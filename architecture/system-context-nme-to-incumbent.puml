@@ -1,0 +1,29 @@
+@startuml 
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title GP2GP Hybrid Adapter - Patient moves from NME to Incumbent
+
+LAYOUT_WITH_LEGEND()
+
+Person(gp, "GP Admin", "GP Admin staff registering a patient")
+System_Ext(requestor, "Incumbent Foundation System", "Makes the initial request for patient data and ingests that data")
+
+System_Ext(spine, "Spine", "Personal Demographics Service\nSpine Directory Service\nTransaction Messaging Service")
+
+Enterprise_Boundary(ent, "New Market Entrant") {
+    System_Ext(mhsSystem, "MHS Adaptor", "Implementation of a Message Handling Service, that encapsulates the details of Spine messaging")
+    System(gp2gpSystem, "GP2GP Adaptor", "Gets GPConnect FHIR data and documents, tranforms into HL7 STU3 and sends to incumbent")
+    System_Ext(sendersSystem, "NME Foundation System", "Provides patient data via GPConnect")
+}
+
+Rel(gp, requestor, "Registers patient")
+Rel_R(requestor, spine, "Searches PDS, updates PDS, gets endpoints from SDS, messaging with TMS")
+Rel_L(spine, requestor, "Sends response messages")
+Rel(spine, mhsSystem, "Sends messages")
+mhsSystem ..> gp2gpSystem: Dequeues messages
+Rel_R(gp2gpSystem, sendersSystem, "Get Structured Record and document requests")
+Rel(gp2gpSystem, mhsSystem, "Sends response messages")
+Rel(mhsSystem, spine, "Messaging with TMS, endpoints from SDS")
+Rel(gp2gpSystem, spine, "Check patient")
+
+@enduml

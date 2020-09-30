@@ -1,0 +1,69 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title GP2GP Adaptor Emerging Architecture
+
+Person(requestorGp, "GP/GP Admin", "")
+Person(senderGp, "GP/GP Admin", "")
+
+System_Boundary(incumbent, "Incumbent") {
+    System_Ext(requestor, "Foundation System", "Incumbent supporting GP2GP 2.2b")
+    System_Ext(requestorDocs, "Document Store", "")
+}
+
+System_Boundary(spine, "NHS Systems") {
+    System(sds, "SDS", "Spine Directory Service")
+    System(pds, "PDS", "Personal Demographics Service")
+    ContainerDb(audit, "Audit Store", "")
+    ContainerDb(mi, "Management Information Store", "")
+}
+
+Enterprise_Boundary(ent, "New Market Entrant") {
+
+    System_Ext(mhs, "MHS Adaptor", "Pre-assured MHS adaptor")
+    ContainerDb(nmeLogs, "Log Store", "Log Records")
+
+    System_Boundary(gp2gpSystem, "GP2GP Adaptor System") {
+        Container(gp2gp, "GP2GP Adaptor", "Docker image", "*Gets data from GPC\n*Builds EHR Extract\n*FHIR --> HL7 v3\n*Switches On/Off\n*Re-send duplicate EHR Extract\n*EHR Messages for viewing")
+        ContainerDb(gp2gpStore, "GP2GP Store", "Database", "")
+        note right of gp2gpStore
+            Stores
+            * EHR Extracts
+            * EHR State
+        end note
+    }
+    Container(logAnalyser, "MI/Audit Log Analyser", "Extracts MI/Audit and forwards to NHS")
+    note bottom of logAnalyser
+            Requirement to report pending EHR Extracts pending for 24 hours.
+            Can this be done by analysing logs?
+        end note
+    System_Ext(sender, "Foundation System", "NME system")
+    System_Ext(senderDocs, "Document Store", "")
+}
+
+Rel(requestorGp, requestor, "Uses", "HTTPS")
+Rel_L(requestor, requestorDocs, "Updates")
+Rel(requestor, sds, "Looks up", "Endpoint details")
+Rel(requestor, pds, "PDS Advanced Trace/Update Healthcare Provider", "HTTPS")
+Rel(requestor, mhs, "Posts", "EHR Request")
+Rel(requestor, audit, "Forwards", "messages")
+Rel(requestor, mi, "Forwards", "messages")
+
+Rel_D(sender, senderGp, "Uses", "HTTPS")
+Rel_Down(mhs, gp2gp, "Dequeues", "EHR Request Message")
+Rel_Up(gp2gp, pds, "Checks that", "Patient still registered")
+Rel_Up(mhs, sds, "Looks up", "Endpoint details")
+Rel_Up(mhs, requestor, "Posts", "EHR Extract")
+Rel_D(gp2gp, sender, "GPConnect", "HTTPS")
+Rel_D(gp2gp, gp2gpStore, "Stores state", "HTTPS")
+Rel_U(sender, gp2gp, "Uses", "HTTPS")
+Rel_D(gp2gp, gp2gpStore, "Fetches", "EHR Extract records")
+Rel_Up(gp2gp, mhs, "Posts", "Ack/Nack/EHR Extract")
+Rel(gp2gp, senderDocs, "Document retrieval")
+Rel(gp2gp, nmeLogs, "Write logs to")
+Rel_Up(sender, nmeLogs, "Write logs to")
+Rel_Up(nmeLogs, logAnalyser, "Extracts", "Audit/MI messages")
+Rel_Up(logAnalyser, audit, "Forwards", "Audit/MI messages")
+Rel_Up(logAnalyser, mi, "Forwards", "Audit/MI messages")
+Rel(sender, senderDocs, "Uses")
+@enduml
