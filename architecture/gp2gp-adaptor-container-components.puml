@@ -66,22 +66,24 @@ Rel_Down(sdsClient, sds, "HTTP Request", "Get /Endpoint")
 ' Task: Consume EHR
 Rel_Down(mhsInbound, ehrExtractRequestConsumer, "Dequeues", "1a EHR Extract Request Message")
 Rel(ehrExtractRequestConsumer, ehrExtractService, "1b Initiate EHR Extract")
-Rel(ehrExtractService, taskQueue, "Publish", "1c Get GPC Access Record Structured Task")
+' Rel(ehrExtractService, taskQueue, "Publish", "1c Get GPC Access Record Structured Task")
 
 ' Task: Get GPC Access Record Structured
-Rel(taskQueue, gpcArs, "Consume", "2a Get GPC Access Record Structure Task")
+' Rel(taskQueue, gpcArs, "Consume", "2a Get GPC Access Record Structure Task")
 Rel(gpcArs, sdsClient, "2b Lookup endpoint")
 Rel_Down(gpcArs, ssp, "HTTP Request", "2c POST Patient/$gpc.getstructuredrecord")
 Rel(gpcArs, gpcService, "TBD", "2d Store Structured Record")
-Rel(gpcArs, taskQueue, "Produce", "2e Get GPC Access Document Tasks")
+' Rel(gpcArs, taskQueue, "Produce", "2e Get GPC Access Document Tasks")
 
 ' Task: Get GPC Access Document
-Rel(taskQueue, gpcAd, "Consume", "3a Get GPC Access Document Task")
+' Rel(taskQueue, gpcAd, "Consume", "3a Get GPC Access Document Task")
 Rel(gpcAd, sdsClient, "3b Lookup endpoint")
 Rel_Down(gpcAd, ssp, "HTTP Request", "3c GET /Binary/[id]")
 Rel(gpcAd, objectStoreAdaptor, "Put", "3d Downloaded document")
 Rel(gpcAd, gpcStaging, "Update", "3e With reference to document/object")
-Rel(gpcAd, taskQueue, "Produce", "3f Translate Document Task")
+' Rel(gpcAd, taskQueue, "Produce", "3f Translate Document Task")
 
+' END STATES
+Rel(doneSuccess, ehrExtractProducer, "")
 
 @enduml
