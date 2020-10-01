@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
+    <id root="76C25210-5271-11EA-9384-E83935108FD5"/>
+    <creationTime value="20200218170946"/>
+    <versionCode code="V3NPfIT3.1.10"/>
+    <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06"/>
+    <processingCode code="P"/>
+    <processingModeCode code="T"/>
+    <acceptAckCode code="NE"/>
+    <communicationFunctionRcv typeCode="RCV">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="200000001161"/>
+        </device>
+    </communicationFunctionRcv>
+    <communicationFunctionSnd typeCode="SND">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="200000000149"/>
+        </device>
+    </communicationFunctionSnd>
+    <ControlActEvent classCode="CACT" moodCode="EVN">
+        <author1 typeCode="AUT">
+            <AgentSystemSDS classCode="AGNT">
+                <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="200000000149"/>
+                </agentSystemSDS>
+            </AgentSystemSDS>
+        </author1>
+        <subject typeCode="SUBJ" contextConductionInd="false">
+            <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                <id root="76C25210-5271-11EA-9384-E83935108FD5"/>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="20200218170946"/>
+                <recordTarget typeCode="RCT">
+                    <patient classCode="PAT">
+                        <id root="2.16.840.1.113883.2.1.4.1" extension="9442964410"/>
+                    </patient>
+                </recordTarget>
+                <author typeCode="AUT">
+                    <time value="20200218170946"/>
+                    <AgentOrgSDS classCode="AGNT">
+                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                            <id root="1.2.826.0.1285.0.1.10" extension="M85019"/>
+                        </agentOrganizationSDS>
+                    </AgentOrgSDS>
+                </author>
+                <destination typeCode="DST">
+                    <AgentOrgSDS classCode="AGNT">
+                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                            <id root="1.2.826.0.1285.0.1.10" extension="B86041"/>
+                        </agentOrganizationSDS>
+                    </AgentOrgSDS>
+                </destination>
+                <component typeCode="COMP">
+                    <ehrFolder classCode="FOLDER" moodCode="EVN">
+                        <id root="76C49C10-5271-11EA-9384-E83935108FD5"/>
+                        <statusCode code="COMPLETE"/>
+                        <effectiveTime>
+                            <low value="20120525000000"/>
+                            <high value="20200218121208"/>
+                        </effectiveTime>
+                        <availabilityTime value="20200218170946"/>
+                        <author typeCode="AUT">
+                            <time value="20200218170946"/>
+                            <AgentOrgSDS classCode="AGNT">
+                                <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                                    <id root="1.2.826.0.1285.0.1.10" extension="M85019"/>
+                                </agentOrganizationSDS>
+                            </AgentOrgSDS>
+                        </author>
+                        <responsibleParty typeCode="RESP">
+                            <agentDirectory classCode="AGNT">
+                                <part typeCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="76C49C0D-5271-11EA-9384-E83935108FD5"/>
+                                        <code code="704951000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other person"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <name use="L">
+                                                <given>Cary</given>
+                                                <family>Lord</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <id root="2.16.840.1.113883.2.1.4.3" extension="M85019"/>
+                                            <code code="600"/>
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                                <part typeCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="76C25214-5271-11EA-9384-E83935108FD5"/>
+                                        <code code="704951000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other person"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <name>
+                                                <family>DR DK NANDI&apos;S PRACTICE</family>
+                                            </name>
+                                        </agentPerson>
+                                    </Agent>
+                                </part>
+                                <part typeCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="76C25212-5271-11EA-9384-E83935108FD5"/>
+                                        <code code="704951000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other person"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <name use="L">
+                                                <given>Spark</given>
+                                                <family>Hill</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <id root="2.16.840.1.113883.2.1.4.3" extension="M85019"/>
+                                            <code code="600"/>
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                                <part typeCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="76C2521B-5271-11EA-9384-E83935108FD5"/>
+                                        <code code="704951000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other person"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <name use="L">
+                                                <given>Assurance</given>
+                                                <family>TeamTwo</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <id root="2.16.840.1.113883.2.1.4.3" extension="M85019"/>
+                                            <code code="600"/>
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                            </agentDirectory>
+                        </responsibleParty>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="76C25218-5271-11EA-9384-E83935108FD5"/>
+                                <code code="37351000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration Note"/>
+                                <statusCode code="COMPLETE"/>
+                                <effectiveTime>
+                                    <center value="20140212094229"/>
+                                </effectiveTime>
+                                <availabilityTime value="20140212094229"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20140212094229"/>
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25212-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="PRF" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25212-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP">
+                                    <MedicationStatement classCode="SBADM" moodCode="INT">
+                                        <id root="76C49C00-5271-11EA-9384-E83935108FD5"/>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <low value="20140212"/>
+                                            <high value="20140812000000"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <consumable typeCode="CSM">
+                                            <manufacturedProduct classCode="MANU">
+                                                <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                                    <code code="02782001" codeSystem="2.16.840.1.113883.2.1.6.4" displayName="Bendroflumethiazide 2.5mg tablets">
+                                                        <translation code="317919004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg tablets"/>
+                                                    </code>
+                                                </manufacturedMaterial>
+                                            </manufacturedProduct>
+                                        </consumable>
+                                        <component typeCode="COMP">
+                                            <ehrSupplyAuthorise classCode="SPLY" moodCode="INT">
+                                                <id root="76C49C01-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="394823007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="NHS prescription"/>
+                                                <statusCode code="COMPLETE"/>
+                                                <effectiveTime>
+                                                    <low value="20140212"/>
+                                                    <high value="20140812000000"/>
+                                                </effectiveTime>
+                                                <availabilityTime value="20140212"/>
+                                                <repeatNumber value="6"/>
+                                                <quantity value="28" unit="1">
+                                                    <translation value="28">
+                                                        <originalText>tablet</originalText>
+                                                    </translation>
+                                                </quantity>
+                                            </ehrSupplyAuthorise>
+                                        </component>
+                                        <pertinentInformation typeCode="PERT">
+                                            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                                                <text>take one each morning</text>
+                                            </pertinentMedicationDosage>
+                                        </pertinentInformation>
+                                    </MedicationStatement>
+                                </component>
+                                <component typeCode="COMP">
+                                    <MedicationStatement classCode="SBADM" moodCode="INT">
+                                        <id root="76C49C02-5271-11EA-9384-E83935108FD5"/>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <low value="20140212"/>
+                                            <high value="20140812000000"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <consumable typeCode="CSM">
+                                            <manufacturedProduct classCode="MANU">
+                                                <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                                    <code code="10688003" codeSystem="2.16.840.1.113883.2.1.6.4" displayName="Atorvastatin 40mg tablets">
+                                                        <translation code="320031002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 40mg tablets"/>
+                                                    </code>
+                                                </manufacturedMaterial>
+                                            </manufacturedProduct>
+                                        </consumable>
+                                        <component typeCode="COMP">
+                                            <ehrSupplyAuthorise classCode="SPLY" moodCode="INT">
+                                                <id root="76C49C03-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="394823007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="NHS prescription"/>
+                                                <statusCode code="COMPLETE"/>
+                                                <effectiveTime>
+                                                    <low value="20140212"/>
+                                                    <high value="20140812000000"/>
+                                                </effectiveTime>
+                                                <availabilityTime value="20140212"/>
+                                                <repeatNumber value="6"/>
+                                                <quantity value="28" unit="1">
+                                                    <translation value="28">
+                                                        <originalText>tablet</originalText>
+                                                    </translation>
+                                                </quantity>
+                                                <pertinentInformation typeCode="PERT">
+                                                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                                                        <text>Please call surgery for a blood test</text>
+                                                    </pertinentSupplyAnnotation>
+                                                </pertinentInformation>
+                                            </ehrSupplyAuthorise>
+                                        </component>
+                                        <pertinentInformation typeCode="PERT">
+                                            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                                                <text>take one at night</text>
+                                            </pertinentMedicationDosage>
+                                        </pertinentInformation>
+                                    </MedicationStatement>
+                                </component>
+                                <component typeCode="COMP">
+                                    <MedicationStatement classCode="SBADM" moodCode="ORD">
+                                        <id root="76C49C04-5271-11EA-9384-E83935108FD5"/>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <center value="20140212"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <consumable typeCode="CSM">
+                                            <manufacturedProduct classCode="MANU">
+                                                <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                                    <code code="10688003" codeSystem="2.16.840.1.113883.2.1.6.4" displayName="Atorvastatin 40mg tablets">
+                                                        <translation code="320031002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 40mg tablets"/>
+                                                    </code>
+                                                </manufacturedMaterial>
+                                            </manufacturedProduct>
+                                        </consumable>
+                                        <component typeCode="COMP">
+                                            <ehrSupplyPrescribe classCode="SPLY" moodCode="RQO">
+                                                <id root="76C49C05-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="394823007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="NHS prescription"/>
+                                                <statusCode code="COMPLETE"/>
+                                                <availabilityTime value="20140212"/>
+                                                <quantity value="28" unit="1">
+                                                    <translation value="28">
+                                                        <originalText>tablet</originalText>
+                                                    </translation>
+                                                </quantity>
+                                                <inFulfillmentOf typeCode="FLFS">
+                                                    <priorMedicationRef classCode="SBADM" moodCode="INT">
+                                                        <id root="76C49C03-5271-11EA-9384-E83935108FD5"/>
+                                                    </priorMedicationRef>
+                                                </inFulfillmentOf>
+                                                <pertinentInformation typeCode="PERT">
+                                                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                                                        <text>Please call surgery for a blood test</text>
+                                                    </pertinentSupplyAnnotation>
+                                                </pertinentInformation>
+                                            </ehrSupplyPrescribe>
+                                        </component>
+                                        <pertinentInformation typeCode="PERT">
+                                            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                                                <text>take one at night</text>
+                                            </pertinentMedicationDosage>
+                                        </pertinentInformation>
+                                    </MedicationStatement>
+                                </component>
+                                <component typeCode="COMP">
+                                    <MedicationStatement classCode="SBADM" moodCode="ORD">
+                                        <id root="76C49C06-5271-11EA-9384-E83935108FD5"/>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <center value="20140212"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <consumable typeCode="CSM">
+                                            <manufacturedProduct classCode="MANU">
+                                                <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                                    <code code="02782001" codeSystem="2.16.840.1.113883.2.1.6.4" displayName="Bendroflumethiazide 2.5mg tablets">
+                                                        <translation code="317919004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bendroflumethiazide 2.5mg tablets"/>
+                                                    </code>
+                                                </manufacturedMaterial>
+                                            </manufacturedProduct>
+                                        </consumable>
+                                        <component typeCode="COMP">
+                                            <ehrSupplyPrescribe classCode="SPLY" moodCode="RQO">
+                                                <id root="76C49C07-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="394823007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="NHS prescription"/>
+                                                <statusCode code="COMPLETE"/>
+                                                <availabilityTime value="20140212"/>
+                                                <quantity value="28" unit="1">
+                                                    <translation value="28">
+                                                        <originalText>tablet</originalText>
+                                                    </translation>
+                                                </quantity>
+                                                <inFulfillmentOf typeCode="FLFS">
+                                                    <priorMedicationRef classCode="SBADM" moodCode="INT">
+                                                        <id root="76C49C01-5271-11EA-9384-E83935108FD5"/>
+                                                    </priorMedicationRef>
+                                                </inFulfillmentOf>
+                                            </ehrSupplyPrescribe>
+                                        </component>
+                                        <pertinentInformation typeCode="PERT">
+                                            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                                                <text>take one each morning</text>
+                                            </pertinentMedicationDosage>
+                                        </pertinentInformation>
+                                    </MedicationStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="76C25219-5271-11EA-9384-E83935108FD5"/>
+                                <code code="37351000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration Note"/>
+                                <statusCode code="COMPLETE"/>
+                                <effectiveTime>
+                                    <center value="20140212095714"/>
+                                </effectiveTime>
+                                <availabilityTime value="20140212095714"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20140212095714"/>
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25212-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="PRF" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25212-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP">
+                                    <MedicationStatement classCode="SBADM" moodCode="ORD">
+                                        <id root="76C49C08-5271-11EA-9384-E83935108FD5"/>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <center value="20140212"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <consumable typeCode="CSM">
+                                            <manufacturedProduct classCode="MANU">
+                                                <manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+                                                    <code code="10688003" codeSystem="2.16.840.1.113883.2.1.6.4" displayName="Atorvastatin 40mg tablets">
+                                                        <translation code="320031002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atorvastatin 40mg tablets"/>
+                                                    </code>
+                                                </manufacturedMaterial>
+                                            </manufacturedProduct>
+                                        </consumable>
+                                        <component typeCode="COMP">
+                                            <ehrSupplyPrescribe classCode="SPLY" moodCode="RQO">
+                                                <id root="76C49C09-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="394823007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="NHS prescription"/>
+                                                <statusCode code="COMPLETE"/>
+                                                <availabilityTime value="20140212"/>
+                                                <quantity value="28" unit="1">
+                                                    <translation value="28">
+                                                        <originalText>tablet</originalText>
+                                                    </translation>
+                                                </quantity>
+                                                <inFulfillmentOf typeCode="FLFS">
+                                                    <priorMedicationRef classCode="SBADM" moodCode="INT">
+                                                        <id root="76C49C03-5271-11EA-9384-E83935108FD5"/>
+                                                    </priorMedicationRef>
+                                                </inFulfillmentOf>
+                                                <pertinentInformation typeCode="PERT">
+                                                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                                                        <text>Please call surgery for a blood test</text>
+                                                    </pertinentSupplyAnnotation>
+                                                </pertinentInformation>
+                                            </ehrSupplyPrescribe>
+                                        </component>
+                                        <pertinentInformation typeCode="PERT">
+                                            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                                                <text>take one at night</text>
+                                            </pertinentMedicationDosage>
+                                        </pertinentInformation>
+                                    </MedicationStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="76C2521A-5271-11EA-9384-E83935108FD5"/>
+                                <code code="37351000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration Note"/>
+                                <statusCode code="COMPLETE"/>
+                                <effectiveTime>
+                                    <center value="20200218121208"/>
+                                </effectiveTime>
+                                <availabilityTime value="20200218121208"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20200218121208"/>
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C2521B-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="PRF" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C2521B-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP">
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="76C49C0A-5271-11EA-9384-E83935108FD5"/>
+                                        <text>Text File: patient-attachment.txt.txt - deduction test 1</text>
+                                        <statusCode code="COMPLETE"/>
+                                        <availabilityTime value="20200218121208"/>
+                                        <reference typeCode="REFR">
+                                            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                                                <id root="767395D0-5271-11EA-9384-E83935108FD5"/>
+                                                <code code="25821000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Original Text document">
+                                                    <originalText>Record Attachment</originalText>
+                                                </code>
+                                                <text mediaType="text/plain">
+                                                    <reference value="file://localhost/767395D0-5271-11EA-9384-E83935108FD5_patient-attachment.txt.txt"/>
+                                                </text>
+                                            </referredToExternalDocument>
+                                        </reference>
+                                    </NarrativeStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="76C49C0B-5271-11EA-9384-E83935108FD5"/>
+                                <code code="37351000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration Note"/>
+                                <statusCode code="COMPLETE"/>
+                                <effectiveTime>
+                                    <center value="20140212"/>
+                                </effectiveTime>
+                                <availabilityTime value="20140212"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20140212"/>
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25214-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <component typeCode="COMP">
+                                    <RegistrationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="76C49C0C-5271-11EA-9384-E83935108FD5"/>
+                                        <code code="25891000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="GMS - Provisional">
+                                            <originalText>Applied</originalText>
+                                        </code>
+                                        <statusCode code="COMPLETE"/>
+                                        <effectiveTime>
+                                            <low value="20140212"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20140212"/>
+                                        <responsibleParty typeCode="RESP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="76C49C0D-5271-11EA-9384-E83935108FD5"/>
+                                            </agentRef>
+                                        </responsibleParty>
+                                    </RegistrationStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="76C49C0E-5271-11EA-9384-E83935108FD5"/>
+                                <code code="37351000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Administration Note"/>
+                                <statusCode code="COMPLETE"/>
+                                <effectiveTime>
+                                    <center value="20140212"/>
+                                </effectiveTime>
+                                <availabilityTime value="20140212"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20140212"/>
+                                    <agentRef classCode="AGNT">
+                                        <id root="76C25214-5271-11EA-9384-E83935108FD5"/>
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>DR DK NANDI&apos;S PRACTICE</name>
+                                            <telecom use="WP" value="tel:01332473669">
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </telecom>
+                                            <addr use="WP">
+                                                <streetAddressLine>342 Troy Road</streetAddressLine>
+                                                <streetAddressLine>Horsforth</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <streetAddressLine>West Yorkshire</streetAddressLine>
+                                                <postalCode>LS18 5TN</postalCode>
+                                                <useablePeriod>
+                                                    <low value="20200218"/>
+                                                </useablePeriod>
+                                            </addr>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <component typeCode="COMP">
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="76C49C0F-5271-11EA-9384-E83935108FD5"/>
+                                        <text> ** Care started at DR DK NANDI&apos;S PRACTICE (Applied) **</text>
+                                        <statusCode code="COMPLETE"/>
+                                        <availabilityTime value="20140212"/>
+                                    </NarrativeStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                    </ehrFolder>
+                </component>
+                <inFulfillmentOf typeCode="FLFS">
+                    <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
+                        <id root="BBBBA01A-A9D1-A411-F824-9F7A00A33757"/>
+                    </priorEhrRequest>
+                </inFulfillmentOf>
+                <limitation typeCode="LIMIT" inversionInd="true">
+                    <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
+                        <id root="76C49C11-5271-11EA-9384-E83935108FD5"/>
+                        <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)"/>
+                    </limitingEhrExtractSpecification>
+                </limitation>
+            </EhrExtract>
+        </subject>
+    </ControlActEvent>
+</RCMR_IN030000UK06>
