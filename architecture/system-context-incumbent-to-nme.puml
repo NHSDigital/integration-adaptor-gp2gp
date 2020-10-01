@@ -8,7 +8,7 @@ LAYOUT_WITH_LEGEND()
 Person(gp, "GP Admin", "GP Admin staff registering a patient")
 System_Ext(requestor, "Incumbent Foundation System", "Provides patient data via GPConnect")
 
-System_Ext(spine, "Spine", "Personal Demographics Service\nSpine Directory Service")
+System_Ext(spine, "Spine", "Personal Demographics Service\nSpine Directory Service\nNHAIS")
 
 System_Ext(sendersSystem, "NME Foundation System", "Requests patient data and ingests that data")
 

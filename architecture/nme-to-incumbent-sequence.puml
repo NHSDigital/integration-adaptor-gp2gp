@@ -1,0 +1,72 @@
+@startuml
+
+
+title GP2GP adaptor, Incumbent recipient
+actor Patient
+actor "Incumbent Admin" as igp
+Patient->Incumbent: registers at practice
+Incumbent->PDS:PDS Trace
+PDS->Incumbent:Trace response
+Incumbent->PDS:Update registration
+note left of PDS: Practice ODS
+PDS->Incumbent:Success
+
+Incumbent->SDS:Lookup old practice GP2GP endpoint
+note left of SDS: search for RMCR interaction
+SDS->Incumbent:Endpoint response with URL
+opt New practice has GP2GP 2.2A
+Incumbent->SDS:Lookup GP2GP endpoint (COPC)
+SDS->Incumbent:Endpoint response
+note left of SDS 
+this indicates 
+old practice has 
+implemented 2.2A
+end note
+Incumbent->Incumbent:use GP2GP 2.2A
+end
+
+Incumbent->Adaptor:EHR Request
+Adaptor->Incumbent:Ack
+Adaptor->SDS:Lookup GP2GP endpoint (RMCR)
+opt Old practice has GP2GP 2.2A
+Adaptor->SDS:Lookup GP2GP endpoint (COPC)
+SDS->Adaptor:Endpoint response
+Adaptor->Adaptor:use GP2GP 2.2A
+end
+
+Adaptor->SDS:Lookup GPC endpoint of NME
+SDS->Adaptor:endpoint URL
+Adaptor->NME:GPC/GP2GP request
+NME->Adaptor:GPC response
+Note over Adaptor
+Translates 
+GP2GP HL7 to FHIR
+end note
+Adaptor->Incumbent:GP2GP EHR Extract(s)
+note left of Adaptor
+Forwared reliable pattern
+If 2.2A may have manifest followed
+by multiple message fragments
+end note
+
+Incumbent-->NHAIS:Acceptance (ACG)
+
+note left of NHAIS
+NHAIS updates PDS, 
+even though new  practice 
+may have already done this 
+end note
+NHAIS-->Incumbent:Approval
+NHAIS-->NME:Deduction (DEF)
+NME->NME:Process DEF
+NME-->NHAIS:RECEP
+
+
+Actor "NME Admin"
+
+igp->Incumbent:Accept EHR Extract
+Incumbent->Incumbent:Save record into DB
+note over Incumbent: Record flagged "Filed"
+Incumbent->Adaptor:Business Ack "Fully integrated"
+
+@enduml

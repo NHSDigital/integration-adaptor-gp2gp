@@ -1,0 +1,19 @@
+@startuml
+
+title GP2GP adaptor, NME as recipient
+actor Patient
+Patient->NME:Registers at new practice
+NME->PDS:Update reg GP
+PDS->NME:Ack
+
+NME->Incumbent: Get GP Connect record
+Incumbent->NME:GPC response
+NME->NME: ingest FHIR
+note over NME:Save new record
+
+NME->NHAIS:Acceptance request
+NHAIS->NME:Approval (business ack)
+NHAIS->Incumbent:Deduction
+Incumbent->NHAIS:Ack
+
+@enduml
