@@ -1,0 +1,55 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Container.puml
+
+title GP2GP Adaptor Emerging Architecture - Components
+
+Person(requestorGp, "GP/GP Admin", "")
+
+System_Boundary(mhsAdaptor, "MHS Adaptor") {
+    ContainerDb(mhsInbound, "Inboud", "AMQP Message Broker", "MHS Inbound Queue")
+    Container(mhsOutbound, "Outbound", "Docker Container", "MHS Outbound API")
+}
+
+System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
+    Container(ehrExtractRequestConsumer, "EHR Extract Request Consumer", "JMS Consumer", "Subscribes to a queue/topic and consumes inbound EHR Extract Requests")
+    Container(ehrExtractService, "EHR Extract Service", "Service", "Encapsulates business logic for creating EHR Extracts")
+    Container(gpcArs, "GPC Access Record Structured", "REST Client", "Retrieve a patient's record in structured format")
+    Container(gpcAd, "GPC Access Document", "REST Client", "Retrieve unstructured documents from a patient’s registered GP practice")
+    Container(sdsClient, "SDS Client", "REST Client", "Lookup the GPC endpoint in SDS")
+    Container(ehrExtractProducer, "EHR Extract Producer", "REST Client", "Sends EHR Extract over multiple requests")
+    ContainerDb(ehrStaging, "EHR Extract", "TBD", "State and staging of EHR extract during preperation, transmission, and retention")
+    ContainerDb(gpcStaging, "GPC Access Records & Documents", "TBD", "State and stage of GPC Access Records and Documents until EHR is translated")
+}
+
+Rel(ehrExtractRequestConsumer, ehrExtractService, "Initiate EHR Extract")
+Rel(ehrExtractService, ehrStaging, "TBD", "Create or update")
+Rel(gpcArs, gpcStaging, "TBD", "Store Structured Record")
+Rel(gpcAd, gpcStaging, "TBD", "Store Document")
+Rel(gpcArs, sdsClient, "Lookup endpoint")
+Rel(gpcAd, sdsClient, "Lookup endpoint")
+
+
+System_Boundary(nhsSystems, "NHS Systems") {
+    System(sds, "SDS API", "Spine Directory Service - FHIR API")
+    System(pds, "PDS", "Personal Demographics Service")
+    ' System(spine, "Spine", "Spine Message Transport")
+    System(ssp, "SSP", "Spine Secure Proxy")
+    System(mesh, "MESH", "MESH API")
+    ContainerDb(audit, "Audit Store", "")
+    ContainerDb(mi, "Management Information Store", "Splunk")
+}
+
+Rel(mesh, mi, "NHSD injest MI from messages sent to specific MESH mailbox")
+
+System_Boundary(nme, "New Market Entrant") {
+    System(gpc, "GP Connect", "GP Connect - Supplier")
+}
+
+Rel_Down(mhsInbound, ehrExtractRequestConsumer, "Dequeues", "EHR Extract Request Message")
+Rel_Down(ehrExtractProducer, mhsOutbound, "HTTP Request", "POST ...")
+Rel_Down(gpcArs, ssp, "HTTP Request", "POST Patient/$gpc.getstructuredrecord")
+Rel_Down(gpcAd, ssp, "HTTP Request", "GET /Binary/[id]")
+Rel_Down(ssp, gpc, "HTTP Request", "Proxied to NME's GPC Supplier system")
+Rel_Down(sdsClient, sds, "HTTP Request", "Get /Endpoint")
+
+@enduml
