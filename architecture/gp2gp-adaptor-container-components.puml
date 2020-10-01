@@ -13,20 +13,33 @@ System_Boundary(mhsAdaptor, "MHS Adaptor") {
 System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
     Container(ehrExtractRequestConsumer, "EHR Extract Request Consumer", "JMS Consumer", "Subscribes to a queue/topic and consumes inbound EHR Extract Requests")
     Container(ehrExtractService, "EHR Extract Service", "Service", "Encapsulates business logic for creating EHR Extracts")
-    Container(gpcArs, "GPC Access Record Structured", "REST Client", "Retrieve a patient's record in structured format")
-    Container(gpcAd, "GPC Access Document", "REST Client", "Retrieve unstructured documents from a patient’s registered GP practice")
+    Container(gpcArs, "GPC Access Record Structured", "Service", "Retrieve a patient's record in structured format")
+    Container(gpcAd, "GPC Access Document", "Service", "Retrieve unstructured documents from a patient’s registered GP practice")
+    Container(gpcService, "GPC Service", "Service", "Encapsulates business logic for fetching GPC data")
     Container(sdsClient, "SDS Client", "REST Client", "Lookup the GPC endpoint in SDS")
     Container(ehrExtractProducer, "EHR Extract Producer", "REST Client", "Sends EHR Extract over multiple requests")
-    ContainerDb(ehrStaging, "EHR Extract", "TBD", "State and staging of EHR extract during preperation, transmission, and retention")
-    ContainerDb(gpcStaging, "GPC Access Records & Documents", "TBD", "State and stage of GPC Access Records and Documents until EHR is translated")
+    Container(documentTransform, "Document Transform", "Service", "Transforms GPC document into EHR formats")
+    Container(objectStoreAdaptor, "Object Store Adaptor", "Service", "Abstraction for cloud-based object stores")
 }
 
-Rel(ehrExtractRequestConsumer, ehrExtractService, "Initiate EHR Extract")
+
+System_Boundary(gp2gpAdaptorDependencies, "GP2GP Adaptor Dependencies") {
+    ContainerDb(ehrStaging, "EHR Extract", "TBD", "State and staging of EHR extract during preperation, transmission, and retention")
+    ContainerDb(gpcStaging, "GPC Access Records & Documents", "TBD", "State and stage of GPC Access Records and Documents until EHR is translated")
+    ContainerDb(documents, "Documents", "Object Store", "Store unstructured data")
+    ContainerDb(taskQueue, "Task Queue", "Message Queue", "Queue of tasks")
+    Container(logging, "Log Aggregation", "TBD", "Aggregation of container logs")
+}
+
+
+
+
+Rel(gp2gpAdaptor, logging, "Logs")
 Rel(ehrExtractService, ehrStaging, "TBD", "Create or update")
-Rel(gpcArs, gpcStaging, "TBD", "Store Structured Record")
-Rel(gpcAd, gpcStaging, "TBD", "Store Document")
-Rel(gpcArs, sdsClient, "Lookup endpoint")
-Rel(gpcAd, sdsClient, "Lookup endpoint")
+Rel(gpcService, gpcStaging, "TBD", "Store Structured Record")
+
+Rel(objectStoreAdaptor, documents, "Get/Put", "Documents")
+
 
 
 System_Boundary(nhsSystems, "NHS Systems") {
@@ -45,11 +58,30 @@ System_Boundary(nme, "New Market Entrant") {
     System(gpc, "GP Connect", "GP Connect - Supplier")
 }
 
-Rel_Down(mhsInbound, ehrExtractRequestConsumer, "Dequeues", "EHR Extract Request Message")
 Rel_Down(ehrExtractProducer, mhsOutbound, "HTTP Request", "POST ...")
-Rel_Down(gpcArs, ssp, "HTTP Request", "POST Patient/$gpc.getstructuredrecord")
-Rel_Down(gpcAd, ssp, "HTTP Request", "GET /Binary/[id]")
+
 Rel_Down(ssp, gpc, "HTTP Request", "Proxied to NME's GPC Supplier system")
 Rel_Down(sdsClient, sds, "HTTP Request", "Get /Endpoint")
+
+' Task: Consume EHR
+Rel_Down(mhsInbound, ehrExtractRequestConsumer, "Dequeues", "1a EHR Extract Request Message")
+Rel(ehrExtractRequestConsumer, ehrExtractService, "1b Initiate EHR Extract")
+Rel(ehrExtractService, taskQueue, "Publish", "1c Get GPC Access Record Structured Task")
+
+' Task: Get GPC Access Record Structured
+Rel(taskQueue, gpcArs, "Consume", "2a Get GPC Access Record Structure Task")
+Rel(gpcArs, sdsClient, "2b Lookup endpoint")
+Rel_Down(gpcArs, ssp, "HTTP Request", "2c POST Patient/$gpc.getstructuredrecord")
+Rel(gpcArs, gpcService, "TBD", "2d Store Structured Record")
+Rel(gpcArs, taskQueue, "Produce", "2e Get GPC Access Document Tasks")
+
+' Task: Get GPC Access Document
+Rel(taskQueue, gpcAd, "Consume", "3a Get GPC Access Document Task")
+Rel(gpcAd, sdsClient, "3b Lookup endpoint")
+Rel_Down(gpcAd, ssp, "HTTP Request", "3c GET /Binary/[id]")
+Rel(gpcAd, objectStoreAdaptor, "Put", "3d Downloaded document")
+Rel(gpcAd, gpcStaging, "Update", "3e With reference to document/object")
+Rel(gpcAd, taskQueue, "Produce", "3f Translate Document Task")
+
 
 @enduml
