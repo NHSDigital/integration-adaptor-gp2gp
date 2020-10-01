@@ -36,11 +36,11 @@ end
 
 Adaptor->SDS:Lookup GPC endpoint of NME
 SDS->Adaptor:endpoint URL
-Adaptor->NME:GPC/GP2GP request
+Adaptor->NME:GPC request
 NME->Adaptor:GPC response
 Note over Adaptor
 Translates 
-GP2GP HL7 to FHIR
+GPC FHIR to HL7
 end note
 Adaptor->Incumbent:GP2GP EHR Extract(s)
 note left of Adaptor

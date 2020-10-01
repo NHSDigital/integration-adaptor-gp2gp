@@ -2,6 +2,7 @@
 
 title GP2GP adaptor, NME as recipient
 actor Patient
+actor "NME Admin" as igp
 Patient->NME:Registers at new practice
 NME->PDS:Update reg GP
 PDS->NME:Ack

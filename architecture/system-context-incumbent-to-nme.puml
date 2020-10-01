@@ -5,12 +5,12 @@ title GP2GP Hybrid Adapter - Patient moves from Incumbent to NME
 
 LAYOUT_WITH_LEGEND()
 
-Person(gp, "GP Admin", "GP Admin staff registering a patient")
+Person(gp, "New Market Entrant Admin", "GP Admin staff registering a patient")
 System_Ext(requestor, "Incumbent Foundation System", "Provides patient data via GPConnect")
 
 System_Ext(spine, "Spine", "Personal Demographics Service\nSpine Directory Service\nNHAIS")
 
-System_Ext(sendersSystem, "NME Foundation System", "Requests patient data and ingests that data")
+System_Ext(sendersSystem, "New Market Entrant Foundation System", "Requests patient data and ingests that data")
 
 Rel(gp, sendersSystem, "Registers patient")
 Rel_L(sendersSystem, spine, "Searches PDS, updates PDS, gets endpoints from SDS")
