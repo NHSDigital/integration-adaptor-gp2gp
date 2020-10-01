@@ -1,0 +1,8 @@
+gpConnect:
+  url: "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir"
+  endpoint: "/Patient/$gpc.getstructuredrecord"
+  odsCode: "GPC001"
+  sspFrom: "200000000359"
+  sspTo: "918999198993"
+  sspInteractionID: "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1"
+  tokenTtl: "300000" # 5 min
