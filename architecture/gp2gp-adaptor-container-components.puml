@@ -3,6 +3,8 @@
 
 title GP2GP Adaptor Emerging Architecture - Components
 
+LAYOUT_WITH_LEGEND()
+
 System_Boundary(mhsAdaptor, "MHS Adaptor") {
     ContainerDb(mhsInbound, "Inboud", "AMQP Message Broker", "MHS Inbound Queue")
     Container(mhsOutbound, "Outbound", "Docker Container", "MHS Outbound API")
@@ -27,6 +29,7 @@ System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
     Container(objectStoreAdaptor, "Object Store Adaptor", "Service", "Abstraction for cloud-based object stores")
     Container(sdsClient, "SDS Client", "REST Client", "Lookup the GPC endpoint in SDS")
     Container(taskDispatcher, "Task Dispatcher", "JMS Consumer", "Consumes from the Task Queue and delegates to the appropriate service")
+    Container(pdsClient, "PDS Client", "REST Client", "Ensure patient is still registered at the pratice requesting the EHR Extract")
 }
 
 System_Boundary(gp2gpAdaptorDependencies, "GP2GP Adaptor Dependencies") {
@@ -37,18 +40,18 @@ System_Boundary(gp2gpAdaptorDependencies, "GP2GP Adaptor Dependencies") {
     Container(logging, "Log Aggregation", "TBD", "Aggregation of container logs")
 }
 
-System_Boundary(nhsSystems, "NHS Systems") {
-    System(sds, "SDS API", "Spine Directory Service - FHIR API")
-    System(pds, "PDS", "Personal Demographics Service")
+Enterprise_Boundary(nhsSystems, "NHS Systems") {
+    System_Ext(sds, "SDS API", "Spine Directory Service - FHIR API")
+    System_Ext(pds, "PDS", "Personal Demographics Service")
     ' System(spine, "Spine", "Spine Message Transport")
-    System(ssp, "SSP", "Spine Secure Proxy")
-    System(mesh, "MESH", "MESH API")
-    ContainerDb(audit, "Audit Store", "")
-    ContainerDb(mi, "Management Information Store", "Splunk")
+    System_Ext(ssp, "SSP", "Spine Secure Proxy")
+    System_Ext(mesh, "MESH", "MESH API")
+    System_Ext(audit, "Audit Store", "")
+    System_Ext(mi, "Management Information Store", "Splunk")
 }
 
-System_Boundary(nme, "New Market Entrant") {
-    System(gpc, "GP Connect", "GP Connect - Supplier")
+Enterprise_Boundary(nme, "New Market Entrant") {
+    System_Ext(gpc, "GP Connect", "GP Connect - Supplier")
 }
 
 ' Rel(objectStoreAdaptor, documents, "Get/Put", "Documents")
@@ -56,12 +59,16 @@ System_Boundary(nme, "New Market Entrant") {
 ' Rel(gp2gpAdaptor, logging, "Logs")
 ' Rel(gp2gpAdaptor, ehrStaging, "Find/Insert/Update")
 ' Rel(gp2gpAdaptor, gpcStaging, "Find/Insert/Update")
-' Rel(taskQueue, taskDispatcher, "Pub/Sub")
+' Rel_Down(taskDispatcher, taskQueue, "Pub/Sub")
 
 ' GLOBAL / EXTERNAL RELATIONS
 Rel_Down(ssp, gpc, "HTTP Request", "Authenticates and proxies requets to the NME's GPC Supplier system")
 Rel_Down(sdsClient, sds, "HTTP Request", "Get /Endpoint")
 Rel_Down(mesh, mi, "NHSD injest MI from messages sent to specific MESH mailbox")
+
+Rel(ehrExtractRequestConsumer, pdsClient, "Uses", "Before starting EHR Extract process")
+Rel(ehrExtractCoreProducer, pdsClient, "Uses", "Before transmitting EHR Extract")
+Rel_Down(pdsClient, pds, "Request")
 
 ' Operations/Relations, in the order they would be executed on the happy path
 ' START: Consume EHR Extract Request
