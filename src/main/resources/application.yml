@@ -1,3 +1,42 @@
+server:
+  port: ${GP2GP_SERVER_PORT:8090}
+  error.whitelabel.enabled: false
+
+logging:
+  level:
+    uk.nhs.adaptors.gp2gp: ${GP2GP_LOGGING_LEVEL:DEBUG}
+    org.apache.qpid.jms: WARN  # at INFO logs every 30 seconds
+
+spring:
+  jms:
+    listener:
+      acknowledge-mode: CLIENT
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping.health: healthcheck
+      exposure:
+        include: info, health, metrics
+  health:
+    mongo:
+      enabled: true
+
+gp2gp:
+  amqp:
+    inboundQueueName: "inbound"
+    outboundQueueName: "outbound"
+    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
+    exchange: amq.direct
+    username: ${GP2GP_AMQP_USERNAME:}
+    password: ${GP2GP_AMQP_PASSWORD:}
+    maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
+
 gpConnect:
   url: "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir"
   endpoint: "/Patient/$gpc.getstructuredrecord"
