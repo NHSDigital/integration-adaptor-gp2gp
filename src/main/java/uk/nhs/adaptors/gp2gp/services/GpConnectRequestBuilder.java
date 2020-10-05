@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.services;
 
 import ca.uhn.fhir.parser.IParser;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -27,6 +28,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class GpConnectRequestBuilder {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
@@ -46,6 +48,7 @@ public class GpConnectRequestBuilder {
         httpPost.addHeader("Accept", FHIR_CONTENT_TYPE);
         httpPost.addHeader("Authorization", "Bearer " + tokenBuilder.buildToken());
         var requestBody = fhirParser.encodeResourceToString(parameters);
+        LOGGER.debug("GPConnect request body:\n{}", requestBody);
         httpPost.setEntity(new StringEntity(requestBody, Charset.defaultCharset()));
 
         return httpPost;

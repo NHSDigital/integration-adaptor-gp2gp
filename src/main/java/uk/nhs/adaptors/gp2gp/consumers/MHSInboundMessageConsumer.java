@@ -27,18 +27,17 @@ public class MHSInboundMessageConsumer {
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws IOException, JMSException, XPathExpressionException, SAXException, ParserConfigurationException {
-        LOGGER.info("Received new message {}", message.getJMSMessageID());
-        LOGGER.debug("Received message: {}", message);
+        var messageID = message.getJMSMessageID();
+        LOGGER.info("Received new message {}", messageID);
         try {
             String body = JmsReader.readMessage(message);
-            LOGGER.debug("Received message body: {}", body);
+            LOGGER.debug("Message {} content: {}", messageID, body);
             var mhsInboundMessage = objectMapper.readValue(body, MhsInboundMessage.class);
-            LOGGER.debug("Decoded message: {}", mhsInboundMessage);
             gp2GPService.handleRequest(mhsInboundMessage.getPayload());
             message.acknowledge();
-            LOGGER.info("Message acknowledged");
+            LOGGER.info("Acknowledged message {}", messageID);
         } catch (Exception e) {
-            LOGGER.error("Error while processing MHS inbound queue message", e);
+            LOGGER.error("Error while processing MHS inbound queue message {}", messageID, e);
             throw e; //message will be sent to DLQ after few unsuccessful redeliveries
         }
     }
