@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  gp2gp:
+    image: local/gp2gp:${BUILD_TAG}
+    ports:
+      - "8090:8080"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - GP2GP_SERVER_PORT
+      - GP2GP_LOGGING_LEVEL
+      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
+
+  activemq:
+    build:
+      context: ./activemq
+    ports:
+      - "8161:8161"
+      - "5672:5672"

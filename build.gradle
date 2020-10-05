@@ -34,6 +34,10 @@ dependencies {
 	}
 }
 
+bootJar {
+    mainClassName = 'uk.nhs.adaptors.gp2gp.GP2GPApplication'
+}
+
 test {
 	useJUnitPlatform()
 }

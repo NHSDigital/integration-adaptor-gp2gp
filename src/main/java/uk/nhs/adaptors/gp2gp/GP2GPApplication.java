@@ -6,10 +6,10 @@ import org.springframework.jms.annotation.EnableJms;
 
 @EnableJms
 @SpringBootApplication
-public class Gp2gpApplication {
+public class GP2GPApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Gp2gpApplication.class, args);
+		SpringApplication.run(GP2GPApplication.class, args);
 	}
 
 }
