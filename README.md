@@ -26,7 +26,6 @@ This value can be overriden using `SCR_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
 ## How to run service:
-TODO
 * Navigate to `docker/service`
 * Add environment tag `export TAG=latest`
 * Run script: `build-image.sh` (excute privileges might be required `chmod +x build-image.sh`)
@@ -38,19 +37,20 @@ If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and r
 * Update gradle `gradle wrapper` 
 
 ## How to run unit tests:
-TODO
-<!-- * Navigate to `service`
-* Run: `./gradlew test` -->
+* Navigate to `service`
+* Run: `./gradlew test`
 
 ## How to run integration tests:
-TODO
-<!-- * Navigate to `service`
-* Run: `./gradlew integrationTest` -->
+* Navigate to `service`
+* Run: `./gradlew integrationTest`
 
 ## How to run all checks:
-TODO
-<!-- * Navigate to `service`
-* Run: `./gradlew check` -->
+* Navigate to `service`
+* Run: `./gradlew check` 
+
+## How to run style check::
+* Navigate to `service`
+* Run: `./gradlew staticCodeAnalysis` 
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
