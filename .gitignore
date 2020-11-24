@@ -32,4 +32,3 @@ hs_err_pid*
 *.DS_Store
 
 service/out/*
-mock-spine-service/out/*
