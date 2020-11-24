@@ -1,5 +1,11 @@
 # integration-adaptor-gp2gp
-National Integration Adaptor - GP2GP API
+National Integration Adaptor - GP2GP
+
+The existing GP2GP solution is based on a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, and perpetuation of these standards in the long term presents a risk to the continued operation of GP2GP across all suppliers.
+
+A hybrid solution approach has been selected as the best option for GP2GP adoption by NMEs and transition by existing incumbent suppliers.
+
+The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using the supplier's existing GP Connect Provider implementation to extract the Electronic Health Record. Suppliers that have not already implemented a GP2GP 2.2 producer, or those wishing to decomission their existing producer, may deploy the GP2GP adaptor in its place.
 
 ## Requirements:
 1. JDK 11
