@@ -44,13 +44,13 @@ If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and r
 * Navigate to `service`
 * Run: `./gradlew integrationTest`
 
+## How to run style check:
+* Navigate to `service`
+* Run: `./gradlew staticCodeAnalysis` 
+
 ## How to run all checks:
 * Navigate to `service`
 * Run: `./gradlew check` 
-
-## How to run style check::
-* Navigate to `service`
-* Run: `./gradlew staticCodeAnalysis` 
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
