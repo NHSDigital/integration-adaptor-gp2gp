@@ -1,0 +1,58 @@
+@startuml
+abstract class TaskDefinition {
+    taskId: String
+    extractId: String
+}
+
+abstract class SspTaskDefinition {
+    sspTraceId: String
+    sspFromAsid: String
+    sspToAsid: String
+    getSspInteractionId(): String
+}
+
+TaskDefinition <|-- SspTaskDefinition
+
+class GetGpcStructuredTaskDefinition {
+    {static}  INTERACTION_ID: String
+    nhsNumber: String
+}
+
+SspTaskDefinition <|-- GetGpcStructuredTaskDefinition
+
+class GetGpcDocumentTaskDefinition {
+    {static} INTERACTION_ID: String
+    documentId: String
+}
+
+SspTaskDefinition <|-- GetGpcDocumentTaskDefinition
+
+interface TaskExecutor<U extends TaskDefinition> {
+    getTaskType(): Class<T> 
+    void execute(taskDefinition: U)
+}
+
+class GetGpcStructuredTaskExecutor {
+    getTaskType(): Class<GetGpcStructuredTaskDefinition> 
+    void execute(t: GetGpcStructuredTaskDefinition)
+}
+
+TaskExecutor <|-- GetGpcStructuredTaskExecutor
+
+class GetGpcDocumentTaskExecutor {
+    getTaskType(): Class<GetGpcDocumentTaskDefinition> 
+    void execute(t: GetGpcDocumentTaskDefinition)
+}
+
+TaskExecutor <|-- GetGpcDocumentTaskExecutor
+
+class TaskDispatcher {
+    executors: Map<Class<? extends TaskDefinition>, TaskExecutor>
+    TaskDispatcher(l: List<TaskExecutor>)
+    publish(t: TaskDefinition)
+    subscribe(t: TaskDefinition)
+}
+
+note bottom of TaskDispatcher: Inject all beans implementing TaskExecutor\nand create map in constructor
+
+@enduml
