@@ -28,7 +28,6 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 ## How to run service:
 * Navigate to `docker/service`
 * Add environment tag `export TAG=latest`
-* Run script: `build-image.sh` (excute privileges might be required `chmod +x build-image.sh`)
 * Navigate to `docker`
 * Run script: `start-local-environment.sh`
 
