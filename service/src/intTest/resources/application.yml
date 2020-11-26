@@ -1,0 +1,7 @@
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping.health: healthcheck
+      exposure:
+        include: info, health, metrics

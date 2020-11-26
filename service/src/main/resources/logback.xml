@@ -1,0 +1,24 @@
+<configuration>
+    <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${GP2GP_LOGGING_FORMAT:-%d{yyyy-mm-dd HH:mm:ss.SSS} Level=%-5level Thread=%thread Logger=%logger{36} Message=%msg%n}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSX</timestampFormat>
+                <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>
+                <appendLineSeparator>true</appendLineSeparator>
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                    <prettyPrint>false</prettyPrint>
+                </jsonFormatter>
+            </layout>
+        </encoder>
+    </appender>
+
+    <root level="${GP2GP_LOGGING_LEVEL:-INFO}">
+        <appender-ref ref="${GP2GP_LOGGING_APPENDER:-JSON}"/>
+    </root>
+</configuration>
