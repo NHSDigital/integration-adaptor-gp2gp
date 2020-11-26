@@ -27,14 +27,14 @@ public class AmqpConfiguration {
     public JmsConnectionFactory jmsConnectionFactory(AmqpProperties properties) {
         JmsConnectionFactory factory = new JmsConnectionFactory();
 
-        factory.setRemoteURI(properties.getBrokers()); //amqp+ssl://b-deb93f13-9c80-4543-8941-0bc8859edcc4-1.mq.eu-west-2.amazonaws.com:5671
+        factory.setRemoteURI(properties.getBrokers()); 
 
         if (!StringUtils.isEmpty(properties.getUsername())) {
-            factory.setUsername(properties.getUsername()); //build
+            factory.setUsername(properties.getUsername()); 
         }
 
         if (!StringUtils.isEmpty(properties.getPassword())) {
-            factory.setPassword(properties.getPassword()); //766zPhHUKdQg
+            factory.setPassword(properties.getPassword()); 
         }
 
         if (!StringUtils.isEmpty(properties.getClientId())) {
