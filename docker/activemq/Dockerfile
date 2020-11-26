@@ -1,2 +1,2 @@
 FROM rmohr/activemq:latest
-COPY --chown=activemq:activemq ./docker/activemq.xml $ACTIVEMQ_HOME/conf
+COPY --chown=activemq:activemq ./activemq.xml /opt/activemq/config

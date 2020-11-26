@@ -9,3 +9,12 @@ management:
       exposure:
         include: info, health, metrics, mappings
 
+gp2gp:
+  amqp:
+    inboundQueueName: "inbound"
+    outboundQueueName: "outbound"
+    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
+    exchange: amq.direct
+    username: ${GP2GP_AMQP_USERNAME:}
+    password: ${GP2GP_AMQP_PASSWORD:}
+    maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
