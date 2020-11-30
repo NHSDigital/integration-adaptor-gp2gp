@@ -15,7 +15,7 @@ public class GP2GPService {
     private final JmsTemplate jmsTemplate;
 
     @Value("${gp2gp.amqp.outboundQueueName}")
-    protected String mhsOutboundQueueName;
+    private String mhsOutboundQueueName;
 
     public void handleRequest(String xml) {
         jmsTemplate.send(mhsOutboundQueueName, session -> session.createTextMessage(xml));

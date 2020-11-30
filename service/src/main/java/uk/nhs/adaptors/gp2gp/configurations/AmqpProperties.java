@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Setter
 public class AmqpProperties {
 
-    private String brokers; ////arn:aws:mq:eu-west-2:067756640211:broker:inbound-queue:b-68a52e9f-0a62-4d60-95eb-420f3181a045
+    private String brokers;
     private String username;
     private String password;
     private String clientId;

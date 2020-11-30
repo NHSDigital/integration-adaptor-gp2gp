@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.configurations;
 
+import java.util.Optional;
+
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
@@ -19,7 +21,7 @@ import javax.jms.ConnectionFactory;
 public class AmqpConfiguration {
 
     @Bean
-    public MessageConverter jsonMessageConverter() {
+    protected MessageConverter jsonMessageConverter() {
         return new MappingJackson2MessageConverter();
     }
 
@@ -27,27 +29,13 @@ public class AmqpConfiguration {
     public JmsConnectionFactory jmsConnectionFactory(AmqpProperties properties) {
         JmsConnectionFactory factory = new JmsConnectionFactory();
 
-        factory.setRemoteURI(properties.getBrokers()); 
+        factory.setRemoteURI(properties.getBrokers());
 
-        if (!StringUtils.isEmpty(properties.getUsername())) {
-            factory.setUsername(properties.getUsername()); 
-        }
-
-        if (!StringUtils.isEmpty(properties.getPassword())) {
-            factory.setPassword(properties.getPassword()); 
-        }
-
-        if (!StringUtils.isEmpty(properties.getClientId())) {
-            factory.setClientID(properties.getClientId());
-        }
-
-        if (properties.getReceiveLocalOnly() != null) {
-            factory.setReceiveLocalOnly(properties.getReceiveLocalOnly());
-        }
-
-        if (properties.getReceiveNoWaitLocalOnly() != null) {
-            factory.setReceiveNoWaitLocalOnly(properties.getReceiveNoWaitLocalOnly());
-        }
+        Optional.ofNullable(properties.getUsername()).ifPresent(factory::setUsername);
+        Optional.ofNullable(properties.getPassword()).ifPresent(factory::setPassword);
+        Optional.ofNullable(properties.getClientId()).ifPresent(factory::setClientID);
+        Optional.ofNullable(properties.getReceiveLocalOnly()).ifPresent(factory::setReceiveLocalOnly);
+        Optional.ofNullable(properties.getReceiveNoWaitLocalOnly()).ifPresent(factory::setReceiveNoWaitLocalOnly);
 
         configureDeserializationPolicy(properties, factory);
         configureRedeliveryPolicy(properties, factory);
@@ -73,11 +61,11 @@ public class AmqpConfiguration {
             properties.getMaxRedeliveries(), JmsMessageSupport.MODIFIED_FAILED_UNDELIVERABLE));
     }
 
-    static class CustomRedeliveryPolicy implements JmsRedeliveryPolicy {
+    static final class CustomRedeliveryPolicy implements JmsRedeliveryPolicy {
         private final int maxRedeliveries;
         private final int outcome;
 
-        public CustomRedeliveryPolicy(int maxRedeliveries, int outcome) {
+        private CustomRedeliveryPolicy(int maxRedeliveries, int outcome) {
             this.maxRedeliveries = maxRedeliveries;
             this.outcome = outcome;
         }
