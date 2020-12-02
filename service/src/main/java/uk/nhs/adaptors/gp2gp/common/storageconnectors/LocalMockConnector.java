@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class LocalMockConnector implements StorageConnector {
 
     private final Map<String, byte[]> storage;
@@ -32,10 +31,5 @@ public class LocalMockConnector implements StorageConnector {
         is.transferTo(returnObject);
 
         return returnObject;
-    }
-
-    @Override
-    public List<String> getFileListFromStorage() {
-        return new ArrayList<String>(storage.keySet());
     }
 }

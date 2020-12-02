@@ -1,24 +1,26 @@
 package uk.nhs.adaptors.gp2gp.common.storageconnectors;
 
-import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.AZURE_BLOB;
+import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.AZURE;
 import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.S3;
+import lombok.Setter;
 
-public class StorageConnectorFactory {
+import org.springframework.beans.factory.FactoryBean;
+
+@Setter
+public class StorageConnectorFactory implements FactoryBean<StorageConnector> {
 
     private static StorageConnector storageConnector;
+    private StorageConnectorConfiguration configuration;
 
-    public static StorageConnector getConfiguredConnector() {
-        String storageMode = System.getenv("STORAGE_SOLUTION");
-        if (storageMode == null) {
-            storageMode = "LocalMock";
-        }
+    @Override
+    public StorageConnector getObject() throws Exception {
         if (storageConnector == null) {
-            switch (storageMode) {
+            switch (configuration.getPlatform()) {
                 case S3:
-                    storageConnector = new S3StorageConnector();
+                    storageConnector = new S3StorageConnector(configuration);
                     break;
-                case AZURE_BLOB:
-                    storageConnector = new AzureStorageConnector();
+                case AZURE:
+                    storageConnector = new AzureStorageConnector(configuration);
                     break;
                 default:
                     storageConnector = new LocalMockConnector();
@@ -27,4 +29,13 @@ public class StorageConnectorFactory {
         return storageConnector;
     }
 
+    @Override
+    public Class<?> getObjectType() {
+        return StorageConnector.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return true;
+    }
 }

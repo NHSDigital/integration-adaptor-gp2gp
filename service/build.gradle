@@ -33,6 +33,7 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.907'
 	implementation 'com.azure:azure-storage-blob:12.9.0'
 	implementation 'commons-io:commons-io:2.8.0'
+	implementation 'org.apache.commons:commons-lang3:3.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "io.rest-assured:rest-assured:4.2.0"
 	testImplementation "io.rest-assured:json-path:4.2.0"

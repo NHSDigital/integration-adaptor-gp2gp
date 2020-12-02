@@ -5,3 +5,9 @@ management:
       path-mapping.health: healthcheck
       exposure:
         include: info, health, metrics
+storage:
+  platform: ${STORAGE_SOLUTION:LocalMock}
+  containerName: ${CONTAINER_NAME:for-nia-testing}
+  s3AccessKey: ${AWS_ACCESS_KEY_ID:for-nia-testing}
+  s3SecretKey: ${AWS_SECRET_ACCESS_KEY:for-nia-testing}
+  azureConnectionString: ${AZURE_STORAGE_CONNECTION_STRING:for-nia-testing}

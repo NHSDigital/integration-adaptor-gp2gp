@@ -10,19 +10,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class LocalMockConnectorTest {
+@SpringBootTest
+public class StorageConnectorTest {
 
-    private static StorageConnector storageConnector;
-    private static final String FILE_TO_UPLOAD = "src/test/resources/test.txt";
-    private static final String FILE_EXPECTED_DOWNLOAD = "src/test/resources/downloads/test.txt";
+    @Autowired
+    private StorageConnector storageConnector;
+
+    private static final String FILE_TO_UPLOAD = "src/intTest/resources/test.txt";
+    private static final String FILE_EXPECTED_DOWNLOAD = "src/intTest/resources/downloads/test.txt";
     private static final String SETUP_FILE = "setupFile.txt";
 
-    @BeforeAll
-    public static void setupConnector() throws IOException {
-        storageConnector = new LocalMockConnector();
+    @BeforeEach
+    public void setupConnector() throws IOException {
         File file = getFileToUpload();
         InputStream inputStream = FileUtils.openInputStream(file);
         storageConnector.uploadToStorage(inputStream, SETUP_FILE);

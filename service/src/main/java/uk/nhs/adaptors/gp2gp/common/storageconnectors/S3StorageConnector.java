@@ -4,58 +4,60 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public class S3StorageConnector implements StorageConnector {
 
     private final AmazonS3 s3client;
-    private static final String BUCKET_NAME = "for-nia-testing";
+    private final String bucketName;
 
-    protected S3StorageConnector() {
+    protected S3StorageConnector(StorageConnectorConfiguration configuration) {
+        this.bucketName = configuration.getContainerName();
+        AWSCredentials credentials = new BasicAWSCredentials(
+            configuration.getS3AccessKey(),
+            configuration.getS3SecretKey()
+        );
         this.s3client = AmazonS3ClientBuilder
             .standard()
+            .withCredentials(new AWSStaticCredentialsProvider(credentials))
+            .withRegion(Regions.EU_WEST_2)
             .build();
     }
 
     @Override
-    public void uploadToStorage(InputStream is, String filename) throws IOException {
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(is.available());
-
-        s3client.putObject(
-            BUCKET_NAME,
-            filename,
-            is,
-            metadata
-        );
+    public void uploadToStorage(InputStream is, String filename) throws StorageConnectorException {
+        try {
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentLength(is.available());
+            s3client.putObject(
+                bucketName,
+                filename,
+                is,
+                metadata
+            );
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred uploading to S3 Bucket", ioException);
+        }
     }
 
     @Override
-    public OutputStream downloadFromStorage(String filename) throws IOException {
-        S3Object s3Object = s3client.getObject(BUCKET_NAME, filename);
-
-        InputStream in = s3Object.getObjectContent();
-        OutputStream out = new ByteArrayOutputStream();
-        in.transferTo(out);
-
-        return out;
-    }
-
-    @Override
-    public List<String> getFileListFromStorage() {
-        ObjectListing objects = s3client.listObjects(BUCKET_NAME);
-        List<S3ObjectSummary> objectSummaries = objects.getObjectSummaries();
-
-        return objectSummaries.stream()
-            .map(S3ObjectSummary::getKey)
-            .collect(Collectors.toList());
+    public OutputStream downloadFromStorage(String filename) throws StorageConnectorException {
+        try {
+            S3Object s3Object = s3client.getObject(bucketName, filename);
+            InputStream in = s3Object.getObjectContent();
+            OutputStream out = new ByteArrayOutputStream();
+            in.transferTo(out);
+            return out;
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred downloading from S3 Bucket", ioException);
+        }
     }
 }

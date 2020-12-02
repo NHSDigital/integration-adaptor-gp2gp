@@ -4,54 +4,51 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
-import com.azure.storage.blob.models.BlobItem;
 
 public class AzureStorageConnector implements StorageConnector {
 
     private BlobServiceClient blobServiceClient;
     private BlobContainerClient containerClient;
 
-    private static final String CONTAINER_NAME = "for-nia-testing";
+    protected AzureStorageConnector(StorageConnectorConfiguration configuration) {
+        String connectionString = configuration.getAzureConnectionString();
+        String containerName = configuration.getContainerName();
 
-    protected AzureStorageConnector() {
-        String connectionString = System.getenv("AZURE_STORAGE_CONNECTION_STRING");
-        if (connectionString != null && !connectionString.isEmpty()) {
+        if (StringUtils.isNotBlank(connectionString)) {
             blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
-
-            if (blobServiceClient.getBlobContainerClient(CONTAINER_NAME).exists()) {
-                containerClient = blobServiceClient.getBlobContainerClient(CONTAINER_NAME);
+            if (blobServiceClient.getBlobContainerClient(containerName).exists()) {
+                containerClient = blobServiceClient.getBlobContainerClient(containerName);
             } else {
-                containerClient = blobServiceClient.createBlobContainer(CONTAINER_NAME);
+                containerClient = blobServiceClient.createBlobContainer(containerName);
             }
         }
     }
 
     @Override
-    public void uploadToStorage(InputStream is, String filename) throws IOException {
-        BlobClient blobClient = containerClient.getBlobClient(filename);
-        blobClient.upload(is, is.available());
+    public void uploadToStorage(InputStream is, String filename) throws StorageConnectorException {
+        try {
+            BlobClient blobClient = containerClient.getBlobClient(filename);
+            blobClient.upload(is, is.available());
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred uploading to Azure Storage", ioException);
+        }
     }
 
     @Override
-    public OutputStream downloadFromStorage(String filename) throws IOException {
-        BlobClient blobClient = containerClient.getBlobClient(filename);
-        OutputStream outputStream = new ByteArrayOutputStream();
-        blobClient.openInputStream().transferTo(outputStream);
-        return outputStream;
+    public OutputStream downloadFromStorage(String filename) throws StorageConnectorException {
+        try {
+            BlobClient blobClient = containerClient.getBlobClient(filename);
+            OutputStream outputStream = new ByteArrayOutputStream();
+            blobClient.openInputStream().transferTo(outputStream);
+            return outputStream;
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred downloading from Azure Storage", ioException);
+        }
     }
-
-    @Override
-    public List<String> getFileListFromStorage() {
-        return containerClient.listBlobs().stream()
-            .map(BlobItem::getName)
-            .collect(Collectors.toList());
-    }
-
 }
