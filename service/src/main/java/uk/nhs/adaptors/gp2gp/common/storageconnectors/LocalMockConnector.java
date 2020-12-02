@@ -18,18 +18,26 @@ public class LocalMockConnector implements StorageConnector {
     }
 
     @Override
-    public void uploadToStorage(InputStream is, String filename) throws IOException {
-        storage.put(filename, is.readAllBytes());
+    public void uploadToStorage(InputStream is, String filename) throws StorageConnectorException {
+        try {
+            storage.put(filename, is.readAllBytes());
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred uploading to Mock Storage", ioException);
+        }
     }
 
     @Override
-    public OutputStream downloadFromStorage(String filename) throws IOException {
-        byte[] objectBytes = storage.get(filename);
-        OutputStream returnObject = new ByteArrayOutputStream();
-        InputStream is = new ByteArrayInputStream(objectBytes);
+    public OutputStream downloadFromStorage(String filename) throws StorageConnectorException {
+        try {
+            byte[] objectBytes = storage.get(filename);
+            OutputStream returnObject = new ByteArrayOutputStream();
+            InputStream is = new ByteArrayInputStream(objectBytes);
 
-        is.transferTo(returnObject);
+            is.transferTo(returnObject);
 
-        return returnObject;
+            return returnObject;
+        } catch (IOException ioException) {
+            throw new StorageConnectorException("Error occurred downloading from Mock Storage", ioException);
+        }
     }
 }
