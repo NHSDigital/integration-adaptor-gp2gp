@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.common.storageconnectors;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
