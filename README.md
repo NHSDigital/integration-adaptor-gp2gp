@@ -45,10 +45,14 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 * Add environment tag `export TAG=latest`
 * Navigate to `docker`
 * Run script: `start-local-environment.sh`
+* Add environment variables in order to connect to Mongo database. They can be also added directly to `applicaion.yml` file. If `uri` field value is not provided, other Mongo database fields will be used to construct the connection string.
 
 If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and run:
 * If gradle isn't installed `brew install gradle`
-* Update gradle `gradle wrapper` 
+* Update gradle `gradle wrapper`
+
+If ran through IDE on local machine:
+* Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ## How to run unit tests:
 * Navigate to `service`
