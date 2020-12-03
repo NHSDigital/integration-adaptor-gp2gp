@@ -38,3 +38,5 @@ service/out/*
 .classpath
 */bin
 .vscode
+
+lombok.config
