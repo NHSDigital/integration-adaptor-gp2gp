@@ -24,9 +24,11 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_SERVER_PORT                  | 9000                      | The port on which the GP2GP API will run
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
-| GP2GP_AMQP_BROKERS                 | (*)                       | Defines amqp broker on which GP2GP will use.
-| GP2GP_AMQP_USERNAME                | (*)                       | Defines username for broker.
-| GP2GP_AMQP_PASSWORD                | (*)                       | Defines password for broker.
+| GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
+| GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
+| GP2GP_AMQP_PASSWORD                |                           | (Optional) password for the AMQP server
+| GP2GP_AMQP_MAX_REDELIVERIES        | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+
 
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
 Default log format is defined in the built-in logback.xml (https://github.com/NHSDigital/summary-care-record-api/tree/master/docker/service/src/main/resources/logback.xml)
@@ -34,10 +36,7 @@ This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
 ## How to run service:
-* Navigate to `docker/service`
-* Add environment tag `export TAG=latest`
 * Navigate to `docker`
-* Add environment tags for AMQP `export GP2GP_AMQP_BROKERS=amqp://activemq:5672`
 * Run script: `start-local-environment.sh`
 
 If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and run:

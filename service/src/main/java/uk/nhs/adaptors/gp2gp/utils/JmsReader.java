@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.codec.CharEncoding;
 import org.apache.qpid.jms.message.JmsBytesMessage;
 import org.apache.qpid.jms.message.JmsTextMessage;
 
@@ -30,7 +30,7 @@ public class JmsReader {
     private static String readBytesMessage(JmsBytesMessage message) throws JMSException, UnsupportedEncodingException {
         byte[] bytes = new byte[(int) message.getBodyLength()];
         message.readBytes(bytes);
-        return new String(bytes, CharEncoding.UTF_8);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     private static String readTextMessage(JmsTextMessage message) throws JMSException {
