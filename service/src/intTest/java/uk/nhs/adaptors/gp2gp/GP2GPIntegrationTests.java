@@ -50,7 +50,7 @@ public class GP2GPIntegrationTests {
     }
 
     @Test
-    public void when_ConsumingQueueMessage_then_PublishTo() throws JMSException {
+    public void When_ConsumingInboundQueueMessage_Expect_PublishToTaskQueue() throws JMSException {
 
         jmsTemplate.send("inbound", session -> {
             TextMessage message = session.createTextMessage(MESSAGE);
