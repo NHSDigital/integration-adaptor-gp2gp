@@ -35,3 +35,6 @@ service/out/*
 
 .project
 .settings
+.classpath
+*/bin
+.vscode

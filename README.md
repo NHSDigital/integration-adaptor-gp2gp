@@ -1,5 +1,11 @@
 # integration-adaptor-gp2gp
-National Integration Adaptor - GP2GP API
+National Integration Adaptor - GP2GP
+
+The existing GP2GP solution is based on a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, and perpetuation of these standards in the long term presents a risk to the continued operation of GP2GP across all suppliers.
+
+A hybrid solution approach has been selected as the best option for GP2GP adoption by NMEs and transition by existing incumbent suppliers.
+
+The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using the supplier's existing GP Connect Provider implementation to extract the Electronic Health Record. Suppliers that have not already implemented a GP2GP 2.2 producer, or those wishing to decommission their existing producer, may deploy the GP2GP adaptor in its place.
 
 ## Requirements:
 1. JDK 11
@@ -22,8 +28,6 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_AMQP_USERNAME                | (*)                       | Defines username for broker.
 | GP2GP_AMQP_PASSWORD                | (*)                       | Defines password for broker.
 
-
-
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
 Default log format is defined in the built-in logback.xml (https://github.com/NHSDigital/summary-care-record-api/tree/master/docker/service/src/main/resources/logback.xml)
 This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
@@ -32,7 +36,6 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 ## How to run service:
 * Navigate to `docker/service`
 * Add environment tag `export TAG=latest`
-* Run script: `build-image.sh` (excute privileges might be required `chmod +x build-image.sh`)
 * Navigate to `docker`
 * Add environment tags for AMQP `export GP2GP_AMQP_BROKERS=amqp://activemq:5672`
 * Run script: `start-local-environment.sh`
