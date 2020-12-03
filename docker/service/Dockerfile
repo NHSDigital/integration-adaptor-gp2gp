@@ -1,10 +1,14 @@
-FROM gradle:jdk14 AS build
+FROM gradle:jdk14 AS base
 
 COPY --chown=gradle:gradle ./service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
+FROM base as test
+
 RUN ./gradlew check
+
+FROM base AS build
 
 RUN ./gradlew test --build-cache bootJar
 

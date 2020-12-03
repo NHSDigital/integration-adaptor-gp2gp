@@ -19,6 +19,13 @@ pipeline {
     stages {
         stage('Build') {
             stages {
+                stage('Test') {
+                    steps {
+                        script {
+                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -t ${DOCKER_IMAGE} -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                        }
+                    }
+                }
                 stage('Build Docker Images') {
                     steps {
                         script {
