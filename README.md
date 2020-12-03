@@ -18,6 +18,10 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_SERVER_PORT                  | 9000                      | The port on which the GP2GP API will run
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
+| GP2GP_AMQP_BROKERS                 | (*)                       | Defines amqp broker on which GP2GP will use.
+| GP2GP_AMQP_USERNAME                | (*)                       | Defines username for broker.
+| GP2GP_AMQP_PASSWORD                | (*)                       | Defines password for broker.
+
 
 
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
@@ -30,6 +34,7 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 * Add environment tag `export TAG=latest`
 * Run script: `build-image.sh` (excute privileges might be required `chmod +x build-image.sh`)
 * Navigate to `docker`
+* Add environment tags for AMQP `export GP2GP_AMQP_BROKERS=amqp://activemq:5672`
 * Run script: `start-local-environment.sh`
 
 If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and run:

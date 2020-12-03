@@ -30,7 +30,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class GP2GPIntegrationTests {
 
     private static final String HEALTHCHECK_ENDPOINT = "/healthcheck";
-    private static final String MESSAGE = "My message";
+    private static final String MESSAGE = "{\"payload\":\"myTestPayload\"}";
 
     @LocalServerPort
     private int port;
@@ -50,14 +50,14 @@ public class GP2GPIntegrationTests {
     }
 
     @Test
-    public void postReportValidBody() throws JMSException {
+    public void when_ConsumingQueueMessage_then_PublishTo() throws JMSException {
 
         jmsTemplate.send("inbound", session -> {
             TextMessage message = session.createTextMessage(MESSAGE);
             return message;
         });
 
-        Message jmsMessage = jmsTemplate.receive("outbound");
+        Message jmsMessage = jmsTemplate.receive("taskQueue");
         if (jmsMessage == null) {
             throw new IllegalStateException("Message must not be null");
         }

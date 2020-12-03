@@ -9,7 +9,7 @@ management:
 gp2gp:
   amqp:
     inboundQueueName: "inbound"
-    outboundQueueName: "outbound"
+    taskQueueName: "taskQueue"
     brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
     exchange: amq.direct
     username: ${GP2GP_AMQP_USERNAME:}

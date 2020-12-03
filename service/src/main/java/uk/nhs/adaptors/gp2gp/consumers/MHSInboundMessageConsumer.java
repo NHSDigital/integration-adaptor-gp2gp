@@ -1,10 +1,13 @@
 package uk.nhs.adaptors.gp2gp.consumers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+
+import uk.nhs.adaptors.gp2gp.models.MhsInboundMessage;
 import uk.nhs.adaptors.gp2gp.services.GP2GPService;
 import uk.nhs.adaptors.gp2gp.utils.JmsReader;
 
@@ -16,7 +19,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MHSInboundMessageConsumer {
-
+    private final ObjectMapper objectMapper;
     private final GP2GPService gp2GPService;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
@@ -26,7 +29,8 @@ public class MHSInboundMessageConsumer {
         try {
             String body = JmsReader.readMessage(message);
             LOGGER.debug("Message {} content: {}", messageID, body);
-            gp2GPService.handleRequest(body);
+            var mhsInboundMessage = objectMapper.readValue(body, MhsInboundMessage.class);
+            gp2GPService.handleRequest(objectMapper.writeValueAsString(mhsInboundMessage));
             message.acknowledge();
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (Exception e) {

@@ -2,6 +2,9 @@ package uk.nhs.adaptors.containers;
 
 import org.testcontainers.containers.GenericContainer;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public final class ActiveMqContainer extends GenericContainer<ActiveMqContainer> {
 
     public static final int ACTIVEMQ_PORT = 5672;

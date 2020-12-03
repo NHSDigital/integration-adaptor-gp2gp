@@ -14,10 +14,10 @@ public class GP2GPService {
 
     private final JmsTemplate jmsTemplate;
 
-    @Value("${gp2gp.amqp.outboundQueueName}")
-    private String mhsOutboundQueueName;
+    @Value("${gp2gp.amqp.taskQueueName}")
+    private String mhsTaskQueueName;
 
     public void handleRequest(String xml) {
-        jmsTemplate.send(mhsOutboundQueueName, session -> session.createTextMessage(xml));
+        jmsTemplate.send(mhsTaskQueueName, session -> session.createTextMessage(xml));
     }
 }

@@ -34,8 +34,8 @@ public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachC
 
         var inboundqueueName = Objects.requireNonNull(
             applicationContext.getEnvironment().getProperty("gp2gp.amqp.inboundQueueName"));
-        var outboundqueueName = Objects.requireNonNull(
-            applicationContext.getEnvironment().getProperty("gp2gp.amqp.outboundQueueName"));
+        var taskQueueName = Objects.requireNonNull(
+            applicationContext.getEnvironment().getProperty("gp2gp.amqp.taskQueueName"));
 
         var receiveTimeout = jmsTemplate.getReceiveTimeout();
         jmsTemplate.setReceiveTimeout(RECEIVE_TIMEOUT_NO_WAIT);
@@ -45,7 +45,7 @@ public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachC
                     LOGGER.info("Purged '" + name + "' message");
                 }
             });
-        List.of(outboundqueueName, DLQ_PREFIX + outboundqueueName)
+        List.of(taskQueueName, DLQ_PREFIX + taskQueueName)
             .forEach(name -> {
                 while (jmsTemplate.receive(name) != null) {
                     LOGGER.info("Purged '" + name + "' message");
