@@ -16,7 +16,6 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.TextMessage;
 
-import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -34,9 +33,8 @@ public class MessageQueueTest {
     @Autowired
     private AmqpProperties amqpProperties;
 
-
     @Test
-    public void When_ConsumingInboundQueueMessage_Expect_PublishToTaskQueue() throws JMSException {
+    public void whenConsumingInboundQueueMessageExpectPublishToTaskQueue() throws JMSException {
 
         jmsTemplate.send("inbound", session -> {
             TextMessage message = session.createTextMessage(MESSAGE);

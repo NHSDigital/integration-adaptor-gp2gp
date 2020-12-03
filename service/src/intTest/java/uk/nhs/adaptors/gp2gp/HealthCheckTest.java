@@ -23,7 +23,7 @@ public class HealthCheckTest {
     private int port;
 
     @Test
-    public void When_HealthCheck_Expect_200() {
+    public void whenHealthCheckExpect200() {
         given()
             .port(port)
             .when()
