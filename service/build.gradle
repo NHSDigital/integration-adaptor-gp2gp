@@ -13,7 +13,6 @@ apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
 
 group = 'uk.nhs.adaptors'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 lombok {
