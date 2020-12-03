@@ -1,5 +1,21 @@
-FROM adoptopenjdk/openjdk11:slim
+FROM gradle:jdk14 AS build
 
-COPY gp2gp.jar /
+COPY --chown=gradle:gradle ./service /home/gradle/service
 
-ENTRYPOINT java -jar /gp2gp.jar --port 8080
+WORKDIR /home/gradle/service
+
+RUN ./gradlew check
+
+RUN ./gradlew test --build-cache bootJar
+
+FROM adoptopenjdk/openjdk14:jre
+
+EXPOSE 8080
+
+RUN mkdir /app
+
+COPY --from=build /home/gradle/service/build/libs/gp2gp.jar /app/gp2gp.jar
+
+USER 65534
+
+ENTRYPOINT ["java", "-jar", "/app/gp2gp.jar", "--port", "8080"]
