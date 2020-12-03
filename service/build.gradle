@@ -33,7 +33,6 @@ dependencies {
 	implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
 	implementation 'org.apache.commons:commons-lang3:3.11'
 
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "io.rest-assured:rest-assured:4.2.0"
 	testImplementation "io.rest-assured:json-path:4.2.0"
