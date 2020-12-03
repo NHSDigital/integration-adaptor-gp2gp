@@ -14,7 +14,7 @@ import java.util.Objects;
 import static org.springframework.jms.support.destination.JmsDestinationAccessor.RECEIVE_TIMEOUT_NO_WAIT;
 
 @Slf4j
-public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachCallback {
+public class MessageQueueExtension implements BeforeAllCallback, BeforeEachCallback {
 
     public static final String DLQ_PREFIX = "DLQ.";
 

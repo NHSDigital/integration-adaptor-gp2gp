@@ -11,8 +11,9 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.containers.MessageQueueExtension;
 
-@ExtendWith({SpringExtension.class})
+@ExtendWith({SpringExtension.class, MessageQueueExtension.class})
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Slf4j
 public class HealthCheckTest {
@@ -22,7 +23,7 @@ public class HealthCheckTest {
     private int port;
 
     @Test
-    public void whenGetHealthCheckThenExpect200() throws Exception {
+    public void When_HealthCheck_Expect_200() {
         given()
             .port(port)
             .when()
