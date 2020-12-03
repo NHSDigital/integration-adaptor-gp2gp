@@ -5,6 +5,7 @@ plugins {
 	id "checkstyle"
 	id "com.github.spotbugs" version "4.5.0"
 	id "io.freefair.lombok" version "5.1.0"
+	id 'jacoco'
 }
 
 apply plugin: 'java'
@@ -41,6 +42,10 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
 }
 
 sourceSets {
