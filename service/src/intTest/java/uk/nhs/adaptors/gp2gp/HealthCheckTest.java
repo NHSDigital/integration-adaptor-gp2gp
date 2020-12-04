@@ -11,9 +11,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.containers.MessageQueueExtension;
 
-@ExtendWith({SpringExtension.class, MessageQueueExtension.class})
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Slf4j
 public class HealthCheckTest {

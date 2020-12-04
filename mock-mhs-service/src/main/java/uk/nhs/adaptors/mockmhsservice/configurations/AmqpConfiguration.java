@@ -1,6 +1,8 @@
-package uk.nhs.adaptors.gp2gp.configurations;
+package uk.nhs.adaptors.mockmhsservice.configurations;
 
 import java.util.Optional;
+
+import javax.jms.ConnectionFactory;
 
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
@@ -13,8 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.util.StringUtils;
-
-import javax.jms.ConnectionFactory;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)
