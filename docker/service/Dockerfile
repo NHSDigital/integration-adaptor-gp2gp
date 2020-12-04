@@ -1,18 +1,16 @@
-FROM gradle:jdk14 AS base
+FROM gradle:jdk11 AS test
 
 COPY --chown=gradle:gradle ./service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
-FROM base as test
+RUN ./gradlew check -x integrationTest
 
-RUN ./gradlew check
+FROM test AS build
 
-FROM base AS build
+RUN ./gradlew --build-cache bootJar
 
-RUN ./gradlew test --build-cache bootJar
-
-FROM adoptopenjdk/openjdk14:jre
+FROM adoptopenjdk/openjdk11:jre
 
 EXPOSE 8080
 

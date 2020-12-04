@@ -10,8 +10,6 @@ pipeline {
 
     environment {
         BUILD_TAG = sh label: 'Generating build tag', returnStdout: true, script: 'python3 scripts/tag.py ${GIT_BRANCH} ${BUILD_NUMBER} ${GIT_COMMIT}'
-        BUILD_TAG_LOWER = sh label: 'Lowercase build tag', returnStdout: true, script: "echo -n ${BUILD_TAG} | tr '[:upper:]' '[:lower:]'"
-        ENVIRONMENT_ID = "build1"
         ECR_REPO_DIR = "gp2gp"
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${ECR_REPO_DIR}:${BUILD_TAG}"
     }
@@ -19,10 +17,23 @@ pipeline {
     stages {
         stage('Build') {
             stages {
-                stage('Test') {
+                stage('Tests') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -t ${DOCKER_IMAGE} -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Tests failed")}
+                            sh '''
+                                docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
+                                docker cp tests:/home/gradle/service/build/reports .
+                                docker kill tests
+                            '''
+                            archiveArtifacts artifacts: 'reports/**/*.*', fingerprint: true
+                            recordIssues(
+                                enabledForFailure: true,
+                                tools: [
+                                    checkStyle(pattern: 'reports/checkstyle/*.xml'),
+                                    spotBugs(pattern: 'reports/spotbugs/*.xml')
+                                ]
+                            )
                         }
                     }
                 }
