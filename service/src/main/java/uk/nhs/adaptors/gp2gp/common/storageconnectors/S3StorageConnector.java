@@ -4,11 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -21,14 +16,8 @@ public class S3StorageConnector implements StorageConnector {
 
     protected S3StorageConnector(StorageConnectorConfiguration configuration) {
         this.bucketName = configuration.getContainerName();
-        AWSCredentials credentials = new BasicAWSCredentials(
-            configuration.getS3AccessKey(),
-            configuration.getS3SecretKey()
-        );
         this.s3client = AmazonS3ClientBuilder
             .standard()
-            .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion(Regions.EU_WEST_2)
             .build();
     }
 

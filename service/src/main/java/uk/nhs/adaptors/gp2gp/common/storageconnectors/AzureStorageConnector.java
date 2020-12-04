@@ -4,31 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.BlobServiceClient;
-import com.azure.storage.blob.BlobServiceClientBuilder;
 
 public class AzureStorageConnector implements StorageConnector {
 
-    private BlobServiceClient blobServiceClient;
+    @Autowired
     private BlobContainerClient containerClient;
 
-    protected AzureStorageConnector(StorageConnectorConfiguration configuration) {
-        String connectionString = configuration.getAzureConnectionString();
-        String containerName = configuration.getContainerName();
-
-        if (StringUtils.isNotBlank(connectionString)) {
-            blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
-            if (blobServiceClient.getBlobContainerClient(containerName).exists()) {
-                containerClient = blobServiceClient.getBlobContainerClient(containerName);
-            } else {
-                containerClient = blobServiceClient.createBlobContainer(containerName);
-            }
-        }
-    }
+    protected AzureStorageConnector() {}
 
     @Override
     public void uploadToStorage(InputStream is, String filename) throws StorageConnectorException {

@@ -13,14 +13,14 @@ public class StorageConnectorFactory implements FactoryBean<StorageConnector> {
     private StorageConnectorConfiguration configuration;
 
     @Override
-    public StorageConnector getObject() throws Exception {
+    public StorageConnector getObject() {
         if (storageConnector == null) {
-            switch (configuration.getPlatform()) {
+            switch (configuration.getType()) {
                 case S3:
                     storageConnector = new S3StorageConnector(configuration);
                     break;
                 case AZURE:
-                    storageConnector = new AzureStorageConnector(configuration);
+                    storageConnector = new AzureStorageConnector();
                     break;
                 default:
                     storageConnector = new LocalMockConnector();
@@ -32,10 +32,5 @@ public class StorageConnectorFactory implements FactoryBean<StorageConnector> {
     @Override
     public Class<?> getObjectType() {
         return StorageConnector.class;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return true;
     }
 }

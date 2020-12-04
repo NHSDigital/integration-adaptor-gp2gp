@@ -10,9 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "storage")
 public class StorageConnectorConfiguration {
-    private String platform;
+    private String type;
     private String containerName;
-    private String s3AccessKey;
-    private String s3SecretKey;
     private String azureConnectionString;
 }

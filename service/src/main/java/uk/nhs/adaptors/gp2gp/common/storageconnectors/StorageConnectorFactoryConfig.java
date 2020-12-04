@@ -18,7 +18,7 @@ public class StorageConnectorFactoryConfig {
     }
 
     @Bean
-    public StorageConnector storageConnector() throws Exception {
+    public StorageConnector storageConnector() {
         return storageConnectorFactory().getObject();
     }
 }
