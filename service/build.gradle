@@ -39,7 +39,7 @@ dependencies {
 	testImplementation "io.rest-assured:xml-path:4.2.0"
 	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.0"
 	testImplementation "org.assertj:assertj-core:3.18.1"
-	testImplementation "org.testcontainers:testcontainers:1.14.2"
+	testImplementation "org.testcontainers:testcontainers:1.15.0-rc2"
 }
 
 test {

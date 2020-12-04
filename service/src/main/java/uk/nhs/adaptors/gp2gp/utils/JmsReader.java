@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.qpid.jms.message.JmsBytesMessage;
@@ -14,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JmsReader {
 
-    public static String readMessage(Message message) throws JMSException, UnsupportedEncodingException {
+    public static String readMessage(Message message) throws JMSException {
         if (message instanceof JmsTextMessage) {
             return readTextMessage((JmsTextMessage) message);
         }
@@ -27,7 +26,7 @@ public class JmsReader {
         return null;
     }
 
-    private static String readBytesMessage(JmsBytesMessage message) throws JMSException, UnsupportedEncodingException {
+    private static String readBytesMessage(JmsBytesMessage message) throws JMSException {
         byte[] bytes = new byte[(int) message.getBodyLength()];
         message.readBytes(bytes);
         return new String(bytes, StandardCharsets.UTF_8);
