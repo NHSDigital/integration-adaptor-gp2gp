@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,37 +20,28 @@ public class StorageConnectorTest {
     @Autowired
     private StorageConnector storageConnector;
 
-    private String fileToUpload = "src/intTest/resources/test.txt";
-    private String fileExpectedDownload = "src/intTest/resources/downloads/test.txt";
-    private static final String setupFile = "setupFile.txt";
-    private File upload;
-    private File download;
+    private static final String FILE_EXPECTED_DOWNLOAD = "src/intTest/resources/downloads/test.txt";
+    private static final String SETUP_FILE_TXT = "setupFile.txt";
+    private static File upload;
 
     @BeforeEach
     public void setupConnector() throws IOException {
+        String fileToUpload = StorageConnectorTest.class.getResource("/test.txt").getPath();
+        upload = new File(fileToUpload);
         InputStream inputStream = FileUtils.openInputStream(upload);
-        storageConnector.uploadToStorage(inputStream, inputStream.available(), setupFile);
+        storageConnector.uploadToStorage(inputStream, inputStream.available(), SETUP_FILE_TXT);
     }
 
     @Test
     public void When_DownloadingFileFromStorage_ExpectFileContentToBeCorrect() throws IOException {
-        InputStream inputStream = new ByteArrayInputStream(storageConnector.downloadFromStorage(setupFile).readAllBytes());
-
+        InputStream inputStream = new ByteArrayInputStream(storageConnector.downloadFromStorage(SETUP_FILE_TXT).readAllBytes());
+        File download = new File(FILE_EXPECTED_DOWNLOAD);
         FileUtils.copyToFile(inputStream, download);
         assertEquals(FileUtils.readLines(upload), FileUtils.readLines(download));
     }
 
-    @AfterTestClass
-    public void deleteDownloadedFile() {
-        new File(fileExpectedDownload).delete();
-    }
-
-    @BeforeEach
-    private void initialiseTestVariables() {
-        fileToUpload = getClass().getResource("/test.txt").getPath();
-        fileExpectedDownload = getClass().getResource("/downloads/test.txt").getPath();
-        System.out.println(fileToUpload);
-        upload = new File(fileToUpload);
-        download = new File(fileExpectedDownload);
+    @AfterAll
+    public static void deleteDownloadedFile() {
+        new File(FILE_EXPECTED_DOWNLOAD).delete();
     }
 }
