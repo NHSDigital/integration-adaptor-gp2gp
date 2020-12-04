@@ -10,6 +10,17 @@ management:
         include: info, health, metrics, mappings
 gp2gp:
   storage:
-    type: ${GP2GP_STORAGE_TYPE:LocalMock}
+    type: ${GP2GP_STORAGE_TYPE:Azure}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:for-nia-testing}
     azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:for-nia-testing}
+mongodb:
+  uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
+  database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
+  host: ${GP2GP_MONGO_HOST:}
+  port: ${GP2GP_MONGO_PORT:}
+  username: ${GP2GP_MONGO_USERNAME:}
+  password: ${GP2GP_MONGO_PASSWORD:}
+  options: ${GP2GP_MONGO_OPTIONS:}
+  autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
+  ttl: ${GP2GP_MONGO_TTL:P30D}
+  cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
