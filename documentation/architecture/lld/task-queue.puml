@@ -2,30 +2,22 @@
 abstract class TaskDefinition {
     taskId: String
     extractId: String
+    traceId: String
 }
 
-abstract class SspTaskDefinition {
-    sspTraceId: String
-    sspFromAsid: String
-    sspToAsid: String
-    getSspInteractionId(): String
-}
-
-TaskDefinition <|-- SspTaskDefinition
+note right of TaskDefinition: taskId is a uuid generated for each task def instance
 
 class GetGpcStructuredTaskDefinition {
-    {static}  INTERACTION_ID: String
     nhsNumber: String
 }
 
-SspTaskDefinition <|-- GetGpcStructuredTaskDefinition
+TaskDefinition <|-- GetGpcStructuredTaskDefinition
 
 class GetGpcDocumentTaskDefinition {
-    {static} INTERACTION_ID: String
     documentId: String
 }
 
-SspTaskDefinition <|-- GetGpcDocumentTaskDefinition
+TaskDefinition <|-- GetGpcDocumentTaskDefinition
 
 interface TaskExecutor<U extends TaskDefinition> {
     getTaskType(): Class<T> 
