@@ -1,7 +1,8 @@
 package uk.nhs.adaptors.gp2gp.common.storageconnectors;
 
-import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.AZURE;
 import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.S3;
+import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOptions.AZURE;
+
 import lombok.Setter;
 
 import org.springframework.beans.factory.FactoryBean;
@@ -15,7 +16,7 @@ public class StorageConnectorFactory implements FactoryBean<StorageConnector> {
     @Override
     public StorageConnector getObject() {
         if (storageConnector == null) {
-            switch (configuration.getType()) {
+            switch (StorageConnectorOptions.enumOf(configuration.getType())) {
                 case S3:
                     storageConnector = new S3StorageConnector(configuration);
                     break;
