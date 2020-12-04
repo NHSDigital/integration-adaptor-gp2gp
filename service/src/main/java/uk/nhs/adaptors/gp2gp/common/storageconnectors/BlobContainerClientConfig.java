@@ -20,7 +20,7 @@ public class BlobContainerClientConfig {
         String connectionString = configuration.getAzureConnectionString();
         String containerName = configuration.getContainerName();
 
-        if (configuration.getType().equals(AZURE.getStringVal()) && StringUtils.isNotBlank(connectionString)) {
+        if (configuration.getType().equals(AZURE.getStringValue()) && StringUtils.isNotBlank(connectionString)) {
             BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
             if (blobServiceClient.getBlobContainerClient(configuration.getContainerName()).exists()) {
                 return blobServiceClient.getBlobContainerClient(containerName);

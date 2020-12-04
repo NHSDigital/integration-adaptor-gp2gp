@@ -8,12 +8,12 @@ public enum  StorageConnectorOptions {
     AZURE("Azure"),
     LOCALMOCK("LocalMock");
 
-    private String stringVal;
-    StorageConnectorOptions(String stringVal) {
-        this.stringVal = stringVal;
+    private String stringValue;
+    StorageConnectorOptions(String stringValue) {
+        this.stringValue = stringValue;
     }
 
-    public static StorageConnectorOptions enumOf(String enumVal) {
-        return valueOf(StorageConnectorOptions.class, enumVal.toUpperCase());
+    public static StorageConnectorOptions enumOf(String enumValue) {
+        return valueOf(StorageConnectorOptions.class, enumValue.toUpperCase());
     }
 }
