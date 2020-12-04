@@ -3,17 +3,15 @@ package uk.nhs.adaptors.gp2gp.common.storageconnectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.event.annotation.AfterTestClass;
 
 @SpringBootTest
 public class StorageConnectorTest {
@@ -21,38 +19,37 @@ public class StorageConnectorTest {
     @Autowired
     private StorageConnector storageConnector;
 
-    private static final String FILE_TO_UPLOAD = "src/intTest/resources/test.txt";
-    private static final String FILE_EXPECTED_DOWNLOAD = "src/intTest/resources/downloads/test.txt";
-    private static final String SETUP_FILE = "setupFile.txt";
-    private static final File upload = loadUploadFromFilePath();
-    private static final File download = loadDownloadFromFilePath();
+    private String fileToUpload = "src/intTest/resources/test.txt";
+    private String fileExpectedDownload = "src/intTest/resources/downloads/test.txt";
+    private static final String setupFile = "setupFile.txt";
+    private File upload;
+    private File download;
 
     @BeforeEach
     public void setupConnector() throws IOException {
         InputStream inputStream = FileUtils.openInputStream(upload);
-        storageConnector.uploadToStorage(inputStream, SETUP_FILE);
+        storageConnector.uploadToStorage(inputStream, inputStream.available(), setupFile);
     }
 
     @Test
     public void When_DownloadingFileFromStorage_ExpectFileContentToBeCorrect() throws IOException {
-        OutputStream fileFromStorage = storageConnector.downloadFromStorage(SETUP_FILE);
-        ByteArrayOutputStream byteArrayOutputStream = (ByteArrayOutputStream) fileFromStorage;
-        InputStream inputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+        InputStream inputStream = new ByteArrayInputStream(storageConnector.downloadFromStorage(setupFile).readAllBytes());
 
         FileUtils.copyToFile(inputStream, download);
         assertEquals(FileUtils.readLines(upload), FileUtils.readLines(download));
     }
 
-    @AfterAll
-    public static void deleteDownloadedFile() {
-        new File(FILE_EXPECTED_DOWNLOAD).delete();
+    @AfterTestClass
+    public void deleteDownloadedFile() {
+        new File(fileExpectedDownload).delete();
     }
 
-    private static File loadUploadFromFilePath() {
-        return new File(FILE_TO_UPLOAD);
-    }
-
-    private static File loadDownloadFromFilePath() {
-        return new File(FILE_EXPECTED_DOWNLOAD);
+    @BeforeEach
+    private void initialiseTestVariables() {
+        fileToUpload = getClass().getResource("/test.txt").getPath();
+        fileExpectedDownload = getClass().getResource("/downloads/test.txt").getPath();
+        System.out.println(fileToUpload);
+        upload = new File(fileToUpload);
+        download = new File(fileExpectedDownload);
     }
 }

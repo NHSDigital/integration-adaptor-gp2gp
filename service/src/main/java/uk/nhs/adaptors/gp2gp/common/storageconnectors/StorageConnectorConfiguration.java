@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "storage")
+@ConfigurationProperties(prefix = "gp2gp.storage")
 public class StorageConnectorConfiguration {
     private String type;
     private String containerName;
