@@ -67,8 +67,7 @@ public class MongoClientConfiguration extends AbstractMongoClientConfiguration {
                 "and will be used to configure the database connection.");
             return uri;
         } else {
-            LOGGER.error("Mongodb must be configured using a connection string or individual properties. " +
-                "Both uri and host are null or empty");
+            LOGGER.error("Mongodb must be configured using a connection string or individual properties. Both uri and host are null or empty");
             throw new RuntimeException("Missing mongodb connection string and/or properties");
         }
     }
