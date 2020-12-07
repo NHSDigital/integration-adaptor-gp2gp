@@ -11,18 +11,12 @@ import static io.restassured.RestAssured.given;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import lombok.extern.slf4j.Slf4j;
-
-@SpringBootTest()
-@ExtendWith({SpringExtension.class})
-@Configuration
-@DirtiesContext
-@Slf4j
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(initializers = {ConfigDataApplicationContextInitializer.class})
 public class MessageQueueTest {
 
     private static final String APPLICATION_XML_UTF_8 = APPLICATION_JSON_VALUE + ";charset=UTF-8";

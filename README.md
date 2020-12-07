@@ -62,7 +62,7 @@ If ran through IDE on local machine:
 
 ## How to run integration tests:
 * Navigate to `docker`
-* Run: `./start-local-environment`
+* Run: `./start-local-environment.sh`
 * Navigate to `service`
 * Run: `./gradlew integrationTest`
 
@@ -72,7 +72,7 @@ If ran through IDE on local machine:
 
 ## How to run all checks:
 * Navigate to `docker`
-* Run: `./start-local-environment`
+* Run: `./start-local-environment.sh`
 * Navigate to `service`
 * Run: `./gradlew check` 
 

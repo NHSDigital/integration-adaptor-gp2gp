@@ -1,0 +1,8 @@
+server:
+  port: ${MHS_MOCK_SERVER_PORT:8081}
+
+gp2gp:
+  amqp:
+    inboundQueueName: "inbound"
+    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
+    exchange: amq.direct
