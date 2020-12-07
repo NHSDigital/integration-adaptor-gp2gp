@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +22,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class EhrExtractStatus {
     @Id
     private String extractId;
-    private LocalDateTime created;
+    private Instant created;
 }

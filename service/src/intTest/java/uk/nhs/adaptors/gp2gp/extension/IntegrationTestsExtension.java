@@ -1,9 +1,5 @@
 package uk.nhs.adaptors.gp2gp.extension;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.container.MongoDbContainer;
 import uk.nhs.adaptors.gp2gp.repository.EhrExtractStatusRepository;
@@ -15,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @Slf4j
-public class IntegrationTestExtension implements BeforeAllCallback, BeforeEachCallback {
+public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachCallback {
     @Override
     public void beforeAll(ExtensionContext context) {
         MongoDbContainer.getInstance().start();
