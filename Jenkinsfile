@@ -44,6 +44,16 @@ pipeline {
                         }
                     }
                 }
+                // stage('Integration Tests') {
+                //     steps {
+                //         script {
+                //             sh '''
+                //                 cd service
+                //                 ./gradlew integrationTest
+                //             '''
+                //         }
+                //     }
+                // }
                 stage('Push Image') {
                     when {
                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
