@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import uk.nhs.adaptors.gp2gp.configuration.MongoClientConfiguration;
