@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -38,6 +39,6 @@ public class EhrExtractStatusRepositoryTest {
         EhrExtractStatus ehrExtractStatus = optionalEhrExtractStatus.get();
 
         assertThat(ehrExtractStatus.getExtractId(), is(EXTRACT_ID));
-        assertThat(ehrExtractStatus.getCreated(), is(now));
+        assertThat(ehrExtractStatus.getCreated(), is(notNullValue()));
     }
 }

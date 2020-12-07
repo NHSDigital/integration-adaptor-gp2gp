@@ -26,9 +26,9 @@ public final class MongoDbContainer extends GenericContainer<MongoDbContainer> {
     public void start() {
         super.start();
         var newMongoUri = "mongodb://" + getContainerIpAddress() + ":" + getMappedPort(MONGODB_PORT);
-        LOGGER.info("Changing Mongo URI (NHAIS_MONGO_URI) to {}", newMongoUri);
-        System.setProperty("NHAIS_MONGO_URI", newMongoUri);
-        LOGGER.info("Setting NHAIS_MONGO_AUTO_INDEX_CREATION to true");
-        System.setProperty("NHAIS_MONGO_AUTO_INDEX_CREATION", String.valueOf(true));
+        LOGGER.info("Changing Mongo URI (GP2GP_MONGO_URI) to {}", newMongoUri);
+        System.setProperty("GP2GP_MONGO_URI", newMongoUri);
+        LOGGER.info("Setting GP2GP_MONGO_AUTO_INDEX_CREATION to true");
+        System.setProperty("GP2GP_MONGO_AUTO_INDEX_CREATION", String.valueOf(true));
     }
 }

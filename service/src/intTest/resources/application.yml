@@ -7,7 +7,7 @@ management:
         include: info, health, metrics
 
 mongodb:
-  uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
+  uri: ${GP2GP_MONGO_URI:}
   database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
   host: ${GP2GP_MONGO_HOST:}
   port: ${GP2GP_MONGO_PORT:}
