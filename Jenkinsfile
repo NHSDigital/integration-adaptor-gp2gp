@@ -23,17 +23,29 @@ pipeline {
                             if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
                                 docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
-                                docker cp tests:/home/gradle/service/build/reports .
+                                docker cp tests:/home/gradle/service/build .
                                 docker kill tests
                             '''
-                            archiveArtifacts artifacts: 'reports/**/*.*', fingerprint: true
+                            archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
                             recordIssues(
                                 enabledForFailure: true,
                                 tools: [
-                                    checkStyle(pattern: 'reports/checkstyle/*.xml'),
-                                    spotBugs(pattern: 'reports/spotbugs/*.xml')
+                                    checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
+                                    spotBugs(pattern: 'build/reports/spotbugs/*.xml')
                                 ]
                             )
+                        }
+                    }
+                    post {
+                        always {
+                            step([
+                                $class : 'JacocoPublisher',
+                                execPattern : '**/build/jacoco/*.exec',
+                                classPattern : '**/build/classes/java',
+                                sourcePattern : 'src/main/java',
+                                exclusionPattern : '**/*Test.class'
+                            ])
+                            sh "rm -rf build"
                         }
                     }
                 }
