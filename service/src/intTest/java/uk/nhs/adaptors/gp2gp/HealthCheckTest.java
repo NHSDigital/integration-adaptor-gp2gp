@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()

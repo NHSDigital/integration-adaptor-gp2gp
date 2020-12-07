@@ -9,6 +9,7 @@ management:
       exposure:
         include: info, health, metrics
 
+
 gp2gp:
   amqp:
     inboundQueueName: "inbound"
@@ -21,3 +22,15 @@ gp2gp:
   outbound:
     mhsEndPoint: ${MHS_ENDPOINT:/mock-mhs-endpoint}
     mhsPort: ${MHS_PORT:8081}
+  mongodb:
+    uri: ${GP2GP_MONGO_URI:}
+    database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
+    host: ${GP2GP_MONGO_HOST:}
+    port: ${GP2GP_MONGO_PORT:}
+    username: ${GP2GP_MONGO_USERNAME:}
+    password: ${GP2GP_MONGO_PASSWORD:}
+    options: ${GP2GP_MONGO_OPTIONS:}
+    autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
+    ttl: ${GP2GP_MONGO_TTL:P30D}
+    cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
+    

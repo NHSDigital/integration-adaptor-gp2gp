@@ -12,6 +12,10 @@ services:
       - GP2GP_AMQP_USERNAME
       - GP2GP_AMQP_PASSWORD
       - GP2GP_AMQP_MAX_REDELIVERIES
+      - GP2GP_MONGO_URI=mongodb://mongodb:27017
+      - GP2GP_MONGO_DATABASE_NAME=gp2gp
+      - GP2GP_MONGO_TTL=P30D
+      - GP2GP_COSMOS_DB_ENABLED=false
 
   mock-mhs-service:
     image: uk.nhs/mock-mhs-service:0.0.1-SNAPSHOT
@@ -26,16 +30,9 @@ services:
       - GP2GP_AMQP_MAX_REDELIVERIES
 
   mongodb:
-    uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
-    database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
-    host: ${GP2GP_MONGO_HOST:}
-    port: ${GP2GP_MONGO_PORT:}
-    username: ${GP2GP_MONGO_USERNAME:}
-    password: ${GP2GP_MONGO_PASSWORD:}
-    options: ${GP2GP_MONGO_OPTIONS:}
-    autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
-    ttl: ${GP2GP_MONGO_TTL:P30D}
-    cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
+    image: mongo
+    ports:
+      - "27017:27017"
 
   activemq:
     build:
@@ -43,3 +40,4 @@ services:
     ports:
       - "8161:8161"
       - "5672:5672"
+
