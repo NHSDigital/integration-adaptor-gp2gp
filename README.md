@@ -21,7 +21,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 
 | Environment Variable               | Default                   | Description 
 | -----------------------------------|---------------------------|-------------
-| GP2GP_SERVER_PORT                  | 9000                      | The port on which the GP2GP API will run
+| GP2GP_SERVER_PORT                  | 8080                      | The port on which the GP2GP API will run
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
 | GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
