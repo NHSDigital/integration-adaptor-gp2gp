@@ -28,6 +28,15 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES        | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+| GP2GP_MONGO_URI                    | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
+| GP2GP_MONGO_DATABASE_NAME          | gp2gp                     | Mongo database name.
+| GP2GP_MONGO_HOST                   | (*)                       | Mongo database host. Can be left blank if full connection string is provided.
+| GP2GP_MONGO_USERNAME               | (*)                       | Mongo database username. Can be left blank if full connection string is provided.
+| GP2GP_MONGO_PASSWORD               | (*)                       | Mongo database password. Can be left blank if full connection string is provided.
+| GP2GP_MONGO_OPTIONS                | (*)                       | Mongodb URL encoded parameters for the connection string without a leading "?". Can be left blank if full connection string is provided.
+| GP2GP_MONGO_AUTO_INDEX_CREATION    | true                      | (Optional) Should auto index for Mongo database be created.
+| GP2GP_MONGO_TTL                    | P30D                      | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+| GP2GP_COSMOS_DB_ENABLED            | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
 
 
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
@@ -38,10 +47,14 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 ## How to run service:
 * Navigate to `docker`
 * Run script: `start-local-environment.sh`
+* Add environment variables in order to connect to Mongo database. They can be also added directly to `applicaion.yml` file. If `uri` field value is not provided, other Mongo database fields will be used to construct the connection string.
 
 If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and run:
 * If gradle isn't installed `brew install gradle`
-* Update gradle `gradle wrapper` 
+* Update gradle `gradle wrapper`
+
+If ran through IDE on local machine:
+* Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ## How to run unit tests:
 * Navigate to `service`
