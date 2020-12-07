@@ -14,12 +14,10 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 import javax.jms.JMSException;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Slf4j
 public class MhsMockController {
     private final MockMhsService mockMhsService;
 
