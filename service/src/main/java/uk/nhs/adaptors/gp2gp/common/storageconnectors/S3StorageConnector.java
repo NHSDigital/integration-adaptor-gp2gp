@@ -8,7 +8,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 
 public class S3StorageConnector implements StorageConnector {
-
     private final AmazonS3 s3client;
     private final String bucketName;
 

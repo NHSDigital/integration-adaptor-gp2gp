@@ -1,18 +1,19 @@
 package uk.nhs.adaptors.gp2gp.common.storageconnectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.AfterTestClass;
 
 @SpringBootTest
 public class StorageConnectorTest {
@@ -33,11 +34,12 @@ public class StorageConnectorTest {
     }
 
     @Test
-    public void When_DownloadingFileFromStorage_ExpectFileContentToBeCorrect() throws IOException {
+    public void When_DownloadingFileFromStorage_Expect_FileContentToBeCorrect() throws IOException {
         InputStream inputStream = new ByteArrayInputStream(storageConnector.downloadFromStorage(SETUP_FILE_TXT).readAllBytes());
         File download = new File(FILE_EXPECTED_DOWNLOAD);
         FileUtils.copyToFile(inputStream, download);
-        assertEquals(FileUtils.readLines(upload), FileUtils.readLines(download));
+
+        assertThat(FileUtils.contentEquals(upload, download), is(true));
     }
 
     @AfterAll

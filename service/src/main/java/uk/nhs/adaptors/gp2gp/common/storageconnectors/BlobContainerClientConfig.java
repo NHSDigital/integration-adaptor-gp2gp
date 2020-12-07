@@ -11,7 +11,6 @@ import static uk.nhs.adaptors.gp2gp.common.storageconnectors.StorageConnectorOpt
 
 @Configuration
 public class BlobContainerClientConfig {
-
     @Autowired
     private StorageConnectorConfiguration configuration;
 
@@ -22,6 +21,7 @@ public class BlobContainerClientConfig {
 
         if (configuration.getType().equals(AZURE.getStringValue()) && StringUtils.isNotBlank(connectionString)) {
             BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
+
             if (blobServiceClient.getBlobContainerClient(configuration.getContainerName()).exists()) {
                 return blobServiceClient.getBlobContainerClient(containerName);
             } else {

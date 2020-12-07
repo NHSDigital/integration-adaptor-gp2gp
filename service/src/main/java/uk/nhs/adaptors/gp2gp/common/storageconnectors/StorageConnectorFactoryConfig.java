@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class StorageConnectorFactoryConfig {
-
     @Autowired
     private StorageConnectorConfiguration configuration;
 

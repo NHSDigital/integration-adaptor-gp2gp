@@ -6,7 +6,6 @@ import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
 
 public class AzureStorageConnector implements StorageConnector {
-
     @Autowired
     private BlobContainerClient containerClient;
 
