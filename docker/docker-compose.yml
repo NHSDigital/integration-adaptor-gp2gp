@@ -4,9 +4,21 @@ services:
   gp2gp:
     image: uk.nhs/gp2gp:0.0.1-SNAPSHOT
     ports:
-      - "9000:8080"
+      - "8080:8080"
     environment:
       - GP2GP_SERVER_PORT=8080
+      - GP2GP_LOGGING_LEVEL
+      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
+
+  mock-mhs-service:
+    image: uk.nhs/mock-mhs-service:0.0.1-SNAPSHOT
+    ports:
+      - "8081:8081"
+    environment:
+      - GP2GP_SERVER_PORT=8081
       - GP2GP_LOGGING_LEVEL
       - GP2GP_AMQP_BROKERS=amqp://activemq:5672
       - GP2GP_AMQP_USERNAME

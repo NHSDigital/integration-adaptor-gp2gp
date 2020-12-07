@@ -48,6 +48,8 @@ If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and r
 * Run: `./gradlew test`
 
 ## How to run integration tests:
+* Navigate to `docker`
+* Run: `./start-local-environment`
 * Navigate to `service`
 * Run: `./gradlew integrationTest`
 
@@ -56,6 +58,8 @@ If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and r
 * Run: `./gradlew staticCodeAnalysis` 
 
 ## How to run all checks:
+* Navigate to `docker`
+* Run: `./start-local-environment`
 * Navigate to `service`
 * Run: `./gradlew check` 
 

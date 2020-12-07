@@ -1,9 +1,8 @@
 package uk.nhs.adaptors.mockmhsservice.configurations;
 
-import java.util.Optional;
-
 import javax.jms.ConnectionFactory;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
@@ -14,7 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.util.StringUtils;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)
@@ -31,11 +29,21 @@ public class AmqpConfiguration {
 
         factory.setRemoteURI(properties.getBrokers());
 
-//        Optional.ofNullable(properties.getUsername()).ifPresent(factory::setUsername);
-//        Optional.ofNullable(properties.getPassword()).ifPresent(factory::setPassword);
-//        Optional.ofNullable(properties.getClientId()).ifPresent(factory::setClientID);
-//        Optional.ofNullable(properties.getReceiveLocalOnly()).ifPresent(factory::setReceiveLocalOnly);
-//        Optional.ofNullable(properties.getReceiveNoWaitLocalOnly()).ifPresent(factory::setReceiveNoWaitLocalOnly);
+        if (StringUtils.isNotBlank(properties.getUsername())) {
+            factory.setUsername(properties.getUsername());
+        }
+        if (StringUtils.isNotBlank(properties.getPassword())) {
+            factory.setPassword(properties.getPassword());
+        }
+        if (StringUtils.isNotBlank(properties.getClientId())) {
+            factory.setClientID(properties.getClientId());
+        }
+        if (properties.getReceiveLocalOnly() != null) {
+            factory.setReceiveLocalOnly(properties.getReceiveLocalOnly());
+        }
+        if (properties.getReceiveNoWaitLocalOnly() != null) {
+            factory.setReceiveNoWaitLocalOnly(properties.getReceiveNoWaitLocalOnly());
+        }
 
         configureDeserializationPolicy(properties, factory);
         configureRedeliveryPolicy(properties, factory);
@@ -47,11 +55,11 @@ public class AmqpConfiguration {
         JmsDefaultDeserializationPolicy deserializationPolicy =
             (JmsDefaultDeserializationPolicy) factory.getDeserializationPolicy();
 
-        if (StringUtils.hasLength(properties.getDeserializationPolicy().getWhiteList())) {
+        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getWhiteList())) {
             deserializationPolicy.setWhiteList(properties.getDeserializationPolicy().getWhiteList());
         }
 
-        if (StringUtils.hasLength(properties.getDeserializationPolicy().getBlackList())) {
+        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getBlackList())) {
             deserializationPolicy.setBlackList(properties.getDeserializationPolicy().getBlackList());
         }
     }

@@ -1,70 +1,52 @@
 package uk.nhs.adaptors.gp2gp;
 
-import io.restassured.http.ContentType;
-import io.restassured.mapper.ObjectMapperType;
-import lombok.extern.slf4j.Slf4j;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import uk.nhs.adaptors.gp2gp.configurations.AmqpProperties;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
+import static java.lang.Integer.parseInt;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 import static io.restassured.RestAssured.given;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import lombok.extern.slf4j.Slf4j;
+
+@SpringBootTest()
 @ExtendWith({SpringExtension.class})
+@Configuration
 @DirtiesContext
 @Slf4j
 public class MessageQueueTest {
 
     private static final String APPLICATION_XML_UTF_8 = APPLICATION_JSON_VALUE + ";charset=UTF-8";
-    private static final String MOCK_MHS_ENDPOINT = "/mock-mhs-endpoint";
     private static final String MESSAGE = "{\"payload\":\"myTestPayload\"}";
-    private static int port;
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
-    @Autowired
-    private AmqpProperties amqpProperties;
+    @Value("${gp2gp.outbound.mhsEndPoint}")
+    private String mhsEndPoint;
 
-    @BeforeAll
-    static void setUp() {
-        port = 8080;
-    }
+    @Value("${gp2gp.outbound.mhsPort}")
+    private String mhsPort;
 
     @Test
-    public void whenConsumingInboundQueueMessageExpectPublishToTaskQueue() throws JMSException {
+    public void whenConsumingInboundQueueMessageExpectPublishToTaskQueue() {
 
-        given()
-            .port(port)
+        var body = given()
+            .port(parseInt(mhsPort))
             .contentType(APPLICATION_XML_UTF_8)
             .body(MESSAGE)
             .when()
-            .post(MOCK_MHS_ENDPOINT)
+            .post(mhsEndPoint)
             .then()
-            .statusCode(ACCEPTED.value())
-            .extract();
+            .statusCode(OK.value())
+            .extract().asString();
 
-        Message jmsMessage = jmsTemplate.receive("taskQueue");
-        if (jmsMessage == null) {
-            throw new IllegalStateException("Message must not be null");
-        }
-
-        String messageBody = jmsMessage.getBody(String.class);
-        assertThat(messageBody).isEqualTo(MESSAGE);
+        assertThat(body).isEqualTo(MESSAGE);
     }
 }
