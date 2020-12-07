@@ -9,7 +9,7 @@ public class AzureStorageConnector implements StorageConnector {
     @Autowired
     private BlobContainerClient containerClient;
 
-    protected AzureStorageConnector() {}
+    protected AzureStorageConnector() { }
 
     @Override
     public void uploadToStorage(InputStream is, long streamLength, String filename) throws StorageConnectorException {
