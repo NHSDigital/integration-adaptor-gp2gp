@@ -43,7 +43,6 @@ dependencies {
 	testImplementation "io.rest-assured:json-path:4.2.0"
 	testImplementation "io.rest-assured:xml-path:4.2.0"
 	testImplementation "org.hamcrest:hamcrest-all:1.3"
-
 	testImplementation "org.testcontainers:testcontainers:1.15.0"
 }
 
