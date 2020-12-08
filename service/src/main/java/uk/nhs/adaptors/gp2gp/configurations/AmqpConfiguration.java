@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.configurations;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
@@ -10,10 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.util.StringUtils;
 
 import javax.jms.ConnectionFactory;
-
-import org.apache.commons.lang3.StringUtils;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)
@@ -30,13 +31,13 @@ public class AmqpConfiguration {
 
         factory.setRemoteURI(properties.getBrokers());
 
-        if (StringUtils.isNotBlank(properties.getUsername())) {
+        if (isNotBlank(properties.getUsername())) {
             factory.setUsername(properties.getUsername());
         }
-        if (StringUtils.isNotBlank(properties.getPassword())) {
+        if (isNotBlank(properties.getPassword())) {
             factory.setPassword(properties.getPassword());
         }
-        if (StringUtils.isNotBlank(properties.getClientId())) {
+        if (isNotBlank(properties.getClientId())) {
             factory.setClientID(properties.getClientId());
         }
         if (properties.getReceiveLocalOnly() != null) {
@@ -56,11 +57,11 @@ public class AmqpConfiguration {
         JmsDefaultDeserializationPolicy deserializationPolicy =
             (JmsDefaultDeserializationPolicy) factory.getDeserializationPolicy();
 
-        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getWhiteList())) {
+        if (StringUtils.hasLength(properties.getDeserializationPolicy().getWhiteList())) {
             deserializationPolicy.setWhiteList(properties.getDeserializationPolicy().getWhiteList());
         }
 
-        if (StringUtils.isNotBlank(properties.getDeserializationPolicy().getBlackList())) {
+        if (StringUtils.hasLength(properties.getDeserializationPolicy().getBlackList())) {
             deserializationPolicy.setBlackList(properties.getDeserializationPolicy().getBlackList());
         }
     }

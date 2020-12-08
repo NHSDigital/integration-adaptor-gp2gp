@@ -18,9 +18,6 @@ gp2gp:
     username: ${GP2GP_AMQP_USERNAME:}
     password: ${GP2GP_AMQP_PASSWORD:}
     maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
-  outbound:
-    mhsEndPoint: ${MHS_ENDPOINT:/mock-mhs-endpoint}
-    mhsPort: ${MHS_PORT:8081}
   mongodb:
     uri: ${GP2GP_MONGO_URI:}
     database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}

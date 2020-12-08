@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.configuration;
+package uk.nhs.adaptors.gp2gp.configurations;
 
 import java.time.Duration;
 

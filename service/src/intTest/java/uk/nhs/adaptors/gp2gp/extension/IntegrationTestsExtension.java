@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.extension;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.container.MongoDbContainer;
-import uk.nhs.adaptors.gp2gp.repository.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.repositorys.EhrExtractStatusRepository;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;

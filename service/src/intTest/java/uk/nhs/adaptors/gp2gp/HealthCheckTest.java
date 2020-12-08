@@ -1,30 +1,30 @@
 package uk.nhs.adaptors.gp2gp;
 
-import static java.lang.Integer.parseInt;
-
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.OK;
-
 import static io.restassured.RestAssured.given;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(initializers = {ConfigDataApplicationContextInitializer.class})
+import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
+
+@ExtendWith({SpringExtension.class, IntegrationTestsExtension.class, ActiveMQExtension.class})
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class HealthCheckTest {
     private static final String HEALTHCHECK_ENDPOINT = "/healthcheck";
 
-    @Value("${server.port}")
-    private String gp2gpPort;
+    @LocalServerPort
+    private int port;
 
     @Test
-    public void whenHealthCheckExpect200() {
+    public void whenGetHealthCheckThenExpect200() {
         given()
-            .port(parseInt(gp2gpPort))
+            .port(port)
             .when()
             .get(HEALTHCHECK_ENDPOINT)
             .then()
