@@ -1,8 +1,10 @@
-version: '3'
+version: '3.4'
 
 services:
   gp2gp:
-    image: uk.nhs/gp2gp:latest
+    build: .
+    depends_on:
+      - mongodb
     ports:
       - "8080:8080"
     environment:

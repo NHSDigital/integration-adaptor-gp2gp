@@ -20,7 +20,7 @@ pipeline {
                 stage('Tests') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Tests failed")}
+                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
                                 docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
                                 docker cp tests:/home/gradle/service/build .
@@ -52,20 +52,25 @@ pipeline {
                 stage('Build Docker Images') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -t ${DOCKER_IMAGE} -f docker/service/Dockerfile .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
                         }
                     }
                 }
-                // stage('Integration Tests') {
-                //     steps {
-                //         script {
-                //             sh '''
-                //                 cd service
-                //                 ./gradlew integrationTest
-                //             '''
-                //         }
-                //     }
-                // }
+                stage('Integration Tests') {
+                    steps {
+                        script {
+                            sh '''
+                                docker-compose -f docker-compose-integration-tests.yml build
+                                docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests
+                            '''
+                        }
+                    }
+                    post {
+                        always {
+                            sh "docker-compose -f docker-compose-integration-tests.yml down --rmi=all"
+                        }
+                    }
+                }
                 stage('Push Image') {
                     when {
                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }

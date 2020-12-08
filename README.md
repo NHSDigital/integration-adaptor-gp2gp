@@ -13,15 +13,15 @@ The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using
 ## Configuration
 
 The adaptor reads its configuration from environment variables. The following sections describe the environment variables
- used to configure the adaptor. 
- 
+ used to configure the adaptor.
+
 Variables without a default value and not marked optional, *MUST* be defined for the adaptor to run.
 
 ### General Configuration Options
 
 | Environment Variable               | Default                   | Description 
 | -----------------------------------|---------------------------|-------------
-| GP2GP_SERVER_PORT                  | 8080                      | The port on which the GP2GP API will run
+| GP2GP_SERVER_PORT                  | 8080                      | The port on which the SCR API will run.
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
 | GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
@@ -45,36 +45,20 @@ This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
 ## How to run service:
-* Navigate to `docker`
-* Run script: `start-local-environment.sh`
-* Add environment variables in order to connect to Mongo database. They can be also added directly to `applicaion.yml` file. If `uri` field value is not provided, other Mongo database fields will be used to construct the connection string.
+* Run `./start-local-environment.sh`
 
-If gradle-wrapper.jar doesn't exist navigate to docker/service in terminal and run:
+If gradle-wrapper.jar doesn't exist run in terminal:
 * If gradle isn't installed `brew install gradle`
 * Update gradle `gradle wrapper`
 
 If ran through IDE on local machine:
 * Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
-## How to run unit tests:
-* Navigate to `service`
-* Run: `./gradlew test`
+## How to run all checks (unit, style etc):
+* `docker build --target=test`
 
 ## How to run integration tests:
-* Navigate to `docker`
-* Run: `./start-local-environment.sh`
-* Navigate to `service`
-* Run: `./gradlew integrationTest`
-
-## How to run style check:
-* Navigate to `service`
-* Run: `./gradlew staticCodeAnalysis` 
-
-## How to run all checks:
-* Navigate to `docker`
-* Run: `./start-local-environment.sh`
-* Navigate to `service`
-* Run: `./gradlew check` 
+* `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
