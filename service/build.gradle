@@ -31,12 +31,18 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
 	implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
+	implementation 'org.apache.qpid:qpid-jms-client:0.51.0'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.12'
 	implementation 'org.apache.commons:commons-lang3:3.11'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "io.rest-assured:rest-assured:4.2.0"
 	testImplementation "io.rest-assured:json-path:4.2.0"
 	testImplementation "io.rest-assured:xml-path:4.2.0"
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+	testImplementation "org.assertj:assertj-core:3.18.1"
 	testImplementation "org.testcontainers:testcontainers:1.15.0"
 }
 

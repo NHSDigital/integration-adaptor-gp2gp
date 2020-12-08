@@ -15,7 +15,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 
 @Configuration
-@ConfigurationProperties(prefix = "mongodb")
+@ConfigurationProperties(prefix = "gp2gp.mongodb")
 @Getter
 @Setter
 @Slf4j

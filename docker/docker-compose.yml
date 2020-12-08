@@ -7,10 +7,27 @@ services:
       - "8080:8080"
     environment:
       - GP2GP_SERVER_PORT=8080
+      - GP2GP_LOGGING_LEVEL
+      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
       - GP2GP_MONGO_URI=mongodb://mongodb:27017
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
       - GP2GP_MONGO_TTL=P30D
       - GP2GP_COSMOS_DB_ENABLED=false
+
+  mock-mhs-service:
+    image: uk.nhs/mock-mhs-service:0.0.1-SNAPSHOT
+    ports:
+      - "8081:8081"
+    environment:
+      - GP2GP_SERVER_PORT=8081
+      - GP2GP_LOGGING_LEVEL
+      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
 
   mongodb:
     image: mongo
