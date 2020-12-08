@@ -1,10 +1,10 @@
 package uk.nhs.adaptors.gp2gp.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class MhsInboundMessage {
-    private final String payload;
+    private String payload;
 }
