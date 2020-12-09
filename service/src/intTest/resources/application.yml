@@ -7,10 +7,10 @@ management:
       base-path: /
       path-mapping.health: healthcheck
       exposure:
-        include: info, health, metrics
+        include: info, health, metrics, mappings
 
 mongodb:
-  uri: ${GP2GP_MONGO_URI:}
+  uri: ${GP2GP_MONGO_URI}
   database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
   host: ${GP2GP_MONGO_HOST:}
   port: ${GP2GP_MONGO_PORT:}
@@ -20,10 +20,9 @@ mongodb:
   autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
   ttl: ${GP2GP_MONGO_TTL:P30D}
   cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
-        include: info, health, metrics, mappings
 
 gp2gp:
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
-    containerName: ${GP2GP_STORAGE_CONTAINER_NAME:for-nia-testing}
-    azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:for-nia-testing}
+    containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
+    azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}

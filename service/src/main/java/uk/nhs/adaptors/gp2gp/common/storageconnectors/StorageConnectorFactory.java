@@ -5,7 +5,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 @Setter
 public class StorageConnectorFactory implements FactoryBean<StorageConnector> {
-    private static StorageConnector storageConnector;
+    private StorageConnector storageConnector;
 
     private StorageConnectorConfiguration configuration;
 

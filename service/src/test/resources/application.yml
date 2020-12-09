@@ -11,8 +11,8 @@ management:
 gp2gp:
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
-    containerName: ${GP2GP_STORAGE_CONTAINER_NAME:for-nia-testing}
-    azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:for-nia-testing}
+    containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
+    azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}
 mongodb:
   uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
   database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
