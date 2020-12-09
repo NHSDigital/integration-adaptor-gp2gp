@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.utils;
 
-import static org.apache.http.Consts.UTF_8;
+import static io.netty.util.CharsetUtil.UTF_8;
 
 import org.apache.qpid.jms.message.JmsBytesMessage;
 import org.apache.qpid.jms.message.JmsTextMessage;
