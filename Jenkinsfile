@@ -26,6 +26,12 @@ pipeline {
                                 docker cp tests:/home/gradle/service/build .
                                 docker kill tests
                             '''
+
+                            // TODO: remove debug code
+                            sh '''
+                                find .
+                            '''
+
                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
                             junit '**/build/test-results/**/*.xml'
                             recordIssues(
