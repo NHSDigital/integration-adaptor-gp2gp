@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @Slf4j
-public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachCallback {
+public class MongoDBExtension implements BeforeAllCallback, BeforeEachCallback {
     @Override
     public void beforeAll(ExtensionContext context) {
         MongoDbContainer.getInstance().start();

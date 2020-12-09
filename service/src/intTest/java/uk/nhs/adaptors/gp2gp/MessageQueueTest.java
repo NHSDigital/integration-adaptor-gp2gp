@@ -3,33 +3,34 @@ package uk.nhs.adaptors.gp2gp;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.jms.JMSException;
+import javax.jms.Message;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jms.core.JmsTemplate;
 
-import uk.nhs.adaptors.gp2gp.configurations.AmqpProperties;
 import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
+import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
 
 @SpringBootTest
-@ExtendWith({IntegrationTestsExtension.class, ActiveMQExtension.class})
+@ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
 public class MessageQueueTest {
+    private static final String INVALID_MESSAGE_CONTENT = "TRASH";
+    private static final String DLQ = "ActiveMQ.DLQ";
 
     @Autowired
     private JmsTemplate jmsTemplate;
-    @Autowired
-    private AmqpProperties amqpProperties;
-
-    private static final String MESSAGE_CONTENT = "TRASH";
+    @Value("${gp2gp.amqp.inboundQueueName}")
+    private String inboundQueueName;
 
     @Test
-    public void whenSendingInvalidMessage_thenMessageIsSentToDeadLetterQueue() throws JMSException {
-        jmsTemplate.send("inbound", session -> session.createTextMessage(MESSAGE_CONTENT));
-        String messageBody = jmsTemplate.receive("ActiveMQ.DLQ").getBody(String.class);
-
-        assertThat(messageBody).isEqualTo(MESSAGE_CONTENT);
+    public void When_SendingInvalidMessage_Expect_MessageIsSentToDeadLetterQueue() throws JMSException {
+        jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(INVALID_MESSAGE_CONTENT));
+        Message message = jmsTemplate.receive(DLQ);
+        assert message != null;
+        assertThat(message.getBody(String.class)).isEqualTo(INVALID_MESSAGE_CONTENT);
     }
 }

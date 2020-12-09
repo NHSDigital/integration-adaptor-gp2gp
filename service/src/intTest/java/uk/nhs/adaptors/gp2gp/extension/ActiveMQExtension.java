@@ -39,7 +39,7 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
 
         var inboundqueueName = Objects.requireNonNull(
             applicationContext.getEnvironment().getProperty("gp2gp.amqp.inboundQueueName"));
-        var outboundqueueName = Objects.requireNonNull(
+        var taskqueueName = Objects.requireNonNull(
             applicationContext.getEnvironment().getProperty("gp2gp.amqp.taskQueueName"));
 
         var receiveTimeout = jmsTemplate.getReceiveTimeout();
@@ -50,9 +50,9 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
             list.add(inboundqueueName);
             list.add(DLQ_PREFIX + inboundqueueName);
         }
-        if (isNotBlank(outboundqueueName)) {
-            list.add(outboundqueueName);
-            list.add(DLQ_PREFIX + outboundqueueName);
+        if (isNotBlank(taskqueueName)) {
+            list.add(taskqueueName);
+            list.add(DLQ_PREFIX + taskqueueName);
         }
         for (String name: list) {
             purgeQueueMessage(name);
