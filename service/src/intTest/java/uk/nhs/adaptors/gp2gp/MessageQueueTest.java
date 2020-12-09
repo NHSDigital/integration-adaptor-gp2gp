@@ -1,23 +1,35 @@
 package uk.nhs.adaptors.gp2gp;
 
-import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import javax.jms.JMSException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jms.core.JmsTemplate;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(initializers = {ConfigDataApplicationContextInitializer.class})
+import uk.nhs.adaptors.gp2gp.configurations.AmqpProperties;
+import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
+
+@SpringBootTest
+@ExtendWith({IntegrationTestsExtension.class, ActiveMQExtension.class})
 public class MessageQueueTest {
 
-    private static final String APPLICATION_XML_UTF_8 = APPLICATION_JSON_VALUE + ";charset=UTF-8";
-    private static final String MESSAGE = "{\"payload\":\"myTestPayload\"}";
+    @Autowired
+    private JmsTemplate jmsTemplate;
+    @Autowired
+    private AmqpProperties amqpProperties;
+
+    private static final String MESSAGE_CONTENT = "TRASH";
 
     @Test
-    public void whenConsumingInboundQueueMessageExpectPublishToTaskQueue() {
+    public void whenSendingInvalidMessage_thenMessageIsSentToDeadLetterQueue() throws JMSException {
+        jmsTemplate.send("inbound", session -> session.createTextMessage(MESSAGE_CONTENT));
+        String messageBody = jmsTemplate.receive("ActiveMQ.DLQ").getBody(String.class);
 
+        assertThat(messageBody).isEqualTo(MESSAGE_CONTENT);
     }
 }

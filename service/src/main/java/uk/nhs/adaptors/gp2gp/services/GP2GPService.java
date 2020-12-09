@@ -17,7 +17,7 @@ public class GP2GPService {
     @Value("${gp2gp.amqp.taskQueueName}")
     private String mhsTaskQueueName;
 
-    public void handleRequest(String xml) {
-        jmsTemplate.send(mhsTaskQueueName, session -> session.createTextMessage(xml));
+    public void handleRequest(String json) {
+        jmsTemplate.send(mhsTaskQueueName, session -> session.createTextMessage(json));
     }
 }
