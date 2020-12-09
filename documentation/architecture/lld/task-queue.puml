@@ -1,8 +1,8 @@
 @startuml
 abstract class TaskDefinition {
     taskId: String
-    extractId: String
-    traceId: String
+    requestId: String
+    conversationId: String
 }
 
 note right of TaskDefinition: taskId is a uuid generated for each task def instance
