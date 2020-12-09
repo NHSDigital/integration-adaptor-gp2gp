@@ -27,6 +27,7 @@ pipeline {
                                 docker kill tests
                             '''
                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
+                            junit '**/build/test-results/**/*.xml'
                             recordIssues(
                                 enabledForFailure: true,
                                 tools: [
@@ -63,6 +64,7 @@ pipeline {
                                 docker-compose -f docker/docker-compose-integration-tests.yml build
                                 docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
                             '''
+                            // TODO: Need to also copy build/test-results/**/*.xml from the integration runs so we can see what passed and what failed
                         }
                     }
                     post {
