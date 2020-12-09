@@ -44,10 +44,6 @@ test {
 	useJUnitPlatform()
 }
 
-jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
-}
-
 sourceSets {
 	integrationTest {
 		java {
@@ -81,6 +77,7 @@ task integrationTest(type: Test) {
 }
 
 check.dependsOn integrationTest
+jacocoTestReport.dependsOn integrationTest
 
 task staticCodeAnalysis(type: GradleBuild) {
 	tasks = [
@@ -95,7 +92,7 @@ task staticCodeAnalysis(type: GradleBuild) {
 tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
 	excludeFilter = rootProject.file('config/spotbugs/exclude.xml')
 	reports {
-		xml.enabled = false
+		xml.enabled = true
 		html.enabled = true
 	}
 }
