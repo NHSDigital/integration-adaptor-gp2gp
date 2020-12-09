@@ -54,11 +54,30 @@ If gradle-wrapper.jar doesn't exist run in terminal:
 If ran through IDE on local machine:
 * Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
-## How to run all checks (unit, style etc):
+## Unit test section 
+
+### How to run unit tests:
+* Navigate to `service`
+* Run: `./gradlew test`
+
+### How to run all checks (unit, style etc):
 * `docker build --target=test`
 
 ## How to run integration tests:
+* Navigate to `service`
+* Run: `./gradlew integrationTest`
+
+## How to run style check:
+* Navigate to `service`
+* Run: `./gradlew staticCodeAnalysis` 
+
+## How to run all checks:
+* Navigate to `service`
+* Run: `./gradlew check`
+
+## How to run e2e tests:
 * `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
+
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
