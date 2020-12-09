@@ -14,7 +14,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class IntegrationTestsExtension implements BeforeAllCallback, BeforeEachCallback {
     @Override
     public void beforeAll(ExtensionContext context) {
-        MongoDbContainer.getInstance().start();
+        if (!"true".equalsIgnoreCase(System.getenv("DISABLE_TEST_CONTAINERS"))) {
+            MongoDbContainer.getInstance().start();
+        }
     }
 
     @Override

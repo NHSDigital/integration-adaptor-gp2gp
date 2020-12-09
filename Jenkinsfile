@@ -20,7 +20,7 @@ pipeline {
                 stage('Tests') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
+                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
                                 docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
                                 docker cp tests:/home/gradle/service/build .
@@ -60,14 +60,14 @@ pipeline {
                     steps {
                         script {
                             sh '''
-                                docker-compose -f docker-compose-integration-tests.yml build
-                                docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests
+                                docker-compose -f docker/docker-compose-integration-tests.yml build
+                                docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
                             '''
                         }
                     }
                     post {
                         always {
-                            sh "docker-compose -f docker-compose-integration-tests.yml down --rmi=all"
+                            sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
                         }
                     }
                 }
