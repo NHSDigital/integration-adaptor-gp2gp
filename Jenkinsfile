@@ -22,8 +22,8 @@ pipeline {
                         script {
                             //if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
-                                docker-compose -f docker/docker-compose-integration-tests.yml build
-                                docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                                 docker cp tests:/home/gradle/service/build .
                             '''
 
@@ -53,7 +53,7 @@ pipeline {
                                 exclusionPattern : '**/*Test.class'
                             ])
                             sh "rm -rf build"
-                            sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
+                            sh "docker-compose -f docker/docker-compose-integration-tests.yml down"
                         }
                     }
                 }
@@ -61,26 +61,12 @@ pipeline {
                 stage('Build Docker Images') {
                     steps {
                         script {
+                            // TODO: How to make this re-use layers built in test stage? Maybe using docker-compose instead of bare docker would help it find them?
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
                         }
                     }
                 }
-//                 stage('Integration Tests') {
-//                     steps {
-//                         script {
-//                             sh '''
-//                                 docker-compose -f docker/docker-compose-integration-tests.yml build
-//                                 docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
-//                             '''
-//                             // TODO: Need to also copy build/test-results/**/*.xml from the integration runs so we can see what passed and what failed
-//                         }
-//                     }
-//                     post {
-//                         always {
-//                             sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
-//                         }
-//                     }
-//                 }
+
                 stage('Push Image') {
                     when {
                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }

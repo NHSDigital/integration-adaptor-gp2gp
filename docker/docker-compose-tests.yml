@@ -1,14 +1,11 @@
+# An override for docker-compose.yml to run all tests
 version: '3.4'
 
 services:
-  integration_tests:
+  gp2gp:
     container_name: tests
     build:
-      context: ../
-      dockerfile: docker/service/Dockerfile
       target: build
-    depends_on:
-      - mongodb
     entrypoint: "./gradlew check"
     environment:
       - GP2GP_SERVER_PORT=8080
@@ -17,8 +14,3 @@ services:
       - GP2GP_MONGO_TTL=P30D
       - GP2GP_COSMOS_DB_ENABLED=false
       - DISABLE_TEST_CONTAINERS=true
-
-  mongodb:
-    image: mongo
-    ports:
-      - "27017:27017"

@@ -4,11 +4,11 @@ COPY --chown=gradle:gradle service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
-RUN ./gradlew compileJava
+RUN gradle classes
 
 FROM build AS package
 
-RUN ./gradlew --build-cache bootJar
+RUN gradle --build-cache bootJar
 
 FROM adoptopenjdk/openjdk11:jre
 
