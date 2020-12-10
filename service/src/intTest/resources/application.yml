@@ -7,22 +7,29 @@ management:
       base-path: /
       path-mapping.health: healthcheck
       exposure:
-        include: info, health, metrics, mappings
-
-mongodb:
-  uri: ${GP2GP_MONGO_URI}
-  database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
-  host: ${GP2GP_MONGO_HOST:}
-  port: ${GP2GP_MONGO_PORT:}
-  username: ${GP2GP_MONGO_USERNAME:}
-  password: ${GP2GP_MONGO_PASSWORD:}
-  options: ${GP2GP_MONGO_OPTIONS:}
-  autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
-  ttl: ${GP2GP_MONGO_TTL:P30D}
-  cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
+        include: info, health, metrics
 
 gp2gp:
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
     azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}
+  amqp:
+    inboundQueueName: "inbound"
+    taskQueueName: "taskQueue"
+    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
+    exchange: amq.direct
+    username: ${GP2GP_AMQP_USERNAME:}
+    password: ${GP2GP_AMQP_PASSWORD:}
+    maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
+  mongodb:
+    uri: ${GP2GP_MONGO_URI:}
+    database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
+    host: ${GP2GP_MONGO_HOST:}
+    port: ${GP2GP_MONGO_PORT:}
+    username: ${GP2GP_MONGO_USERNAME:}
+    password: ${GP2GP_MONGO_PASSWORD:}
+    options: ${GP2GP_MONGO_OPTIONS:}
+    autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
+    ttl: ${GP2GP_MONGO_TTL:P30D}
+    cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}

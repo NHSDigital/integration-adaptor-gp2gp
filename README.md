@@ -30,7 +30,10 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3
 | AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3
 | AWS_REGION                         |                           | Defines the region used to connect to S3
-| GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout.
+| GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
+| GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
+| GP2GP_AMQP_PASSWORD                |                           | (Optional) password for the AMQP server
+| GP2GP_AMQP_MAX_REDELIVERIES        | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
 | GP2GP_MONGO_URI                    | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME          | gp2gp                     | Mongo database name.
 | GP2GP_MONGO_HOST                   | (*)                       | Mongo database host. Can be left blank if full connection string is provided.
@@ -57,7 +60,13 @@ If gradle-wrapper.jar doesn't exist run in terminal:
 If ran through IDE on local machine:
 * Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
-## How to run all checks (unit, style etc):
+## Unit test section 
+
+### How to run unit tests:
+* Navigate to `service`
+* Run: `./gradlew test`
+
+### How to run all checks (unit, style etc):
 * `docker build --target=test`
 
 ## How to run integration tests:
@@ -66,11 +75,13 @@ If ran through IDE on local machine:
 
 ## How to run style check:
 * Navigate to `service`
-* Run: `./gradlew staticCodeAnalysis`
+* Run: `./gradlew staticCodeAnalysis` 
 
 ## How to run all checks:
 * Navigate to `service`
 * Run: `./gradlew check`
+
+## How to run e2e tests:
 * `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
 
 ### Licensing
