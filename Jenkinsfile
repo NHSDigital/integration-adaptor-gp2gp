@@ -84,8 +84,10 @@ pipeline {
     }
     post {
         always {
-            sh label: 'Remove all unused images not just dangling ones', script:'docker system prune --force'
-            sh 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
+            sh label: 'Remove images created by docker-compose', script: 'docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down -rmi=all'
+            sh label: 'Remove exited containers', script: 'docker rm $(docker ps -a -f status=exited -q)'
+            sh label: 'List images tagged with this BUILD_TAG', script: 'docker images -a |  grep "${BUILD_TAG}"'
+            sh label: 'Remove images tagged with this BUILD_TAG', script: 'docker images -a | grep "${BUILD_TAG}" | awk '{print $3}' | xargs docker rmi'
         }
     }
 }
