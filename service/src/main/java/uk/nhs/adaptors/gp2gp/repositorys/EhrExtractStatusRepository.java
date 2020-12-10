@@ -1,8 +1,8 @@
-package uk.nhs.adaptors.gp2gp.repository;
+package uk.nhs.adaptors.gp2gp.repositorys;
 
 import java.util.Optional;
 
-import uk.nhs.adaptors.gp2gp.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.models.EhrExtractStatus;
 
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;

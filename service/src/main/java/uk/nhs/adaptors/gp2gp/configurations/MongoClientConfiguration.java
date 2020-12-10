@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.configuration;
+package uk.nhs.adaptors.gp2gp.configurations;
 
 import java.time.Duration;
 
@@ -15,7 +15,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 
 @Configuration
-@ConfigurationProperties(prefix = "mongodb")
+@ConfigurationProperties(prefix = "gp2gp.mongodb")
 @Getter
 @Setter
 @Slf4j

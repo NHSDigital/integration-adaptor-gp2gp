@@ -26,7 +26,7 @@ hs_err_pid*
 
 .idea/
 *.iml
-*/.gradle/
+*.gradle/
 *.bin
 */build/*
 *.DS_Store
@@ -38,6 +38,7 @@ service/out/*
 .classpath
 */bin
 .vscode
+
 */out
 
 lombok.config
