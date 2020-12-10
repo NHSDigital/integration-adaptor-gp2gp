@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.model;
+package uk.nhs.adaptors.gp2gp.models;
 
 import java.time.Instant;
 

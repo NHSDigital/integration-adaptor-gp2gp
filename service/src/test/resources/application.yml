@@ -7,5 +7,4 @@ management:
       base-path: /
       path-mapping.health: healthcheck
       exposure:
-        include: info, health, metrics, mappings
-
+        include: info, health, metrics
