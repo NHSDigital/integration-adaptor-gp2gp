@@ -1,23 +1,22 @@
 package uk.nhs.adaptors.gp2gp;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-
-import java.time.Instant;
-import java.util.Optional;
-
-import uk.nhs.adaptors.gp2gp.configurations.MongoClientConfiguration;
-import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
-import uk.nhs.adaptors.gp2gp.models.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.repositorys.EhrExtractStatusRepository;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
+
+import java.time.Instant;
+import java.util.Optional;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @ExtendWith({ SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest

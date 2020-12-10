@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.common.storageconnectors;
+package uk.nhs.adaptors.gp2gp.common.storage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

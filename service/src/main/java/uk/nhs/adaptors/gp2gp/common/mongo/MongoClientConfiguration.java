@@ -1,18 +1,16 @@
-package uk.nhs.adaptors.gp2gp.configurations;
+package uk.nhs.adaptors.gp2gp.common.mongo;
 
-import java.time.Duration;
-
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
+import java.time.Duration;
 
 @Configuration
 @ConfigurationProperties(prefix = "gp2gp.mongodb")

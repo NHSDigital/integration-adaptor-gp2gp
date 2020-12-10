@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.configurations;
+package uk.nhs.adaptors.gp2gp.common.amqp;
 
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

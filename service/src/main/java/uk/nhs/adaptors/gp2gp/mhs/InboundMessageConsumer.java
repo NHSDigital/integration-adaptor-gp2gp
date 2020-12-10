@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.consumers;
+package uk.nhs.adaptors.gp2gp.mhs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -6,10 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import uk.nhs.adaptors.gp2gp.models.MhsInboundMessage;
-import uk.nhs.adaptors.gp2gp.services.GP2GPService;
-import uk.nhs.adaptors.gp2gp.utils.JmsReader;
+import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.ehr.request.EhrRequestHandler;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -18,9 +16,9 @@ import java.io.IOException;
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class MHSInboundMessageConsumer {
+public class InboundMessageConsumer {
     private final ObjectMapper objectMapper;
-    private final GP2GPService gp2GPService;
+    private final EhrRequestHandler ehrRequestHandler;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws IOException, JMSException {
@@ -29,8 +27,10 @@ public class MHSInboundMessageConsumer {
         try {
             String body = JmsReader.readMessage(message);
             LOGGER.debug("Message {} content: {}", messageID, body);
-            var mhsInboundMessage = objectMapper.readValue(body, MhsInboundMessage.class);
-            gp2GPService.handleRequest(objectMapper.writeValueAsString(mhsInboundMessage));
+            var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
+            // TODO: NIAD-776 if the inbound message is an EhrRequest interaction then use the ehrRequestHandler
+            ehrRequestHandler.handleRequest(objectMapper.writeValueAsString(mhsInboundMessage));
+            // TODO: NIAD-776 else we don't know how to handle the message, this is an error
             message.acknowledge();
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (Exception e) {

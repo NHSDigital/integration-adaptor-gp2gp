@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.configurations;
+package uk.nhs.adaptors.gp2gp.common.amqp;
 
 import lombok.Getter;
 import lombok.Setter;

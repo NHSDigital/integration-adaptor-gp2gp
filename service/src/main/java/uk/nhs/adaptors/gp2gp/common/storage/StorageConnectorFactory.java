@@ -1,6 +1,6 @@
-package uk.nhs.adaptors.gp2gp.common.storageconnectors;
-import lombok.Setter;
+package uk.nhs.adaptors.gp2gp.common.storage;
 
+import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
 @Setter

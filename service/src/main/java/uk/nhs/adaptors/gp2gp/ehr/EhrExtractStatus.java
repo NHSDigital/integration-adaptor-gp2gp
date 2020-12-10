@@ -1,14 +1,13 @@
-package uk.nhs.adaptors.gp2gp.models;
-
-import java.time.Instant;
+package uk.nhs.adaptors.gp2gp.ehr;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.Instant;
 
 @CompoundIndexes({
     @CompoundIndex(

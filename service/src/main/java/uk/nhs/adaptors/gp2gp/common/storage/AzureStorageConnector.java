@@ -1,9 +1,10 @@
-package uk.nhs.adaptors.gp2gp.common.storageconnectors;
+package uk.nhs.adaptors.gp2gp.common.storage;
 
-import java.io.InputStream;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.InputStream;
 
 public class AzureStorageConnector implements StorageConnector {
     @Autowired

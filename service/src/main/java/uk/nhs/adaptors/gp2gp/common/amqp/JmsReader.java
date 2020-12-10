@@ -1,14 +1,13 @@
-package uk.nhs.adaptors.gp2gp.utils;
+package uk.nhs.adaptors.gp2gp.common.amqp;
 
-import static io.netty.util.CharsetUtil.UTF_8;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.qpid.jms.message.JmsBytesMessage;
 import org.apache.qpid.jms.message.JmsTextMessage;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
 
-import lombok.extern.slf4j.Slf4j;
+import static io.netty.util.CharsetUtil.UTF_8;
 
 @Slf4j
 public class JmsReader {

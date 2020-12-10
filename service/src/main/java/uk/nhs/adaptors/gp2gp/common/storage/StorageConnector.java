@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.common.storageconnectors;
+package uk.nhs.adaptors.gp2gp.common.storage;
 
 import java.io.InputStream;
 
