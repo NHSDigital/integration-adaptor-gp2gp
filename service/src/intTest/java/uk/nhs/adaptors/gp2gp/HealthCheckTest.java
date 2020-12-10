@@ -1,17 +1,18 @@
 package uk.nhs.adaptors.gp2gp;
 
+import static io.restassured.RestAssured.given;
+
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.OK;
-import static io.restassured.RestAssured.given;
+
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.extension.IntegrationTestsExtension;
 
 @ExtendWith({ SpringExtension.class, IntegrationTestsExtension.class })
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -23,7 +24,7 @@ public class HealthCheckTest {
     private int port;
 
     @Test
-    public void whenGetHealthCheckThenExpect200() throws Exception {
+    public void When_GettingHealthCheck_Expect_OkStatusResponse() {
         given()
             .port(port)
             .when()
