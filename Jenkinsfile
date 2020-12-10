@@ -20,16 +20,10 @@ pipeline {
                 stage('Tests') {
                     steps {
                         script {
-                            //if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                                 docker cp tests:/home/gradle/service/build .
-                            '''
-
-                            // TODO: remove debug code
-                            sh '''
-                                find .
                             '''
 
                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
