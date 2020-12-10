@@ -17,12 +17,13 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 import javax.jms.Message;
 
 import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
 public class MessageQueueTest {
-    private static final long WAIT_TIME = 5000L;
+    private static final long TIMEOUT = 10000L;
 
     @Autowired
     private JmsTemplate jmsTemplate;
@@ -40,8 +41,7 @@ public class MessageQueueTest {
         var sentMessageContent = objectMapper.writeValueAsString(inboundMessage);
         jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(sentMessageContent));
 
-        Thread.sleep(WAIT_TIME);
-        verify(inboundMessageHandler).handle(argThat(jmsMessage ->
+        verify(inboundMessageHandler, timeout(TIMEOUT)).handle(argThat(jmsMessage ->
                 hasSameContentAsSentMessage(jmsMessage, sentMessageContent)
         ));
     }
