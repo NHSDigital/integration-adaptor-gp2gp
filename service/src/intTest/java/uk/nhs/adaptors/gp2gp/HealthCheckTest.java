@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest(webEnvironment = RANDOM_PORT)

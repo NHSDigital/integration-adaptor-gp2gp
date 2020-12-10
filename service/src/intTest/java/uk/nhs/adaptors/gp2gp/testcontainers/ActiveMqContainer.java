@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.container;
+package uk.nhs.adaptors.gp2gp.testcontainers;
 
 import org.testcontainers.containers.GenericContainer;
 

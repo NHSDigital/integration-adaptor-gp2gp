@@ -1,8 +1,8 @@
-package uk.nhs.adaptors.gp2gp.extension;
+package uk.nhs.adaptors.gp2gp.testcontainers;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.container.ActiveMqContainer;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMqContainer;
 
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;

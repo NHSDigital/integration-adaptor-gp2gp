@@ -17,20 +17,15 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageConsumer {
-    private final ObjectMapper objectMapper;
-    private final EhrRequestHandler ehrRequestHandler;
+
+    private final InboundMessageHandler inboundMessageHandler;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws IOException, JMSException {
         var messageID = message.getJMSMessageID();
-        LOGGER.info("Received new message {}", messageID);
+        LOGGER.info("Received inbound message {}", messageID);
         try {
-            String body = JmsReader.readMessage(message);
-            LOGGER.debug("Message {} content: {}", messageID, body);
-            var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-            // TODO: NIAD-776 if the inbound message is an EhrRequest interaction then use the ehrRequestHandler
-            ehrRequestHandler.handleRequest(objectMapper.writeValueAsString(mhsInboundMessage));
-            // TODO: NIAD-776 else we don't know how to handle the message, this is an error
+            inboundMessageHandler.handle(message);
             message.acknowledge();
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (Exception e) {

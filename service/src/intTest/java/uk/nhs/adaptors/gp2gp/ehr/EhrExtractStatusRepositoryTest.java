@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp;
+package uk.nhs.adaptors.gp2gp.ehr;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,8 +8,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 import java.time.Instant;
 import java.util.Optional;

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 import java.io.IOException;
 import java.util.UUID;
