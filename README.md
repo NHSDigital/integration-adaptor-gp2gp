@@ -19,11 +19,17 @@ Variables without a default value and not marked optional, *MUST* be defined for
 
 ### General Configuration Options
 
-| Environment Variable               | Default                   | Description 
+| Environment Variable               | Default                   | Description
 | -----------------------------------|---------------------------|-------------
 | GP2GP_SERVER_PORT                  | 8080                      | The port on which the SCR API will run.
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
+| GP2GP_STORAGE_TYPE                 | LocalMock                 | Defines the storage solution being used (S3, Azure, LocalMock)
+| GP2GP_STORAGE_CONTAINER_NAME       | for-nia-testing           | Defines the name of the BlobStorage container on Azure or bucket on S3
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | Defines the connection string used to connect to azure blob storage
+| AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3
+| AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3
+| AWS_REGION                         |                           | Defines the region used to connect to S3
 | GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
 | GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                |                           | (Optional) password for the AMQP server
@@ -77,7 +83,6 @@ If ran through IDE on local machine:
 
 ## How to run e2e tests:
 * `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
-
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.

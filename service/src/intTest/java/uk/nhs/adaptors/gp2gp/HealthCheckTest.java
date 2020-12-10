@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.OK;
-
 import static io.restassured.RestAssured.given;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ public class HealthCheckTest {
     private int port;
 
     @Test
-    public void When_GetHealthCheck_Expect_Expect200() {
+    public void When_GettingHealthCheck_Expect_OkStatusResponse() {
         given()
             .port(port)
             .when()

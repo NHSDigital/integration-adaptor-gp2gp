@@ -10,6 +10,10 @@ management:
         include: info, health, metrics
 
 gp2gp:
+  storage:
+    type: ${GP2GP_STORAGE_TYPE:LocalMock}
+    containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
+    azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}
   amqp:
     inboundQueueName: "inbound"
     taskQueueName: "taskQueue"

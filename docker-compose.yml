@@ -18,6 +18,12 @@ services:
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
       - GP2GP_MONGO_TTL=P30D
       - GP2GP_COSMOS_DB_ENABLED=false
+      - GP2GP_STORAGE_TYPE
+      - GP2GP_STORAGE_CONTAINER_NAME
+      - AZURE_STORAGE_CONNECTION_STRING
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
 
   mongodb:
     image: mongo
