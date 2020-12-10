@@ -1,12 +1,12 @@
-FROM gradle:jdk11 AS test
+FROM gradle:jdk11 AS build
 
 COPY --chown=gradle:gradle service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
-RUN ./gradlew check -x integrationTest
+RUN ./gradlew build
 
-FROM test AS build
+FROM build AS package
 
 RUN ./gradlew --build-cache bootJar
 

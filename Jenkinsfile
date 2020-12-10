@@ -22,9 +22,9 @@ pipeline {
                         script {
                             if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
-                                docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
+                                docker-compose -f docker/docker-compose-integration-tests.yml build
+                                docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
                                 docker cp tests:/home/gradle/service/build .
-                                docker kill tests
                             '''
 
                             // TODO: remove debug code
@@ -53,9 +53,11 @@ pipeline {
                                 exclusionPattern : '**/*Test.class'
                             ])
                             sh "rm -rf build"
+                            sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
                         }
                     }
                 }
+
                 stage('Build Docker Images') {
                     steps {
                         script {
@@ -63,22 +65,22 @@ pipeline {
                         }
                     }
                 }
-                stage('Integration Tests') {
-                    steps {
-                        script {
-                            sh '''
-                                docker-compose -f docker/docker-compose-integration-tests.yml build
-                                docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
-                            '''
-                            // TODO: Need to also copy build/test-results/**/*.xml from the integration runs so we can see what passed and what failed
-                        }
-                    }
-                    post {
-                        always {
-                            sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
-                        }
-                    }
-                }
+//                 stage('Integration Tests') {
+//                     steps {
+//                         script {
+//                             sh '''
+//                                 docker-compose -f docker/docker-compose-integration-tests.yml build
+//                                 docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests
+//                             '''
+//                             // TODO: Need to also copy build/test-results/**/*.xml from the integration runs so we can see what passed and what failed
+//                         }
+//                     }
+//                     post {
+//                         always {
+//                             sh "docker-compose -f docker/docker-compose-integration-tests.yml down --rmi=all"
+//                         }
+//                     }
+//                 }
                 stage('Push Image') {
                     when {
                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
