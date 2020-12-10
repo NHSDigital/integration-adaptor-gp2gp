@@ -7,7 +7,7 @@ import org.apache.qpid.jms.message.JmsTextMessage;
 import javax.jms.JMSException;
 import javax.jms.Message;
 
-import static io.netty.util.CharsetUtil.UTF_8;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Slf4j
 public class JmsReader {

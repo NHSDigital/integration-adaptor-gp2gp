@@ -1,8 +1,7 @@
 <configuration>
     <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${GP2GP_LOGGING_FORMAT:-%d{yyyy-mm-dd HH:mm:ss.SSS} Level=%-5level Thread=%thread
-                Logger=%logger{36} Message=%msg%n}
+            <pattern>${GP2GP_LOGGING_FORMAT:-%d{yyyy-mm-dd HH:mm:ss.SSS} Level=%-5level Thread=%thread Logger=%logger{36} Message=%msg%n}
             </pattern>
         </encoder>
     </appender>
