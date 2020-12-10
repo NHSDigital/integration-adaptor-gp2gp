@@ -22,6 +22,8 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
 public class MessageQueueTest {
+    private static final long WAIT_TIME = 5000L;
+
     @Autowired
     private JmsTemplate jmsTemplate;
     @Value("${gp2gp.amqp.inboundQueueName}")
@@ -32,13 +34,13 @@ public class MessageQueueTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void When_SendingInvalidMessage_Expect_MessageIsSentToDeadLetterQueue() throws Exception {
+    public void When_SendingValidMessage_Expect_InboundMessageHandlerCallWithSameMessage() throws Exception {
         var inboundMessage = new InboundMessage();
         inboundMessage.setPayload("payload");
         var sentMessageContent = objectMapper.writeValueAsString(inboundMessage);
         jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(sentMessageContent));
 
-        Thread.sleep(1000L);
+        Thread.sleep(WAIT_TIME);
         verify(inboundMessageHandler).handle(argThat(jmsMessage ->
                 hasSameContentAsSentMessage(jmsMessage, sentMessageContent)
         ));
