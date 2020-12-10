@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
 public class LocalMockConnector implements StorageConnector {
     private final Map<String, byte[]> storage;
 

@@ -11,17 +11,14 @@ import org.springframework.stereotype.Component;
 @Setter
 public class AmqpProperties {
 
+    private final DeserializationPolicy deserializationPolicy = new DeserializationPolicy();
     private String brokers;
     private String username;
     private String password;
     private String clientId;
-
     private Boolean receiveLocalOnly;
     private Boolean receiveNoWaitLocalOnly;
-
     private int maxRedeliveries;
-
-    private final DeserializationPolicy deserializationPolicy = new DeserializationPolicy();
 
     public DeserializationPolicy getDeserializationPolicy() {
         return deserializationPolicy;

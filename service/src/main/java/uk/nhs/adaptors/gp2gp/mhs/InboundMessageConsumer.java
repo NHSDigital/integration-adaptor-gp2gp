@@ -1,13 +1,10 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
-import uk.nhs.adaptors.gp2gp.ehr.request.EhrRequestHandler;
 
 import javax.jms.JMSException;
 import javax.jms.Message;

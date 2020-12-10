@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.testcontainers;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.testcontainers.containers.GenericContainer;
 
 @Slf4j

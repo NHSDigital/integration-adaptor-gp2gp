@@ -38,6 +38,7 @@ public class MessageQueueTest {
         var sentMessageContent = objectMapper.writeValueAsString(inboundMessage);
         jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(sentMessageContent));
 
+        Thread.sleep(1000L);
         verify(inboundMessageHandler).handle(argThat(jmsMessage ->
                 hasSameContentAsSentMessage(jmsMessage, sentMessageContent)
         ));

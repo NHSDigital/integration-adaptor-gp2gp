@@ -2,8 +2,6 @@ package uk.nhs.adaptors.gp2gp.testcontainers;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMqContainer;
-
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -30,17 +28,17 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
 
     @Override
     @SuppressFBWarnings(
-        value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
-        justification = "SpotBugs issue with fix not yet released https://github.com/spotbugs/spotbugs/issues/456")
+            value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE",
+            justification = "SpotBugs issue with fix not yet released https://github.com/spotbugs/spotbugs/issues/456")
     public void beforeEach(ExtensionContext context) {
         var applicationContext = SpringExtension.getApplicationContext(context);
 
         jmsTemplate = applicationContext.getBean(JmsTemplate.class);
 
         var inboundqueueName = Objects.requireNonNull(
-            applicationContext.getEnvironment().getProperty("gp2gp.amqp.inboundQueueName"));
+                applicationContext.getEnvironment().getProperty("gp2gp.amqp.inboundQueueName"));
         var taskqueueName = Objects.requireNonNull(
-            applicationContext.getEnvironment().getProperty("gp2gp.amqp.taskQueueName"));
+                applicationContext.getEnvironment().getProperty("gp2gp.amqp.taskQueueName"));
 
         var receiveTimeout = jmsTemplate.getReceiveTimeout();
         jmsTemplate.setReceiveTimeout(RECEIVE_TIMEOUT_NO_WAIT);
@@ -54,7 +52,7 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
             list.add(taskqueueName);
             list.add(DLQ_PREFIX + taskqueueName);
         }
-        for (String name: list) {
+        for (String name : list) {
             purgeQueueMessage(name);
         }
 
