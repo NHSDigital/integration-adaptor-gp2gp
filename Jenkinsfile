@@ -53,7 +53,7 @@ pipeline {
                                 exclusionPattern : '**/*Test.class'
                             ])
                             sh "rm -rf build"
-                            sh "docker-compose -f docker/docker-compose-tests.yml down"
+                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
                         }
                     }
                 }
