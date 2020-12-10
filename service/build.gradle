@@ -14,6 +14,7 @@ apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
 
 group = 'uk.nhs.adaptors'
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 lombok {
@@ -31,6 +32,8 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
 	implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.907'
+	implementation 'com.azure:azure-storage-blob:12.9.0'
 	implementation 'org.apache.commons:commons-lang3:3.11'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -79,20 +82,15 @@ task integrationTest(type: Test) {
 check.dependsOn integrationTest
 jacocoTestReport.dependsOn integrationTest
 
-task staticCodeAnalysis(type: GradleBuild) {
-	tasks = [
-			'clean',
-			'checkstyleMain',
-			'checkstyleTest',
-			'spotbugsMain',
-			'spotbugsTest',
-	]
-}
-
-tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
-	excludeFilter = rootProject.file('config/spotbugs/exclude.xml')
+spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
+spotbugsMain {
 	reports {
-		xml.enabled = true
-		html.enabled = true
+		html {
+			enabled = true
+		}
+		xml {
+			enabled = true
+		}
 	}
 }

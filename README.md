@@ -23,6 +23,13 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | -----------------------------------|---------------------------|-------------
 | GP2GP_SERVER_PORT                  | 8080                      | The port on which the SCR API will run.
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
+| GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
+| GP2GP_STORAGE_TYPE                 | LocalMock                 | Defines the storage solution being used (S3, Azure, LocalMock)
+| GP2GP_STORAGE_CONTAINER_NAME       | for-nia-testing           | Defines the name of the BlobStorage container on Azure or bucket on S3
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | Defines the connection string used to connect to azure blob storage
+| AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3
+| AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3
+| AWS_REGION                         |                           | Defines the region used to connect to S3
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout.
 | GP2GP_MONGO_URI                    | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME          | gp2gp                     | Mongo database name.
@@ -54,6 +61,16 @@ If ran through IDE on local machine:
 * `docker build --target=test`
 
 ## How to run integration tests:
+* Navigate to `service`
+* Run: `./gradlew integrationTest`
+
+## How to run style check:
+* Navigate to `service`
+* Run: `./gradlew staticCodeAnalysis`
+
+## How to run all checks:
+* Navigate to `service`
+* Run: `./gradlew check`
 * `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
 
 ### Licensing
