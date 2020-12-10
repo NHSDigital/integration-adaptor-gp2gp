@@ -6,7 +6,7 @@ services:
     build:
       context: ../
       dockerfile: docker/service/Dockerfile
-      target: test
+      target: build
     depends_on:
       - mongodb
     entrypoint: "./gradlew check"

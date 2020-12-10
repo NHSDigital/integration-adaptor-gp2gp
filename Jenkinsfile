@@ -20,7 +20,7 @@ pipeline {
                 stage('Tests') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
+                            //if (sh(label: 'Running gp2gp test suite', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE}-tests --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
                                 docker-compose -f docker/docker-compose-integration-tests.yml build
                                 docker-compose -f docker/docker-compose-integration-tests.yml up --exit-code-from integration_tests

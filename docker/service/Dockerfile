@@ -4,7 +4,7 @@ COPY --chown=gradle:gradle service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
-RUN ./gradlew build
+RUN ./gradlew compileJava
 
 FROM build AS package
 
