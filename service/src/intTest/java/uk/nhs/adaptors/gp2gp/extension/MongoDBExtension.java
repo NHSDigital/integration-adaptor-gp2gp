@@ -10,11 +10,15 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static uk.nhs.adaptors.gp2gp.TestContainerUtils.isTestContainersEnabled;
+
 @Slf4j
 public class MongoDBExtension implements BeforeAllCallback, BeforeEachCallback {
     @Override
     public void beforeAll(ExtensionContext context) {
-        MongoDbContainer.getInstance().start();
+        if (isTestContainersEnabled()) {
+            MongoDbContainer.getInstance().start();
+        }
     }
 
     @Override
