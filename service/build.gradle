@@ -14,7 +14,6 @@ apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
 
 group = 'uk.nhs.adaptors'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 lombok {
@@ -58,10 +57,6 @@ test {
 	useJUnitPlatform()
 }
 
-jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
-}
-
 sourceSets {
 	integrationTest {
 		java {
@@ -95,6 +90,7 @@ task integrationTest(type: Test) {
 }
 
 check.dependsOn integrationTest
+jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
 spotbugsIntegrationTest.enabled = false

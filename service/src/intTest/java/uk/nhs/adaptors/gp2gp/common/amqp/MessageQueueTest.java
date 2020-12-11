@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jms.core.JmsTemplate;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
@@ -29,7 +29,7 @@ public class MessageQueueTest {
     private JmsTemplate jmsTemplate;
     @Value("${gp2gp.amqp.inboundQueueName}")
     private String inboundQueueName;
-    @SpyBean // mock the message handler to prevent any forward processing by the application
+    @MockBean // mock the message handler to prevent any forward processing by the application
     private InboundMessageHandler inboundMessageHandler;
     @Autowired
     private ObjectMapper objectMapper;

@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.springframework.jms.support.destination.JmsDestinationAccessor.RECEIVE_TIMEOUT_NO_WAIT;
+import static uk.nhs.adaptors.gp2gp.TestContainerUtils.isTestContainersEnabled;
 
 @Slf4j
 public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback {
@@ -23,7 +24,9 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
 
     @Override
     public void beforeAll(ExtensionContext context) {
-        ActiveMqContainer.getInstance().start();
+        if (isTestContainersEnabled()) {
+            ActiveMqContainer.getInstance().start();
+        }
     }
 
     @Override
