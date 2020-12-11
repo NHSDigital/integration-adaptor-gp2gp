@@ -55,7 +55,6 @@ pipeline {
                 stage('Build Docker Images') {
                     steps {
                         script {
-                            // TODO: How to make this re-use layers built in test stage? Maybe using docker-compose instead of bare docker would help it find them?
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
                         }
                     }
