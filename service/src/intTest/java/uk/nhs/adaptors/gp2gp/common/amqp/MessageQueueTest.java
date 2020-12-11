@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.jms.core.JmsTemplate;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.verify;
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
 public class MessageQueueTest {
-    private static final long TIMEOUT = 5000L;
+    private static final long TIMEOUT = 10000L;
 
     @Autowired
     private JmsTemplate jmsTemplate;
