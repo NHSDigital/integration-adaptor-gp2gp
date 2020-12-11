@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.repositorys;
+package uk.nhs.adaptors.gp2gp.repositories;
 
 import java.util.Optional;
 

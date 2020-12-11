@@ -11,7 +11,7 @@ import uk.nhs.adaptors.gp2gp.configurations.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.extension.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.extension.MongoDBExtension;
 import uk.nhs.adaptors.gp2gp.models.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.repositorys.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +23,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 public class EhrExtractStatusRepositoryTest {
     private static final String EXTRACT_ID = "test-extract-id";
+    private static final String CONVERSATION_ID = "conversation-id";
+    private static final String TEST_FIELD = "test-field";
 
     @Autowired
     private MongoClientConfiguration mongoClientConfiguration;
@@ -32,7 +34,19 @@ public class EhrExtractStatusRepositoryTest {
     @Test
     public void When_AddingNewEhrExtractStatus_Expect_EhrExtractStatusRetrievableByIdFromDatabase() {
         Instant now = Instant.now();
-        ehrExtractStatusRepository.save(new EhrExtractStatus(EXTRACT_ID, now));
+        ehrExtractStatusRepository.save(new EhrExtractStatus(EXTRACT_ID,
+            now,
+            now,
+            CONVERSATION_ID,
+            new EhrExtractStatus.EhrRequest(TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD,
+                TEST_FIELD)
+        ));
         Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EXTRACT_ID);
 
         assertThat(optionalEhrExtractStatus.isPresent(), is(true));

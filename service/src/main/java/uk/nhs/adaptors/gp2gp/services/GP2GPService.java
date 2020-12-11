@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GP2GPService {
-
     private final JmsTemplate jmsTemplate;
 
     @Value("${gp2gp.amqp.taskQueueName}")

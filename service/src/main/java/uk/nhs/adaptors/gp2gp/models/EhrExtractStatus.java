@@ -23,4 +23,21 @@ public class EhrExtractStatus {
     @Id
     private String extractId;
     private Instant created;
+    private Instant updatedAt;
+    private String conversationId;
+    private EhrRequest ehrRequest;
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    public static class EhrRequest {
+        private String requestId;
+        private String nhsNumber;
+        private String fromPartyId;
+        private String toPartyId;
+        private String fromAsid;
+        private String toAsid;
+        private String fromOdsCode;
+        private String toOdsCode;
+    }
 }
