@@ -2,9 +2,12 @@ version: '3.4'
 
 services:
   gp2gp:
-    build: .
+    build:
+      context: ../
+      dockerfile: docker/service/Dockerfile
     depends_on:
       - mongodb
+      - activemq
     ports:
       - "8080:8080"
     environment:

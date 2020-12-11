@@ -73,6 +73,9 @@ If ran through IDE on local machine:
 * Navigate to `service`
 * Run: `./gradlew integrationTest`
 
+Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
+To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
+
 ## How to run style check:
 * Navigate to `service`
 * Run: `./gradlew staticCodeAnalysis` 

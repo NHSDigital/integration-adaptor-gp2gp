@@ -14,7 +14,6 @@ apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
 
 group = 'uk.nhs.adaptors'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 lombok {
@@ -32,7 +31,6 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
 	implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.907'
 	implementation 'com.azure:azure-storage-blob:12.9.0'
 	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
@@ -54,10 +52,6 @@ dependencies {
 
 test {
 	useJUnitPlatform()
-}
-
-jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
 }
 
 sourceSets {
@@ -93,6 +87,7 @@ task integrationTest(type: Test) {
 }
 
 check.dependsOn integrationTest
+jacocoTestReport.dependsOn integrationTest
 
 spotbugsTest.enabled = false
 spotbugsIntegrationTest.enabled = false
