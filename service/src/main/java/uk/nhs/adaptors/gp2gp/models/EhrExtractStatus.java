@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @CompoundIndexes({
     @CompoundIndex(
-        name = "ehr_extract_status",
-        def = "{'extractId': 1, 'created': 1}",
+        name = "ehr_extract_status_unique_index",
+        def = "{'conversationId': 1, 'requestId': 1}",
         unique = true)
 })
 @Data
