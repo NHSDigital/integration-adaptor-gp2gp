@@ -16,7 +16,7 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/service/build/libs/gp2gp.jar /app/gp2gp.jar
+COPY --from=build /home/gradle/service/build/libs/gp2gp-0.0.1-SNAPSHOT.jar /app/gp2gp.jar
 
 USER 65534
 
