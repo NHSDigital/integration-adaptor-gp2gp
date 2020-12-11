@@ -17,7 +17,6 @@ public class TaskDispatcher {
     @Value("${gp2gp.amqp.taskQueueName}")
     private String mhsTaskQueueName;
 
-    // FIXME: NIAD-761 Remove and replace with actual implementation
     public void temporaryCreateTask(String value) {
         jmsTemplate.send(mhsTaskQueueName, session -> session.createTextMessage(value));
     }
