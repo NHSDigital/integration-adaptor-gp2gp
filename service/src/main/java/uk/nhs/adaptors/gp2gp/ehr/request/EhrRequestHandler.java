@@ -14,7 +14,6 @@ public class EhrRequestHandler {
     private final TaskDispatcher taskDispatcher;
 
     public void handleRequest(String value) {
-        // FIXME: NIAD-776 create actual impl
         taskDispatcher.temporaryCreateTask(value);
     }
 }
