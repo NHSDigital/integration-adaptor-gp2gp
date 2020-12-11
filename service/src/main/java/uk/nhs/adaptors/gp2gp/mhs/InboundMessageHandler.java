@@ -25,9 +25,7 @@ public class InboundMessageHandler {
         String body = JmsReader.readMessage(message);
         LOGGER.debug("Message content: {}", body);
         var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-        // TODO: NIAD-776 if the inbound message is an EhrRequest interaction then use the ehrRequestHandler
         ehrRequestHandler.handleRequest(objectMapper.writeValueAsString(mhsInboundMessage));
-        // TODO: NIAD-776 else we don't know how to handle the message, this is an error
     }
 
 }
