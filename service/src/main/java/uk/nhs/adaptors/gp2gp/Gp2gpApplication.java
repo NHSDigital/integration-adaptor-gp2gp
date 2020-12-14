@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp;
 
-import static org.springframework.boot.SpringApplication.run;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 public class Gp2gpApplication {
