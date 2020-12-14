@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.services;
+package uk.nhs.adaptors.gp2gp.common.service;
 
 import java.io.IOException;
 import java.io.StringReader;

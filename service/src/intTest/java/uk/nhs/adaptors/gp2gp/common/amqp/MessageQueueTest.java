@@ -41,6 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @DirtiesContext
 public class MessageQueueTest {
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
+    private static final String SOAP_HEADER = "<soap:Header></soap:Header>";
     private static final long TIMEOUT = 5000L;
     private static final long EXPECTED_COUNT = 1;
 
@@ -58,7 +59,9 @@ public class MessageQueueTest {
     @Test
     public void When_SendingValidMessage_Expect_InboundMessageHandlerCallWithSameMessage() throws Exception {
         var inboundMessage = new InboundMessage();
-        inboundMessage.setPayload("payload");
+        inboundMessage.setPayload(SOAP_HEADER);
+        inboundMessage.setEbXML(SOAP_HEADER);
+
         var sentMessageContent = objectMapper.writeValueAsString(inboundMessage);
         jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(sentMessageContent));
 
@@ -99,7 +102,7 @@ public class MessageQueueTest {
 
     @Test
     public void When_SendingTwoValidMessageWithTheSameConversationIdAndRequestId_Expect_ExtraMessageIsNotAddedToDb()
-        throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
         String ehtExtractRequestBody = IOUtils.toString(getClass()
             .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
         jmsTemplate.send(inboundQueueName, session -> session.createTextMessage(ehtExtractRequestBody));

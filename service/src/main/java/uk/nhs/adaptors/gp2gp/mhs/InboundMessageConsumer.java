@@ -9,7 +9,7 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.task.EhrStatusConsumerService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrRequestHandler;
 import uk.nhs.adaptors.gp2gp.exceptions.InvalidInboundMessageException;
-import uk.nhs.adaptors.gp2gp.services.XPathService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;

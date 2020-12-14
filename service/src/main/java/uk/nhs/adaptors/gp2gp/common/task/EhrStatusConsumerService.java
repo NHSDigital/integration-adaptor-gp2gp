@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.services.XPathService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
