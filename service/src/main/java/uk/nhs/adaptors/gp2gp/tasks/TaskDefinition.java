@@ -6,9 +6,9 @@ import lombok.Getter;
 
 @Getter
 public abstract class TaskDefinition {
-    private String taskId;
-    private String requestId;
-    private String conversationId;
+    private final String taskId;
+    private final String requestId;
+    private final String conversationId;
 
     public TaskDefinition(String requestId, String conversationId) {
         this.taskId = randomUUID().toString();

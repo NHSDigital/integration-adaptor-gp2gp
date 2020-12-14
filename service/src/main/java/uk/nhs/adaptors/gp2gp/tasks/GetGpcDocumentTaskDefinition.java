@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 
-public class GetGpcDocumentTaskDefinition extends TaskDefinition{
+public class GetGpcDocumentTaskDefinition extends TaskDefinition {
     @Getter
-    private String documentId;
+    private final String documentId;
 
     @Autowired
     public GetGpcDocumentTaskDefinition(String requestId, String conversationId, String documentId) {
