@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
@@ -18,6 +19,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
+@DirtiesContext
 public class EhrExtractStatusRepositoryTest {
     private static final String EXTRACT_ID = "test-extract-id";
 

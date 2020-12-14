@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.annotation.DirtiesContext;
+
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
@@ -22,8 +24,9 @@ import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
+@DirtiesContext
 public class MessageQueueTest {
-    private static final long TIMEOUT = 10000L;
+    private static final long TIMEOUT = 5000L;
 
     @Autowired
     private JmsTemplate jmsTemplate;
