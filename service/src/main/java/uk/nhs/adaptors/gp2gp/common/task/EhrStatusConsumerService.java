@@ -42,20 +42,20 @@ public class EhrStatusConsumerService {
         return new EhrExtractStatus(UUID.randomUUID().toString(),
             now,
             now,
-            XPathService.getTagValue(ebXmlDocument, CONVERSATION_ID_PATH),
+            XPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH),
             ehrRequest);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document ebXmlDocument, Document payloadDocument) {
         return new EhrExtractStatus.EhrRequest(
-            XPathService.getTagValue(payloadDocument, REQUEST_ID_PATH),
-            XPathService.getTagValue(payloadDocument, NHS_NUMBER_PATH),
-            XPathService.getTagValue(ebXmlDocument, FROM_PARTY_ID_PATH),
-            XPathService.getTagValue(ebXmlDocument, TO_PARTY_ID_PATH),
-            XPathService.getTagValue(payloadDocument, FROM_ASID_PATH),
-            XPathService.getTagValue(payloadDocument, TO_ASID_PATH),
-            XPathService.getTagValue(payloadDocument, FROM_ODS_CODE_PATH),
-            XPathService.getTagValue(payloadDocument, TO_ODS_CODE_PATH)
+            XPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH),
+            XPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH),
+            XPathService.getNodeValue(ebXmlDocument, FROM_PARTY_ID_PATH),
+            XPathService.getNodeValue(ebXmlDocument, TO_PARTY_ID_PATH),
+            XPathService.getNodeValue(payloadDocument, FROM_ASID_PATH),
+            XPathService.getNodeValue(payloadDocument, TO_ASID_PATH),
+            XPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH),
+            XPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)
         );
     }
 }

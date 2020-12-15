@@ -65,6 +65,6 @@ public class InboundMessageConsumer {
     }
 
     private boolean isEhrStatusRequest(Document ebXmlDocument) {
-        return XPathService.getTagValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
+        return XPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
     }
 }
