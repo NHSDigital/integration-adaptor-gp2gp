@@ -5,11 +5,9 @@ import java.io.InputStream;
 import uk.nhs.adaptors.gp2gp.exceptions.StorageConnectorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.azure.storage.blob.BlobClient;
 import com.azure.storage.blob.BlobContainerClient;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.InputStream;
 
 public class AzureStorageConnector implements StorageConnector {
     @Autowired

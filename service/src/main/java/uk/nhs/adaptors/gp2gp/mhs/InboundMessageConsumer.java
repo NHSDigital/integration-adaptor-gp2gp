@@ -6,10 +6,10 @@ import javax.jms.Message;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.EhrStatusConsumerService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrRequestHandler;
 import uk.nhs.adaptors.gp2gp.exceptions.InvalidInboundMessageException;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
@@ -30,6 +30,7 @@ public class InboundMessageConsumer {
     private final ObjectMapper objectMapper;
     private final EhrRequestHandler ehrRequestHandler;
     private final EhrStatusConsumerService ehrStatusConsumerService;
+    private final XPathService xPathService;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws JMSException {
@@ -54,8 +55,8 @@ public class InboundMessageConsumer {
 
     private void handleMhsRequest(String body) throws JsonProcessingException {
         var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-        Document ebXmlDocument = XPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
-        Document payloadDocument = XPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
+        Document ebXmlDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
+        Document payloadDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
 
         if (isEhrStatusRequest(ebXmlDocument)) {
             ehrStatusConsumerService.handleEhrStatus(ebXmlDocument, payloadDocument);
@@ -65,6 +66,6 @@ public class InboundMessageConsumer {
     }
 
     private boolean isEhrStatusRequest(Document ebXmlDocument) {
-        return XPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
+        return xPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
     }
 }
