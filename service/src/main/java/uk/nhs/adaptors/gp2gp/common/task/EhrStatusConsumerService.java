@@ -28,10 +28,6 @@ public class EhrStatusConsumerService {
 
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
-    @Autowired
-    private IdGenerationService idGenerationService;
-    @Autowired
-    private XPathService xPathService;
 
     public void handleEhrStatus(Document ebXmlDocument, Document payloadDocument) {
         EhrExtractStatus ehrExtractStatus = prepareEhrExtractStatus(ebXmlDocument, payloadDocument);
@@ -42,23 +38,23 @@ public class EhrStatusConsumerService {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(ebXmlDocument, payloadDocument);
         Instant now = Instant.now();
 
-        return new EhrExtractStatus(idGenerationService.generateId(),
+        return new EhrExtractStatus(IdGenerationService.generateId(),
             now,
             now,
-            xPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH),
+            XPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH),
             ehrRequest);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document ebXmlDocument, Document payloadDocument) {
         return new EhrExtractStatus.EhrRequest(
-            xPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH),
-            xPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH),
-            xPathService.getNodeValue(ebXmlDocument, FROM_PARTY_ID_PATH),
-            xPathService.getNodeValue(ebXmlDocument, TO_PARTY_ID_PATH),
-            xPathService.getNodeValue(payloadDocument, FROM_ASID_PATH),
-            xPathService.getNodeValue(payloadDocument, TO_ASID_PATH),
-            xPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH),
-            xPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)
+            XPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH),
+            XPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH),
+            XPathService.getNodeValue(ebXmlDocument, FROM_PARTY_ID_PATH),
+            XPathService.getNodeValue(ebXmlDocument, TO_PARTY_ID_PATH),
+            XPathService.getNodeValue(payloadDocument, FROM_ASID_PATH),
+            XPathService.getNodeValue(payloadDocument, TO_ASID_PATH),
+            XPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH),
+            XPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)
         );
     }
 }

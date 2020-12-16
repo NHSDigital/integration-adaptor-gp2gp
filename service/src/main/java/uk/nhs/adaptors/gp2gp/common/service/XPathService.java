@@ -6,23 +6,17 @@ import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-@Service
 public class XPathService {
-    @Autowired
-    private XPath xPath;
-
-    public Document prepareDocumentFromXml(String xml) {
+    public static Document prepareDocumentFromXml(String xml) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         Document document;
         try {
@@ -36,9 +30,11 @@ public class XPathService {
         return document;
     }
 
-    public String getNodeValue(Document xmlDoc, String path) {
+    public static String getNodeValue(Document xmlDoc, String path) {
         try {
-            XPathExpression xPathExpression = xPath.compile(path);
+            XPathExpression xPathExpression = XPathFactory.newInstance()
+                .newXPath()
+                .compile(path);
             return (String) xPathExpression.evaluate(xmlDoc, XPathConstants.STRING);
         } catch (XPathExpressionException e) {
             throw new IllegalArgumentException(e);

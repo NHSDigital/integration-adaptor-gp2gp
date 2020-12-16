@@ -23,14 +23,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageConsumer {
-    private final InboundMessageHandler inboundMessageHandler;
     private static final String INTERACTION_ID = "RCMR_IN010000UK05";
     private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
 
+    private final InboundMessageHandler inboundMessageHandler;
     private final ObjectMapper objectMapper;
     private final EhrRequestHandler ehrRequestHandler;
     private final EhrStatusConsumerService ehrStatusConsumerService;
-    private final XPathService xPathService;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws JMSException {
@@ -55,8 +54,8 @@ public class InboundMessageConsumer {
 
     private void handleMhsRequest(String body) throws JsonProcessingException {
         var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-        Document ebXmlDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
-        Document payloadDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
+        Document ebXmlDocument = XPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
+        Document payloadDocument = XPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
 
         if (isEhrStatusRequest(ebXmlDocument)) {
             ehrStatusConsumerService.handleEhrStatus(ebXmlDocument, payloadDocument);
@@ -66,6 +65,6 @@ public class InboundMessageConsumer {
     }
 
     private boolean isEhrStatusRequest(Document ebXmlDocument) {
-        return xPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
+        return XPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
     }
 }
