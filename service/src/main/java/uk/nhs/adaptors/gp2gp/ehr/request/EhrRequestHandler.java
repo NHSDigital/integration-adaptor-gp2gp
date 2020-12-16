@@ -10,7 +10,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrRequestHandler {
-
     private final TaskDispatcher taskDispatcher;
 
     public void handleRequest(String value) {
