@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
 import static java.lang.Thread.sleep;
-import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -14,16 +14,21 @@ import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.common.constants.Constants.DOCUMENT_TASK;
 import static uk.nhs.adaptors.gp2gp.common.constants.Constants.STRUCTURE_TASK;
+import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.DOCUMENT_OBJECT;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.GET_GPC_DOCUMENT_TASK_EXECUTOR;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.GET_GPC_STRUCTURED_TASK_EXECUTOR;
+import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.NHS_NUMBER;
+import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.REQUEST_ID;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.STRUCTURE_OBJECT;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.TASK_NAME_VALUE;
 import static uk.nhs.adaptors.gp2gp.common.task.constants.TaskConstants.TIMEOUT;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -51,12 +56,16 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TaskQueueToDefinitionFactoryTest {
-    private static final Optional<GetGpcDocumentTaskDefinition> GET_GPC_DOCUMENT_TASK_DEFINITION =
-        of(mock(GetGpcDocumentTaskDefinition.class));
-    private static final Optional<GetGpcStructuredTaskDefinition> GET_GPC_STRUCTURED_TASK_DEFINITION =
-        of(mock(GetGpcStructuredTaskDefinition.class));
-    private static final String DOCUMENT_EXPECTED_BODY = "{\"requestId\":\"123\",\"conversationId\":\"456\",\"documentId\":\"789\"}";
-    private static final String STRUCTURE_EXPECTED_BODY = "{\"requestId\":\"123\",\"conversationId\":\"456\",\"nhsNumber\":\"789\"}";
+    private static final GetGpcDocumentTaskDefinition GET_GPC_DOCUMENT_TASK_DEFINITION =
+        mock(GetGpcDocumentTaskDefinition.class);
+    private static final GetGpcStructuredTaskDefinition GET_GPC_STRUCTURED_TASK_DEFINITION =
+        mock(GetGpcStructuredTaskDefinition.class);
+    private static final String REQUEST_ID_KEY = "requestId";
+    private static final String CONVERSATION_ID_KEY = "conversationId";
+    private static final String DOCUMENT_ID_KEY = "documentId";
+    private static final String NHS_NUMBER_KEY = "nhsNumber";
+    private static final String DOCUMENT_EXPECTED_BODY = addCustomValueToJsonString(DOCUMENT_ID_KEY, DOCUMENT_ID);
+    private static final String STRUCTURE_EXPECTED_BODY = addCustomValueToJsonString(NHS_NUMBER_KEY, NHS_NUMBER);
 
     @Value("${gp2gp.amqp.taskQueueName}")
     private String taskQueueName;
@@ -78,13 +87,25 @@ public class TaskQueueToDefinitionFactoryTest {
         );
     }
 
+    private static String addCustomValueToJsonString(String customKey, String customValue) {
+        try {
+            return new JSONObject()
+                .put(REQUEST_ID_KEY, REQUEST_ID)
+                .put(CONVERSATION_ID_KEY, CONVERSATION_ID)
+                .put(customKey, customValue)
+                .toString();
+        } catch (JSONException e) {
+            throw new IllegalStateException("Error constructing buildJsonStringForStructure");
+        }
+    }
+
     @ParameterizedTest
     @MethodSource("provideTasksDataForDefinitionTest")
     public void When_SendingValidMessage_Expect_TaskDefinitionFactoryCalledWithSameMessageAndTask(Object taskTestObject, String taskName,
-        TaskExecutor taskTestExecutor, Optional<TaskDefinition> taskDefinition, String expectedBody)
+        TaskExecutor taskTestExecutor, TaskDefinition taskDefinition, String expectedBody)
         throws InterruptedException, JsonProcessingException {
 
-        when(taskDefinitionFactory.getTaskDefinition(any(), any())).thenReturn(taskDefinition);
+        when(taskDefinitionFactory.getTaskDefinition(any(), any())).thenReturn(ofNullable(taskDefinition));
         when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskTestExecutor);
         doNothing().when(taskTestExecutor).execute(any());
 

@@ -21,8 +21,7 @@ public class TaskDefinitionFactory {
     public Optional<TaskDefinition> getTaskDefinition(String taskName, String body) throws JsonProcessingException {
         if (taskName.equalsIgnoreCase(DOCUMENT_TASK)) {
             return Optional.of(objectMapper.readValue(body, GetGpcDocumentTaskDefinition.class));
-        }
-        if (taskName.equalsIgnoreCase(STRUCTURE_TASK)) {
+        } else if (taskName.equalsIgnoreCase(STRUCTURE_TASK)) {
             return Optional.of(objectMapper.readValue(body, GetGpcStructuredTaskDefinition.class));
         }
         return Optional.empty();
