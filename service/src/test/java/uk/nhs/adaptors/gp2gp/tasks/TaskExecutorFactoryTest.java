@@ -12,24 +12,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class TaskExecutorFactoryTest {
-    private static final GetGpcDocumentTaskDefinition GET_GPC_DOCUMENT_TASK_DEFINITION =
-        new GetGpcDocumentTaskDefinition("", "", "");
-    private static final GetGpcStructuredTaskDefinition GET_GPC_STRUCTURED_TASK_DEFINITION =
-        new GetGpcStructuredTaskDefinition("", "", "");
     @Autowired
     private TaskExecutorFactory taskExecutorFactory;
 
     private static Stream<Arguments> provideTasksDataForTest() {
         return Stream.of(
-            Arguments.of(GetGpcDocumentTaskDefinition.class, GET_GPC_DOCUMENT_TASK_DEFINITION),
-            Arguments.of(GetGpcStructuredTaskDefinition.class, GET_GPC_STRUCTURED_TASK_DEFINITION)
+            Arguments.of(GetGpcDocumentTaskDefinition.class, GetGpcDocumentTaskDefinition.class.toString()),
+            Arguments.of(GetGpcStructuredTaskDefinition.class, GetGpcStructuredTaskDefinition.class.toString())
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideTasksDataForTest")
-    public void When_GettingValidTask_Expect_TaskDefinitionFactoryReturnsCorrectTask(Class taskClass, TaskDefinition taskDefinition) {
-        TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition);
+    public void When_GettingValidTask_Expect_TaskDefinitionFactoryReturnsCorrectTask(Class taskClass, String taskDefinitionClassString) {
+        TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinitionClassString);
         assertThat(taskExecutor.getTaskType()).isEqualTo(taskClass);
     }
 }

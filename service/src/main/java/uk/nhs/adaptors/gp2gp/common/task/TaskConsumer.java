@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
@@ -21,16 +23,16 @@ public class TaskConsumer {
     private final TaskHandler taskService;
 
     @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
-    public void receive(Message message) throws IOException, JMSException, TaskHandlerException {
+    public void receive(Message message) throws JsonProcessingException, JMSException, TaskHandlerException {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received message from taskQueue {}", messageID);
         try {
             taskService.handle(message);
             message.acknowledge();
             LOGGER.info("Acknowledged message {}", messageID);
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
-            throw e; //message will be sent to DLQ after few unsuccessful redeliveries
+            throw e;
         }
     }
 }

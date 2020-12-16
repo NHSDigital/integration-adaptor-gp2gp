@@ -10,14 +10,11 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TaskExecutorFactory {
-    private static final Map<String, TaskExecutor> TASK_EXECUTOR_MAP;
+    private static final Map<String, TaskExecutor> TASK_EXECUTOR_MAP = Map.of(GetGpcDocumentTaskDefinition.class.toString(),
+        new GetGpcDocumentTaskExecutor(),
+        GetGpcStructuredTaskDefinition.class.toString(), new GetGpcStructuredTaskExecutor());
 
-    static {
-        TASK_EXECUTOR_MAP = Map.of(GetGpcDocumentTaskDefinition.class.toString(), new GetGpcDocumentTaskExecutor(),
-            GetGpcStructuredTaskDefinition.class.toString(), new GetGpcStructuredTaskExecutor());
-    }
-
-    public TaskExecutor getTaskExecutor(TaskDefinition taskDefinition) {
-        return TASK_EXECUTOR_MAP.get(taskDefinition.getClass().toString());
+    public TaskExecutor getTaskExecutor(String taskDefinitionClass) {
+        return TASK_EXECUTOR_MAP.get(taskDefinitionClass);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.tasks.TaskDefinition;
@@ -19,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.tasks.TaskExecutorFactory;
 
 @Component
 @AllArgsConstructor
+@Slf4j
 public class TaskHandler {
     private static final String MESSAGE_CLASS = "TaskName";
 
@@ -31,9 +33,12 @@ public class TaskHandler {
 
         Optional<TaskDefinition> taskDefinition = taskDefinitionFactory.getTaskDefinition(taskName, body);
         if (taskDefinition.isPresent()) {
-            TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get());
+            TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get()
+                .getClass()
+                .toString());
             taskExecutor.execute(taskDefinition.get());
         } else {
+            LOGGER.error("Error while processing task definition from queue message {}", message.getJMSMessageID());
             throw new TaskHandlerException("No TaskDefinition Found for message: " + message.getJMSMessageID());
         }
     }
