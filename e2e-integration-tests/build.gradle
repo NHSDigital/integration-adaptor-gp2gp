@@ -1,0 +1,33 @@
+plugins {
+	id 'java'
+	id "io.freefair.lombok" version "5.1.0"
+}
+
+apply plugin: 'java'
+
+group = 'uk.nhs.adaptors'
+sourceCompatibility = '11'
+
+lombok {
+	config['lombok.log.fieldName'] = 'LOGGER'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.mongodb:mongodb-driver-sync:4.0.5'
+//	implementation 'org.apache.qpid:qpid-client:6.4.0'
+	implementation 'org.apache.qpid:qpid-jms-client:0.55.0'
+	implementation "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.0"
+	testImplementation "io.rest-assured:rest-assured:4.2.0"
+	testImplementation "io.rest-assured:json-path:4.2.0"
+	testImplementation "io.rest-assured:xml-path:4.2.0"
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
