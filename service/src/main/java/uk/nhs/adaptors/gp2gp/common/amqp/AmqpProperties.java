@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 public class AmqpProperties {
-
     private final DeserializationPolicy deserializationPolicy = new DeserializationPolicy();
     private String brokers;
     private String username;
