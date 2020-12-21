@@ -62,11 +62,11 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        curl -LO https://github.com/aquasecurity/trivy/releases/download/v0.14.0/trivy_0.14.0_Linux-64bit.tar.gz
+                        curl -sLO https://github.com/aquasecurity/trivy/releases/download/v0.14.0/trivy_0.14.0_Linux-64bit.tar.gz
                         tar xf trivy_0.14.0_Linux-64bit.tar.gz
                         chmod +x trivy && mv trivy /usr/local/bin
                     '''
-                    if (sh(label: 'Running security scan with trivy', script: 'trivy i --ignore-unfixed --exit-code 1 ${DOCKER_IMAGE}', returnStatus: true) != 0) {error("There are fixable vulnerabilities present")}
+                    if (sh(label: 'Running security scan with trivy', script: 'trivy -q i --ignore-unfixed --exit-code 1 ${DOCKER_IMAGE}', returnStatus: true) != 0) {error("There are fixable vulnerabilities present")}
                 }
             }
         }
