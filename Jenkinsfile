@@ -15,81 +15,90 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
-            stages {
-                stage('Tests') {
-                    steps {
-                        script {
-                            sh '''
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
-                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
-                                docker cp tests:/home/gradle/service/build .
-                            '''
+        stage('Tests') {
+            steps {
+                script {
+                    sh '''
+                        docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+                        docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
+                        docker cp tests:/home/gradle/service/build .
+                    '''
 
-                            archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
-                            junit '**/build/test-results/**/*.xml'
-                            recordIssues(
-                                enabledForFailure: true,
-                                tools: [
-                                    checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
-                                    spotBugs(pattern: 'build/reports/spotbugs/*.xml')
-                                ]
-                            )
-                        }
-                    }
-                    post {
-                        always {
-                            step([
-                                $class : 'JacocoPublisher',
-                                execPattern : '**/build/jacoco/*.exec',
-                                classPattern : '**/build/classes/java',
-                                sourcePattern : 'src/main/java',
-                                exclusionPattern : '**/*Test.class'
-                            ])
-                            sh "rm -rf build"
-                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
-                        }
-                    }
+                    archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
+                    junit '**/build/test-results/**/*.xml'
+                    recordIssues(
+                        enabledForFailure: true,
+                        tools: [
+                            checkStyle(pattern: 'build/reports/checkstyle/*.xml'),
+                            spotBugs(pattern: 'build/reports/spotbugs/*.xml')
+                        ]
+                    )
                 }
-
-                stage('Build Docker Images') {
-                    steps {
-                        script {
-                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
-                        }
-                    }
+            }
+            post {
+                always {
+                    step([
+                        $class : 'JacocoPublisher',
+                        execPattern : '**/build/jacoco/*.exec',
+                        classPattern : '**/build/classes/java',
+                        sourcePattern : 'src/main/java',
+                        exclusionPattern : '**/*Test.class'
+                    ])
+            sh "rm -rf build"
+                    sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
                 }
+            }
+        }
 
-                stage('Push Image') {
-                    when {
-                        expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
-                    }
-                    steps {
-                        script {
-                            if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
-                            String dockerPushCommand = "docker push ${DOCKER_IMAGE}"
-                            if (sh (label: "Pushing image", script: dockerPushCommand, returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
-                        }
-                    }
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
                 }
+            }
+        }
 
-                stage('E2E Tests') {
-                    steps {
-                        sh '''
-                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
-                            docker cp e2e-tests:/home/gradle/e2e-tests/build .
-                            mv build e2e-build
-                        '''
-                        archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
-                        junit '**/e2e-build/test-results/**/*.xml'
-                    }
-                    post {
-                        always {
-                            sh "rm -rf e2e-build"
-                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
-                        }
-                    }
+        stage('Security Scan') {
+            steps {
+                script {
+                    sh '''
+                        curl -LO https://github.com/aquasecurity/trivy/releases/download/v0.14.0/trivy_0.14.0_Linux-64bit.tar.gz
+                        tar xf trivy_0.14.0_Linux-64bit.tar.gz
+                        chmod +x trivy && mv trivy /usr/local/bin
+                    '''
+                    if (sh(label: 'Running security scan with trivy', script: 'trivy i --ignore-unfixed --exit-code 1 ${DOCKER_IMAGE}', returnStatus: true) != 0) {error("There are fixable vulnerabilities present")}
+                }
+            }
+        }
+
+        stage('Push Image') {
+            when {
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
+            steps {
+                script {
+                    if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
+                    String dockerPushCommand = "docker push ${DOCKER_IMAGE}"
+                    if (sh (label: "Pushing image", script: dockerPushCommand, returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
+                }
+            }
+        }
+
+        stage('E2E Tests') {
+            steps {
+                sh '''
+                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
+                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
+                    docker cp e2e-tests:/home/gradle/e2e-tests/build .
+                    mv build e2e-build
+                '''
+                archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                junit '**/e2e-build/test-results/**/*.xml'
+            }
+            post {
+                always {
+                    sh "rm -rf e2e-build"
+                    sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
                 }
             }
         }
