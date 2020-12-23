@@ -20,20 +20,20 @@ public class CosmosTtlCreator extends TtlCreator {
 
     public void create(Class<? extends TimeToLive> clazz) {
         if (ttlIndexHasChanged()) {
-            LOGGER.info("TTL value has changed for {} - dropping index and creating new one using value {}", clazz.getSimpleName(), duration);
+            LOGGER.info("TTL value has changed for {} - dropping index and creating new one using value {}",
+                clazz.getSimpleName(), getDuration());
             String indexName = findTtlIndex().map(IndexInfo::getName).orElseThrow();
-            indexOperations.dropIndex(indexName);
+            getIndexOperations().dropIndex(indexName);
         }
-        indexOperations.ensureIndex(
-            new Index()
-                .expire(duration)
-                .on(INDEX_FIELD_KEY, Sort.Direction.ASC)
+        getIndexOperations().ensureIndex(new Index()
+            .expire(getDuration())
+            .on(INDEX_FIELD_KEY, Sort.Direction.ASC)
         );
     }
 
     @Override
     protected Optional<IndexInfo> findTtlIndex() {
-        return indexOperations.getIndexInfo().stream()
+        return getIndexOperations().getIndexInfo().stream()
             .filter(this::isTtlIndex)
             .findFirst();
     }

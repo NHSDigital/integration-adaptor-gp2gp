@@ -10,13 +10,20 @@ import org.springframework.data.mongodb.core.index.IndexOperations;
 
 @RequiredArgsConstructor
 public abstract class TtlCreator {
+    public abstract void create(Class<? extends TimeToLive> clazz);
 
-    protected final IndexOperations indexOperations;
-    protected final Duration duration;
+    protected abstract Optional<IndexInfo> findTtlIndex();
 
-    abstract public void create(Class<? extends TimeToLive> clazz);
+    private final IndexOperations indexOperations;
+    private final Duration duration;
 
-    abstract protected Optional<IndexInfo> findTtlIndex();
+    public IndexOperations getIndexOperations() {
+        return indexOperations;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
 
     protected boolean ttlIndexHasChanged() {
         Optional<IndexInfo> ttlIndex = findTtlIndex();

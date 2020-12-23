@@ -21,20 +21,20 @@ public class MongoTtlCreator extends TtlCreator {
 
     public void create(Class<? extends TimeToLive> clazz) {
         if (ttlIndexHasChanged()) {
-            LOGGER.info("TTL value has changed for {} - dropping index and creating new one using value {}", clazz.getSimpleName(), duration);
-            indexOperations.dropIndex(TTL_INDEX_NAME);
+            LOGGER.info("TTL value has changed for {} - dropping index and creating new one using value {}",
+                clazz.getSimpleName(), getDuration());
+            getIndexOperations().dropIndex(TTL_INDEX_NAME);
         }
-        indexOperations.ensureIndex(
-            new Index()
-                .expire(duration)
-                .named(TTL_INDEX_NAME)
-                .on(FIELD_KEY, Sort.Direction.ASC)
+        getIndexOperations().ensureIndex(new Index()
+            .expire(getDuration())
+            .named(TTL_INDEX_NAME)
+            .on(FIELD_KEY, Sort.Direction.ASC)
         );
     }
 
     @Override
     protected Optional<IndexInfo> findTtlIndex() {
-        return indexOperations.getIndexInfo().stream()
+        return getIndexOperations().getIndexInfo().stream()
             .filter(index -> TTL_INDEX_NAME.equals(index.getName()))
             .findFirst();
     }
