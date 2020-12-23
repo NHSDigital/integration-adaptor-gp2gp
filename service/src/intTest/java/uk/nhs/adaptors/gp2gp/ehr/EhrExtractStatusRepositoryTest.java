@@ -4,7 +4,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-import java.time.Instant;
 import java.util.Optional;
 
 import uk.nhs.adaptors.gp2gp.constants.EhrStatusConstants;
@@ -28,7 +27,7 @@ public class EhrExtractStatusRepositoryTest {
 
     @Test
     public void When_AddingNewEhrExtractStatus_Expect_EhrExtractStatusRetrievableByIdFromDatabase() {
-        ehrExtractStatusRepository.save(prepareEhrExtractStatus());
+        ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
         Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EhrStatusConstants.EXTRACT_ID);
 
         assertThat(optionalEhrExtractStatus.isPresent(), is(true));
@@ -37,23 +36,5 @@ public class EhrExtractStatusRepositoryTest {
 
         assertThat(ehrExtractStatus.getExtractId(), is(EhrStatusConstants.EXTRACT_ID));
         assertThat(ehrExtractStatus.getCreated(), is(notNullValue()));
-    }
-
-    private EhrExtractStatus prepareEhrExtractStatus() {
-        Instant now = Instant.now();
-
-        return new EhrExtractStatus(EhrStatusConstants.EXTRACT_ID,
-            now,
-            now,
-            EhrStatusConstants.CONVERSATION_ID,
-            new EhrExtractStatus.EhrRequest(EhrStatusConstants.REQUEST_ID,
-                EhrStatusConstants.NHS_NUMBER,
-                EhrStatusConstants.FROM_PARTY_ID,
-                EhrStatusConstants.TO_PARTY_ID,
-                EhrStatusConstants.FROM_ASID,
-                EhrStatusConstants.TO_ASID,
-                EhrStatusConstants.FROM_ODS_CODE,
-                EhrStatusConstants.TO_ODS_CODE)
-        );
     }
 }

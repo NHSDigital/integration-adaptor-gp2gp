@@ -1,13 +1,20 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.MongoTtlCreator;
+import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 import org.assertj.core.api.Assertions;
+import org.awaitility.Durations;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,21 +29,32 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 @DirtiesContext
 public class TimeToLiveTest {
+    private static final int MAX_AWAIT_IN_SECONDS = 90;
+
     @Autowired
     private MongoTemplate mongoTemplate;
     @Autowired
     private MongoClientConfiguration mongoClientConfiguration;
+    @Autowired
+    private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Test
-    void When_ApplicationStarts_Expect_TtlIndexExistsForInboundStateWithValueFromConfiguration() {
-        var indexOperations = mongoTemplate.indexOps(EhrExtractStatus.class);
+    public void When_ApplicationStarts_Expect_TtlIndexExistsForEhrExtractStatusWithValueFromConfiguration() {
+        IndexOperations indexOperations = mongoTemplate.indexOps(EhrExtractStatus.class);
         Assertions.assertThat(timeToLiveIndexExists(indexOperations)).isTrue();
     }
 
     @Test
-    void When_ApplicationStarts_Expect_TtlIndexExistsForOutboundStateWithValueFromConfiguration() {
-        var indexOperations = mongoTemplate.indexOps(EhrExtractStatus.class);
-        Assertions.assertThat(timeToLiveIndexExists(indexOperations)).isTrue();
+    @Disabled("Long running test that depends on external TTL config, enable when needed")
+    public void When_TimeToLiveHasPassedInEhrExtractStatusRepository_Expect_DocumentRemoved() {
+        assertThat(ehrExtractStatusRepository.findAll()).isEmpty();
+        ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
+        assertThat(ehrExtractStatusRepository.findAll()).isNotEmpty();
+
+        await()
+            .atMost(MAX_AWAIT_IN_SECONDS, TimeUnit.SECONDS)
+            .pollInterval(Durations.ONE_SECOND)
+            .untilAsserted(() -> assertThat(ehrExtractStatusRepository.findAll()).isEmpty());
     }
 
     private boolean timeToLiveIndexExists(IndexOperations indexOperations) {
