@@ -1,16 +1,19 @@
-package uk.nhs.digital.nhsconnect.nhais.configuration.ttl;
+package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
+
+import java.time.Duration;
+
+import javax.annotation.PostConstruct;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.IndexOperations;
 import org.springframework.stereotype.Component;
-import uk.nhs.digital.nhsconnect.nhais.configuration.NhaisMongoClientConfiguration;
-import uk.nhs.digital.nhsconnect.nhais.inbound.state.InboundState;
-import uk.nhs.digital.nhsconnect.nhais.outbound.state.OutboundState;
-
-import javax.annotation.PostConstruct;
 
 @Component
 @Slf4j
@@ -18,22 +21,21 @@ import javax.annotation.PostConstruct;
 @DependsOn("mongoTemplate")
 public class TimeToLiveConfiguration {
 
-    private final NhaisMongoClientConfiguration mongoConfig;
+    private final MongoClientConfiguration mongoClientConfiguration;
     private final MongoTemplate mongoTemplate;
 
     @PostConstruct
     public void init() {
-        if(mongoConfig.isAutoIndexCreation()) {
-            createTimeToLiveIndex(InboundState.class);
-            createTimeToLiveIndex(OutboundState.class);
+        if (mongoClientConfiguration.isAutoIndexCreation()) {
+            createTimeToLiveIndex(EhrExtractStatus.class);
         }
     }
 
     private void createTimeToLiveIndex(Class<? extends TimeToLive> clazz) {
-        var duration = mongoConfig.getTtl();
-        var indexOperations = mongoTemplate.indexOps(clazz);
+        Duration duration = mongoClientConfiguration.getTtl();
+        IndexOperations indexOperations = mongoTemplate.indexOps(clazz);
 
-        if(mongoConfig.isCosmosDbEnabled()) {
+        if (mongoClientConfiguration.isCosmosDbEnabled()) {
             new CosmosTtlCreator(indexOperations, duration).create(clazz);
         } else {
             new MongoTtlCreator(indexOperations, duration).create(clazz);

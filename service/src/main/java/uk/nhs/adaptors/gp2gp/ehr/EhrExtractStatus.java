@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -19,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @Document
-public class EhrExtractStatus {
+public class EhrExtractStatus implements TimeToLive {
     @Id
     private String extractId;
     private Instant created;

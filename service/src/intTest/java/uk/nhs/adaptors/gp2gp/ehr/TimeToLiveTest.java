@@ -1,15 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static java.lang.Thread.sleep;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
 import java.util.Optional;
 
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
-import uk.nhs.adaptors.gp2gp.constants.EhrStatusConstants;
-import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.common.mongo.ttl.MongoTtlCreator;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -27,9 +21,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith({ SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
-public class EhrExtractStatusTtlTest {
+public class TimeToLiveTest {
     @Autowired
     private MongoTemplate mongoTemplate;
+    @Autowired
+    private MongoClientConfiguration mongoClientConfiguration;
 
     @Test
     void When_ApplicationStarts_Expect_TtlIndexExistsForInboundStateWithValueFromConfiguration() {
@@ -49,6 +45,6 @@ public class EhrExtractStatusTtlTest {
             .filter(index -> index.getName().equals(MongoTtlCreator.TTL_INDEX_NAME))
             .map(IndexInfo::getExpireAfter)
             .flatMap(Optional::stream)
-            .anyMatch(indexExpire -> indexExpire.compareTo(mongoConfig.getTtl()) == 0);
+            .anyMatch(indexExpire -> indexExpire.compareTo(mongoClientConfiguration.getTtl()) == 0);
     }
 }

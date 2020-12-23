@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.time.Instant;
 import java.util.Optional;
 
-import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.constants.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
@@ -24,16 +23,26 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 @DirtiesContext
 public class EhrExtractStatusRepositoryTest {
-
-    @Autowired
-    private MongoClientConfiguration mongoClientConfiguration;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Test
     public void When_AddingNewEhrExtractStatus_Expect_EhrExtractStatusRetrievableByIdFromDatabase() {
+        ehrExtractStatusRepository.save(prepareEhrExtractStatus());
+        Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EhrStatusConstants.EXTRACT_ID);
+
+        assertThat(optionalEhrExtractStatus.isPresent(), is(true));
+
+        EhrExtractStatus ehrExtractStatus = optionalEhrExtractStatus.get();
+
+        assertThat(ehrExtractStatus.getExtractId(), is(EhrStatusConstants.EXTRACT_ID));
+        assertThat(ehrExtractStatus.getCreated(), is(notNullValue()));
+    }
+
+    private EhrExtractStatus prepareEhrExtractStatus() {
         Instant now = Instant.now();
-        ehrExtractStatusRepository.save(new EhrExtractStatus(EhrStatusConstants.EXTRACT_ID,
+
+        return new EhrExtractStatus(EhrStatusConstants.EXTRACT_ID,
             now,
             now,
             EhrStatusConstants.CONVERSATION_ID,
@@ -45,14 +54,6 @@ public class EhrExtractStatusRepositoryTest {
                 EhrStatusConstants.TO_ASID,
                 EhrStatusConstants.FROM_ODS_CODE,
                 EhrStatusConstants.TO_ODS_CODE)
-        ));
-        Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EhrStatusConstants.EXTRACT_ID);
-
-        assertThat(optionalEhrExtractStatus.isPresent(), is(true));
-
-        EhrExtractStatus ehrExtractStatus = optionalEhrExtractStatus.get();
-
-        assertThat(ehrExtractStatus.getExtractId(), is(EhrStatusConstants.EXTRACT_ID));
-        assertThat(ehrExtractStatus.getCreated(), is(notNullValue()));
+        );
     }
 }

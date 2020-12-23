@@ -1,11 +1,12 @@
-package uk.nhs.digital.nhsconnect.nhais.configuration.ttl;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.index.IndexInfo;
-import org.springframework.data.mongodb.core.index.IndexOperations;
+package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
 
 import java.time.Duration;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.mongodb.core.index.IndexInfo;
+import org.springframework.data.mongodb.core.index.IndexOperations;
 
 @RequiredArgsConstructor
 public abstract class TtlCreator {
