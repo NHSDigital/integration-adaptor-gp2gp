@@ -1,0 +1,50 @@
+@startuml
+abstract class TaskDefinition {
+    taskId: String
+    requestId: String
+    conversationId: String
+}
+
+note right of TaskDefinition: taskId is a uuid generated for each task def instance
+
+class GetGpcStructuredTaskDefinition {
+    nhsNumber: String
+}
+
+TaskDefinition <|-- GetGpcStructuredTaskDefinition
+
+class GetGpcDocumentTaskDefinition {
+    documentId: String
+}
+
+TaskDefinition <|-- GetGpcDocumentTaskDefinition
+
+interface TaskExecutor<U extends TaskDefinition> {
+    getTaskType(): Class<T> 
+    void execute(taskDefinition: U)
+}
+
+class GetGpcStructuredTaskExecutor {
+    getTaskType(): Class<GetGpcStructuredTaskDefinition> 
+    void execute(t: GetGpcStructuredTaskDefinition)
+}
+
+TaskExecutor <|-- GetGpcStructuredTaskExecutor
+
+class GetGpcDocumentTaskExecutor {
+    getTaskType(): Class<GetGpcDocumentTaskDefinition> 
+    void execute(t: GetGpcDocumentTaskDefinition)
+}
+
+TaskExecutor <|-- GetGpcDocumentTaskExecutor
+
+class TaskDispatcher {
+    executors: Map<Class<? extends TaskDefinition>, TaskExecutor>
+    TaskDispatcher(l: List<TaskExecutor>)
+    publish(t: TaskDefinition)
+    subscribe(t: TaskDefinition)
+}
+
+note bottom of TaskDispatcher: Inject all beans implementing TaskExecutor\nand create map in constructor
+
+@enduml
