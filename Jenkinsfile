@@ -73,9 +73,6 @@ pipeline {
                     }
                 }
 
-                stage('Deploy') {
-                }
-
                 stage('E2E Tests') {
                     steps {
                         sh '''
