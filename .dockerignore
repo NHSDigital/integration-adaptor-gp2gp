@@ -3,3 +3,5 @@
 !service/src
 !service/build.gradle
 !service/settings.gradle
+!e2e-tests/src
+!e2e-tests/build.gradle
