@@ -33,9 +33,7 @@ public class TaskHandler {
 
         Optional<TaskDefinition> taskDefinition = taskDefinitionFactory.getTaskDefinition(taskName, body);
         if (taskDefinition.isPresent()) {
-            TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get()
-                .getClass()
-                .toString());
+            TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get().getClass());
             taskExecutor.execute(taskDefinition.get());
         } else {
             LOGGER.error("Error while processing task definition from queue message {}", message.getJMSMessageID());

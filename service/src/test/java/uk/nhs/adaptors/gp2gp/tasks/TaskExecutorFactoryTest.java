@@ -1,31 +1,69 @@
 package uk.nhs.adaptors.gp2gp.tasks;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
 public class TaskExecutorFactoryTest {
-    @Autowired
-    private TaskExecutorFactory taskExecutorFactory;
 
-    private static Stream<Arguments> provideTasksDataForTest() {
-        return Stream.of(
-            Arguments.of(GetGpcDocumentTaskDefinition.class, GetGpcDocumentTaskDefinition.class.toString()),
-            Arguments.of(GetGpcStructuredTaskDefinition.class, GetGpcStructuredTaskDefinition.class.toString())
-        );
+    @Test
+    public void When_GettingValidTask_Expect_TaskDefinitionFactoryReturnsCorrectTask() {
+        var alphaTaskExecutor = new AlphaTaskExecutor();
+        var betaTaskExecutor = new BetaTaskExecutor();
+        var executors = List.of(alphaTaskExecutor, betaTaskExecutor);
+        TaskExecutorFactory taskExecutorFactory = new TaskExecutorFactory(executors);
+
+        assertThat(taskExecutorFactory.getTaskExecutor(AlphaTaskDefinition.class)).isEqualTo(alphaTaskExecutor);
+        assertThat(taskExecutorFactory.getTaskExecutor(BetaTaskDefinition.class)).isEqualTo(betaTaskExecutor);
+        assertThat(taskExecutorFactory.getTaskExecutor(NoExecutorTaskDefinition.class)).isNull();
     }
 
-    @ParameterizedTest
-    @MethodSource("provideTasksDataForTest")
-    public void When_GettingValidTask_Expect_TaskDefinitionFactoryReturnsCorrectTask(Class taskClass, String taskDefinitionClassString) {
-        TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinitionClassString);
-        assertThat(taskExecutor.getTaskType()).isEqualTo(taskClass);
+    private static class AlphaTaskDefinition extends TaskDefinition {
+
+        AlphaTaskDefinition() {
+            super("alpha", "alpha");
+        }
+    }
+
+    private static class AlphaTaskExecutor implements TaskExecutor {
+
+        @Override
+        public Class<? extends TaskDefinition> getTaskType() {
+            return AlphaTaskDefinition.class;
+        }
+
+        @Override
+        public void execute(TaskDefinition taskDefinition) {
+
+        }
+    }
+
+    private static class BetaTaskDefinition extends TaskDefinition {
+
+        BetaTaskDefinition() {
+            super("beta", "beta");
+        }
+    }
+
+    private static class BetaTaskExecutor implements TaskExecutor {
+
+        @Override
+        public Class<? extends TaskDefinition> getTaskType() {
+            return BetaTaskDefinition.class;
+        }
+
+        @Override
+        public void execute(TaskDefinition taskDefinition) {
+
+        }
+    }
+
+    private static class NoExecutorTaskDefinition extends TaskDefinition {
+
+        NoExecutorTaskDefinition() {
+            super("noExecutor", "noExecutor");
+        }
     }
 }
