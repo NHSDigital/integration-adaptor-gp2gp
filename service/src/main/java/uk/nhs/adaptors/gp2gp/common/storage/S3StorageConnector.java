@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.storage;
 
+import uk.nhs.adaptors.gp2gp.exceptions.StorageConnectorException;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
