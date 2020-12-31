@@ -1,0 +1,5 @@
+**/**
+!service/config
+!service/src
+!service/build.gradle
+!service/settings.gradle

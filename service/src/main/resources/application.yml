@@ -14,7 +14,7 @@ gp2gp:
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
     azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}
   amqp:
-    inboundQueueName: "inbound"
+    inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:inbound}
     taskQueueName: "taskQueue"
     brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
     exchange: amq.direct
