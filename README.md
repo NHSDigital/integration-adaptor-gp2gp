@@ -46,7 +46,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 
 
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
-Default log format is defined in the built-in logback.xml (https://github.com/NHSDigital/summary-care-record-api/tree/master/docker/service/src/main/resources/logback.xml)
+Default log format is defined in the built-in [logback.xml](service/src/main/resources/logback.xml)
 This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
