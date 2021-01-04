@@ -17,12 +17,12 @@ public class MessageQueue {
         String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound");
 
         Hashtable<String, String> hashtable = new Hashtable<>();
-        hashtable.put("connectionfactory.SBCF", broker);
+        hashtable.put("connectionfactory.CF", broker);
         hashtable.put("queue.QUEUE", queueName);
         hashtable.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.qpid.jms.jndi.JmsInitialContextFactory");
         Context context = new InitialContext(hashtable);
 
-        ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCF");
+        ConnectionFactory cf = (ConnectionFactory) context.lookup("CF");
         Destination queue = (Destination) context.lookup("QUEUE");
         Connection connection = cf.createConnection();
         Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
