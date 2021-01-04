@@ -26,6 +26,6 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+	dependsOn "cleanTest" // never re-use previous test outputs
 }
-
 
