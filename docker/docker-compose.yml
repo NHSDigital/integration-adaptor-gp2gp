@@ -40,3 +40,9 @@ services:
       - "8161:8161"
       - "5672:5672"
 
+  wiremock:
+    build: ./wiremock
+    ports:
+      - "8110:8080"
+
+

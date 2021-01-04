@@ -60,6 +60,15 @@ If gradle-wrapper.jar doesn't exist run in terminal:
 If ran through IDE on local machine:
 * Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
+## How to run wiremock:
+
+The project includes mock interactions of external APIs (GPC, SDS) implemented in Wiremock for local development.
+
+* Navigate to `docker`
+* `docker compose up wiremock`
+
+The folder `docker/wiremock/stubs` describes the supported interactions.
+
 ## Unit test section 
 
 ### How to run unit tests:
