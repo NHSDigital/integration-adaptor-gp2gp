@@ -1,10 +1,11 @@
-package uk.nhs.adaptors.gp2gp.tasks;
+package uk.nhs.adaptors.gp2gp.common.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ public class TaskExecutorFactory {
                 .collect(Collectors.toMap(TaskExecutor::getTaskType, Function.identity()));
     }
 
-    public TaskExecutor getTaskExecutor(Class<? extends TaskDefinition> taskType) {
-        return taskExecutorMap.get(taskType);
+    public Optional<TaskExecutor> getTaskExecutor(Class<? extends TaskDefinition> taskType) {
+        return Optional.ofNullable(taskExecutorMap.get(taskType));
     }
 }

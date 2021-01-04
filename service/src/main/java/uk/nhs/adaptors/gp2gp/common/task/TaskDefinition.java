@@ -1,6 +1,4 @@
-package uk.nhs.adaptors.gp2gp.tasks;
-
-import static java.util.UUID.randomUUID;
+package uk.nhs.adaptors.gp2gp.common.task;
 
 import lombok.Getter;
 
@@ -10,8 +8,8 @@ public abstract class TaskDefinition {
     private final String requestId;
     private final String conversationId;
 
-    public TaskDefinition(String requestId, String conversationId) {
-        this.taskId = randomUUID().toString();
+    public TaskDefinition(String taskId, String requestId, String conversationId) {
+        this.taskId = taskId;
         this.requestId = requestId;
         this.conversationId = conversationId;
     }

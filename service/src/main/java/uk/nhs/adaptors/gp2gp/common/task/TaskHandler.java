@@ -13,31 +13,34 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
-import uk.nhs.adaptors.gp2gp.tasks.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.tasks.TaskDefinitionFactory;
-import uk.nhs.adaptors.gp2gp.tasks.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.tasks.TaskExecutorFactory;
 
 @Component
 @AllArgsConstructor
 @Slf4j
 public class TaskHandler {
-    private static final String MESSAGE_CLASS = "TaskName";
+    private static final String TASK_TYPE_HEADER_NAME = "TaskName";
 
     private final TaskDefinitionFactory taskDefinitionFactory;
     private final TaskExecutorFactory taskExecutorFactory;
 
     public void handle(Message message) throws JMSException, JsonProcessingException, TaskHandlerException {
-        var taskName = message.getStringProperty(MESSAGE_CLASS);
+        var taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
         var body = JmsReader.readMessage(message);
+        LOGGER.info("Current task handled from internal task queue {}", taskType);
 
-        Optional<TaskDefinition> taskDefinition = taskDefinitionFactory.getTaskDefinition(taskName, body);
+        Optional<TaskDefinition> taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
         if (taskDefinition.isPresent()) {
-            TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get().getClass());
-            taskExecutor.execute(taskDefinition.get());
+            Optional<TaskExecutor> taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get().getClass());
+            if (taskExecutor.isPresent()) {
+                taskExecutor.get().execute(taskDefinition.get());
+            } else {
+                LOGGER.error("No executor for task definition '{}' in message id '{}'", taskDefinition.get(), message.getJMSMessageID());
+                throw new TaskHandlerException("No executor for task definition '" + taskDefinition.get() + "' in message id '"
+                    + message.getJMSMessageID() + "'");
+            }
         } else {
-            LOGGER.error("Error while processing task definition from queue message {}", message.getJMSMessageID());
-            throw new TaskHandlerException("No TaskDefinition Found for message: " + message.getJMSMessageID());
+            LOGGER.error("Unknown task type '{}' in message id '{}'", taskType, message.getJMSMessageID());
+            throw new TaskHandlerException("Unknown task type '" + taskType + "' in message id '" + message.getJMSMessageID() + "'");
         }
     }
 }

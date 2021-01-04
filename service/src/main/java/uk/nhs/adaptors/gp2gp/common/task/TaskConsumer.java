@@ -20,14 +20,14 @@ import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TaskConsumer {
 
-    private final TaskHandler taskService;
+    private final TaskHandler taskHandler;
 
     @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
     public void receive(Message message) throws JsonProcessingException, JMSException, TaskHandlerException {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received message from taskQueue {}", messageID);
         try {
-            taskService.handle(message);
+            taskHandler.handle(message);
             message.acknowledge();
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (IOException e) {

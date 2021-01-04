@@ -1,10 +1,14 @@
-package uk.nhs.adaptors.gp2gp.tasks;
+package uk.nhs.adaptors.gp2gp.gpc;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.common.task.TaskExecutorFactory;
 
 public class TaskExecutorFactoryTest {
 
@@ -15,15 +19,15 @@ public class TaskExecutorFactoryTest {
         var executors = List.of(alphaTaskExecutor, betaTaskExecutor);
         TaskExecutorFactory taskExecutorFactory = new TaskExecutorFactory(executors);
 
-        assertThat(taskExecutorFactory.getTaskExecutor(AlphaTaskDefinition.class)).isEqualTo(alphaTaskExecutor);
-        assertThat(taskExecutorFactory.getTaskExecutor(BetaTaskDefinition.class)).isEqualTo(betaTaskExecutor);
-        assertThat(taskExecutorFactory.getTaskExecutor(NoExecutorTaskDefinition.class)).isNull();
+        assertThat(taskExecutorFactory.getTaskExecutor(AlphaTaskDefinition.class).get()).isEqualTo(alphaTaskExecutor);
+        assertThat(taskExecutorFactory.getTaskExecutor(BetaTaskDefinition.class).get()).isEqualTo(betaTaskExecutor);
+        assertThat(taskExecutorFactory.getTaskExecutor(NoExecutorTaskDefinition.class).isEmpty());
     }
 
     private static class AlphaTaskDefinition extends TaskDefinition {
 
         AlphaTaskDefinition() {
-            super("alpha", "alpha");
+            super("alpha", "alpha", "alpha");
         }
     }
 
@@ -43,7 +47,7 @@ public class TaskExecutorFactoryTest {
     private static class BetaTaskDefinition extends TaskDefinition {
 
         BetaTaskDefinition() {
-            super("beta", "beta");
+            super("beta", "beta", "beta");
         }
     }
 
@@ -63,7 +67,7 @@ public class TaskExecutorFactoryTest {
     private static class NoExecutorTaskDefinition extends TaskDefinition {
 
         NoExecutorTaskDefinition() {
-            super("noExecutor", "noExecutor");
+            super("noExecutor", "noExecutor", "noExecutor");
         }
     }
 }

@@ -1,6 +1,8 @@
-package uk.nhs.adaptors.gp2gp.tasks;
+package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 
 @Slf4j
 public class GetGpcStructuredTaskExecutor implements TaskExecutor {
