@@ -95,6 +95,13 @@ To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`
 * Run: `./gradlew check`
 
 ## How to run e2e tests:
+
+End-to-end (e2e) tests execute against an already running / deployed adaptor and its dependencies. You must run these 
+yourself and configure the environment variables as needed. The tests do not automatically start any dependencies.
+
+These tests publish messages to the MHS inbound queue and make assertions on the Mongo database. The tests must have 
+access to both the AMQP message queue and the Mongo database.
+
 * Navigate to `e2e-tests`
 * Run: `./gradlew check`
 
@@ -105,7 +112,7 @@ docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.y
 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
 ```
 
-Environment variables with the same name/meaning as the application's control the e2e test target environment.
+Environment variables with the same name/meaning as the application's control the e2e test target environment:
 
 * GP2GP_AMQP_BROKERS
 * GP2GP_MONGO_URI
