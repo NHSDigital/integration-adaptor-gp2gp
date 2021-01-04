@@ -11,7 +11,9 @@ System_Boundary(mhsAdaptor, "MHS Adaptor") {
 }
 
 System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
-    Container(ehrExtractRequestConsumer, "EHR Extract Request Consumer", "JMS Consumer", "Subscribes to a queue/topic and consumes inbound EHR Extract Requests. Create initial EHR record and GPC tasks.")
+    Container(mhsInboundConsumer, "MHS Inbound Consumer", "JMS Consumer", "Subscribed to inbound queue and delegates handling of messages")
+    
+    Container(ehrExtractRequestHandler, "EHR Request Handler", "JMS Consumer", "Subscribes to a queue/topic and consumes inbound EHR Extract Requests. Create initial EHR record and GPC tasks.")
     
     Container(gpcAccessRecordStructured, "GPC Access Record Structured", "Service", "Retrieves a patient's record in structured format and store for future translation. Create document download tasks.")
     Container(gpcAd, "GPC Access Document", "Service", "Retrieves unstructured documents from a patient’s registered GP practice and stores for future translation. Create document translation tasks.")
@@ -28,8 +30,10 @@ System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
     Container(objectStoreAdaptor, "Object Store Adaptor", "Service", "Abstraction for cloud-based object stores")
     Container(sdsClient, "SDS Client", "REST Client", "Lookup the GPC endpoint in SDS")
     Container(taskDispatcher, "Task Dispatcher", "JMS Consumer", "Consumes from the Task Queue and delegates to the appropriate service")
-    Container(pdsClient, "PDS Client", "REST Client", "Ensure patient is still registered at the pratice requesting the EHR Extract")
 }
+
+Rel_Down(mhsInbound, mhsInboundConsumer, "Subscribe", "Messages from Spine")
+Rel_Down(mhsInboundConsumer, ehrExtractRequestHandler)
 
 
 
@@ -43,10 +47,8 @@ System_Boundary(gp2gpAdaptorDependencies, "GP2GP Adaptor Dependencies") {
 
 Enterprise_Boundary(nhsSystems, "NHS Systems") {
     System_Ext(sds, "SDS API", "Spine Directory Service - FHIR API")
-    System_Ext(pds, "PDS", "Personal Demographics Service")
     ' System(spine, "Spine", "Spine Message Transport")
     System_Ext(ssp, "SSP", "Spine Secure Proxy")
-    System_Ext(mesh, "MESH", "MESH API")
     System_Ext(audit, "Audit Store", "")
     System_Ext(mi, "Management Information Store", "Splunk")
 }
@@ -55,77 +57,29 @@ Enterprise_Boundary(nme, "New Market Entrant") {
     System_Ext(gpc, "GP Connect", "GP Connect - Supplier")
 }
 
-' Rel(objectStoreAdaptor, documents, "Get/Put", "Documents")
-' Rel(objectStoreAdaptor, documents, "Get/Put", "Binary documents and EHR fragments are kept in an object store")
-' Rel(gp2gpAdaptor, logging, "Logs")
-' Rel(gp2gpAdaptor, ehrStaging, "Find/Insert/Update")
-' Rel(gp2gpAdaptor, gpcStaging, "Find/Insert/Update")
-' Rel_Down(taskDispatcher, taskQueue, "Pub/Sub")
-
-'  FORMATTING
-' gp2gpAdaptorDependencies -[hidden]-> gp2gpAdaptor
-' nhsSystems -[hidden]-> gp2gpAdaptorDependencies
-
 ' GLOBAL / EXTERNAL RELATIONS
 Rel_Down(ssp, gpc, "HTTP Request", "Authenticates and proxies requets to the NME's GPC Supplier system")
 Rel_Down(sdsClient, sds, "HTTP Request", "Get /Endpoint")
-Rel_Down(mesh, mi, "NHSD injest MI from messages sent to specific MESH mailbox")
 
-Rel(ehrExtractRequestConsumer, pdsClient, "Uses", "Before starting EHR Extract process")
-Rel(ehrExtractCoreProducer, pdsClient, "Uses", "Before transmitting EHR Extract")
-Rel_Down(pdsClient, pds, "Request")
 
-' Operations/Relations, in the order they would be executed on the happy path
-' START: Consume EHR Extract Request
-Rel_Down(mhsInbound, ehrExtractRequestConsumer, "Dequeues", "EHR Extract Request Message")
-' Rel(ehrExtractRequestConsumer, ehrStaging, "Create initial EHR record")
-' Rel(ehrExtractService, taskQueue, "Publish", "1c Get GPC Access Record Structured Task")
-' Rel(ehrExtractRequestConsumer, gpcAccessRecordStructured, "")
 
-' Task: Fetch and store GPC Access Record Structured
-' Rel(taskQueue, gpcAccessRecordStructured, "Consume", "2a Get GPC Access Record Structure Task")
+
+
 Rel(gpcAccessRecordStructured, sdsClient, "Lookup endpoint")
 Rel_Down(gpcAccessRecordStructured, ssp, "HTTP Request", "POST Patient/$gpc.getstructuredrecord")
-' Rel(gpcAccessRecordStructured, gpcStaging, "TBD", "Store Structured Record")
-' Rel(gpcAccessRecordStructured, taskQueue, "Produce", "2e Get GPC Access Document Tasks")
-' Rel(gpcAccessRecordStructured, gpcAd, "")
 
-' Task: Fetch snd store GPC Access Documents
-' Rel(taskQueue, gpcAd, "Consume", "3a Get GPC Access Document Task")
+
 Rel(gpcAd, sdsClient, "Lookup endpoint")
 Rel_Down(gpcAd, ssp, "HTTP Request", "GET /Binary/[id]")
-' Rel(gpcAd, objectStoreAdaptor, "Put", "Downloaded document")
-' Rel(gpcAd, gpcStaging, "Update", "With reference to document/object")
-' Rel(gpcAd, taskQueue, "Produce", "3f Translate Document Task")
-' Rel(gpcAd, fhirToEhr, "")
 
-' Task: Translate GPC FHIR to EHR Extract HL7
-' Rel(gpcStaging, fhirToEhr, "Get FHIR record")
-' Rel(fhirToEhr, fhirToEhr, "Translate")
-' Rel(fhirToEhr, ehrStaging, "Store EHR Extract")
-' Rel(fhirToEhr, docToEhr, "")
 
-' Task: Translate binary documents to EHR Extract fragments
-' Rel(objectStoreAdaptor, docToEhr, "Stream binary document")
-' Rel(docToEhr, docToEhr, "Translate")
-' Rel(docToEhr, objectStoreAdaptor, "Write EHR Common fragments")
-' Rel(docToEhr, ehrExtractCoreProducer, "")
-
-' Task: Send EHR Core - assumed this is the structure record without attachments
-' Rel(ehrStaging, ehrExtractCoreProducer, "Fetch EHR Core")
 Rel_Down(ehrExtractCoreProducer, mhsOutbound, "HTTP Request", "POST ...")
-' Rel(ehrExtractCoreProducer, ehrExtractAckConsumer, "")
-' Rel(ehrExtractAckConsumer, ehrExtractCommonProducer, "")
 
-' Task: Send EHR Fragments - assumed this is all of the attachments, in chunks
+
+
 Rel_Down(mhsInbound, ehrExtractAckConsumer, "Dequeues", "Acknowledgements")
-' Rel(ehrExtractCommonProducer, objectStoreAdaptor, "Stream fragment")
-Rel_Down(ehrExtractCommonProducer, mhsOutbound, "HTTP Request", "POST ...")
-' Send Fragment, receive acks
 
-' Task: Recieve final ack from receiver
-' Rel_Down(mhsInbound, ehrExtractAckConsumer, "Dequeues", "Final ACK")
-' MI, Audit, cleanup
+Rel_Down(ehrExtractCommonProducer, mhsOutbound, "HTTP Request", "POST ...")
 
 
 @enduml
@@ -152,7 +106,6 @@ System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
     note left of taskDispatcher
         Tasks published by one adaptor instance may be executed by another
     end note
-    Container(pdsClient, "PDS Client", "REST Client", "Ensure patient is still registered at the pratice requesting the EHR Extract")
 }
 
 System_Boundary(gp2gpAdaptorDependencies, "GP2GP Adaptor Dependencies") {
@@ -166,7 +119,6 @@ Enterprise_Boundary(nhsSystems, "NHS Systems") {
 
 Rel_Down(mhsInbound, ehrExtractRequestConsumer, "1: Consumes", "EHR Extract Request")
 Rel(ehrExtractRequestConsumer, pdsClient, "2: Uses", "check if patient is registered at requestor")
-Rel_Down(pdsClient, pds, "3: Calls")
 Rel(ehrExtractRequestConsumer, ehrStaging, "4: Create a new state record for this EHR")
 Rel(ehrExtractRequestConsumer, taskDispatcher, "5: Creates a new task to download GPC ARS")
 Rel(taskDispatcher, taskQueue, "6: Publishes task definition")
