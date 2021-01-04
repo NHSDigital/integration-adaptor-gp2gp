@@ -1,20 +1,25 @@
 package uk.nhs.adaptors.gp2gp.tasks;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TaskExecutorFactory {
-    private static final Map<String, TaskExecutor> TASK_EXECUTOR_MAP = Map.of(GetGpcDocumentTaskDefinition.class.toString(),
-        new GetGpcDocumentTaskExecutor(),
-        GetGpcStructuredTaskDefinition.class.toString(), new GetGpcStructuredTaskExecutor());
 
-    public TaskExecutor getTaskExecutor(String taskDefinitionClass) {
-        return TASK_EXECUTOR_MAP.get(taskDefinitionClass);
+    private final Map<Class<? extends TaskDefinition>, TaskExecutor> taskExecutorMap;
+
+    @Autowired
+    public TaskExecutorFactory(List<TaskExecutor> taskExecutorList) {
+        taskExecutorMap = taskExecutorList.stream()
+                .collect(Collectors.toMap(TaskExecutor::getTaskType, Function.identity()));
+    }
+
+    public TaskExecutor getTaskExecutor(Class<? extends TaskDefinition> taskType) {
+        return taskExecutorMap.get(taskType);
     }
 }
