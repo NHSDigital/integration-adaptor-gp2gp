@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.index.IndexOperations;
 @Slf4j
 public class MongoTtlCreator extends TtlCreator {
     public static final String TTL_INDEX_NAME = "TTL";
-    private static final String FIELD_KEY = "translationTimestamp";
+    private static final String FIELD_KEY = "updatedAt";
 
     public MongoTtlCreator(IndexOperations indexOperations, Duration duration) {
         super(indexOperations, duration);
