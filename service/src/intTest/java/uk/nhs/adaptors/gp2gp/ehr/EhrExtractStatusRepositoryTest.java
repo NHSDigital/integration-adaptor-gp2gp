@@ -30,7 +30,8 @@ public class EhrExtractStatusRepositoryTest {
     @Test
     public void When_AddingNewEhrExtractStatus_Expect_EhrExtractStatusRetrievableByIdFromDatabase() {
         ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
-        Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EhrStatusConstants.EXTRACT_ID);
+        Optional<EhrExtractStatus> optionalEhrExtractStatus =
+                ehrExtractStatusRepository.findByConversationId(EhrStatusConstants.CONVERSATION_ID);
 
         assertThat(optionalEhrExtractStatus.isPresent(), is(true));
 
