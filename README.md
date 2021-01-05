@@ -41,7 +41,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
-| GP2GP_MONGO_TTL                      | P30D                      | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+| GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 | GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
 
 (1) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
@@ -67,7 +67,7 @@ If ran through IDE on local machine:
 The project includes mock interactions of external APIs (GPC, SDS) implemented in Wiremock for local development.
 
 * Navigate to `docker`
-* `docker compose up wiremock`
+* `docker-compose up wiremock`
 
 The folder `docker/wiremock/stubs` describes the supported interactions.
 

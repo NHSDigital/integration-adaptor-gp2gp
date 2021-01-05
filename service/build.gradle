@@ -57,6 +57,7 @@ dependencies {
 	testImplementation 'org.springframework:spring-jms:5.2.6.RELEASE'
 	testImplementation 'org.apache.qpid:qpid-jms-client:0.51.0'
 	testImplementation 'commons-io:commons-io:2.6'
+	testImplementation 'org.awaitility:awaitility:4.0.3'
 }
 
 test {
@@ -92,6 +93,12 @@ task integrationTest(type: Test) {
 		testClassesDirs = sourceSets.integrationTest.output.classesDirs
 		classpath = sourceSets.integrationTest.runtimeClasspath
 		shouldRunAfter test
+	}
+}
+
+tasks.withType(Test) {
+	testLogging {
+		events "passed", "skipped", "failed"
 	}
 }
 
