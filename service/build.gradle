@@ -63,12 +63,6 @@ dependencies {
 	testImplementation 'commons-io:commons-io:2.6'
 }
 
-tasks.withType(Test) {
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
-}
-
 test {
 	useJUnitPlatform()
 }
