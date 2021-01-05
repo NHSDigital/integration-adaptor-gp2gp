@@ -61,6 +61,7 @@ dependencies {
 	testImplementation "org.assertj:assertj-core:3.18.1"
 	testImplementation "org.testcontainers:testcontainers:1.15.0"
 	testImplementation 'commons-io:commons-io:2.6'
+	testImplementation 'org.awaitility:awaitility:4.0.3'
 }
 
 test {
@@ -100,6 +101,12 @@ task integrationTest(type: Test) {
 		testClassesDirs = sourceSets.integrationTest.output.classesDirs
 		classpath = sourceSets.integrationTest.runtimeClasspath
 		shouldRunAfter test
+	}
+}
+
+tasks.withType(Test) {
+	testLogging {
+		events "passed", "skipped", "failed"
 	}
 }
 

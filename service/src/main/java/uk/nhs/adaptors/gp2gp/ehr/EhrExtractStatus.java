@@ -2,6 +2,8 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
+
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,7 +19,7 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @Document
-public class EhrExtractStatus {
+public class EhrExtractStatus implements TimeToLive {
     private Instant created;
     private Instant updatedAt;
     private String conversationId;
