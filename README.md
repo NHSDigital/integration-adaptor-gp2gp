@@ -19,34 +19,36 @@ Variables without a default value and not marked optional, *MUST* be defined for
 
 ### General Configuration Options
 
-| Environment Variable               | Default                   | Description
-| -----------------------------------|---------------------------|-------------
-| GP2GP_SERVER_PORT                  | 8080                      | The port on which the SCR API will run.
-| GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
-| GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
-| GP2GP_STORAGE_TYPE                 | LocalMock                 | Defines the storage solution being used (S3, Azure, LocalMock)
-| GP2GP_STORAGE_CONTAINER_NAME       | for-nia-testing           | Defines the name of the BlobStorage container on Azure or bucket on S3
-| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                         | Defines the connection string used to connect to azure blob storage
-| AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3. Leave undefined to use the instance role instead
-| AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3. Leave undefined to use the instance role instead
-| AWS_REGION                         |                           | Defines the region used to connect to S3
-| GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
-| GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
-| GP2GP_AMQP_PASSWORD                |                           | (Optional) password for the AMQP server
-| GP2GP_AMQP_MAX_REDELIVERIES        | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_MHS_INBOUND_QUEUE            | inbound                    | Name of the queue for MHS inbound
-| GP2GP_MONGO_URI                    | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
-| GP2GP_MONGO_DATABASE_NAME          | gp2gp                     | Mongo database name.
-| GP2GP_MONGO_HOST                   | (*)                       | Mongo database host. Can be left blank if full connection string is provided.
-| GP2GP_MONGO_USERNAME               | (*)                       | Mongo database username. Can be left blank if full connection string is provided.
-| GP2GP_MONGO_PASSWORD               | (*)                       | Mongo database password. Can be left blank if full connection string is provided.
-| GP2GP_MONGO_OPTIONS                | (*)                       | Mongodb URL encoded parameters for the connection string without a leading "?". Can be left blank if full connection string is provided.
-| GP2GP_MONGO_AUTO_INDEX_CREATION    | true                      | (Optional) Should auto index for Mongo database be created.
-| GP2GP_MONGO_TTL                    | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-| GP2GP_COSMOS_DB_ENABLED            | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
+| Environment Variable                 | Default                   | Description
+| ------------------------------------|---------------------------|-------------
+| GP2GP_SERVER_PORT                    | 8080                      | The port on which the SCR API will run.
+| GP2GP_LOGGING_LEVEL                  | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
+| GP2GP_LOGGING_FORMAT                 | (2)                       | Defines how to format log events on stdout
+| GP2GP_STORAGE_TYPE                   | LocalMock                 | The type of storage solution. One of: S3, Azure, LocalMock
+| GP2GP_STORAGE_CONTAINER_NAME         |                           | The name of the Azure Storage container or Amazon S3 Bucket
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | The connection string for Azure Blob Storage. Leave undefined if type is not Azure.
+| AWS_ACCESS_KEY_ID                    |                           | The access key for Amazon S3. Leave undefined if using an AWS instance role.
+| AWS_SECRET_ACCESS_KEY                |                           | The secret access key for Amazon S3. Leave undefined if using an AWS instance role.
+| AWS_REGION                           |                           | The region for Amazon S3. Leave undefined if using an AWS instance role.
+| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (1)
+| GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
+| GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
+| GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+| GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
+| GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
+| GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_USERNAME                 |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
+| GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+| GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
 
+(1) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
+will be used. At least one URL is required.
 
-(*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
+(2) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
 Default log format is defined in the built-in [logback.xml](service/src/main/resources/logback.xml)
 This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
@@ -70,29 +72,66 @@ The project includes mock interactions of external APIs (GPC, SDS) implemented i
 
 The folder `docker/wiremock/stubs` describes the supported interactions.
 
-## Unit test section 
+## How to run tests
+
+**Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
+test outputs for faster builds. To re-run passing tests without making any code changes you must first run 
+`./gradlew clean` to clear the build cache. Otherwise, gradle uses the cached outputs from a previous test execution to 
+pass the build.
+
+You must run all gradle commands from the `service/` directory.
 
 ### How to run unit tests:
-* Navigate to `service`
-* Run: `./gradlew test`
 
-### How to run all checks (unit, style etc):
-* `docker build --target=test`
+```shell script
+./gradlew test
+```
 
-## How to run integration tests:
-* Navigate to `service`
-* Run: `./gradlew integrationTest`
+### How to run all checks:
+
+```shell script
+./gradlew check
+```
+
+### How to run integration tests:
+
+```shell script
+./gradlew integrationTest
+```
 
 Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
 To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
 
-## How to run style check:
-* Navigate to `service`
-* Run: `./gradlew staticCodeAnalysis` 
+#### Example: Run integration tests with AWS S3 in-the-loop
 
-## How to run all checks:
-* Navigate to `service`
-* Run: `./gradlew check`
+Use environment variables to configure the tests to use:
+* An actual S3 bucket
+* ActiveMQ running locally in Docker
+* MongoDB running locally in Docker
+
+1. Start activemq and mongodb dependencies manually
+
+    ```shell script
+    cd docker
+    docker-compose up -d activemq mongodb
+    ```
+
+2. Configure environment variables
+
+    If you're NOT running the test from an AWS instance with an instance role to access the bucket then the variables 
+    `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` must also be set.
+    
+    ```shell script
+    export DISABLE_TEST_CONTAINERS=true
+    export GP2GP_STORAGE_CONTAINER_NAME=your-s3-bucket-name
+    ```
+
+3. Run the integration tests
+
+    ```shell script
+    cd ../service
+    ./gradlew cleanIntegrationTest integrationTest -i
+    ```  
 
 ## How to run e2e tests:
 
