@@ -1,10 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.common.enums.TaskEnums.DOCUMENT_TASK;
-import static uk.nhs.adaptors.gp2gp.common.enums.TaskEnums.STRUCTURE_TASK;
+import static uk.nhs.adaptors.gp2gp.common.enums.GpcEnums.DOCUMENT_TASK;
+import static uk.nhs.adaptors.gp2gp.common.enums.GpcEnums.STRUCTURE_TASK;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinitionFactory;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,42 +57,46 @@ public class TaskDefinitionFactoryTest {
 
     @Test
     public void When_GettingValidDocumentTaskDefinition_Expect_TaskDefinitionFactoryReturnsDocumentTaskDefinition()
-        throws JsonProcessingException {
+            throws JsonProcessingException, TaskHandlerException {
         when(objectMapper.readValue(DOCUMENT_BODY, GetGpcDocumentTaskDefinition.class)).thenReturn(
             new GetGpcDocumentTaskDefinition(TASK_ID_VALUE, REQUEST_ID_VALUE, CONVERSATION_ID_VALUE, DOCUMENT_ID_VALUE)
         );
 
         taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
         GetGpcDocumentTaskDefinition taskDefinition =
-            (GetGpcDocumentTaskDefinition) taskDefinitionFactory.getTaskDefinition(DOCUMENT_TASK.getValue(), DOCUMENT_BODY).get();
+            (GetGpcDocumentTaskDefinition) taskDefinitionFactory.getTaskDefinition(DOCUMENT_TASK.getValue(), DOCUMENT_BODY);
 
         assertThat(taskDefinition.getClass()).isEqualTo(DOCUMENT_TASK_DEFINITION_CLASS);
-        assertThat(taskDefinition.getDocumentId()).isEqualTo(DOCUMENT_ID_VALUE);
-        assertThat(taskDefinition.getConversationId()).isEqualTo(CONVERSATION_ID_VALUE);
-        assertThat(taskDefinition.getRequestId()).isEqualTo(REQUEST_ID_VALUE);
+
+        assertThatCode(() -> taskDefinition.getClass())
+            .doesNotThrowAnyException();
     }
 
     @Test
     public void When_GettingValidStructureTaskDefinition_Expect_TaskDefinitionFactoryReturnsStructureTaskDefinition()
-        throws JsonProcessingException {
+            throws JsonProcessingException, TaskHandlerException {
         when(objectMapper.readValue(STRUCTURE_BODY, GetGpcStructuredTaskDefinition.class)).thenReturn(
             new GetGpcStructuredTaskDefinition(TASK_ID_VALUE, REQUEST_ID_VALUE, CONVERSATION_ID_VALUE, NHS_NUMBER_VALUE)
         );
 
         taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
         GetGpcStructuredTaskDefinition taskDefinition =
-            (GetGpcStructuredTaskDefinition) taskDefinitionFactory.getTaskDefinition(STRUCTURE_TASK.getValue(), STRUCTURE_BODY).get();
+            (GetGpcStructuredTaskDefinition) taskDefinitionFactory.getTaskDefinition(STRUCTURE_TASK.getValue(), STRUCTURE_BODY);
 
         assertThat(taskDefinition.getClass()).isEqualTo(STRUCTURED_TASK_DEFINITION_CLASS);
-        assertThat(taskDefinition.getNhsNumber()).isEqualTo(NHS_NUMBER_VALUE);
-        assertThat(taskDefinition.getConversationId()).isEqualTo(CONVERSATION_ID_VALUE);
-        assertThat(taskDefinition.getRequestId()).isEqualTo(REQUEST_ID_VALUE);
+
+        assertThatCode(() -> taskDefinition.getClass())
+            .doesNotThrowAnyException();
     }
 
     @Test
-    public void When_GettingInvalidTaskDefinition_Expect_TaskDefinitionFactoryReturnsOptionalEmpty() throws JsonProcessingException {
+    public void When_GettingInvalidTaskDefinition_Expect_TaskDefinitionFactoryReturnsOptionalEmpty() {
         taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
 
-        assertThat(taskDefinitionFactory.getTaskDefinition(BLANK_STRING, BLANK_STRING)).isEmpty();
+        assertThatThrownBy(() -> {
+            taskDefinitionFactory.getTaskDefinition(BLANK_STRING, BLANK_STRING);
+        })
+            .isInstanceOf(TaskHandlerException.class)
+            .hasMessage("No task definition class for task type '" + BLANK_STRING + "'");
     }
 }

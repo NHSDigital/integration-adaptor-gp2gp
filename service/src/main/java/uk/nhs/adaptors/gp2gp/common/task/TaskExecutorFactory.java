@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.common.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,13 @@ public class TaskExecutorFactory {
                 .collect(Collectors.toMap(TaskExecutor::getTaskType, Function.identity()));
     }
 
-    public Optional<TaskExecutor> getTaskExecutor(Class<? extends TaskDefinition> taskType) {
-        return Optional.ofNullable(taskExecutorMap.get(taskType));
+    public TaskExecutor getTaskExecutor(Class<? extends TaskDefinition> taskDefinitionClass) throws TaskHandlerException  {
+        var taskExecutor = Optional.ofNullable(taskExecutorMap.get(taskDefinitionClass));
+
+        if (taskExecutor.isPresent()) {
+            return taskExecutorMap.get(taskDefinitionClass);
+        } else {
+            throw new TaskHandlerException("No task executor class for task definition class '" + taskDefinitionClass + "'");
+        }
     }
 }

@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import java.util.Optional;
-
 import javax.jms.JMSException;
 import javax.jms.Message;
 
@@ -28,19 +26,10 @@ public class TaskHandler {
         var body = JmsReader.readMessage(message);
         LOGGER.info("Current task handled from internal task queue {}", taskType);
 
-        Optional<TaskDefinition> taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
-        if (taskDefinition.isPresent()) {
-            Optional<TaskExecutor> taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.get().getClass());
-            if (taskExecutor.isPresent()) {
-                taskExecutor.get().execute(taskDefinition.get());
-            } else {
-                LOGGER.error("No executor for task definition '{}' in message id '{}'", taskDefinition.get(), message.getJMSMessageID());
-                throw new TaskHandlerException("No executor for task definition '" + taskDefinition.get() + "' in message id '"
-                    + message.getJMSMessageID() + "'");
-            }
-        } else {
-            LOGGER.error("Unknown task type '{}' in message id '{}'", taskType, message.getJMSMessageID());
-            throw new TaskHandlerException("Unknown task type '" + taskType + "' in message id '" + message.getJMSMessageID() + "'");
-        }
+        TaskDefinition taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
+
+        TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.getClass());
+
+        taskExecutor.execute(taskDefinition);
     }
 }

@@ -8,14 +8,14 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum TaskEnums {
+public enum GpcEnums {
     DOCUMENT_TASK("DOCUMENT_TASK", "DocumentTask"),
     STRUCTURE_TASK("STRUCTURE_TASK", "StructuredTask");
 
     private final String code;
     private final String value;
 
-    public static Optional<TaskEnums> fromCode(String code) {
+    public static Optional<GpcEnums> fromCode(String code) {
         return Stream.of(values())
             .filter(am -> code.toUpperCase().equals(am.code))
             .findFirst();
