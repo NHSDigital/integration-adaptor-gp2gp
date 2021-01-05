@@ -25,10 +25,10 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_LOGGING_LEVEL                | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 | GP2GP_LOGGING_FORMAT               | (*)                       | Defines how to format log events on stdout
 | GP2GP_STORAGE_TYPE                 | LocalMock                 | Defines the storage solution being used (S3, Azure, LocalMock)
-| GP2GP_STORAGE_CONTAINER_NAME       | for-nia-testing           | Defines the name of the BlobStorage container on Azure or bucket on S3
-| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | Defines the connection string used to connect to azure blob storage
-| AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3
-| AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3
+| GP2GP_STORAGE_CONTAINER_NAME       |                           | Defines the name of the BlobStorage container on Azure or bucket on S3
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                         | Defines the connection string used to connect to azure blob storage
+| AWS_ACCESS_KEY_ID                  |                           | Defines the access key used to connect to S3. Leave undefined to use the instance role instead
+| AWS_SECRET_ACCESS_KEY              |                           | Defines the secret access key used to connect to S3. Leave undefined to use the instance role instead
 | AWS_REGION                         |                           | Defines the region used to connect to S3
 | GP2GP_AMQP_BROKERS                 | amqp://localhost:5672     | Defines amqp broker on which GP2GP will use.
 | GP2GP_AMQP_USERNAME                |                           | (Optional) username for the AMQP server
@@ -46,7 +46,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 
 
 (*) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
-Default log format is defined in the built-in logback.xml (https://github.com/NHSDigital/summary-care-record-api/tree/master/docker/service/src/main/resources/logback.xml)
+Default log format is defined in the built-in [logback.xml](service/src/main/resources/logback.xml)
 This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
@@ -69,32 +69,67 @@ The project includes mock interactions of external APIs (GPC, SDS) implemented i
 
 The folder `docker/wiremock/stubs` describes the supported interactions.
 
-## Unit test section 
+## How to run tests
+
+**Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
+test outputs for faster builds. To re-run passing tests without making any code changes you must first run 
+`./gradle clean` to clear the build cache. Otherwise, gradle uses the cached outputs from a previous test execution to 
+pass the build.
 
 ### How to run unit tests:
-* Navigate to `service`
-* Run: `./gradlew test`
 
-### How to run all checks (unit, style etc):
-* `docker build --target=test`
+```shell script
+cd service
+./gradlew test
+```
 
-## How to run integration tests:
-* Navigate to `service`
-* Run: `./gradlew integrationTest`
+### How to run all checks:
+
+```shell script
+cd service
+./gradlew check
+```
+
+### How to run integration tests:
+
+```shell script
+cd service
+./gradlew integrationTest
+```
 
 Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
 To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
 
-## How to run style check:
-* Navigate to `service`
-* Run: `./gradlew staticCodeAnalysis` 
+#### Example: Run integration tests with AWS S3 in-the-loop
 
-## How to run all checks:
-* Navigate to `service`
-* Run: `./gradlew check`
+Use environment variables to configure the tests to use:
+* An actual S3 bucket
+* ActiveMQ running locally in Docker
+* MongoDB running locally in Docker
 
-## How to run e2e tests:
-* `docker-compose -f docker-compose-integration-tests.yml build && docker-compose -f docker-compose-integration-tests.yml up --exit-code-from integration_tests`
+1. Start activemq and mongodb dependencies manually
+
+    ```shell script
+    cd docker
+    docker-compose up -d activemq mongodb
+    ```
+
+2. Configure environment variables
+
+    If you're NOT running the test from an AWS instance with a role to access the bucket then the variables 
+    `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` must also be set.
+    
+    ```shell script
+    export DISABLE_TEST_CONTAINERS=true
+    export GP2GP_STORAGE_CONTAINER_NAME=your-s3-bucket-name
+    ```
+
+3. Run the integration tests
+
+    ```shell script
+    cd ../service
+    ./gradlew cleanIntegrationTest integrationTest -i
+    ```  
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.

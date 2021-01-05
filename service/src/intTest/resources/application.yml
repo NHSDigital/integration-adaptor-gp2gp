@@ -27,7 +27,7 @@ gp2gp:
     password: ${GP2GP_AMQP_PASSWORD:}
     maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
   mongodb:
-    uri: ${GP2GP_MONGO_URI:}
+    uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
     database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
     host: ${GP2GP_MONGO_HOST:}
     port: ${GP2GP_MONGO_PORT:}
