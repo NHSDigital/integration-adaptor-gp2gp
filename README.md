@@ -65,7 +65,7 @@ If ran through IDE on local machine:
 The project includes mock interactions of external APIs (GPC, SDS) implemented in Wiremock for local development.
 
 * Navigate to `docker`
-* `docker compose up wiremock`
+* `docker-compose up wiremock`
 
 The folder `docker/wiremock/stubs` describes the supported interactions.
 
