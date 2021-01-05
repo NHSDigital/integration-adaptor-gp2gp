@@ -96,6 +96,12 @@ task integrationTest(type: Test) {
 	}
 }
 
+tasks.withType(Test) {
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
+
 check.dependsOn integrationTest
 jacocoTestReport.dependsOn integrationTest
 
