@@ -116,7 +116,7 @@ Use environment variables to configure the tests to use:
 
 2. Configure environment variables
 
-    If you're NOT running the test from an AWS instance with a role to access the bucket then the variables 
+    If you're NOT running the test from an AWS instance with an instance role to access the bucket then the variables 
     `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` must also be set.
     
     ```shell script
