@@ -73,27 +73,26 @@ The folder `docker/wiremock/stubs` describes the supported interactions.
 
 **Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
 test outputs for faster builds. To re-run passing tests without making any code changes you must first run 
-`./gradle clean` to clear the build cache. Otherwise, gradle uses the cached outputs from a previous test execution to 
+`./gradlew clean` to clear the build cache. Otherwise, gradle uses the cached outputs from a previous test execution to 
 pass the build.
+
+You must run all gradle commands from the `service/` directory.
 
 ### How to run unit tests:
 
 ```shell script
-cd service
 ./gradlew test
 ```
 
 ### How to run all checks:
 
 ```shell script
-cd service
 ./gradlew check
 ```
 
 ### How to run integration tests:
 
 ```shell script
-cd service
 ./gradlew integrationTest
 ```
 
