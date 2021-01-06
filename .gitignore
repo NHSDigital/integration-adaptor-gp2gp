@@ -41,3 +41,4 @@ service/out/*
 */out/
 out/
 
+lombok.config
