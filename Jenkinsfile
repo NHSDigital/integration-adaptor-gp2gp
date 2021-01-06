@@ -72,6 +72,25 @@ pipeline {
                         }
                     }
                 }
+
+                stage('E2E Tests') {
+                    steps {
+                        sh '''
+                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
+                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
+                            docker cp e2e-tests:/home/gradle/e2e-tests/build .
+                            mv build e2e-build
+                        '''
+                        archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                        junit '**/e2e-build/test-results/**/*.xml'
+                    }
+                    post {
+                        always {
+                            sh "rm -rf e2e-build"
+                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
+                        }
+                    }
+                }
             }
         }
     }

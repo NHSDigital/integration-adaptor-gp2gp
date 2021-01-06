@@ -3,13 +3,11 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import java.time.Instant;
 import java.time.ZoneId;
 
-import uk.nhs.adaptors.gp2gp.constants.EhrStatusConstants;
-
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
         Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant();
 
-        return new EhrExtractStatus(EhrStatusConstants.EXTRACT_ID,
+        return new EhrExtractStatus(
             now,
             now,
             EhrStatusConstants.CONVERSATION_ID,

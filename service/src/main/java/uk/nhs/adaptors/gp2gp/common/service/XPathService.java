@@ -1,7 +1,9 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import java.io.IOException;
-import java.io.StringReader;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,13 +12,12 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
+import java.io.StringReader;
 
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
+@Component
 public class XPathService {
-    public static Document prepareDocumentFromXml(String xml) {
+    public  Document prepareDocumentFromXml(String xml) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         Document document;
         try {
@@ -30,7 +31,7 @@ public class XPathService {
         return document;
     }
 
-    public static String getNodeValue(Document xmlDoc, String path) {
+    public String getNodeValue(Document xmlDoc, String path) {
         try {
             XPathExpression xPathExpression = XPathFactory.newInstance()
                 .newXPath()
