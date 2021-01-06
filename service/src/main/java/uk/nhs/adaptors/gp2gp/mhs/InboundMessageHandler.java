@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.ehr.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
@@ -18,27 +19,35 @@ import javax.jms.Message;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageHandler {
-    private static final String EHR_EXTRACT_REQUEST_INTERACTION_ID = "RCMR_IN010000UK05";
     private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
 
     private final ObjectMapper objectMapper;
     private final EhrExtractRequestHandler ehrExtractRequestHandler;
     private final XPathService xPathService;
 
-    public void handle(Message message) throws JMSException, JsonProcessingException {
-        String body = JmsReader.readMessage(message);
-        LOGGER.debug("Message content: {}", body);
-        handleMhsRequest(body);
+    public void handle(Message message) {
+        var inboundMessage = unmarshallMessage(message);
+        handleInboundMessage(inboundMessage);
     }
 
-    private void handleMhsRequest(String body) throws JsonProcessingException {
-        var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-        Document ebXmlDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
-        Document payloadDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
+    private InboundMessage unmarshallMessage(Message message) {
+        try {
+            var body = JmsReader.readMessage(message);
+            return objectMapper.readValue(body, InboundMessage.class);
+        } catch (JMSException e) {
+            throw new InvalidInboundMessageException("Unable to read the content of the inbound MHS message", e);
+        } catch (JsonProcessingException e) {
+            throw new InvalidInboundMessageException("Content of the inbound MHS message is not valid JSON", e);
+        }
+    }
+
+    private void handleInboundMessage(InboundMessage inboundMessage) {
+        Document ebXmlDocument = xPathService.prepareDocumentFromXml(inboundMessage.getEbXML());
+        Document payloadDocument = xPathService.prepareDocumentFromXml(inboundMessage.getPayload());
         var interactionId = getInteractionId(ebXmlDocument);
 
-        if (isEhrStatusRequest(interactionId)) {
-            ehrExtractRequestHandler.handleEhrStatus(ebXmlDocument, payloadDocument);
+        if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);
         } else {
             throw new UnsupportedInteractionException(interactionId);
         }
@@ -46,10 +55,6 @@ public class InboundMessageHandler {
 
     private String getInteractionId(Document ebXmlDocument) {
         return xPathService.getNodeValue(ebXmlDocument, ACTION_PATH);
-    }
-
-    private boolean isEhrStatusRequest(String interactionId) {
-        return interactionId.equals(EHR_EXTRACT_REQUEST_INTERACTION_ID);
     }
 
 }

@@ -53,7 +53,7 @@ public class EhrExtractRequestHandlerTest {
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
 
-        ehrExtractRequestHandler.handleEhrStatus(soapHeader, soapBody);
+        ehrExtractRequestHandler.handle(soapHeader, soapBody);
 
         EhrExtractStatus expected = new EhrExtractStatus(
             now,
@@ -92,7 +92,7 @@ public class EhrExtractRequestHandlerTest {
         removeAttributeElement(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleEhrStatus(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -107,7 +107,7 @@ public class EhrExtractRequestHandlerTest {
         clearAttribute(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleEhrStatus(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -129,7 +129,7 @@ public class EhrExtractRequestHandlerTest {
         removeElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleEhrStatus(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -144,7 +144,7 @@ public class EhrExtractRequestHandlerTest {
         clearElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handleEhrStatus(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }

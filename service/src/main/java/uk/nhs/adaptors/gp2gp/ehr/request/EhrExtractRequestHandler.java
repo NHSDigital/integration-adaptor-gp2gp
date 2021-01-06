@@ -34,7 +34,7 @@ public class EhrExtractRequestHandler {
     private final XPathService xPathService;
     private final TimestampService timestampService;
 
-    public void handleEhrStatus(Document header, Document payload) {
+    public void handle(Document header, Document payload) {
         EhrExtractStatus ehrExtractStatus = prepareEhrExtractStatus(header, payload);
         ehrExtractStatusRepository.save(ehrExtractStatus);
     }
