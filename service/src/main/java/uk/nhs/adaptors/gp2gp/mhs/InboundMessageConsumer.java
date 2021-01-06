@@ -33,7 +33,7 @@ public class InboundMessageConsumer {
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (JsonProcessingException e) {
             LOGGER.error("Error while processing MHS inbound queue message {}", messageID, e);
-            throw new UnsupportedInteractionException.InvalidInboundMessageException(e.getMessage());
+            throw new InvalidInboundMessageException(e.getMessage());
         }
     }
 }

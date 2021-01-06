@@ -22,10 +22,6 @@ lombok {
 	config['lombok.log.fieldName'] = 'LOGGER'
 }
 
-springBoot {
-	buildInfo()
-}
-
 repositories {
 	mavenCentral()
 }

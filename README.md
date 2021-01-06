@@ -38,6 +38,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
 | GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_PORT                     |                           | The database port. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_USERNAME                 |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.

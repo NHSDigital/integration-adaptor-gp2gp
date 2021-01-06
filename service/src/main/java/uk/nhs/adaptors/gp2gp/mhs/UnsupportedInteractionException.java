@@ -6,9 +6,4 @@ public class UnsupportedInteractionException extends RuntimeException {
         super("Unsupported interaction id " + interactionId);
     }
 
-    public static class InvalidInboundMessageException extends RuntimeException {
-        public InvalidInboundMessageException(String errorMessage) {
-            super(errorMessage);
-        }
-    }
 }
