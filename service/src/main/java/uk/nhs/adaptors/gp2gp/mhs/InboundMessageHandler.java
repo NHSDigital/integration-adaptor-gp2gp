@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.ehr.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
 import javax.jms.JMSException;

@@ -1,5 +1,6 @@
-package uk.nhs.adaptors.gp2gp.common.service;
+package uk.nhs.adaptors.gp2gp.ehr;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -41,4 +42,5 @@ public class XPathService {
             throw new IllegalArgumentException(e);
         }
     }
+
 }
