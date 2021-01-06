@@ -34,9 +34,11 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
 | GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
 | GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_PORT                     |                           | The database port. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_USERNAME                 |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
 | GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.
@@ -131,6 +133,30 @@ Use environment variables to configure the tests to use:
     cd ../service
     ./gradlew cleanIntegrationTest integrationTest -i
     ```  
+
+## How to run e2e tests:
+
+End-to-end (e2e) tests execute against an already running / deployed adaptor and its dependencies. You must run these 
+yourself and configure the environment variables as needed. The tests do not automatically start any dependencies.
+
+These tests publish messages to the MHS inbound queue and make assertions on the Mongo database. The tests must have 
+access to both the AMQP message queue and the Mongo database.
+
+* Navigate to `e2e-tests`
+* Run: `./gradlew check`
+
+or run from Docker:
+
+```
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
+docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
+```
+
+Environment variables with the same name/meaning as the application's control the e2e test target environment:
+
+* GP2GP_AMQP_BROKERS
+* GP2GP_MONGO_URI
+* GP2GP_MONGO_DATABASE_NAME
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
