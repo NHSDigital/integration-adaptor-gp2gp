@@ -24,7 +24,7 @@ public class InboundMessageConsumerTest {
 
     @Test
     @SneakyThrows
-    public void When_receivedMessageIsHandled_Then_messageIsAcknowledged() {
+    public void When_ReceivedMessageIsHandled_Expect_MessageIsAcknowledged() {
         inboundMessageConsumer.receive(mockMessage);
 
         verify(inboundMessageHandler).handle(mockMessage);
@@ -33,7 +33,7 @@ public class InboundMessageConsumerTest {
 
     @Test
     @SneakyThrows
-    public void When_messageHandlerThrowsException_Then_messageIsNotAcknowledged() {
+    public void When_MessageHandlerThrowsException_Expect_MessageIsNotAcknowledged() {
         doThrow(new RuntimeException()).when(inboundMessageHandler).handle(mockMessage);
 
         inboundMessageConsumer.receive(mockMessage);

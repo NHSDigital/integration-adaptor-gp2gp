@@ -8,7 +8,7 @@ import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
-import uk.nhs.adaptors.gp2gp.ehr.XPathService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 

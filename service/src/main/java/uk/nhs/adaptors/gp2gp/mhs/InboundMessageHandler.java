@@ -7,9 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
-import uk.nhs.adaptors.gp2gp.ehr.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
 import javax.jms.JMSException;
@@ -42,14 +43,31 @@ public class InboundMessageHandler {
     }
 
     private void handleInboundMessage(InboundMessage inboundMessage) {
-        Document ebXmlDocument = xPathService.prepareDocumentFromXml(inboundMessage.getEbXML());
-        Document payloadDocument = xPathService.prepareDocumentFromXml(inboundMessage.getPayload());
+        final Document ebXmlDocument = getMessageEnvelope(inboundMessage);
+        final Document payloadDocument = getMessagePayload(inboundMessage);
+
         var interactionId = getInteractionId(ebXmlDocument);
 
         if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);
         } else {
             throw new UnsupportedInteractionException(interactionId);
+        }
+    }
+
+    private Document getMessageEnvelope(InboundMessage inboundMessage) {
+        try {
+            return xPathService.prepareDocumentFromXml(inboundMessage.getEbXML());
+        } catch (SAXException e) {
+            throw new InvalidInboundMessageException("Unable to parse the XML envelope (ebxml) of the inbound MHS message", e);
+        }
+    }
+
+    private Document getMessagePayload(InboundMessage inboundMessage) {
+        try {
+            return xPathService.prepareDocumentFromXml(inboundMessage.getPayload());
+        } catch (SAXException e) {
+            throw new InvalidInboundMessageException("Unable to parse the XML payload of the inbound MHS message", e);
         }
     }
 

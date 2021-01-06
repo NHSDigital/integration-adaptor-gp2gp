@@ -11,7 +11,7 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.ResourceHelper;
-import uk.nhs.adaptors.gp2gp.ehr.XPathService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
 import javax.jms.JMSException;
@@ -20,6 +20,7 @@ import javax.jms.Message;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
@@ -42,7 +43,7 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_messageIsUnreadable_Then_exceptionIsThrown() {
+    public void When_MessageIsUnreadable_Expect_ExceptionIsThrown() {
         doThrow(mock(JMSException.class)).when(message).getBody(String.class);
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
@@ -52,7 +53,7 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_messageIsNotJson_Then_exceptionIsThrown() {
+    public void When_MessageIsNotJson_Expect_ExceptionIsThrown() {
         when(message.getBody(String.class)).thenReturn("notJson");
         doThrow(mock(JsonProcessingException.class)).when(objectMapper).readValue("notJson", InboundMessage.class);
 
@@ -63,7 +64,7 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_messageIsEhrExtractRequest_Then_requestHandlerCalled() {
+    public void When_MessageIsEhrExtractRequest_Expect_RequestHandlerCalled() {
         when(message.getBody(String.class)).thenReturn("inboundMessage");
         var inboundMessage = new InboundMessage();
         inboundMessage.setEbXML("ebxml");
@@ -81,7 +82,7 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_messageIsForUnknownInteraction_Then_exceptionIsThrown() {
+    public void When_MessageIsForUnknownInteraction_Expect_ExceptionIsThrown() {
         when(message.getBody(String.class)).thenReturn("inboundMessage");
         var inboundMessage = new InboundMessage();
         inboundMessage.setEbXML("ebxml");
@@ -98,6 +99,39 @@ public class InboundMessageHandlerTest {
             .withMessageContaining("RCMR_UNKNOWN");
 
         verifyNoInteractions(ehrExtractRequestHandler);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_MessageHeaderCannotBeParsed_Expect_ExceptionIsThrown() {
+        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        var inboundMessage = new InboundMessage();
+        inboundMessage.setEbXML("NOT VALID XML");
+        inboundMessage.setPayload("payload");
+        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        Document payload = mock(Document.class);
+        doCallRealMethod().when(xPathService).prepareDocumentFromXml("NOT VALID XML");
+
+        assertThatExceptionOfType(InvalidInboundMessageException.class)
+            .isThrownBy(() -> inboundMessageHandler.handle(message))
+            .withMessageContaining("XML envelope");
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_MessagePayloadCannotBeParsed_Expect_ExceptionIsThrown() {
+        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        var inboundMessage = new InboundMessage();
+        inboundMessage.setEbXML("ebxml");
+        inboundMessage.setPayload("payload");
+        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        Document header = mock(Document.class);
+        doReturn(header).when(xPathService).prepareDocumentFromXml("ebxml");
+        doCallRealMethod().when(xPathService).prepareDocumentFromXml("payload");
+
+        assertThatExceptionOfType(InvalidInboundMessageException.class)
+            .isThrownBy(() -> inboundMessageHandler.handle(message))
+            .withMessageContaining("XML payload");
     }
 
 }

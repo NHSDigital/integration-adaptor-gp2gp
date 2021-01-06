@@ -18,7 +18,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
-import uk.nhs.adaptors.gp2gp.ehr.XPathService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -47,7 +47,7 @@ public class EhrExtractRequestHandlerTest {
     }
 
     @Test
-    public void When_validEhrRequestReceived_Then_EhrExtractStatusIsCreated() {
+    public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
         Document soapHeader = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
@@ -85,7 +85,7 @@ public class EhrExtractRequestHandlerTest {
     @SneakyThrows
     @ParameterizedTest
     @MethodSource("pathsToBodyValues")
-    public void When_requiredElementMissingFromBody_Then_handlerThrowsException(String xpath) {
+    public void When_RequiredElementMissingFromBody_Expect_HandlerThrowsException(String xpath) {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
@@ -100,7 +100,7 @@ public class EhrExtractRequestHandlerTest {
     @SneakyThrows
     @ParameterizedTest
     @MethodSource("pathsToBodyValues")
-    public void When_requiredValueIsBlankInBody_Then_handlerThrowsException(String xpath) {
+    public void When_RequiredValueIsBlankInBody_Expect_HandlerThrowsException(String xpath) {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
@@ -122,7 +122,7 @@ public class EhrExtractRequestHandlerTest {
     @SneakyThrows
     @ParameterizedTest
     @MethodSource("pathsToHeaderValues")
-    public void When_requiredElementMissingFromHeader_Then_handlerThrowsException(String xpath) {
+    public void When_RequiredElementMissingFromHeader_Expect_HandlerThrowsException(String xpath) {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
@@ -137,7 +137,7 @@ public class EhrExtractRequestHandlerTest {
     @SneakyThrows
     @ParameterizedTest
     @MethodSource("pathsToHeaderValues")
-    public void When_requiredValueIsBlankInHeader_Then_handlerThrowsException(String xpath) {
+    public void When_RequiredValueIsBlankInHeader_Expect_HandlerThrowsException(String xpath) {
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document body = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
 
