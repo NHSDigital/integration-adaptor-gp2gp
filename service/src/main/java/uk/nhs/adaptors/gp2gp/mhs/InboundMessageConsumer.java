@@ -18,6 +18,8 @@ import org.w3c.dom.Document;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.utils.JmsHeaders;
 
 @Component
 @Slf4j
@@ -30,6 +32,7 @@ public class InboundMessageConsumer {
     private final ObjectMapper objectMapper;
     private final EhrRequestHandler ehrRequestHandler;
     private final EhrStatusConsumerService ehrStatusConsumerService;
+    private final ConversationIdService conversationIdService;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws JMSException {
@@ -38,6 +41,7 @@ public class InboundMessageConsumer {
 
         LOGGER.info("Received inbound message {}", messageID);
         try {
+            setLoggingConversationId(message);
             String body = JmsReader.readMessage(message);
             LOGGER.debug("Message {} content: {}", messageID, body);
 
@@ -49,6 +53,8 @@ public class InboundMessageConsumer {
         } catch (JsonProcessingException e) {
             LOGGER.error("Error while processing MHS inbound queue message {}", messageID, e);
             throw new InvalidInboundMessageException(e.getMessage());
+        } finally {
+            conversationIdService.resetConversationId();
         }
     }
 
@@ -66,5 +72,13 @@ public class InboundMessageConsumer {
 
     private boolean isEhrStatusRequest(Document ebXmlDocument) {
         return XPathService.getNodeValue(ebXmlDocument, ACTION_PATH).equals(INTERACTION_ID);
+    }
+
+    private void setLoggingConversationId(Message message) {
+        try {
+            conversationIdService.applyConversationId(message.getStringProperty(JmsHeaders.CONVERSATION_ID));
+        } catch (JMSException e) {
+            LOGGER.error("Unable to read header " + JmsHeaders.CONVERSATION_ID + " from message", e);
+        }
     }
 }
