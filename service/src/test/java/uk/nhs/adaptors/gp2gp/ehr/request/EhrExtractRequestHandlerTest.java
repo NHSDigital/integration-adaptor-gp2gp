@@ -57,19 +57,7 @@ public class EhrExtractRequestHandlerTest {
 
         ehrExtractRequestHandler.handle(soapHeader, soapBody);
 
-        EhrExtractStatus expected = new EhrExtractStatus(
-            now,
-            now,
-            "DFF5321C-C6EA-468E-BBC2-B0E48000E071",
-            new EhrExtractStatus.EhrRequest("041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC",
-                "9692294935",
-                "N82668-820670",
-                "B86041-822103",
-                "200000000205",
-                "200000001161",
-                "N82668",
-                "B86041")
-        );
+        EhrExtractStatus expected = createEhrExtractStatusMatchXmlFixture(now);
         verify(ehrExtractStatusRepository).save(expected);
         // TODO: tasks created
     }
@@ -81,9 +69,19 @@ public class EhrExtractRequestHandlerTest {
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
-        EhrExtractStatus expected = new EhrExtractStatus(
-            now,
-            now,
+        EhrExtractStatus expected = createEhrExtractStatusMatchXmlFixture(now);
+        when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
+
+        ehrExtractRequestHandler.handle(soapHeader, soapBody);
+
+        verify(ehrExtractStatusRepository).save(expected);
+        // TODO: no tasks created
+    }
+
+    private EhrExtractStatus createEhrExtractStatusMatchXmlFixture(Instant timestamp) {
+        return new EhrExtractStatus(
+            timestamp,
+            timestamp,
             "DFF5321C-C6EA-468E-BBC2-B0E48000E071",
             new EhrExtractStatus.EhrRequest("041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC",
                 "9692294935",
@@ -94,12 +92,6 @@ public class EhrExtractRequestHandlerTest {
                 "N82668",
                 "B86041")
         );
-        when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
-
-        ehrExtractRequestHandler.handle(soapHeader, soapBody);
-
-        verify(ehrExtractStatusRepository).save(expected);
-        // TODO: no tasks created
     }
 
     private static List<String> pathsToBodyValues() {
