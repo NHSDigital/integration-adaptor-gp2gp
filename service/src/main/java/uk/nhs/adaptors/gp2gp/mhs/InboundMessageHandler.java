@@ -28,6 +28,7 @@ public class InboundMessageHandler {
 
     public void handle(Message message) {
         var inboundMessage = unmarshallMessage(message);
+        LOGGER.info("Decoded in inbound MHS message");
         handleInboundMessage(inboundMessage);
     }
 
@@ -47,6 +48,7 @@ public class InboundMessageHandler {
         final Document payloadDocument = getMessagePayload(inboundMessage);
 
         var interactionId = getInteractionId(ebXmlDocument);
+        LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
 
         if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);

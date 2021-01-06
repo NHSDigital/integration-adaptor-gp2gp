@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -15,6 +17,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import java.time.Instant;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractRequestHandler {
     private static final String INTERACTION_ID_PATH = "/RCMR_IN010000UK05";
@@ -35,11 +38,27 @@ public class EhrExtractRequestHandler {
     private final TimestampService timestampService;
 
     public void handle(Document header, Document payload) {
-        EhrExtractStatus ehrExtractStatus = prepareEhrExtractStatus(header, payload);
-        ehrExtractStatusRepository.save(ehrExtractStatus);
+        var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
+        if (saveNewExtractStatusDocument(ehrExtractStatus)) {
+            LOGGER.info("Creating tasks to start the EHR Extract process");
+            // TODO: create task(s) here
+        } else {
+            LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
+        }
     }
 
-    public EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
+    private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
+        try {
+            ehrExtractStatusRepository.save(ehrExtractStatus);
+            LOGGER.info("An ehr_extract_status document was added to the database for the extract request");
+            return true;
+        } catch (DuplicateKeyException e) {
+            LOGGER.warn("A duplicate extract request was received and ignored");
+            return false;
+        }
+    }
+
+    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);

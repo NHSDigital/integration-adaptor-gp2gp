@@ -9,10 +9,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TimestampServiceTest {
 
+    private static final int MILLIS_PER_MICRO = 1000;
+
     @Test
     public void When_TimestampIsCreated_Expect_TruncatedToMilliseconds() {
         Instant now = new TimestampService().now();
-        assertThat(now.getLong(ChronoField.MICRO_OF_SECOND) % 1000).isZero();
+        assertThat(now.getLong(ChronoField.MICRO_OF_SECOND) % MILLIS_PER_MICRO).isZero();
     }
 
 }
