@@ -72,8 +72,8 @@ public class InboundMessageHandlerTest {
         when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document payload = mock(Document.class);
-        doReturn(header).when(xPathService).prepareDocumentFromXml("ebxml");
-        doReturn(payload).when(xPathService).prepareDocumentFromXml("payload");
+        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
+        doReturn(payload).when(xPathService).parseDocumentFromXml("payload");
 
         inboundMessageHandler.handle(message);
 
@@ -90,8 +90,8 @@ public class InboundMessageHandlerTest {
         when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
         Document header = mock(Document.class);
         Document payload = mock(Document.class);
-        doReturn(header).when(xPathService).prepareDocumentFromXml("ebxml");
-        doReturn(payload).when(xPathService).prepareDocumentFromXml("payload");
+        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
+        doReturn(payload).when(xPathService).parseDocumentFromXml("payload");
         doReturn("RCMR_UNKNOWN").when(xPathService).getNodeValue(eq(header), anyString());
 
         assertThatExceptionOfType(UnsupportedInteractionException.class)
@@ -110,7 +110,7 @@ public class InboundMessageHandlerTest {
         inboundMessage.setPayload("payload");
         when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
         Document payload = mock(Document.class);
-        doCallRealMethod().when(xPathService).prepareDocumentFromXml("NOT VALID XML");
+        doCallRealMethod().when(xPathService).parseDocumentFromXml("NOT VALID XML");
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))
@@ -126,8 +126,8 @@ public class InboundMessageHandlerTest {
         inboundMessage.setPayload("payload");
         when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
         Document header = mock(Document.class);
-        doReturn(header).when(xPathService).prepareDocumentFromXml("ebxml");
-        doCallRealMethod().when(xPathService).prepareDocumentFromXml("payload");
+        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
+        doCallRealMethod().when(xPathService).parseDocumentFromXml("payload");
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))

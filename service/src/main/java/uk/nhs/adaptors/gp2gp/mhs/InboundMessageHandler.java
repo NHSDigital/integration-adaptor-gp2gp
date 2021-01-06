@@ -59,7 +59,7 @@ public class InboundMessageHandler {
 
     private Document getMessageEnvelope(InboundMessage inboundMessage) {
         try {
-            return xPathService.prepareDocumentFromXml(inboundMessage.getEbXML());
+            return xPathService.parseDocumentFromXml(inboundMessage.getEbXML());
         } catch (SAXException e) {
             throw new InvalidInboundMessageException("Unable to parse the XML envelope (ebxml) of the inbound MHS message", e);
         }
@@ -67,7 +67,7 @@ public class InboundMessageHandler {
 
     private Document getMessagePayload(InboundMessage inboundMessage) {
         try {
-            return xPathService.prepareDocumentFromXml(inboundMessage.getPayload());
+            return xPathService.parseDocumentFromXml(inboundMessage.getPayload());
         } catch (SAXException e) {
             throw new InvalidInboundMessageException("Unable to parse the XML payload of the inbound MHS message", e);
         }

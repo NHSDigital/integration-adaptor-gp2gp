@@ -14,6 +14,6 @@ public class ResourceHelper {
 
     @SneakyThrows
     public static Document loadClasspathResourceAsXml(String path) {
-        return new XPathService().prepareDocumentFromXml(loadClasspathResourceAsString(path));
+        return new XPathService().parseDocumentFromXml(loadClasspathResourceAsString(path));
     }
 }

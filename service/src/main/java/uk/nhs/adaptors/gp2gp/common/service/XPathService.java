@@ -18,24 +18,16 @@ import java.io.StringReader;
 @Component
 public class XPathService {
 
-    /**
-     * @param xml the xml
-     * @return the parsed DOM object
-     * @throws SAXException if the xml cannot be parsed
-     */
-    public Document prepareDocumentFromXml(String xml) throws SAXException {
+    public Document parseDocumentFromXml(String xml) throws SAXException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         InputSource inputSource;
         DocumentBuilder documentBuilder;
         try {
             documentBuilder = documentBuilderFactory.newDocumentBuilder();
             inputSource = new InputSource(new StringReader(xml));
+            return documentBuilder.parse(inputSource);
         } catch (ParserConfigurationException e) {
             throw new IllegalStateException("Unable to configure XML parser", e);
-        }
-
-        try {
-            return documentBuilder.parse(inputSource);
         } catch (IOException e) {
             throw new RuntimeException("IO error while reading XML", e);
         }
