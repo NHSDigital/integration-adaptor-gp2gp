@@ -1,7 +1,6 @@
-package uk.nhs.adaptors.gp2gp.constants;
+package uk.nhs.adaptors.gp2gp.ehr;
 
 public class EhrStatusConstants {
-    public static final String EXTRACT_ID = "test-extract-id";
     public static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     public static final String CONVERSATION_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
     public static final String NHS_NUMBER = "9692294935";

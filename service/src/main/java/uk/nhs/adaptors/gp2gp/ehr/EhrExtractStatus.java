@@ -1,28 +1,25 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import java.time.Instant;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+
 @CompoundIndexes({
     @CompoundIndex(
         name = "ehr_extract_status_unique_index",
-        def = "{'conversationId': 1, 'requestId': 1}",
+        def = "{'conversationId': 1}",
         unique = true)
 })
 @Data
 @AllArgsConstructor
 @Document
 public class EhrExtractStatus implements TimeToLive {
-    @Id
-    private String extractId;
     private Instant created;
     private Instant updatedAt;
     private String conversationId;
