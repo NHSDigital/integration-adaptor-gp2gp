@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-public interface TaskExecutor {
+public interface TaskExecutor<T extends TaskDefinition> {
 
-    Class<? extends TaskDefinition> getTaskType();
+    Class<T> getTaskType();
 
-    void execute(TaskDefinition taskDefinition);
+    void execute(T taskDefinition);
 }

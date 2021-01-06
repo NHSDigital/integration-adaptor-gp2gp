@@ -22,12 +22,10 @@ public class TaskExecutorFactory {
     }
 
     public TaskExecutor getTaskExecutor(Class<? extends TaskDefinition> taskDefinitionClass) throws TaskHandlerException  {
-        var taskExecutor = Optional.ofNullable(taskExecutorMap.get(taskDefinitionClass));
+        var taskExecutor = Optional.ofNullable(taskExecutorMap.get(taskDefinitionClass))
+            .orElseThrow(() ->
+                new TaskHandlerException("No task executor class for task definition class '" + taskDefinitionClass + "'"));
 
-        if (taskExecutor.isPresent()) {
-            return taskExecutorMap.get(taskDefinitionClass);
-        } else {
-            throw new TaskHandlerException("No task executor class for task definition class '" + taskDefinitionClass + "'");
-        }
+        return taskExecutor;
     }
 }
