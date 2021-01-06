@@ -34,7 +34,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue
+| GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
 | GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
 | GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
