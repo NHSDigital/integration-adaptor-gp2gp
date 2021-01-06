@@ -28,7 +28,6 @@ import static org.mockito.Mockito.verify;
 public class MessageQueueTest {
     private static final String SOAP_HEADER = "<soap:Header></soap:Header>";
     private static final long TIMEOUT = 5000L;
-    private static final long EXPECTED_COUNT = 1;
 
     @Autowired
     private JmsTemplate jmsTemplate;
