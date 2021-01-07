@@ -14,7 +14,7 @@ public class MessageQueue {
 
     public static void sendToMhsInboundQueue(String messageContent) throws Exception {
         String broker = System.getenv().getOrDefault("GP2GP_AMQP_BROKERS", "amqp://localhost:5672");
-        String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound");
+        String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "gp2gpTaskQueue");
 
         Hashtable<String, String> hashtable = new Hashtable<>();
         hashtable.put("connectionfactory.CF", broker);
@@ -29,7 +29,9 @@ public class MessageQueue {
 
         MessageProducer producer = session.createProducer(queue);
         TextMessage message = session.createTextMessage();
-        message.setText(messageContent);
+        //message.setText(messageContent);
+        message.setStringProperty("TaskName", "StructuredTask");
+        message.setText("{\"taskId\":\"21\",\"requestId\":\"21\",\"conversationId\":\"21\",\"nhsNumber\":\"21\"}");
         producer.send(message);
 
         producer.close();

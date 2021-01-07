@@ -1,6 +1,15 @@
 package uk.nhs.adaptors.gp2gp.common.utils;
 
-public class TemplatesUtils {
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
+
+import java.io.IOException;
+import java.io.StringWriter;
+
+public class TemplateUtils {
+
+    //TODO: rename for package feature convention?
     private static final String TEMPLATES_DIRECTORY = "templates";
 
     public static Mustache loadTemplate(String templateName) {

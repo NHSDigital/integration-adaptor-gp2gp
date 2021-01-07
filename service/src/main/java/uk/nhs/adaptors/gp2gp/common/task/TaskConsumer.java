@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.xml.sax.SAXException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ public class TaskConsumer {
     private final TaskHandler taskHandler;
 
     @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
-    public void receive(Message message) throws JsonProcessingException, JMSException, TaskHandlerException {
+    public void receive(Message message) throws JMSException, TaskHandlerException {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received message from taskQueue {}", messageID);
         try {
@@ -32,7 +33,12 @@ public class TaskConsumer {
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (IOException e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
-            throw e;
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
         }
     }
 }

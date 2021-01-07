@@ -1,9 +1,15 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import java.io.IOException;
+
 import javax.jms.JMSException;
 import javax.jms.Message;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -21,7 +27,7 @@ public class TaskHandler {
     private final TaskDefinitionFactory taskDefinitionFactory;
     private final TaskExecutorFactory taskExecutorFactory;
 
-    public void handle(Message message) throws JMSException, JsonProcessingException, TaskHandlerException {
+    public void handle(Message message) throws JMSException, IOException, TaskHandlerException, ParserConfigurationException, SAXException, XPathExpressionException {
         var taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
         var body = JmsReader.readMessage(message);
         LOGGER.info("Current task handled from internal task queue {}", taskType);

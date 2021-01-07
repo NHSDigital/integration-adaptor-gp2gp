@@ -45,6 +45,11 @@ dependencies {
 	implementation 'org.apache.commons:commons-lang3:3.11'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 
+	// GPC
+	implementation 'ca.uhn.hapi.fhir:hapi-fhir-base:5.1.0'
+	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.1.0'
+	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
+
 	testImplementation 'org.apache.commons:commons-lang3:3.11'
 
 	// Test
