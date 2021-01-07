@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.utils;
+package uk.nhs.adaptors.gp2gp.common.task;
 
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
+import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
 
 @Component
 @Slf4j
@@ -21,6 +22,8 @@ import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 public class TaskConsumer {
 
     private final TaskHandler taskHandler;
+    private final TaskIdService taskIdService;
+    private final ConversationIdService conversationIdService;
 
     @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
     public void receive(Message message) throws JsonProcessingException, JMSException, TaskHandlerException {
@@ -33,6 +36,9 @@ public class TaskConsumer {
         } catch (IOException e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
             throw e;
+        } finally {
+            conversationIdService.resetConversationId();
+            taskIdService.resetTaskId();
         }
     }
 }

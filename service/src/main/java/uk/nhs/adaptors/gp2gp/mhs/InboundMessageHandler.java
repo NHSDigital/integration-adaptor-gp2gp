@@ -11,7 +11,6 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
-import uk.nhs.adaptors.gp2gp.utils.JmsHeaders;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
