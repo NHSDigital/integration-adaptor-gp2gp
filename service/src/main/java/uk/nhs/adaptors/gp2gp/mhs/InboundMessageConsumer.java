@@ -45,9 +45,9 @@ public class InboundMessageConsumer {
 
     private void setLoggingConversationId(Message message) {
         try {
-            conversationIdService.applyConversationId(message.getStringProperty(JmsHeaders.CONVERSATION_ID));
+            conversationIdService.applyConversationId(message.getStringProperty(JmsHeaders.getConversationIdHeader()));
         } catch (JMSException e) {
-            LOGGER.error("Unable to read header " + JmsHeaders.CONVERSATION_ID + " from message", e);
+            LOGGER.error("Unable to read header " + JmsHeaders.getConversationIdHeader() + " from message", e);
         }
     }
 }

@@ -1,6 +1,14 @@
 package uk.nhs.adaptors.gp2gp.utils;
 
 public class JmsHeaders {
-    public static String CONVERSATION_ID = "ConversationId";
-    public static String TASK_ID = "TaskId";
+    private static String conversationId = "ConversationId";
+    private static String taskId = "TaskId";
+
+    public static String getConversationIdHeader() {
+        return conversationId;
+    }
+
+    public static String getTaskIdHeader() {
+        return taskId;
+    }
 }
