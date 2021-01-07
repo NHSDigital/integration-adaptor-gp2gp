@@ -22,7 +22,7 @@ public class TaskDispatcher {
     private final ObjectMapper objectMapper;
 
     @Value("${gp2gp.amqp.taskQueueName}")
-    private String mhsTaskQueueName;
+    private String taskQueueName;
 
     public void createTask(TaskDefinition taskDefinition) {
         try {
@@ -34,7 +34,7 @@ public class TaskDispatcher {
     }
 
     private void sendMessage(String payload, String taskType) {
-        jmsTemplate.send(mhsTaskQueueName, session -> {
+        jmsTemplate.send(taskQueueName, session -> {
             TextMessage textMessage = session.createTextMessage(payload);
             textMessage.setStringProperty(TASK_TYPE_HEADER_NAME, taskType);
             return textMessage;

@@ -6,10 +6,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinitionFactory;
+import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -31,9 +32,13 @@ public class TaskDefinitionFactoryTest {
     private static final String NHS_NUMBER_KEY = "nhsNumber";
     private static final String DOCUMENT_BODY = addCustomValueToJsonString(DOCUMENT_ID_KEY, DOCUMENT_ID_VALUE);
     private static final String STRUCTURE_BODY = addCustomValueToJsonString(NHS_NUMBER_KEY, NHS_NUMBER_VALUE);
-    private TaskDefinitionFactory taskDefinitionFactory;
+    private static final String UNKNOWN_TASK_TYPE = "unknownTaskType";
+
     @Mock
     private ObjectMapper objectMapper;
+
+    @InjectMocks
+    private TaskDefinitionFactory taskDefinitionFactory;
 
     private static String addCustomValueToJsonString(String customKey, String customValue) {
         try {
@@ -59,7 +64,6 @@ public class TaskDefinitionFactoryTest {
                 .build()
         );
 
-        taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
         GetGpcDocumentTaskDefinition taskDefinition =
             (GetGpcDocumentTaskDefinition) taskDefinitionFactory
                 .getTaskDefinition(GET_GPC_DOCUMENT.getTaskTypeHeaderValue(), DOCUMENT_BODY);
@@ -79,7 +83,6 @@ public class TaskDefinitionFactoryTest {
                 .build()
         );
 
-        taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
         GetGpcStructuredTaskDefinition taskDefinition =
             (GetGpcStructuredTaskDefinition) taskDefinitionFactory
                 .getTaskDefinition(GET_GPC_STRUCTURED.getTaskTypeHeaderValue(), STRUCTURE_BODY);
@@ -89,12 +92,8 @@ public class TaskDefinitionFactoryTest {
 
     @Test
     public void When_GettingInvalidTaskDefinition_Expect_TaskDefinitionFactoryReturnsOptionalEmpty() {
-        taskDefinitionFactory = new TaskDefinitionFactory(objectMapper);
-
-        assertThatThrownBy(() -> {
-            taskDefinitionFactory.getTaskDefinition("unknownTaskType", "body");
-        })
+        assertThatThrownBy(() -> taskDefinitionFactory.getTaskDefinition(UNKNOWN_TASK_TYPE, "body"))
             .isInstanceOf(TaskHandlerException.class)
-            .hasMessageContaining("unknownTaskType");
+            .hasMessageContaining(UNKNOWN_TASK_TYPE);
     }
 }

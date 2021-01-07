@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,11 +40,11 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractRequestHandlerTest {
-
-    public static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
-    public static final String CONVERSATION_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
-    public static final String NHS_NUMBER = "9692294935";
+    private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
+    private static final String CONVERSATION_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
+    private static final String NHS_NUMBER = "9692294935";
     private static final String TASK_ID = "3a93dfdd-5e72-4f23-8311-9f22772787af";
+
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
@@ -95,19 +96,21 @@ public class EhrExtractRequestHandlerTest {
     }
 
     private EhrExtractStatus createEhrExtractStatusMatchingXmlFixture(Instant timestamp) {
-        return new EhrExtractStatus(
-            timestamp,
-            timestamp,
-            CONVERSATION_ID,
-            new EhrExtractStatus.EhrRequest(REQUEST_ID,
-                NHS_NUMBER,
-                "N82668-820670",
-                "B86041-822103",
-                "200000000205",
-                "200000001161",
-                "N82668",
-                "B86041")
-        );
+        return EhrExtractStatus.builder()
+            .created(timestamp)
+            .updatedAt(timestamp)
+            .conversationId(CONVERSATION_ID)
+            .ehrRequest(EhrExtractStatus.EhrRequest.builder()
+                .requestId(REQUEST_ID)
+                .nhsNumber(NHS_NUMBER)
+                .fromPartyId("N82668-820670")
+                .toPartyId("B86041-822103")
+                .fromAsid("200000000205")
+                .toAsid("200000001161")
+                .fromOdsCode("N82668")
+                .toOdsCode("B86041")
+                .build()
+            ).build();
     }
 
     private GetGpcStructuredTaskDefinition createTaskMatchingXmlFixture() {
@@ -204,7 +207,7 @@ public class EhrExtractRequestHandlerTest {
             .compile(xpath);
         Attr attr = (Attr) xPathExpression.evaluate(xml, XPathConstants.NODE);
         Element owner = attr.getOwnerElement();
-        owner.setAttribute(attr.getName(), "");
+        owner.setAttribute(attr.getName(), StringUtils.EMPTY);
     }
 
     @SneakyThrows

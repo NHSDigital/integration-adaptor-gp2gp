@@ -12,7 +12,6 @@ import javax.jms.Message;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskConsumerTest {
@@ -29,8 +28,6 @@ public class TaskConsumerTest {
     @Test
     @SneakyThrows
     public void When_TaskHandled_Expect_MessageAcknowledged() {
-        when(message.getJMSMessageID()).thenReturn("messageId");
-
         taskConsumer.receive(message);
 
         verify(taskHandler).handle(message);
@@ -40,7 +37,6 @@ public class TaskConsumerTest {
     @Test
     @SneakyThrows
     public void When_TaskHandlerError_Expect_MessageNotAcknowledged() {
-        when(message.getJMSMessageID()).thenReturn("messageId");
         doThrow(RuntimeException.class).when(taskHandler).handle(message);
 
         taskConsumer.receive(message);

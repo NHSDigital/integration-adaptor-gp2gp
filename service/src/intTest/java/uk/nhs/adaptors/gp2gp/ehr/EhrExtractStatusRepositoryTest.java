@@ -14,6 +14,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus.EHR_EXTRACT_STATUS_UNIQUE_INDEX;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -53,6 +54,6 @@ public class EhrExtractStatusRepositoryTest {
         ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
         assertThatExceptionOfType(DuplicateKeyException.class)
             .isThrownBy(() -> ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus()))
-            .withMessageContaining("ehr_extract_status_unique_index");
+            .withMessageContaining(EHR_EXTRACT_STATUS_UNIQUE_INDEX);
     }
 }

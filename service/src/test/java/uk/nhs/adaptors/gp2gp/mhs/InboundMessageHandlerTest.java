@@ -30,6 +30,12 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class InboundMessageHandlerTest {
+    private static final String BODY_NOT_JSON = "notJson";
+    private static final String EBXML_CONTENT = "ebxml";
+    private static final String PAYLOAD_CONTENT = "payload";
+    private static final String INBOUND_MESSAGE_CONTENT = "inboundMessage";
+    private static final String UNKNOWN_INTERACTION_ID = "RCMR_UNKNOWN";
+    private static final String INVALID_EBXML_CONTENT = "NOT VALID XML";
     @Mock
     private ObjectMapper objectMapper;
     @Mock
@@ -54,8 +60,8 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageIsNotJson_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn("notJson");
-        doThrow(mock(JsonProcessingException.class)).when(objectMapper).readValue("notJson", InboundMessage.class);
+        when(message.getBody(String.class)).thenReturn(BODY_NOT_JSON);
+        doThrow(mock(JsonProcessingException.class)).when(objectMapper).readValue(BODY_NOT_JSON, InboundMessage.class);
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))
@@ -65,15 +71,15 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageIsEhrExtractRequest_Expect_RequestHandlerCalled() {
-        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
         var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML("ebxml");
-        inboundMessage.setPayload("payload");
-        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        inboundMessage.setEbXML(EBXML_CONTENT);
+        inboundMessage.setPayload(PAYLOAD_CONTENT);
+        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document payload = mock(Document.class);
-        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
-        doReturn(payload).when(xPathService).parseDocumentFromXml("payload");
+        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
+        doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
 
         inboundMessageHandler.handle(message);
 
@@ -83,20 +89,20 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageIsForUnknownInteraction_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
         var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML("ebxml");
-        inboundMessage.setPayload("payload");
-        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        inboundMessage.setEbXML(EBXML_CONTENT);
+        inboundMessage.setPayload(PAYLOAD_CONTENT);
+        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
         Document header = mock(Document.class);
         Document payload = mock(Document.class);
-        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
-        doReturn(payload).when(xPathService).parseDocumentFromXml("payload");
-        doReturn("RCMR_UNKNOWN").when(xPathService).getNodeValue(eq(header), anyString());
+        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
+        doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
+        doReturn(UNKNOWN_INTERACTION_ID).when(xPathService).getNodeValue(eq(header), anyString());
 
         assertThatExceptionOfType(UnsupportedInteractionException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))
-            .withMessageContaining("RCMR_UNKNOWN");
+            .withMessageContaining(UNKNOWN_INTERACTION_ID);
 
         verifyNoInteractions(ehrExtractRequestHandler);
     }
@@ -104,13 +110,13 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageHeaderCannotBeParsed_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
         var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML("NOT VALID XML");
-        inboundMessage.setPayload("payload");
-        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        inboundMessage.setEbXML(INVALID_EBXML_CONTENT);
+        inboundMessage.setPayload(PAYLOAD_CONTENT);
+        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
         Document payload = mock(Document.class);
-        doCallRealMethod().when(xPathService).parseDocumentFromXml("NOT VALID XML");
+        doCallRealMethod().when(xPathService).parseDocumentFromXml(INVALID_EBXML_CONTENT);
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))
@@ -120,14 +126,14 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessagePayloadCannotBeParsed_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn("inboundMessage");
+        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
         var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML("ebxml");
-        inboundMessage.setPayload("payload");
-        when(objectMapper.readValue("inboundMessage", InboundMessage.class)).thenReturn(inboundMessage);
+        inboundMessage.setEbXML(EBXML_CONTENT);
+        inboundMessage.setPayload(PAYLOAD_CONTENT);
+        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
         Document header = mock(Document.class);
-        doReturn(header).when(xPathService).parseDocumentFromXml("ebxml");
-        doCallRealMethod().when(xPathService).parseDocumentFromXml("payload");
+        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
+        doCallRealMethod().when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
             .isThrownBy(() -> inboundMessageHandler.handle(message))
