@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp;
+package uk.nhs.adaptors.gp2gp.e2e;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
