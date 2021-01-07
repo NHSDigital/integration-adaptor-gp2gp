@@ -16,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
 @AllArgsConstructor
 @Slf4j
 public class TaskHandler {
-    private static final String TASK_TYPE_HEADER_NAME = "TaskName";
+    public static final String TASK_TYPE_HEADER_NAME = "TaskType";
 
     private final TaskDefinitionFactory taskDefinitionFactory;
     private final TaskExecutorFactory taskExecutorFactory;

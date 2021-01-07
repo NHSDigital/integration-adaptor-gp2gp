@@ -8,11 +8,14 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
-import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
+import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
+import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.time.Instant;
 
@@ -36,15 +39,27 @@ public class EhrExtractRequestHandler {
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
     private final TimestampService timestampService;
+    private final TaskDispatcher taskDispatcher;
+    private final TaskIdService taskIdService;
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
-            // TODO: create task(s) here
+            createGetGpcStructuredTask(ehrExtractStatus);
         } else {
             LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
         }
+    }
+
+    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .build();
+        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
     private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {

@@ -1,17 +1,19 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 
+@SuperBuilder
+@Getter
+@EqualsAndHashCode(callSuper = true)
 public class GetGpcDocumentTaskDefinition extends TaskDefinition {
-    @Getter
     private final String documentId;
 
-    @Autowired
-    public GetGpcDocumentTaskDefinition(String taskId, String requestId, String conversationId, String documentId) {
-        super(taskId, requestId, conversationId);
-        this.documentId = documentId;
+    @Override
+    public TaskType getTaskType() {
+        return TaskType.GET_GPC_DOCUMENT;
     }
 }

@@ -1,12 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DuplicateKeyException;
 import org.w3c.dom.Attr;
@@ -15,11 +16,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
+import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -30,23 +34,33 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractRequestHandlerTest {
 
+    public static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
+    public static final String CONVERSATION_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
+    public static final String NHS_NUMBER = "9692294935";
+    private static final String TASK_ID = "3a93dfdd-5e72-4f23-8311-9f22772787af";
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+
+    @Spy
+    private XPathService xPathService;
 
     @Mock
     private TimestampService timestampService;
 
-    private EhrExtractRequestHandler ehrExtractRequestHandler;
+    @Mock
+    private TaskDispatcher taskDispatcher;
 
-    @BeforeEach
-    public void before() {
-        ehrExtractRequestHandler = new EhrExtractRequestHandler(ehrExtractStatusRepository, new XPathService(), timestampService);
-    }
+    @Mock
+    private TaskIdService taskIdService;
+
+    @InjectMocks
+    private EhrExtractRequestHandler ehrExtractRequestHandler;
 
     @Test
     public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
@@ -54,12 +68,14 @@ public class EhrExtractRequestHandlerTest {
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
+        when(taskIdService.createNewTaskId()).thenReturn(TASK_ID);
 
         ehrExtractRequestHandler.handle(soapHeader, soapBody);
 
-        EhrExtractStatus expected = createEhrExtractStatusMatchXmlFixture(now);
-        verify(ehrExtractStatusRepository).save(expected);
-        // TODO: tasks created
+        var expectedEhrExtractStatus = createEhrExtractStatusMatchingXmlFixture(now);
+        verify(ehrExtractStatusRepository).save(expectedEhrExtractStatus);
+        var expectedGetGpcStructuredTaskDefinition = createTaskMatchingXmlFixture();
+        verify(taskDispatcher).createTask(expectedGetGpcStructuredTaskDefinition);
     }
 
     @Test
@@ -69,22 +85,22 @@ public class EhrExtractRequestHandlerTest {
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
-        EhrExtractStatus expected = createEhrExtractStatusMatchXmlFixture(now);
+        EhrExtractStatus expected = createEhrExtractStatusMatchingXmlFixture(now);
         when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
 
         ehrExtractRequestHandler.handle(soapHeader, soapBody);
 
         verify(ehrExtractStatusRepository).save(expected);
-        // TODO: no tasks created
+        verifyNoInteractions(taskDispatcher);
     }
 
-    private EhrExtractStatus createEhrExtractStatusMatchXmlFixture(Instant timestamp) {
+    private EhrExtractStatus createEhrExtractStatusMatchingXmlFixture(Instant timestamp) {
         return new EhrExtractStatus(
             timestamp,
             timestamp,
-            "DFF5321C-C6EA-468E-BBC2-B0E48000E071",
-            new EhrExtractStatus.EhrRequest("041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC",
-                "9692294935",
+            CONVERSATION_ID,
+            new EhrExtractStatus.EhrRequest(REQUEST_ID,
+                NHS_NUMBER,
                 "N82668-820670",
                 "B86041-822103",
                 "200000000205",
@@ -92,6 +108,15 @@ public class EhrExtractRequestHandlerTest {
                 "N82668",
                 "B86041")
         );
+    }
+
+    private GetGpcStructuredTaskDefinition createTaskMatchingXmlFixture() {
+        return GetGpcStructuredTaskDefinition.builder()
+            .requestId(REQUEST_ID)
+            .conversationId(CONVERSATION_ID)
+            .nhsNumber(NHS_NUMBER)
+            .taskId(TASK_ID)
+            .build();
     }
 
     private static List<String> pathsToBodyValues() {
