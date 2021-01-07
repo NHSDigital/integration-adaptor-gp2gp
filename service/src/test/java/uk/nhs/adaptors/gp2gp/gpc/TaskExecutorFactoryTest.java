@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.experimental.SuperBuilder;
 import org.junit.jupiter.api.Test;
-import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
+import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutorFactory;

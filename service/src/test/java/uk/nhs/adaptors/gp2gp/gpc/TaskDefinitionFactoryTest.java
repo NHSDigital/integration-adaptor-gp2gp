@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
+import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinitionFactory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

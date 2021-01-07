@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.common.exception;
+package uk.nhs.adaptors.gp2gp.common.task;
 
 public class TaskHandlerException extends RuntimeException {
     public TaskHandlerException(String message) {
