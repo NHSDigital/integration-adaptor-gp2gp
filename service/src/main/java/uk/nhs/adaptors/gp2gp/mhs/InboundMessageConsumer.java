@@ -11,7 +11,6 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
-import uk.nhs.adaptors.gp2gp.utils.JmsHeaders;
 
 @Component
 @Slf4j
@@ -27,7 +26,6 @@ public class InboundMessageConsumer {
 
         LOGGER.info("Received inbound message {}", messageID);
         try {
-            setLoggingConversationId(message);
             String body = JmsReader.readMessage(message);
             LOGGER.debug("Message {} content: {}", messageID, body);
 
@@ -40,14 +38,6 @@ public class InboundMessageConsumer {
             throw new InvalidInboundMessageException(e.getMessage());
         } finally {
             conversationIdService.resetConversationId();
-        }
-    }
-
-    private void setLoggingConversationId(Message message) {
-        try {
-            conversationIdService.applyConversationId(message.getStringProperty(JmsHeaders.getConversationIdHeader()));
-        } catch (JMSException e) {
-            LOGGER.error("Unable to read header " + JmsHeaders.getConversationIdHeader() + " from message", e);
         }
     }
 }
