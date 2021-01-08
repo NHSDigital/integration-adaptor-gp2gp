@@ -8,7 +8,6 @@ import lombok.extern.jackson.Jacksonized;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 
-@Data
 @Jacksonized
 @SuperBuilder
 @Getter
