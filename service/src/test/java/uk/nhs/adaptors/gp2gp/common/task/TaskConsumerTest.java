@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
 
 import javax.jms.Message;
 
@@ -21,6 +22,12 @@ public class TaskConsumerTest {
 
     @InjectMocks
     private TaskConsumer taskConsumer;
+
+    @Mock
+    private ConversationIdService conversationIdService;
+
+    @Mock
+    private TaskIdService taskIdService;
 
     @Mock
     private Message message;

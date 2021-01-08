@@ -30,8 +30,7 @@ public class TaskConsumer {
             LOGGER.info("Acknowledged message {}", messageID);
         } catch (Exception e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
-        }
-        finally {
+        } finally {
             conversationIdService.resetConversationId();
             taskIdService.resetTaskId();
         }
