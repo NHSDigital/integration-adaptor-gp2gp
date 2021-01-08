@@ -1,0 +1,56 @@
+{
+    "iss": "http://gpconnect-postman-url",
+    "sub": "1",
+    "aud": "{{targetURI}}",
+    "exp": "{{jwtExpiryTime}}",
+    "iat": "{{jwtCreationTime}}",
+    "reason_for_request": "directcare",
+    "requested_scope": "patient/*.read",
+    "requesting_device": {
+        "resourceType": "Device",
+        "id": "1",
+        "identifier": [
+            {
+                "system": "Web Interface",
+                "value": "Postman example consumer"
+            }
+        ],
+        "model": "Postman",
+        "version": "1.0"
+    },
+    "requesting_organization": {
+        "resourceType": "Organization",
+        "identifier": [
+            {
+                "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                "value": "{{requestingOrganizationODSCode}}"
+            }
+        ],
+        "name": "Postman Organization"
+    },
+    "requesting_practitioner": {
+        "resourceType": "Practitioner",
+        "id": "1",
+        "identifier": [
+            {
+                "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                "value": "G13579135"
+            },
+            {
+                "system": "https://fhir.nhs.uk/Id/sds-role-profile-id",
+                "value": "111111111"
+            }
+        ],
+        "name": [
+            {
+                "family": "Demonstrator",
+                "given": [
+                    "GPConnect"
+                ],
+                "prefix": [
+                    "Mr"
+                ]
+            }
+        ]
+    }
+}

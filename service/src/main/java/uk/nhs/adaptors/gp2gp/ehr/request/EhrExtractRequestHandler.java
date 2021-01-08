@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
+import static java.time.Instant.now;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,7 @@ import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import java.time.Instant;
 
@@ -36,9 +39,18 @@ public class EhrExtractRequestHandler {
 
     public EhrExtractStatus prepareEhrExtractStatus(Document ebXmlDocument, Document payloadDocument) {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(ebXmlDocument, payloadDocument);
-        Instant now = Instant.now();
+        Instant now = now();
         String conversationId = xPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH);
         return new EhrExtractStatus(now, now, conversationId, ehrRequest);
+    }
+
+    public void updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+        //object name
+        //accessedAt
+        //taskId
+        structuredTaskDefinition.getConversationId();
+        now();
+        structuredTaskDefinition.getTaskId();
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document ebXmlDocument, Document payloadDocument) {
