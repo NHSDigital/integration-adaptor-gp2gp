@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.utils;
+package uk.nhs.adaptors.gp2gp.common.amqp;
 
 public final class JmsHeaders {
     private static String conversationId = "ConversationId";

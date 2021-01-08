@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
-import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
 
 @Component
 @Slf4j

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
 
 import javax.jms.Message;
 
