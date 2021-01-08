@@ -50,11 +50,11 @@ public class InboundMessageHandler {
         final Document ebXmlDocument = getMessageEnvelope(inboundMessage);
         final Document payloadDocument = getMessagePayload(inboundMessage);
 
+        var conversationId = getConversationId(ebXmlDocument);
+        conversationIdService.applyConversationId(conversationId);
+
         var interactionId = getInteractionId(ebXmlDocument);
         LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
-        var conversationId = getConversationId(ebXmlDocument);
-
-        conversationIdService.applyConversationId(conversationId);
 
         if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);
