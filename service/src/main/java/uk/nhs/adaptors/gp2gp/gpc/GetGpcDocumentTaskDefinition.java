@@ -1,11 +1,15 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
+import lombok.extern.jackson.Jacksonized;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 
+@Data
+@Jacksonized
 @SuperBuilder
 @Getter
 @EqualsAndHashCode(callSuper = true)
