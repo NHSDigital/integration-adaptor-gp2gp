@@ -7,8 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.utils.ConversationIdService;
 
@@ -19,7 +21,6 @@ import javax.jms.Message;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageHandler {
-    private static final String EHR_EXTRACT_REQUEST_INTERACTION_ID = "RCMR_IN010000UK05";
     private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
     private static final String CONVERSATION_ID_PATH = "/Envelope/Header/MessageHeader/ConversationId";
 
@@ -28,25 +29,53 @@ public class InboundMessageHandler {
     private final XPathService xPathService;
     private final ConversationIdService conversationIdService;
 
-    public void handle(Message message) throws JMSException, JsonProcessingException {
-        String body = JmsReader.readMessage(message);
-        LOGGER.debug("Message content: {}", body);
-        handleMhsRequest(body);
+    public void handle(Message message) {
+        var inboundMessage = unmarshallMessage(message);
+        LOGGER.info("Decoded in inbound MHS message");
+        handleInboundMessage(inboundMessage);
     }
 
-    private void handleMhsRequest(String body) throws JsonProcessingException {
-        var mhsInboundMessage = objectMapper.readValue(body, InboundMessage.class);
-        Document ebXmlDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getEbXML());
-        Document payloadDocument = xPathService.prepareDocumentFromXml(mhsInboundMessage.getPayload());
+    private InboundMessage unmarshallMessage(Message message) {
+        try {
+            var body = JmsReader.readMessage(message);
+            return objectMapper.readValue(body, InboundMessage.class);
+        } catch (JMSException e) {
+            throw new InvalidInboundMessageException("Unable to read the content of the inbound MHS message", e);
+        } catch (JsonProcessingException e) {
+            throw new InvalidInboundMessageException("Content of the inbound MHS message is not valid JSON", e);
+        }
+    }
+
+    private void handleInboundMessage(InboundMessage inboundMessage) {
+        final Document ebXmlDocument = getMessageEnvelope(inboundMessage);
+        final Document payloadDocument = getMessagePayload(inboundMessage);
+
         var interactionId = getInteractionId(ebXmlDocument);
+        LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
         var conversationId = getConversationId(ebXmlDocument);
 
         conversationIdService.applyConversationId(conversationId);
 
-        if (isEhrStatusRequest(interactionId)) {
-            ehrExtractRequestHandler.handleEhrStatus(ebXmlDocument, payloadDocument);
+        if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);
         } else {
             throw new UnsupportedInteractionException(interactionId);
+        }
+    }
+
+    private Document getMessageEnvelope(InboundMessage inboundMessage) {
+        try {
+            return xPathService.parseDocumentFromXml(inboundMessage.getEbXML());
+        } catch (SAXException e) {
+            throw new InvalidInboundMessageException("Unable to parse the XML envelope (ebxml) of the inbound MHS message", e);
+        }
+    }
+
+    private Document getMessagePayload(InboundMessage inboundMessage) {
+        try {
+            return xPathService.parseDocumentFromXml(inboundMessage.getPayload());
+        } catch (SAXException e) {
+            throw new InvalidInboundMessageException("Unable to parse the XML payload of the inbound MHS message", e);
         }
     }
 
@@ -56,9 +85,5 @@ public class InboundMessageHandler {
 
     private String getConversationId(Document ebXmlDocument) {
         return xPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH);
-    }
-
-    private boolean isEhrStatusRequest(String interactionId) {
-        return interactionId.equals(EHR_EXTRACT_REQUEST_INTERACTION_ID);
     }
 }
