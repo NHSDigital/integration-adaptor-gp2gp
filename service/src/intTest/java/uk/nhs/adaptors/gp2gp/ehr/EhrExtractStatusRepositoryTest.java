@@ -1,58 +1,59 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-
-import java.time.Instant;
-import java.util.Optional;
-
-import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
-import uk.nhs.adaptors.gp2gp.constants.EhrStatusConstants;
-import uk.nhs.adaptors.gp2gp.repositories.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus.EHR_EXTRACT_STATUS_UNIQUE_INDEX;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
 public class EhrExtractStatusRepositoryTest {
-
-    @Autowired
-    private MongoClientConfiguration mongoClientConfiguration;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Test
     public void When_AddingNewEhrExtractStatus_Expect_EhrExtractStatusRetrievableByIdFromDatabase() {
-        Instant now = Instant.now();
-        ehrExtractStatusRepository.save(new EhrExtractStatus(EhrStatusConstants.EXTRACT_ID,
-            now,
-            now,
-            EhrStatusConstants.CONVERSATION_ID,
-            new EhrExtractStatus.EhrRequest(EhrStatusConstants.REQUEST_ID,
-                EhrStatusConstants.NHS_NUMBER,
-                EhrStatusConstants.FROM_PARTY_ID,
-                EhrStatusConstants.TO_PARTY_ID,
-                EhrStatusConstants.FROM_ASID,
-                EhrStatusConstants.TO_ASID,
-                EhrStatusConstants.FROM_ODS_CODE,
-                EhrStatusConstants.TO_ODS_CODE)
-        ));
-        Optional<EhrExtractStatus> optionalEhrExtractStatus = ehrExtractStatusRepository.findById(EhrStatusConstants.EXTRACT_ID);
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+        Optional<EhrExtractStatus> optionalEhrExtractStatus =
+            ehrExtractStatusRepository.findByConversationId(EhrStatusConstants.CONVERSATION_ID);
 
-        assertThat(optionalEhrExtractStatus.isPresent(), is(true));
+        assertThat(optionalEhrExtractStatus)
+            .isPresent()
+            .contains(ehrExtractStatus);
+    }
 
-        EhrExtractStatus ehrExtractStatus = optionalEhrExtractStatus.get();
+    @Test
+    public void When_AddingTwoEntitiesWithOnlyDifferentConversationIds_Expect_TwoEntitiesInDatabase() {
+        var first = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(first);
+        var second = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        second.setConversationId("9577d735-a307-4840-9199-7974216800af");
 
-        assertThat(ehrExtractStatus.getExtractId(), is(EhrStatusConstants.EXTRACT_ID));
-        assertThat(ehrExtractStatus.getCreated(), is(notNullValue()));
+        ehrExtractStatusRepository.save(second);
+
+        assertThat(ehrExtractStatusRepository.findByConversationId(first.getConversationId())).contains(first);
+        assertThat(ehrExtractStatusRepository.findByConversationId(second.getConversationId())).contains(second);
+
+    }
+
+    @Test
+    public void When_AddingADuplicateEhrExtractStatus_Expect_DuplicateKeyExceptionIsThrown() {
+        ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
+        assertThatExceptionOfType(DuplicateKeyException.class)
+            .isThrownBy(() -> ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus()))
+            .withMessageContaining(EHR_EXTRACT_STATUS_UNIQUE_INDEX);
     }
 }

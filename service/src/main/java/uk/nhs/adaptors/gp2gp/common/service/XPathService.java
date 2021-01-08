@@ -1,7 +1,9 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import java.io.IOException;
-import java.io.StringReader;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,34 +12,36 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
+import java.io.StringReader;
 
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
+@Component
 public class XPathService {
-    public static Document prepareDocumentFromXml(String xml) {
-        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-        Document document;
-        try {
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            InputSource inputSource = new InputSource(new StringReader(xml));
-            document = documentBuilder.parse(inputSource);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            throw new IllegalArgumentException(e);
-        }
 
-        return document;
+    public Document parseDocumentFromXml(String xml) throws SAXException {
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        InputSource inputSource;
+        DocumentBuilder documentBuilder;
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            inputSource = new InputSource(new StringReader(xml));
+            return documentBuilder.parse(inputSource);
+        } catch (ParserConfigurationException e) {
+            throw new IllegalStateException("Unable to configure XML parser", e);
+        } catch (IOException e) {
+            throw new RuntimeException("IO error while reading XML", e);
+        }
     }
 
-    public static String getNodeValue(Document xmlDoc, String path) {
+    public String getNodeValue(Document xmlDoc, String expression) {
         try {
             XPathExpression xPathExpression = XPathFactory.newInstance()
                 .newXPath()
-                .compile(path);
+                .compile(expression);
             return (String) xPathExpression.evaluate(xmlDoc, XPathConstants.STRING);
         } catch (XPathExpressionException e) {
-            throw new IllegalArgumentException(e);
+            throw new IllegalArgumentException("Invalid xpath expression " + expression, e);
         }
     }
+
 }

@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.nhs.adaptors.gp2gp.exceptions.StorageConnectorException;
-
 
 public class LocalMockConnector implements StorageConnector {
     private final Map<String, byte[]> storage;

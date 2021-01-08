@@ -40,4 +40,4 @@ service/out/*
 .vscode
 */out/
 out/
-
+lombok.config

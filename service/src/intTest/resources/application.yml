@@ -27,7 +27,7 @@ gp2gp:
     password: ${GP2GP_AMQP_PASSWORD:}
     maxRedeliveries: ${GP2GP_AMQP_MAX_REDELIVERIES:3}
   mongodb:
-    uri: ${GP2GP_MONGO_URI:}
+    uri: ${GP2GP_MONGO_URI:mongodb://localhost:27017}
     database: ${GP2GP_MONGO_DATABASE_NAME:gp2gp}
     host: ${GP2GP_MONGO_HOST:}
     port: ${GP2GP_MONGO_PORT:}
@@ -35,5 +35,5 @@ gp2gp:
     password: ${GP2GP_MONGO_PASSWORD:}
     options: ${GP2GP_MONGO_OPTIONS:}
     autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
-    ttl: ${GP2GP_MONGO_TTL:P30D}
+    ttl: ${GP2GP_MONGO_TTL:PT30S}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}

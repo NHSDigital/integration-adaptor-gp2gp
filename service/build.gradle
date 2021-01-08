@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
 
 	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
@@ -38,14 +39,11 @@ dependencies {
 	// Infrastructure
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.907'
 	implementation 'com.azure:azure-storage-blob:12.9.0'
-	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
 	implementation 'org.apache.qpid:qpid-jms-client:0.51.0'
 
 	// Utils
 	implementation 'org.apache.commons:commons-lang3:3.11'
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
-
-	testImplementation 'org.apache.commons:commons-lang3:3.11'
 
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -53,14 +51,16 @@ dependencies {
 	testImplementation "io.rest-assured:json-path:4.2.0"
 	testImplementation "io.rest-assured:xml-path:4.2.0"
 	testImplementation "org.assertj:assertj-core:3.18.1"
-	testImplementation "org.testcontainers:testcontainers:1.15.0"
-	testImplementation 'org.springframework:spring-jms:5.2.6.RELEASE'
-	testImplementation 'org.apache.qpid:qpid-jms-client:0.51.0'
-	testImplementation 'commons-io:commons-io:2.6'
+	testImplementation "org.testcontainers:testcontainers:1.15.1"
+	testImplementation 'org.awaitility:awaitility:4.0.3'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
 }
 
 sourceSets {
@@ -92,6 +92,12 @@ task integrationTest(type: Test) {
 		testClassesDirs = sourceSets.integrationTest.output.classesDirs
 		classpath = sourceSets.integrationTest.runtimeClasspath
 		shouldRunAfter test
+	}
+}
+
+tasks.withType(Test) {
+	testLogging {
+		events "passed", "skipped", "failed"
 	}
 }
 

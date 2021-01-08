@@ -1,0 +1,22 @@
+{
+   "sessionId":"2c23284c-1d63-451c-aa34-7bdc7cf05d0a",
+   "userDetails":{
+      "userId":"655050432101",
+      "name":"Gill Smith",
+      "sdsRoleProfileId":"665544332211",
+      "jobCode":"S0080:G0440:R5110",
+      "jobTitle":"Admin Clerical",
+      "activityCodes":[
+         "B0168",
+         "B0370"
+      ],
+      "organisationId":"ABC123",
+      "organisationName":"Test Hospital",
+      "workgroupIds":[
+
+      ],
+      "workgroupNames":[
+
+      ]
+   }
+}
