@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
