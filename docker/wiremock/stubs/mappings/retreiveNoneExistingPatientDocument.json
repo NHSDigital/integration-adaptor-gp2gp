@@ -6,7 +6,7 @@
   },
   "response": {
     "status": 404,
-    "bodyFileName": "emptyPatientDocumentResponse.json",
+    "bodyFileName": "notFoundPatientDocumentResponse.json",
     "headers": {
       "Content-Type": "application/json"
     }

@@ -1,0 +1,24 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "invalid",
+      "details": {
+        "coding": [
+          {
+            "system": "https://fhir.nhs.uk/ValueSet/gpconnect-error-or-warning-code-1",
+            "code": "NO_RECORD_FOUND",
+            "display": "No Record Found"
+          }
+        ]
+      },
+      "diagnostics": "No record found"
+    }
+  ]
+}
