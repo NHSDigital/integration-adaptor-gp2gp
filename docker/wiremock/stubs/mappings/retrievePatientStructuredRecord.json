@@ -1,0 +1,20 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/Patient/$gpc.getstructuredrecord",
+    "bodyPatterns" : [ {
+      "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
+    },
+    {
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286')]"
+    }]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "correctPatientStructuredRecordResponse.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

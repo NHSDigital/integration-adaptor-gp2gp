@@ -1,0 +1,14 @@
+{
+  "priority": 2,
+  "request": {
+    "method": "POST",
+    "url": "/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/Patient/$gpc.getstructuredrecord"
+  },
+  "response": {
+    "status": 404,
+    "body": "",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
