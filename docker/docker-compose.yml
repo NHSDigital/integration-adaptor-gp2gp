@@ -1,8 +1,13 @@
-version: '3'
+version: '3.4'
 
 services:
   gp2gp:
-    image: uk.nhs/gp2gp:latest
+    build:
+      context: ../
+      dockerfile: docker/service/Dockerfile
+    depends_on:
+      - mongodb
+      - activemq
     ports:
       - "8080:8080"
     environment:
@@ -16,6 +21,12 @@ services:
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
       - GP2GP_MONGO_TTL=P30D
       - GP2GP_COSMOS_DB_ENABLED=false
+      - GP2GP_STORAGE_TYPE
+      - GP2GP_STORAGE_CONTAINER_NAME
+      - AZURE_STORAGE_CONNECTION_STRING
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
 
   mock-mhs-service:
     image: uk.nhs/mock-mhs-service:0.0.1-SNAPSHOT
@@ -33,3 +44,17 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+
+  activemq:
+    build:
+      context: ./activemq
+    ports:
+      - "8161:8161"
+      - "5672:5672"
+
+  wiremock:
+    build: ./wiremock
+    ports:
+      - "8110:8080"
+
+

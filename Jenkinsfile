@@ -20,13 +20,14 @@ pipeline {
                 stage('Tests') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp test suite', script: 'docker build -t ${DOCKER_IMAGE}-tests -f docker/service/Dockerfile --target test .', returnStatus: true) != 0) {error("Tests failed")}
                             sh '''
-                                docker run --rm -d --name tests ${DOCKER_IMAGE}-tests sleep 3600
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
+                                docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                                 docker cp tests:/home/gradle/service/build .
-                                docker kill tests
                             '''
+
                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
+                            junit '**/build/test-results/**/*.xml'
                             recordIssues(
                                 enabledForFailure: true,
                                 tools: [
@@ -46,26 +47,19 @@ pipeline {
                                 exclusionPattern : '**/*Test.class'
                             ])
                             sh "rm -rf build"
+                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
                         }
                     }
                 }
+
                 stage('Build Docker Images') {
                     steps {
                         script {
-                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -t ${DOCKER_IMAGE} -f docker/service/Dockerfile .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                            if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
                         }
                     }
                 }
-                // stage('Integration Tests') {
-                //     steps {
-                //         script {
-                //             sh '''
-                //                 cd service
-                //                 ./gradlew integrationTest
-                //             '''
-                //         }
-                //     }
-                // }
+
                 stage('Push Image') {
                     when {
                         expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
@@ -78,13 +72,33 @@ pipeline {
                         }
                     }
                 }
+
+                stage('E2E Tests') {
+                    steps {
+                        sh '''
+                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
+                            docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
+                            docker cp e2e-tests:/home/gradle/e2e-tests/build .
+                            mv build e2e-build
+                        '''
+                        archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                        junit '**/e2e-build/test-results/**/*.xml'
+                    }
+                    post {
+                        always {
+                            sh "rm -rf e2e-build"
+                            sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
+                        }
+                    }
+                }
             }
         }
     }
     post {
         always {
-            sh label: 'Remove all unused images not just dangling ones', script:'docker system prune --force'
-            sh 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
+            sh label: 'Remove images created by docker-compose', script: 'docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down --rmi local'
+            sh label: 'Remove exited containers', script: 'docker rm $(docker ps -a -f status=exited -q)'
+            sh label: 'Remove images tagged with current BUILD_TAG', script: 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
         }
     }
 }
