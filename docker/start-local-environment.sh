@@ -1,12 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
 set -e
 
-pushd mock-mhs-service && ./build-service-image.sh
-popd
-
-pushd service && ./build-service-image.sh
-popd
-
-docker-compose down
+docker-compose build
 docker-compose up
-

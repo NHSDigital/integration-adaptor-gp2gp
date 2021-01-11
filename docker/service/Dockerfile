@@ -1,14 +1,14 @@
-FROM gradle:jdk11 AS test
+FROM gradle:jdk11 AS build
 
-COPY --chown=gradle:gradle ./service /home/gradle/service
+COPY --chown=gradle:gradle service /home/gradle/service
 
 WORKDIR /home/gradle/service
 
-RUN ./gradlew check -x integrationTest
+RUN gradle classes
 
-FROM test AS build
+FROM build AS package
 
-RUN ./gradlew --build-cache bootJar
+RUN gradle --build-cache bootJar
 
 FROM adoptopenjdk/openjdk11:jre
 
@@ -16,8 +16,8 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/service/build/libs/gp2gp.jar /app/gp2gp.jar
+COPY --from=package /home/gradle/service/build/libs/gp2gp.jar /app/gp2gp.jar
 
 USER 65534
 
-ENTRYPOINT ["java", "-jar", "/app/gp2gp.jar", "--port", "8080"]
+ENTRYPOINT ["java", "-jar", "/app/gp2gp.jar"]

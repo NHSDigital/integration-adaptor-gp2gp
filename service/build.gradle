@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 	id "checkstyle"
 	id "com.github.spotbugs" version "4.5.0"
-	id "io.freefair.lombok" version "5.1.0"
+	id "io.freefair.lombok" version "5.3.0"
 	id 'jacoco'
 }
 
@@ -25,25 +25,34 @@ repositories {
 }
 
 dependencies {
+	// Spring
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
+
+	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
 	implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
-	implementation 'org.apache.qpid:qpid-jms-client:0.51.0'
-	implementation 'org.apache.httpcomponents:httpclient:4.5.12'
-	implementation 'org.apache.commons:commons-lang3:3.11'
 
+	// Infrastructure
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.907'
+	implementation 'com.azure:azure-storage-blob:12.9.0'
+	implementation 'org.apache.qpid:qpid-jms-client:0.51.0'
+
+	// Utils
+	implementation 'org.apache.commons:commons-lang3:3.11'
+	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
+
+	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "io.rest-assured:rest-assured:4.2.0"
 	testImplementation "io.rest-assured:json-path:4.2.0"
 	testImplementation "io.rest-assured:xml-path:4.2.0"
-	testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.0"
 	testImplementation "org.assertj:assertj-core:3.18.1"
-	testImplementation "org.testcontainers:testcontainers:1.15.0"
+	testImplementation "org.testcontainers:testcontainers:1.15.1"
+	testImplementation 'org.awaitility:awaitility:4.0.3'
 }
 
 test {
@@ -86,22 +95,24 @@ task integrationTest(type: Test) {
 	}
 }
 
-check.dependsOn integrationTest
-
-task staticCodeAnalysis(type: GradleBuild) {
-	tasks = [
-			'clean',
-			'checkstyleMain',
-			'checkstyleTest',
-			'spotbugsMain',
-			'spotbugsTest',
-	]
+tasks.withType(Test) {
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
-tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
-	excludeFilter = rootProject.file('config/spotbugs/exclude.xml')
+check.dependsOn integrationTest
+jacocoTestReport.dependsOn integrationTest
+
+spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
+spotbugsMain {
 	reports {
-		xml.enabled = false
-		html.enabled = true
+		html {
+			enabled = true
+		}
+		xml {
+			enabled = true
+		}
 	}
 }
