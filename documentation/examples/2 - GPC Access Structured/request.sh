@@ -5,9 +5,12 @@ set -x
 # curl -i --cacert opentest.ca-bundle --cert endpoint.crt --key endpoint.key https://msg.opentest.hscic.gov.uk
 
 # Set SSP_URL to empty string to disable SSP
-PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/structured/fhir/Patient/$gpc.getstructuredrecord'
-SSP_URL='https://proxy.opentest.hscic.gov.uk/'
-#SSP_URL=''
+#PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/structured/fhir/Patient/$gpc.getstructuredrecord'
+# Updated URL
+PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/structured/fhir/Patient/$gpc.getstructuredrecord'
+
+#SSP_URL='https://proxy.opentest.hscic.gov.uk/'
+SSP_URL=''
 
 curl --cacert opentest.ca-bundle --cert endpoint.crt --key endpoint.key \
 --verbose \
