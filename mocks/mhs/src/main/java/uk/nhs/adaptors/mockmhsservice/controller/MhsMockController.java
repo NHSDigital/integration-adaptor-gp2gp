@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.mockmhsservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ public class MhsMockController {
     @ResponseStatus(ACCEPTED)
     public ResponseEntity<String> postMockMhs(@RequestBody String mockMhsMessage) throws JMSException {
         String response = mockMhsService.handleRequest(mockMhsMessage);
-        return new ResponseEntity<>(response, OK);
+
+        return new ResponseEntity<>(response, ACCEPTED);
     }
 }
