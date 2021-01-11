@@ -13,6 +13,7 @@
   "response": {
     "status": 200,
     "bodyFileName": "correctPatientStructuredRecordResponse.json",
+    "transformers": ["response-template"],
     "headers": {
       "Content-Type": "application/json"
     }
