@@ -19,6 +19,7 @@ RUN apt-get -qq update && \
         libcurl4=7.68.0-1ubuntu2.4 \
         libssl1.1=1.1.1f-1ubuntu2.1 \
         openssl=1.1.1f-1ubuntu2.1 \
+        libp11-kit0=0.23.20-1ubuntu0.1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
