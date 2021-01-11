@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.Message;
 
@@ -21,7 +21,7 @@ public class InboundMessageConsumerTest {
     @Mock
     private Message mockMessage;
     @Mock
-    private ConversationIdService conversationIdService;
+    private MDCService mdcService;
     @InjectMocks
     private InboundMessageConsumer inboundMessageConsumer;
 

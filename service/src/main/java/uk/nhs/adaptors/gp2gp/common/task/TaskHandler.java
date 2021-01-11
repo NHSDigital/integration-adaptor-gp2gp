@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
-import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 @Component
 @AllArgsConstructor
@@ -18,8 +18,7 @@ public class TaskHandler {
 
     private final TaskDefinitionFactory taskDefinitionFactory;
     private final TaskExecutorFactory taskExecutorFactory;
-    private final ConversationIdService conversationIdService;
-    private final TaskIdService taskIdService;
+    private final MDCService mdcService;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void handle(Message message) {
@@ -35,8 +34,8 @@ public class TaskHandler {
 
         TaskDefinition taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
 
-        conversationIdService.applyConversationId(taskDefinition.getConversationId());
-        taskIdService.applyTaskId(taskDefinition.getTaskId());
+        mdcService.applyConversationId(taskDefinition.getConversationId());
+        mdcService.applyTaskId(taskDefinition.getTaskId());
 
         LOGGER.info("Current task defined from internal task queue {}", taskType);
 

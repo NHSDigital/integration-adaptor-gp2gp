@@ -12,7 +12,7 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
-import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -27,7 +27,7 @@ public class InboundMessageHandler {
     private final ObjectMapper objectMapper;
     private final EhrExtractRequestHandler ehrExtractRequestHandler;
     private final XPathService xPathService;
-    private final ConversationIdService conversationIdService;
+    private final MDCService mdcService;
 
     public void handle(Message message) {
         var inboundMessage = unmarshallMessage(message);
@@ -51,7 +51,7 @@ public class InboundMessageHandler {
         final Document payloadDocument = getMessagePayload(inboundMessage);
 
         var conversationId = getConversationId(ebXmlDocument);
-        conversationIdService.applyConversationId(conversationId);
+        mdcService.applyConversationId(conversationId);
 
         var interactionId = getInteractionId(ebXmlDocument);
         LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);

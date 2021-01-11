@@ -8,7 +8,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import javax.jms.Message;
-import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 @Component
 @Slf4j
@@ -16,8 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
 public class TaskConsumer {
 
     private final TaskHandler taskHandler;
-    private final TaskIdService taskIdService;
-    private final ConversationIdService conversationIdService;
+    private final MDCService mdcService;
 
     @JmsListener(destination = "${gp2gp.amqp.taskQueueName}")
     @SneakyThrows
@@ -31,8 +30,7 @@ public class TaskConsumer {
         } catch (Exception e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
         } finally {
-            conversationIdService.resetConversationId();
-            taskIdService.resetTaskId();
+            mdcService.resetAllMdcKeys();
         }
     }
 }

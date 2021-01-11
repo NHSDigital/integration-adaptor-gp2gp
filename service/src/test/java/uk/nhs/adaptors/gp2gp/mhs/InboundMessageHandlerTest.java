@@ -13,7 +13,7 @@ import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
-import uk.nhs.adaptors.gp2gp.common.service.ConversationIdService;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -44,7 +44,7 @@ public class InboundMessageHandlerTest {
     @Spy
     private XPathService xPathService;
     @Mock
-    private ConversationIdService conversationIdService;
+    private MDCService mdcService;
     @InjectMocks
     private InboundMessageHandler inboundMessageHandler;
     @Mock
