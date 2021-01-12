@@ -2,10 +2,7 @@ package uk.nhs.adaptors.mockmhsservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -25,13 +22,11 @@ public class MhsMockController {
         produces = APPLICATION_JSON_VALUE
     )
     @ResponseStatus(value = ACCEPTED)
-    public ResponseEntity<String> postMockMhs(@RequestBody String mockMhsMessage) throws JMSException {
-        String mockSuccessMessage = "{\"message\": \"Message acknowledged.\"}";
+    public ResponseEntity<String> postMockMhs(@RequestHeader(value="Interaction-Id") String interactionId, @RequestBody String mockMhsMessage) throws JMSException {
         String mockErrorMessage = "{\"message\": \"Error, something went wrong.\"}";
 
         try {
-            mockMhsService.handleRequest(mockMhsMessage);
-            return new ResponseEntity<>(mockSuccessMessage, ACCEPTED);
+            return mockMhsService.handleRequest(interactionId, mockMhsMessage);
         } catch (Exception e) {
             return new ResponseEntity<>(mockErrorMessage, INTERNAL_SERVER_ERROR);
         }
