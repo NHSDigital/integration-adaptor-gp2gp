@@ -8,7 +8,7 @@
     "status": 200,
     "bodyFileName": "correctPatientDocumentResponse.json",
     "headers": {
-      "Content-Type": "application/json"
+      "Content-Type": "application/fhir+json"
     }
   }
 }
