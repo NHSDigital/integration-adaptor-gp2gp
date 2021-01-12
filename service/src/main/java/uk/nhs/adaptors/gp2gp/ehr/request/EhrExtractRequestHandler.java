@@ -1,12 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -17,7 +16,11 @@ import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-import java.time.Instant;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 
 @Service
 @Slf4j
@@ -77,7 +80,7 @@ public class EhrExtractRequestHandler {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest);
+        return new EhrExtractStatus(now, now, conversationId, ehrRequest, new ArrayList<>());
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
