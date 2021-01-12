@@ -8,7 +8,16 @@
     "status": 200,
     "bodyFileName": "correctPatientDocumentResponse.json",
     "headers": {
-      "Content-Type": "application/fhir+json"
+      "Server":"nginx",
+      "Date":"Tue, 12 Jan 2021 11:36:57 GMT",
+      "Content-Type":"application/fhir+json;charset=UTF-8",
+      "Content-Length":"9560",
+      "Connection":"keep-alive",
+      "expires":"0",
+      "Content-Encoding":"gzip",
+      "Cache-Control": "no-store",
+      "Pragma": "no-cache",
+      "Strict-Transport-Security": "max-age:31536000"
     }
   }
 }
