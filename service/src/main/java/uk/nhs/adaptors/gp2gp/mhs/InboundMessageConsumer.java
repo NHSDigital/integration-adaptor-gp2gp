@@ -8,12 +8,14 @@ import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageConsumer {
     private final InboundMessageHandler inboundMessageHandler;
+    private final MDCService mdcService;
 
     @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
     public void receive(Message message) throws JMSException {
@@ -25,6 +27,8 @@ public class InboundMessageConsumer {
             LOGGER.info("Acknowledged inbound MHS message {}", messageID);
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+        } finally {
+            mdcService.resetAllMdcKeys();
         }
     }
 }
