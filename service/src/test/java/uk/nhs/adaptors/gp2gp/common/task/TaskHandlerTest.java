@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -25,6 +26,9 @@ public class TaskHandlerTest {
 
     @Mock
     private TaskExecutorFactory taskExecutorFactory;
+
+    @Mock
+    private MDCService mdcService;
 
     @InjectMocks
     private TaskHandler taskHandler;

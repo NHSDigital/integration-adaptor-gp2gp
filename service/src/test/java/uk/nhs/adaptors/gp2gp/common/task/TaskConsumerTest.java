@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.Message;
 
@@ -21,6 +22,9 @@ public class TaskConsumerTest {
 
     @InjectMocks
     private TaskConsumer taskConsumer;
+
+    @Mock
+    private MDCService mdcService;
 
     @Mock
     private Message message;
