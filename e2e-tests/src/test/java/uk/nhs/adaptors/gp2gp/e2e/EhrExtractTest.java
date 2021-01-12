@@ -1,7 +1,10 @@
-package uk.nhs.adaptors.gp2gp;
+package uk.nhs.adaptors.gp2gp.e2e;
 
 import org.apache.commons.io.IOUtils;
+import org.bson.Document;
 import org.junit.jupiter.api.Test;
+import uk.nhs.adaptors.gp2gp.MessageQueue;
+import uk.nhs.adaptors.gp2gp.Mongo;
 
 import java.nio.charset.Charset;
 import java.util.UUID;
@@ -11,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class EhrExtractTest {
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
-    public static final String EXTRACT_ID = "test-extract-id";
     public static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     public static final String NHS_NUMBER = "9692294935";
     public static final String FROM_PARTY_ID = "N82668-820670";
@@ -32,6 +34,17 @@ public class EhrExtractTest {
         var ehrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThat(ehrExtractStatus).isNotNull();
         assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId);
+        assertThat(ehrExtractStatus.get("created")).isNotNull();
+        assertThat(ehrExtractStatus.get("updatedAt")).isNotNull();
+        var ehrRequest = (Document) ehrExtractStatus.get("ehrRequest");
+        assertThat(ehrRequest.get("requestId")).isEqualTo(REQUEST_ID);
+        assertThat(ehrRequest.get("nhsNumber")).isEqualTo(NHS_NUMBER);
+        assertThat(ehrRequest.get("fromPartyId")).isEqualTo(FROM_PARTY_ID);
+        assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID);
+        assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID);
+        assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
+        assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
+        assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
     }
 
 }

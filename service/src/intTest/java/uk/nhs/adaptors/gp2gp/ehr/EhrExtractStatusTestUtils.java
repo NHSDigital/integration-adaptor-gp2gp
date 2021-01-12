@@ -2,10 +2,11 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
-        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant();
+        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
 
         return new EhrExtractStatus(
             now,

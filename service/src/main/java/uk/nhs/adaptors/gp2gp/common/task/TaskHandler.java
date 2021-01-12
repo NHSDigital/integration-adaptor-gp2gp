@@ -11,28 +11,39 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
-import uk.nhs.adaptors.gp2gp.common.exception.TaskHandlerException;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 @Component
 @AllArgsConstructor
 @Slf4j
 public class TaskHandler {
-    private static final String TASK_TYPE_HEADER_NAME = "TaskName";
+    public static final String TASK_TYPE_HEADER_NAME = "TaskType";
 
     private final TaskDefinitionFactory taskDefinitionFactory;
     private final TaskExecutorFactory taskExecutorFactory;
+    private final MDCService mdcService;
 
-    public void handle(Message message) throws JMSException, IOException, TaskHandlerException, ParserConfigurationException, SAXException, XPathExpressionException {
-        var taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
-        var body = JmsReader.readMessage(message);
-        LOGGER.info("Current task handled from internal task queue {}", taskType);
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public void handle(Message message) {
+        String taskType = null;
+        String body = null;
+        try {
+            taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
+            body = JmsReader.readMessage(message);
+        } catch (JMSException e) {
+            throw new TaskHandlerException("Unable to read task definition from JSM message", e);
+        }
+        LOGGER.info("Received a task of type {} on internal task queue", taskType);
 
         TaskDefinition taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
+
+        mdcService.applyConversationId(taskDefinition.getConversationId());
+        mdcService.applyTaskId(taskDefinition.getTaskId());
+
+        LOGGER.info("Current task defined from internal task queue {}", taskType);
 
         TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.getClass());
 
