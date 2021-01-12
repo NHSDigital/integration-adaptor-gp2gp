@@ -12,6 +12,7 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -21,10 +22,12 @@ import javax.jms.Message;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class InboundMessageHandler {
     private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
+    private static final String CONVERSATION_ID_PATH = "/Envelope/Header/MessageHeader/ConversationId";
 
     private final ObjectMapper objectMapper;
     private final EhrExtractRequestHandler ehrExtractRequestHandler;
     private final XPathService xPathService;
+    private final MDCService mdcService;
 
     public void handle(Message message) {
         var inboundMessage = unmarshallMessage(message);
@@ -46,6 +49,9 @@ public class InboundMessageHandler {
     private void handleInboundMessage(InboundMessage inboundMessage) {
         final Document ebXmlDocument = getMessageEnvelope(inboundMessage);
         final Document payloadDocument = getMessagePayload(inboundMessage);
+
+        var conversationId = getConversationId(ebXmlDocument);
+        mdcService.applyConversationId(conversationId);
 
         var interactionId = getInteractionId(ebXmlDocument);
         LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
@@ -77,4 +83,7 @@ public class InboundMessageHandler {
         return xPathService.getNodeValue(ebXmlDocument, ACTION_PATH);
     }
 
+    private String getConversationId(Document ebXmlDocument) {
+        return xPathService.getNodeValue(ebXmlDocument, CONVERSATION_ID_PATH);
+    }
 }
