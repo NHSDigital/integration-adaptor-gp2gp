@@ -14,7 +14,14 @@
     "status": 200,
     "bodyFileName": "correctPatientStructuredRecordResponse.json",
     "headers": {
-      "Content-Type": "application/json"
+      "Server": "nginx",
+      "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
+      "Content-Type": "application/fhir+json;charset=UTF-8",
+      "Transfer-Encoding": "chunked",
+      "Connection": "keep-alive",
+      "Cache-Control": "no-store",
+      "X-Powered-By": "HAPI FHIR 3.0.0 REST Server (FHIR Server; FHIR 3.0.1/DSTU3)",
+      "Strict-Transport-Security":"max-age=31536000"
     }
   }
 }
