@@ -8,14 +8,17 @@ import java.util.Optional;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 @Slf4j
 @Component
@@ -51,18 +54,21 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         URI uri = new URI(GPC_SERVICE_URL + "/" + GPC_REDIRECT_URL + taskDefinition.getDocumentId());
         LOGGER.info("Performed request to {} via proxy server url {}", GPC_SERVICE_URL, GPC_REDIRECT_URL);
 
-        String gpcPatientDocument = webClient.get()
+        Optional<String> gpcPatientDocument = webClient.get()
             .uri(uri)
-            .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
-            .block();
+            .retrieve()
+            .bodyToMono(String.class)
+            .onErrorResume(WebClientResponseException.class,
+                ex -> ex.getRawStatusCode() == HttpStatus.NOT_FOUND.value() ? Mono.empty() : Mono.error(ex))
+            .blockOptional();
 
-        if (gpcPatientDocument != null) {
+        gpcPatientDocument.ifPresent(document -> {
             String documentName = taskDefinition.getDocumentId() + ".json";
-            uploadDocument(documentName, gpcPatientDocument);
+            uploadDocument(documentName, document);
 
             Optional<EhrExtractStatus> ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId());
             ehrExtractStatus.ifPresent(extractStatus -> upsertDocument(taskDefinition, extractStatus, documentName));
-        }
+        });
     }
 
     @SneakyThrows
