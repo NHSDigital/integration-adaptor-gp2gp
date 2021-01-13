@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-
-import javax.jms.JMSException;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
@@ -31,13 +29,20 @@ public class MhsMockController {
     )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
-            @RequestHeader(value="Interaction-Id") String interactionId,
-            @RequestBody String mockMhsMessage) throws JMSException, JsonProcessingException {
+            @RequestHeader(value="Interaction-Id", defaultValue="") String interactionId,
+            @RequestHeader(value="wait-for-response", defaultValue="false") String waitForResponse,
+            @RequestHeader(value="from-asid", required=false) String fromAsid,
+            @RequestHeader(value="Message-Id", required=false) String messageId,
+            @RequestHeader(value="Correlation-Id", required=false) String correlationId,
+            @RequestHeader(value="ods-code", required=false) String odsCode,
+            @RequestBody String mockMhsMessage) throws JsonProcessingException {
+
         ObjectNode rootNode = objectMapper.createObjectNode();
         String jsonString;
 
         try {
-            return mockMhsService.handleRequest(interactionId, mockMhsMessage);
+            return mockMhsService.handleRequest(
+                    interactionId, waitForResponse, fromAsid, messageId, correlationId, odsCode, mockMhsMessage);
         } catch (Exception e) {
             rootNode.put("message", e.getMessage());
             jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);

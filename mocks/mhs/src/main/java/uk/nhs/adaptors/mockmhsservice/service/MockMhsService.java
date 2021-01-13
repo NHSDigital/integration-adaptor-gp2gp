@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.mockmhsservice.service;
 
-import javax.jms.JMSException;
+import java.io.IOException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,8 +20,6 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import uk.nhs.adaptors.mockmhsservice.message.InboundMessage;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 
-import java.io.IOException;
-
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MockMhsService {
@@ -32,41 +30,55 @@ public class MockMhsService {
     @Value("classpath:COPC_IN000001UK01.xml")
     private Resource xmlStubPayload;
 
-    public ResponseEntity<String> handleRequest(String interactionId, String json) throws JMSException, IOException {
+    public ResponseEntity<String> handleRequest(
+            String interactionId,
+            String waitForResponse,
+            String fromAsid,
+            String messageId,
+            String correlationId,
+            String odsCode,
+            String mockMhsMessage) throws IOException {
+
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
         ObjectNode rootNode = objectMapper.createObjectNode();
 
-        String jsonString;
+        String responseJsonString;
         String mockSuccessMessage = "Message acknowledged.";
         String mockErrorMessage = "Error, cannot handle request header Interaction-Id.";
 
         try {
-            verifyJson(json);
+            verifyJson(mockMhsMessage);
         } catch (Exception e) {
             rootNode.put("message", e.getMessage());
-            jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-            return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);
+            responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+            return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
         }
 
         if (interactionId.equals("RCMR_IN030000UK06")) {
-            inboundProducer.sendToMhsInboundQueue(readString(xmlStubPayload.getFile().toPath(), UTF_8));
-            rootNode.put("message", mockSuccessMessage);
-            jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-            return new ResponseEntity<>(jsonString, ACCEPTED);
+            try {
+                inboundProducer.sendToMhsInboundQueue(readString(xmlStubPayload.getFile().toPath(), UTF_8));
+                rootNode.put("message", mockSuccessMessage);
+                responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+                return new ResponseEntity<>(responseJsonString, ACCEPTED);
+            } catch (Exception e) {
+                rootNode.put("message", e.getMessage());
+                responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+                return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
+            }
         }
 
         rootNode.put("message", mockErrorMessage);
-        jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-        return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);
+        responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+        return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
     }
 
     private void verifyJson(String json) throws Exception {
         try {
             objectMapper.readValue(json, InboundMessage.class);
         } catch (JsonProcessingException e) {
-            throw new Exception("Content of the inbound MHS message does not match expected JSON", e);
+            throw new Exception("Error, content of request body does not match expected JSON", e);
         }
     }
 }

@@ -13,7 +13,11 @@ public class InboundProducer {
     private final JmsTemplate jmsTemplate;
     private final String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound");
 
-    public void sendToMhsInboundQueue(String messageContent) throws JMSException {
-        jmsTemplate.send(queueName, session -> session.createTextMessage(messageContent));
+    public void sendToMhsInboundQueue(String messageContent) throws Exception {
+        try {
+            jmsTemplate.send(queueName, session -> session.createTextMessage(messageContent));
+        } catch (Exception e) {
+            throw new Exception("Error, could not produce inbound reply.", e);
+        }
     }
 }
