@@ -18,7 +18,6 @@ public class AzureStorageConnector implements StorageConnector {
         try {
             BlobClient blobClient = containerClient.getBlobClient(filename);
             blobClient.upload(is, streamLength);
-
         } catch (Exception exception) {
             throw new StorageConnectorException("Error occurred uploading to Azure Storage", exception);
         }

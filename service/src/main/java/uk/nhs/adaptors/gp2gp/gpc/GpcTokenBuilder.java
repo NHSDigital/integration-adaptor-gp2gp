@@ -1,45 +1,46 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.Base64;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.github.mustachejava.Mustache;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.utils.TemplateUtils;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.util.Base64;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GpcTokenBuilder {
-    private static final Mustache JWT_HEADER_TEMPLATE = TemplateUtils.loadTemplate("jwt.header.mustache");
-    private static final Mustache JWT_PAYLOAD_TEMPLATE = TemplateUtils.loadTemplate("jwt.payload.mustache");
+    private static final Mustache JWT_HEADER_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.header.mustache");
+    private static final Mustache JWT_PAYLOAD_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.payload.mustache");
+    private static final int EXPIRY_TIME_ADDITION = 300000;
+    private static final int MILLISECOND_DIVISION = 1000;
 
     private final GpcConfiguration gpcConfiguration;
 
-    public String buildToken() {
+    public String buildToken(String odsFromCode) {
 
-        var creationTime = Instant.now().toEpochMilli(); //14176017300
-        var expiryTime = creationTime + gpcConfiguration.getTokenTtl(); //300000; 14176317300
+        var creationTime = Instant.now().toEpochMilli();
+        var expiryTime = creationTime + EXPIRY_TIME_ADDITION;
 
-        //TODO: proper token builder
         var jwtData = JwtPayloadData.builder()
             .targetURI(gpcConfiguration.getUrl())
-            .jwtCreationTime(String.valueOf(creationTime / 1000))
-            .jwtExpiryTime(String.valueOf(expiryTime / 1000))
-            .requestingOrganizationODSCode(gpcConfiguration.getOdsCode())
+            .jwtCreationTime(String.valueOf(creationTime / MILLISECOND_DIVISION))
+            .jwtExpiryTime(String.valueOf(expiryTime / MILLISECOND_DIVISION))
+            .requestingOrganizationODSCode(odsFromCode)
             .build();
 
-        String jwtHeader = TemplateUtils.fillTemplate(JWT_HEADER_TEMPLATE, new JwtHeaderData());
-        String jwtPayload = TemplateUtils.fillTemplate(JWT_PAYLOAD_TEMPLATE, jwtData);
+        String jwtHeader = GpcTemplateUtils.fillTemplate(JWT_HEADER_TEMPLATE, new JwtHeaderData());
+        String jwtPayload = GpcTemplateUtils.fillTemplate(JWT_PAYLOAD_TEMPLATE, jwtData);
 
         String encodedJwtHeader = encode(jwtHeader);
         String encodedJwtPayload = encode(jwtPayload);

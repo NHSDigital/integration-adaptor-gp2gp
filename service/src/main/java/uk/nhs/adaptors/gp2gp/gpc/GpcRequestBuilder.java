@@ -1,22 +1,18 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.io.IOException;
-import java.io.StringReader;
+import static java.lang.String.valueOf;
+
+import static org.apache.http.protocol.HTTP.CONTENT_LEN;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
+import static org.apache.http.protocol.HTTP.TARGET_HOST;
+
 import java.util.Collections;
 
 import javax.net.ssl.SSLException;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
-import static org.apache.http.protocol.HTTP.TARGET_HOST;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import org.hl7.fhir.dstu3.model.BooleanType;
-import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -26,10 +22,8 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
@@ -38,6 +32,7 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -46,88 +41,99 @@ public class GpcRequestBuilder {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
     private static final String FHIR_CONTENT_TYPE = "application/fhir+json";
-    private final static String SSP_FROM = "Ssp-From";
-    private final static String SSP_TO = "Ssp-To";
-    private final static String SSP_INTERACTION_ID = "Ssp-InteractionID";
-    private final static String SSP_TRACE_ID = "Ssp-TraceID";
-    private final static String AUTHORIZATION = "Authorization";
+    private static final String SSP_FROM = "Ssp-From";
+    private static final String SSP_TO = "Ssp-To";
+    private static final String SSP_INTERACTION_ID = "Ssp-InteractionID";
+    private static final String SSP_TRACE_ID = "Ssp-TraceID";
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String AUTHORIZATION_BEARER = "Bearer ";
+    private static final int BYTE_COUNT = 16 * 1024 * 1024;
+    private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
+    private final GpcWebClientFilter gpcWebClientFilter;
 
-    public static Parameters buildGetStructuredRecordRequestBody(String ehrXml) throws XPathExpressionException,
-        ParserConfigurationException, IOException, SAXException {
-        var ehrDocument = DocumentBuilderFactory
-            .newInstance()
-            .newDocumentBuilder()
-            .parse(new InputSource(new StringReader(ehrXml)));
-
-        var xPath = XPathFactory.newInstance().newXPath();
-        //TODO: more precise xpath
-        var expression = "/RCMR_IN010000UK05/ControlActEvent/subject/EhrRequest/recordTarget/patient/id";
-        var nodeList = (NodeList) xPath.compile(expression).evaluate(ehrDocument, XPathConstants.NODESET);
-
-        //TODO: handle nulls
-        String nhsNumber = nodeList.item(0).getAttributes().getNamedItem("extension").getNodeValue();
-
+    public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
             .addParameter(new Parameters.ParametersParameterComponent()
                 .setName("patientNHSNumber")
-                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(nhsNumber)))
+                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(structuredTaskDefinition.getNhsNumber())))
             .addParameter(new Parameters.ParametersParameterComponent()
                 .setName("includeAllergies")
                 .addPart(new Parameters.ParametersParameterComponent()
                     .setName("includeResolvedAllergies")
                     .setValue(new BooleanType(true))))
             .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeMedication")
+                .setName("includeMedication"))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeConsultations")
                 .addPart(new Parameters.ParametersParameterComponent()
-                    .setName("includePrescriptionIssues")
-                    .setValue(new BooleanType(true)))
-                .addPart(new Parameters.ParametersParameterComponent()
-                    .setName("medicationSearchFromDate")
-                    .setValue(new DateType("1980-06-05"))));
+                    .setName("includeNumberOfMostRecent")
+                    .setValue(new IntegerType(NUMBER_OF_RECENT_CONSULTANTS))))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeProblems"))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeImmunisations"))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeUncategorisedData"))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeInvestigations"))
+            .addParameter(new Parameters.ParametersParameterComponent()
+                .setName("includeReferrals"));
     }
 
-    // TODO: rename method
-    public WebClient.RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters) throws SSLException {
-
-        SslContext sslContext = SslContextBuilder
-            .forClient()
-            .trustManager(InsecureTrustManagerFactory.INSTANCE)
-            .build();
+    public WebClient.RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
+        EhrExtractStatus ehrExtractStatus) throws SSLException {
+        SslContext sslContext = buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
 
-        // create webclient
-        WebClient client = WebClient
-            .builder()
-            .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .baseUrl(gpcConfiguration.getUrl())
-            .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
-            .build();
-
-        // provide url
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.POST)
             .uri(gpcConfiguration.getEndpoint());
 
-        //body
         var requestBody = fhirParser.encodeResourceToString(requestBodyParameters);
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter
             = BodyInserters.fromValue(requestBody);
 
+        var request = ehrExtractStatus.getEhrRequest();
+
         return uri
             .body(bodyInserter)
             .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, "200000000359")
-            .header(SSP_TO, "918999198738")
+            .header(SSP_FROM, request.getFromAsid())
+            .header(SSP_TO, request.getToAsid())
             .header(SSP_INTERACTION_ID, "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1")
-            .header(SSP_TRACE_ID, "e4f153f8-72f1-457c-ab16-abc71b84354f")
-            .header(AUTHORIZATION, "Bearer " + gpcTokenBuilder.buildToken())
-            .header(TARGET_HOST, "orange.testlab.nhs.uk")
-            .header(CONTENT_LEN, "524")
+            .header(SSP_TRACE_ID, ehrExtractStatus.getConversationId())
+            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(ehrExtractStatus.getEhrRequest().getFromOdsCode()))
+            .header(TARGET_HOST, gpcConfiguration.getHost())
+            .header(CONTENT_LEN, valueOf(requestBody.length()))
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
+    }
+
+    private SslContext buildSSLContext() throws SSLException {
+        return SslContextBuilder
+            .forClient()
+            .trustManager(InsecureTrustManagerFactory.INSTANCE)
+            .build();
+    }
+
+    private org.springframework.web.reactive.function.client.WebClient buildWebClient(HttpClient httpClient) {
+        return org.springframework.web.reactive.function.client.WebClient
+            .builder()
+            .exchangeStrategies(
+                ExchangeStrategies
+                    .builder()
+                    .codecs(
+                        configurer -> configurer.defaultCodecs()
+                            .maxInMemorySize(BYTE_COUNT)).build())
+            .clientConnector(new ReactorClientHttpConnector(httpClient))
+            .filter(gpcWebClientFilter.errorHandlingFilter())
+            .baseUrl(gpcConfiguration.getUrl())
+            .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
+            .build();
     }
 }
 

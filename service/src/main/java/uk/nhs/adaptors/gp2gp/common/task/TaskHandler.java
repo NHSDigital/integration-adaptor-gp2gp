@@ -4,12 +4,8 @@ import java.io.IOException;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +23,7 @@ public class TaskHandler {
     private final MDCService mdcService;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public void handle(Message message) {
+    public void handle(Message message) throws IOException {
         String taskType = null;
         String body = null;
         try {

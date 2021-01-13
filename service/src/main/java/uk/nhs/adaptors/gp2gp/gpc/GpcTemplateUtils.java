@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.common.utils;
+package uk.nhs.adaptors.gp2gp.gpc;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
@@ -7,9 +7,8 @@ import com.github.mustachejava.MustacheFactory;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class TemplateUtils {
+public class GpcTemplateUtils {
 
-    //TODO: rename for package feature convention?
     private static final String TEMPLATES_DIRECTORY = "templates";
 
     public static Mustache loadTemplate(String templateName) {

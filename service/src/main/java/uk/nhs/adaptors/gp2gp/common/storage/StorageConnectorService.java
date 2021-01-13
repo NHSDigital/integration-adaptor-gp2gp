@@ -1,30 +1,37 @@
 package uk.nhs.adaptors.gp2gp.common.storage;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Base64;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.AllArgsConstructor;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
+import uk.nhs.adaptors.gp2gp.gpc.GpcConfiguration;
+import uk.nhs.adaptors.gp2gp.gpc.GpcStructuredResponseObject;
 
 @Service
 @AllArgsConstructor
 public class StorageConnectorService {
     private final StorageConnectorFactory storageConnectorFactory;
+    private final ObjectMapper objectMapper;
+    private final GpcConfiguration gpcConfiguration;
+    private final StorageUtils storageUtils;
 
-    public void handleStructuredRecord(ByteArrayInputStream response, GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
-        var storageConnector = storageConnectorFactory.getObject();
-        int length = response.available();
-        //need content length from respone header, currently not provided.. can we request this to be added?
+    public void handleStructuredRecord(GpcStructuredResponseObject response) throws IOException {
+        String jsonStringResponse = objectMapper.writeValueAsString(response);
+        var responseInputStream = new ByteArrayInputStream(jsonStringResponse.getBytes(UTF_8));
 
-        String fileName = structuredTaskDefinition.getConversationId()+ "_gpc_structured.json";
-        storageConnector.uploadToStorage(response, length, fileName);
+        var storageConnector = Optional.ofNullable(storageConnectorFactory.getObject())
+            .orElseThrow(() ->
+                new TaskHandlerException("No storage connector available"));
 
-        //temp debug to confirm object is stored correctly...
-        String encodedString = Base64.getEncoder().encodeToString(storageConnector.downloadFromStorage(fileName).readAllBytes());
-        byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
-        String decodedString = new String(decodedBytes);
+        var length = storageUtils.getInputStreamSize(responseInputStream);
+        storageConnector.uploadToStorage(responseInputStream, length, response.getConversationId() + "_gpc_structured.json");
     }
 }

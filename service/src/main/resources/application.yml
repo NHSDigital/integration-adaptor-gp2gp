@@ -8,6 +8,7 @@ management:
       path-mapping.health: healthcheck
       exposure:
         include: info, health, metrics, mappings
+
 gp2gp:
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
@@ -34,10 +35,6 @@ gp2gp:
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
 
 gpConnect:
-  url: "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/fhir"
-  endpoint: "/Patient/$gpc.getstructuredrecord"
-  odsCode: "GPC001"
-  sspFrom: "200000000359"
-  sspTo: "918999198738"
-  sspInteractionID: "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1"
-  tokenTtl: "300000" # 5 min
+  url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
+  endpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
+  host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
