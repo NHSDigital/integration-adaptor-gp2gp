@@ -14,7 +14,6 @@
       "Content-Length":"9560",
       "Connection":"keep-alive",
       "expires":"0",
-      "Content-Encoding":"gzip",
       "Cache-Control": "no-store",
       "Pragma": "no-cache",
       "Strict-Transport-Security": "max-age:31536000"

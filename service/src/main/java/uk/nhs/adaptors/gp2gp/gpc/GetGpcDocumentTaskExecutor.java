@@ -1,8 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URI;
 import java.time.Instant;
@@ -28,8 +26,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final WebClient webClient = WebClient
         .builder()
         .defaultHeaders(httpHeaders -> {
-            httpHeaders.add("Accept", "application/fhir+json;charset=utf-8");
-            httpHeaders.add("Content", "application/fhir+json;charset=utf-8");
+            httpHeaders.add("Accept", "application/fhir+json");
             httpHeaders.add("Ssp-TraceID", "629ea9ba-a077-4d99-b289-7a9b19fd4e03");
             httpHeaders.add("Ssp-From", "200000000115");
             httpHeaders.add("Ssp-To", "200000000116");
@@ -86,7 +83,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             document.setTaskId(taskDefinition.getTaskId());
             LOGGER.info("Updated document {} for from assid {}, to assid {}", documentName, ehrExtractStatus.getEhrRequest().getFromAsid(), ehrExtractStatus.getEhrRequest().getToAsid());
         } else {
-            EhrExtractStatus.GpcAccessDocument document = new EhrExtractStatus.GpcAccessDocument(taskDefinition.getDocumentId() + ".json",
+            EhrExtractStatus.GpcAccessDocument document = new EhrExtractStatus.GpcAccessDocument(documentName,
                 Instant.now(),
                 taskDefinition.getTaskId());
             ehrExtractStatus.getGpcAccessDocuments()
