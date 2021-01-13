@@ -56,5 +56,7 @@ services:
     build: ./wiremock
     ports:
       - "8110:8080"
+    command:
+      - -global-response-templating
 
 
