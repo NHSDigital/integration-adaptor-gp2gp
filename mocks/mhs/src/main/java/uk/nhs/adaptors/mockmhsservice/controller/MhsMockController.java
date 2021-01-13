@@ -5,7 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -27,7 +31,7 @@ public class MhsMockController {
     )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
-            @RequestHeader(value="Interaction-Id", required=false) String interactionId,
+            @RequestHeader(value="Interaction-Id") String interactionId,
             @RequestBody String mockMhsMessage) throws JMSException, JsonProcessingException {
         ObjectNode rootNode = objectMapper.createObjectNode();
         String jsonString;
