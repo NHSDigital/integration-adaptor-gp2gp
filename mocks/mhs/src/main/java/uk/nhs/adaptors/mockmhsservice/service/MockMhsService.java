@@ -40,11 +40,13 @@ public class MockMhsService {
             return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);
         }
 
-        if (interactionId.equals("RCMR_IN030000UK06")) {
-            inboundProducer.sendToMhsInboundQueue(json);
-            rootNode.put("message", mockSuccessMessage);
-            jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-            return new ResponseEntity<>(jsonString, ACCEPTED);
+        if (interactionId != null) {
+            if (interactionId.equals("RCMR_IN030000UK06")) {
+                inboundProducer.sendToMhsInboundQueue(json);
+                rootNode.put("message", mockSuccessMessage);
+                jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+                return new ResponseEntity<>(jsonString, ACCEPTED);
+            }
         }
 
         rootNode.put("message", mockErrorMessage);

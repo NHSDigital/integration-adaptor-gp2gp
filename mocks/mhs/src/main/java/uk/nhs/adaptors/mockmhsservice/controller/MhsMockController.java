@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.mockmhsservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +19,25 @@ import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MhsMockController {
     private final MockMhsService mockMhsService;
+    private final ObjectMapper objectMapper;
 
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE
     )
     @ResponseStatus(value = ACCEPTED)
-    public ResponseEntity<String> postMockMhs(@RequestHeader(value="Interaction-Id") String interactionId, @RequestBody String mockMhsMessage) throws JMSException {
-        String mockErrorMessage = "{\"message\": \"Error, something went wrong.\"}";
+    public ResponseEntity<String> postMockMhs(
+            @RequestHeader(value="Interaction-Id", required=false) String interactionId,
+            @RequestBody String mockMhsMessage) throws JMSException, JsonProcessingException {
+        ObjectNode rootNode = objectMapper.createObjectNode();
+        String jsonString;
 
         try {
             return mockMhsService.handleRequest(interactionId, mockMhsMessage);
         } catch (Exception e) {
-            return new ResponseEntity<>(mockErrorMessage, INTERNAL_SERVER_ERROR);
+            rootNode.put("message", e.getMessage());
+            jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+            return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);
         }
     }
 }
