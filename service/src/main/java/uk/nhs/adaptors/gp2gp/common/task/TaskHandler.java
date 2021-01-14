@@ -30,7 +30,7 @@ public class TaskHandler {
         } catch (JMSException e) {
             throw new TaskHandlerException("Unable to read task definition from JMS message", e);
         }
-        LOGGER.info("Received a message on the task queue with {}} header {}", TASK_TYPE_HEADER_NAME, taskType);
+        LOGGER.info("Received a message on the task queue with {} header {}", TASK_TYPE_HEADER_NAME, taskType);
 
         TaskDefinition taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
 
