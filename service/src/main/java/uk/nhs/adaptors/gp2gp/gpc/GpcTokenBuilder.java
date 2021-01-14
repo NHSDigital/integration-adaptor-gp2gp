@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Base64;
@@ -28,7 +27,7 @@ public class GpcTokenBuilder {
 
     private final GpcConfiguration gpcConfiguration;
 
-    public String buildToken(String odsFromCode) throws IOException {
+    public String buildToken(String odsFromCode) {
         var creationTime = Instant.now().toEpochMilli();
         var expiryTime = creationTime + EXPIRY_TIME_ADDITION;
 

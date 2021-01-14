@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp;
 
-import com.mongodb.client.MongoClients;
+import static com.mongodb.client.MongoClients.create;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
@@ -10,7 +11,7 @@ public class Mongo {
     public static MongoCollection<Document> getCollection() {
         var connectionString = System.getenv().getOrDefault("GP2GP_MONGO_URI", "mongodb://localhost:27017");
         var database = System.getenv().getOrDefault("GP2GP_MONGO_DATABASE_NAME", "gp2gp");
-        var client = MongoClients.create(connectionString);
+        var client = create(connectionString);
         var db = client.getDatabase(database);
         return db.getCollection("ehrExtractStatus");
     }
@@ -20,4 +21,15 @@ public class Mongo {
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
 
+    public static Document findUpdatedEhrExtractStatus(String conversationId, String orginalUpdatedTime) {
+        var collection = getCollection();
+        while (getDocumentByConversationId(collection, conversationId).get("updatedAt").toString().equals(orginalUpdatedTime)) {
+            collection = getCollection();
+        }
+        return getDocumentByConversationId(collection, conversationId);
+    }
+
+    private static Document getDocumentByConversationId(MongoCollection<Document> collection, String conversationId) {
+        return collection.find(Filters.eq("conversationId", conversationId)).first();
+    }
 }

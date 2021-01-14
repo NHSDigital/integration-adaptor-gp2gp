@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
-import java.io.IOException;
-
 import javax.jms.JMSException;
 import javax.jms.Message;
 
@@ -23,7 +21,7 @@ public class TaskHandler {
     private final MDCService mdcService;
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public void handle(Message message) throws IOException {
+    public void handle(Message message) {
         String taskType = null;
         String body = null;
         try {

@@ -17,12 +17,16 @@ public class GpcTemplateUtils {
         return m;
     }
 
-    public static String fillTemplate(Mustache template, Object content) throws IOException {
+    public static String fillTemplate(Mustache template, Object content) {
         StringWriter writer = new StringWriter();
         String data = "";
 
-        template.execute(writer, content).flush();
-        data += writer.toString();
+        try {
+            template.execute(writer, content).flush();
+            data += writer.toString();
+        } catch (IOException e) {
+            throw new GpcException("Unable to create the JWT token for the Authorization header. Exception: ", e);
+        }
 
         return data;
     }

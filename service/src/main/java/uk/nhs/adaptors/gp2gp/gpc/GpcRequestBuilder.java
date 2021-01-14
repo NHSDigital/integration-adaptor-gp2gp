@@ -6,10 +6,7 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
-import java.io.IOException;
 import java.util.Collections;
-
-import javax.net.ssl.SSLException;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -34,6 +31,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 
@@ -84,7 +82,7 @@ public class GpcRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
+        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         SslContext sslContext = buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -97,10 +95,11 @@ public class GpcRequestBuilder {
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter
             = BodyInserters.fromValue(requestBody);
 
-        return buildRequestWithHeadersAndBody(uri, bodyInserter, requestBody, structuredTaskDefinition);
+        return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition);
     }
 
-    private SslContext buildSSLContext() throws SSLException {
+    @SneakyThrows
+    private SslContext buildSSLContext() {
         return SslContextBuilder
             .forClient()
             .trustManager(InsecureTrustManagerFactory.INSTANCE)
@@ -118,9 +117,8 @@ public class GpcRequestBuilder {
             .build();
     }
 
-    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri,
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, String requestBody,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
+    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return uri
             .body(bodyInserter)
             .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))

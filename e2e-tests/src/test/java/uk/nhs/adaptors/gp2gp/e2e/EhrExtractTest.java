@@ -9,7 +9,6 @@ import uk.nhs.adaptors.gp2gp.Mongo;
 import java.nio.charset.Charset;
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class EhrExtractTest {
@@ -31,11 +30,21 @@ public class EhrExtractTest {
     public void When_extractRequestReceived_Expect_ExtractStatusAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-                .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
+
+        var accessStructured = AwaitHelper.waitFor(
+            () -> (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+
+        assertThatAccessStructuredWasFetched(conversationId, accessStructured);
+    }
+
+    private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
         assertThat(ehrExtractStatus).isNotNull();
         assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId);
         assertThat(ehrExtractStatus.get("created")).isNotNull();
@@ -49,10 +58,11 @@ public class EhrExtractTest {
         assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
         assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
         assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
-        var accessStructured = (Document) ehrExtractStatus.get(GPC_ACCESS_STRUCTURED);
+    }
+
+    private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
         assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION);
         assertThat(accessStructured.get("accessedAt")).isNotNull();
         assertThat(accessStructured.get("taskId")).isNotNull();
     }
-
 }

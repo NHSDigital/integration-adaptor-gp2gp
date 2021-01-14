@@ -1,9 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +26,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     @Override
-    public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
+    public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
 
         var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
@@ -39,19 +35,5 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         storageConnectorService.handleStructuredRecord(response);
         gpcPatientHandler.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
-
-        var getGpcDocumentTaskDefinition = buildDocumentTask(response, structuredTaskDefinition);
-        taskDispatcher.createTask(getGpcDocumentTaskDefinition);
-    }
-
-    private GetGpcDocumentTaskDefinition buildDocumentTask(GpcStructuredResponseObject response, GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        return GetGpcDocumentTaskDefinition.builder()
-            .documentId(response.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION)
-            .taskId(structuredTaskDefinition.getTaskId())
-            .conversationId(structuredTaskDefinition.getConversationId())
-            .requestId(structuredTaskDefinition.getRequestId())
-            .fromAsid(structuredTaskDefinition.getFromAsid())
-            .toAsid(structuredTaskDefinition.getToAsid())
-            .fromOdsCode(structuredTaskDefinition.getFromOdsCode()).build();
     }
 }
