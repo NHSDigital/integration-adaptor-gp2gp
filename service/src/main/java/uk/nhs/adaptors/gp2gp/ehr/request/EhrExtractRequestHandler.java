@@ -122,7 +122,8 @@ public class EhrExtractRequestHandler {
 
     public void updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition,
         EhrExtractStatus ehrExtractStatus) {
-        var accessStructured = new EhrExtractStatus.GpcAccessStructured(ehrExtractStatus.getConversationId() + "_gpc_structured.json", now(),
+        var accessStructured = new EhrExtractStatus.GpcAccessStructured(ehrExtractStatus.getConversationId()
+            + "_gpc_structured.json", now(),
             structuredTaskDefinition.getTaskId());
         ehrExtractStatus.setGpcAccessStructured(accessStructured);
         ehrExtractStatus.setUpdatedAt(now());

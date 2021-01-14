@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class StorageUtilsTest {
 
     @Test
-    public void When_FileInputSizeIsNine_Then_ReturnNine() throws IOException {
+    public void When_FileInputSizeIsNine_Expect_ReturnNine() throws IOException {
         StorageUtils storageUtils = new StorageUtils();
         String test = "123456789";
         InputStream is = new ByteArrayInputStream(test.getBytes());
