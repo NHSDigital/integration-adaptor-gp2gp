@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.mockmhsservice.message;
+package uk.nhs.adaptors.mockmhsservice.common;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

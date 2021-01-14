@@ -17,7 +17,8 @@ import static java.nio.file.Files.readString;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
-import uk.nhs.adaptors.mockmhsservice.message.InboundMessage;
+import uk.nhs.adaptors.mockmhsservice.common.InboundMessage;
+import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 
 @RestController
@@ -50,7 +51,7 @@ public class MockMhsService {
 
         try {
             verifyJson(mockMhsMessage);
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             rootNode.put("message", e.getMessage());
             responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
             return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
@@ -62,7 +63,7 @@ public class MockMhsService {
                 rootNode.put("message", mockSuccessMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, ACCEPTED);
-            } catch (Exception e) {
+            } catch (MockMHSException e) {
                 rootNode.put("message", e.getMessage());
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
@@ -74,11 +75,11 @@ public class MockMhsService {
         return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
     }
 
-    private void verifyJson(String json) throws Exception {
+    private void verifyJson(String json) throws JsonProcessingException {
         try {
             objectMapper.readValue(json, InboundMessage.class);
         } catch (JsonProcessingException e) {
-            throw new Exception("Error, content of request body does not match expected JSON", e);
+            throw new MockMHSException("Error, content of request body does not match expected JSON", e);
         }
     }
 }
