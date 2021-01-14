@@ -15,6 +15,10 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -41,6 +45,8 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     @Autowired
     private StorageConnector storageConnector;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -65,9 +71,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         gpcPatientDocument.ifPresent(document -> {
             String documentName = taskDefinition.getDocumentId() + ".json";
             uploadDocument(documentName, document);
-
-            Optional<EhrExtractStatus> ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId());
-            ehrExtractStatus.ifPresent(extractStatus -> upsertDocument(taskDefinition, extractStatus, documentName));
+            updateDocumentWithinDatabase(taskDefinition, documentName);
         });
     }
 
@@ -77,26 +81,12 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         storageConnector.uploadToStorage(inputStream, inputStream.available(), documentName);
     }
 
-    private void upsertDocument(GetGpcDocumentTaskDefinition taskDefinition, EhrExtractStatus ehrExtractStatus, String documentName) {
-        Optional<EhrExtractStatus.GpcAccessDocument> gpcAccessDocument = ehrExtractStatus.getGpcAccessDocuments()
-            .stream()
-            .filter(document -> document.getObjectName().equals(documentName))
-            .findFirst();
-
-        if (gpcAccessDocument.isPresent()) {
-            EhrExtractStatus.GpcAccessDocument document = gpcAccessDocument.get();
-            document.setAccessedAt(Instant.now());
-            document.setTaskId(taskDefinition.getTaskId());
-            LOGGER.info("Updated document {} for from assid {}, to assid {}", documentName, ehrExtractStatus.getEhrRequest().getFromAsid(), ehrExtractStatus.getEhrRequest().getToAsid());
-        } else {
-            EhrExtractStatus.GpcAccessDocument document = new EhrExtractStatus.GpcAccessDocument(documentName,
-                Instant.now(),
-                taskDefinition.getTaskId());
-            ehrExtractStatus.getGpcAccessDocuments()
-                .add(document);
-            LOGGER.info("Added document {} for from assid {}, to assid {}", documentName, ehrExtractStatus.getEhrRequest().getFromAsid(), ehrExtractStatus.getEhrRequest().getToAsid());
-        }
-
-        ehrExtractStatusRepository.save(ehrExtractStatus);
+    private void updateDocumentWithinDatabase(GetGpcDocumentTaskDefinition taskDefinition, String documentName) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("conversationId").is(taskDefinition.getConversationId()).and("gpcAccessDocuments.objectName").is(documentName));
+        Update update = new Update();
+        update.set("gpcAccessDocuments.$.accessedAt", Instant.now());
+        update.set("gpcAccessDocuments.$.taskId", taskDefinition.getTaskId());
+        mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
     }
 }
