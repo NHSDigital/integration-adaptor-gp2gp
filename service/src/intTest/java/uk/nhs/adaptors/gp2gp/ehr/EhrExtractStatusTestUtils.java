@@ -8,7 +8,7 @@ public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
         Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
 
-        return new EhrExtractStatus(
+        return new EhrExtractStatus(null,
             now,
             now,
             EhrStatusConstants.CONVERSATION_ID,
@@ -19,7 +19,8 @@ public class EhrExtractStatusTestUtils {
                 EhrStatusConstants.FROM_ASID,
                 EhrStatusConstants.TO_ASID,
                 EhrStatusConstants.FROM_ODS_CODE,
-                EhrStatusConstants.TO_ODS_CODE)
+                EhrStatusConstants.TO_ODS_CODE),
+            null, null
         );
     }
 }

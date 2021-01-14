@@ -77,7 +77,7 @@ public class EhrExtractRequestHandler {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest);
+        return new EhrExtractStatus(null, now, now, conversationId, ehrRequest, null, null);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
