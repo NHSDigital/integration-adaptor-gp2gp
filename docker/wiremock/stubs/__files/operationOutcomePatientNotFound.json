@@ -1,0 +1,24 @@
+{
+  "resourceType": "OperationOutcome",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1"
+    ]
+  },
+  "issue": [
+    {
+      "severity": "error",
+      "code": "not-found",
+      "details": {
+        "coding": [
+          {
+            "system": "https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1",
+            "code": "PATIENT_NOT_FOUND",
+            "display": "PATIENT_NOT_FOUND"
+          }
+        ]
+      },
+      "diagnostics": "No patient details found for patient ID: 9876543210"
+    }
+  ]
+}
