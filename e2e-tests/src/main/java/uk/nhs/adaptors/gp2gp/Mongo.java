@@ -20,16 +20,4 @@ public class Mongo {
         var collection = getCollection();
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
-
-    public static Document findUpdatedEhrExtractStatus(String conversationId, String orginalUpdatedTime) {
-        var collection = getCollection();
-        while (getDocumentByConversationId(collection, conversationId).get("updatedAt").toString().equals(orginalUpdatedTime)) {
-            collection = getCollection();
-        }
-        return getDocumentByConversationId(collection, conversationId);
-    }
-
-    private static Document getDocumentByConversationId(MongoCollection<Document> collection, String conversationId) {
-        return collection.find(Filters.eq("conversationId", conversationId)).first();
-    }
 }
