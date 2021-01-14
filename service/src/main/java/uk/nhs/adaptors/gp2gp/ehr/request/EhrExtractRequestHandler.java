@@ -1,9 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import static java.time.Instant.now;
-
 import java.time.Instant;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +79,9 @@ public class EhrExtractRequestHandler {
             .taskId(taskIdService.createNewTaskId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
@@ -108,25 +108,5 @@ public class EhrExtractRequestHandler {
                 .build();
         }
         return value;
-    }
-
-    public EhrExtractStatus getEhrExtractStatus(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        Optional<EhrExtractStatus> ehrStatus =
-            ehrExtractStatusRepository.findByConversationId(structuredTaskDefinition.getConversationId());
-        if (ehrStatus.isPresent()) {
-            return ehrStatus.get();
-        } else {
-            throw new RuntimeException("No EHR Extract Status for ConversationId: " + structuredTaskDefinition.getConversationId());
-        }
-    }
-
-    public void updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition,
-        EhrExtractStatus ehrExtractStatus) {
-        var accessStructured = new EhrExtractStatus.GpcAccessStructured(ehrExtractStatus.getConversationId()
-            + "_gpc_structured.json", now(),
-            structuredTaskDefinition.getTaskId());
-        ehrExtractStatus.setGpcAccessStructured(accessStructured);
-        ehrExtractStatus.setUpdatedAt(now());
-        ehrExtractStatusRepository.save(ehrExtractStatus);
     }
 }

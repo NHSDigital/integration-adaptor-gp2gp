@@ -6,7 +6,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -15,13 +14,13 @@ public class GpcClient {
     private final GpcConfiguration gpcConfiguration;
 
     public GpcStructuredResponseObject getStructuredRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition, EhrExtractStatus ehrExtractStatus) {
+        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
-            ehrExtractStatus.getEhrRequest().getToAsid(),
-            ehrExtractStatus.getEhrRequest().getFromAsid(),
+            structuredTaskDefinition.getToAsid(),
+            structuredTaskDefinition.getFromAsid(),
             gpcConfiguration.getUrl() + gpcConfiguration.getEndpoint());
 
-        var responseString =  request
+        var responseString = request
             .retrieve()
             .bodyToMono(String.class)
             .block();

@@ -6,6 +6,7 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import javax.net.ssl.SSLException;
@@ -14,6 +15,7 @@ import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Parameters;
+import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -24,6 +26,8 @@ import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
+import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
 import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
@@ -32,7 +36,6 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -49,6 +52,8 @@ public class GpcRequestBuilder {
     private static final String AUTHORIZATION_BEARER = "Bearer ";
     private static final int BYTE_COUNT = 16 * 1024 * 1024;
     private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
+    private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
+        + ".getstructuredrecord-1";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -57,35 +62,29 @@ public class GpcRequestBuilder {
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("patientNHSNumber")
+            .addParameter(buildParamterComponent("patientNHSNumber")
                 .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(structuredTaskDefinition.getNhsNumber())))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeAllergies")
-                .addPart(new Parameters.ParametersParameterComponent()
-                    .setName("includeResolvedAllergies")
+            .addParameter(buildParamterComponent("includeAllergies")
+                .addPart(buildParamterComponent("includeResolvedAllergies")
                     .setValue(new BooleanType(true))))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeMedication"))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeConsultations")
-                .addPart(new Parameters.ParametersParameterComponent()
-                    .setName("includeNumberOfMostRecent")
+            .addParameter(buildParamterComponent("includeMedication"))
+            .addParameter(buildParamterComponent("includeConsultations")
+                .addPart(buildParamterComponent("includeNumberOfMostRecent")
                     .setValue(new IntegerType(NUMBER_OF_RECENT_CONSULTANTS))))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeProblems"))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeImmunisations"))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeUncategorisedData"))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeInvestigations"))
-            .addParameter(new Parameters.ParametersParameterComponent()
-                .setName("includeReferrals"));
+            .addParameter(buildParamterComponent("includeProblems"))
+            .addParameter(buildParamterComponent("includeImmunisations"))
+            .addParameter(buildParamterComponent("includeUncategorisedData"))
+            .addParameter(buildParamterComponent("includeInvestigations"))
+            .addParameter(buildParamterComponent("includeReferrals"));
     }
 
-    public WebClient.RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
-        EhrExtractStatus ehrExtractStatus) throws SSLException {
+    private ParametersParameterComponent buildParamterComponent(String parameterName) {
+        return new ParametersParameterComponent()
+            .setName(parameterName);
+    }
+
+    public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
+        GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
         SslContext sslContext = buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -98,19 +97,7 @@ public class GpcRequestBuilder {
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter
             = BodyInserters.fromValue(requestBody);
 
-        var request = ehrExtractStatus.getEhrRequest();
-
-        return uri
-            .body(bodyInserter)
-            .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, request.getFromAsid())
-            .header(SSP_TO, request.getToAsid())
-            .header(SSP_INTERACTION_ID, "urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1")
-            .header(SSP_TRACE_ID, ehrExtractStatus.getConversationId())
-            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(ehrExtractStatus.getEhrRequest().getFromOdsCode()))
-            .header(TARGET_HOST, gpcConfiguration.getHost())
-            .header(CONTENT_LEN, valueOf(requestBody.length()))
-            .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
+        return buildRequestWithHeadersAndBody(uri, bodyInserter, requestBody, structuredTaskDefinition);
     }
 
     private SslContext buildSSLContext() throws SSLException {
@@ -120,20 +107,39 @@ public class GpcRequestBuilder {
             .build();
     }
 
-    private org.springframework.web.reactive.function.client.WebClient buildWebClient(HttpClient httpClient) {
-        return org.springframework.web.reactive.function.client.WebClient
+    private WebClient buildWebClient(HttpClient httpClient) {
+        return WebClient
             .builder()
-            .exchangeStrategies(
-                ExchangeStrategies
-                    .builder()
-                    .codecs(
-                        configurer -> configurer.defaultCodecs()
-                            .maxInMemorySize(BYTE_COUNT)).build())
+            .exchangeStrategies(buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filter(gpcWebClientFilter.errorHandlingFilter())
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
+    }
+
+    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri,
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, String requestBody,
+        GetGpcStructuredTaskDefinition structuredTaskDefinition) throws IOException {
+        return uri
+            .body(bodyInserter)
+            .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
+            .header(SSP_FROM, structuredTaskDefinition.getFromAsid())
+            .header(SSP_TO, structuredTaskDefinition.getToAsid())
+            .header(SSP_INTERACTION_ID, GPC_STRUCTURED_INTERACTION_ID)
+            .header(SSP_TRACE_ID, structuredTaskDefinition.getConversationId())
+            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(structuredTaskDefinition.getFromOdsCode()))
+            .header(TARGET_HOST, gpcConfiguration.getHost())
+            .header(CONTENT_LEN, valueOf(requestBody.length()))
+            .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
+    }
+
+    private ExchangeStrategies buildExchangeStrategies() {
+        return ExchangeStrategies
+            .builder()
+            .codecs(
+                configurer -> configurer.defaultCodecs()
+                    .maxInMemorySize(BYTE_COUNT)).build();
     }
 }
 

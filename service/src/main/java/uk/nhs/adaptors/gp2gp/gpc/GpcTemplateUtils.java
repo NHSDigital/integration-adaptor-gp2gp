@@ -17,16 +17,12 @@ public class GpcTemplateUtils {
         return m;
     }
 
-    public static String fillTemplate(Mustache template, Object content) {
+    public static String fillTemplate(Mustache template, Object content) throws IOException {
         StringWriter writer = new StringWriter();
         String data = "";
 
-        try {
-            template.execute(writer, content).flush();
-            data += writer.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        template.execute(writer, content).flush();
+        data += writer.toString();
 
         return data;
     }
