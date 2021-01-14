@@ -1,12 +1,14 @@
 package uk.nhs.adaptors.gp2gp;
 
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import static org.springframework.boot.SpringApplication.run;
 
 @SpringBootApplication
 public class Gp2gpApplication {
     public static void main(String[] args) {
-        run(Gp2gpApplication.class);
+        SpringApplication app = new SpringApplication(Gp2gpApplication.class);
+        app.setBannerMode(Banner.Mode.OFF);
+        app.run(args);
     }
 }
