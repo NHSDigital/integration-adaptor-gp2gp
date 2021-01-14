@@ -28,18 +28,18 @@ public class TaskHandler {
             taskType = message.getStringProperty(TASK_TYPE_HEADER_NAME);
             body = JmsReader.readMessage(message);
         } catch (JMSException e) {
-            throw new TaskHandlerException("Unable to read task definition from JSM message", e);
+            throw new TaskHandlerException("Unable to read task definition from JMS message", e);
         }
-        LOGGER.info("Received a task of type {} on internal task queue", taskType);
+        LOGGER.info("Received a message on the task queue with {}} header {}", TASK_TYPE_HEADER_NAME, taskType);
 
         TaskDefinition taskDefinition = taskDefinitionFactory.getTaskDefinition(taskType, body);
 
         mdcService.applyConversationId(taskDefinition.getConversationId());
         mdcService.applyTaskId(taskDefinition.getTaskId());
 
-        LOGGER.info("Current task defined from internal task queue {}", taskType);
-
         TaskExecutor taskExecutor = taskExecutorFactory.getTaskExecutor(taskDefinition.getClass());
+
+        LOGGER.info("Executing a {} with parameters from a {}", taskExecutor.getClass(), taskDefinition.getClass());
 
         taskExecutor.execute(taskDefinition);
     }
