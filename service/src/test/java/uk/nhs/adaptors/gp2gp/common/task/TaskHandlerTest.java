@@ -62,7 +62,7 @@ public class TaskHandlerTest {
 
         assertThatExceptionOfType(TaskHandlerException.class)
             .isThrownBy(() -> taskHandler.handle(message))
-            .withMessageContaining("Unable to read task definition from JSM message");
+            .withMessageContaining("Unable to read task definition from JMS message");
     }
 
 }
