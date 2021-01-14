@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.mockmhsservice.controller;
 
+import java.io.IOException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -43,7 +44,7 @@ public class MhsMockController {
         try {
             return mockMhsService.handleRequest(
                     interactionId, waitForResponse, fromAsid, messageId, correlationId, odsCode, mockMhsMessage);
-        } catch (Exception e) {
+        } catch (IOException e) {
             rootNode.put("message", e.getMessage());
             jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
             return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);

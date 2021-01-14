@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +19,6 @@ import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 import uk.nhs.adaptors.mockmhsservice.common.InboundMessage;
-import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 
 @RestController
@@ -47,12 +47,14 @@ public class MockMhsService {
 
         String responseJsonString;
         String mockSuccessMessage = "Message acknowledged.";
-        String mockErrorMessage = "Error, cannot handle request header Interaction-Id.";
+        String mockInteractionIdErrorMessage = "Error, cannot handle request header Interaction-Id.";
+        String mockRequestBodyErrorMessage = "Error, content of request body does not match expected JSON";
+        String mockInboundReplyErrorMessage = "Error, could not produce inbound reply.";
 
         try {
             verifyJson(mockMhsMessage);
         } catch (JsonProcessingException e) {
-            rootNode.put("message", e.getMessage());
+            rootNode.put("message", mockRequestBodyErrorMessage);
             responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
             return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
         }
@@ -63,23 +65,19 @@ public class MockMhsService {
                 rootNode.put("message", mockSuccessMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, ACCEPTED);
-            } catch (MockMHSException e) {
-                rootNode.put("message", e.getMessage());
+            } catch (JmsException e) {
+                rootNode.put("message", mockInboundReplyErrorMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
             }
         }
 
-        rootNode.put("message", mockErrorMessage);
+        rootNode.put("message", mockInteractionIdErrorMessage);
         responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
         return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
     }
 
     private void verifyJson(String json) throws JsonProcessingException {
-        try {
-            objectMapper.readValue(json, InboundMessage.class);
-        } catch (JsonProcessingException e) {
-            throw new MockMHSException("Error, content of request body does not match expected JSON", e);
-        }
+        objectMapper.readValue(json, InboundMessage.class);
     }
 }
