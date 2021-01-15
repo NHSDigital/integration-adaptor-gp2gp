@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.mockmhsservice.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -28,8 +29,8 @@ public class MockMhsService {
     private final ObjectMapper objectMapper;
     private final InboundProducer inboundProducer;
 
-    @Value("classpath:COPC_IN000001UK01.xml")
-    private Resource xmlStubPayload;
+//    @Value("classpath:COPC_IN000001UK01.xml")
+//    private Resource xmlStubPayload;
 
     public ResponseEntity<String> handleRequest(
             String interactionId,
@@ -39,6 +40,8 @@ public class MockMhsService {
             String correlationId,
             String odsCode,
             String mockMhsMessage) throws IOException {
+
+        this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml");
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
@@ -63,7 +66,9 @@ public class MockMhsService {
 
         if (interactionId.equals(mockValidInteractionId)) {
             try {
-                inboundProducer.sendToMhsInboundQueue(readString(xmlStubPayload.getFile().toPath(), UTF_8));
+//                System.out.println(this.xmlStubPayload.getFile().toPath());
+                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath());
+//                inboundProducer.sendToMhsInboundQueue(readString(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath().get, UTF_8));
                 rootNode.put("message", mockSuccessMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, ACCEPTED);
