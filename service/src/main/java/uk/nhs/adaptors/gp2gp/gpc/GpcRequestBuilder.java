@@ -8,6 +8,16 @@ import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
 import java.util.Collections;
 
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.IntegerType;
@@ -25,15 +35,6 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -89,13 +90,23 @@ public class GpcRequestBuilder {
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.POST)
-            .uri(gpcConfiguration.getEndpoint());
+            .uri(gpcConfiguration.getStructuredEndpoint());
 
         var requestBody = fhirParser.encodeResourceToString(requestBodyParameters);
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter
             = BodyInserters.fromValue(requestBody);
 
         return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition);
+    }
+
+    public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
+        SslContext sslContext = buildSSLContext();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
+
+        return client
+            .method(HttpMethod.GET)
+            .uri(gpcConfiguration.getDocumentEndpoint() + "/" + documentTaskDefinition.getDocumentId());
     }
 
     @SneakyThrows
@@ -118,15 +129,15 @@ public class GpcRequestBuilder {
     }
 
     private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition) {
         return uri
             .body(bodyInserter)
             .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, structuredTaskDefinition.getFromAsid())
-            .header(SSP_TO, structuredTaskDefinition.getToAsid())
+            .header(SSP_FROM, taskDefinition.getFromAsid())
+            .header(SSP_TO, taskDefinition.getToAsid())
             .header(SSP_INTERACTION_ID, GPC_STRUCTURED_INTERACTION_ID)
-            .header(SSP_TRACE_ID, structuredTaskDefinition.getConversationId())
-            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(structuredTaskDefinition.getFromOdsCode()))
+            .header(SSP_TRACE_ID, taskDefinition.getConversationId())
+            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
             .header(TARGET_HOST, gpcConfiguration.getHost())
             .header(CONTENT_LEN, valueOf(requestBody.length()))
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);

@@ -18,7 +18,7 @@ public class GpcClient {
         LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             structuredTaskDefinition.getToAsid(),
             structuredTaskDefinition.getFromAsid(),
-            gpcConfiguration.getUrl() + gpcConfiguration.getEndpoint());
+            gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
 
         var responseString = request
             .retrieve()
@@ -29,6 +29,26 @@ public class GpcClient {
             structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
             structuredTaskDefinition.getConversationId(),
             structuredTaskDefinition.getTaskId(),
+            responseString
+        );
+    }
+
+    public GpcDocumentResponseObject getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+            GetGpcDocumentTaskDefinition documentTaskDefinition) {
+        LOGGER.info("Gpc Document Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
+            documentTaskDefinition.getToAsid(),
+            documentTaskDefinition.getFromAsid(),
+            gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+
+        var responseString = request
+            .retrieve()
+            .bodyToMono(String.class)
+            .block();
+
+        return new GpcDocumentResponseObject(
+            documentTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
+            documentTaskDefinition.getConversationId(),
+            documentTaskDefinition.getTaskId(),
             responseString
         );
     }

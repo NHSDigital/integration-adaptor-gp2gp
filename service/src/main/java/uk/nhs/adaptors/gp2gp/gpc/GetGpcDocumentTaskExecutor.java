@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URI;
-import java.time.Instant;
 import java.util.Optional;
 
 import lombok.SneakyThrows;
@@ -11,14 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -42,11 +36,13 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         .build();
 
     @Autowired
-    private EhrExtractStatusRepository ehrExtractStatusRepository;
-    @Autowired
     private StorageConnector storageConnector;
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private GpcPatientDataHandler gpcPatientDataHandler;
+    @Autowired
+    private GpcRequestBuilder gpcRequestBuilder;
+    @Autowired
+    private GpcClient gpcClient;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -60,33 +56,17 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         URI uri = new URI(GPC_SERVICE_URL + "/" + GPC_REDIRECT_URL + taskDefinition.getDocumentId());
         LOGGER.info("Performed request to {} via proxy server url {}", GPC_SERVICE_URL, GPC_REDIRECT_URL);
 
-        Optional<String> gpcPatientDocument = webClient.get()
-            .uri(uri)
-            .retrieve()
-            .bodyToMono(String.class)
-            .onErrorResume(WebClientResponseException.class,
-                ex -> ex.getRawStatusCode() == HttpStatus.NOT_FOUND.value() ? Mono.empty() : Mono.error(ex))
-            .blockOptional();
+        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
+        GpcDocumentResponseObject gpcDocumentResponseObject = gpcClient.getDocumentRecord(request, taskDefinition);
 
-        gpcPatientDocument.ifPresent(document -> {
-            String documentName = taskDefinition.getDocumentId() + ".json";
-            uploadDocument(documentName, document);
-            updateDocumentWithinDatabase(taskDefinition, documentName);
-        });
+        String documentName = taskDefinition.getDocumentId() + ".json";
+        uploadDocument(documentName, gpcDocumentResponseObject.getResponse());
+        gpcPatientDataHandler.updateEhrExtractStatusAccessDocument(taskDefinition, documentName);
     }
 
     @SneakyThrows
     private void uploadDocument(String documentName, String gpcPatientDocument) {
         InputStream inputStream = new ByteArrayInputStream(gpcPatientDocument.getBytes());
         storageConnector.uploadToStorage(inputStream, inputStream.available(), documentName);
-    }
-
-    private void updateDocumentWithinDatabase(GetGpcDocumentTaskDefinition taskDefinition, String documentName) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("conversationId").is(taskDefinition.getConversationId()).and("gpcAccessDocuments.objectName").is(documentName));
-        Update update = new Update();
-        update.set("gpcAccessDocuments.$.accessedAt", Instant.now());
-        update.set("gpcAccessDocuments.$.taskId", taskDefinition.getTaskId());
-        mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
     }
 }

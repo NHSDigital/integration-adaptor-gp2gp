@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class GpcConfiguration {
     private String url;
-    private String endpoint;
+    private String structuredEndpoint;
+    private String documentEndpoint;
     private String host;
 }
