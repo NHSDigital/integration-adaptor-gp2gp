@@ -2,6 +2,8 @@ package uk.nhs.adaptors.mockmhsservice.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +14,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.micrometer.core.instrument.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -41,8 +45,6 @@ public class MockMhsService {
             String odsCode,
             String mockMhsMessage) throws IOException {
 
-        this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml");
-
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
@@ -67,8 +69,13 @@ public class MockMhsService {
         if (interactionId.equals(mockValidInteractionId)) {
             try {
 //                System.out.println(this.xmlStubPayload.getFile().toPath());
-                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath());
-//                inboundProducer.sendToMhsInboundQueue(readString(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath().get, UTF_8));
+                //ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath());
+
+                var inputStream = this.getClass().getClassLoader().getResourceAsStream("COPC_IN000001UK01.xml");
+                var text = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+
+                //                inboundProducer.sendToMhsInboundQueue(readString(this.getClass().getClassLoader().getResource("COPC_IN000001UK01.xml").getPath().get, UTF_8));
                 rootNode.put("message", mockSuccessMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, ACCEPTED);
