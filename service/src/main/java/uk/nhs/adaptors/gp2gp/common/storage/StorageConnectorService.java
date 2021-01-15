@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE
 
 import java.io.ByteArrayInputStream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 @Service
-@AllArgsConstructor
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class StorageConnectorService {
     private final StorageConnector storageConnector;
     private final ObjectMapper objectMapper;

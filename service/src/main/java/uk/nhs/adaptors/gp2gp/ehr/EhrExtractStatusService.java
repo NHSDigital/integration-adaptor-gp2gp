@@ -28,9 +28,9 @@ public class EhrExtractStatusService {
         query.addCriteria(Criteria.where("conversationId").is(structuredTaskDefinition.getConversationId()));
         Update update = new Update();
         update.set("updatedAt", now);
-        update.set("gpcAccessStructured.$.accessedAt", now);
-        update.set("gpcAccessStructured.$.taskId", structuredTaskDefinition.getTaskId());
-        update.set("gpcAccessStructured.$.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        update.set("gpcAccessStructured.accessedAt", now);
+        update.set("gpcAccessStructured.taskId", structuredTaskDefinition.getTaskId());
+        update.set("gpcAccessStructured.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
     }
 }
