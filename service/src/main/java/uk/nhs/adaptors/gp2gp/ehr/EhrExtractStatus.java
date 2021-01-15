@@ -22,16 +22,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 })
 @Data
 @Document
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class EhrExtractStatus implements TimeToLive {
     public static final String EHR_EXTRACT_STATUS_UNIQUE_INDEX = "ehr_extract_status_unique_index";
 
-    private Instant created;
-    private Instant updatedAt;
     @Id
     private String id;
+    private Instant created;
+    private Instant updatedAt;
     private String conversationId;
     private EhrRequest ehrRequest;
     private List<GpcAccessDocument> gpcAccessDocuments;
@@ -42,6 +42,14 @@ public class EhrExtractStatus implements TimeToLive {
         this.conversationId = conversationId;
         this.ehrRequest = ehrRequest;
         this.gpcAccessDocuments = gpcAccessDocuments;
+    }
+    private GpcAccessStructured gpcAccessStructured;
+
+    public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
+        this.created = created;
+        this.updatedAt = updatedAt;
+        this.conversationId = conversationId;
+        this.ehrRequest = ehrRequest;
     }
 
     @Data
@@ -63,6 +71,15 @@ public class EhrExtractStatus implements TimeToLive {
     @AllArgsConstructor
     @Document
     public static class GpcAccessDocument {
+        private String objectName;
+        private Instant accessedAt;
+        private String taskId;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    public static class GpcAccessStructured {
         private String objectName;
         private Instant accessedAt;
         private String taskId;

@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,14 +54,11 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
-        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(taskIdService.createNewTaskId())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .build();
-        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
+    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
+        EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
+        Instant now = timestampService.now();
+        String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
+        return new EhrExtractStatus(now, now, conversationId, ehrRequest, new ArrayList<>());
     }
 
     private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
@@ -76,11 +72,17 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
-        EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
-        Instant now = timestampService.now();
-        String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest, new ArrayList<>());
+    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
