@@ -51,6 +51,8 @@ public class MockMhsService {
         String mockRequestBodyErrorMessage = "Error, content of request body does not match expected JSON";
         String mockInboundReplyErrorMessage = "Error, could not produce inbound reply.";
 
+        String mockValidInteractionId = "RCMR_IN030000UK06";
+
         try {
             verifyJson(mockMhsMessage);
         } catch (JsonProcessingException e) {
@@ -59,7 +61,7 @@ public class MockMhsService {
             return new ResponseEntity<>(responseJsonString, INTERNAL_SERVER_ERROR);
         }
 
-        if (interactionId.equals("RCMR_IN030000UK06")) {
+        if (interactionId.equals(mockValidInteractionId)) {
             try {
                 inboundProducer.sendToMhsInboundQueue(readString(xmlStubPayload.getFile().toPath(), UTF_8));
                 rootNode.put("message", mockSuccessMessage);
