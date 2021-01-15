@@ -1,11 +1,11 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.common.storage;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GpcStructuredResponseObject {
+public class StorageDataWrapper {
     private String type;
     private String conversationId;
     private String taskId;

@@ -25,7 +25,7 @@ public class GpcTemplateUtils {
             template.execute(writer, content).flush();
             data += writer.toString();
         } catch (IOException e) {
-            throw new GpcException("Unable to create the JWT token for the Authorization header. Exception: ", e);
+            throw new GpConnectException("Unable to create the JWT token for the Authorization header. Exception: ", e.getCause());
         }
 
         return data;

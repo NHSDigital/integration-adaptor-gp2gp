@@ -33,8 +33,8 @@ gp2gp:
     autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
     ttl: ${GP2GP_MONGO_TTL:P7D}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
+  gpc:
+    url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
+    endpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
+    host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
 
-gpConnect:
-  url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
-  endpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
-  host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}

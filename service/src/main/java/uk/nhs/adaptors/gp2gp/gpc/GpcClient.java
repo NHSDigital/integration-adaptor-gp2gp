@@ -6,6 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -13,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GpcClient {
     private final GpcConfiguration gpcConfiguration;
 
-    public GpcStructuredResponseObject getStructuredRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+    public StorageDataWrapper getStructuredRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             structuredTaskDefinition.getToAsid(),
@@ -25,7 +26,7 @@ public class GpcClient {
             .bodyToMono(String.class)
             .block();
 
-        return new GpcStructuredResponseObject(
+        return new StorageDataWrapper(
             structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
             structuredTaskDefinition.getConversationId(),
             structuredTaskDefinition.getTaskId(),

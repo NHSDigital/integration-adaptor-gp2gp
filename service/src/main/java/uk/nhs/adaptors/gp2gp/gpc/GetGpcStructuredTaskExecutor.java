@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -17,7 +18,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final GpcClient gpcClient;
     private final GpcRequestBuilder gpcRequestBuilder;
     private final StorageConnectorService storageConnectorService;
-    private final GpcPatientDataHandler gpcPatientHandler;
+    private final EhrExtractStatusService gpcPatientHandler;
     private final TaskDispatcher taskDispatcher;
 
     @Override
@@ -33,7 +34,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
         var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
 
-        storageConnectorService.handleStructuredRecord(response);
+        storageConnectorService.uploadWithMetadata(response);
         gpcPatientHandler.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
     }
 }

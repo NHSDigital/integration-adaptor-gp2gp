@@ -7,7 +7,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
-import uk.nhs.adaptors.gp2gp.gpc.GpcConfiguration;
 
 import javax.jms.Message;
 
@@ -26,9 +25,6 @@ public class TaskConsumerTest {
 
     @Mock
     private MDCService mdcService;
-
-    @Mock
-    private GpcConfiguration gpcConfiguration;
 
     @Mock
     private Message message;
