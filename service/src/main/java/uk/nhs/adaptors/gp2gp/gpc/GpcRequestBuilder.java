@@ -53,6 +53,7 @@ public class GpcRequestBuilder {
     private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
     private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
         + ".getstructuredrecord-1";
+    private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -96,7 +97,7 @@ public class GpcRequestBuilder {
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter
             = BodyInserters.fromValue(requestBody);
 
-        return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition);
+        return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition, GPC_STRUCTURED_INTERACTION_ID);
     }
 
     public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
@@ -104,9 +105,11 @@ public class GpcRequestBuilder {
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
 
-        return client
+        WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
             .uri(gpcConfiguration.getDocumentEndpoint() + "/" + documentTaskDefinition.getDocumentId());
+
+        return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
     @SneakyThrows
@@ -128,19 +131,22 @@ public class GpcRequestBuilder {
             .build();
     }
 
-    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition) {
-        return uri
-            .body(bodyInserter)
-            .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
+    private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {
+        return uri.accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
             .header(SSP_FROM, taskDefinition.getFromAsid())
             .header(SSP_TO, taskDefinition.getToAsid())
-            .header(SSP_INTERACTION_ID, GPC_STRUCTURED_INTERACTION_ID)
+            .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
             .header(TARGET_HOST, gpcConfiguration.getHost())
-            .header(CONTENT_LEN, valueOf(requestBody.length()))
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
+    }
+
+    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
+            BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
+        return buildRequestWithHeaders(uri, taskDefinition, interactionId)
+            .body(bodyInserter)
+            .header(CONTENT_LEN, valueOf(requestBody.length()));
     }
 
     private ExchangeStrategies buildExchangeStrategies() {
