@@ -5,8 +5,10 @@ plugins {
 	id "io.freefair.lombok" version "5.1.0"
 }
 
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
 group = 'uk.nhs.adaptors'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
