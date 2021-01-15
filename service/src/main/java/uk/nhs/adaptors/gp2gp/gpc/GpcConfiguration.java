@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Component
-@ConfigurationProperties(prefix = "gp-connect")
+@ConfigurationProperties(prefix = "gp2gp.gpc")
 @Getter
 @Setter
 public class GpcConfiguration {

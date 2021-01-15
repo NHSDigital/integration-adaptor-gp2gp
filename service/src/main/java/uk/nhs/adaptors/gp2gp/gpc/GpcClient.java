@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -13,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GpcClient {
     private final GpcConfiguration gpcConfiguration;
 
-    public GpcStructuredResponseObject getStructuredRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+    public StorageDataWrapper getStructuredRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             structuredTaskDefinition.getToAsid(),
@@ -25,7 +26,7 @@ public class GpcClient {
             .bodyToMono(String.class)
             .block();
 
-        return new GpcStructuredResponseObject(
+        return new StorageDataWrapper(
             structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
             structuredTaskDefinition.getConversationId(),
             structuredTaskDefinition.getTaskId(),
@@ -33,7 +34,7 @@ public class GpcClient {
         );
     }
 
-    public GpcDocumentResponseObject getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+    public StorageDataWrapper getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
             GetGpcDocumentTaskDefinition documentTaskDefinition) {
         LOGGER.info("Gpc Document Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             documentTaskDefinition.getToAsid(),
@@ -45,7 +46,7 @@ public class GpcClient {
             .bodyToMono(String.class)
             .block();
 
-        return new GpcDocumentResponseObject(
+        return new StorageDataWrapper(
             documentTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
             documentTaskDefinition.getConversationId(),
             documentTaskDefinition.getTaskId(),

@@ -1,19 +1,17 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
-
     private final GpcClient gpcClient;
     private final GpcRequestBuilder gpcRequestBuilder;
     private final StorageConnectorService storageConnectorService;
@@ -32,7 +30,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
         var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
 
-        storageConnectorService.handleStructuredRecord(response);
+        storageConnectorService.uploadWithMetadata(response);
         gpcPatientHandler.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
     }
 }

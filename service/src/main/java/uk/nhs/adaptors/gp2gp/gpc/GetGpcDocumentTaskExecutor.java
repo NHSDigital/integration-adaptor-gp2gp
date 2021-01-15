@@ -34,7 +34,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
         var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
-        GpcDocumentResponseObject gpcDocumentResponseObject = gpcClient.getDocumentRecord(request, taskDefinition);
+        var gpcDocumentResponseObject = gpcClient.getDocumentRecord(request, taskDefinition);
 
         String documentName = taskDefinition.getDocumentId() + ".json";
         uploadDocument(documentName, gpcDocumentResponseObject.getResponse());

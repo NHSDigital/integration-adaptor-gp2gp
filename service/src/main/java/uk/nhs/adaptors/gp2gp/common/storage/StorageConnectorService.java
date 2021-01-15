@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.gpc.GpcStructuredResponseObject;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class StorageConnectorService {
     private final ObjectMapper objectMapper;
 
     @SneakyThrows(JsonProcessingException.class)
-    public void handleStructuredRecord(GpcStructuredResponseObject response) {
+    public void uploadWithMetadata(StorageDataWrapper response) {
         String jsonStringResponse = objectMapper.writeValueAsString(response);
         var responseBytes = jsonStringResponse.getBytes(UTF_8);
         var responseInputStream = new ByteArrayInputStream(responseBytes);
