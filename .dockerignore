@@ -5,3 +5,6 @@
 !service/settings.gradle
 !e2e-tests/src
 !e2e-tests/build.gradle
+!mock-mhs-adaptor/src
+!mock-mhs-adaptor/build.gradle
+!mock-mhs-adaptor/settings.gradle

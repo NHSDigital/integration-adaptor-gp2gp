@@ -28,8 +28,12 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
 
-  mock-mhs-service:
-    image: uk.nhs/mock-mhs-service:0.0.1-SNAPSHOT
+  mock-mhs-adaptor:
+    build:
+      context: ../
+      dockerfile: docker/mock-mhs-adaptor/Dockerfile
+    depends_on: 
+      - gp2gp
     ports:
       - "8081:8081"
     environment:
