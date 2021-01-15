@@ -1,5 +1,9 @@
-FROM adoptopenjdk/openjdk11:slim
+FROM gradle:jdk11
 
-COPY mock-mhs-service.jar /
+COPY --chown=gradle:gradle mock-mhs-service /home/gradle/mock-mhs-service
 
-ENTRYPOINT java -jar /mock-mhs-service.jar
+WORKDIR /home/gradle/mock-mhs-service
+
+RUN gradle classes
+
+ENTRYPOINT ["gradle", "check"]
