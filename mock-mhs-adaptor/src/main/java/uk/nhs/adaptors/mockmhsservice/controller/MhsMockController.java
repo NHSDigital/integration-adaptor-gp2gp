@@ -1,9 +1,10 @@
 package uk.nhs.adaptors.mockmhsservice.controller;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Optional;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,6 @@ import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MhsMockController {
     private final MockMhsService mockMhsService;
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final ObjectNode rootNode = objectMapper.createObjectNode();
 
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE,
@@ -33,14 +32,11 @@ public class MhsMockController {
     )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
-            @RequestHeader(value="Interaction-Id", defaultValue="") String interactionId,
-            @RequestHeader(value="wait-for-response", defaultValue="false") String waitForResponse,
-            @RequestHeader(value="from-asid", required=false) String fromAsid,
-            @RequestHeader(value="Message-Id", required=false) String messageId,
-            @RequestHeader(value="Correlation-Id", required=false) String correlationId,
-            @RequestHeader(value="ods-code", required=false) String odsCode,
+            @RequestHeader Map<String, String> headers,
             @RequestBody String mockMhsMessage) throws JsonProcessingException {
+
         try {
+            String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse("");
             return mockMhsService.handleRequest(interactionId, mockMhsMessage);
         } catch (IOException e) {
             LOGGER.error("Error could not process mock request", e);

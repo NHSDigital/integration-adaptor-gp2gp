@@ -48,7 +48,7 @@ public class MockMhsService {
         if (interactionId.equals(mockValidInteractionId)) {
             try {
                 inboundProducer.sendToMhsInboundQueue(stubInboundMessage);
-                LOGGER.info("Placed stub Mock Outbound Message on Inbound Queue");
+                LOGGER.info("Placed stub message on Inbound Queue");
                 return new ResponseEntity<>(ACCEPTED);
             } catch (JmsException e) {
                 LOGGER.error("Error could not produce inbound reply", e);
@@ -56,7 +56,7 @@ public class MockMhsService {
             }
         }
 
-        LOGGER.error("Error cannot handle request header Interaction-Id");
+        LOGGER.error("Error cannot handle request header Interaction-Id {}", interactionId);
         return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
     }
 
