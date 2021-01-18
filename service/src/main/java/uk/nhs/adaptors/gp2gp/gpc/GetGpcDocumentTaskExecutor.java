@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     @SneakyThrows
     private void uploadDocument(String documentName, String gpcPatientDocument) {
-        InputStream inputStream = new ByteArrayInputStream(gpcPatientDocument.getBytes());
+        InputStream inputStream = new ByteArrayInputStream(gpcPatientDocument.getBytes(StandardCharsets.UTF_8));
         storageConnector.uploadToStorage(inputStream, inputStream.available(), documentName);
     }
 }
