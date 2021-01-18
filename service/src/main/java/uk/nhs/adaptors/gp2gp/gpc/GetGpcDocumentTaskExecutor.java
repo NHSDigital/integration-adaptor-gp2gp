@@ -34,10 +34,10 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
         var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
-        var gpcDocumentResponseObject = gpcClient.getDocumentRecord(request, taskDefinition);
+        var response = gpcClient.getDocumentRecord(request, taskDefinition);
 
         String documentName = taskDefinition.getDocumentId() + ".json";
-        uploadDocument(documentName, gpcDocumentResponseObject.getResponse());
+        uploadDocument(documentName, response);
         gpcPatientDataHandler.updateEhrExtractStatusAccessDocument(taskDefinition, documentName);
     }
 

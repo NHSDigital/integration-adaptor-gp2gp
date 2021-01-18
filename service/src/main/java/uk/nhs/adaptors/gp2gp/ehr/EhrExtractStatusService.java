@@ -28,9 +28,12 @@ public class EhrExtractStatusService {
         query.addCriteria(Criteria.where("conversationId").is(structuredTaskDefinition.getConversationId()));
         Update update = new Update();
         update.set("updatedAt", now);
-        update.set("gpcAccessStructured.$.accessedAt", now);
-        update.set("gpcAccessStructured.$.taskId", structuredTaskDefinition.getTaskId());
-        update.set("gpcAccessStructured.$.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
-        mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        update.set("gpcAccessStructured.accessedAt", now);
+        update.set("gpcAccessStructured.taskId", structuredTaskDefinition.getTaskId());
+        update.set("gpcAccessStructured.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        var updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        if (!updateResult.wasAcknowledged()) {
+            throw new EhrExtractException("EHR Extarct Status was not updated with Access Structured");
+        }
     }
 }
