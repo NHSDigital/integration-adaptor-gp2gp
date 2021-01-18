@@ -42,8 +42,7 @@ public class MhsMockController {
         String jsonString;
 
         try {
-            return mockMhsService.handleRequest(
-                    interactionId, waitForResponse, fromAsid, messageId, correlationId, odsCode, mockMhsMessage);
+            return mockMhsService.handleRequest(interactionId, mockMhsMessage);
         } catch (IOException e) {
             rootNode.put("message", e.getMessage());
             jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);

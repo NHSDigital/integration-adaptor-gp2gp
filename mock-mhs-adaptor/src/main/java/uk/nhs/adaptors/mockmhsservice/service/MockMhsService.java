@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.mockmhsservice.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -26,14 +27,16 @@ public class MockMhsService {
     private final ObjectMapper objectMapper;
     private final InboundProducer inboundProducer;
 
-    public ResponseEntity<String> handleRequest(
-            String interactionId,
-            String waitForResponse,
-            String fromAsid,
-            String messageId,
-            String correlationId,
-            String odsCode,
-            String mockMhsMessage) throws IOException {
+    private final String mockSuccessMessage = "Message acknowledged.";
+    private final String mockInteractionIdErrorMessage = "Error, cannot handle request header Interaction-Id.";
+    private final String mockRequestBodyErrorMessage = "Error, content of request body does not match expected JSON";
+    private final String mockInboundReplyErrorMessage = "Error, could not produce inbound reply.";
+    private final String mockValidInteractionId = "RCMR_IN030000UK06";
+
+    private final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("COPC_IN000001UK01.xml");
+    private final String stubEbXmlText = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+    public ResponseEntity<String> handleRequest(String interactionId, String mockMhsMessage) throws IOException {
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
@@ -41,13 +44,6 @@ public class MockMhsService {
         ObjectNode rootNode = objectMapper.createObjectNode();
 
         String responseJsonString;
-        String mockSuccessMessage = "Message acknowledged.";
-        String mockInteractionIdErrorMessage = "Error, cannot handle request header Interaction-Id.";
-        String mockRequestBodyErrorMessage = "Error, content of request body does not match expected JSON";
-        String mockInboundReplyErrorMessage = "Error, could not produce inbound reply.";
-
-        String mockValidInteractionId = "RCMR_IN030000UK06";
-
         try {
             verifyJson(mockMhsMessage);
         } catch (JsonProcessingException e) {
@@ -58,10 +54,7 @@ public class MockMhsService {
 
         if (interactionId.equals(mockValidInteractionId)) {
             try {
-                var inputStream = this.getClass().getClassLoader().getResourceAsStream("COPC_IN000001UK01.xml");
-                var text = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
-                inboundProducer.sendToMhsInboundQueue(text);
+                inboundProducer.sendToMhsInboundQueue(stubEbXmlText);
                 rootNode.put("message", mockSuccessMessage);
                 responseJsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
                 return new ResponseEntity<>(responseJsonString, ACCEPTED);

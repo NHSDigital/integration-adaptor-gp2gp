@@ -3,6 +3,7 @@ package uk.nhs.adaptors.mockmhsservice.producer;
 import org.springframework.jms.JmsException;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +12,8 @@ import lombok.RequiredArgsConstructor;
 public class InboundProducer {
 
     private final JmsTemplate jmsTemplate;
-    private final String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound");
+    @Value("${gp2gp.amqp.inboundQueueName}")
+    private String queueName;
 
     public void sendToMhsInboundQueue(String messageContent) throws JmsException {
         jmsTemplate.send(queueName, session -> session.createTextMessage(messageContent));
