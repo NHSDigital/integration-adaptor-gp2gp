@@ -159,8 +159,11 @@ docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.y
 Environment variables with the same name/meaning as the application's control the e2e test target environment:
 
 * GP2GP_AMQP_BROKERS
+* GP2GP_AMQP_USERNAME
+* GP2GP_AMQP_PASSWORD
 * GP2GP_MONGO_URI
 * GP2GP_MONGO_DATABASE_NAME
+* GP2GP_MHS_INBOUND_QUEUE
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.
