@@ -44,7 +44,6 @@ public class EhrExtractRequestHandler {
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final TaskIdService taskIdService;
-    private final GpcConfiguration gpcConfiguration;
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
