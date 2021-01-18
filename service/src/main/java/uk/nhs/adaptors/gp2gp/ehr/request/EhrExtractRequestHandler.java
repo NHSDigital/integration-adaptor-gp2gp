@@ -1,12 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Instant;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -16,8 +19,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-
-import java.time.Instant;
+import uk.nhs.adaptors.gp2gp.gpc.GpcConfiguration;
 
 @Service
 @Slf4j
@@ -41,6 +43,7 @@ public class EhrExtractRequestHandler {
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final TaskIdService taskIdService;
+    private final GpcConfiguration gpcConfiguration;
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
@@ -52,14 +55,11 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
-        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(taskIdService.createNewTaskId())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .build();
-        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
+    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
+        EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
+        Instant now = timestampService.now();
+        String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
+        return new EhrExtractStatus(now, now, conversationId, ehrRequest);
     }
 
     private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
@@ -73,11 +73,17 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
-        EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
-        Instant now = timestampService.now();
-        String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest);
+    private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {

@@ -11,6 +11,9 @@ public abstract class TaskDefinition {
     private final String taskId;
     private final String requestId;
     private final String conversationId;
+    private final String toAsid;
+    private final String fromAsid;
+    private final String fromOdsCode;
 
     public abstract TaskType getTaskType();
 }
