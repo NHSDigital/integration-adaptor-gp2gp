@@ -58,7 +58,13 @@ public class EhrExtractRequestHandler {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest, new ArrayList<>());
+        return EhrExtractStatus.builder()
+            .created(now)
+            .updatedAt(now)
+            .conversationId(conversationId)
+            .ehrRequest(ehrRequest)
+            .gpcAccessDocuments(new ArrayList<>())
+            .build();
     }
 
     private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
