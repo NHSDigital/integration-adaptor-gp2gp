@@ -4,6 +4,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class InboundMessage {
+public class OutboundMessage {
     private String payload;
 }

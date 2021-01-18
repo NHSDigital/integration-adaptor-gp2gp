@@ -4,6 +4,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,12 @@ import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MhsMockController {
     private final MockMhsService mockMhsService;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectNode rootNode = objectMapper.createObjectNode();
 
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE,
@@ -37,16 +40,11 @@ public class MhsMockController {
             @RequestHeader(value="Correlation-Id", required=false) String correlationId,
             @RequestHeader(value="ods-code", required=false) String odsCode,
             @RequestBody String mockMhsMessage) throws JsonProcessingException {
-
-        ObjectNode rootNode = objectMapper.createObjectNode();
-        String jsonString;
-
         try {
             return mockMhsService.handleRequest(interactionId, mockMhsMessage);
         } catch (IOException e) {
-            rootNode.put("message", e.getMessage());
-            jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-            return new ResponseEntity<>(jsonString, INTERNAL_SERVER_ERROR);
+            LOGGER.error("Error could not process mock request", e);
+            return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
         }
     }
 }
