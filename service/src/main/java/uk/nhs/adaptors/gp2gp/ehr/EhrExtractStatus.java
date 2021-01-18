@@ -3,8 +3,10 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,16 +20,27 @@ import java.time.Instant;
         unique = true)
 })
 @Data
-@AllArgsConstructor
 @Document
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class EhrExtractStatus implements TimeToLive {
     public static final String EHR_EXTRACT_STATUS_UNIQUE_INDEX = "ehr_extract_status_unique_index";
 
+    @Id
+    private String id;
     private Instant created;
     private Instant updatedAt;
     private String conversationId;
     private EhrRequest ehrRequest;
+    private GpcAccessStructured gpcAccessStructured;
+
+    public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
+        this.created = created;
+        this.updatedAt = updatedAt;
+        this.conversationId = conversationId;
+        this.ehrRequest = ehrRequest;
+    }
 
     @Data
     @AllArgsConstructor
@@ -42,5 +55,14 @@ public class EhrExtractStatus implements TimeToLive {
         private String toAsid;
         private String fromOdsCode;
         private String toOdsCode;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    public static class GpcAccessStructured {
+        private String objectName;
+        private Instant accessedAt;
+        private String taskId;
     }
 }
