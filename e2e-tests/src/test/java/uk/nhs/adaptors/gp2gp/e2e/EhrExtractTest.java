@@ -40,7 +40,7 @@ public class EhrExtractTest {
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
+                .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
