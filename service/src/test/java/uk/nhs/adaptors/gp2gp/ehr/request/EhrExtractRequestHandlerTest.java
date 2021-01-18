@@ -44,6 +44,9 @@ public class EhrExtractRequestHandlerTest {
     private static final String CONVERSATION_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
     private static final String NHS_NUMBER = "9692294935";
     private static final String TASK_ID = "3a93dfdd-5e72-4f23-8311-9f22772787af";
+    private static final String FROM_ASID = "200000000205";
+    private static final String TO_ASID = "200000001161";
+    private static final String FROM_ODS_CODE = "N82668";
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -105,9 +108,9 @@ public class EhrExtractRequestHandlerTest {
                 .nhsNumber(NHS_NUMBER)
                 .fromPartyId("N82668-820670")
                 .toPartyId("B86041-822103")
-                .fromAsid("200000000205")
-                .toAsid("200000001161")
-                .fromOdsCode("N82668")
+                .fromAsid(FROM_ASID)
+                .toAsid(TO_ASID)
+                .fromOdsCode(FROM_ODS_CODE)
                 .toOdsCode("B86041")
                 .build()
             ).build();
@@ -119,6 +122,9 @@ public class EhrExtractRequestHandlerTest {
             .conversationId(CONVERSATION_ID)
             .nhsNumber(NHS_NUMBER)
             .taskId(TASK_ID)
+            .fromAsid(FROM_ASID)
+            .toAsid(TO_ASID)
+            .fromOdsCode(FROM_ODS_CODE)
             .build();
     }
 
