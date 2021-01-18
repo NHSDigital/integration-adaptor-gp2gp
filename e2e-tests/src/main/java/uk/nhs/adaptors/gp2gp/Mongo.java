@@ -28,11 +28,11 @@ public class Mongo {
             .first();
     }
 
-    public static void addAccessDocument(String conversationId, String documentId, String taskId) {
+    public static void addAccessDocument(String conversationId, String documentId, String taskId, Instant accessedAt) {
         Document document = new Document();
         document.append("objectName", documentId + ".json");
         document.append("taskId", taskId);
-        document.append("accessedAt", Instant.now());
+        document.append("accessedAt", accessedAt);
 
         var collection = getCollection();
         collection.updateOne(Filters.eq("conversationId", conversationId), Updates.addToSet("gpcAccessDocuments", document));

@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.e2e;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.nio.charset.Charset;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,14 +49,15 @@ public class EhrExtractTest {
 
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
 
-        Mongo.addAccessDocument(conversationId, DOCUMENT_ID, TASK_ID);
+        Instant accessedAt = Instant.now();
+        Mongo.addAccessDocument(conversationId, DOCUMENT_ID, TASK_ID, accessedAt);
         MessageQueue.sendToMhsTaskQueue(prepareTaskQueueMessage(conversationId));
 
         var extractStatusWithUpdatedFields = AwaitHelper.waitFor(
             () -> Mongo.findEhrExtractStatusWithGpcAccessDocument(conversationId));
 
         assertThatAccessStructuredWasFetched(conversationId, (Document) extractStatusWithUpdatedFields.get(GPC_ACCESS_STRUCTURED));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, (List) extractStatusWithUpdatedFields.get(GPC_ACCESS_DOCUMENTS));
+        assertThatAccessDocumentWasFetched(DOCUMENT_ID, accessedAt, (List) extractStatusWithUpdatedFields.get(GPC_ACCESS_DOCUMENTS));
     }
 
     private static String prepareTaskQueueMessage(String conversationId) {
@@ -84,10 +86,10 @@ public class EhrExtractTest {
         assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(String documentId, List<Document> accessDocuments) {
+    private void assertThatAccessDocumentWasFetched(String documentId, Instant accessedAt, List<Document> accessDocuments) {
         Document document = accessDocuments.get(0);
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
-        assertThat(document.get("accessedAt")).isNotNull();
+        assertThat(document.get("accessedAt")).isNotEqualTo(accessedAt);
         assertThat(document.get("taskId")).isEqualTo(TASK_ID);
     }
 }
