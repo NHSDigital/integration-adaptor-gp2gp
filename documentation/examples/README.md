@@ -28,3 +28,11 @@ New requirement - we need to call an additional endpoint to find all documents.
 The adaptor downloads all documents for the patient.
 
 Same instructions as for "2 - GPC Access Structured" 
+
+## 5 - EHR Request Completed
+
+
+## 6 - EHR Extract Acknowledged (positive)
+
+
+## 7 - EHR Extract Acknowledged (positive)
