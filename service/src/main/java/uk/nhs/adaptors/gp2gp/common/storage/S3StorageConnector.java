@@ -1,11 +1,11 @@
 package uk.nhs.adaptors.gp2gp.common.storage;
 
+import java.io.InputStream;
+
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-
-import java.io.InputStream;
 
 public class S3StorageConnector implements StorageConnector {
     private final AmazonS3 s3client;
@@ -14,8 +14,8 @@ public class S3StorageConnector implements StorageConnector {
     protected S3StorageConnector(StorageConnectorConfiguration configuration) {
         this.bucketName = configuration.getContainerName();
         this.s3client = AmazonS3ClientBuilder
-                .standard()
-                .build();
+            .standard()
+            .build();
     }
 
     @Override
@@ -23,11 +23,12 @@ public class S3StorageConnector implements StorageConnector {
         try {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(streamLength);
+
             s3client.putObject(
-                    bucketName,
-                    filename,
-                    is,
-                    metadata
+                bucketName,
+                filename,
+                is,
+                metadata
             );
         } catch (Exception exception) {
             throw new StorageConnectorException("Error occurred uploading to S3 Bucket", exception);
