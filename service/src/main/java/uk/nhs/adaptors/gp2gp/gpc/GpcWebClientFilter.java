@@ -14,7 +14,9 @@ public class GpcWebClientFilter {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             clientResponse.statusCode();
             if (clientResponse.statusCode().is5xxServerError()
-                || clientResponse.statusCode().is4xxClientError()) {
+                || clientResponse.statusCode().is4xxClientError()
+                || clientResponse.statusCode().is3xxRedirection()
+                || clientResponse.statusCode().is1xxInformational()) {
                 return getResponseError(clientResponse);
             } else {
                 LOGGER.info("Gpc Structured Request successful, status code: {}", clientResponse.statusCode());
