@@ -18,7 +18,7 @@ public class GpcClient {
         LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             structuredTaskDefinition.getToAsid(),
             structuredTaskDefinition.getFromAsid(),
-            gpcConfiguration.getUrl() + gpcConfiguration.getEndpoint());
+            gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
 
         return request
             .retrieve()
