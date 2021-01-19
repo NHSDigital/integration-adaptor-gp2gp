@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import java.time.Instant;
+import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class GpcPatientDataHandler {
             .is(documentName));
         Update update = new Update();
         update.set("gpcAccessDocuments.$.accessedAt", Instant.now());
-        update.set("gpcAccessDocuments.$.taskId", documentTaskDefinition.getTaskId());
+        update.set("gpcAccessDocuments.$.taskId", UUID.randomUUID().toString());
         mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
     }
 }

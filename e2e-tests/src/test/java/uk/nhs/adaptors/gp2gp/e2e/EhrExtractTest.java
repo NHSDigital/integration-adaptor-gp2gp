@@ -28,11 +28,8 @@ public class EhrExtractTest {
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENTS = "gpcAccessDocuments";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
-    private static final String TASK_ID = "test-task-id";
-    private static final String UPDATED_TASK_ID = "updated-task-id";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    private static final String GPC_ACCESS_DOCUMENT_BODY_TEMPLATE = "{\"taskId\":\"%s\"," +
-        "\"requestId\":\"test-request-id\"," +
+    private static final String GPC_ACCESS_DOCUMENT_BODY_TEMPLATE = "{\"requestId\":\"test-request-id\"," +
         "\"conversationId\":\"%s\"," +
         "\"documentId\":\"%s\"," +
         "\"fromAsid\":\"200000000359\"," +
@@ -51,18 +48,19 @@ public class EhrExtractTest {
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
 
         Instant accessedAt = Instant.now();
-        Mongo.addAccessDocument(conversationId, DOCUMENT_ID, TASK_ID, accessedAt);
-        MessageQueue.sendToMhsTaskQueue(prepareTaskQueueMessage(conversationId));
+        String taskId = UUID.randomUUID().toString();
+        Mongo.addAccessDocument(conversationId, DOCUMENT_ID, taskId, accessedAt);
 
+        MessageQueue.sendToMhsTaskQueue(prepareTaskQueueMessage(conversationId));
         assertThatAccessStructuredWasFetched(conversationId, (Document) ehrExtractStatus.get(GPC_ACCESS_STRUCTURED));
 
         var extractStatusWithUpdatedFields = AwaitHelper.waitFor(
-            () -> Mongo.findEhrExtractStatusWithUpdatedGpcAccessDocument(conversationId, UPDATED_TASK_ID));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, accessedAt, (List) extractStatusWithUpdatedFields.get(GPC_ACCESS_DOCUMENTS));
+            () -> Mongo.findEhrExtractStatusByConversationIdWithoutProvidedTaskId(conversationId, taskId));
+        assertThatAccessDocumentWasFetched(DOCUMENT_ID, taskId, accessedAt, (List) extractStatusWithUpdatedFields.get(GPC_ACCESS_DOCUMENTS));
     }
 
     private static String prepareTaskQueueMessage(String conversationId) {
-        return String.format(GPC_ACCESS_DOCUMENT_BODY_TEMPLATE, UPDATED_TASK_ID, conversationId, DOCUMENT_ID);
+        return String.format(GPC_ACCESS_DOCUMENT_BODY_TEMPLATE, conversationId, DOCUMENT_ID);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -87,10 +85,10 @@ public class EhrExtractTest {
         assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(String documentId, Instant accessedAt, List<Document> accessDocuments) {
+    private void assertThatAccessDocumentWasFetched(String documentId, String taskId, Instant accessedAt, List<Document> accessDocuments) {
         Document document = accessDocuments.get(0);
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
         assertThat(document.get("accessedAt")).isNotEqualTo(accessedAt);
-        assertThat(document.get("taskId")).isEqualTo(UPDATED_TASK_ID);
+        assertThat(document.get("taskId")).isNotEqualTo(taskId);
     }
 }
