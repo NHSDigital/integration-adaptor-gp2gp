@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,14 +29,18 @@ public class MockMhsService {
 
     private final InboundProducer inboundProducer;
     private final ObjectMapper objectMapper = new ObjectMapper();
-
+    private final HttpHeaders headers = new HttpHeaders();
     private final String mockValidInteractionId = "RCMR_IN030000UK06";
 
     private final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("COPC_IN000001UK01.json");
     private final String stubInboundMessage = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+    private final InputStream inputStream2 = this.getClass().getClassLoader().getResourceAsStream("StubEbXmlResponse.xml");
+    private final String stubEbXmlResponse = IOUtils.toString(inputStream2, StandardCharsets.UTF_8);
+    private final InputStream inputStream3 = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
+    private final String internalServerErrorResponse = IOUtils.toString(inputStream3, StandardCharsets.UTF_8);
 
     public ResponseEntity<String> handleRequest(String interactionId, String mockMhsMessage) throws IOException {
-
+        headers.setContentType(MediaType.TEXT_HTML);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
@@ -42,22 +48,23 @@ public class MockMhsService {
             verifyOutboundMessagePayload(mockMhsMessage);
         } catch (JsonProcessingException e) {
             LOGGER.error("Error content of request body does not match expected JSON", e);
-            return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
         }
 
         if (interactionId.equals(mockValidInteractionId)) {
             try {
                 inboundProducer.sendToMhsInboundQueue(stubInboundMessage);
                 LOGGER.info("Placed stub message on Inbound Queue");
-                return new ResponseEntity<>(ACCEPTED);
+                headers.setContentType(MediaType.TEXT_XML);
+                return new ResponseEntity<>(stubEbXmlResponse, headers, ACCEPTED);
             } catch (JmsException e) {
                 LOGGER.error("Error could not produce inbound reply", e);
-                return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
             }
         }
 
-        LOGGER.error("Error cannot handle request header Interaction-Id {}", interactionId);
-        return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
+        LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);
+        return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
     }
 
     private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException {
