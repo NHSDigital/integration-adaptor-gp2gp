@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
@@ -13,14 +14,11 @@ public class GpcWebClientFilter {
     public ExchangeFilterFunction errorHandlingFilter() {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             clientResponse.statusCode();
-            if (clientResponse.statusCode().is5xxServerError()
-                || clientResponse.statusCode().is4xxClientError()
-                || clientResponse.statusCode().is3xxRedirection()
-                || clientResponse.statusCode().is1xxInformational()) {
-                return getResponseError(clientResponse);
-            } else {
+            if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                 LOGGER.info("Gpc Structured Request successful, status code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
+            } else {
+                return getResponseError(clientResponse);
             }
         });
     }
