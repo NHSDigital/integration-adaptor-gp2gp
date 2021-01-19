@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Autowired
     private StorageConnector storageConnector;
     @Autowired
-    private GpcPatientDataHandler gpcPatientDataHandler;
+    private EhrExtractStatusService ehrExtractStatusService;
     @Autowired
     private GpcRequestBuilder gpcRequestBuilder;
     @Autowired
@@ -39,7 +40,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         String documentName = taskDefinition.getDocumentId() + ".json";
         uploadDocument(documentName, response);
-        gpcPatientDataHandler.updateEhrExtractStatusAccessDocument(taskDefinition, documentName);
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName);
     }
 
     @SneakyThrows
