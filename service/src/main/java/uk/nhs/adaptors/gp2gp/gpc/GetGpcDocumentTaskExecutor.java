@@ -1,12 +1,11 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
@@ -16,8 +15,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTaskDefinition> {
+    private static final String JSON_EXTENSION = ".json";
+
     @Autowired
-    private StorageConnector storageConnector;
+    private StorageConnectorService storageConnectorService;
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
     @Autowired
@@ -32,20 +33,24 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     @Override
     @SneakyThrows
-    public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
+    public void execute(GetGpcDocumentTaskDefinition documentTaskDefinition) {
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
-        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
-        var response = gpcClient.getDocumentRecord(request, taskDefinition);
+        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentTaskDefinition);
+        var response = gpcClient.getDocumentRecord(request, documentTaskDefinition);
 
-        String documentName = taskDefinition.getDocumentId() + ".json";
-        uploadDocument(documentName, response);
-        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName);
+        String documentName = documentTaskDefinition.getDocumentId() + JSON_EXTENSION;
+        String taskId = UUID.randomUUID().toString();
+        storageConnectorService.uploadDocument(documentName, buildStorageDataWrapper(documentTaskDefinition, response, taskId));
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(documentTaskDefinition, documentName, taskId);
     }
 
-    @SneakyThrows
-    private void uploadDocument(String documentName, String gpcPatientDocument) {
-        InputStream inputStream = new ByteArrayInputStream(gpcPatientDocument.getBytes(StandardCharsets.UTF_8));
-        storageConnector.uploadToStorage(inputStream, inputStream.available(), documentName);
+    private StorageDataWrapper buildStorageDataWrapper(GetGpcDocumentTaskDefinition documentTaskDefinition, String response, String taskId) {
+        return StorageDataWrapper.builder()
+            .type(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue())
+            .conversationId(documentTaskDefinition.getConversationId())
+            .taskId(taskId)
+            .response(response)
+            .build();
     }
 }

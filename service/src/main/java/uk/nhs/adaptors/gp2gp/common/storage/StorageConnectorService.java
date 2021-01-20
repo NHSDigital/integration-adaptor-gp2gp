@@ -6,14 +6,14 @@ import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE
 
 import java.io.ByteArrayInputStream;
 
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -26,7 +26,17 @@ public class StorageConnectorService {
         String jsonStringResponse = objectMapper.writeValueAsString(response);
         var responseBytes = jsonStringResponse.getBytes(UTF_8);
         var responseInputStream = new ByteArrayInputStream(responseBytes);
+
         storageConnector.uploadToStorage(responseInputStream, responseBytes.length,
             response.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+    }
+
+    @SneakyThrows(JsonProcessingException.class)
+    public void uploadDocument(String documentName, StorageDataWrapper response) {
+        String jsonStringResponse = objectMapper.writeValueAsString(response);
+        var responseBytes = jsonStringResponse.getBytes(UTF_8);
+        var responseInputStream = new ByteArrayInputStream(responseBytes);
+
+        storageConnector.uploadToStorage(responseInputStream, responseBytes.length, documentName);
     }
 }

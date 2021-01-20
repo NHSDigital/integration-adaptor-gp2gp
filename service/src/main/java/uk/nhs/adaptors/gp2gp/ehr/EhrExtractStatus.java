@@ -71,6 +71,7 @@ public class EhrExtractStatus implements TimeToLive {
     @Data
     @AllArgsConstructor
     @Document
+    @Builder
     public static class GpcAccessDocument {
         private String objectName;
         private Instant accessedAt;
