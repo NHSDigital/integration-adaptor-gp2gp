@@ -28,6 +28,21 @@ services:
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
 
+  mock-mhs-adaptor:
+    build:
+      context: ../
+      dockerfile: docker/mock-mhs-adaptor/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - MOCK_MHS_SERVER_PORT=8081
+      - MOCK_MHS_LOGGING_LEVEL
+      - GP2GP_MHS_INBOUND_QUEUE=inbound
+      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
+
   mongodb:
     image: mongo
     ports:
