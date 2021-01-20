@@ -62,6 +62,38 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition);
     }
 
+    @Test
+    public void When_StructuredTaskRunTwice_Expect_ObjectToBeOverwrittenInStroage() throws IOException {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
+
+        GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
+
+        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+        var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
+        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
+        assertThat(structuredTaskDefinition1.getTaskId()).isNotEqualTo(ehrExtractUpdated.getGpcAccessStructured().getTaskId());
+    }
+
+    @Test
+    public void When_StructuredTaskPatientNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildInvalidNHSNumberStructuredTask(ehrExtractStatus);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
+        });
+        assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
+    }
+
     private GetGpcStructuredTaskDefinition buildValidStructuredTask(EhrExtractStatus ehrExtractStatus) {
         return GetGpcStructuredTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
@@ -88,39 +120,6 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
         assertThat(storageDataWrapper.getResponse()).isNotBlank();
-    }
-
-    @Test
-    public void When_StructuredTaskRunTwice_Expect_ObjectToBeOverwrittenInStroage() throws IOException {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-
-        GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
-        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
-
-        GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
-        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
-
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-
-        var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
-        String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
-        var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
-        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
-        assertThat(structuredTaskDefinition1.getTaskId()).isNotEqualTo(ehrExtractUpdated.getGpcAccessStructured().getTaskId());
-    }
-
-    @Test
-    public void When_StructuredTaskPatientNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() throws IOException {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-
-        GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildInvalidNHSNumberStructuredTask(ehrExtractStatus);
-        Exception exception = assertThrows(RuntimeException.class, () -> {
-            getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
-        });
-        assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
     }
 
     private GetGpcStructuredTaskDefinition buildInvalidNHSNumberStructuredTask(EhrExtractStatus ehrExtractStatus) {
