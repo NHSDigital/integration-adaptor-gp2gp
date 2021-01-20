@@ -39,7 +39,7 @@ public class EhrExtractStatusService {
         update.set("gpcAccessStructured.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
-        if (!updateResult.wasAcknowledged()) {
+        if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Structured. Access Structured not present in Ehr Extract Status.");
         }
     }
@@ -56,7 +56,7 @@ public class EhrExtractStatusService {
         update.set("gpcAccessDocuments.$.taskId", UUID.randomUUID().toString());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
-        if (!updateResult.wasAcknowledged()) {
+        if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Document. Access Document not present in Ehr Extract Status.");
         }
     }
