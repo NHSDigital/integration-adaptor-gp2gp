@@ -38,10 +38,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     private StorageDataWrapper buildStorageDataWrapper(GetGpcStructuredTaskDefinition structuredTaskDefinition, String response) {
-        return new StorageDataWrapper(
-            structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue(),
-            structuredTaskDefinition.getConversationId(),
-            structuredTaskDefinition.getTaskId(),
-            response);
+        return StorageDataWrapper.builder()
+            .type(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue())
+            .conversationId(structuredTaskDefinition.getConversationId())
+            .taskId(structuredTaskDefinition.getTaskId())
+            .response(response)
+            .build();
     }
 }
