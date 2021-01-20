@@ -45,7 +45,9 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         ehrExtractStatusService.updateEhrExtractStatusAccessDocument(documentTaskDefinition, documentName, taskId);
     }
 
-    private StorageDataWrapper buildStorageDataWrapper(GetGpcDocumentTaskDefinition documentTaskDefinition, String response, String taskId) {
+    private StorageDataWrapper buildStorageDataWrapper(GetGpcDocumentTaskDefinition documentTaskDefinition,
+            String response,
+            String taskId) {
         return StorageDataWrapper.builder()
             .type(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue())
             .conversationId(documentTaskDefinition.getConversationId())

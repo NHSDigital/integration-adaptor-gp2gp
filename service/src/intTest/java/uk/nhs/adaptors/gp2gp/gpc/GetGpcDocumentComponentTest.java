@@ -38,14 +38,14 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
     private static final String INVALID_DOCUMENT_ID = "invalid-id";
-    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Structured Request: " +
-        "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    " +
-        "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  " +
-        "\"issue\": [ {\n    \"severity\": \"error\",\n    " +
-        "\"code\": \"invalid\",\n    \"details\": {\n      \"coding\": [ {\n        " +
-        "\"system\": \"https://fhir.nhs.uk/ValueSet/gpconnect-error-or-warning-code-1\",\n        " +
-        "\"code\": \"NO_RECORD_FOUND\",\n        \"display\": \"No Record Found\"\n      } ]\n    },\n    " +
-        "\"diagnostics\": \"No record found\"\n  } ]\n}";
+    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Structured Request: "
+        + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
+        + "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  "
+        + "\"issue\": [ {\n    \"severity\": \"error\",\n    "
+        + "\"code\": \"invalid\",\n    \"details\": {\n      \"coding\": [ {\n        "
+        + "\"system\": \"https://fhir.nhs.uk/ValueSet/gpconnect-error-or-warning-code-1\",\n        "
+        + "\"code\": \"NO_RECORD_FOUND\",\n        \"display\": \"No Record Found\"\n      } ]\n    },\n    "
+        + "\"diagnostics\": \"No record found\"\n  } ]\n}";
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;

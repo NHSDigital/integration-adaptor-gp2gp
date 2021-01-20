@@ -91,7 +91,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThat(ehrExtractUpdated.getGpcAccessStructured()).isNull();
 
-        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION));
+        assertThrows(StorageConnectorException.class,
+            () -> storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION));
     }
 
     private GetGpcStructuredTaskDefinition buildValidStructuredTask(EhrExtractStatus ehrExtractStatus) {
