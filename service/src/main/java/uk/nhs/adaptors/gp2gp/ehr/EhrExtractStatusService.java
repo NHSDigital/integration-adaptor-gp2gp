@@ -50,9 +50,12 @@ public class EhrExtractStatusService {
             .is(documentTaskDefinition.getConversationId())
             .and("gpcAccessDocuments.objectName")
             .is(documentName));
-        
+
+        Instant now = Instant.now();
+
         Update update = new Update();
-        update.set("gpcAccessDocuments.$.accessedAt", Instant.now());
+        update.set("updatedAt", now);
+        update.set("gpcAccessDocuments.$.accessedAt", now);
         update.set("gpcAccessDocuments.$.taskId", UUID.randomUUID().toString());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
