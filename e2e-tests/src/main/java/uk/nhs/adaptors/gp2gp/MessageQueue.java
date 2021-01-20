@@ -9,12 +9,15 @@ import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import java.util.Hashtable;
+import io.netty.util.internal.StringUtil;
 
 public class MessageQueue {
 
     public static void sendToMhsInboundQueue(String messageContent) throws Exception {
         String broker = System.getenv().getOrDefault("GP2GP_AMQP_BROKERS", "amqp://localhost:5672");
         String queueName = System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound");
+        String queueUsername = System.getenv().getOrDefault("GP2GP_AMQP_USERNAME", "");
+        String queuePassword = System.getenv().getOrDefault("GP2GP_AMQP_PASSWORD", "");
 
         Hashtable<String, String> hashtable = new Hashtable<>();
         hashtable.put("connectionfactory.CF", broker);
@@ -24,7 +27,12 @@ public class MessageQueue {
 
         ConnectionFactory cf = (ConnectionFactory) context.lookup("CF");
         Destination queue = (Destination) context.lookup("QUEUE");
-        Connection connection = cf.createConnection();
+        Connection connection;
+        if (StringUtil.isNullOrEmpty(queueUsername) || StringUtil.isNullOrEmpty(queuePassword)) {
+            connection = cf.createConnection();
+        } else {
+            connection = cf.createConnection(queueUsername, queuePassword);
+        }
         Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 
         MessageProducer producer = session.createProducer(queue);

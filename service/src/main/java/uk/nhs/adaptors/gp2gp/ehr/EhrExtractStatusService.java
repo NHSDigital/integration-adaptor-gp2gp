@@ -32,7 +32,7 @@ public class EhrExtractStatusService {
         update.set("gpcAccessStructured.taskId", structuredTaskDefinition.getTaskId());
         update.set("gpcAccessStructured.objectName", structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         var updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
-        if (!updateResult.wasAcknowledged()) {
+        if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extarct Status was not updated with Access Structured");
         }
     }
