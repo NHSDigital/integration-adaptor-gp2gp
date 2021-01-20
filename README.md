@@ -49,6 +49,8 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
 | GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 | GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
+| MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
+| MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
 (1) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
 will be used. At least one URL is required.
