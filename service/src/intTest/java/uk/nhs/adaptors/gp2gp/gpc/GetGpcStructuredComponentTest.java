@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
@@ -55,11 +56,14 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
 
+        var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
+        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition);
+    }
+
+    private StorageDataWrapper getStorageDataWrapper(EhrExtractStatus ehrExtractStatus) throws IOException {
         var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
-        var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
-        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition);
+        return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
 
     @Test
@@ -74,11 +78,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
-        String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
-        var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
+        var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
+
         assertThat(structuredTaskDefinition1.getTaskId()).isNotEqualTo(ehrExtractUpdated.getGpcAccessStructured().getTaskId());
     }
 
