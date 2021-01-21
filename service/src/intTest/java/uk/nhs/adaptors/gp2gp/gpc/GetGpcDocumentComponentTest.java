@@ -33,7 +33,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith({ SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
-@DirtiesContext
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
