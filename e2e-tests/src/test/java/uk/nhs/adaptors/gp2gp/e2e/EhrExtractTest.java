@@ -26,7 +26,7 @@ public class EhrExtractTest {
     private static final String TO_ODS_CODE = "B86041";
     private static final String EHR_REQUEST = "ehrRequest";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
-    private static final String GPC_ACCESS_DOCUMENTS = "gpcAccessDocuments";
+    private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     
@@ -44,8 +44,8 @@ public class EhrExtractTest {
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        var gpcAccessDocument = (List) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENTS));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, gpcAccessDocument);
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(DOCUMENT_ID, singleDocument);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -70,8 +70,21 @@ public class EhrExtractTest {
         assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(String documentId, List<Document> accessDocuments) {
-        Document document = accessDocuments.get(0);
+    private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
+        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        if(gpcAccessDocument != null) {
+            var documentList = (List) gpcAccessDocument.get("documents");
+            if(documentList != null && !documentList.isEmpty()) {
+                Document document = (Document) documentList.get(0);
+                if (document.get("objectName") != null) {
+                    return document;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void assertThatAccessDocumentWasFetched(String documentId, Document document) {
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
         assertThat(document.get("accessedAt")).isNotNull();
         assertThat(document.get("taskId")).isNotNull();
