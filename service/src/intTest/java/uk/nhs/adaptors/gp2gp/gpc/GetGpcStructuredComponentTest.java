@@ -42,7 +42,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         + "\"details\":{\"coding\":[{\"system\":\"https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1\",\"code\":"
         + "\"INVALID_NHS_NUMBER\",\"display\":\"INVALID_NHS_NUMBER\"}]},\"diagnostics\":\"Invalid NHS number submitted: 77777\"}]}";
     private static final String TASK_ID = "032a60c7-4960-45eb-9b65-0e778c3da56b";
-    public static final String STRUCTURED_RECORD_FHIR_PROFILE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1";
+    private static final String STRUCTURED_RECORD_FHIR_PROFILE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1";
+    private static final long MEASURABLE_TIME_DELTA = 100L;
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -77,6 +78,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
         var ehrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         var storageDataWrapper1 = getStorageDataWrapper(ehrExtractStatus1.getGpcAccessStructured().getObjectName());
+
+        Thread.sleep(MEASURABLE_TIME_DELTA);
 
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
         var ehrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
