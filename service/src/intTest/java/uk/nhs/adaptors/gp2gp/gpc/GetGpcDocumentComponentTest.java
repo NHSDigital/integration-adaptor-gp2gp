@@ -96,7 +96,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper,
             String conversationId,
             String taskId,
-        GetGpcDocumentTaskDefinition documentTaskDefinition) {
+            GetGpcDocumentTaskDefinition documentTaskDefinition) {
         assertThat(storageDataWrapper.getConversationId(), is(conversationId));
         assertThat(storageDataWrapper.getTaskId(), is(taskId));
         assertThat(storageDataWrapper.getType(), is(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue()));

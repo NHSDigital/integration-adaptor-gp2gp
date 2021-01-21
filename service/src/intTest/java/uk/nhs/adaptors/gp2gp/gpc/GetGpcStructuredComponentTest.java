@@ -33,7 +33,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 @DirtiesContext
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Structured Request: "
+    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
         + "{\"resourceType\":\"OperationOutcome\",\"meta\":{\"profile\":[\"https://fhir.nhs"
         + ".uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1\"]},\"issue\":[{\"severity\":\"error\",\"code\":\"value\","
         + "\"details\":{\"coding\":[{\"system\":\"https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1\",\"code\":"
