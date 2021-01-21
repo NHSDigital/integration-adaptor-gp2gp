@@ -1,12 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import java.time.Instant;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
+import java.util.ArrayList;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +13,14 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GpcConfiguration;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 
 @Service
 @Slf4j
@@ -37,19 +38,20 @@ public class EhrExtractRequestHandler {
     private static final String TO_ASID_PATH = INTERACTION_ID_PATH + "/communicationFunctionRcv/device/id/@extension";
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
+    private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
 
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final TaskIdService taskIdService;
-    private final GpcConfiguration gpcConfiguration;
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
             createGetGpcStructuredTask(ehrExtractStatus);
+            createGetGpcDocumentTask(ehrExtractStatus);
         } else {
             LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
         }
@@ -59,7 +61,13 @@ public class EhrExtractRequestHandler {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
         String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
-        return new EhrExtractStatus(now, now, conversationId, ehrRequest);
+        return EhrExtractStatus.builder()
+            .created(now)
+            .updatedAt(now)
+            .conversationId(conversationId)
+            .ehrRequest(ehrRequest)
+            .gpcAccessDocuments(new ArrayList<>())
+            .build();
     }
 
     private boolean saveNewExtractStatusDocument(EhrExtractStatus ehrExtractStatus) {
@@ -84,6 +92,19 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
+    }
+
+    private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
+            .documentId(DOCUMENT_ID)
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
