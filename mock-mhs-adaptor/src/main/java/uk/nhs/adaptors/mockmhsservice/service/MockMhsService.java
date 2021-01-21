@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
+import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.common.OutboundMessage;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 
@@ -46,6 +47,9 @@ public class MockMhsService {
 
         try {
             verifyOutboundMessagePayload(mockMhsMessage);
+        }  catch (MockMHSException e) {
+            LOGGER.error(e.getMessage(), e);
+            return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
         } catch (JsonProcessingException e) {
             LOGGER.error("Error content of request body does not match expected JSON", e);
             return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
@@ -67,7 +71,10 @@ public class MockMhsService {
         return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
     }
 
-    private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException {
-        objectMapper.readValue(requestBody, OutboundMessage.class);
+    private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException, MockMHSException {
+        var payloadObject = objectMapper.readValue(requestBody, OutboundMessage.class);
+        if (payloadObject.getPayload() == null) {
+            throw new MockMHSException("Error content of request body does not match expected JSON");
+        }
     }
 }
