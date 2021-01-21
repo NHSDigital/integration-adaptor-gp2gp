@@ -1,11 +1,13 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
@@ -40,7 +42,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         + "\"details\":{\"coding\":[{\"system\":\"https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1\",\"code\":"
         + "\"INVALID_NHS_NUMBER\",\"display\":\"INVALID_NHS_NUMBER\"}]},\"diagnostics\":\"Invalid NHS number submitted: 77777\"}]}";
     private static final String TASK_ID = "032a60c7-4960-45eb-9b65-0e778c3da56b";
-    private static final long MEASURABLE_TIME_DELTA = 100;
+    public static final String STRUCTURED_RECORD_FHIR_PROFILE = "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1";
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -71,11 +73,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
+
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
         var ehrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         var storageDataWrapper1 = getStorageDataWrapper(ehrExtractStatus1.getGpcAccessStructured().getObjectName());
-
-        Thread.sleep(MEASURABLE_TIME_DELTA);
 
         getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
         var ehrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
@@ -135,8 +136,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
     private StorageDataWrapper getStorageDataWrapper(String objectName) throws IOException {
         var inputStream = storageConnector.downloadFromStorage(objectName);
-        String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
+        return OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
     }
 
     private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper, EhrExtractStatus ehrExtractStatus,
@@ -144,8 +144,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(ehrExtractStatus.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
-        assertThat(storageDataWrapper.getResponse()).contains("https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord"
-            + "-Bundle-1");
+        assertThat(storageDataWrapper.getResponse()).contains(STRUCTURED_RECORD_FHIR_PROFILE);
     }
 
     private GetGpcStructuredTaskDefinition buildInvalidNHSNumberStructuredTask(EhrExtractStatus ehrExtractStatus) {
