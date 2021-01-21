@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
+import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +39,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         + ".uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1\"]},\"issue\":[{\"severity\":\"error\",\"code\":\"value\","
         + "\"details\":{\"coding\":[{\"system\":\"https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1\",\"code\":"
         + "\"INVALID_NHS_NUMBER\",\"display\":\"INVALID_NHS_NUMBER\"}]},\"diagnostics\":\"Invalid NHS number submitted: 77777\"}]}";
+    private static final String TASK_ID = "032a60c7-4960-45eb-9b65-0e778c3da56b";
+    private static final long MEASURABLE_TIME_DELTA = 100;
+
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
     @Autowired
@@ -56,27 +60,37 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
 
-        var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
+        var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated.getGpcAccessStructured().getObjectName());
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition);
     }
 
     @Test
-    public void When_StructuredTaskRunTwice_Expect_ObjectToBeOverwrittenInStroage() throws IOException {
+    @SneakyThrows
+    public void When_StructuredTaskRunTwice_Expect_ObjectToBeOverwrittenInStroage() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
-        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
+        GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
+        var ehrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var storageDataWrapper1 = getStorageDataWrapper(ehrExtractStatus1.getGpcAccessStructured().getObjectName());
 
-        GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
-        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
+        Thread.sleep(MEASURABLE_TIME_DELTA);
 
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
+        var ehrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var storageDataWrapper2 = getStorageDataWrapper(ehrExtractStatus2.getGpcAccessStructured().getObjectName());
 
-        var storageDataWrapper = getStorageDataWrapper(ehrExtractUpdated);
-        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition2);
+        assertThatObjectCreated(storageDataWrapper1, ehrExtractStatus1, structuredTaskDefinition);
+        assertThatObjectCreated(storageDataWrapper2, ehrExtractStatus2, structuredTaskDefinition);
 
-        assertThat(structuredTaskDefinition1.getTaskId()).isNotEqualTo(ehrExtractUpdated.getGpcAccessStructured().getTaskId());
+        assertThat(ehrExtractStatus1.getGpcAccessStructured().getAccessedAt())
+            .isNotEqualTo(ehrExtractStatus2.getGpcAccessStructured().getAccessedAt());
+
+        //        Need to use wiremocks for the full assertion to work - the public demonstrator payload differs between requests
+//        assertThat(storageDataWrapper1).isEqualTo(storageDataWrapper2);
+        assertThat(storageDataWrapper1)
+            .usingRecursiveComparison().ignoringFields("response").isEqualTo(storageDataWrapper2);
     }
 
     @Test
@@ -107,7 +121,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
             .conversationId(ehrExtractStatus.getConversationId())
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .taskId(UUID.randomUUID().toString())
+            .taskId(TASK_ID)
             .build();
     }
 
@@ -116,11 +130,11 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         var gpcAccessStructured = ehrExtractStatusUpdated.getGpcAccessStructured();
         assertThat(gpcAccessStructured.getObjectName()).isEqualTo(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         assertThat(gpcAccessStructured.getAccessedAt()).isNotNull();
-        assertThat(gpcAccessStructured.getTaskId()).isNotNull();
+        assertThat(gpcAccessStructured.getTaskId()).isEqualTo(TASK_ID);
     }
 
-    private StorageDataWrapper getStorageDataWrapper(EhrExtractStatus ehrExtractStatus) throws IOException {
-        var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+    private StorageDataWrapper getStorageDataWrapper(String objectName) throws IOException {
+        var inputStream = storageConnector.downloadFromStorage(objectName);
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
