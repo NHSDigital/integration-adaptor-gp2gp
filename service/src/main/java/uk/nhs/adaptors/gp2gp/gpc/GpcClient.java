@@ -15,7 +15,7 @@ public class GpcClient {
 
     public String getStructuredRecord(RequestHeadersSpec<? extends RequestHeadersSpec<?>> request,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
+        LOGGER.info("Gpc testest Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
             structuredTaskDefinition.getToAsid(),
             structuredTaskDefinition.getFromAsid(),
             gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());

@@ -14,4 +14,8 @@ public class GpcConfiguration {
     private String url;
     private String structuredEndpoint;
     private String host;
+    private String endpointCert;
+    private String endpointKey;
+    private String rootSubCert;
+    private String keystorePassword;
 }

@@ -6,7 +6,16 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.security.Key;
+import java.security.KeyStore;
+import java.security.cert.X509Certificate;
 import java.util.Collections;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -25,6 +34,8 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import com.heroku.sdk.EnvKeyStore;
 
 import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
@@ -100,11 +111,51 @@ public class GpcRequestBuilder {
 
     @SneakyThrows
     private SslContext buildSSLContext() {
+        //Symmetric Keys (referred to as Secret Keys in the JCE),
+        //Asymmetric Keys (referred to as Public and Private Keys in the JCE), and
+        //Trusted Certificates
+
+        var password = gpcConfiguration.getKeystorePassword();
+        var privateKey = gpcConfiguration.getEndpointKey();
+        var privateCert = gpcConfiguration.getEndpointCert();
+        var rootAndSubCert = gpcConfiguration.getRootSubCert();
+
+        //private key and public cert
+        KeyStore keystore = EnvKeyStore.createFromPEMStrings(privateKey, privateCert, password).keyStore();
+
+        KeyManagerFactory keyManagerFactory =
+            KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        keyManagerFactory.init(keystore, password.toCharArray());
+
+        //ca cert trust
+        KeyStore trustKeyStore = EnvKeyStore.createFromPEMStrings(rootAndSubCert, password).keyStore();
+
+        TrustManagerFactory trustManagerFactory =
+            TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustManagerFactory.init(trustKeyStore);
+
+
         return SslContextBuilder
             .forClient()
-            .trustManager(InsecureTrustManagerFactory.INSTANCE)
+            .keyManager(keyManagerFactory)
+            .trustManager(trustManagerFactory)
             .build();
+
+        // trust manager factory should not be used in production
+        /*
+        * `endpoint.crt` - VPN endpoint certificate
+`endpoint.key` - VPN endpoint private key
+`opentest.ca-bundle` - root and sub-ca certs copied into the same file
+* */
     }
+
+//    @SneakyThrows
+//    private SSLContext defaultSSLContext() {
+//        KeyStore ks = EnvKeyStore.createFromPEMStrings(meshConfig.getEndpointPrivateKey(), meshConfig.getEndpointCert(), meshConfig.getMailboxPassword()).keyStore();
+//        return SSLContexts.custom().loadKeyMaterial(ks, this.meshConfig.getMailboxPassword().toCharArray())
+//            .loadTrustMaterial(TrustAllStrategy.INSTANCE) //TODO: TrustAllStrategy works for fake mesh - in production TrustSelfSignedStrategy should be used
+//            .build();
+//    }
 
     private WebClient buildWebClient(HttpClient httpClient) {
         return WebClient
