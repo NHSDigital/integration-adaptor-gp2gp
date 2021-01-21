@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,27 +13,33 @@ import org.springframework.web.reactive.function.client.WebClient.RequestHeaders
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class GpcClient {
+    private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
+    private static final String ACCESS_LOG_TEMPLATE = "Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
+
     private final GpcConfiguration gpcConfiguration;
 
     public String getStructuredRecord(RequestHeadersSpec<? extends RequestHeadersSpec<?>> request,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        LOGGER.info("Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
-            structuredTaskDefinition.getToAsid(),
-            structuredTaskDefinition.getFromAsid(),
-            gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
+            GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
 
-        return request.retrieve()
-            .bodyToMono(String.class)
-            .block();
+        return performRequestWithStringResponseBody(request);
     }
 
     public String getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
             GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        LOGGER.info("Gpc Document Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}",
-            documentTaskDefinition.getToAsid(),
-            documentTaskDefinition.getFromAsid(),
-            gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(ACCESS_LOG_TEMPLATE, documentTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
 
+        return performRequestWithStringResponseBody(request);
+    }
+
+    private void logRequest(String logTemplate, TaskDefinition taskDefinition, String url) {
+        LOGGER.info(logTemplate,
+            taskDefinition.getToAsid(),
+            taskDefinition.getFromAsid(),
+            gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+    }
+
+    private String performRequestWithStringResponseBody(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request) {
         return request.retrieve()
             .bodyToMono(String.class)
             .block();

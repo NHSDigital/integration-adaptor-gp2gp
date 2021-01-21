@@ -51,8 +51,10 @@ public class EhrExtractTest {
         String taskId = UUID.randomUUID().toString();
         Mongo.addAccessDocument(conversationId, DOCUMENT_ID, taskId, accessedAt);
 
+        var updatedEhrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatusWithStructured(conversationId));
+
         MessageQueue.sendToMhsTaskQueue(prepareTaskQueueMessage(conversationId));
-        assertThatAccessStructuredWasFetched(conversationId, (Document) ehrExtractStatus.get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, (Document) updatedEhrExtractStatus.get(GPC_ACCESS_STRUCTURED));
 
         var extractStatusWithUpdatedFields = AwaitHelper.waitFor(
             () -> Mongo.findEhrExtractStatusByConversationIdWithoutProvidedTaskId(conversationId, taskId));

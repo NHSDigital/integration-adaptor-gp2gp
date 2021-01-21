@@ -38,7 +38,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
     private static final String INVALID_DOCUMENT_ID = "invalid-id";
-    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Structured Request: "
+    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
         + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
         + "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  "
         + "\"issue\": [ {\n    \"severity\": \"error\",\n    "
@@ -69,7 +69,10 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
         var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
-        assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, documentTaskDefinition);
+        assertThatObjectCreated(storageDataWrapper,
+            ehrExtractStatus.getConversationId(),
+            ehrExtractStatus.getGpcAccessDocuments().get(0).getTaskId(),
+            documentTaskDefinition);
     }
 
     @Test
@@ -88,6 +91,16 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(ehrExtract.getGpcAccessDocuments().get(0).getAccessedAt(), is(nullValue()));
 
         assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
+    }
+
+    private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper,
+            String conversationId,
+            String taskId,
+        GetGpcDocumentTaskDefinition documentTaskDefinition) {
+        assertThat(storageDataWrapper.getConversationId(), is(conversationId));
+        assertThat(storageDataWrapper.getTaskId(), is(taskId));
+        assertThat(storageDataWrapper.getType(), is(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue()));
+        assertThat(storageDataWrapper.getResponse(), is(notNullValue()));
     }
 
     private GetGpcDocumentTaskDefinition buildValidAccessTask(EhrExtractStatus ehrExtractStatus, String documentId) {
@@ -109,13 +122,5 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcAccessDocument.getObjectName(), is(DOCUMENT_NAME));
         assertThat(gpcAccessDocument.getAccessedAt(), is(notNullValue()));
         assertThat(gpcAccessDocument.getTaskId(), is(notNullValue()));
-    }
-
-    private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper, EhrExtractStatus ehrExtractStatus,
-            GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        assertThat(storageDataWrapper.getConversationId(), is(ehrExtractStatus.getConversationId()));
-        assertThat(storageDataWrapper.getTaskId(), is(ehrExtractStatus.getGpcAccessDocuments().get(0).getTaskId()));
-        assertThat(storageDataWrapper.getType(), is(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue()));
-        assertThat(storageDataWrapper.getResponse(), is(notNullValue()));
     }
 }

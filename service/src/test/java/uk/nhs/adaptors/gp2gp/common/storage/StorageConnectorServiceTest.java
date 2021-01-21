@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.common.storage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,7 +44,7 @@ public class StorageConnectorServiceTest {
     public void When_ValidStorageDataWrapperIsPass_Expect_UploadStoragePramsHaveCorrectValues() {
         when(objectMapper.writeValueAsString(anyStorageDataWrapper)).thenReturn("response");
         when(anyStorageDataWrapper.getConversationId()).thenReturn("UUID");
-        storageConnectorService.uploadWithMetadata(anyStorageDataWrapper);
+        storageConnectorService.uploadFile(anyStorageDataWrapper, anyString());
         verify(storageConnector).uploadToStorage(
             inputStreamArgumentCaptor.capture(),
             eq(EXPECTED_STREAM_LENGTH),

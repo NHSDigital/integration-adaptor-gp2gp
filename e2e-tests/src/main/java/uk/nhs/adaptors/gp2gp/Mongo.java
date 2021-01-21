@@ -21,6 +21,12 @@ public class Mongo {
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
 
+    public static Document findEhrExtractStatusWithStructured(String conversationId) {
+        var collection = getCollection();
+        return collection.find(Filters.and(Filters.eq("conversationId", conversationId),
+            Filters.exists("gpcAccessStructured"))).first();
+    }
+
     public static Document findEhrExtractStatusByConversationIdWithoutProvidedTaskId(String conversationId, String taskId) {
         var collection = getCollection();
         return collection.find(Filters.and(Filters.eq("conversationId", conversationId),

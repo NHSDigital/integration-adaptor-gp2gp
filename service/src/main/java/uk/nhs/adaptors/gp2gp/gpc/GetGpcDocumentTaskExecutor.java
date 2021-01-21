@@ -5,7 +5,6 @@ import java.util.UUID;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 
@@ -41,18 +40,8 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         String documentName = documentTaskDefinition.getDocumentId() + JSON_EXTENSION;
         String taskId = UUID.randomUUID().toString();
-        storageConnectorService.uploadDocument(documentName, buildStorageDataWrapper(documentTaskDefinition, response, taskId));
+        storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(documentTaskDefinition, response, taskId),
+            documentName);
         ehrExtractStatusService.updateEhrExtractStatusAccessDocument(documentTaskDefinition, documentName, taskId);
-    }
-
-    private StorageDataWrapper buildStorageDataWrapper(GetGpcDocumentTaskDefinition documentTaskDefinition,
-            String response,
-            String taskId) {
-        return StorageDataWrapper.builder()
-            .type(documentTaskDefinition.getTaskType().getTaskTypeHeaderValue())
-            .conversationId(documentTaskDefinition.getConversationId())
-            .taskId(taskId)
-            .response(response)
-            .build();
     }
 }
