@@ -35,7 +35,7 @@ public class EhrExtractStatus implements TimeToLive {
     private String conversationId;
     private EhrRequest ehrRequest;
     private GpcAccessStructured gpcAccessStructured;
-    private List<GpcAccessDocument> gpcAccessDocuments;
+    private GpcAccessDocument gpcAccessDocument;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -73,8 +73,18 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class GpcAccessDocument {
-        private String objectName;
-        private Instant accessedAt;
-        private String taskId;
+        private List<GpcDocument> documents;
+
+        @Data
+        @AllArgsConstructor
+        @Document
+        @Builder
+        public static class GpcDocument {
+            private String documentId;
+            private String accessDocumentUrl;
+            private String objectName;
+            private Instant accessedAt;
+            private String taskId;
+        }
     }
 }

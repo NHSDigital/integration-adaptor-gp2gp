@@ -1,10 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import java.time.Instant;
-import java.util.ArrayList;
-
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -16,11 +21,7 @@ import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
-import org.w3c.dom.Document;
+import java.time.Instant;
 
 @Service
 @Slf4j
@@ -38,13 +39,17 @@ public class EhrExtractRequestHandler {
     private static final String TO_ASID_PATH = INTERACTION_ID_PATH + "/communicationFunctionRcv/device/id/@extension";
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
+
+    // FIXME: Remove these constants as part of NIAD-814
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
+    private static final String DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/fhir/Binary/" + DOCUMENT_ID;
 
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final TaskIdService taskIdService;
+    private final MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
@@ -66,7 +71,6 @@ public class EhrExtractRequestHandler {
             .updatedAt(now)
             .conversationId(conversationId)
             .ehrRequest(ehrRequest)
-            .gpcAccessDocuments(new ArrayList<>())
             .build();
     }
 
@@ -94,7 +98,10 @@ public class EhrExtractRequestHandler {
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
+    // FIXME: NIAD-814 should create a task for each of the patient's documents
     private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
+        addAccessDocument(ehrExtractStatus.getConversationId());
+
         var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .documentId(DOCUMENT_ID)
             .taskId(taskIdService.createNewTaskId())
@@ -103,8 +110,19 @@ public class EhrExtractRequestHandler {
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .accessDocumentUrl(DOCUMENT_URL)
             .build();
         taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
+    }
+
+    @Deprecated // FIXME: Remove as part of NIAD-814
+    private void addAccessDocument(String conversationId) {
+        org.bson.Document document = new org.bson.Document();
+        document.append("documentId", DOCUMENT_ID);
+        document.append("accessDocumentUrl", DOCUMENT_URL);
+
+        var collection = mongoTemplate.getCollection("ehrExtractStatus");
+        collection.updateOne(Filters.eq("conversationId", conversationId), Updates.addToSet("gpcAccessDocument.documents", document));
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {

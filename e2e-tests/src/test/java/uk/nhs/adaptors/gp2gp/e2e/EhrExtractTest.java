@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -37,15 +38,14 @@ public class EhrExtractTest {
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        var ehrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
 
-        Mongo.addAccessDocument(conversationId, DOCUMENT_ID);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        var updatedEhrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatusWithStructuredAndProperDocument(conversationId));
-        assertThatAccessStructuredWasFetched(conversationId, (Document) updatedEhrExtractStatus.get(GPC_ACCESS_STRUCTURED));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, (List) updatedEhrExtractStatus.get(GPC_ACCESS_DOCUMENTS));
+        var gpcAccessDocument = (List) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENTS));
+        assertThatAccessDocumentWasFetched(DOCUMENT_ID, gpcAccessDocument);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
