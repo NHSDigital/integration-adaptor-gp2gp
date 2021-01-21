@@ -32,8 +32,10 @@ public class EhrExtractStatus implements TimeToLive {
     private Instant created;
     private Instant updatedAt;
     private String conversationId;
+    private String patientId;
     private EhrRequest ehrRequest;
     private GpcAccessStructured gpcAccessStructured;
+    private EhrExtractStatusFolder ehrExtractStatusFolder;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
