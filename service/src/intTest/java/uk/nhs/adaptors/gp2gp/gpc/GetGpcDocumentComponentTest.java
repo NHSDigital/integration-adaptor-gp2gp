@@ -70,8 +70,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
         var storageDataWrapper = OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
         assertThatObjectCreated(storageDataWrapper,
-            ehrExtractStatus.getConversationId(),
-            ehrExtractStatus.getGpcAccessDocuments().get(0).getTaskId(),
+            ehrExtractUpdated.getConversationId(),
+            ehrExtractUpdated.getGpcAccessDocuments().get(0).getTaskId(),
             documentTaskDefinition);
     }
 

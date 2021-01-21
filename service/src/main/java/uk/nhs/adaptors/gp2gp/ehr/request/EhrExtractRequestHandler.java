@@ -13,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +38,7 @@ public class EhrExtractRequestHandler {
     private static final String TO_ASID_PATH = INTERACTION_ID_PATH + "/communicationFunctionRcv/device/id/@extension";
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
+    private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
 
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
@@ -49,6 +51,7 @@ public class EhrExtractRequestHandler {
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
             createGetGpcStructuredTask(ehrExtractStatus);
+            createGetGpcDocumentTask(ehrExtractStatus);
         } else {
             LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
         }
@@ -89,6 +92,19 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
+    }
+
+    private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
+        var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
+            .documentId(DOCUMENT_ID)
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {

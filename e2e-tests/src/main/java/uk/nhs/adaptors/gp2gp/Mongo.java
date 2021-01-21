@@ -2,8 +2,6 @@ package uk.nhs.adaptors.gp2gp;
 
 import static com.mongodb.client.MongoClients.create;
 
-import java.time.Instant;
-
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -21,25 +19,19 @@ public class Mongo {
         return collection.find(Filters.eq("conversationId", conversationId)).first();
     }
 
-    public static Document findEhrExtractStatusWithStructured(String conversationId) {
+    public static Document findEhrExtractStatusWithStructuredAndProperDocument(String conversationId) {
         var collection = getCollection();
         return collection.find(Filters.and(Filters.eq("conversationId", conversationId),
-            Filters.exists("gpcAccessStructured"))).first();
-    }
-
-    public static Document findEhrExtractStatusByConversationIdWithoutProvidedTaskId(String conversationId, String taskId) {
-        var collection = getCollection();
-        return collection.find(Filters.and(Filters.eq("conversationId", conversationId),
-            Filters.ne("gpcAccessDocuments.taskId", taskId),
-            Filters.size("gpcAccessDocuments", 1)))
+            Filters.exists("gpcAccessStructured"),
+            Filters.size("gpcAccessDocuments", 1),
+            Filters.exists("gpcAccessDocuments.0.accessedAt"),
+            Filters.exists("gpcAccessDocuments.0.taskId")))
             .first();
     }
 
-    public static void addAccessDocument(String conversationId, String documentId, String taskId, Instant accessedAt) {
+    public static void addAccessDocument(String conversationId, String documentId) {
         Document document = new Document();
         document.append("objectName", documentId + ".json");
-        document.append("taskId", taskId);
-        document.append("accessedAt", accessedAt);
 
         var collection = getCollection();
         collection.updateOne(Filters.eq("conversationId", conversationId), Updates.addToSet("gpcAccessDocuments", document));
