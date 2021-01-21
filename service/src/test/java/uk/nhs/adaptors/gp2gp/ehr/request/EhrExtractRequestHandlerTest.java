@@ -30,6 +30,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -103,6 +104,7 @@ public class EhrExtractRequestHandlerTest {
             .created(timestamp)
             .updatedAt(timestamp)
             .conversationId(CONVERSATION_ID)
+            .gpcAccessDocuments(new ArrayList<>())
             .ehrRequest(EhrExtractStatus.EhrRequest.builder()
                 .requestId(REQUEST_ID)
                 .nhsNumber(NHS_NUMBER)

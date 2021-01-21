@@ -26,6 +26,6 @@ public class GpcWebClientFilter {
     private Mono<ClientResponse> getResponseError(ClientResponse clientResponse) {
         return clientResponse.bodyToMono(String.class)
             .flatMap(operationalOutcome -> Mono.error(
-                new GpConnectException("The following error occurred during Gpc Structured Request: " + operationalOutcome)));
+                new GpConnectException("The following error occurred during Gpc Request: " + operationalOutcome)));
     }
 }
