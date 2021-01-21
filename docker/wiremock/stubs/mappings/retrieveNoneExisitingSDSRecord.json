@@ -1,0 +1,20 @@
+{
+	"priority": 2,
+	"request": {
+		"method": "GET",
+		"urlPath": "/Endpoint",
+		"headers": {
+			"X-Correlation-Id": {
+				"matches": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+			}
+		}
+	},
+	"response": {
+		"status": 404,
+		"bodyFileName": "notFoundSDSResponse.json",
+		"headers": {
+			"Content-Type": "application/fhir+json;",
+			"X-Correlation-Id": "{{request.headers.X-Correlation-Id}}"
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"resourceType": "OperationOutcome",
+	"id": "{{request.headers.x-correlation-id}}",
+	"issue": [
+		{
+			"severity": "error",
+			"code": "not-found",
+			"details": {
+				"coding": [
+					{
+						"system": "https://fhir.nhs.uk/STU3/ValueSet/Spine-ErrorOrWarningCode-1",
+						"code": "NO_RECORD_FOUND",
+						"display": "No record found"
+					}
+				]
+			},
+			"diagnostics": "HTTP endpoint not found"
+		}
+	]
+}
