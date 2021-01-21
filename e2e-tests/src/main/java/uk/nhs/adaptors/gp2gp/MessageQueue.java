@@ -13,8 +13,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import io.netty.util.internal.StringUtil;
-
 public class MessageQueue {
     public static void sendToMhsInboundQueue(String messageContent) throws NamingException, JMSException {
         Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound"));
@@ -26,32 +24,6 @@ public class MessageQueue {
 
         MessageProducer producer = session.createProducer(queue);
         TextMessage message = session.createTextMessage();
-        message.setText(messageContent);
-        producer.send(message);
-
-        producer.close();
-        session.close();
-        connection.close();
-    }
-
-    public static void sendToMhsTaskQueue(String messageContent) throws NamingException, JMSException {
-        Context context = prepareContext(System.getenv().getOrDefault("GP2GP_TASK_QUEUE", "gp2gpTaskQueue"));
-        String queueUsername = System.getenv().getOrDefault("GP2GP_AMQP_USERNAME", "");
-        String queuePassword = System.getenv().getOrDefault("GP2GP_AMQP_PASSWORD", "");
-
-        ConnectionFactory cf = (ConnectionFactory) context.lookup("CF");
-        Destination queue = (Destination) context.lookup("QUEUE");
-        Connection connection;
-        if (StringUtil.isNullOrEmpty(queueUsername) || StringUtil.isNullOrEmpty(queuePassword)) {
-            connection = cf.createConnection();
-        } else {
-            connection = cf.createConnection(queueUsername, queuePassword);
-        }
-        Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
-
-        MessageProducer producer = session.createProducer(queue);
-        TextMessage message = session.createTextMessage();
-        message.setStringProperty("TaskType", "uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition");
         message.setText(messageContent);
         producer.send(message);
 
