@@ -1,10 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import com.google.common.collect.ImmutableList;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
@@ -35,7 +34,7 @@ public class EhrExtractStatusTestUtils {
 
     private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument() {
         return EhrExtractStatus.GpcAccessDocument.builder()
-            .documents(ImmutableList.of(
+            .documents(List.of(
                 EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
                     .documentId(DOCUMENT_ID)
                     .accessDocumentUrl(GPC_ACCESS_DOCUMENT_URL)

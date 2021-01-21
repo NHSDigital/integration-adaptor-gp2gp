@@ -98,7 +98,7 @@ public class EhrExtractRequestHandler {
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
 
-    // FIXME: NIAD-814 should create a task for each of the patient's documents
+    // FIXME: move/remove NIAD-814 should create a task for each of the patient's documents
     private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
         addAccessDocument(ehrExtractStatus.getConversationId());
 
