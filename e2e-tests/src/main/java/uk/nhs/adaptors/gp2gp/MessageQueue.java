@@ -13,13 +13,23 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import io.netty.util.internal.StringUtil;
+
 public class MessageQueue {
     public static void sendToMhsInboundQueue(String messageContent) throws NamingException, JMSException {
         Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound"));
+        String queueUsername = System.getenv().getOrDefault("GP2GP_AMQP_USERNAME", "");
+        String queuePassword = System.getenv().getOrDefault("GP2GP_AMQP_PASSWORD", "");
 
         ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup("CF");
         Destination queue = (Destination) context.lookup("QUEUE");
-        Connection connection = connectionFactory.createConnection();
+        Connection connection;
+        if (StringUtil.isNullOrEmpty(queueUsername) || StringUtil.isNullOrEmpty(queuePassword)) {
+            connection = connectionFactory.createConnection();
+        } else {
+            connection = connectionFactory.createConnection(queueUsername, queuePassword);
+        }
+
         Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 
         MessageProducer producer = session.createProducer(queue);
