@@ -13,8 +13,8 @@ import org.springframework.web.reactive.function.client.WebClient.RequestHeaders
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class GpcClient {
-    private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
-    private static final String ACCESS_LOG_TEMPLATE = "Gpc Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
+    private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Access Structured Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
+    private static final String DOCUMENT_LOG_TEMPLATE = "Gpc Access Document Request, toASID: {}, fromASID: {}, Gpc Endpoint: {}";
 
     private final GpcConfiguration gpcConfiguration;
 
@@ -27,7 +27,7 @@ public class GpcClient {
 
     public String getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
             GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        logRequest(ACCESS_LOG_TEMPLATE, documentTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(DOCUMENT_LOG_TEMPLATE, documentTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
 
         return performRequestWithStringResponseBody(request);
     }
