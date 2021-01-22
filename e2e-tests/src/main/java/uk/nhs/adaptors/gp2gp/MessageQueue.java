@@ -13,8 +13,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import io.netty.util.internal.StringUtil;
-
 public class MessageQueue {
     public static void sendToMhsInboundQueue(String messageContent) throws NamingException, JMSException {
         Context context = prepareContext(System.getenv().getOrDefault("GP2GP_MHS_INBOUND_QUEUE", "inbound"));
@@ -24,7 +22,7 @@ public class MessageQueue {
         ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup("CF");
         Destination queue = (Destination) context.lookup("QUEUE");
         Connection connection;
-        if (StringUtil.isNullOrEmpty(queueUsername) || StringUtil.isNullOrEmpty(queuePassword)) {
+        if (queueUsername.isBlank() || queuePassword.isBlank()) {
             connection = connectionFactory.createConnection();
         } else {
             connection = connectionFactory.createConnection(queueUsername, queuePassword);
