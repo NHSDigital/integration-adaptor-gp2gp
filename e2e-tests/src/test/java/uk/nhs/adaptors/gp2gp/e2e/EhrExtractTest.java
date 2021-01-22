@@ -72,17 +72,21 @@ public class EhrExtractTest {
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        if(gpcAccessDocument != null) {
-            var documentList = (List) gpcAccessDocument.get("documents");
-            if(documentList != null && !documentList.isEmpty()) {
-                Document document = (Document) documentList.get(0);
-                if (document.get("objectName") != null) {
-                    return document;
-                }
+        return getFirstDocumentOrNull(gpcAccessDocument);
+    }
+
+    private Document getFirstDocumentOrNull(Document gpcAccessDocument) {
+        var documentList = (List) gpcAccessDocument.get("documents");
+        if(documentList != null && !documentList.isEmpty()) {
+            Document document = (Document) documentList.get(0);
+            if (document.get("objectName") != null) {
+                return document;
             }
         }
         return null;
     }
+
+    private Document documentHasOBj
 
     private void assertThatAccessDocumentWasFetched(String documentId, Document document) {
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
