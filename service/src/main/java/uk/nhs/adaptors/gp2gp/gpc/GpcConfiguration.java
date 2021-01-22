@@ -14,8 +14,12 @@ public class GpcConfiguration {
     private String url;
     private String structuredEndpoint;
     private String host;
-    private String endpointCert;
-    private String endpointKey;
-    private String rootSubCert;
-    private String keystorePassword;
+    private String enableTLS;
+    private String enableProxy;
+    private String proxy;
+    private String proxyPort;
+    private String clientCert;
+    private String clientKey;
+    private String rootCA;
+    private String subCA;
 }

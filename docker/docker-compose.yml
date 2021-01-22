@@ -29,7 +29,8 @@ services:
       - AWS_REGION
       - GP2GP_ENDPOINT_CERT
       - GP2GP_ENDPOINT_KEY
-      - GP2GP_ROOT_SUB_CERT
+      - GP2GP_ROOT_CERT
+      - GP2GP_SUB_CERT
 
   # mock-mhs-adaptor:
   #   build:
@@ -58,11 +59,11 @@ services:
       - "8161:8161"
       - "5672:5672"
 
-  wiremock:
-    build: ./wiremock
-    ports:
-      - "8110:8080"
-    command:
-      - -global-response-templating
+  # wiremock:
+  #   build: ./wiremock
+  #   ports:
+  #     - "8110:8080"
+  #   command:
+  #     - -global-response-templating
 
 
