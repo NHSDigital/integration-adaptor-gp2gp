@@ -1,47 +1,51 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
-import org.apache.commons.io.IOUtils;
-import org.bson.Document;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
+
+import java.nio.charset.Charset;
+import java.util.Collections;
+import java.util.UUID;
+
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
-import java.nio.charset.Charset;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.apache.commons.io.IOUtils;
+import org.bson.Document;
+import org.junit.jupiter.api.Test;
 
 public class EhrExtractTest {
-
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
-    public static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
-    public static final String NHS_NUMBER = "9690937286";
-    public static final String FROM_PARTY_ID = "N82668-820670";
-    public static final String TO_PARTY_ID = "B86041-822103";
-    public static final String FROM_ASID = "200000000359";
-    public static final String TO_ASID = "918999198738";
-    public static final String FROM_ODS_CODE = "GPC001";
-    public static final String TO_ODS_CODE = "B86041";
-    public static final String EHR_REQUEST = "ehrRequest";
-    public static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
-    public static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
-
+    private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
+    private static final String NHS_NUMBER = "9690937286";
+    private static final String FROM_PARTY_ID = "N82668-820670";
+    private static final String TO_PARTY_ID = "B86041-822103";
+    private static final String FROM_ASID = "200000000359";
+    private static final String TO_ASID = "918999198738";
+    private static final String FROM_ODS_CODE = "GPC001";
+    private static final String TO_ODS_CODE = "B86041";
+    private static final String EHR_REQUEST = "ehrRequest";
+    private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
+    private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
+    private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
+    private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
+    
     @Test
-    public void When_extractRequestReceived_Expect_ExtractStatusAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
+                .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        var ehrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
 
-        var accessStructured = AwaitHelper.waitFor(
-            () -> (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        assertThatAccessStructuredWasFetched(conversationId, accessStructured);
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(singleDocument);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -64,5 +68,27 @@ public class EhrExtractTest {
         assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION);
         assertThat(accessStructured.get("accessedAt")).isNotNull();
         assertThat(accessStructured.get("taskId")).isNotNull();
+    }
+
+    private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
+        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
+    }
+
+    private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
+        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+        if(!documentList.isEmpty()) {
+            Document document = (Document) documentList.get(0);
+            if (document.get("objectName") != null) {
+                return document;
+            }
+        }
+        return null;
+    }
+
+    private void assertThatAccessDocumentWasFetched(Document document) {
+        assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
+        assertThat(document.get("accessedAt")).isNotNull();
+        assertThat(document.get("taskId")).isNotNull();
     }
 }

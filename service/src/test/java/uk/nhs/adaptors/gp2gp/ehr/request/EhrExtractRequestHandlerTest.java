@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
+import com.mongodb.client.MongoCollection;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -63,11 +65,19 @@ public class EhrExtractRequestHandlerTest {
     @Mock
     private TaskIdService taskIdService;
 
+    @Mock
+    private MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
+
+    @Mock
+    private MongoCollection mongoCollection; // FIXME: Remove as part of NIAD-814
+
     @InjectMocks
     private EhrExtractRequestHandler ehrExtractRequestHandler;
 
     @Test
     public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
+        when(mongoTemplate.getCollection("ehrExtractStatus")).thenReturn(mongoCollection); // FIXME: Remove as part of NIAD-814
+
         Document soapHeader = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
