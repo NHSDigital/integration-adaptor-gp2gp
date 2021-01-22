@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,8 +77,8 @@ public class EhrExtractTest {
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
-        var documentList = (List) gpcAccessDocument.get("documents");
-        if(documentList != null && !documentList.isEmpty()) {
+        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+        if(!documentList.isEmpty()) {
             Document document = (Document) documentList.get(0);
             if (document.get("objectName") != null) {
                 return document;
