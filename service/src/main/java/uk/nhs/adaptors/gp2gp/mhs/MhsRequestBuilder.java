@@ -9,12 +9,18 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserter;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
+import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +31,7 @@ import java.util.Collections;
 @Slf4j
 public class MhsRequestBuilder {
     private static final String INTERACTION_ID = "Interaction-Id";
+    private static final String JSON_CONTENT_TYPE = "application/json";
     private static final String MHS_OUTBOUND_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final int BYTE_COUNT = 16 * 1024 * 1024;
 
@@ -34,7 +41,7 @@ public class MhsRequestBuilder {
     private final MhsConfiguration mhsConfiguration;
     private final MhsWebClientFilter mhsWebClientFilter;
 
-    public WebClient.RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
+    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         SslContext sslContext = buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -43,10 +50,11 @@ public class MhsRequestBuilder {
             .method(HttpMethod.POST)
             .uri(mhsConfiguration.getUrl());
 
-        return buildRequestWithHeadersAndBody(uri, stubExtractCoreMessage, sendEhrExtractCoreTaskDefinition, MHS_OUTBOUND_INTERACTION_ID);
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(stubExtractCoreMessage);
+
+        return buildRequestWithHeadersAndBody(uri, stubExtractCoreMessage, bodyInserter,
+            sendEhrExtractCoreTaskDefinition, MHS_OUTBOUND_INTERACTION_ID);
     }
-
-
 
     @SneakyThrows
     private SslContext buildSSLContext() {
@@ -67,10 +75,12 @@ public class MhsRequestBuilder {
             .build();
     }
 
-    private WebClient.RequestHeadersSpec<?> buildRequestWithHeadersAndBody(WebClient.RequestBodySpec uri, String requestBody,
-        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, String interactionId) {
+    private RequestHeadersSpec<?>  buildRequestWithHeadersAndBody(WebClient.RequestBodySpec uri, String requestBody,
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
 
-        return null; // fix method
+        return uri.accept(MediaType.valueOf(JSON_CONTENT_TYPE))
+            .header(INTERACTION_ID, interactionId)
+            .body(bodyInserter);
     }
 
     private ExchangeStrategies buildExchangeStrategies() {

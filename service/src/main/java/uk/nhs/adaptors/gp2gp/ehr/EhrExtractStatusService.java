@@ -26,9 +26,11 @@ public class EhrExtractStatusService {
     private static final String UPDATED_AT_COLUMN = "updatedAt";
     private static final String GPC_ACCESS_STRUCTURED_COLUMN = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENTS_COLUMN = "gpcAccessDocuments";
+    private static final String EHR_EXTRACT_CORE_COLUMN = "ehrExtractCore";
     private static final String TASK_ID_COLUMN = "taskId";
     private static final String OBJECT_NAME_COLUMN = "objectName";
     private static final String ACCESSED_AT_COLUMN = "accessedAt";
+    private static final String SENT_AT_COLUMN = "sentAt";
     private static final String DOT = ".";
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED_COLUMN + DOT + ACCESSED_AT_COLUMN;
@@ -37,6 +39,8 @@ public class EhrExtractStatusService {
     private static final String ACCESS_OBJECT_NAME_PATH = GPC_ACCESS_DOCUMENTS_COLUMN + DOT + OBJECT_NAME_COLUMN;
     private static final String ACCESS_ACCESS_AT_PATH = GPC_ACCESS_DOCUMENTS_COLUMN + ARRAY_REFERENCE + ACCESSED_AT_COLUMN;
     private static final String ACCESS_TASK_ID_PATH = GPC_ACCESS_DOCUMENTS_COLUMN + ARRAY_REFERENCE + TASK_ID_COLUMN;
+    private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE_COLUMN + DOT + TASK_ID_COLUMN;
+    private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE_COLUMN + DOT + SENT_AT_COLUMN;
 
     private final MongoTemplate mongoTemplate;
 
@@ -79,6 +83,23 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Document. "
                 + "Access Document not present in Ehr Extract Status.");
+        }
+    }
+
+    public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(TASK_ID_COLUMN).is(sendEhrExtractCoreTaskDefinition.getTaskId()));
+
+        Instant now = Instant.now();
+
+        Update update = new Update();
+        update.set(UPDATED_AT_COLUMN, now);
+        update.set(EXTRACT_CORE_SENT_AT_PATH, now);
+        update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
         }
     }
 }

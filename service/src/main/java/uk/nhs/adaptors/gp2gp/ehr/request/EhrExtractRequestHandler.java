@@ -13,9 +13,9 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -129,5 +129,12 @@ public class EhrExtractRequestHandler {
                 .build();
         }
         return value;
+    }
+
+    private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
+        var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
+            .taskId(taskIdService.createNewTaskId())
+            .build();
+        taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
     }
 }

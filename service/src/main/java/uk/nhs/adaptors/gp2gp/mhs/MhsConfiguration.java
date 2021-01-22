@@ -12,5 +12,4 @@ import lombok.Setter;
 @Setter
 public class MhsConfiguration {
     private String url;
-    private String host;
 }
