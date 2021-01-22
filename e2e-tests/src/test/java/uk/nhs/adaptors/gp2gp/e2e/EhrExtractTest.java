@@ -87,8 +87,6 @@ public class EhrExtractTest {
         return null;
     }
 
-    private Document documentHasOBj
-
     private void assertThatAccessDocumentWasFetched(String documentId, Document document) {
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
         assertThat(document.get("accessedAt")).isNotNull();
