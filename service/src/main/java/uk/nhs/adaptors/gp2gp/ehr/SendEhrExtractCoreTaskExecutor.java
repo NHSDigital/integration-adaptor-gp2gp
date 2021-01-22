@@ -5,11 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
+    private final MhsClient mhsClient;
+    private EhrExtractStatusService ehrExtractStatusService;
+
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
         return SendEhrExtractCoreTaskDefinition.class;
