@@ -115,7 +115,7 @@ public class EhrExtractRequestHandler {
         taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
     }
 
-    @Deprecated // FIXME: Remove as part of NIAD-814
+    @Deprecated // FIXME: Creates a stub db element that will be added by NIAD-814. Remove as part of NIAD-814
     private void addAccessDocument(String conversationId) {
         org.bson.Document document = new org.bson.Document();
         document.append("documentId", DOCUMENT_ID);
