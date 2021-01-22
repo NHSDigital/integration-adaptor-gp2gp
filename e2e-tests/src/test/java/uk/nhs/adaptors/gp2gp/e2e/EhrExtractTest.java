@@ -72,10 +72,10 @@ public class EhrExtractTest {
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        return getFirstDocumentOrNull(gpcAccessDocument);
+        return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
     }
 
-    private Document getFirstDocumentOrNull(Document gpcAccessDocument) {
+    private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
         var documentList = (List) gpcAccessDocument.get("documents");
         if(documentList != null && !documentList.isEmpty()) {
             Document document = (Document) documentList.get(0);
