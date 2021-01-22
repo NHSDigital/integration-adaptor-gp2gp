@@ -1,9 +1,10 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
-import java.util.List;
+import java.util.Collections;
 import java.util.UUID;
 
 import uk.nhs.adaptors.gp2gp.MessageQueue;
@@ -25,7 +26,7 @@ public class EhrExtractTest {
     private static final String TO_ODS_CODE = "B86041";
     private static final String EHR_REQUEST = "ehrRequest";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
-    private static final String GPC_ACCESS_DOCUMENTS = "gpcAccessDocuments";
+    private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     
@@ -37,15 +38,14 @@ public class EhrExtractTest {
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        var ehrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus);
 
-        Mongo.addAccessDocument(conversationId, DOCUMENT_ID);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-        var updatedEhrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatusWithStructuredAndProperDocument(conversationId));
-        assertThatAccessStructuredWasFetched(conversationId, (Document) updatedEhrExtractStatus.get(GPC_ACCESS_STRUCTURED));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, (List) updatedEhrExtractStatus.get(GPC_ACCESS_DOCUMENTS));
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(singleDocument);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -70,9 +70,24 @@ public class EhrExtractTest {
         assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(String documentId, List<Document> accessDocuments) {
-        Document document = accessDocuments.get(0);
-        assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
+    private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
+        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
+    }
+
+    private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
+        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+        if(!documentList.isEmpty()) {
+            Document document = (Document) documentList.get(0);
+            if (document.get("objectName") != null) {
+                return document;
+            }
+        }
+        return null;
+    }
+
+    private void assertThatAccessDocumentWasFetched(Document document) {
+        assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
         assertThat(document.get("accessedAt")).isNotNull();
         assertThat(document.get("taskId")).isNotNull();
     }

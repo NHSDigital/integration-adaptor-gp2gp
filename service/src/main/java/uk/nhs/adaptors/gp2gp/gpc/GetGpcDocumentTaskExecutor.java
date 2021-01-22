@@ -1,15 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.util.UUID;
-
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
@@ -32,16 +29,16 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     @Override
     @SneakyThrows
-    public void execute(GetGpcDocumentTaskDefinition documentTaskDefinition) {
+    public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
-        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentTaskDefinition);
-        var response = gpcClient.getDocumentRecord(request, documentTaskDefinition);
+        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
+        var response = gpcClient.getDocumentRecord(request, taskDefinition);
 
-        String documentName = documentTaskDefinition.getDocumentId() + JSON_EXTENSION;
-        String taskId = UUID.randomUUID().toString();
-        storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(documentTaskDefinition, response, taskId),
-            documentName);
-        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(documentTaskDefinition, documentName, taskId);
+        String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
+        String taskId = taskDefinition.getTaskId();
+        var storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
+        storageConnectorService.uploadFile(storageDataWrapper, documentName);
+        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName, taskId);
     }
 }
