@@ -6,7 +6,6 @@ import java.util.UUID;
 
 @Service
 public class TaskIdService {
-
     public String createNewTaskId() {
         return UUID.randomUUID().toString();
     }
