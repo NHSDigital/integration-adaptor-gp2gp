@@ -5,7 +5,6 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 import uk.nhs.adaptors.gp2gp.MessageQueue;
@@ -46,7 +45,7 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessDocumentWasFetched(DOCUMENT_ID, singleDocument);
+        assertThatAccessDocumentWasFetched(singleDocument);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -87,8 +86,8 @@ public class EhrExtractTest {
         return null;
     }
 
-    private void assertThatAccessDocumentWasFetched(String documentId, Document document) {
-        assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
+    private void assertThatAccessDocumentWasFetched(Document document) {
+        assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
         assertThat(document.get("accessedAt")).isNotNull();
         assertThat(document.get("taskId")).isNotNull();
     }
