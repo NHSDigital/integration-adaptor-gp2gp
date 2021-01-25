@@ -1,0 +1,13 @@
+{
+	"resourceType": "Bundle",
+	"id": "82B0C63F-CD04-41C4-9D63-48BCDCA47E82",
+	"type": "searchset",
+	"total": 0,
+	"link": [
+		{
+			"relation": "self",
+			"url": "http://internal-dev.apis.ptl.api.platform.nhs.uk/Endpoint?organization=https://fhir.nhs.uk/Id/ods-organization-code|&identifier=https://fhir.nhs.uk/Id/nhsEndpointServiceId|"
+		}
+	],
+	"entry": []
+}
