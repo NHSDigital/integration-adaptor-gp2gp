@@ -33,7 +33,6 @@ public class EhrExtractStatus implements TimeToLive {
     private Instant created;
     private Instant updatedAt;
     private String conversationId;
-    private String patientId;
     private EhrRequest ehrRequest;
     private GpcAccessStructured gpcAccessStructured;
     private GpcAccessDocument gpcAccessDocument;

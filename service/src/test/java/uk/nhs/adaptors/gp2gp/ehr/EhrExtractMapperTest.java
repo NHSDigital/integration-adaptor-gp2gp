@@ -6,19 +6,24 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.CurrentDateGenerator;
+import uk.nhs.adaptors.gp2gp.utils.RandomIdGenerator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -33,51 +38,61 @@ public class EhrExtractMapperTest {
     private static final String OUTPUT_DIRECTORY = "output/";
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
-    private static final String JSON_INPUT_FILE_NAME = "gpc-access-structured.json";
-    private static final String EXPECTED_XML_TO_JSON_FILE_NAME = "ExpectedEhrExtractResponseFromJson.xml";
+    private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
+    private static final String JSON_INPUT_FILE_WITH_NO_PATIENT = "gpc-access-structured-with-no-patient.json";
+    private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
     private static final String TEST_ID = "test-id";
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
     private static final String TEST_NHS_NUMBER = "1234567890";
     private static final String JSON_WITH_NO_CONTENT = "{}";
+    private static final String EXPECTED_NO_CONTENT_EXCEPTION_MESSAGE =
+        "Failed to parse JSON encoded FHIR content: Did not find any content to parse";
+    private static final String EXPECTED_NO_RESOURCE_TYPE_EXCEPTION_MESSAGE =
+        "Invalid JSON content detected, missing required element: 'resourceType'";
+    private static final String EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE = "Missing patient resource in Fhir Bundle.";
+    private static final int YEAR = 2020;
+    private static final int MONTH = 1;
+    private static final int DAY = 1;
+    private static final int HOUR = 1;
+    private static final int MINUTE = 1;
+    private static final int SECOND = 1;
 
     private static String inputJsonFileContent;
+    private static String inputJsonFileWithNoPatientContent;
     private static String expectedJsonToXmlContent;
-    private static EhrExtractStatus ehrExtractStatus;
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
     @Mock
-    private TaskIdService taskIdService;
+    private RandomIdGenerator randomIdGenerator;
+    @Mock
+    private CurrentDateGenerator currentDateGenerator;
 
     private EhrExtractMapper ehrExtractMapper;
 
     @BeforeAll
     public static void initialize() throws IOException {
-        inputJsonFileContent = getFileContent(INPUT_PATH + JSON_INPUT_FILE_NAME);
-        expectedJsonToXmlContent = getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE_NAME);
+        inputJsonFileContent = getFileContent(INPUT_PATH + JSON_INPUT_FILE);
+        inputJsonFileWithNoPatientContent = getFileContent(INPUT_PATH + JSON_INPUT_FILE_WITH_NO_PATIENT);
+        expectedJsonToXmlContent = getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
 
-        ehrExtractStatus = EhrExtractStatus.builder()
-            .conversationId(TEST_CONVERSATION_ID)
-            .ehrRequest(EhrExtractStatus.EhrRequest.builder()
-                .requestId(TEST_REQUEST_ID)
-                .nhsNumber(TEST_NHS_NUMBER)
-                .build())
-            .build();
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
+            .requestId(TEST_REQUEST_ID)
             .build();
     }
 
     @BeforeEach
     public void setUp() {
-        when(taskIdService.createNewTaskId()).thenReturn(TEST_ID);
-        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), taskIdService);
+        when(randomIdGenerator.createNewId()).thenReturn(TEST_ID);
+        when(currentDateGenerator.generateDate()).thenReturn(LocalDateTime.of(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND));
+        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGenerator, currentDateGenerator);
     }
 
     @Test
     public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() {
-        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(ehrExtractStatus,
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
             inputJsonFileContent);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
@@ -85,21 +100,24 @@ public class EhrExtractMapperTest {
         assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 
-    @Test
-    public void When_MappingEmptyJsonRequestBody_Expect_FhirValidationExceptionThrown() {
-        assertThrows(FhirValidationException.class, () -> ehrExtractMapper.mapJsonToEhrFhirExtractParams(ehrExtractStatus,
-            getGpcStructuredTaskDefinition,
-            StringUtils.EMPTY));
-    }
-
-    @Test
-    public void When_MappingJsonBodyWithNoContentRequestBody_Expect_FhirValidationExceptionThrown() {
-        assertThrows(FhirValidationException.class, () -> ehrExtractMapper.mapJsonToEhrFhirExtractParams(ehrExtractStatus,
-            getGpcStructuredTaskDefinition,
-            JSON_WITH_NO_CONTENT));
+    @ParameterizedTest
+    @MethodSource("exceptionParams")
+    public void When_MappingInvalidJsonRequestBody_Expect_FhirValidationExceptionThrown(String jsonContent, String expectedMessage) {
+        Exception exception = assertThrows(FhirValidationException.class,
+            () -> ehrExtractMapper.mapJsonToEhrFhirExtractParams(getGpcStructuredTaskDefinition,
+                jsonContent));
+        assertThat(exception.getMessage()).isEqualTo(expectedMessage);
     }
 
     private static String getFileContent(String filePath) throws IOException {
         return IOUtils.toString(EhrExtractMapperTest.class.getResourceAsStream(filePath), StandardCharsets.UTF_8);
+    }
+
+    private static Stream<Arguments> exceptionParams() {
+        return Stream.of(
+            Arguments.of(StringUtils.EMPTY, EXPECTED_NO_CONTENT_EXCEPTION_MESSAGE),
+            Arguments.of(JSON_WITH_NO_CONTENT, EXPECTED_NO_RESOURCE_TYPE_EXCEPTION_MESSAGE),
+            Arguments.of(inputJsonFileWithNoPatientContent, EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE)
+        );
     }
 }
