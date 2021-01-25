@@ -8,17 +8,17 @@
         </patient>
     </recordTarget>
     <author typeCode="AUT">
-        <time value="{{authorTime}}" />
+        <time value="{{availabilityTime}}" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="{{destinationId}}" />
+                <id root="1.2.826.0.1285.0.1.10" extension="{{authorOdsCode}}" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="{{authorId}}" />
+                <id root="1.2.826.0.1285.0.1.10" extension="{{destinationOdsCode}}" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -32,10 +32,10 @@
             </effectiveTime>
             <availabilityTime value="{{availabilityTime}}" />
             <author typeCode="AUT">
-                <time value="{{authorTime}}" />
+                <time value="{{availabilityTime}}" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="{{destinationId}}" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="{{authorOdsCode}}" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>

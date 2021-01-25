@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.utils.RandomIdGenerator;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -50,7 +50,7 @@ public class EhrExtractRequestHandler {
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
-    private final RandomIdGenerator randomIdGenerator;
+    private final RandomIdGeneratorService randomIdGeneratorService;
     private final MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
 
     public void handle(Document header, Document payload) {
@@ -90,7 +90,7 @@ public class EhrExtractRequestHandler {
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
         var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(randomIdGenerator.createNewId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
@@ -106,7 +106,7 @@ public class EhrExtractRequestHandler {
 
         var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .documentId(DOCUMENT_ID)
-            .taskId(randomIdGenerator.createNewId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())

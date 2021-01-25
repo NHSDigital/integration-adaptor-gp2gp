@@ -1,24 +1,24 @@
 <EhrExtract classCode="EXTRACT" moodCode="EVN">
-    <id root="test-conversation-id" />
+    <id root="test-id" />
     <statusCode code="COMPLETE" />
-    <availabilityTime value="20200101010101" />
+    <availabilityTime value="20200101020101" />
     <recordTarget typeCode="RCT">
         <patient classCode="PAT">
             <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
         </patient>
     </recordTarget>
     <author typeCode="AUT">
-        <time value="" />
+        <time value="20200101020101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="" />
+                <id root="1.2.826.0.1285.0.1.10" extension="test-ods-code" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="" />
+                <id root="1.2.826.0.1285.0.1.10" extension="test-ods-code" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -30,12 +30,12 @@
                 <low value="" />
                 <high value="" />
             </effectiveTime>
-            <availabilityTime value="20200101010101" />
+            <availabilityTime value="20200101020101" />
             <author typeCode="AUT">
-                <time value="" />
+                <time value="20200101020101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="test-ods-code" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>

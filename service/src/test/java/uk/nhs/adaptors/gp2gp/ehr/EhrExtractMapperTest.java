@@ -6,15 +6,15 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.CurrentDateGenerator;
-import uk.nhs.adaptors.gp2gp.utils.RandomIdGenerator;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,18 +45,13 @@ public class EhrExtractMapperTest {
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
     private static final String TEST_NHS_NUMBER = "1234567890";
+    private static final String TEST_ODS_CODE = "test-ods-code";
     private static final String JSON_WITH_NO_CONTENT = "{}";
     private static final String EXPECTED_NO_CONTENT_EXCEPTION_MESSAGE =
         "Failed to parse JSON encoded FHIR content: Did not find any content to parse";
     private static final String EXPECTED_NO_RESOURCE_TYPE_EXCEPTION_MESSAGE =
         "Invalid JSON content detected, missing required element: 'resourceType'";
     private static final String EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE = "Missing patient resource in Fhir Bundle.";
-    private static final int YEAR = 2020;
-    private static final int MONTH = 1;
-    private static final int DAY = 1;
-    private static final int HOUR = 1;
-    private static final int MINUTE = 1;
-    private static final int SECOND = 1;
 
     private static String inputJsonFileContent;
     private static String inputJsonFileWithNoPatientContent;
@@ -64,9 +59,9 @@ public class EhrExtractMapperTest {
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
     @Mock
-    private RandomIdGenerator randomIdGenerator;
+    private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
-    private CurrentDateGenerator currentDateGenerator;
+    private TimestampService timestampService;
 
     private EhrExtractMapper ehrExtractMapper;
 
@@ -80,14 +75,15 @@ public class EhrExtractMapperTest {
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
             .requestId(TEST_REQUEST_ID)
+            .fromOdsCode(TEST_ODS_CODE)
             .build();
     }
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGenerator.createNewId()).thenReturn(TEST_ID);
-        when(currentDateGenerator.generateDate()).thenReturn(LocalDateTime.of(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND));
-        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGenerator, currentDateGenerator);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
+        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
     }
 
     @Test

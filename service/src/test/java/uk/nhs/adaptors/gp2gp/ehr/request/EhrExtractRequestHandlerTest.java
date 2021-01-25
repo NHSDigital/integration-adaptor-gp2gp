@@ -21,7 +21,7 @@ import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.utils.RandomIdGenerator;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
@@ -63,7 +63,7 @@ public class EhrExtractRequestHandlerTest {
     private TaskDispatcher taskDispatcher;
 
     @Mock
-    private RandomIdGenerator randomIdGenerator;
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @Mock
     private MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
@@ -82,7 +82,7 @@ public class EhrExtractRequestHandlerTest {
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
-        when(randomIdGenerator.createNewId()).thenReturn(TASK_ID);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
         ehrExtractRequestHandler.handle(soapHeader, soapBody);
 

@@ -1,15 +1,18 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Optional;
 
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.CurrentDateGenerator;
-import uk.nhs.adaptors.gp2gp.utils.RandomIdGenerator;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Patient;
@@ -22,20 +25,22 @@ import com.github.mustachejava.Mustache;
 @Component
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMDDHHmmss");
-    private static final String SLASH = "/";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
+        .appendPattern("yyyyMMddHHmmss")
+        .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
+        .toFormatter();
 
     private final FhirParseService fhirParseService;
-    private final RandomIdGenerator randomIdGenerator;
-    private final CurrentDateGenerator currentDateGenerator;
+    private final RandomIdGeneratorService randomIdGeneratorService;
+    private final TimestampService timestampService;
 
     @Autowired
     public EhrExtractMapper(FhirParseService fhirParseService,
-            RandomIdGenerator randomIdGenerator,
-            CurrentDateGenerator currentDateGenerator) {
+            RandomIdGeneratorService randomIdGeneratorService,
+            TimestampService timestampService) {
         this.fhirParseService = fhirParseService;
-        this.randomIdGenerator = randomIdGenerator;
-        this.currentDateGenerator = currentDateGenerator;
+        this.randomIdGeneratorService = randomIdGeneratorService;
+        this.timestampService = timestampService;
     }
 
     public EhrExtractTemplateParameters mapJsonToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
@@ -53,18 +58,18 @@ public class EhrExtractMapper {
             GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
             Bundle bundle) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
-        ehrExtractTemplateParameters.setEhrFolderId(randomIdGenerator.createNewId());
+        ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setPatientId(getGpcStructuredTaskDefinition.getNhsNumber());
         ehrExtractTemplateParameters.setRequestId(getGpcStructuredTaskDefinition.getRequestId());
-        ehrExtractTemplateParameters.setEhrExtractId(getGpcStructuredTaskDefinition.getConversationId());
-        ehrExtractTemplateParameters.setAvailabilityTime(FORMATTER.format(currentDateGenerator.generateDate()));
+        ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
+        ehrExtractTemplateParameters.setAuthorOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
+        ehrExtractTemplateParameters.setDestinationOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
+        ehrExtractTemplateParameters.setAuthorOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
+        ehrExtractTemplateParameters.setAvailabilityTime(DATE_TIME_FORMATTER.format(timestampService.now()
+            .atZone(ZoneId.systemDefault())));
 
-        Patient patient = extractPatientFromBundle(bundle)
+        extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));
-
-        if (patient.getManagingOrganization() != null) {
-            ehrExtractTemplateParameters.setAuthorId(getGpcStructuredTaskDefinition.getFromOdsCode());
-        }
 
         return ehrExtractTemplateParameters;
     }
