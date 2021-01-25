@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import java.time.Instant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,11 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("Execute called from SendEhrExtractCoreTaskExecutor");
 
+        Instant requestSentAt = Instant.now();
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
         var response = mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 
-        ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition);
+        // validation on != 202 here?
+        ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
     }
 }

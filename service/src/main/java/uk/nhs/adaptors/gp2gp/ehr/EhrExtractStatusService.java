@@ -86,7 +86,7 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
+    public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
         Query query = new Query();
         query.addCriteria(Criteria.where(TASK_ID_COLUMN).is(sendEhrExtractCoreTaskDefinition.getTaskId()));
 
@@ -94,7 +94,7 @@ public class EhrExtractStatusService {
 
         Update update = new Update();
         update.set(UPDATED_AT_COLUMN, now);
-        update.set(EXTRACT_CORE_SENT_AT_PATH, now);
+        update.set(EXTRACT_CORE_SENT_AT_PATH, requestSentAt);
         update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 

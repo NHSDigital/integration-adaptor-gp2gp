@@ -52,6 +52,7 @@ public class EhrExtractRequestHandler {
             LOGGER.info("Creating tasks to start the EHR Extract process");
             createGetGpcStructuredTask(ehrExtractStatus);
             createGetGpcDocumentTask(ehrExtractStatus);
+            createSendEhrExtractCoreMessage(ehrExtractStatus);
         } else {
             LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
         }
@@ -134,6 +135,11 @@ public class EhrExtractRequestHandler {
     private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
         var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
             .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
     }
