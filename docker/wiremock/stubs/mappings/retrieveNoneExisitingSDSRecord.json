@@ -10,7 +10,7 @@
 		}
 	},
 	"response": {
-		"status": 404,
+		"status": 200,
 		"bodyFileName": "notFoundSDSResponse.json",
 		"headers": {
 			"Content-Type": "application/fhir+json;",
