@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EhrFhirExtractParams {
+public class EhrExtractTemplateParameters {
     private String patientId;
     private String authorId;
     private String destinationId;
