@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -45,7 +45,8 @@ public class EhrExtractMapperTest {
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
     private static final String TEST_NHS_NUMBER = "1234567890";
-    private static final String TEST_ODS_CODE = "test-ods-code";
+    private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
+    private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
     private static final String JSON_WITH_NO_CONTENT = "{}";
     private static final String EXPECTED_NO_CONTENT_EXCEPTION_MESSAGE =
         "Failed to parse JSON encoded FHIR content: Did not find any content to parse";
@@ -75,7 +76,8 @@ public class EhrExtractMapperTest {
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
             .requestId(TEST_REQUEST_ID)
-            .fromOdsCode(TEST_ODS_CODE)
+            .fromOdsCode(TEST_FROM_ODS_CODE)
+            .toOdsCode(TEST_TO_ODS_CODE)
             .build();
     }
 

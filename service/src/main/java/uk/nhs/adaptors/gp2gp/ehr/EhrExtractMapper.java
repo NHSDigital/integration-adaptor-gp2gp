@@ -61,10 +61,8 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setPatientId(getGpcStructuredTaskDefinition.getNhsNumber());
         ehrExtractTemplateParameters.setRequestId(getGpcStructuredTaskDefinition.getRequestId());
-        ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
-        ehrExtractTemplateParameters.setAuthorOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
-        ehrExtractTemplateParameters.setDestinationOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
-        ehrExtractTemplateParameters.setAuthorOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
+        ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
+        ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DATE_TIME_FORMATTER.format(timestampService.now()
             .atZone(ZoneId.systemDefault())));
 

@@ -7,9 +7,8 @@ import lombok.Setter;
 @Setter
 public class EhrExtractTemplateParameters {
     private String patientId;
-    private String authorOdsCode;
-    private String toAsid;
-    private String destinationOdsCode;
+    private String toOdsCode;
+    private String fromOdsCode;
     private String requestId;
     private String ehrFolderId;
     private String availabilityTime;
