@@ -1,0 +1,56 @@
+@startuml
+
+
+title GP2GP Adaptor - EHR Extract process
+actor Patient
+actor "Incumbent Admin" as igp
+Patient->"Incumbent GP System" as igps: registers at practice
+igps->igps: various operations\nbefore making\nEHR Request
+
+igps->Spine TMS: EHR Request
+Spine TMS->MHS Adaptor: EHR Request
+MHS Adaptor->Inbound Queueß: EHR Request
+Adaptor->Incumbent:Ack
+Adaptor->SDS:Lookup GP2GP endpoint (RMCR)
+opt Old practice has GP2GP 2.2A
+Adaptor->SDS:Lookup GP2GP endpoint (COPC)
+SDS->Adaptor:Endpoint response
+Adaptor->Adaptor:use GP2GP 2.2A
+end
+
+Adaptor->SDS:Lookup GPC endpoint of NME
+SDS->Adaptor:endpoint URL
+Adaptor->NME:GPC request
+NME->Adaptor:GPC response
+Note over Adaptor
+Translates 
+GPC FHIR to HL7
+end note
+Adaptor->Incumbent:GP2GP EHR Extract(s)
+note left of Adaptor
+Forwared reliable pattern
+If 2.2A may have manifest followed
+by multiple message fragments
+end note
+
+Incumbent-->NHAIS:Acceptance (ACG)
+
+note left of NHAIS
+NHAIS updates PDS, 
+even though new  practice 
+may have already done this 
+end note
+NHAIS-->Incumbent:Approval
+NHAIS-->NME:Deduction (DEF)
+NME->NME:Process DEF
+NME-->NHAIS:RECEP
+
+
+Actor "NME Admin"
+
+igp->Incumbent:Accept EHR Extract
+Incumbent->Incumbent:Save record into DB
+note over Incumbent: Record flagged "Filed"
+Incumbent->Adaptor:Business Ack "Fully integrated"
+
+@enduml
