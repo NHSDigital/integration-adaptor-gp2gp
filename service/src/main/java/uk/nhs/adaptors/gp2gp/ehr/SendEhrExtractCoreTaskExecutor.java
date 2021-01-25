@@ -28,7 +28,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
         Instant requestSentAt = Instant.now();
-        var response = mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
+        mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 
         ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
     }
