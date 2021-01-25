@@ -26,6 +26,7 @@ public class EhrExtractTest {
     private static final String EHR_REQUEST = "ehrRequest";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENTS = "gpcAccessDocuments";
+    private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     
@@ -46,6 +47,7 @@ public class EhrExtractTest {
         var updatedEhrExtractStatus = AwaitHelper.waitFor(() -> Mongo.findEhrExtractStatusWithStructuredAndProperDocument(conversationId));
         assertThatAccessStructuredWasFetched(conversationId, (Document) updatedEhrExtractStatus.get(GPC_ACCESS_STRUCTURED));
         assertThatAccessDocumentWasFetched(DOCUMENT_ID, (List) updatedEhrExtractStatus.get(GPC_ACCESS_DOCUMENTS));
+        assertThatExtractCoreMessageWasSent((Document) updatedEhrExtractStatus.get(EHR_EXTRACT_CORE));
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
@@ -75,5 +77,10 @@ public class EhrExtractTest {
         assertThat(document.get("objectName")).isEqualTo(documentId + ".json");
         assertThat(document.get("accessedAt")).isNotNull();
         assertThat(document.get("taskId")).isNotNull();
+    }
+
+    private void assertThatExtractCoreMessageWasSent(Document extractCore) {
+        assertThat(extractCore.get("sentAt")).isNotNull();
+        assertThat(extractCore.get("taskId")).isNotNull();
     }
 }

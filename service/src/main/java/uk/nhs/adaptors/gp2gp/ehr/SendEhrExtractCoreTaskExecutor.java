@@ -15,7 +15,7 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
-    private EhrExtractStatusService ehrExtractStatusService;
+    private final EhrExtractStatusService ehrExtractStatusService;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -26,11 +26,10 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("Execute called from SendEhrExtractCoreTaskExecutor");
 
-        Instant requestSentAt = Instant.now();
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
+        Instant requestSentAt = Instant.now();
         var response = mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 
-        // validation on != 202 here?
         ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
     }
 }

@@ -22,6 +22,7 @@ public class Mongo {
     public static Document findEhrExtractStatusWithStructuredAndProperDocument(String conversationId) {
         var collection = getCollection();
         return collection.find(Filters.and(Filters.eq("conversationId", conversationId),
+            Filters.exists("ehrExtractCore"),
             Filters.exists("gpcAccessStructured"),
             Filters.size("gpcAccessDocuments", 1),
             Filters.exists("gpcAccessDocuments.0.accessedAt"),

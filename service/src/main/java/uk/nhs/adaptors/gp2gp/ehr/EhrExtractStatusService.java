@@ -88,7 +88,7 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
         Query query = new Query();
-        query.addCriteria(Criteria.where(TASK_ID_COLUMN).is(sendEhrExtractCoreTaskDefinition.getTaskId()));
+        query.addCriteria(Criteria.where(CONVERSATION_ID_COLUMN).is(sendEhrExtractCoreTaskDefinition.getConversationId()));
 
         Instant now = Instant.now();
 
