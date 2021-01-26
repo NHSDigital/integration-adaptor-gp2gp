@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 public class EhrExtractStatusValidator {
 
     public static boolean isPreparingDataFinished(EhrExtractStatus ehrExtractStatus) {
-        return isPatientStructuredRecordTranslated(ehrExtractStatus) && areAllDocumentsAssociatedWithPatient(ehrExtractStatus);
+        return isPatientStructuredRecordTranslated(ehrExtractStatus) && areAllDocumentsAssociatedWithPatientFetched(ehrExtractStatus);
     }
 
     private static boolean isPatientStructuredRecordTranslated(EhrExtractStatus ehrExtractStatus) {
@@ -15,7 +15,7 @@ public class EhrExtractStatusValidator {
             && StringUtils.isNoneBlank(ehrExtractStatus.getGpcAccessStructured().getObjectName());
     }
 
-    private static boolean areAllDocumentsAssociatedWithPatient(EhrExtractStatus ehrExtractStatus) {
+    private static boolean areAllDocumentsAssociatedWithPatientFetched(EhrExtractStatus ehrExtractStatus) {
         if (ehrExtractStatus.getGpcAccessDocument() != null && ehrExtractStatus.getGpcAccessDocument().getDocuments() != null) {
             List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
 

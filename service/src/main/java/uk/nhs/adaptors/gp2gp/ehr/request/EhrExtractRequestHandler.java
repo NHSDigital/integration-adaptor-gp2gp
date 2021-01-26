@@ -2,14 +2,17 @@ package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
@@ -97,8 +100,8 @@ public class EhrExtractRequestHandler {
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
     }
-
     // FIXME: move/remove NIAD-814 should create a task for each of the patient's documents
+
     private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
         addAccessDocument(ehrExtractStatus.getConversationId());
 
