@@ -27,6 +27,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @Test
     public void When_NewExtractCoreTask_Expect_DatabaseUpdated() {
+        System.getenv("gp2gp.mhs.url");
+
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -35,6 +37,18 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
+    }
+
+    @Test
+    public void When_StructuredTaskPatientNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        // make MHS request return != 202 here to not update database
+        System.setProperty("gp2gp.mhs.url", "http://127.0.0.1:8081/mock-mhs");
+
+        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
     }
 
     private SendEhrExtractCoreTaskDefinition buildValidExtractCoreTask(EhrExtractStatus ehrExtractStatus) {

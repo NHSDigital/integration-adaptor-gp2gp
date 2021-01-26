@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -108,6 +109,18 @@ public class EhrExtractRequestHandler {
         taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
     }
 
+    private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
+        var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
+                .taskId(taskIdService.createNewTaskId())
+                .conversationId(ehrExtractStatus.getConversationId())
+                .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+                .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+                .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+                .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+                .build();
+        taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
+    }
+
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
         return new EhrExtractStatus.EhrRequest(
             getRequiredValue(payload, REQUEST_ID_PATH),
@@ -130,17 +143,5 @@ public class EhrExtractRequestHandler {
                 .build();
         }
         return value;
-    }
-
-    private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
-        var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
-            .taskId(taskIdService.createNewTaskId())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-            .build();
-        taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
     }
 }
