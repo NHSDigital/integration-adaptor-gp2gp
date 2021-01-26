@@ -1,5 +1,24 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,24 +26,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
-import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
-import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest

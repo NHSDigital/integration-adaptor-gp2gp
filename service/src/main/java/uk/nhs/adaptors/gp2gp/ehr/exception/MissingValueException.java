@@ -1,6 +1,7 @@
-package uk.nhs.adaptors.gp2gp.ehr;
+package uk.nhs.adaptors.gp2gp.ehr.exception;
 
 import lombok.Builder;
+import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 
 public class MissingValueException extends RuntimeException {
     @Builder

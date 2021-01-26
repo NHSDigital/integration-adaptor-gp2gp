@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr;
+package uk.nhs.adaptors.gp2gp.ehr.model;
 
 import java.time.Instant;
 import java.util.List;

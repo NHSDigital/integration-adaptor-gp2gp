@@ -6,6 +6,8 @@ import java.time.Instant;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
