@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
@@ -84,7 +85,7 @@ public class EhrExtractMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
+        when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z").truncatedTo(ChronoUnit.MILLIS));
         ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
     }
 
