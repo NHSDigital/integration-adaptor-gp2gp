@@ -43,8 +43,8 @@ gp2gp:
     host: ${GP2GP_GPC_HOST:messagingportal.opentest.hscic.gov.uk}
     enableTLS: ${GP2GP_ENABLE_TLS:true}
     enableProxy: ${GP2GP_ENABLE_PROXY:false}
-    proxy: ${GP2GP_GPC_HTTP_PROXY:10.1.0.251}
-    proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:3128}
+    proxy: ${GP2GP_GPC_HTTP_PROXY:}
+    proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:}
     clientCert: ${GP2GP_SPINE_CLIENT_CERT:}
     clientKey: ${GP2GP_SPINE_CLIENT_KEY:}
     rootCA: ${GP2GP_SPINE_ROOT_CA_CERT:}
