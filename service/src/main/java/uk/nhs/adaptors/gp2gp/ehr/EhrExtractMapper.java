@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
@@ -33,15 +35,6 @@ public class EhrExtractMapper {
     private final FhirParseService fhirParseService;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
-
-    @Autowired
-    public EhrExtractMapper(FhirParseService fhirParseService,
-            RandomIdGeneratorService randomIdGeneratorService,
-            TimestampService timestampService) {
-        this.fhirParseService = fhirParseService;
-        this.randomIdGeneratorService = randomIdGeneratorService;
-        this.timestampService = timestampService;
-    }
 
     public EhrExtractTemplateParameters mapJsonToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
             String json) {
