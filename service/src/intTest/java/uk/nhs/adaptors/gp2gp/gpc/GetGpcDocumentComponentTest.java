@@ -48,6 +48,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     @Autowired
     private StorageConnector storageConnector;
+    @Autowired
+    private GpcTaskAggregateService gpcTaskAggregateService;
 
     private EhrExtractStatus setupDatabase() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();

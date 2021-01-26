@@ -44,6 +44,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     @Autowired
     private StorageConnector storageConnector;
+    @Autowired
+    private GpcTaskAggregateService gpcTaskAggregateService;
 
     @Test
     public void When_NewStructuredTask_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
