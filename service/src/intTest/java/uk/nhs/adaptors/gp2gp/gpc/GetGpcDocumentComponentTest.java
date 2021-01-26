@@ -52,7 +52,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
     @Test
     public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addEhrStatusToDatabase();
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
@@ -70,13 +70,11 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
     @Test
     public void When_NewAccessDocumentTaskIsStartedAndThenUpdated_Expect_DatabaseAndObjectStoreUpdated() throws IOException {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addEhrStatusToDatabase();
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
         var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
-        assertThatAccessRecordWasUpdated(updatedEhrExtractStatus1, ehrExtractStatus, taskDefinition);
-
         var inputStream = storageConnector.downloadFromStorage(DOCUMENT_NAME);
         var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
 
@@ -112,7 +110,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
     }
 
-    private EhrExtractStatus setupDatabase() {
+    private EhrExtractStatus addEhrStatusToDatabase() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
             .documents(prepareDocuments())
