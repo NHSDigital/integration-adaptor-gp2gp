@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.nhs.adaptors.gp2gp.common.utils.PemFormatter;
 
 @Component
 @ConfigurationProperties(prefix = "gp2gp.gpc")
@@ -22,4 +23,21 @@ public class GpcConfiguration {
     private String clientKey;
     private String rootCA;
     private String subCA;
+
+
+    public String getClientCert() {
+        return PemFormatter.format(clientCert);
+    }
+
+    public String getClientKey() {
+        return PemFormatter.format(clientKey);
+    }
+
+    public String getSubCA() {
+        return PemFormatter.format(subCA);
+    }
+
+    public String getRootCA() {
+        return PemFormatter.format(rootCA);
+    }
 }
