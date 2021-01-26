@@ -13,18 +13,18 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
+import java.time.Instant;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
-import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-
-import java.time.Instant;
 
 @Service
 @Slf4j
@@ -51,7 +51,7 @@ public class EhrExtractRequestHandler {
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
-    private final TaskIdService taskIdService;
+    private final RandomIdGeneratorService randomIdGeneratorService;
     private final MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
 
     public void handle(Document header, Document payload) {
@@ -91,11 +91,12 @@ public class EhrExtractRequestHandler {
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
         var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(taskIdService.createNewTaskId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
@@ -107,11 +108,12 @@ public class EhrExtractRequestHandler {
 
         var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .documentId(DOCUMENT_ID)
-            .taskId(taskIdService.createNewTaskId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .accessDocumentUrl(DOCUMENT_URL)
             .build();

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Slf4j
 @Component

@@ -1,5 +1,24 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,24 +26,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
-import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
-import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -51,22 +52,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     @Autowired
     private GpcTaskAggregateService gpcTaskAggregateService;
 
-    private EhrExtractStatus setupDatabase() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-            .documents(List.of(
-                EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
-                    .documentId(EhrStatusConstants.DOCUMENT_ID)
-                    .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
-                    .build()
-            ))
-            .build());
-        return ehrExtractStatusRepository.save(ehrExtractStatus);
-    }
-
     @Test
     public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addEhrStatusToDatabase();
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
@@ -80,6 +68,28 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
         assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
+    }
+
+    @Test
+    public void When_NewAccessDocumentTaskIsStartedAndThenUpdated_Expect_DatabaseAndObjectStoreUpdated() throws IOException {
+        var ehrExtractStatus = addEhrStatusToDatabase();
+        var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
+        getGpcDocumentTaskExecutor.execute(taskDefinition);
+
+        var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        var inputStream = storageConnector.downloadFromStorage(DOCUMENT_NAME);
+        var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
+
+        var newTaskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
+        getGpcDocumentTaskExecutor.execute(newTaskDefinition);
+
+        var updatedEhrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(newTaskDefinition.getConversationId()).get();
+        assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
+
+        var updatedFileInputStream = storageConnector.downloadFromStorage(DOCUMENT_NAME);
+        var updatedStorageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
+
+        assertThat(storageDataWrapper.getTaskId()).isNotEqualTo(updatedStorageDataWrapper.getTaskId());
     }
 
     @Test
@@ -102,6 +112,21 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
     }
 
+    private EhrExtractStatus addEhrStatusToDatabase() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
+            .documents(prepareDocuments())
+            .build());
+        return ehrExtractStatusRepository.save(ehrExtractStatus);
+    }
+
+    private List<EhrExtractStatus.GpcAccessDocument.GpcDocument> prepareDocuments() {
+        return List.of(EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .documentId(EhrStatusConstants.DOCUMENT_ID)
+            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
+            .build());
+    }
+
     private GetGpcDocumentTaskDefinition buildValidAccessTask(EhrExtractStatus ehrExtractStatus, String documentId) {
         return GetGpcDocumentTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
@@ -115,12 +140,13 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private void assertThatAccessRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated,
-                                                  EhrExtractStatus ehrExtractStatus,
-                                                  GetGpcDocumentTaskDefinition taskDefinition) {
+            EhrExtractStatus ehrExtractStatus,
+            GetGpcDocumentTaskDefinition taskDefinition) {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
 
-        var gpcDocument =
-            ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
+        var gpcDocument = ehrExtractStatusUpdated.getGpcAccessDocument()
+            .getDocuments()
+            .get(0);
         assertThat(gpcDocument.getObjectName()).isEqualTo(DOCUMENT_NAME);
         assertThat(gpcDocument.getAccessedAt()).isNotNull();
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());

@@ -13,11 +13,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.IdGenerator;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class SendEhrExtractCoreTest {
@@ -32,7 +32,7 @@ public class SendEhrExtractCoreTest {
     @Mock
     private TaskDispatcher taskDispatcher;
     @Mock
-    private TaskIdService taskIdService;
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     private SendEhrExtractCore sendEhrExtractCore;
 
@@ -41,9 +41,9 @@ public class SendEhrExtractCoreTest {
 
     @BeforeEach
     public void setUp() {
-        when(taskIdService.createNewTaskId()).thenReturn(TASK_ID);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
-        sendEhrExtractCore = new SendEhrExtractCore(taskDispatcher, taskIdService);
+        sendEhrExtractCore = new SendEhrExtractCore(taskDispatcher, randomIdGeneratorService);
     }
 
     @Test

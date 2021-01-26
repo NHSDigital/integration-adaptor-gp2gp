@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusValidator;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Slf4j
 @Service

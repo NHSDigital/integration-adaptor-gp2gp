@@ -9,8 +9,8 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import uk.nhs.adaptors.gp2gp.IdGenerator;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusValidator;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusValidatorTest {
 

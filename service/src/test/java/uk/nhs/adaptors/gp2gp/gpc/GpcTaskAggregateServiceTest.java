@@ -11,8 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class GpcTaskAggregateServiceTest {

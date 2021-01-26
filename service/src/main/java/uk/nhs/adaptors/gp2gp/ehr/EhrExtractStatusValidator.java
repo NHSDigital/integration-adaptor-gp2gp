@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+
 public class EhrExtractStatusValidator {
 
     public static boolean isPreparingDataFinished(EhrExtractStatus ehrExtractStatus) {
