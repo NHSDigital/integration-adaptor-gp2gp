@@ -4,17 +4,22 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import org.springframework.test.context.junit4.SpringRunner;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
@@ -27,8 +32,6 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     @Test
     public void When_NewExtractCoreTask_Expect_DatabaseUpdated() {
-        System.getenv("gp2gp.mhs.url");
-
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -39,17 +42,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
     }
 
-    @Test
-    public void When_StructuredTaskPatientNotFoundError_Expect_EhrStatusNotUpdatedAndNotSavedToStorage() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        // make MHS request return != 202 here to not update database
-        System.setProperty("gp2gp.mhs.url", "http://127.0.0.1:8081/mock-mhs");
-
-        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
-    }
 
     private SendEhrExtractCoreTaskDefinition buildValidExtractCoreTask(EhrExtractStatus ehrExtractStatus) {
         return SendEhrExtractCoreTaskDefinition.builder()
@@ -67,5 +60,39 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var gpcAccessStructured = ehrExtractStatusUpdated.getEhrExtractCore();
         assertThat(gpcAccessStructured.getSentAt()).isNotNull();
         assertThat(gpcAccessStructured.getTaskId()).isNotNull();
+    }
+}
+
+@RunWith(SpringRunner.class)
+@ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
+@SpringBootTest(properties = "gp2gp.mhs.url=http://127.0.0.1:8081/invalid-mhs-endpoint")
+@DirtiesContext
+class InvalidSendEhrExtractCoreComponentTest extends BaseTaskTest {
+    @Autowired
+    private SendEhrExtractCoreTaskExecutor sendEhrExtractCoreTaskExecutor;
+    @Autowired
+    private EhrExtractStatusRepository ehrExtractStatusRepository;
+
+    @Test
+    public void When_InvalidMhsOutboundResponse_Expect_EhrExtractStatusNotUpdated() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition = buildValidExtractCoreTask(ehrExtractStatus);
+        assertThrows(InvalidOutboundMessageException.class, () -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
+
+        var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
+    }
+
+    private SendEhrExtractCoreTaskDefinition buildValidExtractCoreTask(EhrExtractStatus ehrExtractStatus) {
+        return SendEhrExtractCoreTaskDefinition.builder()
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .taskId(UUID.randomUUID().toString())
+            .build();
     }
 }
