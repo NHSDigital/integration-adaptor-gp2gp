@@ -58,6 +58,7 @@ public class EhrExtractMapper {
             GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
             Bundle bundle) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
+        ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setPatientId(getGpcStructuredTaskDefinition.getNhsNumber());
         ehrExtractTemplateParameters.setRequestId(getGpcStructuredTaskDefinition.getRequestId());

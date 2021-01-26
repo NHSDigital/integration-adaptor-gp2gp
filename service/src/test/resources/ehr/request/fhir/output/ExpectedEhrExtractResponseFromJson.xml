@@ -1,5 +1,5 @@
 <EhrExtract classCode="EXTRACT" moodCode="EVN">
-    <id root="" />
+    <id root="test-id" />
     <statusCode code="COMPLETE" />
     <availabilityTime value="20200101020101" />
     <recordTarget typeCode="RCT">
