@@ -48,6 +48,7 @@ public class EhrExtractRequestHandlerTest {
     private static final String TASK_ID = "3a93dfdd-5e72-4f23-8311-9f22772787af";
     private static final String FROM_ASID = "200000000205";
     private static final String TO_ASID = "200000001161";
+    private static final String TO_ODS_CODE = "B86041";
     private static final String FROM_ODS_CODE = "N82668";
 
     @Mock
@@ -120,6 +121,7 @@ public class EhrExtractRequestHandlerTest {
                 .toPartyId("B86041-822103")
                 .fromAsid(FROM_ASID)
                 .toAsid(TO_ASID)
+                .toOdsCode(TO_ODS_CODE)
                 .fromOdsCode(FROM_ODS_CODE)
                 .toOdsCode("B86041")
                 .build()
@@ -134,6 +136,7 @@ public class EhrExtractRequestHandlerTest {
             .taskId(TASK_ID)
             .fromAsid(FROM_ASID)
             .toAsid(TO_ASID)
+            .toOdsCode(TO_ODS_CODE)
             .fromOdsCode(FROM_ODS_CODE)
             .build();
     }

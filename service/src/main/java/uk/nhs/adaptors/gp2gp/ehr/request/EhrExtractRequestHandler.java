@@ -4,10 +4,10 @@ import java.time.Instant;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -95,6 +95,7 @@ public class EhrExtractRequestHandler {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
@@ -111,6 +112,7 @@ public class EhrExtractRequestHandler {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .accessDocumentUrl(DOCUMENT_URL)
             .build();

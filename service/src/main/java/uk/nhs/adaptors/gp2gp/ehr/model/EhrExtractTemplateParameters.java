@@ -15,8 +15,4 @@ public class EhrExtractTemplateParameters {
     private String effectiveTimeLow;
     private String effectiveTimeHigh;
     private String ehrExtractId;
-    private String limitationId;
-    private String limitationCode;
-    private String limitationCodeSystem;
-    private String limitationDisplayName;
 }
