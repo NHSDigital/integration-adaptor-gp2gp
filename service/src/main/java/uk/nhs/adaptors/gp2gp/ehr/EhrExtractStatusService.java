@@ -28,6 +28,7 @@ public class EhrExtractStatusService {
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String CONVERSATION_ID = "conversationId";
     private static final String UPDATED_AT = "updatedAt";
+    private static final String SENT_AT = "sentAt";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
@@ -44,8 +45,8 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
     private static final String DOCUMENT_TASK_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + TASK_ID;
     private static final String DOCUMENT_OBJECT_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + OBJECT_NAME;
-    private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID_COLUMN;
-    private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT_COLUMN;
+    private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
+    private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
 
     private final MongoTemplate mongoTemplate;
 
@@ -93,12 +94,12 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
         Query query = new Query();
-        query.addCriteria(Criteria.where(CONVERSATION_ID_COLUMN).is(sendEhrExtractCoreTaskDefinition.getConversationId()));
+        query.addCriteria(Criteria.where(CONVERSATION_ID).is(sendEhrExtractCoreTaskDefinition.getConversationId()));
 
         Instant now = Instant.now();
 
         Update update = new Update();
-        update.set(UPDATED_AT_COLUMN, now);
+        update.set(UPDATED_AT, now);
         update.set(EXTRACT_CORE_SENT_AT_PATH, requestSentAt);
         update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);

@@ -9,6 +9,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
@@ -132,7 +133,7 @@ public class EhrExtractRequestHandler {
 
     private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
         var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
-                .taskId(taskIdService.createNewTaskId())
+                .taskId(randomIdGeneratorService.createNewId())
                 .conversationId(ehrExtractStatus.getConversationId())
                 .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
                 .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())

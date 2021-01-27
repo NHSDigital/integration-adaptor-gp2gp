@@ -48,7 +48,8 @@ public class EhrExtractTest {
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
         assertThatAccessDocumentWasFetched(singleDocument);
 
-        assertThatExtractCoreMessageWasSent((Document) updatedEhrExtractStatus.get(EHR_EXTRACT_CORE));
+        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
+        assertThatExtractCoreMessageWasSent(ehrExtractCore);
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus) {
