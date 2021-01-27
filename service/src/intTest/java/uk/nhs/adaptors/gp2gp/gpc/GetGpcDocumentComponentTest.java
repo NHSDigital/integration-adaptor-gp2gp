@@ -2,6 +2,9 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +53,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
     @Autowired
     private StorageConnector storageConnector;
+    @MockBean
+    private DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Test
     public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
@@ -66,6 +72,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
         assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
+
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
     @Test
@@ -88,6 +96,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var updatedStorageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
 
         assertThat(storageDataWrapper.getTaskId()).isNotEqualTo(updatedStorageDataWrapper.getTaskId());
+
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus2);
     }
 
     @Test
@@ -108,6 +118,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getObjectName()).isNull();
 
         assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
+
+        verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
     }
 
     private EhrExtractStatus addEhrStatusToDatabase() {
