@@ -2,19 +2,16 @@ package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
-import uk.nhs.adaptors.gp2gp.IdGenerator;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusValidator;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusValidatorTest {
 
-    private static final String TASK_ID = IdGenerator.get();
     private static final String OBJECT_NAME = "some-file-name";
 
     @Test
@@ -123,7 +120,7 @@ public class EhrExtractStatusValidatorTest {
     }
 
     private EhrExtractStatus.GpcAccessStructured getFinishedGpcAccessStructured() {
-        return getGpcAccessStructured(OBJECT_NAME + IdGenerator.get());
+        return getGpcAccessStructured(OBJECT_NAME);
     }
 
     private EhrExtractStatus.GpcAccessStructured getUnfinishedGpcAccessStructured() {
@@ -131,11 +128,9 @@ public class EhrExtractStatusValidatorTest {
     }
 
     private EhrExtractStatus.GpcAccessStructured getGpcAccessStructured(String objectName) {
-        return new EhrExtractStatus.GpcAccessStructured(
-            objectName,
-            Instant.now(),
-            TASK_ID
-        );
+        return EhrExtractStatus.GpcAccessStructured.builder()
+            .objectName(objectName)
+            .build();
     }
 
     private EhrExtractStatus.GpcAccessDocument.GpcDocument getUnfinishedGpcDocument() {
@@ -143,16 +138,12 @@ public class EhrExtractStatusValidatorTest {
     }
 
     private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocument() {
-        return getGpcDocument(OBJECT_NAME + IdGenerator.get());
+        return getGpcDocument(OBJECT_NAME);
     }
 
     private EhrExtractStatus.GpcAccessDocument.GpcDocument getGpcDocument(String objectName) {
-        return new EhrExtractStatus.GpcAccessDocument.GpcDocument(
-            IdGenerator.get(),
-            IdGenerator.get(),
-            objectName,
-            Instant.now(),
-            TASK_ID
-        );
+        return EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .objectName(objectName)
+            .build();
     }
 }

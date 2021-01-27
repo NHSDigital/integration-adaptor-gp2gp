@@ -12,7 +12,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SendEhrExtractCore {
+public class SendEhrExtractCoreTaskDispatcher {
 
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;

@@ -6,20 +6,20 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusValidator;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class GpcTaskAggregateService {
+public class DetectTranslationCompleteService {
 
-    private final SendEhrExtractCore sendEhrExtractCore;
+    private final SendEhrExtractCoreTaskDispatcher sendEhrExtractCoreTaskDispatcher;
 
-    public void sendData(EhrExtractStatus ehrExtractStatus) {
+    public void beginSendingCompleteExtract(EhrExtractStatus ehrExtractStatus) {
         if (EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)) {
             LOGGER.info("All tasks have finished, Creating SendEhrExtractCore Task");
-            sendEhrExtractCore.send(ehrExtractStatus);
+            sendEhrExtractCoreTaskDispatcher.send(ehrExtractStatus);
         }
     }
 }

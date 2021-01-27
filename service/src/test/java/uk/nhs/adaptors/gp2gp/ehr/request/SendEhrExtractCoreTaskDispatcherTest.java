@@ -12,19 +12,18 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.IdGenerator;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @ExtendWith(MockitoExtension.class)
-public class SendEhrExtractCoreTest {
+public class SendEhrExtractCoreTaskDispatcherTest {
 
-    private static final String CONVERSATION_ID = IdGenerator.get();
-    private static final String TASK_ID = IdGenerator.get();
-    private static final String REQUEST_ID = IdGenerator.get();
+    private static final String CONVERSATION_ID = "bc96655f-1b24-4772-ace6-c31f4d80ff58";
+    private static final String TASK_ID = "3a5009e0-55a1-4eac-9436-894494fa2589";
+    private static final String REQUEST_ID = "0c812331-fb6e-4c67-b6d5-9d99022e559f";
     private static final String TO_ASID = "200000000359";
     private static final String FROM_ASID = "918999198738";
     private static final String ODS_CODE = "GPC001";
@@ -34,7 +33,7 @@ public class SendEhrExtractCoreTest {
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
-    private SendEhrExtractCore sendEhrExtractCore;
+    private SendEhrExtractCoreTaskDispatcher sendEhrExtractCoreTaskDispatcher;
 
     @Captor
     private ArgumentCaptor<SendEhrExtractCoreTaskDefinition> sendEhrExtractCoreTaskDefinitionArgumentCaptor;
@@ -43,12 +42,12 @@ public class SendEhrExtractCoreTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
-        sendEhrExtractCore = new SendEhrExtractCore(taskDispatcher, randomIdGeneratorService);
+        sendEhrExtractCoreTaskDispatcher = new SendEhrExtractCoreTaskDispatcher(taskDispatcher, randomIdGeneratorService);
     }
 
     @Test
     public void When_SendEhrExtractCoreTaskIsCreated_Expect_CorrectDefinitionProvided() {
-        sendEhrExtractCore.send(EhrExtractStatus.builder()
+        sendEhrExtractCoreTaskDispatcher.send(EhrExtractStatus.builder()
             .conversationId(CONVERSATION_ID)
             .ehrRequest(EhrExtractStatus.EhrRequest.builder()
                 .requestId(REQUEST_ID)

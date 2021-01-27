@@ -11,41 +11,41 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCore;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @ExtendWith(MockitoExtension.class)
-public class GpcTaskAggregateServiceTest {
+public class DetectTranslationCompleteServiceTest {
 
     @Mock
-    private SendEhrExtractCore sendEhrExtractCore;
+    private SendEhrExtractCoreTaskDispatcher sendEhrExtractCoreTaskDispatcher;
 
-    private GpcTaskAggregateService gpcTaskAggregateService;
+    private DetectTranslationCompleteService detectTranslationCompleteService;
 
     @BeforeEach
     public void setUp() {
-        gpcTaskAggregateService = new GpcTaskAggregateService(sendEhrExtractCore);
+        detectTranslationCompleteService = new DetectTranslationCompleteService(sendEhrExtractCoreTaskDispatcher);
     }
 
     @Test
     public void When_AllPreparingDataStepsAreFinished_Expect_SendEhrExtractTaskCreated() {
-        EhrExtractStatus ehrExtractStatus = getEhrExtractStatus("object_name");
+        EhrExtractStatus ehrExtractStatus = buildEhrExtractStatus("object_name");
 
-        gpcTaskAggregateService.sendData(ehrExtractStatus);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
 
-        verify(sendEhrExtractCore).send(ehrExtractStatus);
+        verify(sendEhrExtractCoreTaskDispatcher).send(ehrExtractStatus);
     }
 
     @Test
     public void When_AllPreparingDataStepsAreNotFinished_Expect_SendEhrExtractTaskNotCreated() {
-        EhrExtractStatus ehrExtractStatus = getEhrExtractStatus(null);
+        EhrExtractStatus ehrExtractStatus = buildEhrExtractStatus(null);
 
-        gpcTaskAggregateService.sendData(ehrExtractStatus);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
 
-        verify(sendEhrExtractCore, never()).send(ehrExtractStatus);
+        verify(sendEhrExtractCoreTaskDispatcher, never()).send(ehrExtractStatus);
     }
 
-    private EhrExtractStatus getEhrExtractStatus(String objectName) {
+    private EhrExtractStatus buildEhrExtractStatus(String objectName) {
         EhrExtractStatus.GpcAccessStructured gpcAccessStructured = EhrExtractStatus.GpcAccessStructured.builder()
             .objectName(objectName)
             .build();

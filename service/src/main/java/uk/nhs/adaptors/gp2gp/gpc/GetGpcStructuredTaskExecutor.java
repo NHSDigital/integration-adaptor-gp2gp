@@ -20,7 +20,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final GpcRequestBuilder gpcRequestBuilder;
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
-    private final GpcTaskAggregateService gpcTaskAggregateService;
+    private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -43,6 +43,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
 
-        gpcTaskAggregateService.sendData(ehrExtractStatus);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }

@@ -25,7 +25,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Autowired
     private GpcClient gpcClient;
     @Autowired
-    private GpcTaskAggregateService gpcTaskAggregateService;
+    private DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -49,6 +49,6 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
             taskId);
 
-        gpcTaskAggregateService.sendData(ehrExtractStatus);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }
