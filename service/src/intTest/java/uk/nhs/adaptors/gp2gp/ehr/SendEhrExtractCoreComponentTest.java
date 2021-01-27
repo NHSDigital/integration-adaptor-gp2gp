@@ -25,6 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -68,23 +69,13 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(UUID.randomUUID().toString());
-        when(mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition)).thenThrow(InvalidOutboundMessageException.class);
+        doThrow(InvalidOutboundMessageException.class)
+            .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
 
         assertThrows(InvalidOutboundMessageException.class, () -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
-    }
-
-    private SendEhrExtractCoreTaskDefinition buildValidExtractCoreTask(EhrExtractStatus ehrExtractStatus) {
-        return SendEhrExtractCoreTaskDefinition.builder()
-            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .taskId(UUID.randomUUID().toString())
-            .build();
     }
 
     private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {
