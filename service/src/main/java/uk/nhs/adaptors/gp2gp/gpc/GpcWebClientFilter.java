@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 
 @Slf4j
 @Component

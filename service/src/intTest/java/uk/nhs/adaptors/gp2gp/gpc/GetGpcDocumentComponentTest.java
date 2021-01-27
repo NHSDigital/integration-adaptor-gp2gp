@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -34,6 +35,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
     private static final String INVALID_DOCUMENT_ID = "invalid-id";
+    private static final String MHS_FILE_NAME_TEMPLATE = "%s_doc_translated.json";
     private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
         + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
         + "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  "
@@ -51,7 +53,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private StorageConnector storageConnector;
 
     @Test
-    public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
+    public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndDocumentAddedToObjectStore() throws IOException {
         var ehrExtractStatus = addEhrStatusToDatabase();
         var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
         getGpcDocumentTaskExecutor.execute(taskDefinition);
@@ -66,6 +68,26 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
         assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
+    }
+
+    @Test
+    public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndMhsPayloadAddedToObjectStore() throws IOException {
+        var ehrExtractStatus = addEhrStatusToDatabase();
+        var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
+        getGpcDocumentTaskExecutor.execute(taskDefinition);
+
+        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
+        String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
+            .getDocuments()
+            .get(0)
+            .getMessageId();
+
+        var inputStream = storageConnector.downloadFromStorage(String.format(MHS_FILE_NAME_TEMPLATE, messageId));
+        var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
+
+        assertThat(storageDataWrapper.getResponse()).isNotBlank();
+        assertThat(storageDataWrapper.getResponse()).contains(messageId);
     }
 
     @Test
