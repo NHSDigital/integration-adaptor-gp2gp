@@ -5,7 +5,10 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
+
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
@@ -16,7 +19,7 @@ public class EhrExtractStatusTestUtils {
             .updatedAt(now)
             .conversationId(EhrStatusConstants.CONVERSATION_ID)
             .ehrRequest(prepareEhrRequest())
-            .gpcAccessDocuments(prepareGpcAccessDocuments())
+            .gpcAccessDocument(prepareGpcAccessDocument())
             .build();
     }
 
@@ -31,10 +34,13 @@ public class EhrExtractStatusTestUtils {
             EhrStatusConstants.TO_ODS_CODE);
     }
 
-    private static List<EhrExtractStatus.GpcAccessDocument> prepareGpcAccessDocuments() {
-        return ImmutableList.of(EhrExtractStatus.GpcAccessDocument.builder()
-            .objectName(EhrStatusConstants.DOCUMENT_ID + ".json")
-            .build()
-        );
+    private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument() {
+        return EhrExtractStatus.GpcAccessDocument.builder()
+            .documents(List.of(
+                EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+                    .documentId(DOCUMENT_ID)
+                    .accessDocumentUrl(GPC_ACCESS_DOCUMENT_URL)
+                    .build()
+            )).build();
     }
 }

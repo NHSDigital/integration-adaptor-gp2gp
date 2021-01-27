@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
+import com.mongodb.client.MongoCollection;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,18 +21,17 @@ import uk.nhs.adaptors.gp2gp.ResourceHelper;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
-import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
+import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -47,6 +48,7 @@ public class EhrExtractRequestHandlerTest {
     private static final String TASK_ID = "3a93dfdd-5e72-4f23-8311-9f22772787af";
     private static final String FROM_ASID = "200000000205";
     private static final String TO_ASID = "200000001161";
+    private static final String TO_ODS_CODE = "B86041";
     private static final String FROM_ODS_CODE = "N82668";
 
     @Mock
@@ -62,18 +64,26 @@ public class EhrExtractRequestHandlerTest {
     private TaskDispatcher taskDispatcher;
 
     @Mock
-    private TaskIdService taskIdService;
+    private RandomIdGeneratorService randomIdGeneratorService;
+
+    @Mock
+    private MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
+
+    @Mock
+    private MongoCollection mongoCollection; // FIXME: Remove as part of NIAD-814
 
     @InjectMocks
     private EhrExtractRequestHandler ehrExtractRequestHandler;
 
     @Test
     public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
+        when(mongoTemplate.getCollection("ehrExtractStatus")).thenReturn(mongoCollection); // FIXME: Remove as part of NIAD-814
+
         Document soapHeader = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");
         Instant now = Instant.now();
         when(timestampService.now()).thenReturn(now);
-        when(taskIdService.createNewTaskId()).thenReturn(TASK_ID);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
         ehrExtractRequestHandler.handle(soapHeader, soapBody);
 
@@ -104,7 +114,6 @@ public class EhrExtractRequestHandlerTest {
             .created(timestamp)
             .updatedAt(timestamp)
             .conversationId(CONVERSATION_ID)
-            .gpcAccessDocuments(new ArrayList<>())
             .ehrRequest(EhrExtractStatus.EhrRequest.builder()
                 .requestId(REQUEST_ID)
                 .nhsNumber(NHS_NUMBER)
@@ -112,6 +121,7 @@ public class EhrExtractRequestHandlerTest {
                 .toPartyId("B86041-822103")
                 .fromAsid(FROM_ASID)
                 .toAsid(TO_ASID)
+                .toOdsCode(TO_ODS_CODE)
                 .fromOdsCode(FROM_ODS_CODE)
                 .toOdsCode("B86041")
                 .build()
@@ -126,6 +136,7 @@ public class EhrExtractRequestHandlerTest {
             .taskId(TASK_ID)
             .fromAsid(FROM_ASID)
             .toAsid(TO_ASID)
+            .toOdsCode(TO_ODS_CODE)
             .fromOdsCode(FROM_ODS_CODE)
             .build();
     }

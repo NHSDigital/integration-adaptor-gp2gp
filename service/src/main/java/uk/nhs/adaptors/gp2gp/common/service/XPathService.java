@@ -17,7 +17,6 @@ import java.io.StringReader;
 
 @Component
 public class XPathService {
-
     public Document parseDocumentFromXml(String xml) throws SAXException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         InputSource inputSource;

@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;

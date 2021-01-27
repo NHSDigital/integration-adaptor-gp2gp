@@ -10,8 +10,8 @@
 		}
 	},
 	"response": {
-		"status": 404,
-		"bodyFileName": "notFoundSDSResponse.json",
+		"status": 200,
+		"bodyFileName": "emptySDSResponse.json",
 		"headers": {
 			"Content-Type": "application/fhir+json;",
 			"X-Correlation-Id": "{{request.headers.X-Correlation-Id}}"

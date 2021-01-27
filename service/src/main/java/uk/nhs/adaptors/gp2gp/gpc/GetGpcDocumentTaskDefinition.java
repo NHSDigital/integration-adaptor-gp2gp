@@ -13,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @EqualsAndHashCode(callSuper = true)
 public class GetGpcDocumentTaskDefinition extends TaskDefinition {
     private final String documentId;
+    private final String accessDocumentUrl;
 
     @Override
     public TaskType getTaskType() {
