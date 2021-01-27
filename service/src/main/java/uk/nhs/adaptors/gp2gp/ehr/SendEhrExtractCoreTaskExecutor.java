@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import java.time.Instant;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
@@ -24,7 +24,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
     @Override
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
-        LOGGER.info("Execute called from SendEhrExtractCoreTaskExecutor");
+        LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
         Instant requestSentAt = Instant.now();

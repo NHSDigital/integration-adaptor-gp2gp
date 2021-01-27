@@ -12,7 +12,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class SendEhrExtractCoreTaskDefinition extends TaskDefinition {
-
     @Override
     public TaskType getTaskType() {
         return TaskType.SEND_EHR_EXTRACT_CORE;
