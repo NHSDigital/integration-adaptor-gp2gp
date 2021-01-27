@@ -15,7 +15,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
+import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -25,6 +27,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
@@ -32,9 +35,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @DirtiesContext
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @Mock
-    private MhsClient mhsClient;
-    @Mock
     private WebClient.RequestHeadersSpec<?> request;
+    @Mock
+    private MhsRequestBuilder mhsRequestBuilder;
+    @Mock
+    private MhsClient mhsClient;
     @Mock
     private SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition;
 
@@ -49,7 +54,11 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition = buildValidExtractCoreTask(ehrExtractStatus);
+        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(UUID.randomUUID().toString());
+        when(mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition)).thenReturn(null);
+        when(mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition)).thenReturn("Successful Mhs Outbound Request");
+
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
@@ -60,6 +69,12 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     public void When_ExtractCoreThrowsException_Expect_EhrExtractStatusNotUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(UUID.randomUUID().toString());
+        when(mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition)).thenReturn(null);
+        when(mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition))
+            .thenThrow(new InvalidOutboundMessageException("Error during request"));
 
         assertThrows(EhrExtractException.class, () -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
 
