@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -15,24 +16,18 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTaskDefinition> {
     private static final String JSON_EXTENSION = ".json";
     private static final String MHS_FILE_NAME_TEMPLATE = "%s_doc_translated.json";
 
-    @Autowired
-    private StorageConnectorService storageConnectorService;
-    @Autowired
-    private EhrExtractStatusService ehrExtractStatusService;
-    @Autowired
-    private GpcRequestBuilder gpcRequestBuilder;
-    @Autowired
-    private GpcClient gpcClient;
-    @Autowired
-    private DetectTranslationCompleteService detectTranslationCompleteService;
-    @Autowired
-    private MhsPayloadMapper mhsPayloadMapper;
-    @Autowired
-    private RandomIdGeneratorService randomIdGeneratorService;
+    private final StorageConnectorService storageConnectorService;
+    private final EhrExtractStatusService ehrExtractStatusService;
+    private final GpcRequestBuilder gpcRequestBuilder;
+    private final GpcClient gpcClient;
+    private final DetectTranslationCompleteService detectTranslationCompleteService;
+    private final MhsPayloadMapper mhsPayloadMapper;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -50,21 +45,18 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
         String taskId = taskDefinition.getTaskId();
 
-        var storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
-        storageConnectorService.uploadFile(storageDataWrapper, documentName);
+        var storageDataWrapperWithDocumentRecord = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
+        storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
 
         String messageId = randomIdGeneratorService.createNewId();
-
-        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
-            taskId, messageId);
 
         String xmlPayload = translateToXmlPayload(taskDefinition, messageId);
         var storageDataWrapperWithMhsPayload = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, xmlPayload, taskId);
         storageConnectorService.uploadFile(storageDataWrapperWithMhsPayload, prepareXmlDocumentName(messageId));
 
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
+            taskId, messageId);
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
-        var storageDataWrapperWithDocumentRecord = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
-        storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
     }
 
     private String translateToXmlPayload(GetGpcDocumentTaskDefinition taskDefinition, String messageId) {
