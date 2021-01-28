@@ -15,7 +15,7 @@ services:
       - GP2GP_AMQP_BROKERS=amqp://activemq:5672
       - GP2GP_MONGO_URI=mongodb://mongodb:27017
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
-      - GP2GP_GPC_GET_URL=http://localhost:8110/GP0001/STU3/1/gpconnect/fhir/
+      - GP2GP_GPC_GET_URL=https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/
       - GP2GP_GPC_GET_STRUCTURED_ENDPOINT=Patient/$gpc.getstructuredrecord
       - GP2GP_GPC_GET_DOCUMENT_ENDPOINT=/documents/Binary/
-      - GP2GP_GPC_HOST=localhost
+      - GP2GP_GPC_HOST=orange.testlab.nhs.uk
