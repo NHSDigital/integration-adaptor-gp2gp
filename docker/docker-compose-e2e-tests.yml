@@ -16,4 +16,4 @@ services:
       - GP2GP_AMQP_BROKERS=amqp://activemq:5672
       - GP2GP_MONGO_URI=mongodb://mongodb:27017
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
-      - GP2P_MHS_OUTBOUND_URL=mock-mhs-adaptor:8081/mock-mhs-endpoint
+      - GP2GP_MHS_OUTBOUND_URL=mock-mhs-adaptor:8081/mock-mhs-endpoint
