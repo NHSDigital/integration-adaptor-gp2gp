@@ -104,6 +104,10 @@ pipeline {
                         stage('E2E Tests') {
                             steps {
                                 sh '''
+                                    export GP2GP_GPC_GET_URL=https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect \
+                                    export GP2GP_GPC_GET_STRUCTURED_ENDPOINT=Patient/$gpc.getstructuredrecord \
+                                    export GP2GP_GPC_GET_DOCUMENT_ENDPOINT=/documents/Binary/ \
+                                    export GP2GP_GPC_HOST=orange.testlab.nhs.uk \
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
                                     docker cp e2e-tests:/home/gradle/e2e-tests/build .
