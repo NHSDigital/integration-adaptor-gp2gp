@@ -13,7 +13,8 @@ import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import org.apache.commons.lang3.StringUtils;
