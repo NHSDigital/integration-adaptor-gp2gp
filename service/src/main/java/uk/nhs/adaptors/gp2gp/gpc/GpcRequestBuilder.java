@@ -6,6 +6,8 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 import ca.uhn.fhir.parser.IParser;
