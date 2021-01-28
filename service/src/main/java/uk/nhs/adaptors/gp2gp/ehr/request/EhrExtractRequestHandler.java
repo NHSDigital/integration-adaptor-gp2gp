@@ -20,7 +20,6 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
@@ -129,18 +128,6 @@ public class EhrExtractRequestHandler {
 
         var collection = mongoTemplate.getCollection("ehrExtractStatus");
         collection.updateOne(Filters.eq("conversationId", conversationId), Updates.addToSet("gpcAccessDocument.documents", document));
-    }
-
-    private void createSendEhrExtractCoreMessage(EhrExtractStatus ehrExtractStatus) {
-        var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
-                .taskId(randomIdGeneratorService.createNewId())
-                .conversationId(ehrExtractStatus.getConversationId())
-                .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-                .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-                .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-                .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-                .build();
-        taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
