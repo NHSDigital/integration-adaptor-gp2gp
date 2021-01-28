@@ -2,6 +2,16 @@
 version: '3.4'
 
 services:
+  gp2gp:
+    build:
+      context: ../
+      dockerfile: docker/service/Dockerfile
+    depends_on:
+      - mongodb
+      - activemq
+      - mock-mhs-adaptor
+    environment:
+      - GP2GP_MHS_OUTBOUND_URL=http://mock-mhs-adaptor:8081/mock-mhs-endpoint
   gp2gp-e2e-tests:
     container_name: e2e-tests
     build:
@@ -16,4 +26,3 @@ services:
       - GP2GP_AMQP_BROKERS=amqp://activemq:5672
       - GP2GP_MONGO_URI=mongodb://mongodb:27017
       - GP2GP_MONGO_DATABASE_NAME=gp2gp
-      - GP2GP_MHS_OUTBOUND_URL=mock-mhs-adaptor:8081/mock-mhs-endpoint

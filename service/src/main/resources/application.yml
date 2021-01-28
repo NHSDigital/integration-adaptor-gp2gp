@@ -39,4 +39,4 @@ gp2gp:
     documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/fhir/Binary/}
     host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
   mhs:
-    url: ${GP2GP_MHS_OUTBOUND_URL:http://127.0.0.1:8081/mock-mhs-endpoint}
+    url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
