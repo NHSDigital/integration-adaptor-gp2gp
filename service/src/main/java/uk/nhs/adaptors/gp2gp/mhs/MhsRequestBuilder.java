@@ -71,7 +71,7 @@ public class MhsRequestBuilder {
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filter(mhsWebClientFilter.errorHandlingFilter())
             .baseUrl(mhsConfiguration.getUrl())
-            .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl())) // comment this line out?
+            .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();
     }
 
