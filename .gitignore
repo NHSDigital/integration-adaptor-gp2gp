@@ -43,4 +43,5 @@ out/
 lombok.config
 
 # env vars with credentials for development
-vars.sh
+.env
+env.yaml

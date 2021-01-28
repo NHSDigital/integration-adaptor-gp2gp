@@ -61,14 +61,43 @@ This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
 ## How to run service:
-* Run `./start-local-environment.sh`
 
-If gradle-wrapper.jar doesn't exist run in terminal:
-* If gradle isn't installed `brew install gradle`
-* Update gradle `gradle wrapper`
+### Using the helper script
 
-If ran through IDE on local machine:
-* Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+Run `./start-local-environment.sh`
+
+### Using docker-compose
+
+If you need to override any defaults, choose one of the dotenv templates (e.g. `docker/opentest.env`) and copy it
+to `.env`. Configured the variables as needed.
+
+```
+cd docker/
+docker-compose build
+docker-compose up -d
+```
+
+### From your IDE or the command line
+
+First start the adaptor dependencies:
+
+```
+    cd docker/
+    docker-compose build activemq wiremock
+    docker-compose up -d activemq wiremock mongodb
+```
+
+Change into the service directory `cd ../service`
+
+Build the project in your IDE or run `./gradlew bootJar`
+
+Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/libs/gp2gp.jar`
+
+### Using Dotenv for IntelliJ
+
+An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
+
+Example: (service/env.opentest.example.yml)[service/env.opentest.example.yml]
 
 ## How to run wiremock:
 

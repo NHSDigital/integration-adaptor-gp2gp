@@ -109,10 +109,11 @@ public class GpcRequestBuilder {
     }
 
     private SslContext buildSSLContext() {
+        // TODO: secure by default? Change to disableTLS and only use insecure option if property is explicitly true
         if (Boolean.parseBoolean(gpcConfiguration.getEnableTLS())) {
-            return buildSSLContextSpine();
+            return buildSSLContextWithClientCertificates();
         } else {
-            return buildSSLContextDefault();
+            return buildSSLContextInsecure();
         }
     }
 
@@ -120,7 +121,7 @@ public class GpcRequestBuilder {
         var httpClient =  HttpClient.create()
             .secure(t -> t.sslContext(sslContext));
 
-        if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())){
+        if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
             return httpClient
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
                     .host(gpcConfiguration.getProxy())
@@ -158,10 +159,10 @@ public class GpcRequestBuilder {
     }
 
     @SneakyThrows
-    private SslContext buildSSLContextSpine() {
+    private SslContext buildSSLContextWithClientCertificates() {
         var clientKey = gpcConfiguration.getClientKey();
         var clientCert = gpcConfiguration.getClientCert();
-//        var rootCert = gpcConfiguration.getRootCA();
+        var rootCert = gpcConfiguration.getRootCA();
         var subCert = gpcConfiguration.getSubCA();
 
         var invalidSslValues = new ArrayList<String>();
@@ -171,9 +172,9 @@ public class GpcRequestBuilder {
         if (StringUtils.isBlank(clientCert)) {
             invalidSslValues.add("client cert");
         }
-//        if (StringUtils.isBlank(subCert)) {
-//            invalidSslValues.add("root cacert");
-//        }
+        if (StringUtils.isBlank(rootCert)) {
+            invalidSslValues.add("root cacert");
+        }
         if (StringUtils.isBlank(subCert)) {
             invalidSslValues.add("sub cacert");
         }
@@ -190,7 +191,7 @@ public class GpcRequestBuilder {
 
         //removed root, worked using sub, root cause ssl error
         KeyStore ts = EnvKeyStore.createFromPEMStrings(
-            subCert,
+            subCert + rootCert,
             randomPassword).keyStore();
 
         KeyManagerFactory keyManagerFactory =
@@ -209,7 +210,7 @@ public class GpcRequestBuilder {
     }
 
     @SneakyThrows
-    private SslContext buildSSLContextDefault() {
+    private SslContext buildSSLContextInsecure() {
         return SslContextBuilder
             .forClient()
             .trustManager(InsecureTrustManagerFactory.INSTANCE)
