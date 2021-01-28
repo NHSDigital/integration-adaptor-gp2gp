@@ -18,7 +18,6 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
@@ -52,8 +51,10 @@ public class MhsRequestBuilder {
 
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(stubExtractCoreMessage);
 
-        return buildRequestWithHeadersAndBody(uri, stubExtractCoreMessage, bodyInserter,
-            sendEhrExtractCoreTaskDefinition, MHS_OUTBOUND_INTERACTION_ID);
+        return uri
+            .accept(MediaType.APPLICATION_JSON)
+            .header(INTERACTION_ID, MHS_OUTBOUND_INTERACTION_ID)
+            .body(bodyInserter);
     }
 
     @SneakyThrows
@@ -73,14 +74,6 @@ public class MhsRequestBuilder {
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();
-    }
-
-    private RequestHeadersSpec<?>  buildRequestWithHeadersAndBody(WebClient.RequestBodySpec uri, String requestBody,
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
-
-        return uri.accept(MediaType.valueOf(JSON_CONTENT_TYPE))
-            .header(INTERACTION_ID, interactionId)
-            .body(bodyInserter);
     }
 
     private ExchangeStrategies buildExchangeStrategies() {

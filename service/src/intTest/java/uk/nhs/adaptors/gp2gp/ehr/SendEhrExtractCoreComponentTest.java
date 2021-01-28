@@ -80,8 +80,8 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
     private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
-        var gpcAccessStructured = ehrExtractStatusUpdated.getEhrExtractCore();
-        assertThat(gpcAccessStructured.getSentAt()).isNotNull();
-        assertThat(gpcAccessStructured.getTaskId()).isNotNull();
+        var ehrExtractCore = ehrExtractStatusUpdated.getEhrExtractCore();
+        assertThat(ehrExtractCore.getSentAt()).isNotNull();
+        assertThat(ehrExtractCore.getTaskId()).isNotNull();
     }
 }
