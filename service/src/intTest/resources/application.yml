@@ -38,6 +38,6 @@ gp2gp:
     ttl: ${GP2GP_MONGO_TTL:PT30S}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
   gpc:
-    url: ${GP2GP_GPC_GET_URL:duckduckgoose}
+    url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
     host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
