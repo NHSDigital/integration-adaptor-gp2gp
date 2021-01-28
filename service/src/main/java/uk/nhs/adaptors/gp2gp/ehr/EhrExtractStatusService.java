@@ -12,13 +12,12 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import com.mongodb.client.result.UpdateResult;
 
 @Service
 @Slf4j
@@ -48,7 +47,7 @@ public class EhrExtractStatusService {
 
     private final MongoTemplate mongoTemplate;
 
-    public void updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+    public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         Query query = new Query();
         query.addCriteria(Criteria.where(CONVERSATION_ID).is(structuredTaskDefinition.getConversationId()));
 
@@ -59,15 +58,20 @@ public class EhrExtractStatusService {
         update.set(STRUCTURE_ACCESSED_AT_PATH, now);
         update.set(STRUCTURE_TASK_ID_PATH, structuredTaskDefinition.getTaskId());
         update.set(STRUCTURE_OBJECT_NAME_PATH, structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Structured. "
                 + "Access Structured not present in Ehr Extract Status.");
         }
+
+        return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
             String documentName,
             String taskId,
             String messageId) {
@@ -84,11 +88,23 @@ public class EhrExtractStatusService {
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
         update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        if (updateResult.getModifiedCount() != 1) {
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Document. "
                 + "Access Document not present in Ehr Extract Status.");
         }
+
+        return ehrExtractStatus;
+    }
+
+    private FindAndModifyOptions getReturningUpdatedRecordOption() {
+        FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
+        findAndModifyOptions.returnNew(true);
+
+        return findAndModifyOptions;
     }
 }

@@ -8,6 +8,7 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final GpcRequestBuilder gpcRequestBuilder;
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
+    private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -36,9 +38,12 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
         storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,
-                response,
-                structuredTaskDefinition.getTaskId()),
+            response,
+            structuredTaskDefinition.getTaskId()),
             fileName);
-        ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
+
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
+
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }

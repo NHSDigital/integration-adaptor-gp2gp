@@ -6,6 +6,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.MhsPayloadTemplateParameters;
 
@@ -27,6 +28,8 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     @Autowired
     private GpcClient gpcClient;
     @Autowired
+    private DetectTranslationCompleteService detectTranslationCompleteService;
+    @Autowired
     private MhsPayloadMapper mhsPayloadMapper;
     @Autowired
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -46,15 +49,22 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
         String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
         String taskId = taskDefinition.getTaskId();
-        var storageDataWrapperWithDocumentRecord = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
-        storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
+
+        var storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
+        storageConnectorService.uploadFile(storageDataWrapper, documentName);
 
         String messageId = randomIdGeneratorService.createNewId();
+
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
+            taskId, messageId);
+
         String xmlPayload = translateToXmlPayload(taskDefinition, messageId);
         var storageDataWrapperWithMhsPayload = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, xmlPayload, taskId);
         storageConnectorService.uploadFile(storageDataWrapperWithMhsPayload, prepareXmlDocumentName(messageId));
 
-        ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName, taskId, messageId);
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
+        var storageDataWrapperWithDocumentRecord = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
+        storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
     }
 
     private String translateToXmlPayload(GetGpcDocumentTaskDefinition taskDefinition, String messageId) {
