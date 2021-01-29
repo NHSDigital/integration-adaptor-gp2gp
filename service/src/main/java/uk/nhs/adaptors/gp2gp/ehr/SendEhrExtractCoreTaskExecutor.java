@@ -26,7 +26,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
 
-        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
+        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest();
         Instant requestSentAt = Instant.now();
         mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 

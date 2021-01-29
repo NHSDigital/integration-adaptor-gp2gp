@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -13,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
@@ -47,13 +46,15 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
+    private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
+
     @Test
     public void When_NewExtractCoreTask_Expect_DatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(UUID.randomUUID().toString());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         when(mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition)).thenReturn("Successful Mhs Outbound Request");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
@@ -68,9 +69,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(UUID.randomUUID().toString());
+        when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         doThrow(InvalidOutboundMessageException.class)
-            .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest(sendEhrExtractCoreTaskDefinition);
+            .when(mhsRequestBuilder).buildSendEhrExtractCoreRequest();
 
         assertThrows(InvalidOutboundMessageException.class, () -> sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition));
 
