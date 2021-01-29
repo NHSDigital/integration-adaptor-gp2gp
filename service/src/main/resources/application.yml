@@ -42,7 +42,7 @@ gp2gp:
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
     host: ${GP2GP_GPC_HOST:messagingportal.opentest.hscic.gov.uk}
     enableTLS: ${GP2GP_ENABLE_TLS:true}
-    enableProxy: ${GP2GP_ENABLE_PROXY:false}
+    enableProxy: ${GP2GP_GPC_ENABLE_HTTP_PROXY:false}
     proxy: ${GP2GP_GPC_HTTP_PROXY:}
     proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:}
     clientCert: ${GP2GP_SPINE_CLIENT_CERT:}
