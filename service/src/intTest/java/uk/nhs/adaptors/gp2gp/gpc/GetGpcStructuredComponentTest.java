@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
-import org.hamcrest.Matchers;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
