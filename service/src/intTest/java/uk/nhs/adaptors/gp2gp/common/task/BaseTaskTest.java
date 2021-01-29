@@ -5,6 +5,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -13,6 +16,9 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 @SuppressWarnings("checkstyle:VisibilityModifier")
 public abstract class BaseTaskTest {
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    public static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
+
     @MockBean
     protected TaskDispatcher taskDispatcher;
     @MockBean
