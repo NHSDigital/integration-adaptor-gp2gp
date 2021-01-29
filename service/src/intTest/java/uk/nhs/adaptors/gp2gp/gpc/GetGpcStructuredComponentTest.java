@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -10,9 +11,12 @@ import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
+import org.hamcrest.Matchers;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,7 +40,9 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SpringBootTest
 @DirtiesContext
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
-    private static final String PATIENT_NOT_FOUND = "INVALID_NHS_NUMBER";
+    private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
+    private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
+    public static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
     @Autowired
@@ -144,7 +150,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .conversationId(ehrExtractStatus.getConversationId())
-            .nhsNumber("77777")
+            .nhsNumber("9876543210")
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .build();
@@ -154,7 +160,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
         var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
         var coding = operationOutcome.getDetails().getCodingFirstRep();
-        assertThat(coding.getCode()).isEqualTo(PATIENT_NOT_FOUND);
-        assertThat(coding.getDisplay()).isEqualTo(PATIENT_NOT_FOUND);
+
+        assertTrue(VALID_ERRORS.contains(coding.getCode()));
+        assertTrue(VALID_ERRORS.contains(coding.getDisplay()));
     }
 }
