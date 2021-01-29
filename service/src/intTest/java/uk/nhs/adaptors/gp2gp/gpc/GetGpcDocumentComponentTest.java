@@ -96,6 +96,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
         assertThat(storageDataWrapper.getResponse()).isNotBlank();
         assertThat(storageDataWrapper.getResponse()).contains(messageId);
+        assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
     }
 
     @Test

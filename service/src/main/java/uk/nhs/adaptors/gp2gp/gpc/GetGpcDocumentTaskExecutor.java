@@ -9,7 +9,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
-import uk.nhs.adaptors.gp2gp.mhs.model.MhsPayloadTemplateParameters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,8 +24,8 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final EhrExtractStatusService ehrExtractStatusService;
     private final GpcRequestBuilder gpcRequestBuilder;
     private final GpcClient gpcClient;
+    private final GpcDocumentTranslator gpcDocumentTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
-    private final MhsPayloadMapper mhsPayloadMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     @Override
@@ -49,22 +48,15 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
 
         String messageId = randomIdGeneratorService.createNewId();
-
-        String xmlPayload = translateToXmlPayload(taskDefinition, messageId);
-        var storageDataWrapperWithMhsPayload = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, xmlPayload, taskId);
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsPayload, prepareXmlDocumentName(messageId));
+        String mhsOutboundRequest = gpcDocumentTranslator.translateToMhsOutboundRequestPayload(taskDefinition, response, messageId);
+        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition,
+            mhsOutboundRequest, taskId);
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, prepareXmlDocumentName(messageId));
 
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
             taskId, messageId);
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
-
-    private String translateToXmlPayload(GetGpcDocumentTaskDefinition taskDefinition, String messageId) {
-        MhsPayloadTemplateParameters mhsPayloadTemplateParameters =
-            mhsPayloadMapper.mapToMhsPayloadTemplateParameters(taskDefinition, messageId);
-        return mhsPayloadMapper.mapMhsPayloadTemplateToXml(mhsPayloadTemplateParameters);
-    }
-
     private String prepareXmlDocumentName(String messageId) {
         return String.format(MHS_FILE_NAME_TEMPLATE, messageId);
     }

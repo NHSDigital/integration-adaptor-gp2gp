@@ -44,7 +44,7 @@
                     <sequenceNumber value="1"/>
                     <pertinentPayloadBody>
                         <code code="GP2GPLMATTACHMENT" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.202" displayName="GP2GP Large Message Attachment"/>
-                        <id root="AA99CAAA-2A91-4DBB-AE96-9E722787EBD4"/> <!-- root id random / structural only? -->
+                        <id root="test-id"/>
                         <value><reference value="test-document-id"/></value>
                     </pertinentPayloadBody>
                 </pertinentInformation>

@@ -1,11 +1,11 @@
-package uk.nhs.adaptors.gp2gp.mhs.model;
+package uk.nhs.adaptors.gp2gp.ehr.model;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class MhsPayloadTemplateParameters {
+public class EhrDocumentTemplateParameters {
     private String messageId;
     private String resourceCreated;
     private String fromAsid;
@@ -13,4 +13,5 @@ public class MhsPayloadTemplateParameters {
     private String fromOdsCode;
     private String toOdsCode;
     private String accessDocumentId;
+    private String pertinentPayloadId;
 }
