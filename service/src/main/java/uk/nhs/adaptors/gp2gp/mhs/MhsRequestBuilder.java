@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -15,6 +16,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
 import java.io.InputStream;
@@ -32,9 +34,9 @@ public class MhsRequestBuilder {
     private final String stubExtractCoreMessage = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
     private final MhsConfiguration mhsConfiguration;
-    private final MhsWebClientFilter mhsWebClientFilter;
 
     private final RequestBuilderService requestBuilderService;
+    private final WebClientFilterService webClientFilterService;
 
     public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest() {
         SslContext sslContext = requestBuilderService.buildSSLContext();
@@ -58,7 +60,7 @@ public class MhsRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(mhsWebClientFilter.errorHandlingFilter())
+            .filter(webClientFilterService.errorHandlingFilter("Mhs Outbound", HttpStatus.ACCEPTED))
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();

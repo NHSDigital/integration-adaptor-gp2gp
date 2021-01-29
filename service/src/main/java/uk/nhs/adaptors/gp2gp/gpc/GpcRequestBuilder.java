@@ -12,8 +12,10 @@ import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -55,8 +57,8 @@ public class GpcRequestBuilder {
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
-    private final GpcWebClientFilter gpcWebClientFilter;
     private final RequestBuilderService requestBuilderService;
+    private final WebClientFilterService webClientFilterService;
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
@@ -115,7 +117,7 @@ public class GpcRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(gpcWebClientFilter.errorHandlingFilter())
+            .filter(webClientFilterService.errorHandlingFilter("Gpc", HttpStatus.OK))
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
