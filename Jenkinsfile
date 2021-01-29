@@ -104,8 +104,8 @@ pipeline {
                         stage('E2E Tests') {
                             steps {
                                 sh '''
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-gpc-pub-demo.yml -f docker/docker-compose-e2e-tests.yml build
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-gpc-pub-demo.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp gp2gp-e2e-tests
                                     docker cp e2e-tests:/home/gradle/e2e-tests/build .
                                     mv build e2e-build
                                 '''
