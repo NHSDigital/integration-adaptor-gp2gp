@@ -27,10 +27,10 @@ services:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
       - AWS_REGION
-      - GP2GP_GPC_GET_URL
+      - GP2GP_GPC_GET_URL=http://wiremock:8080/GP0001/STU3/1/gpconnect
       - GP2GP_GPC_GET_STRUCTURED_ENDPOINT
       - GP2GP_GPC_GET_DOCUMENT_ENDPOINT
-      - GP2GP_GPC_HOST
+      - GP2GP_GPC_HOST=wiremock
 
   mock-mhs-adaptor:
     build:
