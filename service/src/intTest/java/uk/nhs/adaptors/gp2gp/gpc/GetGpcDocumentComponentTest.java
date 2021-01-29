@@ -37,7 +37,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
-    private static final String INVALID_DOCUMENT_ID = "invalid-id";
+    private static final String INVALID_DOCUMENT_ID = "non-existing-id";
     private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
         + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
         + "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  "
