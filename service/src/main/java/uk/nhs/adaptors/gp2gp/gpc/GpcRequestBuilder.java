@@ -1,19 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static java.lang.String.valueOf;
-
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-import static org.apache.http.protocol.HTTP.TARGET_HOST;
-
-import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.UUID;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManagerFactory;
-
+import ca.uhn.fhir.parser.IParser;
+import com.heroku.sdk.EnvKeyStore;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -28,22 +21,26 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-
-import com.heroku.sdk.EnvKeyStore;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
+import java.security.KeyStore;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+import static java.lang.String.valueOf;
+import static org.apache.http.protocol.HTTP.CONTENT_LEN;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
+import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -108,13 +105,12 @@ public class GpcRequestBuilder {
         return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition);
     }
 
+    @SneakyThrows
     private SslContext buildSSLContext() {
-        // TODO: secure by default? Change to disableTLS and only use insecure option if property is explicitly true
-        if (Boolean.parseBoolean(gpcConfiguration.getEnableTLS())) {
+        if (shouldBuildSslContext()) {
             return buildSSLContextWithClientCertificates();
-        } else {
-            return buildSSLContextInsecure();
         }
+        return SslContextBuilder.forClient().build();
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {
@@ -138,10 +134,15 @@ public class GpcRequestBuilder {
             .builder()
             .exchangeStrategies(buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(gpcWebClientFilter.errorHandlingFilter())
+            .filters(this::addWebClientFilters)
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
+    }
+
+    private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
+        filters.add(gpcWebClientFilter.errorHandlingFilter());
+        filters.add(gpcWebClientFilter.logRequest());
     }
 
     private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
@@ -159,41 +160,50 @@ public class GpcRequestBuilder {
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
     }
 
-    @SneakyThrows
-    private SslContext buildSSLContextWithClientCertificates() {
+    private boolean shouldBuildSslContext() {
         var clientKey = gpcConfiguration.getClientKey();
         var clientCert = gpcConfiguration.getClientCert();
         var rootCert = gpcConfiguration.getRootCA();
         var subCert = gpcConfiguration.getSubCA();
+        final int allSslProperties = 4;
 
-        var invalidSslValues = new ArrayList<String>();
+        var missingSslProperties = new ArrayList<String>();
         if (StringUtils.isBlank(clientKey)) {
-            invalidSslValues.add("client key");
+            missingSslProperties.add("GP2GP_SPINE_CLIENT_KEY");
         }
         if (StringUtils.isBlank(clientCert)) {
-            invalidSslValues.add("client cert");
+            missingSslProperties.add("GP2GP_SPINE_CLIENT_CERT");
         }
         if (StringUtils.isBlank(rootCert)) {
-            invalidSslValues.add("root cacert");
+            missingSslProperties.add("GP2GP_SPINE_ROOT_CA_CERT");
         }
         if (StringUtils.isBlank(subCert)) {
-            invalidSslValues.add("sub cacert");
+            missingSslProperties.add("GP2GP_SPINE_SUB_CA_CERT");
         }
-        if (!invalidSslValues.isEmpty()) {
-            throw new GpConnectException(String.format("Spine SSL %s %s not set",
-                String.join(", ", invalidSslValues),
-                invalidSslValues.size() == 1 ? "is" : "are"));
+
+        if (missingSslProperties.size() == allSslProperties) {
+            LOGGER.debug("No TLS MA properties were provided. Not configuring an SSL context.");
+            return false;
+        } else if (missingSslProperties.isEmpty()) {
+            LOGGER.debug("All TLS MA properties were provided. Configuration an SSL context.");
+            return true;
+        } else {
+            throw new GpConnectException("All or none of the GP2GP_SPINE_ variables must be defined. Missing variables: "
+                + String.join(",", missingSslProperties));
         }
+    }
+
+    @SneakyThrows
+    private SslContext buildSSLContextWithClientCertificates() {
+        var caCertChain = gpcConfiguration.getFormattedSubCA() + gpcConfiguration.getFormattedRootCA();
+
         var randomPassword = UUID.randomUUID().toString();
 
         KeyStore ks = EnvKeyStore.createFromPEMStrings(
-            clientKey, clientCert,
+            gpcConfiguration.getFormattedClientKey(), gpcConfiguration.getFormattedClientCert(),
             randomPassword).keyStore();
 
-        //removed root, worked using sub, root cause ssl error
-        KeyStore ts = EnvKeyStore.createFromPEMStrings(
-            subCert + rootCert,
-            randomPassword).keyStore();
+        KeyStore ts = EnvKeyStore.createFromPEMStrings(caCertChain, randomPassword).keyStore();
 
         KeyManagerFactory keyManagerFactory =
             KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
@@ -207,14 +217,6 @@ public class GpcRequestBuilder {
             .forClient()
             .keyManager(keyManagerFactory)
             .trustManager(trustManagerFactory)
-            .build();
-    }
-
-    @SneakyThrows
-    private SslContext buildSSLContextInsecure() {
-        return SslContextBuilder
-            .forClient()
-            .trustManager(InsecureTrustManagerFactory.INSTANCE)
             .build();
     }
 

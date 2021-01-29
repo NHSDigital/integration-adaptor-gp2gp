@@ -38,10 +38,10 @@ gp2gp:
     ttl: ${GP2GP_MONGO_TTL:P7D}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
   gpc:
-    url: ${GP2GP_GPC_GET_URL:https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/structured}
+    url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
+    host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
-    host: ${GP2GP_GPC_HOST:messagingportal.opentest.hscic.gov.uk}
-    enableTLS: ${GP2GP_ENABLE_TLS:true}
+    documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/fhir/Binary/}
     enableProxy: ${GP2GP_GPC_ENABLE_HTTP_PROXY:false}
     proxy: ${GP2GP_GPC_HTTP_PROXY:}
     proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:}

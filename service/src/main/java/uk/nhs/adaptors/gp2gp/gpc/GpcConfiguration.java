@@ -15,7 +15,6 @@ public class GpcConfiguration {
     private String url;
     private String structuredEndpoint;
     private String host;
-    private String enableTLS;
     private String enableProxy;
     private String proxy;
     private String proxyPort;
@@ -24,20 +23,19 @@ public class GpcConfiguration {
     private String rootCA;
     private String subCA;
 
-
-    public String getClientCert() {
-        return PemFormatter.format(clientCert);
+    public String getFormattedClientCert() {
+        return PemFormatter.format(getClientCert());
     }
 
-    public String getClientKey() {
-        return PemFormatter.format(clientKey);
+    public String getFormattedClientKey() {
+        return PemFormatter.format(getClientKey());
     }
 
-    public String getSubCA() {
-        return PemFormatter.format(subCA);
+    public String getFormattedSubCA() {
+        return PemFormatter.format(getSubCA());
     }
 
-    public String getRootCA() {
-        return PemFormatter.format(rootCA);
+    public String getFormattedRootCA() {
+        return PemFormatter.format(getRootCA());
     }
 }

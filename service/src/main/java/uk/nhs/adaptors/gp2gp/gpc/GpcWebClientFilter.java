@@ -8,6 +8,9 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
 public class GpcWebClientFilter {
@@ -21,6 +24,18 @@ public class GpcWebClientFilter {
                 return getResponseError(clientResponse);
             }
         });
+    }
+
+    public ExchangeFilterFunction logRequest() {
+        return (clientRequest, next) -> {
+            if (LOGGER.isDebugEnabled()) {
+                var headers = clientRequest.headers().entrySet().stream()
+                    .map(e -> e.getKey() + ": " + e.getValue())
+                    .collect(Collectors.joining(System.lineSeparator()));
+                LOGGER.debug("Request: {} {} \n{}", clientRequest.method(), clientRequest.url(), headers);
+            }
+            return next.exchange(clientRequest);
+        };
     }
 
     private Mono<ClientResponse> getResponseError(ClientResponse clientResponse) {
