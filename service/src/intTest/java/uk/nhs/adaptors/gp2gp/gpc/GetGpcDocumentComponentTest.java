@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -34,6 +35,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Slf4j
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
@@ -108,6 +110,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         GetGpcDocumentTaskDefinition documentTaskDefinition = buildValidAccessTask(ehrExtractStatus, INVALID_DOCUMENT_ID);
 
         Exception exception = assertThrows(GpConnectException.class, () -> getGpcDocumentTaskExecutor.execute(documentTaskDefinition));
+        LOGGER.info("GPC Error message: " + exception.getMessage());
         assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
 
         var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();

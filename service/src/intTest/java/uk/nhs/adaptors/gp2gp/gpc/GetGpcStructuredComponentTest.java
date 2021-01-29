@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -35,6 +36,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
+@Slf4j
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
@@ -96,6 +98,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildInvalidNHSNumberStructuredTask(ehrExtractStatus);
         Exception exception = assertThrows(RuntimeException.class, () -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1));
+        LOGGER.info("GPC Error message: " + exception.getMessage());
         assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
