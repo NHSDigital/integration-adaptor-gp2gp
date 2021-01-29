@@ -122,6 +122,7 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
 
         if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
+            LOGGER.info("Using HTTP Proxy {}:{} for GP Connect API", gpcConfiguration.getProxy(), gpcConfiguration.getProxyPort());
             return httpClient
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
                     .host(gpcConfiguration.getProxy())
