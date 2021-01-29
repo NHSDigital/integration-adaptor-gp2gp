@@ -62,14 +62,15 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 
 ## How to run service:
 
-### Using the helper script
+### Using Docker the helper script
+
+The adaptor runs using development mocks by default. To override environment variable choose an example file e.g. 
+(docker/vars.opentest.sh)[docker/vars.opentest.sh] and copy it to `docker/vars.sh`. Make your changes in this copy.
+We don't use Docker's envfile format because it does not support multiline variables.
 
 Run `./start-local-environment.sh`
 
 ### Using docker-compose
-
-If you need to override any defaults, choose one of the dotenv templates (e.g. `docker/opentest.env`) and copy it
-to `.env`. Configured the variables as needed.
 
 ```
 cd docker/
@@ -97,7 +98,9 @@ Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/lib
 
 An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
 
-Example: (service/env.opentest.example.yml)[service/env.opentest.example.yml]
+To override environment variables choose an example file e.g. 
+(service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
+changes in this copy. 
 
 ## How to run wiremock:
 
