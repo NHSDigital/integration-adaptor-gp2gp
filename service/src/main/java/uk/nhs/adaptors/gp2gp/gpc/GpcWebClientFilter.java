@@ -15,7 +15,7 @@ public class GpcWebClientFilter {
         return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
             clientResponse.statusCode();
             if (clientResponse.statusCode().equals(HttpStatus.OK)) {
-                LOGGER.info("Gpc Structured Request successful, status code: {}", clientResponse.statusCode());
+                LOGGER.info("Gpc Request successful, status code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
             } else {
                 return getResponseError(clientResponse);
@@ -25,7 +25,7 @@ public class GpcWebClientFilter {
 
     private Mono<ClientResponse> getResponseError(ClientResponse clientResponse) {
         return clientResponse.bodyToMono(String.class)
-            .flatMap(operationalOutcome -> Mono.error(
-                new GpConnectException("The following error occurred during Gpc Structured Request: " + operationalOutcome)));
+            .flatMap(response -> Mono.error(
+                new GpConnectException("The following error occurred during Gpc Request: " + response)));
     }
 }
