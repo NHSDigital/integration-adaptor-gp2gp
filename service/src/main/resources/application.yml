@@ -38,3 +38,5 @@ gp2gp:
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/Patient/$gpc.getstructuredrecord}
     documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/Binary/}
     host: ${GP2GP_GPC_HOST:localhost}
+  mhs:
+    url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}

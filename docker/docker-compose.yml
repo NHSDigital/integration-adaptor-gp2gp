@@ -23,6 +23,7 @@ services:
       - GP2GP_COSMOS_DB_ENABLED=false
       - GP2GP_STORAGE_TYPE
       - GP2GP_STORAGE_CONTAINER_NAME
+      - GP2GP_MHS_OUTBOUND_URL=http://mock-mhs-adaptor:8081/mock-mhs-endpoint
       - AZURE_STORAGE_CONNECTION_STRING
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
