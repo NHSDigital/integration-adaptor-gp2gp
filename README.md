@@ -50,6 +50,13 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
 | GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 | GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
+| GP2GP_GPC_ENABLE_HTTP_PROXY          | false                     | Enable your environment requires you to access HSCN or OpenTest networks via an HTTP proxy
+| GP2GP_GPC_HTTP_PROXY                 | gp2gp                     | HTTPE proxy address
+| GP2GP_GPC_HTTP_PROXY_PORT            | gp2gp                     | HTTP proxy port
+| GP2GP_SPINE_CLIENT_CERT              | gp2gp                     | The content of the PEM-formatted client endpoint certificate
+| GP2GP_SPINE_CLIENT_KEY               | gp2gp                     | The content of the PEM-formatted client private key
+| GP2GP_SPINE_ROOT_CA_CERT             | gp2gp                     | The content of the PEM-formatted certificate of the issuing Root CA.
+| GP2GP_SPINE_SUB_CA_CERT              | gp2gp                     | The content of the PEM-formatted certificate of the issuing Sub CA.
 | MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
 | MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
@@ -102,6 +109,13 @@ Build the project in your IDE or run `./gradlew bootJar`
 
 Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/libs/gp2gp.jar`
 
+### Using Dotenv for IntelliJ
+
+An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
+
+To override environment variables choose an example file e.g. 
+(service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
+changes in this copy. 
 
 ## How to run wiremock:
 

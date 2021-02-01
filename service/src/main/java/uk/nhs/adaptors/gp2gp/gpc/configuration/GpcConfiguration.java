@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.Setter;
+import uk.nhs.adaptors.gp2gp.common.utils.PemFormatter;
 
 @Component
 @ConfigurationProperties(prefix = "gp2gp.gpc")
@@ -16,4 +17,27 @@ public class GpcConfiguration {
     private String documentEndpoint;
     private String patientEndpoint;
     private String host;
+    private String enableProxy;
+    private String proxy;
+    private String proxyPort;
+    private String clientCert;
+    private String clientKey;
+    private String rootCA;
+    private String subCA;
+
+    public String getFormattedClientCert() {
+        return PemFormatter.format(getClientCert());
+    }
+
+    public String getFormattedClientKey() {
+        return PemFormatter.format(getClientKey());
+    }
+
+    public String getFormattedSubCA() {
+        return PemFormatter.format(getSubCA());
+    }
+
+    public String getFormattedRootCA() {
+        return PemFormatter.format(getRootCA());
+    }
 }
