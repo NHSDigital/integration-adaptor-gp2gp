@@ -11,6 +11,15 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.UUID;
 
+import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -23,30 +32,14 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
-
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
-    private static final String INVALID_DOCUMENT_ID = "invalid-id";
-    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
-        + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
-        + "\"profile\": [ \"https://fhir.nhs.uk/StructureDefinition/gpconnect-operationoutcome-1\" ]\n  },\n  "
-        + "\"issue\": [ {\n    \"severity\": \"error\",\n    "
-        + "\"code\": \"invalid\",\n    \"details\": {\n      \"coding\": [ {\n        "
-        + "\"system\": \"https://fhir.nhs.uk/ValueSet/gpconnect-error-or-warning-code-1\",\n        "
-        + "\"code\": \"NO_RECORD_FOUND\",\n        \"display\": \"No Record Found\"\n      } ]\n    },\n    "
-        + "\"diagnostics\": \"No record found\"\n  } ]\n}";
+    private static final String INVALID_DOCUMENT_ID = "non-existing-id";
+    private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
+    private static final String NO_RECORD_FOUND_STRING = "No Record Found";
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
@@ -115,7 +108,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         GetGpcDocumentTaskDefinition documentTaskDefinition = buildValidAccessTask(ehrExtractStatus, INVALID_DOCUMENT_ID);
 
         Exception exception = assertThrows(GpConnectException.class, () -> getGpcDocumentTaskExecutor.execute(documentTaskDefinition));
-        assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
+        assertOperationOutcome(exception);
 
         var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         var gpcDocuments = ehrExtract.getGpcAccessDocument().getDocuments();
@@ -137,13 +130,6 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         return ehrExtractStatusRepository.save(ehrExtractStatus);
     }
 
-    private List<EhrExtractStatus.GpcAccessDocument.GpcDocument> prepareDocuments() {
-        return List.of(EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
-            .documentId(EhrStatusConstants.DOCUMENT_ID)
-            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
-            .build());
-    }
-
     private GetGpcDocumentTaskDefinition buildValidAccessTask(EhrExtractStatus ehrExtractStatus, String documentId) {
         return GetGpcDocumentTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
@@ -157,8 +143,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private void assertThatAccessRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated,
-            EhrExtractStatus ehrExtractStatus,
-            GetGpcDocumentTaskDefinition taskDefinition) {
+        EhrExtractStatus ehrExtractStatus,
+        GetGpcDocumentTaskDefinition taskDefinition) {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
 
         var gpcDocument = ehrExtractStatusUpdated.getGpcAccessDocument()
@@ -167,5 +153,20 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocument.getObjectName()).isEqualTo(DOCUMENT_NAME);
         assertThat(gpcDocument.getAccessedAt()).isNotNull();
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());
+    }
+
+    private List<EhrExtractStatus.GpcAccessDocument.GpcDocument> prepareDocuments() {
+        return List.of(EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .documentId(EhrStatusConstants.DOCUMENT_ID)
+            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
+            .build());
+    }
+
+    private void assertOperationOutcome(Exception exception) {
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
+        var coding = operationOutcome.getDetails().getCodingFirstRep();
+        assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);
+        assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
     }
 }
