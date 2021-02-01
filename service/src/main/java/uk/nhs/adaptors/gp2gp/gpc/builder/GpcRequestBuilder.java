@@ -6,27 +6,9 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
-import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManagerFactory;
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
-import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
-
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.IntegerType;
@@ -42,23 +24,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
-import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 
-import com.heroku.sdk.EnvKeyStore;
-
 import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -73,19 +54,17 @@ public class GpcRequestBuilder {
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_BEARER = "Bearer ";
-    private static final int BYTE_COUNT = 16 * 1024 * 1024;
     private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
     private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
         + ".getstructuredrecord-1";
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
+    private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
-    //swap this for service
-    private final GpcWebClientFilter gpcWebClientFilter;
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
@@ -112,7 +91,7 @@ public class GpcRequestBuilder {
 
     public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        SslContext sslContext = buildSSLContext();
+        SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
@@ -139,15 +118,6 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
-    //could be common
-    @SneakyThrows
-    private SslContext buildSSLContext() {
-        if (shouldBuildSslContext()) {
-            return buildSSLContextWithClientCertificates();
-        }
-        return SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
-    }
-
     private HttpClient buildHttpClient(SslContext sslContext) {
         var httpClient =  HttpClient.create()
             .secure(t -> t.sslContext(sslContext));
@@ -168,17 +138,10 @@ public class GpcRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(webClientFilterService.errorHandlingFilter("Gpc", HttpStatus.OK))
+            .filters(this::addWebClientFilters)
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
-        // .filters(this::addWebClientFilters)
-    }
-
-    //could be common
-    private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
-        filters.add(gpcWebClientFilter.errorHandlingFilter());
-        filters.add(gpcWebClientFilter.logRequest());
     }
 
     private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {
@@ -199,72 +162,8 @@ public class GpcRequestBuilder {
             .header(CONTENT_LEN, valueOf(requestBody.length()));
     }
 
-    //could be common things below
-    private boolean shouldBuildSslContext() {
-        var clientKey = gpcConfiguration.getClientKey();
-        var clientCert = gpcConfiguration.getClientCert();
-        var rootCert = gpcConfiguration.getRootCA();
-        var subCert = gpcConfiguration.getSubCA();
-        final int allSslProperties = 4;
-
-        var missingSslProperties = new ArrayList<String>();
-        if (StringUtils.isBlank(clientKey)) {
-            missingSslProperties.add("GP2GP_SPINE_CLIENT_KEY");
-        }
-        if (StringUtils.isBlank(clientCert)) {
-            missingSslProperties.add("GP2GP_SPINE_CLIENT_CERT");
-        }
-        if (StringUtils.isBlank(rootCert)) {
-            missingSslProperties.add("GP2GP_SPINE_ROOT_CA_CERT");
-        }
-        if (StringUtils.isBlank(subCert)) {
-            missingSslProperties.add("GP2GP_SPINE_SUB_CA_CERT");
-        }
-
-        if (missingSslProperties.size() == allSslProperties) {
-            LOGGER.debug("No TLS MA properties were provided. Not configuring an SSL context.");
-            return false;
-        } else if (missingSslProperties.isEmpty()) {
-            LOGGER.debug("All TLS MA properties were provided. Configuration an SSL context.");
-            return true;
-        } else {
-            throw new GpConnectException("All or none of the GP2GP_SPINE_ variables must be defined. Missing variables: "
-                + String.join(",", missingSslProperties));
-        }
-    }
-
-    @SneakyThrows
-    private SslContext buildSSLContextWithClientCertificates() {
-        var caCertChain = gpcConfiguration.getFormattedSubCA() + gpcConfiguration.getFormattedRootCA();
-
-        var randomPassword = UUID.randomUUID().toString();
-
-        KeyStore ks = EnvKeyStore.createFromPEMStrings(
-            gpcConfiguration.getFormattedClientKey(), gpcConfiguration.getFormattedClientCert(),
-            randomPassword).keyStore();
-
-        KeyStore ts = EnvKeyStore.createFromPEMStrings(caCertChain, randomPassword).keyStore();
-
-        KeyManagerFactory keyManagerFactory =
-            KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-        keyManagerFactory.init(ks, randomPassword.toCharArray());
-
-        TrustManagerFactory trustManagerFactory =
-            TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        trustManagerFactory.init(ts);
-
-        return SslContextBuilder
-            .forClient()
-            .keyManager(keyManagerFactory)
-            .trustManager(trustManagerFactory)
-            .build();
-    }
-
-    private ExchangeStrategies buildExchangeStrategies() {
-        return ExchangeStrategies
-            .builder()
-            .codecs(
-                configurer -> configurer.defaultCodecs()
-                    .maxInMemorySize(BYTE_COUNT)).build();
+    private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
+        filters.add(webClientFilterService.errorHandlingFilter(GPC_REQUEST_TYPE_FILTER, HttpStatus.OK));
+        filters.add(webClientFilterService.logRequest());
     }
 }
