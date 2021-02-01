@@ -29,6 +29,8 @@ public class EhrDocumentMapperTest {
     private static final String TEST_MESSAGE_ID = "test-message-id";
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
+    private static final String TEST_FROM_ASID_CODE = "test-from-asid-code";
+    private static final String TEST_TO_ASID_CODE = "test-to-asid-code";
     private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
     private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
     private static final String TEST_DOCUMENT_ID = "test-document-id";
@@ -51,6 +53,8 @@ public class EhrDocumentMapperTest {
         getGpcDocumentTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .conversationId(TEST_CONVERSATION_ID)
             .requestId(TEST_REQUEST_ID)
+            .fromAsid(TEST_FROM_ASID_CODE)
+            .toAsid(TEST_TO_ASID_CODE)
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .documentId(TEST_DOCUMENT_ID)

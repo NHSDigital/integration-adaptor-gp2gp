@@ -1,24 +1,25 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import java.util.Collections;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import org.hl7.fhir.dstu3.model.Binary;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GpcDocumentTranslator {
-    private static final String PAYLOAD_KEY = "payload";
-    private static final String ATTACHMENTS_KEY = "attachments";
-    private static final String CONTENT_TYPE_KEY = "content_type";
-    private static final String IS_BASE64_KEY = "is_base64";
-    private static final String DESCRIPTION_KEY = "description";
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private final FhirParseService fhirParseService;
     private final EhrDocumentMapper ehrDocumentMapper;
@@ -30,27 +31,22 @@ public class GpcDocumentTranslator {
             ehrDocumentMapper.mapToMhsPayloadTemplateParameters(taskDefinition, messageId);
         String xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
-        return prepareJsonPayload(taskDefinition, binary, xmlContent);
+        try {
+            return prepareOutboundMessage(taskDefinition, binary, xmlContent);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
-    private String prepareJsonPayload(GetGpcDocumentTaskDefinition taskDefinition, Binary binary, String xmlContent) {
-        JSONObject root = prepareJsonObject(PAYLOAD_KEY, xmlContent);
+    private String prepareOutboundMessage(GetGpcDocumentTaskDefinition taskDefinition, Binary binary, String xmlContent)
+            throws JsonProcessingException {
+        List<OutboundMessage.Attachment> attachments = Collections.singletonList(
+            new OutboundMessage.Attachment(binary.getContentType(),
+                Boolean.TRUE.toString(),
+                taskDefinition.getDocumentId(),
+                binary.getContentAsBase64()));
+        OutboundMessage outboundMessage = new OutboundMessage(xmlContent, attachments);
 
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(prepareJsonObject(CONTENT_TYPE_KEY, binary.getContentType()));
-        jsonArray.put(prepareJsonObject(IS_BASE64_KEY, Boolean.TRUE.toString()));
-        jsonArray.put(prepareJsonObject(DESCRIPTION_KEY, taskDefinition.getDocumentId()));
-        jsonArray.put(prepareJsonObject(PAYLOAD_KEY, binary.getContentAsBase64()));
-
-        root.put(ATTACHMENTS_KEY, jsonArray);
-
-        return root.toString();
-    }
-
-    private JSONObject prepareJsonObject(String key, String value) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(key, value);
-
-        return jsonObject;
+        return OBJECT_MAPPER.writeValueAsString(outboundMessage);
     }
 }

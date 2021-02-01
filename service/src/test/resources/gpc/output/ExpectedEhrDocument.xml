@@ -8,19 +8,19 @@
     <acceptAckCode code="NE"/>
     <communicationFunctionRcv>
         <device>
-            <id root="1.2.826.0.1285.0.2.0.107" extension=""/>
+            <id root="1.2.826.0.1285.0.2.0.107" extension="test-from-asid-code"/>
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd>
         <device>
-            <id root="1.2.826.0.1285.0.2.0.107" extension=""/>
+            <id root="1.2.826.0.1285.0.2.0.107" extension="test-to-asid-code"/>
         </device>
     </communicationFunctionSnd>
     <ControlActEvent>
         <author1>
             <AgentSystemSDS>
                 <agentSystemSDS>
-                    <id root="1.2.826.0.1285.0.2.0.107" extension=""/>
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="test-to-asid-code"/>
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
