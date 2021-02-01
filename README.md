@@ -62,14 +62,46 @@ This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
 Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
 
 ## How to run service:
-* Run `./start-local-environment.sh`
 
-If gradle-wrapper.jar doesn't exist run in terminal:
-* If gradle isn't installed `brew install gradle`
-* Update gradle `gradle wrapper`
+### Using the helper script
 
-If ran through IDE on local machine:
-* Setup local Mongo database. Tutorial can be viewed here: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+Run `./start-local-environment.sh`
+
+### Using docker-compose
+
+```
+cd docker/
+docker-compose build
+docker-compose up -d
+```
+
+### Using the GP Connect Public Demonstrator instead of Wiremock
+
+The adaptor uses our own wiremock for the GP Connect API by default. To use the GP Connect public demonstrator instead
+you can use the provided override file for Docker Compose.
+
+```
+cd docker/
+docker-compose build
+docker-compose -f docker-compose.yml -f docker-compose-gpc-pub-demo.yml up -d
+```
+
+### From your IDE or the command line
+
+First start the adaptor dependencies:
+
+```
+    cd docker/
+    docker-compose build activemq wiremock
+    docker-compose up -d activemq wiremock mongodb
+```
+
+Change into the service directory `cd ../service`
+
+Build the project in your IDE or run `./gradlew bootJar`
+
+Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/libs/gp2gp.jar`
+
 
 ## How to run wiremock:
 
@@ -167,6 +199,15 @@ Environment variables with the same name/meaning as the application's control th
 * GP2GP_MONGO_URI
 * GP2GP_MONGO_DATABASE_NAME
 * GP2GP_MHS_INBOUND_QUEUE
+
+## Troubleshooting
+
+### gradle-wrapper.jar doesn't exist
+
+If gradle-wrapper.jar doesn't exist run in terminal:
+* Install Gradle (MacOS) `brew install gradle`
+* Update gradle `gradle wrapper`
+
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.

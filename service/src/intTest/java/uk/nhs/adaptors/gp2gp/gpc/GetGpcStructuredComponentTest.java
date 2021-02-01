@@ -1,28 +1,22 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
-import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
 import org.apache.commons.io.IOUtils;
+import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +24,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
+
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
-        + "{\"resourceType\":\"OperationOutcome\",\"meta\":{\"profile\":[\"https://fhir.nhs"
-        + ".uk/STU3/StructureDefinition/GPConnect-OperationOutcome-1\"]},\"issue\":[{\"severity\":\"error\",\"code\":\"value\","
-        + "\"details\":{\"coding\":[{\"system\":\"https://fhir.nhs.uk/STU3/CodeSystem/Spine-ErrorOrWarningCode-1\",\"code\":"
-        + "\"INVALID_NHS_NUMBER\",\"display\":\"INVALID_NHS_NUMBER\"}]},\"diagnostics\":\"Invalid NHS number submitted: 77777\"}]}";
+    private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
+    private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
+    public static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
     @Autowired
@@ -96,7 +96,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildInvalidNHSNumberStructuredTask(ehrExtractStatus);
         Exception exception = assertThrows(RuntimeException.class, () -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1));
-        assertThat(exception.getMessage()).isEqualTo(EXPECTED_ERROR_RESPONSE);
+
+        assertOperationOutcome(exception);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThat(ehrExtractUpdated.getGpcAccessStructured()).isNull();
@@ -148,9 +149,18 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .conversationId(ehrExtractStatus.getConversationId())
-            .nhsNumber("77777")
+            .nhsNumber("9876543210")
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .build();
+    }
+
+    private void assertOperationOutcome(Exception exception) {
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
+        var coding = operationOutcome.getDetails().getCodingFirstRep();
+
+        assertTrue(VALID_ERRORS.contains(coding.getCode()));
+        assertTrue(VALID_ERRORS.contains(coding.getDisplay()));
     }
 }
