@@ -36,7 +36,7 @@ public class RequestBuilderService {
         if (shouldBuildSslContext()) {
             return buildSSLContextWithClientCertificates();
         }
-        return SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
+        return SslContextBuilder.forClient().build();
     }
 
     private boolean shouldBuildSslContext() {
