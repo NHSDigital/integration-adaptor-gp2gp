@@ -41,3 +41,7 @@ service/out/*
 */out/
 out/
 lombok.config
+
+# env vars with credentials for development
+vars.sh
+env.yaml

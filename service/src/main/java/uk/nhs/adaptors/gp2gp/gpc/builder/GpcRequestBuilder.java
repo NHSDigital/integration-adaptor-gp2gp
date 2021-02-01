@@ -7,18 +7,7 @@ import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
 import java.util.Collections;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
-import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+import java.util.List;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -34,9 +23,23 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.transport.ProxyProvider;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -51,11 +54,11 @@ public class GpcRequestBuilder {
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_BEARER = "Bearer ";
-    private static final int BYTE_COUNT = 16 * 1024 * 1024;
     private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
     private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
         + ".getstructuredrecord-1";
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
+    private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -89,7 +92,7 @@ public class GpcRequestBuilder {
     public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
         WebClient.RequestBodySpec uri = client
@@ -115,12 +118,27 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
+    private HttpClient buildHttpClient(SslContext sslContext) {
+        var httpClient =  HttpClient.create()
+            .secure(t -> t.sslContext(sslContext));
+
+        if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
+            LOGGER.info("Using HTTP Proxy {}:{} for GP Connect API", gpcConfiguration.getProxy(), gpcConfiguration.getProxyPort());
+            return httpClient
+                .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
+                    .host(gpcConfiguration.getProxy())
+                    .port(Integer.parseInt(gpcConfiguration.getProxyPort())));
+        } else {
+            return httpClient;
+        }
+    }
+
     private WebClient buildWebClient(HttpClient httpClient) {
         return WebClient
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(webClientFilterService.errorHandlingFilter("Gpc", HttpStatus.OK))
+            .filters(this::addWebClientFilters)
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
@@ -138,9 +156,14 @@ public class GpcRequestBuilder {
     }
 
     private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
-            BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, TaskDefinition taskDefinition, String interactionId) {
         return buildRequestWithHeaders(uri, taskDefinition, interactionId)
             .body(bodyInserter)
             .header(CONTENT_LEN, valueOf(requestBody.length()));
+    }
+
+    private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
+        filters.add(webClientFilterService.errorHandlingFilter(GPC_REQUEST_TYPE_FILTER, HttpStatus.OK));
+        filters.add(webClientFilterService.logRequest());
     }
 }
