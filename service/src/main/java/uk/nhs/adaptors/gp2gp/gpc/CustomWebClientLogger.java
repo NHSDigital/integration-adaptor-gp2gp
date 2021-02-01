@@ -31,7 +31,8 @@ public class CustomWebClientLogger extends LoggingHandler {
                 array = src.array();
                 offset = src.arrayOffset() + readerIndex;
             } else {
-                array = allocateUninitializedArray(max(len, 1024));
+                final int defaultLength = 1024;
+                array = allocateUninitializedArray(max(len, defaultLength));
                 offset = 0;
                 src.getBytes(readerIndex, array, 0, len);
             }

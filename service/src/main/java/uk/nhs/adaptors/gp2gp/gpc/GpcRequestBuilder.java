@@ -118,12 +118,12 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
 
         if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
+
             LOGGER.info("Using HTTP Proxy {}:{} for GP Connect API", gpcConfiguration.getProxy(), gpcConfiguration.getProxyPort());
             return httpClient
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
                     .host(gpcConfiguration.getProxy())
                     .port(Integer.parseInt(gpcConfiguration.getProxyPort())));
-//                    .nonProxyHosts("localhost|orange.testlab.nhs.uk|messagingportal.opentest.hscic.gov.uk"));
         } else {
             return httpClient;
         }
