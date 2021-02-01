@@ -15,6 +15,8 @@ import org.springframework.web.reactive.function.client.WebClient.RequestHeaders
 public class GpcClient {
     private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Access Structured Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String DOCUMENT_LOG_TEMPLATE = "Gpc Access Document Request, toASID: {}, fromASID: {}, Gpc Url: {}";
+    private static final String PATIENT_LOG_TEMPLATE = "Gpc Access Patient Request, toASID: {}, fromASID: {}, Gpc Url: {}";
+    private static final String PATIENT_DOCUMENTS_LOG_TEMPLATE = "Gpc Access Patient Documents, toASID: {}, fromASID: {}, Gpc Url: {}";
 
     private final GpcConfiguration gpcConfiguration;
 
@@ -28,6 +30,20 @@ public class GpcClient {
     public String getDocumentRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
             GetGpcDocumentTaskDefinition documentTaskDefinition) {
         logRequest(DOCUMENT_LOG_TEMPLATE, documentTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+
+        return performRequestWithStringResponseBody(request);
+    }
+
+    public String getPatientRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+            GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
+        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+
+        return performRequestWithStringResponseBody(request);
+    }
+
+    public String getDocumentReferences(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
+        GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition) {
+        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getPatientEndpoint());
 
         return performRequestWithStringResponseBody(request);
     }

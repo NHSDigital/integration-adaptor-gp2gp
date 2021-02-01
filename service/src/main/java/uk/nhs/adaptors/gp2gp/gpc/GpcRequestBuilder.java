@@ -35,6 +35,7 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -54,6 +55,8 @@ public class GpcRequestBuilder {
     private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
         + ".getstructuredrecord-1";
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
+    private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
+    private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -107,9 +110,45 @@ public class GpcRequestBuilder {
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
-            .uri(gpcConfiguration.getDocumentEndpoint() + "/" + documentTaskDefinition.getDocumentId());
+            .uri(documentTaskDefinition.getAccessDocumentUrl());
 
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
+    }
+
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
+        SslContext sslContext = buildSSLContext();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
+
+        WebClient.RequestBodySpec uri = client
+            .method(HttpMethod.GET)
+            .uri(uriBuilder -> uriBuilder
+                .path(gpcConfiguration.getPatientEndpoint())
+                .queryParam("identifier", "https://fhir.nhs.uk/Id/nhs-number|" + patientIdentifierTaskDefinition.getNhsNumber())
+                .build());
+
+        return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
+    }
+
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition, String patientId) {
+        SslContext sslContext = buildSSLContext();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
+
+        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcConfiguration.getUrl());
+        factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+
+        WebClient.RequestBodySpec uri = client
+            .method(HttpMethod.GET)
+            .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
+                + patientId + "/DocumentReference" +
+                "?_include=DocumentReference%3Asubject%3APatient" +
+                "&_include=DocumentReference%3Acustodian%3AOrganization" +
+                "&_include=DocumentReference%3Aauthor%3AOrganization" +
+                "&_include=DocumentReference%3Aauthor%3APractitioner" +
+                "&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"));
+
+        return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
     }
 
     @SneakyThrows

@@ -20,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
 
 import java.time.Instant;
 
@@ -40,23 +41,19 @@ public class EhrExtractRequestHandler {
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
 
-    // FIXME: Remove these constants as part of NIAD-814
-    private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    private static final String DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/fhir/Binary/" + DOCUMENT_ID;
 
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final TaskIdService taskIdService;
-    private final MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
+            createGpcFindDocumentsTask(ehrExtractStatus);
             createGetGpcStructuredTask(ehrExtractStatus);
-            createGetGpcDocumentTask(ehrExtractStatus);
         } else {
             LOGGER.info("Skipping creation of new tasks for the duplicate extract request");
         }
@@ -85,6 +82,19 @@ public class EhrExtractRequestHandler {
         }
     }
 
+    private void createGpcFindDocumentsTask(EhrExtractStatus ehrExtractStatus) {
+        var GpcFindDocuments = GpcFindDocumentsTaskDefinition.builder()
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .taskId(taskIdService.createNewTaskId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(GpcFindDocuments);
+    }
+
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
         var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
@@ -96,33 +106,6 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
-    }
-
-    // FIXME: move/remove NIAD-814 should create a task for each of the patient's documents
-    private void createGetGpcDocumentTask(EhrExtractStatus ehrExtractStatus) {
-        addAccessDocument(ehrExtractStatus.getConversationId());
-
-        var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
-            .documentId(DOCUMENT_ID)
-            .taskId(taskIdService.createNewTaskId())
-            .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-            .accessDocumentUrl(DOCUMENT_URL)
-            .build();
-        taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
-    }
-
-    @Deprecated // FIXME: Creates a stub db element that will be added by NIAD-814. Remove as part of NIAD-814
-    private void addAccessDocument(String conversationId) {
-        org.bson.Document document = new org.bson.Document();
-        document.append("documentId", DOCUMENT_ID);
-        document.append("accessDocumentUrl", DOCUMENT_URL);
-
-        var collection = mongoTemplate.getCollection("ehrExtractStatus");
-        collection.updateOne(Filters.eq("conversationId", conversationId), Updates.addToSet("gpcAccessDocument.documents", document));
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {

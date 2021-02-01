@@ -3,11 +3,14 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -30,14 +33,17 @@ public class EhrExtractStatusService {
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
+    private static final String PATIENT_ID = "patientId";
     private static final String DOCUMENT_ID = "documentId";
     private static final String OBJECT_NAME = "objectName";
     private static final String ACCESSED_AT = "accessedAt";
+    private static final String ACCESSED_DOCUMENT_URL = "accessDocumentUrl";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
 
     private static final String DOCUMENT_ID_PATH = GPC_DOCUMENTS + DOT + DOCUMENT_ID;
+    private static final String DOCUMENT_PATIENT_ID = GPC_ACCESS_DOCUMENT + DOT + PATIENT_ID;
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
     private static final String DOCUMENT_TASK_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + TASK_ID;
     private static final String DOCUMENT_OBJECT_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + OBJECT_NAME;
@@ -83,6 +89,53 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Access Document. "
                 + "Access Document not present in Ehr Extract Status.");
+        }
+    }
+
+    public void updateEhrExtractStatusAccessDocumentPatientId(GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition,
+            String patientId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(CONVERSATION_ID).is(patientIdentifierTaskDefinition.getConversationId()));
+
+        Instant now = Instant.now();
+
+        Update update = new Update();
+        update.set(UPDATED_AT, now);
+        if (!patientId.isBlank()) {
+            update.set(DOCUMENT_PATIENT_ID, patientId);
+        } else {
+            update.set(DOCUMENT_PATIENT_ID, null);
+        }
+        update.set(GPC_DOCUMENTS, new ArrayList<>());
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with patientId");
+        }
+    }
+
+    public void updateEhrExtractStatusAccessDocumentDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition,
+            List<String> urls) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(CONVERSATION_ID).is(documentReferencesTaskDefinition.getConversationId()));
+
+        Instant now = Instant.now();
+
+        Update update = new Update();
+        update.set(UPDATED_AT, now);
+        urls.forEach(url -> {
+            update.addToSet(GPC_DOCUMENTS, new EhrExtractStatus.GpcAccessDocument.GpcDocument(
+                GetGpcDocumentTaskDefinition.extractIdFromUrl(url),
+                url,
+                null,
+                now,
+                documentReferencesTaskDefinition.getTaskId()
+            ));
+        });
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with document URL's");
         }
     }
 }

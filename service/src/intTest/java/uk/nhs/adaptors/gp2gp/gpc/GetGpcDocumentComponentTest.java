@@ -32,6 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
+    private static final String VALID_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510";
     private static final String INVALID_DOCUMENT_ID = "invalid-id";
     private static final String EXPECTED_ERROR_RESPONSE = "The following error occurred during Gpc Request: "
         + "{\n  \"resourceType\": \"OperationOutcome\",\n  \"meta\": {\n    "
@@ -109,6 +110,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .documentId(documentId)
+            .accessDocumentUrl(VALID_DOCUMENT_URL)
             .build();
     }
 
