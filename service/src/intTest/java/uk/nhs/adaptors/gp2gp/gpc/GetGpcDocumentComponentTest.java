@@ -75,28 +75,13 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
         assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
 
-        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
-    }
-
-    @Test
-    public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndMhsPayloadAddedToObjectStore() throws IOException {
-        var ehrExtractStatus = addEhrStatusToDatabase();
-        var taskDefinition = buildValidAccessTask(ehrExtractStatus, EhrStatusConstants.DOCUMENT_ID);
-        getGpcDocumentTaskExecutor.execute(taskDefinition);
-
-        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
-        assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
         String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
             .getDocuments()
             .get(0)
             .getMessageId();
-
-        var inputStream = storageConnector.downloadFromStorage(String.format(MHS_FILE_NAME_TEMPLATE, messageId));
-        var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
-
-        assertThat(storageDataWrapper.getResponse()).isNotBlank();
         assertThat(storageDataWrapper.getResponse()).contains(messageId);
-        assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
+
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
     @Test

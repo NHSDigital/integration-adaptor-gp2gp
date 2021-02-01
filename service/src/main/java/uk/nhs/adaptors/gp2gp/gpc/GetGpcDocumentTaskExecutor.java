@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTaskDefinition> {
     private static final String JSON_EXTENSION = ".json";
-    private static final String MHS_FILE_NAME_TEMPLATE = "%s_doc_translated.json";
 
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -44,20 +43,14 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
         String taskId = taskDefinition.getTaskId();
 
-        var storageDataWrapperWithDocumentRecord = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition, response, taskId);
-        storageConnectorService.uploadFile(storageDataWrapperWithDocumentRecord, documentName);
-
         String messageId = randomIdGeneratorService.createNewId();
         String mhsOutboundRequest = gpcDocumentTranslator.translateToMhsOutboundRequestPayload(taskDefinition, response, messageId);
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider.buildStorageDataWrapper(taskDefinition,
             mhsOutboundRequest, taskId);
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, prepareXmlDocumentName(messageId));
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
             taskId, messageId);
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
-    }
-    private String prepareXmlDocumentName(String messageId) {
-        return String.format(MHS_FILE_NAME_TEMPLATE, messageId);
     }
 }
