@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;

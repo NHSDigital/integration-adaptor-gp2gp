@@ -173,7 +173,8 @@ public class EhrExtractStatusService {
                 url,
                 null,
                 now,
-                documentReferencesTaskDefinition.getTaskId()
+                documentReferencesTaskDefinition.getTaskId(),
+                documentReferencesTaskDefinition.getConversationId()
             ));
         });
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
