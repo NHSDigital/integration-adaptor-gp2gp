@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.gpc.configuration;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;

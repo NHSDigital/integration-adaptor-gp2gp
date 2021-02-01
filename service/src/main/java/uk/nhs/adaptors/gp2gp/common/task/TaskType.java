@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.common.task;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
@@ -11,7 +12,8 @@ import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
 public enum TaskType {
     GET_GPC_DOCUMENT(GetGpcDocumentTaskDefinition.class),
     GET_GPC_STRUCTURED(GetGpcStructuredTaskDefinition.class),
-    GPC_FIND_DOCUMENTS(GpcFindDocumentsTaskDefinition.class);
+    GPC_FIND_DOCUMENTS(GpcFindDocumentsTaskDefinition.class),
+    SEND_EHR_EXTRACT_CORE(SendEhrExtractCoreTaskDefinition.class);
 
     private final Class<? extends TaskDefinition> classOfTaskDefinition;
 

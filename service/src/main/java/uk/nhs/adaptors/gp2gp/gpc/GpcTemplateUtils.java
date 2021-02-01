@@ -7,6 +7,8 @@ import com.github.mustachejava.MustacheFactory;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+
 public class GpcTemplateUtils {
 
     private static final String TEMPLATES_DIRECTORY = "templates";

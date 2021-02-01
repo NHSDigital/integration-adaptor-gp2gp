@@ -8,6 +8,8 @@ import java.util.List;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
 
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
         Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);

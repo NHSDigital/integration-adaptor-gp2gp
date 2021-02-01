@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "POST",
-    "url": "/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/Patient/$gpc.getstructuredrecord",
+    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/$gpc.getstructuredrecord",
     "bodyPatterns" : [ {
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },

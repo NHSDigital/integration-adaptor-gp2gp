@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.gpc.builder;
 
 import static java.lang.String.valueOf;
 
@@ -16,7 +16,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -25,13 +31,13 @@ import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ReactiveHttpOutputMessage;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
@@ -61,7 +67,8 @@ public class GpcRequestBuilder {
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
     private final GpcConfiguration gpcConfiguration;
-    private final GpcWebClientFilter gpcWebClientFilter;
+    private final RequestBuilderService requestBuilderService;
+    private final WebClientFilterService webClientFilterService;
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
@@ -88,7 +95,7 @@ public class GpcRequestBuilder {
 
     public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
         GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        SslContext sslContext = buildSSLContext();
+        SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
 
@@ -104,7 +111,7 @@ public class GpcRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        SslContext sslContext = buildSSLContext();
+        SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
 
@@ -162,9 +169,9 @@ public class GpcRequestBuilder {
     private WebClient buildWebClient(HttpClient httpClient) {
         return WebClient
             .builder()
-            .exchangeStrategies(buildExchangeStrategies())
+            .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(gpcWebClientFilter.errorHandlingFilter())
+            .filter(webClientFilterService.errorHandlingFilter("Gpc", HttpStatus.OK))
             .baseUrl(gpcConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
             .build();
@@ -187,13 +194,4 @@ public class GpcRequestBuilder {
             .body(bodyInserter)
             .header(CONTENT_LEN, valueOf(requestBody.length()));
     }
-
-    private ExchangeStrategies buildExchangeStrategies() {
-        return ExchangeStrategies
-            .builder()
-            .codecs(
-                configurer -> configurer.defaultCodecs()
-                    .maxInMemorySize(BYTE_COUNT)).build();
-    }
 }
-

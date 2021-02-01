@@ -91,7 +91,7 @@
 						]
 					}
 				],
-				"address": "{{request.baseUrl}}/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/Patient/$gpc.getstructuredrecord"
+				"address": "{{request.baseUrl}}/GP0001/STU3/1/gpconnect/fhir/Patient/$gpc.getstructuredrecord"
 			},
 			"search": {
 				"mode": "match"

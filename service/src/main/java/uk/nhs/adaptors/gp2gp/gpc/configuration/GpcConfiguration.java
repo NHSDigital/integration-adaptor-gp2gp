@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.gpc.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

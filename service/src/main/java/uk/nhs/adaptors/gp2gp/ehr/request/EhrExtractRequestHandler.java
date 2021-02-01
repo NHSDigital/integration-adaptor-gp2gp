@@ -1,28 +1,26 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
+
+import java.time.Instant;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.task.TaskIdService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.MissingValueException;
-import uk.nhs.adaptors.gp2gp.ehr.SpineInteraction;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
-
-import java.time.Instant;
 
 @Service
 @Slf4j
@@ -46,7 +44,7 @@ public class EhrExtractRequestHandler {
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
-    private final TaskIdService taskIdService;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public void handle(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
@@ -85,11 +83,12 @@ public class EhrExtractRequestHandler {
     private void createGpcFindDocumentsTask(EhrExtractStatus ehrExtractStatus) {
         var GpcFindDocuments = GpcFindDocumentsTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(taskIdService.createNewTaskId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(GpcFindDocuments);
@@ -98,11 +97,12 @@ public class EhrExtractRequestHandler {
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {
         var getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .taskId(taskIdService.createNewTaskId())
+            .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(getGpcStructuredTaskDefinition);
