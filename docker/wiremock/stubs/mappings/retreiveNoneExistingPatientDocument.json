@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "url": "/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/documents/Binary/non-existing-id"
+    "url": "/GP0001/STU3/1/gpconnect/fhir/Binary/non-existing-id"
   },
   "response": {
     "status": 404,
