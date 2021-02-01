@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.stream.Stream;
 
@@ -16,6 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,7 +29,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.testcontainers.shaded.org.apache.commons.io.IOUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -48,6 +47,7 @@ public class EhrExtractMapperTest {
     private static final String TEST_NHS_NUMBER = "1234567890";
     private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
     private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
+    private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
     private static final String JSON_WITH_NO_CONTENT = "{}";
     private static final String EXPECTED_NO_CONTENT_EXCEPTION_MESSAGE =
         "Failed to parse JSON encoded FHIR content: Did not find any content to parse";
@@ -69,9 +69,9 @@ public class EhrExtractMapperTest {
 
     @BeforeAll
     public static void initialize() throws IOException {
-        inputJsonFileContent = getFileContent(INPUT_PATH + JSON_INPUT_FILE);
-        inputJsonFileWithNoPatientContent = getFileContent(INPUT_PATH + JSON_INPUT_FILE_WITH_NO_PATIENT);
-        expectedJsonToXmlContent = getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
+        inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
+        inputJsonFileWithNoPatientContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE_WITH_NO_PATIENT);
+        expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
 
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(TEST_NHS_NUMBER)
@@ -85,7 +85,7 @@ public class EhrExtractMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
+        when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
     }
 
@@ -106,10 +106,6 @@ public class EhrExtractMapperTest {
             () -> ehrExtractMapper.mapJsonToEhrFhirExtractParams(getGpcStructuredTaskDefinition,
                 jsonContent));
         assertThat(exception.getMessage()).isEqualTo(expectedMessage);
-    }
-
-    private static String getFileContent(String filePath) throws IOException {
-        return IOUtils.toString(EhrExtractMapperTest.class.getResourceAsStream(filePath), StandardCharsets.UTF_8);
     }
 
     private static Stream<Arguments> exceptionParams() {

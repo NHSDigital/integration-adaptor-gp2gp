@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  gp2gp:
+    environment:
+      - GP2GP_GPC_GET_URL=https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/fhir
+      - GP2GP_GPC_HOST=orange.testlab.nhs.uk

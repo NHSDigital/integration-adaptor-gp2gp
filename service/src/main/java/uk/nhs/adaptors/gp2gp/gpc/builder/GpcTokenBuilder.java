@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.gpc.builder;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.gpc.GpcTemplateUtils;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @Slf4j

@@ -27,9 +27,12 @@ pipeline {
                             sh '''
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
-                                docker cp tests:/home/gradle/service/build .
                             '''
-
+                        }
+                    }
+                    post {
+                        always {
+                            sh "docker cp tests:/home/gradle/service/build ."
                             archiveArtifacts artifacts: 'build/reports/**/*.*', fingerprint: true
                             junit '**/build/test-results/**/*.xml'
                             recordIssues(
@@ -39,10 +42,6 @@ pipeline {
                                     spotBugs(pattern: 'build/reports/spotbugs/*.xml')
                                 ]
                             )
-                        }
-                    }
-                    post {
-                        always {
                             step([
                                 $class : 'JacocoPublisher',
                                 execPattern : '**/build/jacoco/*.exec',
@@ -104,16 +103,17 @@ pipeline {
                         stage('E2E Tests') {
                             steps {
                                 sh '''
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests
-                                    docker cp e2e-tests:/home/gradle/e2e-tests/build .
-                                    mv build e2e-build
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-gpc-pub-demo.yml -f docker/docker-compose-e2e-tests.yml build
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-gpc-pub-demo.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp gp2gp-e2e-tests
                                 '''
-                                archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
-                                junit '**/e2e-build/test-results/**/*.xml'
+
                             }
                             post {
                                 always {
+                                    sh "docker cp e2e-tests:/home/gradle/e2e-tests/build ."
+                                    sh "mv build e2e-build"
+                                    archiveArtifacts artifacts: 'e2e-build/reports/**/*.*', fingerprint: true
+                                    junit '**/e2e-build/test-results/**/*.xml'
                                     sh "rm -rf e2e-build"
                                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
                                 }
