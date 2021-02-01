@@ -1,24 +1,26 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
-
     private final GpcClient gpcClient;
     private final GpcRequestBuilder gpcRequestBuilder;
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
+    private final DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -33,16 +35,14 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
         var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
 
-        storageConnectorService.uploadWithMetadata(buildStorageDataWrapper(structuredTaskDefinition, response));
-        ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
-    }
+        String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
+        storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,
+            response,
+            structuredTaskDefinition.getTaskId()),
+            fileName);
 
-    private StorageDataWrapper buildStorageDataWrapper(GetGpcStructuredTaskDefinition structuredTaskDefinition, String response) {
-        return StorageDataWrapper.builder()
-            .type(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue())
-            .conversationId(structuredTaskDefinition.getConversationId())
-            .taskId(structuredTaskDefinition.getTaskId())
-            .response(response)
-            .build();
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
+
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }

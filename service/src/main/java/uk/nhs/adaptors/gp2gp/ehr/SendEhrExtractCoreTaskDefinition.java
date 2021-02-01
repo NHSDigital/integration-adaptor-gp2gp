@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.ehr;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -8,15 +8,12 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 
 @Jacksonized
-@SuperBuilder
 @Getter
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class GetGpcDocumentTaskDefinition extends TaskDefinition {
-    private final String documentId;
-    private final String accessDocumentUrl;
-
+public class SendEhrExtractCoreTaskDefinition extends TaskDefinition {
     @Override
     public TaskType getTaskType() {
-        return TaskType.GET_GPC_DOCUMENT;
+        return TaskType.SEND_EHR_EXTRACT_CORE;
     }
 }

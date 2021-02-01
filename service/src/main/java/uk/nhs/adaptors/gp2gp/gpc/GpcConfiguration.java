@@ -14,6 +14,7 @@ import uk.nhs.adaptors.gp2gp.common.utils.PemFormatter;
 public class GpcConfiguration {
     private String url;
     private String structuredEndpoint;
+    private String documentEndpoint;
     private String host;
     private String enableProxy;
     private String proxy;

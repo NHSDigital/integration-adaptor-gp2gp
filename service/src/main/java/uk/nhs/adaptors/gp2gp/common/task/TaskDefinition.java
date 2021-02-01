@@ -14,6 +14,7 @@ public abstract class TaskDefinition {
     private final String toAsid;
     private final String fromAsid;
     private final String fromOdsCode;
+    private final String toOdsCode;
 
     public abstract TaskType getTaskType();
 }
