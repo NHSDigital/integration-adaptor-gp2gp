@@ -137,7 +137,8 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition, String patientId) {
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition,
+            String patientId) {
         SslContext sslContext = buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -148,12 +149,12 @@ public class GpcRequestBuilder {
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
             .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
-                + patientId + "/DocumentReference" +
-                "?_include=DocumentReference%3Asubject%3APatient" +
-                "&_include=DocumentReference%3Acustodian%3AOrganization" +
-                "&_include=DocumentReference%3Aauthor%3AOrganization" +
-                "&_include=DocumentReference%3Aauthor%3APractitioner" +
-                "&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"));
+                + patientId + "/DocumentReference"
+                + "?_include=DocumentReference%3Asubject%3APatient"
+                + "&_include=DocumentReference%3Acustodian%3AOrganization"
+                + "&_include=DocumentReference%3Aauthor%3AOrganization"
+                + "&_include=DocumentReference%3Aauthor%3APractitioner"
+                + "&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"));
 
         return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
     }

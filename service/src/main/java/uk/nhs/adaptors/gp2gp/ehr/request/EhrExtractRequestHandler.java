@@ -81,7 +81,7 @@ public class EhrExtractRequestHandler {
     }
 
     private void createGpcFindDocumentsTask(EhrExtractStatus ehrExtractStatus) {
-        var GpcFindDocuments = GpcFindDocumentsTaskDefinition.builder()
+        var gpcFindDocuments = GpcFindDocumentsTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
@@ -91,7 +91,7 @@ public class EhrExtractRequestHandler {
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
-        taskDispatcher.createTask(GpcFindDocuments);
+        taskDispatcher.createTask(gpcFindDocuments);
     }
 
     private void createGetGpcStructuredTask(EhrExtractStatus ehrExtractStatus) {

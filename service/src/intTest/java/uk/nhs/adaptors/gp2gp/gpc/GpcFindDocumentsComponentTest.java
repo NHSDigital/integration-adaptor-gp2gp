@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 

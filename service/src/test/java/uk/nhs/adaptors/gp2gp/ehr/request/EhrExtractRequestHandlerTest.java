@@ -77,7 +77,7 @@ public class EhrExtractRequestHandlerTest {
 
     @Test
     public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
-        when(mongoTemplate.getCollection("ehrExtractStatus")).thenReturn(mongoCollection); // FIXME: Remove as part of NIAD-814
+        //when(mongoTemplate.getCollection("ehrExtractStatus")).thenReturn(mongoCollection); // FIXME: Remove as part of NIAD-814
 
         Document soapHeader = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document soapBody = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_body.xml");

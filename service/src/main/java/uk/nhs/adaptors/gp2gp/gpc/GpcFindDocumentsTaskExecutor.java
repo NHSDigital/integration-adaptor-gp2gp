@@ -60,7 +60,7 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
         FhirContext ctx = FhirContext.forDstu3();
         IParser parser = ctx.newJsonParser();
 
-        if (response.contains("Bundle")){
+        if (response.contains("Bundle")) {
             Bundle fhirBundle = parser.parseResource(Bundle.class, response);
             if (!fhirBundle.getEntry().isEmpty()) {
                 Patient patient = (Patient) fhirBundle.getEntry().get(0).getResource();
@@ -71,7 +71,7 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
     }
 
     private List<String> retrieveDocumentReferences(GpcFindDocumentsTaskDefinition taskDefinition, String patientId) {
-        var request= gpcRequestBuilder.buildGetPatientDocumentReferences(taskDefinition, patientId);
+        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(taskDefinition, patientId);
         var response = gpcClient.getDocumentReferences(request, taskDefinition);
 
         if (response.contains("Bundle")) {
@@ -84,8 +84,7 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
                 .filter(fr -> fr.getResource().getResourceType().equals(ResourceType.DocumentReference))
                 .map(resource -> extractUrl((DocumentReference) resource.getResource()))
                 .collect(Collectors.toList());
-        }
-        else {
+        } else {
             return new ArrayList<>();
         }
     }

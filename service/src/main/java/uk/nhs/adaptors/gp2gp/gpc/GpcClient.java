@@ -37,14 +37,16 @@ public class GpcClient {
 
     public String getPatientRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
             GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
-        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl()
+            + gpcConfiguration.getDocumentEndpoint());
 
         return performRequestWithStringResponseBody(request);
     }
 
     public String getDocumentReferences(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
         GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition) {
-        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getPatientEndpoint());
+        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl()
+            + gpcConfiguration.getPatientEndpoint());
 
         return performRequestWithStringResponseBody(request);
     }
