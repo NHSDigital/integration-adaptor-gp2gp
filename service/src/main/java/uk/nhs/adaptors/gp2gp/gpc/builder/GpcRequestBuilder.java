@@ -201,7 +201,7 @@ public class GpcRequestBuilder {
             .header(SSP_FROM, taskDefinition.getFromAsid())
             .header(SSP_TO, taskDefinition.getToAsid())
             .header(SSP_INTERACTION_ID, interactionId)
-            .header(SSP_TRACE_ID, taskDefinitigon.getConversationId())
+            .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
             .header(TARGET_HOST, gpcConfiguration.getHost())
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
