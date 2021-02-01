@@ -6,27 +6,16 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
+import java.security.KeyStore;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.TrustManagerFactory;
 
-import ca.uhn.fhir.parser.IParser;
-import com.heroku.sdk.EnvKeyStore;
-import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.IntegerType;
@@ -45,21 +34,19 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import com.heroku.sdk.EnvKeyStore;
+
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.TrustManagerFactory;
-import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
-
-import static java.lang.String.valueOf;
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-import static org.apache.http.protocol.HTTP.TARGET_HOST;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -142,7 +129,7 @@ public class GpcRequestBuilder {
         if (shouldBuildSslContext()) {
             return buildSSLContextWithClientCertificates();
         }
-        return SslContextBuilder.forClient().build();
+        return SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {
@@ -150,7 +137,6 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
 
         if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
-
             LOGGER.info("Using HTTP Proxy {}:{} for GP Connect API", gpcConfiguration.getProxy(), gpcConfiguration.getProxyPort());
             return httpClient
                 .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
@@ -175,21 +161,6 @@ public class GpcRequestBuilder {
     private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
         filters.add(gpcWebClientFilter.errorHandlingFilter());
         filters.add(gpcWebClientFilter.logRequest());
-    }
-
-    private RequestHeadersSpec<?> buildRequestWithHeadersAndBody(RequestBodySpec uri, String requestBody,
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter, GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        return uri
-            .body(bodyInserter)
-            .accept(MediaType.valueOf(FHIR_CONTENT_TYPE))
-            .header(SSP_FROM, structuredTaskDefinition.getFromAsid())
-            .header(SSP_TO, structuredTaskDefinition.getToAsid())
-            .header(SSP_INTERACTION_ID, GPC_STRUCTURED_INTERACTION_ID)
-            .header(SSP_TRACE_ID, structuredTaskDefinition.getConversationId())
-            .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(structuredTaskDefinition.getFromOdsCode()))
-            .header(TARGET_HOST, gpcConfiguration.getHost())
-            .header(CONTENT_LEN, valueOf(requestBody.length()))
-            .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
     }
 
     private RequestBodySpec buildRequestWithHeaders(RequestBodySpec uri, TaskDefinition taskDefinition, String interactionId) {

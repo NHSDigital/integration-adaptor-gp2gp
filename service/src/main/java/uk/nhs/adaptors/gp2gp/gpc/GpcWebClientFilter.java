@@ -18,7 +18,6 @@ public class GpcWebClientFilter {
             clientResponse.statusCode();
             if (clientResponse.statusCode().equals(HttpStatus.OK)) {
                 LOGGER.info("Gpc request successful, status code: {}", clientResponse.statusCode());
-                LOGGER.info("Gpc request successful, status code: {}", clientResponse.statusCode());
                 return Mono.just(clientResponse);
             } else {
                 return getResponseError(clientResponse);
