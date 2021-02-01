@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.gpc.exception;
 
 public class GpConnectException extends RuntimeException {
     public GpConnectException(String message) {

@@ -35,6 +35,7 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+| GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
 | GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
 | GP2GP_GPC_GET_URL                    |                           | The URL used for GP Connect requests.
 | GP2GP_GPC_GET_STRUCTURED_ENDPOINT    |                           | The endpoiint for GP Connect Get Structured Access. 
@@ -62,11 +63,7 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 
 ## How to run service:
 
-### Using Docker the helper script
-
-The adaptor runs using development mocks by default. To override environment variable choose an example file e.g. 
-(docker/vars.opentest.sh)[docker/vars.opentest.sh] and copy it to `docker/vars.sh`. Make your changes in this copy.
-We don't use Docker's envfile format because it does not support multiline variables.
+### Using the helper script
 
 Run `./start-local-environment.sh`
 
@@ -76,6 +73,17 @@ Run `./start-local-environment.sh`
 cd docker/
 docker-compose build
 docker-compose up -d
+```
+
+### Using the GP Connect Public Demonstrator instead of Wiremock
+
+The adaptor uses our own wiremock for the GP Connect API by default. To use the GP Connect public demonstrator instead
+you can use the provided override file for Docker Compose.
+
+```
+cd docker/
+docker-compose build
+docker-compose -f docker-compose.yml -f docker-compose-gpc-pub-demo.yml up -d
 ```
 
 ### From your IDE or the command line
@@ -198,6 +206,15 @@ Environment variables with the same name/meaning as the application's control th
 * GP2GP_MONGO_URI
 * GP2GP_MONGO_DATABASE_NAME
 * GP2GP_MHS_INBOUND_QUEUE
+
+## Troubleshooting
+
+### gradle-wrapper.jar doesn't exist
+
+If gradle-wrapper.jar doesn't exist run in terminal:
+* Install Gradle (MacOS) `brew install gradle`
+* Update gradle `gradle wrapper`
+
 
 ### Licensing
 This code is dual licensed under the MIT license and the OGL (Open Government License). Any new work added to this repository must conform to the conditions of these licenses. In particular this means that this project may not depend on GPL-licensed or AGPL-licensed libraries, as these would violate the terms of those libraries' licenses.

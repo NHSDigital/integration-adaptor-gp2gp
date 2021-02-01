@@ -34,10 +34,10 @@ gp2gp:
     ttl: ${GP2GP_MONGO_TTL:P7D}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
   gpc:
-    url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
-    host: ${GP2GP_GPC_HOST:orange.testlab.nhs.uk}
-    structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
-    documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/fhir/Binary/}
+    url: ${GP2GP_GPC_GET_URL:http://localhost:8110/GP0001/STU3/1/gpconnect/fhir}
+    structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/Patient/$gpc.getstructuredrecord}
+    documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/Binary/}
+    host: ${GP2GP_GPC_HOST:localhost}
     enableProxy: ${GP2GP_GPC_ENABLE_HTTP_PROXY:false}
     proxy: ${GP2GP_GPC_HTTP_PROXY:}
     proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:}
@@ -45,3 +45,5 @@ gp2gp:
     clientKey: ${GP2GP_SPINE_CLIENT_KEY:}
     rootCA: ${GP2GP_SPINE_ROOT_CA_CERT:}
     subCA: ${GP2GP_SPINE_SUB_CA_CERT:}
+  mhs:
+    url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}

@@ -45,7 +45,7 @@ public class EhrExtractRequestHandler {
 
     // FIXME: Remove these constants as part of NIAD-814
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    private static final String DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/fhir/Binary/" + DOCUMENT_ID;
+    private static final String DOCUMENT_URL = "http://localhost:8110/GP0001/STU3/1/gpconnect/fhir/Binary/" + DOCUMENT_ID;
 
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
