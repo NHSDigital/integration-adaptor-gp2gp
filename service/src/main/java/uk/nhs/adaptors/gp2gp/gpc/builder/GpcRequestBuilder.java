@@ -126,8 +126,8 @@ public class GpcRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
-        SslContext sslContext = buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
         WebClient.RequestBodySpec uri = client
@@ -142,8 +142,8 @@ public class GpcRequestBuilder {
 
     public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition,
             String patientId) {
-        SslContext sslContext = buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
         DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcConfiguration.getUrl());
@@ -160,14 +160,6 @@ public class GpcRequestBuilder {
                 + "&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"));
 
         return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
-    }
-
-    @SneakyThrows
-    private SslContext buildSSLContext() {
-        return SslContextBuilder
-            .forClient()
-            .trustManager(InsecureTrustManagerFactory.INSTANCE)
-            .build();
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {

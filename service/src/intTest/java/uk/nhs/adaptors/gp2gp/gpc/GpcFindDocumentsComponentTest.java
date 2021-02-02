@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +27,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
+    private static final String PATIENT_NOT_FOUND = "9876543210";
     private static final String VALID_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510";
 
     @Autowired
@@ -49,7 +49,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     }
 
     @Test
-    public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() throws IOException {
+    public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() {
         var ehrExtractStatus = setupDatabase();
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITH_DOCUMENT);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
@@ -68,6 +68,14 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThat(updatedEhrExtractStatus.getGpcAccessDocument().getDocuments().size()).isEqualTo(0);
+
+    }
+
+    @Test
+    public void When_FindDocumentTaskIsStarted_Expect_PatientNotFound() {
+        var ehrExtractStatus = setupDatabase();
+        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, PATIENT_NOT_FOUND);
+        gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
     }
 
