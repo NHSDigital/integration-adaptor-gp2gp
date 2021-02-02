@@ -6,18 +6,6 @@
         </encoder>
     </appender>
 
-    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-                <timestampFormat>yyyy-MM-dd'T'HH:mm:ss.SSSX</timestampFormat>
-                <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>
-                <appendLineSeparator>true</appendLineSeparator>
-                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                    <prettyPrint>false</prettyPrint>
-                </jsonFormatter>
-            </layout>
-        </encoder>
-    </appender>
 
     <root level="${GP2GP_ROOT_LOGGING_LEVEL:-WARN}">
         <appender-ref ref="${GP2GP_LOGGING_APPENDER:-TEXT}"/>
