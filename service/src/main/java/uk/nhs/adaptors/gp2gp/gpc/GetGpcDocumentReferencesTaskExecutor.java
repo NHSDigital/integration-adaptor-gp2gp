@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumentsTaskDefinition> {
+public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpcDocumentReferencesTaskDefinition> {
 
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
@@ -35,25 +35,27 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
     private TaskDispatcher taskDispatcher;
 
     @Override
-    public Class<GpcFindDocumentsTaskDefinition> getTaskType() {
-        return GpcFindDocumentsTaskDefinition.class;
+    public Class<GetGpcDocumentReferencesTaskDefinition> getTaskType() {
+        return GetGpcDocumentReferencesTaskDefinition.class;
     }
 
     @Override
-    public void execute(GpcFindDocumentsTaskDefinition taskDefinition) {
+    public void execute(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         LOGGER.info("Execute called from GpcFindDocumentsTaskExecutor");
 
         String patientId = retrievePatientId(taskDefinition);
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition, patientId);
 
-        List<String> urls = retrieveDocumentReferences(taskDefinition, patientId);
-        ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
+        if (!patientId.isBlank()) {
+            List<String> urls = retrieveDocumentReferences(taskDefinition, patientId);
+            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
-        urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
+            urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
+        }
 
     }
 
-    private String retrievePatientId(GpcFindDocumentsTaskDefinition taskDefinition) {
+    private String retrievePatientId(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(taskDefinition);
         var response = gpcClient.getPatientRecord(request, taskDefinition);
 
@@ -70,7 +72,7 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
         return StringUtils.EMPTY;
     }
 
-    private List<String> retrieveDocumentReferences(GpcFindDocumentsTaskDefinition taskDefinition, String patientId) {
+    private List<String> retrieveDocumentReferences(GetGpcDocumentReferencesTaskDefinition taskDefinition, String patientId) {
         var request = gpcRequestBuilder.buildGetPatientDocumentReferences(taskDefinition, patientId);
         var response = gpcClient.getDocumentReferences(request, taskDefinition);
 
@@ -89,7 +91,7 @@ public class GpcFindDocumentsTaskExecutor implements TaskExecutor<GpcFindDocumen
         }
     }
 
-    private void queueGetDocumentsTask(GpcFindDocumentsTaskDefinition taskDefinition, String url) {
+    private void queueGetDocumentsTask(GetGpcDocumentReferencesTaskDefinition taskDefinition, String url) {
         var getGpcDocumentTaskTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .documentId(GetGpcDocumentTaskDefinition.extractIdFromUrl(url))
             .taskId(taskDefinition.getTaskId())

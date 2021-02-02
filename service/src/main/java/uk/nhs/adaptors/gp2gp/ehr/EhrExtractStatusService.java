@@ -13,7 +13,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -59,13 +59,10 @@ public class EhrExtractStatusService {
     private final MongoTemplate mongoTemplate;
 
     public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where(CONVERSATION_ID).is(structuredTaskDefinition.getConversationId()));
-
+        Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
 
-        Update update = new Update();
-        update.set(UPDATED_AT, now);
+        Update update = createUpdateWithUpdatedAt();
         update.set(STRUCTURE_ACCESSED_AT_PATH, now);
         update.set(STRUCTURE_TASK_ID_PATH, structuredTaskDefinition.getTaskId());
         update.set(STRUCTURE_OBJECT_NAME_PATH, structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
@@ -91,10 +88,8 @@ public class EhrExtractStatusService {
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
             .and(DOCUMENT_ID_PATH).is(documentTaskDefinition.getDocumentId()));
 
+        Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
-
-        Update update = new Update();
-        update.set(UPDATED_AT, now);
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
         update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
@@ -120,13 +115,9 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where(CONVERSATION_ID).is(sendEhrExtractCoreTaskDefinition.getConversationId()));
+        Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
-        Instant now = Instant.now();
-
-        Update update = new Update();
-        update.set(UPDATED_AT, now);
+        Update update = createUpdateWithUpdatedAt();
         update.set(EXTRACT_CORE_SENT_AT_PATH, requestSentAt);
         update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
@@ -136,15 +127,11 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusAccessDocumentPatientId(GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition,
+    public void updateEhrExtractStatusAccessDocumentPatientId(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
             String patientId) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where(CONVERSATION_ID).is(patientIdentifierTaskDefinition.getConversationId()));
+        Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
-        Instant now = Instant.now();
-
-        Update update = new Update();
-        update.set(UPDATED_AT, now);
+        Update update = createUpdateWithUpdatedAt();
         if (!patientId.isBlank()) {
             update.set(DOCUMENT_PATIENT_ID, patientId);
         } else {
@@ -158,15 +145,13 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusAccessDocumentDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition,
+    public void updateEhrExtractStatusAccessDocumentDocumentReferences(
+            GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
             List<String> urls) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where(CONVERSATION_ID).is(documentReferencesTaskDefinition.getConversationId()));
+        Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
+        Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
-
-        Update update = new Update();
-        update.set(UPDATED_AT, now);
         urls.forEach(url -> {
             update.addToSet(GPC_DOCUMENTS, new EhrExtractStatus.GpcAccessDocument.GpcDocument(
                 GetGpcDocumentTaskDefinition.extractIdFromUrl(url),
@@ -182,5 +167,21 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with document URL's");
         }
+    }
+
+    private static Query createQueryForConversationId(String conversationId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(CONVERSATION_ID).is(conversationId));
+
+        return query;
+    }
+
+    private static Update createUpdateWithUpdatedAt() {
+        Instant now = Instant.now();
+        Update update = new Update();
+
+        update.set(UPDATED_AT, now);
+
+        return update;
     }
 }

@@ -31,7 +31,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     private static final String VALID_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510";
 
     @Autowired
-    private GpcFindDocumentsTaskExecutor gpcFindDocumentsTaskExecutor;
+    private GetGpcDocumentReferencesTaskExecutor gpcFindDocumentsTaskExecutor;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
@@ -51,6 +51,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     @Test
     public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() {
         var ehrExtractStatus = setupDatabase();
+        assertThatAccessRecordWasOverwritten(ehrExtractStatus);
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITH_DOCUMENT);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
@@ -63,6 +64,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     @Test
     public void When_FindDocumentTaskIsStartedForPatientWithoutDocument_Expect_DatabaseToNotBeUpdated() {
         var ehrExtractStatus = setupDatabase();
+        assertThatAccessRecordWasOverwritten(ehrExtractStatus);
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITHOUT_DOCUMENT);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
@@ -77,10 +79,13 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, PATIENT_NOT_FOUND);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
+        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
+        assertThat(updatedEhrExtractStatus.getGpcAccessDocument().getPatientId()).isNull();
+
     }
 
-    private static GpcFindDocumentsTaskDefinition buildFindDocumentTask(EhrExtractStatus ehrExtractStatus, String nhsNumber) {
-        return GpcFindDocumentsTaskDefinition.builder()
+    private static GetGpcDocumentReferencesTaskDefinition buildFindDocumentTask(EhrExtractStatus ehrExtractStatus, String nhsNumber) {
+        return GetGpcDocumentReferencesTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
@@ -91,7 +96,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
             .build();
     }
 
-    private static GetGpcDocumentTaskDefinition buildGetDocumentTask(GpcFindDocumentsTaskDefinition taskDefinition) {
+    private static GetGpcDocumentTaskDefinition buildGetDocumentTask(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(GetGpcDocumentTaskDefinition.extractIdFromUrl(VALID_DOCUMENT_URL))
             .taskId(taskDefinition.getTaskId())
@@ -106,7 +111,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     private void assertThatAccessRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated,
         EhrExtractStatus ehrExtractStatus,
-        GpcFindDocumentsTaskDefinition taskDefinition) {
+        GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
 
         assertThat(ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().size()).isEqualTo(1);
@@ -119,4 +124,16 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());
     }
 
+    private void assertThatAccessRecordWasOverwritten(EhrExtractStatus ehrExtractStatus) {
+        var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+
+        assertThat(updatedEhrExtractStatus.getCreated()).isEqualTo(ehrExtractStatus.getCreated());
+        assertThat(updatedEhrExtractStatus.getUpdatedAt()).isEqualTo(ehrExtractStatus.getUpdatedAt());
+
+        EhrExtractStatus.EhrRequest updatedEhrRequest = updatedEhrExtractStatus.getEhrRequest();
+        EhrExtractStatus.EhrRequest ehrRequest = ehrExtractStatus.getEhrRequest();
+        assertThat(updatedEhrRequest.getRequestId()).isEqualTo(ehrRequest.getRequestId());
+        assertThat(updatedEhrRequest.getNhsNumber()).isEqualTo(ehrRequest.getNhsNumber());
+
+    }
 }

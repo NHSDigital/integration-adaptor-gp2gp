@@ -10,10 +10,7 @@ import java.util.Collections;
 
 import ca.uhn.fhir.parser.IParser;
 import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
@@ -21,7 +18,7 @@ import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import java.util.List;
 
@@ -66,6 +63,10 @@ public class GpcRequestBuilder {
     private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
     private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
     private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
+    private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
+        + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
+        + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
+    private static final String GPC_FIND_PATIENT_IDENTIFIER = "https://fhir.nhs.uk/Id/nhs-number|";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -125,7 +126,7 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
@@ -134,13 +135,13 @@ public class GpcRequestBuilder {
             .method(HttpMethod.GET)
             .uri(uriBuilder -> uriBuilder
                 .path(gpcConfiguration.getPatientEndpoint())
-                .queryParam("identifier", "https://fhir.nhs.uk/Id/nhs-number|" + patientIdentifierTaskDefinition.getNhsNumber())
+                .queryParam("identifier", GPC_FIND_PATIENT_IDENTIFIER + patientIdentifierTaskDefinition.getNhsNumber())
                 .build());
 
         return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition,
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
             String patientId) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
@@ -152,12 +153,7 @@ public class GpcRequestBuilder {
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
             .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
-                + patientId + "/DocumentReference"
-                + "?_include=DocumentReference%3Asubject%3APatient"
-                + "&_include=DocumentReference%3Acustodian%3AOrganization"
-                + "&_include=DocumentReference%3Aauthor%3AOrganization"
-                + "&_include=DocumentReference%3Aauthor%3APractitioner"
-                + "&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"));
+                + patientId + GPC_DOCUMENT_REFERENCE_INCLUDES));
 
         return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
     }

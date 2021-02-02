@@ -11,7 +11,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @SuperBuilder
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class GpcFindDocumentsTaskDefinition extends TaskDefinition {
+public class GetGpcDocumentReferencesTaskDefinition extends TaskDefinition {
     private final String nhsNumber;
 
     @Override

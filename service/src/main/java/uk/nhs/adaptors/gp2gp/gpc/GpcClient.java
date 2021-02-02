@@ -36,7 +36,7 @@ public class GpcClient {
     }
 
     public String getPatientRecord(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
-            GpcFindDocumentsTaskDefinition patientIdentifierTaskDefinition) {
+            GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
         logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl()
             + gpcConfiguration.getDocumentEndpoint());
 
@@ -44,7 +44,7 @@ public class GpcClient {
     }
 
     public String getDocumentReferences(WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> request,
-        GpcFindDocumentsTaskDefinition documentReferencesTaskDefinition) {
+        GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition) {
         logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl()
             + gpcConfiguration.getPatientEndpoint());
 

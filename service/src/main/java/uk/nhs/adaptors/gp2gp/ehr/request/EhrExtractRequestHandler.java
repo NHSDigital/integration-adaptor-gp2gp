@@ -20,7 +20,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GpcFindDocumentsTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 
 @Service
 @Slf4j
@@ -81,7 +81,7 @@ public class EhrExtractRequestHandler {
     }
 
     private void createGpcFindDocumentsTask(EhrExtractStatus ehrExtractStatus) {
-        var gpcFindDocuments = GpcFindDocumentsTaskDefinition.builder()
+        var gpcFindDocuments = GetGpcDocumentReferencesTaskDefinition.builder()
             .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
