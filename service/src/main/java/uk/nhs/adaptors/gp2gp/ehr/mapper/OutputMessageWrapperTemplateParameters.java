@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class EventWrapperTemplateParameters {
+public class OutputMessageWrapperTemplateParameters {
     private String eventId;
     private String creationTime;
     private String fromAsid;
     private String toAsid;
-    private String content;
+    private String ehrExtractContent;
 }

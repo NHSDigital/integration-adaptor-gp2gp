@@ -15,10 +15,9 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 
-
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class EventWrapperMapper {
-    private static final Mustache CONTROL_ACT_EVENT_TEMPLATE = TemplateUtils.loadTemplate("event_wrapper_template.mustache");
+public class OutputMessageWrapperMapper {
+    private static final Mustache TEMPLATE = TemplateUtils.loadTemplate("output_message_wrapper_template.mustache");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
         .appendPattern("yyyyMMddHHmmss")
         .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
@@ -27,15 +26,15 @@ public class EventWrapperMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
 
-    public String map(GetGpcDocumentTaskDefinition getGpcDocumentTaskDefinition, String eventContent) {
-        EventWrapperTemplateParameters eventWrapperTemplateParameters = EventWrapperTemplateParameters.builder()
+    public String map(GetGpcDocumentTaskDefinition getGpcDocumentTaskDefinition, String content) {
+        OutputMessageWrapperTemplateParameters outputMessageWrapperTemplateParameters = OutputMessageWrapperTemplateParameters.builder()
             .eventId(randomIdGeneratorService.createNewId())
             .creationTime(DATE_TIME_FORMATTER.format(timestampService.now().atOffset(ZoneOffset.UTC)))
             .fromAsid(getGpcDocumentTaskDefinition.getFromAsid())
             .toAsid(getGpcDocumentTaskDefinition.getToAsid())
-            .content(eventContent)
+            .ehrExtractContent(content)
             .build();
 
-        return TemplateUtils.fillTemplate(CONTROL_ACT_EVENT_TEMPLATE, eventWrapperTemplateParameters);
+        return TemplateUtils.fillTemplate(TEMPLATE, outputMessageWrapperTemplateParameters);
     }
 }
