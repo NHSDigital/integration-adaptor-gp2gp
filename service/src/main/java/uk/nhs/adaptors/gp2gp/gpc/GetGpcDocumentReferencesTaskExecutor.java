@@ -85,6 +85,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
                 .stream()
                 .filter(fr -> fr.getResource().getResourceType().equals(ResourceType.DocumentReference))
                 .map(resource -> extractUrl((DocumentReference) resource.getResource()))
+                .filter(StringUtils::isNotEmpty)
                 .collect(Collectors.toList());
         } else {
             return new ArrayList<>();
@@ -116,7 +117,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
                 }
             }
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 
 }

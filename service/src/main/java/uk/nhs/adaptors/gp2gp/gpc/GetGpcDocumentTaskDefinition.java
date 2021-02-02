@@ -25,5 +25,4 @@ public class GetGpcDocumentTaskDefinition extends TaskDefinition {
     public static String extractIdFromUrl(String url) {
         return StringUtils.substring(url, StringUtils.lastIndexOf(url, "/") + 1);
     }
-
 }

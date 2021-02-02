@@ -116,7 +116,7 @@ public class GpcRequestBuilder {
 
     public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
         WebClient.RequestBodySpec uri = client
