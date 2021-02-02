@@ -36,7 +36,7 @@ dependencies {
 	implementation 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
 
 	//Keystore
-	implementation 'com.heroku.sdk:env-keystore:1.1.4'
+	implementation 'com.heroku.sdk:env-keystore:1.1.6'
 
 	// Logging
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
