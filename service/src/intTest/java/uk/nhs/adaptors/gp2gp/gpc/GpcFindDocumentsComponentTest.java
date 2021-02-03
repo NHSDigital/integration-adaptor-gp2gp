@@ -35,8 +35,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     private static final String NHS_NUMBER_INVALID = "ASDF";
     private static final String PATIENT_NOT_FOUND = "9876543210";
     private static final String VALID_DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
-    private static final String NO_RECORD_FOUND_STRING = "No Record Found";
+    private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
 
     @Autowired
     private GetGpcDocumentReferencesTaskExecutor gpcFindDocumentsTaskExecutor;
@@ -163,8 +162,8 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
         var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
         var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
         var coding = operationOutcome.getDetails().getCodingFirstRep();
-        assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);
-        assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
+        assertThat(coding.getCode()).isEqualTo(INVALID_NHS_NUMBER);
+        assertThat(coding.getDisplay()).isEqualTo(INVALID_NHS_NUMBER);
     }
 
     private String buildDocumentUrl() {
