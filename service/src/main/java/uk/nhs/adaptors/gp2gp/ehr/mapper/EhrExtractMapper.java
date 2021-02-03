@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr;
+package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,6 @@ import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
