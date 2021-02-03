@@ -10,9 +10,12 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
+import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -21,19 +24,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
+    private static final String NHS_NUMBER_INVALID = "ASDF";
     private static final String PATIENT_NOT_FOUND = "9876543210";
-    private static final String VALID_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510";
+    private static final String VALID_DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
+    private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
+    private static final String NO_RECORD_FOUND_STRING = "No Record Found";
 
     @Autowired
     private GetGpcDocumentReferencesTaskExecutor gpcFindDocumentsTaskExecutor;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+    @Autowired
+    private GpcConfiguration configuration;
 
     private EhrExtractStatus setupDatabase() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
@@ -84,6 +94,16 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     }
 
+    @Test
+    public void When_InvalidNhsNumberIsSupplied_Expect_OperationOutcomeResponse() {
+        var ehrExtractStatus = setupDatabase();
+        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_INVALID);
+        var exception = assertThrows(GpConnectException.class, () -> gpcFindDocumentsTaskExecutor.execute(taskDefinition));
+
+        assertOperationOutcome(exception);
+
+    }
+
     private static GetGpcDocumentReferencesTaskDefinition buildFindDocumentTask(EhrExtractStatus ehrExtractStatus, String nhsNumber) {
         return GetGpcDocumentReferencesTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
@@ -96,16 +116,17 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
             .build();
     }
 
-    private static GetGpcDocumentTaskDefinition buildGetDocumentTask(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
+    private GetGpcDocumentTaskDefinition buildGetDocumentTask(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
+        var documentUrl = buildDocumentUrl();
         return GetGpcDocumentTaskDefinition.builder()
-            .documentId(GetGpcDocumentTaskDefinition.extractIdFromUrl(VALID_DOCUMENT_URL))
+            .documentId(VALID_DOCUMENT_ID)
             .taskId(taskDefinition.getTaskId())
             .conversationId(taskDefinition.getConversationId())
             .requestId(taskDefinition.getRequestId())
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
             .fromOdsCode(taskDefinition.getFromOdsCode())
-            .accessDocumentUrl(VALID_DOCUMENT_URL)
+            .accessDocumentUrl(documentUrl)
             .build();
     }
 
@@ -117,9 +138,10 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
         assertThat(ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().size()).isEqualTo(1);
         var gpcDocument =
             ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
+        var documentUrl = buildDocumentUrl();
 
         assertThat(gpcDocument).isNotNull();
-        assertThat(gpcDocument.getAccessDocumentUrl()).isEqualTo(VALID_DOCUMENT_URL);
+        assertThat(gpcDocument.getAccessDocumentUrl()).isEqualTo(documentUrl);
         assertThat(gpcDocument.getAccessedAt()).isNotNull();
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());
     }
@@ -135,5 +157,17 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
         assertThat(updatedEhrRequest.getRequestId()).isEqualTo(ehrRequest.getRequestId());
         assertThat(updatedEhrRequest.getNhsNumber()).isEqualTo(ehrRequest.getNhsNumber());
 
+    }
+
+    private void assertOperationOutcome(Exception exception) {
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
+        var coding = operationOutcome.getDetails().getCodingFirstRep();
+        assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);
+        assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
+    }
+
+    private String buildDocumentUrl() {
+        return configuration.getUrl() + "/documents" + configuration.getDocumentEndpoint() + VALID_DOCUMENT_ID;
     }
 }

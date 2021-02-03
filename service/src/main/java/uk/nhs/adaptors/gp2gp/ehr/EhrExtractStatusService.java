@@ -153,14 +153,13 @@ public class EhrExtractStatusService {
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
         urls.forEach(url -> {
-            update.addToSet(GPC_DOCUMENTS, new EhrExtractStatus.GpcAccessDocument.GpcDocument(
-                GetGpcDocumentTaskDefinition.extractIdFromUrl(url),
-                url,
-                null,
-                now,
-                documentReferencesTaskDefinition.getTaskId(),
-                documentReferencesTaskDefinition.getConversationId()
-            ));
+            update.addToSet(GPC_DOCUMENTS, EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+                .documentId(GetGpcDocumentTaskDefinition.extractIdFromUrl(url))
+                .accessDocumentUrl(url)
+                .objectName(null)
+                .accessedAt(now)
+                .taskId(documentReferencesTaskDefinition.getTaskId())
+                .messageId(documentReferencesTaskDefinition.getConversationId()).build());
         });
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 

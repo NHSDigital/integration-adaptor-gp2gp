@@ -28,6 +28,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
@@ -37,7 +38,6 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
-    private static final String DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/Binary/";
     private static final String INVALID_DOCUMENT_ID = "non-existing-id";
     private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
@@ -50,6 +50,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private StorageConnector storageConnector;
     @MockBean
     private DetectTranslationCompleteService detectTranslationCompleteService;
+    @Autowired
+    private GpcConfiguration configuration;
 
     @Test
     public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndDocumentAddedToObjectStore() throws IOException {
@@ -140,7 +142,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .documentId(documentId)
-            .accessDocumentUrl(DOCUMENT_URL + documentId)
+            .accessDocumentUrl(buildDocumentUrl(documentId))
             .build();
     }
 
@@ -170,5 +172,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var coding = operationOutcome.getDetails().getCodingFirstRep();
         assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);
         assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
+    }
+
+    private String buildDocumentUrl(String documentId) {
+        return configuration.getUrl() + "/documents" + configuration.getDocumentEndpoint() + documentId;
     }
 }
