@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
@@ -25,6 +27,18 @@ public class WebClientFilterService {
                 return getResponseError(clientResponse, requestType);
             }
         });
+    }
+
+    public ExchangeFilterFunction logRequest() {
+        return (clientRequest, next) -> {
+            if (LOGGER.isDebugEnabled()) {
+                var headers = clientRequest.headers().entrySet().stream()
+                    .map(e -> e.getKey() + ": " + e.getValue())
+                    .collect(Collectors.joining(System.lineSeparator()));
+                LOGGER.debug("Request: {} {} \n{}", clientRequest.method(), clientRequest.url(), headers);
+            }
+            return next.exchange(clientRequest);
+        };
     }
 
     private Mono<ClientResponse> getResponseError(ClientResponse clientResponse, String requestType) {
