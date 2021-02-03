@@ -5,7 +5,7 @@
     "url": "/GP0001/STU3/1/gpconnect/fhir/Patient?identifier=https://fhir.nhs.uk/Id/nhs-number%7CASDF"
   },
   "response": {
-    "status": 200,
+    "status": 400,
     "bodyFileName": "patientInvalidNhsNumber.json",
     "headers": {
       "Server": "nginx",
