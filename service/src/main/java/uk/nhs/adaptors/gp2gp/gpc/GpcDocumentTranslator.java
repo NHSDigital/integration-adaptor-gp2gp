@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
-import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithAttachments;
 
 import org.hl7.fhir.dstu3.model.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +40,12 @@ public class GpcDocumentTranslator {
 
     private String prepareOutboundMessage(GetGpcDocumentTaskDefinition taskDefinition, Binary binary, String xmlContent)
             throws JsonProcessingException {
-        List<OutboundMessage.Attachment> attachments = Collections.singletonList(
-            new OutboundMessage.Attachment(binary.getContentType(),
+        List<OutboundMessageWithAttachments.Attachment> attachments = Collections.singletonList(
+            new OutboundMessageWithAttachments.Attachment(binary.getContentType(),
                 Boolean.TRUE.toString(),
                 taskDefinition.getDocumentId(),
                 binary.getContentAsBase64()));
-        OutboundMessage outboundMessage = new OutboundMessage(xmlContent, attachments);
+        OutboundMessageWithAttachments outboundMessage = new OutboundMessageWithAttachments(xmlContent, attachments);
 
         return OBJECT_MAPPER.writeValueAsString(outboundMessage);
     }

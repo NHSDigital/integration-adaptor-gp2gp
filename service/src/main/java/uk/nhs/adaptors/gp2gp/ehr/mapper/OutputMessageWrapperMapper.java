@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
@@ -13,8 +14,9 @@ import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
+@Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OutputMessageWrapperMapper {
     private static final Mustache TEMPLATE = TemplateUtils.loadTemplate("output_message_wrapper_template.mustache");
@@ -26,7 +28,7 @@ public class OutputMessageWrapperMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
 
-    public String map(GetGpcDocumentTaskDefinition getGpcDocumentTaskDefinition, String content) {
+    public String map(GetGpcStructuredTaskDefinition getGpcDocumentTaskDefinition, String content) {
         OutputMessageWrapperTemplateParameters outputMessageWrapperTemplateParameters = OutputMessageWrapperTemplateParameters.builder()
             .eventId(randomIdGeneratorService.createNewId())
             .creationTime(DATE_TIME_FORMATTER.format(timestampService.now().atOffset(ZoneOffset.UTC)))
