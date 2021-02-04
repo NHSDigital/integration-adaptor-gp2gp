@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 public class GetGpcDocumentTaskDefinition extends TaskDefinition {
     private final String documentId;
     private final String accessDocumentUrl;
-    private static final String SLASH = "/";
+    private static final String PATH_DELIMITER = "/";
 
     @Override
     public TaskType getTaskType() {
@@ -24,6 +24,6 @@ public class GetGpcDocumentTaskDefinition extends TaskDefinition {
     }
 
     public static String extractIdFromUrl(String url) {
-        return StringUtils.substring(url, StringUtils.lastIndexOf(url, SLASH) + 1);
+        return StringUtils.substring(url, StringUtils.lastIndexOf(url, PATH_DELIMITER) + 1);
     }
 }

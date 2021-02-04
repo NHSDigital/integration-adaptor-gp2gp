@@ -5,6 +5,7 @@ import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
@@ -128,11 +129,11 @@ public class EhrExtractStatusService {
     }
 
     public void updateEhrExtractStatusAccessDocumentPatientId(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-            String patientId) {
+            Optional<String> patientId) {
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
-        if (!patientId.isBlank()) {
+        if (patientId.isPresent()) {
             update.set(DOCUMENT_PATIENT_ID, patientId);
         } else {
             update.set(DOCUMENT_PATIENT_ID, null);

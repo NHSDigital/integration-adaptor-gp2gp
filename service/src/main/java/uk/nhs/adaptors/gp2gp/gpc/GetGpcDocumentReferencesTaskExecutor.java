@@ -12,7 +12,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -43,11 +42,11 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     public void execute(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         LOGGER.info("Execute called from GpcFindDocumentsTaskExecutor");
 
-        String patientId = retrievePatientId(taskDefinition);
+        Optional<String> patientId = retrievePatientId(taskDefinition);
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition, patientId);
 
-        if (StringUtils.isNotBlank(patientId)) {
-            List<String> urls = retrieveDocumentReferences(taskDefinition, patientId);
+        if (patientId.isPresent()) {
+            List<String> urls = retrieveDocumentReferences(taskDefinition, patientId.get());
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
             urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
@@ -55,21 +54,19 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
 
     }
 
-    private String retrievePatientId(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
+    private Optional<String> retrievePatientId(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
         var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(taskDefinition);
         var response = gpcClient.getPatientRecord(request, taskDefinition);
 
         FhirContext ctx = FhirContext.forDstu3();
         IParser parser = ctx.newJsonParser();
 
-        if (response.contains("Bundle")) {
-            Bundle fhirBundle = parser.parseResource(Bundle.class, response);
-            if (!fhirBundle.getEntry().isEmpty()) {
-                Patient patient = (Patient) fhirBundle.getEntry().get(0).getResource();
-                return patient.getIdElement().getIdPart();
-            }
+        Bundle fhirBundle = parser.parseResource(Bundle.class, response);
+        if (!fhirBundle.getEntry().isEmpty()) {
+            Patient patient = (Patient) fhirBundle.getEntry().get(0).getResource();
+            return Optional.of(patient.getIdElement().getIdPart());
         }
-        return StringUtils.EMPTY;
+        return Optional.empty();
     }
 
     private List<String> retrieveDocumentReferences(GetGpcDocumentReferencesTaskDefinition taskDefinition, String patientId) {
@@ -108,11 +105,15 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         if (!documentReference.getContent().isEmpty()) {
             DocumentReference.DocumentReferenceContentComponent content = documentReference.getContent().get(0);
             Attachment attachment = content.getAttachment();
-            if (attachment != null && !attachment.getUrl().isBlank()) {
+            if (isUrlPresent(attachment)) {
                 return Optional.of(attachment.getUrl());
             }
         }
         return Optional.empty();
+    }
+
+    private static boolean isUrlPresent(Attachment attachment) {
+        return attachment != null && !attachment.getUrl().isBlank();
     }
 
 }

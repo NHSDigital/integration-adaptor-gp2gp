@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
-import com.mongodb.client.MongoCollection;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -65,12 +63,6 @@ public class EhrExtractRequestHandlerTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-
-    @Mock
-    private MongoTemplate mongoTemplate; // FIXME: Remove as part of NIAD-814
-
-    @Mock
-    private MongoCollection mongoCollection; // FIXME: Remove as part of NIAD-814
 
     @InjectMocks
     private EhrExtractRequestHandler ehrExtractRequestHandler;
