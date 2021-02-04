@@ -4,7 +4,6 @@ import static java.lang.String.valueOf;
 
 import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-import static org.apache.http.protocol.HTTP.TARGET_HOST;
 
 import java.util.Collections;
 
@@ -189,7 +188,6 @@ public class GpcRequestBuilder {
             .header(SSP_INTERACTION_ID, interactionId)
             .header(SSP_TRACE_ID, taskDefinition.getConversationId())
             .header(AUTHORIZATION, AUTHORIZATION_BEARER + gpcTokenBuilder.buildToken(taskDefinition.getFromOdsCode()))
-            .header(TARGET_HOST, gpcConfiguration.getHost())
             .header(CONTENT_TYPE, FHIR_CONTENT_TYPE);
     }
 
