@@ -9,6 +9,6 @@ import lombok.Builder;
 @Builder
 public class NarrativeStatementTemplateParameters {
     private String narrativeStatementId;
-    private String comment;
     private String availabilityTime;
+    private String comment;
 }

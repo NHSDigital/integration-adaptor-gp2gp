@@ -1,9 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalAccessor;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -28,11 +28,11 @@ public class NarrativeStatementMapper {
 
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapObservationToNarrativeStatement(Observation observation) {
+    public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .comment(observation.getComment())
             .availabilityTime(getAvailabilityTime(observation))
+            .comment(observation.getComment())
             .build();
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters);
@@ -40,11 +40,11 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType()) {
-            return DATE_TIME_FORMATTER.format((TemporalAccessor) observation.getEffectiveDateTimeType());
+            return DATE_TIME_FORMATTER.format(observation.getEffectiveDateTimeType().getValue().toInstant().atOffset(ZoneOffset.UTC));
         } else if (observation.hasEffectivePeriod()) {
-            return DATE_TIME_FORMATTER.format(observation.getEffectivePeriod().getStart().toInstant());
+            return DATE_TIME_FORMATTER.format(observation.getEffectivePeriod().getStart().toInstant().atOffset(ZoneOffset.UTC));
         } else {
-            return DATE_TIME_FORMATTER.format(observation.getIssued().toInstant());
+            return DATE_TIME_FORMATTER.format(observation.getIssued().toInstant().atOffset(ZoneOffset.UTC));
         }
     }
 }
