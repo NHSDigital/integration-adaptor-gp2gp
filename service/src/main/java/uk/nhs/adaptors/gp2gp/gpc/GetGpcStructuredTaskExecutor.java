@@ -9,6 +9,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.mapper.TransformationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
+    private final TransformationService transformationService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -41,6 +43,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             response,
             structuredTaskDefinition.getTaskId()),
             fileName);
+
+        transformationService.map();
 
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
 
