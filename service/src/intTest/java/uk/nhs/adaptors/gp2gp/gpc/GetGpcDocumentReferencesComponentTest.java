@@ -1,10 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-import java.util.UUID;
-
+import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
@@ -15,20 +17,14 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
-import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import java.util.List;
+import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
