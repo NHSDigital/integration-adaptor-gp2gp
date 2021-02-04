@@ -74,7 +74,7 @@ dependencies {
 		implementation('commons-codec:commons-codec:1.15') {
 			because 'hapi-fhir-structures-dstu3:5.2.1 depends on previous version with SNYK-JAVA-COMMONSCODEC-561518'
 		}
-		implementation('com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-cbor', version: '2.12.1') {
+		implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.1') {
 			because 'aws-java-sdk-s3:1.11.946 depends on a previous version with CVE-2020-28491'
 		}
 	}

@@ -8,4 +8,4 @@ RUN gradle classes
 
 # USER 65534
 
-ENTRYPOINT ["gradle", "check"]
+ENTRYPOINT [ "./run.sh" ]

@@ -27,10 +27,12 @@ dependencies {
 tasks.withType(Test) {
 	testLogging {
 		events "passed", "skipped", "failed"
+        showStandardStreams true
 	}
 }
 
 test {
+	testLogging.showStandardStreams = true
 	useJUnitPlatform()
 	dependsOn "cleanTest" // never re-use previous test outputs
 }
