@@ -1,9 +1,7 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import io.micrometer.core.instrument.util.IOUtils;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -14,14 +12,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,15 +28,11 @@ public class MhsRequestBuilder {
     private static final String INTERACTION_ID = "Interaction-Id";
     private static final String MHS_OUTBOUND_INTERACTION_ID = "RCMR_IN030000UK06";
 
-    private final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("StubEhrExtractCoreMessage.json");
-    private final String stubExtractCoreMessage = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
     private final MhsConfiguration mhsConfiguration;
-
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
 
-    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest() {
+    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(String extractCoreMessage) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -47,7 +41,7 @@ public class MhsRequestBuilder {
             .method(HttpMethod.POST)
             .uri(mhsConfiguration.getUrl());
 
-        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(stubExtractCoreMessage);
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(extractCoreMessage);
 
         return uri
             .accept(MediaType.APPLICATION_JSON)
