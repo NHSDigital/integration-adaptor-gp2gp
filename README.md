@@ -70,28 +70,23 @@ Alternatively, an external `logback.xml` with much more customizations can be pr
 
 ## How to run service:
 
-### Using the helper script
+### Copy a configuration example
+
+We provide several example configurations:
+* `vars.local.sh` to run the adaptor with mock services
+* `vars.public.sh` to run the adaptor with the GP Connect public demonstrator
+* `vars.opentest.sh` to run the adaptor with providers and responders in OpenTest
+
+```bash
+cd docker/
+cp vars.local.sh vars.sh
+```
+
+### Using the helper script for Docker Compose
 
 Run `./start-local-environment.sh`
 
-### Using docker-compose
-
-```
-cd docker/
-docker-compose build
-docker-compose up -d
-```
-
-### Using the GP Connect Public Demonstrator instead of Wiremock
-
-The adaptor uses our own wiremock for the GP Connect API by default. To use the GP Connect public demonstrator instead
-you can use the provided override file for Docker Compose.
-
-```
-cd docker/
-docker-compose build
-docker-compose -f docker-compose.yml -f docker-compose-gpc-pub-demo.yml up -d
-```
+You can also run the docker-compose commands directly.
 
 ### From your IDE or the command line
 
@@ -99,8 +94,8 @@ First start the adaptor dependencies:
 
 ```
     cd docker/
-    docker-compose build activemq wiremock
-    docker-compose up -d activemq wiremock mongodb
+    docker-compose build activemq wiremock mock-mhs-adaptor
+    docker-compose up -d activemq wiremock mongodb mock-mhs-adaptor
 ```
 
 Change into the service directory `cd ../service`
@@ -109,7 +104,7 @@ Build the project in your IDE or run `./gradlew bootJar`
 
 Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/libs/gp2gp.jar`
 
-### Using Dotenv for IntelliJ
+### Using Envfile for IntelliJ
 
 An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
 
@@ -117,7 +112,7 @@ To override environment variables choose an example file e.g.
 (service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
 changes in this copy. 
 
-## How to run wiremock:
+## How to use WireMock
 
 The project includes mock interactions of external APIs (GPC, SDS) implemented in Wiremock for local development.
 
@@ -156,7 +151,9 @@ You must run all gradle commands from the `service/` directory.
 Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
 To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
 
-#### Example: Run integration tests with AWS S3 in-the-loop
+You can set the adaptor's environment variables to test integrations with specific dependencies.
+
+**Example: Run integration tests with AWS S3 in-the-loop**
 
 Use environment variables to configure the tests to use:
 * An actual S3 bucket
