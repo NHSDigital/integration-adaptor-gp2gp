@@ -41,7 +41,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
     private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
-    private static final String RCMR_IN030000UK06 = "RCMR_IN030000UK06";
+    private static final String EXPECTED_PAYLOAD_TYPE = "RCMR_IN030000UK06";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -140,7 +140,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(ehrExtractStatus.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
-        assertThat(storageDataWrapper.getHl7Response()).contains(RCMR_IN030000UK06);
+        assertThat(storageDataWrapper.getHl7Response()).contains(EXPECTED_PAYLOAD_TYPE);
     }
 
     private GetGpcStructuredTaskDefinition buildInvalidNHSNumberStructuredTask(EhrExtractStatus ehrExtractStatus) {

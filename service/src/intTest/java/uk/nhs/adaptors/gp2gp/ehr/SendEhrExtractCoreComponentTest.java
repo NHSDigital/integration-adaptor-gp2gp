@@ -36,7 +36,9 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @DirtiesContext
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     private static final String PAYLOAD = "payload";
+
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
+
     @Mock
     private StorageDataWrapper storageDataWrapper;
     @MockBean
