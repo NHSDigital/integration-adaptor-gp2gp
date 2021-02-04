@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -46,7 +46,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         String patientId = retrievePatientId(taskDefinition);
         ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition, patientId);
 
-        if (!patientId.isBlank()) {
+        if (StringUtils.isNotBlank(patientId)) {
             List<String> urls = retrieveDocumentReferences(taskDefinition, patientId);
             ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
@@ -76,20 +76,17 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         var request = gpcRequestBuilder.buildGetPatientDocumentReferences(taskDefinition, patientId);
         var response = gpcClient.getDocumentReferences(request, taskDefinition);
 
-        if (response.contains("Bundle")) {
-            FhirContext ctx = FhirContext.forDstu3();
-            IParser parser = ctx.newJsonParser();
+        FhirContext ctx = FhirContext.forDstu3();
+        IParser parser = ctx.newJsonParser();
 
-            Bundle bundle = parser.parseResource(Bundle.class, response);
-            return bundle.getEntry()
-                .stream()
-                .filter(fr -> fr.getResource().getResourceType().equals(ResourceType.DocumentReference))
-                .map(resource -> extractUrl((DocumentReference) resource.getResource()))
-                .filter(StringUtils::isNotEmpty)
-                .collect(Collectors.toList());
-        } else {
-            return new ArrayList<>();
-        }
+        Bundle bundle = parser.parseResource(Bundle.class, response);
+        return bundle.getEntry()
+            .stream()
+            .filter(entry -> entry.getResource().getResourceType().equals(ResourceType.DocumentReference))
+            .map(resource -> extractUrl((DocumentReference) resource.getResource()))
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.toList());
     }
 
     private void queueGetDocumentsTask(GetGpcDocumentReferencesTaskDefinition taskDefinition, String url) {
@@ -107,17 +104,15 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         taskDispatcher.createTask(getGpcDocumentTaskTaskDefinition);
     }
 
-    private static String extractUrl(DocumentReference documentReference) {
-        if (documentReference.getContent().size() > 0) {
+    private static Optional<String> extractUrl(DocumentReference documentReference) {
+        if (!documentReference.getContent().isEmpty()) {
             DocumentReference.DocumentReferenceContentComponent content = documentReference.getContent().get(0);
-            if (content.getAttachment() != null) {
-                Attachment attachment = content.getAttachment();
-                if (!attachment.getUrl().isBlank()) {
-                    return attachment.getUrl();
-                }
+            Attachment attachment = content.getAttachment();
+            if (attachment != null && !attachment.getUrl().isBlank()) {
+                return Optional.of(attachment.getUrl());
             }
         }
-        return StringUtils.EMPTY;
+        return Optional.empty();
     }
 
 }

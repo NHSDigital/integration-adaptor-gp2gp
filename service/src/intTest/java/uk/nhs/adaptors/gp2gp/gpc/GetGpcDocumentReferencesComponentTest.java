@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class GpcFindDocumentsComponentTest extends BaseTaskTest {
+public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
     private static final String NHS_NUMBER_INVALID = "ASDF";
@@ -44,7 +44,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
     @Autowired
     private GpcConfiguration configuration;
 
-    private EhrExtractStatus setupDatabase() {
+    private EhrExtractStatus addTestDataToDatabase() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
             .documents(List.of(
@@ -59,7 +59,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     @Test
     public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addTestDataToDatabase();
         assertThatAccessRecordWasOverwritten(ehrExtractStatus);
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITH_DOCUMENT);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
@@ -72,7 +72,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     @Test
     public void When_FindDocumentTaskIsStartedForPatientWithoutDocument_Expect_DatabaseToNotBeUpdated() {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addTestDataToDatabase();
         assertThatAccessRecordWasOverwritten(ehrExtractStatus);
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITHOUT_DOCUMENT);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
@@ -84,7 +84,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     @Test
     public void When_FindDocumentTaskIsStarted_Expect_PatientNotFound() {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addTestDataToDatabase();
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, PATIENT_NOT_FOUND);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
@@ -95,7 +95,7 @@ public class GpcFindDocumentsComponentTest extends BaseTaskTest {
 
     @Test
     public void When_InvalidNhsNumberIsSupplied_Expect_OperationOutcomeResponse() {
-        var ehrExtractStatus = setupDatabase();
+        var ehrExtractStatus = addTestDataToDatabase();
         var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_INVALID);
         var exception = assertThrows(GpConnectException.class, () -> gpcFindDocumentsTaskExecutor.execute(taskDefinition));
 

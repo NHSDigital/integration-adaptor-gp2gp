@@ -2,16 +2,11 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/2/DocumentReference?_include=DocumentReference%3Asubject%3APatient&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner",
-    "headers": {
-      "Host": {
-        "equalTo": "wiremock"
-      }
-    }
+    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/2/DocumentReference?_include=DocumentReference%3Asubject%3APatient&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "patientWithDocumentResources_wiremock.json",
+    "bodyFileName": "patientWithDocumentResources.json",
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
