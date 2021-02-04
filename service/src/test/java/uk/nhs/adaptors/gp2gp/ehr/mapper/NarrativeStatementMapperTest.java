@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +39,13 @@ public class NarrativeStatementMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
+        MessageContext.setMessageContext(new IdMapper(randomIdGeneratorService));
+        narrativeStatementMapper = new NarrativeStatementMapper();
+    }
+
+    @AfterEach
+    public void tearDown() {
+        MessageContext.resetMessageContext();
     }
 
     @Test

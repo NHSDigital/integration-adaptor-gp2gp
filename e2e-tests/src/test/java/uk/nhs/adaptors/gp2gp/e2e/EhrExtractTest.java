@@ -5,7 +5,6 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 import uk.nhs.adaptors.gp2gp.MessageQueue;

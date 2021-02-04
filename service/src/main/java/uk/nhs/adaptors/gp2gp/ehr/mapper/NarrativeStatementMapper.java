@@ -5,18 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 
-import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import org.hl7.fhir.dstu3.model.Observation;
 
 import com.github.mustachejava.Mustache;
 
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class NarrativeStatementMapper {
 
@@ -26,11 +22,9 @@ public class NarrativeStatementMapper {
         .appendPattern("yyyyMMddHHmmss")
         .toFormatter();
 
-    private final RandomIdGeneratorService randomIdGeneratorService;
-
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(randomIdGeneratorService.createNewId())
+            .narrativeStatementId(MessageContext.getIdMapper().getOrNew(observation.getId()))
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
             .isNested(isNested)
