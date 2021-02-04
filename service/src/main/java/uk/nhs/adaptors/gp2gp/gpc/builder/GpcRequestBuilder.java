@@ -6,6 +6,20 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 import java.util.Collections;
+
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.netty.http.client.HttpClient;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+
 import java.util.List;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -26,19 +40,9 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
-import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
-import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -57,7 +61,14 @@ public class GpcRequestBuilder {
     private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
         + ".getstructuredrecord-1";
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
+    private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
+    private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
     private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
+    private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
+        + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
+        + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
+    private static final String IDENTIFIER_PARAMETER = "identifier";
+    private static final String GPC_FIND_PATIENT_IDENTIFIER = NHS_NUMBER_SYSTEM + "|";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -107,14 +118,41 @@ public class GpcRequestBuilder {
 
     public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
-            .uri(gpcConfiguration.getDocumentEndpoint() + "/" + documentTaskDefinition.getDocumentId());
+            .uri(documentTaskDefinition.getAccessDocumentUrl());
 
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
+    }
+
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = buildHttpClient(sslContext);
+        WebClient client = buildWebClient(httpClient);
+
+        WebClient.RequestBodySpec uri = preparePatientUri(client, patientIdentifierTaskDefinition.getNhsNumber());
+
+        return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
+    }
+
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
+            String patientId) {
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = buildHttpClient(sslContext);
+        WebClient client = buildWebClient(httpClient);
+
+        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcConfiguration.getUrl());
+        factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+
+        WebClient.RequestBodySpec uri = client
+            .method(HttpMethod.GET)
+            .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
+                + patientId + GPC_DOCUMENT_REFERENCE_INCLUDES));
+
+        return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {
@@ -163,5 +201,14 @@ public class GpcRequestBuilder {
     private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
         filters.add(webClientFilterService.errorHandlingFilter(GPC_REQUEST_TYPE_FILTER, HttpStatus.OK));
         filters.add(webClientFilterService.logRequest());
+    }
+
+    private WebClient.RequestBodySpec preparePatientUri(WebClient client, String nhsNumber) {
+        return client
+            .method(HttpMethod.GET)
+            .uri(uriBuilder -> uriBuilder
+                .path(gpcConfiguration.getPatientEndpoint())
+                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER + nhsNumber)
+                .build());
     }
 }
