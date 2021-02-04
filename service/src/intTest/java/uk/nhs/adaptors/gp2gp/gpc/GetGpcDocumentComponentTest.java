@@ -65,13 +65,13 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(taskDefinition.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
-        assertThat(storageDataWrapper.getResponse()).contains(EhrStatusConstants.DOCUMENT_ID);
+        assertThat(storageDataWrapper.getHl7Response()).contains(EhrStatusConstants.DOCUMENT_ID);
 
         String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
             .getDocuments()
             .get(0)
             .getMessageId();
-        assertThat(storageDataWrapper.getResponse()).contains(messageId);
+        assertThat(storageDataWrapper.getHl7Response()).contains(messageId);
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }

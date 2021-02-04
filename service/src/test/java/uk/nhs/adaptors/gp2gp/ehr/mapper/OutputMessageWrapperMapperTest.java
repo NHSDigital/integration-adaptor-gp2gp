@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,7 +33,7 @@ public class OutputMessageWrapperMapperTest {
     private TimestampService timestampService;
 
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
-    private GetGpcDocumentTaskDefinition getGpcStructuredTaskDefinition;
+    private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
     private CharSequence expectedOutputMessage;
 
     @BeforeEach
@@ -42,7 +42,7 @@ public class OutputMessageWrapperMapperTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
 
-        getGpcStructuredTaskDefinition = GetGpcDocumentTaskDefinition.builder()
+        getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .toAsid(TO_ASID_VALUE)
             .fromAsid(FROM_ASID_VALUE)
             .build();

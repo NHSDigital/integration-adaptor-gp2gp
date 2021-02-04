@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
@@ -22,6 +24,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
+    private final OutputMessageWrapperMapper outputMessageWrapperMapper;
+    private final EhrExtractMapper ehrExtractMapper;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -36,9 +40,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
         var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
 
+        var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
+            structuredTaskDefinition,
+            response);
+        String transformedExtract = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+
+        var hl7TranslatedResponse = outputMessageWrapperMapper.map(
+            structuredTaskDefinition,
+            transformedExtract);
+
         String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
         storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,
-            response,
+            hl7TranslatedResponse,
             structuredTaskDefinition.getTaskId()),
             fileName);
 

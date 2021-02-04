@@ -3,10 +3,12 @@ package uk.nhs.adaptors.gp2gp.common.storage;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,14 @@ public class StorageConnectorService {
         var responseInputStream = new ByteArrayInputStream(responseBytes);
 
         storageConnector.uploadToStorage(responseInputStream, responseBytes.length, fileName);
+    }
+
+    @SneakyThrows
+    public StorageDataWrapper downloadFile(String filename) {
+        var inputStream = storageConnector.downloadFromStorage(filename);
+        var stringDownload = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        var storageDataWrapper = objectMapper.readValue(stringDownload, StorageDataWrapper.class);
+
+        return storageDataWrapper;
     }
 }
