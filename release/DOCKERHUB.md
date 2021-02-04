@@ -1,4 +1,3 @@
-
 # Quick reference
 - Maintained by: NHS Digital
 - Where to get help: https://github.com/nhsconnect/integration-adaptor-gp2gp
@@ -20,6 +19,7 @@ To get running make sure you have an OpenTest environment setup. The project als
 testing and development.
 
 ## Clone the repository
+
 ```bash
 git clone https://github.com/nhsconnect/integration-adaptor-gp2gp.git
 ```
@@ -35,6 +35,7 @@ git checkout 0.0.1
 ```
 
 ## Find the docker directory
+
 ```bash
 cd integration-adaptor-gp2gp/docker
 ```
@@ -56,26 +57,30 @@ to the [README](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/0.0
 options.
 
 ## Find the release directory
+
 ```bash
 cd ../release
 ```
 
 ## Start the adaptor
 
-The script pulls the released GP2GP adaptor container image from Docker Hub and builds containers for its dependencies.
+The script pulls the released GP2GP adaptor container image from Docker Hub. It builds containers for its dependencies
+from the Dockerfiles in the repository.
 
 ```bash
 ./run.sh
 ```
 
 ## Monitor the logs
+
 ```bash
 ./logs.sh
 ```
 
 ## Run the tests
 
-There are shell scripts in the release/tests directory to help run some of the adaptor's tests.
+We provide shell scripts in the release/tests directory to help you start testing.
+
 * `healthcheck.sh` verifies that the adaptor's healthcheck endpoint is available
 * `e2e.sh` starts a docker container that runs the adaptor's end-to-end tests
 
