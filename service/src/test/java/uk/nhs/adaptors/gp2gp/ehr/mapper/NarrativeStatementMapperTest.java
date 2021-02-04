@@ -21,13 +21,14 @@ public class NarrativeStatementMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private static final String TEST_ID = "394559384658936";
-    private static final String INPUT_JSON_1 = "/ehr/mapper/observation/example-observation-resource-1.json";
-    private static final String INPUT_JSON_2 = "/ehr/mapper/observation/example-observation-resource-2.json";
-    private static final String INPUT_JSON_3 = "/ehr/mapper/observation/example-observation-resource-3.json";
-    private static final String INPUT_JSON_4 = "/ehr/mapper/observation/example-observation-resource-4.json";
-    private static final String OUTPUT_XML_1 = "/ehr/mapper/observation/expected-output-narrative-statement-1.xml";
-    private static final String OUTPUT_XML_2 = "/ehr/mapper/observation/expected-output-narrative-statement-2.xml";
-    private static final String OUTPUT_XML_3 = "/ehr/mapper/observation/expected-output-narrative-statement-3.xml";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-1.json";
+    private static final String INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-2.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = "/ehr/mapper/observation/example-observation-resource-3.json";
+    private static final String INPUT_JSON_WITH_ISSUED_ONLY = "/ehr/mapper/observation/example-observation-resource-4.json";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/expected-output-narrative-statement-1.xml";
+    private static final String OUTPUT_XML_USES_ISSUED = "/ehr/mapper/observation/expected-output-narrative-statement-2.xml";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = "/ehr/mapper/observation/"
+        + "expected-output-narrative-statement-3.xml";
 
     private CharSequence expectedOutputMessage;
     private NarrativeStatementMapper narrativeStatementMapper;
@@ -40,9 +41,9 @@ public class NarrativeStatementMapperTest {
 
     @Test
     public void When_MappingParsedObservationJsonWithEffectiveDatetime_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_1);
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_EFFECTIVE_DATE_TIME);
 
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_1);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
@@ -52,9 +53,9 @@ public class NarrativeStatementMapperTest {
 
     @Test
     public void When_MappingParsedObservationJsonWithNullEffectiveDatetime_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_2);
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_ISSUED);
 
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_2);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
@@ -63,10 +64,10 @@ public class NarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithEffectivePeriod_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_3);
+    public void When_MappingParsedObservationJsonWithEffectivePeriodStart_Expect_NarrativeStatementXmlOutput() throws IOException {
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_EFFECTIVE_PERIOD_START);
 
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_3);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_PERIOD);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
@@ -76,9 +77,9 @@ public class NarrativeStatementMapperTest {
 
     @Test
     public void When_MappingParsedObservationJsonWithoutEffective_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_2);
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_ISSUED);
 
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_4);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ISSUED_ONLY);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);

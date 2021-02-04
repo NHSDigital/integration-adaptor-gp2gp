@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -19,6 +20,7 @@ import com.github.mustachejava.Mustache;
 @Component
 public class NarrativeStatementMapper {
 
+    private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
         .appendPattern("yyyyMMddHHmmss")
@@ -38,23 +40,19 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return DATE_TIME_FORMATTER.format(
-                observation.getEffectiveDateTimeType().getValue()
-                    .toInstant()
-                    .atZone(ZoneId.of("Europe/London"))
-                    .toLocalDateTime());
+            return formatDate(observation.getEffectiveDateTimeType().getValue());
         } else if (observation.hasEffectivePeriod()) {
-            return DATE_TIME_FORMATTER.format(
-                observation.getEffectivePeriod().getStart()
-                    .toInstant()
-                    .atZone(ZoneId.of("Europe/London"))
-                    .toLocalDateTime());
+            return formatDate(observation.getEffectivePeriod().getStart());
         } else {
-            return DATE_TIME_FORMATTER.format(
-                observation.getIssued()
-                    .toInstant()
-                    .atZone(ZoneId.of("Europe/London"))
-                    .toLocalDateTime());
+            return formatDate(observation.getIssued());
         }
+    }
+
+    private String formatDate(Date date) {
+        return DATE_TIME_FORMATTER.format(
+            date
+                .toInstant()
+                .atZone(ZoneId.of(UK_ZONE_ID))
+                .toLocalDateTime());
     }
 }
