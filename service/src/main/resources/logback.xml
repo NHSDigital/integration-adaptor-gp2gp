@@ -8,7 +8,7 @@
 
 
     <root level="${GP2GP_ROOT_LOGGING_LEVEL:-WARN}">
-        <appender-ref ref="${GP2GP_LOGGING_APPENDER:-TEXT}"/>
+        <appender-ref ref="TEXT}"/>
     </root>
 
     <logger name="uk.nhs.adaptors.gp2gp" level="${GP2GP_LOGGING_LEVEL:-INFO}" />

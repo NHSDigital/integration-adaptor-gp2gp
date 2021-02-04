@@ -22,8 +22,34 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | Environment Variable                 | Default                   | Description
 | -------------------------------------|---------------------------|-------------
 | GP2GP_SERVER_PORT                    | 8080                      | The port on which the GP2GP Adapter will run.
-| GP2GP_LOGGING_LEVEL                  | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
-| GP2GP_LOGGING_FORMAT                 | (2)                       | Defines how to format log events on stdout
+| GP2GP_ROOT_LOGGING_LEVEL             | WARN                      | The logging level applied to the entire application (including third-party dependencies).
+| GP2GP_LOGGING_LEVEL                  | INFO                      | The logging level applied to GP2GP adaptor components.
+| GP2GP_LOGGING_FORMAT                 | (*)                       | Defines how to format log events on stdout
+
+Logging levels are ane of: DEBUG, INFO, WARN, ERROR
+
+The level DEBUG **MUST NOT** be used when handling live patient data.
+
+(*) GP2GP API uses logback (http://logback.qos.ch/). The built-in [logback.xml](service/src/main/resources/logback.xml) 
+defines the default log format. This value can be overridden using the `GP2GP_LOGGING_FORMAT` environment variable.
+You can provide an external `logback.xml` file using the `-Dlogback.configurationFile` JVM parameter.
+
+### Database Configuration Options
+
+The adaptor requires a Mongodb-compatible database to manage its internal state.
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
+| GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
+| GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_PORT                     |                           | The database port. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_USERNAME                 |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.
+| GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
+| GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+| GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
 
 ### File Storage Configuration Options
 
@@ -45,7 +71,7 @@ queue its own internal asynchronous tasks
 
 | Environment Variable                 | Default                   | Description
 | -------------------------------------|---------------------------|-------------
-| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (1)
+| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (*)
 | GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
@@ -53,18 +79,23 @@ queue its own internal asynchronous tasks
 | GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
 | GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
 
+(*) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
+will be used. At least one URL is required.
+
 ### GP Connect API Configuration Options
 
 The adaptor uses the GP Connect API to fetch patient records and documents.
 
-| Environment Variable                 | Default                   | Description
-| -------------------------------------|---------------------------|-------------
-| GP2GP_GPC_GET_URL                    |                           | The URL used for GP Connect requests.
-| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    |                           | The endpoiint for GP Connect Get Structured Access. 
-| GP2GP_SPINE_CLIENT_CERT              | gp2gp                     | The content of the PEM-formatted client endpoint certificate
-| GP2GP_SPINE_CLIENT_KEY               | gp2gp                     | The content of the PEM-formatted client private key
-| GP2GP_SPINE_ROOT_CA_CERT             | gp2gp                     | The content of the PEM-formatted certificate of the issuing Root CA.
-| GP2GP_SPINE_SUB_CA_CERT              | gp2gp                     | The content of the PEM-formatted certificate of the issuing Sub CA.
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_GPC_GET_URL                    | http://localhost:8110/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
+| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    | /fhir/Patient/$gpc.getstructuredrecord        | The path of the Get Access Structured operation on the Patient resource
+| GP2GP_GPC_GET_PATIENT_ENDPOINT       | /fhir/Patient                                 | The path of the Access Document Patient resource
+| GP2GP_GPC_GET_DOCUMENT_ENDPOINT      | /fhir/Binary/                                 | The path of the Access Document Binary resource
+| GP2GP_SPINE_CLIENT_CERT              |                                               | The content of the PEM-formatted client endpoint certificate
+| GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
+| GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
+| GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
 
 Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
 Secure Proxy (SSP).
@@ -75,30 +106,13 @@ Secure Proxy (SSP).
 | GP2GP_GPC_HTTP_PROXY                 | gp2gp                     | HTTP proxy address
 | GP2GP_GPC_HTTP_PROXY_PORT            | gp2gp                     | HTTP proxy port
 
-### Database Configuration Options
+### MHS Adaptor Configuration Options
 
-The adaptor requires a Mongodb-compatible database to manage its internal state.
+The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 
-| Environment Variable                 | Default                   | Description
-| -------------------------------------|---------------------------|-------------
-| GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
-| GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
-| GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
-| GP2GP_MONGO_PORT                     |                           | The database port. Leave undefined if GP2GP_MONGO_URI is used.
-| GP2GP_MONGO_USERNAME                 |                           | The database username. Leave undefined if GP2GP_MONGO_URI is used.
-| GP2GP_MONGO_PASSWORD                 |                           | Mongo database password. Leave undefined if GP2GP_MONGO_URI is used.
-| GP2GP_MONGO_OPTIONS                  |                           | Mongodb URL encoded parameters for the connection string without a leading "?". Leave undefined if GP2GP_MONGO_URI is used.
-| GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
-| GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-| GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
-
-(1) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
-will be used. At least one URL is required.
-
-(2) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
-Default log format is defined in the built-in [logback.xml](service/src/main/resources/logback.xml)
-This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
-Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 
 ## How to run service:
 
