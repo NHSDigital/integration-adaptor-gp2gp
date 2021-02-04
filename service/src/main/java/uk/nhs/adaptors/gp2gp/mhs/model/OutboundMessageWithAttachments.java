@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Getter
 @Setter
 @AllArgsConstructor
-public class OutboundMessage {
+public class OutboundMessageWithAttachments {
     private String payload;
     private List<Attachment> attachments;
 
