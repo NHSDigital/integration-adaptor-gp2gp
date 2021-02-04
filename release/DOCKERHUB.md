@@ -1,8 +1,8 @@
 
 # Quick reference
 - Maintained by: NHS Digital
-- Where to get help: https://github.com/nhsconnect/integration-adaptor-nhais
-- Where to file issues: https://github.com/nhsconnect/integration-adaptor-nhais/issues
+- Where to get help: https://github.com/nhsconnect/integration-adaptor-gp2gp
+- Where to file issues: https://github.com/nhsconnect/integration-adaptor-gp2gp/issues
 
 # What is the GP2GP Adaptor?
 * A pre-assured implementation of part of the GP2GP 2.2b patient transfer process
@@ -11,10 +11,13 @@
 ** where the supplier implements a GP Connect v1.5 provider
 
 # How to use this image
+
+To help you begin using the GP2GP Adaptor we provide shell scripts and Docker Compose configurations.
+
 ## Pre-requisites
 
 To get running make sure you have an OpenTest environment setup. The project also includes mock dependencies for local
-testing and development
+testing and development.
 
 ## Clone the repository
 ```bash
@@ -33,7 +36,7 @@ git checkout 0.0.1
 
 ## Find the docker directory
 ```bash
-cd integration-adaptor-gp2gp/release
+cd integration-adaptor-gp2gp/docker
 ```
 
 ## Configure the application
@@ -58,6 +61,9 @@ cd ../release
 ```
 
 ## Start the adaptor
+
+The script pulls the released GP2GP adaptor container image from Docker Hub and builds containers for its dependencies.
+
 ```bash
 ./run.sh
 ```

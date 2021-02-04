@@ -1,5 +1,5 @@
 plugins {
-	id 'java'
+    id 'java'
 }
 
 apply plugin: 'java'
@@ -8,32 +8,31 @@ group = 'uk.nhs.adaptors'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.apache.qpid:qpid-jms-client:0.55.0'
-	implementation "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.0"
-	implementation 'org.mongodb:mongo-java-driver:3.12.7'
+    implementation 'org.apache.qpid:qpid-jms-client:0.55.0'
+    implementation "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.0"
+    implementation 'org.mongodb:mongo-java-driver:3.12.7'
 
-	testImplementation 'commons-io:commons-io:2.6'
-	testImplementation 'org.awaitility:awaitility:4.0.3'
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-	testImplementation "org.assertj:assertj-core:3.18.1"
+    testImplementation 'commons-io:commons-io:2.6'
+    testImplementation 'org.awaitility:awaitility:4.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testImplementation "org.assertj:assertj-core:3.18.1"
 
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
 tasks.withType(Test) {
-	testLogging {
-		events "passed", "skipped", "failed"
+    testLogging {
+        events "passed", "skipped", "failed"
         showStandardStreams true
-	}
+    }
 }
 
 test {
-	testLogging.showStandardStreams = true
-	useJUnitPlatform()
-	dependsOn "cleanTest" // never re-use previous test outputs
+    useJUnitPlatform()
+    dependsOn "cleanTest" // never re-use previous test outputs
 }
 
