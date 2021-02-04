@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Incomplete GP2GP workflow. The adaptor only send the EhrExtract message. It cannot yet send documents or acknowledgements.
 - Incomplete EhrExtract message. The adaptor does not yet support the complete message standard.
 - The adaptor does not yet send an EhrExtract message for patients without documents.
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.54.Final (No upgrade or patch available)
 
 ### Added
 - NIAD-649	GP2GP POC
@@ -50,8 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NIAD-844	Send Translated EHR Extract Core Message
 - NIAD-814	Find the patient's documents
 
-### Changed
-- 
-
-### Removed
-
+### Fixed
+- Information Disclosure [Medium Severity] https://snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-1015415 in com.google.guava:guava@29.0-jre
+- Information Disclosure [High Severity] https://snyk.io/vuln/SNYK-JAVA-ORGCODEHAUSGROOVY-1048694 in org.codehaus.groovy:groovy@2.5.13
+- Comparison Using Wrong Factors [High Severity] https://snyk.io/vuln/SNYK-JAVA-ORGBOUNCYCASTLE-1052448 in org.bouncycastle:bcprov-jdk15on@1.65
+- Information Exposure [Medium Severity] https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-1048292 in org.apache.tomcat.embed:tomcat-embed-core@9.0.39
+- Information Disclosure (new) [Medium Severity] https://snyk.io/vuln/SNYK-JAVA-ORGAPACHETOMCATEMBED-1061939 in org.apache.tomcat.embed:tomcat-embed-core@9.0.39
+- Denial of Service (DoS) [High Severity] https://snyk.io/vuln/SNYK-JAVA-COMFASTERXMLJACKSONDATAFORMAT-1047329 in com.fasterxml.jackson.dataformat:jackson-dataformat-cbor@2.11.3
