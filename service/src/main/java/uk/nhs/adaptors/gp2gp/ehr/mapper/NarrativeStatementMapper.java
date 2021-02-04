@@ -1,9 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -23,7 +22,6 @@ public class NarrativeStatementMapper {
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
         .appendPattern("yyyyMMddHHmmss")
-        .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
         .toFormatter();
 
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -39,12 +37,24 @@ public class NarrativeStatementMapper {
     }
 
     private String getAvailabilityTime(Observation observation) {
-        if (observation.hasEffectiveDateTimeType()) {
-            return DATE_TIME_FORMATTER.format(observation.getEffectiveDateTimeType().getValue().toInstant().atOffset(ZoneOffset.UTC));
+        if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
+            return DATE_TIME_FORMATTER.format(
+                observation.getEffectiveDateTimeType().getValue()
+                    .toInstant()
+                    .atZone(ZoneId.of("Europe/London"))
+                    .toLocalDateTime());
         } else if (observation.hasEffectivePeriod()) {
-            return DATE_TIME_FORMATTER.format(observation.getEffectivePeriod().getStart().toInstant().atOffset(ZoneOffset.UTC));
+            return DATE_TIME_FORMATTER.format(
+                observation.getEffectivePeriod().getStart()
+                    .toInstant()
+                    .atZone(ZoneId.of("Europe/London"))
+                    .toLocalDateTime());
         } else {
-            return DATE_TIME_FORMATTER.format(observation.getIssued().toInstant().atOffset(ZoneOffset.UTC));
+            return DATE_TIME_FORMATTER.format(
+                observation.getIssued()
+                    .toInstant()
+                    .atZone(ZoneId.of("Europe/London"))
+                    .toLocalDateTime());
         }
     }
 }
