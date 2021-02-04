@@ -15,6 +15,7 @@ public class GpcConfiguration {
     private String url;
     private String structuredEndpoint;
     private String documentEndpoint;
+    private String patientEndpoint;
     private String host;
     private String enableProxy;
     private String proxy;

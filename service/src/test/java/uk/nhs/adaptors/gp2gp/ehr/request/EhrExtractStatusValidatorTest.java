@@ -13,13 +13,14 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 public class EhrExtractStatusValidatorTest {
 
     private static final String OBJECT_NAME = "some-file-name";
+    private static final String PATIENT_ID = "3";
 
     @Test
     public void When_AllPreparingDataStepsAreFinished_Expect_ReturnTrue() {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument())
+            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getFinishedGpcAccessStructured());
@@ -32,7 +33,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Collections.emptyList()
+            Collections.emptyList(), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getFinishedGpcAccessStructured());
@@ -45,7 +46,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getUnfinishedGpcDocument(), getUnfinishedGpcDocument())
+            Arrays.asList(getUnfinishedGpcDocument(), getUnfinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getUnfinishedGpcAccessStructured());
@@ -58,7 +59,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getUnfinishedGpcDocument(), getUnfinishedGpcDocument())
+            Arrays.asList(getUnfinishedGpcDocument(), getUnfinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getFinishedGpcAccessStructured());
@@ -71,7 +72,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getUnfinishedGpcDocument(), getFinishedGpcDocument())
+            Arrays.asList(getUnfinishedGpcDocument(), getFinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getFinishedGpcAccessStructured());
@@ -84,7 +85,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument())
+            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
         ehrExtractStatus.setGpcAccessStructured(getUnfinishedGpcAccessStructured());
@@ -104,7 +105,7 @@ public class EhrExtractStatusValidatorTest {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
 
         EhrExtractStatus.GpcAccessDocument gpcAccessDocument = new EhrExtractStatus.GpcAccessDocument(
-            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument())
+            Arrays.asList(getFinishedGpcDocument(), getFinishedGpcDocument()), PATIENT_ID
         );
         ehrExtractStatus.setGpcAccessDocument(gpcAccessDocument);
 
