@@ -28,3 +28,27 @@ New requirement - we need to call an additional endpoint to find all documents.
 The adaptor downloads all documents for the patient.
 
 Same instructions as for "2 - GPC Access Structured"
+
+## 5 - RCMR_IN030000UK06
+
+Clone the mhs repository `https://github.com/nhsconnect/integration-adaptor-mhs` and follow the test scripts instructions to run the adaptor on version `1.0.0`
+
+Follow instructions in each request script to:
+- add asid to requests
+- send request
+
+On recieving a RCMR_IN010000UK05 the adaptor sends this oubound message to the mhs.
+
+## 6 - COPC_IN000001UK01
+
+The adaptor sends this oubound message to the mhs
+
+Same instructions as for "5 - RCMR_IN030000UK06"
+
+## 7 - MCCI_IN010000UK13
+
+The adaptor sends this oubound message to the mhs
+
+No response is returned for this acknowledgement. 
+
+Same instructions as for "5 - RCMR_IN030000UK06"
