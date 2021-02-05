@@ -76,6 +76,7 @@ public class EhrExtractStatus implements TimeToLive {
     @Builder
     public static class GpcAccessDocument {
         private List<GpcDocument> documents;
+        private String patientId;
 
         @Data
         @AllArgsConstructor

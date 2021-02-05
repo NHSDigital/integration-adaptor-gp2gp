@@ -1,4 +1,4 @@
-FROM gradle:jdk11 AS build
+FROM gradle:jdk11-hotspot AS build
 
 COPY --chown=gradle:gradle service /home/gradle/service
 
@@ -10,7 +10,7 @@ FROM build AS package
 
 RUN gradle --build-cache bootJar
 
-FROM adoptopenjdk/openjdk11:jre
+FROM adoptopenjdk:11-jre-hotspot
 
 EXPOSE 8080
 
