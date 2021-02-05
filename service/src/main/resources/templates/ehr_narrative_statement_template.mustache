@@ -1,9 +1,4 @@
-{{#isNested}}
-<component typeCode="COMP" contextConductionInd="true">
-{{/isNested}}
-{{^isNested}}
-<component typeCode="COMP">
-{{/isNested}}
+<component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="{{narrativeStatementId}}" />
         <statusCode code="COMPLETE" />
