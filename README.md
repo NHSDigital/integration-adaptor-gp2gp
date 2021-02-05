@@ -116,6 +116,12 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 
 ## How to run service:
 
+The following steps use Docker to provide mocks of adaptor dependencies and infrastructure for local testing and 
+development. These containers are not suitable for use in a deployed environment. You are responsible for providing 
+adequate infrastructure and connections to external APIs. 
+
+We publish releases of the GP2GP adaptor container image to [Docker Hub](https://hub.docker.com/r/nhsdev/nia-gp2gp-adaptor).
+
 ### Copy a configuration example
 
 We provide several example configurations:
