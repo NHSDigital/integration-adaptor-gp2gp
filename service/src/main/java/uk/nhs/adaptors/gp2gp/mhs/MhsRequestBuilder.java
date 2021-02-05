@@ -32,7 +32,7 @@ public class MhsRequestBuilder {
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
 
-    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(String extractCoreMessage) {
+    public RequestHeadersSpec<?> buildSendEhrExtractCoreRequest(String extractCoreMessage, String conversationId) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -46,6 +46,8 @@ public class MhsRequestBuilder {
         return uri
             .accept(MediaType.APPLICATION_JSON)
             .header(INTERACTION_ID, MHS_OUTBOUND_INTERACTION_ID)
+            .header("wait-for-response", "false")
+            .header("Correlation-Id", conversationId)
             .body(bodyInserter);
     }
 

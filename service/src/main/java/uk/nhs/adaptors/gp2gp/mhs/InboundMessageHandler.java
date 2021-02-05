@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +13,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
@@ -24,6 +27,7 @@ public class InboundMessageHandler {
     private static final String ACTION_PATH = "/Envelope/Header/MessageHeader/Action";
     private static final String CONVERSATION_ID_PATH = "/Envelope/Header/MessageHeader/ConversationId";
 
+    private final EhrExtractStatusService ehrExtractStatusService;
     private final ObjectMapper objectMapper;
     private final EhrExtractRequestHandler ehrExtractRequestHandler;
     private final XPathService xPathService;
@@ -56,8 +60,10 @@ public class InboundMessageHandler {
         var interactionId = getInteractionId(ebXmlDocument);
         LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
 
-        if (SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
-            ehrExtractRequestHandler.handle(ebXmlDocument, payloadDocument);
+        if (EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handleStart(ebXmlDocument, payloadDocument);
+        } else if (CONTINUE_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getPayload());
         } else {
             throw new UnsupportedInteractionException(interactionId);
         }

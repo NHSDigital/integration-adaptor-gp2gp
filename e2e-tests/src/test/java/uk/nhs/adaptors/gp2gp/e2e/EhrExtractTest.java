@@ -31,6 +31,7 @@ public class EhrExtractTest {
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
+    private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     
@@ -38,7 +39,7 @@ public class EhrExtractTest {
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-                .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
@@ -53,6 +54,9 @@ public class EhrExtractTest {
 
         var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
+
+        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
+        assertThatExtractContinueMessageWasSent(ehrContinue);
     }
 
     @Test
@@ -69,6 +73,11 @@ public class EhrExtractTest {
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
+    }
+
+    private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
+        assertThat(ehrContinue).isNotEmpty();
+        assertThat(ehrContinue.get("received")).isNotNull();
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {

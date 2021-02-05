@@ -16,11 +16,14 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrContinueTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
+import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
 
 @Service
 @Slf4j
@@ -38,15 +41,16 @@ public class EhrExtractRequestHandler {
     private static final String TO_ASID_PATH = INTERACTION_ID_PATH + "/communicationFunctionRcv/device/id/@extension";
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
+    private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
 
-
+    private final EhrExtractStatusService ehrExtractStatusService;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
     private final XPathService xPathService;
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public void handle(Document header, Document payload) {
+    public void handleStart(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
         if (saveNewExtractStatusDocument(ehrExtractStatus)) {
             LOGGER.info("Creating tasks to start the EHR Extract process");
@@ -130,5 +134,32 @@ public class EhrExtractRequestHandler {
                 .build();
         }
         return value;
+    }
+
+    public void handleContinue(String conversationId, String payload) {
+        if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
+            ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
+            ehrExtractStatusRepository.findByConversationId(conversationId).ifPresent(ehrExtractStatus -> ehrExtractStatus
+                .getGpcAccessDocument()
+                .getDocuments()
+                .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName())));
+        } else {
+            throw new InvalidInboundMessageException("Continue Message did not no have Continue Acknowledgment");
+        }
+    }
+
+    private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName) {
+        var sendEhrContinueTaskDefinition = SendEhrContinueTaskDefinition.builder()
+            .documentName(documentName)
+            .taskId(randomIdGeneratorService.createNewId())
+            .conversationId(ehrExtractStatus.getConversationId())
+            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
+            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
+            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .build();
+        taskDispatcher.createTask(sendEhrContinueTaskDefinition);
+        LOGGER.info("Ehr Continue task create for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
     }
 }

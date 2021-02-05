@@ -36,6 +36,7 @@ public class EhrExtractStatusService {
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
+    private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
     private static final String PATIENT_ID = "patientId";
@@ -43,11 +44,11 @@ public class EhrExtractStatusService {
     private static final String OBJECT_NAME = "objectName";
     private static final String MESSAGE_ID = "messageId";
     private static final String ACCESSED_AT = "accessedAt";
-    private static final String ACCESSED_DOCUMENT_URL = "accessDocumentUrl";
+    private static final String RECEIVED = "received";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
-
+    private static final String CONTINUE_RECEIVED_PATH = EHR_CONTINUE + DOT + RECEIVED;
     private static final String DOCUMENT_ID_PATH = GPC_DOCUMENTS + DOT + DOCUMENT_ID;
     private static final String DOCUMENT_PATIENT_ID = GPC_ACCESS_DOCUMENT + DOT + PATIENT_ID;
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
@@ -125,6 +126,22 @@ public class EhrExtractStatusService {
 
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
+        }
+    }
+
+    public void updateEhrExtractStatusContinue(String conversationId) {
+        Query query = createQueryForConversationId(conversationId);
+
+        Update update = createUpdateWithUpdatedAt();
+        Instant now = Instant.now();
+        update.set(CONTINUE_RECEIVED_PATH, now);
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with EHR Continue, No database record for conversation "
+                + "id: " + conversationId);
+        } else {
+            LOGGER.info("Database successfully updated with EHRContinue");
         }
     }
 
