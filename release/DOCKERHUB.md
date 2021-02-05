@@ -6,7 +6,7 @@
 # What is the GP2GP Adaptor?
 * A pre-assured implementation of part of the GP2GP 2.2b patient transfer process
 * Part of a foundation system supplier's infrastructure to:
-** enable transfers of patients from the supplier's system other practices with GP2GP 2.2b compliant GP systems
+** enable transfers of patients from the supplier's system to other practices with GP2GP 2.2b compliant GP systems
 ** where the supplier implements a GP Connect v1.5 provider
 
 # How to use this image
