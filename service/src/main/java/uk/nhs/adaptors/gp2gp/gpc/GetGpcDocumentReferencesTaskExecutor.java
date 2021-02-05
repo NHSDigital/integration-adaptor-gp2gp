@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpcDocumentReferencesTaskDefinition> {
-
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
     @Autowired
@@ -32,6 +32,8 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     private GpcClient gpcClient;
     @Autowired
     private TaskDispatcher taskDispatcher;
+    @Autowired
+    private DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Override
     public Class<GetGpcDocumentReferencesTaskDefinition> getTaskType() {
@@ -43,15 +45,17 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         LOGGER.info("Execute called from GpcFindDocumentsTaskExecutor");
 
         Optional<String> patientId = retrievePatientId(taskDefinition);
-        ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition, patientId);
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition,
+            patientId);
 
         if (patientId.isPresent()) {
             List<String> urls = retrieveDocumentReferences(taskDefinition, patientId.get());
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
+            ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
             urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
         }
 
+        detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
     private Optional<String> retrievePatientId(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
