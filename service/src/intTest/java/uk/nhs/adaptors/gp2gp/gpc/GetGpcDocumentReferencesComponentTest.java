@@ -1,12 +1,14 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import org.hl7.fhir.dstu3.model.OperationOutcome;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
+import java.util.List;
+import java.util.UUID;
+
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
@@ -17,11 +19,14 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.hl7.fhir.dstu3.model.OperationOutcome;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -40,15 +45,13 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     @Autowired
     private GpcConfiguration configuration;
 
+    @MockBean
+    private DetectTranslationCompleteService detectTranslationCompleteService;
+
     private EhrExtractStatus addTestDataToDatabase() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatus.setGpcAccessDocument(EhrExtractStatus.GpcAccessDocument.builder()
-            .documents(List.of(
-                EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
-                    .documentId(EhrStatusConstants.DOCUMENT_ID)
-                    .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
-                    .build()
-            ))
+            .documents(prepareAccessDocuments())
             .build());
         return ehrExtractStatusRepository.save(ehrExtractStatus);
     }
@@ -63,7 +66,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
         Mockito.verify(taskDispatcher).createTask(buildGetDocumentTask(taskDefinition));
-
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
     @Test
@@ -75,7 +78,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThat(updatedEhrExtractStatus.getGpcAccessDocument().getDocuments().size()).isEqualTo(0);
-
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
     @Test
@@ -86,7 +89,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThat(updatedEhrExtractStatus.getGpcAccessDocument().getPatientId()).isNull();
-
+        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
     @Test
@@ -96,10 +99,18 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
         var exception = assertThrows(GpConnectException.class, () -> gpcFindDocumentsTaskExecutor.execute(taskDefinition));
 
         assertOperationOutcome(exception);
-
+        verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any(EhrExtractStatus.class));
     }
 
-    private static GetGpcDocumentReferencesTaskDefinition buildFindDocumentTask(EhrExtractStatus ehrExtractStatus, String nhsNumber) {
+    private List<EhrExtractStatus.GpcAccessDocument.GpcDocument> prepareAccessDocuments() {
+        return List.of(EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .documentId(EhrStatusConstants.DOCUMENT_ID)
+            .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
+            .build()
+        );
+    }
+
+    private GetGpcDocumentReferencesTaskDefinition buildFindDocumentTask(EhrExtractStatus ehrExtractStatus, String nhsNumber) {
         return GetGpcDocumentReferencesTaskDefinition.builder()
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
