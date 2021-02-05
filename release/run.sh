@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-RELEASE_VERSION=0.0.1
+source ./version.sh
 
 LIGHT_GREEN='\033[1;32m'
 RED='\033[31m'

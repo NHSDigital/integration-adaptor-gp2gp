@@ -1,8 +1,5 @@
 #!/bin/bash 
 
-RELEASE_VERSION=0.0.1
-export GP2GP_IMAGE="nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}"
-
 LIGHT_GREEN='\033[1;32m' 
 NC='\033[0m'
 

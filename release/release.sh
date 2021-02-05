@@ -2,7 +2,7 @@
 
 set -e
 
-export RELEASE_VERSION=0.0.1
+source ./version.sh
 
 cd ../docker
 docker-compose build gp2gp
