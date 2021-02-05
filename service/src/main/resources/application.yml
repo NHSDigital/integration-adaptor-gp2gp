@@ -38,7 +38,6 @@ gp2gp:
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
     documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/fhir/Binary/}
     patientEndpoint: ${GP2GP_GPC_GET_PATIENT_ENDPOINT:/fhir/Patient}
-    host: ${GP2GP_GPC_HOST:localhost}
     enableProxy: ${GP2GP_GPC_ENABLE_HTTP_PROXY:false}
     proxy: ${GP2GP_GPC_HTTP_PROXY:}
     proxyPort: ${GP2GP_GPC_HTTP_PROXY_PORT:}
