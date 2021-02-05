@@ -29,6 +29,8 @@ public class NarrativeStatementMapperTest {
     private static final String OUTPUT_XML_USES_ISSUED = "/ehr/mapper/observation/expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = "/ehr/mapper/observation/"
         + "expected-output-narrative-statement-3.xml";
+    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = "/ehr/mapper/observation/"
+        + "expected-output-narrative-statement-4.xml";
 
     private CharSequence expectedOutputMessage;
     private NarrativeStatementMapper narrativeStatementMapper;
@@ -83,6 +85,18 @@ public class NarrativeStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+    }
+
+    @Test
+    public void When_MappingParsedObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
+
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
+        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }

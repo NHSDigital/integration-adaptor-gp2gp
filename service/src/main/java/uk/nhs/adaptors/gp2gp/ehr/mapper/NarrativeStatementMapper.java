@@ -33,6 +33,7 @@ public class NarrativeStatementMapper {
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
+            .isNested(isNested)
             .build();
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters);

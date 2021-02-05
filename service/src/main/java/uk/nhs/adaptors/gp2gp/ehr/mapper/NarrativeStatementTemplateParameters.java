@@ -11,4 +11,5 @@ public class NarrativeStatementTemplateParameters {
     private String narrativeStatementId;
     private String availabilityTime;
     private String comment;
+    private boolean isNested;
 }

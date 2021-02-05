@@ -1,6 +1,13 @@
-<NarrativeStatement classCode="OBS" moodCode="EVN">
-    <id root="{{narrativeStatementId}}" />
-    <statusCode code="COMPLETE" />
-    <availabilityTime value="{{availabilityTime}}" />
-    <text>{{comment}}</text>
-</NarrativeStatement>
+{{#isNested}}
+<component typeCode="COMP" contextConductionInd="true">
+{{/isNested}}
+{{^isNested}}
+<component typeCode="COMP">
+{{/isNested}}
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="{{narrativeStatementId}}" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="{{availabilityTime}}" />
+        <text>{{comment}}</text>
+    </NarrativeStatement>
+</component>
