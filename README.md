@@ -20,26 +20,26 @@ Variables without a default value and not marked optional, *MUST* be defined for
 ### General Configuration Options
 
 | Environment Variable                 | Default                   | Description
-| ------------------------------------|---------------------------|-------------
+| -------------------------------------|---------------------------|-------------
 | GP2GP_SERVER_PORT                    | 8080                      | The port on which the GP2GP Adapter will run.
-| GP2GP_LOGGING_LEVEL                  | INFO                      | Application logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
-| GP2GP_LOGGING_FORMAT                 | (2)                       | Defines how to format log events on stdout
-| GP2GP_STORAGE_TYPE                   | LocalMock                 | The type of storage solution. One of: S3, Azure, LocalMock
-| GP2GP_STORAGE_CONTAINER_NAME         |                           | The name of the Azure Storage container or Amazon S3 Bucket
-| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | The connection string for Azure Blob Storage. Leave undefined if type is not Azure.
-| AWS_ACCESS_KEY_ID                    |                           | The access key for Amazon S3. Leave undefined if using an AWS instance role.
-| AWS_SECRET_ACCESS_KEY                |                           | The secret access key for Amazon S3. Leave undefined if using an AWS instance role.
-| AWS_REGION                           |                           | The region for Amazon S3. Leave undefined if using an AWS instance role.
-| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (1)
-| GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
-| GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
-| GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
-| GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
-| GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
-| GP2GP_GPC_GET_URL                    |                           | The URL used for GP Connect requests.
-| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    |                           | The endpoiint for GP Connect Get Structured Access. 
-| GP2GP_GPC_HOST                       |                           | The host used for GP Connect requests.
+| GP2GP_ROOT_LOGGING_LEVEL             | WARN                      | The logging level applied to the entire application (including third-party dependencies).
+| GP2GP_LOGGING_LEVEL                  | INFO                      | The logging level applied to GP2GP adaptor components.
+| GP2GP_LOGGING_FORMAT                 | (*)                       | Defines how to format log events on stdout
+
+Logging levels are ane of: DEBUG, INFO, WARN, ERROR
+
+The level DEBUG **MUST NOT** be used when handling live patient data.
+
+(*) GP2GP API uses logback (http://logback.qos.ch/). The built-in [logback.xml](service/src/main/resources/logback.xml) 
+defines the default log format. This value can be overridden using the `GP2GP_LOGGING_FORMAT` environment variable.
+You can provide an external `logback.xml` file using the `-Dlogback.configurationFile` JVM parameter.
+
+### Database Configuration Options
+
+The adaptor requires a Mongodb-compatible database to manage its internal state.
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
 | GP2GP_MONGO_URI                      | mongodb://localhost:27017 | Whole Mongo database connection string. Has a priority over other Mongo variables.
 | GP2GP_MONGO_DATABASE_NAME            | gp2gp                     | The database name.
 | GP2GP_MONGO_HOST                     |                           | The database host. Leave undefined if GP2GP_MONGO_URI is used.
@@ -50,48 +50,95 @@ Variables without a default value and not marked optional, *MUST* be defined for
 | GP2GP_MONGO_AUTO_INDEX_CREATION      | true                      | (Optional) Should auto index for Mongo database be created.
 | GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 | GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
-| GP2GP_GPC_ENABLE_HTTP_PROXY          | false                     | Enable your environment requires you to access HSCN or OpenTest networks via an HTTP proxy
-| GP2GP_GPC_HTTP_PROXY                 | gp2gp                     | HTTPE proxy address
-| GP2GP_GPC_HTTP_PROXY_PORT            | gp2gp                     | HTTP proxy port
-| GP2GP_SPINE_CLIENT_CERT              | gp2gp                     | The content of the PEM-formatted client endpoint certificate
-| GP2GP_SPINE_CLIENT_KEY               | gp2gp                     | The content of the PEM-formatted client private key
-| GP2GP_SPINE_ROOT_CA_CERT             | gp2gp                     | The content of the PEM-formatted certificate of the issuing Root CA.
-| GP2GP_SPINE_SUB_CA_CERT              | gp2gp                     | The content of the PEM-formatted certificate of the issuing Sub CA.
-| MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
-| MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
-(1) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
+### File Storage Configuration Options
+
+The adaptor uses AWS S3 or Azure Storage Blob to stage translated GP2GP HL7 and ebXML documents.
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| GP2GP_STORAGE_TYPE                   | LocalMock                 | The type of storage solution. One of: S3, Azure, LocalMock
+| GP2GP_STORAGE_CONTAINER_NAME         |                           | The name of the Azure Storage container or Amazon S3 Bucket
+| GP2GP_AZURE_STORAGE_CONNECTION_STRING|                           | The connection string for Azure Blob Storage. Leave undefined if type is not Azure.
+| AWS_ACCESS_KEY_ID                    |                           | The access key for Amazon S3. Leave undefined if using an AWS instance role.
+| AWS_SECRET_ACCESS_KEY                |                           | The secret access key for Amazon S3. Leave undefined if using an AWS instance role.
+| AWS_REGION                           |                           | The region for Amazon S3. Leave undefined if using an AWS instance role.
+
+### Message Broker Configuration Options
+
+The adaptor requires an AMQP 1.0 compatible message broker to 1) receive inbound Spine messages via MHS adaptor and 2)
+queue its own internal asynchronous tasks
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| GP2GP_AMQP_BROKERS                   | amqp://localhost:5672     | A comma-separated list of URLs to AMQP brokers (*)
+| GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
+| GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
+| GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
+| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+| GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
+| GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
+
+(*) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
 will be used. At least one URL is required.
 
-(2) GP2GP API is using logback (http://logback.qos.ch/) for logging configuration.
-Default log format is defined in the built-in [logback.xml](service/src/main/resources/logback.xml)
-This value can be overriden using `GP2GP_LOGGING_FORMAT` environment variable.
-Alternatively, an external `logback.xml` with much more customizations can be provided using `-Dlogback.configurationFile` JVM parameter.
+### GP Connect API Configuration Options
+
+The adaptor uses the GP Connect API to fetch patient records and documents.
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_GPC_GET_URL                    | http://localhost:8110/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
+| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    | /fhir/Patient/$gpc.getstructuredrecord        | The path of the Get Access Structured operation on the Patient resource
+| GP2GP_GPC_GET_PATIENT_ENDPOINT       | /fhir/Patient                                 | The path of the Access Document Patient resource
+| GP2GP_GPC_GET_DOCUMENT_ENDPOINT      | /fhir/Binary/                                 | The path of the Access Document Binary resource
+| GP2GP_SPINE_CLIENT_CERT              |                                               | The content of the PEM-formatted client endpoint certificate
+| GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
+| GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
+| GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
+
+Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
+Secure Proxy (SSP).
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| GP2GP_GPC_ENABLE_HTTP_PROXY          | false                     | Enable your environment requires you to access HSCN or OpenTest networks via an HTTP proxy
+| GP2GP_GPC_HTTP_PROXY                 | gp2gp                     | HTTP proxy address
+| GP2GP_GPC_HTTP_PROXY_PORT            | gp2gp                     | HTTP proxy port
+
+### MHS Adaptor Configuration Options
+
+The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 
 ## How to run service:
 
-### Using the helper script
+The following steps use Docker to provide mocks of adaptor dependencies and infrastructure for local testing and 
+development. These containers are not suitable for use in a deployed environment. You are responsible for providing 
+adequate infrastructure and connections to external APIs. 
+
+We publish releases of the GP2GP adaptor container image to [Docker Hub](https://hub.docker.com/r/nhsdev/nia-gp2gp-adaptor).
+
+### Copy a configuration example
+
+We provide several example configurations:
+* `vars.local.sh` to run the adaptor with mock services
+* `vars.public.sh` to run the adaptor with the GP Connect public demonstrator
+* `vars.opentest.sh` to run the adaptor with providers and responders in OpenTest
+
+```bash
+cd docker/
+cp vars.local.sh vars.sh
+```
+
+### Using the helper script for Docker Compose
 
 Run `./start-local-environment.sh`
 
-### Using docker-compose
-
-```
-cd docker/
-docker-compose build
-docker-compose up -d
-```
-
-### Using the GP Connect Public Demonstrator instead of Wiremock
-
-The adaptor uses our own wiremock for the GP Connect API by default. To use the GP Connect public demonstrator instead
-you can use the provided override file for Docker Compose.
-
-```
-cd docker/
-docker-compose build
-docker-compose -f docker-compose.yml -f docker-compose-gpc-pub-demo.yml up -d
-```
+You can also run the docker-compose commands directly.
 
 ### From your IDE or the command line
 
@@ -99,8 +146,8 @@ First start the adaptor dependencies:
 
 ```
     cd docker/
-    docker-compose build activemq wiremock
-    docker-compose up -d activemq wiremock mongodb
+    docker-compose build activemq wiremock mock-mhs-adaptor
+    docker-compose up -d activemq wiremock mongodb mock-mhs-adaptor
 ```
 
 Change into the service directory `cd ../service`
@@ -109,7 +156,7 @@ Build the project in your IDE or run `./gradlew bootJar`
 
 Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/libs/gp2gp.jar`
 
-### Using Dotenv for IntelliJ
+### Using Envfile for IntelliJ
 
 An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
 
@@ -117,14 +164,6 @@ To override environment variables choose an example file e.g.
 (service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
 changes in this copy. 
 
-## How to run wiremock:
-
-The project includes mock interactions of external APIs (GPC, SDS) implemented in Wiremock for local development.
-
-* Navigate to `docker`
-* `docker-compose up wiremock`
-
-The folder `docker/wiremock/stubs` describes the supported interactions.
 
 ## How to run tests
 
@@ -156,7 +195,9 @@ You must run all gradle commands from the `service/` directory.
 Integration tests automatically start their external dependencies using [TestContainers](https://www.testcontainers.org/). 
 To disable this set the `DISABLE_TEST_CONTAINERS` environment variable to `true`.
 
-#### Example: Run integration tests with AWS S3 in-the-loop
+You can set the adaptor's environment variables to test integrations with specific dependencies.
+
+**Example: Run integration tests with AWS S3 in-the-loop**
 
 Use environment variables to configure the tests to use:
 * An actual S3 bucket
@@ -213,6 +254,27 @@ Environment variables with the same name/meaning as the application's control th
 * GP2GP_MONGO_URI
 * GP2GP_MONGO_DATABASE_NAME
 * GP2GP_MHS_INBOUND_QUEUE
+
+## How to use WireMock
+
+We provide mocks of external APIs (GPC, SDS) for local development and testing.
+
+* Navigate to `docker`
+* `docker-compose up wiremock`
+
+The folder `docker/wiremock/stubs` describes the supported interactions.
+
+## How to use Mock MHS Adaptor
+
+We provide a mock MHS adaptor for local development and testing.
+
+* Navigate to `docker`
+* `docker-compose up mock-mhs-adaptor`
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
+| MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
 ## Troubleshooting
 

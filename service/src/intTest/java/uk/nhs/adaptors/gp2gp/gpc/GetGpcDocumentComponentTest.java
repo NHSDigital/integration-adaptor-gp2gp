@@ -1,25 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -28,13 +15,24 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
     private static final String INVALID_DOCUMENT_ID = "non-existing-id";
@@ -49,6 +47,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private StorageConnector storageConnector;
     @MockBean
     private DetectTranslationCompleteService detectTranslationCompleteService;
+    @Autowired
+    private GpcConfiguration configuration;
 
     @Test
     public void When_NewAccessDocumentTaskIsStarted_Expect_DatabaseUpdatedAndDocumentAddedToObjectStore() throws IOException {
@@ -117,7 +117,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getAccessedAt()).isNull();
         assertThat(gpcDocuments.get(0).getObjectName()).isNull();
 
-        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
+        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(INVALID_DOCUMENT_ID));
 
         verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
     }
@@ -139,6 +139,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .documentId(documentId)
+            .accessDocumentUrl(buildDocumentUrl(documentId))
             .build();
     }
 
@@ -168,5 +169,9 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         var coding = operationOutcome.getDetails().getCodingFirstRep();
         assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);
         assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
+    }
+
+    private String buildDocumentUrl(String documentId) {
+        return configuration.getUrl() + "/documents" + configuration.getDocumentEndpoint() + documentId;
     }
 }
