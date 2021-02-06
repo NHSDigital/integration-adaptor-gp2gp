@@ -3,6 +3,16 @@
 Note: `COPC_IN000001UK01` appears several times. This is a general-purpose interaction type used
 for different types of messages.
 
+Ensure you have the following commands available:
+
+- python
+- envsubst
+- uuidgen
+
+Copy `vars.example.sh` to `vars.sh` and populate with values for your endpoint.
+
+For messages from inbound - you can use `inbound_to_xml.sh` to decode the base64 from rabbitmq and extract the XML message.
+
 ## 1 - MHS Inbound - RCMR_IN01000UK05 - EHR Request
 
 The adaptor receives the EHR Request message on the MHS inbound queue.
@@ -45,7 +55,7 @@ Follow instructions in each request script to:
 - add asid to requests
 - send request
 
-On recieving a RCMR_IN010000UK05 the adaptor sends this oubound message to the mhs.
+We expect the 
 
 ## 7 - MHS Inbound - COPC_IN000001UK01 - Continue
 
