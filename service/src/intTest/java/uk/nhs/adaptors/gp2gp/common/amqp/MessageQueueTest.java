@@ -31,14 +31,14 @@ public class MessageQueueTest {
 
     @Value("${gp2gp.amqp.inboundQueueName}")
     private String inboundQueueName;
-    @MockBean // mock the message handler to prevent any forward processing by the application
-    private InboundMessageHandler inboundMessageHandler;
     @Autowired
     private JmsTemplate jmsTemplate;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+    @MockBean // mock the message handler to prevent any forward processing by the application
+    private InboundMessageHandler inboundMessageHandler;
 
     @Test
     public void When_SendingValidMessage_Expect_InboundMessageHandlerCallWithSameMessage() throws Exception {

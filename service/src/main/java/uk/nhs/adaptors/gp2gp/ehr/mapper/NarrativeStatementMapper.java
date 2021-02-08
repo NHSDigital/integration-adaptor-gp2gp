@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
@@ -51,7 +51,7 @@ public class NarrativeStatementMapper {
     private String formatDate(Date date) {
         return DATE_TIME_FORMATTER.format(
             date.toInstant()
-                .atZone(ZoneOffset.UTC)
+                .atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
     }
 }
