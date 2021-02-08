@@ -138,11 +138,11 @@ public class EhrExtractRequestHandler {
 
     public void handleContinue(String conversationId, String payload) {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
-            ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
-            ehrExtractStatusRepository.findByConversationId(conversationId).ifPresent(ehrExtractStatus -> ehrExtractStatus
+            var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
+            ehrExtractStatus
                 .getGpcAccessDocument()
                 .getDocuments()
-                .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName())));
+                .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName()));
         } else {
             throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
                 + conversationId);
