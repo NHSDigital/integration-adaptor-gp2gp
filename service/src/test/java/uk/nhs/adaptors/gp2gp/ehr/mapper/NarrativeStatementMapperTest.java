@@ -3,17 +3,22 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
+
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
 import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
 
 @ExtendWith(MockitoExtension.class)
 public class NarrativeStatementMapperTest {
@@ -39,6 +44,16 @@ public class NarrativeStatementMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
+    }
+
+    @BeforeAll
+    public static void initialize() {
+        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
     }
 
     @Test
