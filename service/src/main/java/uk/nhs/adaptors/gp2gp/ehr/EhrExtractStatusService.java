@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -23,6 +22,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import com.mongodb.client.result.UpdateResult;
 
 @Service
 @Slf4j
@@ -44,6 +45,7 @@ public class EhrExtractStatusService {
     private static final String OBJECT_NAME = "objectName";
     private static final String MESSAGE_ID = "messageId";
     private static final String ACCESSED_AT = "accessedAt";
+    private static final String ACCESSED_DOCUMENT_URL = "accessDocumentUrl";
     private static final String RECEIVED = "received";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
@@ -109,13 +111,6 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    private FindAndModifyOptions getReturningUpdatedRecordOption() {
-        FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
-        findAndModifyOptions.returnNew(true);
-
-        return findAndModifyOptions;
-    }
-
     public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
@@ -145,7 +140,8 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusAccessDocumentPatientId(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
+    public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
+        GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
             Optional<String> patientId) {
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
@@ -156,14 +152,20 @@ public class EhrExtractStatusService {
             update.set(DOCUMENT_PATIENT_ID, null);
         }
         update.set(GPC_DOCUMENTS, new ArrayList<>());
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with patientId");
         }
+
+        return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAccessDocumentDocumentReferences(
+    public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
             GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
             List<String> urls) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
@@ -179,21 +181,34 @@ public class EhrExtractStatusService {
                 .taskId(documentReferencesTaskDefinition.getTaskId())
                 .messageId(documentReferencesTaskDefinition.getConversationId()).build());
         });
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with document URL's");
         }
+
+        return ehrExtractStatus;
     }
 
-    private static Query createQueryForConversationId(String conversationId) {
+    private FindAndModifyOptions getReturningUpdatedRecordOption() {
+        FindAndModifyOptions findAndModifyOptions = new FindAndModifyOptions();
+        findAndModifyOptions.returnNew(true);
+
+        return findAndModifyOptions;
+    }
+
+    private Query createQueryForConversationId(String conversationId) {
         Query query = new Query();
         query.addCriteria(Criteria.where(CONVERSATION_ID).is(conversationId));
 
         return query;
     }
 
-    private static Update createUpdateWithUpdatedAt() {
+    private Update createUpdateWithUpdatedAt() {
         Instant now = Instant.now();
         Update update = new Update();
 
