@@ -114,6 +114,15 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 
+### Trust Store Configuration Options
+
+The adaptor might be assigned with a predefined trustore configuration.
+
+| Environment Variable                 | Default                   | Description
+| -------------------------------------|---------------------------|-------------
+| GP2GP_SSL_TRUST_STORE_URL            |                           | The Amazon S3 URL from which the "jks" file should be downloaded from.
+| GP2GP_SSL_TRUST_STORE_PASSWORD       |                           | The trust store password.
+
 ## How to run service:
 
 The following steps use Docker to provide mocks of adaptor dependencies and infrastructure for local testing and 

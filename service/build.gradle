@@ -54,6 +54,9 @@ dependencies {
 	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.2.1'
 
+	// AWS
+	implementation 'com.amazonaws:aws-java-sdk:1.11.950'
+
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.assertj:assertj-core:3.18.1"

@@ -10,6 +10,8 @@ management:
         include: info, health, metrics, mappings
 
 gp2gp:
+  trustStoreUrl: ${GP2GP_SSL_TRUST_STORE_URL:}
+  trustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:}
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
@@ -33,6 +35,8 @@ gp2gp:
     autoIndexCreation: ${GP2GP_MONGO_AUTO_INDEX_CREATION:true}
     ttl: ${GP2GP_MONGO_TTL:P7D}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
+    sslTrustStoreUrl: ${GP2GP_SSL_TRUST_STORE_URL:}
+    sslTrustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:kainostest}
   gpc:
     url: ${GP2GP_GPC_GET_URL:http://localhost:8110/GP0001/STU3/1/gpconnect}
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
