@@ -28,7 +28,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
-public class EhrContinue {
+public class EhrContinueTest {
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
     private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
