@@ -32,7 +32,6 @@ public class EhrContinueTest {
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
     private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
-    private static final String VALID_PAYLOAD = CONTINUE_ACKNOWLEDGEMENT;
     private static final String DOCUMENT_NAME = "documentName";
 
     @Autowired
@@ -48,7 +47,7 @@ public class EhrContinueTest {
         var expectedResponse = createContinueTasks(ehrExtractStatus);
 
         ehrExtractStatusRepository.save(ehrExtractStatus);
-        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), VALID_PAYLOAD);
+        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
 
         verify(taskDispatcher).createTask(
             argThat(task -> hasSameContent(
@@ -64,14 +63,14 @@ public class EhrContinueTest {
         var expectedResponse = createContinueTasks(ehrExtractStatus);
 
         ehrExtractStatusRepository.save(ehrExtractStatus);
-        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), VALID_PAYLOAD);
+        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
 
         verify(taskDispatcher).createTask(
             argThat(task -> hasSameContent(
                 (SendEhrContinueTaskDefinition) task, expectedResponse)));
         var first = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
-        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), VALID_PAYLOAD);
+        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
 
         verify(taskDispatcher, times(2)).createTask(
             argThat(task -> hasSameContent(
@@ -98,7 +97,7 @@ public class EhrContinueTest {
         String conversationId = randomIdGeneratorService.createNewId();
 
         Exception exception = assertThrows(EhrExtractException.class,
-            () -> ehrExtractRequestHandler.handleContinue(conversationId, VALID_PAYLOAD));
+            () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
         assertThat(exception.getMessage()).isEqualTo("EHR Extract Status was not updated with EHR Continue, No database record for "
             + "conversation id: " + conversationId);

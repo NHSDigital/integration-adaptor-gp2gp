@@ -60,7 +60,7 @@ public class MockMhsService {
             try {
                 var inboundMessage = stubInboundMessage.replace("%%ConversationId%%", correlationId);
                 inboundProducer.sendToMhsInboundQueue(inboundMessage);
-                LOGGER.info("Placed message on Inbound Queue");
+                LOGGER.info("Placed message on Inbound Queue, conversationId: " + correlationId);
                 headers.setContentType(MediaType.TEXT_XML);
                 return new ResponseEntity<>(stubEbXmlResponse, headers, ACCEPTED);
             } catch (JmsException e) {
