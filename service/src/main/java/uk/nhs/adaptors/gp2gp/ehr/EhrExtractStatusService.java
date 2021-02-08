@@ -124,20 +124,26 @@ public class EhrExtractStatusService {
         }
     }
 
-    public void updateEhrExtractStatusContinue(String conversationId) {
+    public EhrExtractStatus updateEhrExtractStatusContinue(String conversationId) {
         Query query = createQueryForConversationId(conversationId);
 
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
         update.set(CONTINUE_RECEIVED_PATH, now);
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
-            throw new EhrExtractException("EHR Extract Status was not updated with EHR Continue, No database record for conversation "
-                + "id: " + conversationId);
-        } else {
-            LOGGER.info("Database successfully updated with EHRContinue");
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
+                + "' that is not recognised");
         }
+
+        LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
+        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(

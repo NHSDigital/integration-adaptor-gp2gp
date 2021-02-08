@@ -88,7 +88,8 @@ public class EhrContinueTest {
         Exception exception = assertThrows(InvalidInboundMessageException.class, () ->
             ehrExtractRequestHandler.handleContinue(conversationId, payload));
 
-        assertThat(exception.getMessage()).isEqualTo("Continue Message did not no have Continue Acknowledgment");
+        assertThat(exception.getMessage()).isEqualTo("Continue Message did not have Continue Acknowledgment, conversationId: "
+            + conversationId);
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -99,8 +100,8 @@ public class EhrContinueTest {
         Exception exception = assertThrows(EhrExtractException.class,
             () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
-        assertThat(exception.getMessage()).isEqualTo("EHR Extract Status was not updated with EHR Continue, No database record for "
-            + "conversation id: " + conversationId);
+        assertThat(exception.getMessage()).isEqualTo("Received a Continue message with a Conversation-Id '" + conversationId
+            + "' that is not recognised");
         verify(taskDispatcher, never()).createTask(any());
     }
 

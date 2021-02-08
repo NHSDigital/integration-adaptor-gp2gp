@@ -144,7 +144,8 @@ public class EhrExtractRequestHandler {
                 .getDocuments()
                 .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName())));
         } else {
-            throw new InvalidInboundMessageException("Continue Message did not no have Continue Acknowledgment");
+            throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
+                + conversationId);
         }
     }
 
