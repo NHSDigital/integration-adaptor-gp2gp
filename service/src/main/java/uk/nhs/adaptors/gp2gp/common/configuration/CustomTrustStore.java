@@ -35,10 +35,7 @@ public class CustomTrustStore {
         X509TrustManager combinedTrustManager = new CombinedTrustManager(customTrustManager, defaultTrustManager);
 
         SSLContext sslContext = SSLContext.getInstance("TLS");
-        sslContext.init(null, new TrustManager[]
-            {
-                combinedTrustManager
-            }, null);
+        sslContext.init(null, new TrustManager[] {combinedTrustManager}, null);
         LOGGER.info("Overriding default TrustStore with combined one");
         SSLContext.setDefault(sslContext);
     }

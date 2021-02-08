@@ -2,7 +2,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />
-        <availabilityTime value="20100113000000" />
+        <availabilityTime value="20100112230000" />
         <text>1.This is a line of &quot;text&quot; with a line break at the end.
             2.This is a line of text with a line break at the end.
             3.This is a line of text with a line break at the end.
