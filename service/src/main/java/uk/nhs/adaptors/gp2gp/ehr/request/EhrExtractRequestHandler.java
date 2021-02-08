@@ -160,6 +160,6 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
         taskDispatcher.createTask(sendEhrContinueTaskDefinition);
-        LOGGER.info("Ehr Continue task create for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
+        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
     }
 }
