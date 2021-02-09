@@ -20,11 +20,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
+@DirtiesContext
 public class MessageQueueTest {
     private static final String SOAP_HEADER = "<soap:Header></soap:Header>";
     private static final long TIMEOUT = 5000L;
