@@ -2,7 +2,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="111122223333"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113142950"/>
+        <availabilityTime value="20100113152950"/>
         <text>First comment</text>
     </NarrativeStatement>
 </component>
@@ -10,7 +10,7 @@
 <NarrativeStatement classCode="OBS" moodCode="EVN">
     <id root="111122223333"/>
     <statusCode code="COMPLETE"/>
-    <availabilityTime value="20100113142950"/>
+    <availabilityTime value="20100113152950"/>
     <text>Second comment</text>
 </NarrativeStatement>
 </component>
@@ -18,7 +18,7 @@
 <NarrativeStatement classCode="OBS" moodCode="EVN">
     <id root="3334445555"/>
     <statusCode code="COMPLETE"/>
-    <availabilityTime value="20100113142950"/>
+    <availabilityTime value="20100113152950"/>
     <text>Third comment</text>
 </NarrativeStatement>
 </component>
