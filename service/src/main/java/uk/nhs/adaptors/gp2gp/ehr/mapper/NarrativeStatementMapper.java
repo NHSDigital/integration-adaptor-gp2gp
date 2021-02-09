@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
@@ -34,9 +35,11 @@ public class NarrativeStatementMapper {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue());
         } else if (observation.hasEffectivePeriod()) {
-            return DateFormatUtil.formatDate((observation.getEffectivePeriod().getStart()));
-        } else {
+            return DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart());
+        } else if (observation.hasIssued()) {
             return DateFormatUtil.formatDate((observation.getIssued()));
+        } else {
+            throw new EhrMapperException("Could not map effective date");
         }
     }
 }
