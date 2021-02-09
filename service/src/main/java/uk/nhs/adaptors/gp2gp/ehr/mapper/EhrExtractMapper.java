@@ -34,7 +34,6 @@ public class EhrExtractMapper {
     private final FhirParseService fhirParseService;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
-    private final MapperService mapperService;
 
     public EhrExtractTemplateParameters mapJsonToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
             String json) {
@@ -62,8 +61,6 @@ public class EhrExtractMapper {
 
         extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));
-
-        mapperService.mapToHl7(bundle);
 
         return ehrExtractTemplateParameters;
     }
