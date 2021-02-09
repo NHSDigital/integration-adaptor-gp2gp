@@ -1,6 +1,6 @@
-package uk.nhs.adaptors.gp2gp.gpc;
+package uk.nhs.adaptors.gp2gp.ehr;
 
-import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_STRUCTURED;
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_EHR_CONTINUE;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,11 +13,10 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @Getter
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class GetGpcStructuredTaskDefinition extends TaskDefinition {
-    private final String nhsNumber;
-
+public class SendEhrContinueTaskDefinition extends TaskDefinition {
+    private final String documentName;
     @Override
     public TaskType getTaskType() {
-        return GET_GPC_STRUCTURED;
+        return SEND_EHR_CONTINUE;
     }
 }

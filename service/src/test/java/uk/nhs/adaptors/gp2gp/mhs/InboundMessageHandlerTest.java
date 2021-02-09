@@ -86,7 +86,7 @@ public class InboundMessageHandlerTest {
 
         inboundMessageHandler.handle(message);
 
-        verify(ehrExtractRequestHandler).handle(header, payload);
+        verify(ehrExtractRequestHandler).handleStart(header, payload);
     }
 
     @Test

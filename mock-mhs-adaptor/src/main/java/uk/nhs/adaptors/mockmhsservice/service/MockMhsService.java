@@ -2,6 +2,7 @@ package uk.nhs.adaptors.mockmhsservice.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -40,7 +41,7 @@ public class MockMhsService {
     private final InputStream inputStream3 = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
     private final String internalServerErrorResponse = IOUtils.toString(inputStream3, StandardCharsets.UTF_8);
 
-    public ResponseEntity<String> handleRequest(String interactionId, String mockMhsMessage) throws IOException {
+    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String mockMhsMessage) {
         headers.setContentType(MediaType.TEXT_HTML);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
@@ -57,8 +58,9 @@ public class MockMhsService {
 
         if (interactionId.equals(mockValidInteractionId)) {
             try {
-                inboundProducer.sendToMhsInboundQueue(stubInboundMessage);
-                LOGGER.info("Placed stub message on Inbound Queue");
+                var inboundMessage = stubInboundMessage.replace("%%ConversationId%%", correlationId);
+                inboundProducer.sendToMhsInboundQueue(inboundMessage);
+                LOGGER.info("Placed message on Inbound Queue, conversationId: " + correlationId);
                 headers.setContentType(MediaType.TEXT_XML);
                 return new ResponseEntity<>(stubEbXmlResponse, headers, ACCEPTED);
             } catch (JmsException e) {
