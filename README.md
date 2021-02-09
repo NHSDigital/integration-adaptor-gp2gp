@@ -116,7 +116,7 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 
 ### Trust Store Configuration Options
 
-The adaptor might be assigned with a predefined trustore configuration.
+The adaptor may be assigned with a predefined trustore configuration for Amazon S3.
 
 | Environment Variable                 | Default                   | Description
 | -------------------------------------|---------------------------|-------------
