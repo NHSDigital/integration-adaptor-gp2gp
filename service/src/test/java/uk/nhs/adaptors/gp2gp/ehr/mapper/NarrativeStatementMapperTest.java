@@ -117,6 +117,7 @@ public class NarrativeStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_DATES);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        assertThrows(NullPointerException.class, () -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+        assertThrows(NullPointerException.class, ()
+            -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
     }
 }
