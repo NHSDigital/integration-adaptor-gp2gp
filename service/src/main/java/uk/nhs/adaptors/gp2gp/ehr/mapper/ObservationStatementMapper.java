@@ -21,31 +21,24 @@ public class ObservationStatementMapper {
 
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
+    public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParameters = ObservationStatementTemplateParameters.builder()
             .observationStatementId(randomIdGeneratorService.createNewId())
             .comment(observation.getComment())
             .issued(DateFormatUtil.formatDate(observation.getIssued()))
             .isNested(isNested)
-            .effectiveTime(getEffectiveTime(observation))
-            .effectiveTimeLow(DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart()))
-            .effectiveTimeHigh(DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()))
             .build();
 
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
+            observationStatementTemplateParameters.setEffectiveTime(DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue()));
             return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
         } else if (observation.hasEffectivePeriod()) {
+            observationStatementTemplateParameters.setEffectiveTimeLow(DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart()));
+            observationStatementTemplateParameters.setEffectiveTimeHigh(DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()));
             return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_PERIOD_TEMPLATE, observationStatementTemplateParameters);
         } else {
+            observationStatementTemplateParameters.setEffectiveTime("UNK");
             return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
-        }
-    }
-
-    private String getEffectiveTime(Observation observation) {
-        if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue());
-        } else {
-            return "UNK";
         }
     }
 }
