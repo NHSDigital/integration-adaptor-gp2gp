@@ -14,12 +14,12 @@ management:
         include: info, health, metrics
 
 gp2gp:
-  trustStoreUrl: ${GP2GP_SSL_TRUST_STORE_URL:}
-  trustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:}
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
     azureConnectionString: ${GP2GP_AZURE_STORAGE_CONNECTION_STRING:}
+    trustStoreUrl: ${GP2GP_SSL_TRUST_STORE_URL:}
+    trustStorePassword: ${GP2GP_SSL_TRUST_STORE_PASSWORD:}
   amqp:
     inboundQueueName: "inbound"
     taskQueueName: "taskQueue"
