@@ -5,7 +5,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
@@ -18,6 +20,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EHR_EXTRACT_STATU
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
+@DirtiesContext
 public class EhrExtractStatusRepositoryTest {
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;

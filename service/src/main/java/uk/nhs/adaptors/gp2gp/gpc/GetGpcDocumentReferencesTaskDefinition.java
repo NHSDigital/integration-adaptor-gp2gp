@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GPC_FIND_DOCUMENTS;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -16,6 +18,6 @@ public class GetGpcDocumentReferencesTaskDefinition extends TaskDefinition {
 
     @Override
     public TaskType getTaskType() {
-        return TaskType.GPC_FIND_DOCUMENTS;
+        return GPC_FIND_DOCUMENTS;
     }
 }

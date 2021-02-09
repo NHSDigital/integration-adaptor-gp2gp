@@ -45,7 +45,8 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
         var outboundMessage = OutboundMessageWithPayload.builder().payload(extractCoreMessage).build();
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
 
-        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(stringRequestBody);
+        var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(
+            stringRequestBody, sendEhrExtractCoreTaskDefinition.getConversationId());
         Instant requestSentAt = Instant.now();
         mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 

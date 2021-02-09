@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
+
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +19,6 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTaskDefinition> {
-    private static final String JSON_EXTENSION = ".json";
-
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final GpcRequestBuilder gpcRequestBuilder;

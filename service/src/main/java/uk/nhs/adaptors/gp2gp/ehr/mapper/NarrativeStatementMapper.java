@@ -19,6 +19,7 @@ import com.github.mustachejava.Mustache;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class NarrativeStatementMapper {
+
     private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
