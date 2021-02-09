@@ -153,7 +153,7 @@ public class EhrExtractStatusService {
 
         Update update = createUpdateWithUpdatedAt();
         if (patientId.isPresent()) {
-            update.set(DOCUMENT_PATIENT_ID, patientId);
+            update.set(DOCUMENT_PATIENT_ID, patientId.get());
         } else {
             update.set(DOCUMENT_PATIENT_ID, null);
         }
