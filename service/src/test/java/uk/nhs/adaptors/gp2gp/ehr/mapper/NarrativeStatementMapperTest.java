@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -113,11 +114,11 @@ public class NarrativeStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithNoDates_Expect_NullPointerException() throws IOException {
+    public void When_MappingParsedObservationJsonWithNoDates_Expect_MapperException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_DATES);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        assertThrows(NullPointerException.class, ()
+        assertThrows(EhrMapperException.class, ()
             -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
     }
 }
