@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.springframework.stereotype.Component;
@@ -38,8 +39,10 @@ public class NarrativeStatementMapper {
             return formatDate(observation.getEffectiveDateTimeType().getValue());
         } else if (observation.hasEffectivePeriod()) {
             return formatDate(observation.getEffectivePeriod().getStart());
-        } else {
+        } else if (observation.hasIssued()) {
             return formatDate(observation.getIssued());
+        } else {
+            throw new EhrMapperException("Could not map effective date");
         }
     }
 
