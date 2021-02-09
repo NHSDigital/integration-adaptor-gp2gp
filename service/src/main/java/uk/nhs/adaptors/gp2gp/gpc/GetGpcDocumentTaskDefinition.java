@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_DOCUMENT;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -20,7 +22,7 @@ public class GetGpcDocumentTaskDefinition extends TaskDefinition {
 
     @Override
     public TaskType getTaskType() {
-        return TaskType.GET_GPC_DOCUMENT;
+        return GET_GPC_DOCUMENT;
     }
 
     public static String extractIdFromUrl(String url) {

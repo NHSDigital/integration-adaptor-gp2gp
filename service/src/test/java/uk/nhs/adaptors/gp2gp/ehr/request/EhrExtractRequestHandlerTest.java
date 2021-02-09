@@ -75,7 +75,7 @@ public class EhrExtractRequestHandlerTest {
         when(timestampService.now()).thenReturn(now);
         when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
-        ehrExtractRequestHandler.handle(soapHeader, soapBody);
+        ehrExtractRequestHandler.handleStart(soapHeader, soapBody);
 
         var expectedEhrExtractStatus = createEhrExtractStatusMatchingXmlFixture(now);
         verify(ehrExtractStatusRepository).save(expectedEhrExtractStatus);
@@ -93,7 +93,7 @@ public class EhrExtractRequestHandlerTest {
         EhrExtractStatus expected = createEhrExtractStatusMatchingXmlFixture(now);
         when(ehrExtractStatusRepository.save(expected)).thenThrow(mock(DuplicateKeyException.class));
 
-        ehrExtractRequestHandler.handle(soapHeader, soapBody);
+        ehrExtractRequestHandler.handleStart(soapHeader, soapBody);
 
         verify(ehrExtractStatusRepository).save(expected);
         verifyNoInteractions(taskDispatcher);
@@ -152,7 +152,7 @@ public class EhrExtractRequestHandlerTest {
         removeAttributeElement(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -167,7 +167,7 @@ public class EhrExtractRequestHandlerTest {
         clearAttribute(xpath, body);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -189,7 +189,7 @@ public class EhrExtractRequestHandlerTest {
         removeElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
@@ -204,7 +204,7 @@ public class EhrExtractRequestHandlerTest {
         clearElement(xpath, header);
 
         assertThatExceptionOfType(MissingValueException.class)
-            .isThrownBy(() -> ehrExtractRequestHandler.handle(header, body))
+            .isThrownBy(() -> ehrExtractRequestHandler.handleStart(header, body))
             .withMessageContaining(xpath)
             .withMessageContaining(SpineInteraction.EHR_EXTRACT_REQUEST.getInteractionId());
     }
