@@ -2,9 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -19,7 +16,6 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -90,7 +86,7 @@ public class EhrExtractMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService, mapperService);
+        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
     }
 
     @Test
@@ -101,8 +97,6 @@ public class EhrExtractMapperTest {
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
-
-        verify(mapperService).mapToHl7(any(Bundle.class));
     }
 
     @ParameterizedTest
@@ -112,8 +106,6 @@ public class EhrExtractMapperTest {
             () -> ehrExtractMapper.mapJsonToEhrFhirExtractParams(getGpcStructuredTaskDefinition,
                 jsonContent));
         assertThat(exception.getMessage()).isEqualTo(expectedMessage);
-
-        verify(mapperService, never()).mapToHl7(any());
     }
 
     private static Stream<Arguments> exceptionParams() {

@@ -45,6 +45,7 @@ public class NarrativeStatementMapperTest {
     public void setUp() {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        MessageContext.setMessageContext(new IdMapper(randomIdGeneratorService));
         narrativeStatementMapper = new NarrativeStatementMapper();
     }
 
