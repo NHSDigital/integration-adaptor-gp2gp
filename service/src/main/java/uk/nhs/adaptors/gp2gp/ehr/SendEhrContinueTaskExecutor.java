@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +19,6 @@ public class SendEhrContinueTaskExecutor implements TaskExecutor<SendEhrContinue
     @Override
     public void execute(SendEhrContinueTaskDefinition taskDefinition) {
         LOGGER.info("SendEhrContinue task was created, Sending EHR Continue to GP");
-        LOGGER.info("Document: " + taskDefinition.getDocumentName() + JSON_EXTENSION);
+        LOGGER.info("Document: " + taskDefinition.getDocumentName());
     }
 }
