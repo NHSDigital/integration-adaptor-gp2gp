@@ -19,8 +19,7 @@ public class DateFormatUtil {
         }
 
         return DATE_TIME_FORMATTER.format(
-            date
-                .toInstant()
+            date.toInstant()
                 .atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
     }

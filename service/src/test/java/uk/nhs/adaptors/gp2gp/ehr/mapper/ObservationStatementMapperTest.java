@@ -24,19 +24,20 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationStatementMapperTest {
+    private static final String TEST_ID = "394559384658936";
+    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
+    private static final String INPUT_JSON_WITH_NULL_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-2.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "example-observation-resource-3.json";
+    private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY + "example-observation-resource-4.json";
+    private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY + "example-observation-resource-5.json";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-observation-statement-1.xml";
+    private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-observation-statement-2.xml";
+    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-observation-statement-3.xml";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "expected-output-observation-statement-4.xml";
+
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-
-    private static final String TEST_ID = "394559384658936";
-    private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-1.json";
-    private static final String INPUT_JSON_WITH_NULL_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-2.json";
-    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = "/ehr/mapper/observation/example-observation-resource-3.json";
-    private static final String INPUT_JSON_WITH_ISSUED_ONLY = "/ehr/mapper/observation/example-observation-resource-4.json";
-    private static final String INPUT_JSON_WITH_NO_DATES = "/ehr/mapper/observation/example-observation-resource-5.json";
-    private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/expected-output-observation-statement-1.xml";
-    private static final String OUTPUT_XML_USES_UNK_DATE_TIME = "/ehr/mapper/observation/expected-output-observation-statement-2.xml";
-    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = "/ehr/mapper/observation/expected-output-observation-statement-3.xml";
-    private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD = "/ehr/mapper/observation/expected-output-observation-statement-4.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -47,7 +48,7 @@ public class ObservationStatementMapperTest {
     }
 
     @AfterAll
-    public static void tearDown() {
+    public static void deinitialize() {
         TimeZone.setDefault(null);
     }
 
