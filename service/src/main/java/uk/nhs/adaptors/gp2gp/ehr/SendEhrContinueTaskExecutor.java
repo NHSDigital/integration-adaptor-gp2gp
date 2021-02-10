@@ -21,6 +21,6 @@ public class SendEhrContinueTaskExecutor implements TaskExecutor<SendEhrContinue
     @Override
     public void execute(SendEhrContinueTaskDefinition taskDefinition) {
         LOGGER.info("SendEhrContinue task was created, Sending EHR Continue to GP");
-        LOGGER.info("Document: " + taskDefinition.getDocumentName() + JSON_EXTENSION);
+        LOGGER.info("Document: " + taskDefinition.getDocumentName());
     }
 }
