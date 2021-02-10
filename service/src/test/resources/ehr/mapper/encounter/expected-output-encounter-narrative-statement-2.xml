@@ -1,0 +1,32 @@
+<component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id" />
+        <code code="24631000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Residential Home Visit Note">
+            <originalText>Residential home visit note</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <low value="20100113152000"/>
+        </effectiveTime>
+        <availabilityTime value="20091102" />
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+    </ehrComposition>
+</component>
