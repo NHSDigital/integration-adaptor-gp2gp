@@ -116,9 +116,7 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 
 ### Trust Store Configuration Options
 
-These optional properties configure a trust store with private CA certificates. This trust store does not replace Java's
-default trust store. At runtime the application adds these additional certificates to the default trust store. See
-[OPERATING.md - AWS DocumentDB TLS configuration](OPERATING.md#AWS DocumentDB TLS configuration) for more information.
+You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not replace Java's default trust store. At runtime the application adds these additional certificates to the default trust store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.
 
 | Environment Variable                | Default       | Description
 | ------------------------------------|---------------|-------------
