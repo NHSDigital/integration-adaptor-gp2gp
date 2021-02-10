@@ -18,7 +18,6 @@ public class NarrativeStatementMapper {
 
     private final MessageContext messageContext;
 
-    private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
 
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {

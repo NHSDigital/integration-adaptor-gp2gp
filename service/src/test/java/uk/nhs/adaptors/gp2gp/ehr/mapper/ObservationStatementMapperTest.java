@@ -18,6 +18,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,6 +43,7 @@ public class ObservationStatementMapperTest {
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
+    private MessageContext messageContext;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -51,15 +53,21 @@ public class ObservationStatementMapperTest {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
     }
 
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
-
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        observationStatementMapper = new ObservationStatementMapper(randomIdGeneratorService);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        observationStatementMapper = new ObservationStatementMapper(messageContext);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
     }
 
     @ParameterizedTest

@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.hl7.fhir.dstu3.model.Observation;
 
 import com.github.mustachejava.Mustache;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
@@ -20,11 +20,11 @@ public class ObservationStatementMapper {
     private static final String EFFECTIVE_PERIOD_XML = "<effectiveTime><low value=\"%s\"/><high value=\"%s\"/></effectiveTime>";
     private static final String EFFECTIVE_TIME_UNK_XML =  "<effectiveTime><center value=\"UNK\"/></effectiveTime>";
 
-    private final RandomIdGeneratorService randomIdGeneratorService;
+    private final MessageContext messageContext;
 
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParameters = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(randomIdGeneratorService.createNewId())
+            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
             .comment(observation.getComment())
             .issued(DateFormatUtil.formatDate(observation.getIssued()))
             .isNested(isNested)
