@@ -36,11 +36,11 @@ public class ObservationStatementMapperTest {
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-observation-statement-3.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "expected-output-observation-statement-4.xml";
 
-    @Mock
-    private RandomIdGeneratorService randomIdGeneratorService;
-
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
+
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @BeforeAll
     public static void initialize() {
