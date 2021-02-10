@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
