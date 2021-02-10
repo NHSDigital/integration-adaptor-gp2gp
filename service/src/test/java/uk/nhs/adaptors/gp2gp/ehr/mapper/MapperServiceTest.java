@@ -40,7 +40,8 @@ public class MapperServiceTest {
     public void setUp() throws ParseException {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
         when(randomIdGeneratorService.createNewId()).thenReturn("111122223333", "3334445555");
-        mapperService = new MapperService(randomIdGeneratorService, new NarrativeStatementMapper());
+        MessageContext messageContext = new MessageContext(randomIdGeneratorService);
+        mapperService = new MapperService(new NarrativeStatementMapper(messageContext), messageContext);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         date = simpleDateFormat.parse("2010-01-13 15:29:50.3+00:00");
@@ -81,5 +82,4 @@ public class MapperServiceTest {
 
         return observation;
     }
-
 }

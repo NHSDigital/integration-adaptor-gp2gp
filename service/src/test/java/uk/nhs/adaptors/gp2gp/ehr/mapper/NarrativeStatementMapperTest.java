@@ -40,18 +40,19 @@ public class NarrativeStatementMapperTest {
 
     private CharSequence expectedOutputMessage;
     private NarrativeStatementMapper narrativeStatementMapper;
+    private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        MessageContext.setMessageContext(new IdMapper(randomIdGeneratorService));
-        narrativeStatementMapper = new NarrativeStatementMapper();
+        messageContext = new MessageContext(randomIdGeneratorService);
+        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
     }
 
     @AfterEach
     public void tearDown() {
-        MessageContext.resetMessageContext();
+        messageContext.resetMessageContext();
         TimeZone.setDefault(null);
     }
 

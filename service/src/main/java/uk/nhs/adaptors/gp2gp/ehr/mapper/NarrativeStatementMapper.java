@@ -5,9 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 
+import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import org.hl7.fhir.dstu3.model.ResourceType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import org.hl7.fhir.dstu3.model.Observation;
@@ -15,7 +18,10 @@ import org.hl7.fhir.dstu3.model.Observation;
 import com.github.mustachejava.Mustache;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class NarrativeStatementMapper {
+
+    private final MessageContext messageContext;
 
     private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
@@ -25,7 +31,7 @@ public class NarrativeStatementMapper {
 
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(MessageContext.getIdMapper().getOrNew(observation.getId()))
+            .narrativeStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
             .isNested(isNested)

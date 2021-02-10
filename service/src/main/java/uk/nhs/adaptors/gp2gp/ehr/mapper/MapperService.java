@@ -13,18 +13,16 @@ import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class MapperService {
 
-    private final RandomIdGeneratorService randomIdGeneratorService;
     private final NarrativeStatementMapper narrativeStatementMapper;
+    private final MessageContext messageContext;
 
     public String mapToHl7(Bundle bundle) {
-        MessageContext.setMessageContext(new IdMapper(randomIdGeneratorService));
         String hl7;
 
         try {
@@ -33,7 +31,7 @@ public class MapperService {
                 .map(observation -> narrativeStatementMapper.mapObservationToNarrativeStatement((Observation) observation, false))
                 .collect(Collectors.joining());
         } finally {
-            MessageContext.resetMessageContext();
+            messageContext.resetMessageContext();
         }
 
         return hl7;
