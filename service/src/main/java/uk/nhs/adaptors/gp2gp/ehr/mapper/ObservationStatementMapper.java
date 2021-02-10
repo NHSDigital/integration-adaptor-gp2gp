@@ -30,11 +30,14 @@ public class ObservationStatementMapper {
             .build();
 
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            observationStatementTemplateParameters.setEffectiveTime(DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue()));
+            observationStatementTemplateParameters.setEffectiveTime(
+                DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue()));
             return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
         } else if (observation.hasEffectivePeriod()) {
-            observationStatementTemplateParameters.setEffectiveTimeLow(DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart()));
-            observationStatementTemplateParameters.setEffectiveTimeHigh(DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()));
+            observationStatementTemplateParameters.setEffectiveTimeLow(
+                DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart()));
+            observationStatementTemplateParameters.setEffectiveTimeHigh(
+                DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()));
             return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_PERIOD_TEMPLATE, observationStatementTemplateParameters);
         } else {
             observationStatementTemplateParameters.setEffectiveTime("UNK");

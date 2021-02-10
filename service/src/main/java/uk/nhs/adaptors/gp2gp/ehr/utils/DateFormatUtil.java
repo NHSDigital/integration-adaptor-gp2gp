@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -12,6 +14,10 @@ public class DateFormatUtil {
         .toFormatter();
 
     public static String formatDate(Date date) {
+        if (date == null) {
+            throw new EhrMapperException("Could not format date");
+        }
+
         return DATE_TIME_FORMATTER.format(
             date
                 .toInstant()
