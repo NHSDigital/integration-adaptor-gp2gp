@@ -18,6 +18,7 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,26 +41,33 @@ public class NarrativeStatementMapperTest {
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
 
-    private CharSequence expectedOutputMessage;
-    private NarrativeStatementMapper narrativeStatementMapper;
-
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+
+    private CharSequence expectedOutputMessage;
+    private NarrativeStatementMapper narrativeStatementMapper;
+    private MessageContext messageContext;
 
     @BeforeAll
     public static void initialize() {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
     }
 
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
-
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
     }
 
     @ParameterizedTest
