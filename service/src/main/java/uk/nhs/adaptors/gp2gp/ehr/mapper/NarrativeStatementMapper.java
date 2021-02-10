@@ -10,10 +10,9 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import org.hl7.fhir.dstu3.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import org.hl7.fhir.dstu3.model.Observation;
 
 import com.github.mustachejava.Mustache;
 
@@ -54,8 +53,7 @@ public class NarrativeStatementMapper {
 
     private String formatDate(Date date) {
         return DATE_TIME_FORMATTER.format(
-            date
-                .toInstant()
+            date.toInstant()
                 .atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
     }
