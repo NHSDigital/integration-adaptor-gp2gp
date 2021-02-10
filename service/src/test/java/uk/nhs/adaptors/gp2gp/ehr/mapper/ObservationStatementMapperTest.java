@@ -1,24 +1,26 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import org.hl7.fhir.dstu3.model.Observation;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.ZoneOffset;
 import java.util.TimeZone;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationStatementMapperTest {
@@ -39,16 +41,20 @@ public class ObservationStatementMapperTest {
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
 
-    @BeforeEach
-    public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        observationStatementMapper = new ObservationStatementMapper(randomIdGeneratorService);
+    @BeforeAll
+    public static void initialize() {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
     }
 
     @AfterAll
     public static void tearDown() {
         TimeZone.setDefault(null);
+    }
+
+    @BeforeEach
+    public void setUp() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        observationStatementMapper = new ObservationStatementMapper(randomIdGeneratorService);
     }
 
     @Test
