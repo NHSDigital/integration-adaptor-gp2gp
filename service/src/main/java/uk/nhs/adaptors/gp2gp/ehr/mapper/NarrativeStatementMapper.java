@@ -16,7 +16,6 @@ import com.github.mustachejava.Mustache;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class NarrativeStatementMapper {
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
-
     private final MessageContext messageContext;
 
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
