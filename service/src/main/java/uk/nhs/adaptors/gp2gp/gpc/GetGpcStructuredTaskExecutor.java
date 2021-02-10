@@ -8,10 +8,12 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final DetectTranslationCompleteService detectTranslationCompleteService;
     private final OutputMessageWrapperMapper outputMessageWrapperMapper;
     private final EhrExtractMapper ehrExtractMapper;
+    private final MessageContext messageContext;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -39,15 +42,20 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
         var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
+        var hl7TranslatedResponse = StringUtils.EMPTY;
 
-        var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
-            structuredTaskDefinition,
-            response);
-        String transformedExtract = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        try {
+            var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
+                structuredTaskDefinition,
+                response);
+            String transformedExtract = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        var hl7TranslatedResponse = outputMessageWrapperMapper.map(
-            structuredTaskDefinition,
-            transformedExtract);
+            hl7TranslatedResponse = outputMessageWrapperMapper.map(
+                structuredTaskDefinition,
+                transformedExtract);
+        } finally {
+            messageContext.resetMessageContext();
+        }
 
         String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
         storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,

@@ -62,8 +62,6 @@ public class EhrExtractMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
-    @Mock
-    private MapperService mapperService;
 
     private EhrExtractMapper ehrExtractMapper;
 
