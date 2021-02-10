@@ -4,27 +4,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import org.hl7.fhir.dstu3.model.Observation;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import java.io.IOException;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
-import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
+import org.hl7.fhir.dstu3.model.Observation;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class NarrativeStatementMapperTest {
-    @Mock
-    private RandomIdGeneratorService randomIdGeneratorService;
-
     private static final String TEST_ID = "394559384658936";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-1.json";
     private static final String INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME = "/ehr/mapper/observation/example-observation-resource-2.json";
@@ -41,16 +40,23 @@ public class NarrativeStatementMapperTest {
     private CharSequence expectedOutputMessage;
     private NarrativeStatementMapper narrativeStatementMapper;
 
-    @BeforeEach
-    public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
+
+    @BeforeAll
+    public static void initialize() {
         TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
     }
 
     @AfterAll
-    public static void tearDown() {
+    public static void deinitialize() {
         TimeZone.setDefault(null);
+    }
+
+    @BeforeEach
+    public void setUp() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
     }
 
     @Test
