@@ -26,22 +26,22 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class EncounterStatementMapperTest {
     private static final String TEST_FILES_DIRECTORY = "/ehr/mapper/encounter/";
-    private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "example-encounter-resource-1.json";
-    private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "expected-output-encounter-narrative-statement-1.xml";
-    private static final String INPUT_JSON_WITH_START_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "example-encounter-resource-2.json";
-    private static final String OUTPUT_XML_WITH_START_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "expected-output-encounter-narrative-statement-2.xml";
-    private static final String INPUT_JSON_WITH_NO_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "example-encounter-resource-3.json";
-    private static final String OUTPUT_XML_WITH_NO_EFFECTIVE_TIME = TEST_FILES_DIRECTORY +
-        "expected-output-encounter-narrative-statement-3.xml";
-    private static final String INPUT_JSON_WITH_NO_PERIOD_FIELD = TEST_FILES_DIRECTORY +
-        "example-encounter-resource-4.json";
-    private static final String OUTPUT_XML_WITH_NO_PERIOD_FIELD = TEST_FILES_DIRECTORY +
-        "expected-output-encounter-narrative-statement-4.xml";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-1.json";
+    private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-narrative-statement-1.xml";
+    private static final String INPUT_JSON_WITH_START_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-2.json";
+    private static final String OUTPUT_XML_WITH_START_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-narrative-statement-2.xml";
+    private static final String INPUT_JSON_WITH_NO_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-3.json";
+    private static final String OUTPUT_XML_WITH_NO_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-narrative-statement-3.xml";
+    private static final String INPUT_JSON_WITH_NO_PERIOD_FIELD = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-4.json";
+    private static final String OUTPUT_XML_WITH_NO_PERIOD_FIELD = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-narrative-statement-4.xml";
     private static final String TEST_ID = "test-id";
 
     @Mock
@@ -80,7 +80,7 @@ public class EncounterStatementMapperTest {
     private static Stream<Arguments> testFilePaths() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_TIME, OUTPUT_XML_WITH_EFFECTIVE_TIME),
-            Arguments.of( INPUT_JSON_WITH_START_EFFECTIVE_TIME, OUTPUT_XML_WITH_START_EFFECTIVE_TIME),
+            Arguments.of(INPUT_JSON_WITH_START_EFFECTIVE_TIME, OUTPUT_XML_WITH_START_EFFECTIVE_TIME),
             Arguments.of(INPUT_JSON_WITH_NO_EFFECTIVE_TIME, OUTPUT_XML_WITH_NO_EFFECTIVE_TIME),
             Arguments.of(INPUT_JSON_WITH_NO_PERIOD_FIELD, OUTPUT_XML_WITH_NO_PERIOD_FIELD)
         );
