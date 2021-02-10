@@ -1,4 +1,4 @@
-<component typeCode="COMP" contextConductionInd="true">
+<component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />

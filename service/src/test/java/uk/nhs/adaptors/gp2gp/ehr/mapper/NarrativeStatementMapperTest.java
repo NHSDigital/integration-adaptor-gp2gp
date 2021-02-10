@@ -7,7 +7,11 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.time.ZoneOffset;
 import java.util.TimeZone;
+import java.util.stream.Stream;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -58,11 +62,11 @@ public class NarrativeStatementMapperTest {
         narrativeStatementMapper = new NarrativeStatementMapper(randomIdGeneratorService);
     }
 
-    @Test
-    public void When_MappingParsedObservationJsonWithEffectiveDatetime_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_EFFECTIVE_DATE_TIME);
-
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
+    @ParameterizedTest
+    @MethodSource("resourceFileParams")
+    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
@@ -70,46 +74,18 @@ public class NarrativeStatementMapperTest {
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
-    @Test
-    public void When_MappingParsedObservationJsonWithNullEffectiveDatetime_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_ISSUED);
-
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
-
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
-
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+    private static Stream<Arguments> resourceFileParams() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
+            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
+            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED)
+        );
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithEffectivePeriodStart_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_EFFECTIVE_PERIOD_START);
-
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_PERIOD);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
-
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
-
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
-    }
-
-    @Test
-    public void When_MappingParsedObservationJsonWithoutEffective_Expect_NarrativeStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_ISSUED);
-
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ISSUED_ONLY);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
-
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
-
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
-    }
-
-    @Test
-    public void When_MappingParsedObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
+    public void When_MappingObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
-
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
