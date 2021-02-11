@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,8 +17,6 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class NarrativeStatementMapperTest {
+public class NarrativeStatementMapperTest extends MapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
@@ -48,11 +44,6 @@ public class NarrativeStatementMapperTest {
     private NarrativeStatementMapper narrativeStatementMapper;
     private MessageContext messageContext;
 
-    @BeforeAll
-    public static void initialize() {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-    }
-
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
@@ -63,11 +54,6 @@ public class NarrativeStatementMapperTest {
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
     }
 
     @ParameterizedTest
