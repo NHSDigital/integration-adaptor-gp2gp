@@ -6,7 +6,7 @@
         </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            <center nullFlavour="UNK"/>
+            <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="" />
         <author typeCode="AUT" contextControlCode="OP">

@@ -7,7 +7,7 @@ import org.hl7.fhir.dstu3.model.Period;
 public final class EffectiveTimeMappingUtils {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String EFFECTIVE_TIME_FULL_TEMPLATE = "<low value=\"%s\"/><high value=\"%s\"/>";
-    private static final String DEFAULT_TIME_VALUE = "<center nullFlavour=\"UNK\"/>";
+    private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
 
     private EffectiveTimeMappingUtils() {
     }
