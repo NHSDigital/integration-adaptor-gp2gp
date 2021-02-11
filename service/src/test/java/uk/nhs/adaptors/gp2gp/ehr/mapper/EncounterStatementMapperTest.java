@@ -46,6 +46,8 @@ public class EncounterStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private MessageContext messageContext;
 
     private EncounterStatementMapper encounterStatementMapper;
 
@@ -62,7 +64,8 @@ public class EncounterStatementMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        encounterStatementMapper = new EncounterStatementMapper(randomIdGeneratorService);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        encounterStatementMapper = new EncounterStatementMapper(messageContext);
     }
 
     @ParameterizedTest

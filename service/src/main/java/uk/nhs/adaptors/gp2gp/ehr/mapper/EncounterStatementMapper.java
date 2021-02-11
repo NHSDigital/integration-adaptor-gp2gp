@@ -1,12 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Period;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +22,11 @@ public class EncounterStatementMapper {
     private static final String EFFECTIVE_LOW_TEMPLATE = "<low value=\"%s\"/>";
     private static final String EFFECTIVE_HIGH_TEMPLATE = "<high value=\"%s\"/>";
 
-    private final RandomIdGeneratorService randomIdGeneratorService;
+    private final MessageContext messageContext;
 
     public String mapEncounterToEncounterStatement(Encounter encounter) {
         var encounterStatementTemplateParameters = EncounterStatementTemplateParameters.builder()
-            .encounterStatementId(randomIdGeneratorService.createNewId())
+            .encounterStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Encounter, encounter.getId()))
             .status(COMPLETE_CODE);
 
         Period period = encounter.getPeriod();
