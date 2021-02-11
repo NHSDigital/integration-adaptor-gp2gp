@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -39,9 +39,6 @@ public class ImmunizationObservationStatementMapper {
     private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_observation_statement_template.mustache");
-    private static final DateTimeFormatter DATE_TIME_FORMATTER_HL7 = new DateTimeFormatterBuilder()
-        .appendPattern("yyyyMMddHHmmss")
-        .toFormatter();
     private static final DateTimeFormatter DATE_TIME_FORMATTER_SHORT = new DateTimeFormatterBuilder()
         .appendPattern("yyyy-MM-dd")
         .toFormatter();
@@ -61,11 +58,11 @@ public class ImmunizationObservationStatementMapper {
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
     private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S%n";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
-    private final RandomIdGeneratorService randomIdGeneratorService;
+    private final MessageContext messageContext;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, Bundle bundle, boolean isNested) {
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
-            .observationStatementId(randomIdGeneratorService.createNewId())
+            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Immunization, immunization.getId()))
             .availabilityTime(buildAvailabilityTime(immunization))
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization, bundle))
@@ -88,7 +85,7 @@ public class ImmunizationObservationStatementMapper {
         immunization.getDate();
         Optional<String> effectiveTime = Optional.empty();
         if (immunization.getDate() != null) {
-            effectiveTime = Optional.of(formatHL7Date(immunization.getDate()));
+            effectiveTime = Optional.of(DateFormatUtil.formatDate(immunization.getDate()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -183,7 +180,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildDoseQuantityPertinentInformation(Immunization immunization) {
         if (immunization.getDoseQuantity().getValue() != null && immunization.getDoseQuantity().getUnit() != null) {
             SimpleQuantity doseQuantity = immunization.getDoseQuantity();
-            return doseQuantity.getValue() + StringUtils.SPACE + doseQuantity.getUnit();
+            return QUANTITY + doseQuantity.getValue() + StringUtils.SPACE + doseQuantity.getUnit();
         }
         return StringUtils.EMPTY;
     }
@@ -255,15 +252,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String formatDateTimeType(DateTimeType dateTimeType) {
         Date extractedDate = dateTimeType.getValue();
-        return formatHL7Date(extractedDate);
-    }
-
-    private String formatHL7Date(Date date) {
-        return DATE_TIME_FORMATTER_HL7
-            .format(date
-                .toInstant()
-                .atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
+        return DateFormatUtil.formatDate(extractedDate);
     }
 
     private String formatShortDate(Date date) {

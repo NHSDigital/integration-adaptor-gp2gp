@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.TimeZone;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -13,6 +14,8 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Immunization;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,17 +40,29 @@ public class ImmunizationObservationStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
     private Bundle bundle;
     private FhirParseService fhirParseService;
 
     @BeforeEach
     public void setUp() throws IOException {
-        fhirParseService = new FhirParseService();
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(randomIdGeneratorService);
+        fhirParseService = new FhirParseService();
+        messageContext = new MessageContext(randomIdGeneratorService);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
     }
 
     @Test
@@ -56,7 +71,7 @@ public class ImmunizationObservationStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, false);
-
+        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
