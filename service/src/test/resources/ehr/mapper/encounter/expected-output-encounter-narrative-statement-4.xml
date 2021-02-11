@@ -8,7 +8,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="" />
+        <availabilityTime nullFlavor="UNK" />
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113151332" />
             <agentRef classCode="AGNT">

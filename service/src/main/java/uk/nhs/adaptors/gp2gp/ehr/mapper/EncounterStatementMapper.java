@@ -1,8 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-import uk.nhs.adaptors.gp2gp.ehr.utils.EffectiveTimeMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -24,12 +23,9 @@ public class EncounterStatementMapper {
     public String mapEncounterToEncounterStatement(Encounter encounter) {
         var encounterStatementTemplateParameters = EncounterStatementTemplateParameters.builder()
             .encounterStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Encounter, encounter.getId()))
-            .effectiveTime(EffectiveTimeMappingUtils.prepareEffectiveTimeForObservationForEncounter(encounter))
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
             .status(COMPLETE_CODE);
-
-        if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
-            encounterStatementTemplateParameters.availabilityTime(DateFormatUtil.formatDate(encounter.getPeriod().getStart()));
-        }
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());

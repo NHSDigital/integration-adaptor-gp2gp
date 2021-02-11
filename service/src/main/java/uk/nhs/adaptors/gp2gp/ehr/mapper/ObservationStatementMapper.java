@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-import uk.nhs.adaptors.gp2gp.ehr.utils.EffectiveTimeMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.hl7.fhir.dstu3.model.Observation;
@@ -25,7 +25,7 @@ public class ObservationStatementMapper {
             .comment(observation.getComment())
             .issued(DateFormatUtil.formatDate(observation.getIssued()))
             .isNested(isNested)
-            .effectiveTime(EffectiveTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
             .build();
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
