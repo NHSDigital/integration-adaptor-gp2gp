@@ -3,7 +3,7 @@
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="UNK" />
+            <center nullFlavour="UNK" />
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
         <pertinentInformation typeCode="PERT">

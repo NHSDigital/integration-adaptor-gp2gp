@@ -10,5 +10,6 @@ import lombok.Setter;
 public class EncounterStatementTemplateParameters {
     private String encounterStatementId;
     private String status;
+    private String availabilityTime;
     private String effectiveTime;
 }
