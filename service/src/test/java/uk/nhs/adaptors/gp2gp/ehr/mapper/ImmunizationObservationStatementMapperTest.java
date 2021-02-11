@@ -26,17 +26,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class ImmunizationObservationStatementMapperTest {
 
     private static final String TEST_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
-    private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION =
-        "/ehr/mapper/immunization/immunization-all-pertinent-information.json";
-    private static final String INPUT_JSON_WITHOUT_PERTINENT_INFORMATION =
-        "/ehr/mapper/immunization/immunization-no-pertinent-information.json";
-    private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION =
-        "/ehr/mapper/immunization/immunization-no-date-recorded.json";
-    private static final String INPUT_JSON_BUNDLE = "/ehr/mapper/immunization/fhir-bundle.json";
-    private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION =
-        "/ehr/mapper/immunization/expected-output-observation-statement-all-information.xml";
-    private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION =
-        "/ehr/mapper/immunization/expected-output-observation-statement-no-information.xml";
+    private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
+    private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-all-pertinent-information.json";
+    private static final String INPUT_JSON_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-no-pertinent-information.json";
+    private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-no-date-recorded.json";
+    private static final String INPUT_JSON_BUNDLE =  IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
+    private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-all-information.xml";
+    private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-no-information.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;

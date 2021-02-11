@@ -11,17 +11,17 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -42,10 +42,8 @@ public class ImmunizationObservationStatementMapper {
     private static final DateTimeFormatter DATE_TIME_FORMATTER_SHORT = new DateTimeFormatterBuilder()
         .appendPattern("yyyy-MM-dd")
         .toFormatter();
-
     private static final String PARENT_PRESENT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1";
     private static final String DATE_RECORDED_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1";
-
     private static final String PARENT_PRESENT = "Parent Present: ";
     private static final String LOCATION = "Location: ";
     private static final String MANUFACTURER = "Manufacturer: ";
@@ -58,6 +56,8 @@ public class ImmunizationObservationStatementMapper {
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
     private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S%n";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
+    private static final String COMMA = ",";
+
     private final MessageContext messageContext;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, Bundle bundle, boolean isNested) {
@@ -72,19 +72,15 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildAvailabilityTime(Immunization immunization) {
-        var dateRecordedExtension = filterExtensionByUrl(immunization, DATE_RECORDED_URL);
-        if (dateRecordedExtension.isPresent()) {
-            var dateRecorded = dateRecordedExtension.get();
-            return formatDateTimeType((DateTimeType) dateRecorded.getValue());
-        }
-        throw new EhrMapperException("Could not map recorded date");
+        var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
+        return dateRecordedExtension
+            .map(value -> formatDateTimeType((DateTimeType) value.getValue()))
+            .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
     }
 
     private String buildEffectiveTime(Immunization immunization) {
-        immunization.getDateElement();
-        immunization.getDate();
         Optional<String> effectiveTime = Optional.empty();
-        if (immunization.getDate() != null) {
+        if (immunization.hasDate()) {
             effectiveTime = Optional.of(DateFormatUtil.formatDate(immunization.getDate()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
@@ -94,7 +90,7 @@ public class ImmunizationObservationStatementMapper {
         List<String> pertinentInformationList = retrievePertinentInformation(immunization, bundle);
         return pertinentInformationList.stream()
             .filter(StringUtils::isNotEmpty)
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining(System.lineSeparator()));
     }
 
     private List<String> retrievePertinentInformation(Immunization immunization, Bundle bundle) {
@@ -114,12 +110,14 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildParentPresentPertinentInformation(Immunization immunization) {
-        var parentPresentOptional = filterExtensionByUrl(immunization, PARENT_PRESENT_URL);
+        var parentPresentOptional = ExtensionMappingUtils.filterExtensionByUrl(immunization, PARENT_PRESENT_URL);
         if (parentPresentOptional.isPresent()) {
             BooleanType isParentPresent = (BooleanType) parentPresentOptional.get().getValue();
             return PARENT_PRESENT + isParentPresent.getValue();
         }
-        return StringUtils.EMPTY;
+        return parentPresentOptional.map(value -> (BooleanType) value.getValue())
+            .map(value -> PARENT_PRESENT + value.getValue())
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildLocationPertinentInformation(Immunization immunization, Bundle bundle) {
@@ -138,7 +136,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildManufacturerPertinentInformation(Immunization immunization, Bundle bundle) {
         Optional<Organization> organization = Optional.empty();
-        if (immunization.getManufacturer() != null) {
+        if (immunization.hasManufacturer()) {
             String organizationId = immunization.getManufacturer().getReferenceElement().getIdPart();
             organization = bundle.getEntry().stream()
                 .filter(bundleEntryComponent -> bundleEntryComponent.getResource().getResourceType().equals(ResourceType.Organization))
@@ -161,24 +159,24 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildSitePertinentInformation(Immunization immunization) {
         Optional<String> site = Optional.empty();
-        if (immunization.getSite() != null) {
+        if (immunization.hasSite()) {
             CodeableConcept siteObject = immunization.getSite();
-            site = extractTextOrCoding(siteObject);
+            site = CodeableConceptMappingUtils.extractTextOrCoding(siteObject);
         }
         return site.map(value -> SITE + value).orElse(StringUtils.EMPTY);
     }
 
     private String buildRoutePertinentInformation(Immunization immunization) {
         Optional<String> route = Optional.empty();
-        if (immunization.getRoute() != null) {
+        if (immunization.hasRoute()) {
             CodeableConcept routeObject = immunization.getRoute();
-            route = extractTextOrCoding(routeObject);
+            route = CodeableConceptMappingUtils.extractTextOrCoding(routeObject);
         }
         return route.map(value -> ROUTE + value).orElse(StringUtils.EMPTY);
     }
 
     private String buildDoseQuantityPertinentInformation(Immunization immunization) {
-        if (immunization.getDoseQuantity().getValue() != null && immunization.getDoseQuantity().getUnit() != null) {
+        if (immunization.getDoseQuantity().hasValue() && immunization.getDoseQuantity().hasUnit()) {
             SimpleQuantity doseQuantity = immunization.getDoseQuantity();
             return QUANTITY + doseQuantity.getValue() + StringUtils.SPACE + doseQuantity.getUnit();
         }
@@ -187,7 +185,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildNotePertinentInformation(Immunization immunization) {
         String notes = StringUtils.EMPTY;
-        if (ObjectUtils.isNotEmpty(immunization.getNote())) {
+        if (immunization.hasNote()) {
             List<Annotation> annotations = immunization.getNote();
             notes = annotations.stream()
                 .map(Annotation::getText)
@@ -198,13 +196,13 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExplanationPertinentInformation(Immunization immunization) {
         Optional<String> explanation;
-        if (immunization.getExplanation().getReasonFirstRep().getCodingFirstRep().getDisplay() != null) {
+        if (immunization.getExplanation().getReasonFirstRep().getCodingFirstRep().hasDisplay()) {
             CodeableConcept reason = immunization.getExplanation().getReasonFirstRep();
-            explanation = extractTextOrCoding(reason);
+            explanation = CodeableConceptMappingUtils.extractTextOrCoding(reason);
             return explanation.map(value -> REASON + value).orElse(StringUtils.EMPTY);
-        } else if (immunization.getExplanation().getReasonNotGivenFirstRep().getCodingFirstRep().getDisplay() != null) {
+        } else if (immunization.getExplanation().getReasonNotGivenFirstRep().getCodingFirstRep().hasDisplay()) {
             CodeableConcept reasonNotGiven = immunization.getExplanation().getReasonNotGivenFirstRep();
-            explanation = extractTextOrCoding(reasonNotGiven);
+            explanation = CodeableConceptMappingUtils.extractTextOrCoding(reasonNotGiven);
             return explanation.map(value -> REASON_NOT_GIVEN + value).orElse(StringUtils.EMPTY);
         }
         return StringUtils.EMPTY;
@@ -227,27 +225,12 @@ public class ImmunizationObservationStatementMapper {
             vaccinationProtocolComponent.getSeriesDoses());
 
         String targetDiseases = vaccinationProtocolComponent.getTargetDisease().stream()
-            .map(this::extractTextOrCoding)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .collect(Collectors.joining(","));
+            .collect(Collectors.joining(COMMA));
 
         return vaccinationProtocol + VACCINATION_TARGET_DISEASE + targetDiseases;
-    }
-
-    private Optional<String> extractTextOrCoding(CodeableConcept codeableConcept) {
-        if (codeableConcept.getText() != null) {
-            return Optional.of(codeableConcept.getText());
-        } else {
-            return Optional.ofNullable(codeableConcept.getCodingFirstRep().getDisplay());
-        }
-    }
-
-    private Optional<Extension> filterExtensionByUrl(Immunization immunization, String url) {
-        return immunization.getExtension()
-            .stream()
-            .filter(extension -> extension.getUrl().equals(url))
-            .findFirst();
     }
 
     private String formatDateTimeType(DateTimeType dateTimeType) {
