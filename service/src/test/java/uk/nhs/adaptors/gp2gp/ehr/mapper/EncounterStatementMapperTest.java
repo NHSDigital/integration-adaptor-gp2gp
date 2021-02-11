@@ -14,6 +14,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,10 +47,9 @@ public class EncounterStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-    @Mock
-    private MessageContext messageContext;
 
     private EncounterStatementMapper encounterStatementMapper;
+    private MessageContext messageContext;
 
     @BeforeAll
     public static void initialize() {
@@ -57,7 +57,7 @@ public class EncounterStatementMapperTest {
     }
 
     @AfterAll
-    public static void tearDown() {
+    public static void deinitialize() {
         TimeZone.setDefault(null);
     }
 
@@ -66,6 +66,11 @@ public class EncounterStatementMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         encounterStatementMapper = new EncounterStatementMapper(messageContext);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
     }
 
     @ParameterizedTest
