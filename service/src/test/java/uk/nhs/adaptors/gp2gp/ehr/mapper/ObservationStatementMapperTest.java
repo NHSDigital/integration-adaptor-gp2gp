@@ -28,7 +28,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class NarrativeStatementMapperTest {
+public class ObservationStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
@@ -36,17 +36,17 @@ public class NarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "example-observation-resource-3.json";
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY + "example-observation-resource-4.json";
     private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY + "example-observation-resource-5.json";
-    private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
-    private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
-    private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
-    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-observation-statement-1.xml";
+    private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-observation-statement-2.xml";
+    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-observation-statement-3.xml";
+    private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "expected-output-observation-statement-4.xml";
+
+    private CharSequence expectedOutputMessage;
+    private ObservationStatementMapper observationStatementMapper;
+    private MessageContext messageContext;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-
-    private CharSequence expectedOutputMessage;
-    private NarrativeStatementMapper narrativeStatementMapper;
-    private MessageContext messageContext;
 
     @BeforeAll
     public static void initialize() {
@@ -57,7 +57,7 @@ public class NarrativeStatementMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        observationStatementMapper = new ObservationStatementMapper(messageContext);
     }
 
     @AfterEach
@@ -72,12 +72,12 @@ public class NarrativeStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+    public void When_MappingObservationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml) throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
+        String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
@@ -85,29 +85,29 @@ public class NarrativeStatementMapperTest {
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
-            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED)
+            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_UNK_DATE_TIME),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD),
+            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_UNK_DATE_TIME)
         );
     }
 
     @Test
-    public void When_MappingObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
+    public void When_MappingParsedObservationJsonWithNestedTrue_Expect_ObservationStatementXmlOutput() throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
+        String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithNoDates_Expect_MapperException() throws IOException {
+    public void When_MappingParsedObservationJsonWithNoDates_Expect_Exception() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_DATES);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         assertThrows(EhrMapperException.class, ()
-            -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+            -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true));
     }
 }

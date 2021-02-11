@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
@@ -31,6 +32,7 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
@@ -51,6 +53,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private StorageConnector storageConnector;
     @MockBean
     private DetectTranslationCompleteService detectTranslationCompleteService;
+    @MockBean
+    private MessageContext messageContext;
 
     @Test
     public void When_NewStructuredTask_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
@@ -67,6 +71,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThatObjectCreated(storageDataWrapper, ehrExtractUpdated, structuredTaskDefinition);
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(ehrExtractUpdated);
+        verify(messageContext).resetMessageContext();
     }
 
     @Test
@@ -88,6 +93,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(structuredTaskDefinition1.getTaskId()).isNotEqualTo(ehrExtractUpdated.getGpcAccessStructured().getTaskId());
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(ehrExtractUpdated);
+        verify(messageContext, times(2)).resetMessageContext();
     }
 
     @Test
