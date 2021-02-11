@@ -2,11 +2,11 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
-import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,10 @@ import com.github.mustachejava.Mustache;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class NarrativeStatementMapper {
-    private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
+
     private final MessageContext messageContext;
+
+    private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
 
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
