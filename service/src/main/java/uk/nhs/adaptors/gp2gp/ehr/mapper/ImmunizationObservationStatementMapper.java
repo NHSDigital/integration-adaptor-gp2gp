@@ -34,7 +34,7 @@ import com.github.mustachejava.Mustache;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
-public class ObservationStatementMapper {
+public class ImmunizationObservationStatementMapper {
 
     private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
@@ -64,7 +64,7 @@ public class ObservationStatementMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, Bundle bundle, boolean isNested) {
-        var observationStatementTemplateParameters = ObservationStatementTemplateParameters.builder()
+        var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
             .observationStatementId(randomIdGeneratorService.createNewId())
             .availabilityTime(buildAvailabilityTime(immunization))
             .effectiveTime(buildEffectiveTime(immunization))

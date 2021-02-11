@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ObservationStatementTemplateParameters {
+public class ImmunizationObservationStatementTemplateParameters {
     private boolean isNested;
     private String observationStatementId;
     private String availabilityTime;

@@ -20,7 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class ObservationStatementMapperTest {
+public class ImmunizationObservationStatementMapperTest {
 
     private static final String TEST_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
     private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION =
@@ -37,7 +37,7 @@ public class ObservationStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-    private ObservationStatementMapper observationStatementMapper;
+    private ImmunizationObservationStatementMapper observationStatementMapper;
     private Bundle bundle;
     private FhirParseService fhirParseService;
 
@@ -45,7 +45,7 @@ public class ObservationStatementMapperTest {
     public void setUp() throws IOException {
         fhirParseService = new FhirParseService();
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        observationStatementMapper = new ObservationStatementMapper(randomIdGeneratorService);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(randomIdGeneratorService);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
     }
