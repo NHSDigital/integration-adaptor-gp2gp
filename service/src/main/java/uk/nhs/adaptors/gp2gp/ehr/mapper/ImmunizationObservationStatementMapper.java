@@ -59,7 +59,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
-    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S\nSequence: %S,%S\n";
+    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S%n";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private final RandomIdGeneratorService randomIdGeneratorService;
 
