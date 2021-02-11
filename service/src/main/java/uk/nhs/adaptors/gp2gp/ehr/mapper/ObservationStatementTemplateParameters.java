@@ -11,5 +11,6 @@ public class ObservationStatementTemplateParameters {
     private boolean isNested;
     private String observationStatementId;
     private String availabilityTime;
+    private String effectiveTime;
     private String pertinentInformation;
 }
