@@ -5,6 +5,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -12,6 +14,7 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,6 +52,7 @@ public class EhrDocumentMapperTest {
 
     @BeforeAll
     public static void initialize() throws IOException {
+        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
         expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + EXPECTED_XML_TO_JSON_FILE);
         getGpcDocumentTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .conversationId(TEST_CONVERSATION_ID)
@@ -59,6 +63,11 @@ public class EhrDocumentMapperTest {
             .toOdsCode(TEST_TO_ODS_CODE)
             .documentId(TEST_DOCUMENT_ID)
             .build();
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
     }
 
     @BeforeEach
