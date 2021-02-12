@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.parameters;
 
 import lombok.Getter;
 import lombok.Setter;
