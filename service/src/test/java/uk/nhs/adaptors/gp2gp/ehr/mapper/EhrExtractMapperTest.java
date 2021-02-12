@@ -65,6 +65,7 @@ public class EhrExtractMapperTest {
     private TimestampService timestampService;
 
     private EhrExtractMapper ehrExtractMapper;
+    private MessageContext messageContext;
 
     @BeforeAll
     public static void initialize() throws IOException {
@@ -85,7 +86,11 @@ public class EhrExtractMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(),
+            randomIdGeneratorService,
+            timestampService,
+            new EncounterMapper(messageContext));
     }
 
     @Test
