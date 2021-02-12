@@ -28,6 +28,11 @@ public class ObservationStatementMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
             .build();
 
+        var instantType = observation.getIssuedElement().getDay();
+        var type = observation.getEffective();
+        var dateTimeType = observation.getEffectiveDateTimeType().getTimeZone();
+        var period = observation.getEffectivePeriod().getEnd().getTime();
+
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
     }
 }

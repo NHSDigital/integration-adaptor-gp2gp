@@ -48,10 +48,10 @@ public class NarrativeStatementMapperTest {
     private NarrativeStatementMapper narrativeStatementMapper;
     private MessageContext messageContext;
 
-    @BeforeAll
-    public static void initialize() {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-    }
+//    @BeforeAll
+//    public static void initialize() {
+//        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
+//    }
 
     @BeforeEach
     public void setUp() {
@@ -65,10 +65,10 @@ public class NarrativeStatementMapperTest {
         messageContext.resetMessageContext();
     }
 
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
+//    @AfterAll
+//    public static void deinitialize() {
+//        TimeZone.setDefault(null);
+//    }
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")

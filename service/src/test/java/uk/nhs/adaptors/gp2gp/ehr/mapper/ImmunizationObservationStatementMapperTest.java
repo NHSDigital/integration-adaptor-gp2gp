@@ -76,7 +76,8 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedImmunizationJsonWithoutPertinentInformation_Expect_NarrativeStatementXmlOutput() throws IOException {
+    public void
+    When_MappingParsedImmunizationJsonWithoutPertinentInformation_Expect_NarrativeStatementXmlOutput() throws IOException {
         var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_PERTINENT_INFORMATION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);

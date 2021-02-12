@@ -33,7 +33,7 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue());
+            return DateFormatUtil.formatDateTest(observation.getEffectiveDateTimeType().getValue(), observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
             return DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart());
         } else if (observation.hasIssued()) {
