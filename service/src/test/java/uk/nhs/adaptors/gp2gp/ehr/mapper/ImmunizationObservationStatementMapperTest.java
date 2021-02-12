@@ -26,8 +26,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ImmunizationObservationStatementMapperTest {
-
-    private static final String TEST_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
+    private static final String TEST_ID = "test-id";
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
     private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-all-pertinent-information.json";
