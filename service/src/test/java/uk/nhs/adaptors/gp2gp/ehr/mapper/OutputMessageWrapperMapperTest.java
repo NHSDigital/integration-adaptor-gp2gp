@@ -5,7 +5,11 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +39,16 @@ public class OutputMessageWrapperMapperTest {
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
     private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
     private CharSequence expectedOutputMessage;
+
+    @BeforeAll
+    public static void initialize() {
+        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
+    }
+
+    @AfterAll
+    public static void deinitialize() {
+        TimeZone.setDefault(null);
+    }
 
     @BeforeEach
     public void setUp() throws IOException {

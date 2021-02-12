@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
@@ -35,6 +35,7 @@ public class EhrExtractMapper {
         .appendPattern("yyyyMMddHHmmss")
         .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
         .toFormatter();
+    private static final String UK_ZONE_ID = "Europe/London";
 
     private final FhirParseService fhirParseService;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -63,7 +64,7 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DATE_TIME_FORMATTER.format(timestampService.now()
-            .atOffset(ZoneOffset.UTC)));
+            .atZone(ZoneId.of(UK_ZONE_ID))));
 
         extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));

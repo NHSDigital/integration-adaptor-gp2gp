@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -25,6 +26,7 @@ public class EhrDocumentMapper {
         .appendPattern("yyyyMMddHHmmss")
         .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
         .toFormatter();
+    private static final String UK_ZONE_ID = "Europe/London";
 
     private final TimestampService timestampService;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -32,7 +34,7 @@ public class EhrDocumentMapper {
     public EhrDocumentTemplateParameters mapToMhsPayloadTemplateParameters(GetGpcDocumentTaskDefinition taskDefinition, String messageId) {
         return EhrDocumentTemplateParameters.builder()
             .resourceCreated(DATE_TIME_FORMATTER.format(timestampService.now()
-                .atOffset(ZoneOffset.UTC)))
+                .atZone(ZoneId.of(UK_ZONE_ID))))
             .messageId(messageId)
             .accessDocumentId(taskDefinition.getDocumentId())
             .fromAsid(taskDefinition.getFromAsid())
