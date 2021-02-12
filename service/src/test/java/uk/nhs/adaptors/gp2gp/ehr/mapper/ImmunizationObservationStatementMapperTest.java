@@ -72,7 +72,6 @@ public class ImmunizationObservationStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, false);
-        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 

@@ -22,6 +22,7 @@ import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DomainResource;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -54,7 +55,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
-    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S%n";
+    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String COMMA = ",";
 
@@ -90,7 +91,7 @@ public class ImmunizationObservationStatementMapper {
         List<String> pertinentInformationList = retrievePertinentInformation(immunization, bundle);
         return pertinentInformationList.stream()
             .filter(StringUtils::isNotEmpty)
-            .collect(Collectors.joining(System.lineSeparator()));
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private List<String> retrievePertinentInformation(Immunization immunization, Bundle bundle) {
@@ -111,10 +112,6 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildParentPresentPertinentInformation(Immunization immunization) {
         var parentPresentOptional = ExtensionMappingUtils.filterExtensionByUrl(immunization, PARENT_PRESENT_URL);
-        if (parentPresentOptional.isPresent()) {
-            BooleanType isParentPresent = (BooleanType) parentPresentOptional.get().getValue();
-            return PARENT_PRESENT + isParentPresent.getValue();
-        }
         return parentPresentOptional.map(value -> (BooleanType) value.getValue())
             .map(value -> PARENT_PRESENT + value.getValue())
             .orElse(StringUtils.EMPTY);
@@ -122,16 +119,22 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildLocationPertinentInformation(Immunization immunization, Bundle bundle) {
         Optional<Location> location = Optional.empty();
-        if (immunization.getLocation() != null) {
+        if (immunization.hasLocation()) {
             String locationId = immunization.getLocation().getReferenceElement().getIdPart();
-            location = bundle.getEntry().stream()
-                .filter(bundleEntryComponent -> bundleEntryComponent.getResource().getResourceType().equals(ResourceType.Location))
-                .map(bundleEntryComponent -> (Location) bundleEntryComponent.getResource())
-                .filter(bundleLocation -> bundleLocation.getIdElement().getIdPart().equals(locationId))
-                .findFirst();
+            location = extractLocationFromBundleById(bundle, locationId);
         }
 
-        return location.map(value -> LOCATION + value.getName()).orElse(StringUtils.EMPTY);
+        return location.map(value -> LOCATION + value.getName())
+            .orElse(StringUtils.EMPTY);
+    }
+
+    private Optional<Location> extractLocationFromBundleById(Bundle bundle, String locationId) {
+        return bundle.getEntry()
+            .stream()
+            .filter(bundleEntryComponent -> bundleEntryComponent.getResource().getResourceType().equals(ResourceType.Location))
+            .map(bundleEntryComponent -> (Location) bundleEntryComponent.getResource())
+            .filter(bundleLocation -> bundleLocation.getIdElement().getIdPart().equals(locationId))
+            .findFirst();
     }
 
     private String buildManufacturerPertinentInformation(Immunization immunization, Bundle bundle) {
@@ -213,7 +216,7 @@ public class ImmunizationObservationStatementMapper {
         AtomicInteger protocolCount = new AtomicInteger(1);
         return vaccinationProtocols.stream()
             .map(protocol -> extractVaccinationProtocolString(protocol, protocolCount))
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String extractVaccinationProtocolString(Immunization.ImmunizationVaccinationProtocolComponent vaccinationProtocolComponent,

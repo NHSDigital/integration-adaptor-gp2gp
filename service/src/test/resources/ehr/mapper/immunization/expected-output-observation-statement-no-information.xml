@@ -1,16 +1,10 @@
 <component typeCode="COMP" >
-    <ObservationStatment classCode="OBS" moodCode="EVN">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100630055900"/>
         </effectiveTime>
-        <availabilityTime value="20100630054806" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1"/>
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-    </ObservationStatment>
+        <availabilityTime value="20100630054806" />3
+    </ObservationStatement>
 </component>
