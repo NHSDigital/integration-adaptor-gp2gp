@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
