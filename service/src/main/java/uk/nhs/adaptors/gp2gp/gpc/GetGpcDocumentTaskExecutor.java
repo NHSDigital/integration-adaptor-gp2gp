@@ -37,8 +37,7 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
-        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(taskDefinition);
-        var response = gpcClient.getDocumentRecord(request, taskDefinition);
+        var response = gpcClient.getDocumentRecord(taskDefinition);
 
         String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
         String taskId = taskDefinition.getTaskId();

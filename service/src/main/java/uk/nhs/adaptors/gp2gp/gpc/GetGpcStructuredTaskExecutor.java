@@ -39,9 +39,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
 
-        var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
-        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
-        var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
+        var response = gpcClient.getStructuredRecord(structuredTaskDefinition);
         var hl7TranslatedResponse = StringUtils.EMPTY;
 
         try {
