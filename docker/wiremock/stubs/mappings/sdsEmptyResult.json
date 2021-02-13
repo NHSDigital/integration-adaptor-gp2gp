@@ -1,0 +1,15 @@
+{
+	"priority": 999,
+	"request": {
+		"method": "GET",
+		"urlPath": "/Endpoint"
+	},
+	"response": {
+		"status": 200,
+		"bodyFileName": "sdsEmptyResult.json",
+		"headers": {
+			"Content-Type": "application/fhir+json;",
+			"X-Correlation-Id": "{{request.headers.X-Correlation-Id}}"
+		}
+	}
+}
