@@ -30,13 +30,13 @@ public class OutputMessageWrapperMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
 
-    public String map(GetGpcStructuredTaskDefinition getGpcDocumentTaskDefinition, String content) {
+    public String map(GetGpcStructuredTaskDefinition getGpcDocumentTaskDefinition, String ehrExtractContent) {
         OutputMessageWrapperTemplateParameters outputMessageWrapperTemplateParameters = OutputMessageWrapperTemplateParameters.builder()
             .eventId(randomIdGeneratorService.createNewId())
             .creationTime(DATE_TIME_FORMATTER.format(timestampService.now().atZone(ZoneId.of(UK_ZONE_ID))))
             .fromAsid(getGpcDocumentTaskDefinition.getFromAsid())
             .toAsid(getGpcDocumentTaskDefinition.getToAsid())
-            .ehrExtractContent(content)
+            .ehrExtractContent(ehrExtractContent)
             .build();
 
         return TemplateUtils.fillTemplate(TEMPLATE, outputMessageWrapperTemplateParameters);

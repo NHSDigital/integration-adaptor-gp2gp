@@ -49,8 +49,8 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String EXPECTED_PAYLOAD_TYPE = "RCMR_IN030000UK06";
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
-
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
+
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
     @Autowired

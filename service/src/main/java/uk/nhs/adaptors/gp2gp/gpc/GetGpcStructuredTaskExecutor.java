@@ -48,11 +48,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
                 structuredTaskDefinition,
                 response);
-            String transformedExtract = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
             hl7TranslatedResponse = outputMessageWrapperMapper.map(
                 structuredTaskDefinition,
-                transformedExtract);
+                ehrExtractContent);
         } finally {
             messageContext.resetMessageContext();
         }
