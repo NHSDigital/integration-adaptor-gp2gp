@@ -11,8 +11,6 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.nhs.adaptors.gp2gp.sds.configuration.SdsConfiguration;
 
-import static uk.nhs.adaptors.gp2gp.TestContainerUtils.isTestContainersEnabled;
-
 @Slf4j
 public class WiremockExtension implements BeforeAllCallback, BeforeEachCallback {
 
@@ -20,9 +18,7 @@ public class WiremockExtension implements BeforeAllCallback, BeforeEachCallback 
 
     @Override
     public void beforeAll(ExtensionContext context) {
-        if (isTestContainersEnabled()) {
-            wireMockServer = startWiremock(context);
-        }
+        wireMockServer = startWiremock(context);
     }
 
     private WireMockServer startWiremock(ExtensionContext context) {
