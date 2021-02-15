@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.TimeZone;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -14,7 +13,6 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Immunization;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class ImmunizationObservationStatementMapperTest {
+public class ImmunizationObservationStatementMapperTest extends MapperTest {
 
     private static final String TEST_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
@@ -59,11 +57,6 @@ public class ImmunizationObservationStatementMapperTest {
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
     }
 
     @Test

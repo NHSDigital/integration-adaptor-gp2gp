@@ -21,6 +21,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -42,9 +43,9 @@ public class DiaryPlanStatementMapper {
 
         PlanStatementMapperParameters.PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getId()));
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getId()))
+            .availabilityTime(buildAvailabilityTime(procedureRequest));
 
-        buildAuthoredOn(procedureRequest).map(builder::authoredOn);
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
 
@@ -67,12 +68,14 @@ public class DiaryPlanStatementMapper {
         return date != null ? String.format(FULL_DATE, DateFormatUtil.formatDate(date)) : EMPTY_DATE;
     }
 
-    private Optional<String> buildAuthoredOn(ProcedureRequest procedureRequest) {
+    private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasAuthoredOn()) {
-            return Optional.of(DateFormatUtil.formatDate(procedureRequest.getAuthoredOn()));
+            return DateFormatUtil.formatDate(procedureRequest.getAuthoredOn());
         }
 
-        return Optional.empty();
+        throw new EhrMapperException(
+            String.format("ProcedureRequest: %s does not have required authoredOn", procedureRequest.getId())
+        );
     }
 
     private Optional<String> buildText(ProcedureRequest procedureRequest) {
@@ -138,7 +141,7 @@ public class DiaryPlanStatementMapper {
         private Boolean isNested;
         private String id;
         private String text;
-        private String authoredOn;
+        private String availabilityTime;
         private String effectiveTime;
     }
 }

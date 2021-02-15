@@ -4,6 +4,7 @@
     "status": "active",
     "intent": "plan",
     "occurrenceDateTime": "2010-07-14T16:32:51.42+01:00",
+    "authoredOn": "2010-01-13T15:29:50.1+00:00",
     "reasonCode": [
         {
             "coding": [

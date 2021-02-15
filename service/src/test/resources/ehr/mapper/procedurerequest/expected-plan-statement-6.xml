@@ -5,5 +5,6 @@
         <effectiveTime>
             <center value="20100115000000" />
         </effectiveTime>
+        <availabilityTime value="20100113152950"/>
     </PlanStatement>
 </component>

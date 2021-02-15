@@ -5,6 +5,7 @@
         <effectiveTime>
             <center value="20100714163251" />
         </effectiveTime>
+        <availabilityTime value="20100113152950"/>
         <text>
             Reason code value display 1, Reason code value display 2, Reason code value text 3
         </text>
