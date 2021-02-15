@@ -1,9 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,6 +45,11 @@ public class SendEhrExtractCoreTaskDispatcherTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TASK_ID);
 
         sendEhrExtractCoreTaskDispatcher = new SendEhrExtractCoreTaskDispatcher(taskDispatcher, randomIdGeneratorService);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        reset();
     }
 
     @Test

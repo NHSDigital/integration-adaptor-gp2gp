@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,6 +61,11 @@ public class GpcDocumentTranslatorTest {
 
         gpcDocumentTranslator = new GpcDocumentTranslator(new FhirParseService(),
             new EhrDocumentMapper(timestampService, randomIdGeneratorService));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        reset();
     }
 
     @Test

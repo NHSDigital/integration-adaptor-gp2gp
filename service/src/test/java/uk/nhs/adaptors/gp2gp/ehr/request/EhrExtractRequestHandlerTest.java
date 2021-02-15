@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
@@ -66,6 +68,11 @@ public class EhrExtractRequestHandlerTest {
 
     @InjectMocks
     private EhrExtractRequestHandler ehrExtractRequestHandler;
+
+    @AfterEach
+    public void tearDown() {
+        reset();
+    }
 
     @Test
     public void When_ValidEhrRequestReceived_Expect_EhrExtractStatusIsCreated() {
