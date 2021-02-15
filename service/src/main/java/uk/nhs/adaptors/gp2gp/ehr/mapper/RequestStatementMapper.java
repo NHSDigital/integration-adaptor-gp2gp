@@ -27,19 +27,31 @@ public class RequestStatementMapper {
     private static final String PRIORITY = "PRIORITY: ";
     private static final String SERVICE_REQUESTED = "Service(s) Requested: ";
     private static final String SPECIALTY = "Specialty: ";
-    private static final String UBRN_SYSTEM_URL = "https://fhir.nhs.uk/Id/ubr-numbe";
+    private static final String UBRN_SYSTEM_URL = "https://fhir.nhs.uk/Id/ubr-number";
     private static final String UBRN = "UBRN: ";
+    private static final String REASON_CODE = "Reason Codes: ";
+    private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
+        + ".113883.2.1.3.2.4.15\"/>";
+    private static final String NOTE = "Annotation: %s @ %s %s";
+    private static final String NOTE_AUTHOR = "Author: ";
+    private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
+    private static final String NOTE_AUTHOR_PRACTITIONER= NOTE_AUTHOR + "Practitioner ";
+    private static final String NOTE_AUTHOR_PATIENT= NOTE_AUTHOR + "Patient";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
 
     public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
-                .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
-                .isNested(isNested)
-                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
-                .description(buildDescription(referralRequest))
-                .build();
+            .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
+            .isNested(isNested)
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
+            .description(buildDescription(referralRequest))
+            .build();
+
+        if (!referralRequest.hasReasonCode()) {
+            requestStatementTemplateParameters.setDefaultReasonCode(DEFAULT_REASON_CODE_XML);
+        }
 
         return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters);
     }
@@ -53,10 +65,14 @@ public class RequestStatementMapper {
 
     private List<String> retrieveDescription(ReferralRequest referralRequest) {
         return List.of(
-            buildSpecialtyDescription(referralRequest),
             buildIdentifierDescription(referralRequest),
-            buildServiceRequestedString(referralRequest),
             buildPriorityDescription(referralRequest),
+            buildServiceRequestedDescription(referralRequest),
+            buildRequesterDescription(referralRequest),
+            buildSpecialtyDescription(referralRequest),
+            buildRecipientDescription(referralRequest),
+            buildReasonCodeDescription(referralRequest),
+            buildNoteDescription(referralRequest),
             buildTextDescription(referralRequest)
         );
     }
@@ -73,21 +89,24 @@ public class RequestStatementMapper {
         return identifier.map(value -> UBRN + value).orElse(StringUtils.EMPTY);
     }
 
-    private String buildSpecialtyDescription(ReferralRequest referralRequest) {
-        Optional<String> specialty = Optional.empty();
-        if (referralRequest.hasSpecialty()) {
-            CodeableConcept specialtyObject = referralRequest.getSpecialty();
-            specialty = CodeableConceptMappingUtils.extractTextOrCoding(specialtyObject);
+    private String buildPriorityDescription(ReferralRequest referralRequest) {
+        if (referralRequest.hasPriority()) {
+            return PRIORITY + referralRequest.getPriority().getDisplay();
+        } else {
+            return StringUtils.EMPTY;
         }
-        return specialty.map(value -> SPECIALTY + value).orElse(StringUtils.EMPTY);
     }
 
-    private String buildServiceRequestedString(ReferralRequest referralRequest) {
+    private String buildServiceRequestedDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasServiceRequested()) {
             return SERVICE_REQUESTED + extractServiceRequestedString(referralRequest);
         } else {
             return StringUtils.EMPTY;
         }
+    }
+
+    private String buildRequesterDescription(ReferralRequest referralRequest) {
+        return StringUtils.EMPTY;
     }
 
     private String extractServiceRequestedString(ReferralRequest referralRequest) {
@@ -98,12 +117,38 @@ public class RequestStatementMapper {
             .collect(Collectors.joining(COMMA));
     }
 
-    private String buildPriorityDescription(ReferralRequest referralRequest) {
-        if (referralRequest.hasPriority()) {
-            return PRIORITY + referralRequest.getPriority().getDisplay();
+    private String buildSpecialtyDescription(ReferralRequest referralRequest) {
+        Optional<String> specialty = Optional.empty();
+        if (referralRequest.hasSpecialty()) {
+            CodeableConcept specialtyObject = referralRequest.getSpecialty();
+            specialty = CodeableConceptMappingUtils.extractTextOrCoding(specialtyObject);
+        }
+        return specialty.map(value -> SPECIALTY + value).orElse(StringUtils.EMPTY);
+    }
+
+    private String buildRecipientDescription(ReferralRequest referralRequest) {
+        return StringUtils.EMPTY;
+    }
+
+    private String buildReasonCodeDescription(ReferralRequest referralRequest) {
+        if (referralRequest.hasReasonCode() && (referralRequest.getReasonCode().size() > 1)) {
+            return REASON_CODE + extractReasonCodeString(referralRequest);
         } else {
             return StringUtils.EMPTY;
         }
+    }
+
+    private String extractReasonCodeString(ReferralRequest referralRequest) {
+        var ignoreFirstReasonCode = referralRequest.getReasonCode().subList(1, referralRequest.getReasonCode().size());
+        return ignoreFirstReasonCode.stream()
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.joining(COMMA));
+    }
+
+    private String buildNoteDescription(ReferralRequest referralRequest) {
+        return StringUtils.EMPTY;
     }
 
     private String buildTextDescription(ReferralRequest referralRequest) {

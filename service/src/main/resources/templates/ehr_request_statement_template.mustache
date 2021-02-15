@@ -1,11 +1,11 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="{{requestStatementId}}" />
-        <text>{{description}}</text>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        {{availabilityTime}}
+        {{{availabilityTime}}}
+        {{{defaultReasonCode}}}
         <text>{{description}}</text>
     </RequestStatement>
 </component>
