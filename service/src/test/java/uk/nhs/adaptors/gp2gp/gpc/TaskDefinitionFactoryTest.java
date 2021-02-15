@@ -1,7 +1,12 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_DOCUMENT;
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_STRUCTURED;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -9,14 +14,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinitionFactory;
 import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.mockito.Mockito.when;
-import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_DOCUMENT;
-import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_STRUCTURED;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskDefinitionFactoryTest {

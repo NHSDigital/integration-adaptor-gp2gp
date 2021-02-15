@@ -1,14 +1,15 @@
 package uk.nhs.adaptors.gp2gp.common.storage;
 
-import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.BlobServiceClient;
-import com.azure.storage.blob.BlobServiceClientBuilder;
+import static uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorOptions.AZURE;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorOptions.AZURE;
+import com.azure.storage.blob.BlobContainerClient;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 
 @Configuration
 public class BlobContainerClientConfig {

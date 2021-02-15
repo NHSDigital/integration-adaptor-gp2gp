@@ -1,18 +1,19 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.UUID;
 
-import uk.nhs.adaptors.gp2gp.MessageQueue;
-import uk.nhs.adaptors.gp2gp.Mongo;
-
 import org.apache.commons.io.IOUtils;
 import org.bson.Document;
 import org.junit.jupiter.api.Test;
+
+import uk.nhs.adaptors.gp2gp.MessageQueue;
+import uk.nhs.adaptors.gp2gp.Mongo;
 
 public class EhrExtractTest {
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";

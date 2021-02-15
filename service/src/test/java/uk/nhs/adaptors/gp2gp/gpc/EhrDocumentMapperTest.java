@@ -6,12 +6,6 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.time.Instant;
 
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +14,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
