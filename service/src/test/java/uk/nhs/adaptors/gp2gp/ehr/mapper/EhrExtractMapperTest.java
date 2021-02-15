@@ -108,6 +108,7 @@ public class EhrExtractMapperTest {
     @AfterEach
     public void tearDown() {
         reset();
+        messageContext.resetMessageContext();
     }
 
     @Test
