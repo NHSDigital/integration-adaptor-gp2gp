@@ -69,8 +69,7 @@ public class EhrExtractMapper {
         extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));
 
-        var encounters = EncounterExtractor.extractEncountersByReferences(bundle.getEntry(),
-            EncounterExtractor.extractEncounterReferences(bundle.getEntry()));
+        var encounters = EncounterExtractor.extractConsultationListEncounters(bundle.getEntry());
         ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
 
         return ehrExtractTemplateParameters;

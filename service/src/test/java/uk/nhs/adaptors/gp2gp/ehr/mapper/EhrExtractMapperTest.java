@@ -43,7 +43,9 @@ public class EhrExtractMapperTest {
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
     private static final String JSON_INPUT_FILE_WITH_NO_PATIENT = "gpc-access-structured-with-no-patient.json";
     private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
-    private static final String TEST_ID = "test-id";
+    private static final String TEST_ID_1 = "test-id-1";
+    private static final String TEST_ID_2 = "test-id-2";
+    private static final String TEST_ID_3 = "test-id-3";
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
     private static final String TEST_NHS_NUMBER = "1234567890";
@@ -92,7 +94,7 @@ public class EhrExtractMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         messageContext = new MessageContext(randomIdGeneratorService);
         ehrExtractMapper = new EhrExtractMapper(new FhirParseService(),
