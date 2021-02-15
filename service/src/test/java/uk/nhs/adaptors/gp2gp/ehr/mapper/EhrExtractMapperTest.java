@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -101,6 +103,11 @@ public class EhrExtractMapperTest {
             randomIdGeneratorService,
             timestampService,
             new EncounterMapper(messageContext));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        reset();
     }
 
     @Test

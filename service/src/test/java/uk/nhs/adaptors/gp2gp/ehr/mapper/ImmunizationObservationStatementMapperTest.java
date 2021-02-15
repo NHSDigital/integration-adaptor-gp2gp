@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class ImmunizationObservationStatementMapperTest {
 
     @AfterEach
     public void tearDown() {
+        reset();
         messageContext.resetMessageContext();
     }
 
