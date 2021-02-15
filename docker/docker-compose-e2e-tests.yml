@@ -12,7 +12,6 @@ services:
       - activemq
       - gp2gp
       - mock-mhs-adaptor
-      - wiremock
     environment:
       - GP2GP_AMQP_BROKERS
       - GP2GP_MONGO_URI
