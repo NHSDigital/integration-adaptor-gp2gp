@@ -60,7 +60,7 @@ dependencies {
 	testImplementation "org.testcontainers:testcontainers:1.15.1"
 	testImplementation 'org.awaitility:awaitility:4.0.3'
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
-    testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.27.2"
+	testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.27.2"
 
 	constraints {
 		implementation('org.bouncycastle:bcprov-jdk15on:1.68') {
