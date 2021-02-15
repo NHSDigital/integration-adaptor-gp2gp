@@ -104,9 +104,9 @@ pipeline {
                         stage('E2E Tests') {
                             steps {
                                 sh '''
-                                    source docker/vars.public.sh
+                                    source docker/vars.local.sh
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp gp2gp-e2e-tests
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gp2gp-e2e-tests
                                 '''
 
                             }
