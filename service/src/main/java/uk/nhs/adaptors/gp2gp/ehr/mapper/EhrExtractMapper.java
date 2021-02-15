@@ -6,14 +6,6 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -21,6 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component

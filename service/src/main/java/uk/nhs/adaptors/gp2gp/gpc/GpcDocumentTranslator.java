@@ -3,18 +3,18 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import java.util.Collections;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
-import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithAttachments;
-
 import org.hl7.fhir.dstu3.model.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.AllArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithAttachments;
 
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))

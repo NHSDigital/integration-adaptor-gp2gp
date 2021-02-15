@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.amqp;
 
+import javax.jms.ConnectionFactory;
+
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -9,8 +11,6 @@ import org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration;
 import org.springframework.boot.autoconfigure.jms.JndiConnectionFactoryAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.jms.ConnectionFactory;
 
 @Configuration
 @AutoConfigureBefore(JmsAutoConfiguration.class)

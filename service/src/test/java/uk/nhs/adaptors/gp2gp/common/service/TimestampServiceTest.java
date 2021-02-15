@@ -1,11 +1,11 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
 import java.time.temporal.ChronoField;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class TimestampServiceTest {
 

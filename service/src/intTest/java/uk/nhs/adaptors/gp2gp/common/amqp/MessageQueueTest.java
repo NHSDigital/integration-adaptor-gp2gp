@@ -6,13 +6,6 @@ import static org.mockito.Mockito.verify;
 
 import javax.jms.Message;
 
-import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
-import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +16,13 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
+import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @SpringBootTest
 @ExtendWith({MongoDBExtension.class, ActiveMQExtension.class})
