@@ -1,22 +1,11 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
 
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +14,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
+import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -54,7 +49,6 @@ public class EhrDocumentMapperTest {
 
     @BeforeAll
     public static void initialize() throws IOException {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
         expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + EXPECTED_XML_TO_JSON_FILE);
         getGpcDocumentTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .conversationId(TEST_CONVERSATION_ID)
@@ -67,21 +61,11 @@ public class EhrDocumentMapperTest {
             .build();
     }
 
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
-
     @BeforeEach
     public void setUp() {
         ehrDocumentMapper = new EhrDocumentMapper(timestampService, randomIdGeneratorService);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        reset();
     }
 
     @Test

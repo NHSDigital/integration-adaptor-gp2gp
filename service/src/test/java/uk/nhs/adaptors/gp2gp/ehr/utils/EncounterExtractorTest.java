@@ -3,13 +3,10 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.time.ZoneOffset;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -41,8 +38,6 @@ public class EncounterExtractorTest {
 
     @BeforeAll
     public static void initialize() throws IOException {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-
         String inputFullBundle = ResourceTestFileUtils.getFileContent(INPUT_PATH
             + FULL_BUNDLE_FILE);
         fullBundle = FHIR_PARSE_SERVICE.parseResource(inputFullBundle, Bundle.class);
@@ -54,11 +49,6 @@ public class EncounterExtractorTest {
         String inputBundleWithNoConsultationList = ResourceTestFileUtils.getFileContent(INPUT_PATH
             + BUNDLE_FILE_WITHOUT_CONSULTATION_LIST);
         bundleWithNoConsultationList = FHIR_PARSE_SERVICE.parseResource(inputBundleWithNoConsultationList, Bundle.class);
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
     }
 
     @Test

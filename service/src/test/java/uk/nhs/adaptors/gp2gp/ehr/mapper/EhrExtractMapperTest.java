@@ -2,17 +2,13 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,7 +71,6 @@ public class EhrExtractMapperTest {
 
     @BeforeAll
     public static void initialize() throws IOException {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
         inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
         inputJsonFileWithNoPatientContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE_WITH_NO_PATIENT);
         expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
@@ -87,11 +82,6 @@ public class EhrExtractMapperTest {
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .build();
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
     }
 
     @BeforeEach
@@ -107,7 +97,6 @@ public class EhrExtractMapperTest {
 
     @AfterEach
     public void tearDown() {
-        reset();
         messageContext.resetMessageContext();
     }
 
