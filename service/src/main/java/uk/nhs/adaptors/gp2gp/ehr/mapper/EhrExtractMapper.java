@@ -1,22 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.utils.EncounterExtractor;
-import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -27,15 +13,21 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
+import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.EncounterExtractor;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern("yyyyMMddHHmmss")
-        .parseDefaulting(ChronoField.NANO_OF_DAY, 0)
-        .toFormatter();
-    private static final String UK_ZONE_ID = "Europe/London";
 
     private final FhirParseService fhirParseService;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -63,8 +55,7 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setRequestId(getGpcStructuredTaskDefinition.getRequestId());
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
-        ehrExtractTemplateParameters.setAvailabilityTime(DATE_TIME_FORMATTER.format(timestampService.now()
-            .atZone(ZoneId.of(UK_ZONE_ID))));
+        ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.formatDate(timestampService.now()));
 
         extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));

@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -21,6 +22,16 @@ public class DateFormatUtil {
         return DATE_TIME_FORMATTER.format(
             date.toInstant()
                 .atZone(ZoneId.of(UK_ZONE_ID))
+                .toLocalDateTime());
+    }
+
+    public static String formatDate(Instant instant) {
+        if (instant == null) {
+            throw new EhrMapperException("Could not format date");
+        }
+
+        return DATE_TIME_FORMATTER.format(
+            instant.atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
     }
 }
