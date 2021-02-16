@@ -8,10 +8,16 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

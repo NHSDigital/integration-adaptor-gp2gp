@@ -3,12 +3,12 @@ package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
 import java.time.Duration;
 import java.util.Optional;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexInfo;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MongoTtlCreator extends TtlCreator {

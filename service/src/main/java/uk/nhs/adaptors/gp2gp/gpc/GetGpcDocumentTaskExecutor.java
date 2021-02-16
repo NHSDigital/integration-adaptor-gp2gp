@@ -2,6 +2,9 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -11,9 +14,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component

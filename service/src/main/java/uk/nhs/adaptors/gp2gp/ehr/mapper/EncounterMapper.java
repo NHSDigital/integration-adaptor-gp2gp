@@ -1,16 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component

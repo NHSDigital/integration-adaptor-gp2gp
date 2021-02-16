@@ -1,22 +1,22 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import lombok.experimental.SuperBuilder;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
+import lombok.experimental.SuperBuilder;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutorFactory;
+import uk.nhs.adaptors.gp2gp.common.task.TaskHandlerException;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskExecutorFactoryTest {
