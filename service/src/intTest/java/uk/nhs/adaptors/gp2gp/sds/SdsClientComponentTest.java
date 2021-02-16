@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.nhs.adaptors.gp2gp.common.ResourceReader;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.sds.configuration.SdsConfiguration;
+import uk.nhs.adaptors.gp2gp.sds.exception.SdsException;
 import uk.nhs.adaptors.gp2gp.testcontainers.WiremockExtension;
 
 import javax.annotation.PostConstruct;
@@ -30,6 +32,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.matching;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith({SpringExtension.class, WiremockExtension.class})
 @SpringBootTest
@@ -70,6 +73,9 @@ public class SdsClientComponentTest {
     @Value("classpath:sds/sds_no_address_response.json")
     private Resource sdsNoAddressResponse;
 
+    @Value("classpath:sds/sds_error_response.json")
+    private Resource sdsErrorResponse;
+
     private List<Pair<String, Function<TaskDefinition, Optional<SdsClient.SdsResponseData>>>> allInteractions;
 
     @PostConstruct
@@ -94,6 +100,14 @@ public class SdsClientComponentTest {
             .willReturn(aResponse()
                 .withHeader("Content-Type", "application/fhir+json")
                 .withBody(response)));
+    }
+
+    private void stubEndpointError() {
+        stubFor(get(urlPathEqualTo("/Endpoint"))
+            .willReturn(aResponse()
+                .withStatus(HttpStatus.UNAUTHORIZED.value())
+                .withHeader("Content-Type", "application/fhir+json")
+                .withBody(ResourceReader.asString(sdsErrorResponse))));
     }
 
     @Test
@@ -122,13 +136,24 @@ public class SdsClientComponentTest {
     }
 
     @Test
-    public void When_SdsReturnsEmptyAddress_Expect_Exception() {
+    public void When_SdsReturnsEmptyAddress_Expect_EmptyResultIsReturned() {
         allInteractions.forEach(pair -> {
             wireMockServer.resetAll();
             stubEndpoint(pair.getKey(), ResourceReader.asString(sdsNoAddressResponse));
             var retrievedSdsData = pair.getValue().apply(TASK_DEFINITION);
             assertThat(retrievedSdsData)
                 .isEmpty();
+            wireMockServer.resetAll();
+        });
+    }
+
+    @Test
+    public void When_SdsReturnsError_Expect_Exception() {
+        allInteractions.forEach(pair -> {
+            wireMockServer.resetAll();
+            stubEndpointError();
+            assertThatThrownBy(() -> pair.getValue().apply(TASK_DEFINITION))
+                .isInstanceOf(SdsException.class);
             wireMockServer.resetAll();
         });
     }

@@ -49,6 +49,3 @@ gp2gp:
   sds:
     url: ${GP2GP_SDS_URL:http://localhost:8110/}
     apiKey: ${GP2GP_SDS_APIKEY:test_api_key}
-    enableProxy: ${GP2GP_SDS_ENABLE_PROXY:false}
-    proxy: ${GP2GP_SDS_PROXY:}
-    proxyPort: ${GP2GP_SDS_PROXY_PORT:}

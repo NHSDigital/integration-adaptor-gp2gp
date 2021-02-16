@@ -168,7 +168,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     }
 
     private void assertOperationOutcome(Exception exception) {
-        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during GPC request: ", "");
         var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
         var coding = operationOutcome.getDetails().getCodingFirstRep();
         assertThat(coding.getCode()).isEqualTo(INVALID_NHS_NUMBER);

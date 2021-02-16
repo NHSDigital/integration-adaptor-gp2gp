@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.sds.builder;
 
-import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.transport.ProxyProvider;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
@@ -40,8 +38,6 @@ public class SdsRequestBuilder {
 
     private static final String API_KEY_HEADER = "apikey";
 
-    private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
-
     private final SdsConfiguration sdsConfiguration;
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
@@ -64,7 +60,7 @@ public class SdsRequestBuilder {
 
     private WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> buildRequest(String odsCode, String interaction) {
         var sslContext = requestBuilderService.buildSSLContext();
-        var httpClient = buildHttpClient(sslContext);
+        var httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         return buildWebClient(httpClient)
             .get()
             .uri(uriBuilder -> uriBuilder
@@ -73,21 +69,6 @@ public class SdsRequestBuilder {
                 .queryParam(INTERACTION_PARAMETER, INTERACTION_IDENTIFIER + PIPE_ENCODED + interaction)
                 .build())
             .header(API_KEY_HEADER, sdsConfiguration.getApiKey());
-    }
-
-    private HttpClient buildHttpClient(SslContext sslContext) {
-        var httpClient =  HttpClient.create()
-            .secure(t -> t.sslContext(sslContext));
-
-        if (sdsConfiguration.isEnableProxy()) {
-            LOGGER.info("Using HTTP Proxy {}:{} for SDS API", sdsConfiguration.getProxy(), sdsConfiguration.getProxyPort());
-            return httpClient
-                .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
-                    .host(sdsConfiguration.getProxy())
-                    .port(Integer.parseInt(sdsConfiguration.getProxyPort())));
-        } else {
-            return httpClient;
-        }
     }
 
     private WebClient buildWebClient(HttpClient httpClient) {
@@ -101,7 +82,7 @@ public class SdsRequestBuilder {
     }
 
     private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
-        filters.add(webClientFilterService.errorHandlingFilter(GPC_REQUEST_TYPE_FILTER, HttpStatus.OK));
+        filters.add(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.SDS, HttpStatus.OK));
         filters.add(webClientFilterService.logRequest());
     }
 }

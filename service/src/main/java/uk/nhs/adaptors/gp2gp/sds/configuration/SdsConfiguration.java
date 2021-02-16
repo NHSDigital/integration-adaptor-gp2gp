@@ -12,7 +12,4 @@ import org.springframework.stereotype.Component;
 public class SdsConfiguration {
     private String url;
     private String apiKey;
-    private boolean enableProxy;
-    private String proxy;
-    private String proxyPort;
 }
