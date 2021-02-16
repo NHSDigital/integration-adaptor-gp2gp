@@ -64,14 +64,16 @@ public class EncounterExtractorTest {
 
     @Test
     public void When_ExtractingEncountersFromEntriesWithEmptyConsultationList_Expect_NoEncountersExtracted() {
-        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundleWithEmptyConsultationList.getEntry());
+        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(
+            bundleWithEmptyConsultationList.getEntry());
 
         assertThat(encounters.isEmpty()).isTrue();
     }
 
     @Test
     public void When_ExtractingEncountersFromEntriesWithNoConsultationList_Expect_NoEncountersExtracted() {
-        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundleWithNoConsultationList.getEntry());
+        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(
+            bundleWithNoConsultationList.getEntry());
 
         assertThat(encounters.isEmpty()).isTrue();
     }
