@@ -351,6 +351,11 @@
         "entry": [
           {
             "item": {
+              "reference": "Encounter/DBF5776F-8A86-477C-AB98-57182A9B40FD"
+            }
+          },
+          {
+            "item": {
               "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
             }
           },
@@ -372,11 +377,6 @@
           {
             "item": {
               "reference": "Encounter/4088F3A1-CE58-4374-AABA-763C31738281"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/DBF5776F-8A86-477C-AB98-57182A9B40FD"
             }
           }
         ]

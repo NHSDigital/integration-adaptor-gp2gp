@@ -1,7 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.AccessLevel;
@@ -21,11 +23,18 @@ public final class EncounterExtractor {
 
     public static List<Encounter> extractConsultationListEncounters(List<Bundle.BundleEntryComponent> entries) {
         var encounterReferences = extractEncounterReferencesFromConsultationList(entries);
-        return entries.stream()
+        List<Encounter> encountersFromBundle = entries.stream()
             .filter(entry -> entry.getResource().getResourceType().equals(ResourceType.Encounter))
             .map(entry -> (Encounter) entry.getResource())
-            .filter(encounter -> encounterReferences.contains(encounter.getId()))
             .collect(Collectors.toList());
+
+        List<Encounter> sortedReferencedEncounters = new ArrayList<>();
+
+        encounterReferences.forEach(encounterReference -> encountersFromBundle
+            .forEach(encounter -> fetchMatchingEncounter(encounterReference, encounter)
+                .ifPresent(sortedReferencedEncounters::add)));
+
+        return sortedReferencedEncounters;
     }
 
     private static List<String> extractEncounterReferencesFromConsultationList(List<Bundle.BundleEntryComponent> entries) {
@@ -50,5 +59,13 @@ public final class EncounterExtractor {
             .map(ListResource.ListEntryComponent::getItem)
             .map(Reference::getReference)
             .collect(Collectors.toList());
+    }
+
+    private static Optional<Encounter> fetchMatchingEncounter(String encounterReference, Encounter encounter) {
+        if (encounterReference.equals(encounter.getId())) {
+            return Optional.of(encounter);
+        }
+
+        return Optional.empty();
     }
 }
