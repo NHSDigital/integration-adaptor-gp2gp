@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -43,17 +42,11 @@ public final class EncounterExtractor {
     }
 
     private static boolean isConsultationList(ListResource listResource) {
-        if (listResource.hasCode()) {
-            CodeableConcept listCode = listResource.getCode();
-
-            if (listCode.hasCoding()) {
-                return listCode.getCoding()
-                    .stream()
-                    .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(CONSULTATION_LIST_CODE));
-            }
-            return false;
-        }
-        return false;
+        return listResource.hasCode()
+            && listResource.getCode().hasCoding()
+            && listResource.getCode().getCoding()
+            .stream()
+            .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(CONSULTATION_LIST_CODE));
     }
 
     private static List<String> extractEncounterReferencesFromListResource(List<ListResource.ListEntryComponent> entries) {
