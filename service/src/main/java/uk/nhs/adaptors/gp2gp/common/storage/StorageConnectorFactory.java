@@ -1,7 +1,8 @@
 package uk.nhs.adaptors.gp2gp.common.storage;
 
-import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
+
+import lombok.Setter;
 
 @Setter
 public class StorageConnectorFactory implements FactoryBean<StorageConnector> {

@@ -1,13 +1,13 @@
 package uk.nhs.adaptors.gp2gp.common.configuration;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorConfiguration;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorConfiguration;
 
 @Component(value = "appInitializer")
 @Slf4j
