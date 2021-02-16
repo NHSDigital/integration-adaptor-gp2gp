@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import java.util.Optional;
+
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 
 public class CodeableConceptMappingUtils {

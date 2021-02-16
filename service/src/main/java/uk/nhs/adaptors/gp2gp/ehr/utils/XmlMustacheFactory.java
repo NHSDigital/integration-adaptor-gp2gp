@@ -3,9 +3,10 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 import java.io.IOException;
 import java.io.Writer;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.MustacheException;
-import org.apache.commons.text.StringEscapeUtils;
 
 public class XmlMustacheFactory extends DefaultMustacheFactory {
     public XmlMustacheFactory(String resourceRoot) {

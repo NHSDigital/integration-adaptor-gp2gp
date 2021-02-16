@@ -6,20 +6,6 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 import java.util.Collections;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
-import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
-
 import java.util.List;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -42,7 +28,19 @@ import org.springframework.web.reactive.function.client.WebClient.RequestBodySpe
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

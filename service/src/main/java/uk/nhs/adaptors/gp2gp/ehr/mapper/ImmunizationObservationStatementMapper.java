@@ -7,13 +7,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -29,6 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component

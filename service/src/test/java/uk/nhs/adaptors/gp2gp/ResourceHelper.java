@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp;
 
-import lombok.SneakyThrows;
-import org.w3c.dom.Document;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+
+import org.w3c.dom.Document;
+
+import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 
 public class ResourceHelper {
     public static String loadClasspathResourceAsString(String path) {
