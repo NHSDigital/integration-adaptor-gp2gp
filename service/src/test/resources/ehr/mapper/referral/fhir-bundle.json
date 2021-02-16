@@ -1,0 +1,81 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1"
+        ]
+    },
+    "type": "searchset",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "TestOrganization",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "B82617"
+                    }
+                ],
+                "name": "Test Organization",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "NHS NPFIT Test Data Manager",
+                            "Princes Exchange"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "LS1 4HY"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "EB3994A6-5A87-4B53-A414-TestLocation",
+                "meta": {
+                    "versionId": "636064088100870233",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "name": "Test Location",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "1234567890",
+                        "use": "work"
+                    }
+                ],
+                "address": {
+                    "line": [
+                        "Trevelyan Square",
+                        "Boar Ln",
+                        "Leeds"
+                    ],
+                    "postalCode": "LS1 6AE"
+                },
+                "managingOrganization": {
+                    "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+                }
+            }
+        }
+    ]
+}

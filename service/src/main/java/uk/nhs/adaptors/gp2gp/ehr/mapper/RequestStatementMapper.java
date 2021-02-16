@@ -5,9 +5,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
+import org.hl7.fhir.dstu3.model.RelatedPerson;
 import org.hl7.fhir.dstu3.model.ResourceType;
 
 import com.github.mustachejava.Mustache;
@@ -16,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ExtractBundleResourceUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -24,29 +32,34 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class RequestStatementMapper {
     private static final Mustache REQUEST_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_request_statement_template.mustache");
 
+    private static final String UBRN = "UBRN: ";
+    private static final String UBRN_SYSTEM_URL = "https://fhir.nhs.uk/Id/ubr-number";
     private static final String PRIORITY = "PRIORITY: ";
     private static final String SERVICE_REQUESTED = "Service(s) Requested: ";
+    private static final String REQUESTER_DEVICE = "Requester Device: ";
+    private static final String REQUESTER_ORG = "Requester Org: ";
+    private static final String REQUESTER_PATIENT = "Requester: Patient";
+    private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
-    private static final String UBRN_SYSTEM_URL = "https://fhir.nhs.uk/Id/ubr-number";
-    private static final String UBRN = "UBRN: ";
     private static final String REASON_CODE = "Reason Codes: ";
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String NOTE_AUTHOR = "Author: ";
     private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
-    private static final String NOTE_AUTHOR_PRACTITIONER= NOTE_AUTHOR + "Practitioner ";
-    private static final String NOTE_AUTHOR_PATIENT= NOTE_AUTHOR + "Patient";
+    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
+    private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
+    private static final String NOTE_AT = " @ ";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
 
-    public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
+    public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, Bundle bundle, boolean isNested) {
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
             .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
             .isNested(isNested)
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
-            .description(buildDescription(referralRequest))
+            .description(buildDescription(referralRequest, bundle))
             .build();
 
         if (!referralRequest.hasReasonCode()) {
@@ -56,23 +69,23 @@ public class RequestStatementMapper {
         return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters);
     }
 
-    private String buildDescription(ReferralRequest referralRequest) {
-        List<String> descriptionList = retrieveDescription(referralRequest);
+    private String buildDescription(ReferralRequest referralRequest, Bundle bundle) {
+        List<String> descriptionList = retrieveDescription(referralRequest, bundle);
         return descriptionList.stream()
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
-    private List<String> retrieveDescription(ReferralRequest referralRequest) {
+    private List<String> retrieveDescription(ReferralRequest referralRequest, Bundle bundle) {
         return List.of(
             buildIdentifierDescription(referralRequest),
             buildPriorityDescription(referralRequest),
             buildServiceRequestedDescription(referralRequest),
-            buildRequesterDescription(referralRequest),
+            buildRequesterDescription(referralRequest, bundle),
             buildSpecialtyDescription(referralRequest),
             buildRecipientDescription(referralRequest),
             buildReasonCodeDescription(referralRequest),
-            buildNoteDescription(referralRequest),
+            buildNoteDescription(referralRequest, bundle),
             buildTextDescription(referralRequest)
         );
     }
@@ -105,16 +118,35 @@ public class RequestStatementMapper {
         }
     }
 
-    private String buildRequesterDescription(ReferralRequest referralRequest) {
-        return StringUtils.EMPTY;
-    }
-
     private String extractServiceRequestedString(ReferralRequest referralRequest) {
         return referralRequest.getServiceRequested().stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.joining(COMMA));
+    }
+
+    private String buildRequesterDescription(ReferralRequest referralRequest, Bundle bundle) {
+        if (referralRequest.hasRequester() && referralRequest.getRequester().getAgent().hasReference()) {
+            String reference = referralRequest.getRequester().getAgent().getReference();
+            if (reference.startsWith(ResourceType.Device.name())) {
+                var device = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Device) value).or(Optional::empty);
+                return device.map(value -> REQUESTER_DEVICE + CodeableConceptMappingUtils.extractTextOrCoding(value.getType())).orElse(StringUtils.EMPTY);
+            }
+            else if (reference.startsWith(ResourceType.Organization.name())) {
+                var organization = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Organization) value).or(Optional::empty);
+                return organization.map(value -> REQUESTER_ORG + value.getName()).orElse(StringUtils.EMPTY);
+            }
+            else if (reference.startsWith(ResourceType.Patient.name())) {
+                return REQUESTER_PATIENT;
+            }
+            else if (reference.startsWith(ResourceType.RelatedPerson.name())) {
+                var relatedPerson = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (RelatedPerson) value).or(Optional::empty);
+                return relatedPerson.map(value -> REQUESTER_RELATION + value.getNameFirstRep().getText()).orElse(StringUtils.EMPTY);
+            }
+        }
+
+        return StringUtils.EMPTY;
     }
 
     private String buildSpecialtyDescription(ReferralRequest referralRequest) {
@@ -147,7 +179,35 @@ public class RequestStatementMapper {
             .collect(Collectors.joining(COMMA));
     }
 
-    private String buildNoteDescription(ReferralRequest referralRequest) {
+    private String buildNoteDescription(ReferralRequest referralRequest, Bundle bundle) {
+        if (referralRequest.hasNote()) {
+        return referralRequest.getNote().stream()
+            .map(value -> getAuthorString(value, bundle) + NOTE_AT + DateFormatUtil.formatDate(value.getTime()) + value.getText())
+            .collect(Collectors.joining(COMMA));
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    private String getAuthorString(Annotation annotation, Bundle bundle) {
+        if (annotation.hasAuthorStringType()) {
+            return NOTE_AUTHOR + annotation.getAuthorStringType().getValue();
+        }
+        else if (annotation.hasAuthorReference()) {
+            String reference = annotation.getAuthorReference().getReference();
+            if (reference.startsWith(ResourceType.RelatedPerson.name())) {
+                var relatedPerson = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (RelatedPerson) value).or(Optional::empty);
+                return relatedPerson.map(value -> NOTE_AUTHOR_RELATION + value.getNameFirstRep().getText()).orElse(StringUtils.EMPTY);
+            }
+            else if (reference.startsWith(ResourceType.Practitioner.name())) {
+                var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Practitioner) value).or(Optional::empty);
+                return practitioner.map(value -> value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
+            }
+            else if (reference.startsWith(ResourceType.Patient.name())) {
+                return NOTE_AUTHOR_PATIENT;
+            }
+        }
+
         return StringUtils.EMPTY;
     }
 

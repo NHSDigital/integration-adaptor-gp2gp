@@ -8,6 +8,7 @@ import java.time.ZoneOffset;
 import java.util.TimeZone;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -28,6 +29,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class RequestStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
+    private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "example-referral-request-resource-1.json";
     private static final String INPUT_JSON_WITH_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "example-referral-request-resource-2.json";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-1.xml";
@@ -36,6 +38,7 @@ public class RequestStatementMapperTest {
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
+    private Bundle bundle;
     private CharSequence expectedOutputMessage;
     private RequestStatementMapper requestStatementMapper;
     private MessageContext messageContext;
@@ -46,10 +49,12 @@ public class RequestStatementMapperTest {
     }
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         requestStatementMapper = new RequestStatementMapper(messageContext);
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
     }
 
     @AfterEach
@@ -69,7 +74,7 @@ public class RequestStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
 
-        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, false);
+        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, bundle,false);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
