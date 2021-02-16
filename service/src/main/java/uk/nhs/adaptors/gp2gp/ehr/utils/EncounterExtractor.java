@@ -49,7 +49,7 @@ public final class EncounterExtractor {
             if (listCode.hasCoding()) {
                 return listCode.getCoding()
                     .stream()
-                    .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(CONSULTATION_LIST_CODE))
+                    .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(CONSULTATION_LIST_CODE));
             }
             return false;
         }
