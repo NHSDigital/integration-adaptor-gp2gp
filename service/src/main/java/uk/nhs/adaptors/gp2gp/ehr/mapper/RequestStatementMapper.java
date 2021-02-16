@@ -9,9 +9,11 @@ import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
+import org.hl7.fhir.dstu3.model.HealthcareService;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -41,6 +43,9 @@ public class RequestStatementMapper {
     private static final String REQUESTER_PATIENT = "Requester: Patient";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
+    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
+    private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient HealthCare Service: ";
+    private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String REASON_CODE = "Reason Codes: ";
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
@@ -49,7 +54,6 @@ public class RequestStatementMapper {
     private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
     private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
     private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
-    private static final String NOTE_AT = " @ ";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
@@ -83,7 +87,7 @@ public class RequestStatementMapper {
             buildServiceRequestedDescription(referralRequest),
             buildRequesterDescription(referralRequest, bundle),
             buildSpecialtyDescription(referralRequest),
-            buildRecipientDescription(referralRequest),
+            buildRecipientDescription(referralRequest, bundle),
             buildReasonCodeDescription(referralRequest),
             buildNoteDescription(referralRequest, bundle),
             buildTextDescription(referralRequest)
@@ -105,17 +109,15 @@ public class RequestStatementMapper {
     private String buildPriorityDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasPriority()) {
             return PRIORITY + referralRequest.getPriority().getDisplay();
-        } else {
-            return StringUtils.EMPTY;
         }
+        return StringUtils.EMPTY;
     }
 
     private String buildServiceRequestedDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasServiceRequested()) {
             return SERVICE_REQUESTED + extractServiceRequestedString(referralRequest);
-        } else {
-            return StringUtils.EMPTY;
         }
+        return StringUtils.EMPTY;
     }
 
     private String extractServiceRequestedString(ReferralRequest referralRequest) {
@@ -158,16 +160,52 @@ public class RequestStatementMapper {
         return specialty.map(value -> SPECIALTY + value).orElse(StringUtils.EMPTY);
     }
 
-    private String buildRecipientDescription(ReferralRequest referralRequest) {
+    private String buildRecipientDescription(ReferralRequest referralRequest, Bundle bundle) {
+        if (referralRequest.hasRecipient()) {
+            var ignoreFirstPractitioner = removeFirstPractitionerReference(referralRequest.getRecipient());
+
+            return ignoreFirstPractitioner.stream()
+                .map(value -> extractRecipientString(value, bundle))
+                .collect(Collectors.joining(COMMA));
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    private List<Reference> removeFirstPractitionerReference(List<Reference> referenceList) {
+        for (int i=0; i < referenceList.size()-1; i++) {
+            if (referenceList.get(i).getReference().startsWith(ResourceType.Practitioner.name())) {
+                // Call practitioner mapper here with reference to first practitioner in reference list
+                var practitioner = referenceList.remove(i);
+                return referenceList;
+            }
+        }
+        return referenceList;
+    }
+
+    private String extractRecipientString(Reference reference, Bundle bundle) {
+        String referenceString = reference.getReference();
+
+        if (referenceString.startsWith(ResourceType.Practitioner.name())) {
+            var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Practitioner) value).or(Optional::empty);
+            return practitioner.map(value -> RECIPIENT_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
+        }
+        else if (referenceString.startsWith(ResourceType.HealthcareService.name())) {
+            var healthCareService = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (HealthcareService) value).or(Optional::empty);
+            return healthCareService.map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName()).orElse(StringUtils.EMPTY);
+        }
+        else if (referenceString.startsWith(ResourceType.Organization.name())) {
+            var organization = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Organization) value).or(Optional::empty);
+            return organization.map(value -> RECIPIENT_ORG + value.getName()).orElse(StringUtils.EMPTY);
+        }
         return StringUtils.EMPTY;
     }
 
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasReasonCode() && (referralRequest.getReasonCode().size() > 1)) {
             return REASON_CODE + extractReasonCodeString(referralRequest);
-        } else {
-            return StringUtils.EMPTY;
         }
+        return StringUtils.EMPTY;
     }
 
     private String extractReasonCodeString(ReferralRequest referralRequest) {
@@ -181,11 +219,10 @@ public class RequestStatementMapper {
 
     private String buildNoteDescription(ReferralRequest referralRequest, Bundle bundle) {
         if (referralRequest.hasNote()) {
-        return referralRequest.getNote().stream()
-            .map(value -> getAuthorString(value, bundle) + NOTE_AT + DateFormatUtil.formatDate(value.getTime()) + value.getText())
-            .collect(Collectors.joining(COMMA));
+            return referralRequest.getNote().stream()
+                .map(value -> String.format(NOTE, getAuthorString(value, bundle), DateFormatUtil.formatDate(value.getTime()),  value.getText()))
+                .collect(Collectors.joining(COMMA));
         }
-
         return StringUtils.EMPTY;
     }
 
@@ -201,7 +238,7 @@ public class RequestStatementMapper {
             }
             else if (reference.startsWith(ResourceType.Practitioner.name())) {
                 var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Practitioner) value).or(Optional::empty);
-                return practitioner.map(value -> value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
+                return practitioner.map(value -> NOTE_AUTHOR_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
             }
             else if (reference.startsWith(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
