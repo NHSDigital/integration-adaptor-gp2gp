@@ -6,6 +6,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2021-02-17
+
+### Known Issues and Limitations
+
+- No SDS support. The adaptor does not use the configuration options for SDS.
+- No Spine Secure Proxy support. The adapter makes direct requests to the GP Connect provider.
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents or acknowledgements.
+- Incomplete / invalid EhrExtract message. The adaptor does not yet support the complete message standard.
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.58.Final (No upgrade or patch available)
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1070799] in io.netty:netty-codec-http@4.1.58.Final caused by org.apache.qpid:qpid-jms-client:0.56.0
+
+### Added
+
+- NIAD-1076: Pipeline to run against wiremock (#86)
+- NIAD-1014: Update Mock SDS API to latest API version (#83)
+- NIAD-915: translating immunization to observation statement (#80)
+- NIAD-912: encounter to ehr composition (#79)
+- NIAD-920: Translating Uncategorised Observation to Observation Statement (#78)
+- NIAD-1033: Generate ids in the context of message (#74)
+- NIAD-874: Fix log message (#77)
+- NIAD-932: Trust store is set for mongo connection. No E2E tests imple… (#71)
+- NIAD-814: Find the patient's documents (#75)
+- NIAD-919 Translating Narrative Comment Note to Narrative Statement Improvements  (#73)
+- NIAD-874: EHR Receive Continue Reply  (#70)
+- Translating FHIR Narrative (Comment Note) Observation to Narrative Statement (#66)
+- NIAD-988: Document reference task marks GPC completions (#69)
+
+### Fixed
+
+- [Issue 88](https://github.com/nhsconnect/integration-adaptor-gp2gp/issues/88) Missing MHS header wait-for-response on outbound messages
+
 ## [0.0.1] - 2021-02-04
 
 ### Known Issues and Limitations
