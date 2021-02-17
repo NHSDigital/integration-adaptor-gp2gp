@@ -131,7 +131,13 @@
           "text": "Viral hepatitis, type A"
         },
         {
-          "text": "Viral hepatitis, type B"
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "40468003",
+              "display": "Viral hepatitis, type B"
+            }
+          ]
         }
       ],
       "doseStatus": {
