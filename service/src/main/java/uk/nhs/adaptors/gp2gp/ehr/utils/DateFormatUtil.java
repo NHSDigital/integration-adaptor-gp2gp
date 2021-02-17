@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.InstantType;
 
 import com.google.common.collect.ImmutableMap;
@@ -30,19 +31,14 @@ public class DateFormatUtil {
         MINUTE, "yyyyMMddHHmm"
     );
 
-    public static String formatDateTimeType(DateTimeType dateTimeType) {
-        if (!dateTimeType.hasValue()) {
+    public static String formatDateType(DateType dateType) {
+        if (!dateType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
 
-        return Optional.ofNullable(YEAR_PATTERN_MAP.get(dateTimeType.getPrecision()))
-            .map(pattern -> localDateTime(dateTimeType, pattern))
-            .orElseGet(() -> localDateTime(dateTimeType, "yyyyMMddHHmmss"));
-    }
-
-    private static String localDateTime(DateTimeType effectiveDateTimeType, String pattern) {
-        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_TIMEZONE))
-            .format(DateTimeFormatter.ofPattern(pattern));
+        return Optional.ofNullable(YEAR_PATTERN_MAP.get(dateType.getPrecision()))
+            .map(pattern -> dateTypeConverter(dateType, pattern))
+            .orElseGet(() -> dateTypeConverter(dateType, "yyyyMMddHHmmss"));
     }
 
     public static String formatInstantType(InstantType dateInstantType) {
@@ -53,5 +49,25 @@ public class DateFormatUtil {
         DateTimeType dateTimeType = new DateTimeType(dateInstantType.toCalendar().toInstant().toString());
 
         return formatDateTimeType(dateTimeType);
+    }
+
+    public static String formatDateTimeType(DateTimeType dateTimeType) {
+        if (!dateTimeType.hasValue()) {
+            throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
+        }
+
+        return Optional.ofNullable(YEAR_PATTERN_MAP.get(dateTimeType.getPrecision()))
+            .map(pattern -> dateTimeTypeConverter(dateTimeType, pattern))
+            .orElseGet(() -> dateTimeTypeConverter(dateTimeType, "yyyyMMddHHmmss"));
+    }
+
+    private static String dateTypeConverter(DateType effectiveDateTimeType, String pattern) {
+        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_TIMEZONE))
+            .format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    private static String dateTimeTypeConverter(DateTimeType effectiveDateTimeType, String pattern) {
+        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_TIMEZONE))
+            .format(DateTimeFormatter.ofPattern(pattern));
     }
 }

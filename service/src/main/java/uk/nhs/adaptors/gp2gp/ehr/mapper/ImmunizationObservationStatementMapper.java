@@ -1,11 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateType;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,6 +14,7 @@ import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -152,8 +150,16 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
-        Optional<Date> expirationDate = Optional.ofNullable(immunization.getExpirationDate());
-        return expirationDate.map(value -> EXPIRATION + formatDateTimeType(value)).orElse(StringUtils.EMPTY);
+        Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
+        if (expirationDateElement.isPresent()) {
+            if (expirationDateElement.get().hasValue()) {
+                return expirationDateElement.map(dateType -> EXPIRATION + formatDateType(dateType)).orElse(StringUtils.EMPTY);
+            } else {
+                return StringUtils.EMPTY;
+            }
+        } else {
+            return StringUtils.EMPTY;
+        }
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
