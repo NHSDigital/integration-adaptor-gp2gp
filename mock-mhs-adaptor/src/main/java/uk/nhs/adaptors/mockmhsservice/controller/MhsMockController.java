@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -39,9 +40,10 @@ public class MhsMockController {
             @RequestBody(required=false) String mockMhsMessage) {
 
         try {
-            String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse("");
-            String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse("");
-            return mockMhsService.handleRequest(interactionId, correlationId, mockMhsMessage);
+            String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse(StringUtils.EMPTY);
+            String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse(StringUtils.EMPTY);
+            String waitForResponse = Optional.ofNullable(headers.get("wait-for-response")).orElse(StringUtils.EMPTY);
+            return mockMhsService.handleRequest(interactionId, correlationId, waitForResponse, mockMhsMessage);
         } catch (Exception e) {
             LOGGER.error("Error could not process mock request", e);
             responseHeaders.setContentType(MediaType.TEXT_HTML);
