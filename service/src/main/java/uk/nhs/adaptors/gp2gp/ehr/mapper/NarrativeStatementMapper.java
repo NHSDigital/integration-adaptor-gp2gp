@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantType;
+
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,6 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
@@ -33,11 +35,11 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return DateFormatUtil.formatDateTimeType(observation.getEffectiveDateTimeType());
+            return formatDateTimeType(observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
-            return DateFormatUtil.formatDateTimeType(observation.getEffectivePeriod().getStartElement());
+            return formatDateTimeType(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
-            return DateFormatUtil.formatInstantType(observation.getIssuedElement());
+            return formatInstantType(observation.getIssuedElement());
         } else {
             throw new EhrMapperException("Could not map effective date");
         }

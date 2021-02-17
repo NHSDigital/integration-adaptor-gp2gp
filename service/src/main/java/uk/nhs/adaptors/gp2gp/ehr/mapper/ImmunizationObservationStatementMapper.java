@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
+
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -28,7 +30,6 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -80,8 +81,8 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildEffectiveTime(Immunization immunization) {
         Optional<String> effectiveTime = Optional.empty();
-        if (immunization.hasDate()) {
-            effectiveTime = Optional.of(DateFormatUtil.formatDateTimeType(immunization.getDateElement()));
+        if (immunization.hasDateElement()) {
+            effectiveTime = Optional.of(formatDateTimeType(immunization.getDateElement()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -233,10 +234,6 @@ public class ImmunizationObservationStatementMapper {
             .collect(Collectors.joining(COMMA));
 
         return vaccinationProtocol + VACCINATION_TARGET_DISEASE + targetDiseases;
-    }
-
-    private String formatDateTimeType(DateTimeType dateTimeType) {
-        return DateFormatUtil.formatDateTimeType(dateTimeType);
     }
 
     private String formatShortDate(Date date) {
