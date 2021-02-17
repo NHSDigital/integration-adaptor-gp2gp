@@ -88,7 +88,7 @@ public class ImmunizationObservationStatementMapperTest {
         String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, false);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
-    
+
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
