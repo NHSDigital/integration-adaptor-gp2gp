@@ -37,12 +37,8 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Component
 public class ImmunizationObservationStatementMapper {
 
-    private static final String UK_ZONE_ID = "Europe/London";
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_observation_statement_template.mustache");
-    private static final DateTimeFormatter DATE_TIME_FORMATTER_SHORT = new DateTimeFormatterBuilder()
-        .appendPattern("yyyy-MM-dd")
-        .toFormatter();
     private static final String PARENT_PRESENT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1";
     private static final String DATE_RECORDED_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1";
     private static final String PARENT_PRESENT = "Parent Present: ";
@@ -157,7 +153,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<Date> expirationDate = Optional.ofNullable(immunization.getExpirationDate());
-        return expirationDate.map(value -> EXPIRATION + formatShortDate(value)).orElse(StringUtils.EMPTY);
+        return expirationDate.map(value -> EXPIRATION + formatDateTimeType(value)).orElse(StringUtils.EMPTY);
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
@@ -235,13 +231,5 @@ public class ImmunizationObservationStatementMapper {
             .collect(Collectors.joining(COMMA));
 
         return vaccinationProtocol + VACCINATION_TARGET_DISEASE + targetDiseases;
-    }
-
-    private String formatShortDate(Date date) {
-        return DATE_TIME_FORMATTER_SHORT
-            .format(date
-                .toInstant()
-                .atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
     }
 }

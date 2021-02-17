@@ -46,3 +46,6 @@ gp2gp:
     patientEndpoint: ${GP2GP_GPC_GET_PATIENT_ENDPOINT:/fhir/Patient}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
+  sds:
+    url: ${GP2GP_SDS_URL:http://localhost:8110/}
+    apiKey: ${GP2GP_SDS_APIKEY:test_api_key}

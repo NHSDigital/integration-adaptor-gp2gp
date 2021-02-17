@@ -49,3 +49,6 @@ gp2gp:
     subCA: ${GP2GP_SPINE_SUB_CA_CERT:}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
+  sds:
+    url: ${GP2GP_SDS_URL:http://localhost:8110/}
+    apiKey: ${GP2GP_SDS_APIKEY}
