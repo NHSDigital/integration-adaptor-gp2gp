@@ -25,7 +25,7 @@ public class EhrExtractStatusTestUtils {
 
     private static EhrExtractStatus.EhrRequest prepareEhrRequest() {
         return new EhrExtractStatus.EhrRequest(EhrStatusConstants.REQUEST_ID,
-            EhrStatusConstants.NHS_NUMBER,
+            EhrStatusConstants.getNhsNumber(),
             EhrStatusConstants.FROM_PARTY_ID,
             EhrStatusConstants.TO_PARTY_ID,
             EhrStatusConstants.FROM_ASID,

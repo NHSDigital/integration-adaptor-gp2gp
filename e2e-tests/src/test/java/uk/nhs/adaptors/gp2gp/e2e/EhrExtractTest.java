@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.bson.Document;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import uk.nhs.adaptors.gp2gp.MessageQueue;
@@ -19,7 +20,6 @@ public class EhrExtractTest {
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
-    private static final String NHS_NUMBER = "9690937286";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
@@ -34,17 +34,25 @@ public class EhrExtractTest {
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
+    private static String nhsNumber;
+
+    @BeforeAll
+    public static void setup() {
+        nhsNumber = System.getenv().getOrDefault("GP2GP_GPC_OVERRIDE_NHS_NUMBER", "9690937286");
+    }
     
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
             .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
-        ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
+        ehrExtractRequest = ehrExtractRequest
+            .replace("%%ConversationId%%", conversationId)
+            .replace("%%nhsNumber%%", nhsNumber);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber);
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);

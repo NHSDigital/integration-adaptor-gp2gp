@@ -33,7 +33,6 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
-    private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
     private static final String NHS_NUMBER_INVALID = "ASDF";
     private static final String PATIENT_NOT_FOUND = "9876543210";
@@ -62,7 +61,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() {
         var ehrExtractStatus = addTestDataToDatabase();
         assertThatAccessRecordWasOverwritten(ehrExtractStatus);
-        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, NHS_NUMBER_WITH_DOCUMENT);
+        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, EhrStatusConstants.getNhsNumber());
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
