@@ -47,9 +47,9 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-all-information.xml";
     private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-no-information.xml";
-    private static final String OUTPUT_XML_WITHOUT_CONTEXT= IMMUNIZATION_FILE_LOCATIONS
+    private static final String OUTPUT_XML_WITHOUT_CONTEXT = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-with-context.xml";
-    private static final String OUTPUT_XML_WITHOUT_DATE= IMMUNIZATION_FILE_LOCATIONS
+    private static final String OUTPUT_XML_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-no-date.xml";
 
     @Mock
