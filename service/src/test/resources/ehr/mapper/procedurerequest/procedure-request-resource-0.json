@@ -7,8 +7,7 @@
     "authoredOn": "2010-01-13T15:29:50.1+00:00",
     "requester": {
         "agent": {
-            "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
-            "display": "Organisation name"
+            "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
         }
     },
     "reasonCode": [

@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
@@ -46,6 +47,7 @@ public class DiaryPlanStatementMapperTest extends MapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END = TEST_DIRECTORY + "expected-plan-statement-7.xml";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_IS_NESTED = TEST_DIRECTORY + "expected-plan-statement-8.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITHOUT_REQUIRED_AUTHORED_ON = TEST_DIRECTORY + "procedure-request-resource-8.json";
+    private static final String INPUT_BUNDLE = TEST_DIRECTORY + "input-bundle.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -54,9 +56,14 @@ public class DiaryPlanStatementMapperTest extends MapperTest {
     private DiaryPlanStatementMapper diaryPlanStatementMapper;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
+
         diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext);
     }
 

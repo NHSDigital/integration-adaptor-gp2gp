@@ -7,7 +7,7 @@
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
         <text>
-            Reason code value display 1, Reason code value display 2, Reason code value text 3
+            Reason Code: Reason code value display 1
         </text>
     </PlanStatement>
 </component>

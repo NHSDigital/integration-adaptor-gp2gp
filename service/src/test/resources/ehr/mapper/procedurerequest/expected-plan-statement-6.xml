@@ -6,5 +6,8 @@
             <center value="20100115000000" />
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
+        <text>
+            Earliest Recall Date: 2010-01-13 00:00:00
+        </text>
     </PlanStatement>
 </component>

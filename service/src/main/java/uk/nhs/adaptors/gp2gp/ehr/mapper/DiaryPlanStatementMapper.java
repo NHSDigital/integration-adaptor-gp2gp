@@ -1,13 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+
 import java.util.Date;
 import java.util.Optional;
-import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.Device;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -22,6 +25,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -30,9 +34,12 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class DiaryPlanStatementMapper {
 
     private static final Mustache PLAN_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_plan_statement_template.mustache");
-    private static final String COMMA = ", ";
     private static final String EMPTY_DATE = "nullFlavor=\"UNK\"";
     private static final String FULL_DATE = "value=\"%s\"";
+    public static final String REASON_CODE_TEXT_FORMAT = "Reason Code: %s";
+    public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
+    public static final String RECALL_DEVICE = "Recall Device: %s %s";
+    public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
 
     private final MessageContext messageContext;
 
@@ -79,45 +86,50 @@ public class DiaryPlanStatementMapper {
     }
 
     private Optional<String> buildText(ProcedureRequest procedureRequest) {
-        return Stream.of(
+        return Optional.of(Stream.of(
+            getEarliestRecallDate(procedureRequest),
             getRequester(procedureRequest),
             getReasonCode(procedureRequest),
             getNotes(procedureRequest)
         )
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .reduce(joining());
+            .collect(Collectors.joining(StringUtils.SPACE)));
+    }
+
+    private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasOccurrencePeriod()
+            && procedureRequest.getOccurrencePeriod().hasStart()) {
+            return Optional.of(formatStartDate(procedureRequest));
+        }
+
+        return Optional.empty();
+    }
+
+    private String formatStartDate(ProcedureRequest procedureRequest) {
+        return String.format(EARLIEST_RECALL_DATE_FORMAT,
+            DateFormatUtil.formatTextDate(procedureRequest.getOccurrencePeriod().getStart()));
+    }
+
+    private Optional<String> getNotes(ProcedureRequest procedureRequest) {
+        return Optional.of(procedureRequest.getNote()
+            .stream()
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE)));
     }
 
     private Optional<String> getReasonCode(ProcedureRequest procedureRequest) {
         return procedureRequest.getReasonCode()
             .stream()
-            .map(reasonCode -> {
-                if (StringUtils.isNoneBlank(reasonCode.getText())) {
-                    return reasonCode.getText();
-                }
-                return getDisplay(reasonCode);
-            })
-            .filter(StringUtils::isNoneBlank)
-            .reduce(joining());
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .map(this::formatReason)
+            .findFirst();
     }
 
-    private String getDisplay(org.hl7.fhir.dstu3.model.CodeableConcept reasonCode) {
-        return reasonCode.getCoding()
-            .stream()
-            .map(Coding::getDisplay)
-            .reduce(joining()).orElse(StringUtils.EMPTY);
-    }
-
-    private Optional<String> getNotes(ProcedureRequest procedureRequest) {
-        return procedureRequest.getNote()
-            .stream()
-            .map(Annotation::getText)
-            .reduce(joining());
-    }
-
-    private BinaryOperator<String> joining() {
-        return (value1, value2) -> value1 + COMMA + value2;
+    private String formatReason(String value) {
+        return String.format(REASON_CODE_TEXT_FORMAT, value);
     }
 
     private Optional<String> getRequester(ProcedureRequest procedureRequest) {
@@ -125,13 +137,28 @@ public class DiaryPlanStatementMapper {
 
         if (agent.hasReference()) {
             String reference = agent.getReference();
-            if (reference.startsWith(ResourceType.Organization.name())
-                || reference.startsWith(ResourceType.Device.name())) {
-                return Optional.of(agent.getDisplay());
+            if (reference.startsWith(ResourceType.Organization.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (Organization) resource)
+                    .map(this::formatOrganization);
+            } else if (reference.startsWith(ResourceType.Device.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (Device) resource)
+                    .map(this::formatDevice);
             }
         }
 
         return Optional.empty();
+    }
+
+    private String formatDevice(Device device) {
+        return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
+    }
+
+    private String formatOrganization(Organization organization) {
+        return String.format(RECALL_ORGANISATION, organization.getName());
     }
 
     @Getter
