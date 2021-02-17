@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
@@ -41,14 +42,19 @@ public class MockMhsService {
     private final InputStream inputStream3 = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
     private final String internalServerErrorResponse = IOUtils.toString(inputStream3, StandardCharsets.UTF_8);
 
-    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String mockMhsMessage) {
+    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage) {
         headers.setContentType(MediaType.TEXT_HTML);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
+        if (!waitForResponse.equals("false")) {
+            LOGGER.error("Missing or invalid wait-for-response header");
+            return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
+        }
+
         try {
             verifyOutboundMessagePayload(mockMhsMessage);
-        }  catch (MockMHSException e) {
+        } catch (MockMHSException e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
         } catch (JsonProcessingException e) {
