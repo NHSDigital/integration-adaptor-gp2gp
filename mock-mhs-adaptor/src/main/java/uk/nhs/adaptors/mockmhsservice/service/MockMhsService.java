@@ -47,14 +47,14 @@ public class MockMhsService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
-        if(!waitForResponse.equals("false")) {
+        if (!waitForResponse.equals("false")) {
             LOGGER.error("Missing or invalid wait-for-response header");
             return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
         }
 
         try {
             verifyOutboundMessagePayload(mockMhsMessage);
-        }  catch (MockMHSException e) {
+        } catch (MockMHSException e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
         } catch (JsonProcessingException e) {
