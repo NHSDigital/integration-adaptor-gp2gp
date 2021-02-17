@@ -26,12 +26,7 @@ public class DateFormatUtil {
     }
 
     public static String formatDate(Instant instant) {
-        if (instant == null) {
-            throw new EhrMapperException("Could not format date");
-        }
-
-        return DATE_TIME_FORMATTER.format(
-            instant.atZone(ZoneId.of(UK_ZONE_ID))
+        return DATE_TIME_FORMATTER.format(instant.atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
     }
 }
