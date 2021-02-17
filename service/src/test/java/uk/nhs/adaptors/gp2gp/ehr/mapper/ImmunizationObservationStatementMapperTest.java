@@ -41,6 +41,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-codeable-concepts-text.json";
     private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-date.json";
+    private static final String INPUT_JSON_REASON_NOT_GIVEN= IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-reason-not-given-coding.json";
+    private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT= IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-reason-not-given-text.json";
 
     private static final String INPUT_JSON_BUNDLE =  IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -51,6 +55,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-with-context.xml";
     private static final String OUTPUT_XML_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-no-date.xml";
+    private static final String OUTPUT_XML_WITH_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-reason-not-given.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -98,6 +104,8 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITHOUT_CODEABLE_CONCEPT_TEXT, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITHOUT_DATE, OUTPUT_XML_WITHOUT_DATE, false),
             Arguments.of(INPUT_JSON_WITHOUT_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION, false),
+            Arguments.of(INPUT_JSON_REASON_NOT_GIVEN, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
+            Arguments.of(INPUT_JSON_REASON_NOT_GIVEN_TEXT, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_CONTEXT, true)
         );
     }
