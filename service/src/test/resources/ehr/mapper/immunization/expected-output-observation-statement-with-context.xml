@@ -1,6 +1,6 @@
-<component typeCode="COMP" >
+<component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id" />
+        <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100630055900"/>

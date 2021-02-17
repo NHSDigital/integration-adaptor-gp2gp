@@ -1,9 +1,9 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id" />
+        <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100630055900"/>
+            <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100630054806" />
         <pertinentInformation typeCode="PERT">
