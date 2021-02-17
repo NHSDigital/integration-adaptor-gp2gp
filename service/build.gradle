@@ -42,7 +42,7 @@ dependencies {
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 
 	// Infrastructure
-	implementation 'com.amazonaws:aws-java-sdk:1.11.950'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.955'
 	implementation 'com.azure:azure-storage-blob:12.10.0'
 	implementation 'org.apache.qpid:qpid-jms-client:0.56.0'
 
@@ -71,8 +71,8 @@ dependencies {
 		implementation('commons-codec:commons-codec:1.15') {
 			because 'hapi-fhir-structures-dstu3:5.2.1 depends on previous version with SNYK-JAVA-COMMONSCODEC-561518'
 		}
-		implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.1') {
-			because 'aws-java-sdk-s3:1.11.946 depends on a previous version with CVE-2020-28491'
+		implementation('io.netty:netty-codec-http:4.1.59.Final') {
+			because 'to fix SNYK-JAVA-IONETTY-1070799'
 		}
 	}
 }
