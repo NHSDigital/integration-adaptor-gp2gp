@@ -3,6 +3,16 @@
     "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
     "authoredOn": "2010-01-19",
     "priority": "routine",
+    "description": "Referred for investigation into low blood pressure",
+    "specialty": {
+        "coding": [
+            {
+                "system": "http://hl7.org/fhir/v3/NullFlavor",
+                "code": "UNK",
+                "display": "unknown"
+            }
+        ]
+    },
     "identifier": [
         {
             "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",

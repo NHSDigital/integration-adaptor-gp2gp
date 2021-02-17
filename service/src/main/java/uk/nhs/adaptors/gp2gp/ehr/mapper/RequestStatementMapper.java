@@ -36,7 +36,7 @@ public class RequestStatementMapper {
 
     private static final String UBRN = "UBRN: ";
     private static final String UBRN_SYSTEM_URL = "https://fhir.nhs.uk/Id/ubr-number";
-    private static final String PRIORITY = "PRIORITY: ";
+    private static final String PRIORITY = "Priority: ";
     private static final String SERVICE_REQUESTED = "Service(s) Requested: ";
     private static final String REQUESTER_DEVICE = "Requester Device: ";
     private static final String REQUESTER_ORG = "Requester Org: ";
@@ -188,6 +188,7 @@ public class RequestStatementMapper {
 
         if (referenceString.startsWith(ResourceType.Practitioner.name())) {
             var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Practitioner) value).or(Optional::empty);
+            // TODO: Change to string format
             return practitioner.map(value -> RECIPIENT_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
         }
         else if (referenceString.startsWith(ResourceType.HealthcareService.name())) {
@@ -238,6 +239,7 @@ public class RequestStatementMapper {
             }
             else if (reference.startsWith(ResourceType.Practitioner.name())) {
                 var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Practitioner) value).or(Optional::empty);
+                // TODO: Change to string format
                 return practitioner.map(value -> NOTE_AUTHOR_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
             }
             else if (reference.startsWith(ResourceType.Patient.name())) {
