@@ -21,8 +21,11 @@ docker-compose down
 echo -e "${LIGHT_GREEN}Building and starting dependencies${NC}"
 docker-compose up -d activemq mongodb wiremock mock-mhs-adaptor
 
-echo -e "${LIGHT_GREEN}Starting GP2GP adaptor ${RELEASE_VERSION}${NC}"
+echo -e "${LIGHT_GREEN}Pulling GP2GP adaptor image ${RELEASE_VERSION}${NC}"
 export GP2GP_IMAGE="nhsdev/nia-gp2gp-adaptor:${RELEASE_VERSION}"
+docker pull "$GP2GP_IMAGE"
+
+echo -e "${LIGHT_GREEN}Starting GP2GP adaptor ${RELEASE_VERSION}${NC}"
 docker-compose up -d --no-build gp2gp
 
 echo -e "${LIGHT_GREEN}Verify all containers are up${NC}"
