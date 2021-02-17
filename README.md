@@ -115,6 +115,15 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 
+### SDS API Configuration Options
+
+The GP2GP uses the [SDS API]() to discover GPC endpoints.
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_SDS_URL                        | http://localhost:8110/                        | URL to the SDS API
+| GP2GP_SDS_APIKEY                     |                                               | Secret key used to authenticate with the API
+
 ### Trust Store Configuration Options
 
 You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not replace Java's default trust store. At runtime the application adds these additional certificates to the default trust store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.

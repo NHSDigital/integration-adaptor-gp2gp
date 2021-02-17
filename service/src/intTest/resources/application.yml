@@ -47,3 +47,6 @@ gp2gp:
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:9690937286}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
+  sds:
+    url: ${GP2GP_SDS_URL:http://localhost:8110/}
+    apiKey: ${GP2GP_SDS_APIKEY:test_api_key}

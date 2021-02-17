@@ -58,7 +58,7 @@ public class MhsRequestBuilder {
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
-            .filter(webClientFilterService.errorHandlingFilter("Mhs Outbound", HttpStatus.ACCEPTED))
+            .filter(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.MHS_OUTBOUND, HttpStatus.ACCEPTED))
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();
