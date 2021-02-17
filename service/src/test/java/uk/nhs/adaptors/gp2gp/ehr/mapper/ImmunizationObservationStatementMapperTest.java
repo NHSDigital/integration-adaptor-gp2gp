@@ -45,7 +45,6 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-reason-not-given-coding.json";
     private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-reason-not-given-text.json";
-
     private static final String INPUT_JSON_BUNDLE =  IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-information.xml";
