@@ -23,15 +23,10 @@ public class ObservationStatementMapper {
         var observationStatementTemplateParameters = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
             .comment(observation.getComment())
-            .issued(DateFormatUtil.formatDate(observation.getIssued()))
+            .issued(DateFormatUtil.formatInstantType(observation.getIssuedElement()))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
             .build();
-
-        var instantType = observation.getIssuedElement().getDay();
-        var type = observation.getEffective();
-        var dateTimeType = observation.getEffectiveDateTimeType().getTimeZone();
-        var period = observation.getEffectivePeriod().getEnd().getTime();
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE, observationStatementTemplateParameters);
     }

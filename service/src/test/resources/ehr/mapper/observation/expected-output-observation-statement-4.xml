@@ -3,8 +3,8 @@
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <low value="20100113000000" />
-            <high value="20100115000000" />
+            <low value="20100113" />
+            <high value="20100115" />
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <pertinentInformation typeCode="PERT">

@@ -81,7 +81,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildEffectiveTime(Immunization immunization) {
         Optional<String> effectiveTime = Optional.empty();
         if (immunization.hasDate()) {
-            effectiveTime = Optional.of(DateFormatUtil.formatDate(immunization.getDate()));
+            effectiveTime = Optional.of(DateFormatUtil.formatDateTimeType(immunization.getDateElement()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -236,8 +236,7 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String formatDateTimeType(DateTimeType dateTimeType) {
-        Date extractedDate = dateTimeType.getValue();
-        return DateFormatUtil.formatDate(extractedDate);
+        return DateFormatUtil.formatDateTimeType(dateTimeType);
     }
 
     private String formatShortDate(Date date) {

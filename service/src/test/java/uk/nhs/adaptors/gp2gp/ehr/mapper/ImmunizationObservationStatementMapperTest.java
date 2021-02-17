@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.TimeZone;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -14,7 +13,6 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Immunization;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +31,7 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-no-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-date-recorded.json";
-    private static final String INPUT_JSON_BUNDLE =  IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
+    private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-information.xml";
     private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -61,11 +59,6 @@ public class ImmunizationObservationStatementMapperTest {
         messageContext.resetMessageContext();
     }
 
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
-
     @Test
     public void When_MappingParsedImmunizationJsonWithPertinentInformation_Expect_NarrativeStatementXmlOutput() throws IOException {
         var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_PERTINENT_INFORMATION);
@@ -76,13 +69,11 @@ public class ImmunizationObservationStatementMapperTest {
     }
 
     @Test
-    public void
-    When_MappingParsedImmunizationJsonWithoutPertinentInformation_Expect_NarrativeStatementXmlOutput() throws IOException {
+    public void When_MappingParsedImmunizationJsonWithoutPertinentInformation_Expect_NarrativeStatementXmlOutput() throws IOException {
         var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_PERTINENT_INFORMATION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, false);
-
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 

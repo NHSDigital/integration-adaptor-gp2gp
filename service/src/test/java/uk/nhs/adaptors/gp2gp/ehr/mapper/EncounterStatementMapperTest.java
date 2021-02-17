@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
@@ -13,9 +11,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Encounter;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,16 +46,6 @@ public class EncounterStatementMapperTest {
 
     private EncounterStatementMapper encounterStatementMapper;
     private MessageContext messageContext;
-
-    @BeforeAll
-    public static void initialize() {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
-    }
 
     @BeforeEach
     public void setUp() {
