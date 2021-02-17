@@ -61,7 +61,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     public void When_FindDocumentTaskIsStartedForPatientWithDocument_Expect_DatabaseToBeUpdated() {
         var ehrExtractStatus = addTestDataToDatabase();
         assertThatAccessRecordWasOverwritten(ehrExtractStatus);
-        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, EhrStatusConstants.getNhsNumber());
+        var taskDefinition = buildFindDocumentTask(ehrExtractStatus, EhrStatusConstants.NHS_NUMBER);
         gpcFindDocumentsTaskExecutor.execute(taskDefinition);
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
