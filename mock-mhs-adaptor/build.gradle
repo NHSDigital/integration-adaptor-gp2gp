@@ -19,7 +19,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework:spring-jms:5.2.6.RELEASE'
-	implementation 'org.apache.qpid:qpid-jms-client:0.51.0'
+	implementation 'org.apache.qpid:qpid-jms-client:0.56.0'
 	implementation 'org.apache.commons:commons-lang3:3.11'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
