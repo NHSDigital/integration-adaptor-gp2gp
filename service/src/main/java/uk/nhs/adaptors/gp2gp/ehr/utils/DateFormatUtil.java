@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -9,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.InstantType;
+
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class DateFormatUtil {
 

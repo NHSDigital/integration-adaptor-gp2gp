@@ -3,10 +3,10 @@ package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
 import java.time.Duration;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.data.mongodb.core.index.IndexInfo;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public abstract class TtlCreator {

@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
-
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
+
 import static org.awaitility.Awaitility.await;
+
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 public class AwaitHelper {
 
