@@ -1,20 +1,22 @@
 package uk.nhs.adaptors.gp2gp.testcontainers;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import lombok.extern.slf4j.Slf4j;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.springframework.jms.support.destination.JmsDestinationAccessor.RECEIVE_TIMEOUT_NO_WAIT;
+
+import static uk.nhs.adaptors.gp2gp.TestContainerUtils.isTestContainersEnabled;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.springframework.jms.support.destination.JmsDestinationAccessor.RECEIVE_TIMEOUT_NO_WAIT;
-import static uk.nhs.adaptors.gp2gp.TestContainerUtils.isTestContainersEnabled;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback {

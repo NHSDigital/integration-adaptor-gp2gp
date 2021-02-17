@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp;
 
+import static com.mongodb.client.MongoClients.create;
+
+import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
-
-import static com.mongodb.client.MongoClients.create;
 
 public class Mongo {
     private static MongoDatabase sharedDatabaseConnection = null;
