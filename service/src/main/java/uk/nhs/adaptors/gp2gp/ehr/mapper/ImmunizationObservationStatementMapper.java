@@ -54,7 +54,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
-    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %S%nSequence: %S,%S";
+    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %s Sequence: %S,%S ";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String COMMA = ",";
 
@@ -198,11 +198,11 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExplanationPertinentInformation(Immunization immunization) {
         Optional<String> explanation;
-        if (immunization.getExplanation().getReasonFirstRep().getCodingFirstRep().hasDisplay()) {
+        if (immunization.hasExplanation() && immunization.getExplanation().hasReason()) {
             CodeableConcept reason = immunization.getExplanation().getReasonFirstRep();
             explanation = CodeableConceptMappingUtils.extractTextOrCoding(reason);
             return explanation.map(value -> REASON + value).orElse(StringUtils.EMPTY);
-        } else if (immunization.getExplanation().getReasonNotGivenFirstRep().getCodingFirstRep().hasDisplay()) {
+        } else if (immunization.hasExplanation() && immunization.getExplanation().hasReasonNotGiven()) {
             CodeableConcept reasonNotGiven = immunization.getExplanation().getReasonNotGivenFirstRep();
             explanation = CodeableConceptMappingUtils.extractTextOrCoding(reasonNotGiven);
             return explanation.map(value -> REASON_NOT_GIVEN + value).orElse(StringUtils.EMPTY);
@@ -226,7 +226,8 @@ public class ImmunizationObservationStatementMapper {
             vaccinationProtocolComponent.getDoseSequence(),
             vaccinationProtocolComponent.getSeriesDoses());
 
-        String targetDiseases = vaccinationProtocolComponent.getTargetDisease().stream()
+        String targetDiseases = vaccinationProtocolComponent.getTargetDisease()
+            .stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
