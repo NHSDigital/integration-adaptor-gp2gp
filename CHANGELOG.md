@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NIAD-814: Find the patient's documents (#75)
 - NIAD-919 Translating Narrative Comment Note to Narrative Statement Improvements  (#73)
 - NIAD-874: EHR Receive Continue Reply  (#70)
-- Translating FHIR Narrative (Comment Note) Observation to Narrative Statement (#66)
+- NIAD-919: Translating FHIR Narrative (Comment Note) Observation to Narrative Statement (#66)
 - NIAD-988: Document reference task marks GPC completions (#69)
 
 ### Fixed
