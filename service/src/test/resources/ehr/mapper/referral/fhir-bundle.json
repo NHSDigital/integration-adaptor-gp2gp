@@ -29,6 +29,105 @@
                 },
                 "manufacturer": "Device name"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Device",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "Device type code",
+                            "display": "Device type display"
+                        }
+                    ],
+                    "text": "Device type text"
+                },
+                "manufacturer": "Device name"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "RelatedPerson",
+                "id": "f002",
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n     Ariadne Bor-Jansma\n    </div>"
+                },
+                "patient": {
+                    "reference": "Patient/f201"
+                },
+                "relationship": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                "code": "SIGOTHR"
+                            }
+                        ]
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "text": "Ariadne Bor-Jansma"
+                    }
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "+31201234567",
+                        "use": "home"
+                    }
+                ],
+                "gender": "female",
+                "birthDate": "1963",
+                "period": {
+                    "start": "1975"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "567B852A-5775-4AEF-BB77-504D820F11F7",
+                "meta": {
+                    "versionId": "1098667621224880139",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Adams",
+                        "given": [
+                            "James"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "unknown"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "HealthcareService",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "text": {
+                    "identifier": [
+                        {
+                            "system": "http://example.org/shared-ids",
+                            "value": "HS-12"
+                        }
+                    ],
+                    "active": true,
+                    "name": "Consulting psychologists and/or psychology services"
+
+                }
+            }
         }
     ]
 }

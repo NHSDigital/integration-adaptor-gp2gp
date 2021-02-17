@@ -36,14 +36,21 @@ public class RequestStatementMapperTest {
     private static final String INPUT_JSON_WITH_ONE_REASON_CODE = TEST_FILE_DIRECTORY + "example-referral-request-resource-3.json";
     private static final String INPUT_JSON_WITH_PRACTITIONER_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-4.json";
     private static final String INPUT_JSON_WITH_REASON_CODES = TEST_FILE_DIRECTORY + "example-referral-request-resource-5.json";
+    private static final String INPUT_JSON_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY + "example-referral-request-resource-6.json";
+    private static final String INPUT_JSON_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-7.json";
+    private static final String INPUT_JSON_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-8.json";
+    private static final String INPUT_JSON_WITH_PATIENT_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-9.json";
+    private static final String INPUT_JSON_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-10.json";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-1.xml";
     private static final String OUTPUT_XML_USES_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-2.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-request-statement-3.xml";
     private static final String OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE = TEST_FILE_DIRECTORY + "expected-output-request-statement-4.xml";
     private static final String OUTPUT_XML_WITH_REASON_CODES = TEST_FILE_DIRECTORY + "expected-output-request-statement-5.xml";
-
-    private static final String INPUT_JSON_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY + "example-referral-request-resource-6.json";
     private static final String OUTPUT_XML_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY + "expected-output-request-statement-6.xml";
+    private static final String OUTPUT_XML_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-7.xml";
+    private static final String OUTPUT_XML_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-8.xml";
+    private static final String OUTPUT_XML_WITH_PATIENT_REQUESTER  = TEST_FILE_DIRECTORY + "expected-output-request-statement-9.xml";
+    private static final String OUTPUT_XML_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-10.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -96,6 +103,10 @@ public class RequestStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
             Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES),
             Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
+            Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
+            Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
+            Arguments.of(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
+            Arguments.of(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
             Arguments.of(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_USES_OPTIONAL_FIELDS)
             );
     }

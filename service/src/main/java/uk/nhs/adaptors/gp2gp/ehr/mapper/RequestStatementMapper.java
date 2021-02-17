@@ -43,7 +43,7 @@ public class RequestStatementMapper {
     private static final String REQUESTER_PATIENT = "Requester: Patient";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
-    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
+    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: %s %s";
     private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient HealthCare Service: ";
     private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String REASON_CODE = "Reason Codes: ";
@@ -52,7 +52,7 @@ public class RequestStatementMapper {
     private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String NOTE_AUTHOR = "Author: ";
     private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
-    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
+    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner %s %s";
     private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
     private static final String COMMA = ",";
 
@@ -133,7 +133,7 @@ public class RequestStatementMapper {
             String reference = referralRequest.getRequester().getAgent().getReference();
             if (reference.startsWith(ResourceType.Device.name())) {
                 var device = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Device) value).or(Optional::empty);
-                return device.map(value -> REQUESTER_DEVICE + CodeableConceptMappingUtils.extractTextOrCoding(value.getType())).orElse(StringUtils.EMPTY);
+                return device.map(value -> CodeableConceptMappingUtils.extractTextOrCoding(value.getType()).map(text -> REQUESTER_DEVICE + text).orElse(StringUtils.EMPTY)).orElse(StringUtils.EMPTY);
             }
             else if (reference.startsWith(ResourceType.Organization.name())) {
                 var organization = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Organization) value).or(Optional::empty);
@@ -188,8 +188,7 @@ public class RequestStatementMapper {
 
         if (referenceString.startsWith(ResourceType.Practitioner.name())) {
             var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Practitioner) value).or(Optional::empty);
-            // TODO: Change to string format
-            return practitioner.map(value -> RECIPIENT_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
+            return practitioner.map(value -> String.format(RECIPIENT_PRACTITIONER, value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily())).orElse(StringUtils.EMPTY);
         }
         else if (referenceString.startsWith(ResourceType.HealthcareService.name())) {
             var healthCareService = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (HealthcareService) value).or(Optional::empty);
@@ -239,8 +238,7 @@ public class RequestStatementMapper {
             }
             else if (reference.startsWith(ResourceType.Practitioner.name())) {
                 var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Practitioner) value).or(Optional::empty);
-                // TODO: Change to string format
-                return practitioner.map(value -> NOTE_AUTHOR_PRACTITIONER + value.getNameFirstRep().getGivenAsSingleString() + " " + value.getNameFirstRep().getFamily()).orElse(StringUtils.EMPTY);
+                return practitioner.map(value -> String.format(NOTE_AUTHOR_PRACTITIONER, value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily())).orElse(StringUtils.EMPTY);
             }
             else if (reference.startsWith(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
