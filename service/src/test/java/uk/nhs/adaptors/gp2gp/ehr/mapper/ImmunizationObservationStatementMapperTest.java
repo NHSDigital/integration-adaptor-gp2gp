@@ -41,9 +41,9 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-codeable-concepts-text.json";
     private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-date.json";
-    private static final String INPUT_JSON_REASON_NOT_GIVEN= IMMUNIZATION_FILE_LOCATIONS
+    private static final String INPUT_JSON_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-reason-not-given-coding.json";
-    private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT= IMMUNIZATION_FILE_LOCATIONS
+    private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-reason-not-given-text.json";
 
     private static final String INPUT_JSON_BUNDLE =  IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
