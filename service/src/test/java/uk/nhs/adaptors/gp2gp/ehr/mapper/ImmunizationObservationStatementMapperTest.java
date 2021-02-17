@@ -60,7 +60,6 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
-    private Bundle bundle;
     private FhirParseService fhirParseService;
 
     @BeforeEach
@@ -68,9 +67,10 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         fhirParseService = new FhirParseService();
         messageContext = new MessageContext(randomIdGeneratorService);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
+        Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
+        messageContext.initialize(bundle);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext);
     }
 
     @AfterEach
@@ -82,12 +82,11 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
         boolean isNested) throws IOException {
-
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
 
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
-        String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, isNested);
+        String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, isNested);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
@@ -109,6 +108,6 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 
         assertThrows(EhrMapperException.class, ()
-            -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, bundle, false));
+            -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false));
     }
 }

@@ -15,6 +15,7 @@ import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -136,13 +137,13 @@ public class DiaryPlanStatementMapper {
         Reference agent = procedureRequest.getRequester().getAgent();
 
         if (agent.hasReference()) {
-            String reference = agent.getReference();
-            if (reference.startsWith(ResourceType.Organization.name())) {
+            IIdType reference = agent.getReferenceElement();
+            if (reference.getResourceType().equals(ResourceType.Organization.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Organization) resource)
                     .map(this::formatOrganization);
-            } else if (reference.startsWith(ResourceType.Device.name())) {
+            } else if (reference.getResourceType().equals(ResourceType.Device.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Device) resource)

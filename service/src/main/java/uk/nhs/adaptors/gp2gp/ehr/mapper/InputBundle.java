@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.instance.model.api.IIdType;
 
 public class InputBundle {
     private final Bundle bundle;
@@ -14,7 +15,7 @@ public class InputBundle {
         this.bundle = bundle;
     }
 
-    public Optional<Resource> getResource(String reference) {
+    public Optional<Resource> getResource(IIdType reference) {
         return extractResourceByReference(this.bundle, reference);
     }
 }

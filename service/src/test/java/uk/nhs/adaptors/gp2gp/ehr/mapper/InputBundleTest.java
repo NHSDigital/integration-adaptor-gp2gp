@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,7 @@ public class InputBundleTest {
 
     @Test
     public void When_GettingResourceFromBundle_Expect_ResourceReturned() {
-        Optional<Resource> resource = new InputBundle(bundle).getResource(EXISTING_REFERENCE);
+        Optional<Resource> resource = new InputBundle(bundle).getResource(new IdType(EXISTING_REFERENCE));
 
         assertThat(resource).isPresent();
         assertThat(resource.get().getId()).isEqualTo(EXISTING_REFERENCE);
@@ -42,11 +43,11 @@ public class InputBundleTest {
 
     @Test
     public void When_GettingResourceFromEmptyBundle_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(new Bundle()).getResource(EXISTING_REFERENCE)).isNotPresent();
+        assertThat(new InputBundle(new Bundle()).getResource(new IdType(EXISTING_REFERENCE))).isNotPresent();
     }
 
     @Test
     public void When_GettingNotInBundleResource_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(bundle).getResource(NO_EXISTING_REFERENCE)).isNotPresent();
+        assertThat(new InputBundle(bundle).getResource(new IdType(NO_EXISTING_REFERENCE))).isNotPresent();
     }
 }
