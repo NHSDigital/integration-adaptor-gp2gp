@@ -144,11 +144,7 @@
   "explanation": {
     "reasonNotGiven": [
       {
-        "coding": [
-          {
-            "display": "Not needed"
-          }
-        ]
+        "text": "Not needed"
       }
     ]
   },
