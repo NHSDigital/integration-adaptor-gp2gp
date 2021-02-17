@@ -198,11 +198,11 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExplanationPertinentInformation(Immunization immunization) {
         Optional<String> explanation;
-        if (immunization.getExplanation().getReasonFirstRep().getCodingFirstRep().hasDisplay()) {
+        if (immunization.getExplanation().hasReason()) {
             CodeableConcept reason = immunization.getExplanation().getReasonFirstRep();
             explanation = CodeableConceptMappingUtils.extractTextOrCoding(reason);
             return explanation.map(value -> REASON + value).orElse(StringUtils.EMPTY);
-        } else if (immunization.getExplanation().getReasonNotGivenFirstRep().getCodingFirstRep().hasDisplay()) {
+        } else if (immunization.getExplanation().hasReasonNotGiven()) {
             CodeableConcept reasonNotGiven = immunization.getExplanation().getReasonNotGivenFirstRep();
             explanation = CodeableConceptMappingUtils.extractTextOrCoding(reasonNotGiven);
             return explanation.map(value -> REASON_NOT_GIVEN + value).orElse(StringUtils.EMPTY);
@@ -226,7 +226,8 @@ public class ImmunizationObservationStatementMapper {
             vaccinationProtocolComponent.getDoseSequence(),
             vaccinationProtocolComponent.getSeriesDoses());
 
-        String targetDiseases = vaccinationProtocolComponent.getTargetDisease().stream()
+        String targetDiseases = vaccinationProtocolComponent.getTargetDisease()
+            .stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
