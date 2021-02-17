@@ -6,7 +6,6 @@ import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.MONTH;
 import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.YEAR;
 
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
-import lombok.SneakyThrows;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -31,7 +30,6 @@ public class DateFormatUtil {
         MINUTE, "yyyyMMddHHmm"
     );
 
-    @SneakyThrows
     public static String formatDateTimeType(DateTimeType dateTimeType) {
         if (!dateTimeType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
