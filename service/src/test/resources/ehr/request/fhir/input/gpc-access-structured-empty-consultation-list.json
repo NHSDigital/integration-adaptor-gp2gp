@@ -348,38 +348,7 @@
             "text": "Items excluded due to confidentiality and/or patient preferences. Patient record transfer from previous GP practice not yet complete; information recorded before 23-Jun-2010 may be missing."
           }
         ],
-        "entry": [
-          {
-            "item": {
-              "reference": "Encounter/DBF5776F-8A86-477C-AB98-57182A9B40FD"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/9B69F6AE-F991-49EE-9FFD-028E39B38BFE"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/D81C5E8F-CB3A-4A78-92EA-51EC3665648E"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/8FEB11AA-5785-43D3-99A9-E9D49EAF2161"
-            }
-          },
-          {
-            "item": {
-              "reference": "Encounter/4088F3A1-CE58-4374-AABA-763C31738281"
-            }
-          }
-        ]
+        "entry": []
       }
     },
     {

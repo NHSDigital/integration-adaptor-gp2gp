@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -39,7 +41,9 @@ public class EhrExtractMapperTest {
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
     private static final String JSON_INPUT_FILE_WITH_NO_PATIENT = "gpc-access-structured-with-no-patient.json";
     private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
-    private static final String TEST_ID = "test-id";
+    private static final String TEST_ID_1 = "test-id-1";
+    private static final String TEST_ID_2 = "test-id-2";
+    private static final String TEST_ID_3 = "test-id-3";
     private static final String TEST_CONVERSATION_ID = "test-conversation-id";
     private static final String TEST_REQUEST_ID = "test-request-id";
     private static final String TEST_NHS_NUMBER = "1234567890";
@@ -62,8 +66,8 @@ public class EhrExtractMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
-
     private EhrExtractMapper ehrExtractMapper;
+    private MessageContext messageContext;
 
     @BeforeAll
     public static void initialize() throws IOException {
@@ -82,9 +86,18 @@ public class EhrExtractMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(), randomIdGeneratorService, timestampService);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        ehrExtractMapper = new EhrExtractMapper(new FhirParseService(),
+            randomIdGeneratorService,
+            timestampService,
+            new EncounterMapper(messageContext));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
     }
 
     @Test
