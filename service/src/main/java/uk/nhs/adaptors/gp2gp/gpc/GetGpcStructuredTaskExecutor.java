@@ -39,20 +39,18 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     public void execute(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
 
-        var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
-        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
-        var response = gpcClient.getStructuredRecord(request, structuredTaskDefinition);
+        var response = gpcClient.getStructuredRecord(structuredTaskDefinition);
         var hl7TranslatedResponse = StringUtils.EMPTY;
 
         try {
             var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
                 structuredTaskDefinition,
                 response);
-            String transformedExtract = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
             hl7TranslatedResponse = outputMessageWrapperMapper.map(
                 structuredTaskDefinition,
-                transformedExtract);
+                ehrExtractContent);
         } finally {
             messageContext.resetMessageContext();
         }

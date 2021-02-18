@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
