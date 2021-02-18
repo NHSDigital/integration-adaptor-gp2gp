@@ -1,11 +1,11 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-
-import java.io.IOException;
-import java.io.StringWriter;
 
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 

@@ -1,0 +1,15 @@
+<component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="{{id}}" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center {{{effectiveTime}}}/>
+        </effectiveTime>
+        {{#availabilityTime}}<availabilityTime value="{{availabilityTime}}"/>{{/availabilityTime}}
+        {{#text}}
+            <text>
+            {{text}}
+            </text>
+        {{/text}}
+    </PlanStatement>
+</component>

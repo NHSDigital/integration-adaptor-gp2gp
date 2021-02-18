@@ -1,12 +1,12 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import org.hl7.fhir.instance.model.api.IBaseResource;
+import org.springframework.stereotype.Service;
+
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import ca.uhn.fhir.parser.StrictErrorHandler;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
-
-import org.hl7.fhir.instance.model.api.IBaseResource;
-import org.springframework.stereotype.Service;
 
 @Service
 public class FhirParseService {

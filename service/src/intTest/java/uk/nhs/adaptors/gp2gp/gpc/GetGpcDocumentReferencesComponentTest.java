@@ -9,16 +9,6 @@ import static org.mockito.Mockito.verify;
 import java.util.List;
 import java.util.UUID;
 
-import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
-import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
-import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +18,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -168,7 +168,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     }
 
     private void assertOperationOutcome(Exception exception) {
-        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during GPC request: ", "");
         var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
         var coding = operationOutcome.getDetails().getCodingFirstRep();
         assertThat(coding.getCode()).isEqualTo(INVALID_NHS_NUMBER);
