@@ -44,7 +44,7 @@ public class RequestStatementMapper {
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
     private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: %s %s";
-    private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient HealthCare Service: ";
+    private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient Healthcare Service: ";
     private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String REASON_CODE = "Reason Codes: ";
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
@@ -220,7 +220,7 @@ public class RequestStatementMapper {
     private String buildNoteDescription(ReferralRequest referralRequest, Bundle bundle) {
         if (referralRequest.hasNote()) {
             return referralRequest.getNote().stream()
-                .map(value -> String.format(NOTE, getAuthorString(value, bundle), DateFormatUtil.formatDate(value.getTime()),  value.getText()))
+                .map(value -> String.format(NOTE, getAuthorString(value, bundle), getNoteTime(value),  value.getText()))
                 .collect(Collectors.joining(COMMA));
         }
         return StringUtils.EMPTY;
@@ -245,6 +245,13 @@ public class RequestStatementMapper {
             }
         }
 
+        return StringUtils.EMPTY;
+    }
+
+    private String getNoteTime(Annotation annotation) {
+        if (annotation.hasTime()) {
+            return DateFormatUtil.formatDate(annotation.getTime());
+        }
         return StringUtils.EMPTY;
     }
 

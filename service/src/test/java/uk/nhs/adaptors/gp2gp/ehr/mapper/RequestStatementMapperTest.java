@@ -41,6 +41,9 @@ public class RequestStatementMapperTest {
     private static final String INPUT_JSON_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-8.json";
     private static final String INPUT_JSON_WITH_PATIENT_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-9.json";
     private static final String INPUT_JSON_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-10.json";
+    private static final String INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY + "example-referral-request-resource-11.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY + "example-referral-request-resource-12.json";
+    private static final String INPUT_JSON_WITH_NOTES = TEST_FILE_DIRECTORY + "example-referral-request-resource-13.json";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-1.xml";
     private static final String OUTPUT_XML_USES_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-2.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-request-statement-3.xml";
@@ -51,6 +54,9 @@ public class RequestStatementMapperTest {
     private static final String OUTPUT_XML_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-8.xml";
     private static final String OUTPUT_XML_WITH_PATIENT_REQUESTER  = TEST_FILE_DIRECTORY + "expected-output-request-statement-9.xml";
     private static final String OUTPUT_XML_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-10.xml";
+    private static final String OUTPUT_XML_WITH_RECIPIENTS = TEST_FILE_DIRECTORY + "expected-output-request-statement-11.xml";
+    private static final String OUTPUT_XML_WITH_RECIPIENTS_AND_PRACTITIONER = TEST_FILE_DIRECTORY + "expected-output-request-statement-12.xml";
+    private static final String OUTPUT_XML_WITH_NOTES = TEST_FILE_DIRECTORY + "expected-output-request-statement-13.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -98,16 +104,19 @@ public class RequestStatementMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
-            Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES),
-            Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
-            Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_USES_OPTIONAL_FIELDS)
+//            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
+//            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
+//            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
+//            Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES),
+//            Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
+//            Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
+//            Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
+//            Arguments.of(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
+//            Arguments.of(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
+//            Arguments.of(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_RECIPIENTS),
+//            Arguments.of(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_RECIPIENTS_AND_PRACTITIONER),
+            Arguments.of(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES)
+//            Arguments.of(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_USES_OPTIONAL_FIELDS)
             );
     }
 
