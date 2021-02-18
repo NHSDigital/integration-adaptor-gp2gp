@@ -57,7 +57,6 @@ public class RequestStatementMapper {
     private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
     private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
     private static final String COMMA = ",";
-
     private static final String NAME = "%s %s";
 
     private final MessageContext messageContext;
