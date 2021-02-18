@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import static org.apache.http.client.utils.URLEncodedUtils.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -34,6 +33,7 @@ public class MhsRequestBuilder {
     private static final String CORRELATION_ID = "Correlation-Id";
     private static final String WAIT_FOR_RESPONSE = "wait-for-response";
     private static final String FALSE = "false";
+    public static final String CONTENT_TYPE = "Content-type";
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;

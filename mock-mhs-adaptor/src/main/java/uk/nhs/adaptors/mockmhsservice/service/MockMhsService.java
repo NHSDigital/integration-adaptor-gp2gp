@@ -49,11 +49,6 @@ public class MockMhsService {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
-        if (!contentType.equals(APPLICATION_JSON_VALUE)) {
-            LOGGER.error("Missing or invalid content-type header");
-            return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
-        }
-
         if (odsCode.isEmpty()) {
             LOGGER.error("Missing ods-code header");
             return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);

@@ -2,6 +2,9 @@ package uk.nhs.adaptors.mockmhsservice.controller;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
+import static org.springframework.http.MediaType.TEXT_XML_VALUE;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +36,9 @@ public class MhsMockController {
     private final String internalServerErrorResponse = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
-    @PostMapping(value = "/mock-mhs-endpoint")
+    @PostMapping(value = "/mock-mhs-endpoint",
+        consumes = APPLICATION_JSON_VALUE
+    )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
             @RequestHeader Map<String, String> headers,
