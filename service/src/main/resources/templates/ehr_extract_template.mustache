@@ -40,7 +40,9 @@
                 </AgentOrgSDS>
             </author>
             <!-- responsibleParty/agentDirectory will go here -->
-            <!-- ehrComposition components will go here -->
+            {{#components}}
+                {{{.}}}
+            {{/components}}
         </ehrFolder>
     </component>
     <inFulfillmentOf typeCode="FLFS">
