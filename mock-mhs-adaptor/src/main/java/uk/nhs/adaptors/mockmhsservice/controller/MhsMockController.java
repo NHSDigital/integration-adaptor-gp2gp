@@ -2,6 +2,7 @@ package uk.nhs.adaptors.mockmhsservice.controller;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +34,9 @@ public class MhsMockController {
     private final String internalServerErrorResponse = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
-    @PostMapping(value = "/mock-mhs-endpoint")
+    @PostMapping(value = "/mock-mhs-endpoint",
+        consumes = APPLICATION_JSON_VALUE
+    )
     @ResponseStatus(value = ACCEPTED)
     public ResponseEntity<String> postMockMhs(
             @RequestHeader Map<String, String> headers,
@@ -43,7 +46,9 @@ public class MhsMockController {
             String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse(StringUtils.EMPTY);
             String correlationId = Optional.ofNullable(headers.get("correlation-id")).orElse(StringUtils.EMPTY);
             String waitForResponse = Optional.ofNullable(headers.get("wait-for-response")).orElse(StringUtils.EMPTY);
-            return mockMhsService.handleRequest(interactionId, correlationId, waitForResponse, mockMhsMessage);
+            String contentType = Optional.ofNullable(headers.get("content-type")).orElse(StringUtils.EMPTY);
+            String odsCode = Optional.ofNullable(headers.get("ods-code")).orElse(StringUtils.EMPTY);
+            return mockMhsService.handleRequest(interactionId, correlationId, waitForResponse, mockMhsMessage, contentType, odsCode);
         } catch (Exception e) {
             LOGGER.error("Error could not process mock request", e);
             responseHeaders.setContentType(MediaType.TEXT_HTML);
