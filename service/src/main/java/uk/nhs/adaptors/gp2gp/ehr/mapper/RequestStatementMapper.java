@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.HealthcareService;
@@ -20,12 +19,13 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
+
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ExtractBundleResourceUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -58,12 +58,12 @@ public class RequestStatementMapper {
 
     private final MessageContext messageContext;
 
-    public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, Bundle bundle, boolean isNested) {
+    public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
             .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
             .isNested(isNested)
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
-            .description(buildDescription(referralRequest, bundle))
+            .description(buildDescription(referralRequest))
             .build();
 
         if (!referralRequest.hasReasonCode()) {
@@ -73,23 +73,23 @@ public class RequestStatementMapper {
         return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters);
     }
 
-    private String buildDescription(ReferralRequest referralRequest, Bundle bundle) {
-        List<String> descriptionList = retrieveDescription(referralRequest, bundle);
+    private String buildDescription(ReferralRequest referralRequest) {
+        List<String> descriptionList = retrieveDescription(referralRequest);
         return descriptionList.stream()
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
-    private List<String> retrieveDescription(ReferralRequest referralRequest, Bundle bundle) {
+    private List<String> retrieveDescription(ReferralRequest referralRequest) {
         return List.of(
             buildIdentifierDescription(referralRequest),
             buildPriorityDescription(referralRequest),
             buildServiceRequestedDescription(referralRequest),
-            buildRequesterDescription(referralRequest, bundle),
+            buildRequesterDescription(referralRequest),
             buildSpecialtyDescription(referralRequest),
-            buildRecipientDescription(referralRequest, bundle),
+            buildRecipientDescription(referralRequest),
             buildReasonCodeDescription(referralRequest),
-            buildNoteDescription(referralRequest, bundle),
+            buildNoteDescription(referralRequest),
             buildTextDescription(referralRequest)
         );
     }
@@ -128,27 +128,38 @@ public class RequestStatementMapper {
             .collect(Collectors.joining(COMMA));
     }
 
-    private String buildRequesterDescription(ReferralRequest referralRequest, Bundle bundle) {
+    private String buildRequesterDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasRequester() && referralRequest.getRequester().getAgent().hasReference()) {
-            String reference = referralRequest.getRequester().getAgent().getReference();
-            if (reference.startsWith(ResourceType.Device.name())) {
-                var device = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Device) value).or(Optional::empty);
-                return device.map(value -> CodeableConceptMappingUtils.extractTextOrCoding(value.getType()).map(text -> REQUESTER_DEVICE + text).orElse(StringUtils.EMPTY)).orElse(StringUtils.EMPTY);
-            }
-            else if (reference.startsWith(ResourceType.Organization.name())) {
-                var organization = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Organization) value).or(Optional::empty);
-                return organization.map(value -> REQUESTER_ORG + value.getName()).orElse(StringUtils.EMPTY);
-            }
-            else if (reference.startsWith(ResourceType.Patient.name())) {
+            IIdType reference = referralRequest.getRequester().getAgent().getReferenceElement();
+            if (reference.getResourceType().equals(ResourceType.Device.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (Device) resource)
+                    .map(this::getDeviceCode)
+                    .map(text -> REQUESTER_DEVICE + text)
+                    .orElse(StringUtils.EMPTY);
+            } else if (reference.getResourceType().equals(ResourceType.Organization.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (Organization) resource)
+                    .map(value -> REQUESTER_ORG + value.getName())
+                    .orElse(StringUtils.EMPTY);
+            } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return REQUESTER_PATIENT;
-            }
-            else if (reference.startsWith(ResourceType.RelatedPerson.name())) {
-                var relatedPerson = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (RelatedPerson) value).or(Optional::empty);
-                return relatedPerson.map(value -> REQUESTER_RELATION + value.getNameFirstRep().getText()).orElse(StringUtils.EMPTY);
+            } else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (RelatedPerson) resource)
+                    .map(value -> REQUESTER_RELATION + value.getNameFirstRep().getText())
+                    .orElse(StringUtils.EMPTY);
             }
         }
 
         return StringUtils.EMPTY;
+    }
+
+    private String getDeviceCode(Device device) {
+        return CodeableConceptMappingUtils.extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY);
     }
 
     private String buildSpecialtyDescription(ReferralRequest referralRequest) {
@@ -160,12 +171,13 @@ public class RequestStatementMapper {
         return specialty.map(value -> SPECIALTY + value).orElse(StringUtils.EMPTY);
     }
 
-    private String buildRecipientDescription(ReferralRequest referralRequest, Bundle bundle) {
+    private String buildRecipientDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasRecipient()) {
             var ignoreFirstPractitioner = removeFirstPractitionerReference(referralRequest.getRecipient());
 
             return ignoreFirstPractitioner.stream()
-                .map(value -> extractRecipientString(value, bundle))
+                .filter(Reference::hasReferenceElement)
+                .map(value -> extractRecipientString(value))
                 .collect(Collectors.joining(COMMA));
         }
 
@@ -173,30 +185,36 @@ public class RequestStatementMapper {
     }
 
     private List<Reference> removeFirstPractitionerReference(List<Reference> referenceList) {
-        for (int i=0; i < referenceList.size()-1; i++) {
+        for (int i = 0; i < referenceList.size() - 1; i++) {
             if (referenceList.get(i).getReference().startsWith(ResourceType.Practitioner.name())) {
-                // Call practitioner mapper here with reference to first practitioner in reference list
-                var practitioner = referenceList.remove(i);
+                referenceList.remove(i);
                 return referenceList;
             }
         }
         return referenceList;
     }
 
-    private String extractRecipientString(Reference reference, Bundle bundle) {
-        String referenceString = reference.getReference();
-
-        if (referenceString.startsWith(ResourceType.Practitioner.name())) {
-            var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Practitioner) value).or(Optional::empty);
-            return practitioner.map(value -> String.format(RECIPIENT_PRACTITIONER, value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily())).orElse(StringUtils.EMPTY);
-        }
-        else if (referenceString.startsWith(ResourceType.HealthcareService.name())) {
-            var healthCareService = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (HealthcareService) value).or(Optional::empty);
-            return healthCareService.map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName()).orElse(StringUtils.EMPTY);
-        }
-        else if (referenceString.startsWith(ResourceType.Organization.name())) {
-            var organization = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, referenceString).map(value -> (Organization) value).or(Optional::empty);
-            return organization.map(value -> RECIPIENT_ORG + value.getName()).orElse(StringUtils.EMPTY);
+    private String extractRecipientString(Reference reference) {
+        IIdType referenceId = reference.getReferenceElement();
+        if (referenceId.getResourceType().equals(ResourceType.Practitioner.name())) {
+            return messageContext.getInputBundleHolder()
+                .getResource(referenceId)
+                .map(resource -> (Practitioner) resource)
+                .map(value -> String.format(RECIPIENT_PRACTITIONER,
+                    value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily()))
+                .orElse(StringUtils.EMPTY);
+        } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
+            return messageContext.getInputBundleHolder()
+                .getResource(referenceId)
+                .map(resource -> (HealthcareService) resource)
+                .map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName())
+                .orElse(StringUtils.EMPTY);
+        } else if (referenceId.getResourceType().equals(ResourceType.Organization.name())) {
+            return messageContext.getInputBundleHolder()
+                .getResource(referenceId)
+                .map(resource -> (Organization) resource)
+                .map(value -> RECIPIENT_ORG + value.getName())
+                .orElse(StringUtils.EMPTY);
         }
         return StringUtils.EMPTY;
     }
@@ -217,30 +235,34 @@ public class RequestStatementMapper {
             .collect(Collectors.joining(COMMA));
     }
 
-    private String buildNoteDescription(ReferralRequest referralRequest, Bundle bundle) {
+    private String buildNoteDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasNote()) {
             return referralRequest.getNote().stream()
-                .map(value -> String.format(NOTE, getAuthorString(value, bundle), getNoteTime(value),  value.getText()))
+                .map(value -> String.format(NOTE, getAuthorString(value), getNoteTime(value),  value.getText()))
                 .collect(Collectors.joining(COMMA));
         }
         return StringUtils.EMPTY;
     }
 
-    private String getAuthorString(Annotation annotation, Bundle bundle) {
-        if (annotation.hasAuthorStringType()) {
+    private String getAuthorString(Annotation annotation) {
+        if (annotation.hasAuthorStringType() && annotation.getAuthorStringType().hasValue()) {
             return NOTE_AUTHOR + annotation.getAuthorStringType().getValue();
-        }
-        else if (annotation.hasAuthorReference()) {
-            String reference = annotation.getAuthorReference().getReference();
-            if (reference.startsWith(ResourceType.RelatedPerson.name())) {
-                var relatedPerson = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (RelatedPerson) value).or(Optional::empty);
-                return relatedPerson.map(value -> NOTE_AUTHOR_RELATION + value.getNameFirstRep().getText()).orElse(StringUtils.EMPTY);
-            }
-            else if (reference.startsWith(ResourceType.Practitioner.name())) {
-                var practitioner = ExtractBundleResourceUtil.extractResourceFromBundle(bundle, reference).map(value -> (Practitioner) value).or(Optional::empty);
-                return practitioner.map(value -> String.format(NOTE_AUTHOR_PRACTITIONER, value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily())).orElse(StringUtils.EMPTY);
-            }
-            else if (reference.startsWith(ResourceType.Patient.name())) {
+        } else if (annotation.hasAuthorReference() && annotation.getAuthorReference().hasReferenceElement()) {
+            IIdType reference = annotation.getAuthorReference().getReferenceElement();
+            if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (RelatedPerson) resource)
+                    .map(value -> NOTE_AUTHOR_RELATION + value.getNameFirstRep().getText())
+                    .orElse(StringUtils.EMPTY);
+            } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
+                return messageContext.getInputBundleHolder()
+                    .getResource(reference)
+                    .map(resource -> (Practitioner) resource)
+                    .map(value -> String.format(NOTE_AUTHOR_PRACTITIONER,
+                        value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily()))
+                    .orElse(StringUtils.EMPTY);
+            } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
             }
         }
