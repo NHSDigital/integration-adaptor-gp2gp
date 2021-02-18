@@ -18,6 +18,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -25,9 +27,10 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ImmunizationObservationStatementMapperTest extends MapperTest {
+    private static final String TEST_ID = "test-id";
 
-    private static final String TEST_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
     private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-all-pertinent-information.json";
@@ -43,8 +46,8 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
         + "immunization-reason-not-given-coding.json";
     private static final String INPUT_JSON_REASON_NOT_GIVEN_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-reason-not-given-text.json";
-
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
+
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-information.xml";
     private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS

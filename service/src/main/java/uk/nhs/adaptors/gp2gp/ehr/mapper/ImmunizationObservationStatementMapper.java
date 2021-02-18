@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -138,7 +137,8 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<Date> expirationDate = Optional.ofNullable(immunization.getExpirationDate());
-        return expirationDate.map(value -> EXPIRATION + formatShortDate(value)).orElse(StringUtils.EMPTY);
+        return expirationDate.map(date -> EXPIRATION + DateFormatUtil.formatShortDate(date))
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
@@ -221,9 +221,5 @@ public class ImmunizationObservationStatementMapper {
     private String formatDateTimeType(DateTimeType dateTimeType) {
         Date extractedDate = dateTimeType.getValue();
         return DateFormatUtil.formatDate(extractedDate);
-    }
-
-    private String formatShortDate(Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
 }
