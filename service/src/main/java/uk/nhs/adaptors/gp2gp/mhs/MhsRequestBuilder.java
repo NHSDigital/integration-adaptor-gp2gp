@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import static org.apache.http.client.utils.URLEncodedUtils.CONTENT_TYPE;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +50,8 @@ public class MhsRequestBuilder {
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(extractCoreMessage);
 
         return uri
-            .accept(MediaType.APPLICATION_JSON)
+            .accept(APPLICATION_JSON)
+            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
             .header(INTERACTION_ID, MHS_OUTBOUND_INTERACTION_ID)
             .header(WAIT_FOR_RESPONSE, "false")
             .header(CORRELATION_ID, conversationId)
