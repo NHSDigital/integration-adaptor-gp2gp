@@ -32,7 +32,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class EhrExtractMapperTest {
+public class EhrExtractMapperTest extends MapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/request/fhir/";
     private static final String INPUT_DIRECTORY = "input/";
     private static final String OUTPUT_DIRECTORY = "output/";
@@ -57,9 +57,7 @@ public class EhrExtractMapperTest {
         "Invalid JSON content detected, missing required element: 'resourceType'";
     private static final String EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE = "Missing patient resource in Fhir Bundle.";
 
-    private static String inputJsonFileContent;
     private static String inputJsonFileWithNoPatientContent;
-    private static String expectedJsonToXmlContent;
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
     @Mock
@@ -70,11 +68,12 @@ public class EhrExtractMapperTest {
     private MessageContext messageContext;
 
     @BeforeAll
-    public static void initialize() throws IOException {
-        inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
+    public static void loadFile() throws IOException {
         inputJsonFileWithNoPatientContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE_WITH_NO_PATIENT);
-        expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
+    }
 
+    @BeforeEach
+    public void setUp() throws IOException {
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
@@ -82,10 +81,7 @@ public class EhrExtractMapperTest {
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .build();
-    }
 
-    @BeforeEach
-    public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         messageContext = new MessageContext(randomIdGeneratorService);
@@ -101,7 +97,10 @@ public class EhrExtractMapperTest {
     }
 
     @Test
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() {
+    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() throws IOException {
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
+
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
             inputJsonFileContent);

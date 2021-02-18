@@ -1,0 +1,34 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "name": "Organisation name"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Device",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "Device type code",
+                            "display": "Device type display"
+                        }
+                    ],
+                    "text": "Device type text"
+                },
+                "manufacturer": "Device name"
+            }
+        }
+    ]
+}
