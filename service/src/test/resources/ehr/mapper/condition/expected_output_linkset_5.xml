@@ -8,7 +8,7 @@
         <availabilityTime value="20200907101202" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB"/>
+                <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
             </namedStatementRef>
         </conditionNamed>
         <component typeCode="COMP">
@@ -33,4 +33,22 @@
             </qualifier>
         </code>
     </LinkSet>
+</component>
+<component>
+<ObservationStatement classCode="OBS" moodCode="EVN">
+    <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
+    <code><!--code placeholder--></code>
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <low value="20200906000000"/>
+        <high value="20201004000000"/>
+    </effectiveTime>
+    <availabilityTime value="20200907101202" />
+    <pertinentInformation typeCode="PERT">
+        <sequenceNumber value="+1" />
+        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+            <text>Burning feet description</text>
+        </pertinentAnnotation>
+    </pertinentInformation>
+</ObservationStatement>
 </component>

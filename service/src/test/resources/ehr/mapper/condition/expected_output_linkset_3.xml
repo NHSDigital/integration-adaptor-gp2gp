@@ -6,11 +6,6 @@
             <high value="20201004000000"/>
         </effectiveTime>
         <availabilityTime value="20200907101202" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB"/>
-            </namedStatementRef>
-        </conditionNamed>
         <component typeCode="COMP">
             <statementRef classCode="OBS" moodCode="EVN">
                 <id root="D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"/>

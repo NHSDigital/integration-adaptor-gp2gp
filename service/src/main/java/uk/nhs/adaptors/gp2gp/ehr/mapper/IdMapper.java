@@ -27,9 +27,8 @@ public class IdMapper {
         return mappedId;
     }
 
-    public boolean hasBeenMapped(Reference reference) {
-        String mappedId = ids.get(reference.getReference());
-        return StringUtils.isNotBlank(mappedId);
+    public String getNew() {
+        return randomIdGeneratorService.createNewId();
     }
 
     private Reference buildReference(ResourceType resourceType, String id) {

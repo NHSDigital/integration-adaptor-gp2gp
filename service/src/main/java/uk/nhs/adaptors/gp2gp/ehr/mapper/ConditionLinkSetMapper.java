@@ -1,21 +1,22 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import lombok.Builder;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -34,52 +35,62 @@ public class ConditionLinkSetMapper {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1";
     private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1";
-    private static final String RELATED_CLINICAL_CONTENT_COMPONENT_TEMPLATE
-        = "<component typeCode=\"COMP\"><statementRef " +
-        "classCode=\"OBS\" moodCode=\"EVN\">\r" +
-        "<id root=\"%S\"/>\r" +
-        "</statementRef>\r" +
-        "</component>";
-    private static final String CONDITION_NAMED_TEMPLATE = "<conditionNamed typeCode=\"NAME\" inversionInd=\"true\">\r" +
-        "<namedStatementRef classCode=\"OBS\" moodCode=\"EVN\">\r" +
-        "<id root=\"%S/>\r" +
-        "</namedStatementRef>\r" +
-        "</conditionNamed>";
+    private static final String ACTIVE = "active";
+    private static final String MAJOR = "major";
+    private static final String LIST = "List";
+    private static final String EXTENSION_NOT_PRESENT = "Extension not present";
 
     private final MessageContext messageContext;
 
-    public String mapConditionToLinkSet(Condition condition, Bundle bundle, boolean isNested) {
-        var builder = LinkSetMapperParameters.builder()
+    public String mapConditionToLinkSet(Condition condition, boolean isNested) {
+        var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getId()));
+            .linkSetId(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
 
-        buildConditionNamed(condition, bundle).map(builder::conditionNamed);
-        buildQualifier(condition).map(builder::qualifier);
-        buildClinicalStatusCode(condition).map(builder::clinicalStatusCode);
         buildEffectiveTimeLow(condition).map(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).map(builder::effectiveTimeHigh);
         buildAvailabilityTime(condition).map(builder::availabilityTime);
-        buildRelatedClinicalContent(condition).map(builder::relatedClinicalContent);
+        builder.relatedClinicalContent(buildRelatedClinicalContent(condition));
 
-        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder);
-    }
+        var qualifier = buildQualifier(condition);
+        qualifier.map(value -> value.equalsIgnoreCase(MAJOR)).map(builder::qualifierIsMajor);
+        qualifier.map(builder::qualifier);
 
-    private Optional<String> buildConditionNamed(Condition condition, Bundle bundle) {
-        Optional<Extension> actualProblemExtension = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL);
-        Optional<Reference> reference = actualProblemExtension
-            .map(Extension::getValue)
-            .map(value -> (Reference) value);
+        var clinicalStatus = buildClinicalStatusCode(condition);
+        clinicalStatus.map(value -> value.equalsIgnoreCase(ACTIVE)).map(builder::clinicalStatusIsActive);
+        clinicalStatus.map(builder::clinicalStatusCode);
 
-        if (reference.map(this::checkIfReferenceIsObservation).orElse(false)) {
-            if (messageContext.getIdMapper().hasBeenMapped(reference.get())) {
-                // generate observation statement
-            }
+        var conditionNamed = buildConditionNamed(condition);
+        if (conditionNamed.isPresent()) {
+            conditionNamed
+                .filter(value -> !value.equalsIgnoreCase(EXTENSION_NOT_PRESENT))
+                .map(builder::conditionNamed);
+        } else {
+            String newId = messageContext.getIdMapper().getNew();
+            builder.generateObservationStatement(true);
+            builder.conditionNamed(newId);
+            buildPertinentInfo(condition).map(builder::pertinentInfo);
         }
 
-        return reference
-            .map(Reference::getReferenceElement)
-            .map(IIdType::getIdPart)
-            .map(id -> String.format(CONDITION_NAMED_TEMPLATE, id));
+        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private Optional<String> buildConditionNamed(Condition condition) {
+        Optional<Extension> actualProblemExtension = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL);
+        if (actualProblemExtension.isPresent()) {
+            Optional<Reference> reference = actualProblemExtension
+                .map(Extension::getValue)
+                .map(value -> (Reference) value);
+
+
+            if (reference.map(this::checkIfReferenceIsObservation).orElse(false)) {
+                return reference
+                    .map(ref -> messageContext.getIdMapper().getOrNew(ref));
+            }
+            return Optional.empty();
+        } else {
+            return Optional.of(EXTENSION_NOT_PRESENT);
+        }
     }
 
     private Optional<String> buildQualifier(Condition condition) {
@@ -120,61 +131,32 @@ public class ConditionLinkSetMapper {
         return Optional.empty();
     }
 
-    private Optional<String> buildRelatedClinicalContent(Condition condition) {
+    private List<String> buildRelatedClinicalContent(Condition condition) {
        return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
            .stream()
             .map(Extension::getValue)
             .map(value -> (Reference) value)
             .filter(this::filterOutListResourceType)
-            .map(this::populateRelatedClinicalContentTemplate)
-            .collect(Collectors
-                .collectingAndThen(
-                    Collectors.joining(System.lineSeparator()),
-                    Optional::of)
-            );
+            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
+            .collect(Collectors.toList());
 
     }
 
-    private String populateRelatedClinicalContentTemplate(Reference reference) {
-        String id = messageContext.getIdMapper().getOrNew(reference);
-        return String.format(RELATED_CLINICAL_CONTENT_COMPONENT_TEMPLATE, id);
+    private Optional<String> buildPertinentInfo(Condition condition) {
+        if (condition.hasNote()) {
+            return Optional.of(condition.getNote()
+                .stream()
+                .map(Annotation::getText)
+                .collect(Collectors.joining(StringUtils.SPACE)));
+        }
+        return Optional.empty();
     }
 
     private boolean filterOutListResourceType(Reference reference) {
-        return !reference.getReferenceElement().getResourceType().equals("List");
+        return !reference.getReferenceElement().getResourceType().equals(LIST);
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
-        return reference.getReferenceElement().getResourceType().equals("Observation");
-    }
-
-    public static Optional<Resource> extractResourceFromBundle(Bundle bundle, String relativeReference) {
-        return bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> buildRelativeReference(resource).equals(relativeReference))
-            .findFirst();
-    }
-    private static String buildRelativeReference(Resource resource) {
-        if (resource.hasIdElement()) {
-            IdType idType = resource.getIdElement();
-            return idType.getResourceType() + "/" + idType.getIdPart();
-        }
-        return StringUtils.EMPTY;
-    }
-
-    @Getter
-    @Setter
-    @Builder
-    public static class LinkSetMapperParameters {
-        private boolean isNested;
-        private String id;
-        private String conditionNamed;
-        private String qualifier;
-        private String clinicalStatusCode;
-        private String effectiveTimeHigh;
-        private String effectiveTimeLow;
-        private String availabilityTime;
-        private String relatedClinicalContent;
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
     }
 }
