@@ -5,9 +5,7 @@ public class GpConnectException extends RuntimeException {
         super(message);
     }
 
-
     public GpConnectException(String message, Throwable cause) {
         super(message, cause);
     }
-
 }
