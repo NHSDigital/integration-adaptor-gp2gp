@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +11,7 @@ import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.HealthcareService;
+import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
@@ -24,7 +27,6 @@ import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -43,7 +45,7 @@ public class RequestStatementMapper {
     private static final String REQUESTER_PATIENT = "Requester: Patient";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
-    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: %s %s";
+    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
     private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient Healthcare Service: ";
     private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String REASON_CODE = "Reason Codes: ";
@@ -52,9 +54,11 @@ public class RequestStatementMapper {
     private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String NOTE_AUTHOR = "Author: ";
     private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
-    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner %s %s";
+    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
     private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
     private static final String COMMA = ",";
+
+    private static final String NAME = "%s %s";
 
     private final MessageContext messageContext;
 
@@ -122,7 +126,7 @@ public class RequestStatementMapper {
 
     private String extractServiceRequestedString(ReferralRequest referralRequest) {
         return referralRequest.getServiceRequested().stream()
-            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .map(value -> extractTextOrCoding(value))
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.joining(COMMA));
@@ -150,7 +154,7 @@ public class RequestStatementMapper {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (RelatedPerson) resource)
-                    .map(value -> REQUESTER_RELATION + value.getNameFirstRep().getText())
+                    .map(value -> REQUESTER_RELATION + getHumanNameString(value.getNameFirstRep()))
                     .orElse(StringUtils.EMPTY);
             }
         }
@@ -159,14 +163,14 @@ public class RequestStatementMapper {
     }
 
     private String getDeviceCode(Device device) {
-        return CodeableConceptMappingUtils.extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY);
+        return extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY);
     }
 
     private String buildSpecialtyDescription(ReferralRequest referralRequest) {
         Optional<String> specialty = Optional.empty();
         if (referralRequest.hasSpecialty()) {
             CodeableConcept specialtyObject = referralRequest.getSpecialty();
-            specialty = CodeableConceptMappingUtils.extractTextOrCoding(specialtyObject);
+            specialty = extractTextOrCoding(specialtyObject);
         }
         return specialty.map(value -> SPECIALTY + value).orElse(StringUtils.EMPTY);
     }
@@ -200,8 +204,7 @@ public class RequestStatementMapper {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
                 .map(resource -> (Practitioner) resource)
-                .map(value -> String.format(RECIPIENT_PRACTITIONER,
-                    value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily()))
+                .map(value -> RECIPIENT_PRACTITIONER + getHumanNameString(value.getNameFirstRep()))
                 .orElse(StringUtils.EMPTY);
         } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
             return messageContext.getInputBundleHolder()
@@ -229,7 +232,7 @@ public class RequestStatementMapper {
     private String extractReasonCodeString(ReferralRequest referralRequest) {
         var ignoreFirstReasonCode = referralRequest.getReasonCode().subList(1, referralRequest.getReasonCode().size());
         return ignoreFirstReasonCode.stream()
-            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .map(value -> extractTextOrCoding(value))
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.joining(COMMA));
@@ -253,20 +256,30 @@ public class RequestStatementMapper {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (RelatedPerson) resource)
-                    .map(value -> NOTE_AUTHOR_RELATION + value.getNameFirstRep().getText())
+                    .map(value -> NOTE_AUTHOR_RELATION + getHumanNameString(value.getNameFirstRep()))
                     .orElse(StringUtils.EMPTY);
             } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Practitioner) resource)
-                    .map(value -> String.format(NOTE_AUTHOR_PRACTITIONER,
-                        value.getNameFirstRep().getGivenAsSingleString(), value.getNameFirstRep().getFamily()))
+                    .map(value -> NOTE_AUTHOR_PRACTITIONER + getHumanNameString(value.getNameFirstRep()))
                     .orElse(StringUtils.EMPTY);
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
             }
         }
 
+        return StringUtils.EMPTY;
+    }
+
+    private String getHumanNameString(HumanName humanName) {
+        if  (humanName.hasText()) {
+            return humanName.getText();
+        } else if (humanName.hasGiven() || humanName.hasFamily()) {
+            String given = Optional.ofNullable(humanName.getGivenAsSingleString()).orElse(StringUtils.EMPTY);
+            String family = Optional.ofNullable(humanName.getFamily()).orElse(StringUtils.EMPTY);
+            return String.format(NAME, given, family);
+        }
         return StringUtils.EMPTY;
     }
 

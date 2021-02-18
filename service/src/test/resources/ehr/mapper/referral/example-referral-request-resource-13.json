@@ -44,6 +44,13 @@
             }
         },
         {
+            "text": "Some text annotation",
+            "time": "2010-01-19",
+            "authorReference": {
+                "reference": "RelatedPerson/f003"
+            }
+        },
+        {
             "text": "Significance : Major - Episodicity : First",
             "time": "2010-01-19",
             "authorReference": {

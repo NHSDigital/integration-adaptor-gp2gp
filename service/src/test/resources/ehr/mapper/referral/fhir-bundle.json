@@ -89,6 +89,52 @@
         },
         {
             "resource": {
+                "resourceType": "RelatedPerson",
+                "id": "f003",
+                "text": {
+                    "status": "generated",
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n     Ariadne Bor-Jansma\n    </div>"
+                },
+                "patient": {
+                    "reference": "Patient/f201"
+                },
+                "relationship": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                "code": "SIGOTHR"
+                            }
+                        ]
+                    }
+                ],"name": [
+                    {
+                        "use": "official",
+                        "family": "Frank",
+                        "given": [
+                            "River"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "+31201234567",
+                        "use": "home"
+                    }
+                ],
+                "gender": "female",
+                "birthDate": "1963",
+                "period": {
+                    "start": "1975"
+                }
+            }
+        },
+        {
+            "resource": {
                 "resourceType": "Practitioner",
                 "id": "567B852A-5775-4AEF-BB77-504D820F11F7",
                 "meta": {
