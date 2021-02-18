@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class ImmunizationObservationStatementMapper {
+
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_observation_statement_template.mustache");
     private static final String PARENT_PRESENT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1";

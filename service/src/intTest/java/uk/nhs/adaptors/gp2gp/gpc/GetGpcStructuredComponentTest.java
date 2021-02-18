@@ -45,7 +45,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
     private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
-    private static final String TEST_EXCEPTION_MESSAGE = "The following error occurred during Gpc Request: ";
+    private static final String TEST_EXCEPTION_MESSAGE = "The following error occurred during GPC Request: ";
     private static final String EXPECTED_PAYLOAD_TYPE = "RCMR_IN030000UK06";
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
