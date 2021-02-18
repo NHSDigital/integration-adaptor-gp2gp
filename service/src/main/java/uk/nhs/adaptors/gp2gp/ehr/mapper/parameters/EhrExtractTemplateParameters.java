@@ -1,4 +1,6 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.parameters;
+
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +17,5 @@ public class EhrExtractTemplateParameters {
     private String effectiveTimeLow;
     private String effectiveTimeHigh;
     private String ehrExtractId;
+    private List<String> components;
 }
