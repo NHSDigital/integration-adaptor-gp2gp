@@ -3,8 +3,6 @@ package uk.nhs.adaptors.mockmhsservice.controller;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
-import static org.springframework.http.MediaType.TEXT_XML_VALUE;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
