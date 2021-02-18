@@ -1,5 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractAuthor;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractDevice;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractHumanName;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractNoteTime;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractRecipient;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractServiceRequested;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
 import java.util.List;
@@ -7,14 +14,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
-import org.hl7.fhir.dstu3.model.HealthcareService;
-import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
@@ -27,7 +30,6 @@ import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -45,19 +47,11 @@ public class RequestStatementMapper {
     private static final String REQUESTER_PATIENT = "Requester: Patient";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String SPECIALTY = "Specialty: ";
-    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
-    private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient Healthcare Service: ";
-    private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String REASON_CODE = "Reason Codes: ";
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
-    private static final String NOTE_AUTHOR = "Author: ";
-    private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
-    private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
-    private static final String NOTE_AUTHOR_PATIENT = NOTE_AUTHOR + "Patient";
     private static final String COMMA = ",";
-    private static final String NAME = "%s %s";
 
     private final MessageContext messageContext;
 
@@ -118,17 +112,9 @@ public class RequestStatementMapper {
 
     private String buildServiceRequestedDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasServiceRequested()) {
-            return SERVICE_REQUESTED + extractServiceRequestedString(referralRequest);
+            return SERVICE_REQUESTED + extractServiceRequested(referralRequest);
         }
         return StringUtils.EMPTY;
-    }
-
-    private String extractServiceRequestedString(ReferralRequest referralRequest) {
-        return referralRequest.getServiceRequested().stream()
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.joining(COMMA));
     }
 
     private String buildRequesterDescription(ReferralRequest referralRequest) {
@@ -138,7 +124,7 @@ public class RequestStatementMapper {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Device) resource)
-                    .map(this::getDeviceCode)
+                    .map(value -> extractDevice(value))
                     .map(text -> REQUESTER_DEVICE + text)
                     .orElse(StringUtils.EMPTY);
             } else if (reference.getResourceType().equals(ResourceType.Organization.name())) {
@@ -153,16 +139,12 @@ public class RequestStatementMapper {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (RelatedPerson) resource)
-                    .map(value -> REQUESTER_RELATION + getHumanNameString(value.getNameFirstRep()))
+                    .map(value -> REQUESTER_RELATION + extractHumanName(value.getNameFirstRep()))
                     .orElse(StringUtils.EMPTY);
             }
         }
 
         return StringUtils.EMPTY;
-    }
-
-    private String getDeviceCode(Device device) {
-        return extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY);
     }
 
     private String buildSpecialtyDescription(ReferralRequest referralRequest) {
@@ -180,7 +162,7 @@ public class RequestStatementMapper {
 
             return ignoreFirstPractitioner.stream()
                 .filter(Reference::hasReferenceElement)
-                .map(value -> extractRecipientString(value))
+                .map(value -> extractRecipient(messageContext, value))
                 .collect(Collectors.joining(COMMA));
         }
 
@@ -188,103 +170,27 @@ public class RequestStatementMapper {
     }
 
     private List<Reference> removeFirstPractitionerReference(List<Reference> referenceList) {
-        for (int i = 0; i < referenceList.size() - 1; i++) {
-            if (referenceList.get(i).getReference().startsWith(ResourceType.Practitioner.name())) {
-                referenceList.remove(i);
+        for (int index = 0; index < referenceList.size() - 1; index++) {
+            if (referenceList.get(index).getReference().startsWith(ResourceType.Practitioner.name())) {
+                referenceList.remove(index);
                 return referenceList;
             }
         }
         return referenceList;
     }
 
-    private String extractRecipientString(Reference reference) {
-        IIdType referenceId = reference.getReferenceElement();
-        if (referenceId.getResourceType().equals(ResourceType.Practitioner.name())) {
-            return messageContext.getInputBundleHolder()
-                .getResource(referenceId)
-                .map(resource -> (Practitioner) resource)
-                .map(value -> RECIPIENT_PRACTITIONER + getHumanNameString(value.getNameFirstRep()))
-                .orElse(StringUtils.EMPTY);
-        } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
-            return messageContext.getInputBundleHolder()
-                .getResource(referenceId)
-                .map(resource -> (HealthcareService) resource)
-                .map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName())
-                .orElse(StringUtils.EMPTY);
-        } else if (referenceId.getResourceType().equals(ResourceType.Organization.name())) {
-            return messageContext.getInputBundleHolder()
-                .getResource(referenceId)
-                .map(resource -> (Organization) resource)
-                .map(value -> RECIPIENT_ORG + value.getName())
-                .orElse(StringUtils.EMPTY);
-        }
-        return StringUtils.EMPTY;
-    }
-
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasReasonCode() && (referralRequest.getReasonCode().size() > 1)) {
-            return REASON_CODE + extractReasonCodeString(referralRequest);
+            return REASON_CODE + extractReasonCode(referralRequest);
         }
         return StringUtils.EMPTY;
-    }
-
-    private String extractReasonCodeString(ReferralRequest referralRequest) {
-        var ignoreFirstReasonCode = referralRequest.getReasonCode().subList(1, referralRequest.getReasonCode().size());
-        return ignoreFirstReasonCode.stream()
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.joining(COMMA));
     }
 
     private String buildNoteDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasNote()) {
             return referralRequest.getNote().stream()
-                .map(value -> String.format(NOTE, getAuthorString(value), getNoteTime(value),  value.getText()))
+                .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value),  value.getText()))
                 .collect(Collectors.joining(COMMA));
-        }
-        return StringUtils.EMPTY;
-    }
-
-    private String getAuthorString(Annotation annotation) {
-        if (annotation.hasAuthorStringType() && annotation.getAuthorStringType().hasValue()) {
-            return NOTE_AUTHOR + annotation.getAuthorStringType().getValue();
-        } else if (annotation.hasAuthorReference() && annotation.getAuthorReference().hasReferenceElement()) {
-            IIdType reference = annotation.getAuthorReference().getReferenceElement();
-            if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
-                return messageContext.getInputBundleHolder()
-                    .getResource(reference)
-                    .map(resource -> (RelatedPerson) resource)
-                    .map(value -> NOTE_AUTHOR_RELATION + getHumanNameString(value.getNameFirstRep()))
-                    .orElse(StringUtils.EMPTY);
-            } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
-                return messageContext.getInputBundleHolder()
-                    .getResource(reference)
-                    .map(resource -> (Practitioner) resource)
-                    .map(value -> NOTE_AUTHOR_PRACTITIONER + getHumanNameString(value.getNameFirstRep()))
-                    .orElse(StringUtils.EMPTY);
-            } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
-                return NOTE_AUTHOR_PATIENT;
-            }
-        }
-
-        return StringUtils.EMPTY;
-    }
-
-    private String getHumanNameString(HumanName humanName) {
-        if  (humanName.hasText()) {
-            return humanName.getText();
-        } else if (humanName.hasGiven() || humanName.hasFamily()) {
-            String given = Optional.ofNullable(humanName.getGivenAsSingleString()).orElse(StringUtils.EMPTY);
-            String family = Optional.ofNullable(humanName.getFamily()).orElse(StringUtils.EMPTY);
-            return String.format(NAME, given, family);
-        }
-        return StringUtils.EMPTY;
-    }
-
-    private String getNoteTime(Annotation annotation) {
-        if (annotation.hasTime()) {
-            return DateFormatUtil.formatDate(annotation.getTime());
         }
         return StringUtils.EMPTY;
     }

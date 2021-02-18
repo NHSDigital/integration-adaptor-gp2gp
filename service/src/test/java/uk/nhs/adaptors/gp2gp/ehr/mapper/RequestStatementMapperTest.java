@@ -4,15 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +23,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
-public class RequestStatementMapperTest {
+public class RequestStatementMapperTest extends MapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
     private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
@@ -69,11 +65,6 @@ public class RequestStatementMapperTest {
     private RequestStatementMapper requestStatementMapper;
     private MessageContext messageContext;
 
-    @BeforeAll
-    public static void initialize() {
-        TimeZone.setDefault(TimeZone.getTimeZone(ZoneOffset.UTC));
-    }
-
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
@@ -89,11 +80,6 @@ public class RequestStatementMapperTest {
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
-    }
-
-    @AfterAll
-    public static void deinitialize() {
-        TimeZone.setDefault(null);
     }
 
     @ParameterizedTest

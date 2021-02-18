@@ -26,25 +26,22 @@ public final class StatementTimeMappingUtils {
             }
 
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, DateFormatUtil.formatDate(encounter.getPeriod().getStart()));
-        } else {
-            return DEFAULT_TIME_VALUE;
         }
+        return DEFAULT_TIME_VALUE;
     }
 
     public static String prepareAvailabilityTimeForEncounter(Encounter encounter) {
         if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.formatDate(encounter.getPeriod().getStart()));
-        } else {
-            return DEFAULT_AVAILABILITY_TIME_VALUE;
         }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 
     public static String prepareAvailabilityTimeForReferralRequest(ReferralRequest referralRequest) {
         if (referralRequest.hasAuthoredOn()) {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.formatDate(referralRequest.getAuthoredOn()));
-        } else {
-            return DEFAULT_AVAILABILITY_TIME_VALUE;
         }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 
     public static String prepareEffectiveTimeForObservation(Observation observation) {
@@ -54,8 +51,7 @@ public final class StatementTimeMappingUtils {
         } else if (observation.hasEffectivePeriod()) {
             return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart()),
                 DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()));
-        } else {
-            return DEFAULT_TIME_VALUE;
         }
+        return DEFAULT_TIME_VALUE;
     }
 }
