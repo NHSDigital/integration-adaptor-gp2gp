@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -12,15 +11,10 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.IdType;
-import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
-import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -132,14 +126,13 @@ public class ConditionLinkSetMapper {
     }
 
     private List<String> buildRelatedClinicalContent(Condition condition) {
-       return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
+        return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
            .stream()
-            .map(Extension::getValue)
-            .map(value -> (Reference) value)
-            .filter(this::filterOutListResourceType)
-            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
-            .collect(Collectors.toList());
-
+           .map(Extension::getValue)
+           .map(value -> (Reference) value)
+           .filter(this::filterOutListResourceType)
+           .map(reference -> messageContext.getIdMapper().getOrNew(reference))
+           .collect(Collectors.toList());
     }
 
     private Optional<String> buildPertinentInfo(Condition condition) {
