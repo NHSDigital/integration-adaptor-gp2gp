@@ -151,15 +151,11 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
-        if (expirationDateElement.isPresent()) {
-            if (expirationDateElement.get().hasValue()) {
-                return expirationDateElement.map(dateType -> EXPIRATION + formatDateType(dateType)).orElse(StringUtils.EMPTY);
-            } else {
-                return StringUtils.EMPTY;
-            }
-        } else {
-            return StringUtils.EMPTY;
-        }
+        if (expirationDateElement.isPresent() && expirationDateElement.get().hasValue()) {
+            return expirationDateElement.map(dateType -> EXPIRATION + formatDateType(dateType)).orElse(StringUtils.EMPTY);
+        } 
+           
+        return StringUtils.EMPTY;
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
