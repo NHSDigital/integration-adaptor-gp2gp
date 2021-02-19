@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2021-02-19
+
+### Known Issues and Limitations
+
+- Same as for 0.0.2
+
+### Added
+
+- NIAD-1073: Force specific nhs number for test with env var (#99)
+- NIAD-917: Add ProcedureRequest to PlanStatement mapping (#81)
+- NIAD-1040: output ehr composition for each encounter (#82)
+- NIAD-821: SDS Client (#84)
+- NIAD-915: Additional tests for immunization mapper (#90)
+
+### Fixed
+
+- [Issue 98](https://github.com/nhsconnect/integration-adaptor-gp2gp/issues/98) NIAD-1103 JWT exp/iat values should be integers
+- [Issue 94](https://github.com/nhsconnect/integration-adaptor-gp2gp/issues/94) NIAD-1094 Wrong content type in request message from Gp2Gp to MHS outbound adapter 
+
 ## [0.0.2] - 2021-02-17
 
 ### Known Issues and Limitations
