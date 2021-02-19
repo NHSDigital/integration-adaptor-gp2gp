@@ -5,6 +5,7 @@
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
+        
         <text></text>
     </RequestStatement>
 </component>

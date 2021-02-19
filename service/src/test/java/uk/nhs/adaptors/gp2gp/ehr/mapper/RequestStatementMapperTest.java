@@ -91,7 +91,7 @@ public class RequestStatementMapperTest extends MapperTest {
 
         String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, false);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     private static Stream<Arguments> resourceFileParams() {
@@ -120,6 +120,6 @@ public class RequestStatementMapperTest extends MapperTest {
 
         String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, true);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 }

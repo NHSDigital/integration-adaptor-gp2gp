@@ -69,8 +69,9 @@ public class RequestStatementExtractor {
     }
 
     public static String extractReasonCode(ReferralRequest referralRequest) {
-        var ignoreFirstReasonCode = referralRequest.getReasonCode().subList(1, referralRequest.getReasonCode().size());
+        var ignoreFirstReasonCode = referralRequest.getReasonCode();
         return ignoreFirstReasonCode.stream()
+            .skip(1)
             .map(value -> extractTextOrCoding(value))
             .filter(Optional::isPresent)
             .map(Optional::get)

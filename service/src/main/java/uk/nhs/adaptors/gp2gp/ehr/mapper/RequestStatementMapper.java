@@ -158,7 +158,8 @@ public class RequestStatementMapper {
 
     private String buildRecipientDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasRecipient()) {
-            var ignoreFirstPractitioner = removeFirstPractitionerReference(referralRequest.getRecipient());
+            var ignoreFirstPractitioner = referralRequest.getRecipient();
+            removeFirstPractitionerReference(ignoreFirstPractitioner);
 
             return ignoreFirstPractitioner.stream()
                 .filter(Reference::hasReferenceElement)
@@ -169,14 +170,13 @@ public class RequestStatementMapper {
         return StringUtils.EMPTY;
     }
 
-    private List<Reference> removeFirstPractitionerReference(List<Reference> referenceList) {
+    private void removeFirstPractitionerReference(List<Reference> referenceList) {
         for (int index = 0; index < referenceList.size() - 1; index++) {
             if (referenceList.get(index).getReference().startsWith(ResourceType.Practitioner.name())) {
                 referenceList.remove(index);
-                return referenceList;
+                return;
             }
         }
-        return referenceList;
     }
 
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
