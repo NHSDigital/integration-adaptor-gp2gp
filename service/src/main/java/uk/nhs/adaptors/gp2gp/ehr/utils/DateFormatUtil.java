@@ -8,10 +8,11 @@ import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.YEAR;
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 
 import java.time.LocalDateTime;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Date;
 import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.DateTimeType;
@@ -28,13 +29,11 @@ public class DateFormatUtil {
         .appendPattern("yyyyMMddHHmmss")
         .toFormatter();
     private static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String TEXT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
     private static final DateTimeFormatter TEXT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern("yyyy-MM-dd HH:mm:ss")
+        .appendPattern(TEXT_DATE_TIME)
         .toFormatter();
 
-    public static String formatDate(Date date) {
-        return format(date, DATE_TIME_FORMATTER);
-    }
 
     public static Object formatTextDate(Date date) {
         return format(date, TEXT_DATE_TIME_FORMATTER);
@@ -49,10 +48,6 @@ public class DateFormatUtil {
             date.toInstant()
                 .atZone(ZoneId.of(UK_ZONE_ID))
                 .toLocalDateTime());
-    }
-
-    public static String formatShortDate(Date date) {
-        return new SimpleDateFormat(SHORT_DATE_FORMAT).format(date);
     }
 
     public static String formatDate(Instant instant) {
@@ -101,12 +96,12 @@ public class DateFormatUtil {
     }
 
     private static String dateTypeConverter(DateType effectiveDateTimeType, String pattern) {
-        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_TIMEZONE))
+        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_ZONE_ID))
             .format(DateTimeFormatter.ofPattern(pattern));
     }
 
     private static String dateTimeTypeConverter(DateTimeType effectiveDateTimeType, String pattern) {
-        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_TIMEZONE))
+        return LocalDateTime.ofInstant(effectiveDateTimeType.toCalendar().toInstant(), ZoneId.of(UK_ZONE_ID))
             .format(DateTimeFormatter.ofPattern(pattern));
     }
 }
