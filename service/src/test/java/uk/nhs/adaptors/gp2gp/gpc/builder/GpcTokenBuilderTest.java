@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
@@ -31,7 +30,6 @@ public class GpcTokenBuilderTest {
     private GpcTokenBuilder gpcTokenBuilder;
 
     @Test
-    @SneakyThrows
     public void When_gpcJwtTokenIsCreated_Then_iatAndExpAreIntegerSeconds() {
         Instant timestamp = Instant.ofEpochSecond(1613734770L);
         when(timestampService.now()).thenReturn(timestamp);
