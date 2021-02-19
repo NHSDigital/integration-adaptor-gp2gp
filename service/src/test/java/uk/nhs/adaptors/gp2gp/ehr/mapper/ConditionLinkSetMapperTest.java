@@ -96,7 +96,6 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(randomIdGeneratorService, condition, isNested);
-        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
