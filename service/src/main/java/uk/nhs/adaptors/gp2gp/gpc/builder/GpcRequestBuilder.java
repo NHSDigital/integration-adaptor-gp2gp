@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -73,10 +74,14 @@ public class GpcRequestBuilder {
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
 
+    @Value("${gp2gp.gpc.overrideNhsNumber}")
+    private String overrideNhsNumber;
+
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
             .addParameter(buildParamterComponent("patientNHSNumber")
-                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(structuredTaskDefinition.getNhsNumber())))
+                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(
+                    ((overrideNhsNumber.isBlank()) ? structuredTaskDefinition.getNhsNumber() : overrideNhsNumber))))
             .addParameter(buildParamterComponent("includeAllergies")
                 .addPart(buildParamterComponent("includeResolvedAllergies")
                     .setValue(new BooleanType(true))))
@@ -205,7 +210,8 @@ public class GpcRequestBuilder {
             .method(HttpMethod.GET)
             .uri(uriBuilder -> uriBuilder
                 .path(gpcConfiguration.getPatientEndpoint())
-                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER + nhsNumber)
+                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER
+                    + ((overrideNhsNumber.isBlank()) ? nhsNumber : overrideNhsNumber))
                 .build());
     }
 }
