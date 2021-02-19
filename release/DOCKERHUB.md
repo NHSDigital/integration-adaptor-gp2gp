@@ -31,7 +31,7 @@ you are testing to ensure compatibility with configurations and scripts.
 
 ```bash
 git pull
-git checkout 0.0.2
+git checkout 0.0.3
 ```
 
 ## Find the docker directory
@@ -53,7 +53,7 @@ cp vars.local.sh vars.sh
 ```
 
 Make any required changes to the `vars.sh` file. If using `vars.local.sh` you do not need to modify anything. Refer
-to the [README](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/0.0.2/README.md) for possible configuration
+to the [README](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/0.0.3/README.md) for possible configuration
 options.
 
 ## Find the release directory
