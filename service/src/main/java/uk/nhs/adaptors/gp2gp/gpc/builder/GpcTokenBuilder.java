@@ -35,8 +35,8 @@ public class GpcTokenBuilder {
 
         var jwtData = JwtPayloadData.builder()
             .targetURI(gpcConfiguration.getUrl())
-            .jwtCreationTime(String.valueOf(creationTime / MILLISECOND_DIVISION))
-            .jwtExpiryTime(String.valueOf(expiryTime / MILLISECOND_DIVISION))
+            .jwtCreationTime(creationTime / MILLISECOND_DIVISION)
+            .jwtExpiryTime(expiryTime / MILLISECOND_DIVISION)
             .requestingOrganizationODSCode(odsFromCode)
             .build();
 
@@ -70,8 +70,8 @@ public class GpcTokenBuilder {
     @Getter
     private static final class JwtPayloadData {
         private String targetURI;
-        private String jwtExpiryTime;
-        private String jwtCreationTime;
+        private long jwtExpiryTime;
+        private long jwtCreationTime;
         private String requestingOrganizationODSCode;
     }
 }
