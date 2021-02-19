@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- NIAD-1073: Force specific nhs number for test with env var (#99)
 - NIAD-917: Add ProcedureRequest to PlanStatement mapping (#81)
 - NIAD-1040: output ehr composition for each encounter (#82)
 - NIAD-821: SDS Client (#84)
