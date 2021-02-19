@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,6 +44,12 @@ public class RequestStatementMapperTest extends MapperTest {
     private static final String INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY
         + "example-referral-request-resource-12.json";
     private static final String INPUT_JSON_WITH_NOTES = TEST_FILE_DIRECTORY + "example-referral-request-resource-13.json";
+    private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT = TEST_FILE_DIRECTORY + "example-referral-request-resource-14.json";
+    private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR = TEST_FILE_DIRECTORY + "example-referral-request-resource-15.json";
+    private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-19.json";
+    private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-16.json";
+    private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT = TEST_FILE_DIRECTORY + "example-referral-request-resource-17.json";
+    private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR = TEST_FILE_DIRECTORY + "example-referral-request-resource-18.json";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-1.xml";
     private static final String OUTPUT_XML_USES_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-2.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-request-statement-3.xml";
@@ -121,5 +129,26 @@ public class RequestStatementMapperTest extends MapperTest {
         String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, true);
 
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFileParamsWithUnexpectedReferences")
+    public void When_MappingReferralRequestJsonWithUnexpectedReferences_Expect_Exception(String inputJson) throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
+
+        assertThrows(EhrMapperException.class, ()
+            -> requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, false));
+    }
+
+    private static Stream<Arguments> resourceFileParamsWithUnexpectedReferences() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER),
+            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT),
+            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR),
+            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER),
+            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT),
+            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR)
+            );
     }
 }

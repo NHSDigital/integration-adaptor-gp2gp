@@ -30,6 +30,7 @@ import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -126,13 +127,13 @@ public class RequestStatementMapper {
                     .map(resource -> (Device) resource)
                     .map(value -> extractDevice(value))
                     .map(text -> REQUESTER_DEVICE + text)
-                    .orElse(StringUtils.EMPTY);
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve Device Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Organization.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Organization) resource)
                     .map(value -> REQUESTER_ORG + value.getName())
-                    .orElse(StringUtils.EMPTY);
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return REQUESTER_PATIENT;
             } else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
@@ -140,8 +141,11 @@ public class RequestStatementMapper {
                     .getResource(reference)
                     .map(resource -> (RelatedPerson) resource)
                     .map(value -> REQUESTER_RELATION + extractHumanName(value.getNameFirstRep()))
-                    .orElse(StringUtils.EMPTY);
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
+            } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
+                return StringUtils.EMPTY;
             }
+            throw new EhrMapperException("Requester Reference not of expected Resource Type");
         }
 
         return StringUtils.EMPTY;

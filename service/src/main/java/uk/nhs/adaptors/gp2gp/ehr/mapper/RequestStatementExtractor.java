@@ -18,6 +18,7 @@ import org.hl7.fhir.dstu3.model.RelatedPerson;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 public class RequestStatementExtractor {
@@ -51,21 +52,21 @@ public class RequestStatementExtractor {
                 .getResource(referenceId)
                 .map(resource -> (Practitioner) resource)
                 .map(value -> RECIPIENT_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
-                .orElse(StringUtils.EMPTY);
+                .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
         } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
                 .map(resource -> (HealthcareService) resource)
                 .map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName())
-                .orElse(StringUtils.EMPTY);
+                .orElseThrow(() -> new EhrMapperException("Could not resolve HealthcareService Reference"));
         } else if (referenceId.getResourceType().equals(ResourceType.Organization.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
                 .map(resource -> (Organization) resource)
                 .map(value -> RECIPIENT_ORG + value.getName())
-                .orElse(StringUtils.EMPTY);
+                .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Recipient Reference not of expected Resource Type");
     }
 
     public static String extractReasonCode(ReferralRequest referralRequest) {
@@ -88,16 +89,17 @@ public class RequestStatementExtractor {
                     .getResource(reference)
                     .map(resource -> (RelatedPerson) resource)
                     .map(value -> NOTE_AUTHOR_RELATION + extractHumanName(value.getNameFirstRep()))
-                    .orElse(StringUtils.EMPTY);
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
                     .map(resource -> (Practitioner) resource)
                     .map(value -> NOTE_AUTHOR_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
-                    .orElse(StringUtils.EMPTY);
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
             }
+            throw new EhrMapperException("Author Reference not of expected Resource Type");
         }
 
         return StringUtils.EMPTY;
