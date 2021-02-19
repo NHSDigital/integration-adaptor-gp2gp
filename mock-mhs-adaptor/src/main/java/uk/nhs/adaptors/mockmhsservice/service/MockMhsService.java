@@ -2,6 +2,7 @@ package uk.nhs.adaptors.mockmhsservice.service;
 
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -42,10 +43,16 @@ public class MockMhsService {
     private final InputStream inputStream3 = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
     private final String internalServerErrorResponse = IOUtils.toString(inputStream3, StandardCharsets.UTF_8);
 
-    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage) {
+    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage,
+        String contentType, String odsCode) {
         headers.setContentType(MediaType.TEXT_HTML);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
+
+        if (odsCode.isEmpty()) {
+            LOGGER.error("Missing ods-code header");
+            return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
+        }
 
         if (!waitForResponse.equals("false")) {
             LOGGER.error("Missing or invalid wait-for-response header");

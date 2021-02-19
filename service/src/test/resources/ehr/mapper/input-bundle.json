@@ -1,0 +1,23 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Encounter",
+                "id": "34567"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Appointment",
+                "id": "1234"
+            }
+        }
+    ]
+}
