@@ -40,7 +40,7 @@
     <code><!--code placeholder--></code>
     <statusCode code="COMPLETE"/>
     <effectiveTime>
-        <low value="20200906000000"/>
+        <low value="20200906010000"/>
         <high value="20201004000000"/>
     </effectiveTime>
     <availabilityTime value="20200907101202" />
