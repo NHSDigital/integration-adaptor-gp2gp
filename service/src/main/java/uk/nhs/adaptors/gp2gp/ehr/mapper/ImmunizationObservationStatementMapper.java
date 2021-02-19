@@ -144,10 +144,6 @@ public class ImmunizationObservationStatementMapper {
         }
 
         return StringUtils.EMPTY;
-
-//        Optional<Date> expirationDate = Optional.ofNullable(immunization.getExpirationDate());
-//        return expirationDate.map(date -> EXPIRATION + DateFormatUtil.formatShortDate(date))
-//            .orElse(StringUtils.EMPTY);
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {

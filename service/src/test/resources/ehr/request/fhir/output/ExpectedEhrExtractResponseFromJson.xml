@@ -144,9 +144,9 @@
                     </code>
                     <statusCode code="COMPLETE" />
                     <effectiveTime>
-                        <center value="20100609010000"/>
+                        <center value="20100609"/>
                     </effectiveTime>
-                    <availabilityTime value="20100609010000"/>
+                    <availabilityTime value="20100609"/>
                     <author typeCode="AUT" contextControlCode="OP">
                         <time value="20100113151332" />
                         <agentRef classCode="AGNT">
