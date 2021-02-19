@@ -63,7 +63,7 @@ public class ConditionLinkSetMapper {
                 String newId = randomIdGeneratorService.createNewId();
                 builder.generateObservationStatement(true);
                 builder.conditionNamed(newId);
-                buildPertinentInfo(condition).map(builder::pertinentInfo);
+                buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
             });
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
