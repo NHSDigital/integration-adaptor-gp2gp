@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc.builder;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
