@@ -18,7 +18,8 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @ExtendWith(MockitoExtension.class)
 public class GpcTokenBuilderTest {
-    private static final int EXPIRY_TIME_ADDITION = 300000;
+    private static final int EXPIRY_TIME_ADDITION = 300;
+    private static final long EPOCH_SECOND = 1613734770L;
 
     @Mock
     private GpcConfiguration gpcConfiguration;
@@ -30,8 +31,8 @@ public class GpcTokenBuilderTest {
     private GpcTokenBuilder gpcTokenBuilder;
 
     @Test
-    public void When_gpcJwtTokenIsCreated_Then_iatAndExpAreIntegerSeconds() {
-        Instant timestamp = Instant.ofEpochSecond(1613734770L);
+    public void When_GpcJwtTokenIsCreated_Expect_IatAndExpAreIntegerSeconds() {
+        Instant timestamp = Instant.ofEpochSecond(EPOCH_SECOND);
         when(timestampService.now()).thenReturn(timestamp);
         when(gpcConfiguration.getUrl()).thenReturn("http://aud");
         String token = gpcTokenBuilder.buildToken("ODS-CODE");

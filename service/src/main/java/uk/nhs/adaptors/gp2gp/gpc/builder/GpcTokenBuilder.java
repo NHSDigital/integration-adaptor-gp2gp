@@ -24,7 +24,7 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 public class GpcTokenBuilder {
     private static final Mustache JWT_HEADER_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.header.mustache");
     private static final Mustache JWT_PAYLOAD_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.payload.mustache");
-    private static final int EXPIRY_TIME_ADDITION = 300000;
+    private static final int EXPIRY_TIME_ADDITION = 300;
 
     private final GpcConfiguration gpcConfiguration;
     private final TimestampService timestampService;
