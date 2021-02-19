@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -29,62 +30,74 @@ public class ConditionLinkSetMapper {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1";
     private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1";
-    private static final String ACTIVE = "active";
-    private static final String MAJOR = "major";
+    private static final String ACTIVE = "Active";
+    private static final String ACTIVE_CODE = "394774009";
+    private static final String INACTIVE = "Inactive";
+    private static final String INACTIVE_CODE = "394775005";
+    private static final String PROBLEM = " Problem";
+    private static final String MAJOR = "Major";
+    private static final String MAJOR_CODE = "386134007";
+    private static final String SIGNIFICANT = "Significant";
+    private static final String MINOR = "Minor";
+    private static final String MINOR_CODE = "394847000";
+    private static final String UNSPECIFIED_SIGNIFICANCE = "Unspecified significance";
     private static final String LIST = "List";
-    private static final String EXTENSION_NOT_PRESENT = "Extension not present";
 
     private final MessageContext messageContext;
 
-    public String mapConditionToLinkSet(Condition condition, boolean isNested) {
+    public String mapConditionToLinkSet(RandomIdGeneratorService randomIdGeneratorService, Condition condition, boolean isNested) {
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
             .linkSetId(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
 
-        buildEffectiveTimeLow(condition).map(builder::effectiveTimeLow);
-        buildEffectiveTimeHigh(condition).map(builder::effectiveTimeHigh);
-        buildAvailabilityTime(condition).map(builder::availabilityTime);
+        buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
+        buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
+        buildAvailabilityTime(condition).ifPresent(builder::availabilityTime);
         builder.relatedClinicalContent(buildRelatedClinicalContent(condition));
 
-        var qualifier = buildQualifier(condition);
-        qualifier.map(value -> value.equalsIgnoreCase(MAJOR)).map(builder::qualifierIsMajor);
-        qualifier.map(builder::qualifier);
+        buildQualifier(condition).ifPresent(qualifier -> setQualifierProperties(builder, qualifier));
+        buildClinicalStatusCode(condition).ifPresent(status -> setClinicalStatusProperties(builder, status));
 
-        var clinicalStatus = buildClinicalStatusCode(condition);
-        clinicalStatus.map(value -> value.equalsIgnoreCase(ACTIVE)).map(builder::clinicalStatusIsActive);
-        clinicalStatus.map(builder::clinicalStatusCode);
-
-        var conditionNamed = buildConditionNamed(condition);
-        if (conditionNamed.isPresent()) {
-            conditionNamed
-                .filter(value -> !value.equalsIgnoreCase(EXTENSION_NOT_PRESENT))
-                .map(builder::conditionNamed);
-        } else {
-            String newId = messageContext.getIdMapper().getNew();
-            builder.generateObservationStatement(true);
-            builder.conditionNamed(newId);
-            buildPertinentInfo(condition).map(builder::pertinentInfo);
-        }
+        buildConditionNamed(condition).ifPresentOrElse(builder::conditionNamed,
+            () -> {
+                String newId = randomIdGeneratorService.createNewId();
+                builder.generateObservationStatement(true);
+                builder.conditionNamed(newId);
+                buildPertinentInfo(condition).map(builder::pertinentInfo);
+            });
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }
 
-    private Optional<String> buildConditionNamed(Condition condition) {
-        Optional<Extension> actualProblemExtension = ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL);
-        if (actualProblemExtension.isPresent()) {
-            Optional<Reference> reference = actualProblemExtension
-                .map(Extension::getValue)
-                .map(value -> (Reference) value);
-
-
-            if (reference.map(this::checkIfReferenceIsObservation).orElse(false)) {
-                return reference
-                    .map(ref -> messageContext.getIdMapper().getOrNew(ref));
-            }
-            return Optional.empty();
-        } else {
-            return Optional.of(EXTENSION_NOT_PRESENT);
+    private void setQualifierProperties(ConditionLinkSetMapperParameters.ConditionLinkSetMapperParametersBuilder builder,
+        String qualifier) {
+        builder.qualifierDisplay(qualifier);
+        if (qualifier.equalsIgnoreCase(MAJOR)) {
+            builder.qualifierCode(MAJOR_CODE);
+            builder.qualifierSignificance(SIGNIFICANT);
+        } else if (qualifier.equalsIgnoreCase(MINOR)) {
+            builder.qualifierCode(MINOR_CODE);
+            builder.qualifierSignificance(UNSPECIFIED_SIGNIFICANCE);
         }
+    }
+
+    private void setClinicalStatusProperties(ConditionLinkSetMapperParameters.ConditionLinkSetMapperParametersBuilder builder,
+        String clinicalStatus) {
+        if (clinicalStatus.equalsIgnoreCase(ACTIVE)) {
+            builder.clinicalStatusCode(ACTIVE_CODE);
+            builder.clinicalStatusDisplay(ACTIVE + PROBLEM);
+        } else if (clinicalStatus.equalsIgnoreCase(INACTIVE)) {
+            builder.clinicalStatusCode(INACTIVE_CODE);
+            builder.clinicalStatusDisplay(INACTIVE + PROBLEM);
+        }
+    }
+
+    private Optional<String> buildConditionNamed(Condition condition) {
+        return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+            .map(Extension::getValue)
+            .map(value -> (Reference) value)
+            .filter(this::checkIfReferenceIsObservation)
+            .map(reference -> messageContext.getIdMapper().getOrNew(reference));
     }
 
     private Optional<String> buildQualifier(Condition condition) {

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Condition;
@@ -49,7 +50,7 @@ public class ConditionLinkSetMapperTest {
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
     private static final String OUTPUT_XML_WITHOUT_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "2.xml";
-    private static final String OUTPUT_XML_NO_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "3.xml";
+    private static final String OUTPUT_XML_WITH_GENERATED_PROBLEM = EXPECTED_OUTPUT_LINKSET + "3.xml";
     private static final String OUTPUT_XML_WITH_CONDITION_NAMED = EXPECTED_OUTPUT_LINKSET + "4.xml";
     private static final String OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED = EXPECTED_OUTPUT_LINKSET + "5.xml";
     private static final String OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE = EXPECTED_OUTPUT_LINKSET + "6.xml";
@@ -66,6 +67,8 @@ public class ConditionLinkSetMapperTest {
     private IdMapper idMapper;
     @Mock
     private MessageContext messageContext;
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
     private ConditionLinkSetMapper conditionLinkSetMapper;
     private FhirParseService fhirParseService;
 
@@ -74,7 +77,7 @@ public class ConditionLinkSetMapperTest {
         fhirParseService = new FhirParseService();
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext);
         when(messageContext.getIdMapper()).thenReturn(idMapper);
-        lenient().when(idMapper.getNew()).thenReturn(GENERATED_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
         when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
     }
@@ -92,7 +95,7 @@ public class ConditionLinkSetMapperTest {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
-        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
+        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(randomIdGeneratorService, condition, isNested);
         System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
@@ -101,7 +104,7 @@ public class ConditionLinkSetMapperTest {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_IS_NESTED, true),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITHOUT_IS_NESTED, false),
-            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_NO_ACTUAL_PROBLEM, false),
+            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_WITH_GENERATED_PROBLEM, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION, OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED, false),
             Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),

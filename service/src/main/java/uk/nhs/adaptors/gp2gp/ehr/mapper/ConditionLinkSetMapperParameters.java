@@ -13,10 +13,11 @@ public class ConditionLinkSetMapperParameters {
     private boolean isNested;
     private String linkSetId;
     private String conditionNamed;
-    private boolean qualifierIsMajor;
-    private String qualifier;
-    private boolean clinicalStatusIsActive;
+    private String qualifierCode;
+    private String qualifierDisplay;
+    private String qualifierSignificance;
     private String clinicalStatusCode;
+    private String clinicalStatusDisplay;
     private String effectiveTimeHigh;
     private String effectiveTimeLow;
     private String availabilityTime;

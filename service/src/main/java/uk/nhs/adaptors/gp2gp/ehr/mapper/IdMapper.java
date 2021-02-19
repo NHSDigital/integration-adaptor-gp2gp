@@ -26,10 +26,6 @@ public class IdMapper {
         return mappedId;
     }
 
-    public String getNew() {
-        return randomIdGeneratorService.createNewId();
-    }
-
     private Reference buildReference(ResourceType resourceType, String id) {
         return new Reference(new IdType(resourceType.name(), id));
     }
