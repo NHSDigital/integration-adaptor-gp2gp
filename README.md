@@ -96,7 +96,7 @@ The adaptor uses the GP Connect API to fetch patient records and documents.
 | GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
 | GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
 | GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
-| GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | NHS number for e2e and integration tests.
+| GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
 
 Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
 Secure Proxy (SSP).
