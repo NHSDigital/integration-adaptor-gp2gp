@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.gpc.GpcTemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
@@ -25,18 +26,18 @@ public class GpcTokenBuilder {
     private static final Mustache JWT_HEADER_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.header.mustache");
     private static final Mustache JWT_PAYLOAD_TEMPLATE = GpcTemplateUtils.loadTemplate("jwt.payload.mustache");
     private static final int EXPIRY_TIME_ADDITION = 300000;
-    private static final int MILLISECOND_DIVISION = 1000;
 
     private final GpcConfiguration gpcConfiguration;
+    private final TimestampService timestampService;
 
     public String buildToken(String odsFromCode) {
-        var creationTime = Instant.now().toEpochMilli();
+        var creationTime = timestampService.now().getEpochSecond();
         var expiryTime = creationTime + EXPIRY_TIME_ADDITION;
 
         var jwtData = JwtPayloadData.builder()
             .targetURI(gpcConfiguration.getUrl())
-            .jwtCreationTime(creationTime / MILLISECOND_DIVISION)
-            .jwtExpiryTime(expiryTime / MILLISECOND_DIVISION)
+            .jwtCreationTime(creationTime)
+            .jwtExpiryTime(expiryTime)
             .requestingOrganizationODSCode(odsFromCode)
             .build();
 
