@@ -72,14 +72,14 @@ public class OragnizationAgentMapperTest {
 
     private static Stream<Arguments> testArguments() {
         return Stream.of(
-//            Arguments.of(INPUT_JSON_WITH_IDENTIFIER, OUTPUT_XML_WITH_IDENTIFIER),
-//            Arguments.of(INPUT_JSON_WITHOUT_IDENTIFIER, OUTPUT_XML_WITHOUT_IDENTIFIER),
-//            Arguments.of(INPUT_JSON_WITH_TELECOM_IN_0, OUTPUT_XML_WITH_TELECOM),
-//            Arguments.of(INPUT_JSON_WITHOUT_TELECOM, OUTPUT_XML_WITHOUT_TELECOM),
-//            Arguments.of(INPUT_JSON_WITH_TELECOM_IN_2, OUTPUT_XML_WITH_TELECOM_2),
-//            Arguments.of(INPUT_JSON_WITH_ADDRESS, OUTPUT_XML_WITH_ADDRESS),
-//            Arguments.of(INPUT_JSON_WITHOUT_ADDRESS, OUTPUT_XML_WITHOUT_ADDRESS),
-//            Arguments.of(INPUT_JSON_WITH_USE_HOME, OUTPUT_XML_USE_HOME),
+            Arguments.of(INPUT_JSON_WITH_IDENTIFIER, OUTPUT_XML_WITH_IDENTIFIER),
+            Arguments.of(INPUT_JSON_WITHOUT_IDENTIFIER, OUTPUT_XML_WITHOUT_IDENTIFIER),
+            Arguments.of(INPUT_JSON_WITH_TELECOM_IN_0, OUTPUT_XML_WITH_TELECOM),
+            Arguments.of(INPUT_JSON_WITHOUT_TELECOM, OUTPUT_XML_WITHOUT_TELECOM),
+            Arguments.of(INPUT_JSON_WITH_TELECOM_IN_2, OUTPUT_XML_WITH_TELECOM_2),
+            Arguments.of(INPUT_JSON_WITH_ADDRESS, OUTPUT_XML_WITH_ADDRESS),
+            Arguments.of(INPUT_JSON_WITHOUT_ADDRESS, OUTPUT_XML_WITHOUT_ADDRESS),
+            Arguments.of(INPUT_JSON_WITH_USE_HOME, OUTPUT_XML_USE_HOME),
             Arguments.of(INPUT_JSON_WITH_USE_TEMP, OUTPUT_XML_USE_TEMP),
             Arguments.of(INPUT_JSON_WITH_USE_EMPTY, OUTPUT_XML_USE_EMPTY)
         );
