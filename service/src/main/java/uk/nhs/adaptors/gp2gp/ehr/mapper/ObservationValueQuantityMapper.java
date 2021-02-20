@@ -3,16 +3,11 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.math.BigDecimal;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Quantity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Component
-public class QuantityObservationMapper {
+public final class ObservationValueQuantityMapper {
     private static final String UNITS_OF_MEASURE_SYSTEM = "http://unitsofmeasure.org";
     private static final String UNCERTAINTY_EXTENSION = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ValueApproximation-1";
 
@@ -41,9 +36,11 @@ public class QuantityObservationMapper {
     private static final String UNCERTAINTY_CODE = "<uncertaintyCode code=\"U\" " +
         "codeSystem=\"2.16.840.1.113883.5.1053\" displayName=\"Recorded as uncertain\"/>";
 
-    public String mapObservationValueQuantity(Quantity valueQuantity) {
-        String result = StringUtils.EMPTY;
+    private ObservationValueQuantityMapper() {
+    }
 
+    public static String processQuantity(Quantity valueQuantity) {
+        String result = StringUtils.EMPTY;
         if (isUncertaintyCodePresent(valueQuantity)) {
             result += UNCERTAINTY_CODE;
         }
@@ -57,7 +54,7 @@ public class QuantityObservationMapper {
         return result;
     }
 
-    private String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
+    private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
         if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
             return String.format(NO_COMPARATOR_VALUE_TEMPLATE, valueQuantity.getValue(), valueQuantity.getCode());
         } else {
@@ -65,7 +62,7 @@ public class QuantityObservationMapper {
         }
     }
 
-    private String prepareQuantityValueAccordingToComparator(Quantity valueQuantity) {
+    private static String prepareQuantityValueAccordingToComparator(Quantity valueQuantity) {
         if (valueQuantity.getComparator() == Quantity.QuantityComparator.LESS_THAN) {
             return prepareQuantityValueByComparator(valueQuantity,
                 LESS_COMPARATOR_VALUE_TEMPLATE,
@@ -87,7 +84,7 @@ public class QuantityObservationMapper {
         return StringUtils.EMPTY;
     }
 
-    private String prepareQuantityValueByComparator(Quantity valueQuantity, String systemTemplate, String nonSystemTemplate) {
+    private static String prepareQuantityValueByComparator(Quantity valueQuantity, String systemTemplate, String nonSystemTemplate) {
         if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
             return formatSystemTemplate(systemTemplate, valueQuantity.getValue(), valueQuantity.getCode());
         }
@@ -95,22 +92,30 @@ public class QuantityObservationMapper {
         return formatNoSystemTemplate(nonSystemTemplate, valueQuantity.getValue(), valueQuantity.getUnit());
     }
 
-    private String formatSystemTemplate(String template, BigDecimal value, String code) {
+    private static String formatSystemTemplate(String template, BigDecimal value, String code) {
         return String.format(template, value, code);
     }
 
-    private String formatNoSystemTemplate(String template, BigDecimal value, String unit) {
+    private static String formatNoSystemTemplate(String template, BigDecimal value, String unit) {
         return String.format(template, value, value, unit);
     }
 
-    private boolean isUncertaintyCodePresent(Quantity valueQuantity) {
+    private static boolean isUncertaintyCodePresent(Quantity valueQuantity) {
         if (valueQuantity.hasExtension()) {
             for (Extension extension : valueQuantity.getExtension()) {
-                if (extension.hasUrl() && extension.getUrl().equals(UNCERTAINTY_EXTENSION)) {
+                if (isUncertaintyExtension(extension)) {
                     return true;
                 }
             }
         }
+
         return false;
+    }
+
+    private static boolean isUncertaintyExtension(Extension extension) {
+        return extension.hasUrl()
+            && extension.getUrl().equals(UNCERTAINTY_EXTENSION)
+            && extension.getValue() instanceof BooleanType
+            && ((BooleanType) extension.getValue()).booleanValue();
     }
 }

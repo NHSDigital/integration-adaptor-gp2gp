@@ -16,8 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
-public class QuantityObservationMapperTest {
-    private static final QuantityObservationMapper QUANTITY_OBSERVATION_MAPPER = new QuantityObservationMapper();
+public class ObservationValueQuantityMapperTest {
     private static final String TEST_FILES_DIRECTORY = "/ehr/mapper/quantity/";
 
     private static final String INPUT_JSON_WITH_UNIT_OF_MEASURE_SYSTEM_NO_COMPARATOR = TEST_FILES_DIRECTORY
@@ -69,7 +68,7 @@ public class QuantityObservationMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
         Observation parseObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = QUANTITY_OBSERVATION_MAPPER.mapObservationValueQuantity(parseObservation.getValueQuantity());
+        String outputMessage = ObservationValueQuantityMapper.processQuantity(parseObservation.getValueQuantity());
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
