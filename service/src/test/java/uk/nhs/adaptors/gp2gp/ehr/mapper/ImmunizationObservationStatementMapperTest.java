@@ -90,6 +90,7 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
 
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
         String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, isNested);
+        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
