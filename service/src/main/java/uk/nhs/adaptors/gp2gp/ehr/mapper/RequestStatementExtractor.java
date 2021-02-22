@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +20,6 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 public class RequestStatementExtractor {
     private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
@@ -124,7 +124,7 @@ public class RequestStatementExtractor {
 
     public static String extractNoteTime(Annotation annotation) {
         if (annotation.hasTime()) {
-            return DateFormatUtil.formatDate(annotation.getTime());
+            return formatDateTimeTypeComputerReadable(annotation.getTimeElement());
         }
         return StringUtils.EMPTY;
     }

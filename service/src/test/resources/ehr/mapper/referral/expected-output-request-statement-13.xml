@@ -4,8 +4,8 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="20100119000000"/>
+        <availabilityTime value="20100119"/>
         <code code="3457005" displayName="Patient referral" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <text>UBRN: bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4 Priority: Routine Specialty: unknown Annotation:  @  Information not available,Annotation:  @ 20100119000000 This is a hayfever problem,Annotation: Author: John James @ 20100119000000 Patient record transfer from previous GP practice not yet complete,Annotation: Author: Relation Ariadne Bor-Jansma @ 20100119000000 Standard check up,Annotation: Author: Relation River Frank @ 20100119000000 Some text annotation,Annotation: Author: Practitioner James Adams @ 20100119000000 Significance : Major - Episodicity : First,Annotation: Author: Patient @ 20100119000000 Patient Notes:Issue number 3 Patient text 3 Referred for investigation into low blood pressure</text>
+        <text>UBRN: bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4 Priority: Routine Specialty: unknown Annotation:  @  Information not available,Annotation:  @ 20100119 This is a hayfever problem,Annotation: Author: John James @ 20100119 Patient record transfer from previous GP practice not yet complete,Annotation: Author: Relation Ariadne Bor-Jansma @ 20100119 Standard check up,Annotation: Author: Relation River Frank @ 20100119 Some text annotation,Annotation: Author: Practitioner James Adams @ 20100119 Significance : Major - Episodicity : First,Annotation: Author: Patient @ 20100119 Patient Notes:Issue number 3 Patient text 3 Referred for investigation into low blood pressure</text>
     </RequestStatement>
 </component>

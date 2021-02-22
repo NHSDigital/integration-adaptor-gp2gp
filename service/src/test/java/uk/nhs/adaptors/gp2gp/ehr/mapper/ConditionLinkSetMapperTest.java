@@ -73,7 +73,7 @@ public class ConditionLinkSetMapperTest {
     private FhirParseService fhirParseService;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() {
         fhirParseService = new FhirParseService();
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
         when(messageContext.getIdMapper()).thenReturn(idMapper);
