@@ -1,0 +1,11 @@
+<component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="394559384658936" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK"/>
+        
+        <text></text>
+    </RequestStatement>
+</component>

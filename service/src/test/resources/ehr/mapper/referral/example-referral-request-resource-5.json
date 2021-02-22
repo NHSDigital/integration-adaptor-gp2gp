@@ -1,0 +1,149 @@
+{
+    "resourceType": "ReferralRequest",
+    "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
+    "authoredOn": "2010-01-19",
+    "priority": "routine",
+    "description": "Referred for investigation into low blood pressure",
+    "specialty": {
+        "coding": [
+            {
+                "system": "http://hl7.org/fhir/v3/NullFlavor",
+                "code": "UNK",
+                "display": "unknown"
+            }
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+            "value": "B154D1A3-D631-49BD-8B67-2F76D7D85865"
+        },
+        {
+            "system": "https://fhir.nhs.uk/Id/ubr-number",
+            "value": "bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4"
+        }
+    ],
+    "reasonCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://read.info/readv2",
+                    "code": "8H54.00",
+                    "display": "Orthopaedic referral",
+                    "userSelected": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                            "extension": [
+                                {
+                                    "url": "descriptionId",
+                                    "valueId": "283646018"
+                                },
+                                {
+                                    "url": "descriptionDisplay",
+                                    "valueString": "Orthopaedic referral"
+                                }
+                            ]
+                        }
+                    ],
+                    "system": "http://snomed.info/sct",
+                    "code": "183545006",
+                    "display": "Referral to orthopaedic service"
+                }
+            ]
+        },
+        {
+            "coding": [
+                {
+                    "system": "http://read.info/readv2",
+                    "code": "8H3..00",
+                    "display": "Non-urgent hospital admission",
+                    "userSelected": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                            "extension": [
+                                {
+                                    "url": "descriptionId",
+                                    "valueId": "283553018"
+                                },
+                                {
+                                    "url": "descriptionDisplay",
+                                    "valueString": "Non-urgent hospital admission"
+                                }
+                            ]
+                        }
+                    ],
+                    "system": "http://snomed.info/sct",
+                    "code": "183481006",
+                    "display": "Non-urgent hospital admission"
+                }
+            ]
+        },
+        {
+            "coding": [
+                {
+                    "system": "http://read.info/readv2",
+                    "code": "8H61.00",
+                    "display": "Referral to private doctor",
+                    "userSelected": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                            "extension": [
+                                {
+                                    "url": "descriptionId",
+                                    "valueId": "397210015"
+                                },
+                                {
+                                    "url": "descriptionDisplay",
+                                    "valueString": "Referral to private doctor"
+                                }
+                            ]
+                        }
+                    ],
+                    "system": "http://snomed.info/sct",
+                    "code": "266747000",
+                    "display": "Referral to private doctor"
+                }
+            ]
+        },
+        {
+            "coding": [
+                {
+                    "system": "http://read.info/readv2",
+                    "code": "8Hh..00",
+                    "display": "Self-referral",
+                    "userSelected": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                            "extension": [
+                                {
+                                    "url": "descriptionId",
+                                    "valueId": "448978012"
+                                },
+                                {
+                                    "url": "descriptionDisplay",
+                                    "valueString": "Self-referral"
+                                }
+                            ]
+                        }
+                    ],
+                    "system": "http://snomed.info/sct",
+                    "code": "306098008",
+                    "display": "Self-referral"
+                }
+            ],
+            "text": "Neurosurgical referral"
+        }
+    ]
+}
