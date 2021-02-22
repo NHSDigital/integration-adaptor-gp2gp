@@ -3,14 +3,9 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
-import org.apache.commons.io.FilenameUtils;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;

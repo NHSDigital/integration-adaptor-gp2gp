@@ -96,7 +96,7 @@ public class OrganizationToAgentMapper {
 
     private List<String> buildAddressLine(Organization organization) {
         if (organization.hasAddress()) {
-            var addressLines= organization.getAddressFirstRep()
+            var addressLines = organization.getAddressFirstRep()
                 .getLine()
                 .stream()
                 .map(StringType::getValue)
