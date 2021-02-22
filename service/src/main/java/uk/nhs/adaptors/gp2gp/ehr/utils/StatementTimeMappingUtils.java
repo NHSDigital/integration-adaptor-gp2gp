@@ -5,6 +5,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeC
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
+import org.hl7.fhir.dstu3.model.ReferralRequest;
 
 public final class StatementTimeMappingUtils {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
@@ -28,18 +29,25 @@ public final class StatementTimeMappingUtils {
 
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, formatDateTimeTypeComputerReadable(
                 encounter.getPeriod().getStartElement()));
-        } else {
-            return DEFAULT_TIME_VALUE;
         }
+        return DEFAULT_TIME_VALUE;
     }
 
     public static String prepareAvailabilityTimeForEncounter(Encounter encounter) {
         if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeTypeComputerReadable(
                 encounter.getPeriod().getStartElement()));
-        } else {
-            return DEFAULT_AVAILABILITY_TIME_VALUE;
         }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
+    }
+
+    public static String prepareAvailabilityTimeForReferralRequest(ReferralRequest referralRequest) {
+        if (referralRequest.hasAuthoredOn()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeTypeComputerReadable(
+                referralRequest.getAuthoredOnElement()));
+
+        }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 
     public static String prepareEffectiveTimeForObservation(Observation observation) {
@@ -50,8 +58,7 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, formatDateTimeTypeComputerReadable(
                 observation.getEffectivePeriod().getStartElement()),
                 formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getEndElement()));
-        } else {
-            return DEFAULT_TIME_VALUE;
         }
+        return DEFAULT_TIME_VALUE;
     }
 }
