@@ -37,7 +37,7 @@ public class DateFormatUtilTest {
             Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"), // GMT
             Arguments.of("2019-07-28T10:30:05+00:00", "20190728113005"), // BST
             Arguments.of("2019-07-28T23:30:05+00:00", "20190729003005"), // BST - over midnight
-            Arguments.of("2019-07-28T10:30:00+05:00", "20190728063000")); // other offset
+            Arguments.of("2019-07-28T10:30:55+05:00", "20190728063055")); // other offset
     }
 
 //    private static Stream<Arguments> dateParams() {
