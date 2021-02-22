@@ -1,19 +1,16 @@
-<component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
+<component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="{{observationStatementId}}" />
+        <id root="394559384658936" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            {{{effectiveTime}}}
+            <center value="20190601113000"/>
         </effectiveTime>
-        <availabilityTime value="{{issued}}"/>
-        {{{value}}}
+        <availabilityTime value="20190601113000"/>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                {{{valueQuantity}}}
-                <text>{{comment}}</text>
+                <text>Range: Text: Test reference range text High: 20 Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        {{{referenceRange}}}
     </ObservationStatement>
 </component>

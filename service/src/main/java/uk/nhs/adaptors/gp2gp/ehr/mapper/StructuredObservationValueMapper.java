@@ -25,11 +25,13 @@ public class StructuredObservationValueMapper {
     private static final String REFERENCE_RANGE_TEMPLATE = "<referenceRange typeCode=\"REFV\">"
         + "<referenceInterpretationRange classCode=\"OBS\" moodCode=\"EVN.CRT\">"
         + "<text>%s</text>"
-        + "<value>%s</value>";
+        + "<value>%s</value>"
+        + "</referenceInterpretationRange>"
+        + "</referenceRange>";
     private static final String LOW_RANGE_TEMPLATE = "<low value=\"%s\"/>";
     private static final String HIGH_RANGE_TEMPLATE = "<high value=\"%s\"/>";
 
-    public String mapObservationValueToXmlElement(IBaseElement value) {
+    public String mapObservationValueToStructuredElement(IBaseElement value) {
         if (!isStructuredValueType(value)) {
             throw new IllegalArgumentException(
                 String.format("Observation value of '%s' type can not be converted to xml element", value.getClass()));
@@ -39,19 +41,18 @@ public class StructuredObservationValueMapper {
             .apply(value);
     }
 
-    public static String mapReferenceRangeType(Observation.ObservationReferenceRangeComponent value) {
-        if (value.hasText()) {
+    public String mapReferenceRangeType(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.hasText()) {
             String rangeValue = StringUtils.EMPTY;
 
-            if (value.hasLow() && value.getLow().hasValue()) {
-                rangeValue += String.format(LOW_RANGE_TEMPLATE, value.getLow().getValue());
+            if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
+                rangeValue += String.format(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
             }
-            if (value.hasHigh() && value.getHigh().hasValue()) {
-                rangeValue += String.format(HIGH_RANGE_TEMPLATE, value.getHigh().getValue());
+            if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
+                rangeValue += String.format(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
             }
-            return String.format(REFERENCE_RANGE_TEMPLATE, value.getText(), rangeValue);
+            return String.format(REFERENCE_RANGE_TEMPLATE, referenceRange.getText(), rangeValue);
         }
-
         return StringUtils.EMPTY;
     }
 

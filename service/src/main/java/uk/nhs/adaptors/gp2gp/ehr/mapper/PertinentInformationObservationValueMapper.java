@@ -44,6 +44,10 @@ public class PertinentInformationObservationValueMapper {
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
     private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s End %s ";
+    private static final String RANGE_PREFIX = "Range: ";
+    private static final String TEXT_PREFIX = "Text: ";
+    private static final String LOW_PREFIX = "Low: ";
+    private static final String HIGH_PREFIX = "High: ";
 
     public String mapObservationValueToPertinentInformation(Type value) {
         if (!isPertinentInformation(value)) {
@@ -57,6 +61,36 @@ public class PertinentInformationObservationValueMapper {
 
     public boolean isPertinentInformation(Type value) {
         return VALUE_TO_PERTINENT_INFORMATION_FUNCTIONS.containsKey(value.getClass());
+    }
+
+    public String mapReferenceRangeToPertinentInformation(
+            Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
+        String result = RANGE_PREFIX;
+        if (observationReferenceRangeComponent.hasText()) {
+            result += TEXT_PREFIX + observationReferenceRangeComponent.getText() + StringUtils.SPACE;
+
+            if (observationReferenceRangeComponent.hasLow()) {
+                SimpleQuantity low = observationReferenceRangeComponent.getLow();
+                if (low.hasValue()) {
+                    result += LOW_PREFIX + low.getValue() + StringUtils.SPACE;
+
+                    if (low.hasUnit()) {
+                        result += low.getUnit() + StringUtils.SPACE;
+                    }
+                }
+            }
+            if (observationReferenceRangeComponent.hasHigh()) {
+                SimpleQuantity high = observationReferenceRangeComponent.getHigh();
+                if (high.hasValue()) {
+                    result += HIGH_PREFIX + high.getValue() + StringUtils.SPACE;
+
+                    if (high.hasUnit()) {
+                        result += high.getUnit() + StringUtils.SPACE;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     private static String processCodeableConcept(CodeableConcept value) {
@@ -153,37 +187,5 @@ public class PertinentInformationObservationValueMapper {
             && ratio.getDenominator().hasComparator()
             && ratio.getDenominator().hasValue()
             && ratio.getDenominator().hasUnit();
-    }
-
-    private static String mapReferenceRangeToPertinentInformation(
-            Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
-        String result = "Range: ";
-        if (observationReferenceRangeComponent.hasText()) {
-            result += "Text: " + observationReferenceRangeComponent.getText();
-
-            if (observationReferenceRangeComponent.hasLow()) {
-                SimpleQuantity low = observationReferenceRangeComponent.getLow();
-                if (low.hasValue()) {
-                    result += "Low: " + low.getValue() + StringUtils.SPACE;
-
-                    if (low.hasUnit()) {
-                        result += low.getUnit() + StringUtils.SPACE;
-                    }
-                }
-            }
-
-            if (observationReferenceRangeComponent.hasHigh()) {
-                SimpleQuantity high = observationReferenceRangeComponent.getHigh();
-                if (high.hasValue()) {
-                    result += "High: " + high.getValue() + StringUtils.SPACE;
-
-                    if (high.hasUnit()) {
-                        result += high.getUnit() + StringUtils.SPACE;
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 }
