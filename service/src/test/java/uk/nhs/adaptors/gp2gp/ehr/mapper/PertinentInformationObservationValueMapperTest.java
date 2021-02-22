@@ -44,8 +44,8 @@ public class PertinentInformationObservationValueMapperTest {
     private static final String EXPECTED_RANGE = "Range Value: Low 10.1 test-unit High 20.5 test-unit ";
     private static final String EXPECTED_RATIO = "Ratio Value: < 10 test-unit / > 20 test-unit ";
     private static final String EXPECTED_TIME = "Time Value: 12:30:10 ";
-    private static final String EXPECTED_DATE_TIME = "DateTime Value: Wed Mar 01 13:50:12 CET 2017 ";
-    private static final String EXPECTED_PERIOD = "Period Value: Start Wed Mar 01 13:50:12 CET 2017 End Sun Jun 03 15:12:10 CEST 2018 ";
+    private static final String EXPECTED_DATE_TIME = "DateTime Value: Wed Mar 01 12:50:12 GMT 2017 ";
+    private static final String EXPECTED_PERIOD = "Period Value: Start Wed Mar 01 12:50:12 GMT 2017 End Sun Jun 03 13:12:10 GMT 2018 ";
     private static final String EXPECTED_REFERENCE_RANGE = "Range: Text: Test reference range text Low: 10 High: 20 ";
     private static final String EXPECTED_REFERENCE_RANGE_WITH_LOW = "Range: Text: Test reference range text Low: 10 ";
     private static final String EXPECTED_REFERENCE_RANGE_WITH_HIGH = "Range: Text: Test reference range text High: 20 ";
