@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantTypeComputerReadable;
 
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -25,7 +25,7 @@ public class ObservationStatementMapper {
         var observationStatementTemplateParameters = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
             .comment(observation.getComment())
-            .issued(formatInstantType(observation.getIssuedElement()))
+            .issued(formatInstantTypeComputerReadable(observation.getIssuedElement()))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
             .build();

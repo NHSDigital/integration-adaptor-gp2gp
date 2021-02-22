@@ -89,7 +89,7 @@ public class DateFormatUtil {
         return convertWithPrecision(dateType.getPrecision(), dateType.toCalendar());
     }
 
-    public static String formatInstantType(InstantType dateInstantType) {
+    public static String formatInstantTypeComputerReadable(InstantType dateInstantType) {
         if (!dateInstantType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }

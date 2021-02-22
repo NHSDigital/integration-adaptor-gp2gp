@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantTypeComputerReadable;
 
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -40,7 +40,7 @@ public class NarrativeStatementMapper {
         } else if (observation.hasEffectivePeriod()) {
             return formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
-            return formatInstantType(observation.getIssuedElement());
+            return formatInstantTypeComputerReadable(observation.getIssuedElement());
         } else {
             throw new EhrMapperException("Could not map effective date");
         }
