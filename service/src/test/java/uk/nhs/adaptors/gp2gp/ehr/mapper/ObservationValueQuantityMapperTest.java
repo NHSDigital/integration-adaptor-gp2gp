@@ -6,18 +6,15 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Observation;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
-@ExtendWith(MockitoExtension.class)
 public class ObservationValueQuantityMapperTest {
-    private static final String TEST_FILES_DIRECTORY = "/ehr/mapper/quantity/";
+    private static final String TEST_FILES_DIRECTORY = "/ehr/mapper/observation/quantity/";
 
     private static final String INPUT_JSON_WITH_UNIT_OF_MEASURE_SYSTEM_NO_COMPARATOR = TEST_FILES_DIRECTORY
         + "example-observation-resource-with-quantity-1.json";
@@ -66,9 +63,9 @@ public class ObservationValueQuantityMapperTest {
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
-        Observation parseObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = ObservationValueQuantityMapper.processQuantity(parseObservation.getValueQuantity());
+        String outputMessage = ObservationValueQuantityMapper.processQuantity(observation.getValueQuantity());
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 

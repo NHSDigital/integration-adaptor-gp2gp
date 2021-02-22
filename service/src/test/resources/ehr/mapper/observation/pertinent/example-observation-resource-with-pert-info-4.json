@@ -1,0 +1,61 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "meta":{
+        "profile":[
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+        ]
+    },
+    "identifier":[
+        {
+            "system":"https://provider.nhs.uk/data-identifier",
+            "value":"8c4908e8-0236-4eab-8d59-09295bd06911"
+        }
+    ],
+    "status":"final",
+    "code":{
+        "coding":[
+            {
+                "extension":[
+                    {
+                        "url":"https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension":[
+                            {
+                                "url":"DescriptionID",
+                                "valueId":"3008650016"
+                            }
+                        ]
+                    }
+                ],
+                "system":"http://snomed.info/sct",
+                "code":"703421000",
+                "display":"Temperature"
+            }
+        ]
+    },
+    "subject":{
+        "reference":"Patient/2"
+    },
+    "context":{
+        "reference":"Encounter/Encounter3"
+    },
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "performer":[
+        {
+            "reference":"Practitioner/1"
+        }
+    ],
+    "valueRatio": {
+        "numerator": {
+            "comparator" : "<",
+            "value": 10,
+            "unit": "test-unit"
+        },
+        "denominator": {
+            "comparator" : ">",
+            "value": 20,
+            "unit": "test-unit"
+        }
+    }
+}

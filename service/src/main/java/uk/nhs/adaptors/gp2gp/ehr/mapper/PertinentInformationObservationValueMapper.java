@@ -8,13 +8,15 @@ import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Range;
 import org.hl7.fhir.dstu3.model.Ratio;
-import org.hl7.fhir.dstu3.model.StringType;
+import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.TimeType;
 import org.hl7.fhir.dstu3.model.Type;
+import org.hl7.fhir.instance.model.api.IBaseElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +27,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class PertinentInformationObservationValueMapper {
-    private static final Map<Class<? extends Type>, Function<Type, String>> PERTINENT_INFORMATION_APPENDING_FUNCTIONS =
-        ImmutableMap.<Class<? extends Type>, Function<Type, String>>builder()
+    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> VALUE_TO_PERTINENT_INFORMATION_FUNCTIONS =
+        ImmutableMap.<Class<? extends IBaseElement>, Function<IBaseElement, String>>builder()
             .put(CodeableConcept.class, value -> processCodeableConcept((CodeableConcept) value))
             .put(BooleanType.class, value -> processBooleanType((BooleanType) value))
             .put(Range.class, value -> processRange((Range) value))
@@ -41,7 +43,7 @@ public class PertinentInformationObservationValueMapper {
     private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
-    private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s  End %s ";
+    private static final String PERIOD_VALUE_TEMPLATE = "Period Value: Start %s End %s ";
 
     public String mapObservationValueToPertinentInformation(Type value) {
         if (!isPertinentInformation(value)) {
@@ -49,14 +51,13 @@ public class PertinentInformationObservationValueMapper {
                 String.format("Observation value of '%s' type can not be converted to pertinent information", value.getClass()));
         }
 
-        return PERTINENT_INFORMATION_APPENDING_FUNCTIONS.get(value.getClass())
+        return VALUE_TO_PERTINENT_INFORMATION_FUNCTIONS.get(value.getClass())
             .apply(value);
     }
 
     public boolean isPertinentInformation(Type value) {
-        return PERTINENT_INFORMATION_APPENDING_FUNCTIONS.containsKey(value.getClass());
+        return VALUE_TO_PERTINENT_INFORMATION_FUNCTIONS.containsKey(value.getClass());
     }
-
 
     private static String processCodeableConcept(CodeableConcept value) {
         if (value.hasCoding() && !value.getCoding().isEmpty()) {
@@ -68,8 +69,6 @@ public class PertinentInformationObservationValueMapper {
 
         return StringUtils.EMPTY;
     }
-
-
 
     private static String processBooleanType(BooleanType value) {
         if (value.hasValue()) {
@@ -95,10 +94,10 @@ public class PertinentInformationObservationValueMapper {
             Quantity denominator = value.getDenominator();
 
             return String.format(RATIO_VALUE_TEMPLATE,
-                numerator.getComparator(),
+                numerator.getComparator().toCode(),
                 numerator.getValue(),
                 numerator.getUnit(),
-                denominator.getComparator(),
+                denominator.getComparator().toCode(),
                 denominator.getValue(),
                 denominator.getUnit());
         }
@@ -154,5 +153,36 @@ public class PertinentInformationObservationValueMapper {
             && ratio.getDenominator().hasComparator()
             && ratio.getDenominator().hasValue()
             && ratio.getDenominator().hasUnit();
+    }
+
+    private static String mapReferenceRangeToPertinentInformation(Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
+        String result = "Range: ";
+        if (observationReferenceRangeComponent.hasText()) {
+            result += "Text: " + observationReferenceRangeComponent.getText();
+
+            if (observationReferenceRangeComponent.hasLow()) {
+                SimpleQuantity low = observationReferenceRangeComponent.getLow();
+                if (low.hasValue()) {
+                    result += "Low: " + low.getValue() + StringUtils.SPACE;
+
+                    if (low.hasUnit()) {
+                        result += low.getUnit() + StringUtils.SPACE;
+                    }
+                }
+            }
+
+            if (observationReferenceRangeComponent.hasHigh()) {
+                SimpleQuantity high = observationReferenceRangeComponent.getHigh();
+                if (high.hasValue()) {
+                    result += "High: " + high.getValue() + StringUtils.SPACE;
+
+                    if (high.hasUnit()) {
+                        result += high.getUnit() + StringUtils.SPACE;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }
