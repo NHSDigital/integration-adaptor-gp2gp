@@ -46,7 +46,6 @@ public class DateFormatUtil {
         .toFormatter();
 
     // FIXME: NIAD-1082 using Date object will incorrectly convert into system local time
-    @Deprecated(forRemoval = true)
     public static Object toTextFormat(Date date) {
         if (date == null) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);

@@ -17,18 +17,16 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
 @ExtendWith(MockitoExtension.class)
 public class DateFormatUtilTest {
-    private static final FhirParseService fhirParser = new FhirParseService();
-    private static final String templateObservationWithIssuedInstant = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
-    private static final String templateObservationWithValueDate = "{\"resourceType\": \"Observation\", \"valueDate\": \"%s\"}";
-    private static final String templateObservationWithValueDateTime = "{\"resourceType\": \"Observation\", \"valueDateTime\": \"%s\"}";
-
-
+    private static final FhirParseService FHIR_PARSER = new FhirParseService();
+    private static final String INSTANT_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
+    private static final String DATE_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDate\": \"%s\"}";
+    private static final String DATETIME_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDateTime\": \"%s\"}";
 
     @ParameterizedTest
     @MethodSource("instantParams")
-    public void When_FormattingInstantToHl7_Then_OutputUkZoneAtAvailablePrecision(String input, String expected) {
-        String observationJson = String.format(templateObservationWithIssuedInstant, input);
-        Observation observation = fhirParser.parseResource(observationJson, Observation.class);
+    public void When_FormattingInstantToHl7_Expect_Hl7InUkZone(String input, String expected) {
+        String observationJson = String.format(INSTANT_OBSERVATION_TEMPLATE, input);
+        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
 
         String actual = toHl7Format(observation.getIssuedElement());
         assertThat(actual).isEqualTo(expected);
@@ -41,56 +39,6 @@ public class DateFormatUtilTest {
             Arguments.of("2019-07-28T23:30:05+00:00", "20190729003005"), // BST - over midnight
             Arguments.of("2019-07-28T10:30:00+05:00", "20190728063000")); // other offset
     }
-
-//    @ParameterizedTest
-//    @MethodSource("dateParams")
-//    public void When_ConvertingDateTimeType_Expect_ComputerReadbleDate(String observationString, String immunizationString, String expectedResponse) {
-//        Observation observation = fhirParser.parseResource(observationString, Observation.class);
-//        Immunization immunization = fhirParser.parseResource(immunizationString, Immunization.class);
-//
-//        var computerReadableDateTimeType = dateTimeTypeToHl7(observation.getValueDateTimeType());
-//        var computerReadableDateType = dateTypeToHl7(immunization.getExpirationDateElement());
-//        var computerReadableInstantType = instantTypeToHl7(observation.getIssuedElement());
-//
-//        assertThat(computerReadableDateTimeType).isEqualTo(expectedResponse);
-//        assertThat(computerReadableDateType).isEqualTo(expectedResponse);
-//        assertThat(computerReadableInstantType).isEqualTo(expectedResponse);
-//    }
-
-//    @ParameterizedTest
-//    @MethodSource("dateParams")
-//    public void When_ConvertingDateType_Expect_ComputerReadbleDate(TemporalPrecisionEnum precision, String expectedResponse) {
-//        DateType dateType = new DateType(date);
-//        dateType.setPrecision(precision);
-//
-//        var computerReadableDate = formatDateTypeComputerReadable(dateType);
-//
-//        assertThat(computerReadableDate).isEqualTo(expectedResponse);
-//    }
-//
-//    @ParameterizedTest
-//    @MethodSource("dateParams")
-//    public void When_ConvertingInstantType_Expect_ComputerReadbleDate(TemporalPrecisionEnum precision, String expectedResponse) {
-//        InstantType dateType = new InstantType(date);
-//        dateType.setPrecision(precision);
-//
-//        var computerReadableDate = formatInstantTypeComputerReadable(dateType);
-//
-//        assertThat(computerReadableDate).isEqualTo(expectedResponse);
-//    }
-//
-//    @Test
-//    public void When_DateTypeHasNonUkTimeZone_Expect_Correct() {
-//        DateType dateType = new DateType(date);
-//        dateType.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Singapore")));
-//        dateType.setPrecision(SECOND);
-//
-//        var computerReadableDate = formatDateTypeComputerReadable(dateType);
-//
-//        assertThat(computerReadableDate).isEqualTo(TEST_YEAR + TEST_MONTH + TEST_DAY + TEST_HOUR + TEST_MINUTE + TEST_SECOND);
-//    }
-
-
 
 //    private static Stream<Arguments> dateParams() {
 //        return Stream.of(
