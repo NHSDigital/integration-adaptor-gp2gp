@@ -28,7 +28,7 @@
         </code>
     </LinkSet>
 </component>
-{{#generateObservationStatement}}<component>
+{{#generateObservationStatement}}<component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="{{conditionNamed}}"/>
         <code><!--code placeholder--></code>

@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.parameters;
 
 import java.util.List;
 

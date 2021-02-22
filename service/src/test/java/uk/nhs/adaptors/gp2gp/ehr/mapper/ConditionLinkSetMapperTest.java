@@ -75,7 +75,7 @@ public class ConditionLinkSetMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         fhirParseService = new FhirParseService();
-        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext);
+        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
@@ -95,7 +95,8 @@ public class ConditionLinkSetMapperTest {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
-        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(randomIdGeneratorService, condition, isNested);
+        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
+        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
@@ -103,7 +104,7 @@ public class ConditionLinkSetMapperTest {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_IS_NESTED, true),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITHOUT_IS_NESTED, false),
-            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_WITH_GENERATED_PROBLEM, false),
+            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_WITH_GENERATED_PROBLEM, true),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION, OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED, false),
             Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),

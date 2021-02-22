@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -44,8 +45,9 @@ public class ConditionLinkSetMapper {
     private static final String LIST = "List";
 
     private final MessageContext messageContext;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapConditionToLinkSet(RandomIdGeneratorService randomIdGeneratorService, Condition condition, boolean isNested) {
+    public String mapConditionToLinkSet(Condition condition, boolean isNested) {
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
             .linkSetId(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));

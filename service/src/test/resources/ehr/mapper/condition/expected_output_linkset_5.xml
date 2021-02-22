@@ -34,7 +34,7 @@
         </code>
     </LinkSet>
 </component>
-<component>
+<component typeCode="COMP">
 <ObservationStatement classCode="OBS" moodCode="EVN">
     <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
     <code><!--code placeholder--></code>

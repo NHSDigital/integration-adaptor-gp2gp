@@ -1,4 +1,4 @@
-<component typeCode="COMP">
+<component typeCode="COMP" contextConductionInd="true">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
         <effectiveTime>
@@ -34,7 +34,7 @@
         </code>
     </LinkSet>
 </component>
-<component>
+<component typeCode="COMP" contextConductionInd="true">
 <ObservationStatement classCode="OBS" moodCode="EVN">
     <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
     <code><!--code placeholder--></code>
