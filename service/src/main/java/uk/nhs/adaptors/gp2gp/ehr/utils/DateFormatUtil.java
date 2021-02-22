@@ -7,7 +7,6 @@ import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.YEAR;
 
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 
-import java.time.LocalDateTime;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -24,35 +23,20 @@ import com.google.common.collect.ImmutableMap;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class DateFormatUtil {
-    private static final String UK_ZONE_ID = "Europe/London";
+    private static final ZoneId UK_ZONE_ID = ZoneId.of("Europe/London");
     private static final String COULD_NOT_FORMAT_DATE = "Could not format date";
-    private static final String COMPUTER_READABLE_YEAR_FORMAT = "yyyy";
-    private static final String COMPUTER_READABLE_MONTH_FORMAT = "yyyyMM";
-    private static final String COMPUTER_READABLE_DAY_FORMAT = "yyyyMMdd";
-    private static final String COMPUTER_READABLE_MINUTE_FORMAT = "yyyyMMddHHmm";
-    private static final String COMPUTER_READABLE_SECOND_FORMAT = "yyyyMMddHHmmss";
 
-    private static final DateTimeFormatter COMPUTER_READABLE_YEAR_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern(COMPUTER_READABLE_YEAR_FORMAT)
-        .toFormatter();
-    private static final DateTimeFormatter COMPUTER_READABLE_MONTH_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern(COMPUTER_READABLE_MONTH_FORMAT)
-        .toFormatter();
-    private static final DateTimeFormatter COMPUTER_READABLE_DAY_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern(COMPUTER_READABLE_DAY_FORMAT)
-        .toFormatter();
-    private static final DateTimeFormatter COMPUTER_READABLE_MINUTE_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern(COMPUTER_READABLE_MINUTE_FORMAT)
-        .toFormatter();
-    private static final DateTimeFormatter COMPUTER_READABLE_SECOND_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern(COMPUTER_READABLE_SECOND_FORMAT)
-        .toFormatter();
+    private static final DateTimeFormatter HL7_YEAR = DateTimeFormatter.ofPattern("yyyy");
+    private static final DateTimeFormatter HL7_MONTH = DateTimeFormatter.ofPattern("yyyyMM");
+    private static final DateTimeFormatter HL7_DAY = DateTimeFormatter.ofPattern("yyyyMMdd");
+    private static final DateTimeFormatter HL7_MINUTES = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+    private static final DateTimeFormatter HL7_SECONDS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
-    private static final ImmutableMap<TemporalPrecisionEnum, DateTimeFormatter> COMPUTER_READABLE_FORMATTER_MAP = ImmutableMap.of(
-        YEAR, COMPUTER_READABLE_YEAR_FORMATTER,
-        MONTH, COMPUTER_READABLE_MONTH_FORMATTER,
-        DAY, COMPUTER_READABLE_DAY_FORMATTER,
-        MINUTE, COMPUTER_READABLE_MINUTE_FORMATTER
+    private static final ImmutableMap<TemporalPrecisionEnum, DateTimeFormatter> HL7_FORMATS = ImmutableMap.of(
+        YEAR, HL7_YEAR,
+        MONTH, HL7_MONTH,
+        DAY, HL7_DAY,
+        MINUTE, HL7_MINUTES
     );
 
     //TODO: NIAD-1082
@@ -61,27 +45,23 @@ public class DateFormatUtil {
         .appendPattern(TEXT_DATE_TIME)
         .toFormatter();
 
-    public static Object formatTextDate(Date date) {
-        return format(date, TEXT_DATE_TIME_FORMATTER);
-    }
-
-    private static String format(Date date, DateTimeFormatter dateTimeFormatter) {
+    // FIXME: NIAD-1082 using Date object will incorrectly convert into system local time
+    @Deprecated(forRemoval = true)
+    public static Object toTextFormat(Date date) {
         if (date == null) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
 
-        return dateTimeFormatter.format(
-            date.toInstant()
-                .atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
+        return date.toInstant()
+            .atZone(UK_ZONE_ID)
+            .format(TEXT_DATE_TIME_FORMATTER);
     }
 
-    public static String formatInstant(Instant instant) {
-        return COMPUTER_READABLE_SECOND_FORMATTER.format(instant.atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
+    public static String toHl7Format(Instant instant) {
+        return instant.atZone(UK_ZONE_ID).format(HL7_SECONDS);
     }
 
-    public static String formatDateTypeComputerReadable(DateType dateType) {
+    public static String toHl7Format(DateType dateType) {
         if (!dateType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
@@ -89,7 +69,7 @@ public class DateFormatUtil {
         return convertWithPrecision(dateType.getPrecision(), dateType.toCalendar());
     }
 
-    public static String formatInstantTypeComputerReadable(InstantType dateInstantType) {
+    public static String toHl7Format(InstantType dateInstantType) {
         if (!dateInstantType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
@@ -97,7 +77,7 @@ public class DateFormatUtil {
         return convertWithPrecision(dateInstantType.getPrecision(), dateInstantType.toCalendar());
     }
 
-    public static String formatDateTimeTypeComputerReadable(DateTimeType dateTimeType) {
+    public static String toHl7Format(DateTimeType dateTimeType) {
         if (!dateTimeType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
@@ -106,11 +86,11 @@ public class DateFormatUtil {
     }
 
     private static DateTimeFormatter getFormatStringForPrecision(TemporalPrecisionEnum precisionEnum) {
-        return COMPUTER_READABLE_FORMATTER_MAP.getOrDefault(precisionEnum, COMPUTER_READABLE_SECOND_FORMATTER);
+        return HL7_FORMATS.getOrDefault(precisionEnum, HL7_SECONDS);
     }
 
     private static String convertWithPrecision(TemporalPrecisionEnum precisionEnum, Calendar calendar) {
-        return calendar.toInstant().atZone(ZoneId.of(UK_ZONE_ID))
+        return calendar.toInstant().atZone(UK_ZONE_ID)
             .format(getFormatStringForPrecision(precisionEnum));
     }
 }

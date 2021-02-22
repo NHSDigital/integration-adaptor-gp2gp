@@ -124,7 +124,7 @@ public class RequestStatementExtractor {
 
     public static String extractNoteTime(Annotation annotation) {
         if (annotation.hasTime()) {
-            return DateFormatUtil.formatDateTimeTypeComputerReadable(annotation.getTimeElement());
+            return DateFormatUtil.toHl7Format(annotation.getTimeElement());
         }
         return StringUtils.EMPTY;
     }

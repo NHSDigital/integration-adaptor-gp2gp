@@ -73,12 +73,12 @@ public class DiaryPlanStatementMapper {
     }
 
     private String formatEffectiveDate(DateTimeType date) {
-        return date != null ? String.format(FULL_DATE, DateFormatUtil.formatDateTimeTypeComputerReadable(date)) : EMPTY_DATE;
+        return date != null ? String.format(FULL_DATE, DateFormatUtil.toHl7Format(date)) : EMPTY_DATE;
     }
 
     private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasAuthoredOn()) {
-            return DateFormatUtil.formatDateTimeTypeComputerReadable(procedureRequest.getAuthoredOnElement());
+            return DateFormatUtil.toHl7Format(procedureRequest.getAuthoredOnElement());
         }
 
         throw new EhrMapperException(
@@ -109,7 +109,7 @@ public class DiaryPlanStatementMapper {
 
     private String formatStartDate(ProcedureRequest procedureRequest) {
         return String.format(EARLIEST_RECALL_DATE_FORMAT,
-            DateFormatUtil.formatTextDate(procedureRequest.getOccurrencePeriod().getStart()));
+            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStart()));
     }
 
     private Optional<String> getNotes(ProcedureRequest procedureRequest) {

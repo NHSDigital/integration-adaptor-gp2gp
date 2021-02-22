@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTypeComputerReadable;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +27,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -68,14 +69,14 @@ public class ImmunizationObservationStatementMapper {
     private String buildAvailabilityTime(Immunization immunization) {
         var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
         return dateRecordedExtension
-            .map(value -> formatDateTimeTypeComputerReadable((DateTimeType) value.getValue()))
+            .map(value -> DateFormatUtil.toHl7Format((DateTimeType) value.getValue()))
             .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
     }
 
     private String buildEffectiveTime(Immunization immunization) {
         Optional<String> effectiveTime = Optional.empty();
         if (immunization.hasDateElement()) {
-            effectiveTime = Optional.of(formatDateTimeTypeComputerReadable(immunization.getDateElement()));
+            effectiveTime = Optional.of(DateFormatUtil.toHl7Format(immunization.getDateElement()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -140,7 +141,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
         if (expirationDateElement.isPresent() && expirationDateElement.get().hasValue()) {
-            return expirationDateElement.map(dateType -> EXPIRATION + formatDateTypeComputerReadable(dateType)).orElse(StringUtils.EMPTY);
+            return expirationDateElement.map(dateType -> EXPIRATION + toHl7Format(dateType)).orElse(StringUtils.EMPTY);
         }
 
         return StringUtils.EMPTY;

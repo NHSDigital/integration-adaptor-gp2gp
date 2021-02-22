@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantTypeComputerReadable;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import java.util.stream.Stream;
 
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
 @ExtendWith(MockitoExtension.class)
-public class DateFormatterUtilTest {
+public class DateFormatUtilTest {
     private static final FhirParseService fhirParser = new FhirParseService();
     private static final String templateObservationWithIssuedInstant = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
     private static final String templateObservationWithValueDate = "{\"resourceType\": \"Observation\", \"valueDate\": \"%s\"}";
@@ -30,14 +30,16 @@ public class DateFormatterUtilTest {
         String observationJson = String.format(templateObservationWithIssuedInstant, input);
         Observation observation = fhirParser.parseResource(observationJson, Observation.class);
 
-        String actual = formatInstantTypeComputerReadable(observation.getIssuedElement());
+        String actual = toHl7Format(observation.getIssuedElement());
         assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> instantParams() {
         return Stream.of(
-            Arguments.of("2019-03-28T10:30:00+00:00", "20190328103000"), //GMT
-            Arguments.of("2019-07-28T10:30:00+00:00", "20190728113000")); //BST
+            Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"), // GMT
+            Arguments.of("2019-07-28T10:30:05+00:00", "20190728113005"), // BST
+            Arguments.of("2019-07-28T23:30:05+00:00", "20190729003005"), // BST - over midnight
+            Arguments.of("2019-07-28T10:30:00+05:00", "20190728063000")); // other offset
     }
 
 //    @ParameterizedTest

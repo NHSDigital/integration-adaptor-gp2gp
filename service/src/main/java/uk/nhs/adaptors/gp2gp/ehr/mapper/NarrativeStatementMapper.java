@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantTypeComputerReadable;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -13,6 +13,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
@@ -36,11 +37,11 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return formatDateTimeTypeComputerReadable(observation.getEffectiveDateTimeType());
+            return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
-            return formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getStartElement());
+            return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
-            return formatInstantTypeComputerReadable(observation.getIssuedElement());
+            return toHl7Format(observation.getIssuedElement());
         } else {
             throw new EhrMapperException("Could not map effective date");
         }

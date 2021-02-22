@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -23,11 +23,11 @@ public final class StatementTimeMappingUtils {
 
             if (encounter.getPeriod().hasEnd()) {
                 return String.format(EFFECTIVE_TIME_FULL_TEMPLATE,
-                    formatDateTimeTypeComputerReadable(period.getStartElement()),
-                    formatDateTimeTypeComputerReadable(period.getEndElement()));
+                    toHl7Format(period.getStartElement()),
+                    toHl7Format(period.getEndElement()));
             }
 
-            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, formatDateTimeTypeComputerReadable(
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
                 encounter.getPeriod().getStartElement()));
         }
         return DEFAULT_TIME_VALUE;
@@ -35,7 +35,7 @@ public final class StatementTimeMappingUtils {
 
     public static String prepareAvailabilityTimeForEncounter(Encounter encounter) {
         if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeTypeComputerReadable(
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
                 encounter.getPeriod().getStartElement()));
         }
         return DEFAULT_AVAILABILITY_TIME_VALUE;
@@ -43,7 +43,7 @@ public final class StatementTimeMappingUtils {
 
     public static String prepareAvailabilityTimeForReferralRequest(ReferralRequest referralRequest) {
         if (referralRequest.hasAuthoredOn()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeTypeComputerReadable(
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
                 referralRequest.getAuthoredOnElement()));
 
         }
@@ -53,11 +53,11 @@ public final class StatementTimeMappingUtils {
     public static String prepareEffectiveTimeForObservation(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE,
-                formatDateTimeTypeComputerReadable(observation.getEffectiveDateTimeType()));
+                toHl7Format(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
-            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, formatDateTimeTypeComputerReadable(
+            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, toHl7Format(
                 observation.getEffectivePeriod().getStartElement()),
-                formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getEndElement()));
+                toHl7Format(observation.getEffectivePeriod().getEndElement()));
         }
         return DEFAULT_TIME_VALUE;
     }
