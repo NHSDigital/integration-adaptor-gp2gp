@@ -9,6 +9,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extract
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractServiceRequested;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -162,10 +163,7 @@ public class RequestStatementMapper {
 
     private String buildRecipientDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasRecipient()) {
-            var ignoreFirstPractitioner = referralRequest.getRecipient();
-            removeFirstPractitionerReference(ignoreFirstPractitioner);
-
-            return ignoreFirstPractitioner.stream()
+            return getRecipientsWithoutFirstPractitioner(referralRequest).stream()
                 .filter(Reference::hasReferenceElement)
                 .map(value -> extractRecipient(messageContext, value))
                 .collect(Collectors.joining(COMMA));
@@ -174,13 +172,21 @@ public class RequestStatementMapper {
         return StringUtils.EMPTY;
     }
 
-    private void removeFirstPractitionerReference(List<Reference> referenceList) {
-        for (int index = 0; index < referenceList.size() - 1; index++) {
-            if (referenceList.get(index).getReference().startsWith(ResourceType.Practitioner.name())) {
-                referenceList.remove(index);
-                return;
+    private List<Reference> getRecipientsWithoutFirstPractitioner(ReferralRequest referralRequest) {
+        boolean firstPractitionerFound = false;
+        List<Reference> recipients = new ArrayList<>(referralRequest.getRecipient().size());
+        for (Reference reference : referralRequest.getRecipient()) {
+            if (!firstPractitionerFound && isReferenceToPractitioner(reference)) {
+                firstPractitionerFound = true;
+            } else {
+                recipients.add(reference);
             }
         }
+        return recipients;
+    }
+
+    private boolean isReferenceToPractitioner(Reference reference) {
+        return reference.getReference().startsWith(ResourceType.Practitioner.name());
     }
 
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
