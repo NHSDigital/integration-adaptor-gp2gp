@@ -11,13 +11,17 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeC
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.InstantType;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -79,6 +83,17 @@ public class DateFormatterUtil {
         var computerReadableDate = formatInstantType(dateType);
 
         assertThat(computerReadableDate).isEqualTo(expectedResponse);
+    }
+
+    @Test
+    public void When_DateTypeHasNonUkTimeZone_Expect_Correct() {
+        DateType dateType = new DateType(date);
+        dateType.setTimeZone(TimeZone.getTimeZone(ZoneId.of("Asia/Singapore")));
+        dateType.setPrecision(SECOND);
+
+        var computerReadableDate = formatDateTypeComputerReadable(dateType);
+
+        assertThat(computerReadableDate).isEqualTo(TEST_YEAR + TEST_MONTH + TEST_DAY + TEST_HOUR + TEST_MINUTE + TEST_SECOND);
     }
 
     private static Stream<Arguments> dateParams() {

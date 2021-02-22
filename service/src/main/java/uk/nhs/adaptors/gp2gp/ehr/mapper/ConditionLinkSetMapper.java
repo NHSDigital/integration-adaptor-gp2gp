@@ -118,7 +118,7 @@ public class ConditionLinkSetMapper {
         if (condition.hasOnset()
             && (condition.hasOnsetDateTimeType() && condition.getOnsetDateTimeType().hasValue())) {
             return Optional.of(DateFormatUtil
-                .formatDate(condition.getOnsetDateTimeType().getValue()));
+                .formatDateTimeTypeComputerReadable(condition.getOnsetDateTimeType()));
         }
         return Optional.empty();
     }
@@ -127,7 +127,7 @@ public class ConditionLinkSetMapper {
         if (condition.hasAbatement()
             && (condition.hasAbatementDateTimeType() && condition.getAbatementDateTimeType().hasValue())) {
             return Optional.of(DateFormatUtil
-                .formatDate(condition.getAbatementDateTimeType().getValue()));
+                .formatDateTimeTypeComputerReadable(condition.getAbatementDateTimeType()));
         }
         return Optional.empty();
     }
@@ -135,7 +135,7 @@ public class ConditionLinkSetMapper {
     private Optional<String> buildAvailabilityTime(Condition condition) {
         if (condition.hasAssertedDate()) {
             return Optional.of(DateFormatUtil
-                .formatDate(condition.getAssertedDate()));
+                .formatDateTimeTypeComputerReadable(condition.getAssertedDateElement()));
         }
         return Optional.empty();
     }
