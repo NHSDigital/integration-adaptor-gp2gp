@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTypeComputerReadable;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,14 +68,14 @@ public class ImmunizationObservationStatementMapper {
     private String buildAvailabilityTime(Immunization immunization) {
         var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
         return dateRecordedExtension
-            .map(value -> formatDateTimeType((DateTimeType) value.getValue()))
+            .map(value -> formatDateTimeTypeComputerReadable((DateTimeType) value.getValue()))
             .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
     }
 
     private String buildEffectiveTime(Immunization immunization) {
         Optional<String> effectiveTime = Optional.empty();
         if (immunization.hasDateElement()) {
-            effectiveTime = Optional.of(formatDateTimeType(immunization.getDateElement()));
+            effectiveTime = Optional.of(formatDateTimeTypeComputerReadable(immunization.getDateElement()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -140,7 +140,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
         if (expirationDateElement.isPresent() && expirationDateElement.get().hasValue()) {
-            return expirationDateElement.map(dateType -> EXPIRATION + formatDateType(dateType)).orElse(StringUtils.EMPTY);
+            return expirationDateElement.map(dateType -> EXPIRATION + formatDateTypeComputerReadable(dateType)).orElse(StringUtils.EMPTY);
         }
 
         return StringUtils.EMPTY;

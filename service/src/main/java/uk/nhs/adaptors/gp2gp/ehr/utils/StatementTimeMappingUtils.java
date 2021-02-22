@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
 
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -22,11 +22,12 @@ public final class StatementTimeMappingUtils {
 
             if (encounter.getPeriod().hasEnd()) {
                 return String.format(EFFECTIVE_TIME_FULL_TEMPLATE,
-                    formatDateTimeType(period.getStartElement()),
-                    formatDateTimeType(period.getEndElement()));
+                    formatDateTimeTypeComputerReadable(period.getStartElement()),
+                    formatDateTimeTypeComputerReadable(period.getEndElement()));
             }
 
-            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, formatDateTimeType(encounter.getPeriod().getStartElement()));
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, formatDateTimeTypeComputerReadable(
+                encounter.getPeriod().getStartElement()));
         } else {
             return DEFAULT_TIME_VALUE;
         }
@@ -34,7 +35,8 @@ public final class StatementTimeMappingUtils {
 
     public static String prepareAvailabilityTimeForEncounter(Encounter encounter) {
         if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeType(encounter.getPeriod().getStartElement()));
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, formatDateTimeTypeComputerReadable(
+                encounter.getPeriod().getStartElement()));
         } else {
             return DEFAULT_AVAILABILITY_TIME_VALUE;
         }
@@ -43,10 +45,11 @@ public final class StatementTimeMappingUtils {
     public static String prepareEffectiveTimeForObservation(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE,
-                formatDateTimeType(observation.getEffectiveDateTimeType()));
+                formatDateTimeTypeComputerReadable(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
-            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, formatDateTimeType(observation.getEffectivePeriod().getStartElement()),
-                formatDateTimeType(observation.getEffectivePeriod().getEndElement()));
+            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, formatDateTimeTypeComputerReadable(
+                observation.getEffectivePeriod().getStartElement()),
+                formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getEndElement()));
         } else {
             return DEFAULT_TIME_VALUE;
         }

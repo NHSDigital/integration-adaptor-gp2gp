@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDateTimeTypeComputerReadable;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatInstantType;
 
 import org.hl7.fhir.dstu3.model.Observation;
@@ -36,9 +36,9 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return formatDateTimeType(observation.getEffectiveDateTimeType());
+            return formatDateTimeTypeComputerReadable(observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
-            return formatDateTimeType(observation.getEffectivePeriod().getStartElement());
+            return formatDateTimeTypeComputerReadable(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
             return formatInstantType(observation.getIssuedElement());
         } else {

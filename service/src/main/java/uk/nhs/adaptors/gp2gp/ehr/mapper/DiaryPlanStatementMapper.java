@@ -73,12 +73,12 @@ public class DiaryPlanStatementMapper {
     }
 
     private String formatEffectiveDate(DateTimeType date) {
-        return date != null ? String.format(FULL_DATE, DateFormatUtil.formatDateTimeType(date)) : EMPTY_DATE;
+        return date != null ? String.format(FULL_DATE, DateFormatUtil.formatDateTimeTypeComputerReadable(date)) : EMPTY_DATE;
     }
 
     private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasAuthoredOn()) {
-            return DateFormatUtil.formatDateTimeType(procedureRequest.getAuthoredOnElement());
+            return DateFormatUtil.formatDateTimeTypeComputerReadable(procedureRequest.getAuthoredOnElement());
         }
 
         throw new EhrMapperException(

@@ -23,7 +23,7 @@ public class OutputMessageWrapperMapper {
     public String map(GetGpcStructuredTaskDefinition getGpcDocumentTaskDefinition, String ehrExtractContent) {
         OutputMessageWrapperTemplateParameters outputMessageWrapperTemplateParameters = OutputMessageWrapperTemplateParameters.builder()
             .eventId(randomIdGeneratorService.createNewId())
-            .creationTime(DateFormatUtil.formatDate(timestampService.now()))
+            .creationTime(DateFormatUtil.formatInstant(timestampService.now()))
             .fromAsid(getGpcDocumentTaskDefinition.getFromAsid())
             .toAsid(getGpcDocumentTaskDefinition.getToAsid())
             .ehrExtractContent(ehrExtractContent)
