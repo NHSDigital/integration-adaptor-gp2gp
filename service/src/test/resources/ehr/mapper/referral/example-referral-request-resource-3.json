@@ -1,0 +1,36 @@
+{
+    "resourceType": "ReferralRequest",
+    "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
+    "reasonCode": [
+        {
+            "coding": [
+                {
+                    "system": "http://read.info/readv2",
+                    "code": "8H61.00",
+                    "display": "Referral to private doctor",
+                    "userSelected": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                            "extension": [
+                                {
+                                    "url": "descriptionId",
+                                    "valueId": "397210015"
+                                },
+                                {
+                                    "url": "descriptionDisplay",
+                                    "valueString": "Referral to private doctor"
+                                }
+                            ]
+                        }
+                    ],
+                    "system": "http://snomed.info/sct",
+                    "code": "266747000",
+                    "display": "Referral to private doctor"
+                }
+            ]
+        }
+    ]
+}
