@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_EHR_EXTRACT_CORE;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -14,6 +16,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 public class SendEhrExtractCoreTaskDefinition extends TaskDefinition {
     @Override
     public TaskType getTaskType() {
-        return TaskType.SEND_EHR_EXTRACT_CORE;
+        return SEND_EHR_EXTRACT_CORE;
     }
 }

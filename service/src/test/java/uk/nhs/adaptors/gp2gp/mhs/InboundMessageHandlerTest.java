@@ -1,23 +1,5 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.w3c.dom.Document;
-import uk.nhs.adaptors.gp2gp.ResourceHelper;
-import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
-import uk.nhs.adaptors.gp2gp.common.service.MDCService;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -28,6 +10,26 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.w3c.dom.Document;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.ResourceHelper;
+import uk.nhs.adaptors.gp2gp.common.service.MDCService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
+import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
 @ExtendWith(MockitoExtension.class)
 public class InboundMessageHandlerTest {
@@ -86,7 +88,7 @@ public class InboundMessageHandlerTest {
 
         inboundMessageHandler.handle(message);
 
-        verify(ehrExtractRequestHandler).handle(header, payload);
+        verify(ehrExtractRequestHandler).handleStart(header, payload);
     }
 
     @Test

@@ -3,16 +3,16 @@ package uk.nhs.adaptors.gp2gp.ehr.model;
 import java.time.Instant;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.mongo.ttl.TimeToLive;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @CompoundIndexes({
     @CompoundIndex(
@@ -37,6 +37,7 @@ public class EhrExtractStatus implements TimeToLive {
     private GpcAccessStructured gpcAccessStructured;
     private GpcAccessDocument gpcAccessDocument;
     private EhrExtractCore ehrExtractCore;
+    private EhrContinue ehrContinue;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -99,5 +100,13 @@ public class EhrExtractStatus implements TimeToLive {
     public static class EhrExtractCore {
         private Instant sentAt;
         private String taskId;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class EhrContinue {
+        private Instant received;
     }
 }

@@ -1,12 +1,25 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -20,19 +33,9 @@ import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String DOCUMENT_NAME = EhrStatusConstants.DOCUMENT_ID + ".json";
     private static final String INVALID_DOCUMENT_ID = "non-existing-id";
@@ -117,7 +120,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocuments.get(0).getAccessedAt()).isNull();
         assertThat(gpcDocuments.get(0).getObjectName()).isNull();
 
-        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(INVALID_DOCUMENT_ID));
+        assertThrows(StorageConnectorException.class, () -> storageConnector.downloadFromStorage(DOCUMENT_NAME));
 
         verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
     }
@@ -164,7 +167,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private void assertOperationOutcome(Exception exception) {
-        var operationOutcomeString = exception.getMessage().replace("The following error occurred during Gpc Request: ", "");
+        var operationOutcomeString = exception.getMessage().replace("The following error occurred during GPC request: ", "");
         var operationOutcome = FHIR_PARSE_SERVICE.parseResource(operationOutcomeString, OperationOutcome.class).getIssueFirstRep();
         var coding = operationOutcome.getDetails().getCodingFirstRep();
         assertThat(coding.getCode()).isEqualTo(NO_RECORD_FOUND);

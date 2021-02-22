@@ -1,42 +1,37 @@
 package uk.nhs.adaptors.gp2gp.common.mongo;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import java.time.Duration;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
-import java.time.Duration;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @ConfigurationProperties(prefix = "gp2gp.mongodb")
 @Getter
 @Setter
 @Slf4j
+@DependsOn({"appInitializer"})
 public class MongoClientConfiguration extends AbstractMongoClientConfiguration {
     private String database;
-
     private String uri;
-
     private String host;
-
     private String port;
-
     private String username;
-
     private String password;
-
     private String options;
-
     private boolean autoIndexCreation;
-
-    private Duration ttl;
-
     private boolean cosmosDbEnabled;
+    private Duration ttl;
 
     @Override
     public String getDatabaseName() {

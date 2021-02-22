@@ -4,15 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.parser.IParser;
-import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
-
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -21,13 +12,19 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.IParser;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
+import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+
 @Slf4j
 @Component
 public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpcDocumentReferencesTaskDefinition> {
     @Autowired
     private EhrExtractStatusService ehrExtractStatusService;
-    @Autowired
-    private GpcRequestBuilder gpcRequestBuilder;
     @Autowired
     private GpcClient gpcClient;
     @Autowired
@@ -59,8 +56,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     }
 
     private Optional<String> retrievePatientId(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
-        var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(taskDefinition);
-        var response = gpcClient.getPatientRecord(request, taskDefinition);
+        var response = gpcClient.getPatientRecord(taskDefinition);
 
         FhirContext ctx = FhirContext.forDstu3();
         IParser parser = ctx.newJsonParser();
@@ -74,8 +70,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     }
 
     private List<String> retrieveDocumentReferences(GetGpcDocumentReferencesTaskDefinition taskDefinition, String patientId) {
-        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(taskDefinition, patientId);
-        var response = gpcClient.getDocumentReferences(request, taskDefinition);
+        var response = gpcClient.getDocumentReferences(taskDefinition, patientId);
 
         FhirContext ctx = FhirContext.forDstu3();
         IParser parser = ctx.newJsonParser();

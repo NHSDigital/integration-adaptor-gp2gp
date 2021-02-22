@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_STRUCTURED;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -16,6 +18,6 @@ public class GetGpcStructuredTaskDefinition extends TaskDefinition {
 
     @Override
     public TaskType getTaskType() {
-        return TaskType.GET_GPC_STRUCTURED;
+        return GET_GPC_STRUCTURED;
     }
 }

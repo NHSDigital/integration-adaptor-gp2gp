@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.common.amqp;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
+import javax.jms.ConnectionFactory;
+
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.apache.qpid.jms.JmsDestination;
 import org.apache.qpid.jms.message.JmsMessageSupport;
@@ -11,10 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.util.StringUtils;
-
-import javax.jms.ConnectionFactory;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Configuration
 @ConditionalOnMissingBean(ConnectionFactory.class)

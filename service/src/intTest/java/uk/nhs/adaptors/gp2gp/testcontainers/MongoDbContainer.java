@@ -1,7 +1,8 @@
 package uk.nhs.adaptors.gp2gp.testcontainers;
 
-import lombok.extern.slf4j.Slf4j;
 import org.testcontainers.containers.GenericContainer;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class MongoDbContainer extends GenericContainer<MongoDbContainer> {

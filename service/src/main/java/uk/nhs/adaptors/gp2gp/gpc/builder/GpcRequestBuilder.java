@@ -6,20 +6,6 @@ import static org.apache.http.protocol.HTTP.CONTENT_LEN;
 import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 import java.util.Collections;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.netty.http.client.HttpClient;
-import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
-import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
-
 import java.util.List;
 
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -28,6 +14,7 @@ import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,7 +29,19 @@ import org.springframework.web.reactive.function.client.WebClient.RequestBodySpe
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
+import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
+import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -63,7 +62,6 @@ public class GpcRequestBuilder {
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
     private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
     private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
-    private static final String GPC_REQUEST_TYPE_FILTER = "Gpc";
     private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
         + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
         + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
@@ -76,10 +74,14 @@ public class GpcRequestBuilder {
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
 
+    @Value("${gp2gp.gpc.overrideNhsNumber}")
+    private String overrideNhsNumber;
+
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
             .addParameter(buildParamterComponent("patientNHSNumber")
-                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(structuredTaskDefinition.getNhsNumber())))
+                .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(
+                    ((overrideNhsNumber.isBlank()) ? structuredTaskDefinition.getNhsNumber() : overrideNhsNumber))))
             .addParameter(buildParamterComponent("includeAllergies")
                 .addPart(buildParamterComponent("includeResolvedAllergies")
                     .setValue(new BooleanType(true))))
@@ -199,7 +201,7 @@ public class GpcRequestBuilder {
     }
 
     private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
-        filters.add(webClientFilterService.errorHandlingFilter(GPC_REQUEST_TYPE_FILTER, HttpStatus.OK));
+        filters.add(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.GPC, HttpStatus.OK));
         filters.add(webClientFilterService.logRequest());
     }
 
@@ -208,7 +210,8 @@ public class GpcRequestBuilder {
             .method(HttpMethod.GET)
             .uri(uriBuilder -> uriBuilder
                 .path(gpcConfiguration.getPatientEndpoint())
-                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER + nhsNumber)
+                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER
+                    + ((overrideNhsNumber.isBlank()) ? nhsNumber : overrideNhsNumber))
                 .build());
     }
 }

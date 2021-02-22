@@ -7,14 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,6 +16,14 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.client.result.UpdateResult;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
+import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 @Service
 @Slf4j
@@ -37,6 +37,7 @@ public class EhrExtractStatusService {
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
+    private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
     private static final String PATIENT_ID = "patientId";
@@ -45,10 +46,11 @@ public class EhrExtractStatusService {
     private static final String MESSAGE_ID = "messageId";
     private static final String ACCESSED_AT = "accessedAt";
     private static final String ACCESSED_DOCUMENT_URL = "accessDocumentUrl";
+    private static final String RECEIVED = "received";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
-
+    private static final String CONTINUE_RECEIVED_PATH = EHR_CONTINUE + DOT + RECEIVED;
     private static final String DOCUMENT_ID_PATH = GPC_DOCUMENTS + DOT + DOCUMENT_ID;
     private static final String DOCUMENT_PATIENT_ID = GPC_ACCESS_DOCUMENT + DOT + PATIENT_ID;
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
@@ -122,6 +124,28 @@ public class EhrExtractStatusService {
         }
     }
 
+    public EhrExtractStatus updateEhrExtractStatusContinue(String conversationId) {
+        Query query = createQueryForConversationId(conversationId);
+
+        Update update = createUpdateWithUpdatedAt();
+        Instant now = Instant.now();
+        update.set(CONTINUE_RECEIVED_PATH, now);
+
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
+                + "' that is not recognised");
+        }
+
+        LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
+        return ehrExtractStatus;
+    }
+
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
         GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
             Optional<String> patientId) {
@@ -129,7 +153,7 @@ public class EhrExtractStatusService {
 
         Update update = createUpdateWithUpdatedAt();
         if (patientId.isPresent()) {
-            update.set(DOCUMENT_PATIENT_ID, patientId);
+            update.set(DOCUMENT_PATIENT_ID, patientId.get());
         } else {
             update.set(DOCUMENT_PATIENT_ID, null);
         }

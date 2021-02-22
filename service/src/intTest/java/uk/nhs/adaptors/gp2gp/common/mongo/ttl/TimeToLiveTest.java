@@ -1,5 +1,11 @@
 package uk.nhs.adaptors.gp2gp.common.mongo.ttl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
 import org.assertj.core.api.Assertions;
 import org.awaitility.Durations;
 import org.junit.jupiter.api.Disabled;
@@ -10,7 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.IndexInfo;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
@@ -18,14 +26,9 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
-
 @ExtendWith({ SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
+@DirtiesContext
 public class TimeToLiveTest {
     private static final int MAX_AWAIT_IN_SECONDS = 90;
 

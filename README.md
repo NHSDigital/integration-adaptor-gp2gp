@@ -96,6 +96,7 @@ The adaptor uses the GP Connect API to fetch patient records and documents.
 | GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
 | GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
 | GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
+| GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
 
 Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
 Secure Proxy (SSP).
@@ -113,6 +114,24 @@ The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
+
+### SDS API Configuration Options
+
+The GP2GP uses the [SDS API]() to discover GPC endpoints.
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_SDS_URL                        | http://localhost:8110/                        | URL to the SDS API
+| GP2GP_SDS_APIKEY                     |                                               | Secret key used to authenticate with the API
+
+### Trust Store Configuration Options
+
+You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not replace Java's default trust store. At runtime the application adds these additional certificates to the default trust store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.
+
+| Environment Variable                | Default       | Description
+| ------------------------------------|---------------|-------------
+| GP2GP_SSL_TRUST_STORE_URL           |               | (Optional) URL of the trust store JKS. The only scheme currently supported is `s3://`
+| GP2GP_SSL_TRUST_STORE_PASSWORD      |               | (Optional) Password used to access the trust store
 
 ## How to run service:
 
