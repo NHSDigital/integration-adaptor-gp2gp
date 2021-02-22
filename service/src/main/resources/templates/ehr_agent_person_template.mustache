@@ -1,0 +1,28 @@
+<part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="{{practitionerId}}"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                {{#practitionerRole}}
+                <orginalText>{{practitionerRole}}</orginalText>
+                {{/practitionerRole}}
+            </code>
+            <name>
+                {{#practitionerPrefix}}
+                <prefix>{{practitionerPrefix}}</prefix>
+                {{/practitionerPrefix}}
+                {{#practitionerGivenName}}
+                <given>{{practitionerGivenName}}</given>
+                {{/practitionerGivenName}}
+                {{#practitionerFamilyName}}
+                <family>{{practitionerFamilyName}}</family>
+                {{/practitionerFamilyName}}
+            </name>
+        </agentPerson>
+        {{#organization}}
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            {{organization}}
+        </representedOrganization>
+        {{/organization}}
+    </Agent>
+</part>
