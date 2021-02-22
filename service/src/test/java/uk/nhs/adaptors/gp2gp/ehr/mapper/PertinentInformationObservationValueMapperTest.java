@@ -69,7 +69,8 @@ public class PertinentInformationObservationValueMapperTest {
 
     @ParameterizedTest
     @MethodSource("testReferenceRangeFilePaths")
-    public void When_MappingParsedObservationJsonWithReferenceRange_Expect_CorrectXmlOutput(String input, String output) throws IOException {
+    public void When_MappingParsedObservationJsonWithReferenceRange_Expect_CorrectXmlOutput(String input,
+            String output) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 

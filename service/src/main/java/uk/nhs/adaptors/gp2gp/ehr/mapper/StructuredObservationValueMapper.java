@@ -36,7 +36,6 @@ public class StructuredObservationValueMapper {
             throw new IllegalArgumentException(
                 String.format("Observation value of '%s' type can not be converted to xml element", value.getClass()));
         }
-
         return VALUE_MAPPING_FUNCTIONS.get(value.getClass())
             .apply(value);
     }
@@ -47,6 +46,7 @@ public class StructuredObservationValueMapper {
 
             if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
                 rangeValue += String.format(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
+
             }
             if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
                 rangeValue += String.format(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());

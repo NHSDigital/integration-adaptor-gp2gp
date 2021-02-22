@@ -1,7 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -28,6 +30,7 @@ public class ObservationStatementMapper {
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = ImmutableList.of(SampledData.class, Attachment.class);
     private static final Mustache OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE =
         TemplateUtils.loadTemplate("ehr_observation_statement_effective_time_template.mustache");
+    private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -56,11 +59,13 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasReferenceRange()) {
-            if (observation.hasValue() && observation.getValue() instanceof Quantity) {
+            Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
+            if (observation.hasValue() && observation.hasValueQuantity()) {
                 observationStatementTemplateParametersBuilder.referenceRange(
-                    structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
+                    structuredObservationValueMapper.mapReferenceRangeType(referenceRange));
+                comment = prepareCommentWithReferenceRangeUnits(comment, referenceRange, observation.getValueQuantity());
             } else {
-                comment = prepareCommentWithReferenceRange(comment, observation.getReferenceRangeFirstRep());
+                comment = prepareCommentWithReferenceRange(comment, referenceRange);
             }
         }
 
@@ -79,5 +84,32 @@ public class ObservationStatementMapper {
 
     private String prepareCommentWithReferenceRange(String comment, Observation.ObservationReferenceRangeComponent referenceRange) {
         return pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange) + comment;
+    }
+
+    private String prepareCommentWithReferenceRangeUnits(String comment,
+            Observation.ObservationReferenceRangeComponent referenceRange,
+            Quantity quantity) {
+
+        Optional<String> referenceRangeUnit = extractUnit(referenceRange);
+
+        if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), quantity)) {
+            return REFERENCE_RANGE_UNIT_PREFIX + referenceRangeUnit.get() + StringUtils.SPACE + comment;
+        }
+
+        return comment;
+    }
+
+    private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.hasHigh() && referenceRange.getHigh().hasUnit()) {
+            return Optional.of(referenceRange.getHigh().getUnit());
+        } else if (referenceRange.hasLow() && referenceRange.getLow().hasUnit()) {
+            return Optional.of(referenceRange.getLow().getUnit());
+        }
+
+        return Optional.empty();
+    }
+
+    private boolean isRangeUnitValid(String unit, Quantity quantity) {
+        return quantity.hasUnit() && !unit.equals(quantity.getUnit());
     }
 }
