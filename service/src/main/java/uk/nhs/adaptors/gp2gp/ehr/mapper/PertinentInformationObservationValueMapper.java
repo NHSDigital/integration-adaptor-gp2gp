@@ -38,7 +38,7 @@ public class PertinentInformationObservationValueMapper {
             .put(Period.class, value -> processPeriod((Period) value))
             .build();
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
-    private static final String BOOLEAN_VALUE_TEMPLATE= "Boolean Value: %s ";
+    private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: Low %s %s High %s %s ";
     private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
@@ -155,7 +155,8 @@ public class PertinentInformationObservationValueMapper {
             && ratio.getDenominator().hasUnit();
     }
 
-    private static String mapReferenceRangeToPertinentInformation(Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
+    private static String mapReferenceRangeToPertinentInformation(
+            Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
         String result = "Range: ";
         if (observationReferenceRangeComponent.hasText()) {
             result += "Text: " + observationReferenceRangeComponent.getText();

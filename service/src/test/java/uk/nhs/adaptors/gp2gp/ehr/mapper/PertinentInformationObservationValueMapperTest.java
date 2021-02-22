@@ -45,10 +45,12 @@ public class PertinentInformationObservationValueMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        boolean isProperValue = PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.isPertinentInformation(observation.getValue());
+        boolean isProperValue =
+            PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.isPertinentInformation(observation.getValue());
         assertThat(isProperValue).isTrue();
 
-        String outputMessage = PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.mapObservationValueToPertinentInformation(observation.getValue());
+        String outputMessage =
+            PERTINENT_INFORMATION_OBSERVATION_VALUE_MAPPER.mapObservationValueToPertinentInformation(observation.getValue());
         assertThat(outputMessage).isEqualTo(output);
     }
 
