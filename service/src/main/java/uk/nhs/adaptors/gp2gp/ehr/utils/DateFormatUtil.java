@@ -5,8 +5,6 @@ import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.MINUTE;
 import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.MONTH;
 import static ca.uhn.fhir.model.api.TemporalPrecisionEnum.YEAR;
 
-import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
-
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -14,12 +12,11 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.hl7.fhir.dstu3.model.DateTimeType;
-import org.hl7.fhir.dstu3.model.DateType;
-import org.hl7.fhir.dstu3.model.InstantType;
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 
 import com.google.common.collect.ImmutableMap;
 
+import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class DateFormatUtil {
@@ -60,28 +57,12 @@ public class DateFormatUtil {
         return instant.atZone(UK_ZONE_ID).format(HL7_SECONDS);
     }
 
-    public static String toHl7Format(DateType dateType) {
-        if (!dateType.hasValue()) {
-            throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
-        }
-
-        return convertWithPrecision(dateType.getPrecision(), dateType.toCalendar());
-    }
-
-    public static String toHl7Format(InstantType dateInstantType) {
+    public static String toHl7Format(BaseDateTimeType dateInstantType) {
         if (!dateInstantType.hasValue()) {
             throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
 
         return convertWithPrecision(dateInstantType.getPrecision(), dateInstantType.toCalendar());
-    }
-
-    public static String toHl7Format(DateTimeType dateTimeType) {
-        if (!dateTimeType.hasValue()) {
-            throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
-        }
-
-        return convertWithPrecision(dateTimeType.getPrecision(), dateTimeType.toCalendar());
     }
 
     private static DateTimeFormatter getFormatStringForPrecision(TemporalPrecisionEnum precisionEnum) {
