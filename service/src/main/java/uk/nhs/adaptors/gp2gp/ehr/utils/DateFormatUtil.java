@@ -110,7 +110,7 @@ public class DateFormatUtil {
     }
 
     private static String convertWithPrecision(TemporalPrecisionEnum precisionEnum, Calendar calendar) {
-        return LocalDateTime.ofInstant(calendar.toInstant(), ZoneId.of(UK_ZONE_ID))
+        return calendar.toInstant().atZone(ZoneId.of(UK_ZONE_ID))
             .format(getFormatStringForPrecision(precisionEnum));
     }
 }
