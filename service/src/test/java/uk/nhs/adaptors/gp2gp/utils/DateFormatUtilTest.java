@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 public class DateFormatUtilTest {
     private static final FhirParseService FHIR_PARSER = new FhirParseService();
     private static final String INSTANT_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"issued\": \"%s\"}";
-    private static final String DATE_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDate\": \"%s\"}";
+    private static final String DATETYPE_IMMUNIZATION_TEMPLATE = "{\"resourceType\": \"Immunization\", \"expirationDate\": \"%s\"}";
     private static final String DATETIME_OBSERVATION_TEMPLATE = "{\"resourceType\": \"Observation\", \"valueDateTime\": \"%s\"}";
 
     @ParameterizedTest
@@ -35,10 +36,10 @@ public class DateFormatUtilTest {
     @ParameterizedTest
     @MethodSource("dateParams")
     public void When_FormattingDateTypeToHl7_Expect_Hl7InUkZone(String input, String expected) {
-        String observationJson = String.format(INSTANT_OBSERVATION_TEMPLATE, input);
-        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
+        String observationJson = String.format(DATETYPE_IMMUNIZATION_TEMPLATE, input);
+        Immunization immunization = FHIR_PARSER.parseResource(observationJson, Immunization.class);
 
-        String actual = toHl7Format(observation.getIssuedElement());
+        String actual = toHl7Format(immunization.getExpirationDateElement());
         assertThat(actual).isEqualTo(expected);
     }
 
