@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
@@ -23,29 +22,52 @@ public class PractitionerAgentPersonMapper {
     private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_agent_person_template.mustache");
     private final MessageContext messageContext;
+    private final OrganizationToAgentMapper organizationToAgentMapper;
 
-    public String mapPractitionerToAgentPerson(PractitionerRole practitionerRole, Practitioner practitioner, Organization organization) {
+    public String mapPractitionerToAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole,
+        Optional<Organization> organization) {
         var builder = PractitionerAgentPersonMapperParameters.builder()
             .practitionerId(messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, practitioner.getIdElement().getIdPart()));
 
-        buildPractitionerRole(practitionerRole).ifPresent(builder::practitionerRole);
+        buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
+        buildPractitionerGivenName(practitioner).ifPresent(builder::practitionerGivenName);
+        buildPractitionerFamilyName(practitioner).ifPresent(builder::practitionerFamilyName);
+
+        practitionerRole.flatMap(this::buildPractitionerRole).ifPresent(builder::practitionerRole);
+        organization.ifPresent(organization1 -> {
+            var organizationMapped = Optional.of(organizationToAgentMapper.mapOrganizationToAgentInner(organization1));
+            organizationMapped.ifPresent(builder::organization);
+        });
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
     }
 
     private Optional<String> buildPractitionerRole(PractitionerRole practitionerRole) {
+        if (practitionerRole.hasCode() && practitionerRole.getCodeFirstRep().hasCoding()
+            && practitionerRole.getCodeFirstRep().getCodingFirstRep().hasDisplay()) {
+            return Optional.of(practitionerRole.getCodeFirstRep().getCodingFirstRep().getDisplay());
+        }
         return Optional.empty();
     }
 
-    private Optional<String> buildPractitionerPrefix(PractitionerRole practitionerRole) {
+    private Optional<String> buildPractitionerPrefix(Practitioner practitioner) {
+        if (practitioner.hasName() && practitioner.getNameFirstRep().hasPrefix()) {
+            return Optional.of(practitioner.getNameFirstRep().getPrefixAsSingleString());
+        }
         return Optional.empty();
     }
 
-    private Optional<String> buildPractitionerGivenName(PractitionerRole practitionerRole) {
+    private Optional<String> buildPractitionerGivenName(Practitioner practitioner) {
+        if (practitioner.hasName() && practitioner.getNameFirstRep().hasGiven()) {
+            return Optional.of(practitioner.getNameFirstRep().getGivenAsSingleString());
+        }
         return Optional.empty();
     }
 
-    private Optional<String> buildPractitionerFamilyName(PractitionerRole practitionerRole) {
+    private Optional<String> buildPractitionerFamilyName(Practitioner practitioner) {
+        if (practitioner.hasName() && practitioner.getNameFirstRep().hasFamily()) {
+            return Optional.of(practitioner.getNameFirstRep().getFamily());
+        }
         return Optional.empty();
     }
 
