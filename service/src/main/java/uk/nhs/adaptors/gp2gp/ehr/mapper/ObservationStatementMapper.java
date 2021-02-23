@@ -40,7 +40,8 @@ public class ObservationStatementMapper {
         String comment = observation.getComment();
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
-            .issued(DateFormatUtil.formatDate(observation.getIssued()))
+            .comment(observation.getComment())
+            .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
 

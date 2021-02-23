@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.Date;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,6 +12,7 @@ import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -67,14 +69,14 @@ public class ImmunizationObservationStatementMapper {
     private String buildAvailabilityTime(Immunization immunization) {
         var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
         return dateRecordedExtension
-            .map(value -> formatDateTimeType((DateTimeType) value.getValue()))
+            .map(value -> DateFormatUtil.toHl7Format((DateTimeType) value.getValue()))
             .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
     }
 
     private String buildEffectiveTime(Immunization immunization) {
         Optional<String> effectiveTime = Optional.empty();
-        if (immunization.hasDate()) {
-            effectiveTime = Optional.of(DateFormatUtil.formatDate(immunization.getDate()));
+        if (immunization.hasDateElement()) {
+            effectiveTime = Optional.of(DateFormatUtil.toHl7Format(immunization.getDateElement()));
         }
         return effectiveTime.orElse(StringUtils.EMPTY);
     }
@@ -137,9 +139,12 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
-        Optional<Date> expirationDate = Optional.ofNullable(immunization.getExpirationDate());
-        return expirationDate.map(date -> EXPIRATION + DateFormatUtil.formatShortDate(date))
-            .orElse(StringUtils.EMPTY);
+        Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
+        if (expirationDateElement.isPresent() && expirationDateElement.get().hasValue()) {
+            return expirationDateElement.map(dateType -> EXPIRATION + toHl7Format(dateType)).orElse(StringUtils.EMPTY);
+        }
+
+        return StringUtils.EMPTY;
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
@@ -217,10 +222,5 @@ public class ImmunizationObservationStatementMapper {
             .collect(Collectors.joining(COMMA));
 
         return vaccinationProtocol + VACCINATION_TARGET_DISEASE + targetDiseases;
-    }
-
-    private String formatDateTimeType(DateTimeType dateTimeType) {
-        Date extractedDate = dateTimeType.getValue();
-        return DateFormatUtil.formatDate(extractedDate);
     }
 }
