@@ -95,7 +95,7 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processCodeableConcept(CodeableConcept value) {
         if (value.hasCoding() && !value.getCoding().isEmpty()) {
-            Coding coding = value.getCoding().get(0);
+            Coding coding = value.getCodingFirstRep();
             if (coding.hasCode() && coding.hasDisplay()) {
                 return String.format(CODEABLE_CONCEPT_VALUE_TEMPLATE, coding.getCode(), coding.getDisplay());
             }
