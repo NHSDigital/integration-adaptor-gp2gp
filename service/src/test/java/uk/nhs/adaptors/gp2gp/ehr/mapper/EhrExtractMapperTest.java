@@ -61,8 +61,6 @@ public class EhrExtractMapperTest extends MapperTest {
     private TimestampService timestampService;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
-    @Mock
-    private EncounterComponentsMapper encounterComponentsMapper;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -77,6 +75,15 @@ public class EhrExtractMapperTest extends MapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         messageContext = new MessageContext(randomIdGeneratorService);
+        EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
+            messageContext,
+            new DiaryPlanStatementMapper(messageContext),
+            new NarrativeStatementMapper(messageContext),
+            new ObservationStatementMapper(messageContext),
+            new ImmunizationObservationStatementMapper(messageContext),
+            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService)
+        );
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
             new EncounterMapper(messageContext, encounterComponentsMapper));
@@ -92,6 +99,7 @@ public class EhrExtractMapperTest extends MapperTest {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        messageContext.initialize(bundle);
 
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
