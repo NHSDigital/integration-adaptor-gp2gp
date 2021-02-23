@@ -32,28 +32,42 @@ public class DateFormatUtilTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> instantParams() {
-        return Stream.of(
-            Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"), // GMT
-            Arguments.of("2019-07-28T10:30:05+00:00", "20190728113005"), // BST
-            Arguments.of("2019-07-28T23:30:05+00:00", "20190729003005"), // BST - over midnight
-            Arguments.of("2019-07-28T10:30:55+05:00", "20190728063055")); // other offset
+    @ParameterizedTest
+    @MethodSource("dateParams")
+    public void When_FormattingDateTypeToHl7_Expect_Hl7InUkZone(String input, String expected) {
+        String observationJson = String.format(INSTANT_OBSERVATION_TEMPLATE, input);
+        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
+
+        String actual = toHl7Format(observation.getIssuedElement());
+        assertThat(actual).isEqualTo(expected);
     }
 
-//    private static Stream<Arguments> dateParams() {
-//        return Stream.of(
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2019", "2019"),
-//                format(immDateTypeTemplate, "2019"), "2019"),
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2020-03", "2020-03"),
-//                format(immDateTypeTemplate, "2020-07"), "202003"),
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2017-02-28", "2017-02-28"),
-//                format(immDateTypeTemplate, "2017-02-28"), "20170228"),
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2019-01-28T10:30", "2019-01-28T10:30"),
-//                format(immDateTypeTemplate, "2019-01-28T10:30"), "201901281030"),
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2010-07-28T10:30:00", "2019-07-28T10:30:00"),
-//                format(immDateTypeTemplate, "2019-07-28T10:30:00"), "20190728103000"),
-//            Arguments.of(format(obsInstantDateTimeTemplate, "2019-03-28T10:30:00+00:00", "2019-03-28T10:30:00+00:00"),
-//                format(immDateTypeTemplate, "2019-07-28T10:30:00+01:00"), "20190728103000")
-//        );
-//    }
+    @ParameterizedTest
+    @MethodSource("dateParams")
+    public void When_FormattingDateTimeTypeToHl7_Expect_Hl7InUkZone(String input, String expected) {
+        String observationJson = String.format(DATETIME_OBSERVATION_TEMPLATE, input);
+        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
+
+        String actual = toHl7Format(observation.getValueDateTimeType());
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> instantParams() {
+        return Stream.of(
+            Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"),
+            Arguments.of("2019-07-28T10:30:05+00:00", "20190728113005"),
+            Arguments.of("1740-07-28T23:30:05+00:00", "17400728232850"),
+            Arguments.of("1960-07-28T10:30:55+05:00", "19600728063055"));
+    }
+
+    private static Stream<Arguments> dateParams() {
+        return Stream.of(
+            Arguments.of("1973", "1973"),
+            Arguments.of("2008-08", "200808"),
+            Arguments.of("2019-07-28", "20190728"),
+            Arguments.of("2010-02-22T10:30:05+00:00", "20100222103005"),
+            Arguments.of("2019-09-28T10:30:05+00:00", "20190928113005"),
+            Arguments.of("1740-07-07T23:30:05+00:00", "17400707232850"),
+            Arguments.of("1960-06-13T10:30:55+05:00", "19600613063055"));
+    }
 }
