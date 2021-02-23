@@ -24,7 +24,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class EncounterComponentsMapperTest {
+public class EncounterComponentsMapperTest extends MapperTest {
     private static final String TEST_ID = "394559384658936";
 
     private static final String TEST_DIRECTORY = "/ehr/mapper/encountercomponents/";
@@ -55,13 +55,15 @@ public class EncounterComponentsMapperTest {
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(messageContext);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext);
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             diaryPlanStatementMapper,
             narrativeStatementMapper,
             observationStatementMapper,
-            immunizationObservationStatementMapper);
+            immunizationObservationStatementMapper,
+            conditionLinkSetMapper);
     }
 
     @AfterEach

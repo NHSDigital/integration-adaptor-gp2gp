@@ -199,6 +199,11 @@
                         "item": {
                             "reference": "Observation/observationcommentid1"
                         }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/conditionid1"
+                        }
                     }
                 ]
             }
@@ -454,6 +459,56 @@
                 "serviceProvider": {
                     "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
                 }
+            }
+        },
+        {
+            "resource" : {
+                "resourceType": "Condition",
+                "id": "conditionid1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+                        "valueReference": {
+                            "reference": "Observation/7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+                        "valueReference": {
+                            "reference": "ReferralRequest/D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+                        "valueReference": {
+                            "reference": "ReferralRequest/82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+                        "valueReference": {
+                            "reference": "DocumentReference/8747DFC5-11B7-4A77-B2F3-7720CC58C2FC"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+                        "valueCode": "minor"
+                    }
+                ],
+                "clinicalStatus": "active",
+                "onsetDateTime": "2020-09-06",
+                "abatementDateTime": "2020-10-04T00:00:00+01:00",
+                "assertedDate": "2020-09-07T10:12:02.093+01:00",
+                "note": [
+                    {
+                        "text": "Condition note"
+                    }
+                ]
             }
         }
     ]

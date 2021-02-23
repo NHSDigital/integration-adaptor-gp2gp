@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -42,14 +43,17 @@ public class EncounterComponentsMapper {
         .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
         .put(ResourceType.Observation, this::mapObservation)
         .put(ResourceType.Immunization, this::mapImmunization)
+        .put(ResourceType.Condition, this::mapCondition)
         .build();
 
     private final MessageContext messageContext;
 
     private final DiaryPlanStatementMapper diaryPlanStatementMapper;
+
     private final NarrativeStatementMapper narrativeStatementMapper;
     private final ObservationStatementMapper observationStatementMapper;
     private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
+    private final ConditionLinkSetMapper conditionLinkSetMapper;
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -80,6 +84,10 @@ public class EncounterComponentsMapper {
         return String.format(NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER,
             resource.getIdElement().getResourceType(),
             resource.getIdElement().getIdPart());
+    }
+
+    private String mapCondition(Resource resource) {
+        return conditionLinkSetMapper.mapConditionToLinkSet((Condition) resource, IS_NESTED);
     }
 
     private String mapProcedureRequest(Resource resource) {
