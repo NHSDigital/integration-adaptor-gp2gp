@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +36,11 @@ public class NarrativeStatementMapper {
 
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
-            return DateFormatUtil.formatDate(observation.getEffectiveDateTimeType().getValue());
+            return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
-            return DateFormatUtil.formatDate(observation.getEffectivePeriod().getStart());
-        } else if (observation.hasIssued()) {
-            return DateFormatUtil.formatDate((observation.getIssued()));
+            return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
+        } else if (observation.hasIssuedElement()) {
+            return toHl7Format(observation.getIssuedElement());
         } else {
             throw new EhrMapperException("Could not map effective date");
         }
