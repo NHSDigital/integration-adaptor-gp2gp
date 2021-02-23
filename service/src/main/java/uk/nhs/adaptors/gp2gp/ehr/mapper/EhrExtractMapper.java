@@ -15,7 +15,6 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
@@ -29,25 +28,16 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
 
-    private final FhirParseService fhirParseService;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EncounterMapper encounterMapper;
-
-    public EhrExtractTemplateParameters mapJsonToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-            String json) {
-        Bundle bundle = fhirParseService.parseResource(json, Bundle.class);
-
-        return prepareEhrFhirExtractParamsFromFhirBundle(getGpcStructuredTaskDefinition, bundle);
-    }
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
     }
 
-    private EhrExtractTemplateParameters prepareEhrFhirExtractParamsFromFhirBundle(
-            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-            Bundle bundle) {
+    public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
+        Bundle bundle) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
@@ -67,13 +57,17 @@ public class EhrExtractMapper {
     }
 
     private Optional<Patient> extractPatientFromBundle(Bundle bundle) {
-        return bundle.getEntry()
-            .stream()
-            .filter(entry -> !entry.isEmpty())
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType() == ResourceType.Patient)
-            .map(resource -> (Patient) resource)
-            .findFirst();
+        if (bundle != null && bundle.hasEntry()) {
+            return bundle.getEntry()
+                .stream()
+                .filter(entry -> !entry.isEmpty())
+                .map(Bundle.BundleEntryComponent::getResource)
+                .filter(resource -> resource.getResourceType() == ResourceType.Patient)
+                .map(resource -> (Patient) resource)
+                .findFirst();
+        }
+
+        return Optional.empty();
     }
 
     private List<String> mapEncounterToEhrComponents(List<Encounter> encounters) {

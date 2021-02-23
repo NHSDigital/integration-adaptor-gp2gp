@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class EncounterMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private EncounterComponentsMapper encounterComponentsMapper;
 
     private EncounterMapper encounterMapper;
     private MessageContext messageContext;
@@ -54,7 +57,7 @@ public class EncounterMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        encounterMapper = new EncounterMapper(messageContext);
+        encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
 
     @AfterEach
@@ -72,6 +75,8 @@ public class EncounterMapperTest {
 
         String outputMessage = encounterMapper.mapEncounterToEhrComposition(parsedEncounter);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+
+        verify(encounterComponentsMapper).mapComponents(parsedEncounter);
     }
 
     private static Stream<Arguments> testFilePaths() {
