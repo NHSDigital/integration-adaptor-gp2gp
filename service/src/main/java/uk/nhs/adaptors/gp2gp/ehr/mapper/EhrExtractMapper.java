@@ -45,7 +45,7 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setRequestId(getGpcStructuredTaskDefinition.getRequestId());
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
-        ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.formatDate(timestampService.now()));
+        ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
 
         extractPatientFromBundle(bundle)
             .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));
