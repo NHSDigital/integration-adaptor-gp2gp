@@ -36,9 +36,9 @@ public class OrganizationToAgentMapperTest {
     private static final String ORGANIZATION_FOR_INNER_MAPPER_XML = ORGANIZATION_INNER_FILE_LOCATION
         + "organization_with_address.xml";
 
-    private OrganizationToAgentMapper organizationToAgentMapper;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    private OrganizationToAgentMapper organizationToAgentMapper;
     private MessageContext messageContext;
 
     @BeforeEach
@@ -56,7 +56,9 @@ public class OrganizationToAgentMapperTest {
 
         Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
         var outputMessage = organizationToAgentMapper.mapOrganizationToAgent(organization);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage)
+            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @Test
