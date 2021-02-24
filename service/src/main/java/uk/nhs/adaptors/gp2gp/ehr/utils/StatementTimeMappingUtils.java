@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
@@ -53,5 +57,15 @@ public final class StatementTimeMappingUtils {
                 DateFormatUtil.formatDate(observation.getEffectivePeriod().getEnd()));
         }
         return DEFAULT_TIME_VALUE;
+    }
+
+    public static String prepareEffectiveTimeForAllergyIntolerance(String onsetDate, String endDate) {
+        if (!onsetDate.isEmpty() && !endDate.isEmpty()) {
+            return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, onsetDate, endDate);
+        } else if (!onsetDate.isEmpty() && endDate.isEmpty()) {
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
+        } else {
+            return DEFAULT_TIME_VALUE;
+        }
     }
 }

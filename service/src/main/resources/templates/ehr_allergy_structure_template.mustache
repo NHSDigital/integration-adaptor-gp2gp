@@ -3,6 +3,10 @@
         <id root="{{allergyStructureId}}"/>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
+            <effectiveTime>
+                {{{effectiveTime}}}
+            </effectiveTime>
+            <availabilityTime value="{{availabilityTime}}" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>{{pertinentInformation}}</text>
             </pertinentAnnotation>

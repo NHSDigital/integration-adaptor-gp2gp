@@ -1,7 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractOnsetDate;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractReaction;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDate;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +20,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,12 +28,14 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class AllergyStructureMapper {
     private static final Mustache ALLERGY_STRUCTURE_TEMPLATE = TemplateUtils.loadTemplate("ehr_allergy_structure_template.mustache");
 
+    private static final String ALLERGY_INTOLERANCE_END_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1";
     private static final String STATUS = "Status: ";
     private static final String TYPE = "Type: ";
     private static final String CRITICALITY = "Criticality: ";
     private static final String PATIENT_ASSERTER = "Asserted By Patient";
     private static final String LAST_OCCURRENCE = "Last Occurred: ";
     private static final String PATIENT_RECORDER = "Recorded By Patient";
+    private static final String COMMA = ",";
 
     private final MessageContext messageContext;
 
@@ -36,6 +43,8 @@ public class AllergyStructureMapper {
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
             .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
+            .effectiveTime(buildEffectiveTime(allergyIntolerance))
+            .availabilityTime(formatDate(allergyIntolerance.getAssertedDate()))
             .build();
         return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
     }
@@ -49,14 +58,22 @@ public class AllergyStructureMapper {
 
     private List<String> retrievePertinentInformation(AllergyIntolerance allergyIntolerance) {
         return List.of(
+            buildExtensionReasonEndPertinentInformation(allergyIntolerance),
             buildClinicalStatusPertinentInformation(allergyIntolerance),
             buildTypePertinentInformation(allergyIntolerance),
             buildCriticalityPertinentInformation(allergyIntolerance),
             buildAsserterPertinentInformation(allergyIntolerance),
             buildLastOccurrencePertinentInformation(allergyIntolerance),
             buildRecorderPertinentInformation(allergyIntolerance),
+            buildReactionPertinentInformation(allergyIntolerance),
             buildNotePertinentInformation(allergyIntolerance)
         );
+    }
+
+    private String buildExtensionReasonEndPertinentInformation(AllergyIntolerance allergyIntolerance) {
+        return filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
+            .map(AllergyStructureExtractor::extractReasonEnd)
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildClinicalStatusPertinentInformation(AllergyIntolerance allergyIntolerance) {
@@ -74,11 +91,21 @@ public class AllergyStructureMapper {
     }
 
     private String buildCriticalityPertinentInformation(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasType()) {
+        if (allergyIntolerance.hasCriticality()) {
             return CRITICALITY + allergyIntolerance.getCriticality().getDisplay();
         }
         return StringUtils.EMPTY;
     }
+
+    private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
+        var onsetDate = extractOnsetDate(allergyIntolerance);
+        var endDate = filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
+            .map(AllergyStructureExtractor::extractEndDate)
+            .orElse(StringUtils.EMPTY);
+
+        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
+    }
+
 
     private String buildAsserterPertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasAsserter()) {
@@ -92,7 +119,7 @@ public class AllergyStructureMapper {
 
     private String buildLastOccurrencePertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasLastOccurrence()) {
-            return LAST_OCCURRENCE + DateFormatUtil.formatDate(allergyIntolerance.getLastOccurrence());
+            return LAST_OCCURRENCE + formatDate(allergyIntolerance.getLastOccurrence());
         }
         return StringUtils.EMPTY;
     }
@@ -103,6 +130,16 @@ public class AllergyStructureMapper {
             if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return PATIENT_RECORDER;
             }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String buildReactionPertinentInformation(AllergyIntolerance allergyIntolerance) {
+        AtomicInteger reactionCount = new AtomicInteger(1);
+        if (allergyIntolerance.hasReaction()) {
+            return allergyIntolerance.getReaction().stream()
+                .map(reaction -> extractReaction(reaction, reactionCount))
+                .collect(Collectors.joining(COMMA));
         }
         return StringUtils.EMPTY;
     }
