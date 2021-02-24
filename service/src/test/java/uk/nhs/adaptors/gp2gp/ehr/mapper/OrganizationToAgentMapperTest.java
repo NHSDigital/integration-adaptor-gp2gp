@@ -30,9 +30,9 @@ public class OrganizationToAgentMapperTest {
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String ORGANIZATION_FILE_LOCATION = "/ehr/mapper/organization/";
 
-    private OrganizationToAgentMapper organizationToAgentMapper;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    private OrganizationToAgentMapper organizationToAgentMapper;
     private MessageContext messageContext;
 
     @BeforeEach
