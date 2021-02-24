@@ -1,20 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
-import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
@@ -47,27 +43,10 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
 
-        extractPatientFromBundle(bundle)
-            .orElseThrow(() -> new FhirValidationException("Missing patient resource in Fhir Bundle."));
-
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle.getEntry());
         ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
 
         return ehrExtractTemplateParameters;
-    }
-
-    private Optional<Patient> extractPatientFromBundle(Bundle bundle) {
-        if (bundle != null && bundle.hasEntry()) {
-            return bundle.getEntry()
-                .stream()
-                .filter(entry -> !entry.isEmpty())
-                .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> resource.getResourceType() == ResourceType.Patient)
-                .map(resource -> (Patient) resource)
-                .findFirst();
-        }
-
-        return Optional.empty();
     }
 
     private List<String> mapEncounterToEhrComponents(List<Encounter> encounters) {

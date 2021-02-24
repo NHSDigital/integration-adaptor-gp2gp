@@ -12,6 +12,7 @@ import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -71,12 +72,11 @@ public class EncounterComponentsMapperTest extends MapperTest {
         messageContext.resetMessageContext();
     }
 
-    @ParameterizedTest
-    @MethodSource("testData")
-    public void When_MappingEncounterComponents_Expect_ResourceMapped(String inputJsonPath, String expectedXmlPath) throws IOException {
-        String expectedXml = ResourceTestFileUtils.getFileContent(expectedXmlPath);
+    @Test
+    public void When_MappingEncounterComponents_Expect_ResourceMapped() throws IOException {
+        String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
-        String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
@@ -107,12 +107,6 @@ public class EncounterComponentsMapperTest extends MapperTest {
             .filter(resource -> ResourceType.Encounter.equals(resource.getResourceType()))
             .map(resource -> (Encounter) resource)
             .findFirst();
-    }
-
-    private static Stream<Arguments> testData() {
-        return Stream.of(
-            Arguments.of(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED, EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED)
-        );
     }
 
     private static Stream<Arguments> emptyResult() {

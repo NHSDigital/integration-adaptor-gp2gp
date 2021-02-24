@@ -50,6 +50,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
+    private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\" >";
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -63,7 +64,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private DetectTranslationCompleteService detectTranslationCompleteService;
 
     @Test
-    public void When_NewStructuredTask_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
+    public void When_NewStructuredTask0_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
@@ -156,6 +157,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         String hl7Response = storageDataWrapper.getHl7Response();
         assertThat(hl7Response).contains(EXPECTED_PAYLOAD_TYPE);
         assertThat(hl7Response).contains(EHR_COMPOSITION_ELEMENT);
+        assertThat(hl7Response).containsIgnoringCase(COMPONENT_ELEMENT);
     }
 
     private GetGpcStructuredTaskDefinition buildInvalidNHSNumberStructuredTask(EhrExtractStatus ehrExtractStatus) {

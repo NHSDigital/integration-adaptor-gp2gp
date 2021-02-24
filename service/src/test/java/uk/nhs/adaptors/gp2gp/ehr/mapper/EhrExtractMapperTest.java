@@ -1,28 +1,20 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -49,9 +41,6 @@ public class EhrExtractMapperTest extends MapperTest {
     private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
     private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
-    private static final String EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE = "Missing patient resource in Fhir Bundle.";
-    public static final Bundle EMPTY_BUNDLE = new Bundle();
-    public static final Bundle BUNDLE_WITHOUT_PATIENT = new Bundle().setEntry(new ArrayList<>());
 
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -107,22 +96,5 @@ public class EhrExtractMapperTest extends MapperTest {
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
-    }
-
-    @ParameterizedTest
-    @MethodSource("exceptionParams")
-    public void When_MappingInvalidBundleBody_Expect_FhirValidationExceptionThrown(Bundle bundle, String expectedMessage) {
-        Exception exception = assertThrows(FhirValidationException.class,
-            () -> ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition,
-                bundle));
-        assertThat(exception.getMessage()).isEqualTo(expectedMessage);
-    }
-
-    private static Stream<Arguments> exceptionParams() {
-        return Stream.of(
-            Arguments.of(null, EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE),
-            Arguments.of(EMPTY_BUNDLE, EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE),
-            Arguments.of(BUNDLE_WITHOUT_PATIENT, EXPECTED_NO_PATIENT_EXCEPTION_MESSAGE)
-        );
     }
 }
