@@ -66,7 +66,9 @@ public class PractitionerAgentPersonMapperTest {
 
         var outputMessage = practitionerAgentPersonMapper
             .mapPractitionerToAgentPerson(practitioner, Optional.of(practitionerRole), Optional.of(organization));
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage)
+            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, practitionerRoleJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @ParameterizedTest
@@ -79,7 +81,9 @@ public class PractitionerAgentPersonMapperTest {
         Practitioner practitioner = fhirParseService.parseResource(jsonInputPractitioner, Practitioner.class);
         var outputMessage = practitionerAgentPersonMapper
             .mapPractitionerToAgentPerson(practitioner, Optional.empty(), Optional.empty());
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage)
+            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @AfterEach
