@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -26,7 +25,6 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-@Slf4j
 public class OrganizationToAgentMapperTest {
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
@@ -47,13 +45,14 @@ public class OrganizationToAgentMapperTest {
     @ParameterizedTest
     @MethodSource("readTestCases")
     public void When_MappingOrganization_Expect_AgentResourceXml(String inputJson, String outputXml) throws IOException {
-        LOGGER.info(inputJson);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
 
         Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
         var outputMessage = organizationToAgentMapper.mapOrganizationToAgent(organization);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage)
+            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     private static Stream<Arguments> readTestCases() {
