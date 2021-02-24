@@ -37,9 +37,9 @@ public class PractitionerAgentPersonMapperTest {
     private static final String ORGANIZATION = PRACTITIONER_FILE_LOCATION + "organization.json";
     private static final String PRACTITIONER = PRACTITIONER_FILE_LOCATION + "practitioner.json";
 
-    private PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    private PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     private MessageContext messageContext;
     private FhirParseService fhirParseService;
 
@@ -82,6 +82,11 @@ public class PractitionerAgentPersonMapperTest {
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
     private static Stream<Arguments> readPractitionerOnlyTests() {
         return TestArgumentsLoaderUtil.readTestCases(PRACTITIONER_ONLY_FILE_LOCATION);
     }
@@ -98,10 +103,5 @@ public class PractitionerAgentPersonMapperTest {
     private static Organization getOrganizationResource() throws IOException {
         String jsonOrganization = ResourceTestFileUtils.getFileContent(ORGANIZATION);
         return new FhirParseService().parseResource(jsonOrganization, Organization.class);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        messageContext.resetMessageContext();
     }
 }

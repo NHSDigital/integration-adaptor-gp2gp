@@ -43,8 +43,7 @@ public class PractitionerAgentPersonMapper {
     }
 
     private Optional<String> buildPractitionerRole(PractitionerRole practitionerRole) {
-        if (practitionerRole.hasCode() && practitionerRole.getCodeFirstRep().hasCoding()
-            && practitionerRole.getCodeFirstRep().getCodingFirstRep().hasDisplay()) {
+        if (hasPractitionerRoleDisplay(practitionerRole)) {
             return Optional.of(practitionerRole.getCodeFirstRep().getCodingFirstRep().getDisplay());
         }
         return Optional.empty();
@@ -71,4 +70,9 @@ public class PractitionerAgentPersonMapper {
         return Optional.empty();
     }
 
+    private static boolean hasPractitionerRoleDisplay(PractitionerRole practitionerRole) {
+        return practitionerRole.hasCode()
+            && practitionerRole.getCodeFirstRep().hasCoding()
+            && practitionerRole.getCodeFirstRep().getCodingFirstRep().hasDisplay();
+    }
 }
