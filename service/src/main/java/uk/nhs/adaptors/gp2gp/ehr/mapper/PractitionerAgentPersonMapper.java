@@ -34,10 +34,7 @@ public class PractitionerAgentPersonMapper {
         buildPractitionerFamilyName(practitioner).ifPresent(builder::practitionerFamilyName);
 
         practitionerRole.flatMap(this::buildPractitionerRole).ifPresent(builder::practitionerRole);
-        organization.ifPresent(organization1 -> {
-            var organizationMapped = Optional.of(organizationToAgentMapper.mapOrganizationToAgentInner(organization1));
-            organizationMapped.ifPresent(builder::organization);
-        });
+        organization.map(organizationToAgentMapper::mapOrganizationToAgentInner).ifPresent(builder::organization);
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
     }
