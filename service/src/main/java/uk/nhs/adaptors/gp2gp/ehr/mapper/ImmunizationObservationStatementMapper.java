@@ -36,7 +36,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class ImmunizationObservationStatementMapper {
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
-        .loadTemplate("ehr_observation_statement_template.mustache");
+        .loadTemplate("immunization_observation_statement_template.mustache");
     private static final String PARENT_PRESENT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1";
     private static final String DATE_RECORDED_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1";
     private static final String PARENT_PRESENT = "Parent Present: ";

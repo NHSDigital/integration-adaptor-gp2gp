@@ -29,7 +29,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class ObservationStatementMapper {
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = ImmutableList.of(SampledData.class, Attachment.class);
     private static final Mustache OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE =
-        TemplateUtils.loadTemplate("ehr_observation_statement_effective_time_template.mustache");
+        TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
 
     private final MessageContext messageContext;
