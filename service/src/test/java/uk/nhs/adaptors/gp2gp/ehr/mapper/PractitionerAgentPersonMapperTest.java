@@ -67,7 +67,7 @@ public class PractitionerAgentPersonMapperTest {
         var outputMessage = practitionerAgentPersonMapper
             .mapPractitionerToAgentPerson(practitioner, Optional.of(practitionerRole), Optional.of(organization));
         assertThat(outputMessage)
-            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, practitionerRoleJson, outputXml)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, practitionerRoleJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
@@ -82,7 +82,7 @@ public class PractitionerAgentPersonMapperTest {
         var outputMessage = practitionerAgentPersonMapper
             .mapPractitionerToAgentPerson(practitioner, Optional.empty(), Optional.empty());
         assertThat(outputMessage)
-            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
     }
 

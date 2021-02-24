@@ -57,7 +57,7 @@ public class OrganizationToAgentMapperTest {
         Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
         var outputMessage = organizationToAgentMapper.mapOrganizationToAgent(organization);
         assertThat(outputMessage)
-            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
