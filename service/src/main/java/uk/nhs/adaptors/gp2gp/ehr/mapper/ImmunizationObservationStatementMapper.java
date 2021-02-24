@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 
 import java.util.List;
 import java.util.Optional;
@@ -140,7 +140,7 @@ public class ImmunizationObservationStatementMapper {
     private String buildExpirationDatePertinentInformation(Immunization immunization) {
         Optional<DateType> expirationDateElement = Optional.ofNullable(immunization.getExpirationDateElement());
         if (expirationDateElement.isPresent() && expirationDateElement.get().hasValue()) {
-            return expirationDateElement.map(dateType -> EXPIRATION + toHl7Format(dateType)).orElse(StringUtils.EMPTY);
+            return expirationDateElement.map(dateType -> EXPIRATION + toTextFormat(dateType)).orElse(StringUtils.EMPTY);
         }
 
         return StringUtils.EMPTY;

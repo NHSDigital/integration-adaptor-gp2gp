@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.utils;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 
 import java.util.stream.Stream;
 
@@ -53,6 +54,18 @@ public class DateFormatUtilTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @ParameterizedTest
+    @MethodSource("dateTextParams")
+    public void When_FormattingDateTimeTypeToText_Expect_Hl7InUkZone(String input, String expected) {
+        String observationJson = String.format(DATETIME_OBSERVATION_TEMPLATE, input);
+        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
+
+        String actual = toTextFormat(observation.getValueDateTimeType());
+        assertThat(actual).isEqualTo(expected);
+    }
+
+
+
     private static Stream<Arguments> instantParams() {
         return Stream.of(
             Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"),
@@ -70,5 +83,16 @@ public class DateFormatUtilTest {
             Arguments.of("2019-09-28T10:30:05+00:00", "20190928113005"),
             Arguments.of("1740-07-07T23:30:05+00:00", "17400707232850"),
             Arguments.of("1960-06-13T10:30:55+05:00", "19600613063055"));
+    }
+
+    private static Stream<Arguments> dateTextParams() {
+        return Stream.of(
+            Arguments.of("1973", "1973"),
+            Arguments.of("2008-08", "2008-08"),
+            Arguments.of("2019-07-28", "2019-07-28"),
+            Arguments.of("2010-02-22T10:30:05+00:00", "2010-02-22 10:30:05"),
+            Arguments.of("2019-09-28T10:30:05+00:00", "2019-09-28 11:30:05"),
+            Arguments.of("1740-07-07T23:30:05+00:00", "1740-07-07 23:28:50"),
+            Arguments.of("1960-06-13T10:30:55+05:00", "1960-06-13 06:30:55"));
     }
 }
