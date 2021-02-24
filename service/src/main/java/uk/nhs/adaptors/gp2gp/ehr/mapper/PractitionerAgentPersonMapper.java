@@ -21,6 +21,7 @@ public class PractitionerAgentPersonMapper {
 
     private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_agent_person_template.mustache");
+    private static final String UNKNOWN = "Unknown";
     private final MessageContext messageContext;
     private final OrganizationToAgentMapper organizationToAgentMapper;
 
@@ -30,8 +31,15 @@ public class PractitionerAgentPersonMapper {
             .practitionerId(messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, practitioner.getIdElement().getIdPart()));
 
         buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
-        buildPractitionerGivenName(practitioner).ifPresent(builder::practitionerGivenName);
-        buildPractitionerFamilyName(practitioner).ifPresent(builder::practitionerFamilyName);
+        var practitionerGiven = buildPractitionerGivenName(practitioner);
+        var practitionerFamily = buildPractitionerFamilyName(practitioner);
+
+        practitionerGiven.ifPresent(builder::practitionerGivenName);
+        practitionerFamily.ifPresent(builder::practitionerFamilyName);
+
+        if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
+            builder.practitionerFamilyName(UNKNOWN);
+        }
 
         practitionerRole.flatMap(this::buildPractitionerRole).ifPresent(builder::practitionerRole);
         organization.map(organizationToAgentMapper::mapOrganizationToAgentInner).ifPresent(builder::organization);
