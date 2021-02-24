@@ -9,8 +9,7 @@ import java.util.stream.Stream;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.jupiter.params.provider.Arguments;
 
-public class TestArgumentsLoaderUtil
-{
+public class TestArgumentsLoaderUtil {
     public static final String FAIL_MESSAGE = "Input file: %s Expected Output: %s";
     private static final String RESOURCES_LOCATION = "src/test/resources";
     private static final String XML = ".xml";
