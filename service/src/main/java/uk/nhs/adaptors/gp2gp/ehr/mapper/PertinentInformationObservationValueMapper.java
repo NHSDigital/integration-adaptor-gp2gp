@@ -65,32 +65,41 @@ public class PertinentInformationObservationValueMapper {
 
     public String mapReferenceRangeToPertinentInformation(
             Observation.ObservationReferenceRangeComponent observationReferenceRangeComponent) {
-        String result = RANGE_PREFIX;
+        StringBuilder pertinentInformationBuilder = new StringBuilder(RANGE_PREFIX);
+
         if (observationReferenceRangeComponent.hasText()) {
-            result += TEXT_PREFIX + observationReferenceRangeComponent.getText() + StringUtils.SPACE;
+            pertinentInformationBuilder.append(TEXT_PREFIX)
+                .append(observationReferenceRangeComponent.getText())
+                .append(StringUtils.SPACE);
 
             if (observationReferenceRangeComponent.hasLow()) {
-                SimpleQuantity low = observationReferenceRangeComponent.getLow();
-                if (low.hasValue()) {
-                    result += LOW_PREFIX + low.getValue() + StringUtils.SPACE;
-
-                    if (low.hasUnit()) {
-                        result += low.getUnit() + StringUtils.SPACE;
-                    }
-                }
+                addRangePertinentInformation(pertinentInformationBuilder,
+                    observationReferenceRangeComponent.getLow(),
+                    LOW_PREFIX);
             }
             if (observationReferenceRangeComponent.hasHigh()) {
-                SimpleQuantity high = observationReferenceRangeComponent.getHigh();
-                if (high.hasValue()) {
-                    result += HIGH_PREFIX + high.getValue() + StringUtils.SPACE;
-
-                    if (high.hasUnit()) {
-                        result += high.getUnit() + StringUtils.SPACE;
-                    }
-                }
+                addRangePertinentInformation(pertinentInformationBuilder,
+                    observationReferenceRangeComponent.getHigh(),
+                    HIGH_PREFIX);
             }
         }
-        return result;
+
+        return pertinentInformationBuilder.toString();
+    }
+
+    private void addRangePertinentInformation(StringBuilder pertinentInformationBuilder,
+            SimpleQuantity simpleQuantity,
+            String valuePrefix) {
+        if (simpleQuantity.hasValue()) {
+            pertinentInformationBuilder.append(valuePrefix)
+                .append(simpleQuantity.getValue())
+                .append(StringUtils.SPACE);
+
+            if (simpleQuantity.hasUnit()) {
+                pertinentInformationBuilder.append(simpleQuantity.getUnit())
+                    .append(StringUtils.SPACE);
+            }
+        }
     }
 
     private static String processCodeableConcept(CodeableConcept value) {
