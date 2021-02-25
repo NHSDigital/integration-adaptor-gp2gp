@@ -1,0 +1,408 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "topicid1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "title": "Endometriosis of uterus",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25851000000105",
+                            "display": "Topic (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                },
+                "date": "2010-01-23T14:03:54.347+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "List/category1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Immunization/immunizationid1"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "topicid2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "title": "Untitled",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25851000000105",
+                            "display": "Topic (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                },
+                "date": "2010-01-23T14:03:54.347+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Flag/flagid1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "List/category2"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "category1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "title": "History",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "24781000000107",
+                            "display": "Category (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                },
+                "date": "2010-07-14T16:32:32.03+01:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "ProcedureRequest/procedurerequestid1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/observationcommentid1"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "category2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "title": "History",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "24781000000107",
+                            "display": "Category (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                },
+                "date": "2010-07-14T16:32:32.03+01:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Observation/observationuncategorisedid1"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Immunization",
+                "id": "immunizationid1",
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1",
+                        "valueDateTime": "2010-06-30T05:48:06.91+01:00"
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://read.info/readv2",
+                                    "code": "65M1.00",
+                                    "display": "Measles/mumps/rubella vaccn.",
+                                    "userSelected": true
+                                },
+                                {
+                                    "extension": [
+                                        {
+                                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                            "extension": [
+                                                {
+                                                    "url": "descriptionId",
+                                                    "valueId": "65004017"
+                                                },
+                                                {
+                                                    "url": "descriptionDisplay",
+                                                    "valueString": "Measles-mumps-rubella vaccination"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "system": "http://snomed.info/sct",
+                                    "code": "38598009",
+                                    "display": "Measles-mumps-rubella vaccination"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "C93659E1-1107-441C-BE25-C5EF4B7831D1"
+                    }
+                ],
+                "status": "completed",
+                "notGiven": false,
+                "vaccineCode": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/v3/NullFlavor",
+                            "code": "UNK",
+                            "display": "unknown"
+                        }
+                    ]
+                },
+                "patient": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                },
+                "date": "2010-06-30T05:59:00+01:00",
+                "primarySource": true,
+                "practitioner": [
+                    {
+                        "role": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/v2/0443",
+                                    "code": "AP",
+                                    "display": "Administering Provider"
+                                }
+                            ]
+                        },
+                        "actor": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    }
+                ],
+                "note": [
+                    {
+                        "text": "immunization note"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ProcedureRequest",
+                "id": "procedurerequestid1",
+                "status": "active",
+                "intent": "plan",
+                "authoredOn": "2010-01-13T15:29:50.1+00:00"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "observationcommentid1",
+                "issued": "2010-01-13T15:29:50.3+00:00",
+                "comment": "observation comment"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "observationuncategorisedid1",
+                "issued": "2010-01-13T15:29:50.3+00:00",
+                "comment": "observation uncategorised"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Flag",
+                "id": "flagid1",
+                "encounter": {
+                    "reference": "Encounter/F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Encounter",
+                "id": "F550CC56-EF65-4934-A7B1-3DC2E02243C3",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "F550CC56-EF65-4934-A7B1-3DC2E02243C3"
+                    }
+                ],
+                "status": "finished",
+                "type": [
+                    {
+                        "text": "GP Surgery"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "participant": [
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/v3/ParticipationType",
+                                        "code": "PPRF",
+                                        "display": "primary performer"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    },
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
+                                        "code": "REC",
+                                        "display": "recorder"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    }
+                ],
+                "period": {
+                    "start": "2010-01-13T15:20:00+00:00",
+                    "end": "2010-01-13T16:20:00+00:00"
+                },
+                "location": [
+                    {
+                        "location": {
+                            "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                        }
+                    }
+                ],
+                "serviceProvider": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        }
+    ]
+}
