@@ -1,0 +1,10 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "valuePeriod": {
+        "start": "2017-03-01T12:50:12.111Z",
+        "end": "2018-06-03T13:12:10.222Z"
+    }
+}
