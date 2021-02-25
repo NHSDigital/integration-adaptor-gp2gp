@@ -50,6 +50,13 @@ public final class StatementTimeMappingUtils {
         return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 
+    public static String prepareAvailabilityTimeForObservation(Observation observation) {
+        if (observation.hasIssued()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.formatDate(observation.getIssued()));
+        }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
+    }
+
     public static String prepareEffectiveTimeForObservation(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE,
