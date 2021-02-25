@@ -64,8 +64,6 @@ public class DateFormatUtilTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-
-
     private static Stream<Arguments> instantParams() {
         return Stream.of(
             Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"),
