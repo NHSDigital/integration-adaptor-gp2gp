@@ -60,11 +60,11 @@ public class EncounterComponentsMapper {
             messageContext.getInputBundleHolder().getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
 
         return listReferencedToEncounter
-            .map(this::mapItemsToComponents)
+            .map(this::mapListResourceToComponents)
             .orElse(StringUtils.EMPTY);
     }
 
-    private String mapItemsToComponents(ListResource listReferencedToEncounter) {
+    private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
         return listReferencedToEncounter.getEntry()
             .stream()
             .map(this::mapItemToComponent)
@@ -111,7 +111,7 @@ public class EncounterComponentsMapper {
         ListResource listResource = (ListResource) resource;
 
         if (listResource.hasEntry() && hasCode(listResource.getCode(), COMPONENTS_LISTS)) {
-            return mapItemsToComponents(listResource);
+            return mapListResourceToComponents(listResource);
         }
 
         return StringUtils.EMPTY;
