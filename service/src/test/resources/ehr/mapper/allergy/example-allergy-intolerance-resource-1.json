@@ -1,6 +1,17 @@
 {
     "resourceType": "AllergyIntolerance",
     "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+    "extension": [
+        {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+            "extension": [
+                {
+                    "url": "reasonEnded",
+                    "valueString": "Patient reports no subsequent recurrence on same medication"
+                }
+            ]
+        }
+    ],
     "clinicalStatus": "resolved",
     "type": "allergy",
     "category": [

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -49,13 +50,20 @@ public class AllergyStructureMapper {
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
+            .ehrCompositionId(messageContext.getIdMapper().getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
             .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
+            .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(formatDate(allergyIntolerance.getAssertedDate()))
-            .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .build();
 
+        buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
+
+        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
+    }
+
+    private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParameters templateParameters) {
         var category = allergyIntolerance.getCategory().stream()
             .map(PrimitiveType::getValueAsString)
             .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
@@ -63,12 +71,12 @@ public class AllergyStructureMapper {
             .orElse(StringUtils.EMPTY);
 
         if (category.equals(ENVIRONMENT_CATEGORY)) {
-            allergyStructureTemplateParameters.setCategoryCode(UNSPECIFIED_ALLERGY_CODE);
+            templateParameters.setCategoryCode(UNSPECIFIED_ALLERGY_CODE);
         } else if (category.equals(MEDICATION_CATEGORY)) {
-            allergyStructureTemplateParameters.setCategoryCode(DRUG_ALLERGY_CODE);
+            templateParameters.setCategoryCode(DRUG_ALLERGY_CODE);
+        } else {
+            throw new EhrMapperException("Category could not be mapped");
         }
-
-        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
     }
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
@@ -127,7 +135,6 @@ public class AllergyStructureMapper {
 
         return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
     }
-
 
     private String buildAsserterPertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasAsserter()) {

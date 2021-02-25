@@ -21,12 +21,12 @@ public class AllergyStructureExtractor {
     private static final String ALLERGY_REASON_END_URL = "reasonEnded";
     private static final String ALLERGY_END_DATE_URL = "endDate";
     private static final String ALLERGY_NO_INFO = "No information available";
-    private static final String REACTION = "Reaction %S ";
-    private static final String REACTION_DESCRIPTION = "Description: ";
-    private static final String REACTION_SEVERITY = "Severity: ";
-    private static final String REACTION_EXPOSURE_ROUTE = "Exposure Route: ";
-    private static final String REACTION_MANIFESTATIONS = "Manifestation(s): ";
-    private static final String COMMA = ",";
+    private static final String REACTION = "Reaction %S";
+    private static final String REACTION_DESCRIPTION = " Description: ";
+    private static final String REACTION_SEVERITY = " Severity: ";
+    private static final String REACTION_EXPOSURE_ROUTE = " Exposure Route: ";
+    private static final String REACTION_MANIFESTATIONS = " Manifestation(s): ";
+    private static final String COMMA = ", ";
 
     public static String extractReasonEnd(Extension extension) {
         var reasonEnd = extension.getExtension().stream()
@@ -36,7 +36,7 @@ public class AllergyStructureExtractor {
             .map(reason -> ((StringType) reason).getValueAsString())
             .orElse(StringUtils.EMPTY);
 
-        if (!reasonEnd.equals(ALLERGY_NO_INFO) && !reasonEnd.isEmpty()) {
+        if (!reasonEnd.isEmpty() && !reasonEnd.equals(ALLERGY_NO_INFO)) {
             return ALLERGY_REASON_ENDED + reasonEnd;
         }
 
@@ -69,8 +69,8 @@ public class AllergyStructureExtractor {
         if (reactionComponent.hasSeverity()) {
             reaction += REACTION_SEVERITY + reactionComponent.getSeverity();
         }
-        if (reactionComponent.hasExposureRoute()) {
-            reaction += REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute());
+        if (reactionComponent.hasExposureRoute() && extractTextOrCoding(reactionComponent.getExposureRoute()).isPresent()) {
+            reaction += REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute()).get();
         }
         if (reactionComponent.hasManifestation()) {
             var manifestations = reactionComponent.getManifestation().stream()

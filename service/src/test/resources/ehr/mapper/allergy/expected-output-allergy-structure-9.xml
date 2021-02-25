@@ -25,7 +25,7 @@
                     <pertinentInformation typeCode="PERT">
                         <sequenceNumber value="+1"/>
                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Asserted By Patient Recorded By Patient</text>
+                            <text>Reaction 1 Description: example description Severity: MILD Exposure Route: Topical route Manifestation(s): Manifestation 1, Manifestation 2, Manifestation 3, Reaction 2 Description: example description 2 Severity: MILD Exposure Route: Topical route, Reaction 3 Description: example description 3 Severity: MILD, Reaction 4 Description: example description 4</text>
                         </pertinentAnnotation>
                     </pertinentInformation>
                 </ObservationStatement>
