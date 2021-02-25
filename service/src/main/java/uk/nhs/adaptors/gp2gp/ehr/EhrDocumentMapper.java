@@ -23,7 +23,7 @@ public class EhrDocumentMapper {
 
     public EhrDocumentTemplateParameters mapToMhsPayloadTemplateParameters(GetGpcDocumentTaskDefinition taskDefinition, String messageId) {
         return EhrDocumentTemplateParameters.builder()
-            .resourceCreated(DateFormatUtil.formatDate(timestampService.now()))
+            .resourceCreated(DateFormatUtil.toHl7Format(timestampService.now()))
             .messageId(messageId)
             .accessDocumentId(taskDefinition.getDocumentId())
             .fromAsid(taskDefinition.getFromAsid())
