@@ -24,8 +24,6 @@ import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-=======
->>>>>>> main
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
