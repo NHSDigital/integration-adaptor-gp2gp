@@ -18,6 +18,46 @@
                 "resourceType": "Appointment",
                 "id": "1234"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "0123456",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "valid-code"
+                        }
+                    ]
+                },
+                "encounter": {
+                    "reference": "Encounter/43536547"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "2368870",
+                "encounter": {
+                    "reference": "Encounter/43536547"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "567368870"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "encounter": {
+                    "reference": "Encounter/43536547"
+                }
+            }
         }
     ]
 }
