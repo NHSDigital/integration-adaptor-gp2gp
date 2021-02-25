@@ -2,8 +2,9 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractOnsetDate;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractReaction;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDate;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,7 +56,7 @@ public class AllergyStructureMapper {
             .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(formatDate(allergyIntolerance.getAssertedDate()))
+            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
             .build();
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
@@ -148,7 +149,7 @@ public class AllergyStructureMapper {
 
     private String buildLastOccurrencePertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasLastOccurrence()) {
-            return LAST_OCCURRENCE + formatDate(allergyIntolerance.getLastOccurrence());
+            return LAST_OCCURRENCE + toTextFormat(allergyIntolerance.getLastOccurrence());
         }
         return StringUtils.EMPTY;
     }

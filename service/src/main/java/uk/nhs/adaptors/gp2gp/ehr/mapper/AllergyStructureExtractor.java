@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.formatDate;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,14 +47,14 @@ public class AllergyStructureExtractor {
         return extension.getExtension().stream()
             .filter(allergyEnd -> allergyEnd.getUrl().equals(ALLERGY_END_DATE_URL))
             .findFirst()
-            .map(value -> ((DateTimeType) value.getValue()).getValue())
-            .map(DateFormatUtil::formatDate)
+            .map(value -> (DateTimeType) value.getValue())
+            .map(DateFormatUtil::toHl7Format)
             .orElse(StringUtils.EMPTY);
     }
 
     public static String extractOnsetDate(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasOnset() && allergyIntolerance.getOnsetDateTimeType().hasValue()) {
-            return formatDate(allergyIntolerance.getOnsetDateTimeType().getValue());
+            return toHl7Format(allergyIntolerance.getOnsetDateTimeType());
         }
         return StringUtils.EMPTY;
     }
