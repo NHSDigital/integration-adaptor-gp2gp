@@ -31,6 +31,7 @@ public class ObservationStatementMapper {
     private static final Mustache OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE =
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
+    private static final int COMMENT_OFFSET = 0;
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -69,7 +70,8 @@ public class ObservationStatementMapper {
         StringBuilder commentBuilder = new StringBuilder(observation.hasComment() ? observation.getComment() : StringUtils.EMPTY);
 
         if (observation.hasValue()  && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
-            commentBuilder.insert(0, pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()));
+            commentBuilder.insert(COMMENT_OFFSET,
+                pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()));
         }
 
         if (observation.hasReferenceRange()) {
@@ -79,13 +81,13 @@ public class ObservationStatementMapper {
                 Optional<String> referenceRangeUnit = extractUnit(referenceRange);
 
                 if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), observation.getValueQuantity())) {
-                    commentBuilder.insert(0, REFERENCE_RANGE_UNIT_PREFIX + referenceRangeUnit.get() + StringUtils.SPACE);
+                    commentBuilder.insert(COMMENT_OFFSET, REFERENCE_RANGE_UNIT_PREFIX + referenceRangeUnit.get() + StringUtils.SPACE);
                 }
             } else {
-                commentBuilder.insert(0, pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange));
+                commentBuilder.insert(COMMENT_OFFSET,
+                    pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange));
             }
         }
-
         return commentBuilder.toString();
     }
 
