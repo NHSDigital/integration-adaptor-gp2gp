@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -101,5 +102,10 @@ public class PractitionerAgentPersonMapperTest extends MapperTest {
     private static Organization getOrganizationResource() throws IOException {
         String jsonOrganization = ResourceTestFileUtils.getFileContent(ORGANIZATION);
         return new FhirParseService().parseResource(jsonOrganization, Organization.class);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
     }
 }

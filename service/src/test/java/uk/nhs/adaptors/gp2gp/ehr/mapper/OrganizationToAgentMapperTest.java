@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Organization;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,4 +75,8 @@ public class OrganizationToAgentMapperTest extends MapperTest {
         return TestArgumentsLoaderUtil.readTestCases(ORGANIZATION_FILE_LOCATION);
     }
 
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
 }
