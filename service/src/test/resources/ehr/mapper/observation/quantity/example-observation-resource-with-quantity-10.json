@@ -1,0 +1,12 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "valueQuantity":{
+        "value":37.1,
+        "unit":"C",
+        "code":"Cel",
+        "comparator":">="
+    }
+}
