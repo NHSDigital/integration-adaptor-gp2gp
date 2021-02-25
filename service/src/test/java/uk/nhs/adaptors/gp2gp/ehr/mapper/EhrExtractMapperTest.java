@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,7 +69,11 @@ public class EhrExtractMapperTest extends MapperTest {
             messageContext,
             new DiaryPlanStatementMapper(messageContext),
             new NarrativeStatementMapper(messageContext),
-            new ObservationStatementMapper(messageContext),
+            new ObservationStatementMapper(
+                messageContext,
+                new StructuredObservationValueMapper(),
+                new PertinentInformationObservationValueMapper()
+            ),
             new ImmunizationObservationStatementMapper(messageContext),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService)
         );

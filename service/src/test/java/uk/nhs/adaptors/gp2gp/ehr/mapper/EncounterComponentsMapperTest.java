@@ -53,7 +53,10 @@ public class EncounterComponentsMapperTest extends MapperTest {
 
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext);
         NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
-        ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(messageContext);
+        ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
+            messageContext,
+            new StructuredObservationValueMapper(),
+            new PertinentInformationObservationValueMapper());
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
