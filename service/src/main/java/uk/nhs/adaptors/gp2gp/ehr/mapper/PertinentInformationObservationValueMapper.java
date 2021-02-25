@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -158,7 +159,7 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processDateTimeType(DateTimeType value) {
         if (value.hasValue()) {
-            return String.format(DATE_TIME_VALUE_TEMPLATE, value.getValue());
+            return String.format(DATE_TIME_VALUE_TEMPLATE, DateFormatUtil.toTextFormat(value.getValue()));
         }
 
         return StringUtils.EMPTY;
@@ -166,7 +167,7 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processPeriod(Period value) {
         if (value.hasStart() && value.hasEnd()) {
-            return String.format(PERIOD_VALUE_TEMPLATE, value.getStart(), value.getEnd());
+            return String.format(PERIOD_VALUE_TEMPLATE, DateFormatUtil.toTextFormat(value.getStart()), DateFormatUtil.toTextFormat(value.getEnd()));
         }
 
         return StringUtils.EMPTY;

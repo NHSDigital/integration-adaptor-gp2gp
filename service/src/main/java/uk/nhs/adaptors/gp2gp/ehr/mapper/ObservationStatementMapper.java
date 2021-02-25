@@ -69,7 +69,7 @@ public class ObservationStatementMapper {
     private String prepareComment(Observation observation) {
         StringBuilder commentBuilder = new StringBuilder(observation.hasComment() ? observation.getComment() : StringUtils.EMPTY);
 
-        if (observation.hasValue()  && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
+        if (observation.hasValue() && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
             commentBuilder.insert(COMMENT_OFFSET,
                 pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()));
         }
