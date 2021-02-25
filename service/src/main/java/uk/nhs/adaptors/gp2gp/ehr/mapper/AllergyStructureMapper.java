@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,21 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class AllergyStructureMapper {
     private static final Mustache ALLERGY_STRUCTURE_TEMPLATE = TemplateUtils.loadTemplate("ehr_allergy_structure_template.mustache");
 
-    private static final String ALLERGY_INTOLERANCE_END_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1";
+    private static final String ALLERGY_INTOLERANCE_END_URL =
+        "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1";
     private static final String STATUS = "Status: ";
     private static final String TYPE = "Type: ";
     private static final String CRITICALITY = "Criticality: ";
     private static final String PATIENT_ASSERTER = "Asserted By Patient";
     private static final String LAST_OCCURRENCE = "Last Occurred: ";
     private static final String PATIENT_RECORDER = "Recorded By Patient";
-    private static final String COMMA = ",";
+    private static final String ENVIRONMENT_CATEGORY = "environment";
+    private static final String MEDICATION_CATEGORY = "medication";
+    private static final String UNSPECIFIED_ALLERGY_CODE = "<code code=\"SN53.00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" "
+        + "displayName=\"Allergy, unspecified\"/>";
+    private static final String DRUG_ALLERGY_CODE = "<code code=\"14L...00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" displayName=\"H/O: "
+        + "drug allergy\"/>";
+    private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
 
@@ -45,7 +53,21 @@ public class AllergyStructureMapper {
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(formatDate(allergyIntolerance.getAssertedDate()))
+            .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .build();
+
+        var category = allergyIntolerance.getCategory().stream()
+            .map(PrimitiveType::getValueAsString)
+            .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
+            .findFirst()
+            .orElse(StringUtils.EMPTY);
+
+        if (category.equals(ENVIRONMENT_CATEGORY)) {
+            allergyStructureTemplateParameters.setCategoryCode(UNSPECIFIED_ALLERGY_CODE);
+        } else if (category.equals(MEDICATION_CATEGORY)) {
+            allergyStructureTemplateParameters.setCategoryCode(DRUG_ALLERGY_CODE);
+        }
+
         return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
     }
 

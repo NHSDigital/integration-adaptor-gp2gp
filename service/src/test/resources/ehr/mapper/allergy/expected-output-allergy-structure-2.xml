@@ -1,29 +1,27 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="{{allergyStructureId}}"/>
+        <id root="394559384658936"/>
         <statusCode code="COMPLETE"/>
-        {{#categoryCode}}{{{categoryCode}}}{{/categoryCode}}
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <effectiveTime>
-            {{{effectiveTime}}}
+            <center value="19781231000000"/>
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}" />
-        {{#categoryCode}}
+        <availabilityTime value="20100114095757" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="{{observationId}}"/>
+                <id root="394559384658936"/>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
-                    {{{effectiveTime}}}
+                    <center value="19781231000000"/>
                 </effectiveTime>
-                <availabilityTime value="{{availabilityTime}}" />
+                <availabilityTime value="20100114095757" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>{{pertinentInformation}}</text>
+                        <text></text>
                     </pertinentAnnotation>
                 </pertinentInformation>
             </ObservationStatement>
         </component>
-        {{/categoryCode}}
     </CompoundStatement>
 </component>

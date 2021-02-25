@@ -1,0 +1,18 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+    "clinicalStatus": "resolved",
+    "type": "allergy",
+    "category": [
+        "medication"
+    ],
+    "criticality": "low",
+    "onsetDateTime": "1978-12-31",
+    "assertedDate": "2010-01-14T09:57:57.33+00:00",
+    "note": [
+        {
+            "text": "Example note text"
+        }
+    ],
+    "lastOccurrence": "1978-12-31"
+}

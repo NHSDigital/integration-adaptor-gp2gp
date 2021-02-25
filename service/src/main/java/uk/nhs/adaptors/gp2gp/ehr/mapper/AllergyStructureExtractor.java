@@ -33,8 +33,7 @@ public class AllergyStructureExtractor {
             .filter(value -> value.getUrl().equals(ALLERGY_REASON_END_URL))
             .findFirst()
             .map(Extension::getValue)
-            .map(reason -> (StringType) reason)
-            .map(StringType::toString)
+            .map(reason -> ((StringType) reason).getValueAsString())
             .orElse(StringUtils.EMPTY);
 
         if (!reasonEnd.equals(ALLERGY_NO_INFO) && !reasonEnd.isEmpty()) {
@@ -44,21 +43,20 @@ public class AllergyStructureExtractor {
         return StringUtils.EMPTY;
     }
 
+    public static String extractEndDate(Extension extension) {
+        return extension.getExtension().stream()
+            .filter(allergyEnd -> allergyEnd.getUrl().equals(ALLERGY_END_DATE_URL))
+            .findFirst()
+            .map(value -> ((DateTimeType) value.getValue()).getValue())
+            .map(DateFormatUtil::formatDate)
+            .orElse(StringUtils.EMPTY);
+    }
+
     public static String extractOnsetDate(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasOnset() && allergyIntolerance.getOnsetDateTimeType().hasValue()) {
             return formatDate(allergyIntolerance.getOnsetDateTimeType().getValue());
         }
         return StringUtils.EMPTY;
-    }
-
-    public static String extractEndDate(Extension extension) {
-        return extension.getExtension().stream()
-            .filter(allergyEnd -> allergyEnd.getUrl().equals(ALLERGY_END_DATE_URL))
-            .findFirst()
-            .map(value -> (DateTimeType) value.getValue())
-            .map(date -> date.getValue())
-            .map(DateFormatUtil::formatDate)
-            .orElse(StringUtils.EMPTY);
     }
 
     public static String extractReaction(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent,
