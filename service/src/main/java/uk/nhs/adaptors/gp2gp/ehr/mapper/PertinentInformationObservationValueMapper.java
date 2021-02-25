@@ -24,6 +24,8 @@ import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+=======
+>>>>>>> main
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -167,7 +169,9 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processPeriod(Period value) {
         if (value.hasStart() && value.hasEnd()) {
-            return String.format(PERIOD_VALUE_TEMPLATE, DateFormatUtil.toTextFormat(value.getStart()), DateFormatUtil.toTextFormat(value.getEnd()));
+            return String.format(PERIOD_VALUE_TEMPLATE,
+                DateFormatUtil.toTextFormat(value.getStart()),
+                DateFormatUtil.toTextFormat(value.getEnd()));
         }
 
         return StringUtils.EMPTY;
