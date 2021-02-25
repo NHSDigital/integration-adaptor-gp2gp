@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +27,7 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class PractitionerAgentPersonMapperTest {
+public class PractitionerAgentPersonMapperTest extends MapperTest {
 
     private static final String TEST_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
     private static final String PRACTITIONER_FILE_LOCATION = "/ehr/mapper/practitioner/";
@@ -84,11 +83,6 @@ public class PractitionerAgentPersonMapperTest {
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        messageContext.resetMessageContext();
     }
 
     private static Stream<Arguments> readPractitionerOnlyTests() {
