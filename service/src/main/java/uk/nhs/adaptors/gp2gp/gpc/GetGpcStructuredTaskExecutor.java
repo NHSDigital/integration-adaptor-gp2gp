@@ -3,11 +3,13 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
@@ -29,6 +31,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final OutputMessageWrapperMapper outputMessageWrapperMapper;
     private final EhrExtractMapper ehrExtractMapper;
     private final MessageContext messageContext;
+    private final FhirParseService fhirParseService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -43,9 +46,12 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var hl7TranslatedResponse = StringUtils.EMPTY;
 
         try {
-            var ehrExtractTemplateParameters = ehrExtractMapper.mapJsonToEhrFhirExtractParams(
+            Bundle bundle = fhirParseService.parseResource(response, Bundle.class);
+            messageContext.initialize(bundle);
+
+            var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
                 structuredTaskDefinition,
-                response);
+                bundle);
             String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
             hl7TranslatedResponse = outputMessageWrapperMapper.map(
