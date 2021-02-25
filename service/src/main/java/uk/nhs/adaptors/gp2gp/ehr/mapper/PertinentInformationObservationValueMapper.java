@@ -167,7 +167,7 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processPeriod(Period value) {
         if (value.hasStart() && value.hasEnd()) {
-            return String.format(PERIOD_VALUE_TEMPLATE, 
+            return String.format(PERIOD_VALUE_TEMPLATE,
                 DateFormatUtil.toTextFormat(value.getStartElement()),
                 DateFormatUtil.toTextFormat(value.getEndElement()));
         }
