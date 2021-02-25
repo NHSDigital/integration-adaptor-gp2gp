@@ -2,11 +2,11 @@
     <Agent classCode="AGNT">
         <id root="{{practitionerId}}"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            {{#practitionerRole}}
             <code nullFlavor="UNK">
-                {{#practitionerRole}}
                 <orginalText>{{practitionerRole}}</orginalText>
-                {{/practitionerRole}}
             </code>
+            {{/practitionerRole}}
             <name>
                 {{#practitionerPrefix}}
                 <prefix>{{practitionerPrefix}}</prefix>
