@@ -37,10 +37,9 @@ public class ObservationStatementMapper {
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
 
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
-        String comment = observation.getComment();
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
-            .comment(observation.getComment())
+            .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
@@ -54,50 +53,40 @@ public class ObservationStatementMapper {
             } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
                 observationStatementTemplateParametersBuilder.value(
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value));
-            } else if (pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
-                comment = prepareCommentWithValue(comment, observation);
             }
         }
 
-        if (observation.hasReferenceRange()) {
-            Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
-            if (observation.hasValue() && observation.hasValueQuantity()) {
-                observationStatementTemplateParametersBuilder.referenceRange(
-                    structuredObservationValueMapper.mapReferenceRangeType(referenceRange));
-                comment = prepareCommentWithReferenceRangeUnits(comment, referenceRange, observation.getValueQuantity());
-            } else {
-                comment = prepareCommentWithReferenceRange(comment, referenceRange);
-            }
+        if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
+            observationStatementTemplateParametersBuilder.referenceRange(
+                structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
-
-        observationStatementTemplateParametersBuilder.comment(comment);
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
     }
 
-    private String prepareCommentWithValue(String comment, Observation observation) {
-        if (observation.hasValue() && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
-            return pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()) + comment;
-        }
-        return comment;
-    }
+    private String prepareComment(Observation observation) {
+        StringBuilder commentBuilder = new StringBuilder(observation.hasComment() ? observation.getComment() : StringUtils.EMPTY);
 
-    private String prepareCommentWithReferenceRange(String comment, Observation.ObservationReferenceRangeComponent referenceRange) {
-        return pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange) + comment;
-    }
-
-    private String prepareCommentWithReferenceRangeUnits(String comment,
-            Observation.ObservationReferenceRangeComponent referenceRange,
-            Quantity quantity) {
-
-        Optional<String> referenceRangeUnit = extractUnit(referenceRange);
-
-        if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), quantity)) {
-            return REFERENCE_RANGE_UNIT_PREFIX + referenceRangeUnit.get() + StringUtils.SPACE + comment;
+        if (observation.hasValue()  && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
+            commentBuilder.insert(0, pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()));
         }
 
-        return comment;
+        if (observation.hasReferenceRange()) {
+            Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
+
+            if (observation.hasValueQuantity()) {
+                Optional<String> referenceRangeUnit = extractUnit(referenceRange);
+
+                if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), observation.getValueQuantity())) {
+                    commentBuilder.insert(0, REFERENCE_RANGE_UNIT_PREFIX + referenceRangeUnit.get() + StringUtils.SPACE);
+                }
+            } else {
+                commentBuilder.insert(0, pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange));
+            }
+        }
+
+        return commentBuilder.toString();
     }
 
     private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
