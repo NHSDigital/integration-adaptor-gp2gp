@@ -1,6 +1,9 @@
 String tfProject     = "nia"
 String tfEnvironment = "build1"
 String tfComponent   = "gp2gp"
+String redirectEnv = "ptl"          // Name of environment where TF deployment needs to be re-directed
+String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
+
 
 pipeline {
     agent{
@@ -85,6 +88,10 @@ pipeline {
                         stage('Deploy using Terraform') {
                             steps {
                                 script {
+                                    
+                                    // Check if TF deployment environment needs to be redirected
+                                    if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
+                                    
                                     String tfCodeBranch  = "develop"
                                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
