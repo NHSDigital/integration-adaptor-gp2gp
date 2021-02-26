@@ -20,13 +20,17 @@ public class EncounterMapper {
     private static final String COMPLETE_CODE = "COMPLETE";
 
     private final MessageContext messageContext;
+    private final EncounterComponentsMapper encounterComponentsMapper;
 
     public String mapEncounterToEhrComposition(Encounter encounter) {
+        String components = encounterComponentsMapper.mapComponents(encounter);
+
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
             .encounterStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Encounter, encounter.getId()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
-            .status(COMPLETE_CODE);
+            .status(COMPLETE_CODE)
+            .components(components);
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
