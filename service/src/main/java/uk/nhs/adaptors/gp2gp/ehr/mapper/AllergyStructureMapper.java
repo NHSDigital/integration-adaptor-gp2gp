@@ -65,7 +65,8 @@ public class AllergyStructureMapper {
     }
 
     private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParameters templateParameters) {
-        var category = allergyIntolerance.getCategory().stream()
+        var category = allergyIntolerance.getCategory()
+            .stream()
             .map(PrimitiveType::getValueAsString)
             .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
             .findFirst()
@@ -82,7 +83,8 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
-        return descriptionList.stream()
+        return descriptionList
+            .stream()
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(StringUtils.SPACE));
     }
@@ -167,7 +169,8 @@ public class AllergyStructureMapper {
     private String buildReactionPertinentInformation(AllergyIntolerance allergyIntolerance) {
         AtomicInteger reactionCount = new AtomicInteger(1);
         if (allergyIntolerance.hasReaction()) {
-            return allergyIntolerance.getReaction().stream()
+            return allergyIntolerance.getReaction()
+                .stream()
                 .map(reaction -> extractReaction(reaction, reactionCount))
                 .collect(Collectors.joining(COMMA));
         }

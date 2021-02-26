@@ -29,7 +29,8 @@ public class AllergyStructureExtractor {
     private static final String COMMA = ", ";
 
     public static String extractReasonEnd(Extension extension) {
-        var reasonEnd = extension.getExtension().stream()
+        var reasonEnd = extension.getExtension()
+            .stream()
             .filter(value -> value.getUrl().equals(ALLERGY_REASON_END_URL))
             .findFirst()
             .map(Extension::getValue)
@@ -44,7 +45,8 @@ public class AllergyStructureExtractor {
     }
 
     public static String extractEndDate(Extension extension) {
-        return extension.getExtension().stream()
+        return extension.getExtension()
+            .stream()
             .filter(allergyEnd -> allergyEnd.getUrl().equals(ALLERGY_END_DATE_URL))
             .findFirst()
             .map(value -> (DateTimeType) value.getValue())
@@ -73,7 +75,8 @@ public class AllergyStructureExtractor {
             reaction += REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute()).get();
         }
         if (reactionComponent.hasManifestation()) {
-            var manifestations = reactionComponent.getManifestation().stream()
+            var manifestations = reactionComponent.getManifestation()
+                .stream()
                 .map(CodeableConceptMappingUtils::extractTextOrCoding)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
