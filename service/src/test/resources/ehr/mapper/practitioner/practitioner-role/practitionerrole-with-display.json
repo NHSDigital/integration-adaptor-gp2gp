@@ -1,0 +1,27 @@
+{
+    "resourceType": "PractitionerRole",
+    "id": "6D340A1BBC154D4E93CFBBCB5B74DF735E496953065B41F29577BE8F2FBD0757",
+    "meta": {
+        "versionId": "8380942905747068072",
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+        ]
+    },
+    "practitioner": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    },
+    "organization": {
+        "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+    },
+    "code": [
+        {
+            "coding": [
+                {
+                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                    "code": "R0260",
+                    "display": "General Medical Practitioner"
+                }
+            ]
+        }
+    ]
+}

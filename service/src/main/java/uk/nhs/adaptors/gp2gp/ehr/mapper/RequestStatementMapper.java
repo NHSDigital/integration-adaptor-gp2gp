@@ -53,7 +53,7 @@ public class RequestStatementMapper {
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
-    private static final String COMMA = ",";
+    private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
 
