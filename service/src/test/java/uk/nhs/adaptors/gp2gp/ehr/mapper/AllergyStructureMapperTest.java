@@ -58,7 +58,6 @@ public class AllergyStructureMapperTest {
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
-    private CharSequence expectedOutputMessage;
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
 
@@ -77,7 +76,7 @@ public class AllergyStructureMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml) throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
 

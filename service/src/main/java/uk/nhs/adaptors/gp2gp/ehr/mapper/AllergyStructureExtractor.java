@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -21,27 +22,23 @@ public class AllergyStructureExtractor {
     private static final String ALLERGY_REASON_END_URL = "reasonEnded";
     private static final String ALLERGY_END_DATE_URL = "endDate";
     private static final String ALLERGY_NO_INFO = "No information available";
-    private static final String REACTION = "Reaction %S";
-    private static final String REACTION_DESCRIPTION = " Description: ";
-    private static final String REACTION_SEVERITY = " Severity: ";
-    private static final String REACTION_EXPOSURE_ROUTE = " Exposure Route: ";
-    private static final String REACTION_MANIFESTATIONS = " Manifestation(s): ";
+    private static final String REACTION = "Reaction %S ";
+    private static final String REACTION_DESCRIPTION = "Description: ";
+    private static final String REACTION_SEVERITY = "Severity: ";
+    private static final String REACTION_EXPOSURE_ROUTE = "Exposure Route: ";
+    private static final String REACTION_MANIFESTATIONS = "Manifestation(s): ";
     private static final String COMMA = ", ";
 
     public static String extractReasonEnd(Extension extension) {
-        var reasonEnd = extension.getExtension()
+        return extension.getExtension()
             .stream()
             .filter(value -> value.getUrl().equals(ALLERGY_REASON_END_URL))
             .findFirst()
             .map(Extension::getValue)
             .map(reason -> ((StringType) reason).getValueAsString())
+            .filter(reasonEnd -> !reasonEnd.equals(ALLERGY_NO_INFO))
+            .map(reasonEnd -> ALLERGY_REASON_ENDED + reasonEnd)
             .orElse(StringUtils.EMPTY);
-
-        if (!reasonEnd.isEmpty() && !reasonEnd.equals(ALLERGY_NO_INFO)) {
-            return ALLERGY_REASON_ENDED + reasonEnd;
-        }
-
-        return StringUtils.EMPTY;
     }
 
     public static String extractEndDate(Extension extension) {
@@ -64,16 +61,44 @@ public class AllergyStructureExtractor {
     public static String extractReaction(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent,
         AtomicInteger reactionCount) {
         String reaction = String.format(REACTION, reactionCount.getAndIncrement());
+        List<String> reactionList = retrieveReaction(reactionComponent);
+        return reaction + reactionList
+            .stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+    }
 
+    private static List<String> retrieveReaction(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
+        return List.of(
+            buildReactionDescription(reactionComponent),
+            buildReactionExposureRoute(reactionComponent),
+            buildReactionSeverity(reactionComponent),
+            buildReactionManifestation(reactionComponent)
+        );
+    }
+
+    private static String buildReactionDescription(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
         if (reactionComponent.hasDescription()) {
-            reaction += REACTION_DESCRIPTION + reactionComponent.getDescription();
+            return REACTION_DESCRIPTION + reactionComponent.getDescription();
         }
+        return StringUtils.EMPTY;
+    }
+
+    private static String buildReactionSeverity(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
         if (reactionComponent.hasSeverity()) {
-            reaction += REACTION_SEVERITY + reactionComponent.getSeverity();
+            return REACTION_SEVERITY + reactionComponent.getSeverity();
         }
+        return StringUtils.EMPTY;
+    }
+
+    private static String buildReactionExposureRoute(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
         if (reactionComponent.hasExposureRoute() && extractTextOrCoding(reactionComponent.getExposureRoute()).isPresent()) {
-            reaction += REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute()).get();
+            return REACTION_EXPOSURE_ROUTE + extractTextOrCoding(reactionComponent.getExposureRoute()).get();
         }
+        return StringUtils.EMPTY;
+    }
+
+    private static String buildReactionManifestation(AllergyIntolerance.AllergyIntoleranceReactionComponent reactionComponent) {
         if (reactionComponent.hasManifestation()) {
             var manifestations = reactionComponent.getManifestation()
                 .stream()
@@ -81,9 +106,8 @@ public class AllergyStructureExtractor {
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.joining(COMMA));
-            reaction += REACTION_MANIFESTATIONS + manifestations;
+            return REACTION_MANIFESTATIONS + manifestations;
         }
-
-        return reaction;
+        return StringUtils.EMPTY;
     }
 }
