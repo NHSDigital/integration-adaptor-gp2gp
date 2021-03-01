@@ -9,11 +9,12 @@ import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class DateFormatUtil {
-    public static final int NINE = 9;
-    public static final int EIGHT = 8;
-    public static final int ONE = 1;
-    public static final String ZERO_STRING = "0";
-    public static final String TEN_STRING = "10";
+    private static final String ZERO_STRING = "0";
+    private static final String TEN_STRING = "10";
+    private static final int SEPTEMBER = 8;
+    private static final int OCTOBER = 9;
+    private static final int MONTH_PADDING = 1;
+    private static final int NINTH = 9;
     private static final ZoneId UK_ZONE_ID = ZoneId.of("Europe/London");
     private static final String COULD_NOT_FORMAT_DATE = "Could not format date";
     private static final DateTimeFormatter HL7_SECONDS_COMPUTER_READABLE = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -33,11 +34,11 @@ public class DateFormatUtil {
                 return baseDateTimeType.getYear().toString();
             case MONTH:
                 return baseDateTimeType.getYear()
-                    + formatMonthElement(baseDateTimeType.getMonth());
+                    + formatSingleDigitMonthElement(baseDateTimeType.getMonth());
             case DAY:
                 return baseDateTimeType.getYear()
-                    + formatMonthElement(baseDateTimeType.getMonth())
-                    + formatDayElement(baseDateTimeType.getDay());
+                    + formatSingleDigitMonthElement(baseDateTimeType.getMonth())
+                    + formatSingleDigitDayElement(baseDateTimeType.getDay());
             default:
                 return baseDateTimeType.toCalendar().toInstant().atZone(UK_ZONE_ID)
                     .format(HL7_SECONDS_COMPUTER_READABLE);
@@ -54,30 +55,30 @@ public class DateFormatUtil {
                 return baseDateTimeType.getYear().toString();
             case MONTH:
                 return baseDateTimeType.getYear() + "-"
-                    + formatMonthElement(baseDateTimeType.getMonth());
+                    + formatSingleDigitMonthElement(baseDateTimeType.getMonth());
             case DAY:
                 return baseDateTimeType.getYear() + "-"
-                    + formatMonthElement(baseDateTimeType.getMonth())
-                    + "-" + formatDayElement(baseDateTimeType.getDay());
+                    + formatSingleDigitMonthElement(baseDateTimeType.getMonth())
+                    + "-" + formatSingleDigitDayElement(baseDateTimeType.getDay());
             default:
                 return baseDateTimeType.toCalendar().toInstant().atZone(UK_ZONE_ID)
                     .format(HL7_SECONDS_HUMAN_READABLE);
         }
     }
 
-    private static String formatMonthElement(int element) {
-        if (element <= EIGHT) {
-            return ZERO_STRING + (element + ONE);
-        } else if (element == NINE) {
+    private static String formatSingleDigitMonthElement(int monthValue) {
+        if (monthValue <= SEPTEMBER) {
+            return ZERO_STRING + (monthValue + MONTH_PADDING);
+        } else if (monthValue == OCTOBER) {
             return TEN_STRING;
         }
-        return String.valueOf(element);
+        return String.valueOf(monthValue);
     }
 
-    private static String formatDayElement(int element) {
-        if (element <= NINE) {
-            return ZERO_STRING + element;
+    private static String formatSingleDigitDayElement(int dayValue) {
+        if (dayValue <= NINTH) {
+            return ZERO_STRING + dayValue;
         }
-        return String.valueOf(element);
+        return String.valueOf(dayValue);
     }
 }
