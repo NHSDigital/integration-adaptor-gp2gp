@@ -36,6 +36,7 @@ public class ObservationStatementMapper {
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
@@ -43,7 +44,8 @@ public class ObservationStatementMapper {
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
             .isNested(isNested)
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
+            .code(prepareCode(observation));
 
         if (observation.hasValue()) {
             Type value = observation.getValue();
@@ -99,6 +101,13 @@ public class ObservationStatementMapper {
         }
 
         return Optional.empty();
+    }
+
+    private String prepareCode(Observation observation) {
+        if (observation.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+        }
+        return StringUtils.EMPTY;
     }
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {

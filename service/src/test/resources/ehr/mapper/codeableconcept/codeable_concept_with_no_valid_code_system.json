@@ -1,0 +1,34 @@
+{
+    "resourceType" : "Observation",
+    "code": {
+        "coding": [
+            {
+                "system": "invalid",
+                "code": "K500.00",
+                "display": "1",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "126835018"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "2"
+                            }
+                        ]
+                    }
+                ],
+                "system": "invalid",
+                "code": "76376003",
+                "display": "3"
+            }
+        ],
+        "text": "4"
+    }
+}

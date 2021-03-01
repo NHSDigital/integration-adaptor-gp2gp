@@ -2,12 +2,14 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +26,7 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +64,8 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
     private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
     private FhirParseService fhirParseService;
@@ -68,12 +73,14 @@ public class ImmunizationObservationStatementMapperTest extends MapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         fhirParseService = new FhirParseService();
         messageContext = new MessageContext(randomIdGeneratorService);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
         messageContext.initialize(bundle);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
     }
 
     @AfterEach

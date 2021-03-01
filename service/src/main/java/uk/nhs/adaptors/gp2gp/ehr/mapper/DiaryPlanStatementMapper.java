@@ -43,6 +43,7 @@ public class DiaryPlanStatementMapper {
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
@@ -56,6 +57,7 @@ public class DiaryPlanStatementMapper {
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
+        buildCode(procedureRequest).ifPresent(builder::code);
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
@@ -154,6 +156,13 @@ public class DiaryPlanStatementMapper {
         return Optional.empty();
     }
 
+    private Optional<String> buildCode(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasCode()) {
+            return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode()));
+        }
+        return Optional.empty();
+    }
+
     private String formatDevice(Device device) {
         return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
     }
@@ -171,5 +180,6 @@ public class DiaryPlanStatementMapper {
         private String text;
         private String availabilityTime;
         private String effectiveTime;
+        private String code;
     }
 }

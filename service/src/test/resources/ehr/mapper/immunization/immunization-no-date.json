@@ -57,15 +57,6 @@
   ],
   "status": "completed",
   "notGiven": false,
-  "vaccineCode": {
-    "coding": [
-      {
-        "system": "http://hl7.org/fhir/v3/NullFlavor",
-        "code": "UNK",
-        "display": "unknown"
-      }
-    ]
-  },
   "patient": {
     "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
   },

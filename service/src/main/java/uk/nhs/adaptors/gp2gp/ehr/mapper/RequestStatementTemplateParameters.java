@@ -13,4 +13,5 @@ public class RequestStatementTemplateParameters {
     private String availabilityTime;
     private String description;
     private String defaultReasonCode;
+    private String code;
 }

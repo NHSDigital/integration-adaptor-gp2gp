@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class EncounterMapper {
 
     private final MessageContext messageContext;
     private final EncounterComponentsMapper encounterComponentsMapper;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapEncounterToEhrComposition(Encounter encounter) {
         String components = encounterComponentsMapper.mapComponents(encounter);
@@ -30,9 +32,17 @@ public class EncounterMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
             .status(COMPLETE_CODE)
+            .type(buildType(encounter))
             .components(components);
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private String buildType(Encounter encounter) {
+        if (encounter.hasType()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(encounter.getTypeFirstRep());
+        }
+        return StringUtils.EMPTY;
     }
 }

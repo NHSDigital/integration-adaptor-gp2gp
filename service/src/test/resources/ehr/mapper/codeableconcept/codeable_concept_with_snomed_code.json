@@ -5,8 +5,7 @@
             {
                 "system": "http://read.info/readv2",
                 "code": "K500.00",
-                "display": "Endometriosis of uterus1",
-                "userSelected": true
+                "display": "1"
             },
             {
                 "extension": [
@@ -19,16 +18,16 @@
                             },
                             {
                                 "url": "descriptionDisplay",
-                                "valueString": "Endometriosis of uterus2"
+                                "valueString": "2"
                             }
                         ]
                     }
                 ],
                 "system": "http://snomed.info/sct",
                 "code": "76376003",
-                "display": "Endometriosis of uterus3"
+                "display": "3"
             }
         ],
-        "text": "Blah di Blah"
+        "text": "4"
     }
 }

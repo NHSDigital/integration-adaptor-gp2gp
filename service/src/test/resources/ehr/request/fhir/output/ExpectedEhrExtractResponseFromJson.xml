@@ -78,14 +78,22 @@
                                 <center value="20100714180700"/>
                             </effectiveTime>
                             <availabilityTime value="20100714163232"/>
+
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
+
+                            <code nullFlavor="UNK">
+                                <originalText>4</originalText>
+                            </code>
                         </ObservationStatement>
                     </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -138,6 +146,9 @@
                                 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
                         </NarrativeStatement>
                     </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -178,86 +189,109 @@
                                 <center value="20100123134800"/>
                             </effectiveTime>
                             <availabilityTime value="20100123140354"/>
+
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text></text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
+
+                            <code nullFlavor="UNK">
+                                <originalText>4</originalText>
+                            </code>
                         </ObservationStatement>
-                    </component>
-                    <component typeCode="COMP" >
-                        <ObservationStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
-                            <effectiveTime>
-                                <center value="20100123134800"/>
-                            </effectiveTime>
-                            <availabilityTime value="20100123140354"/>
-                            <pertinentInformation typeCode="PERT">
-                                <sequenceNumber value="+1" />
-                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                    <text>These are some notes !&quot;£$%^&amp;*()</text>
-                                </pertinentAnnotation>
-                            </pertinentInformation>
-                        </ObservationStatement>
-                    </component>
-                    <component typeCode="COMP" >
-                        <NarrativeStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
-                            <availabilityTime value="20100123134800" />
-                            <text>This is some random free text</text>
-                        </NarrativeStatement>
-                    </component>
-                    <component typeCode="COMP" >
-                        <ObservationStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
-                            <effectiveTime>
-                                <center value="20100123134800"/>
-                            </effectiveTime>
-                            <availabilityTime value="20100123140354"/>
-                            <pertinentInformation typeCode="PERT">
-                                <sequenceNumber value="+1" />
-                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                    <text></text>
-                                </pertinentAnnotation>
-                            </pertinentInformation>
-                        </ObservationStatement>
-                    </component>
-                    <component typeCode="COMP" >
-                        <ObservationStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
-                            <effectiveTime>
-                                <center value="20100123134800"/>
-                            </effectiveTime>
-                            <availabilityTime value="20100123140354"/>
-                            <pertinentInformation typeCode="PERT">
-                                <sequenceNumber value="+1" />
-                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                    <text>Family member : Mother</text>
-                                </pertinentAnnotation>
-                            </pertinentInformation>
-                        </ObservationStatement>
-                    </component>
-                    <component typeCode="COMP" >
-                        <ObservationStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
-                            <effectiveTime>
-                                <center value="20100123134800"/>
-                            </effectiveTime>
-                            <availabilityTime value="20100123140354"/>
-                            <pertinentInformation typeCode="PERT">
-                                <sequenceNumber value="+1" />
-                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                    <text>Family member : Father - note - this is obviously wrong?</text>
-                                </pertinentAnnotation>
-                            </pertinentInformation>
-                        </ObservationStatement>
-                    </component>
+                    </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>These are some notes !&quot;£$%^&amp;*()</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+
+                        <code nullFlavor="UNK">
+                            <originalText>4</originalText>
+                        </code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <availabilityTime value="20100123134800" />
+                        <text>This is some random free text</text>
+                    </NarrativeStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text></text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+
+                        <code nullFlavor="UNK">
+                            <originalText>4</originalText>
+                        </code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Family member : Mother</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+
+                        <code nullFlavor="UNK">
+                            <originalText>4</originalText>
+                        </code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Family member : Father - note - this is obviously wrong?</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+
+                        <code nullFlavor="UNK">
+                            <originalText>4</originalText>
+                        </code>
+                    </ObservationStatement>
+                </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -298,6 +332,9 @@
                             <text>hhhhhhhhh</text>
                         </NarrativeStatement>
                     </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -338,6 +375,9 @@
                             <text>This is kjkjkjkjkjkjkjkjkj</text>
                         </NarrativeStatement>
                     </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -378,14 +418,22 @@
                                 <center value="20100714175500"/>
                             </effectiveTime>
                             <availabilityTime value="20100714162813"/>
+
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text>This is the BP reading in a consultation with a note</text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
+
+                            <code nullFlavor="UNK">
+                                <originalText>4</originalText>
+                            </code>
                         </ObservationStatement>
                     </component>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ehrComposition>
             </component>
         </ehrFolder>

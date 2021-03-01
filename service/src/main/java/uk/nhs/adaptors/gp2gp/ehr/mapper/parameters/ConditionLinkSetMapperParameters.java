@@ -24,4 +24,5 @@ public class ConditionLinkSetMapperParameters {
     private List<String> relatedClinicalContent;
     private boolean generateObservationStatement;
     private String pertinentInfo;
+    private String code;
 }

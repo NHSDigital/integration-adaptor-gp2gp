@@ -374,6 +374,9 @@
             "resource": {
                 "resourceType": "Observation",
                 "id": "observationuncategorisedid1",
+                "code": {
+                    "text": "Test"
+                },
                 "issued": "2010-01-13T15:29:50.3+00:00",
                 "comment": "observation uncategorised"
             }

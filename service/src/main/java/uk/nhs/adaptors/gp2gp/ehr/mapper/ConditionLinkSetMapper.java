@@ -46,6 +46,7 @@ public class ConditionLinkSetMapper {
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
         var builder = ConditionLinkSetMapperParameters.builder()
@@ -67,6 +68,8 @@ public class ConditionLinkSetMapper {
                 builder.conditionNamed(newId);
                 buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
             });
+
+        buildCode(condition).ifPresent(builder::code);
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }
@@ -166,5 +169,12 @@ public class ConditionLinkSetMapper {
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
+    }
+
+    private Optional<String> buildCode(Condition condition) {
+        if (condition.hasCode()) {
+            return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode()));
+        }
+        return Optional.empty();
     }
 }

@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +24,7 @@ import org.mockito.quality.Strictness;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -41,6 +44,8 @@ public class EncounterComponentsMapperTest extends MapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
@@ -48,18 +53,23 @@ public class EncounterComponentsMapperTest extends MapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
-        DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext);
+        DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
         NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             new StructuredObservationValueMapper(),
-            new PertinentInformationObservationValueMapper());
+            new PertinentInformationObservationValueMapper(),
+            codeableConceptCdMapper
+            );
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
-            new ImmunizationObservationStatementMapper(messageContext);
-        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
+            randomIdGeneratorService,
+            codeableConceptCdMapper);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
