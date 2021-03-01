@@ -14,8 +14,11 @@ SSP_URL=''
 # NOTE: the Authorization header needs to be updated manually with a non-expired JWT token. Use the postman collection
 # against the public demonstrator to generate one
 
+#PROXY_OPT="--proxy 10.1.0.251:3128"
+PROXY_OPT=""
+
 curl --cacert opentest.ca-bundle --cert endpoint.crt --key endpoint.key \
---location --request POST "${SSP_URL}${PROVIDER_URL}" \
+--location --request $PROXY_OPT POST "${SSP_URL}${PROVIDER_URL}" \
 --header 'Accept: application/fhir+json' \
 --header 'Ssp-From: 200000000359' \
 --header 'Ssp-To: 918999198738' \

@@ -11,7 +11,11 @@ services:
       - mongodb
       - activemq
       - gp2gp
+      - mock-mhs-adaptor
     environment:
-      - GP2GP_AMQP_BROKERS=amqp://activemq:5672
-      - GP2GP_MONGO_URI=mongodb://mongodb:27017
-      - GP2GP_MONGO_DATABASE_NAME=gp2gp
+      - GP2GP_AMQP_BROKERS
+      - GP2GP_MONGO_URI
+      - GP2GP_MONGO_DATABASE_NAME
+      - GP2GP_GPC_GET_URL
+      - GP2GP_GPC_GET_STRUCTURED_ENDPOINT
+      - GP2GP_GPC_GET_DOCUMENT_ENDPOINT

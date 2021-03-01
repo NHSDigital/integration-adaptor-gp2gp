@@ -1,12 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {

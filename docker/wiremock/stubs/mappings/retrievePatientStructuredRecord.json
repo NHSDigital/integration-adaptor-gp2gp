@@ -2,12 +2,12 @@
   "priority": 1,
   "request": {
     "method": "POST",
-    "url": "/http://exampleGPSystem.co.uk/GP0001/STU3/1/gpconnect/Patient/$gpc.getstructuredrecord",
+    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/$gpc.getstructuredrecord",
     "bodyPatterns" : [ {
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
     {
-      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286')]"
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286' || @.value == '9690937294')]"
     }]
   },
   "response": {

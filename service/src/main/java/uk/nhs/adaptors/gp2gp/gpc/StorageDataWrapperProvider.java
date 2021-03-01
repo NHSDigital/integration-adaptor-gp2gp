@@ -14,7 +14,7 @@ public final class StorageDataWrapperProvider {
             .type(taskDefinition.getTaskType().getTaskTypeHeaderValue())
             .conversationId(taskDefinition.getConversationId())
             .taskId(taskId)
-            .response(response)
+            .hl7Response(response)
             .build();
     }
 }

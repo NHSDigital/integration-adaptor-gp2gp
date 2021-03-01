@@ -4,16 +4,16 @@ import java.time.Duration;
 
 import javax.annotation.PostConstruct;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatus;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.IndexOperations;
 import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.mongo.MongoClientConfiguration;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Component
 @Slf4j

@@ -1,11 +1,12 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import lombok.SneakyThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import lombok.SneakyThrows;
 
 public class XPathServiceTest {
 

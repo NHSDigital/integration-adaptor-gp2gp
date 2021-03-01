@@ -1,0 +1,10 @@
+<component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100630055900"/>
+        </effectiveTime>
+        <availabilityTime value="20100630054806" />
+    </ObservationStatement>
+</component>

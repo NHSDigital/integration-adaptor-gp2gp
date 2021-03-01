@@ -1,24 +1,27 @@
 package uk.nhs.adaptors.mockmhsservice.service;
 
-import java.io.IOException;
+import static org.springframework.http.HttpStatus.ACCEPTED;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.micrometer.core.instrument.util.IOUtils;
 import lombok.RequiredArgsConstructor;
-
-import static org.springframework.http.HttpStatus.ACCEPTED;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.common.OutboundMessage;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
@@ -40,14 +43,25 @@ public class MockMhsService {
     private final InputStream inputStream3 = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
     private final String internalServerErrorResponse = IOUtils.toString(inputStream3, StandardCharsets.UTF_8);
 
-    public ResponseEntity<String> handleRequest(String interactionId, String mockMhsMessage) throws IOException {
+    public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage,
+        String contentType, String odsCode) {
         headers.setContentType(MediaType.TEXT_HTML);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
         objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, true);
 
+        if (odsCode.isEmpty()) {
+            LOGGER.error("Missing ods-code header");
+            return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
+        }
+
+        if (!waitForResponse.equals("false")) {
+            LOGGER.error("Missing or invalid wait-for-response header");
+            return new ResponseEntity<>(internalServerErrorResponse, headers, HttpStatus.BAD_REQUEST);
+        }
+
         try {
             verifyOutboundMessagePayload(mockMhsMessage);
-        }  catch (MockMHSException e) {
+        } catch (MockMHSException e) {
             LOGGER.error(e.getMessage(), e);
             return new ResponseEntity<>(internalServerErrorResponse, headers, INTERNAL_SERVER_ERROR);
         } catch (JsonProcessingException e) {
@@ -57,8 +71,9 @@ public class MockMhsService {
 
         if (interactionId.equals(mockValidInteractionId)) {
             try {
-                inboundProducer.sendToMhsInboundQueue(stubInboundMessage);
-                LOGGER.info("Placed stub message on Inbound Queue");
+                var inboundMessage = stubInboundMessage.replace("%%ConversationId%%", correlationId);
+                inboundProducer.sendToMhsInboundQueue(inboundMessage);
+                LOGGER.info("Placed message on Inbound Queue, conversationId: " + correlationId);
                 headers.setContentType(MediaType.TEXT_XML);
                 return new ResponseEntity<>(stubEbXmlResponse, headers, ACCEPTED);
             } catch (JmsException e) {
