@@ -2,7 +2,7 @@
     <id root="394559384658936"/>
     <statusCode code="COMPLETE"/>
     <effectiveTime>
-        <center value="19781231"/>
+        <center value="19781131"/>
     </effectiveTime>
     <availabilityTime value="20100114095757" />
     <component typeCode="COMP" contextConductionInd="true">
@@ -11,7 +11,7 @@
             <statusCode code="COMPLETE"/>
             <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
             <effectiveTime>
-                <center value="19781231"/>
+                <center value="19781131"/>
             </effectiveTime>
             <availabilityTime value="20100114095757" />
             <component typeCode="COMP" contextConductionInd="true">
@@ -19,7 +19,7 @@
                     <id root="394559384658936"/>
                     <statusCode code="COMPLETE"/>
                     <effectiveTime>
-                        <center value="19781231"/>
+                        <center value="19781131"/>
                     </effectiveTime>
                     <availabilityTime value="20100114095757" />
                     <pertinentInformation typeCode="PERT">
