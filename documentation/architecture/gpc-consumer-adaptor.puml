@@ -1,0 +1,52 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Dynamic.puml
+
+title GP Connect Consumer Adaptor
+
+' Person(requestorGp, "GP/GP Admin", "")
+' Person(senderGp, "GP/GP Admin", "")
+
+System_Boundary(nme, "Supplier Infrastructure") {
+    System_Boundary(gp2gp_boundary, "GP2GP Adaptor") {
+        System(gp2gp_system, "GP2GP Adaptor", "The GP2GP adaptor service")
+    }
+
+    System_Boundary(gpc_boundary, "GP Connect Consumer Adaptor") {
+        Container(zuul_endpoint, "Endpoints", "application.yml", "Configure supported endpoints using Zuul proxy for Spring Boot")
+        Container(sds_filter, "SDS Filter", "Pre Filter", "If enabled, Use SDS API to lookup the endpoint for ODS code and interaction id and dynamically route to this endpoint")
+        Container(ssp_filter, "SSP Filter", "Pre Filter", "If enabled, appends the Spine Security Proxy to request URL")
+        Container(jwt_filter, "JWT Filter", "Pre Filter", "Construct JWT token and add to headers")
+        Container(proxy_internals, "Proxy Internals", "Zuul Proxy", "Proxies request to dynamic endpoint")
+        Container(post_filter, "Payload URL Rewrite Filter", "Post Filter", "Re-write all URLs to {{gpc_endpoint}} to a valid consumer adaptor endpoint")
+    
+    }
+}
+
+System_Boundary(nhs, "NHS Infrastructure") {
+    System(ssp_system, "Spine Security Proxy")
+    
+}
+
+System_Boundary(nme2, "Supplier Infrastructure") {
+    System(gpc_provider_system, "GP Connect Provider")
+}
+
+Rel_D(gp2gp_system, zuul_endpoint, "Request", "http:/[consumer_host]/[ods_code]/[structured|document]/[fhir_path]")
+Rel_D(zuul_endpoint, sds_filter, "next")
+Rel_R(sds_filter, ssp_filter, "next")
+Rel_R(ssp_filter, jwt_filter, "next")
+Rel_R(jwt_filter, proxy_internals, "next")
+Rel_D(proxy_internals, ssp_system, "GP Connect request over SSP")
+Rel_L(ssp_system, gpc_provider_system, "via Spine")
+Rel_U(ssp_system, proxy_internals, "GP Connect response over SSP")
+Rel_R(proxy_internals, post_filter, "next")
+Rel_U(post_filter, gp2gp_system, "Proxied GP Connect Response")
+
+
+note left of gpc_provider_system
+            For the GP2GP adaptor use-case the same supplier operates both adaptors and the GP Connect Provider.
+            For the GP2GP over GPC use-case the GPC Provider may belong to a different supplier.
+        end note
+' Rel(requestorGp, requestor, "Uses", "HTTPS")
+
+@enduml

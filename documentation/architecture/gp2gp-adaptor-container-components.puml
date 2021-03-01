@@ -32,7 +32,7 @@ System_Boundary(gp2gpAdaptor, "GP2GP Adaptor") {
     Container(taskDispatcher, "Task Dispatcher", "JMS Consumer", "Consumes from the Task Queue and delegates to the appropriate service")
 }
 
-Rel_Down(mhsInbound, mhsInboundConsumer, "Subscribe", "Messages from Spine")
+(mhsInbound, mhsInboundConsumer, "Subscribe", "Messages from Spine")
 Rel_Down(mhsInboundConsumer, ehrExtractRequestHandler)
 
 
