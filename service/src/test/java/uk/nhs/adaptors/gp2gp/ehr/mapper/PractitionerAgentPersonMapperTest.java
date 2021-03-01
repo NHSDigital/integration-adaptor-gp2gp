@@ -28,7 +28,7 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class PractitionerAgentPersonMapperTest extends MapperTest {
+public class PractitionerAgentPersonMapperTest {
 
     private static final String TEST_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
     private static final String PRACTITIONER_FILE_LOCATION = "/ehr/mapper/practitioner/";
