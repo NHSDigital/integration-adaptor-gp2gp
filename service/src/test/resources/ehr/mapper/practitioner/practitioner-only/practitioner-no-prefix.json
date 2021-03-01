@@ -1,0 +1,20 @@
+{
+    "resourceType": "Practitioner",
+    "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+    "meta": {
+        "versionId": "4749697187075864793",
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+        ]
+    },
+    "name": [
+        {
+            "use": "official",
+            "family": "McAvenue",
+            "given": [
+                "David"
+            ]
+        }
+    ],
+    "gender": "male"
+}
