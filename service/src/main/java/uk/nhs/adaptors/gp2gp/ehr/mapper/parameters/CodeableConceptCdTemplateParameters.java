@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.TranslationCodes;
 
 @Getter
 @Setter
@@ -16,14 +17,4 @@ public class CodeableConceptCdTemplateParameters {
     private String mainOriginalText;
     private boolean nullFlavor;
     private List<TranslationCodes> codes;
-
-    @Getter
-    @Setter
-    @Builder
-    static
-    public class TranslationCodes {
-        private String translationCode;
-        private String translationCodeSystem;
-        private String translationDisplayName;
-    }
 }

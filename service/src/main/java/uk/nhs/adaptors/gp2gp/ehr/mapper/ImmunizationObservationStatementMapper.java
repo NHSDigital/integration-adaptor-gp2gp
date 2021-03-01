@@ -241,9 +241,8 @@ public class ImmunizationObservationStatementMapper {
     private String buildVaccineCode(Immunization immunization) {
         if (immunization.hasVaccineCode() && vaccineCodeNotUNK(immunization.getVaccineCode())) {
             var code = CodeableConceptMappingUtils.extractTextOrCoding(immunization.getVaccineCode());
-            if (code.isPresent()){
+            if (code.isPresent()) {
                 return String.format(VACCINATION_CODE, code.get());
-
             }
         }
         return StringUtils.EMPTY;

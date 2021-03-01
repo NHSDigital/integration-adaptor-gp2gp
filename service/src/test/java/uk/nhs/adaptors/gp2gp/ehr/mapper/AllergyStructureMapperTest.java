@@ -2,12 +2,14 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,13 +18,17 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class AllergyStructureMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/allergy/";
@@ -57,6 +63,8 @@ public class AllergyStructureMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
@@ -64,8 +72,10 @@ public class AllergyStructureMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        allergyStructureMapper = new AllergyStructureMapper(messageContext);
+        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper);
     }
 
     @AfterEach
@@ -82,7 +92,7 @@ public class AllergyStructureMapperTest {
 
         String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
 
-        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
     private static Stream<Arguments> resourceFileParams() {

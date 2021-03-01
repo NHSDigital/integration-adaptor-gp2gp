@@ -37,7 +37,7 @@ public class CodeableConceptCdMapper {
         Optional<Coding> mainCode;
         var firstFoundMainCode = findMainCode(codeableConcept);
 
-        if (firstFoundMainCode != null && isCodingSystemValid(firstFoundMainCode)){
+        if (firstFoundMainCode != null && isCodingSystemValid(firstFoundMainCode)) {
             setMainCodeProperties(builder, codeableConcept, firstFoundMainCode);
             mainCode = Optional.of(firstFoundMainCode);
 
@@ -84,8 +84,8 @@ public class CodeableConceptCdMapper {
         setMainCodePropertiesWithNullFlavour(builder, mainCode, codeableConcept, false);
     }
 
-    private void setMainCodePropertiesWithNullFlavour(CodeableConceptCdTemplateParameters.CodeableConceptCdTemplateParametersBuilder builder,
-        Coding mainCode, CodeableConcept codeableConcept, boolean nullFlavor) {
+    private void setMainCodePropertiesWithNullFlavour(CodeableConceptCdTemplateParameters
+        .CodeableConceptCdTemplateParametersBuilder builder, Coding mainCode, CodeableConcept codeableConcept, boolean nullFlavor) {
 
         var codingSystem = extractCodingSystem(mainCode);
         var code = extractCode(mainCode);
@@ -156,7 +156,8 @@ public class CodeableConceptCdMapper {
         return false;
     }
 
-    private List<CodeableConceptCdTemplateParameters.TranslationCodes> buildTranslationCodes(CodeableConcept codeableConcept, Coding mainCode) {
+    private List<TranslationCodes> buildTranslationCodes(CodeableConcept codeableConcept,
+        Coding mainCode) {
         return codeableConcept.getCoding()
             .stream()
             .filter(coding -> !coding.equals(mainCode))
@@ -165,8 +166,8 @@ public class CodeableConceptCdMapper {
             .collect(Collectors.toList());
     }
 
-    private CodeableConceptCdTemplateParameters.TranslationCodes mapToTranslationCode(Coding coding) {
-        var translationCodeBuilder = CodeableConceptCdTemplateParameters.TranslationCodes.builder();
+    private TranslationCodes mapToTranslationCode(Coding coding) {
+        var translationCodeBuilder = TranslationCodes.builder();
         var codingSystem = extractCodingSystem(coding);
         var code = extractCode(coding);
         var displayName = extractDisplayText(coding);

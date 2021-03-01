@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.time.Instant;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;

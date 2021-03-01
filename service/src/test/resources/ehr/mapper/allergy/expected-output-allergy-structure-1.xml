@@ -28,6 +28,9 @@
                             <text>Reason Ended: Patient reports no subsequent recurrence on same medication Status: Resolved Type: Allergy Criticality: Low Risk Last Occurred: 1978-11-31 Example note text</text>
                         </pertinentAnnotation>
                     </pertinentInformation>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ObservationStatement>
             </component>
         </CompoundStatement>

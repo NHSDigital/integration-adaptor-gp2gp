@@ -48,6 +48,7 @@ public class AllergyStructureMapper {
     private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
@@ -57,6 +58,7 @@ public class AllergyStructureMapper {
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
+            .code(buildCode(allergyIntolerance))
             .build();
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
@@ -186,5 +188,12 @@ public class AllergyStructureMapper {
                 .collect(Collectors.joining(StringUtils.SPACE));
         }
         return notes;
+    }
+
+    private String buildCode(AllergyIntolerance allergyIntolerance) {
+        if (allergyIntolerance.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+        }
+        return StringUtils.EMPTY;
     }
 }
