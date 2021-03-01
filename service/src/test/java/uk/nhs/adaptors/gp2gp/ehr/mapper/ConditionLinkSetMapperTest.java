@@ -31,7 +31,7 @@ import org.mockito.stubbing.Answer;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class ConditionLinkSetMapperTest extends MapperTest {
+public class ConditionLinkSetMapperTest {
 
     private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
     private static final String GENERATED_ID = "50233a2f-128f-4b96-bdae-6207ed11a8ea";

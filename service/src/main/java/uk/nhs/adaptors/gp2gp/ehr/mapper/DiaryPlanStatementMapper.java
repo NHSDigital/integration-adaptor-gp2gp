@@ -111,7 +111,7 @@ public class DiaryPlanStatementMapper {
 
     private String formatStartDate(ProcedureRequest procedureRequest) {
         return String.format(EARLIEST_RECALL_DATE_FORMAT,
-            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStart()));
+            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStartElement()));
     }
 
     private Optional<String> getNotes(ProcedureRequest procedureRequest) {

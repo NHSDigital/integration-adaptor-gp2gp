@@ -28,7 +28,7 @@ import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class EncounterComponentsMapperTest extends MapperTest {
+public class EncounterComponentsMapperTest {
     private static final String TEST_ID = "394559384658936";
 
     private static final String TEST_DIRECTORY = "/ehr/mapper/encountercomponents/";

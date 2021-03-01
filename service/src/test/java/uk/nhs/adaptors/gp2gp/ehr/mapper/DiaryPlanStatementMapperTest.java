@@ -28,7 +28,7 @@ import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class DiaryPlanStatementMapperTest extends MapperTest {
+public class DiaryPlanStatementMapperTest {
 
     private static final String TEST_ID = "394559384658936";
 

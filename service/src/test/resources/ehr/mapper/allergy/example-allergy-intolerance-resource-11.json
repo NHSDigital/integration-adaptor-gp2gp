@@ -1,0 +1,73 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+    "category": [
+        "medication"
+    ],
+    "reaction": [
+        {
+            "description": "example description",
+            "severity": "mild",
+            "exposureRoute": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "6064005 ",
+                        "display": "Topical route"
+                    }
+                ]
+            },
+            "manifestation": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "109006",
+                            "display": "Manifestation 1"
+                        }
+                    ]
+                },
+                {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "109006",
+                            "display": "Manifestation 2"
+                        }
+                    ]
+                },
+                {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "109006",
+                            "display": "Manifestation 3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "example description 2",
+            "severity": "mild",
+            "exposureRoute": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "6064005 ",
+                        "display": "Topical route"
+                    }
+                ]
+            }
+        },
+        {
+            "description": "example description 3",
+            "severity": "mild"
+        },
+        {
+            "description": "example description 4"
+        }
+    ],
+    "onsetDateTime": "1978-12-31",
+    "assertedDate": "2010-01-14T09:57:57.33+00:00"
+}

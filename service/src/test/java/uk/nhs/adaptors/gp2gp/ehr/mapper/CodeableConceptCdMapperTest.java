@@ -15,7 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
-public class CodeableConceptCdMapperTest extends MapperTest {
+public class CodeableConceptCdMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/codeableconcept/";
 
     private FhirParseService fhirParseService;

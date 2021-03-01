@@ -31,7 +31,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class RequestStatementMapperTest extends MapperTest {
+public class RequestStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
     private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
