@@ -151,7 +151,7 @@ public class AllergyStructureMapper {
 
     private String buildLastOccurrencePertinentInformation(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasLastOccurrence()) {
-            return LAST_OCCURRENCE + toTextFormat(allergyIntolerance.getLastOccurrence());
+            return LAST_OCCURRENCE + toTextFormat(allergyIntolerance.getLastOccurrenceElement());
         }
         return StringUtils.EMPTY;
     }
