@@ -63,6 +63,8 @@ public class EncounterMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapEncounterTypeNoSnomed(any(Encounter.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper, codeableConceptCdMapper);
     }

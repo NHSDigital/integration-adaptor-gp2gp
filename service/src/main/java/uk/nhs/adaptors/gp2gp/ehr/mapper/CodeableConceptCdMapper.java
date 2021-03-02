@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
+import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public class CodeableConceptCdMapper {
         .loadTemplate("codeable_concept_cd_template.mustache");
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
+    private static final String ENCOUNTER_NO_SNOMED_CODE = "24591000000103";
+    private static final String ENCOUNTER_NO_SNOMED_DISPLAY = "Other report";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
 
@@ -44,6 +47,17 @@ public class CodeableConceptCdMapper {
             code.ifPresent(builder::mainCode);
             displayText.ifPresent(builder::mainDisplayName);
         }
+
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
+    public String mapEncounterTypeNoSnomed(Encounter encounter) {
+        var builder = CodeableConceptCdTemplateParameters.builder();
+        builder.mainCodeSystem(SNOMED_SYSTEM_CODE);
+        builder.mainCode(ENCOUNTER_NO_SNOMED_CODE);
+        builder.mainDisplayName(ENCOUNTER_NO_SNOMED_DISPLAY);
+        var mainText = findDisplayText(encounter.getTypeFirstRep().getCodingFirstRep());
+        mainText.ifPresent(builder::mainOriginalText);
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
