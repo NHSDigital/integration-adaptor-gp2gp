@@ -9,8 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class AgentMapperTemplateParameters {
-    private String agentId;
+public class AgentMapperTemplateParametersInner {
     private String agentExtensionId;
     private String agentName;
     private String telecomValue;
