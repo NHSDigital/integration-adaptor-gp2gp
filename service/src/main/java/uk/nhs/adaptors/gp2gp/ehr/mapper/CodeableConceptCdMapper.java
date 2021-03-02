@@ -1,15 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
-import org.hl7.fhir.dstu3.model.Element;
 import org.hl7.fhir.dstu3.model.Extension;
 
 import com.github.mustachejava.Mustache;
@@ -17,7 +11,6 @@ import com.github.mustachejava.Mustache;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.CodeableConceptCdTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Slf4j
