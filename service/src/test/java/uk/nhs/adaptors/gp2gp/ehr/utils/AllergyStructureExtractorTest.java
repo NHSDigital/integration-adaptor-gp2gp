@@ -32,7 +32,7 @@ public class AllergyStructureExtractorTest {
     private static final String REASON_END_DATE = "2018-03-01";
     private static final String EXPECTED_REASON_END_DATE = "20180301";
     private static final String ONSET_DATE = "1978-12-31";
-    private static final String EXPECTED_ONSET_DATE = "19781131";
+    private static final String EXPECTED_ONSET_DATE = "19781231";
     private static final String REACTION_START = "Reaction 1 ";
     private static final String FULL_REACTION = REACTION_START + "Description: description Exposure Route: exposure route "
         + "Severity: MODERATE Manifestation(s): manifestation 1, manifestation 2";
