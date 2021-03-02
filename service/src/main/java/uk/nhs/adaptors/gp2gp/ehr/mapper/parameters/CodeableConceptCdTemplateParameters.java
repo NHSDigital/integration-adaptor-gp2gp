@@ -16,5 +16,4 @@ public class CodeableConceptCdTemplateParameters {
     private String mainDisplayName;
     private String mainOriginalText;
     private boolean nullFlavor;
-    private List<TranslationCodes> codes;
 }

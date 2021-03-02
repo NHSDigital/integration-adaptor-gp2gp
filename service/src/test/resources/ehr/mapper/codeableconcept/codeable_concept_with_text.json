@@ -3,9 +3,10 @@
     "code": {
         "coding": [
             {
-                "system": "http://read.info/readv2",
-                "code": "K500.00",
-                "display": "1"
+                "system": "http://blah.info/blahsomecodesystem",
+                "code": "X%^^%",
+                "display": "Endometriosis of uterus",
+                "userSelected": true
             },
             {
                 "extension": [
@@ -18,16 +19,17 @@
                             },
                             {
                                 "url": "descriptionDisplay",
-                                "valueString": "2"
+                                "valueString": "Endometriosis of uterus"
                             }
                         ]
                     }
                 ],
                 "system": "http://snomed.info/sct",
                 "code": "76376003",
-                "display": "3"
+                "display": "Endometriosis of uterus"
             }
         ],
-        "text": "4"
+        "text": "Blah di Blah"
     }
+
 }
