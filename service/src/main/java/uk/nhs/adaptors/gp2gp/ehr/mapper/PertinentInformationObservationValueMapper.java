@@ -159,7 +159,7 @@ public class PertinentInformationObservationValueMapper {
 
     private static String processDateTimeType(DateTimeType value) {
         if (value.hasValue()) {
-            return String.format(DATE_TIME_VALUE_TEMPLATE, DateFormatUtil.toTextFormat(value.getValue()));
+            return String.format(DATE_TIME_VALUE_TEMPLATE, DateFormatUtil.toTextFormat(value));
         }
 
         return StringUtils.EMPTY;
@@ -168,8 +168,8 @@ public class PertinentInformationObservationValueMapper {
     private static String processPeriod(Period value) {
         if (value.hasStart() && value.hasEnd()) {
             return String.format(PERIOD_VALUE_TEMPLATE,
-                DateFormatUtil.toTextFormat(value.getStart()),
-                DateFormatUtil.toTextFormat(value.getEnd()));
+                DateFormatUtil.toTextFormat(value.getStartElement()),
+                DateFormatUtil.toTextFormat(value.getEndElement()));
         }
 
         return StringUtils.EMPTY;

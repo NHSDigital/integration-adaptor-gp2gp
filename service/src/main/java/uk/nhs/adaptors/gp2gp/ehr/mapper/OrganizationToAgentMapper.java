@@ -18,14 +18,16 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersInner;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AgentMapperTemplateParametersOuter;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class OrganizationToAgentMapper {
 
-    private static final Mustache AGENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_agent_template.mustache");
+    private static final Mustache AGENT_TEMPLATE_OUTER = TemplateUtils.loadTemplate("ehr_agent_template_outer.mustache");
+    private static final Mustache AGENT_TEMPLATE_INNER = TemplateUtils.loadTemplate("ehr_agent_template_inner.mustache");
     private static final String ODS_ORG_CODE_SYSTEM = "https://fhir.nhs.uk/Id/ods-organization-code";
     private static final Map<String, String> ADDRESS_USES = Map.of(
         "home", "H",
@@ -37,9 +39,18 @@ public class OrganizationToAgentMapper {
 
     public String mapOrganizationToAgent(Organization organization) {
 
-        var builder = AgentMapperTemplateParameters.builder()
+        var builder = AgentMapperTemplateParametersOuter.builder()
             .agentId(messageContext.getIdMapper().getOrNew(ResourceType.Organization,
                 organization.getIdElement().getIdPart()));
+
+        var inner = Optional.of(mapOrganizationToAgentInner(organization));
+        inner.ifPresent(builder::organisationInfo);
+
+        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_OUTER, builder.build());
+    }
+
+    public String mapOrganizationToAgentInner(Organization organization) {
+        var builder = AgentMapperTemplateParametersInner.builder();
 
         buildAgentExtensionId(organization).ifPresent(builder::agentExtensionId);
         buildName(organization).ifPresent(builder::agentName);
@@ -54,7 +65,7 @@ public class OrganizationToAgentMapper {
             builder.addressPresent(true);
         }
 
-        return TemplateUtils.fillTemplate(AGENT_TEMPLATE, builder.build());
+        return TemplateUtils.fillTemplate(AGENT_TEMPLATE_INNER, builder.build());
     }
 
     private Optional<String> buildAgentExtensionId(Organization organization) {

@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +30,11 @@ public class OrganizationToAgentMapperTest {
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String ORGANIZATION_FILE_LOCATION = "/ehr/mapper/organization/";
+    private static final String ORGANIZATION_INNER_FILE_LOCATION = ORGANIZATION_FILE_LOCATION + "inner_mapping/";
+    private static final String ORGANIZATION_FOR_INNER_MAPPER_JSON = ORGANIZATION_INNER_FILE_LOCATION
+        + "organization_with_address.json";
+    private static final String ORGANIZATION_FOR_INNER_MAPPER_XML = ORGANIZATION_INNER_FILE_LOCATION
+        + "organization_with_address.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -51,8 +57,18 @@ public class OrganizationToAgentMapperTest {
         Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
         var outputMessage = organizationToAgentMapper.mapOrganizationToAgent(organization);
         assertThat(outputMessage)
-            .withFailMessage(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    @Test
+    public void When_MappingOrganizationInner_Expect_AgentResourceXmlInner() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(ORGANIZATION_FOR_INNER_MAPPER_JSON);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(ORGANIZATION_FOR_INNER_MAPPER_XML);
+
+        Organization organization = new FhirParseService().parseResource(jsonInput, Organization.class);
+        var outputMessage = organizationToAgentMapper.mapOrganizationToAgentInner(organization);
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     private static Stream<Arguments> readTestCases() {

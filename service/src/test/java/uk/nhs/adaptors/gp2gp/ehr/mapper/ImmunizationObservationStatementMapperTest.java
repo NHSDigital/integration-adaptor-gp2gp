@@ -28,7 +28,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class ImmunizationObservationStatementMapperTest extends MapperTest {
+public class ImmunizationObservationStatementMapperTest {
     private static final String TEST_ID = "test-id";
 
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
