@@ -10,6 +10,39 @@
     {
       "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1",
       "valueDateTime": "2010-06-30T05:48:06.91+01:00"
+    },
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://read.info/readv2",
+            "code": "65M1.00",
+            "display": "Measles/mumps/rubella vaccn.",
+            "userSelected": true
+          },
+          {
+            "extension": [
+              {
+                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                "extension": [
+                  {
+                    "url": "descriptionId",
+                    "valueId": "65004017"
+                  },
+                  {
+                    "url": "descriptionDisplay",
+                    "valueString": "Measles-mumps-rubella vaccination"
+                  }
+                ]
+              }
+            ],
+            "system": "http://snomed.info/sct",
+            "code": "38598009",
+            "display": "Measles-mumps-rubella vaccination"
+          }
+        ]
+      }
     }
   ],
   "identifier": [
@@ -20,6 +53,15 @@
   ],
   "status": "completed",
   "notGiven": false,
+  "vaccineCode": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v3/NullFlavor",
+        "code": "UNK",
+        "display": "unknown"
+      }
+    ]
+  },
   "patient": {
     "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
   },

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
@@ -175,6 +176,6 @@ public class ConditionLinkSetMapper {
         if (condition.hasCode()) {
             return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode()));
         }
-        return Optional.empty();
+        throw new EhrMapperException("Condition code not present");
     }
 }

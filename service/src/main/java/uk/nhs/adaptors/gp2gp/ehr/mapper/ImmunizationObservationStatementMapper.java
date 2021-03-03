@@ -235,7 +235,7 @@ public class ImmunizationObservationStatementMapper {
             CodeableConcept codeableConcept = (CodeableConcept) vaccinationProcedure.get().getValue();
             return codeableConceptCdMapper.mapCodeableConceptToCd(codeableConcept);
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Immunization vaccination procedure not present");
     }
 
     private String buildVaccineCode(Immunization immunization) {
@@ -244,8 +244,10 @@ public class ImmunizationObservationStatementMapper {
             if (code.isPresent()) {
                 return String.format(VACCINATION_CODE, code.get());
             }
+        } else if (immunization.hasVaccineCode() && !vaccineCodeNotUNK(immunization.getVaccineCode())) {
+            return StringUtils.EMPTY;
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Immunization vaccine code not present");
     }
 
     private boolean vaccineCodeNotUNK(CodeableConcept codeableConcept) {

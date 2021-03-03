@@ -6,7 +6,9 @@
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
-
+        <code nullFlavor="UNK">
+            <originalText>4</originalText>
+        </code>
     </PlanStatement>
 </component><component typeCode="COMP" >
 <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -49,7 +51,9 @@
             <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
         </qualifier>
     </code>
-
+    <code nullFlavor="UNK">
+        <originalText>4</originalText>
+    </code>
 </LinkSet>
 </component>
 <component typeCode="COMP" >

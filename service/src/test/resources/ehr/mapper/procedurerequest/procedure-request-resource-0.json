@@ -35,5 +35,8 @@
         {
             "text": "Comment value 2"
         }
-    ]
+    ],
+    "code": {
+        "text": "test"
+    }
 }

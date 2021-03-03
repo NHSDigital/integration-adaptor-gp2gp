@@ -28,6 +28,9 @@
                             <text></text>
                         </pertinentAnnotation>
                     </pertinentInformation>
+                    <code nullFlavor="UNK">
+                        <originalText>4</originalText>
+                    </code>
                 </ObservationStatement>
             </component>
         </CompoundStatement>

@@ -160,7 +160,7 @@ public class DiaryPlanStatementMapper {
         if (procedureRequest.hasCode()) {
             return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode()));
         }
-        return Optional.empty();
+        throw new EhrMapperException("Procedure request code not present");
     }
 
     private String formatDevice(Device device) {

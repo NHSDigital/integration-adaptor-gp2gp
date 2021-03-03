@@ -9,5 +9,8 @@
         <text>
             Reason Code: Reason code value display 1
         </text>
+        <code nullFlavor="UNK">
+            <originalText>4</originalText>
+        </code>
     </PlanStatement>
 </component>

@@ -106,7 +106,7 @@ public class EncounterMapper {
     private String buildType(Encounter encounter) {
         if (encounter.hasType() && containsSnomedEncounterCode(encounter)) {
             return codeableConceptCdMapper.mapCodeableConceptToCd(encounter.getTypeFirstRep());
-        } else if(encounter.hasType() && !containsSnomedEncounterCode(encounter)) {
+        } else if (encounter.hasType() && !containsSnomedEncounterCode(encounter)) {
             return codeableConceptCdMapper.mapEncounterTypeNoSnomed(encounter);
         }
         return StringUtils.EMPTY;

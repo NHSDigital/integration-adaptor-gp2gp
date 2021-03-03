@@ -194,6 +194,6 @@ public class AllergyStructureMapper {
         if (allergyIntolerance.hasCode()) {
             return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Allergy code not present");
     }
 }

@@ -37,7 +37,7 @@ public class ImmunizationObservationStatementMapperTest {
     private static final String IMMUNIZATION_FILE_LOCATIONS = "/ehr/mapper/immunization/";
     private static final String INPUT_JSON_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-all-pertinent-information.json";
-    private static final String INPUT_JSON_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+    private static final String INPUT_JSON_WITHOUT_REQUIRED_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-date-recorded.json";
@@ -53,7 +53,7 @@ public class ImmunizationObservationStatementMapperTest {
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-all-information.xml";
-    private static final String OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
+    private static final String OUTPUT_XML_WITHOUT_REQUIRED_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-no-information.xml";
     private static final String OUTPUT_XML_WITHOUT_CONTEXT = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-with-context.xml";
@@ -105,7 +105,7 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITHOUT_CODEABLE_CONCEPT_TEXT, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITHOUT_DATE, OUTPUT_XML_WITHOUT_DATE, false),
-            Arguments.of(INPUT_JSON_WITHOUT_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_PERTINENT_INFORMATION, false),
+            Arguments.of(INPUT_JSON_WITHOUT_REQUIRED_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_REQUIRED_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN_TEXT, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_CONTEXT, true)

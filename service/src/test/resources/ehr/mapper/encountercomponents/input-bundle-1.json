@@ -351,7 +351,10 @@
                 "id": "procedurerequestid1",
                 "status": "active",
                 "intent": "plan",
-                "authoredOn": "2010-01-13T15:29:50.1+00:00"
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "code": {
+                    "text": "test"
+                }
             }
         },
         {
@@ -511,7 +514,10 @@
                     {
                         "text": "Condition note"
                     }
-                ]
+                ],
+                "code": {
+                    "text": "test"
+                }
             }
         }
     ]
