@@ -14,5 +14,8 @@
                 <text>Code Value: test-code Test display Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
+        <code nullFlavor="UNK">
+            <originalText>4</originalText>
+        </code>
     </ObservationStatement>
 </component>

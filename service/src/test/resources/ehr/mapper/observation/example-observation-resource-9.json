@@ -6,5 +6,8 @@
     "comment": "Test comment",
     "valueSampledData": {
         "data": "test-data"
+    },
+    "code": {
+        "text": "test"
     }
 }

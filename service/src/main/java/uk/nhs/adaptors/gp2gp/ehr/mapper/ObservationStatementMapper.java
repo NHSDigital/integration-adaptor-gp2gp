@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -107,7 +108,7 @@ public class ObservationStatementMapper {
         if (observation.hasCode()) {
             return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Observation code is not present");
     }
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {

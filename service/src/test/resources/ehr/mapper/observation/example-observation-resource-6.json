@@ -4,5 +4,8 @@
   "effectiveDateTime":"2019-06-01T10:30:00+00:00",
   "issued":"2019-06-01T10:30:00+00:00",
   "comment": "Test comment",
-  "valueString": "test-string"
+  "valueString": "test-string",
+  "code": {
+    "text": "test"
+  }
 }
