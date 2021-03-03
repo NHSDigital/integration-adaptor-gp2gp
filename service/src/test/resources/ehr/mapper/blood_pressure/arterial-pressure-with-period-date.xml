@@ -1,0 +1,64 @@
+<component typeCode="COMP" >
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <!--<code code="" codeSystem="" displayName="">-->
+        <!--</code>-->
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            <high value="20100115"/>
+        </effectiveTime>
+        <availabilityTime value="20131118094149" />
+        <component typeCode="COMP">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <!--<code code="" codeSystem="" displayName=""> -->
+                <!--</code>-->
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <low value="20100113"/>
+                    <high value="20100115"/>
+                </effectiveTime>
+                <availabilityTime value="20131118094149" />
+                <valueQuantity>
+                    <value xsi:type="PQ" value="120" unit="1">
+                        <translation value="120">
+                            <originalText>mmHg</originalText>
+                        </translation>
+                    </value>
+                </valueQuantity>
+                <!--<referenceRange/>-->
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <!--<code code="" codeSystem="" displayName=""> -->
+                <!--</code>-->
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <low value="20100113"/>
+                    <high value="20100115"/>
+                </effectiveTime>
+                <availabilityTime value="20131118094149" />
+                <valueQuantity>
+                    <value xsi:type="PQ" value="75" unit="1">
+                        <translation value="75">
+                            <originalText>mmHg</originalText>
+                        </translation>
+                    </value>
+                </valueQuantity>
+                <!--<referenceRange/>-->
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <text>abnormality only Very Low Interpretation(s): Systolic arterial pressure interpretation, Diastolic arterial pressure interpretation</text>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="20100113"/>
+            </NarrativeStatement>
+        </component>
+        <!--<Participant typeCode="PRF" ..../>-->
+    </CompoundStatement>
+</component>

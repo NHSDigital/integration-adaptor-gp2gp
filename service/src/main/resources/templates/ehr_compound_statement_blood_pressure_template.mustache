@@ -1,56 +1,55 @@
-<component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
+<component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="{{id}}"/>
-<!--        <code code="{{code}}" codeSystem="{{codeSystem}}" displayName="{{codeDisplay}}">-->
-<!--        </code>-->
+        <!--<code code="{{code}}" codeSystem="{{codeSystem}}" displayName="{{codeDisplay}}">-->
+        <!--</code>-->
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             {{{effectiveTime}}}
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}" />
-
+        {{{availabilityTime}}}
         {{#systolicId}}
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{systolicId}}"/>
-<!--                <code code="{{systolicCode}}" codeSystem="{{systolicCodeSystem}}" displayName="{{systolicCodeDisplay}}">-->
-<!--                </code>-->
+                <!--<code code="{{systolicCode}}" codeSystem="{{systolicCodeSystem}}" displayName="{{systolicCodeDisplay}}">-->
+                <!--</code>-->
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     {{{effectiveTime}}}
                 </effectiveTime>
-                <availabilityTime value="{{availabilityTime}}" />
-                <!--                <valueQuantity/>-->
-                <!--                <referenceRange/>-->
+                {{{availabilityTime}}}
+                {{#systolicQuantity}}<valueQuantity>{{{systolicQuantity}}}</valueQuantity>{{/systolicQuantity}}
+                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         {{/systolicId}}
-
         {{#diastolicId}}
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{diastolicId}}"/>
-<!--                <code code="{{diastolicCode}}" codeSystem="{{diastolicCodeSystem}}" displayName="{{diastolicCodeDisplay}}">-->
-<!--                </code>-->
+                <!--<code code="{{diastolicCode}}" codeSystem="{{diastolicCodeSystem}}" displayName="{{diastolicCodeDisplay}}">-->
+                <!--</code>-->
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     {{{effectiveTime}}}
                 </effectiveTime>
-                <availabilityTime value="{{availabilityTime}}" />
-                <!--                <valueQuantity/>-->
-                <!--                <referenceRange/>-->
+                {{{availabilityTime}}}
+                {{#diastolicQuantity}}<valueQuantity>{{{diastolicQuantity}}}</valueQuantity>{{/diastolicQuantity}}
+                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         {{/diastolicId}}
-
-        <component typeCode="COMP" contextConductionInd="true">
+        {{#narrativeId}}
+        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
             <NarrativeStatement classCode="OBS" moodCode="EVN">
                 <id root="{{narrativeId}}"/>
                 <text>{{narrativeText}}</text>
                 <statusCode code="COMPLETE"/>
-                <availabilityTime {{narrativeAvailabilityTime}}/>
+                {{{narrativeAvailabilityTime}}}
             </NarrativeStatement>
         </component>
-        <!--        <Participant typeCode="PRF" ..../>-->
+        {{/narrativeId}}
+        <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
 </component>

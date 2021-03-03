@@ -1,0 +1,143 @@
+{
+    "resourceType": "Observation",
+    "id": "296D5D73-8D65-4CAC-8047-553232F77A82",
+    "meta": {
+      "profile": [
+        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+      ]
+    },
+    "identifier": [
+      {
+        "system": "https://EMISWeb/A82038",
+        "value": "296D5D73-8D65-4CAC-8047-553232F77A82"
+      }
+    ],
+    "status": "final",
+    "code": {
+      "coding": [
+        {
+          "system": "http://read.info/readv2",
+          "code": "42Q5.00",
+          "display": "Prothrombin time",
+          "userSelected": true
+        },
+        {
+          "extension": [
+            {
+              "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+              "extension": [
+                {
+                  "url": "descriptionId",
+                  "valueId": "2207951000000110"
+                }
+              ]
+            }
+          ],
+          "system": "http://snomed.info/sct",
+          "code": "852471000000107",
+          "display": "Prothrombin time"
+        }
+      ]
+    },
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                        "code": "2469",
+                        "display": "Systolic blood pressure",
+                        "userSelected": true
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                "extension": [
+                                    {
+                                        "url": "descriptionId",
+                                        "valueId": "120159016"
+                                    },
+                                    {
+                                        "url": "descriptionDisplay",
+                                        "valueString": "Systolic blood pressure"
+                                    }
+                                ]
+                            }
+                        ],
+                        "system": "http://snomed.info/sct",
+                        "code": "271649006",
+                        "display": "Systolic blood pressure"
+                    }
+                ]
+            },
+            "valueQuantity": {
+                "value": 110,
+                "unit": "mm[Hg]"
+            },
+            "interpretation": {
+                "text": "Systolic blood pressure interpretation text"
+            }
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                        "code": "246A",
+                        "display": "Diastolic blood pressure",
+                        "userSelected": true
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                "extension": [
+                                    {
+                                        "url": "descriptionId",
+                                        "valueId": "271650006"
+                                    },
+                                    {
+                                        "url": "descriptionDisplay",
+                                        "valueString": "Diastolic blood pressure"
+                                    }
+                                ]
+                            }
+                        ],
+                        "system": "http://snomed.info/sct",
+                        "code": "271650006",
+                        "display": "Diastolic blood pressure"
+                    }
+                ]
+            },
+            "valueQuantity": {
+                "value": 55,
+                "unit": "mm[Hg]"
+            },
+            "interpretation": {
+                "coding": [
+                    {
+                        "display": "Diastolic blood pressure interpretation display"
+                    }
+                ]
+            }
+        }
+    ],
+    "subject": {
+      "reference": "Patient/7CCF0FBE-C849-4BA2-A7DD-9907D1676161"
+    },
+    "context": {
+      "reference": "Encounter/41882B34-B22F-4A5B-970E-75CF7846A629"
+    },
+    "effectiveDateTime": "2013-11-18T09:41:49.46+00:00",
+    "issued": "2013-11-18T09:41:49.46+00:00",
+    "performer": [
+      {
+        "reference": "Practitioner/749107A2-4975-441F-8EDF-ADFF451FD12D"
+      }
+    ],
+    "interpretation": {
+      "text": "LO - Below low reference limit"
+    },
+    "comment": "blood pressure is very low"
+  }

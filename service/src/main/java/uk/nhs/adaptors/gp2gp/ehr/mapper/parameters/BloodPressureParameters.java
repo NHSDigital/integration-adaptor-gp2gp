@@ -10,7 +10,9 @@ public class BloodPressureParameters {
     private String effectiveTime;
     private String availabilityTime;
     private String systolicId;
+    private String systolicQuantity;
     private String diastolicId;
+    private String diastolicQuantity;
     private String narrativeId;
     private String narrativeText;
     private String narrativeAvailabilityTime;

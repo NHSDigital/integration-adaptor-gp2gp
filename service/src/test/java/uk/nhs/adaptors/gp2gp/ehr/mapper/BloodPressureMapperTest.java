@@ -2,12 +2,14 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -24,31 +26,78 @@ public class BloodPressureMapperTest {
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
     private static final String BLOOD_PRESSURE_FILE_LOCATION = "/ehr/mapper/blood_pressure/";
 
+    private static final String INPUT_ARTERIAL_PRESSURE_WITH_DATA = "arterial-pressure-with-data.json";
+    private static final String EXPECTED_ARTERIAL_PRESSURE_WITH_DATA = "arterial-pressure-with-data.xml";
+    private static final String INPUT_ARTERIAL_PRESSURE_WITH_PERIOD_DATE = "arterial-pressure-with-period-date.json";
+    private static final String EXPECTED_ARTERIAL_PRESSURE_WITH_PERIOD_DATE = "arterial-pressure-with-period-date.xml";
+    private static final String INPUT_ARTERIAL_PRESSURE_WITHOUT_DATA = "arterial-pressure-without-data.json";
+    private static final String EXPECTED_ARTERIAL_PRESSURE_WITHOUT_DATA = "arterial-pressure-without-data.xml";
+    private static final String INPUT_BLOOD_PRESSURE_WITH_DATA = "blood-pressure-with-data.json";
+    private static final String EXPECTED_BLOOD_PRESSURE_WITH_DATA = "blood-pressure-with-data.xml";
+    private static final String EXPECTED_NESTED_BLOOD_PRESSURE = "blood-pressure-with-data-nested.xml";
+    private static final String INPUT_BLOOD_PRESSURE_WITHOUT_DATA = "blood-pressure-without-data.json";
+    private static final String EXPECTED_BLOOD_PRESSURE_WITHOUT_DATA = "blood-pressure-without-data.xml";
+    private static final String INPUT_EMPTY_OBSERVATION = "empty-observation.json";
+    private static final String EXPECTED_EMPTY_OBSERVATION = "empty-observation.xml";
+    private static final String INPUT_OBSERVATION_WITHOUT_VALID_CODE = "observation-with-no-valid-code.json";
+    private static final String EXPECTED_OBSERVATION_WITHOUT_VALID_CODE = "observation-with-no-valid-code.xml";
+
     private BloodPressureMapper bloodPressureMapper;
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-    private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        messageContext = new MessageContext(randomIdGeneratorService);
-        bloodPressureMapper = new BloodPressureMapper(messageContext);
+        MessageContext messageContext = new MessageContext(randomIdGeneratorService);
+        bloodPressureMapper = new BloodPressureMapper(messageContext, randomIdGeneratorService);
     }
 
-    @ParameterizedTest
-    @MethodSource("loadTestArguments")
-    public void When_MappingBloodPressure_Expect_CompoundStatementXml(String inputJson, String outputXml) throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
+    @Test
+    public void When_MappingEmptyObservation_Expect_CompoundStatementXmlReturned() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_EMPTY_OBSERVATION);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_EMPTY_OBSERVATION);
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, false);
+
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
-    private static Stream<Arguments> loadTestArguments() {
-        return TestArgumentsLoaderUtil.readTestCases(BLOOD_PRESSURE_FILE_LOCATION);
+    @Test
+    public void When_MappingBloodPressureWithNestedTrue_Expect_CompoundStatementXmlReturned() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_DATA);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_NESTED_BLOOD_PRESSURE);
+
+        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    @ParameterizedTest
+    @MethodSource("testArguments")
+    public void When_MappingBloodPressure_Expect_CompoundStatementXmlReturned(String inputJson, String outputXml) throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + inputJson);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + outputXml);
+
+        Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        var outputMessage = bloodPressureMapper.mapBloodPressure(observation, false);
+
+        assertThat(outputMessage)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    private static Stream<Arguments> testArguments() {
+        return Stream.of(
+            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITH_DATA, EXPECTED_ARTERIAL_PRESSURE_WITH_DATA),
+            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITH_PERIOD_DATE, EXPECTED_ARTERIAL_PRESSURE_WITH_PERIOD_DATE),
+            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITHOUT_DATA, EXPECTED_ARTERIAL_PRESSURE_WITHOUT_DATA),
+            Arguments.of(INPUT_BLOOD_PRESSURE_WITH_DATA, EXPECTED_BLOOD_PRESSURE_WITH_DATA),
+            Arguments.of(INPUT_BLOOD_PRESSURE_WITHOUT_DATA, EXPECTED_BLOOD_PRESSURE_WITHOUT_DATA),
+            Arguments.of(INPUT_OBSERVATION_WITHOUT_VALID_CODE, EXPECTED_OBSERVATION_WITHOUT_VALID_CODE)
+        );
     }
 }

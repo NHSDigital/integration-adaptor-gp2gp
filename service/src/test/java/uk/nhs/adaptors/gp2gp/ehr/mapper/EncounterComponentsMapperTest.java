@@ -60,6 +60,7 @@ public class EncounterComponentsMapperTest {
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
+        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(messageContext, randomIdGeneratorService);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -67,7 +68,8 @@ public class EncounterComponentsMapperTest {
             narrativeStatementMapper,
             observationStatementMapper,
             immunizationObservationStatementMapper,
-            conditionLinkSetMapper);
+            conditionLinkSetMapper,
+            bloodPressureMapper);
     }
 
     @AfterEach
