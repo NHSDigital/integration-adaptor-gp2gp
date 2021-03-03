@@ -36,8 +36,11 @@ public class EncounterComponentsMapper {
     private static final String BLOOD_PRESSURE_READING_CODE = "163020007";
     private static final String ARTERIAL_BLOOD_PRESSURE_CODE = "386534000";
     private static final String BLOOD_PRESSURE_CODE = "75367002";
+    private static final String STANDING_BLOOD_PRESSURE_CODE = "163034007";
+    private static final String SITTING_BLOOD_PRESSURE_CODE = "163035008";
+    private static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
     private static final List<String> BLOOD_CODES = Arrays.asList(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
-        BLOOD_PRESSURE_CODE);
+        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
 
     private static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";

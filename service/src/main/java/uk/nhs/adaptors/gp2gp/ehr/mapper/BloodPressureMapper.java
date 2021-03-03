@@ -34,10 +34,18 @@ public class BloodPressureMapper {
         loadTemplate("ehr_compound_statement_blood_pressure_template.mustache");
     private static final String SYSTOLIC_ARTERIAL_PRESSURE = "72313002";
     private static final String SYSTOLIC_BLOOD_PRESSURE = "271649006";
+    private static final String SYSTOLIC_STANDING_BLOOD_PRESSURE = "400974009";
+    private static final String SYSTOLIC_SITTING_BLOOD_PRESSURE = "407554009";
+    private static final String SYSTOLIC_LYING_BLOOD_PRESSURE = "407556006";
     private static final String DIASTOLIC_ARTERIAL_PRESSURE = "1091811000000102";
     private static final String DIASTOLIC_BLOOD_PRESSURE = "271650006";
-    private static final List<String> SYSTOLIC_CODE = Arrays.asList(SYSTOLIC_ARTERIAL_PRESSURE, SYSTOLIC_BLOOD_PRESSURE);
-    private static final List<String> DIASTOLIC_CODE = Arrays.asList(DIASTOLIC_ARTERIAL_PRESSURE, DIASTOLIC_BLOOD_PRESSURE);
+    private static final String DIASTOLIC_STANDING_BLOOD_PRESSURE = "400975005";
+    private static final String DIASTOLIC_SITTING_BLOOD_PRESSURE = "407555005";
+    private static final String DIASTOLIC_LYING_BLOOD_PRESSURE = "407557002";
+    private static final List<String> SYSTOLIC_CODE = Arrays.asList(SYSTOLIC_ARTERIAL_PRESSURE,
+        SYSTOLIC_BLOOD_PRESSURE, SYSTOLIC_STANDING_BLOOD_PRESSURE, SYSTOLIC_SITTING_BLOOD_PRESSURE, SYSTOLIC_LYING_BLOOD_PRESSURE);
+    private static final List<String> DIASTOLIC_CODE = Arrays.asList(DIASTOLIC_ARTERIAL_PRESSURE,
+        DIASTOLIC_BLOOD_PRESSURE, DIASTOLIC_STANDING_BLOOD_PRESSURE, DIASTOLIC_SITTING_BLOOD_PRESSURE, DIASTOLIC_LYING_BLOOD_PRESSURE);
     private static final String COMMA = ", ";
     private static final String SYSTOLIC_MEASUREMENT_SITE = "Systolic Measurement Site: %s";
     private static final String DIASTOLIC_MEASUREMENT_SITE = "Diastolic Measurement Site: %s";
