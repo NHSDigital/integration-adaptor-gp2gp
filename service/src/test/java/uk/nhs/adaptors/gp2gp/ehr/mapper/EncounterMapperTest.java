@@ -1,14 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +21,6 @@ import org.mockito.quality.Strictness;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,8 +49,6 @@ public class EncounterMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private EncounterComponentsMapper encounterComponentsMapper;
-    @Mock
-    private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private EncounterMapper encounterMapper;
     private MessageContext messageContext;
@@ -61,12 +56,8 @@ public class EncounterMapperTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(codeableConceptCdMapper.mapEncounterTypeNoSnomed(any(Encounter.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper, codeableConceptCdMapper);
+        encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
 
     @AfterEach
