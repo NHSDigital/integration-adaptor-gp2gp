@@ -9,7 +9,7 @@
             <high value="20100115"/>
         </effectiveTime>
         <availabilityTime value="20131118094149" />
-        <component typeCode="COMP">
+        <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
                 <!--<code code="" codeSystem="" displayName=""> -->
@@ -30,7 +30,7 @@
                 <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
-        <component typeCode="COMP">
+        <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
                 <!--<code code="" codeSystem="" displayName=""> -->
@@ -51,7 +51,7 @@
                 <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
-        <component typeCode="COMP">
+        <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
                 <text>abnormality only Very Low Interpretation(s): Systolic arterial pressure interpretation, Diastolic arterial pressure interpretation</text>

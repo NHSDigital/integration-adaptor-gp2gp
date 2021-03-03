@@ -380,7 +380,7 @@
                                 <center value="20100714175500"/>
                             </effectiveTime>
                             <availabilityTime value="20100714162813"/>
-                            <component typeCode="COMP">
+                            <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="EVN">
                                     <id root="test-id-3"/>
                                     <!--<code code="" codeSystem="" displayName="">-->
@@ -394,7 +394,7 @@
                                     <!--<referenceRange/>-->
                                 </ObservationStatement>
                             </component>
-                            <component typeCode="COMP">
+                            <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="EVN">
                                     <id root="test-id-3"/>
                                     <!--<code code="" codeSystem="" displayName="">-->
@@ -408,7 +408,7 @@
                                     <!--<referenceRange/>-->
                                 </ObservationStatement>
                             </component>
-                            <component typeCode="COMP">
+                            <component typeCode="COMP" contextConductionInd="true">
                                 <NarrativeStatement classCode="OBS" moodCode="EVN">
                                     <id root="test-id-3"/>
                                     <text>This is the BP reading in a consultation with a note</text>

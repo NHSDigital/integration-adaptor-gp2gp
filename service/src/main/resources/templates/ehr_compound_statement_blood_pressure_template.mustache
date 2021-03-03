@@ -9,7 +9,7 @@
         </effectiveTime>
         {{{availabilityTime}}}
         {{#systolicId}}
-        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
+        <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{systolicId}}"/>
                 <!--<code code="{{systolicCode}}" codeSystem="{{systolicCodeSystem}}" displayName="{{systolicCodeDisplay}}">-->
@@ -25,7 +25,7 @@
         </component>
         {{/systolicId}}
         {{#diastolicId}}
-        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
+        <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{diastolicId}}"/>
                 <!--<code code="{{diastolicCode}}" codeSystem="{{diastolicCodeSystem}}" displayName="{{diastolicCodeDisplay}}">-->
@@ -41,7 +41,7 @@
         </component>
         {{/diastolicId}}
         {{#narrativeId}}
-        <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
+        <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
                 <id root="{{narrativeId}}"/>
                 <text>{{narrativeText}}</text>

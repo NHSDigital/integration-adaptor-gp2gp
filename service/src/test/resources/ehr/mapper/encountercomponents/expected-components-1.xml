@@ -95,7 +95,7 @@
         <center nullFlavor="UNK"/>
     </effectiveTime>
     <availabilityTime nullFlavor="UNK"/>
-    <component typeCode="COMP">
+    <component typeCode="COMP" contextConductionInd="true">
         <NarrativeStatement classCode="OBS" moodCode="EVN">
             <id root="394559384658936"/>
             <text>Blood pressure 1</text>
@@ -116,7 +116,7 @@
         <center nullFlavor="UNK"/>
     </effectiveTime>
     <availabilityTime nullFlavor="UNK"/>
-    <component typeCode="COMP">
+    <component typeCode="COMP" contextConductionInd="true">
         <NarrativeStatement classCode="OBS" moodCode="EVN">
             <id root="394559384658936"/>
             <text>Blood pressure 2</text>
@@ -137,7 +137,7 @@
         <center nullFlavor="UNK"/>
     </effectiveTime>
     <availabilityTime nullFlavor="UNK"/>
-    <component typeCode="COMP">
+    <component typeCode="COMP" contextConductionInd="true">
         <NarrativeStatement classCode="OBS" moodCode="EVN">
             <id root="394559384658936"/>
             <text>Blood pressure 3</text>
