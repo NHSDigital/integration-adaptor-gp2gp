@@ -18,13 +18,7 @@
                     <center value="20131118094149"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity>
-                <value xsi:type="PQ" value="110" unit="1">
-                    <translation value="110">
-                        <originalText>mm[Hg]</originalText>
-                    </translation>
-                </value><
-                /valueQuantity>
+                <valueQuantity><value xsi:type="PQ" value="110" unit="1"><translation value="110"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
                 <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
@@ -38,13 +32,7 @@
                     <center value="20131118094149"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity>
-                    <value xsi:type="PQ" value="55" unit="1">
-                        <translation value="55">
-                            <originalText>mm[Hg]</originalText>
-                        </translation>
-                    </value>
-                </valueQuantity>
+                <valueQuantity><value xsi:type="PQ" value="55" unit="1"><translation value="55"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
                 <!--<referenceRange/>-->
             </ObservationStatement>
         </component>

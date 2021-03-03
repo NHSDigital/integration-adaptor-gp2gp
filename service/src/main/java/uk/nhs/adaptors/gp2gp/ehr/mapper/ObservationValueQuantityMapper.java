@@ -29,7 +29,8 @@ public final class ObservationValueQuantityMapper {
         + "value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
         + "<originalText>%s</originalText></translation></high></value>";
     private static final String GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\">"
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">%s</originalText></translation></low></value>";
+        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\"><originalText>%s</originalText>"
+        + "</translation></low></value>";
     private static final String GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\">"
         + "<low value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
         + "<originalText>%s</originalText></translation></low></value>";
