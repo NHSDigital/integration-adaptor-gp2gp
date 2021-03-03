@@ -91,9 +91,7 @@
                             </code>
                         </ObservationStatement>
                     </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -146,9 +144,7 @@
                                 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
                         </NarrativeStatement>
                     </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -289,9 +285,7 @@
                         </code>
                     </ObservationStatement>
                 </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -332,9 +326,7 @@
                             <text>hhhhhhhhh</text>
                         </NarrativeStatement>
                     </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -375,9 +367,7 @@
                             <text>This is kjkjkjkjkjkjkjkjkj</text>
                         </NarrativeStatement>
                     </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -431,9 +421,7 @@
                             </code>
                         </ObservationStatement>
                     </component>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+
                 </ehrComposition>
             </component>
         </ehrFolder>
