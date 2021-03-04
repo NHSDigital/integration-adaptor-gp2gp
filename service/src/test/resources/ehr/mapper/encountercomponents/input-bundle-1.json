@@ -250,6 +250,21 @@
                         "item": {
                             "reference": "Observation/observationuncategorisedid1"
                         }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/bloodpressure1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/bloodpressure2"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/bloodpressure3"
+                        }
                     }
                 ]
             }
@@ -462,7 +477,7 @@
             }
         },
         {
-            "resource" : {
+            "resource": {
                 "resourceType": "Condition",
                 "id": "conditionid1",
                 "meta": {
@@ -509,6 +524,72 @@
                         "text": "Condition note"
                     }
                 ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "bloodpressure1",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42Q5.00",
+                            "display": "Prothrombin time",
+                            "userSelected": true
+                        },
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "163020007"
+                        }
+                    ]
+                },
+                "comment": "Blood pressure 1"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "bloodpressure3",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42Q5.00",
+                            "display": "Prothrombin time",
+                            "userSelected": true
+                        },
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "386534000"
+                        }
+                    ]
+                },
+                "comment": "Blood pressure 3"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "bloodpressure2",
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "42Q5.00",
+                            "display": "Prothrombin time",
+                            "userSelected": true
+                        },
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "75367002"
+                        }
+                    ]
+                },
+                "comment": "Blood pressure 2"
             }
         }
     ]

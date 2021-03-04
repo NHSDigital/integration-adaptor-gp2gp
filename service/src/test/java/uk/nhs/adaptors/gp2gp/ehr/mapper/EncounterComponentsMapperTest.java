@@ -53,13 +53,18 @@ public class EncounterComponentsMapperTest {
 
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext);
         NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
-            new StructuredObservationValueMapper(),
+            structuredObservationValueMapper,
             new PertinentInformationObservationValueMapper());
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
+        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
+            messageContext,
+            randomIdGeneratorService,
+            structuredObservationValueMapper);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -67,7 +72,8 @@ public class EncounterComponentsMapperTest {
             narrativeStatementMapper,
             observationStatementMapper,
             immunizationObservationStatementMapper,
-            conditionLinkSetMapper);
+            conditionLinkSetMapper,
+            bloodPressureMapper);
     }
 
     @AfterEach

@@ -75,7 +75,8 @@ public class EhrExtractMapperTest {
                 new PertinentInformationObservationValueMapper()
             ),
             new ImmunizationObservationStatementMapper(messageContext),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService)
+            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService),
+            new BloodPressureMapper(messageContext, randomIdGeneratorService, new StructuredObservationValueMapper())
         );
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
