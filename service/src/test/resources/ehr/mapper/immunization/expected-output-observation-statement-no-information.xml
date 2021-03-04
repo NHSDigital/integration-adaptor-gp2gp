@@ -6,14 +6,6 @@
             <center value="20100630055900"/>
         </effectiveTime>
         <availabilityTime value="20100630054806" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1"/>
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Substance: unknown</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        <code nullFlavor="UNK">
-            <originalText>4</originalText>
-        </code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </ObservationStatement>
 </component>

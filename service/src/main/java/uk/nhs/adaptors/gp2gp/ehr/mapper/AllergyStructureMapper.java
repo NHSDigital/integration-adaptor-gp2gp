@@ -56,9 +56,9 @@ public class AllergyStructureMapper {
             .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
             .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
+            .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
-            .code(buildCode(allergyIntolerance))
             .build();
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);

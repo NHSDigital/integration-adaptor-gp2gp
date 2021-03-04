@@ -25,12 +25,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class ConditionLinkSetMapperTest {
 
     private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
@@ -105,7 +102,6 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
-        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
@@ -127,8 +123,6 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false)
         );
     }
-
-
 
     private Answer<String> answerWithObjectId() {
         return invocation -> {

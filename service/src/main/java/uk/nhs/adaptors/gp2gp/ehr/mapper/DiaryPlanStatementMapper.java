@@ -57,7 +57,7 @@ public class DiaryPlanStatementMapper {
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
-        buildCode(procedureRequest).ifPresent(builder::code);
+        builder.code(buildCode(procedureRequest));
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
@@ -156,9 +156,9 @@ public class DiaryPlanStatementMapper {
         return Optional.empty();
     }
 
-    private Optional<String> buildCode(ProcedureRequest procedureRequest) {
+    private String buildCode(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasCode()) {
-            return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode()));
+            return codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode());
         }
         throw new EhrMapperException("Procedure request code not present");
     }

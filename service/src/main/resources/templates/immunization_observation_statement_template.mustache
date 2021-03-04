@@ -6,16 +6,14 @@
             {{#effectiveTime}}<center value="{{effectiveTime}}"/>{{/effectiveTime}}{{^effectiveTime}}<center nullFlavor="UNK"/>{{/effectiveTime}}
         </effectiveTime>
         <availabilityTime value="{{availabilityTime}}" />
-{{#pertinentInformation}}
-    <pertinentInformation typeCode="PERT">
-        <sequenceNumber value="+1"/>
-        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-            <text>{{pertinentInformation}}</text>
-        </pertinentAnnotation>
-<   /pertinentInformation>
-{{/pertinentInformation}}
-        {{#code}}
+        {{#pertinentInformation}}
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1"/>
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>{{pertinentInformation}}</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        {{/pertinentInformation}}
         {{{code}}}
-        {{/code}}
     </ObservationStatement>
 </component>

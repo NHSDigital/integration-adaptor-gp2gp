@@ -28,9 +28,7 @@
                             <text></text>
                         </pertinentAnnotation>
                     </pertinentInformation>
-                    <code nullFlavor="UNK">
-                        <originalText>4</originalText>
-                    </code>
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 </ObservationStatement>
             </component>
         </CompoundStatement>

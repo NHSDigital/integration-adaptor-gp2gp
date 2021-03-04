@@ -42,11 +42,11 @@ public class ObservationStatementMapper {
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .code(prepareCode(observation))
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
             .isNested(isNested)
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-            .code(prepareCode(observation));
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
 
         if (observation.hasValue()) {
             Type value = observation.getValue();

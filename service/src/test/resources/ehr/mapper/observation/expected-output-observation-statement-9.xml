@@ -14,8 +14,6 @@
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>Test reference range text</text><value><low value="20"/><high value="30"/></value></referenceInterpretationRange></referenceRange>
-        <code nullFlavor="UNK">
-            <originalText>4</originalText>
-        </code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </ObservationStatement>
 </component>

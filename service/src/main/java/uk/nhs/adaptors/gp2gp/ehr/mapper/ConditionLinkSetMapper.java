@@ -70,7 +70,7 @@ public class ConditionLinkSetMapper {
                 buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
             });
 
-        buildCode(condition).ifPresent(builder::code);
+        builder.code(buildCode(condition));
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }
@@ -172,9 +172,9 @@ public class ConditionLinkSetMapper {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
     }
 
-    private Optional<String> buildCode(Condition condition) {
+    private String buildCode(Condition condition) {
         if (condition.hasCode()) {
-            return Optional.of(codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode()));
+            return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
         }
         throw new EhrMapperException("Condition code not present");
     }

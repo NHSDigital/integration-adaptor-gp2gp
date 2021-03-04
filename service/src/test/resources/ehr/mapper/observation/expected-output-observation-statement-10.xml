@@ -12,8 +12,6 @@
                 <text>Range: Text: Test reference range text High: 20 Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <code nullFlavor="UNK">
-            <originalText>4</originalText>
-        </code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </ObservationStatement>
 </component>

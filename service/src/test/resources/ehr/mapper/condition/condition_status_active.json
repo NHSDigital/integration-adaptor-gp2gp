@@ -54,6 +54,27 @@
             ]
         }
     ],
+    "code": {
+        "coding": [
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "60126016"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "36031001",
+                "display": "Burning feet",
+                "userSelected": true
+            }
+        ]
+    },
     "subject": {
         "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
     },
@@ -67,8 +88,5 @@
         {
             "text": "Burning feet description"
         }
-    ],
-    "code": {
-        "text": "test"
-    }
+    ]
 }

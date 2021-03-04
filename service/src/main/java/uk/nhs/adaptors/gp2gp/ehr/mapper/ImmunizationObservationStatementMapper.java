@@ -251,6 +251,6 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private boolean vaccineCodeNotUNK(CodeableConcept codeableConcept) {
-        return  (codeableConcept.getCodingFirstRep().hasCode() && !codeableConcept.getCodingFirstRep().getDisplay().equals("UNK"));
+        return  (codeableConcept.getCodingFirstRep().hasCode() && !codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
     }
 }
