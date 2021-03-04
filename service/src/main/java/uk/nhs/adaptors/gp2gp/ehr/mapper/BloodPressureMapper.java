@@ -128,10 +128,10 @@ public class BloodPressureMapper {
         }
         extractBodySite(observation).ifPresent(narrativeTextParts::add);
 
-        extractMeasurementSite(observation, SYSTOLIC_CODE, SYSTOLIC_MEASUREMENT_ABSENT)
+        extractMeasurementAbsent(observation, SYSTOLIC_CODE, SYSTOLIC_MEASUREMENT_ABSENT)
             .ifPresent(narrativeTextParts::add);
 
-        extractMeasurementSite(observation, DIASTOLIC_CODE, DIASTOLIC_MEASUREMENT_ABSENT)
+        extractMeasurementAbsent(observation, DIASTOLIC_CODE, DIASTOLIC_MEASUREMENT_ABSENT)
             .ifPresent(narrativeTextParts::add);
 
         extractInterpretation(observation).ifPresent(narrativeTextParts::add);
@@ -144,7 +144,7 @@ public class BloodPressureMapper {
             .map(text -> String.format(MEASUREMENT_SITE, text));
     }
 
-    private Optional<String> extractMeasurementSite(Observation observation, List<String> diastolicCode, String measurementSite) {
+    private Optional<String> extractMeasurementAbsent(Observation observation, List<String> diastolicCode, String measurementSite) {
         return extractBloodPressureComponent(observation, diastolicCode)
             .map(Observation.ObservationComponentComponent::getDataAbsentReason)
             .flatMap(dataAbsentReason -> extractTextOrCoding(dataAbsentReason)
