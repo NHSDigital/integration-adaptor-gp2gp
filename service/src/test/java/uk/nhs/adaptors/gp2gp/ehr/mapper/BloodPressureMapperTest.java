@@ -57,7 +57,7 @@ public class BloodPressureMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        bloodPressureMapper = new BloodPressureMapper(messageContext, randomIdGeneratorService);
+        bloodPressureMapper = new BloodPressureMapper(messageContext, randomIdGeneratorService, new StructuredObservationValueMapper());
     }
 
     @AfterEach

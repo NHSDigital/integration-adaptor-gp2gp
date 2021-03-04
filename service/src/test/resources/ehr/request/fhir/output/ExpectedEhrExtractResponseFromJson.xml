@@ -391,7 +391,6 @@
                                     </effectiveTime>
                                     <availabilityTime value="20100714162813"/>
                                     <valueQuantity><value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value></valueQuantity>
-                                    <!--<referenceRange/>-->
                                 </ObservationStatement>
                             </component>
                             <component typeCode="COMP" contextConductionInd="true">
@@ -405,7 +404,6 @@
                                     </effectiveTime>
                                     <availabilityTime value="20100714162813"/>
                                     <valueQuantity><value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value></valueQuantity>
-                                    <!--<referenceRange/>-->
                                 </ObservationStatement>
                             </component>
                             <component typeCode="COMP" contextConductionInd="true">

@@ -49,10 +49,12 @@ public class BloodPressureMapper {
     private static final String COMMA = ", ";
     private static final String SYSTOLIC_MEASUREMENT_SITE = "Systolic Measurement Site: %s";
     private static final String DIASTOLIC_MEASUREMENT_SITE = "Diastolic Measurement Site: %s";
+    private static final String MEASUREMENT_SITE = "Measurement Site: %s";
     public static final String INTERPRETATION = "Interpretation(s): %s";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final StructuredObservationValueMapper structuredObservationValueMapper;
 
     public String mapBloodPressure(Observation observation, boolean isNested) {
         BloodPressureParametersBuilder builder = BloodPressureParameters.builder()
@@ -64,12 +66,14 @@ public class BloodPressureMapper {
         extractBloodPressureComponent(observation, SYSTOLIC_CODE).ifPresent(observationComponent -> {
                 builder.systolicId(randomIdGeneratorService.createNewId());
                 buildQuantity(observationComponent).ifPresent(builder::systolicQuantity);
+                buildReferenceRange(observationComponent).ifPresent(builder::systolicReferenceRange);
             }
         );
 
         extractBloodPressureComponent(observation, DIASTOLIC_CODE).ifPresent(observationComponent -> {
                 builder.diastolicId(randomIdGeneratorService.createNewId());
                 buildQuantity(observationComponent).ifPresent(builder::diastolicQuantity);
+                buildReferenceRange(observationComponent).ifPresent(builder::diastolicReferenceRange);
             }
         );
 
@@ -80,6 +84,17 @@ public class BloodPressureMapper {
         });
 
         return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_BLOOD_PRESSURE_TEMPLATE, builder.build());
+    }
+
+    private Optional<String> buildReferenceRange(Observation.ObservationComponentComponent observationComponent) {
+        if (observationComponent.hasReferenceRange()) {
+            return observationComponent.getReferenceRange()
+                .stream()
+                .map(structuredObservationValueMapper::mapReferenceRangeType)
+                .findFirst();
+        }
+
+        return Optional.empty();
     }
 
     private Optional<String> buildQuantity(Observation.ObservationComponentComponent observationComponent) {
@@ -111,6 +126,7 @@ public class BloodPressureMapper {
         if (observation.hasComment()) {
             narrativeTextParts.add(observation.getComment());
         }
+        extractBodySite(observation).ifPresent(narrativeTextParts::add);
 
         extractMeasurementSite(observation, SYSTOLIC_CODE, SYSTOLIC_MEASUREMENT_SITE)
             .ifPresent(narrativeTextParts::add);
@@ -119,20 +135,27 @@ public class BloodPressureMapper {
             .ifPresent(narrativeTextParts::add);
 
         extractInterpretation(observation).ifPresent(narrativeTextParts::add);
-        extractTextOrCoding(observation.getBodySite()).ifPresent(narrativeTextParts::add);
 
         return narrativeTextParts.isEmpty() ? Optional.empty() : Optional.of(StringUtils.join(narrativeTextParts, StringUtils.SPACE));
     }
 
-    private Optional<String> extractMeasurementSite(Observation observation, List<String> diastolicCode, String diastolicMeasurementSite) {
+    private Optional<String> extractBodySite(Observation observation) {
+        return extractTextOrCoding(observation.getBodySite())
+            .map(text -> String.format(MEASUREMENT_SITE, text));
+    }
+
+    private Optional<String> extractMeasurementSite(Observation observation, List<String> diastolicCode, String measurementSite) {
         return extractBloodPressureComponent(observation, diastolicCode)
             .map(Observation.ObservationComponentComponent::getDataAbsentReason)
             .flatMap(dataAbsentReason -> extractTextOrCoding(dataAbsentReason)
-                .map(text -> String.format(diastolicMeasurementSite, text)));
+                .map(text -> String.format(measurementSite, text)));
     }
 
     private Optional<String> extractInterpretation(Observation observation) {
         List<String> interpretations = new ArrayList<>();
+
+        extractTextOrCoding(observation.getInterpretation())
+            .ifPresent(interpretations::add);
 
         extractBloodPressureComponent(observation, SYSTOLIC_CODE)
             .flatMap(observationComponent -> extractTextOrCoding(observationComponent.getInterpretation()))

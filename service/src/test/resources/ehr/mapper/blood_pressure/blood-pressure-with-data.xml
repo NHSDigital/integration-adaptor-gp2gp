@@ -19,7 +19,6 @@
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
                 <valueQuantity><value xsi:type="PQ" value="110" unit="1"><translation value="110"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
-                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -33,13 +32,12 @@
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
                 <valueQuantity><value xsi:type="PQ" value="55" unit="1"><translation value="55"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
-                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                <text>blood pressure is very low Interpretation(s): Systolic blood pressure interpretation text, Diastolic blood pressure interpretation display</text>
+                <text>blood pressure is very low Measurement Site: Body site display Interpretation(s): Systolic blood pressure interpretation text, Diastolic blood pressure interpretation display</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20131118094149"/>
             </NarrativeStatement>

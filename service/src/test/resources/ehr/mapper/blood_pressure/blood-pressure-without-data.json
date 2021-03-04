@@ -139,7 +139,17 @@
         }
     ],
     "interpretation": {
-        "text": "LO - Below low reference limit"
+        "coding": [{
+            "display": "Panel level interpretation display"
+        }],
+        "text": "Panel level interpretation"
     },
-    "comment": "blood pressure is very low"
+    "comment": "blood pressure is very low",
+    "bodySite": {
+        "coding": [
+            {
+                "display": "Body site display"
+            }
+        ]
+    }
 }

@@ -77,7 +77,18 @@
             },
             "interpretation": {
                 "text": "Systolic arterial pressure interpretation"
-            }
+            },
+            "referenceRange":[
+                {
+                    "text":"Systolic reference range text",
+                    "low":{
+                        "value":10
+                    },
+                    "high":{
+                        "value":20
+                    }
+                }
+            ]
         },
         {
             "code": {
@@ -116,7 +127,12 @@
             },
             "interpretation": {
                 "text": "Diastolic arterial pressure interpretation"
-            }
+            },
+            "referenceRange":[
+                {
+                    "text": "Diastolic reference range text"
+                }
+            ]
         }
     ],
     "subject": {
@@ -133,7 +149,10 @@
       }
     ],
     "interpretation": {
-      "text": "LO - Below low reference limit"
+      "text": "Panel level interpretation"
     },
-    "comment": "abnormality only Very Low"
+    "comment": "abnormality only Very Low",
+    "bodySite": {
+        "text": "Body site text"
+    }
   }

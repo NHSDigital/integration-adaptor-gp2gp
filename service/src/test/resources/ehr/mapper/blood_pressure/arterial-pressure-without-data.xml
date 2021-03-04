@@ -18,7 +18,6 @@
                     <center value="20060818"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -31,13 +30,12 @@
                     <center value="20060818"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <!--<referenceRange/>-->
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                <text>abnormality only Very Low Systolic Measurement Site: Systolic arterial pressure data absent reason text Diastolic Measurement Site: Diastolic arterial pressure data absent reason display Interpretation(s): Systolic arterial pressure interpretation text, Diastolic arterial pressure interpretation display</text>
+                <text>abnormality only Very Low Measurement Site: Body site text Systolic Measurement Site: Systolic arterial pressure data absent reason text Diastolic Measurement Site: Diastolic arterial pressure data absent reason display Interpretation(s): Systolic arterial pressure interpretation text, Diastolic arterial pressure interpretation display</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20060818"/>
             </NarrativeStatement>

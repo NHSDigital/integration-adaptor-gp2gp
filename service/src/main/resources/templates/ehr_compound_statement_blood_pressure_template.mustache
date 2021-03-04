@@ -22,7 +22,9 @@
                 {{#systolicQuantity}}
                 <valueQuantity>{{{systolicQuantity}}}</valueQuantity>
                 {{/systolicQuantity}}
-                <!--<referenceRange/>-->
+                {{#systolicReferenceRange}}
+                {{{systolicReferenceRange}}}
+                {{/systolicReferenceRange}}
             </ObservationStatement>
         </component>
         {{/systolicId}}
@@ -40,7 +42,9 @@
                 {{#diastolicQuantity}}
                 <valueQuantity>{{{diastolicQuantity}}}</valueQuantity>
                 {{/diastolicQuantity}}
-                <!--<referenceRange/>-->
+                {{#diastolicReferenceRange}}
+                {{{diastolicReferenceRange}}}
+                {{/diastolicReferenceRange}}
             </ObservationStatement>
         </component>
         {{/diastolicId}}
