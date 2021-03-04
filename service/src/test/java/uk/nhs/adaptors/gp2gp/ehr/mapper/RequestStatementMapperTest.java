@@ -103,7 +103,7 @@ public class RequestStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
         assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
     }
 
@@ -125,7 +125,7 @@ public class RequestStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParamsReasonCodes")
-    public void When_MappingObservationJsonWithReason_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+    public void When_MappingObservationJsonWithReason_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
