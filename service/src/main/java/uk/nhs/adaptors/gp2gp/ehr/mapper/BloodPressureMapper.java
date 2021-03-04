@@ -47,8 +47,8 @@ public class BloodPressureMapper {
     private static final List<String> DIASTOLIC_CODE = Arrays.asList(DIASTOLIC_ARTERIAL_PRESSURE,
         DIASTOLIC_BLOOD_PRESSURE, DIASTOLIC_STANDING_BLOOD_PRESSURE, DIASTOLIC_SITTING_BLOOD_PRESSURE, DIASTOLIC_LYING_BLOOD_PRESSURE);
     private static final String COMMA = ", ";
-    private static final String SYSTOLIC_MEASUREMENT_SITE = "Systolic Measurement Site: %s";
-    private static final String DIASTOLIC_MEASUREMENT_SITE = "Diastolic Measurement Site: %s";
+    private static final String SYSTOLIC_MEASUREMENT_ABSENT = "Systolic Measurement Absent: %s";
+    private static final String DIASTOLIC_MEASUREMENT_ABSENT = "Diastolic Measurement Absent: %s";
     private static final String MEASUREMENT_SITE = "Measurement Site: %s";
     public static final String INTERPRETATION = "Interpretation(s): %s";
 
@@ -128,10 +128,10 @@ public class BloodPressureMapper {
         }
         extractBodySite(observation).ifPresent(narrativeTextParts::add);
 
-        extractMeasurementSite(observation, SYSTOLIC_CODE, SYSTOLIC_MEASUREMENT_SITE)
+        extractMeasurementSite(observation, SYSTOLIC_CODE, SYSTOLIC_MEASUREMENT_ABSENT)
             .ifPresent(narrativeTextParts::add);
 
-        extractMeasurementSite(observation, DIASTOLIC_CODE, DIASTOLIC_MEASUREMENT_SITE)
+        extractMeasurementSite(observation, DIASTOLIC_CODE, DIASTOLIC_MEASUREMENT_ABSENT)
             .ifPresent(narrativeTextParts::add);
 
         extractInterpretation(observation).ifPresent(narrativeTextParts::add);
