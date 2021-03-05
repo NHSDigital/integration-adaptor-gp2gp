@@ -66,7 +66,9 @@ public class EncounterComponentsMapperTest {
             new PertinentInformationObservationValueMapper(), codeableConceptCdMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
-        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
+            randomIdGeneratorService,
+            codeableConceptCdMapper);
         BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
             messageContext,
             randomIdGeneratorService,
