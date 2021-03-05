@@ -5,7 +5,7 @@
             {
                 "system": "http://blah.info/blahsomecodesystem",
                 "code": "X%^^%",
-                "display": "Endometriosis of uterus",
+                "display": "Display for invalid code/system",
                 "userSelected": true
             },
             {

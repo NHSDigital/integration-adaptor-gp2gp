@@ -239,18 +239,18 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildVaccineCode(Immunization immunization) {
-        if (immunization.hasVaccineCode() && vaccineCodeNotUNK(immunization.getVaccineCode())) {
+        if (immunization.hasVaccineCode() && !vaccineCodeUNK(immunization.getVaccineCode())) {
             var code = CodeableConceptMappingUtils.extractTextOrCoding(immunization.getVaccineCode());
             if (code.isPresent()) {
                 return String.format(VACCINATION_CODE, code.get());
             }
-        } else if (immunization.hasVaccineCode() && !vaccineCodeNotUNK(immunization.getVaccineCode())) {
+        } else if (immunization.hasVaccineCode() && vaccineCodeUNK(immunization.getVaccineCode())) {
             return StringUtils.EMPTY;
         }
         throw new EhrMapperException("Immunization vaccine code not present");
     }
 
-    private boolean vaccineCodeNotUNK(CodeableConcept codeableConcept) {
-        return  (codeableConcept.getCodingFirstRep().hasCode() && !codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
+    private boolean vaccineCodeUNK(CodeableConcept codeableConcept) {
+        return  (codeableConcept.getCodingFirstRep().hasCode() && codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
     }
 }

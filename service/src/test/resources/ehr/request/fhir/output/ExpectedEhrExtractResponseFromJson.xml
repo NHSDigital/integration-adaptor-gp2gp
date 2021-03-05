@@ -78,18 +78,15 @@
                                 <center value="20100714180700"/>
                             </effectiveTime>
                             <availabilityTime value="20100714163232"/>
-
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
-
                             <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                         </ObservationStatement>
                     </component>
-
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -142,7 +139,6 @@
                                 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
                         </NarrativeStatement>
                     </component>
-
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -183,14 +179,12 @@
                                 <center value="20100123134800"/>
                             </effectiveTime>
                             <availabilityTime value="20100123140354"/>
-
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text></text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
-
                             <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                         </ObservationStatement>
                     </component><component typeCode="COMP" >
@@ -201,14 +195,12 @@
                             <center value="20100123134800"/>
                         </effectiveTime>
                         <availabilityTime value="20100123140354"/>
-
                         <pertinentInformation typeCode="PERT">
                             <sequenceNumber value="+1" />
                             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                 <text>These are some notes !&quot;£$%^&amp;*()</text>
                             </pertinentAnnotation>
                         </pertinentInformation>
-
                         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     </ObservationStatement>
                 </component><component typeCode="COMP" >
@@ -226,14 +218,12 @@
                             <center value="20100123134800"/>
                         </effectiveTime>
                         <availabilityTime value="20100123140354"/>
-
                         <pertinentInformation typeCode="PERT">
                             <sequenceNumber value="+1" />
                             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                 <text></text>
                             </pertinentAnnotation>
                         </pertinentInformation>
-
                         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     </ObservationStatement>
                 </component><component typeCode="COMP" >
@@ -244,14 +234,12 @@
                             <center value="20100123134800"/>
                         </effectiveTime>
                         <availabilityTime value="20100123140354"/>
-
                         <pertinentInformation typeCode="PERT">
                             <sequenceNumber value="+1" />
                             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                 <text>Family member : Mother</text>
                             </pertinentAnnotation>
                         </pertinentInformation>
-
                         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     </ObservationStatement>
                 </component><component typeCode="COMP" >
@@ -262,18 +250,15 @@
                             <center value="20100123134800"/>
                         </effectiveTime>
                         <availabilityTime value="20100123140354"/>
-
                         <pertinentInformation typeCode="PERT">
                             <sequenceNumber value="+1" />
                             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                 <text>Family member : Father - note - this is obviously wrong?</text>
                             </pertinentAnnotation>
                         </pertinentInformation>
-
                         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     </ObservationStatement>
                 </component>
-
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -314,7 +299,6 @@
                             <text>hhhhhhhhh</text>
                         </NarrativeStatement>
                     </component>
-
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -355,7 +339,6 @@
                             <text>This is kjkjkjkjkjkjkjkjkj</text>
                         </NarrativeStatement>
                     </component>
-
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -396,18 +379,15 @@
                                 <center value="20100714175500"/>
                             </effectiveTime>
                             <availabilityTime value="20100714162813"/>
-
                             <pertinentInformation typeCode="PERT">
                                 <sequenceNumber value="+1" />
                                 <pertinentAnnotation classCode="OBS" moodCode="EVN">
                                     <text>This is the BP reading in a consultation with a note</text>
                                 </pertinentAnnotation>
                             </pertinentInformation>
-
                             <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                         </ObservationStatement>
                     </component>
-
                 </ehrComposition>
             </component>
         </ehrFolder>
