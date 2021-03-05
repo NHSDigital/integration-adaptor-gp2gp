@@ -371,22 +371,52 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
-                    <component typeCode="COMP" >
-                        <ObservationStatement classCode="OBS" moodCode="EVN">
-                            <id root="test-id-3" />
-                            <statusCode code="COMPLETE" />
+                    <component typeCode="COMP">
+                        <CompoundStatement classCode="BATTERY" moodCode="EVN">
+                            <id root="test-id-3"/>
+                            <!--<code code="" codeSystem="" displayName="">-->
+                            <!--</code>-->
+                            <statusCode code="COMPLETE"/>
                             <effectiveTime>
                                 <center value="20100714175500"/>
                             </effectiveTime>
                             <availabilityTime value="20100714162813"/>
-                            <pertinentInformation typeCode="PERT">
-                                <sequenceNumber value="+1" />
-                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <!--<code code="" codeSystem="" displayName="">-->
+                                    <!--</code>-->
+                                    <statusCode code="COMPLETE"/>
+                                    <effectiveTime>
+                                        <center value="20100714175500"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100714162813"/>
+                                    <valueQuantity><value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                                </ObservationStatement>
+                            </component>
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <!--<code code="" codeSystem="" displayName="">-->
+                                    <!--</code>-->
+                                    <statusCode code="COMPLETE"/>
+                                    <effectiveTime>
+                                        <center value="20100714175500"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100714162813"/>
+                                    <valueQuantity><value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                                </ObservationStatement>
+                            </component>
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
                                     <text>This is the BP reading in a consultation with a note</text>
-                                </pertinentAnnotation>
-                            </pertinentInformation>
-                            <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                        </ObservationStatement>
+                                    <statusCode code="COMPLETE"/>
+                                    <availabilityTime value="20100714175500"/>
+                                </NarrativeStatement>
+                            </component>
+                            <!--<Participant typeCode="PRF" ..../>-->
+                        </CompoundStatement>
                     </component>
                 </ehrComposition>
             </component>

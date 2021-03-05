@@ -87,3 +87,66 @@
     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
 </ObservationStatement>
 </component>
+<component typeCode="COMP">
+<CompoundStatement classCode="BATTERY" moodCode="EVN">
+    <id root="394559384658936"/>
+    <!--<code code="" codeSystem="" displayName="">-->
+    <!--</code>-->
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <center nullFlavor="UNK"/>
+    </effectiveTime>
+    <availabilityTime nullFlavor="UNK"/>
+    <component typeCode="COMP" contextConductionInd="true">
+        <NarrativeStatement classCode="OBS" moodCode="EVN">
+            <id root="394559384658936"/>
+            <text>Blood pressure 1</text>
+            <statusCode code="COMPLETE"/>
+            <availabilityTime nullFlavor="UNK"/>
+        </NarrativeStatement>
+    </component>
+    <!--<Participant typeCode="PRF" ..../>-->
+</CompoundStatement>
+</component>
+<component typeCode="COMP">
+<CompoundStatement classCode="BATTERY" moodCode="EVN">
+    <id root="394559384658936"/>
+    <!--<code code="" codeSystem="" displayName="">-->
+    <!--</code>-->
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <center nullFlavor="UNK"/>
+    </effectiveTime>
+    <availabilityTime nullFlavor="UNK"/>
+    <component typeCode="COMP" contextConductionInd="true">
+        <NarrativeStatement classCode="OBS" moodCode="EVN">
+            <id root="394559384658936"/>
+            <text>Blood pressure 2</text>
+            <statusCode code="COMPLETE"/>
+            <availabilityTime nullFlavor="UNK"/>
+        </NarrativeStatement>
+    </component>
+    <!--<Participant typeCode="PRF" ..../>-->
+</CompoundStatement>
+</component>
+<component typeCode="COMP">
+<CompoundStatement classCode="BATTERY" moodCode="EVN">
+    <id root="394559384658936"/>
+    <!--<code code="" codeSystem="" displayName="">-->
+    <!--</code>-->
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <center nullFlavor="UNK"/>
+    </effectiveTime>
+    <availabilityTime nullFlavor="UNK"/>
+    <component typeCode="COMP" contextConductionInd="true">
+        <NarrativeStatement classCode="OBS" moodCode="EVN">
+            <id root="394559384658936"/>
+            <text>Blood pressure 3</text>
+            <statusCode code="COMPLETE"/>
+            <availabilityTime nullFlavor="UNK"/>
+        </NarrativeStatement>
+    </component>
+    <!--<Participant typeCode="PRF" ..../>-->
+</CompoundStatement>
+</component>

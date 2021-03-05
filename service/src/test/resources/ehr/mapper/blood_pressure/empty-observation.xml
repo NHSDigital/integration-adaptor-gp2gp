@@ -1,0 +1,13 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <!--<code code="" codeSystem="" displayName="">-->
+        <!--</code>-->
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK"/>
+        <!--<Participant typeCode="PRF" ..../>-->
+    </CompoundStatement>
+</component>

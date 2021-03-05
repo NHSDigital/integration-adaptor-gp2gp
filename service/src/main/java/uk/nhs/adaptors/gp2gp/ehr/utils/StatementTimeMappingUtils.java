@@ -45,8 +45,31 @@ public final class StatementTimeMappingUtils {
         if (referralRequest.hasAuthoredOn()) {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
                 referralRequest.getAuthoredOnElement()));
-
         }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
+    }
+
+    public static String prepareAvailabilityTimeForObservation(Observation observation) {
+        if (observation.hasIssued()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(observation.getIssued().toInstant()));
+        }
+
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
+    }
+
+    public static String prepareAvailabilityTimeForBloodPressureNote(Observation observation) {
+        if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
+            return String.format(
+                AVAILABILITY_TIME_VALUE_TEMPLATE,
+                toHl7Format(observation.getEffectiveDateTimeType())
+            );
+        } else if (observation.hasEffectivePeriod()) {
+            return String.format(
+                AVAILABILITY_TIME_VALUE_TEMPLATE,
+                toHl7Format(observation.getEffectivePeriod().getStartElement())
+            );
+        }
+
         return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 

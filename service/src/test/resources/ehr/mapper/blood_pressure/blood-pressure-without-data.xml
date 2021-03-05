@@ -1,0 +1,45 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <!--<code code="" codeSystem="" displayName="">-->
+        <!--</code>-->
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20131118094149"/>
+        </effectiveTime>
+        <availabilityTime value="20131118094149"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <!--<code code="" codeSystem="" displayName="">-->
+                <!--</code>-->
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20131118094149"/>
+                </effectiveTime>
+                <availabilityTime value="20131118094149"/>
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <!--<code code="" codeSystem="" displayName="">-->
+                <!--</code>-->
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20131118094149"/>
+                </effectiveTime>
+                <availabilityTime value="20131118094149"/>
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP" contextConductionInd="true">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+                <text>blood pressure is very low Measurement Site: Body site display Systolic Measurement Absent: Systolic blood pressure data absent reason text Diastolic Measurement Absent: Diastolic blood pressure data absent reason display Interpretation(s): Panel level interpretation, Systolic blood pressure interpretation text, Diastolic blood pressure interpretation display</text>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="20131118094149"/>
+            </NarrativeStatement>
+        </component>
+        <!--<Participant typeCode="PRF" ..../>-->
+    </CompoundStatement>
+</component>

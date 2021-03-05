@@ -33,6 +33,15 @@ public class EncounterComponentsMapper {
     private static final String CATEGORY_LIST_CODE = "24781000000107";
     private static final List<String> COMPONENTS_LISTS = Arrays.asList(TOPIC_LIST_CODE, CATEGORY_LIST_CODE);
 
+    private static final String BLOOD_PRESSURE_READING_CODE = "163020007";
+    private static final String ARTERIAL_BLOOD_PRESSURE_CODE = "386534000";
+    private static final String BLOOD_PRESSURE_CODE = "75367002";
+    private static final String STANDING_BLOOD_PRESSURE_CODE = "163034007";
+    private static final String SITTING_BLOOD_PRESSURE_CODE = "163035008";
+    private static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
+    private static final List<String> BLOOD_CODES = Arrays.asList(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
+        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
+
     private static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
@@ -54,6 +63,7 @@ public class EncounterComponentsMapper {
     private final ObservationStatementMapper observationStatementMapper;
     private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
     private final ConditionLinkSetMapper conditionLinkSetMapper;
+    private final BloodPressureMapper bloodPressureMapper;
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -98,6 +108,9 @@ public class EncounterComponentsMapper {
         Observation observation = (Observation) resource;
         if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
             return narrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
+        }
+        if (hasCode(observation.getCode(), BLOOD_CODES)) {
+            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
         }
 
         return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);

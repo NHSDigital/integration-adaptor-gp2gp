@@ -20,8 +20,8 @@ public final class ObservationValueQuantityMapper {
         + "unit=\"%s\" inclusive=\"false\"/></value>";
     private static final String GREATER_OR_EQUAL_COMPARATOR_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\"><low value=\"%s\" "
         + "unit=\"%s\" inclusive=\"true\"/></value>";
-    private static final String NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"valueQuantity.value\" unit=\"1\">"
-        + "<translation value=\"valueQuantity.value\"><originalText>%s</originalText></translation></value>";
+    private static final String NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"PQ\" value=\"%s\" unit=\"1\">"
+        + "<translation value=\"%s\"><originalText>%s</originalText></translation></value>";
     private static final String LESS_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\">"
         + "<high value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">"
         + "<originalText>%s</originalText></translation></high></value>";
@@ -29,7 +29,8 @@ public final class ObservationValueQuantityMapper {
         + "value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
         + "<originalText>%s</originalText></translation></high></value>";
     private static final String GREATER_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\">"
-        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\">%s</originalText></translation></low></value>";
+        + "<low value=\"%s\" unit=\"1\" inclusive=\"false\"><translation value=\"%s\"><originalText>%s</originalText>"
+        + "</translation></low></value>";
     private static final String GREATER_OR_EQUAL_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE = "<value xsi:type=\"IVL_PQ\">"
         + "<low value=\"%s\" unit=\"1\" inclusive=\"true\"><translation value=\"%s\">"
         + "<originalText>%s</originalText></translation></low></value>";
@@ -55,10 +56,11 @@ public final class ObservationValueQuantityMapper {
     }
 
     private static String prepareQuantityValueWithoutComparator(Quantity valueQuantity) {
+        BigDecimal value = valueQuantity.getValue();
         if (valueQuantity.hasSystem() && valueQuantity.getSystem().equals(UNITS_OF_MEASURE_SYSTEM)) {
-            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, valueQuantity.getValue(), valueQuantity.getCode());
+            return String.format(NO_COMPARATOR_VALUE_TEMPLATE, value, valueQuantity.getCode());
         } else {
-            return String.format(NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE, valueQuantity.getUnit());
+            return String.format(NO_COMPARATOR_NO_SYSTEM_VALUE_TEMPLATE, value, value, valueQuantity.getUnit());
         }
     }
 
