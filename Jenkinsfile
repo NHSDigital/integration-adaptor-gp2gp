@@ -65,6 +65,9 @@ pipeline {
                     steps {
                         script {
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                            if (publishWiremockImage) {
+                                if (sh(label: 'Running gp2gp-wiremock docker build', script: 'docker build -f docker/service/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp-wiremock Docker image")}
+                            }
                         }
                     }
                 }
