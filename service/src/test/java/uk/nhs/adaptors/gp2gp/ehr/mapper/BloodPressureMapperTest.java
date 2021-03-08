@@ -46,6 +46,8 @@ public class BloodPressureMapperTest {
     private static final String EXPECTED_ARTERIAL_PRESSURE_WITH_SYSTOLIC_DATA_ONLY = "arterial-pressure-with-systolic-data-only.xml";
     private static final String INPUT_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY = "arterial-pressure-with-diastolic-data-only.json";
     private static final String EXPECTED_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY = "arterial-pressure-with-diastolic-data-only.xml";
+    private static final String INPUT_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE = "arterial-pressure-without-effective-date.json";
+    private static final String EXPECTED_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE = "arterial-pressure-without-effective-date.xml";
 
     private BloodPressureMapper bloodPressureMapper;
 
@@ -110,7 +112,8 @@ public class BloodPressureMapperTest {
             Arguments.of(INPUT_BLOOD_PRESSURE_WITHOUT_DATA, EXPECTED_BLOOD_PRESSURE_WITHOUT_DATA),
             Arguments.of(INPUT_OBSERVATION_WITHOUT_VALID_CODE, EXPECTED_OBSERVATION_WITHOUT_VALID_CODE),
             Arguments.of(INPUT_ARTERIAL_PRESSURE_WITH_SYSTOLIC_DATA_ONLY, EXPECTED_ARTERIAL_PRESSURE_WITH_SYSTOLIC_DATA_ONLY),
-            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY, EXPECTED_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY)
+            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY, EXPECTED_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY),
+            Arguments.of(INPUT_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE, EXPECTED_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE)
         );
     }
 }

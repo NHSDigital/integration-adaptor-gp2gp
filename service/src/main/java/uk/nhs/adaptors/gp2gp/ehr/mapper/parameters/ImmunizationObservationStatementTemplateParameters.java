@@ -13,4 +13,5 @@ public class ImmunizationObservationStatementTemplateParameters {
     private String availabilityTime;
     private String effectiveTime;
     private String pertinentInformation;
+    private String code;
 }

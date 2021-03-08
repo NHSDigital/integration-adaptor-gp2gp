@@ -28,6 +28,7 @@
                             <text>Reason Ended: Patient reports no subsequent recurrence on same medication</text>
                         </pertinentAnnotation>
                     </pertinentInformation>
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 </ObservationStatement>
             </component>
         </CompoundStatement>

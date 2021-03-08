@@ -4,5 +4,8 @@
     "category": [
         "medication"
     ],
-    "onsetDateTime": "1978-12-31"
+    "onsetDateTime": "1978-12-31",
+    "code": {
+        "text": "test"
+    }
 }

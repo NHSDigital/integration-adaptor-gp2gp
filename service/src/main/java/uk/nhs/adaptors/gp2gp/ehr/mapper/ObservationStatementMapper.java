@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -36,10 +37,12 @@ public class ObservationStatementMapper {
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .code(prepareCode(observation))
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
             .isNested(isNested)
@@ -99,6 +102,13 @@ public class ObservationStatementMapper {
         }
 
         return Optional.empty();
+    }
+
+    private String prepareCode(Observation observation) {
+        if (observation.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+        }
+        throw new EhrMapperException("Observation code is not present");
     }
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {

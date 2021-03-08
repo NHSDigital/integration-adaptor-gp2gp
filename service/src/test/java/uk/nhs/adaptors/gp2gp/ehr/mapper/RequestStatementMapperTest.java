@@ -2,12 +2,14 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +21,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -73,6 +77,8 @@ public class RequestStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private Bundle bundle;
     private CharSequence expectedOutputMessage;
@@ -82,13 +88,12 @@ public class RequestStatementMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
 
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        requestStatementMapper = new RequestStatementMapper(messageContext);
+        requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper);
     }
 
     @AfterEach
@@ -98,22 +103,14 @@ public class RequestStatementMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
-
-        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(parsedReferralRequest, false);
-
-        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
+    public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
+        assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
     }
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
-            Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES),
             Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
             Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
             Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
@@ -124,6 +121,21 @@ public class RequestStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
             Arguments.of(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_USES_OPTIONAL_FIELDS)
             );
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFileParamsReasonCodes")
+    public void When_MappingObservationJsonWithReason_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
+    }
+
+    private static Stream<Arguments> resourceFileParamsReasonCodes() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
+            Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
+        );
     }
 
     @Test
@@ -157,4 +169,16 @@ public class RequestStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR)
             );
     }
+
+    @SneakyThrows
+    private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath, boolean isNested) {
+        var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
+        var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
+        var referralRequest = new FhirParseService().parseResource(input, ReferralRequest.class);
+
+        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, isNested);
+
+        assertThat(outputMessage).isEqualTo(expected);
+    }
+
 }

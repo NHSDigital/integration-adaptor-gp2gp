@@ -10,8 +10,10 @@ import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -69,13 +71,17 @@ public class ConditionLinkSetMapperTest {
     private MessageContext messageContext;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
     private ConditionLinkSetMapper conditionLinkSetMapper;
     private FhirParseService fhirParseService;
 
     @BeforeEach
     public void setUp() {
         fhirParseService = new FhirParseService();
-        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService);
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
@@ -96,7 +102,6 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
-        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
@@ -118,8 +123,6 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false)
         );
     }
-
-
 
     private Answer<String> answerWithObjectId() {
         return invocation -> {

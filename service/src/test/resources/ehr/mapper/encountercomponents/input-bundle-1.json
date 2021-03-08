@@ -366,7 +366,10 @@
                 "id": "procedurerequestid1",
                 "status": "active",
                 "intent": "plan",
-                "authoredOn": "2010-01-13T15:29:50.1+00:00"
+                "authoredOn": "2010-01-13T15:29:50.1+00:00",
+                "code": {
+                    "text": "test"
+                }
             }
         },
         {
@@ -389,6 +392,9 @@
             "resource": {
                 "resourceType": "Observation",
                 "id": "observationuncategorisedid1",
+                "code": {
+                    "text": "Test"
+                },
                 "issued": "2010-01-13T15:29:50.3+00:00",
                 "comment": "observation uncategorised"
             }
@@ -523,7 +529,10 @@
                     {
                         "text": "Condition note"
                     }
-                ]
+                ],
+                "code": {
+                    "text": "test"
+                }
             }
         },
         {

@@ -29,5 +29,8 @@
             ],
             "text": "Reason code value text 3"
         }
-    ]
+    ],
+    "code": {
+        "text": "test"
+    }
 }

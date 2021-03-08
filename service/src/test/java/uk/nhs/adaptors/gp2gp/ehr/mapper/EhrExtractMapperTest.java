@@ -1,12 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,6 +52,8 @@ public class EhrExtractMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -64,18 +69,21 @@ public class EhrExtractMapperTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
-            new DiaryPlanStatementMapper(messageContext),
+            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
             new NarrativeStatementMapper(messageContext),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
-                new PertinentInformationObservationValueMapper()
+                new PertinentInformationObservationValueMapper(),
+                codeableConceptCdMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
+            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
             new BloodPressureMapper(messageContext, randomIdGeneratorService, new StructuredObservationValueMapper())
         );
 
@@ -100,7 +108,6 @@ public class EhrExtractMapperTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-
         assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 }

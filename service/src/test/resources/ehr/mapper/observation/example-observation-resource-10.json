@@ -23,5 +23,8 @@
                 "unit": "test-unit"
             }
         }
-    ]
+    ],
+    "code": {
+        "text": "test"
+    }
 }

@@ -48,6 +48,7 @@ public class AllergyStructureMapper {
     private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
@@ -55,6 +56,7 @@ public class AllergyStructureMapper {
             .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
             .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
+            .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
             .build();
@@ -186,5 +188,12 @@ public class AllergyStructureMapper {
                 .collect(Collectors.joining(StringUtils.SPACE));
         }
         return notes;
+    }
+
+    private String buildCode(AllergyIntolerance allergyIntolerance) {
+        if (allergyIntolerance.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+        }
+        throw new EhrMapperException("Allergy code not present");
     }
 }
