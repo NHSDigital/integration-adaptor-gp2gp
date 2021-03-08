@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
@@ -46,6 +47,7 @@ public class ConditionLinkSetMapper {
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
         var builder = ConditionLinkSetMapperParameters.builder()
@@ -67,6 +69,8 @@ public class ConditionLinkSetMapper {
                 builder.conditionNamed(newId);
                 buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
             });
+
+        builder.code(buildCode(condition));
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }
@@ -166,5 +170,12 @@ public class ConditionLinkSetMapper {
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
+    }
+
+    private String buildCode(Condition condition) {
+        if (condition.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
+        }
+        throw new EhrMapperException("Condition code not present");
     }
 }

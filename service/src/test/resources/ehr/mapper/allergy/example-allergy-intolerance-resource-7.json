@@ -15,5 +15,8 @@
     "category": [
         "medication"
     ],
-    "assertedDate": "2010-01-14T09:57:57.33+00:00"
+    "assertedDate": "2010-01-14T09:57:57.33+00:00",
+    "code": {
+        "text": "test"
+    }
 }

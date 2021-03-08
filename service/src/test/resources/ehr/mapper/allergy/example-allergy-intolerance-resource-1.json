@@ -25,5 +25,8 @@
             "text": "Example note text"
         }
     ],
-    "lastOccurrence": "1978-12-31"
+    "lastOccurrence": "1978-12-31",
+    "code": {
+        "text": "test"
+    }
 }

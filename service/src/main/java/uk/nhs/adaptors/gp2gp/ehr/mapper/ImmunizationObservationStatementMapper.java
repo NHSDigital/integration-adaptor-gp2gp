@@ -39,6 +39,7 @@ public class ImmunizationObservationStatementMapper {
         .loadTemplate("immunization_observation_statement_template.mustache");
     private static final String PARENT_PRESENT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1";
     private static final String DATE_RECORDED_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1";
+    private static final String VACCINATION_PROCEDURE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1";
     private static final String PARENT_PRESENT = "Parent Present: ";
     private static final String LOCATION = "Location: ";
     private static final String MANUFACTURER = "Manufacturer: ";
@@ -51,9 +52,11 @@ public class ImmunizationObservationStatementMapper {
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
     private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %s Sequence: %S,%S ";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
+    private static final String VACCINATION_CODE = "Substance: %s";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
@@ -62,6 +65,7 @@ public class ImmunizationObservationStatementMapper {
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization))
             .isNested(isNested)
+            .code(buildCode(immunization))
             .build();
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, observationStatementTemplateParameters);
     }
@@ -100,7 +104,8 @@ public class ImmunizationObservationStatementMapper {
             buildDoseQuantityPertinentInformation(immunization),
             buildNotePertinentInformation(immunization),
             buildExplanationPertinentInformation(immunization),
-            buildVaccinationProtocolPertinentInformation(immunization)
+            buildVaccinationProtocolPertinentInformation(immunization),
+            buildVaccineCode(immunization)
         );
     }
 
@@ -222,5 +227,30 @@ public class ImmunizationObservationStatementMapper {
             .collect(Collectors.joining(COMMA));
 
         return vaccinationProtocol + VACCINATION_TARGET_DISEASE + targetDiseases;
+    }
+
+    private String buildCode(Immunization immunization) {
+        var vaccinationProcedure = ExtensionMappingUtils.filterExtensionByUrl(immunization, VACCINATION_PROCEDURE_URL);
+        if (vaccinationProcedure.isPresent()) {
+            CodeableConcept codeableConcept = (CodeableConcept) vaccinationProcedure.get().getValue();
+            return codeableConceptCdMapper.mapCodeableConceptToCd(codeableConcept);
+        }
+        throw new EhrMapperException("Immunization vaccination procedure not present");
+    }
+
+    private String buildVaccineCode(Immunization immunization) {
+        if (immunization.hasVaccineCode() && !vaccineCodeUNK(immunization.getVaccineCode())) {
+            var code = CodeableConceptMappingUtils.extractTextOrCoding(immunization.getVaccineCode());
+            if (code.isPresent()) {
+                return String.format(VACCINATION_CODE, code.get());
+            }
+        } else if (immunization.hasVaccineCode() && vaccineCodeUNK(immunization.getVaccineCode())) {
+            return StringUtils.EMPTY;
+        }
+        throw new EhrMapperException("Immunization vaccine code not present");
+    }
+
+    private boolean vaccineCodeUNK(CodeableConcept codeableConcept) {
+        return  (codeableConcept.getCodingFirstRep().hasCode() && codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
     }
 }

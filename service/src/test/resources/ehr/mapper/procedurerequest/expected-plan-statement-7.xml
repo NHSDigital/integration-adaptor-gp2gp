@@ -9,5 +9,6 @@
         <text>
             Earliest Recall Date: 2010-01-13
         </text>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </PlanStatement>
 </component>

@@ -15,4 +15,5 @@ public class AllergyStructureTemplateParameters {
     private String effectiveTime;
     private String availabilityTime;
     private String categoryCode;
+    private String code;
 }
