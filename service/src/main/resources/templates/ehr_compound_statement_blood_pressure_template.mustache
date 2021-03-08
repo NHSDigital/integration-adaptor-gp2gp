@@ -1,8 +1,7 @@
 <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="{{id}}"/>
-        <!--<code code="{{code}}" codeSystem="{{codeSystem}}" displayName="{{codeDisplay}}">-->
-        <!--</code>-->
+        {{{compoundStatementCode}}}
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             {{{effectiveTime}}}
@@ -12,8 +11,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{systolicId}}"/>
-                <!--<code code="{{systolicCode}}" codeSystem="{{systolicCodeSystem}}" displayName="{{systolicCodeDisplay}}">-->
-                <!--</code>-->
+                {{{systolicCode}}}
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     {{{effectiveTime}}}
@@ -32,8 +30,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
                 <id root="{{diastolicId}}"/>
-                <!--<code code="{{diastolicCode}}" codeSystem="{{diastolicCodeSystem}}" displayName="{{diastolicCodeDisplay}}">-->
-                <!--</code>-->
+                {{{diastolicCode}}}
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     {{{effectiveTime}}}

@@ -72,7 +72,8 @@ public class EncounterComponentsMapperTest {
         BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
             messageContext,
             randomIdGeneratorService,
-            structuredObservationValueMapper);
+            structuredObservationValueMapper,
+            codeableConceptCdMapper);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
