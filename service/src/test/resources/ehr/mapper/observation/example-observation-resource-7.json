@@ -10,5 +10,8 @@
         "system":"http://unitsofmeasure.org",
         "code":"Cel",
         "comparator":">="
+    },
+    "code": {
+        "text": "test"
     }
 }

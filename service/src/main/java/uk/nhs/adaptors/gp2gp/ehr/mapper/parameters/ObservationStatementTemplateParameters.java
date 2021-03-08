@@ -15,4 +15,5 @@ public class ObservationStatementTemplateParameters {
     private String value;
     private String referenceRange;
     private boolean isNested;
+    private String code;
 }

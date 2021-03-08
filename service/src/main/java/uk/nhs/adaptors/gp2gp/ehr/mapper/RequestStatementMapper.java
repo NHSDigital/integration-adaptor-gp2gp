@@ -56,6 +56,7 @@ public class RequestStatementMapper {
     private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
@@ -63,6 +64,7 @@ public class RequestStatementMapper {
             .isNested(isNested)
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
             .description(buildDescription(referralRequest))
+            .code(buildCode(referralRequest))
             .build();
 
         if (!referralRequest.hasReasonCode()) {
@@ -208,5 +210,12 @@ public class RequestStatementMapper {
     private String buildTextDescription(ReferralRequest referralRequest) {
         Optional<String> text = Optional.ofNullable(referralRequest.getDescription());
         return text.orElse(StringUtils.EMPTY);
+    }
+
+    private String buildCode(ReferralRequest referralRequest) {
+        if (referralRequest.hasReasonCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
+        }
+        return StringUtils.EMPTY;
     }
 }

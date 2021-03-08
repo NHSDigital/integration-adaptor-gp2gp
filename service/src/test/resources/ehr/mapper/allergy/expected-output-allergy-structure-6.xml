@@ -28,6 +28,7 @@
                             <text></text>
                         </pertinentAnnotation>
                     </pertinentInformation>
+                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 </ObservationStatement>
             </component>
         </CompoundStatement>

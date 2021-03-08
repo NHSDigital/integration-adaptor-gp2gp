@@ -5,5 +5,8 @@
     "intent": "plan",
     "occurrencePeriod": {
         "start": "2010-01-13"
+    },
+    "code": {
+        "text": "test"
     }
 }
