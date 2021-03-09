@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.BloodPressureParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.BloodPressureParameters.BloodPressureParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -55,15 +56,18 @@ public class BloodPressureMapper {
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapBloodPressure(Observation observation, boolean isNested) {
         BloodPressureParametersBuilder builder = BloodPressureParameters.builder()
             .isNested(isNested)
             .id(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
             .effectiveTime(prepareEffectiveTimeForObservation(observation))
-            .availabilityTime(prepareAvailabilityTimeForObservation(observation));
+            .availabilityTime(prepareAvailabilityTimeForObservation(observation))
+            .compoundStatementCode(buildBloodPressureCode(observation));
 
         extractBloodPressureComponent(observation, SYSTOLIC_CODE).ifPresent(observationComponent -> {
+                builder.systolicCode(buildBloodPressureComponentCode(observationComponent));
                 builder.systolicId(randomIdGeneratorService.createNewId());
                 buildQuantity(observationComponent).ifPresent(builder::systolicQuantity);
                 buildReferenceRange(observationComponent).ifPresent(builder::systolicReferenceRange);
@@ -71,6 +75,7 @@ public class BloodPressureMapper {
         );
 
         extractBloodPressureComponent(observation, DIASTOLIC_CODE).ifPresent(observationComponent -> {
+                builder.diastolicCode(buildBloodPressureComponentCode(observationComponent));
                 builder.diastolicId(randomIdGeneratorService.createNewId());
                 buildQuantity(observationComponent).ifPresent(builder::diastolicQuantity);
                 buildReferenceRange(observationComponent).ifPresent(builder::diastolicReferenceRange);
@@ -167,5 +172,19 @@ public class BloodPressureMapper {
 
         return interpretations.isEmpty()
             ? Optional.empty() : Optional.of(String.format(INTERPRETATION, StringUtils.join(interpretations, COMMA)));
+    }
+
+    private String buildBloodPressureCode(Observation observation) {
+        if (observation.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+        }
+        throw new EhrMapperException("Blood Pressure Compound Statement code could not be mapped");
+    }
+
+    private String buildBloodPressureComponentCode(Observation.ObservationComponentComponent observationComponent) {
+        if (observationComponent.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(observationComponent.getCode());
+        }
+        throw new EhrMapperException("Blood Pressure Observation Statement code could not be mapped");
     }
 }
