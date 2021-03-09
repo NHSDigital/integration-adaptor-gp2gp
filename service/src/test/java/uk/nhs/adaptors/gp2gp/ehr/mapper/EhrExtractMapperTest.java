@@ -54,6 +54,7 @@ public class EhrExtractMapperTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 

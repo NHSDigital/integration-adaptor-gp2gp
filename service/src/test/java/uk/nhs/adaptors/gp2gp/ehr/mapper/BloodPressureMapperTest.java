@@ -53,24 +53,24 @@ public class BloodPressureMapperTest {
     private static final String EXPECTED_ARTERIAL_PRESSURE_WITH_DIASTOLIC_DATA_ONLY = "arterial-pressure-with-diastolic-data-only.xml";
     private static final String INPUT_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE = "arterial-pressure-without-effective-date.json";
     private static final String EXPECTED_ARTERIAL_PRESSURE_WITHOUT_EFFECTIVE_DATE = "arterial-pressure-without-effective-date.xml";
-    private static final String INPUT_BLOOD_PRESSURE_WITH_CODES = "blood-pressure-with-codes.json";
-    private static final String EXPECTED_BLOOD_PRESSURE_WITH_CODES = "blood-pressure-with-codes.xml";
-    private static final String INPUT_BLOOD_PRESSURE_WITH_NO_CODES = "blood-pressure-with-no-codes.json";
-
-    private BloodPressureMapper bloodPressureMapper;
+    private static final String INPUT_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS = "blood-pressure-with-codeable-concepts.json";
+    private static final String EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS = "blood-pressure-with-codeable-concepts.xml";
+    private static final String INPUT_BLOOD_PRESSURE_WITH_NO_CODEABLE_CONCEPTS = "blood-pressure-with-no-codeable-concepts.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
-    private CodeableConceptCdMapper codeableConceptCdMapper;
+    private CodeableConceptCdMapper mockCodeableConceptCdMapper;
+
     private MessageContext messageContext;
+    private BloodPressureMapper bloodPressureMapper;
 
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), mockCodeableConceptCdMapper);
     }
 
     @AfterEach
@@ -80,7 +80,7 @@ public class BloodPressureMapperTest {
 
     @Test
     public void When_MappingEmptyObservation_Expect_CompoundStatementXmlReturned() throws IOException {
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_EMPTY_OBSERVATION);
@@ -94,7 +94,7 @@ public class BloodPressureMapperTest {
 
     @Test
     public void When_MappingBloodPressureWithNestedTrue_Expect_CompoundStatementXmlReturned() throws IOException {
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_DATA);
@@ -109,7 +109,7 @@ public class BloodPressureMapperTest {
     @ParameterizedTest
     @MethodSource("testArguments")
     public void When_MappingBloodPressure_Expect_CompoundStatementXmlReturned(String inputJson, String outputXml) throws IOException {
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+        when(mockCodeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + inputJson);
@@ -138,13 +138,14 @@ public class BloodPressureMapperTest {
     }
 
     @Test
-    public void When_MappingBloodPressureWithCodes_Expect_CompoundStatementXmlReturned() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_CODES);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_BLOOD_PRESSURE_WITH_CODES);
+    public void When_MappingBloodPressureWithCodeableConcepts_Expect_CompoundStatementXmlReturned() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(
+            BLOOD_PRESSURE_FILE_LOCATION + EXPECTED_BLOOD_PRESSURE_WITH_CODEABLE_CONCEPTS);
 
-        CodeableConceptCdMapper code = new CodeableConceptCdMapper();
+        CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), code);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper);
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
@@ -153,12 +154,12 @@ public class BloodPressureMapperTest {
     }
 
     @Test
-    public void When_MappingBloodPressureWithNoCodes_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_NO_CODES);
+    public void When_MappingBloodPressureWithNoCodeableConcepts_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(BLOOD_PRESSURE_FILE_LOCATION + INPUT_BLOOD_PRESSURE_WITH_NO_CODEABLE_CONCEPTS);
 
-        CodeableConceptCdMapper code = new CodeableConceptCdMapper();
+        CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), code);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper);
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
