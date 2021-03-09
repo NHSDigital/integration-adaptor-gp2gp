@@ -54,6 +54,7 @@ public class EhrExtractMapperTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -84,7 +85,8 @@ public class EhrExtractMapperTest {
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
-            new BloodPressureMapper(messageContext, randomIdGeneratorService, new StructuredObservationValueMapper())
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
         );
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,

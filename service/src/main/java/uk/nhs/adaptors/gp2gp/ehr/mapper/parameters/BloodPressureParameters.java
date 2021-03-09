@@ -19,4 +19,7 @@ public class BloodPressureParameters {
     private String narrativeText;
     private String narrativeAvailabilityTime;
     private boolean isNested;
+    private String compoundStatementCode;
+    private String systolicCode;
+    private String diastolicCode;
 }

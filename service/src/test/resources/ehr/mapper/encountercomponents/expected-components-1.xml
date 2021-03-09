@@ -90,8 +90,7 @@
 <component typeCode="COMP">
 <CompoundStatement classCode="BATTERY" moodCode="EVN">
     <id root="394559384658936"/>
-    <!--<code code="" codeSystem="" displayName="">-->
-    <!--</code>-->
+    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     <statusCode code="COMPLETE"/>
     <effectiveTime>
         <center nullFlavor="UNK"/>
@@ -111,8 +110,7 @@
 <component typeCode="COMP">
 <CompoundStatement classCode="BATTERY" moodCode="EVN">
     <id root="394559384658936"/>
-    <!--<code code="" codeSystem="" displayName="">-->
-    <!--</code>-->
+    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     <statusCode code="COMPLETE"/>
     <effectiveTime>
         <center nullFlavor="UNK"/>
@@ -132,8 +130,7 @@
 <component typeCode="COMP">
 <CompoundStatement classCode="BATTERY" moodCode="EVN">
     <id root="394559384658936"/>
-    <!--<code code="" codeSystem="" displayName="">-->
-    <!--</code>-->
+    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     <statusCode code="COMPLETE"/>
     <effectiveTime>
         <center nullFlavor="UNK"/>

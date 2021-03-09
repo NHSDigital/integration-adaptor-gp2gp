@@ -374,8 +374,7 @@
                     <component typeCode="COMP">
                         <CompoundStatement classCode="BATTERY" moodCode="EVN">
                             <id root="test-id-3"/>
-                            <!--<code code="" codeSystem="" displayName="">-->
-                            <!--</code>-->
+                            <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                             <statusCode code="COMPLETE"/>
                             <effectiveTime>
                                 <center value="20100714175500"/>
@@ -384,8 +383,7 @@
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="EVN">
                                     <id root="test-id-3"/>
-                                    <!--<code code="" codeSystem="" displayName="">-->
-                                    <!--</code>-->
+                                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                                     <statusCode code="COMPLETE"/>
                                     <effectiveTime>
                                         <center value="20100714175500"/>
@@ -397,8 +395,7 @@
                             <component typeCode="COMP" contextConductionInd="true">
                                 <ObservationStatement classCode="OBS" moodCode="EVN">
                                     <id root="test-id-3"/>
-                                    <!--<code code="" codeSystem="" displayName="">-->
-                                    <!--</code>-->
+                                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                                     <statusCode code="COMPLETE"/>
                                     <effectiveTime>
                                         <center value="20100714175500"/>
