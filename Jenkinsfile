@@ -1,9 +1,10 @@
-String tfProject     = "nia"
-String tfEnvironment = "build1"
-String tfComponent   = "gp2gp"
-String redirectEnv = "ptl"          // Name of environment where TF deployment needs to be re-directed
+String tfProject      = "nia"
+String tfEnvironment  = "build1"
+String tfComponent    = "gp2gp"
+String redirectEnv    = "ptl"          // Name of environment where TF deployment needs to be re-directed
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
+Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
 
 pipeline {
     agent{
@@ -19,8 +20,10 @@ pipeline {
         BUILD_TAG = sh label: 'Generating build tag', returnStdout: true, script: 'python3 scripts/tag.py ${GIT_BRANCH} ${BUILD_NUMBER} ${GIT_COMMIT}'
         ECR_REPO_DIR = "gp2gp"
         WIREMOCK_ECR_REPO_DIR = "gp2gp-wiremock"
+        MHS_MOCK_ECR_REPO_DIR = "gp2gp-mock-mhs"
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${ECR_REPO_DIR}:${BUILD_TAG}"
         WIREMOCK_DOCKER_IMAGE = "${DOCKER_REGISTRY}/${WIREMOCK_ECR_REPO_DIR}:${BUILD_TAG}"
+        MHS_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${MHS_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
     }
 
     stages {
@@ -68,6 +71,9 @@ pipeline {
                             if (publishWiremockImage) {
                                 if (sh(label: 'Running gp2gp-wiremock docker build', script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build gp2gp-wiremock Docker image")}
                             }
+                            if (publishMhsMockImage) {
+                                if (sh(label: 'Running gp2gp-mhs-mock docker build', script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} docker/mock-mhs-adaptor', returnStatus: true) != 0) {error("Failed to build gp2gp-mock-mhs Docker image")}
+                            }
                         }
                     }
                 }
@@ -85,6 +91,11 @@ pipeline {
                             String dockerPushCommandWiremock = "docker push ${WIREMOCK_DOCKER_IMAGE}"
                             if (publishWiremockImage) {
                                 if (sh (label: "Pushing Wiremock image", script: dockerPushCommandWiremock, returnStatus: true) !=0) { error("Docker push gp2gp-wiremock image failed") }
+                            }
+
+                            String dockerPushCommandMhsMock = "docker push ${MHS_MOCK_DOCKER_IMAGE}"
+                            if (publishMhsMockImage) {
+                                if (sh(label: "Pushing MHS Mock image", script: dockerPushCommandMhsMock, returnStatus: true) != 0) {error("Docker push gp2gp-mock-mhs image failed") }
                             }
                         }
                     }
