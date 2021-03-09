@@ -72,7 +72,7 @@ pipeline {
                                 if (sh(label: 'Running gp2gp-wiremock docker build', script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build gp2gp-wiremock Docker image")}
                             }
                             if (publishMhsMockImage) {
-                                if (sh(label: 'Running gp2gp-mhs-mock docker build', script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} docker/mock-mhs-adaptor', returnStatus: true) != 0) {error("Failed to build gp2gp-mock-mhs Docker image")}
+                                if (sh(label: 'Running gp2gp-mhs-mock docker build', script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp-mock-mhs Docker image")}
                             }
                         }
                     }
