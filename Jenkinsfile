@@ -169,13 +169,20 @@ int ecrLogin(String aws_region) {
     return sh(label: "Logging in with Docker", script: dockerLogin, returnStatus: true)
 }
 
+String tfEnv(String tfEnvRepo="https://github.com/tfutils/tfenv.git", String tfEnvPath="~/.tfenv") {
+  sh(label: "Get tfenv" ,  script: "git clone ${tfEnvRepo} ${tfEnvPath}", returnStatus: true)
+  sh(label: "Install TF",  script: "${tfEnvPath}/bin/tfenv install"     , returnStatus: true)
+  return "${tfEnvPath}/bin/terraform"
+}
+
 int terraformInit(String tfStateBucket, String project, String environment, String component, String region) {
+  String terraformBinPath = tfEnv()
   println("Terraform Init for Environment: ${environment} Component: ${component} in region: ${region} using bucket: ${tfStateBucket}")
-  String command = "terraform init -backend-config='bucket=${tfStateBucket}' -backend-config='region=${region}' -backend-config='key=${project}-${environment}-${component}.tfstate' -input=false -no-color"
+  String command = "${terraformBinPath} init -backend-config='bucket=${tfStateBucket}' -backend-config='region=${region}' -backend-config='key=${project}-${environment}-${component}.tfstate' -input=false -no-color"
   dir("components/${component}") {
     return( sh( label: "Terraform Init", script: command, returnStatus: true))
-  }
-}
+  } // dir
+} // int TerraformInit
 
 int terraform(String action, String tfStateBucket, String project, String environment, String component, String region, Map<String, String> variables=[:], List<String> parameters=[]) {
     println("Running Terraform ${action} in region ${region} with: \n Project: ${project} \n Environment: ${environment} \n Component: ${component}")
@@ -186,9 +193,12 @@ int terraform(String action, String tfStateBucket, String project, String enviro
     variablesMap.put('tf_state_bucket',tfStateBucket)
     parametersList = parameters
     parametersList.add("-no-color")
+    //parametersList.add("-compact-warnings")  /TODO update terraform to have this working
 
+    // Get the secret variables for global
     String secretsFile = "etc/secrets.tfvars"
     writeVariablesToFile(secretsFile,getAllSecretsForEnvironment(environment,"nia",region))
+    String terraformBinPath = tfEnv()
 
     List<String> variableFilesList = [
       "-var-file=../../etc/global.tfvars",
@@ -197,12 +207,25 @@ int terraform(String action, String tfStateBucket, String project, String enviro
     ]
     if (action == "apply"|| action == "destroy") {parametersList.add("-auto-approve")}
     List<String> variablesList=variablesMap.collect { key, value -> "-var ${key}=${value}" }
-    String command = "terraform ${action} ${variableFilesList.join(" ")} ${parametersList.join(" ")} ${variablesList.join(" ")} "
+    String command = "${terraformBinPath} ${action} ${variableFilesList.join(" ")} ${parametersList.join(" ")} ${variablesList.join(" ")} "
     dir("components/${component}") {
       return sh(label:"Terraform: "+action, script: command, returnStatus: true)
+    } // dir
+} // int Terraform
+
+Map<String,String> collectTfOutputs(String component) {
+  Map<String,String> returnMap = [:]
+  dir("components/${component}") {
+    String terraformBinPath = tfEnv()
+    List<String> outputsList = sh (label: "Listing TF outputs", script: "${terraformBinPath} output", returnStdout: true).split("\n")
+    outputsList.each {
+      returnMap.put(it.split("=")[0].trim(),it.split("=")[1].trim())
     }
+  } // dir
+  return returnMap
 }
 
+// Retrieving Secrets from AWS Secrets
 String getSecretValue(String secretName, String region) {
   String awsCommand = "aws secretsmanager get-secret-value --region ${region} --secret-id ${secretName} --query SecretString --output text"
   return sh(script: awsCommand, returnStdout: true).trim()
