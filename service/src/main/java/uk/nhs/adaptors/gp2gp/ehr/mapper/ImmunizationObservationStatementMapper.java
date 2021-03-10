@@ -102,11 +102,11 @@ public class ImmunizationObservationStatementMapper {
             buildSitePertinentInformation(immunization),
             buildRoutePertinentInformation(immunization),
             buildDoseQuantityPertinentInformation(immunization),
-            buildNotePertinentInformation(immunization),
             buildExplanationPertinentInformation(immunization),
             buildVaccinationProtocolPertinentInformation(immunization),
-            buildVaccineCode(immunization)
-        );
+            buildVaccineCode(immunization),
+            buildNotePertinentInformation(immunization)
+            );
     }
 
     private String buildParentPresentPertinentInformation(Immunization immunization) {
