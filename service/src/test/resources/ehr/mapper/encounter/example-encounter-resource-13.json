@@ -13,11 +13,6 @@
         }
     ],
     "status":"finished",
-    "type":[
-        {
-            "text":"GP Surgery"
-        }
-    ],
     "subject":{
         "reference":"Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
     },

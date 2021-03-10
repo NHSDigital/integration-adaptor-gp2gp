@@ -68,8 +68,16 @@ public class EncounterMapperTest {
         + "example-encounter-resource-10.json";
     private static final String OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT = TEST_FILES_DIRECTORY
         + "expected-output-encounter-10.xml";
-    private static final String INPUT_JSON_WITH_NO_TYPE = TEST_FILES_DIRECTORY
+    private static final String INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-11.json";
+    private static final String OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT= TEST_FILES_DIRECTORY
+        + "expected-output-encounter-11.xml";
+    private static final String INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-12.json";
+    private static final String OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT  = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-12.xml";
+    private static final String INPUT_JSON_WITH_NO_TYPE = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-13.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -116,7 +124,9 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_SNOMED_AND_NOT_IN_VOCAB_AND_TEXT, OUTPUT_XML_WITH_TYPE_SNOMED_AND_NOT_IN_VOCAB_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_SNOMED_AND_NOT_IN_VOCAB_NO_TEXT, OUTPUT_XML_WITH_TYPE_SNOMED_AND_NOT_IN_VOCAB_NO_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_TEXT),
-            Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT)
+            Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT),
+            Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
+            Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT)
         );
     }
 
