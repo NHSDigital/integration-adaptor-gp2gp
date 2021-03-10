@@ -62,11 +62,10 @@ public class EncounterMapper {
 
         var coding = type.getCoding()
             .stream()
-            .findFirst()
-            .orElseThrow(() -> new EhrMapperException("Could not map Encounter type coding"));
+            .findFirst();
 
-        if (isSnomedAndWithinEhrCompositionVocabularyCodes(coding)) {
-            return String.format(EHR_COMPOSITION_SNOMED_CODE, coding.getCode(), coding.getDisplay(), buildCodeText(type));
+        if (coding.isPresent() && isSnomedAndWithinEhrCompositionVocabularyCodes(coding.get())) {
+            return String.format(EHR_COMPOSITION_SNOMED_CODE, coding.get().getCode(), coding.get().getDisplay(), buildCodeText(type));
         } else {
             return String.format(EHR_COMPOSITION_OTHER_REPORT_CODE, buildCodeText(type));
         }
