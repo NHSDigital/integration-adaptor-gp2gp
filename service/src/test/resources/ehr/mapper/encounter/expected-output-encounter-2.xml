@@ -1,9 +1,7 @@
 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="test-id" />
-        <code code="24631000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Residential Home Visit Note">
-            <originalText>Residential home visit note</originalText>
-        </code>
+        <code code="24671000000101" displayName="Telephone call to a patient" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>GP Surgery</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113152000"/>
