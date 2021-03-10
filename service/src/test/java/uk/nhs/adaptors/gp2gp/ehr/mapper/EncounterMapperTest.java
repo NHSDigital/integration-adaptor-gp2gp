@@ -70,7 +70,7 @@ public class EncounterMapperTest {
         + "expected-output-encounter-10.xml";
     private static final String INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-11.json";
-    private static final String OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT= TEST_FILES_DIRECTORY
+    private static final String OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT = TEST_FILES_DIRECTORY
         + "expected-output-encounter-11.xml";
     private static final String INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-12.json";
