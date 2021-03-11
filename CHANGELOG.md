@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- NIAD-980 Build MHS mock alongside GP2GP (#122)
 - NIAD-1020/1087: Updates from testing feedback (#123)
 - NIAD-1092: Fixing pertinent information ordering (#124)
 - NIAD-1142: Translate Blood Pressure Codeable Concepts (#121)
