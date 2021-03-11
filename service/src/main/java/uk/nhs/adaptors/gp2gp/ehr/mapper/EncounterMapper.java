@@ -3,10 +3,11 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -29,12 +30,12 @@ public class EncounterMapper {
         TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
     private static final String COMPLETE_CODE = "COMPLETE";
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
-    private static final String EHR_COMPOSITION_SNOMED_CODE = "<code code=\"%s\" displayName=\"%s\" codeSystem"
-        + "=\"2.16.840.1.113883.2.1.3.2.4.15\">%s</code>";
-    private static final String EHR_COMPOSITION_OTHER_REPORT_CODE = "<code code=\"24591000000103\" displayName=\"Other report\" "
-        + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">%s</code>";
-    private static final String EHR_COMPOSITION_CODE_TEXT = "<originalText>%s</originalText>";
-    private static final String[] EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
+    private static final String OTHER_REPORT_CODE = "24591000000103";
+    private static final String OTHER_REPORT_DISPLAY = "Other report";
+    private static final String NEW_LINE = "\n";
+    private static final InputStream VOCAB_CODE_INPUT_STREAM =
+        EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
+    private static final HashSet<String> EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
 
     private final MessageContext messageContext;
     private final EncounterComponentsMapper encounterComponentsMapper;
@@ -48,48 +49,61 @@ public class EncounterMapper {
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
             .status(COMPLETE_CODE)
             .components(components)
-            .code(buildCode(encounter));
+            .code(buildCode(encounter))
+            .displayName(buildDisplayName(encounter))
+            .originalText(buildOriginalText(encounter));
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
     }
 
-    private String buildCode(Encounter encounter) {
+    private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {
+        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM)
+            && EHR_COMPOSITION_NAME_VOCABULARY_CODES.contains(coding.getCode());
+    }
+
+    private Optional<Coding> extractCoding(Encounter encounter) {
         var type = encounter.getType()
             .stream()
             .findFirst()
             .orElseThrow(() -> new EhrMapperException("Could not map Encounter type"));
 
-        var coding = type.getCoding()
+        return type.getCoding()
             .stream()
             .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
             .findFirst();
+    }
 
+    private String buildCode(Encounter encounter) {
+        var coding = extractCoding(encounter);
         if (coding.isPresent()) {
-            return String.format(EHR_COMPOSITION_SNOMED_CODE, coding.get().getCode(), coding.get().getDisplay(), buildCodeText(type));
+            return coding.get().getCode();
         } else {
-            return String.format(EHR_COMPOSITION_OTHER_REPORT_CODE, buildCodeText(type));
+            return OTHER_REPORT_CODE;
         }
     }
 
-    private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {
-        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM)
-            && Arrays.asList(EHR_COMPOSITION_NAME_VOCABULARY_CODES).contains(coding.getCode());
+    private String buildDisplayName(Encounter encounter) {
+        var coding = extractCoding(encounter);
+        if (coding.isPresent()) {
+            return coding.get().getDisplay();
+        } else {
+            return OTHER_REPORT_DISPLAY;
+        }
     }
 
-    private String buildCodeText(CodeableConcept codeableConcept) {
-        if (codeableConcept.hasText()) {
-            return String.format(EHR_COMPOSITION_CODE_TEXT, codeableConcept.getText());
+    private String buildOriginalText(Encounter encounter) {
+        if (encounter.getTypeFirstRep().hasText()) {
+            return encounter.getTypeFirstRep().getText();
         } else {
             return StringUtils.EMPTY;
         }
     }
 
     @SneakyThrows
-    private static String[] getEhrCompositionNameVocabularyCodes() {
-        InputStream inputStream = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
-        String ehrCompositionNameCodes = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+    private static HashSet<String> getEhrCompositionNameVocabularyCodes() {
+        String ehrCompositionNameCodes = IOUtils.toString(VOCAB_CODE_INPUT_STREAM, StandardCharsets.UTF_8);
 
-        return  ehrCompositionNameCodes.split("\n");
+        return new HashSet<>(Arrays.asList(ehrCompositionNameCodes.split(NEW_LINE)));
     }
 }

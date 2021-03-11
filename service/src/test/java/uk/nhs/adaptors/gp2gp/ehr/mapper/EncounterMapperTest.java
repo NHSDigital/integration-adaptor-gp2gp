@@ -89,7 +89,6 @@ public class EncounterMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
@@ -102,6 +101,7 @@ public class EncounterMapperTest {
     @ParameterizedTest
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
