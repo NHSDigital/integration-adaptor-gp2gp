@@ -22,25 +22,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- NIAD-1060: FHIR to HL7 date and times
-- NIAD-916: Translating Referral Request to Request Statement 
-- NIAD-905: map condition to link set 
-- NIAD-908: Transform organization to agent resource 
-- NIAD-1095: Remove "structured" path element from opentest vars file
-- NIAD-1019: translate care connect quantity value
-- NIAD-905: map condition to link set
-- NIAD-904: topic category lists in encounter mapping
-- NIAD-907: translating to agent person and represented organisation
-- NIAD-1019 translate care connect quantity value
-- NIAD-1082: Date Time human readable 
-- NIAD-914: Translating Allergy Intolerance to Allergy Structure
-- NIAD-838: Add TF deployment redirection based on branch
-- NIAD-1087: translating stubbed codeable concept to cd
-- Enhanced component test to ensure ExrExtract is parsable XML
-- NIAD-906: blood pressure mapping
-- NIAD-822:Publish-gp2gp-wiremock-Image
-- NIAD-1142: Translate Blood Pressure Codeable Concepts
-- NIAD-1092: Fixing pertinent information ordering
+- NIAD-1020/1087: Updates from testing feedback (#123)
+- NIAD-1092: Fixing pertinent information ordering (#124)
+- NIAD-1142: Translate Blood Pressure Codeable Concepts (#121)
+- NIAD-822:Publish-gp2gp-wiremock-Image (#119)
+- NIAD-903: Add missing blood pressure mapping unit tests (#120)
+- NIAD-1087: translating stubbed codeable concept to cd (#115)
+- NIAD-906 blood pressure mapping (#118)
+- Enhanced component test to ensure ExrExtract is parsable XML (#117)
+- Add TF deployment redirection based on branch (#113)
+- change dateutil format plus fix allergy intollerence tests (#114)
+- NIAD 914: Translating Allergy Intolerance to Allergy Structure (#112)
+- NIAD-907: translating to agent person and represented organisation (#108)
+- NIAD-1082: Date Time human readable (#111)
+- NIAD-904: Topic and category lists in encounter mapping (#107)
+- Feature/niad 1019 translate care connect quantity value (#110)
+- Feature/niad 1019 translate care connect quantity value (#104)
+- NIAD-908: organization to agent testing feedback (#109)
+- NIAD-1060: FHIR to HL7 date and times (#92)
+- NIAD-905: map condition to link set (#105)
+- NIAD-908: Transform organization to agent resource (#102)
+- NIAD-916 Translating Referral Request to Request Statement (#96)
+- NIAD-905: map condition to link set (#97)
+- NIAD-1095: Remove "structured" path element from opentest vars file (#103)
 
 
 ### Fixed
