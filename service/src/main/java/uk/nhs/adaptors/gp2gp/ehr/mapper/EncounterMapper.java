@@ -62,9 +62,10 @@ public class EncounterMapper {
 
         var coding = type.getCoding()
             .stream()
+            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
             .findFirst();
 
-        if (coding.isPresent() && isSnomedAndWithinEhrCompositionVocabularyCodes(coding.get())) {
+        if (coding.isPresent()) {
             return String.format(EHR_COMPOSITION_SNOMED_CODE, coding.get().getCode(), coding.get().getDisplay(), buildCodeText(type));
         } else {
             return String.format(EHR_COMPOSITION_OTHER_REPORT_CODE, buildCodeText(type));
