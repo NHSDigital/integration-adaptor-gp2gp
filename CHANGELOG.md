@@ -6,6 +6,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2021-03-10
+
+### Known Issues and Limitations
+
+- Same as for 0.0.3
+- Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-NETMINIDEV-1078499] in net.minidev:json-smart@2.3
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082238] in io.netty:netty-transport-native-epoll@4.1.53.Final
+
+
+### Added
+
+- NIAD-1060: FHIR to HL7 date and times
+- NIAD-916: Translating Referral Request to Request Statement 
+- NIAD-905: map condition to link set 
+- NIAD-908: Transform organization to agent resource 
+- NIAD-1095: Remove "structured" path element from opentest vars file
+- NIAD-1019: translate care connect quantity value
+- NIAD-905: map condition to link set
+- NIAD-904: topic category lists in encounter mapping
+- NIAD-907: translating to agent person and represented organisation
+- NIAD-1019 translate care connect quantity value
+- NIAD-1082: Date Time human readable 
+- NIAD-914: Translating Allergy Intolerance to Allergy Structure
+- NIAD-838: Add TF deployment redirection based on branch
+- NIAD-1087: translating stubbed codeable concept to cd
+- Enhanced component test to ensure ExrExtract is parsable XML
+- NIAD-906: blood pressure mapping
+- NIAD-822:Publish-gp2gp-wiremock-Image
+- NIAD-1142: Translate Blood Pressure Codeable Concepts
+- NIAD-1092: Fixing pertinent information ordering
+
+
+### Fixed
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082235] in io.netty:netty-handler@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1070799] in io.netty:netty-codec-http@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082234] in io.netty:netty-common@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082236] in io.netty:netty-transport@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082238] in io.netty:netty-transport-native-epoll@4.1.58.Final
+
+
 ## [0.0.3] - 2021-02-19
 
 ### Known Issues and Limitations
