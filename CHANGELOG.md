@@ -6,6 +6,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2021-03-10
+
+### Known Issues and Limitations
+
+- No SDS support. The adaptor does not use the configuration options for SDS.
+- No Spine Secure Proxy support. The adapter makes direct requests to the GP Connect provider.
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents or acknowledgements.
+- Incomplete / invalid EhrExtract message. The adaptor does not yet support the complete message standard.
+- Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-NETMINIDEV-1078499] in net.minidev:json-smart@2.3
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082238] in io.netty:netty-transport-native-epoll@4.1.53.Final
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.59.Final
+- HTTP Request Smuggling [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1083991] in io.netty:netty-codec-http2@4.1.59.Final
+
+
+### Added
+
+- NIAD-980 Build MHS mock alongside GP2GP (#122)
+- NIAD-1020/1087: Updates from testing feedback (#123)
+- NIAD-1092: Fixing pertinent information ordering (#124)
+- NIAD-1142: Translate Blood Pressure Codeable Concepts (#121)
+- NIAD-822:Publish-gp2gp-wiremock-Image (#119)
+- NIAD-903: Add missing blood pressure mapping unit tests (#120)
+- NIAD-1087: translating stubbed codeable concept to cd (#115)
+- NIAD-906 blood pressure mapping (#118)
+- Enhanced component test to ensure ExrExtract is parsable XML (#117)
+- Add TF deployment redirection based on branch (#113)
+- change dateutil format plus fix allergy intollerence tests (#114)
+- NIAD 914: Translating Allergy Intolerance to Allergy Structure (#112)
+- NIAD-907: translating to agent person and represented organisation (#108)
+- NIAD-1082: Date Time human readable (#111)
+- NIAD-904: Topic and category lists in encounter mapping (#107)
+- Feature/niad 1019 translate care connect quantity value (#110)
+- Feature/niad 1019 translate care connect quantity value (#104)
+- NIAD-908: organization to agent testing feedback (#109)
+- NIAD-1060: FHIR to HL7 date and times (#92)
+- NIAD-905: map condition to link set (#105)
+- NIAD-908: Transform organization to agent resource (#102)
+- NIAD-916 Translating Referral Request to Request Statement (#96)
+- NIAD-905: map condition to link set (#97)
+- NIAD-1095: Remove "structured" path element from opentest vars file (#103)
+
+
+### Fixed
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082235] in io.netty:netty-handler@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1070799] in io.netty:netty-codec-http@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082234] in io.netty:netty-common@4.1.58.Final
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082236] in io.netty:netty-transport@4.1.58.Final
+
 ## [0.0.3] - 2021-02-19
 
 ### Known Issues and Limitations
