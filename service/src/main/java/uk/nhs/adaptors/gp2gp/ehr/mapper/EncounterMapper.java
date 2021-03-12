@@ -78,26 +78,23 @@ public class EncounterMapper {
         var coding = extractCoding(encounter);
         if (coding.isPresent()) {
             return coding.get().getCode();
-        } else {
-            return OTHER_REPORT_CODE;
         }
+        return OTHER_REPORT_CODE;
     }
 
     private String buildDisplayName(Encounter encounter) {
         var coding = extractCoding(encounter);
         if (coding.isPresent()) {
             return coding.get().getDisplay();
-        } else {
-            return OTHER_REPORT_DISPLAY;
         }
+        return OTHER_REPORT_DISPLAY;
     }
 
     private String buildOriginalText(Encounter encounter) {
         if (encounter.getTypeFirstRep().hasText()) {
             return encounter.getTypeFirstRep().getText();
-        } else {
-            return StringUtils.EMPTY;
         }
+        return StringUtils.EMPTY;
     }
 
     @SneakyThrows
