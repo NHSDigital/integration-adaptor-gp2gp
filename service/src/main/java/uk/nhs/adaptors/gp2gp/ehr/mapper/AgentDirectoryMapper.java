@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,17 +7,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
-import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
-import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,13 +34,14 @@ public class AgentDirectoryMapper {
 
     private final PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     private final OrganizationToAgentMapper organizationToAgentMapper;
-    private final MessageContext messageContext;
 
     public String mapEHRFolderToAgentDirectory(Bundle bundle, String nhsNumber) {
         var builder = AgentDirectoryParameter.builder()
             .patientManagingOrganization(extractPatientManagingOrganization(bundle, nhsNumber))
             .observationOrganizations(prepareObservationAgentsList(bundle))
             .referralRequestsOrganizations(prepareReferralRequestAgentsList(bundle));
+
+        var testing = preparePractitionerRoleAgentsList(bundle);
 
         return TemplateUtils.fillTemplate(AGENT_DIRECTORY_STRUCTURE_TEMPLATE, builder.build());
     }
@@ -79,7 +75,8 @@ public class AgentDirectoryMapper {
     }
 
     private List<String> preparePractitionerRoleAgentsList(Bundle bundle) {
-        List<Practitioner> practitioners = List.of();
+        List<Practitioner> practitioners = AgentDirectoryExtractor.extractRemainingPractitioners(bundle);
+        var testing = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, practitioners);
 
         return List.of();
     }
