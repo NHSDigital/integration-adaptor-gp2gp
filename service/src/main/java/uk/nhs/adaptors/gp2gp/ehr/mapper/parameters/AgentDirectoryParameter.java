@@ -11,5 +11,6 @@ import lombok.Setter;
 @Builder
 public class AgentDirectoryParameter {
     private String patientManagingOrganization;
-    private List<String> observationManagingOrganization;
+    private List<String> observationOrganizations;
+    private List<String> referralRequestsOrganizations;
 }
