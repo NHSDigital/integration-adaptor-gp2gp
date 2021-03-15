@@ -1,12 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.io.InputStreamReader;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -32,10 +32,7 @@ public class EncounterMapper {
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
     private static final String OTHER_REPORT_CODE = "24591000000103";
     private static final String OTHER_REPORT_DISPLAY = "Other report";
-    private static final String NEW_LINE = "\n";
-    private static final InputStream VOCAB_CODE_INPUT_STREAM =
-        EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
-    private static final HashSet<String> EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
+    private static final Set<String> EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
 
     private final MessageContext messageContext;
     private final EncounterComponentsMapper encounterComponentsMapper;
@@ -97,10 +94,14 @@ public class EncounterMapper {
         return StringUtils.EMPTY;
     }
 
-    @SneakyThrows
-    private static HashSet<String> getEhrCompositionNameVocabularyCodes() {
-        String ehrCompositionNameCodes = IOUtils.toString(VOCAB_CODE_INPUT_STREAM, StandardCharsets.UTF_8);
-
-        return new HashSet<>(Arrays.asList(ehrCompositionNameCodes.split(NEW_LINE)));
+    private static Set<String> getEhrCompositionNameVocabularyCodes() {
+        try (InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            return reader.lines()
+                .filter(line -> !line.isBlank())
+                .collect(Collectors.toUnmodifiableSet());
+        } catch (IOException e) {
+            throw new EhrMapperException("Could not retrieve Ehr Composition Name Vocabulary codes");
+        }
     }
 }
