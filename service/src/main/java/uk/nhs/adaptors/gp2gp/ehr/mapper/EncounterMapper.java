@@ -100,7 +100,7 @@ public class EncounterMapper {
         try (InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8))) {
             return reader.lines()
-                .filter(line -> !line.isBlank())
+                .filter(line -> line.trim().length() > 0)
                 .collect(Collectors.toUnmodifiableSet());
         } catch (IOException e) {
             throw new EhrMapperException("Could not retrieve Ehr Composition Name Vocabulary codes");
