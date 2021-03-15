@@ -3,14 +3,13 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -19,7 +18,9 @@ import org.springframework.stereotype.Component;
 
 import com.github.mustachejava.Mustache;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -61,32 +62,31 @@ public class EncounterMapper {
             && EHR_COMPOSITION_NAME_VOCABULARY_CODES.contains(coding.getCode());
     }
 
-    private Optional<Coding> extractCoding(Encounter encounter) {
-        var type = encounter.getType()
+    private CodeableConcept extractType(Encounter encounter) {
+        return encounter.getType()
             .stream()
             .findFirst()
             .orElseThrow(() -> new EhrMapperException("Could not map Encounter type"));
-
-        return type.getCoding()
-            .stream()
-            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
-            .findFirst();
     }
 
     private String buildCode(Encounter encounter) {
-        var coding = extractCoding(encounter);
-        if (coding.isPresent()) {
-            return coding.get().getCode();
-        }
-        return OTHER_REPORT_CODE;
+        var type = extractType(encounter);
+        return type.getCoding()
+            .stream()
+            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
+            .findFirst()
+            .map(Coding::getCode)
+            .orElse(OTHER_REPORT_CODE);
     }
 
     private String buildDisplayName(Encounter encounter) {
-        var coding = extractCoding(encounter);
-        if (coding.isPresent()) {
-            return coding.get().getDisplay();
-        }
-        return OTHER_REPORT_DISPLAY;
+        var type = extractType(encounter);
+        return type.getCoding()
+            .stream()
+            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
+            .findFirst()
+            .map(Coding::getDisplay)
+            .orElse(OTHER_REPORT_DISPLAY);
     }
 
     private String buildOriginalText(Encounter encounter) {
@@ -96,20 +96,15 @@ public class EncounterMapper {
         return StringUtils.EMPTY;
     }
 
+    @SneakyThrows
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE",
+        justification = "https://github.com/spotbugs/spotbugs/issues/1338")
     private static Set<String> getEhrCompositionNameVocabularyCodes() {
-        try {
-            InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8));
-            try {
-                return reader.lines()
-                    .filter(line -> !line.isBlank())
-                    .collect(Collectors.toUnmodifiableSet());
-            } finally {
-                is.close();
-                reader.close();
-            }
-        } catch (IOException e) {
-            throw new EhrMapperException("Could not retrieve Ehr Composition Name vocabulary codes");
+        try (InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8))) {
+            return reader.lines()
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.toUnmodifiableSet());
         }
     }
 }
