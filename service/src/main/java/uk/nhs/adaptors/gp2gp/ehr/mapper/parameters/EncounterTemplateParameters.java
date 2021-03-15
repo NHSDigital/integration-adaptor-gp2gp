@@ -13,4 +13,7 @@ public class EncounterTemplateParameters {
     private String availabilityTime;
     private String effectiveTime;
     private String components;
+    private String code;
+    private String displayName;
+    private String originalText;
 }

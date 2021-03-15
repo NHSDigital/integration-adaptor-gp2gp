@@ -7669,7 +7669,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {
@@ -7742,7 +7749,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {
@@ -7815,7 +7829,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {
@@ -7888,7 +7909,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {
@@ -7961,7 +7989,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {
@@ -8034,7 +8069,14 @@
         "status": "finished",
         "type": [
           {
-            "text": "GP Surgery"
+            "text": "GP Surgery",
+            "coding": [
+              {
+                "system":"http://snomed.info/sct",
+                "code":"25741000000100",
+                "display":"Third Party Consultation"
+              }
+            ]
           }
         ],
         "subject": {

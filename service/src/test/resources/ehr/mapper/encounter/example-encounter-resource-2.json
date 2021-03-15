@@ -15,7 +15,14 @@
   "status":"finished",
   "type":[
     {
-      "text":"GP Surgery"
+      "text":"GP Surgery",
+      "coding": [
+        {
+          "system":"http://snomed.info/sct",
+          "code":"24671000000101",
+          "display":"Telephone call to a patient"
+        }
+      ]
     }
   ],
   "subject":{
