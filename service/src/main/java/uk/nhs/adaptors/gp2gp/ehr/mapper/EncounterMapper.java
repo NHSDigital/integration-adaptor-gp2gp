@@ -90,7 +90,7 @@ public class EncounterMapper {
     }
 
     private String buildOriginalText(Encounter encounter) {
-        if (encounter.getTypeFirstRep().hasText()) {
+        if (extractType(encounter).hasText()) {
             return encounter.getTypeFirstRep().getText();
         }
         return StringUtils.EMPTY;
