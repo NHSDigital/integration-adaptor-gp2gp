@@ -1,0 +1,42 @@
+{
+    "resourceType": "Observation",
+    "id": "296D5D73-8D65-4CAC-8047-553232F77A82",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "296D5D73-8D65-4CAC-8047-553232F77A82"
+        }
+    ],
+    "status": "final",
+    "code": {
+        "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "42Q5.00",
+                "display": "Prothrombin time",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "2207951000000110"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "852471000000107",
+                "display": "Prothrombin time"
+            }
+        ]
+    }
+}

@@ -9,5 +9,6 @@
         <text>
             Recall Device: Device type text Device name
         </text>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </PlanStatement>
 </component>

@@ -2,13 +2,13 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
-import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Period;
@@ -43,6 +43,7 @@ public class DiaryPlanStatementMapper {
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
 
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
 
     public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
@@ -56,29 +57,30 @@ public class DiaryPlanStatementMapper {
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
+        builder.code(buildCode(procedureRequest));
 
         return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
 
     private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
-        Date date = null;
+        DateTimeType date = null;
         if (procedureRequest.hasOccurrenceDateTimeType()) {
-            date = procedureRequest.getOccurrenceDateTimeType().getValue();
+            date = procedureRequest.getOccurrenceDateTimeType();
         } else if (procedureRequest.hasOccurrencePeriod()) {
             Period occurrencePeriod = procedureRequest.getOccurrencePeriod();
-            date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEnd() : occurrencePeriod.getStart();
+            date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEndElement() : occurrencePeriod.getStartElement();
         }
 
         return Optional.of(formatEffectiveDate(date));
     }
 
-    private String formatEffectiveDate(Date date) {
-        return date != null ? String.format(FULL_DATE, DateFormatUtil.formatDate(date)) : EMPTY_DATE;
+    private String formatEffectiveDate(DateTimeType date) {
+        return date != null ? String.format(FULL_DATE, DateFormatUtil.toHl7Format(date)) : EMPTY_DATE;
     }
 
     private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasAuthoredOn()) {
-            return DateFormatUtil.formatDate(procedureRequest.getAuthoredOn());
+            return DateFormatUtil.toHl7Format(procedureRequest.getAuthoredOnElement());
         }
 
         throw new EhrMapperException(
@@ -109,7 +111,7 @@ public class DiaryPlanStatementMapper {
 
     private String formatStartDate(ProcedureRequest procedureRequest) {
         return String.format(EARLIEST_RECALL_DATE_FORMAT,
-            DateFormatUtil.formatTextDate(procedureRequest.getOccurrencePeriod().getStart()));
+            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStartElement()));
     }
 
     private Optional<String> getNotes(ProcedureRequest procedureRequest) {
@@ -154,6 +156,13 @@ public class DiaryPlanStatementMapper {
         return Optional.empty();
     }
 
+    private String buildCode(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode());
+        }
+        throw new EhrMapperException("Procedure request code not present");
+    }
+
     private String formatDevice(Device device) {
         return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
     }
@@ -171,5 +180,6 @@ public class DiaryPlanStatementMapper {
         private String text;
         private String availabilityTime;
         private String effectiveTime;
+        private String code;
     }
 }

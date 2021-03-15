@@ -1,0 +1,18 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "valueRatio": {
+        "numerator": {
+            "comparator" : "<",
+            "value": 10,
+            "unit": "test-unit"
+        },
+        "denominator": {
+            "comparator" : ">",
+            "value": 20,
+            "unit": "test-unit"
+        }
+    }
+}

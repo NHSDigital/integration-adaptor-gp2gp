@@ -1,0 +1,20 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "comment": "Test comment",
+    "valueCodeableConcept": {
+        "coding": [
+            {
+                "system": "http://test-system",
+                "code": "test-code",
+                "display": "Test display"
+            }
+        ],
+        "text": "Test text"
+    },
+    "code": {
+        "text": "test"
+    }
+}

@@ -1,0 +1,10 @@
+<part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <family>Unknown</family>
+            </name>
+        </agentPerson>
+    </Agent>
+</part>

@@ -1,49 +1,64 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
+
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class DateFormatUtil {
-    private static final String UK_ZONE_ID = "Europe/London";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern("yyyyMMddHHmmss")
-        .toFormatter();
-    private static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
-    private static final DateTimeFormatter TEXT_DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
-        .appendPattern("yyyy-MM-dd HH:mm:ss")
-        .toFormatter();
+    private static final int MONTH_PADDING = 1;
+    private static final ZoneId UK_ZONE_ID = ZoneId.of("Europe/London");
+    private static final String COULD_NOT_FORMAT_DATE = "Could not format date";
+    private static final DateTimeFormatter HL7_SECONDS_COMPUTER_READABLE = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    private static final DateTimeFormatter HL7_SECONDS_HUMAN_READABLE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public static final String FORMAT_TWO_DIGITS = "%02d";
 
-    public static String formatDate(Date date) {
-        return format(date, DATE_TIME_FORMATTER);
+    public static String toHl7Format(Instant instant) {
+        return instant.atZone(UK_ZONE_ID).format(HL7_SECONDS_COMPUTER_READABLE);
     }
 
-    public static Object formatTextDate(Date date) {
-        return format(date, TEXT_DATE_TIME_FORMATTER);
-    }
-
-    private static String format(Date date, DateTimeFormatter dateTimeFormatter) {
-        if (date == null) {
-            throw new EhrMapperException("Could not format date");
+    public static String toHl7Format(BaseDateTimeType baseDateTimeType) {
+        if (!baseDateTimeType.hasValue()) {
+            throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
         }
 
-        return dateTimeFormatter.format(
-            date.toInstant()
-                .atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
+        switch (baseDateTimeType.getPrecision()) {
+            case YEAR:
+                return baseDateTimeType.getYear().toString();
+            case MONTH:
+                return baseDateTimeType.getYear()
+                    + String.format(FORMAT_TWO_DIGITS, baseDateTimeType.getMonth() + MONTH_PADDING);
+            case DAY:
+                return baseDateTimeType.getYear()
+                    + String.format(FORMAT_TWO_DIGITS, baseDateTimeType.getMonth() + MONTH_PADDING)
+                    + String.format(FORMAT_TWO_DIGITS, baseDateTimeType.getDay());
+            default:
+                return baseDateTimeType.toCalendar().toInstant().atZone(UK_ZONE_ID)
+                    .format(HL7_SECONDS_COMPUTER_READABLE);
+        }
     }
 
-    public static String formatShortDate(Date date) {
-        return new SimpleDateFormat(SHORT_DATE_FORMAT).format(date);
-    }
+    public static String toTextFormat(BaseDateTimeType baseDateTimeType) {
+        if (!baseDateTimeType.hasValue()) {
+            throw new EhrMapperException(COULD_NOT_FORMAT_DATE);
+        }
 
-    public static String formatDate(Instant instant) {
-        return DATE_TIME_FORMATTER.format(instant.atZone(ZoneId.of(UK_ZONE_ID))
-                .toLocalDateTime());
+        switch (baseDateTimeType.getPrecision()) {
+            case YEAR:
+                return baseDateTimeType.getYear().toString();
+            case MONTH:
+                return baseDateTimeType.getYear() + "-"
+                    + String.format(FORMAT_TWO_DIGITS, baseDateTimeType.getMonth() + MONTH_PADDING);
+            case DAY:
+                return baseDateTimeType.getYear() + "-"
+                    + String.format(FORMAT_TWO_DIGITS,  baseDateTimeType.getMonth() + MONTH_PADDING)
+                    + "-" + String.format(FORMAT_TWO_DIGITS, baseDateTimeType.getDay());
+            default:
+                return baseDateTimeType.toCalendar().toInstant().atZone(UK_ZONE_ID)
+                    .format(HL7_SECONDS_HUMAN_READABLE);
+        }
     }
 }

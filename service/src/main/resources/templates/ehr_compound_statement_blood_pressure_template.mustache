@@ -1,0 +1,60 @@
+<component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="{{id}}"/>
+        {{{compoundStatementCode}}}
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{{availabilityTime}}}
+        {{#systolicId}}
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="{{systolicId}}"/>
+                {{{systolicCode}}}
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    {{{effectiveTime}}}
+                </effectiveTime>
+                {{{availabilityTime}}}
+                {{#systolicQuantity}}
+                <valueQuantity>{{{systolicQuantity}}}</valueQuantity>
+                {{/systolicQuantity}}
+                {{#systolicReferenceRange}}
+                {{{systolicReferenceRange}}}
+                {{/systolicReferenceRange}}
+            </ObservationStatement>
+        </component>
+        {{/systolicId}}
+        {{#diastolicId}}
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="{{diastolicId}}"/>
+                {{{diastolicCode}}}
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    {{{effectiveTime}}}
+                </effectiveTime>
+                {{{availabilityTime}}}
+                {{#diastolicQuantity}}
+                <valueQuantity>{{{diastolicQuantity}}}</valueQuantity>
+                {{/diastolicQuantity}}
+                {{#diastolicReferenceRange}}
+                {{{diastolicReferenceRange}}}
+                {{/diastolicReferenceRange}}
+            </ObservationStatement>
+        </component>
+        {{/diastolicId}}
+        {{#narrativeId}}
+        <component typeCode="COMP" contextConductionInd="true">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="{{narrativeId}}"/>
+                <text>{{narrativeText}}</text>
+                <statusCode code="COMPLETE"/>
+                {{{narrativeAvailabilityTime}}}
+            </NarrativeStatement>
+        </component>
+        {{/narrativeId}}
+        <!--<Participant typeCode="PRF" ..../>-->
+    </CompoundStatement>
+</component>

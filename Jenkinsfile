@@ -1,6 +1,10 @@
-String tfProject     = "nia"
-String tfEnvironment = "build1"
-String tfComponent   = "gp2gp"
+String tfProject      = "nia"
+String tfEnvironment  = "build1"
+String tfComponent    = "gp2gp"
+String redirectEnv    = "ptl"          // Name of environment where TF deployment needs to be re-directed
+String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
+Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
+Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
 
 pipeline {
     agent{
@@ -15,7 +19,11 @@ pipeline {
     environment {
         BUILD_TAG = sh label: 'Generating build tag', returnStdout: true, script: 'python3 scripts/tag.py ${GIT_BRANCH} ${BUILD_NUMBER} ${GIT_COMMIT}'
         ECR_REPO_DIR = "gp2gp"
+        WIREMOCK_ECR_REPO_DIR = "gp2gp-wiremock"
+        MHS_MOCK_ECR_REPO_DIR = "gp2gp-mock-mhs"
         DOCKER_IMAGE = "${DOCKER_REGISTRY}/${ECR_REPO_DIR}:${BUILD_TAG}"
+        WIREMOCK_DOCKER_IMAGE = "${DOCKER_REGISTRY}/${WIREMOCK_ECR_REPO_DIR}:${BUILD_TAG}"
+        MHS_MOCK_DOCKER_IMAGE  = "${DOCKER_REGISTRY}/${MHS_MOCK_ECR_REPO_DIR}:${BUILD_TAG}"
     }
 
     stages {
@@ -60,6 +68,12 @@ pipeline {
                     steps {
                         script {
                             if (sh(label: 'Running gp2gp docker build', script: 'docker build -f docker/service/Dockerfile -t ${DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp Docker image")}
+                            if (publishWiremockImage) {
+                                if (sh(label: 'Running gp2gp-wiremock docker build', script: 'docker build -f docker/wiremock/Dockerfile -t ${WIREMOCK_DOCKER_IMAGE} docker/wiremock', returnStatus: true) != 0) {error("Failed to build gp2gp-wiremock Docker image")}
+                            }
+                            if (publishMhsMockImage) {
+                                if (sh(label: 'Running gp2gp-mhs-mock docker build', script: 'docker build -f docker/mock-mhs-adaptor/Dockerfile -t ${MHS_MOCK_DOCKER_IMAGE} .', returnStatus: true) != 0) {error("Failed to build gp2gp-mock-mhs Docker image")}
+                            }
                         }
                     }
                 }
@@ -73,6 +87,16 @@ pipeline {
                             if (ecrLogin(TF_STATE_BUCKET_REGION) != 0 )  { error("Docker login to ECR failed") }
                             String dockerPushCommand = "docker push ${DOCKER_IMAGE}"
                             if (sh (label: "Pushing image", script: dockerPushCommand, returnStatus: true) !=0) { error("Docker push gp2gp image failed") }
+
+                            String dockerPushCommandWiremock = "docker push ${WIREMOCK_DOCKER_IMAGE}"
+                            if (publishWiremockImage) {
+                                if (sh (label: "Pushing Wiremock image", script: dockerPushCommandWiremock, returnStatus: true) !=0) { error("Docker push gp2gp-wiremock image failed") }
+                            }
+
+                            String dockerPushCommandMhsMock = "docker push ${MHS_MOCK_DOCKER_IMAGE}"
+                            if (publishMhsMockImage) {
+                                if (sh(label: "Pushing MHS Mock image", script: dockerPushCommandMhsMock, returnStatus: true) != 0) {error("Docker push gp2gp-mock-mhs image failed") }
+                            }
                         }
                     }
                 }
@@ -85,6 +109,10 @@ pipeline {
                         stage('Deploy using Terraform') {
                             steps {
                                 script {
+                                    
+                                    // Check if TF deployment environment needs to be redirected
+                                    if (GIT_BRANCH == redirectBranch) { tfEnvironment = redirectEnv }
+                                    
                                     String tfCodeBranch  = "develop"
                                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
@@ -141,13 +169,20 @@ int ecrLogin(String aws_region) {
     return sh(label: "Logging in with Docker", script: dockerLogin, returnStatus: true)
 }
 
+String tfEnv(String tfEnvRepo="https://github.com/tfutils/tfenv.git", String tfEnvPath="~/.tfenv") {
+  sh(label: "Get tfenv" ,  script: "git clone ${tfEnvRepo} ${tfEnvPath}", returnStatus: true)
+  sh(label: "Install TF",  script: "${tfEnvPath}/bin/tfenv install"     , returnStatus: true)
+  return "${tfEnvPath}/bin/terraform"
+}
+
 int terraformInit(String tfStateBucket, String project, String environment, String component, String region) {
+  String terraformBinPath = tfEnv()
   println("Terraform Init for Environment: ${environment} Component: ${component} in region: ${region} using bucket: ${tfStateBucket}")
-  String command = "terraform init -backend-config='bucket=${tfStateBucket}' -backend-config='region=${region}' -backend-config='key=${project}-${environment}-${component}.tfstate' -input=false -no-color"
+  String command = "${terraformBinPath} init -backend-config='bucket=${tfStateBucket}' -backend-config='region=${region}' -backend-config='key=${project}-${environment}-${component}.tfstate' -input=false -no-color"
   dir("components/${component}") {
     return( sh( label: "Terraform Init", script: command, returnStatus: true))
-  }
-}
+  } // dir
+} // int TerraformInit
 
 int terraform(String action, String tfStateBucket, String project, String environment, String component, String region, Map<String, String> variables=[:], List<String> parameters=[]) {
     println("Running Terraform ${action} in region ${region} with: \n Project: ${project} \n Environment: ${environment} \n Component: ${component}")
@@ -158,9 +193,12 @@ int terraform(String action, String tfStateBucket, String project, String enviro
     variablesMap.put('tf_state_bucket',tfStateBucket)
     parametersList = parameters
     parametersList.add("-no-color")
+    //parametersList.add("-compact-warnings")  /TODO update terraform to have this working
 
+    // Get the secret variables for global
     String secretsFile = "etc/secrets.tfvars"
     writeVariablesToFile(secretsFile,getAllSecretsForEnvironment(environment,"nia",region))
+    String terraformBinPath = tfEnv()
 
     List<String> variableFilesList = [
       "-var-file=../../etc/global.tfvars",
@@ -169,12 +207,25 @@ int terraform(String action, String tfStateBucket, String project, String enviro
     ]
     if (action == "apply"|| action == "destroy") {parametersList.add("-auto-approve")}
     List<String> variablesList=variablesMap.collect { key, value -> "-var ${key}=${value}" }
-    String command = "terraform ${action} ${variableFilesList.join(" ")} ${parametersList.join(" ")} ${variablesList.join(" ")} "
+    String command = "${terraformBinPath} ${action} ${variableFilesList.join(" ")} ${parametersList.join(" ")} ${variablesList.join(" ")} "
     dir("components/${component}") {
       return sh(label:"Terraform: "+action, script: command, returnStatus: true)
+    } // dir
+} // int Terraform
+
+Map<String,String> collectTfOutputs(String component) {
+  Map<String,String> returnMap = [:]
+  dir("components/${component}") {
+    String terraformBinPath = tfEnv()
+    List<String> outputsList = sh (label: "Listing TF outputs", script: "${terraformBinPath} output", returnStdout: true).split("\n")
+    outputsList.each {
+      returnMap.put(it.split("=")[0].trim(),it.split("=")[1].trim())
     }
+  } // dir
+  return returnMap
 }
 
+// Retrieving Secrets from AWS Secrets
 String getSecretValue(String secretName, String region) {
   String awsCommand = "aws secretsmanager get-secret-value --region ${region} --secret-id ${secretName} --query SecretString --output text"
   return sh(script: awsCommand, returnStdout: true).trim()

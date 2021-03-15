@@ -70,6 +70,23 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP" >
+                        <ObservationStatement classCode="OBS" moodCode="EVN">
+                            <id root="test-id-3" />
+                            <statusCode code="COMPLETE" />
+                            <effectiveTime>
+                                <center value="20100714180700"/>
+                            </effectiveTime>
+                            <availabilityTime value="20100714163232"/>
+                            <pertinentInformation typeCode="PERT">
+                                <sequenceNumber value="+1" />
+                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                    <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
+                                </pertinentAnnotation>
+                            </pertinentInformation>
+                            <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                        </ObservationStatement>
+                    </component>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -102,6 +119,26 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP" >
+                        <NarrativeStatement classCode="OBS" moodCode="EVN">
+                            <id root="test-id-3" />
+                            <statusCode code="COMPLETE" />
+                            <availabilityTime value="20100113152000" />
+                            <text>1.This is a line of text with a line break at the end.
+                                2.This is a line of text with a line break at the end.
+                                3.This is a line of text with a line break at the end.
+                                4.This is a line of text with a line break at the end.
+
+                                The Line above this one was blank (with a line break)
+
+                                This is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,  this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,and this is the end of the long line.
+
+                                ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesENDOFTEXT
+
+                                The line below contains special characters...
+                                ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+                        </NarrativeStatement>
+                    </component>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -134,6 +171,94 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP" >
+                        <ObservationStatement classCode="OBS" moodCode="EVN">
+                            <id root="test-id-3" />
+                            <statusCode code="COMPLETE" />
+                            <effectiveTime>
+                                <center value="20100123134800"/>
+                            </effectiveTime>
+                            <availabilityTime value="20100123140354"/>
+                            <pertinentInformation typeCode="PERT">
+                                <sequenceNumber value="+1" />
+                                <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                    <text></text>
+                                </pertinentAnnotation>
+                            </pertinentInformation>
+                            <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                        </ObservationStatement>
+                    </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>These are some notes !&quot;£$%^&amp;*()</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <availabilityTime value="20100123134800" />
+                        <text>This is some random free text</text>
+                    </NarrativeStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text></text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Family member : Mother</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    </ObservationStatement>
+                </component><component typeCode="COMP" >
+                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                        <id root="test-id-3" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <center value="20100123134800"/>
+                        </effectiveTime>
+                        <availabilityTime value="20100123140354"/>
+                        <pertinentInformation typeCode="PERT">
+                            <sequenceNumber value="+1" />
+                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                <text>Family member : Father - note - this is obviously wrong?</text>
+                            </pertinentAnnotation>
+                        </pertinentInformation>
+                        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                    </ObservationStatement>
+                </component>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -144,9 +269,9 @@
                     </code>
                     <statusCode code="COMPLETE" />
                     <effectiveTime>
-                        <center value="20100609010000"/>
+                        <center value="20100609"/>
                     </effectiveTime>
-                    <availabilityTime value="20100609010000"/>
+                    <availabilityTime value="20100609"/>
                     <author typeCode="AUT" contextControlCode="OP">
                         <time value="20100113151332" />
                         <agentRef classCode="AGNT">
@@ -166,6 +291,14 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP" >
+                        <NarrativeStatement classCode="OBS" moodCode="EVN">
+                            <id root="test-id-3" />
+                            <statusCode code="COMPLETE" />
+                            <availabilityTime value="20100609" />
+                            <text>hhhhhhhhh</text>
+                        </NarrativeStatement>
+                    </component>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -198,6 +331,14 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP" >
+                        <NarrativeStatement classCode="OBS" moodCode="EVN">
+                            <id root="test-id-3" />
+                            <statusCode code="COMPLETE" />
+                            <availabilityTime value="20100610082200" />
+                            <text>This is kjkjkjkjkjkjkjkjkj</text>
+                        </NarrativeStatement>
+                    </component>
                 </ehrComposition>
             </component>
             <component typeCode="COMP">
@@ -230,6 +371,50 @@
                             <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
                         </agentRef>
                     </Participant2>
+                    <component typeCode="COMP">
+                        <CompoundStatement classCode="BATTERY" moodCode="EVN">
+                            <id root="test-id-3"/>
+                            <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                            <statusCode code="COMPLETE"/>
+                            <effectiveTime>
+                                <center value="20100714175500"/>
+                            </effectiveTime>
+                            <availabilityTime value="20100714162813"/>
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                                    <statusCode code="COMPLETE"/>
+                                    <effectiveTime>
+                                        <center value="20100714175500"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100714162813"/>
+                                    <valueQuantity><value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                                </ObservationStatement>
+                            </component>
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                                    <statusCode code="COMPLETE"/>
+                                    <effectiveTime>
+                                        <center value="20100714175500"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100714162813"/>
+                                    <valueQuantity><value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                                </ObservationStatement>
+                            </component>
+                            <component typeCode="COMP" contextConductionInd="true">
+                                <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <text>This is the BP reading in a consultation with a note</text>
+                                    <statusCode code="COMPLETE"/>
+                                    <availabilityTime value="20100714175500"/>
+                                </NarrativeStatement>
+                            </component>
+                            <!--<Participant typeCode="PRF" ..../>-->
+                        </CompoundStatement>
+                    </component>
                 </ehrComposition>
             </component>
         </ehrFolder>

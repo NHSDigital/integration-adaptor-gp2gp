@@ -6,5 +6,6 @@
             <center value="20100630055900"/>
         </effectiveTime>
         <availabilityTime value="20100630054806" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </ObservationStatement>
 </component>

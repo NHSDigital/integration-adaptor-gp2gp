@@ -12,5 +12,8 @@ public class ObservationStatementTemplateParameters {
     private String comment;
     private String effectiveTime;
     private String issued;
+    private String value;
+    private String referenceRange;
     private boolean isNested;
+    private String code;
 }

@@ -10,12 +10,17 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -38,6 +43,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.w3c.dom.Document;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -50,6 +56,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
+    private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\" >";
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -156,6 +163,16 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         String hl7Response = storageDataWrapper.getHl7Response();
         assertThat(hl7Response).contains(EXPECTED_PAYLOAD_TYPE);
         assertThat(hl7Response).contains(EHR_COMPOSITION_ELEMENT);
+        assertThat(hl7Response).contains(COMPONENT_ELEMENT);
+        assertThatXmlCanBeParsed(hl7Response);
+    }
+
+    @SneakyThrows
+    private void assertThatXmlCanBeParsed(String content) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)));
+        assertThat(doc.getDocumentElement().getNodeName()).isEqualTo(EXPECTED_PAYLOAD_TYPE);
     }
 
     private GetGpcStructuredTaskDefinition buildInvalidNHSNumberStructuredTask(EhrExtractStatus ehrExtractStatus) {
