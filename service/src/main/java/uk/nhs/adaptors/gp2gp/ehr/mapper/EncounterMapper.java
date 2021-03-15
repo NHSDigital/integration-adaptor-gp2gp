@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -96,13 +97,13 @@ public class EncounterMapper {
         return StringUtils.EMPTY;
     }
 
+    @SneakyThrows
     private static Set<String> getEhrCompositionNameVocabularyCodes() {
         try (InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8))) {
             return reader.lines()
+                .filter(line -> !line.isBlank())
                 .collect(Collectors.toUnmodifiableSet());
-        } catch (IOException e) {
-            throw new EhrMapperException("Could not retrieve Ehr Composition Name Vocabulary codes");
         }
     }
 }
