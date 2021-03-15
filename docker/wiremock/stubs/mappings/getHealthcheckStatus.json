@@ -1,0 +1,12 @@
+{
+    "priority": 1,
+    "request": {
+        "method": "GET",
+        "url": "/healthcheck"
+    },
+    "response": {
+        "status": 200,
+        "body": "STATUS: healthy"
+        }
+    }
+}
