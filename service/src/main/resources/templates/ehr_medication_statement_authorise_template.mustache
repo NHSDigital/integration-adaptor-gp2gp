@@ -1,0 +1,48 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="INT">
+        <id root="{{medicationStatementId}}"/>
+        {{{effectiveTime}}}
+        <component typeCode="COMP">
+            <ehrSupplyAuthorise>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                {{{availabilityTime}}}
+                {{{effectiveTime}}}
+                <quantity value="{{quantityValue}}" unit="1">
+                    <translation value="{{quantityValue}}">
+                        <originalText>{{quantityText}}</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>{{ehrSupplyPertinentInformation}}</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+            </ehrSupplyAuthorise>
+        </component>
+        {{#ehrSupplyDiscontinueCode}}
+        <component typeCode="COMP">
+            <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
+                <id root="{{ehrSupplyDiscontinueId}}"/>
+                {{{ehrSupplyDiscontinueCode}}}
+                <statusCode code="COMPLETE"/>
+                {{{ehrSupplyDiscontinueAvailabilityTime}}}
+                <reversalOf typeCode="REV">
+                    <!-- id reference to ehrSupplyAuthorise/id/@root UUID" -->
+                </reversalOf>
+            </ehrSupplyDiscontinue>
+        </component>
+        {{/ehrSupplyDiscontinueCode}}
+        {{#priorPrescription}}
+        <predecessor typeCode="SUCC">
+            <priorMedicationRef classCode="SBADM" moodCode="INT">
+                <!-- id reference to MedicationStatement/ehrSupplyAuthorise/id/@root of MedicationStatement that was generated for the MedicationRequest referenced -->
+            </priorMedicationRef>
+        </predecessor>
+        {{/priorPrescription}}
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>{{medicationStatementPertinentInformation}}</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>

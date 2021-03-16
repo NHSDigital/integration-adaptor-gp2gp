@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
@@ -92,5 +93,31 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
         }
         return DEFAULT_TIME_VALUE;
+    }
+
+    public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
+        if (medicationRequest.getDispenseRequest().hasValidityPeriod()
+            && medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
+            Period period = medicationRequest.getDispenseRequest().getValidityPeriod();
+
+            if (medicationRequest.getDispenseRequest().getValidityPeriod().hasEnd()) {
+                return String.format(EFFECTIVE_TIME_FULL_TEMPLATE,
+                    toHl7Format(period.getStartElement()),
+                    toHl7Format(period.getEndElement()));
+            }
+
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
+                medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+        }
+        return DEFAULT_TIME_VALUE;
+    }
+
+    public static String prepareAvailabilityTimeForMedicationRequest(MedicationRequest medicationRequest) {
+        if (medicationRequest.getDispenseRequest().hasValidityPeriod()
+            && medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
+                medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+        }
+        return DEFAULT_AVAILABILITY_TIME_VALUE;
     }
 }
