@@ -35,7 +35,8 @@ public class AgentDirectoryMapperTest {
         FhirParseService fps = new FhirParseService();
         Bundle bundle = fps.parseResource(jsonInput, Bundle.class);
 
-        agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, "9465701459");
+        var mapperOutput = agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, "9465701459");
+        System.out.println(mapperOutput);
     }
 
 }

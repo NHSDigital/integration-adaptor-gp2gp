@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.sql.Ref;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -113,13 +112,22 @@ public class AgentDirectoryExtractor {
             .map(resource -> (Organization) resource)
             .collect(Collectors.toList());
 
-        return List.of();
+        return practitioners.stream()
+            .map(practitioner -> combineTriple(practitioner, practitionerRoles, organizations))
+            .collect(Collectors.toList());
     }
 
-    private static boolean referencesPractitioner(PractitionerRole practitionerRole, List<Practitioner> practitioners) {
-        var practitionerRolePractitionerId = practitionerRole.getPractitioner().getReferenceElement().getIdPart();
-        return practitioners.stream()
-            .anyMatch(practitioner -> practitioner.getIdElement().getIdPart().equals(practitionerRolePractitionerId));
+    private static Triple<Practitioner, Optional<PractitionerRole>, Optional<Organization>> combineTriple(Practitioner practitioner,
+        List<PractitionerRole> practitionerRoles, List<Organization> organizations) {
+
+        var practitionerRole = extractRelevantPractitionerRole(practitioner, practitionerRoles);
+
+        if (practitionerRole.isPresent()) {
+            var organization = extractRelevantOrganization(practitionerRole.get(), organizations);
+            return Triple.of(practitioner, practitionerRole, organization);
+        } else {
+            return Triple.of(practitioner, Optional.empty(), Optional.empty());
+        }
     }
 
     public static Optional<Resource> extractObservationResource(Observation observation, Bundle bundle, ResourceType resourceType) {
@@ -128,6 +136,28 @@ public class AgentDirectoryExtractor {
             .filter(reference1 -> reference1.getReferenceElement().getResourceType().equals(resourceType.name()))
             .findFirst();
         return reference.flatMap(value -> ResourceExtractor.extractResourceByReference(bundle, value.getReferenceElement()));
+    }
+
+    private static boolean referencesPractitioner(PractitionerRole practitionerRole, List<Practitioner> practitioners) {
+        var practitionerRolePractitionerId = practitionerRole.getPractitioner().getReferenceElement().getIdPart();
+        return practitioners.stream()
+            .anyMatch(practitioner -> practitioner.getIdElement().getIdPart().equals(practitionerRolePractitionerId));
+    }
+
+    private static Optional<PractitionerRole> extractRelevantPractitionerRole(Practitioner practitioner, List<PractitionerRole> practitionerRoles) {
+        var practitionerId = practitioner.getIdElement().getIdPart();
+        return practitionerRoles
+            .stream()
+            .filter(practitionerRole -> practitionerRole.getPractitioner().getReferenceElement().getIdPart().equals(practitionerId))
+            .findFirst();
+    }
+
+    private static Optional<Organization> extractRelevantOrganization(PractitionerRole practitionerRole, List<Organization> organizations) {
+        var organizationId = practitionerRole.getOrganization().getReferenceElement().getIdPart();
+        return organizations
+            .stream()
+            .filter(organization -> organization.getIdElement().getIdPart().equals(organizationId))
+            .findFirst();
     }
 
     private static boolean containsRelevantPractitioner(Resource resource) {

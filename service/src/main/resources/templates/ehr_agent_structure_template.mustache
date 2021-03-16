@@ -1,5 +1,12 @@
 <agentDirectory>
     {{{patientManagingOrganization}}}
-    {{{observationOrganization}}}
-    {{{referralRequestsOrganizations}}}
+    {{#observationOrganizations}}
+    {{{.}}}
+    {{/observationOrganizations}}
+    {{#referralRequestsOrganizations}}
+    {{{.}}}
+    {{/referralRequestsOrganizations}}
+    {{#agentPersons}}
+    {{{.}}}
+    {{/agentPersons}}
 </agentDirectory>
