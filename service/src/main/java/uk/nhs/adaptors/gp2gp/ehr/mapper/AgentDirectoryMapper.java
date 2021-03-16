@@ -108,7 +108,7 @@ public class AgentDirectoryMapper {
     }
 
     private String mapAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole, Optional<Organization> organization) {
-        if (!organizationPractitionerHasBeenMapped(practitioner, organization.get())) {
+        if (organization.isPresent() && !organizationPractitionerHasBeenMapped(practitioner, organization.get())) {
             addOrganizationPractitionerPairToMap(practitioner, organization.get());
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
