@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractNonAcuteRepeatValue;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,11 +11,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestStatus;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,20 +41,19 @@ public class MedicationStatementMapper {
 
     private static final String ACTIVE_STATUS_CODE = "ACTIVE";
     private static final String COMPLETE_STATUS_CODE = "COMPLETE";
-
-    private static final String DEFAULT_QUANTITY_VALUE = "1";
-    private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
-
+    private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
+    private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String NOTES = "Notes: %s";
     private static final String EXPECTED_SUPPLY_DURATION = "Expected Supply Duration: %s %s";
     private static final String PATIENT_INSTRUCTION = "Patient Instruction: %s";
-
+    private static final String DEFAULT_QUANTITY_VALUE = "1";
+    private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
     private static final String MEDICATION_STATUS_REASON_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1";
     private static final String STATUS_REASON_URL = "statusReason";
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
-    private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
-    private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
-
+    private static final List<String> ACUTE_PRESCRIPTION_TYPE_CODES = Arrays.asList("acute", "acute-handwritten");
+    private static final List<String> NON_ACUTE_PRESCRIPTION_TYPE_CODES = Arrays.asList("delayed-prescribing", "repeat", "repeat-dispensing");
+    private static final String ACUTE_REPEAT_VALUE = "0";
 
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final MessageContext messageContext;
@@ -58,26 +63,51 @@ public class MedicationStatementMapper {
         var medicationStatementTemplateParameters = MedicationStatementTemplateParameters.builder()
             .medicationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId()))
             .statusCode(buildStatusCode(medicationRequest))
+            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest))
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest))
+            .medicationReferenceCode(buildMedicationReferenceCode(medicationRequest))
+            .ehrSupplyId(randomIdGeneratorService.createNewId())
+            .medicationStatementPertinentInformation(buildDosageInstructionPertinentInformation(medicationRequest))
+            .ehrSupplyPertinentInformation(buildPertinentInformation(medicationRequest))
+            .repeatNumber(buildRepeatValue(medicationRequest))
             .quantityValue(buildQuantityValue(medicationRequest))
             .quantityText(buildQuantityText(medicationRequest))
             .ehrSupplyDiscontinueCode(buildStatusReasonCode(medicationRequest))
             .ehrSupplyDiscontinueId(randomIdGeneratorService.createNewId())
             .ehrSupplyDiscontinueAvailabilityTime(buildStatusReasonAvailabilityTime(medicationRequest))
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest))
-            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest))
             .hasPriorPrescription(medicationRequest.hasPriorPrescription())
-            .ehrSupplyPertinentInformation(buildPertinentInformation(medicationRequest))
-            .medicationStatementPertinentInformation(buildDosageInstructionPertinentInformation(medicationRequest))
             .build();
 
         if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
             return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_AUTHORISE_TEMPLATE, medicationStatementTemplateParameters);
-
         } else if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.ORDER.getDisplay())) {
             return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE, medicationStatementTemplateParameters);
         }
 
         throw new EhrMapperException("Could not map Medication Request intent");
+    }
+
+    private String buildStatusCode(MedicationRequest medicationRequest) {
+        if (medicationRequest.getStatus().getDisplay().equals(MedicationRequestStatus.ACTIVE.getDisplay())) {
+            return ACTIVE_STATUS_CODE;
+        }
+        return COMPLETE_STATUS_CODE;
+    }
+
+    private String buildMedicationReferenceCode(MedicationRequest medicationRequest) {
+        IIdType reference = medicationRequest.getMedicationReference().getReferenceElement();
+        return messageContext.getInputBundleHolder()
+            .getResource(reference)
+            .map(resource -> (Medication) resource)
+            .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd(value.getCode()))
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Reference"));
+    }
+
+    private String buildDosageInstructionPertinentInformation(MedicationRequest medicationRequest) {
+        if (medicationRequest.hasDosageInstruction() && medicationRequest.getDosageInstructionFirstRep().hasText()) {
+            return medicationRequest.getDosageInstructionFirstRep().getText();
+        }
+        return StringUtils.EMPTY;
     }
 
     private String buildPertinentInformation(MedicationRequest medicationRequest) {
@@ -91,6 +121,7 @@ public class MedicationStatementMapper {
     private List<String> retrievePertinentInformation(MedicationRequest medicationRequest) {
         return List.of(
             buildPatientInstructionPertinentInformation(medicationRequest),
+            buildExpectedSupplyDurationPertinentInformation(medicationRequest),
             buildNotePertinentInformation(medicationRequest)
         );
     }
@@ -100,13 +131,6 @@ public class MedicationStatementMapper {
             return medicationRequest.getDispenseRequest().getQuantity().getValue().toString();
         }
         return DEFAULT_QUANTITY_VALUE;
-    }
-
-    private String buildStatusCode(MedicationRequest medicationRequest) {
-        if (medicationRequest.getStatus().getDisplay().equals(MedicationRequestStatus.ACTIVE.getDisplay())) {
-            return ACTIVE_STATUS_CODE;
-        }
-        return COMPLETE_STATUS_CODE;
     }
 
     private String buildQuantityText(MedicationRequest medicationRequest) {
@@ -147,40 +171,53 @@ public class MedicationStatementMapper {
         return StringUtils.EMPTY;
     }
 
-    private String buildDosageInstructionPertinentInformation(MedicationRequest medicationRequest) {
-        if (medicationRequest.hasDosageInstruction() && medicationRequest.getDosageInstructionFirstRep().hasText()) {
-            return medicationRequest.getDosageInstructionFirstRep().getText();
+    private String buildStatusReasonCode(MedicationRequest medicationRequest) {
+        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+            return medicationRequest.getExtension()
+                .stream()
+                .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
+                .findFirst()
+                .get() // TODO: refactor
+                .getExtension()
+                .stream()
+                .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
+                .findFirst()
+                .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
+                .orElse(StringUtils.EMPTY);
         }
         return StringUtils.EMPTY;
     }
 
-    private String buildStatusReasonCode(MedicationRequest medicationRequest) {
-        return medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
-            .findFirst()
-            .get() // TODO: refactor
-            .getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
-            .findFirst()
-            .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
-            .orElse(StringUtils.EMPTY);
+    private String buildStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
+        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+            return medicationRequest.getExtension()
+                .stream()
+                .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
+                .findFirst()
+                .get() // TODO: refactor
+                .getExtension()
+                .stream()
+                .filter(value -> value.getUrl().equals(STATUS_CHANGE_URL))
+                .findFirst()
+                .map(value -> (DateTimeType) value.getValue())
+                .map(DateFormatUtil::toHl7Format)
+                .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value)) // TODO: refactor?
+                .orElse(DEFAULT_AVAILABILITY_TIME_VALUE);
+        }
+        return StringUtils.EMPTY;
     }
 
-    private String buildStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
-        return medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
-            .findFirst()
-            .get() // TODO: refactor
-            .getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(STATUS_CHANGE_URL))
-            .findFirst()
-            .map(value -> (DateTimeType) value.getValue())
-            .map(DateFormatUtil::toHl7Format)
-            .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value)) // TODO: refactor?
-            .orElse(DEFAULT_AVAILABILITY_TIME_VALUE);
+    private String buildRepeatValue(MedicationRequest medicationRequest) {
+        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+            var prescriptionTypeCode = extractPrescriptionTypeCode(medicationRequest);
+
+            if (ACUTE_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
+                return ACUTE_REPEAT_VALUE;
+            } else if (NON_ACUTE_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
+                return extractNonAcuteRepeatValue(medicationRequest);
+            }
+            throw new EhrMapperException("Could not match Prescription Type to Repeat value");
+        }
+        return StringUtils.EMPTY;
     }
 }
