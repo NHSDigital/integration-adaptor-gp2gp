@@ -9,7 +9,6 @@ import io.netty.handler.ssl.SslContextBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
