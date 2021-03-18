@@ -13,6 +13,7 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
@@ -26,6 +27,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.InFulfilmentOfTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.MedicationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -38,6 +40,8 @@ public class MedicationStatementMapper {
         TemplateUtils.loadTemplate("ehr_medication_statement_authorise_template.mustache");
     private static final Mustache MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE =
         TemplateUtils.loadTemplate("ehr_medication_statement_prescribe_template.mustache");
+    private static final Mustache IN_FULFILMENT_OF_TEMPLATE =
+        TemplateUtils.loadTemplate("in_fulfilment_of_template.mustache");
 
     private static final String ACTIVE_STATUS_CODE = "ACTIVE";
     private static final String COMPLETE_STATUS_CODE = "COMPLETE";
@@ -55,8 +59,8 @@ public class MedicationStatementMapper {
     private static final List<String> NON_ACUTE_PRESCRIPTION_TYPE_CODES = Arrays.asList("delayed-prescribing", "repeat", "repeat-dispensing");
     private static final String ACUTE_REPEAT_VALUE = "0";
 
-    private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final MessageContext messageContext;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
@@ -66,7 +70,7 @@ public class MedicationStatementMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest))
             .medicationReferenceCode(buildMedicationReferenceCode(medicationRequest))
-            .ehrSupplyId(randomIdGeneratorService.createNewId())
+            .ehrSupplyId(messageContext.getMedicationStatementReferenceIdMapper().getOrNew(medicationRequest.getId()))
             .medicationStatementPertinentInformation(buildDosageInstructionPertinentInformation(medicationRequest))
             .ehrSupplyPertinentInformation(buildPertinentInformation(medicationRequest))
             .repeatNumber(buildRepeatValue(medicationRequest))
@@ -76,6 +80,7 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueId(randomIdGeneratorService.createNewId())
             .ehrSupplyDiscontinueAvailabilityTime(buildStatusReasonAvailabilityTime(medicationRequest))
             .hasPriorPrescription(medicationRequest.hasPriorPrescription())
+            .basedOn(buildBasedOn(medicationRequest))
             .build();
 
         if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
@@ -219,5 +224,39 @@ public class MedicationStatementMapper {
             throw new EhrMapperException("Could not match Prescription Type to Repeat value");
         }
         return StringUtils.EMPTY;
+    }
+
+    private String buildBasedOn(MedicationRequest medicationRequest) {
+        if (medicationRequest.hasBasedOn() && medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.ORDER.getDisplay())) {
+            return medicationRequest.getBasedOn()
+                .stream()
+                .filter(reference -> reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name()))
+                .map(this::extractBasedOn)
+                .filter(StringUtils::isNotEmpty)
+                .map(this::buildBasedOnCode)
+                .collect(Collectors.joining(StringUtils.LF));
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractBasedOn(Reference reference) {
+        var resource = messageContext.getInputBundleHolder()
+            .getResource(reference.getReferenceElement())
+            .map(value -> (MedicationRequest) value)
+            .filter(value -> value.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay()));
+
+        if (resource.isPresent()) {
+            return messageContext.getMedicationStatementReferenceIdMapper()
+                .getOrNew(reference.getIdElement().getId());
+        }
+
+        return StringUtils.EMPTY; // TODO: should this throw an exception?
+    }
+
+    private String buildBasedOnCode(String id) {
+        var inFulfilmentOfTemplateParameters = InFulfilmentOfTemplateParameters.builder()
+            .ehrSupplyAuthoriseId(id);
+
+        return TemplateUtils.fillTemplate(IN_FULFILMENT_OF_TEMPLATE, inFulfilmentOfTemplateParameters);
     }
 }

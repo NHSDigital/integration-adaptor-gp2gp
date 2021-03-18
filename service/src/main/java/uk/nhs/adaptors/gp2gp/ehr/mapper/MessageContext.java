@@ -14,6 +14,7 @@ public class MessageContext {
 
     private static ThreadLocal<IdMapper> idMapperHolder = new NamedThreadLocal<>("IdMapper");
     private static ThreadLocal<InputBundle> inputBundleHolder = new NamedThreadLocal<>("InputBundle");
+    private static ThreadLocal<MedicationRequestIdMapper> medicationRequestIdHolder = new NamedThreadLocal<>("MedicationRequestReferenceIdMapper");
 
     @Autowired
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -21,6 +22,7 @@ public class MessageContext {
     public void resetMessageContext() {
         idMapperHolder.remove();
         inputBundleHolder.remove();
+        medicationRequestIdHolder.remove();
     }
 
     public void initialize(Bundle bundle) {
@@ -37,5 +39,13 @@ public class MessageContext {
 
     public InputBundle getInputBundleHolder() {
         return inputBundleHolder.get();
+    }
+
+    public MedicationRequestIdMapper getMedicationStatementReferenceIdMapper() {
+        if (medicationRequestIdHolder.get() == null) {
+            medicationRequestIdHolder.set(new MedicationRequestIdMapper(randomIdGeneratorService));
+        }
+
+        return medicationRequestIdHolder.get();
     }
 }

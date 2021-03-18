@@ -1,0 +1,26 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Medication",
+                "id": "20",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "430127000",
+                            "display": "Oral Form Oxycodone (product)"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
