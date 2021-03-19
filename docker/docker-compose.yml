@@ -1,40 +1,40 @@
 version: '3.4'
 
 services:
-#  gp2gp:
-#    image: ${GP2GP_IMAGE:-local/gp2gp:latest}
-#    build:
-#      context: ../
-#      dockerfile: docker/service/Dockerfile
-#    depends_on:
-#      - mongodb
-#      - activemq
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      - GP2GP_SERVER_PORT
-#      - GP2GP_LOGGING_LEVEL
-#      - GP2GP_AMQP_BROKERS
-#      - GP2GP_AMQP_USERNAME
-#      - GP2GP_AMQP_PASSWORD
-#      - GP2GP_AMQP_MAX_REDELIVERIES
-#      - GP2GP_MONGO_URI
-#      - GP2GP_MONGO_DATABASE_NAME
-#      - GP2GP_MONGO_TTL
-#      - GP2GP_COSMOS_DB_ENABLED
-#      - GP2GP_STORAGE_TYPE
-#      - GP2GP_STORAGE_CONTAINER_NAME
-#      - GP2GP_MHS_OUTBOUND_URL
-#      - AZURE_STORAGE_CONNECTION_STRING
-#      - AWS_ACCESS_KEY_ID
-#      - AWS_SECRET_ACCESS_KEY
-#      - AWS_REGION
-#      - GP2GP_GPC_GET_URL
-#      - GP2GP_GPC_GET_STRUCTURED_ENDPOINT
-#      - GP2GP_GPC_GET_DOCUMENT_ENDPOINT
-#      - GP2GP_SSL_TRUST_STORE_URL
-#      - GP2GP_SSL_TRUST_STORE_PASSWORD
-#      - GP2GP_GPC_OVERRIDE_NHS_NUMBER
+  gp2gp:
+    image: ${GP2GP_IMAGE:-local/gp2gp:latest}
+    build:
+      context: ../
+      dockerfile: docker/service/Dockerfile
+    depends_on:
+      - mongodb
+      - activemq
+    ports:
+      - "8080:8080"
+    environment:
+      - GP2GP_SERVER_PORT
+      - GP2GP_LOGGING_LEVEL
+      - GP2GP_AMQP_BROKERS
+      - GP2GP_AMQP_USERNAME
+      - GP2GP_AMQP_PASSWORD
+      - GP2GP_AMQP_MAX_REDELIVERIES
+      - GP2GP_MONGO_URI
+      - GP2GP_MONGO_DATABASE_NAME
+      - GP2GP_MONGO_TTL
+      - GP2GP_COSMOS_DB_ENABLED
+      - GP2GP_STORAGE_TYPE
+      - GP2GP_STORAGE_CONTAINER_NAME
+      - GP2GP_MHS_OUTBOUND_URL
+      - AZURE_STORAGE_CONNECTION_STRING
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
+      - GP2GP_GPC_GET_URL
+      - GP2GP_GPC_GET_STRUCTURED_ENDPOINT
+      - GP2GP_GPC_GET_DOCUMENT_ENDPOINT
+      - GP2GP_SSL_TRUST_STORE_URL
+      - GP2GP_SSL_TRUST_STORE_PASSWORD
+      - GP2GP_GPC_OVERRIDE_NHS_NUMBER
 
   mock-mhs-adaptor:
     build:
@@ -70,21 +70,21 @@ services:
     command:
       - -global-response-templating
 
-#  gpcc:
-#    image: nhsdev/nia-gpc-consumer-adaptor:0.0.1
-#    ports:
-#      - "8090:8080"
-#    environment:
-#      - GPC_CONSUMER_SERVER_PORT
-#      - GPC_CONSUMER_SPINE_CLIENT_CERT
-#      - GPC_CONSUMER_SPINE_CLIENT_KEY
-#      - GPC_CONSUMER_SPINE_ROOT_CA_CERT
-#      - GPC_CONSUMER_SPINE_SUB_CA_CERT
-#      - GPC_CONSUMER_URL
-#      - GPC_CONSUMER_GPC_GET_URL
-#      - GPC_CONSUMER_SEARCH_DOCUMENTS_PATH
-#      - GPC_CONSUMER_GPC_STRUCTURED_PATH
-#      - GPC_CONSUMER_GPC_GET_PATIENT_PATH
-#      - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
-#      - GPC_CONSUMER_SDS_URL
-#      - GPC_CONSUMER_SDS_APIKEY
+  gpcc:
+    image: nhsdev/nia-gpc-consumer-adaptor:0.0.1
+    ports:
+      - "8090:8080"
+    environment:
+      - GPC_CONSUMER_SERVER_PORT
+      - GPC_CONSUMER_SPINE_CLIENT_CERT
+      - GPC_CONSUMER_SPINE_CLIENT_KEY
+      - GPC_CONSUMER_SPINE_ROOT_CA_CERT
+      - GPC_CONSUMER_SPINE_SUB_CA_CERT
+      - GPC_CONSUMER_URL
+      - GPC_CONSUMER_GPC_GET_URL
+      - GPC_CONSUMER_SEARCH_DOCUMENTS_PATH
+      - GPC_CONSUMER_GPC_STRUCTURED_PATH
+      - GPC_CONSUMER_GPC_GET_PATIENT_PATH
+      - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
+      - GPC_CONSUMER_SDS_URL
+      - GPC_CONSUMER_SDS_APIKEY
