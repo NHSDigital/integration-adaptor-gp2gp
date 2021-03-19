@@ -1,6 +1,7 @@
 <component typeCode="COMP" contextConductionInd="true">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="{{medicationStatementId}}"/>
+        <statusCode code="{{statusCode}}"/>
         {{{availabilityTime}}}
         {{{effectiveTime}}}
         <consumable typeCode="CSM">
@@ -13,6 +14,7 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="{{ehrSupplyId}}"/>
+                <statusCode code="{{statusCode}}"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 {{{availabilityTime}}}
                 {{{effectiveTime}}}
@@ -33,8 +35,8 @@
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="{{ehrSupplyDiscontinueId}}"/>
-                {{{ehrSupplyDiscontinueCode}}}
                 <statusCode code="COMPLETE"/>
+                {{{ehrSupplyDiscontinueCode}}}
                 {{{ehrSupplyDiscontinueAvailabilityTime}}}
                 <reversalOf typeCode="REV">
                     <id root="{{ehrSupplyId}}"/>

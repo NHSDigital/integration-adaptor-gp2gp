@@ -28,9 +28,9 @@
         }
     ],
     "status":"active",
-    "intent":"order",
+    "intent":"plan",
     "medicationReference":{
-        "reference":"Medication/20"
+        "reference":"Device/20"
     },
     "subject":{
         "reference":"Patient/2"

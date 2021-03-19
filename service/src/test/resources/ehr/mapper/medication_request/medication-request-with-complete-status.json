@@ -27,7 +27,7 @@
             "value":"f2489066-7082-11eb-bb13-00505692d4aa"
         }
     ],
-    "status":"active",
+    "status":"completed",
     "intent":"order",
     "medicationReference":{
         "reference":"Medication/20"
