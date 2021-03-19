@@ -73,7 +73,7 @@ services:
   gpcc:
     image: nhsdev/nia-gpc-consumer-adaptor:0.0.1
     ports:
-      - "8220:8080"
+      - "8090:8080"
     environment:
       - GPC_CONSUMER_SERVER_PORT
       - GPC_CONSUMER_SPINE_CLIENT_CERT

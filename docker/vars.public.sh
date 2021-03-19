@@ -7,6 +7,6 @@ export GP2GP_MONGO_DATABASE_NAME="gp2gp"
 export GP2GP_MHS_OUTBOUND_URL="http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
 export GP2GP_GPC_GET_URL="https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect"
 
-export GPC_CONSUMER_URL="http://localhost:8220"
+export GPC_CONSUMER_URL="http://localhost:8090"
 export GPC_CONSUMER_GPC_GET_URL="https://orange.testlab.nhs.uk"
 export GPC_CONSUMER_SDS_URL="http://wiremock:8080/"
