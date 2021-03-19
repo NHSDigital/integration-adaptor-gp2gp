@@ -38,8 +38,8 @@ gp2gp:
   gpc:
     url: ${GP2GP_GPC_GET_URL:http://localhost:8090/GP0001/STU3/1/gpconnect}
     structuredEndpoint: ${GP2GP_GPC_GET_STRUCTURED_ENDPOINT:/fhir/Patient/$gpc.getstructuredrecord}
-    documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/fhir/Binary/}
-    patientEndpoint: ${GP2GP_GPC_GET_PATIENT_ENDPOINT:/fhir/Patient}
+    documentEndpoint: ${GP2GP_GPC_GET_DOCUMENT_ENDPOINT:/documents/Binary/}
+    patientEndpoint: ${GP2GP_GPC_GET_PATIENT_ENDPOINT:/documents/Patient}
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
