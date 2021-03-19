@@ -11,5 +11,5 @@ public class EhrStatusConstants {
     public static final String FROM_ODS_CODE = "GPC001";
     public static final String TO_ODS_CODE = "B86041";
     public static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    public static final String GPC_ACCESS_DOCUMENT_URL = "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/Binary/" + DOCUMENT_ID;
+    public static final String GPC_ACCESS_DOCUMENT_URL = "https://localhost:8090/GP0001/STU3/1/gpconnect/documents/Binary/" + DOCUMENT_ID;
 }
