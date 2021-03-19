@@ -150,7 +150,7 @@ public class GpcRequestBuilder {
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
-            .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
+            .uri(factory.expand(gpcConfiguration.getPatientDocumentReferenceEndpoint() + "/"
                 + patientId + GPC_DOCUMENT_REFERENCE_INCLUDES));
 
         return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
