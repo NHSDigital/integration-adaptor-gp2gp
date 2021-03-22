@@ -205,6 +205,106 @@
     },
     {
       "resource": {
+        "resourceType": "Practitioner",
+        "id": "C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B",
+        "meta": {
+          "versionId": "7786052607397903776",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Test",
+            "given": [
+              "NHS"
+            ],
+            "prefix": [
+              "Mr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "744B53BD-299D-4604-AC81-167DEBC49E4B",
+        "meta": {
+          "versionId": "28944702100670712",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Recall Schedule",
+            "given": [
+              "EMIS Web"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "unknown"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "744B53BD-299D-4604-AC81-167DEBC49E4C",
+        "meta": {
+          "versionId": "28944702100670712",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Recall Schedule 2",
+            "given": [
+              "EMIS Web 2"
+            ],
+            "prefix": [
+              "Dr 2"
+            ]
+          }
+        ],
+        "gender": "unknown"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF74",
+        "meta": {
+          "versionId": "4749697187075864793",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "McAvenue2",
+            "given": [
+              "David2"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
         "resourceType": "ReferralRequest",
         "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
         "authoredOn": "2010-01-19",
@@ -261,6 +361,86 @@
             }
           }
         ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "D81C5E8F-CB3A-4A78-92EA-51EC3665648E",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+          ]
+        },
+        "status": "finished",
+        "participant": [
+          {
+            "individual": {
+              "reference": "Practitioner/6AB948A5-2067-4A67-AD00-60EAF13E9CAA"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ReferralRequest",
+        "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
+        "authoredOn": "2010-01-19",
+        "priority": "routine",
+        "description": "Referred for investigation into low blood pressure",
+        "recipient": [
+          {
+            "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "123CEDB7-33BC-40B4-ACA3-DC48E41839FF",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+          ]
+        },
+        "onsetDateTime": "2010-01-13",
+        "assertedDate": "2010-01-13T14:57:10.83+00:00",
+        "recorder": {
+          "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "123CEDB7-33BC-40B4-ACA3-DC48E41839F7",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+          ]
+        },
+        "onsetDateTime": "2010-01-13",
+        "assertedDate": "2010-01-13T14:57:10.83+00:00",
+        "asserter": {
+          "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "05E9B02E-2991-4AE1-BFCF-444095DFEBD8-PROB",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+          ]
+        },
+        "clinicalStatus": "active",
+        "asserter": {
+          "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF74"
+        }
       }
     }
   ]

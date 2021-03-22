@@ -210,7 +210,15 @@ public class AgentDirectoryExtractor {
     }
 
     private static IIdType extractIIdTypeFromAllergyIntolerance(Resource resource) {
-        Optional<IIdType> practitionerReference = Optional.of(((AllergyIntolerance) resource).getAsserter().getReferenceElement());
+        Optional<IIdType> practitionerReference = extractAsserterReference(resource);
         return practitionerReference.orElseGet(() -> ((AllergyIntolerance) resource).getRecorder().getReferenceElement());
+    }
+
+    private static Optional<IIdType> extractAsserterReference(Resource resource) {
+        var practitionerReference = ((AllergyIntolerance) resource).getAsserter().getReferenceElement();
+        if (practitionerReference.getIdPart() != null) {
+            return Optional.of(practitionerReference);
+        }
+        return Optional.empty();
     }
 }

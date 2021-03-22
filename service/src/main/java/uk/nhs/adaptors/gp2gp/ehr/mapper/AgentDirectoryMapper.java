@@ -108,8 +108,8 @@ public class AgentDirectoryMapper {
     }
 
     private String mapAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole, Optional<Organization> organization) {
-        if (organization.isPresent() && !organizationPractitionerHasBeenMapped(practitioner, organization.get())) {
-            addOrganizationPractitionerPairToMap(practitioner, organization.get());
+        if (!organizationPractitionerHasBeenMapped(practitioner, organization)) {
+            addOrganizationPractitionerPairToMap(practitioner, organization);
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
                 practitionerRole,
@@ -119,13 +119,19 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization) {
-        var joinedId = practitioner.getIdElement().getIdPart() + "-" + organization.getIdElement().getIdPart();
-        return MAPPED_ORGANIZATIONS_AND_PRACTITIONER.containsKey(joinedId);
+    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Optional<Organization> organization) {
+        var mappedId = practitioner.getIdElement().getIdPart();
+        if (organization.isPresent()){
+             mappedId += "-" + organization.get().getIdElement().getIdPart();
+        }
+        return MAPPED_ORGANIZATIONS_AND_PRACTITIONER.containsKey(mappedId);
     }
 
-    private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Organization organization) {
-        var joinedId = practitioner.getId() + "-" + organization.getId();
-        MAPPED_ORGANIZATIONS_AND_PRACTITIONER.put(joinedId, true);
+    private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Optional<Organization> organization) {
+        var mappedId = practitioner.getIdElement().getIdPart();
+        if (organization.isPresent()) {
+            mappedId += "-" + organization.get().getIdElement().getIdPart();
+        }
+        MAPPED_ORGANIZATIONS_AND_PRACTITIONER.put(mappedId, true);
     }
 }
