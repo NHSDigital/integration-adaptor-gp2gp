@@ -75,10 +75,10 @@ public class EhrExtractTest {
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAckToRequestWasSent(ackToRequester);
+        assertThatAcknoledgementToRequestWasSent(ackToRequester);
     }
 
-    private void assertThatAckToRequestWasSent(Document ackToRequester) {
+    private void assertThatAcknoledgementToRequestWasSent(Document ackToRequester) {
         assertThat(ackToRequester.get("messageId")).isNotNull();
         assertThat(ackToRequester.get("taskId")).isNotNull();
         assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);

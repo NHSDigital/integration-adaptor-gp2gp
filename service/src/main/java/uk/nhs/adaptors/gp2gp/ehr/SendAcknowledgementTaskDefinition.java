@@ -20,6 +20,7 @@ public class SendAcknowledgementTaskDefinition extends TaskDefinition {
     private final String typeCode;
     private final Optional<String> reasonCode;
     private final Optional<String> detail;
+    
     @Override
     public TaskType getTaskType() {
         return SEND_ACKNOWLEDGEMENT;

@@ -35,12 +35,12 @@ public class MockMhsService {
 
     private static final String EXTRACT_CORE_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final String ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
-    private static final ClassLoader CLASS_LOADER = MockMhsService.class.getClassLoader();
-    private static final InputStream INPUT_STREAM_CONTINUE_REPLY = CLASS_LOADER.getResourceAsStream("COPC_IN000001UK01.json");
+    private static final ClassLoader MOCK_MHS_SERVICE_CLASS_LOADER = MockMhsService.class.getClassLoader();
+    private static final InputStream INPUT_STREAM_CONTINUE_REPLY = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("COPC_IN000001UK01.json");
     private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = IOUtils.toString(INPUT_STREAM_CONTINUE_REPLY, StandardCharsets.UTF_8);
-    private static final InputStream INPUT_STREAM_ACCEPTED_RESPONSE = CLASS_LOADER.getResourceAsStream("StubEbXmlResponse.xml");
+    private static final InputStream INPUT_STREAM_ACCEPTED_RESPONSE = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("StubEbXmlResponse.xml");
     private static final String STUB_ACCEPTED_RESPONSE = IOUtils.toString(INPUT_STREAM_ACCEPTED_RESPONSE, StandardCharsets.UTF_8);
-    private static final InputStream INPUT_STREAM_INTERNAL_SERVER_ERROR = CLASS_LOADER.getResourceAsStream("InternalServerError.html");
+    private static final InputStream INPUT_STREAM_INTERNAL_SERVER_ERROR = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("InternalServerError.html");
     private static final String INTERNAL_SERVER_ERROR_RESPONSE = IOUtils.toString(INPUT_STREAM_INTERNAL_SERVER_ERROR, StandardCharsets.UTF_8);
 
     public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage,

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class SendAcknowledgementResponseObject {
+public class SendAcknowledgementResponse {
     private final String fromAsid;
     private final String toAsid;
     private final String creationTime;

@@ -41,7 +41,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         LOGGER.info("SendAcknowledgement task was created, Sending Acknowledgement to Spine");
         var messageId = randomIdGeneratorService.createNewId();
 
-        var sendAcknowledgementResponseObject = SendAcknowledgementResponseObject.builder()
+        var sendAcknowledgementResponseObject = SendAcknowledgementResponse.builder()
             .creationTime(timestampService.now().toString())
             .uuid(messageId)
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())
