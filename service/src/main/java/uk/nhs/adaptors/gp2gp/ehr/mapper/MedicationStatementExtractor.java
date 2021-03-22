@@ -64,7 +64,6 @@ public class MedicationStatementExtractor {
                 .map(value -> value.getValueAsPrimitive().getValueAsString())
                 .orElse(DEFAULT_REPEAT_VALUE);
         }
-
         return DEFAULT_REPEAT_VALUE;
     }
 

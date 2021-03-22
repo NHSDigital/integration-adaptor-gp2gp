@@ -138,7 +138,6 @@ public class MedicationStatementMapper {
         } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension()) {
             return extractDispenseRequestQuantityText(medicationRequest);
         }
-
         return DEFAULT_QUANTITY_TEXT;
     }
 

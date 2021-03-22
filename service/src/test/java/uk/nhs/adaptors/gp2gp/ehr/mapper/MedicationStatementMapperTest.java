@@ -31,6 +31,8 @@ public class MedicationStatementMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/medication_request/";
     private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_INVALID_INTENT = TEST_FILE_DIRECTORY + "medication-request-with-invalid-intent.json";
+    private static final String INPUT_JSON_WITH_NO_VALIDITY_PERIOD = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-validity-period.json";
     private static final String INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE = TEST_FILE_DIRECTORY
         + "medication-request-with-invalid-prescription-type.json";
     private static final String INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE = TEST_FILE_DIRECTORY
@@ -95,7 +97,6 @@ public class MedicationStatementMapperTest {
         + "medication-statement-with-prescribe-based-on.xml";
     private static final String OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION = TEST_FILE_DIRECTORY
         + "medication-statement-with-prescribe-prior-prescription.xml";
-
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -212,6 +213,7 @@ public class MedicationStatementMapperTest {
 
     private static Stream<Arguments> resourceFileExpectException() {
         return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_NO_VALIDITY_PERIOD),
             Arguments.of(INPUT_JSON_WITH_INVALID_INTENT),
             Arguments.of(INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE),
             Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE),
