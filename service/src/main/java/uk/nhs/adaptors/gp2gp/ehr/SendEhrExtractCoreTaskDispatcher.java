@@ -28,7 +28,8 @@ public class SendEhrExtractCoreTaskDispatcher {
             .build();
 
         taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
-        LOGGER.info(String.format("SendEhrExtractCoreTaskDefinition added to task queue, conversationId: %s", ehrExtractStatus.getConversationId()));
+        LOGGER.info(String.format("SendEhrExtractCoreTaskDefinition added to task queue, conversationId: %s",
+            ehrExtractStatus.getConversationId()));
 
     }
 }

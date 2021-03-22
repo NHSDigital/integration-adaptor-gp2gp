@@ -30,6 +30,7 @@ public class SendAcknowledgementTaskDispatcher {
             .build();
 
         taskDispatcher.createTask(sendAcknowledgementTaskDefinition);
-        LOGGER.info(String.format("SendAcknowledgementTaskDefiniiton added to task queue, conversationId: %s", ehrExtractStatus.getConversationId()));
+        LOGGER.info(String.format("SendAcknowledgementTaskDefiniiton added to task queue, conversationId: %s",
+            ehrExtractStatus.getConversationId()));
     }
 }

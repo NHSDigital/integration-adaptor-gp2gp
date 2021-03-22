@@ -119,7 +119,8 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -127,7 +128,8 @@ public class EhrExtractStatusService {
         update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
+        EhrExtractStatus ehrExtractStatus =
+            mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
 
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
@@ -214,7 +216,8 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition, String messageId) {
+    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+        String messageId) {
         Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();

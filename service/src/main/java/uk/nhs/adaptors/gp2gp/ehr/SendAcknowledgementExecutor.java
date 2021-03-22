@@ -21,14 +21,14 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithPayload;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledgementTaskDefinition> {
-    private static final Mustache ACKNOWLEDGEMENT_TEMPLATE = TemplateUtils.loadTemplate("outbound_message_positive_acknowledgement.mustache");
+    private static final Mustache ACKNOWLEDGEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("outbound_message_positive_acknowledgement.mustache");
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final ObjectMapper objectMapper;
     private final TimestampService timestampService;
     private final RandomIdGeneratorService randomIdGeneratorService;
-
 
     @Override
     public Class<SendAcknowledgementTaskDefinition> getTaskType() {
@@ -61,5 +61,4 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         ehrExtractStatusService.updateEhrExtractStatusAcknowledgment(sendAcknowledgementTaskDefinition, messageId);
         LOGGER.info("");
     }
-
 }
