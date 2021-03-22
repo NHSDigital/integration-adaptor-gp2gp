@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractBasedOn;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractNonAcuteRepeatValue;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonCode;
@@ -47,7 +47,7 @@ public class MedicationStatementMapper {
     private static final String DEFAULT_QUANTITY_VALUE = "1";
     private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
     private static final List<String> ACUTE_PRESCRIPTION_TYPE_CODES = Arrays.asList("acute", "acute-handwritten");
-    private static final List<String> NON_ACUTE_PRESCRIPTION_TYPE_CODES =
+    private static final List<String> REPEAT_PRESCRIPTION_TYPE_CODES =
         Arrays.asList("delayed-prescribing", "repeat", "repeat-dispensing");
     private static final String ACUTE_REPEAT_VALUE = "0";
 
@@ -62,7 +62,7 @@ public class MedicationStatementMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest))
             .medicationReferenceCode(buildMedicationReferenceCode(medicationRequest))
-            .ehrSupplyId(messageContext.getMedicationStatementIdMapper().getOrNew(medicationRequest.getId()))
+            .ehrSupplyId(messageContext.getMedicationRequestIdMapper().getOrNew(medicationRequest.getId()))
             .medicationStatementPertinentInformation(buildDosageInstructionPertinentInformation(medicationRequest))
             .ehrSupplyPertinentInformation(buildPertinentInformation(medicationRequest))
             .repeatNumber(buildRepeatValue(medicationRequest))
@@ -189,10 +189,10 @@ public class MedicationStatementMapper {
 
             if (ACUTE_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
                 return ACUTE_REPEAT_VALUE;
-            } else if (NON_ACUTE_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
-                return extractNonAcuteRepeatValue(medicationRequest);
+            } else if (REPEAT_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
+                return extractRepeatValue(medicationRequest);
             }
-            throw new EhrMapperException("Could not match Prescription Type to Repeat value");
+            throw new EhrMapperException("Could not resolve Prescription Type for Repeat value");
         }
         return StringUtils.EMPTY;
     }
@@ -205,7 +205,7 @@ public class MedicationStatementMapper {
                 .filter(reference -> reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name()))
                 .map(reference -> extractBasedOn(reference, messageContext))
                 .map(MedicationStatementExtractor::buildBasedOnCode)
-                .collect(Collectors.joining(StringUtils.LF));
+                .collect(Collectors.joining());
         }
         return StringUtils.EMPTY;
     }

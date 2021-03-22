@@ -8,6 +8,8 @@ import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+
 public final class StatementTimeMappingUtils {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String EFFECTIVE_TIME_FULL_TEMPLATE = "<low value=\"%s\"/><high value=\"%s\"/>";
@@ -109,7 +111,7 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
                 medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
         }
-        return DEFAULT_TIME_VALUE;
+        throw new EhrMapperException("Could not map Effective Time for Medication Request");
     }
 
     public static String prepareAvailabilityTimeForMedicationRequest(MedicationRequest medicationRequest) {
@@ -118,6 +120,6 @@ public final class StatementTimeMappingUtils {
             return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
                 medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
         }
-        return DEFAULT_AVAILABILITY_TIME_VALUE;
+        throw new EhrMapperException("Could not map Availability Time for Medication Request");
     }
 }

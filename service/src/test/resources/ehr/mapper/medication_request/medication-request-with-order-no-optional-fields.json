@@ -28,7 +28,7 @@
         }
     ],
     "status":"active",
-    "intent":"plan",
+    "intent":"order",
     "medicationReference":{
         "reference":"Medication/20"
     },

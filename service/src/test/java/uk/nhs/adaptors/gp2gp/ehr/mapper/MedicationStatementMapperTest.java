@@ -11,6 +11,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -36,57 +37,62 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-invalid-medication-reference.json";
     private static final String INPUT_JSON_WITH_INVALID_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
         + "medication-request-with-invalid-medication-reference-type.json";
-    private static final String INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "medication-request-with-plan-no-optional-fields.json";
+    private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "medication-statement-with-plan-no-optional-fields.xml";
+        + "medication-statement-with-prescribe-no-optional-fields.xml";
+    private static final String INPUT_JSON_WITH_ORDER_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-optional-fields.json";
+    private static final String OUTPUT_XML_WITH_PRESCRIBE_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "medication-statement-with-prescribe-optional-fields.xml";
     private static final String INPUT_JSON_WITH_COMPLETE_STATUS = TEST_FILE_DIRECTORY + "medication-request-with-complete-status.json";
     private static final String OUTPUT_XML_WITH_COMPLETE_STATUS = TEST_FILE_DIRECTORY + "medication-statement-with-complete-status.xml";
     private static final String INPUT_JSON_WITH_ACTIVE_STATUS = TEST_FILE_DIRECTORY + "medication-request-with-active-status.json";
     private static final String OUTPUT_XML_WITH_ACTIVE_STATUS = TEST_FILE_DIRECTORY + "medication-statement-with-active-status.xml";
-    private static final String INPUT_JSON_WITH_ORDER_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-optional-fields.json";
+    private static final String INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-optional-fields.json";
     private static final String OUTPUT_XML_WITH_AUTHORISE_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-statement-with-authorise-optional-fields.xml";
     private static final String INPUT_JSON_WITH_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-dispense-quantity-text.json";
+        + "medication-request-with-plan-dispense-quantity-text.json";
     private static final String OUTPUT_XML_WITH_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
         + "medication-statement-with-dispense-quantity-text.xml";
     private static final String INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-no-dispense-quantity-text.json";
+        + "medication-request-with-plan-no-dispense-quantity-text.json";
     private static final String OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
         + "medication-statement-with-no-dispense-quantity-text.xml";
     private static final String INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_VALUE = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-no-dispense-quantity-value.json";
+        + "medication-request-with-plan-no-dispense-quantity-value.json";
     private static final String OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_VALUE = TEST_FILE_DIRECTORY
         + "medication-statement-with-no-dispense-quantity-value.xml";
-    private static final String INPUT_JSON_WITH_ORDER_ACUTE_PRESCRIPTION = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-acute-prescription.json";
+    private static final String INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-acute-prescription.json";
     private static final String OUTPUT_XML_WITH_AUTHORISE_ACUTE_PRESCRIPTION = TEST_FILE_DIRECTORY
         + "medication-statement-with-authorise-acute-prescription.xml";
-    private static final String INPUT_JSON_WITH_ORDER_NON_ACUTE_PRESCRIPTION = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-non-acute-prescription.json";
-    private static final String OUTPUT_XML_WITH_AUTHORISE_NON_ACUTE_PRESCRIPTION = TEST_FILE_DIRECTORY
-        + "medication-statement-with-authorise-non-acute-prescription.xml";
-    private static final String INPUT_JSON_WITH_ORDER_START_PERIOD_ONLY = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-start-period-only.json";
+    private static final String INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-repeat-prescription.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION = TEST_FILE_DIRECTORY
+        + "medication-statement-with-authorise-repeat-prescription.xml";
+    private static final String INPUT_JSON_WITH_ORDER_REPEAT_PRESCRIPTION_NO_VALUE = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-repeat-prescription-no-value.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION_NO_VALUE = TEST_FILE_DIRECTORY
+        + "medication-statement-with-authorise-repeat-prescription-no-value.xml";
+    private static final String INPUT_JSON_WITH_PLAN_START_PERIOD_ONLY = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-start-period-only.json";
     private static final String OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY = TEST_FILE_DIRECTORY
         + "medication-statement-with-authorise-start-period-only.xml";
-    private static final String INPUT_JSON_WITH_ORDER_NON_ACUTE_PRESCRIPTION_NO_VALUE = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-non-acute-prescription-no-value.json";
-    private static final String OUTPUT_XML_WITH_AUTHORISE_NON_ACUTE_PRESCRIPTION_NO_VALUE = TEST_FILE_DIRECTORY
-        + "medication-statement-with-authorise-non-acute-prescription-no-value.xml";
-
-/*
-    private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "medication-request-with-order-no-optional-fields.json";
-    private static final String OUTPUT_XML_WITH_AUTHROISE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+    private static final String INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-no-optional-fields.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-statement-with-authorise-no-optional-fields.xml";
-*/
+    private static final String INPUT_JSON_WITH_ORDER_BASED_ON = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-based-on.json";
+    private static final String OUTPUT_XML_WITH_PRESCRIBE_BASED_ON = TEST_FILE_DIRECTORY
+        + "medication-statement-with-prescribe-based-on.xml";
+
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
 
-    private Bundle bundle;
     private MessageContext messageContext;
     private CodeableConceptCdMapper codeableConceptCdMapper;
     private MedicationStatementMapper medicationStatementMapper;
@@ -96,7 +102,7 @@ public class MedicationStatementMapperTest {
         when(mockRandomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
@@ -116,18 +122,20 @@ public class MedicationStatementMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_ORDER_OPTIONAL_FIELDS, OUTPUT_XML_WITH_PRESCRIBE_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_COMPLETE_STATUS, OUTPUT_XML_WITH_COMPLETE_STATUS),
             Arguments.of(INPUT_JSON_WITH_ACTIVE_STATUS, OUTPUT_XML_WITH_ACTIVE_STATUS),
-            Arguments.of(INPUT_JSON_WITH_ORDER_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_DISPENSE_QUANTITY_TEXT, OUTPUT_XML_WITH_DISPENSE_QUANTITY_TEXT),
             Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_TEXT, OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_TEXT),
             Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_VALUE, OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_VALUE),
-            Arguments.of(INPUT_JSON_WITH_ORDER_ACUTE_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_ACUTE_PRESCRIPTION),
-            Arguments.of(INPUT_JSON_WITH_ORDER_NON_ACUTE_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_NON_ACUTE_PRESCRIPTION),
-            Arguments.of(INPUT_JSON_WITH_ORDER_NON_ACUTE_PRESCRIPTION_NO_VALUE, OUTPUT_XML_WITH_AUTHORISE_NON_ACUTE_PRESCRIPTION_NO_VALUE),
-            Arguments.of(INPUT_JSON_WITH_ORDER_START_PERIOD_ONLY, OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY)
-        );
+            Arguments.of(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_ACUTE_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_ORDER_REPEAT_PRESCRIPTION_NO_VALUE, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION_NO_VALUE),
+            Arguments.of(INPUT_JSON_WITH_PLAN_START_PERIOD_ONLY, OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY),
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS)
+            );
     }
 
     @SneakyThrows
@@ -139,6 +147,29 @@ public class MedicationStatementMapperTest {
         String outputMessage = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         assertThat(outputMessage).isEqualTo(expected);
+    }
+
+    @SneakyThrows
+    @Test
+    public void When_MappingBasedOnField_Expect_CorrectReferences() {
+        var expected = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_PRESCRIBE_BASED_ON);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("123");
+        var inputAuthorise1 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
+        var parsedMedicationRequest1 = new FhirParseService().parseResource(inputAuthorise1, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123", "789");
+        var inputBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ORDER_BASED_ON);
+        var parsedMedicationRequest = new FhirParseService().parseResource(inputBasedOn, MedicationRequest.class);
+        String outputMessageBasedOn = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("789");
+        var inputAuthorise2 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION);
+        var parsedMedicationRequest2 = new FhirParseService().parseResource(inputAuthorise2, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest2);
+
+        assertThat(outputMessageBasedOn).isEqualTo(expected);
     }
 
     @ParameterizedTest

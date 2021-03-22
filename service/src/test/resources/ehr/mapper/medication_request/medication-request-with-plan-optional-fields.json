@@ -26,8 +26,8 @@
                 "coding": [
                     {
                         "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
-                        "code": "acute",
-                        "display": "Acute"
+                        "code": "repeat",
+                        "display": "Repeat"
                     }
                 ]
             }

@@ -41,7 +41,7 @@ public class MessageContext {
         return inputBundleHolder.get();
     }
 
-    public MedicationRequestIdMapper getMedicationStatementIdMapper() {
+    public MedicationRequestIdMapper getMedicationRequestIdMapper() {
         if (medicationRequestIdHolder.get() == null) {
             medicationRequestIdHolder.set(new MedicationRequestIdMapper(randomIdGeneratorService));
         }

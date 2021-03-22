@@ -1,11 +1,6 @@
 {
     "resourceType":"MedicationRequest",
-    "id":"3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
-    "meta":{
-        "profile":[
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
-        ]
-    },
+    "id":"456",
     "extension":[
         {
             "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
@@ -27,7 +22,7 @@
         }
     ],
     "status":"active",
-    "intent":"plan",
+    "intent":"order",
     "medicationReference":{
         "reference":"Medication/20"
     },
@@ -45,5 +40,13 @@
             "start":"2017-11-10T00:00:00+00:00",
             "end":"2018-08-15T00:00:00+01:00"
         }
-    }
+    },
+    "basedOn": [
+        {
+            "reference": "MedicationRequest/123"
+        },
+        {
+            "reference": "MedicationRequest/789"
+        }
+    ]
 }

@@ -22,7 +22,7 @@ public class MedicationStatementExtractor {
     private static final String PRESCRIPTION_TYPE_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1";
     private static final String REPEAT_INFORMATION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1";
     private static final String NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL = "numberOfRepeatPrescriptionsAllowed";
-    private static final String DEFAULT_NON_ACUTE_REPEAT_VALUE = "1";
+    private static final String DEFAULT_REPEAT_VALUE = "1";
     private static final String MEDICATION_STATUS_REASON_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1";
     private static final String STATUS_REASON_URL = "statusReason";
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
@@ -36,7 +36,7 @@ public class MedicationStatementExtractor {
             .filter(value -> value.getUrl().equals(MEDICATION_QUANTITY_TEXT))
             .findFirst()
             .map(value -> value.getValue().toString())
-            .orElse(StringUtils.EMPTY);
+            .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION IF CANNOT EXTRACT THIS TEXT?
     }
 
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
@@ -52,9 +52,9 @@ public class MedicationStatementExtractor {
                 .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
                 .findFirst()
                 .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
-                .orElse(StringUtils.EMPTY);
+                .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION IF CANNOT GET STATUS REASON CODE?
         }
-        return StringUtils.EMPTY;
+        return StringUtils.EMPTY; // AS ABOVE?
     }
 
     public static String extractPrescriptionTypeCode(MedicationRequest medicationRequest) {
@@ -64,10 +64,10 @@ public class MedicationStatementExtractor {
             .findFirst()
             .map(value -> (CodeableConcept) value.getValue())
             .map(code -> code.getCodingFirstRep().getCode())
-            .orElse(StringUtils.EMPTY);
+            .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION NOT EMPTY?
     }
 
-    public static String extractNonAcuteRepeatValue(MedicationRequest medicationRequest) {
+    public static String extractRepeatValue(MedicationRequest medicationRequest) {
         var repeatInformation = medicationRequest.getExtension()
             .stream()
             .filter(value -> value.getUrl().equals(REPEAT_INFORMATION_URL))
@@ -79,11 +79,11 @@ public class MedicationStatementExtractor {
                 .stream()
                 .filter(value -> value.getUrl().equals(NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL) && value.hasValue())
                 .findFirst()
-                .map(value -> value.getValueAsPrimitive().getValueAsString()) // TODO: Remove "UnsignedIntType" from value returned
-                .orElse(DEFAULT_NON_ACUTE_REPEAT_VALUE);
+                .map(value -> value.getValueAsPrimitive().getValueAsString())
+                .orElse(DEFAULT_REPEAT_VALUE);
         }
 
-        return DEFAULT_NON_ACUTE_REPEAT_VALUE;
+        return DEFAULT_REPEAT_VALUE;
     }
 
     public static String extractStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
@@ -101,7 +101,7 @@ public class MedicationStatementExtractor {
                 .map(value -> (DateTimeType) value.getValue())
                 .map(DateFormatUtil::toHl7Format)
                 .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value))
-                .orElse(DEFAULT_AVAILABILITY_TIME_VALUE);
+                .orElse(DEFAULT_AVAILABILITY_TIME_VALUE); // TODO: THROW EXCEPTION NOT NULL FLAVOR?
         }
 
         return StringUtils.EMPTY;
@@ -114,8 +114,8 @@ public class MedicationStatementExtractor {
             .filter(value -> value.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay()));
 
         if (resource.isPresent()) {
-            return messageContext.getMedicationStatementIdMapper()
-                .getOrNew(reference.getIdElement().getId());
+            return messageContext.getMedicationRequestIdMapper()
+                .getOrNew(reference.getReference());
         }
 
         throw new EhrMapperException("Could not resolve basedOn MedicationRequest Reference");
@@ -123,7 +123,8 @@ public class MedicationStatementExtractor {
 
     public static String buildBasedOnCode(String id) {
         var inFulfilmentOfTemplateParameters = InFulfilmentOfTemplateParameters.builder()
-            .ehrSupplyAuthoriseId(id);
+            .ehrSupplyAuthoriseId(id)
+            .build();
 
         return TemplateUtils.fillTemplate(IN_FULFILMENT_OF_TEMPLATE, inFulfilmentOfTemplateParameters);
     }

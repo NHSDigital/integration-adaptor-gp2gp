@@ -1,6 +1,6 @@
 {
     "resourceType":"MedicationRequest",
-    "id":"20",
+    "id":"789",
     "meta":{
         "profile":[
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
