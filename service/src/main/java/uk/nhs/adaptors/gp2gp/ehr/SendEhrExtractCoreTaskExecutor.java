@@ -22,11 +22,13 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithPayload;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
+    private static final String positiveAcknowledgementTypeCode = "AA";
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final StorageConnectorService storageConnectorService;
     private final ObjectMapper objectMapper;
+    private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -47,9 +49,12 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(
             stringRequestBody, sendEhrExtractCoreTaskDefinition.getConversationId(), sendEhrExtractCoreTaskDefinition.getFromOdsCode());
+        mhsClient.sendMessageToMHS(request);
         Instant requestSentAt = Instant.now();
-        mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 
-        ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
+        if (ehrExtractStatus.getGpcAccessDocument().getDocuments().isEmpty()) {
+            sendAcknowledgementTaskDispatcher.send(ehrExtractStatus, positiveAcknowledgementTypeCode);
+        }
     }
 }

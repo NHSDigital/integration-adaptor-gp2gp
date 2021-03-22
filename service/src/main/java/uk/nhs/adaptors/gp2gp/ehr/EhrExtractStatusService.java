@@ -45,8 +45,11 @@ public class EhrExtractStatusService {
     private static final String OBJECT_NAME = "objectName";
     private static final String MESSAGE_ID = "messageId";
     private static final String ACCESSED_AT = "accessedAt";
-    private static final String ACCESSED_DOCUMENT_URL = "accessDocumentUrl";
     private static final String RECEIVED = "received";
+    private static final String ACK_TO_REQUESTER = "ackToRequester";
+    private static final String TYPE_CODE = "typeCode";
+    private static final String REASON_CODE = "reasonCode";
+    private static final String DETAIL_CODE = "detail";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -59,6 +62,11 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_MESSAGE_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + MESSAGE_ID;
     private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
+    private static final String ACK_TASK_ID_PATH = ACK_TO_REQUESTER + DOT + TASK_ID;
+    private static final String ACK_MESSAGE_ID_PATH = ACK_TO_REQUESTER + DOT + MESSAGE_ID;
+    private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
+    private static final String ACK_REASON_CODE_PATH = ACK_TO_REQUESTER + DOT + REASON_CODE;
+    private static final String ACK_DETAIL_CODE_PATH = ACK_TO_REQUESTER + DOT + DETAIL_CODE;
 
     private final MongoTemplate mongoTemplate;
 
@@ -111,17 +119,23 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition, Instant requestSentAt) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
         update.set(EXTRACT_CORE_SENT_AT_PATH, requestSentAt);
         update.set(EXTRACT_CORE_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        if (updateResult.getModifiedCount() != 1) {
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query, update, returningUpdatedRecordOption, EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
         }
+
+        LOGGER.info(String.format("Database successfully updated with EHRContinue, Conversation-Id: %s",
+            sendEhrExtractCoreTaskDefinition.getConversationId()));
+        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusContinue(String conversationId) {
@@ -198,6 +212,24 @@ public class EhrExtractStatusService {
         }
 
         return ehrExtractStatus;
+    }
+
+    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition, String messageId) {
+        Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
+
+        Update update = createUpdateWithUpdatedAt();
+        update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
+        update.set(ACK_MESSAGE_ID_PATH, messageId);
+        update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
+
+        sendAcknowledgementTaskDefinition.getReasonCode().ifPresent(reason -> update.set(ACK_REASON_CODE_PATH, reason));
+        sendAcknowledgementTaskDefinition.getDetail().ifPresent(detail -> update.set(ACK_DETAIL_CODE_PATH, detail));
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
+        }
     }
 
     private FindAndModifyOptions getReturningUpdatedRecordOption() {

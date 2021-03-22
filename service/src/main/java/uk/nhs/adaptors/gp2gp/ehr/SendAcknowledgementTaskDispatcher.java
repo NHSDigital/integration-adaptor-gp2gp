@@ -12,12 +12,12 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Service
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SendEhrExtractCoreTaskDispatcher {
+public class SendAcknowledgementTaskDispatcher {
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public void send(EhrExtractStatus ehrExtractStatus) {
-        var sendEhrExtractCoreTaskDefinition = SendEhrExtractCoreTaskDefinition.builder()
+    public void send(EhrExtractStatus ehrExtractStatus, String typeCode) {
+        var sendAcknowledgementTaskDefinition = SendAcknowledgementTaskDefinition.builder()
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
@@ -25,10 +25,11 @@ public class SendEhrExtractCoreTaskDispatcher {
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
+            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
+            .typeCode(typeCode)
             .build();
 
-        taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
-        LOGGER.info(String.format("SendEhrExtractCoreTaskDefinition added to task queue, conversationId: %s", ehrExtractStatus.getConversationId()));
-
+        taskDispatcher.createTask(sendAcknowledgementTaskDefinition);
+        LOGGER.info(String.format("SendAcknowledgementTaskDefiniiton added to task queue, conversationId: %s", ehrExtractStatus.getConversationId()));
     }
 }

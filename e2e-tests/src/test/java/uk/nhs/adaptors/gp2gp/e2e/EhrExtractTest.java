@@ -34,7 +34,8 @@ public class EhrExtractTest {
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
-    
+    public static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
+
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
@@ -73,6 +74,14 @@ public class EhrExtractTest {
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAckToRequestWasSent(ackToRequester);
+    }
+
+    private void assertThatAckToRequestWasSent(Document ackToRequester) {
+        assertThat(ackToRequester.get("messageId")).isNotNull();
+        assertThat(ackToRequester.get("taskId")).isNotNull();
+        assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
