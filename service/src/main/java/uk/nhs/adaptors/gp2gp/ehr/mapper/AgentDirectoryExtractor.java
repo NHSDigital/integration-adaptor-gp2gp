@@ -36,9 +36,11 @@ public class AgentDirectoryExtractor {
             ResourceType.Condition);
     private static final Map<ResourceType, Predicate<Resource>> RESOURCE_HAS_PRACTITIONER = Map.of(
         ResourceType.Immunization, (resource) -> ((Immunization) resource).hasPractitioner(),
-        ResourceType.Encounter, (resource -> ((Encounter) resource).hasParticipant() && ((Encounter) resource).getParticipantFirstRep().hasIndividual()),
+        ResourceType.Encounter, (resource -> ((Encounter) resource).hasParticipant()
+            && ((Encounter) resource).getParticipantFirstRep().hasIndividual()),
         ResourceType.ReferralRequest, (resource -> ((ReferralRequest) resource).hasRecipient()),
-        ResourceType.AllergyIntolerance, (resource -> ((AllergyIntolerance) resource).hasAsserter() || ((AllergyIntolerance) resource).hasRecorder()),
+        ResourceType.AllergyIntolerance, (resource -> ((AllergyIntolerance) resource).hasAsserter()
+            || ((AllergyIntolerance) resource).hasRecorder()),
         ResourceType.Condition, (resource -> ((Condition) resource).hasAsserter())
     );
     private static final Map<ResourceType, Function<Resource, IIdType>> RESOURCE_EXTRACT_IIDTYPE = Map.of(
@@ -95,7 +97,9 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
     }
 
-    public static List<Triple<Practitioner, Optional<PractitionerRole>, Optional<Organization>>> extractPractitionerRoleTriples(Bundle bundle, List<Practitioner> practitioners) {
+    public static List<Triple<Practitioner, Optional<PractitionerRole>, Optional<Organization>>>
+        extractPractitionerRoleTriples(Bundle bundle, List<Practitioner> practitioners) {
+
         List<PractitionerRole> practitionerRoles = bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
@@ -121,7 +125,6 @@ public class AgentDirectoryExtractor {
         List<PractitionerRole> practitionerRoles, List<Organization> organizations) {
 
         var practitionerRole = extractRelevantPractitionerRole(practitioner, practitionerRoles);
-
         if (practitionerRole.isPresent()) {
             var organization = extractRelevantOrganization(practitionerRole.get(), organizations);
             return Triple.of(practitioner, practitionerRole, organization);
@@ -144,7 +147,8 @@ public class AgentDirectoryExtractor {
             .anyMatch(practitioner -> practitioner.getIdElement().getIdPart().equals(practitionerRolePractitionerId));
     }
 
-    private static Optional<PractitionerRole> extractRelevantPractitionerRole(Practitioner practitioner, List<PractitionerRole> practitionerRoles) {
+    private static Optional<PractitionerRole> extractRelevantPractitionerRole(Practitioner practitioner,
+        List<PractitionerRole> practitionerRoles) {
         var practitionerId = practitioner.getIdElement().getIdPart();
         return practitionerRoles
             .stream()

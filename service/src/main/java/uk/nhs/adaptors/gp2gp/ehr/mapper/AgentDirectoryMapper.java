@@ -42,6 +42,7 @@ public class AgentDirectoryMapper {
             .referralRequestsOrganizations(prepareReferralRequestAgentsList(bundle))
             .agentPersons(preparePractitionerRoleAgentsList(bundle));
 
+        MAPPED_ORGANIZATIONS_AND_PRACTITIONER.clear();
         return TemplateUtils.fillTemplate(AGENT_DIRECTORY_STRUCTURE_TEMPLATE, builder.build());
     }
 
@@ -97,8 +98,10 @@ public class AgentDirectoryMapper {
     }
 
     private String buildAgentPerson(ReferralRequest referralRequest, Bundle bundle) {
-        var practitioner = ResourceExtractor.extractResourceByReference(bundle, referralRequest.getRequester().getAgent().getReferenceElement());
-        var organization = ResourceExtractor.extractResourceByReference(bundle, referralRequest.getRequester().getOnBehalfOf().getReferenceElement());
+        var practitioner = ResourceExtractor
+            .extractResourceByReference(bundle, referralRequest.getRequester().getAgent().getReferenceElement());
+        var organization = ResourceExtractor
+            .extractResourceByReference(bundle, referralRequest.getRequester().getOnBehalfOf().getReferenceElement());
         if (practitioner.isPresent() && organization.isPresent()) {
             return mapAgentPerson((Practitioner) practitioner.get(),
                 Optional.empty(),
@@ -107,7 +110,8 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private String mapAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole, Optional<Organization> organization) {
+    private String mapAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole,
+        Optional<Organization> organization) {
         if (!organizationPractitionerHasBeenMapped(practitioner, organization)) {
             addOrganizationPractitionerPairToMap(practitioner, organization);
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
@@ -121,8 +125,8 @@ public class AgentDirectoryMapper {
 
     private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Optional<Organization> organization) {
         var mappedId = practitioner.getIdElement().getIdPart();
-        if (organization.isPresent()){
-             mappedId += "-" + organization.get().getIdElement().getIdPart();
+        if (organization.isPresent()) {
+            mappedId += "-" + organization.get().getIdElement().getIdPart();
         }
         return MAPPED_ORGANIZATIONS_AND_PRACTITIONER.containsKey(mappedId);
     }
