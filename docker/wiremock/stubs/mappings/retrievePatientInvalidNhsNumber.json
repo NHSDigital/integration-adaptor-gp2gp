@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "url": "/GP0001/STU3/1/gpconnect/documents/Patient?identifier=https://fhir.nhs.uk/Id/nhs-number%7CASDF"
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/Patient[?]identifier=https:\/\/fhir.nhs.uk\/Id\/nhs-number%7CASDF"
   },
   "response": {
     "status": 400,
@@ -10,11 +10,11 @@
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
-      "Content-Type": "application/fhir+json;charset=UTF-8",
+      "Content-Type": "application\/fhir+json;charset=UTF-8",
       "Transfer-Encoding": "chunked",
       "Connection": "keep-alive",
       "Cache-Control": "no-store",
-      "X-Powered-By": "HAPI FHIR 3.0.0 REST Server (FHIR Server; FHIR 3.0.1/DSTU3)",
+      "X-Powered-By": "HAPI FHIR 3.0.0 REST Server (FHIR Server; FHIR 3.0.1\/DSTU3)",
       "Strict-Transport-Security":"max-age=31536000"
     }
   }
