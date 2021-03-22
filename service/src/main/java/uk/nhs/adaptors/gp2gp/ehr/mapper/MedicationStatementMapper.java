@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractBasedOn;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPlanMedicationRequestReference;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
@@ -71,7 +71,7 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueCode(buildStatusReasonCode(medicationRequest))
             .ehrSupplyDiscontinueId(randomIdGeneratorService.createNewId())
             .ehrSupplyDiscontinueAvailabilityTime(buildStatusReasonAvailabilityTime(medicationRequest))
-            .hasPriorPrescription(medicationRequest.hasPriorPrescription())
+            .priorPrescriptionId(buildPriorPrescription(medicationRequest))
             .basedOn(buildBasedOn(medicationRequest))
             .build();
 
@@ -203,9 +203,17 @@ public class MedicationStatementMapper {
             return medicationRequest.getBasedOn()
                 .stream()
                 .filter(reference -> reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name()))
-                .map(reference -> extractBasedOn(reference, messageContext))
+                .map(reference -> extractPlanMedicationRequestReference(reference, messageContext))
                 .map(MedicationStatementExtractor::buildBasedOnCode)
                 .collect(Collectors.joining());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String buildPriorPrescription(MedicationRequest medicationRequest) {
+        if (medicationRequest.hasPriorPrescription()
+            && medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+            return extractPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
         }
         return StringUtils.EMPTY;
     }

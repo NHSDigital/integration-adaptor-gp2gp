@@ -33,10 +33,14 @@ public class MedicationStatementMapperTest {
     private static final String INPUT_JSON_WITH_INVALID_INTENT = TEST_FILE_DIRECTORY + "medication-request-with-invalid-intent.json";
     private static final String INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE = TEST_FILE_DIRECTORY
         + "medication-request-with-invalid-prescription-type.json";
-    private static final String INPUT_JSON_WITH_INVALID_MEDICATION_REFERENCE = TEST_FILE_DIRECTORY
-        + "medication-request-with-invalid-medication-reference.json";
-    private static final String INPUT_JSON_WITH_INVALID_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
-        + "medication-request-with-invalid-medication-reference-type.json";
+    private static final String INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-based-on-medication-reference.json";
+    private static final String INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-based-on-medication-reference-type.json";
+    private static final String INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-prior-prescription-medication-reference.json";
+    private static final String INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-prior-prescription-medication-reference-type.json";
     private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -89,6 +93,9 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-order-based-on.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_BASED_ON = TEST_FILE_DIRECTORY
         + "medication-statement-with-prescribe-based-on.xml";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION = TEST_FILE_DIRECTORY
+        + "medication-statement-with-prescribe-prior-prescription.xml";
+
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -172,6 +179,24 @@ public class MedicationStatementMapperTest {
         assertThat(outputMessageBasedOn).isEqualTo(expected);
     }
 
+    @SneakyThrows
+    @Test
+    public void When_MappingPriorPrescriptionField_Expect_CorrectReferences() {
+        var expected = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("123");
+        var inputAuthorise1 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
+        var parsedMedicationRequest1 = new FhirParseService().parseResource(inputAuthorise1, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
+
+        when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123");
+        var inputBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS);
+        var parsedMedicationRequest = new FhirParseService().parseResource(inputBasedOn, MedicationRequest.class);
+        String outputMessageBasedOn = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+
+        assertThat(outputMessageBasedOn).isEqualTo(expected);
+    }
+
     @ParameterizedTest
     @MethodSource("resourceFileExpectException")
     public void When_MappingMedicationRequestWithInvalidResource_Expect_Exception(String inputJson) throws IOException {
@@ -189,8 +214,10 @@ public class MedicationStatementMapperTest {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_INVALID_INTENT),
             Arguments.of(INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_MEDICATION_REFERENCE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_MEDICATION_REFERENCE_TYPE)
+            Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE),
+            Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE),
+            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE),
+            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE)
         );
     }
 }

@@ -106,6 +106,6 @@
         }
     ],
     "priorPrescription": {
-        "reference": "MedicationRequest/123"
+        "reference": "Device/123"
     }
 }

@@ -106,7 +106,7 @@ public class MedicationStatementExtractor {
         return StringUtils.EMPTY;
     }
 
-    public static String extractBasedOn(Reference reference, MessageContext messageContext) {
+    public static String extractPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
         var resource = messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
             .map(value -> (MedicationRequest) value)
@@ -117,7 +117,7 @@ public class MedicationStatementExtractor {
                 .getOrNew(reference.getReference());
         }
 
-        throw new EhrMapperException("Could not resolve Based On Medication Request Reference");
+        throw new EhrMapperException("Could not resolve Medication Request Reference");
     }
 
     public static String buildBasedOnCode(String id) {
