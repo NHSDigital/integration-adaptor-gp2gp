@@ -175,6 +175,6 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private String buildDocumentUrl(String documentId) {
-        return configuration.getUrl() + configuration.getDocumentEndpoint() + documentId;
+        return configuration.getUrl() + "/documents" + configuration.getDocumentEndpoint() + documentId;
     }
 }
