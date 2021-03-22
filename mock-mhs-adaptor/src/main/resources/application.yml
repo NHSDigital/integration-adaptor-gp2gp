@@ -1,9 +1,3 @@
-management:
-  endpoints:
-    web:
-      base-path: /
-      path-mapping.health: healthcheck
-
 server:
   port: ${MOCK_MHS_SERVER_PORT:8081}
 
