@@ -27,7 +27,7 @@ public class MedicationStatementExtractor {
     private static final String STATUS_REASON_URL = "statusReason";
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
-    private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
+    private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
@@ -36,7 +36,7 @@ public class MedicationStatementExtractor {
             .filter(value -> value.getUrl().equals(MEDICATION_QUANTITY_TEXT))
             .findFirst()
             .map(value -> value.getValue().toString())
-            .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION IF CANNOT EXTRACT THIS TEXT?
+            .orElse(DEFAULT_QUANTITY_TEXT);
     }
 
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
@@ -52,9 +52,9 @@ public class MedicationStatementExtractor {
                 .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
                 .findFirst()
                 .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
-                .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION IF CANNOT GET STATUS REASON CODE?
+                .orElse(StringUtils.EMPTY);
         }
-        return StringUtils.EMPTY; // AS ABOVE?
+        return StringUtils.EMPTY;
     }
 
     public static String extractPrescriptionTypeCode(MedicationRequest medicationRequest) {
@@ -64,7 +64,7 @@ public class MedicationStatementExtractor {
             .findFirst()
             .map(value -> (CodeableConcept) value.getValue())
             .map(code -> code.getCodingFirstRep().getCode())
-            .orElse(StringUtils.EMPTY); // TODO: THROW EXCEPTION NOT EMPTY?
+            .orElse(StringUtils.EMPTY);
     }
 
     public static String extractRepeatValue(MedicationRequest medicationRequest) {
@@ -101,10 +101,10 @@ public class MedicationStatementExtractor {
                 .map(value -> (DateTimeType) value.getValue())
                 .map(DateFormatUtil::toHl7Format)
                 .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value))
-                .orElse(DEFAULT_AVAILABILITY_TIME_VALUE); // TODO: THROW EXCEPTION NOT NULL FLAVOR?
+                .orElseThrow(() -> new EhrMapperException("Could not resolve Availability Time for Status Reason"));
         }
 
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Could not resolve Availability Time for Status Reason");
     }
 
     public static String extractBasedOn(Reference reference, MessageContext messageContext) {
@@ -118,7 +118,7 @@ public class MedicationStatementExtractor {
                 .getOrNew(reference.getReference());
         }
 
-        throw new EhrMapperException("Could not resolve basedOn MedicationRequest Reference");
+        throw new EhrMapperException("Could not resolve Based On Medication Request Reference");
     }
 
     public static String buildBasedOnCode(String id) {
