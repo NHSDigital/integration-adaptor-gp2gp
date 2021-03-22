@@ -7,6 +7,15 @@ management:
 server:
   port: ${MOCK_MHS_SERVER_PORT:8081}
 
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping.health: healthcheck
+      exposure:
+        include: info, health, metrics, mappings
+
+
 gp2gp:
   amqp:
     inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:inbound}

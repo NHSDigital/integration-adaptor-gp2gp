@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.RequestStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 

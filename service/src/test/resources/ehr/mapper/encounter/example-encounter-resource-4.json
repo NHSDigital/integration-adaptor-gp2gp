@@ -15,7 +15,14 @@
   "status":"finished",
   "type":[
     {
-      "text":"GP Surgery"
+      "text":"GP Surgery",
+      "coding": [
+        {
+          "system":"http://snomed.info/sct",
+          "code":"24611000000106",
+          "display":"Radiology Result"
+        }
+      ]
     }
   ],
   "subject":{
