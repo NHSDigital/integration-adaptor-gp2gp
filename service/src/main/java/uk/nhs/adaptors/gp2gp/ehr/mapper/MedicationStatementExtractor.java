@@ -39,24 +39,6 @@ public class MedicationStatementExtractor {
             .orElse(DEFAULT_QUANTITY_TEXT);
     }
 
-    public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
-        var statusReasonCode = medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
-            .findFirst();
-
-        if (statusReasonCode.isPresent()) {
-            return statusReasonCode.get()
-                .getExtension()
-                .stream()
-                .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
-                .findFirst()
-                .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
-                .orElse(StringUtils.EMPTY);
-        }
-        return StringUtils.EMPTY;
-    }
-
     public static String extractPrescriptionTypeCode(MedicationRequest medicationRequest) {
         return medicationRequest.getExtension()
             .stream()
@@ -86,6 +68,24 @@ public class MedicationStatementExtractor {
         return DEFAULT_REPEAT_VALUE;
     }
 
+    public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
+        var statusReasonCode = medicationRequest.getExtension()
+            .stream()
+            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
+            .findFirst();
+
+        if (statusReasonCode.isPresent()) {
+            return statusReasonCode.get()
+                .getExtension()
+                .stream()
+                .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
+                .findFirst()
+                .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
+                .orElse(StringUtils.EMPTY);
+        }
+        return StringUtils.EMPTY;
+    }
+
     public static String extractStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
         var statusReason = medicationRequest.getExtension()
             .stream()
@@ -103,8 +103,7 @@ public class MedicationStatementExtractor {
                 .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value))
                 .orElseThrow(() -> new EhrMapperException("Could not resolve Availability Time for Status Reason"));
         }
-
-        throw new EhrMapperException("Could not resolve Availability Time for Status Reason");
+        return StringUtils.EMPTY;
     }
 
     public static String extractBasedOn(Reference reference, MessageContext messageContext) {
