@@ -52,6 +52,8 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-10.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
         + "example-observation-resource-11.json";
+    private static final String INPUT_JSON_WITH_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "example-observation-resource-12.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -72,6 +74,8 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-9.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-10.xml";
+    private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-11.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -142,7 +146,8 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_CODEABLE_CONCEPT_VALUE, OUTPUT_XML_WITH_CODEABLE_CONCEPT_VALUE),
             Arguments.of(INPUT_JSON_WITH_SAMPLED_DATA_VALUE, OUTPUT_XML_WITH_SAMPLED_DATA_VALUE),
             Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_AND_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_AND_QUANTITY),
-            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE)
+            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE),
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION, OUTPUT_XML_WITH_INTERPRETATION_CODE)
         );
     }
 }

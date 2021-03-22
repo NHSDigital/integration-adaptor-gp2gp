@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -65,6 +67,11 @@ public class ObservationStatementMapper {
                 structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
 
+        if (observation.hasInterpretation() && isInterpretationCode(observation.getInterpretation())) {
+            observationStatementTemplateParametersBuilder.interpretation(
+                structuredObservationValueMapper.mapInterpretation(observation.getInterpretation()));
+        }
+
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
     }
@@ -113,5 +120,15 @@ public class ObservationStatementMapper {
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {
         return quantity.hasUnit() && !unit.equals(quantity.getUnit());
+    }
+
+    private boolean isInterpretationCode(CodeableConcept interpretation) {
+        Coding coding = interpretation.getCodingFirstRep();
+        String codingSystem = coding.getSystem();
+        String code = coding.getCode();
+
+        return codingSystem.equals("http://hl7.org/fhir/v2/0078") && (code.equals("H") || code.equals("HH")
+            || code.equals("HU") || code.equals("L") || code.equals("LL") || code.equals("LU") || code.equals("A")
+            || code.equals("AA"));
     }
 }

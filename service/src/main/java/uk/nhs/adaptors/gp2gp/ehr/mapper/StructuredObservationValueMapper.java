@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.StringType;
@@ -30,6 +32,10 @@ public class StructuredObservationValueMapper {
         + "</referenceRange>";
     private static final String LOW_RANGE_TEMPLATE = "<low value=\"%s\"/>";
     private static final String HIGH_RANGE_TEMPLATE = "<high value=\"%s\"/>";
+    private static final String INTERPRETATION_CODE_TEMPLATE = "<interpretationCode code=\"%s\" codeSystem=\"%s\" "
+        + "displayName=\"%s\">"
+        + "<originalText>%s</originalText>"
+        + "</interpretationCode>";
 
     public String mapObservationValueToStructuredElement(IBaseElement value) {
         if (!isStructuredValueType(value)) {
@@ -38,6 +44,31 @@ public class StructuredObservationValueMapper {
         }
         return VALUE_MAPPING_FUNCTIONS.get(value.getClass())
             .apply(value);
+    }
+
+    public String mapInterpretation(CodeableConcept interpretation) {
+        Coding coding = interpretation.getCodingFirstRep();
+        String code = coding.getCode();
+
+        switch (code) {
+            case "H":
+            case "HH":
+            case "HU":
+                return String.format(INTERPRETATION_CODE_TEMPLATE, "HI", "2.16.840.1.113883.2.1.6.5",
+                    "Above high reference limit", coding.getDisplay());
+            case "L":
+            case "LL":
+            case "LU":
+                return String.format(INTERPRETATION_CODE_TEMPLATE, "LO", "2.16.840.1.113883.2.1.6.5",
+                    "Below low reference limit", coding.getDisplay());
+            case "A":
+            case "AA":
+                return String.format(INTERPRETATION_CODE_TEMPLATE, "PA", "2.16.840.1.113883.2.1.6.5",
+                    "Potentially abnormal", coding.getDisplay());
+            default:
+                return StringUtils.EMPTY;
+        }
+
     }
 
     public String mapReferenceRangeType(Observation.ObservationReferenceRangeComponent referenceRange) {
