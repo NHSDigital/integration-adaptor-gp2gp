@@ -168,16 +168,17 @@ public class MedicationStatementMapperTest {
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123", "789");
-        var inputBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ORDER_BASED_ON);
-        var parsedMedicationRequest = new FhirParseService().parseResource(inputBasedOn, MedicationRequest.class);
-        String outputMessageBasedOn = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+        var inputWithBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ORDER_BASED_ON);
+        var parsedMedicationRequestWithBasedOn = new FhirParseService().parseResource(inputWithBasedOn, MedicationRequest.class);
+        String outputMessageWithBasedOn =
+            medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequestWithBasedOn);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("789");
         var inputAuthorise2 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION);
         var parsedMedicationRequest2 = new FhirParseService().parseResource(inputAuthorise2, MedicationRequest.class);
         medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest2);
 
-        assertThat(outputMessageBasedOn).isEqualTo(expected);
+        assertThat(outputMessageWithBasedOn).isEqualTo(expected);
     }
 
     @SneakyThrows
@@ -186,16 +187,18 @@ public class MedicationStatementMapperTest {
         var expected = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("123");
-        var inputAuthorise1 = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
-        var parsedMedicationRequest1 = new FhirParseService().parseResource(inputAuthorise1, MedicationRequest.class);
-        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest1);
+        var inputAuthorise = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION);
+        var parsedMedicationRequest = new FhirParseService().parseResource(inputAuthorise, MedicationRequest.class);
+        medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
 
         when(mockRandomIdGeneratorService.createNewId()).thenReturn("456", "456", "123");
-        var inputBasedOn = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS);
-        var parsedMedicationRequest = new FhirParseService().parseResource(inputBasedOn, MedicationRequest.class);
-        String outputMessageBasedOn = medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest);
+        var inputWithPriorPrescription = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS);
+        var parsedMedicationRequestWithPriorPrescription =
+            new FhirParseService().parseResource(inputWithPriorPrescription, MedicationRequest.class);
+        String outputMessageWithPriorPrescription =
+            medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequestWithPriorPrescription);
 
-        assertThat(outputMessageBasedOn).isEqualTo(expected);
+        assertThat(outputMessageWithPriorPrescription).isEqualTo(expected);
     }
 
     @ParameterizedTest
