@@ -1,12 +1,14 @@
-<agentDirectory>
-    {{{patientManagingOrganization}}}
-    {{#observationOrganizations}}
-    {{{.}}}
-    {{/observationOrganizations}}
-    {{#referralRequestsOrganizations}}
-    {{{.}}}
-    {{/referralRequestsOrganizations}}
-    {{#agentPersons}}
-    {{{.}}}
-    {{/agentPersons}}
-</agentDirectory>
+<responsibleParty>
+    <agentDirectory>
+        {{{patientManagingOrganization}}}
+        {{#observationOrganizations}}
+            {{{.}}}
+        {{/observationOrganizations}}
+        {{#referralRequestsOrganizations}}
+            {{{.}}}
+        {{/referralRequestsOrganizations}}
+        {{#agentPersons}}
+            {{{.}}}
+        {{/agentPersons}}
+    </agentDirectory>
+</responsibleParty>

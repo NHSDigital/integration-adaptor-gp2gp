@@ -1,3 +1,4 @@
+<responsibleParty>
 <agentDirectory>
     <part typeCode="PART">
         <Agent classCode="AGNT">
@@ -168,3 +169,4 @@
         </Agent>
     </part>
 </agentDirectory>
+</responsibleParty>
