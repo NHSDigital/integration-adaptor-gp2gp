@@ -40,7 +40,7 @@ gp2gp:
     ttl: ${GP2GP_MONGO_TTL:P7D}
     cosmosDbEnabled: ${GP2GP_COSMOS_DB_ENABLED:false}
   gpc:
-    url: ${GP2GP_GPC_GET_URL:http://wiremock:8080/GP0001/STU3/1/gpconnect}
+    url: ${GP2GP_GPC_GET_URL:https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect}
     structuredEndpoint: ${GP2GP_GPC_DOCUMENTS_FHIR_BASE:/fhir}/Patient/$gpc.getstructuredrecord
     documentEndpoint: ${GP2GP_GPC_DOCUMENTS_FHIR_BASE:/fhir}/Binary/
     patientEndpoint: ${GP2GP_GPC_DOCUMENTS_FHIR_BASE:/fhir}/Patient
