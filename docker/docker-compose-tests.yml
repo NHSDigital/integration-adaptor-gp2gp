@@ -9,3 +9,4 @@ services:
     entrypoint: "gradle check"
     environment:
       - DISABLE_TEST_CONTAINERS=true
+      - GP2GP_GPC_GET_URL=
