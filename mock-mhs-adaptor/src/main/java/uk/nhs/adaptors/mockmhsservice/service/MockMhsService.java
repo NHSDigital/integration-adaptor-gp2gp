@@ -3,9 +3,6 @@ package uk.nhs.adaptors.mockmhsservice.service;
 import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,11 +15,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.micrometer.core.instrument.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.common.MockMHSException;
 import uk.nhs.adaptors.mockmhsservice.common.OutboundMessage;
+import uk.nhs.adaptors.mockmhsservice.common.ResourceReader;
 import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 
 @RestController
@@ -35,13 +32,10 @@ public class MockMhsService {
 
     private static final String EXTRACT_CORE_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final String ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
-    private static final ClassLoader MOCK_MHS_SERVICE_CLASS_LOADER = MockMhsService.class.getClassLoader();
-    private static final InputStream INPUT_STREAM_CONTINUE_REPLY = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("COPC_IN000001UK01.json");
-    private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = IOUtils.toString(INPUT_STREAM_CONTINUE_REPLY, StandardCharsets.UTF_8);
-    private static final InputStream INPUT_STREAM_ACCEPTED_RESPONSE = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("StubEbXmlResponse.xml");
-    private static final String STUB_ACCEPTED_RESPONSE = IOUtils.toString(INPUT_STREAM_ACCEPTED_RESPONSE, StandardCharsets.UTF_8);
-    private static final InputStream INPUT_STREAM_INTERNAL_SERVER_ERROR = MOCK_MHS_SERVICE_CLASS_LOADER.getResourceAsStream("InternalServerError.html");
-    private static final String INTERNAL_SERVER_ERROR_RESPONSE = IOUtils.toString(INPUT_STREAM_INTERNAL_SERVER_ERROR, StandardCharsets.UTF_8);
+
+    private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = ResourceReader.readAsString("COPC_IN000001UK01.json");
+    private static final String STUB_ACCEPTED_RESPONSE = ResourceReader.readAsString("StubEbXmlResponse.xml");
+    private static final String INTERNAL_SERVER_ERROR_RESPONSE = ResourceReader.readAsString("InternalServerError.html");
 
     public ResponseEntity<String> handleRequest(String interactionId, String correlationId, String waitForResponse, String mockMhsMessage,
         String odsCode) {
