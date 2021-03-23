@@ -3,18 +3,17 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
-@AllArgsConstructor()
+@RequiredArgsConstructor
 public class MedicationRequestIdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
+    @NonNull
     private final Map<String, String> ids = new HashMap<>();
 
     public String getOrNew(String id) {
-        String mappedId = ids.getOrDefault(id, randomIdGeneratorService.createNewId());
-        ids.put(id, mappedId);
-
-        return mappedId;
+        return ids.computeIfAbsent(id, $ -> randomIdGeneratorService.createNewId());
     }
 }

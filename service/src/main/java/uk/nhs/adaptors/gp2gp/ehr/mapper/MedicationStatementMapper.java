@@ -75,9 +75,9 @@ public class MedicationStatementMapper {
             .basedOn(buildBasedOn(medicationRequest))
             .build();
 
-        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_AUTHORISE_TEMPLATE, medicationStatementTemplateParameters);
-        } else if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.ORDER.getDisplay())) {
+        } else if (MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE, medicationStatementTemplateParameters);
         }
 
@@ -86,7 +86,7 @@ public class MedicationStatementMapper {
 
     private String buildStatusCode(MedicationRequest medicationRequest) {
         if (medicationRequest.hasStatus()) {
-            if (medicationRequest.getStatus().getDisplay().equals(MedicationRequestStatus.ACTIVE.getDisplay())) {
+            if (MedicationRequestStatus.ACTIVE.getDisplay().equals(medicationRequest.getStatus().getDisplay())) {
                 return ACTIVE_STATUS_CODE;
             }
             return COMPLETE_STATUS_CODE;
@@ -98,8 +98,9 @@ public class MedicationStatementMapper {
         IIdType reference = medicationRequest.getMedicationReference().getReferenceElement();
         return messageContext.getInputBundleHolder()
             .getResource(reference)
-            .map(resource -> (Medication) resource)
-            .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd(value.getCode()))
+            .map(Medication.class::cast)
+            .map(Medication::getCode)
+            .map(codeableConceptCdMapper::mapCodeableConceptToCd)
             .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Reference"));
     }
 
@@ -128,7 +129,6 @@ public class MedicationStatementMapper {
 
     private String buildQuantityValue(MedicationRequest medicationRequest) {
         if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasQuantity()
-            && medicationRequest.hasDispenseRequest()
             && medicationRequest.getDispenseRequest().getQuantity().hasValue()) {
             return medicationRequest.getDispenseRequest().getQuantity().getValue().toString();
         }
@@ -172,21 +172,21 @@ public class MedicationStatementMapper {
     }
 
     private String buildStatusReasonCode(MedicationRequest medicationRequest) {
-        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return extractStatusReasonCode(medicationRequest, codeableConceptCdMapper);
         }
         return StringUtils.EMPTY;
     }
 
     private String buildStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
-        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return extractStatusReasonAvailabilityTime(medicationRequest);
         }
         return StringUtils.EMPTY;
     }
 
     private String buildRepeatValue(MedicationRequest medicationRequest) {
-        if (medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             var prescriptionTypeCode = extractPrescriptionTypeCode(medicationRequest);
 
             if (ACUTE_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
@@ -201,7 +201,7 @@ public class MedicationStatementMapper {
 
     private String buildBasedOn(MedicationRequest medicationRequest) {
         if (medicationRequest.hasBasedOn()
-            && medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.ORDER.getDisplay())) {
+            && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return medicationRequest.getBasedOn()
                 .stream()
                 .filter(reference -> reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name()))
@@ -214,7 +214,7 @@ public class MedicationStatementMapper {
 
     private String buildPriorPrescription(MedicationRequest medicationRequest) {
         if (medicationRequest.hasPriorPrescription()
-            && medicationRequest.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay())) {
+            && MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return extractPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
         }
         return StringUtils.EMPTY;

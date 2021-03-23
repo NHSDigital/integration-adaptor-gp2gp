@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -219,18 +220,18 @@ public class MedicationStatementMapperTest {
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));
     }
 
-    private static Stream<Arguments> resourceFileExpectException() {
-        return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_NO_VALIDITY_PERIOD),
-            Arguments.of(INPUT_JSON_WITH_INVALID_INTENT),
-            Arguments.of(INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE),
-            Arguments.of(INPUT_JSON_WITH_NO_STATUS),
-            Arguments.of(INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION),
-            Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_REQUEST)
+    private static List<String> resourceFileExpectException() {
+        return List.of(
+            INPUT_JSON_WITH_NO_VALIDITY_PERIOD,
+            INPUT_JSON_WITH_INVALID_INTENT,
+            INPUT_JSON_WITH_INVALID_PRESCRIPTION_TYPE,
+            INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE,
+            INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE,
+            INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE,
+            INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE,
+            INPUT_JSON_WITH_NO_STATUS,
+            INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
+            INPUT_JSON_WITH_NO_DISPENSE_REQUEST
             );
     }
 }

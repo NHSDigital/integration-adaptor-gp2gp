@@ -3,11 +3,15 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.BaseExtension;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
+import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
 import com.github.mustachejava.Mustache;
 
@@ -35,7 +39,7 @@ public class MedicationStatementExtractor {
         return medicationRequest.getDispenseRequest()
             .getExtension()
             .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_QUANTITY_TEXT_URL))
+            .filter(value -> MEDICATION_QUANTITY_TEXT_URL.equals(value.getUrl()))
             .findFirst()
             .map(value -> value.getValue().toString())
             .orElse(DEFAULT_QUANTITY_TEXT);
@@ -43,70 +47,71 @@ public class MedicationStatementExtractor {
 
     public static String extractPrescriptionTypeCode(MedicationRequest medicationRequest) {
         return filterExtensionByUrl(medicationRequest, PRESCRIPTION_TYPE_URL)
-            .map(value -> (CodeableConcept) value.getValue())
-            .map(code -> code.getCodingFirstRep().getCode())
+            .map(Extension::getValue)
+            .map(CodeableConcept.class::cast)
+            .map(CodeableConcept::getCodingFirstRep)
+            .map(Coding::getCode)
             .orElse(StringUtils.EMPTY);
     }
 
     public static String extractRepeatValue(MedicationRequest medicationRequest) {
         var repeatInformation = filterExtensionByUrl(medicationRequest, REPEAT_INFORMATION_URL);
 
-        if (repeatInformation.isPresent()) {
-            return repeatInformation.get()
+        return repeatInformation.map(extension -> extension
                 .getExtension()
                 .stream()
-                .filter(value -> value.getUrl().equals(NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL) && value.hasValue())
+                .filter(value -> NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL.equals(value.getUrl()))
+                .filter(Extension::hasValue)
                 .findFirst()
-                .map(value -> value.getValueAsPrimitive().getValueAsString())
-                .orElse(DEFAULT_REPEAT_VALUE);
-        }
-        return DEFAULT_REPEAT_VALUE;
+                .map(BaseExtension::getValueAsPrimitive)
+                .map(IPrimitiveType::getValueAsString)
+                .orElse(DEFAULT_REPEAT_VALUE))
+            .orElse(DEFAULT_REPEAT_VALUE);
     }
 
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
-        var statusReasonCode = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
+        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
-        if (statusReasonCode.isPresent()) {
-            return statusReasonCode.get()
+        return statusReason.map(extension -> extension
                 .getExtension()
                 .stream()
-                .filter(value -> value.getUrl().equals(STATUS_REASON_URL))
+                .filter(value -> STATUS_REASON_URL.equals(value.getUrl()))
                 .findFirst()
-                .map(value -> codeableConceptCdMapper.mapCodeableConceptToCd((CodeableConcept) value.getValue()))
-                .orElse(StringUtils.EMPTY);
-        }
-        return StringUtils.EMPTY;
+                .map(Extension::getValue)
+                .map(CodeableConcept.class::cast)
+                .map(codeableConceptCdMapper::mapCodeableConceptToCd)
+                .orElse(StringUtils.EMPTY))
+            .orElse(StringUtils.EMPTY);
     }
 
     public static String extractStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
         var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
-        if (statusReason.isPresent()) {
-            return statusReason.get()
-                .getExtension()
-                .stream()
-                .filter(value -> value.getUrl().equals(STATUS_CHANGE_URL))
-                .findFirst()
-                .map(value -> (DateTimeType) value.getValue())
-                .map(DateFormatUtil::toHl7Format)
-                .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value))
-                .orElseThrow(() -> new EhrMapperException("Could not resolve Availability Time for Status Reason"));
+        if (statusReason.isEmpty()) {
+            return StringUtils.EMPTY;
         }
-        return StringUtils.EMPTY;
+
+        return statusReason.get()
+            .getExtension()
+            .stream()
+            .filter(value -> STATUS_CHANGE_URL.equals(value.getUrl()))
+            .findFirst()
+            .map(Extension::getValue)
+            .map(DateTimeType.class::cast)
+            .map(DateFormatUtil::toHl7Format)
+            .map(value -> String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, value))
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Availability Time for Status Reason"));
     }
 
     public static String extractPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
-        var resource = messageContext.getInputBundleHolder()
+        messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
-            .map(value -> (MedicationRequest) value)
-            .filter(value -> value.getIntent().getDisplay().equals(MedicationRequestIntent.PLAN.getDisplay()));
+            .map(MedicationRequest.class::cast)
+            .filter(value -> MedicationRequestIntent.PLAN.getDisplay().equals(value.getIntent().getDisplay()))
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request Reference"));
 
-        if (resource.isPresent()) {
-            return messageContext.getMedicationRequestIdMapper()
-                .getOrNew(reference.getReference());
-        }
-
-        throw new EhrMapperException("Could not resolve Medication Request Reference");
+        return messageContext.getMedicationRequestIdMapper()
+            .getOrNew(reference.getReference());
     }
 
     public static String buildBasedOnCode(String id) {
