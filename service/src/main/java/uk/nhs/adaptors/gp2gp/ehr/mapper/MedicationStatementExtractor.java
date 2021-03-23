@@ -20,7 +20,7 @@ public class MedicationStatementExtractor {
     private static final Mustache IN_FULFILMENT_OF_TEMPLATE =
         TemplateUtils.loadTemplate("in_fulfilment_of_template.mustache");
 
-    private static final String MEDICATION_QUANTITY_TEXT = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationQuantityText-1";
+    private static final String MEDICATION_QUANTITY_TEXT_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationQuantityText-1";
     private static final String PRESCRIPTION_TYPE_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1";
     private static final String REPEAT_INFORMATION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1";
     private static final String NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL = "numberOfRepeatPrescriptionsAllowed";
@@ -35,7 +35,7 @@ public class MedicationStatementExtractor {
         return medicationRequest.getDispenseRequest()
             .getExtension()
             .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_QUANTITY_TEXT))
+            .filter(value -> value.getUrl().equals(MEDICATION_QUANTITY_TEXT_URL))
             .findFirst()
             .map(value -> value.getValue().toString())
             .orElse(DEFAULT_QUANTITY_TEXT);
