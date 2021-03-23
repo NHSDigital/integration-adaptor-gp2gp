@@ -45,18 +45,6 @@ public class AgentDirectoryMapper {
         return TemplateUtils.fillTemplate(AGENT_DIRECTORY_STRUCTURE_TEMPLATE, builder.build());
     }
 
-    private String extractPatientManagingOrganization2(Bundle bundle, String nhsNumber) {
-        Optional<Patient> patientOptional = AgentDirectoryExtractor.extractPatientByNhsNumber(bundle, nhsNumber);
-        if (patientOptional.isPresent() && patientOptional.get().hasManagingOrganization()) {
-            var organization = ResourceExtractor.extractResourceByReference(bundle,
-                patientOptional.get().getManagingOrganization().getReferenceElement());
-            if (organization.isPresent()) {
-                return organizationToAgentMapper.mapOrganizationToAgent((Organization) organization.get());
-            }
-        }
-        throw new EhrMapperException("No patient or managing organization found in ehrFolder with NHS Number: " + nhsNumber);
-    }
-
     private String extractPatientManagingOrganization(Bundle bundle, String nhsNumber) {
         return AgentDirectoryExtractor.extractPatientByNhsNumber(bundle, nhsNumber)
             .filter(Patient::hasManagingOrganization)
