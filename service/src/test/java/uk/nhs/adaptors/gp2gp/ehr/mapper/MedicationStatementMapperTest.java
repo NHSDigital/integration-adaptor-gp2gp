@@ -43,6 +43,11 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-invalid-prior-prescription-medication-reference.json";
     private static final String INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE = TEST_FILE_DIRECTORY
         + "medication-request-with-invalid-prior-prescription-medication-reference-type.json";
+    private static final String INPUT_JSON_WITH_NO_STATUS = TEST_FILE_DIRECTORY + "medication-request-with-no-status.json";
+    private static final String INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-dosage-instruction.json";
+    private static final String INPUT_JSON_WITH_NO_DISPENSE_REQUEST = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-dispense-request.json";
     private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -222,7 +227,10 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE),
             Arguments.of(INPUT_JSON_WITH_INVALID_BASED_ON_MEDICATION_REFERENCE_TYPE),
             Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE),
-            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE)
-        );
+            Arguments.of(INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE),
+            Arguments.of(INPUT_JSON_WITH_NO_STATUS),
+            Arguments.of(INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION),
+            Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_REQUEST)
+            );
     }
 }

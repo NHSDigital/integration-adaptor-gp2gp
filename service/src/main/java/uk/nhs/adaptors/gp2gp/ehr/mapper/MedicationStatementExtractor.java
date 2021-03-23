@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
@@ -40,20 +42,14 @@ public class MedicationStatementExtractor {
     }
 
     public static String extractPrescriptionTypeCode(MedicationRequest medicationRequest) {
-        return medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(PRESCRIPTION_TYPE_URL))
-            .findFirst()
+        return filterExtensionByUrl(medicationRequest, PRESCRIPTION_TYPE_URL)
             .map(value -> (CodeableConcept) value.getValue())
             .map(code -> code.getCodingFirstRep().getCode())
             .orElse(StringUtils.EMPTY);
     }
 
     public static String extractRepeatValue(MedicationRequest medicationRequest) {
-        var repeatInformation = medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(REPEAT_INFORMATION_URL))
-            .findFirst();
+        var repeatInformation = filterExtensionByUrl(medicationRequest, REPEAT_INFORMATION_URL);
 
         if (repeatInformation.isPresent()) {
             return repeatInformation.get()
@@ -68,10 +64,7 @@ public class MedicationStatementExtractor {
     }
 
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
-        var statusReasonCode = medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
-            .findFirst();
+        var statusReasonCode = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
         if (statusReasonCode.isPresent()) {
             return statusReasonCode.get()
@@ -86,10 +79,7 @@ public class MedicationStatementExtractor {
     }
 
     public static String extractStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
-        var statusReason = medicationRequest.getExtension()
-            .stream()
-            .filter(value -> value.getUrl().equals(MEDICATION_STATUS_REASON_URL))
-            .findFirst();
+        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
         if (statusReason.isPresent()) {
             return statusReason.get()

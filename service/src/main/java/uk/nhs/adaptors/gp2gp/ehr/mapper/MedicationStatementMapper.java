@@ -85,10 +85,13 @@ public class MedicationStatementMapper {
     }
 
     private String buildStatusCode(MedicationRequest medicationRequest) {
-        if (medicationRequest.getStatus().getDisplay().equals(MedicationRequestStatus.ACTIVE.getDisplay())) {
-            return ACTIVE_STATUS_CODE;
+        if (medicationRequest.hasStatus()) {
+            if (medicationRequest.getStatus().getDisplay().equals(MedicationRequestStatus.ACTIVE.getDisplay())) {
+                return ACTIVE_STATUS_CODE;
+            }
+            return COMPLETE_STATUS_CODE;
         }
-        return COMPLETE_STATUS_CODE;
+        throw new EhrMapperException("Could not map Medication Request status");
     }
 
     private String buildMedicationReferenceCode(MedicationRequest medicationRequest) {
@@ -104,7 +107,7 @@ public class MedicationStatementMapper {
         if (medicationRequest.hasDosageInstruction() && medicationRequest.getDosageInstructionFirstRep().hasText()) {
             return medicationRequest.getDosageInstructionFirstRep().getText();
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Could not resolve Dosage Instruction text");
     }
 
     private String buildPertinentInformation(MedicationRequest medicationRequest) {
