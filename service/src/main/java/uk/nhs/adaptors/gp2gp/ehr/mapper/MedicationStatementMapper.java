@@ -204,7 +204,6 @@ public class MedicationStatementMapper {
             && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return medicationRequest.getBasedOn()
                 .stream()
-                .filter(reference -> reference.getReferenceElement().getResourceType().equals(ResourceType.MedicationRequest.name()))
                 .map(reference -> extractPlanMedicationRequestReference(reference, messageContext))
                 .map(MedicationStatementExtractor::buildBasedOnCode)
                 .collect(Collectors.joining());
