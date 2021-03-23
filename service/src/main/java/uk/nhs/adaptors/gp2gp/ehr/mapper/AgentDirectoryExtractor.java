@@ -12,6 +12,7 @@ import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -35,20 +36,20 @@ public class AgentDirectoryExtractor {
             ResourceType.AllergyIntolerance,
             ResourceType.Condition);
     private static final Map<ResourceType, Predicate<Resource>> RESOURCE_HAS_PRACTITIONER = Map.of(
-        ResourceType.Immunization, (resource) -> ((Immunization) resource).hasPractitioner(),
-        ResourceType.Encounter, (resource -> ((Encounter) resource).hasParticipant()
-            && ((Encounter) resource).getParticipantFirstRep().hasIndividual()),
-        ResourceType.ReferralRequest, (resource -> ((ReferralRequest) resource).hasRecipient()),
-        ResourceType.AllergyIntolerance, (resource -> ((AllergyIntolerance) resource).hasAsserter()
-            || ((AllergyIntolerance) resource).hasRecorder()),
-        ResourceType.Condition, (resource -> ((Condition) resource).hasAsserter())
+        ResourceType.Immunization, resource -> ((Immunization) resource).hasPractitioner(),
+        ResourceType.Encounter, resource -> ((Encounter) resource).hasParticipant()
+            && ((Encounter) resource).getParticipantFirstRep().hasIndividual(),
+        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).hasRecipient(),
+        ResourceType.AllergyIntolerance, resource -> ((AllergyIntolerance) resource).hasAsserter()
+            || ((AllergyIntolerance) resource).hasRecorder(),
+        ResourceType.Condition, resource -> ((Condition) resource).hasAsserter()
     );
     private static final Map<ResourceType, Function<Resource, IIdType>> RESOURCE_EXTRACT_IIDTYPE = Map.of(
-        ResourceType.Immunization, (resource -> ((Immunization) resource).getPractitionerFirstRep().getActor().getReferenceElement()),
-        ResourceType.Encounter, (resource -> ((Encounter) resource).getParticipantFirstRep().getIndividual().getReferenceElement()),
-        ResourceType.ReferralRequest, (resource -> ((ReferralRequest) resource).getRecipientFirstRep().getReferenceElement()),
+        ResourceType.Immunization, resource -> ((Immunization) resource).getPractitionerFirstRep().getActor().getReferenceElement(),
+        ResourceType.Encounter, resource -> ((Encounter) resource).getParticipantFirstRep().getIndividual().getReferenceElement(),
+        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRecipientFirstRep().getReferenceElement(),
         ResourceType.AllergyIntolerance, AgentDirectoryExtractor::extractIIdTypeFromAllergyIntolerance,
-        ResourceType.Condition, (resource -> ((Condition) resource).getAsserter().getReferenceElement())
+        ResourceType.Condition, resource -> ((Condition) resource).getAsserter().getReferenceElement()
     );
 
     public static List<ReferralRequest> extractReferralRequestsWithRequester(Bundle bundle) {
@@ -56,7 +57,7 @@ public class AgentDirectoryExtractor {
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> resource.getResourceType().equals(ResourceType.ReferralRequest))
-            .map(resource -> (ReferralRequest) resource)
+            .map(ReferralRequest.class::cast)
             .filter(ReferralRequest::hasRequester)
             .filter(AgentDirectoryExtractor::requesterContainsAgentAndOrganization)
             .collect(Collectors.toList());
@@ -67,7 +68,7 @@ public class AgentDirectoryExtractor {
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> resource.getResourceType().equals(ResourceType.Observation))
-            .map(resource -> (Observation) resource)
+            .map(Observation.class::cast)
             .filter(Observation::hasPerformer)
             .filter(AgentDirectoryExtractor::performerContainersOrgAndPractitioner)
             .collect(Collectors.toList());
@@ -78,7 +79,7 @@ public class AgentDirectoryExtractor {
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(AgentDirectoryExtractor::isPatientResource)
-            .map(resource -> (Patient) resource)
+            .map(Patient.class::cast)
             .filter(patient -> isNhsNumberMatching(patient, nhsNumber))
             .findFirst();
     }
@@ -91,8 +92,8 @@ public class AgentDirectoryExtractor {
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
             .map(AgentDirectoryExtractor::extractIIdTypes)
             .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
-            .filter(Optional::isPresent)
-            .map(resource -> (Practitioner) resource.get())
+            .flatMap(Optional::stream)
+            .map(Practitioner.class::cast)
             .distinct()
             .collect(Collectors.toList());
     }
@@ -104,7 +105,7 @@ public class AgentDirectoryExtractor {
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> resource.getResourceType().equals(ResourceType.PractitionerRole))
-            .map(resource -> (PractitionerRole) resource)
+            .map(PractitionerRole.class::cast)
             .filter(practitionerRole -> referencesPractitioner(practitionerRole, practitioners))
             .collect(Collectors.toList());
 
@@ -113,7 +114,7 @@ public class AgentDirectoryExtractor {
             .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .map(resource -> (Organization) resource)
+            .map(Organization.class::cast)
             .collect(Collectors.toList());
 
         return practitioners.stream()
@@ -144,7 +145,9 @@ public class AgentDirectoryExtractor {
     private static boolean referencesPractitioner(PractitionerRole practitionerRole, List<Practitioner> practitioners) {
         var practitionerRolePractitionerId = practitionerRole.getPractitioner().getReferenceElement().getIdPart();
         return practitioners.stream()
-            .anyMatch(practitioner -> practitioner.getIdElement().getIdPart().equals(practitionerRolePractitionerId));
+            .map(Practitioner::getIdElement)
+            .map(IdType::getIdPart)
+            .anyMatch(practitionerRolePractitionerId::equals);
     }
 
     private static Optional<PractitionerRole> extractRelevantPractitionerRole(Practitioner practitioner,
@@ -189,8 +192,9 @@ public class AgentDirectoryExtractor {
 
     private static boolean listHasResourceType(List<Reference> references, ResourceType resourceType) {
         return references.stream()
-            .map(reference -> reference.getReferenceElement().getResourceType())
-            .anyMatch(referenceResourceType -> referenceResourceType.equals(resourceType.name()));
+            .map(Reference::getReferenceElement)
+            .map(IIdType::getResourceType)
+            .anyMatch(resourceType.name()::equals);
     }
 
     private static boolean requesterContainsAgentAndOrganization(ReferralRequest referralRequest) {

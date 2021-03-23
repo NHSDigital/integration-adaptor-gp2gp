@@ -30,8 +30,8 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Component
 public class AgentDirectoryMapper {
     private static final Mustache AGENT_DIRECTORY_STRUCTURE_TEMPLATE = TemplateUtils.loadTemplate("ehr_agent_structure_template.mustache");
-    private static final Map<String, Boolean> MAPPED_ORGANIZATIONS_AND_PRACTITIONER = new HashMap<>();
 
+    private final Map<String, Boolean> mappedOrganizationsAndPractitioner = new HashMap<>();
     private final PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     private final OrganizationToAgentMapper organizationToAgentMapper;
 
@@ -42,11 +42,10 @@ public class AgentDirectoryMapper {
             .referralRequestsOrganizations(prepareReferralRequestAgentsList(bundle))
             .agentPersons(preparePractitionerRoleAgentsList(bundle));
 
-        MAPPED_ORGANIZATIONS_AND_PRACTITIONER.clear();
         return TemplateUtils.fillTemplate(AGENT_DIRECTORY_STRUCTURE_TEMPLATE, builder.build());
     }
 
-    private String extractPatientManagingOrganization(Bundle bundle, String nhsNumber) {
+    private String extractPatientManagingOrganization2(Bundle bundle, String nhsNumber) {
         Optional<Patient> patientOptional = AgentDirectoryExtractor.extractPatientByNhsNumber(bundle, nhsNumber);
         if (patientOptional.isPresent() && patientOptional.get().hasManagingOrganization()) {
             var organization = ResourceExtractor.extractResourceByReference(bundle,
@@ -56,6 +55,18 @@ public class AgentDirectoryMapper {
             }
         }
         throw new EhrMapperException("No patient or managing organization found in ehrFolder with NHS Number: " + nhsNumber);
+    }
+
+    private String extractPatientManagingOrganization(Bundle bundle, String nhsNumber) {
+        return AgentDirectoryExtractor.extractPatientByNhsNumber(bundle, nhsNumber)
+            .filter(Patient::hasManagingOrganization)
+            .map(patient -> ResourceExtractor.extractResourceByReference(bundle,
+                patient.getManagingOrganization().getReferenceElement()))
+            .map(Optional::get)
+            .map(Organization.class::cast)
+            .map(organizationToAgentMapper::mapOrganizationToAgent)
+            .orElseThrow(() -> new EhrMapperException("No patient or managing organization found in ehrFolder with NHS Number: "
+                + nhsNumber));
     }
 
     private List<String> prepareObservationAgentsList(Bundle bundle) {
@@ -128,7 +139,7 @@ public class AgentDirectoryMapper {
         if (organization.isPresent()) {
             mappedId += "-" + organization.get().getIdElement().getIdPart();
         }
-        return MAPPED_ORGANIZATIONS_AND_PRACTITIONER.containsKey(mappedId);
+        return mappedOrganizationsAndPractitioner.containsKey(mappedId);
     }
 
     private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Optional<Organization> organization) {
@@ -136,6 +147,6 @@ public class AgentDirectoryMapper {
         if (organization.isPresent()) {
             mappedId += "-" + organization.get().getIdElement().getIdPart();
         }
-        MAPPED_ORGANIZATIONS_AND_PRACTITIONER.put(mappedId, true);
+        mappedOrganizationsAndPractitioner.put(mappedId, true);
     }
 }
