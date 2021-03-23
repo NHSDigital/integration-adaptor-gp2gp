@@ -5,7 +5,7 @@ set -x
 # curl -i --cacert opentest.ca-bundle --cert endpoint.crt --key endpoint.key https://msg.opentest.hscic.gov.uk
 
 # Provider URL for OpenTest
-PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/structured/fhir/Patient/$gpc.getstructuredrecord'
+PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510'
 
 # Set SSP_URL to empty string to disable SSP
 #SSP_URL='https://proxy.opentest.hscic.gov.uk/'
