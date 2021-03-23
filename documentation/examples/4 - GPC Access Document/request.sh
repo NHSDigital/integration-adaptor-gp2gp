@@ -3,7 +3,7 @@
 set -x
 
 # Provider URL for OpenTest
-PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/documents/Binary/07a6483f-732b-461e-86b6-edb665c45510'
+PROVIDER_URL='https://messagingportal.opentest.hscic.gov.uk:19192/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510'
 
 # Set SSP_URL to empty string to disable SSP
 #SSP_URL='https://proxy.opentest.hscic.gov.uk/'
