@@ -144,8 +144,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
 
         assertThat(ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().size()).isEqualTo(1);
-        var gpcDocument =
-            ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
+        var gpcDocument = ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
         var documentUrl = buildDocumentUrl();
 
         assertThat(gpcDocument).isNotNull();

@@ -15,5 +15,4 @@ public class GpcConfiguration {
     private String structuredEndpoint;
     private String documentEndpoint;
     private String patientEndpoint;
-    private String patientDocumentReferenceEndpoint;
 }

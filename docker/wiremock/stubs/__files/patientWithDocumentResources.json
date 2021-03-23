@@ -402,7 +402,7 @@
           {
             "attachment": {
               "contentType": "application/msword",
-              "url": "{{request.baseUrl}}/GP0001/STU3/1/gpconnect/documents/Binary/07a6483f-732b-461e-86b6-edb665c45510",
+              "url": "{{request.baseUrl}}/GP0001/STU3/1/gpconnect/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
               "size": 3654
             }
           }
