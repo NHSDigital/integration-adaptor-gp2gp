@@ -6,6 +6,7 @@ export GP2GP_MONGO_URI="mongodb://mongodb:27017"
 export GP2GP_MONGO_DATABASE_NAME="gp2gp"
 export GP2GP_MHS_OUTBOUND_URL="http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
 export GP2GP_GPC_GET_URL="http://gpcc:8080/B82617/STU3/1/gpconnect"
+export GP2GP_GPC_GET_TEST_URL="http://wiremock:8080/GP0001/STU3/1/gpconnect"
 export GP2GP_GPC_DOCUMENTS_FHIR_BASE="/fhir"
 
 export GPC_CONSUMER_URL="http://gpcc:8080"
