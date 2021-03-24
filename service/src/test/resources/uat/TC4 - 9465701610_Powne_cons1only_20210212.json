@@ -1,0 +1,1412 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "List",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ClinicalSetting-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://snomed.info/sct",
+                                    "code": "1060971000000108",
+                                    "display": "General practice service"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "current",
+                "mode": "snapshot",
+                "title": "List of consultations",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "1149501000000101",
+                            "display": "List of consultations"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "date": "2021-02-12T15:44:34.542+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "event-date",
+                            "display": "Sorted by Event Date"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "55315F2E-55D0-4737-B2BC-4E816F04770E-LST",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "title": "GP Surgery",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "325851000000107",
+                            "display": "Consultation"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "encounter": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "date": "2011-02-11T14:02:43.367+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "List/55315F2E-55D0-4737-B2BC-4E816F04770E-PG0"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "58B02021-E70A-4B30-A149-A02E3A5296C7",
+                "meta": {
+                    "versionId": "6810039769230733788",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "preferredBranchSurgery",
+                                "valueReference": {
+                                    "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ],
+                                    "text": "Number present and verified"
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "9465701610"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Powne",
+                        "given": [
+                            "Alger",
+                            "Scot"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    },
+                    {
+                        "use": "old",
+                        "family": "Pwtestpatient"
+                    }
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01234987654",
+                        "use": "work",
+                        "rank": 1
+                    },
+                    {
+                        "system": "phone",
+                        "value": "01234567890",
+                        "use": "home",
+                        "rank": 1
+                    },
+                    {
+                        "system": "phone",
+                        "value": "07777707070",
+                        "use": "mobile",
+                        "rank": 1
+                    },
+                    {
+                        "system": "email",
+                        "value": "Testpatient@testmail.com",
+                        "use": "home",
+                        "rank": 1
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1998-11-15",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "3 Barrow Road",
+                            "New Holland"
+                        ],
+                        "city": "Barrow-Upon-Humber",
+                        "postalCode": "DN19 7QT"
+                    }
+                ],
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Encounter",
+                "id": "55315F2E-55D0-4737-B2BC-4E816F04770E",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "55315F2E-55D0-4737-B2BC-4E816F04770E"
+                    }
+                ],
+                "status": "unknown",
+                "type": [
+                    {
+                        "text": "GP Surgery"
+                    }
+                ],
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "participant": [
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/v3/ParticipationType",
+                                        "code": "PPRF",
+                                        "display": "primary performer"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    },
+                    {
+                        "type": [
+                            {
+                                "coding": [
+                                    {
+                                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
+                                        "code": "REC",
+                                        "display": "recorder"
+                                    }
+                                ]
+                            }
+                        ],
+                        "individual": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    }
+                ],
+                "period": {
+                    "start": "2011-02-11T13:53:00+00:00",
+                    "end": "2011-02-11T14:23:31+00:00"
+                },
+                "length": {
+                    "value": 30,
+                    "unit": "minute",
+                    "system": "http://unitsofmeasure.org",
+                    "code": "min"
+                },
+                "location": [
+                    {
+                        "location": {
+                            "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                        }
+                    }
+                ],
+                "serviceProvider": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "55315F2E-55D0-4737-B2BC-4E816F04770E-PG0",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25851000000105",
+                            "display": "Topic (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "encounter": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "date": "2011-02-11T14:02:43.367+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "List/55315F2E-55D0-4737-B2BC-4E816F04770E-PG0-HD0"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "5E496953-065B-41F2-9577-BE8F2FBD0757",
+                "meta": {
+                    "versionId": "1112974926854455048",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
+                        "valueReference": {
+                            "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "A82038"
+                    }
+                ],
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    }
+                ],
+                "name": "TEMPLE SOWERBY MEDICAL PRACTICE",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01133800000",
+                        "use": "work",
+                        "rank": 1
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "type": "physical",
+                        "line": [
+                            "Fulford Grange",
+                            "Micklefield Lane",
+                            "Rawdon",
+                            "Rawdon"
+                        ],
+                        "city": "Leeds",
+                        "district": "Yorkshire",
+                        "postalCode": "LS19 6BA"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "meta": {
+                    "versionId": "4749697187075864793",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "McAvenue",
+                        "given": [
+                            "David"
+                        ],
+                        "prefix": [
+                            "Dr"
+                        ]
+                    }
+                ],
+                "gender": "male"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "EB3994A6-5A87-4B53-A414-913137072F57",
+                "meta": {
+                    "versionId": "5019450143199176900",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "status": "active",
+                "name": "EMIS Test Practice Location",
+                "description": "none",
+                "type": {
+                    "text": "Main Surgery"
+                },
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01133800000",
+                        "use": "work",
+                        "rank": 1
+                    }
+                ],
+                "address": {
+                    "use": "work",
+                    "type": "physical",
+                    "line": [
+                        "Fulford Grange",
+                        "Micklefield Lane",
+                        "Rawdon",
+                        "Rawdon"
+                    ],
+                    "city": "Leeds",
+                    "district": "Yorkshire",
+                    "postalCode": "LS19 6BA"
+                },
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757",
+                    "display": "TEMPLE SOWERBY MEDICAL PRACTICE"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "id": "55315F2E-55D0-4737-B2BC-4E816F04770E-PG0-HD0",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "status": "current",
+                "mode": "snapshot",
+                "title": "Additional",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "24781000000107",
+                            "display": "Category (EHR)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "encounter": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "date": "2011-02-11T14:02:43.367+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "system",
+                            "display": "Sorted by System"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/343D4E34-2B31-4F06-AAC0-07102CC82917"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "6D340A1BBC154D4E93CFBBCB5B74DF735E496953065B41F29577BE8F2FBD0757",
+                "meta": {
+                    "versionId": "8380942905747068072",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
+                "organization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "87C817BA-ADFF-49FC-A4ED-8D455E821008",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "PKyz500",
+                            "display": "Happy puppet syndrome",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "127639017"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Happy puppet syndrome"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "76880004",
+                            "display": "Angelman syndrome"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:43.4+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "related": [
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/D67FB1C5-F0B0-4E14-9390-8A180D10818F"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/D2940DDA-A7CF-4B0D-ABEB-9A7B92E5B3BA"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/AF0942B7-C504-4D82-911B-49062BA7D16C"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/6F96229B-E217-40D2-9621-DC5CD96C6A6B"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/4CF8FAF9-09E4-4415-BA5B-F2D74A82623C"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/9EBFF609-4026-422E-A6B4-4F527EFD8125"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/DBA34160-8D01-4C5D-8343-82C70D76C99D"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/591CB3F3-B8EF-4734-9B6B-431E45B72E68"
+                        }
+                    },
+                    {
+                        "type": "has-member",
+                        "target": {
+                            "reference": "Observation/8B99C1E9-818F-44E6-8FCA-F0EF1C3CABEB"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "343D4E34-2B31-4F06-AAC0-07102CC82917",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "343D4E34-2B31-4F06-AAC0-07102CC82917"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "246..00",
+                            "display": "O/E - blood pressure reading",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "254063019"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163020007",
+                            "display": "O/E - blood pressure reading"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.943+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "component": [
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://read.info/readv2",
+                                    "code": "2469.00",
+                                    "display": "O/E - Systolic BP reading",
+                                    "userSelected": true
+                                },
+                                {
+                                    "extension": [
+                                        {
+                                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                            "extension": [
+                                                {
+                                                    "url": "descriptionId",
+                                                    "valueId": "120159016"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "system": "http://snomed.info/sct",
+                                    "code": "72313002",
+                                    "display": "Systolic arterial pressure"
+                                }
+                            ],
+                            "text": "Systolic blood pressure"
+                        },
+                        "valueQuantity": {
+                            "value": 120.000,
+                            "unit": "mm[Hg]"
+                        }
+                    },
+                    {
+                        "code": {
+                            "coding": [
+                                {
+                                    "system": "http://read.info/readv2",
+                                    "code": "246A.00",
+                                    "display": "O/E - Diastolic BP reading",
+                                    "userSelected": true
+                                },
+                                {
+                                    "extension": [
+                                        {
+                                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                            "extension": [
+                                                {
+                                                    "url": "descriptionId",
+                                                    "valueId": "2734671000000117"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "system": "http://snomed.info/sct",
+                                    "code": "1091811000000102",
+                                    "display": "Diastolic arterial pressure"
+                                }
+                            ],
+                            "text": "Diastolic blood pressure"
+                        },
+                        "valueQuantity": {
+                            "value": 90.000,
+                            "unit": "mm[Hg]"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "D67FB1C5-F0B0-4E14-9390-8A180D10818F",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D67FB1C5-F0B0-4E14-9390-8A180D10818F"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "1683.00",
+                            "display": "Tired all the time",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "102731000006113"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Tired all the time"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "267032009",
+                            "display": "Tired all the time"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:43.413+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "TAT notes",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "D2940DDA-A7CF-4B0D-ABEB-9A7B92E5B3BA",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D2940DDA-A7CF-4B0D-ABEB-9A7B92E5B3BA"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "196411000000103",
+                            "display": "Transfer-degraded record entry"
+                        }
+                    ],
+                    "text": "Comments"
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:43.43+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Aaaargh",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "AF0942B7-C504-4D82-911B-49062BA7D16C",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "AF0942B7-C504-4D82-911B-49062BA7D16C"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "7K20y00",
+                            "display": "Total prosthetic replacement of hip joint using cement OS",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "98201000006118"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Total prosthetic replacement of hip joint using cement OS"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "265157000",
+                            "display": "Total prosthetic replacement of hip joint using cement"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.82+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Laterality : Right - notes on hip jint OS",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "6F96229B-E217-40D2-9621-DC5CD96C6A6B",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "6F96229B-E217-40D2-9621-DC5CD96C6A6B"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "7K20.00",
+                            "display": "Total prosthetic replacement of hip joint using cement",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "393801018"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "265157000",
+                            "display": "Total prosthetic replacement of hip joint using cement"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.85+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Laterality : Left - notes on hip joint",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "4CF8FAF9-09E4-4415-BA5B-F2D74A82623C",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "4CF8FAF9-09E4-4415-BA5B-F2D74A82623C"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "7K30.00",
+                            "display": "Total prosthetic replacement of knee joint using cement",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "393818019"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "265170009",
+                            "display": "Total prosthetic replacement of knee joint using cement"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.867+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "notes on knee joint",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9EBFF609-4026-422E-A6B4-4F527EFD8125",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "9EBFF609-4026-422E-A6B4-4F527EFD8125"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "3....00",
+                            "display": "Diagnostic procedures",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "167453013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "103693007",
+                            "display": "Diagnostic procedure"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.88+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "DBA34160-8D01-4C5D-8343-82C70D76C99D",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "DBA34160-8D01-4C5D-8343-82C70D76C99D"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "196411000000103",
+                            "display": "Transfer-degraded record entry"
+                        }
+                    ],
+                    "text": "Option A"
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2010-12-04",
+                "issued": "2011-02-11T14:02:44.897+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "591CB3F3-B8EF-4734-9B6B-431E45B72E68",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "591CB3F3-B8EF-4734-9B6B-431E45B72E68"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "136Q.00",
+                            "display": "Very heavy drinker",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "342322012"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "228279004",
+                            "display": "Very heavy drinker"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.913+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "8B99C1E9-818F-44E6-8FCA-F0EF1C3CABEB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "8B99C1E9-818F-44E6-8FCA-F0EF1C3CABEB"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "196411000000103",
+                            "display": "Transfer-degraded record entry"
+                        }
+                    ],
+                    "text": "Some freetext"
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "context": {
+                    "reference": "Encounter/55315F2E-55D0-4737-B2BC-4E816F04770E"
+                },
+                "effectiveDateTime": "2011-02-11T13:53:00+00:00",
+                "issued": "2011-02-11T14:02:44.93+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "some random freetext notes blah blah",
+                "related": [
+                    {
+                        "type": "derived-from",
+                        "target": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "List",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ClinicalSetting-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://snomed.info/sct",
+                                    "code": "1060971000000108",
+                                    "display": "General practice service"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "current",
+                "mode": "snapshot",
+                "title": "Consultations - uncategorised data contained in consultations",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/GPConnect-SecondaryListValues-1",
+                            "code": "consultations-uncategorised-data-contained-in-consultations",
+                            "display": "Consultations - uncategorised data contained in consultations"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "date": "2021-02-12T15:44:34.574+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "event-date",
+                            "display": "Sorted by Event Date"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Observation/87C817BA-ADFF-49FC-A4ED-8D455E821008"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/343D4E34-2B31-4F06-AAC0-07102CC82917"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
