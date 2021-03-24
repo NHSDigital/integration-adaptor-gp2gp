@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
@@ -18,7 +19,10 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 public class SendAcknowledgementTaskDefinition extends TaskDefinition {
     private final String nhsNumber;
     private final String typeCode;
+    private final String messageId;
+    @NonNull
     private final Optional<String> reasonCode;
+    @NonNull
     private final Optional<String> detail;
     @Override
     public TaskType getTaskType() {

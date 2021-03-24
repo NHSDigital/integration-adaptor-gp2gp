@@ -22,7 +22,6 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithPayload;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtractCoreTaskDefinition> {
-    private static final String POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -54,7 +53,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
         if (ehrExtractStatus.getGpcAccessDocument().getDocuments().isEmpty()) {
-            sendAcknowledgementTaskDispatcher.send(ehrExtractStatus, POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+            sendAcknowledgementTaskDispatcher.sendPositiveAcknowledgement(ehrExtractStatus);
         }
     }
 }

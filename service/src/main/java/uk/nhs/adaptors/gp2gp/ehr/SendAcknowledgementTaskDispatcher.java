@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +15,28 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SendAcknowledgementTaskDispatcher {
+    private static final String POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public void send(EhrExtractStatus ehrExtractStatus, String typeCode) {
+    public void sendPositiveAcknowledgement(EhrExtractStatus ehrExtractStatus) {
+        var ehrRequest = ehrExtractStatus.getEhrRequest();
         var sendAcknowledgementTaskDefinition = SendAcknowledgementTaskDefinition.builder()
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
-            .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
-            .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
-            .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
-            .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
-            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
-            .nhsNumber(ehrExtractStatus.getEhrRequest().getNhsNumber())
-            .typeCode(typeCode)
+            .requestId(ehrRequest.getRequestId())
+            .toAsid(ehrRequest.getToAsid())
+            .fromAsid(ehrRequest.getFromAsid())
+            .fromOdsCode(ehrRequest.getFromOdsCode())
+            .toOdsCode(ehrRequest.getToOdsCode())
+            .nhsNumber(ehrRequest.getNhsNumber())
+            .typeCode(POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE)
+            .reasonCode(Optional.empty())
+            .detail(Optional.empty())
+            .messageId(ehrRequest.getMessageId())
             .build();
 
         taskDispatcher.createTask(sendAcknowledgementTaskDefinition);
-        LOGGER.info(String.format("SendAcknowledgementTaskDefiniiton added to task queue, conversationId: %s",
-            ehrExtractStatus.getConversationId()));
+        LOGGER.info("SendAcknowledgementTaskDefinition added to task queue");
     }
 }

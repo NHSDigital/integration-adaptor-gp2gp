@@ -39,17 +39,16 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     @SneakyThrows
     public void execute(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
         LOGGER.info("SendAcknowledgement task was created, Sending Acknowledgement to Spine");
-        var messageId = randomIdGeneratorService.createNewId();
 
-        var sendAcknowledgementResponseObject = SendAcknowledgementResponse.builder()
+        var sendAckTemplateParams = SendAckTemplateParams.builder()
             .creationTime(timestampService.now().toString())
-            .uuid(messageId)
+            .uuid(randomIdGeneratorService.createNewId())
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())
             .toAsid(sendAcknowledgementTaskDefinition.getToAsid())
             .typeCode(sendAcknowledgementTaskDefinition.getTypeCode())
-            .messageId(messageId)
+            .messageId(sendAcknowledgementTaskDefinition.getMessageId())
             .build();
-        var acknowledgmentRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAcknowledgementResponseObject);
+        var acknowledgmentRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAckTemplateParams);
         var outboundMessage = OutboundMessageWithPayload.builder().payload(acknowledgmentRequestBody).build();
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
 
@@ -58,7 +57,6 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
 
         mhsClient.sendMessageToMHS(request);
 
-        ehrExtractStatusService.updateEhrExtractStatusAcknowledgment(sendAcknowledgementTaskDefinition, messageId);
-        LOGGER.info("");
+        ehrExtractStatusService.updateEhrExtractStatusAcknowledgment(sendAcknowledgementTaskDefinition);
     }
 }

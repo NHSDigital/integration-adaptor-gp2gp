@@ -135,8 +135,7 @@ public class EhrExtractStatusService {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
         }
 
-        LOGGER.info(String.format("Database successfully updated with EHRContinue, Conversation-Id: %s",
-            sendEhrExtractCoreTaskDefinition.getConversationId()));
+        LOGGER.info("Database successfully updated with EHRContinue");
         return ehrExtractStatus;
     }
 
@@ -216,13 +215,12 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
-        String messageId) {
+    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
         Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
-        update.set(ACK_MESSAGE_ID_PATH, messageId);
+        update.set(ACK_MESSAGE_ID_PATH, sendAcknowledgementTaskDefinition.getMessageId());
         update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
 
         sendAcknowledgementTaskDefinition.getReasonCode().ifPresent(reason -> update.set(ACK_REASON_CODE_PATH, reason));
@@ -233,6 +231,7 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
         }
+        LOGGER.info("Database successfully updated with Acknowledgement");
     }
 
     private FindAndModifyOptions getReturningUpdatedRecordOption() {

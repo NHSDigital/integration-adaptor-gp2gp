@@ -50,6 +50,7 @@ public class EhrExtractRequestHandlerTest {
     private static final String TO_ASID = "200000001161";
     private static final String TO_ODS_CODE = "B86041";
     private static final String FROM_ODS_CODE = "N82668";
+    private static final String MESSAGE_ID = "DFF5321C-C6EA-468E-BBC2-B0E48000E071";
 
     @Mock
     private EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -115,7 +116,8 @@ public class EhrExtractRequestHandlerTest {
                 .toAsid(TO_ASID)
                 .toOdsCode(TO_ODS_CODE)
                 .fromOdsCode(FROM_ODS_CODE)
-                .toOdsCode("B86041")
+                .toOdsCode(TO_ODS_CODE)
+                .messageId(MESSAGE_ID)
                 .build()
             ).build();
     }
