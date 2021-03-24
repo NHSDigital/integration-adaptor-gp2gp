@@ -31,7 +31,7 @@ public class MedicationStatementExtractor {
     private static final String REPEAT_INFORMATION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1";
     private static final String NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL = "numberOfRepeatPrescriptionsAllowed";
     private static final String DEFAULT_REPEAT_VALUE = "1";
-    private static final String MEDICATION_STATUS_REASON_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1";
+    private static final String MEDICATION_STATUS_REASON_STOPPED_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1";
     private static final String STATUS_REASON_URL = "statusReason";
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
@@ -70,12 +70,13 @@ public class MedicationStatementExtractor {
     }
 
     public static boolean hasStatusReasonStopped(MedicationRequest medicationRequest) {
-        return filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL)
+        return filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL)
             .isPresent();
     }
 
-    public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
-        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
+    public static String extractStatusReasonStoppedCode(MedicationRequest medicationRequest,
+        CodeableConceptCdMapper codeableConceptCdMapper) {
+        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL);
 
         return statusReason.map(Extension::getExtension).stream()
             .flatMap(List::stream)
@@ -87,8 +88,8 @@ public class MedicationStatementExtractor {
             .orElse(StringUtils.EMPTY);
     }
 
-    public static String extractStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
-        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
+    public static String extractStatusReasonStoppedAvailabilityTime(MedicationRequest medicationRequest) {
+        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL);
 
         if (statusReason.isEmpty()) {
             return StringUtils.EMPTY;

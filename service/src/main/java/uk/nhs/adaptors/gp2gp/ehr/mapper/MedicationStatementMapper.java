@@ -4,8 +4,8 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extr
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonAvailabilityTime;
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
 
 import java.util.Arrays;
@@ -57,24 +57,42 @@ public class MedicationStatementMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
+        var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId());
+        var statusCode = buildStatusCode(medicationRequest);
+        var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest);
+        var availabilityTime = StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest);
+        var medicationReferenceCode = buildMedicationReferenceCode(medicationRequest);
+        var ehrSupplyId = messageContext.getMedicationRequestIdMapper().getOrNew(medicationRequest.getId());
+        var medicationStatementPertinentInformation = buildDosageInstructionPertinentInformation(medicationRequest);
+        var ehrSupplyPertinentInformation = buildEhrSupplyPertinentInformation(medicationRequest);
+        var repeatNumber = buildRepeatNumber(medicationRequest);
+        var quantityValue = buildQuantityValue(medicationRequest);
+        var quantityText = buildQuantityText(medicationRequest);
+        var hasEhrSupplyDiscontinue = hasStatusReasonStopped(medicationRequest);
+        var ehrSupplyDiscontinueCode = buildStatusReasonStoppedCode(medicationRequest);
+        var ehrSupplyDiscontinueId = randomIdGeneratorService.createNewId();
+        var ehrSupplyDiscontinueAvailabilityTime = buildStatusReasonStoppedAvailabilityTime(medicationRequest);
+        var priorPrescriptionId = buildPriorPrescription(medicationRequest);
+        var basedOn = buildBasedOn(medicationRequest);
+
         var medicationStatementTemplateParameters = MedicationStatementTemplateParameters.builder()
-            .medicationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId()))
-            .statusCode(buildStatusCode(medicationRequest))
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest))
-            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest))
-            .medicationReferenceCode(buildMedicationReferenceCode(medicationRequest))
-            .ehrSupplyId(messageContext.getMedicationRequestIdMapper().getOrNew(medicationRequest.getId()))
-            .medicationStatementPertinentInformation(buildDosageInstructionPertinentInformation(medicationRequest))
-            .ehrSupplyPertinentInformation(buildPertinentInformation(medicationRequest))
-            .repeatNumber(buildRepeatValue(medicationRequest))
-            .quantityValue(buildQuantityValue(medicationRequest))
-            .quantityText(buildQuantityText(medicationRequest))
-            .hasEhrSupplyDiscontinue(hasStatusReasonStopped(medicationRequest))
-            .ehrSupplyDiscontinueCode(buildStatusReasonCode(medicationRequest))
-            .ehrSupplyDiscontinueId(randomIdGeneratorService.createNewId())
-            .ehrSupplyDiscontinueAvailabilityTime(buildStatusReasonAvailabilityTime(medicationRequest))
-            .priorPrescriptionId(buildPriorPrescription(medicationRequest))
-            .basedOn(buildBasedOn(medicationRequest))
+            .medicationStatementId(medicationStatementId)
+            .statusCode(statusCode)
+            .effectiveTime(effectiveTime)
+            .availabilityTime(availabilityTime)
+            .medicationReferenceCode(medicationReferenceCode)
+            .ehrSupplyId(ehrSupplyId)
+            .medicationStatementPertinentInformation(medicationStatementPertinentInformation)
+            .ehrSupplyPertinentInformation(ehrSupplyPertinentInformation)
+            .repeatNumber(repeatNumber)
+            .quantityValue(quantityValue)
+            .quantityText(quantityText)
+            .hasEhrSupplyDiscontinue(hasEhrSupplyDiscontinue)
+            .ehrSupplyDiscontinueCode(ehrSupplyDiscontinueCode)
+            .ehrSupplyDiscontinueId(ehrSupplyDiscontinueId)
+            .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
+            .priorPrescriptionId(priorPrescriptionId)
+            .basedOn(basedOn)
             .build();
 
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
@@ -113,7 +131,7 @@ public class MedicationStatementMapper {
         throw new EhrMapperException("Could not resolve Dosage Instruction text");
     }
 
-    private String buildPertinentInformation(MedicationRequest medicationRequest) {
+    private String buildEhrSupplyPertinentInformation(MedicationRequest medicationRequest) {
         List<String> descriptionList = retrievePertinentInformation(medicationRequest);
         return descriptionList
             .stream()
@@ -173,21 +191,21 @@ public class MedicationStatementMapper {
         return StringUtils.EMPTY;
     }
 
-    private String buildStatusReasonCode(MedicationRequest medicationRequest) {
+    private String buildStatusReasonStoppedCode(MedicationRequest medicationRequest) {
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return extractStatusReasonCode(medicationRequest, codeableConceptCdMapper);
+            return extractStatusReasonStoppedCode(medicationRequest, codeableConceptCdMapper);
         }
         return StringUtils.EMPTY;
     }
 
-    private String buildStatusReasonAvailabilityTime(MedicationRequest medicationRequest) {
+    private String buildStatusReasonStoppedAvailabilityTime(MedicationRequest medicationRequest) {
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return extractStatusReasonAvailabilityTime(medicationRequest);
+            return extractStatusReasonStoppedAvailabilityTime(medicationRequest);
         }
         return StringUtils.EMPTY;
     }
 
-    private String buildRepeatValue(MedicationRequest medicationRequest) {
+    private String buildRepeatNumber(MedicationRequest medicationRequest) {
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             var prescriptionTypeCode = extractPrescriptionTypeCode(medicationRequest);
 
