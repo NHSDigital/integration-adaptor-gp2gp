@@ -103,6 +103,10 @@ public class MedicationStatementMapperTest {
         + "medication-statement-with-prescribe-based-on.xml";
     private static final String OUTPUT_XML_WITH_AUTHORISE_PRIOR_PRESCRIPTION = TEST_FILE_DIRECTORY
         + "medication-statement-with-prescribe-prior-prescription.xml";
+    private static final String INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-no-status-reason-code.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE = TEST_FILE_DIRECTORY
+        + "medication-statement-with-authorise-default-status-reason-code.xml";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -148,7 +152,8 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PLAN_REPEAT_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION),
             Arguments.of(INPUT_JSON_WITH_ORDER_REPEAT_PRESCRIPTION_NO_VALUE, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION_NO_VALUE),
             Arguments.of(INPUT_JSON_WITH_PLAN_START_PERIOD_ONLY, OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY),
-            Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS)
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE, OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE)
             );
     }
 
