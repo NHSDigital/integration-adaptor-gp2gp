@@ -1,9 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class AgentDirectoryMapper {
     private static final Mustache AGENT_DIRECTORY_STRUCTURE_TEMPLATE = TemplateUtils.loadTemplate("ehr_agent_structure_template.mustache");
 
-    private final Map<String, Boolean> mappedOrganizationsAndPractitioner = new HashMap<>();
+    private final Set<String> mappedOrganizationsAndPractitioner = new HashSet<>();
     private final PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     private final OrganizationToAgentMapper organizationToAgentMapper;
 
@@ -77,10 +79,10 @@ public class AgentDirectoryMapper {
 
     private List<String> preparePractitionerRoleAgentsList(Bundle bundle) {
         List<Practitioner> practitioners = AgentDirectoryExtractor.extractRemainingPractitioners(bundle);
-        var mappingTriplets = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, practitioners);
+        var mappingTriplets = AgentDirectoryExtractor.extractAgentData(bundle, practitioners);
 
         return mappingTriplets.stream()
-            .map(triple -> mapAgentPerson(triple.getLeft(), triple.getMiddle(), triple.getRight()))
+            .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
     }
@@ -90,16 +92,16 @@ public class AgentDirectoryMapper {
         var organization = AgentDirectoryExtractor.extractObservationResource(observation, bundle, ResourceType.Organization);
         if (practitioner.isPresent() && organization.isPresent()) {
             return mapAgentPerson((Practitioner) practitioner.get(),
-                Optional.empty(),
-                organization.map(value -> (Organization) value));
+                null,
+                (Organization) organization.get());
         } else if (practitioner.isPresent()) {
-            var triplet = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, List.of((Practitioner) practitioner.get()))
+            var agentDataList = AgentDirectoryExtractor.extractAgentData(bundle, List.of((Practitioner) practitioner.get()))
                 .stream()
-                .map(triple -> mapAgentPerson(triple.getLeft(), triple.getMiddle(), triple.getRight()))
+                .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
                 .filter(StringUtils::isNotEmpty)
                 .findFirst();
-            if (triplet.isPresent()) {
-                return triplet.get();
+            if (agentDataList.isPresent()) {
+                return agentDataList.get();
             }
         }
         return StringUtils.EMPTY;
@@ -111,48 +113,49 @@ public class AgentDirectoryMapper {
         var organization = ResourceExtractor
             .extractResourceByReference(bundle, referralRequest.getRequester().getOnBehalfOf().getReferenceElement());
         if (practitioner.isPresent() && organization.isPresent()) {
-            return mapAgentPerson((Practitioner) practitioner.get(),
-                Optional.empty(),
-                organization.map(value -> (Organization) value));
+            return mapAgentPerson(practitioner.map(Practitioner.class::cast).get(),
+                null,
+                organization.map(Organization.class::cast).get());
+
         } else if (practitioner.isPresent()) {
-            var triplet = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, List.of((Practitioner) practitioner.get()))
+            var agentDataList = AgentDirectoryExtractor.extractAgentData(bundle, List.of(practitioner.map(Practitioner.class::cast).get()))
                 .stream()
-                .map(triple -> mapAgentPerson(triple.getLeft(), triple.getMiddle(), triple.getRight()))
+                .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
                 .filter(StringUtils::isNotEmpty)
                 .findFirst();
-            if (triplet.isPresent()) {
-                return triplet.get();
+
+            if (agentDataList.isPresent()) {
+                return agentDataList.get();
             }
         }
         return StringUtils.EMPTY;
     }
 
-    private String mapAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole,
-        Optional<Organization> organization) {
+    private String mapAgentPerson(Practitioner practitioner, PractitionerRole practitionerRole, Organization organization) {
         if (!organizationPractitionerHasBeenMapped(practitioner, organization)) {
             addOrganizationPractitionerPairToMap(practitioner, organization);
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
-                practitionerRole,
-                organization
+                Optional.ofNullable(practitionerRole),
+                Optional.ofNullable(organization)
             );
         }
         return StringUtils.EMPTY;
     }
 
-    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Optional<Organization> organization) {
+    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization) {
         var mappedId = practitioner.getIdElement().getIdPart();
-        if (organization.isPresent()) {
-            mappedId += "-" + organization.get().getIdElement().getIdPart();
+        if (organization != null) {
+            mappedId += "-" + organization.getIdElement().getIdPart();
         }
-        return mappedOrganizationsAndPractitioner.containsKey(mappedId);
+        return mappedOrganizationsAndPractitioner.contains(mappedId);
     }
 
-    private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Optional<Organization> organization) {
+    private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Organization organization) {
         var mappedId = practitioner.getIdElement().getIdPart();
-        if (organization.isPresent()) {
-            mappedId += "-" + organization.get().getIdElement().getIdPart();
+        if (organization != null) {
+            mappedId += "-" + organization.getIdElement().getIdPart();
         }
-        mappedOrganizationsAndPractitioner.put(mappedId, true);
+        mappedOrganizationsAndPractitioner.add(mappedId);
     }
 }

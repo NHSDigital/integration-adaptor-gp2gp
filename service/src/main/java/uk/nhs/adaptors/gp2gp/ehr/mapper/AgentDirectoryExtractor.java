@@ -25,6 +25,7 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
+import lombok.Data;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
 public class AgentDirectoryExtractor {
@@ -96,8 +97,7 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
     }
 
-    public static List<Triple<Practitioner, Optional<PractitionerRole>, Optional<Organization>>>
-        extractPractitionerRoleTriples(Bundle bundle, List<Practitioner> practitioners) {
+    public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
 
         List<PractitionerRole> practitionerRoles = bundle.getEntry()
             .stream()
@@ -116,19 +116,19 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
 
         return practitioners.stream()
-            .map(practitioner -> combineTriple(practitioner, practitionerRoles, organizations))
+            .map(practitioner -> createAgentData(practitioner, practitionerRoles, organizations))
             .collect(Collectors.toList());
     }
 
-    private static Triple<Practitioner, Optional<PractitionerRole>, Optional<Organization>> combineTriple(Practitioner practitioner,
+    private static AgentData createAgentData(Practitioner practitioner,
         List<PractitionerRole> practitionerRoles, List<Organization> organizations) {
 
         var practitionerRole = extractRelevantPractitionerRole(practitioner, practitionerRoles);
         if (practitionerRole.isPresent()) {
             var organization = extractRelevantOrganization(practitionerRole.get(), organizations);
-            return Triple.of(practitioner, practitionerRole, organization);
+            return new AgentData(practitioner, practitionerRole.get(), organization.get());
         } else {
-            return Triple.of(practitioner, Optional.empty(), Optional.empty());
+            return new AgentData(practitioner, null, null);
         }
     }
 
@@ -175,19 +175,6 @@ public class AgentDirectoryExtractor {
         return extractor.apply(resource);
     }
 
-    private static boolean performerContainersOrgAndPractitioner(Observation observation) {
-        var performers = observation.getPerformer();
-        return listHasPractitioner(performers) && listHasOrganization(performers);
-    }
-
-    private static boolean listHasPractitioner(List<Reference> references) {
-        return listHasResourceType(references, ResourceType.Practitioner);
-    }
-
-    private static boolean listHasOrganization(List<Reference> references) {
-        return listHasResourceType(references, ResourceType.Organization);
-    }
-
     private static boolean listHasResourceType(List<Reference> references, ResourceType resourceType) {
         return references.stream()
             .map(Reference::getReferenceElement)
@@ -207,15 +194,19 @@ public class AgentDirectoryExtractor {
     }
 
     private static IIdType extractIIdTypeFromAllergyIntolerance(Resource resource) {
-        Optional<IIdType> practitionerReference = extractAsserterReference(resource);
+        Optional<IIdType> practitionerReference = extractAsserterReference((AllergyIntolerance) resource);
         return practitionerReference.orElseGet(() -> ((AllergyIntolerance) resource).getRecorder().getReferenceElement());
     }
 
-    private static Optional<IIdType> extractAsserterReference(Resource resource) {
-        var practitionerReference = ((AllergyIntolerance) resource).getAsserter().getReferenceElement();
-        if (practitionerReference.getIdPart() != null) {
-            return Optional.of(practitionerReference);
-        }
-        return Optional.empty();
+    private static Optional<IIdType> extractAsserterReference(AllergyIntolerance resource) {
+        var practitionerReference = resource.getAsserter().getReferenceElement();
+        return Optional.of(practitionerReference).filter(ref -> ref.getIdPart() != null);
+    }
+
+    @Data
+    public static class AgentData {
+        private final Practitioner practitioner;
+        private final PractitionerRole practitionerRole;
+        private final Organization organization;
     }
 }
