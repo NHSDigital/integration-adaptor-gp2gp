@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extr
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
 
 import java.util.Arrays;
 import java.util.List;
@@ -68,6 +69,7 @@ public class MedicationStatementMapper {
             .repeatNumber(buildRepeatValue(medicationRequest))
             .quantityValue(buildQuantityValue(medicationRequest))
             .quantityText(buildQuantityText(medicationRequest))
+            .hasEhrSupplyDiscontinue(hasStatusReasonStopped(medicationRequest))
             .ehrSupplyDiscontinueCode(buildStatusReasonCode(medicationRequest))
             .ehrSupplyDiscontinueId(randomIdGeneratorService.createNewId())
             .ehrSupplyDiscontinueAvailabilityTime(buildStatusReasonAvailabilityTime(medicationRequest))

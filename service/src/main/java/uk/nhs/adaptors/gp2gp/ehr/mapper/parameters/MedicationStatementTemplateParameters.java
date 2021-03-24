@@ -19,6 +19,7 @@ public class MedicationStatementTemplateParameters {
     private String quantityValue;
     private String quantityText;
     private String repeatNumber;
+    private boolean hasEhrSupplyDiscontinue;
     private String ehrSupplyDiscontinueId;
     private String ehrSupplyDiscontinueCode;
     private String ehrSupplyDiscontinueAvailabilityTime;

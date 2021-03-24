@@ -34,7 +34,7 @@ public class MedicationStatementExtractor {
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
-    public static final String DEFAULT_STATUS_RESASON_CODE = "<code nullFlavor=\"UNK><originalText>Stopped</originalText></code>";
+    public static final String DEFAULT_STATUS_REASON_CODE = "<code nullFlavor=\"UNK\"><originalText>Stopped</originalText></code>";
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
@@ -70,6 +70,11 @@ public class MedicationStatementExtractor {
             .orElse(DEFAULT_REPEAT_VALUE);
     }
 
+    public static boolean hasStatusReasonStopped(MedicationRequest medicationRequest) {
+        return filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL)
+            .isPresent();
+    }
+
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
         var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
@@ -81,7 +86,7 @@ public class MedicationStatementExtractor {
                 .map(Extension::getValue)
                 .map(CodeableConcept.class::cast)
                 .map(codeableConceptCdMapper::mapCodeableConceptToCd)
-                .orElse(DEFAULT_STATUS_RESASON_CODE))
+                .orElse(DEFAULT_STATUS_REASON_CODE))
             .orElse(StringUtils.EMPTY);
     }
 

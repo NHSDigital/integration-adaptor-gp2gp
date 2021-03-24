@@ -31,19 +31,19 @@
                 {{#repeatNumber}}<repeatNumber value="{{repeatNumber}}"/>{{/repeatNumber}}
             </ehrSupplyAuthorise>
         </component>
-        {{#ehrSupplyDiscontinueCode}}
+        {{#hasEhrSupplyDiscontinue}}
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="{{ehrSupplyDiscontinueId}}"/>
                 <statusCode code="COMPLETE"/>
-                {{{ehrSupplyDiscontinueCode}}}
+                {{#ehrSupplyDiscontinueCode}}{{{ehrSupplyDiscontinueCode}}}{{/ehrSupplyDiscontinueCode}}{{^ehrSupplyDiscontinueCode}}<code nullFlavor="UNK"><originalText>Stopped</originalText></code>{{/ehrSupplyDiscontinueCode}}
                 {{{ehrSupplyDiscontinueAvailabilityTime}}}
                 <reversalOf typeCode="REV">
                     <id root="{{ehrSupplyId}}"/>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
-        {{/ehrSupplyDiscontinueCode}}
+        {{/hasEhrSupplyDiscontinue}}
         {{#priorPrescriptionId}}
         <predecessor typeCode="SUCC">
             <priorMedicationRef classCode="SBADM" moodCode="INT">
