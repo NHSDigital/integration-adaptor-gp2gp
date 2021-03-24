@@ -61,9 +61,9 @@ public class GpcRequestBuilder {
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
     private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
     private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
-    private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
-        + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
-        + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
+    private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference:subject:Patient"
+        + "&_include=DocumentReference:custodian:Organization&_include=DocumentReference:author:Organization"
+        + "&_include=DocumentReference:author:Practitioner&_revinclude:recurse=PractitionerRole:practitioner";
     private static final String IDENTIFIER_PARAMETER = "identifier";
     private static final String GPC_FIND_PATIENT_IDENTIFIER = NHS_NUMBER_SYSTEM + "|";
 
