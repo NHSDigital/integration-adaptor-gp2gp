@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.model.SendAckTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
@@ -40,7 +41,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     public void execute(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
         LOGGER.info("SendAcknowledgement task was created, Sending Acknowledgement to Spine");
 
-        var sendAckTemplateParams = SendAckTemplateParams.builder()
+        var sendAckTemplateParams = SendAckTemplateParameters.builder()
             .creationTime(timestampService.now().toString())
             .uuid(randomIdGeneratorService.createNewId())
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())

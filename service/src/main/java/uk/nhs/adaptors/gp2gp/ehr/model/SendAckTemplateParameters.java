@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr;
+package uk.nhs.adaptors.gp2gp.ehr.model;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class SendAckTemplateParams {
+public class SendAckTemplateParameters {
     private final String fromAsid;
     private final String toAsid;
     private final String creationTime;
