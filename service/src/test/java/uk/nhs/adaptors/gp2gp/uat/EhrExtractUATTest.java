@@ -43,7 +43,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class ExtractUATTest {
+public class EhrExtractUATTest {
     private static final String TEST_FILES_DIRECTORY = "/uat/";
     private static final String INPUT_JSON_WITH_PATHOLOGY_RECORD = "TC4 - 9465701718_Guerra_inv1only_20210212.json";
     private static final String INPUT_JSON_WITH_MEDICATION_RECORD = "TC4 - 9465701645_Prytherch_medsonly_20210212.json";
