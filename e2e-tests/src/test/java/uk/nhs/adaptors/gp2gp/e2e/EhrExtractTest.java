@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
@@ -75,40 +76,7 @@ public class EhrExtractTest {
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknoledgementToRequestWasSent(ackToRequester);
-    }
-
-    private void assertThatAcknoledgementToRequestWasSent(Document ackToRequester) {
-        assertThat(ackToRequester.get("messageId")).isNotNull();
-        assertThat(ackToRequester.get("taskId")).isNotNull();
-        assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-    }
-
-    private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
-        assertThat(ehrContinue).isNotEmpty();
-        assertThat(ehrContinue.get("received")).isNotNull();
-    }
-
-    private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
-        assertThat(ehrExtractStatus).isNotNull();
-        assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId);
-        assertThat(ehrExtractStatus.get("created")).isNotNull();
-        assertThat(ehrExtractStatus.get("updatedAt")).isNotNull();
-        var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);
-        assertThat(ehrRequest.get("requestId")).isEqualTo(REQUEST_ID);
-        assertThat(ehrRequest.get("nhsNumber")).isEqualTo(nhsNumber);
-        assertThat(ehrRequest.get("fromPartyId")).isEqualTo(FROM_PARTY_ID);
-        assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID);
-        assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID);
-        assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
-        assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
-        assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
-    }
-
-    private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
-        assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION);
-        assertThat(accessStructured.get("accessedAt")).isNotNull();
-        assertThat(accessStructured.get("taskId")).isNotNull();
+        assertThatAcknowledgementToRequestWasSent(ackToRequester);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
@@ -131,15 +99,60 @@ public class EhrExtractTest {
         return null;
     }
 
+    private void assertThatAcknowledgementToRequestWasSent(Document ackToRequester) {
+        assertAll(
+            () -> assertThat(ackToRequester.get("messageId")).isNotNull(),
+            () -> assertThat(ackToRequester.get("taskId")).isNotNull(),
+            () -> assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE)
+        );
+    }
+
+    private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
+        assertAll(
+            () -> assertThat(ehrContinue).isNotEmpty().isNotEmpty(),
+            () -> assertThat(ehrContinue.get("received")).isNotNull()
+        );
+    }
+
+    private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
+        var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);
+        assertAll(
+            () -> assertThat(ehrExtractStatus).isNotNull(),
+            () -> assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId),
+            () -> assertThat(ehrExtractStatus.get("created")).isNotNull(),
+            () -> assertThat(ehrExtractStatus.get("updatedAt")).isNotNull(),
+            () -> assertThat(ehrRequest.get("requestId")).isEqualTo(REQUEST_ID),
+            () -> assertThat(ehrRequest.get("nhsNumber")).isEqualTo(nhsNumber),
+            () -> assertThat(ehrRequest.get("fromPartyId")).isEqualTo(FROM_PARTY_ID),
+            () -> assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID),
+            () -> assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID),
+            () -> assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID),
+            () -> assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE),
+            () -> assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE)
+        );
+    }
+
+    private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
+        assertAll(
+            () -> assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION),
+            () -> assertThat(accessStructured.get("accessedAt")).isNotNull(),
+            () -> assertThat(accessStructured.get("taskId")).isNotNull()
+        );
+    }
+
     private void assertThatAccessDocumentWasFetched(Document document) {
-        assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
-        assertThat(document.get("accessedAt")).isNotNull();
-        assertThat(document.get("taskId")).isNotNull();
+        assertAll(
+            () -> assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json"),
+            () -> assertThat(document.get("accessedAt")).isNotNull(),
+            () -> assertThat(document.get("taskId")).isNotNull()
+        );
     }
 
     private void assertThatExtractCoreMessageWasSent(Document extractCore) {
-        assertThat(extractCore.get("sentAt")).isNotNull();
-        assertThat(extractCore.get("taskId")).isNotNull();
+        assertAll(
+            () -> assertThat(extractCore.get("sentAt")).isNotNull(),
+            () -> assertThat(extractCore.get("taskId")).isNotNull()
+        );
     }
 
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {

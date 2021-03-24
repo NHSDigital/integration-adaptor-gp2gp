@@ -11,9 +11,7 @@ public class ResourceReader {
     @SneakyThrows
     public static String readAsString(String resourceName) {
         try (InputStream inputStream = ResourceReader.class.getResourceAsStream(String.format("/%s",resourceName))) {
-            var resourceAsString = IOUtils.toString(inputStream, UTF_8);
-            inputStream.close();
-            return resourceAsString;
+            return IOUtils.toString(inputStream, UTF_8);
         }
     }
 }
