@@ -10,9 +10,9 @@ services:
     depends_on:
       - mongodb
       - activemq
-      - gpcc
       - gp2gp
       - mock-mhs-adaptor
+      - gpcc
     environment:
       - GP2GP_AMQP_BROKERS
       - GP2GP_MONGO_URI
