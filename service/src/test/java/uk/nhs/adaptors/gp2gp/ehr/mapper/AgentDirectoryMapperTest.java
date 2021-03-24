@@ -25,6 +25,9 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class AgentDirectoryMapperTest {
 
     private static final String AGENT_DIRECTORY_FOLDER = "/ehr/mapper/agent-directory/";
+    private static final String BUNDLE_NO_ROLES = AGENT_DIRECTORY_FOLDER + "fhir-bundle-no-roles.json";
+    private static final String BUNDLE_WITH_DUPLICATES = AGENT_DIRECTORY_FOLDER + "fhir-bundle-duplicates.json";
+    private static final String DIRECTORY_NO_ROLES = AGENT_DIRECTORY_FOLDER + "agent-directory-no-roles.xml";
     private static final String NHS_NUMBER = "9465701459";
     private static final String INVALID_NHS_NUMBER = "9465701451";
     private static final String ORGANIZATION = "<ORGANIZATION/>";
@@ -46,8 +49,8 @@ public class AgentDirectoryMapperTest {
     @Test
     public void When_MappingAgentDirectory_Expect_CorrectAmountOfCallsToChildMappers() throws IOException {
         setupMock(organizationToAgentMapper, practitionerAgentPersonMapper);
-        var jsonInput = ResourceTestFileUtils.getFileContent(AGENT_DIRECTORY_FOLDER + "fhir-bundle-no-roles.json");
-        var expectedOutput = ResourceTestFileUtils.getFileContent(AGENT_DIRECTORY_FOLDER + "agent-directory-no-roles.xml");
+        var jsonInput = ResourceTestFileUtils.getFileContent(BUNDLE_NO_ROLES);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(DIRECTORY_NO_ROLES);
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         var mapperOutput = agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER);
         assertThat(mapperOutput).isEqualTo(expectedOutput);
@@ -56,8 +59,8 @@ public class AgentDirectoryMapperTest {
     @Test
     public void When_MappingAgentDirectory_Expect_NoDuplicates() throws IOException {
         setupMock(organizationToAgentMapper, practitionerAgentPersonMapper);
-        var jsonInput = ResourceTestFileUtils.getFileContent(AGENT_DIRECTORY_FOLDER + "fhir-bundle-duplicates.json");
-        var expectedOutput = ResourceTestFileUtils.getFileContent(AGENT_DIRECTORY_FOLDER + "agent-directory-no-roles.xml");
+        var jsonInput = ResourceTestFileUtils.getFileContent(BUNDLE_WITH_DUPLICATES);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(DIRECTORY_NO_ROLES);
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         var mapperOutput = agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER);
         assertThat(mapperOutput).isEqualTo(expectedOutput);
@@ -65,7 +68,7 @@ public class AgentDirectoryMapperTest {
 
     @Test
     public void When_IncorrectNhsNumber_Expect_ErrorToBeThrown() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(AGENT_DIRECTORY_FOLDER + "fhir-bundle-duplicates.json");
+        var jsonInput = ResourceTestFileUtils.getFileContent(BUNDLE_WITH_DUPLICATES);
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         assertThrows(EhrMapperException.class, () -> agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, INVALID_NHS_NUMBER));
     }

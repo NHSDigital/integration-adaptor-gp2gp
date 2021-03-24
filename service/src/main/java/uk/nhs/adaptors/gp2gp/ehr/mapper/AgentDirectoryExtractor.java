@@ -59,7 +59,6 @@ public class AgentDirectoryExtractor {
             .filter(resource -> resource.getResourceType().equals(ResourceType.ReferralRequest))
             .map(ReferralRequest.class::cast)
             .filter(ReferralRequest::hasRequester)
-            .filter(AgentDirectoryExtractor::requesterContainsAgentAndOrganization)
             .collect(Collectors.toList());
     }
 
@@ -70,7 +69,6 @@ public class AgentDirectoryExtractor {
             .filter(resource -> resource.getResourceType().equals(ResourceType.Observation))
             .map(Observation.class::cast)
             .filter(Observation::hasPerformer)
-            .filter(AgentDirectoryExtractor::performerContainersOrgAndPractitioner)
             .collect(Collectors.toList());
     }
 
@@ -195,15 +193,6 @@ public class AgentDirectoryExtractor {
             .map(Reference::getReferenceElement)
             .map(IIdType::getResourceType)
             .anyMatch(resourceType.name()::equals);
-    }
-
-    private static boolean requesterContainsAgentAndOrganization(ReferralRequest referralRequest) {
-        var requester = referralRequest.getRequester();
-        return requesterAgentContainsPractitioner(requester) && requester.hasOnBehalfOf();
-    }
-
-    private static boolean requesterAgentContainsPractitioner(ReferralRequest.ReferralRequestRequesterComponent requester) {
-        return requester.getAgent().getReferenceElement().getResourceType().equals(ResourceType.Practitioner.name());
     }
 
     private static boolean isPatientResource(Resource resource) {

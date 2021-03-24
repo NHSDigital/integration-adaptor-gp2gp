@@ -92,6 +92,15 @@ public class AgentDirectoryMapper {
             return mapAgentPerson((Practitioner) practitioner.get(),
                 Optional.empty(),
                 organization.map(value -> (Organization) value));
+        } else if (practitioner.isPresent()) {
+            var triplet = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, List.of((Practitioner) practitioner.get()))
+                .stream()
+                .map(triple -> mapAgentPerson(triple.getLeft(), triple.getMiddle(), triple.getRight()))
+                .filter(StringUtils::isNotEmpty)
+                .findFirst();
+            if (triplet.isPresent()) {
+                return triplet.get();
+            }
         }
         return StringUtils.EMPTY;
     }
@@ -105,6 +114,15 @@ public class AgentDirectoryMapper {
             return mapAgentPerson((Practitioner) practitioner.get(),
                 Optional.empty(),
                 organization.map(value -> (Organization) value));
+        } else if (practitioner.isPresent()) {
+            var triplet = AgentDirectoryExtractor.extractPractitionerRoleTriples(bundle, List.of((Practitioner) practitioner.get()))
+                .stream()
+                .map(triple -> mapAgentPerson(triple.getLeft(), triple.getMiddle(), triple.getRight()))
+                .filter(StringUtils::isNotEmpty)
+                .findFirst();
+            if (triplet.isPresent()) {
+                return triplet.get();
+            }
         }
         return StringUtils.EMPTY;
     }
