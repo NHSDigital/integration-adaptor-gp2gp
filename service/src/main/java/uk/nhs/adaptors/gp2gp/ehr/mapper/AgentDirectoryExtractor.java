@@ -7,7 +7,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.tuple.Triple;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
