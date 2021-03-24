@@ -34,7 +34,6 @@ public class MedicationStatementExtractor {
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
-    public static final String DEFAULT_STATUS_REASON_CODE = "<code nullFlavor=\"UNK\"><originalText>Stopped</originalText></code>";
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
@@ -86,7 +85,7 @@ public class MedicationStatementExtractor {
                 .map(Extension::getValue)
                 .map(CodeableConcept.class::cast)
                 .map(codeableConceptCdMapper::mapCodeableConceptToCd)
-                .orElse(DEFAULT_STATUS_REASON_CODE))
+                .orElse(StringUtils.EMPTY))
             .orElse(StringUtils.EMPTY);
     }
 
