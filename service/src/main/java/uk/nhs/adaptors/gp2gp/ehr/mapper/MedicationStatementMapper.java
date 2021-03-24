@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPlanMedicationRequestReference;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
@@ -93,7 +93,7 @@ public class MedicationStatementMapper {
             }
             return COMPLETE_STATUS_CODE;
         }
-        throw new EhrMapperException("Could not map Medication Request status");
+        throw new EhrMapperException("Could not resolve Medication Request status");
     }
 
     private String buildMedicationReferenceCode(MedicationRequest medicationRequest) {
@@ -103,7 +103,7 @@ public class MedicationStatementMapper {
             .map(Medication.class::cast)
             .map(Medication::getCode)
             .map(codeableConceptCdMapper::mapCodeableConceptToCd)
-            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Reference"));
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication reference"));
     }
 
     private String buildDosageInstructionPertinentInformation(MedicationRequest medicationRequest) {
@@ -206,7 +206,7 @@ public class MedicationStatementMapper {
             && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return medicationRequest.getBasedOn()
                 .stream()
-                .map(reference -> extractPlanMedicationRequestReference(reference, messageContext))
+                .map(reference -> extractIdFromPlanMedicationRequestReference(reference, messageContext))
                 .map(MedicationStatementExtractor::buildBasedOnCode)
                 .collect(Collectors.joining());
         }
@@ -216,7 +216,7 @@ public class MedicationStatementMapper {
     private String buildPriorPrescription(MedicationRequest medicationRequest) {
         if (medicationRequest.hasPriorPrescription()
             && MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return extractPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
+            return extractIdFromPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
         }
         return StringUtils.EMPTY;
     }

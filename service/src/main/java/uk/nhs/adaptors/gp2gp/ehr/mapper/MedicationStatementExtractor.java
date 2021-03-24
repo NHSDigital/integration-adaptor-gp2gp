@@ -2,6 +2,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BaseExtension;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -57,15 +59,13 @@ public class MedicationStatementExtractor {
     public static String extractRepeatValue(MedicationRequest medicationRequest) {
         var repeatInformation = filterExtensionByUrl(medicationRequest, REPEAT_INFORMATION_URL);
 
-        return repeatInformation.map(extension -> extension
-                .getExtension()
-                .stream()
-                .filter(value -> NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL.equals(value.getUrl()))
-                .filter(Extension::hasValue)
-                .findFirst()
-                .map(BaseExtension::getValueAsPrimitive)
-                .map(IPrimitiveType::getValueAsString)
-                .orElse(DEFAULT_REPEAT_VALUE))
+        return repeatInformation.map(Extension::getExtension).stream()
+            .flatMap(List::stream)
+            .filter(value -> NUM_OF_REPEAT_PRESCRIPTIONS_ALLOWED_URL.equals(value.getUrl()))
+            .filter(Extension::hasValue)
+            .findFirst()
+            .map(BaseExtension::getValueAsPrimitive)
+            .map(IPrimitiveType::getValueAsString)
             .orElse(DEFAULT_REPEAT_VALUE);
     }
 
@@ -77,15 +77,13 @@ public class MedicationStatementExtractor {
     public static String extractStatusReasonCode(MedicationRequest medicationRequest, CodeableConceptCdMapper codeableConceptCdMapper) {
         var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_URL);
 
-        return statusReason.map(extension -> extension
-                .getExtension()
-                .stream()
-                .filter(value -> STATUS_REASON_URL.equals(value.getUrl()))
-                .findFirst()
-                .map(Extension::getValue)
-                .map(CodeableConcept.class::cast)
-                .map(codeableConceptCdMapper::mapCodeableConceptToCd)
-                .orElse(StringUtils.EMPTY))
+        return statusReason.map(Extension::getExtension).stream()
+            .flatMap(List::stream)
+            .filter(value -> STATUS_REASON_URL.equals(value.getUrl()))
+            .findFirst()
+            .map(Extension::getValue)
+            .map(CodeableConcept.class::cast)
+            .map(codeableConceptCdMapper::mapCodeableConceptToCd)
             .orElse(StringUtils.EMPTY);
     }
 
@@ -108,12 +106,12 @@ public class MedicationStatementExtractor {
             .orElseThrow(() -> new EhrMapperException("Could not resolve Availability Time for Status Reason"));
     }
 
-    public static String extractPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
+    public static String extractIdFromPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
         messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
             .map(MedicationRequest.class::cast)
             .filter(value -> MedicationRequestIntent.PLAN.getDisplay().equals(value.getIntent().getDisplay()))
-            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request Reference"));
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request reference"));
 
         return messageContext.getMedicationRequestIdMapper()
             .getOrNew(reference.getReference());

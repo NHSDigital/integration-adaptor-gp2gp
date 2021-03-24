@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -98,18 +99,16 @@ public final class StatementTimeMappingUtils {
     }
 
     public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
-        if (medicationRequest.getDispenseRequest().hasValidityPeriod()
-            && medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
-            Period period = medicationRequest.getDispenseRequest().getValidityPeriod();
-
-            if (medicationRequest.getDispenseRequest().getValidityPeriod().hasEnd()) {
+        final var dispenseRequest = medicationRequest.getDispenseRequest();
+        if (dispenseRequest.hasValidityPeriod() && dispenseRequest.getValidityPeriod().hasStart()) {
+            Period period = dispenseRequest.getValidityPeriod();
+            DateTimeType startElement = period.getStartElement();
+            if (period.hasEnd()) {
                 return String.format(EFFECTIVE_TIME_FULL_TEMPLATE,
-                    toHl7Format(period.getStartElement()),
+                    toHl7Format(startElement),
                     toHl7Format(period.getEndElement()));
             }
-
-            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
-                medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(startElement));
         }
         throw new EhrMapperException("Could not map Effective Time for Medication Request");
     }
