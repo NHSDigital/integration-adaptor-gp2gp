@@ -41,32 +41,33 @@ public class EhrExtractUATTest {
     private static final String TEST_FILE_DIRECTORY = "/uat/";
     private static final String INPUT_DIRECTORY = "input/";
     private static final String OUTPUT_DIRECTORY = "output/";
+    private static final String FILES_PREFIX = "TC4 - ";
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
-    private static final String INPUT_JSON_WITH_PATHOLOGY_RECORD = "TC4 - 9465701718_Guerra_inv1only_20210212.json";
-    private static final String INPUT_JSON_WITH_MEDICATION_RECORD = "TC4 - 9465701645_Prytherch_medsonly_20210212.json";
+    private static final String INPUT_JSON_WITH_PATHOLOGY_RECORD = "9465701718_Guerra_inv1only_20210212.json";
+    private static final String INPUT_JSON_WITH_MEDICATION_RECORD = "9465701645_Prytherch_medsonly_20210212.json";
     private static final String INPUT_JSON_WITH_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT =
-        "TC4 - 9465701610_Powne_imms1only_20210212.json";
+        "9465701610_Powne_imms1only_20210212.json";
     private static final String INPUT_JSON_WITH_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT = INPUT_JSON_WITH_PATHOLOGY_RECORD;
-    private static final String INPUT_JSON_WITH_BLOOD_PRESSURES = "TC4 - 9465701610_Powne_cons1only_20210212.json";
+    private static final String INPUT_JSON_WITH_BLOOD_PRESSURES = "9465701610_Powne_cons1only_20210212.json";
     private static final String INPUT_JSON_WITH_IMMUNISATIONS = INPUT_JSON_WITH_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT;
-    private static final String INPUT_JSON_WITH_DRUG_AND_NON_DRUG_ALLERGIES = "TC4 - 9465700827_Bentley_allergy1only_20210212.json";
-    private static final String INPUT_JSON_WITH_DIARY_ENTRIES = "TC4 - 9465700827_Bentley_diary1only_20210212.json";
-    private static final String INPUT_JSON_WITH_REFERRALS = "TC4 - 9465701149_Drake_refs1only_20210212.json";
-    private static final String INPUT_JSON_WITH_PROBLEMS_AND_PROBLEM_LINKAGES = "TC4 - 9465699918_Magre_prob1only_20210212.json";
-    private static final String INPUT_JSON_WITH_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "TC4 - 9465701483_Dougill_uncat18jan_20210215.json";
-    private static final String OUTPUT_XML_USES_PATHOLOGY_RECORD = "TC4 - 9465701718_Guerra_inv1only_20210212.xml";
-    private static final String OUTPUT_XML_USES_MEDICATION_RECORD = "TC4 - 9465701645_Prytherch_medsonly_20210212.xml";
+    private static final String INPUT_JSON_WITH_DRUG_AND_NON_DRUG_ALLERGIES = "9465700827_Bentley_allergy1only_20210212.json";
+    private static final String INPUT_JSON_WITH_DIARY_ENTRIES = "9465700827_Bentley_diary1only_20210212.json";
+    private static final String INPUT_JSON_WITH_REFERRALS = "9465701149_Drake_refs1only_20210212.json";
+    private static final String INPUT_JSON_WITH_PROBLEMS_AND_PROBLEM_LINKAGES = "9465699918_Magre_prob1only_20210212.json";
+    private static final String INPUT_JSON_WITH_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "9465701483_Dougill_uncat18jan_20210215.json";
+    private static final String OUTPUT_XML_USES_PATHOLOGY_RECORD = "9465701718_Guerra_inv1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_MEDICATION_RECORD = "9465701645_Prytherch_medsonly_20210212.xml";
     private static final String OUTPUT_XML_USES_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT =
-        "TC4 - 9465701610_Powne_imms1only_20210212.xml";
+        "9465701610_Powne_imms1only_20210212.xml";
     private static final String OUTPUT_XML_USES_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT = OUTPUT_XML_USES_PATHOLOGY_RECORD;
-    private static final String OUTPUT_XML_USES_BLOOD_PRESSURES = "TC4 - 9465701610_Powne_cons1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_BLOOD_PRESSURES = "9465701610_Powne_cons1only_20210212.xml";
     private static final String OUTPUT_XML_USES_IMMUNISATIONS = OUTPUT_XML_USES_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT;
-    private static final String OUTPUT_XML_USES_DRUG_AND_NON_DRUG_ALLERGIES = "TC4 - 9465700827_Bentley_allergy1only_20210212.xml";
-    private static final String OUTPUT_XML_USES_DIARY_ENTRIES = "TC4 - 9465700827_Bentley_diary1only_20210212.xml";
-    private static final String OUTPUT_XML_USES_REFERRALS = "TC4 - 9465701149_Drake_refs1only_20210212.xml";
-    private static final String OUTPUT_XML_USES_PROBLEMS_AND_PROBLEM_LINKAGES = "TC4 - 9465699918_Magre_prob1only_20210212.xml";
-    private static final String OUTPUT_XML_USES_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "TC4 - 9465701483_Dougill_uncat18jan_20210215.xml";
+    private static final String OUTPUT_XML_USES_DRUG_AND_NON_DRUG_ALLERGIES = "9465700827_Bentley_allergy1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_DIARY_ENTRIES = "9465700827_Bentley_diary1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_REFERRALS = "9465701149_Drake_refs1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_PROBLEMS_AND_PROBLEM_LINKAGES = "9465699918_Magre_prob1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "9465701483_Dougill_uncat18jan_20210215.xml";
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
     private static final String TEST_ID_3 = "test-id-3";
@@ -131,8 +132,8 @@ public class EhrExtractUATTest {
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
     public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
-        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + expectedOutputXml);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + inputJson);
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + FILES_PREFIX + expectedOutputXml);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
         messageContext.initialize(bundle);
 
