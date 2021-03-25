@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -30,7 +27,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapp
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -38,13 +34,15 @@ import java.time.Instant;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class EhrExtractUATTest {
-    private static final String TEST_FILES_DIRECTORY = "/uat/";
+    private static final String TEST_FILE_DIRECTORY = "/uat/";
+    private static final String INPUT_DIRECTORY = "input/";
+    private static final String OUTPUT_DIRECTORY = "output/";
+    private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
+    private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
     private static final String INPUT_JSON_WITH_PATHOLOGY_RECORD = "TC4 - 9465701718_Guerra_inv1only_20210212.json";
     private static final String INPUT_JSON_WITH_MEDICATION_RECORD = "TC4 - 9465701645_Prytherch_medsonly_20210212.json";
     private static final String INPUT_JSON_WITH_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT =
@@ -57,6 +55,18 @@ public class EhrExtractUATTest {
     private static final String INPUT_JSON_WITH_REFERRALS = "TC4 - 9465701149_Drake_refs1only_20210212.json";
     private static final String INPUT_JSON_WITH_PROBLEMS_AND_PROBLEM_LINKAGES = "TC4 - 9465699918_Magre_prob1only_20210212.json";
     private static final String INPUT_JSON_WITH_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "TC4 - 9465701483_Dougill_uncat18jan_20210215.json";
+    private static final String OUTPUT_XML_USES_PATHOLOGY_RECORD = "TC4 - 9465701718_Guerra_inv1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_MEDICATION_RECORD = "TC4 - 9465701645_Prytherch_medsonly_20210212.xml";
+    private static final String OUTPUT_XML_USES_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT =
+        "TC4 - 9465701610_Powne_imms1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT = OUTPUT_XML_USES_PATHOLOGY_RECORD;
+    private static final String OUTPUT_XML_USES_BLOOD_PRESSURES = "TC4 - 9465701610_Powne_cons1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_IMMUNISATIONS = OUTPUT_XML_USES_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT;
+    private static final String OUTPUT_XML_USES_DRUG_AND_NON_DRUG_ALLERGIES = "TC4 - 9465700827_Bentley_allergy1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_DIARY_ENTRIES = "TC4 - 9465700827_Bentley_diary1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_REFERRALS = "TC4 - 9465701149_Drake_refs1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_PROBLEMS_AND_PROBLEM_LINKAGES = "TC4 - 9465699918_Magre_prob1only_20210212.xml";
+    private static final String OUTPUT_XML_USES_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES = "TC4 - 9465701483_Dougill_uncat18jan_20210215.xml";
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
     private static final String TEST_ID_3 = "test-id-3";
@@ -91,8 +101,6 @@ public class EhrExtractUATTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -122,33 +130,36 @@ public class EhrExtractUATTest {
 
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String input) throws IOException {
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(TEST_FILES_DIRECTORY + input);
+    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + expectedOutputXml);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + inputJson);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
         messageContext.initialize(bundle);
 
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
             bundle);
-        String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        String outputXml = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        System.out.println(outputXml);
 
-        //TODO: compare with the proper XML files
-        assertThat(output).isEqualTo(output);
+        assertThat(outputXml).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testValueFilePaths() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_PATHOLOGY_RECORD),
-            Arguments.of(INPUT_JSON_WITH_MEDICATION_RECORD),
-            Arguments.of(INPUT_JSON_WITH_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT),
-            Arguments.of(INPUT_JSON_WITH_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT),
-            Arguments.of(INPUT_JSON_WITH_BLOOD_PRESSURES),
-            Arguments.of(INPUT_JSON_WITH_IMMUNISATIONS),
-            Arguments.of(INPUT_JSON_WITH_DRUG_AND_NON_DRUG_ALLERGIES),
-            Arguments.of(INPUT_JSON_WITH_DIARY_ENTRIES),
-            Arguments.of(INPUT_JSON_WITH_REFERRALS),
-            Arguments.of(INPUT_JSON_WITH_PROBLEMS_AND_PROBLEM_LINKAGES),
-            Arguments.of(INPUT_JSON_WITH_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES)
+            Arguments.of(INPUT_JSON_WITH_PATHOLOGY_RECORD, OUTPUT_XML_USES_PATHOLOGY_RECORD),
+            Arguments.of(INPUT_JSON_WITH_MEDICATION_RECORD, OUTPUT_XML_USES_MEDICATION_RECORD),
+            Arguments.of(INPUT_JSON_WITH_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT,
+                OUTPUT_XML_USES_STRUCTURED_CONSULTATIONS_INCLUDING_NARRATIVE_CONTENT),
+            Arguments.of(INPUT_JSON_WITH_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT,
+                OUTPUT_XML_USES_GENERAL_MISCELLANEOUS_CODED_OBSERVATION_CONTENT),
+            Arguments.of(INPUT_JSON_WITH_BLOOD_PRESSURES, OUTPUT_XML_USES_BLOOD_PRESSURES),
+            Arguments.of(INPUT_JSON_WITH_IMMUNISATIONS, OUTPUT_XML_USES_IMMUNISATIONS),
+            Arguments.of(INPUT_JSON_WITH_DRUG_AND_NON_DRUG_ALLERGIES, OUTPUT_XML_USES_DRUG_AND_NON_DRUG_ALLERGIES),
+            Arguments.of(INPUT_JSON_WITH_DIARY_ENTRIES, OUTPUT_XML_USES_DIARY_ENTRIES),
+            Arguments.of(INPUT_JSON_WITH_REFERRALS, OUTPUT_XML_USES_REFERRALS),
+            Arguments.of(INPUT_JSON_WITH_PROBLEMS_AND_PROBLEM_LINKAGES, OUTPUT_XML_USES_PROBLEMS_AND_PROBLEM_LINKAGES),
+            Arguments.of(INPUT_JSON_WITH_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES, OUTPUT_XML_USES_NON_SNOMED_CODED_DATA_VIA_EGTON_CODES)
         );
     }
 }
