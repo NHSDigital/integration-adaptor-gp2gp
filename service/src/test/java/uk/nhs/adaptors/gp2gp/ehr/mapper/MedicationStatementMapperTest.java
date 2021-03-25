@@ -49,6 +49,10 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-no-dosage-instruction.json";
     private static final String INPUT_JSON_WITH_NO_DISPENSE_REQUEST = TEST_FILE_DIRECTORY
         + "medication-request-with-no-dispense-request.json";
+    private static final String INPUT_JSON_WITH_ORDER_NO_BASED_ON = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-no-based-on.json";
+    private static final String INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-status-reason-stopped-no-date.json";
     private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -107,6 +111,9 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-plan-no-status-reason-code.json";
     private static final String OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE = TEST_FILE_DIRECTORY
         + "medication-statement-with-authorise-default-status-reason-code.xml";
+    private static final String INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-no-info-prescription-text.json";
+
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -153,8 +160,9 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_ORDER_REPEAT_PRESCRIPTION_NO_VALUE, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION_NO_VALUE),
             Arguments.of(INPUT_JSON_WITH_PLAN_START_PERIOD_ONLY, OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE, OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE)
-            );
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE, OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE),
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION)
+        );
     }
 
     @SneakyThrows
@@ -236,7 +244,9 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_INVALID_PRIOR_PRESCRIPTION_MEDICATION_REFERENCE_TYPE,
             INPUT_JSON_WITH_NO_STATUS,
             INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
-            INPUT_JSON_WITH_NO_DISPENSE_REQUEST
+            INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
+            INPUT_JSON_WITH_ORDER_NO_BASED_ON,
+            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE
             );
     }
 }

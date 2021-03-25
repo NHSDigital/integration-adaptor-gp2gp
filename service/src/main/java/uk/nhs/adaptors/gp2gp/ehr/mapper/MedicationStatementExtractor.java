@@ -36,6 +36,7 @@ public class MedicationStatementExtractor {
     private static final String STATUS_CHANGE_URL = "statusChangeDate";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_QUANTITY_TEXT = "Unk UoM";
+    private static final String NO_INFO_AVAILABLE = "No information available";
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
@@ -54,6 +55,16 @@ public class MedicationStatementExtractor {
             .map(CodeableConcept::getCodingFirstRep)
             .map(Coding::getCode)
             .orElse(StringUtils.EMPTY);
+    }
+
+    public static boolean prescriptionTypeTextIsNoInfoAvailable(MedicationRequest medicationRequest) {
+        var prescriptionTypeText =  filterExtensionByUrl(medicationRequest, PRESCRIPTION_TYPE_URL)
+            .map(Extension::getValue)
+            .map(CodeableConcept.class::cast)
+            .map(CodeableConcept::getText)
+            .orElse(StringUtils.EMPTY);
+
+        return NO_INFO_AVAILABLE.equals(prescriptionTypeText);
     }
 
     public static String extractRepeatValue(MedicationRequest medicationRequest) {

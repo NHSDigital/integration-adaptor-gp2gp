@@ -7,6 +7,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extr
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.prescriptionTypeTextIsNoInfoAvailable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -101,7 +102,7 @@ public class MedicationStatementMapper {
             return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE, medicationStatementTemplateParameters);
         }
 
-        throw new EhrMapperException("Could not map Medication Request intent");
+        throw new EhrMapperException("Could not resolve Medication Request intent");
     }
 
     private String buildStatusCode(MedicationRequest medicationRequest) {
@@ -213,6 +214,8 @@ public class MedicationStatementMapper {
                 return ACUTE_REPEAT_VALUE;
             } else if (REPEAT_PRESCRIPTION_TYPE_CODES.contains(prescriptionTypeCode)) {
                 return extractRepeatValue(medicationRequest);
+            } else if (prescriptionTypeCode.isBlank() && prescriptionTypeTextIsNoInfoAvailable(medicationRequest)) {
+                return extractRepeatValue(medicationRequest);
             }
             throw new EhrMapperException("Could not resolve Prescription Type for Repeat value");
         }
@@ -227,6 +230,9 @@ public class MedicationStatementMapper {
                 .map(reference -> extractIdFromPlanMedicationRequestReference(reference, messageContext))
                 .map(MedicationStatementExtractor::buildBasedOnCode)
                 .collect(Collectors.joining());
+        } else if (!medicationRequest.hasBasedOn()
+            && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+            throw new EhrMapperException("Could not resolve Based On for Order Medication Request");
         }
         return StringUtils.EMPTY;
     }
