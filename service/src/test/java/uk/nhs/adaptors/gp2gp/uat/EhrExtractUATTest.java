@@ -84,9 +84,8 @@ public class EhrExtractUATTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
-    @Mock
-    private CodeableConceptCdMapper codeableConceptCdMapper;
 
+    private CodeableConceptCdMapper codeableConceptCdMapper;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -99,6 +98,8 @@ public class EhrExtractUATTest {
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .build();
+
+        codeableConceptCdMapper = new CodeableConceptCdMapper();
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
