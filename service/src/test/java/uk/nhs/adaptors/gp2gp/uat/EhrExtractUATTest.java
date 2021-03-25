@@ -140,7 +140,6 @@ public class EhrExtractUATTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String outputXml = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        System.out.println(outputXml);
 
         assertThat(outputXml).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
