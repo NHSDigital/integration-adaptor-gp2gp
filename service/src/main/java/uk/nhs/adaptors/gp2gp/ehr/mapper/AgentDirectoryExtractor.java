@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -18,7 +19,6 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
-import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -125,18 +125,20 @@ public class AgentDirectoryExtractor {
         var practitionerRole = extractRelevantPractitionerRole(practitioner, practitionerRoles);
         if (practitionerRole.isPresent()) {
             var organization = extractRelevantOrganization(practitionerRole.get(), organizations);
-            return new AgentData(practitioner, practitionerRole.get(), organization.get());
-        } else {
-            return new AgentData(practitioner, null, null);
+            if (organization.isPresent()) {
+                return new AgentData(practitioner, practitionerRole.get(), organization.get());
+            }
         }
+        return new AgentData(practitioner, null, null);
     }
 
     public static Optional<Resource> extractObservationResource(Observation observation, Bundle bundle, ResourceType resourceType) {
         var reference = observation.getPerformer()
             .stream()
-            .filter(reference1 -> reference1.getReferenceElement().getResourceType().equals(resourceType.name()))
+            .map(BaseReference::getReferenceElement)
+            .filter(reference1 -> reference1.getResourceType().equals(resourceType.name()))
             .findFirst();
-        return reference.flatMap(value -> ResourceExtractor.extractResourceByReference(bundle, value.getReferenceElement()));
+        return reference.flatMap(value -> ResourceExtractor.extractResourceByReference(bundle, value));
     }
 
     private static boolean referencesPractitioner(PractitionerRole practitionerRole, List<Practitioner> practitioners) {
@@ -172,13 +174,6 @@ public class AgentDirectoryExtractor {
     private static IIdType extractIIdTypes(Resource resource) {
         Function<Resource, IIdType> extractor = RESOURCE_EXTRACT_IIDTYPE.get(resource.getResourceType());
         return extractor.apply(resource);
-    }
-
-    private static boolean listHasResourceType(List<Reference> references, ResourceType resourceType) {
-        return references.stream()
-            .map(Reference::getReferenceElement)
-            .map(IIdType::getResourceType)
-            .anyMatch(resourceType.name()::equals);
     }
 
     private static boolean isPatientResource(Resource resource) {

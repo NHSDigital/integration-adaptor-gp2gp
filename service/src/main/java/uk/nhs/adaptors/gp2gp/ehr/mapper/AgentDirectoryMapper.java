@@ -142,18 +142,20 @@ public class AgentDirectoryMapper {
     }
 
     private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization) {
-        var mappedId = practitioner.getIdElement().getIdPart();
-        if (organization != null) {
-            mappedId += "-" + organization.getIdElement().getIdPart();
-        }
+        var mappedId = createMappedId(practitioner, organization);
         return mappedOrganizationsAndPractitioner.contains(mappedId);
     }
 
     private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Organization organization) {
+        var mappedId = createMappedId(practitioner, organization);
+        mappedOrganizationsAndPractitioner.add(mappedId);
+    }
+
+    private String createMappedId(Practitioner practitioner, Organization organization) {
         var mappedId = practitioner.getIdElement().getIdPart();
         if (organization != null) {
             mappedId += "-" + organization.getIdElement().getIdPart();
         }
-        mappedOrganizationsAndPractitioner.add(mappedId);
+        return mappedId;
     }
 }
