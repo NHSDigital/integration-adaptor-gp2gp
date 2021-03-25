@@ -41,7 +41,7 @@ public class EhrExtractUATTest {
     private static final String TEST_FILE_DIRECTORY = "/uat/";
     private static final String INPUT_DIRECTORY = "input/";
     private static final String OUTPUT_DIRECTORY = "output/";
-    private static final String FILES_PREFIX = "TC4 - ";
+    private static final String FILES_PREFIX = "TC4-";
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
     private static final String INPUT_JSON_WITH_PATHOLOGY_RECORD = "9465701718_Guerra_inv1only_20210212.json";
