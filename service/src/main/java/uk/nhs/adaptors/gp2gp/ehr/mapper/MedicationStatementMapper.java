@@ -223,15 +223,14 @@ public class MedicationStatementMapper {
     }
 
     private String buildBasedOn(MedicationRequest medicationRequest) {
-        if (medicationRequest.hasBasedOn()
-            && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return medicationRequest.getBasedOn()
-                .stream()
-                .map(reference -> extractIdFromPlanMedicationRequestReference(reference, messageContext))
-                .map(MedicationStatementExtractor::buildBasedOnCode)
-                .collect(Collectors.joining());
-        } else if (!medicationRequest.hasBasedOn()
-            && MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+        if (MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+            if (medicationRequest.hasBasedOn()) {
+                return medicationRequest.getBasedOn()
+                    .stream()
+                    .map(reference -> extractIdFromPlanMedicationRequestReference(reference, messageContext))
+                    .map(MedicationStatementExtractor::buildBasedOnCode)
+                    .collect(Collectors.joining());
+            }
             throw new EhrMapperException("Could not resolve Based On for Order Medication Request");
         }
         return StringUtils.EMPTY;
