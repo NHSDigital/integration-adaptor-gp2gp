@@ -65,7 +65,7 @@ public class GpcRequestBuilder {
         + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
         + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
     private static final String IDENTIFIER_PARAMETER = "identifier";
-    private static final String GPC_FIND_PATIENT_IDENTIFIER = NHS_NUMBER_SYSTEM + "|";
+    private static final String GPC_FIND_PATIENT_IDENTIFIER = NHS_NUMBER_SYSTEM + "%7C";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
