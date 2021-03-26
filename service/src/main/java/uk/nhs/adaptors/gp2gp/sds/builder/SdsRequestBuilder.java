@@ -37,28 +37,29 @@ public class SdsRequestBuilder {
         "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
 
     private static final String API_KEY_HEADER = "apikey";
+    private static final String X_CORRELATION_ID_HEADER = "X-Correlation-Id";
 
     private final SdsConfiguration sdsConfiguration;
     private final RequestBuilderService requestBuilderService;
     private final WebClientFilterService webClientFilterService;
 
     public WebClient.RequestHeadersSpec<?> buildGetStructuredRecordRequest(TaskDefinition task) {
-        return buildRequest(task.getFromOdsCode(), GET_STRUCTURED_INTERACTION);
+        return buildRequest(task.getFromOdsCode(), GET_STRUCTURED_INTERACTION, task.getConversationId());
     }
 
     public WebClient.RequestHeadersSpec<?> buildPatientSearchAccessDocumentRequest(TaskDefinition task) {
-        return buildRequest(task.getFromOdsCode(), PATIENT_SEARCH_ACCESS_DOCUMENT_INTERACTION);
+        return buildRequest(task.getFromOdsCode(), PATIENT_SEARCH_ACCESS_DOCUMENT_INTERACTION, task.getConversationId());
     }
 
     public WebClient.RequestHeadersSpec<?> buildSearchForDocumentRequest(TaskDefinition task) {
-        return buildRequest(task.getFromOdsCode(), SEARCH_FOR_DOCUMENT_INTERACTION);
+        return buildRequest(task.getFromOdsCode(), SEARCH_FOR_DOCUMENT_INTERACTION, task.getConversationId());
     }
 
     public WebClient.RequestHeadersSpec<?> buildRetrieveDocumentRequest(TaskDefinition task) {
-        return buildRequest(task.getFromOdsCode(), RETRIEVE_DOCUMENT_INTERACTION);
+        return buildRequest(task.getFromOdsCode(), RETRIEVE_DOCUMENT_INTERACTION, task.getConversationId());
     }
 
-    private WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> buildRequest(String odsCode, String interaction) {
+    private WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> buildRequest(String odsCode, String interaction, String conversationId) {
         var sslContext = requestBuilderService.buildSSLContext();
         var httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         return buildWebClient(httpClient)
@@ -68,7 +69,8 @@ public class SdsRequestBuilder {
                 .queryParam(ORG_CODE_PARAMETER, ORG_CODE_IDENTIFIER + PIPE_ENCODED + odsCode)
                 .queryParam(INTERACTION_PARAMETER, INTERACTION_IDENTIFIER + PIPE_ENCODED + interaction)
                 .build())
-            .header(API_KEY_HEADER, sdsConfiguration.getApiKey());
+            .header(API_KEY_HEADER, sdsConfiguration.getApiKey())
+            .header(X_CORRELATION_ID_HEADER, conversationId);
     }
 
     private WebClient buildWebClient(HttpClient httpClient) {
