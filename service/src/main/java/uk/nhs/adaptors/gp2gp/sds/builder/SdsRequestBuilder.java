@@ -59,7 +59,8 @@ public class SdsRequestBuilder {
         return buildRequest(task.getFromOdsCode(), RETRIEVE_DOCUMENT_INTERACTION, task.getConversationId());
     }
 
-    private WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> buildRequest(String odsCode, String interaction, String conversationId) {
+    private WebClient.RequestHeadersSpec<? extends WebClient.RequestHeadersSpec<?>> buildRequest(String odsCode, String interaction,
+        String conversationId) {
         var sslContext = requestBuilderService.buildSSLContext();
         var httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         return buildWebClient(httpClient)

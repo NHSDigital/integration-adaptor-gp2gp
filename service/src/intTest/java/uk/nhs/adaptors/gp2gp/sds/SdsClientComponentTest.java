@@ -179,7 +179,7 @@ public class SdsClientComponentTest {
 
     @Test
     public void When_SdsRequestWithNoXCorrelationId_Expect_Exception() {
-        TaskDefinition taskNoConversationId= GetGpcStructuredTaskDefinition.builder()
+        TaskDefinition taskNoConversationId = GetGpcStructuredTaskDefinition.builder()
             .fromOdsCode(FROM_ODS_CODE)
             .build();
 
