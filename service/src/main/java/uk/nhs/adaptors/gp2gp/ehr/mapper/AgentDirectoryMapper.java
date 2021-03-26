@@ -131,7 +131,6 @@ public class AgentDirectoryMapper {
 
     private String mapAgentPerson(Practitioner practitioner, PractitionerRole practitionerRole, Organization organization) {
         if (!organizationPractitionerHasBeenMapped(practitioner, organization)) {
-            addOrganizationPractitionerPairToMap(practitioner, organization);
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
                 Optional.ofNullable(practitionerRole),
@@ -143,11 +142,14 @@ public class AgentDirectoryMapper {
 
     private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization) {
         var mappedId = createMappedId(practitioner, organization);
-        return mappedOrganizationsAndPractitioner.contains(mappedId);
+        var mapped = mappedOrganizationsAndPractitioner.contains(mappedId);
+        if (!mapped) {
+            addOrganizationPractitionerPairToMap(mappedId);
+        }
+        return mapped;
     }
 
-    private void addOrganizationPractitionerPairToMap(Practitioner practitioner, Organization organization) {
-        var mappedId = createMappedId(practitioner, organization);
+    private void addOrganizationPractitionerPairToMap(String mappedId) {
         mappedOrganizationsAndPractitioner.add(mappedId);
     }
 

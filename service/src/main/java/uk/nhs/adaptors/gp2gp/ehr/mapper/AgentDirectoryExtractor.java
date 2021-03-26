@@ -107,7 +107,8 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
 
         List<Organization> organizations = practitionerRoles.stream()
-            .map(practitionerRole -> practitionerRole.getOrganization().getReferenceElement())
+            .map(PractitionerRole::getOrganization)
+            .map(BaseReference::getReferenceElement)
             .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
             .filter(Optional::isPresent)
             .map(Optional::get)
@@ -188,13 +189,16 @@ public class AgentDirectoryExtractor {
     }
 
     private static IIdType extractIIdTypeFromAllergyIntolerance(Resource resource) {
-        Optional<IIdType> practitionerReference = extractAsserterReference((AllergyIntolerance) resource);
-        return practitionerReference.orElseGet(() -> ((AllergyIntolerance) resource).getRecorder().getReferenceElement());
-    }
+        Optional<AllergyIntolerance> allergyIntolerance = Optional.of(resource)
+            .map(AllergyIntolerance.class::cast);
 
-    private static Optional<IIdType> extractAsserterReference(AllergyIntolerance resource) {
-        var practitionerReference = resource.getAsserter().getReferenceElement();
-        return Optional.of(practitionerReference).filter(ref -> ref.getIdPart() != null);
+        return allergyIntolerance
+            .map(AllergyIntolerance::getAsserter)
+            .map(BaseReference::getReferenceElement)
+            .filter(IIdType::hasIdPart)
+            .orElseGet(() -> allergyIntolerance
+                .map(AllergyIntolerance::getRecorder)
+                .map(BaseReference::getReferenceElement).get());
     }
 
     @Data
