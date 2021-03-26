@@ -201,6 +201,6 @@ public class GpcRequestBuilder {
                 .path(gpcConfiguration.getPatientEndpoint())
                 .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER
                     + ((overrideNhsNumber.isBlank()) ? nhsNumber : overrideNhsNumber))
-                .build());
+                .build(false));
     }
 }
