@@ -23,6 +23,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.WiremockExtension;
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -53,6 +54,7 @@ public class SdsClientComponentTest {
 
     private static final TaskDefinition TASK_DEFINITION = GetGpcStructuredTaskDefinition.builder()
         .fromOdsCode(FROM_ODS_CODE)
+        .conversationId(String.valueOf(UUID.randomUUID()))
         .build();
 
     @Autowired
@@ -97,6 +99,7 @@ public class SdsClientComponentTest {
                 .withQueryParam("organization", equalTo("https://fhir.nhs.uk/Id/ods-organization-code%7C" + FROM_ODS_CODE))
                 .withQueryParam("identifier", equalTo("https://fhir.nhs.uk/Id/nhsServiceInteractionId%7C" + interaction))
                 .withHeader("apikey", matching(".*"))
+                .withHeader("X-Correlation-Id", matching("[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"))
             .willReturn(aResponse()
                 .withHeader("Content-Type", "application/fhir+json")
                 .withBody(response)));
@@ -153,6 +156,37 @@ public class SdsClientComponentTest {
             wireMockServer.resetAll();
             stubEndpointError();
             assertThatThrownBy(() -> pair.getValue().apply(TASK_DEFINITION))
+                .isInstanceOf(SdsException.class);
+            wireMockServer.resetAll();
+        });
+    }
+
+    @Test
+    public void When_SdsRequestWithInvalidXCorrelationId_Expect_Exception() {
+        TaskDefinition taskInvalidUUID = GetGpcStructuredTaskDefinition.builder()
+            .fromOdsCode(FROM_ODS_CODE)
+            .conversationId("test")
+            .build();
+
+        allInteractions.forEach(pair -> {
+            wireMockServer.resetAll();
+            stubEndpointError();
+            assertThatThrownBy(() -> pair.getValue().apply(taskInvalidUUID))
+                .isInstanceOf(SdsException.class);
+            wireMockServer.resetAll();
+        });
+    }
+
+    @Test
+    public void When_SdsRequestWithNoXCorrelationId_Expect_Exception() {
+        TaskDefinition taskNoConversationId= GetGpcStructuredTaskDefinition.builder()
+            .fromOdsCode(FROM_ODS_CODE)
+            .build();
+
+        allInteractions.forEach(pair -> {
+            wireMockServer.resetAll();
+            stubEndpointError();
+            assertThatThrownBy(() -> pair.getValue().apply(taskNoConversationId))
                 .isInstanceOf(SdsException.class);
             wireMockServer.resetAll();
         });
