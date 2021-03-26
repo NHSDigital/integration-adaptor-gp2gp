@@ -72,9 +72,9 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:0.0.1
+    image: nhsdev/nia-gpc-consumer-adaptor:0.0.2
     ports:
-      - "8090:8080"
+      - "8090:8090"
     environment:
       - GPC_CONSUMER_SERVER_PORT
       - GPC_CONSUMER_SPINE_CLIENT_CERT
