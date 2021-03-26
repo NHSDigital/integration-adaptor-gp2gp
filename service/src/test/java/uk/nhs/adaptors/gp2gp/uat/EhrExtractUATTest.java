@@ -143,7 +143,7 @@ public class EhrExtractUATTest {
             bundle);
         String outputXml = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        assertThat(outputXml).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
+        assertThat(outputXml).isEqualTo(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testValueFilePaths() {
