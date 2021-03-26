@@ -47,7 +47,7 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 @Slf4j
 public class GpcRequestBuilder {
 
-    private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
+    private static final String NHS_NUMBER_SYSTEM = "https%3A%2F%2Ffhir.nhs.uk%2FId%2Fnhs-number";
     private static final String FHIR_CONTENT_TYPE = "application/fhir+json";
     private static final String SSP_FROM = "Ssp-From";
     private static final String SSP_TO = "Ssp-To";
