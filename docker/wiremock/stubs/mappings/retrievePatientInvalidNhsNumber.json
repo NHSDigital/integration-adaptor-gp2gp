@@ -10,7 +10,7 @@
     "headers": {
       "Server": "nginx",
       "Date": "{{now format='E, d MMM y HH:mm:ss z'}}",
-      "Content-Type": "application\/fhir+json;charset=UTF-8",
+      "Content-Type": "application/fhir+json;charset=UTF-8",
       "Transfer-Encoding": "chunked",
       "Connection": "keep-alive",
       "Cache-Control": "no-store",
