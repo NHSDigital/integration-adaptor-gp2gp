@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -146,7 +147,6 @@ public class ObservationStatementMapper {
         String code = coding.getCode();
 
         return (coding.hasSystem() && codingSystem.equals("http://hl7.org/fhir/v2/0078"))
-            && (code.equals("H") || code.equals("HH") || code.equals("HU") || code.equals("L") || code.equals("LL")
-            || code.equals("LU") || code.equals("A") || code.equals("AA"));
+            && Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA").contains(code);
     }
 }
