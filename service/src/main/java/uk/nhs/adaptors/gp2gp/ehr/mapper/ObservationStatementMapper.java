@@ -98,6 +98,24 @@ public class ObservationStatementMapper {
                     pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange));
             }
         }
+
+        if (observation.hasInterpretation() && !isInterpretationCode(observation.getInterpretation())) {
+            Coding coding = observation.getInterpretation().getCodingFirstRep();
+
+            if (coding.hasUserSelected() && coding.getUserSelected()) {
+                commentBuilder.insert(COMMENT_OFFSET, "userSelected == true" + StringUtils.SPACE);
+            }
+
+            commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: " + coding.getCode() + StringUtils.SPACE
+                + coding.getDisplay() + StringUtils.SPACE);
+
+            if (observation.getInterpretation().hasText()) {
+                commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
+                    + observation.getInterpretation().getText() + StringUtils.SPACE);
+            }
+
+        }
+
         return commentBuilder.toString();
     }
 
@@ -127,8 +145,8 @@ public class ObservationStatementMapper {
         String codingSystem = coding.getSystem();
         String code = coding.getCode();
 
-        return codingSystem.equals("http://hl7.org/fhir/v2/0078") && (code.equals("H") || code.equals("HH")
-            || code.equals("HU") || code.equals("L") || code.equals("LL") || code.equals("LU") || code.equals("A")
-            || code.equals("AA"));
+        return (coding.hasSystem() && codingSystem.equals("http://hl7.org/fhir/v2/0078"))
+            && (code.equals("H") || code.equals("HH") || code.equals("HU") || code.equals("L") || code.equals("LL")
+            || code.equals("LU") || code.equals("A") || code.equals("AA"));
     }
 }
