@@ -121,7 +121,7 @@ public class ObservationStatementMapperTest {
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class ObservationStatementMapperTest {
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test

@@ -40,7 +40,7 @@ public class StructuredObservationValueMapperTest {
         assertThat(isProperValue).isTrue();
 
         String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapObservationValueToStructuredElement(observation.getValue());
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class StructuredObservationValueMapperTest {
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapReferenceRangeType(observation.getReferenceRangeFirstRep());
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class StructuredObservationValueMapperTest {
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapInterpretation(observation.getInterpretation());
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
