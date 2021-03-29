@@ -2,7 +2,7 @@
   "priority": 2,
   "request": {
     "method": "POST",
-    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/fhir\/Patient\/[$]gpc[.]getstructuredrecord"
+    "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient/[$]gpc[.]getstructuredrecord"
   },
   "response": {
     "status": 404,
