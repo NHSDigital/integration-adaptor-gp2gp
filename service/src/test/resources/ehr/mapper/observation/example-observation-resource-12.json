@@ -1,14 +1,14 @@
 {
-  "resourceType":"Observation",
-  "id":"Consultation3-Topic2-Category-Examination-Observation-1",
-  "effectiveDateTime":"2019-06-01T10:30:00+00:00",
-  "issued":"2019-06-01T10:30:00+00:00",
+  "resourceType": "Observation",
+  "id": "Consultation3-Topic2-Category-Examination-Observation-1",
+  "effectiveDateTime": "2019-06-01T10:30:00+00:00",
+  "issued": "2019-06-01T10:30:00+00:00",
   "comment": "Test comment",
-  "referenceRange":[
+  "referenceRange": [
     {
-      "text":"Test reference range text",
-      "high":{
-        "value":20
+      "text": "Test reference range text",
+      "high": {
+        "value": 20
       }
     }
   ],
