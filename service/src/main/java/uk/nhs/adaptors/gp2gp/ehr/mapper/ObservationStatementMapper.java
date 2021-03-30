@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -105,22 +106,24 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasInterpretation()) {
-            boolean isInterpretationCode = observation.getInterpretation().getCoding().stream()
+            CodeableConcept interpretation = observation.getInterpretation();
+
+            boolean isInterpretationCode = interpretation.getCoding().stream()
                 .anyMatch(this::isInterpretationCode);
 
             if (!isInterpretationCode) {
-                Optional<Coding> codeWithUserSelected = observation.getInterpretation().getCoding().stream()
+                Optional<Coding> codeWithUserSelected = interpretation.getCoding().stream()
                     .filter(code -> !isInterpretationCode(code) && code.hasUserSelected() && code.getUserSelected())
                     .findFirst();
 
-                Coding coding = codeWithUserSelected.orElse(observation.getInterpretation().getCodingFirstRep());
+                Coding coding = codeWithUserSelected.orElse(interpretation.getCodingFirstRep());
 
                 commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: " + coding.getCode() + StringUtils.SPACE
                     + coding.getDisplay() + StringUtils.SPACE);
 
-                if (observation.getInterpretation().hasText()) {
+                if (interpretation.hasText()) {
                     commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
-                        + observation.getInterpretation().getText() + StringUtils.SPACE);
+                        + interpretation.getText() + StringUtils.SPACE);
                 }
             }
         }
