@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -46,8 +45,7 @@ public class StructuredObservationValueMapper {
             .apply(value);
     }
 
-    public String mapInterpretation(CodeableConcept interpretation) {
-        Coding coding = interpretation.getCodingFirstRep();
+    public String mapInterpretation(Coding coding) {
         String code = coding.getCode();
 
         switch (code) {

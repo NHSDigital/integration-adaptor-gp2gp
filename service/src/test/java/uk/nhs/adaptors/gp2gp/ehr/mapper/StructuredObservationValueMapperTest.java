@@ -61,7 +61,8 @@ public class StructuredObservationValueMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_INTERPRETATION);
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapInterpretation(observation.getInterpretation());
+        String outputMessage = XML_OBSERVATION_VALUE_MAPPER.mapInterpretation(observation.getInterpretation()
+            .getCodingFirstRep());
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 

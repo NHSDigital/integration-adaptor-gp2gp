@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -68,9 +67,14 @@ public class ObservationStatementMapper {
                 structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
 
-        if (observation.hasInterpretation() && isInterpretationCode(observation.getInterpretation())) {
-            observationStatementTemplateParametersBuilder.interpretation(
-                structuredObservationValueMapper.mapInterpretation(observation.getInterpretation()));
+        if (observation.hasInterpretation()) {
+            observation.getInterpretation().getCoding().stream()
+                .filter(this::isInterpretationCode)
+                .findFirst()
+                .ifPresent(coding ->
+                    observationStatementTemplateParametersBuilder.interpretation(
+                        structuredObservationValueMapper.mapInterpretation(coding))
+            );
         }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
@@ -100,21 +104,25 @@ public class ObservationStatementMapper {
             }
         }
 
-        if (observation.hasInterpretation() && !isInterpretationCode(observation.getInterpretation())) {
-            Coding coding = observation.getInterpretation().getCodingFirstRep();
+        if (observation.hasInterpretation()) {
+            boolean isInterpretationCode = observation.getInterpretation().getCoding().stream()
+                .anyMatch(this::isInterpretationCode);
 
-            if (coding.hasUserSelected() && coding.getUserSelected()) {
-                commentBuilder.insert(COMMENT_OFFSET, "userSelected == true" + StringUtils.SPACE);
+            if (!isInterpretationCode) {
+                Optional<Coding> codeWithUserSelected = observation.getInterpretation().getCoding().stream()
+                    .filter(code -> !isInterpretationCode(code) && code.hasUserSelected() && code.getUserSelected())
+                    .findFirst();
+
+                Coding coding = codeWithUserSelected.orElse(observation.getInterpretation().getCodingFirstRep());
+
+                commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: " + coding.getCode() + StringUtils.SPACE
+                    + coding.getDisplay() + StringUtils.SPACE);
+
+                if (observation.getInterpretation().hasText()) {
+                    commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
+                        + observation.getInterpretation().getText() + StringUtils.SPACE);
+                }
             }
-
-            commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: " + coding.getCode() + StringUtils.SPACE
-                + coding.getDisplay() + StringUtils.SPACE);
-
-            if (observation.getInterpretation().hasText()) {
-                commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
-                    + observation.getInterpretation().getText() + StringUtils.SPACE);
-            }
-
         }
 
         return commentBuilder.toString();
@@ -141,8 +149,7 @@ public class ObservationStatementMapper {
         return quantity.hasUnit() && !unit.equals(quantity.getUnit());
     }
 
-    private boolean isInterpretationCode(CodeableConcept interpretation) {
-        Coding coding = interpretation.getCodingFirstRep();
+    private boolean isInterpretationCode(Coding coding) {
         String codingSystem = coding.getSystem();
         String code = coding.getCode();
 
