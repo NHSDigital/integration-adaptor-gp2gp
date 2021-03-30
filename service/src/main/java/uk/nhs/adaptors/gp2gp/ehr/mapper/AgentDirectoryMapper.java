@@ -114,7 +114,6 @@ public class AgentDirectoryMapper {
             return mapAgentPerson(practitioner.map(Practitioner.class::cast).get(),
                 null,
                 organization.map(Organization.class::cast).get());
-
         } else if (practitioner.isPresent()) {
             var agentDataList = AgentDirectoryExtractor.extractAgentData(bundle, List.of(practitioner.map(Practitioner.class::cast).get()))
                 .stream()

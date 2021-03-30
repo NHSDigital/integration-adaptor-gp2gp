@@ -63,7 +63,7 @@ public class AgentDirectoryComponentTest {
         var expectedOutput = ResourceTestFileUtils.getFileContent(output);
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         var mapperOutput = agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER);
-        assertThat(mapperOutput).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(mapperOutput).isEqualTo(expectedOutput);
     }
 
     private static Stream<Arguments> testParams() {

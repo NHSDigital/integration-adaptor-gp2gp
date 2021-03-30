@@ -1,10 +1,10 @@
 <responsibleParty>
-<agentDirectory>
-<part typeCode="PART">
+    <agentDirectory>
+        <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
-            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+                        <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
             <addr use="WP">
@@ -18,7 +18,7 @@
         </agentOrganization>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -43,7 +43,7 @@
         </representedOrganization>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -68,7 +68,7 @@
         </representedOrganization>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -80,7 +80,7 @@
         </agentPerson>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -92,7 +92,7 @@
         </agentPerson>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -104,7 +104,7 @@
         </agentPerson>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -116,7 +116,7 @@
         </agentPerson>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -128,7 +128,7 @@
         </agentPerson>
     </Agent>
 </part>
-<part partCode="PART">
+            <part partCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -140,5 +140,5 @@
         </agentPerson>
     </Agent>
 </part>
-</agentDirectory>
+    </agentDirectory>
 </responsibleParty>
