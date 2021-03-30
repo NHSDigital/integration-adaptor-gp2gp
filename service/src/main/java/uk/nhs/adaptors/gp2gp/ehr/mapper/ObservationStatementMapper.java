@@ -118,8 +118,15 @@ public class ObservationStatementMapper {
 
                 Coding coding = codeWithUserSelected.orElse(interpretation.getCodingFirstRep());
 
-                commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: " + coding.getCode() + StringUtils.SPACE
-                    + coding.getDisplay() + StringUtils.SPACE);
+                if (coding.hasCode() || coding.hasDisplay()) {
+                    if (coding.hasDisplay()) {
+                        commentBuilder.insert(COMMENT_OFFSET, coding.getDisplay() + StringUtils.SPACE);
+                    }
+                    if (coding.hasCode()) {
+                        commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
+                    }
+                    commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: ");
+                }
 
                 if (interpretation.hasText()) {
                     commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
