@@ -1,0 +1,447 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "88F14BF6-CADE-47D6-90E2-B10519BF956F",
+        "meta": {
+          "versionId": "5852021019724084706",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9465701459"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Nel",
+            "given": [
+              "Morris",
+              "Chad"
+            ],
+            "prefix": [
+              "Mr"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1999-02-25",
+        "generalPractitioner": [
+          {
+            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "5E496953-065B-41F2-9577-BE8F2FBD0757",
+        "meta": {
+          "versionId": "1112974926854455048",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
+            "valueReference": {
+              "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+            }
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+            "value": "A82038"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                "code": "gp-practice"
+              }
+            ],
+            "text": "GP Practice"
+          }
+        ],
+        "name": "TEMPLE SOWERBY MEDICAL PRACTICE",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "01133800000",
+            "use": "work",
+            "rank": 1
+          }
+        ],
+        "address": [
+          {
+            "use": "work",
+            "type": "physical",
+            "line": [
+              "Fulford Grange",
+              "Micklefield Lane",
+              "Rawdon",
+              "Rawdon"
+            ],
+            "city": "Leeds",
+            "district": "Yorkshire",
+            "postalCode": "LS19 6BA"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "549EA74D-C2C1-498E-8E67-DF660977A6A1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "549EA74D-C2C1-498E-8E67-DF660977A6A1"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "37331000000100",
+              "display": "Comment note"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+        },
+        "context": {
+          "reference": "Encounter/9B69F6AE-F991-49EE-9FFD-028E39B38BFE"
+        },
+        "effectiveDateTime": "2010-01-23T13:48:00+00:00",
+        "issued": "2010-01-23T14:03:54.41+00:00",
+        "performer": [
+          {
+            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+          },
+          {
+            "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+          }
+        ],
+        "comment": "This is some random free text"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+        "meta": {
+          "versionId": "4749697187075864793",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "McAvenue",
+            "given": [
+              "David"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "6AB948A5-2067-4A67-AD00-60EAF13E9CAA",
+        "meta": {
+          "versionId": "8001103298958225736",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Whitcombe",
+            "given": [
+              "Peter"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B",
+        "meta": {
+          "versionId": "7786052607397903776",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Test",
+            "given": [
+              "NHS"
+            ],
+            "prefix": [
+              "Mr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "744B53BD-299D-4604-AC81-167DEBC49E4B",
+        "meta": {
+          "versionId": "28944702100670712",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Recall Schedule",
+            "given": [
+              "EMIS Web"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "unknown"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "744B53BD-299D-4604-AC81-167DEBC49E4C",
+        "meta": {
+          "versionId": "28944702100670712",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "Recall Schedule 2",
+            "given": [
+              "EMIS Web 2"
+            ],
+            "prefix": [
+              "Dr 2"
+            ]
+          }
+        ],
+        "gender": "unknown"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF74",
+        "meta": {
+          "versionId": "4749697187075864793",
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+          ]
+        },
+        "name": [
+          {
+            "use": "official",
+            "family": "McAvenue2",
+            "given": [
+              "David2"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "gender": "male"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ReferralRequest",
+        "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
+        "authoredOn": "2010-01-19",
+        "priority": "routine",
+        "description": "Referred for investigation into low blood pressure",
+        "requester": {
+          "agent": {
+            "reference": "Practitioner/6AB948A5-2067-4A67-AD00-60EAF13E9CAA"
+          },
+          "onBehalfOf": {
+            "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+          }
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Immunization",
+        "id": "C93659E1-1107-441C-BE25-C5EF4B7831D1",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Immunization-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "C93659E1-1107-441C-BE25-C5EF4B7831D1"
+          }
+        ],
+        "status": "completed",
+        "notGiven": false,
+        "vaccineCode": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/v3/NullFlavor",
+              "code": "UNK",
+              "display": "unknown"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+        },
+        "encounter": {
+          "reference": "Encounter/6CE8318F-2230-47CE-86CC-5210130A00F5"
+        },
+        "date": "2010-06-30T05:59:00+01:00",
+        "primarySource": true,
+        "practitioner": [
+          {
+            "actor": {
+              "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "D81C5E8F-CB3A-4A78-92EA-51EC3665648E",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Encounter-1"
+          ]
+        },
+        "status": "finished",
+        "participant": [
+          {
+            "individual": {
+              "reference": "Practitioner/6AB948A5-2067-4A67-AD00-60EAF13E9CAA"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "ReferralRequest",
+        "id": "E63AF323-919F-4D5F-9A1D-BA933BC230BC",
+        "authoredOn": "2010-01-19",
+        "priority": "routine",
+        "description": "Referred for investigation into low blood pressure",
+        "recipient": [
+          {
+            "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "123CEDB7-33BC-40B4-ACA3-DC48E41839FF",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+          ]
+        },
+        "onsetDateTime": "2010-01-13",
+        "assertedDate": "2010-01-13T14:57:10.83+00:00",
+        "recorder": {
+          "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "123CEDB7-33BC-40B4-ACA3-DC48E41839F7",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+          ]
+        },
+        "onsetDateTime": "2010-01-13",
+        "assertedDate": "2010-01-13T14:57:10.83+00:00",
+        "asserter": {
+          "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4C"
+        }
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "05E9B02E-2991-4AE1-BFCF-444095DFEBD8-PROB",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+          ]
+        },
+        "clinicalStatus": "active",
+        "asserter": {
+          "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF74"
+        }
+      }
+    }
+  ]
+}
