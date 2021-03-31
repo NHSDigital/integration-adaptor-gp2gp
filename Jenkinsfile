@@ -5,6 +5,10 @@ String redirectEnv    = "ptl"          // Name of environment where TF deploymen
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
 Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
+Boolean gpccDeploy    = true         // true: To deploy GPC-Consumer service inside gp2gp
+String gpccBranch     = "main"      // Name of branch as a prefix to image name (GPC-Consumer) stored in ECR
+String gpccEcrRepo    = "gpc-consumer" // ECR Repo Name of GPC-Consumer
+String tfGpccImagePrefix  = "gpc-consumer" // Image name prefix of GPC-Consumer
 
 pipeline {
     agent{
@@ -118,6 +122,9 @@ pipeline {
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
                                     List<String> tfParams = []
                                     Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
+                                      if (gpccDeploy) {
+                                          tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
+                                      }
                                     dir ("integration-adaptors") {
                                       git (branch: tfCodeBranch, url: tfCodeRepo)
                                       dir ("terraform/aws") {
@@ -125,9 +132,9 @@ pipeline {
                                         if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
                                       }
                                     }
-                                }
-                            }
-                        }
+                                }  //script
+                            } // steps
+                        } // Stage Deploy using Terraform
 
                         stage('E2E Tests') {
                             steps {
@@ -148,12 +155,12 @@ pipeline {
                                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        }
-    }
+                        } //stage E2E Test
+                    } //Stages Deploy & Test
+                }  // Stage Deploy & Test
+            }  // Stages Build
+        } //Stage Build
+    }  //Stages
     post {
         always {
             sh label: 'Remove images created by docker-compose', script: 'docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down --rmi local'
@@ -161,7 +168,7 @@ pipeline {
             sh label: 'Remove images tagged with current BUILD_TAG', script: 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
         }
     }
-}
+}  // Pipeline
 
 int ecrLogin(String aws_region) {
     String ecrCommand = "aws ecr get-login --region ${aws_region}"
@@ -279,4 +286,24 @@ void writeVariablesToFile(String fileName, Map<String,Object> variablesMap) {
   variablesList.each {
     sh (script: "echo '${it}' >> ${fileName}")
   }
+}
+
+// Retrieving Docker images from ECR
+
+String getLatestImageTag(String prefix, String ecrRepo, String region) {
+  List<String> imageTags = getAllImageTagsByPrefix(prefix, ecrRepo, region)
+  Map<Integer, String> buildNumberTag = [:]
+  Integer maxBuild = 0
+  imageTags.each {
+    Integer currBuild = it.replace("${prefix}-","").split("-")[0]
+    buildNumberTag.put(currBuild, it)
+    if (currBuild  > maxBuild) { maxBuild = currBuild}
+  }
+  return buildNumberTag[maxBuild]
+}
+
+List<String> getAllImageTagsByPrefix(String prefix, String ecrRepo, String region) {
+  String awsCommand = "aws ecr list-images --repository-name ${ecrRepo} --region ${region} --query imageIds[].imageTag --output text"
+  List<String> allImageTags = sh (script: awsCommand, returnStdout: true).split()
+  return allImageTags.findAll{it.startsWith(prefix)}
 }
