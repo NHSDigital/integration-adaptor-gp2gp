@@ -8,7 +8,7 @@ Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR
 Boolean gpccDeploy    = true         // true: To deploy GPC-Consumer service inside gp2gp
 String gpccBranch     = "main"      // Name of branch as a prefix to image name (GPC-Consumer) stored in ECR
 String gpccEcrRepo    = "gpc-consumer" // ECR Repo Name of GPC-Consumer
-String tfComponentGpcc  = "gpc-consumer" // Component service name of GPC-Consumer
+String tfGpccImagePrefix  = "gpc-consumer" // Image name prefix of GPC-Consumer
 
 pipeline {
     agent{
@@ -123,7 +123,7 @@ pipeline {
                                     List<String> tfParams = []
                                     Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
                                       if (gpccDeploy) {
-                                          tfVariables.put("${tfComponentGpcc}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
+                                          tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
                                       }
                                     dir ("integration-adaptors") {
                                       git (branch: tfCodeBranch, url: tfCodeRepo)
