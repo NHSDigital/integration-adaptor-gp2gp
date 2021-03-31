@@ -57,16 +57,17 @@ public class EncounterComponentsMapperTest {
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
+        ParticipantMapper participantMapper = new ParticipantMapper();
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
-        NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext, new ParticipantMapper());
+        NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext, participantMapper);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
             new PertinentInformationObservationValueMapper(), codeableConceptCdMapper,
-            new ParticipantMapper());
+            participantMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
             codeableConceptCdMapper);

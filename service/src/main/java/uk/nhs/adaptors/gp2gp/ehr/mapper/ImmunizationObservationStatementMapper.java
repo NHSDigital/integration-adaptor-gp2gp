@@ -57,18 +57,23 @@ public class ImmunizationObservationStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
-    // TODO AC3
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
-            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Immunization, immunization.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Immunization, immunization.getId()))
             .availabilityTime(buildAvailabilityTime(immunization))
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization))
             .isNested(isNested)
-            .code(buildCode(immunization))
-            .build();
-        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, observationStatementTemplateParameters);
+            .code(buildCode(immunization));
+        messageContext.getAgentReference()
+            .map(ref -> idMapper.getOrNew(ResourceType.Practitioner, ref))
+            .map(ref -> participantMapper.mapToParticipant(ref, "PPRF"))
+            .ifPresent(observationStatementTemplateParameters::agentReference);
+
+        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, observationStatementTemplateParameters.build());
     }
 
     private String buildAvailabilityTime(Immunization immunization) {

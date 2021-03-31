@@ -65,6 +65,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-reason-not-given.xml";
     private static final String OUTPUT_XML_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-with-vaccine-code.xml";
+    private static final String OUTPUT_XML_WITH_AGENT = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-with-agent.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -84,7 +86,8 @@ public class ImmunizationObservationStatementMapperTest {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
         messageContext.initialize(bundle);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper());
     }
 
     @AfterEach
@@ -95,7 +98,7 @@ public class ImmunizationObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
-        boolean isNested) throws IOException {
+                                                                                  boolean isNested) throws IOException {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
 
@@ -124,5 +127,17 @@ public class ImmunizationObservationStatementMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false));
+    }
+
+    @Test
+    public void When_MappingImmunizationJsonWithAgent_Expect_ObservationStatementXmlOutput() throws IOException {
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_AGENT);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
+        Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
+        messageContext.setAgentReference("agent-ref");
+
+        String outputMessage = observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 }
