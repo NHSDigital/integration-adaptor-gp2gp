@@ -131,7 +131,7 @@ public class EhrExtractUATTest {
 
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
+    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
         String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + FILES_PREFIX + expectedOutputXml);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
