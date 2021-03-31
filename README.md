@@ -89,13 +89,8 @@ The adaptor uses the GP Connect API to fetch patient records and documents.
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_GPC_GET_URL                    | http://localhost:8090/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
-| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    | /fhir/Patient/$gpc.getstructuredrecord        | The path of the Get Access Structured operation on the Patient resource
-| GP2GP_GPC_GET_PATIENT_ENDPOINT       | /fhir/Patient                                 | The path of the Access Document Patient resource
-| GP2GP_GPC_GET_DOCUMENT_ENDPOINT      | /fhir/Binary/                                 | The path of the Access Document Binary resource
-| GP2GP_SPINE_CLIENT_CERT              |                                               | The content of the PEM-formatted client endpoint certificate
-| GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
-| GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
-| GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /structured/fhir                              | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_DOCUMENTS_FHIR_BASE        | /documents/fhir                               | The path segment for Get Access Documents FHIR server
 | GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
 
 Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
