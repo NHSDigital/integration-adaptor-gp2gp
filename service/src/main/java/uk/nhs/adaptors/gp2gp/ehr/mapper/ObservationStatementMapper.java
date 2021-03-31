@@ -36,6 +36,7 @@ public class ObservationStatementMapper {
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
     private static final int COMMENT_OFFSET = 0;
+    private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -118,13 +119,13 @@ public class ObservationStatementMapper {
 
                 Coding coding = codeWithUserSelected.orElse(interpretation.getCodingFirstRep());
 
+                if (coding.hasDisplay()) {
+                    commentBuilder.insert(COMMENT_OFFSET, coding.getDisplay() + StringUtils.SPACE);
+                }
+                if (coding.hasCode()) {
+                    commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
+                }
                 if (coding.hasCode() || coding.hasDisplay()) {
-                    if (coding.hasDisplay()) {
-                        commentBuilder.insert(COMMENT_OFFSET, coding.getDisplay() + StringUtils.SPACE);
-                    }
-                    if (coding.hasCode()) {
-                        commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
-                    }
                     commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: ");
                 }
 
@@ -163,7 +164,7 @@ public class ObservationStatementMapper {
         String codingSystem = coding.getSystem();
         String code = coding.getCode();
 
-        return (coding.hasSystem() && codingSystem.equals("http://hl7.org/fhir/v2/0078"))
+        return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
             && Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA").contains(code);
     }
 }
