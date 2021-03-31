@@ -119,22 +119,25 @@ public class ObservationStatementMapper {
                     .filter(Coding::getUserSelected)
                     .findFirst();
 
-                Coding coding = codeWithUserSelected.orElse(interpretation.getCodingFirstRep());
+                Coding coding = codeWithUserSelected.orElseGet(() ->
+                    interpretation.hasCoding() ? interpretation.getCodingFirstRep() : null);
 
-                if (coding.hasDisplay()) {
-                    commentBuilder.insert(COMMENT_OFFSET, coding.getDisplay() + StringUtils.SPACE);
-                }
-                if (coding.hasCode()) {
-                    commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
-                }
-                if (coding.hasCode() || coding.hasDisplay()) {
-                    commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: ");
-                }
+                Optional.ofNullable(coding).ifPresent(code -> {
+                    if (code.hasDisplay()) {
+                        commentBuilder.insert(COMMENT_OFFSET, code.getDisplay() + StringUtils.SPACE);
+                    }
+                    if (code.hasCode()) {
+                        commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
+                    }
+                    if (code.hasCode() || code.hasDisplay()) {
+                        commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: ");
+                    }
 
-                if (interpretation.hasText()) {
-                    commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
-                        + interpretation.getText() + StringUtils.SPACE);
-                }
+                    if (interpretation.hasText()) {
+                        commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
+                            + interpretation.getText() + StringUtils.SPACE);
+                    }
+                });
             }
         }
 
