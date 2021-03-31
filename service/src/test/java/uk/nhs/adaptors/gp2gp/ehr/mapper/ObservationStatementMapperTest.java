@@ -58,6 +58,8 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-13.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM = TEST_FILE_DIRECTORY
         + "example-observation-resource-14.json";
+    private static final String INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
+        + "example-observation-resource-15.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -84,6 +86,8 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-12.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-13.xml";
+    private static final String OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-14.xml";
 
 
     private CharSequence expectedOutputMessage;
@@ -158,7 +162,8 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION, OUTPUT_XML_WITH_INTERPRETATION_CODE),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM)
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM),
+            Arguments.of(INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED, OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED)
         );
     }
 }
