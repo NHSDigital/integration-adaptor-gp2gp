@@ -63,7 +63,8 @@ public class EncounterComponentsMapperTest {
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
-            new PertinentInformationObservationValueMapper(), codeableConceptCdMapper);
+            new PertinentInformationObservationValueMapper(), codeableConceptCdMapper,
+            new ParticipantMapper());
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,

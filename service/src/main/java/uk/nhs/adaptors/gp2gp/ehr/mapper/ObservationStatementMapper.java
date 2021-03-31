@@ -43,11 +43,12 @@ public class ObservationStatementMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
-    // TODO AC1
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
             .code(prepareCode(observation))
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
@@ -80,6 +81,11 @@ public class ObservationStatementMapper {
                         structuredObservationValueMapper.mapInterpretation(coding))
             );
         }
+
+        messageContext.getAgentReference()
+            .map(ref -> idMapper.getOrNew(ResourceType.Practitioner, ref))
+            .map(ref -> participantMapper.mapToParticipant(ref, "PPRF"))
+            .ifPresent(observationStatementTemplateParametersBuilder::agentReference);
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());

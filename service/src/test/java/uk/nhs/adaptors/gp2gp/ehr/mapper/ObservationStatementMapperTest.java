@@ -92,7 +92,8 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-14.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-15.xml";
-
+    private static final String OUTPUT_XML_WITH_STRING_VALUE_AND_AGENT = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-16.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -112,7 +113,8 @@ public class ObservationStatementMapperTest {
         observationStatementMapper = new ObservationStatementMapper(messageContext,
             new StructuredObservationValueMapper(),
             new PertinentInformationObservationValueMapper(),
-            codeableConceptCdMapper);
+            codeableConceptCdMapper,
+            new ParticipantMapper());
     }
 
     @AfterEach
@@ -150,6 +152,18 @@ public class ObservationStatementMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true));
+    }
+
+    @Test
+    public void When_MappingObservationJsonWithAgent_Expect_ObservationStatementXmlOutput() throws IOException {
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_STRING_VALUE_AND_AGENT);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_STRING_VALUE);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        messageContext.setAgentReference("agent-ref");
+
+        String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
     private static Stream<Arguments> resourceFileParams() {

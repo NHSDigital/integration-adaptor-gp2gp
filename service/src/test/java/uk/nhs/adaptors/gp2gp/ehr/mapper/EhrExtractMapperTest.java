@@ -86,7 +86,8 @@ public class EhrExtractMapperTest {
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
-                codeableConceptCdMapper
+                codeableConceptCdMapper,
+                new ParticipantMapper()
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
