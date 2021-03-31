@@ -4,5 +4,8 @@
         <statusCode code="COMPLETE" />
         <availabilityTime value="{{availabilityTime}}" />
         <text>{{comment}}</text>
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </NarrativeStatement>
 </component>

@@ -110,6 +110,7 @@ public class EhrExtractUATTest {
             .build();
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
+        ParticipantMapper participantMapper = new ParticipantMapper();
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
@@ -120,13 +121,13 @@ public class EhrExtractUATTest {
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new NarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
                 codeableConceptCdMapper,
-                new ParticipantMapper()
+                participantMapper
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
