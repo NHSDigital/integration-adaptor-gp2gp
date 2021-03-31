@@ -56,7 +56,9 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
 
+        ParticipantMapper participantMapper = new ParticipantMapper();
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
         NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
@@ -64,9 +66,9 @@ public class EncounterComponentsMapperTest {
             messageContext,
             structuredObservationValueMapper,
             new PertinentInformationObservationValueMapper(), codeableConceptCdMapper,
-            new ParticipantMapper());
+            participantMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
             codeableConceptCdMapper);
