@@ -20,7 +20,7 @@
       {
         "system": "http://hl7.org/fhir/v2/0078",
         "code": "Example",
-        "display": "Example without system"
+        "display": "Example without code"
       }
     ]
   }
