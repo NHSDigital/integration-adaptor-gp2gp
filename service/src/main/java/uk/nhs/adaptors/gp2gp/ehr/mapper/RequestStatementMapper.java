@@ -59,6 +59,7 @@ public class RequestStatementMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
+    // TODO AC4 AC5 AC6
     public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
             .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))

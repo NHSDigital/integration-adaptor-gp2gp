@@ -57,6 +57,7 @@ public class MedicationStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
+    // TODO AC11
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
         var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId());
         var statusCode = buildStatusCode(medicationRequest);

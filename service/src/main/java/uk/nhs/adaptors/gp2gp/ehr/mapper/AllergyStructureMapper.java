@@ -51,6 +51,7 @@ public class AllergyStructureMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
+    // TODO AC7
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
             .ehrCompositionId(messageContext.getIdMapper().getOrNew(ResourceType.Composition, allergyIntolerance.getId()))

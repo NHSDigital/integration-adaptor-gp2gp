@@ -58,6 +58,7 @@ public class ImmunizationObservationStatementMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
+    // TODO AC3
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Immunization, immunization.getId()))

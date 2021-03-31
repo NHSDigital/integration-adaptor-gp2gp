@@ -49,6 +49,7 @@ public class ConditionLinkSetMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
+    // TODO AC8
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)

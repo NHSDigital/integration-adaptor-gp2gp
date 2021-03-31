@@ -40,6 +40,7 @@ public class EncounterMapper {
     private final MessageContext messageContext;
     private final EncounterComponentsMapper encounterComponentsMapper;
 
+    // TODO AC9 AC10
     public String mapEncounterToEhrComposition(Encounter encounter) {
         String components = encounterComponentsMapper.mapComponents(encounter);
 

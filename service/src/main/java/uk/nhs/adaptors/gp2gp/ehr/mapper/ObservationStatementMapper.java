@@ -44,6 +44,7 @@ public class ObservationStatementMapper {
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
+    // TODO AC1
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
