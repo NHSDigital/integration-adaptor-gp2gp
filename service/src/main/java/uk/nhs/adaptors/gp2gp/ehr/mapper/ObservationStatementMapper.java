@@ -114,7 +114,9 @@ public class ObservationStatementMapper {
 
             if (!isInterpretationCode) {
                 Optional<Coding> codeWithUserSelected = interpretation.getCoding().stream()
-                    .filter(code -> !isInterpretationCode(code) && code.hasUserSelected() && code.getUserSelected())
+                    .filter(code -> !isInterpretationCode(code))
+                    .filter(Coding::hasUserSelected)
+                    .filter(Coding::getUserSelected)
                     .findFirst();
 
                 Coding coding = codeWithUserSelected.orElse(interpretation.getCodingFirstRep());
