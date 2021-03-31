@@ -43,10 +43,12 @@ public class ObservationStatementMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
             .code(prepareCode(observation))
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
@@ -78,6 +80,13 @@ public class ObservationStatementMapper {
                     observationStatementTemplateParametersBuilder.interpretation(
                         structuredObservationValueMapper.mapInterpretation(coding))
             );
+        }
+
+        if (observation.hasPerformer()) {
+            final String participantReference = idMapper.getOrNew(observation.getPerformerFirstRep());
+            final String participantBlock = participantMapper
+                .mapToParticipant(participantReference, ParticipantType.PERFORMER.getCode());
+            observationStatementTemplateParametersBuilder.participant(participantBlock);
         }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
