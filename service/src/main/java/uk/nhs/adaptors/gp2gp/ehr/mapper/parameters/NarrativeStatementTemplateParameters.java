@@ -12,4 +12,5 @@ public class NarrativeStatementTemplateParameters {
     private String availabilityTime;
     private String comment;
     private boolean isNested;
+    private String agentReference;
 }

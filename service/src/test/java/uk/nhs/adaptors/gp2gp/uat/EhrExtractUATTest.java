@@ -120,7 +120,7 @@ public class EhrExtractUATTest {
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new NarrativeStatementMapper(messageContext, new ParticipantMapper()),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),

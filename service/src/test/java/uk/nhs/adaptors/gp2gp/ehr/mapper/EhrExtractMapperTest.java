@@ -81,7 +81,7 @@ public class EhrExtractMapperTest {
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new NarrativeStatementMapper(messageContext, new ParticipantMapper()),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
@@ -125,6 +125,6 @@ public class EhrExtractMapperTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
+        assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
 }

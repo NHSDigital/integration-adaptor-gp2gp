@@ -39,6 +39,7 @@ public class NarrativeStatementMapperTest {
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
+    private static final String OUTPUT_XML_USES_AGENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -51,7 +52,7 @@ public class NarrativeStatementMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        narrativeStatementMapper = new NarrativeStatementMapper(messageContext, new ParticipantMapper());
     }
 
     @AfterEach
@@ -98,5 +99,17 @@ public class NarrativeStatementMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+    }
+
+    @Test
+    public void When_MappingObservationJsonWithAgent_Expect_NarrativeStatementXmlOutput() throws IOException {
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_AGENT);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_ISSUED_ONLY);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+        messageContext.setAgentReference("agent-ref");
+
+        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
+
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 }
