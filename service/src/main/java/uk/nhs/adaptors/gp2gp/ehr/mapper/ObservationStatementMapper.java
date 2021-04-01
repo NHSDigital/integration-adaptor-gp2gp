@@ -37,6 +37,7 @@ public class ObservationStatementMapper {
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
     private static final int COMMENT_OFFSET = 0;
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
+    private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -170,6 +171,6 @@ public class ObservationStatementMapper {
         String code = coding.getCode();
 
         return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
-            && Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA").contains(code);
+            && INTERPRETATION_CODES.contains(code);
     }
 }
