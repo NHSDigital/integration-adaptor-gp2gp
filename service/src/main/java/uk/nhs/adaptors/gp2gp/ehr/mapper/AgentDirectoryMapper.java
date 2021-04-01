@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,16 +30,16 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 public class AgentDirectoryMapper {
     private static final Mustache AGENT_DIRECTORY_STRUCTURE_TEMPLATE = TemplateUtils.loadTemplate("ehr_agent_structure_template.mustache");
 
-    private final Set<String> mappedOrganizationsAndPractitioner = new HashSet<>();
     private final PractitionerAgentPersonMapper practitionerAgentPersonMapper;
     private final OrganizationToAgentMapper organizationToAgentMapper;
 
     public String mapEHRFolderToAgentDirectory(Bundle bundle, String nhsNumber) {
+        HashSet<String> mappedOrganizationsAndPractitioner = new HashSet<>();
         var builder = AgentDirectoryParameter.builder()
             .patientManagingOrganization(extractPatientManagingOrganization(bundle, nhsNumber))
-            .observationOrganizations(prepareObservationAgentsList(bundle))
-            .referralRequestsOrganizations(prepareReferralRequestAgentsList(bundle))
-            .agentPersons(preparePractitionerRoleAgentsList(bundle));
+            .observationOrganizations(prepareObservationAgentsList(bundle, mappedOrganizationsAndPractitioner))
+            .referralRequestsOrganizations(prepareReferralRequestAgentsList(bundle, mappedOrganizationsAndPractitioner))
+            .agentPersons(preparePractitionerRoleAgentsList(bundle, mappedOrganizationsAndPractitioner));
 
         return TemplateUtils.fillTemplate(AGENT_DIRECTORY_STRUCTURE_TEMPLATE, builder.build());
     }
@@ -57,45 +56,57 @@ public class AgentDirectoryMapper {
                 + nhsNumber));
     }
 
-    private List<String> prepareObservationAgentsList(Bundle bundle) {
+    private List<String> prepareObservationAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
         List<Observation> observations = AgentDirectoryExtractor.extractObservationsWithPerformers(bundle);
 
         return observations.stream()
-            .map(observation -> buildAgentPerson(observation, bundle))
+            .map(observation -> buildAgentPerson(observation, bundle, mappedOrganizationsAndPractitioner))
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
     }
 
-    private List<String> prepareReferralRequestAgentsList(Bundle bundle) {
+    private List<String> prepareReferralRequestAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
         List<ReferralRequest> referralRequests = AgentDirectoryExtractor.extractReferralRequestsWithRequester(bundle);
 
         return referralRequests.stream()
-            .map(referralRequest -> buildAgentPerson(referralRequest, bundle))
+            .map(referralRequest -> buildAgentPerson(referralRequest, bundle, mappedOrganizationsAndPractitioner))
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
     }
 
-    private List<String> preparePractitionerRoleAgentsList(Bundle bundle) {
+    private List<String> preparePractitionerRoleAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
         List<Practitioner> practitioners = AgentDirectoryExtractor.extractRemainingPractitioners(bundle);
         var mappingTriplets = AgentDirectoryExtractor.extractAgentData(bundle, practitioners);
 
         return mappingTriplets.stream()
-            .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
+            .map(agentData -> mapAgentPerson(
+                agentData.getPractitioner(),
+                agentData.getPractitionerRole(),
+                agentData.getOrganization(),
+                mappedOrganizationsAndPractitioner)
+            )
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
     }
 
-    private String buildAgentPerson(Observation observation, Bundle bundle) {
+    private String buildAgentPerson(Observation observation, Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
         var practitioner = AgentDirectoryExtractor.extractObservationResource(observation, bundle, ResourceType.Practitioner);
         var organization = AgentDirectoryExtractor.extractObservationResource(observation, bundle, ResourceType.Organization);
         if (practitioner.isPresent() && organization.isPresent()) {
             return mapAgentPerson((Practitioner) practitioner.get(),
                 null,
-                (Organization) organization.get());
+                (Organization) organization.get(),
+                mappedOrganizationsAndPractitioner
+            );
         } else if (practitioner.isPresent()) {
             var agentDataList = AgentDirectoryExtractor.extractAgentData(bundle, List.of((Practitioner) practitioner.get()))
                 .stream()
-                .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
+                .map(agentData -> mapAgentPerson(
+                    agentData.getPractitioner(),
+                    agentData.getPractitionerRole(),
+                    agentData.getOrganization(),
+                    mappedOrganizationsAndPractitioner)
+                )
                 .filter(StringUtils::isNotEmpty)
                 .findFirst();
             if (agentDataList.isPresent()) {
@@ -105,19 +116,26 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private String buildAgentPerson(ReferralRequest referralRequest, Bundle bundle) {
+    private String buildAgentPerson(ReferralRequest referralRequest, Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
         var practitioner = ResourceExtractor
             .extractResourceByReference(bundle, referralRequest.getRequester().getAgent().getReferenceElement());
         var organization = ResourceExtractor
             .extractResourceByReference(bundle, referralRequest.getRequester().getOnBehalfOf().getReferenceElement());
         if (practitioner.isPresent() && organization.isPresent()) {
-            return mapAgentPerson(practitioner.map(Practitioner.class::cast).get(),
+            return mapAgentPerson(
+                practitioner.map(Practitioner.class::cast).get(),
                 null,
-                organization.map(Organization.class::cast).get());
+                organization.map(Organization.class::cast).get(),
+                mappedOrganizationsAndPractitioner);
         } else if (practitioner.isPresent()) {
             var agentDataList = AgentDirectoryExtractor.extractAgentData(bundle, List.of(practitioner.map(Practitioner.class::cast).get()))
                 .stream()
-                .map(agentData -> mapAgentPerson(agentData.getPractitioner(), agentData.getPractitionerRole(), agentData.getOrganization()))
+                .map(agentData -> mapAgentPerson(
+                    agentData.getPractitioner(),
+                    agentData.getPractitionerRole(),
+                    agentData.getOrganization(),
+                    mappedOrganizationsAndPractitioner)
+                )
                 .filter(StringUtils::isNotEmpty)
                 .findFirst();
 
@@ -128,8 +146,9 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private String mapAgentPerson(Practitioner practitioner, PractitionerRole practitionerRole, Organization organization) {
-        if (!organizationPractitionerHasBeenMapped(practitioner, organization)) {
+    private String mapAgentPerson(Practitioner practitioner, PractitionerRole practitionerRole, Organization organization,
+        HashSet<String> mappedOrganizationsAndPractitioner) {
+        if (!organizationPractitionerHasBeenMapped(practitioner, organization, mappedOrganizationsAndPractitioner)) {
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
                 Optional.ofNullable(practitionerRole),
@@ -139,16 +158,17 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization) {
+    private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization,
+        HashSet<String> mappedOrganizationsAndPractitioner) {
         var mappedId = createMappedId(practitioner, organization);
         var mapped = mappedOrganizationsAndPractitioner.contains(mappedId);
         if (!mapped) {
-            addOrganizationPractitionerPairToMap(mappedId);
+            addOrganizationPractitionerPairToMap(mappedOrganizationsAndPractitioner, mappedId);
         }
         return mapped;
     }
 
-    private void addOrganizationPractitionerPairToMap(String mappedId) {
+    private void addOrganizationPractitionerPairToMap(HashSet<String> mappedOrganizationsAndPractitioner, String mappedId) {
         mappedOrganizationsAndPractitioner.add(mappedId);
     }
 
