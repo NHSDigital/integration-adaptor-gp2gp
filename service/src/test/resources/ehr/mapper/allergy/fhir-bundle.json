@@ -1,13 +1,14 @@
 {
-    "resourceType": "Bundle",
-    "meta": {
-      "profile": [
-        "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
-      ]
-    },
-    "type": "collection",
-    "entry": [
-      {
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
         "resourceType": "Condition",
         "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB",
         "extension": [
@@ -72,5 +73,6 @@
           }
         ]
       }
-    ]
+    }
+  ]
 }

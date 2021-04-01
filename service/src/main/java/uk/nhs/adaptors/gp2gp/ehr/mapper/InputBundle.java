@@ -24,4 +24,32 @@ public class InputBundle {
     public Optional<ListResource> getListReferencedToEncounter(IIdType reference, String code) {
         return extractListByEncounterReference(this.bundle, reference, code);
     }
+
+    public Optional<Resource> getRelatedCondition(String referenceId) {
+        System.out.println("yolo1: " + referenceId);
+        for (var entry: bundle.getEntry()) {
+            String path = entry.getResource().getResourceType().getPath();
+            if (path.equals("condition")) {
+                System.out.println(entry.getResource().getId());
+                entry.getResource().
+                System.out.println("-----------");
+                //entry.getResource().children().
+                for (var c: entry.getResource().children()) {
+                    if (c.getName().equals("extension")) {
+                        System.out.println(c.getValues().get(0).get);
+                    }
+                    //System.out.println(c.getName().equals("extension"));
+                }
+                System.out.println("-----------");
+                System.out.println("condition?" + entry.getResource().children().get(1).getName());
+                for (var extension: entry.getExtension()) {
+                    var url = extension.getUrl();
+                    System.out.println("url: " + url);
+                }
+            }
+            System.out.println("yolo 2: " + path);
+        }
+
+        return Optional.empty();
+    }
 }

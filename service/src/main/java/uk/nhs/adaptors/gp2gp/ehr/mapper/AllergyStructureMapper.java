@@ -86,6 +86,7 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
+        System.out.println("yolo3");
         return descriptionList
             .stream()
             .filter(StringUtils::isNotEmpty)
@@ -188,6 +189,8 @@ public class AllergyStructureMapper {
                 .map(Annotation::getText)
                 .collect(Collectors.joining(StringUtils.SPACE));
         }
+        var b = messageContext.getInputBundleHolder().getRelatedCondition(allergyIntolerance.getId());
+
         return notes;
     }
 

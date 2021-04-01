@@ -18,9 +18,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -132,9 +136,13 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_NO_ASSERTED_DATE)
             );
     }
-//
-//    @Test
-//    public void bundleTest() {
-//        System.out.println("wip:" + bundle.getEntry().get(0).get);
-//    }
+
+    @Test
+    @MockitoSettings(strictness = Strictness.LENIENT)
+    public void bundleTest() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent("/ehr/mapper/allergy/example-allergy-intolerance-resource-15.json");
+        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+        String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
+        assertThat(true).isEqualTo(true);
+    }
 }
