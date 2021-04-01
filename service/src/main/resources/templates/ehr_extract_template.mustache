@@ -39,7 +39,9 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <!-- responsibleParty/agentDirectory will go here -->
+            {{#agentDirectory}}
+            {{{agentDirectory}}}
+            {{/agentDirectory}}
             {{#components}}
                 {{{.}}}
             {{/components}}

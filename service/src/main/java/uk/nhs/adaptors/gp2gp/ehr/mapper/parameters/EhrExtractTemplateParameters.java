@@ -17,5 +17,6 @@ public class EhrExtractTemplateParameters {
     private String effectiveTimeLow;
     private String effectiveTimeHigh;
     private String ehrExtractId;
+    private String agentDirectory;
     private List<String> components;
 }

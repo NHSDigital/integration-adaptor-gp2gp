@@ -27,6 +27,7 @@ public class EhrExtractMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EncounterMapper encounterMapper;
+    private final AgentDirectoryMapper agentDirectoryMapper;
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
@@ -42,6 +43,8 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
+        ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle,
+            getGpcStructuredTaskDefinition.getNhsNumber()));
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle.getEntry());
         ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
