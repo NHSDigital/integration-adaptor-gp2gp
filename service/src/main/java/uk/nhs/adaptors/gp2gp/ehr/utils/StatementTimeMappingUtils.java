@@ -2,10 +2,14 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
+
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public final class StatementTimeMappingUtils {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
@@ -92,5 +96,29 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, onsetDate);
         }
         return DEFAULT_TIME_VALUE;
+    }
+
+    public static String prepareEffectiveTimeForMedicationRequest(MedicationRequest medicationRequest) {
+        final var dispenseRequest = medicationRequest.getDispenseRequest();
+        if (dispenseRequest.hasValidityPeriod() && dispenseRequest.getValidityPeriod().hasStart()) {
+            Period period = dispenseRequest.getValidityPeriod();
+            DateTimeType startElement = period.getStartElement();
+            if (period.hasEnd()) {
+                return String.format(EFFECTIVE_TIME_FULL_TEMPLATE,
+                    toHl7Format(startElement),
+                    toHl7Format(period.getEndElement()));
+            }
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(startElement));
+        }
+        throw new EhrMapperException("Could not map Effective Time for Medication Request");
+    }
+
+    public static String prepareAvailabilityTimeForMedicationRequest(MedicationRequest medicationRequest) {
+        if (medicationRequest.getDispenseRequest().hasValidityPeriod()
+            && medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
+                medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+        }
+        throw new EhrMapperException("Could not map Availability Time for Medication Request");
     }
 }
