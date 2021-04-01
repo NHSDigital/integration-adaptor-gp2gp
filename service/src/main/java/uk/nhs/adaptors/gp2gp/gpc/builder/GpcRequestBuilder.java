@@ -34,7 +34,6 @@ import io.netty.handler.ssl.SslContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.transport.ProxyProvider;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
@@ -158,18 +157,8 @@ public class GpcRequestBuilder {
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {
-        var httpClient =  HttpClient.create()
+        return HttpClient.create()
             .secure(t -> t.sslContext(sslContext));
-
-        if (Boolean.parseBoolean(gpcConfiguration.getEnableProxy())) {
-            LOGGER.info("Using HTTP Proxy {}:{} for GP Connect API", gpcConfiguration.getProxy(), gpcConfiguration.getProxyPort());
-            return httpClient
-                .proxy(spec -> spec.type(ProxyProvider.Proxy.HTTP)
-                    .host(gpcConfiguration.getProxy())
-                    .port(Integer.parseInt(gpcConfiguration.getProxyPort())));
-        } else {
-            return httpClient;
-        }
     }
 
     private WebClient buildWebClient(HttpClient httpClient) {
@@ -212,6 +201,6 @@ public class GpcRequestBuilder {
                 .path(gpcConfiguration.getPatientEndpoint())
                 .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER
                     + ((overrideNhsNumber.isBlank()) ? nhsNumber : overrideNhsNumber))
-                .build());
+                .build(false));
     }
 }
