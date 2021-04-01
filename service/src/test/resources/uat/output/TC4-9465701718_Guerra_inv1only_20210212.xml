@@ -39,7 +39,67 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <!-- responsibleParty/agentDirectory will go here -->
+            <responsibleParty>
+    <agentDirectory>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+            <part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="test-id-3"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                <orginalText>General Medical Practitioner</orginalText>
+            </code>
+            <name>
+                <prefix>Dr</prefix>
+                <given>David</given>
+                <family>McAvenue</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+            <part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="test-id-3"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                <orginalText>General Medical Practitioner</orginalText>
+            </code>
+            <name>
+                <prefix>Dr</prefix>
+                <given>Peter</given>
+                <family>Whitcombe</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+    </agentDirectory>
+</responsibleParty>
         </ehrFolder>
     </component>
     <inFulfillmentOf typeCode="FLFS">

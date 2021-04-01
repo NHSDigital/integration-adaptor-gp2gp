@@ -39,7 +39,11 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <!-- responsibleParty/agentDirectory will go here -->
+            <responsibleParty>
+    <agentDirectory>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+    </agentDirectory>
+</responsibleParty>
         </ehrFolder>
     </component>
     <inFulfillmentOf typeCode="FLFS">

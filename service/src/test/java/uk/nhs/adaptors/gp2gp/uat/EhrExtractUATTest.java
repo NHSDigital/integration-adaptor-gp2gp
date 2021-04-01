@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ConditionLinkSetMapper;
@@ -23,10 +25,13 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -34,6 +39,7 @@ import java.time.Instant;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -84,6 +90,8 @@ public class EhrExtractUATTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
+    @Mock
+    private OrganizationToAgentMapper organizationToAgentMapper;
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
@@ -102,6 +110,8 @@ public class EhrExtractUATTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
+        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -119,9 +129,18 @@ public class EhrExtractUATTest {
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
         );
 
+        AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
+            new PractitionerAgentPersonMapper(
+                messageContext,
+                new OrganizationToAgentMapper(messageContext)
+            ),
+            organizationToAgentMapper
+        );
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper));
+            new EncounterMapper(messageContext, encounterComponentsMapper),
+            agentDirectoryMapper);
     }
 
     @AfterEach
