@@ -10,15 +10,19 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extract
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
@@ -58,22 +62,35 @@ public class RequestStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
-    // TODO AC4 AC5 AC6
     public String mapReferralRequestToRequestStatement(ReferralRequest referralRequest, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var requestStatementTemplateParameters = RequestStatementTemplateParameters.builder()
-            .requestStatementId(messageContext.getIdMapper().getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
+            .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
             .isNested(isNested)
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
             .description(buildDescription(referralRequest))
-            .code(buildCode(referralRequest))
-            .build();
+            .code(buildCode(referralRequest));
 
         if (!referralRequest.hasReasonCode()) {
-            requestStatementTemplateParameters.setDefaultReasonCode(DEFAULT_REASON_CODE_XML);
+            requestStatementTemplateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
         }
 
-        return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters);
+        if (referralRequest.hasRequester() && referralRequest.getRequester().hasAgent()
+                && referralRequest.getRequester().getAgent().hasReference()) {
+            final String agentRef = idMapper.getOrNew(referralRequest.getRequester().getAgent());
+            final String participant = participantMapper.mapToParticipant(agentRef, "AUT");
+            requestStatementTemplateParameters.participant(participant);
+        }
+
+        if (referralRequest.hasRecipient()) {
+            final Reference recipient = referralRequest.getRecipientFirstRep();
+            final var responsibleParty = idMapper.getOrNew(recipient);
+            requestStatementTemplateParameters.responsibleParty(responsibleParty);
+        }
+
+        return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters.build());
     }
 
     private String buildDescription(ReferralRequest referralRequest) {
@@ -84,7 +101,7 @@ public class RequestStatementMapper {
     }
 
     private List<String> retrieveDescription(ReferralRequest referralRequest) {
-        return List.of(
+        return Stream.concat(Stream.of(
             buildIdentifierDescription(referralRequest),
             buildPriorityDescription(referralRequest),
             buildServiceRequestedDescription(referralRequest),
@@ -93,8 +110,9 @@ public class RequestStatementMapper {
             buildRecipientDescription(referralRequest),
             buildReasonCodeDescription(referralRequest),
             buildNoteDescription(referralRequest),
-            buildTextDescription(referralRequest)
-        );
+            buildTextDescription(referralRequest)),
+            buildPractitionersDescription(referralRequest).stream()
+        ).collect(Collectors.toList());
     }
 
     private String buildIdentifierDescription(ReferralRequest referralRequest) {
@@ -212,6 +230,26 @@ public class RequestStatementMapper {
     private String buildTextDescription(ReferralRequest referralRequest) {
         Optional<String> text = Optional.ofNullable(referralRequest.getDescription());
         return text.orElse(StringUtils.EMPTY);
+    }
+
+    private List<String> buildPractitionersDescription(ReferralRequest referralRequest) {
+        return referralRequest.hasRecipient()
+            ? referralRequest.getRecipient().stream()
+                .filter(this::isReferenceToPractitioner)
+                .skip(1)
+                .map(this::getRecipientName)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList())
+            : Collections.emptyList();
+    }
+
+    private String getRecipientName(Reference reference) {
+        final IIdType iidType = reference.getReferenceElement();
+        return messageContext.getInputBundleHolder()
+            .getResource(iidType)
+            .map(Practitioner.class::cast)
+            .map(practitioner -> practitioner.getNameFirstRep().getNameAsSingleString())
+            .orElse(null);
     }
 
     private String buildCode(ReferralRequest referralRequest) {

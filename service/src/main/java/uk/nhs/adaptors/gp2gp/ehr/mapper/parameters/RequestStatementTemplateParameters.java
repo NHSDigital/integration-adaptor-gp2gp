@@ -14,4 +14,6 @@ public class RequestStatementTemplateParameters {
     private String description;
     private String defaultReasonCode;
     private String code;
+    private String participant;
+    private String responsibleParty;
 }

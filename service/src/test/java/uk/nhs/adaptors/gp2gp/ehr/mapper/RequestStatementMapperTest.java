@@ -74,6 +74,7 @@ public class RequestStatementMapperTest {
     private static final String OUTPUT_XML_WITH_RECIPIENTS_AND_PRACTITIONER = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-12.xml";
     private static final String OUTPUT_XML_WITH_NOTES = TEST_FILE_DIRECTORY + "expected-output-request-statement-13.xml";
+    private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY + "expected-output-request-statement-14.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -93,7 +94,7 @@ public class RequestStatementMapperTest {
 
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper);
+        requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
     @AfterEach
@@ -110,7 +111,7 @@ public class RequestStatementMapperTest {
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_WITH_PARTICIPANT),
             Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
             Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
             Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
