@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +31,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class AllergyStructureMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/allergy/";
+    private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-1.json";
     private static final String INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-2.json";
@@ -63,15 +66,20 @@ public class AllergyStructureMapperTest {
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
 
+    private Bundle bundle;
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
+    private ConditionLinkSetMapper conditionLinkSetMapper;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
         allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper);
     }
 
@@ -124,4 +132,9 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_NO_ASSERTED_DATE)
             );
     }
+//
+//    @Test
+//    public void bundleTest() {
+//        System.out.println("wip:" + bundle.getEntry().get(0).get);
+//    }
 }
