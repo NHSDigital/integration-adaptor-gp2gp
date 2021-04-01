@@ -12,5 +12,15 @@
         {{#code}}
         {{{code}}}
         {{/code}}
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
+        {{#responsibleParty}}
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="{{{.}}}"/>
+            </agentRef>
+        </responsibleParty>
+        {{/responsibleParty}}
     </RequestStatement>
 </component>

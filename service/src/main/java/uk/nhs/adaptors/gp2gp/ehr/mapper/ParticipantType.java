@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ParticipantType {
-    PERFORMER("PRF");
+    PERFORMER("PRF"),
+    AUTHOR("AUT");
 
     private final String code;
 }
