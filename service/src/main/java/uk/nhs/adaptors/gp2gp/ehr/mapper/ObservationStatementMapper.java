@@ -2,9 +2,12 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -33,6 +36,8 @@ public class ObservationStatementMapper {
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
     private static final int COMMENT_OFFSET = 0;
+    private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
+    private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -65,6 +70,16 @@ public class ObservationStatementMapper {
                 structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
         }
 
+        if (observation.hasInterpretation()) {
+            observation.getInterpretation().getCoding().stream()
+                .filter(this::isInterpretationCode)
+                .findFirst()
+                .ifPresent(coding ->
+                    observationStatementTemplateParametersBuilder.interpretation(
+                        structuredObservationValueMapper.mapInterpretation(coding))
+            );
+        }
+
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
     }
@@ -91,6 +106,42 @@ public class ObservationStatementMapper {
                     pertinentInformationObservationValueMapper.mapReferenceRangeToPertinentInformation(referenceRange));
             }
         }
+
+        if (observation.hasInterpretation()) {
+            CodeableConcept interpretation = observation.getInterpretation();
+
+            boolean isInterpretationCode = interpretation.getCoding().stream()
+                .anyMatch(this::isInterpretationCode);
+
+            if (!isInterpretationCode) {
+                Optional<Coding> codeWithUserSelected = interpretation.getCoding().stream()
+                    .filter(code -> !isInterpretationCode(code))
+                    .filter(Coding::hasUserSelected)
+                    .filter(Coding::getUserSelected)
+                    .findFirst();
+
+                Coding coding = codeWithUserSelected.orElseGet(() ->
+                    interpretation.hasCoding() ? interpretation.getCodingFirstRep() : null);
+
+                Optional.ofNullable(coding).ifPresent(code -> {
+                    if (code.hasDisplay()) {
+                        commentBuilder.insert(COMMENT_OFFSET, code.getDisplay() + StringUtils.SPACE);
+                    }
+                    if (code.hasCode()) {
+                        commentBuilder.insert(COMMENT_OFFSET, coding.getCode() + StringUtils.SPACE);
+                    }
+                    if (code.hasCode() || code.hasDisplay()) {
+                        commentBuilder.insert(COMMENT_OFFSET, "Interpretation Code: ");
+                    }
+
+                    if (interpretation.hasText()) {
+                        commentBuilder.insert(COMMENT_OFFSET, "Interpretation Text: "
+                            + interpretation.getText() + StringUtils.SPACE);
+                    }
+                });
+            }
+        }
+
         return commentBuilder.toString();
     }
 
@@ -113,5 +164,13 @@ public class ObservationStatementMapper {
 
     private boolean isRangeUnitValid(String unit, Quantity quantity) {
         return quantity.hasUnit() && !unit.equals(quantity.getUnit());
+    }
+
+    private boolean isInterpretationCode(Coding coding) {
+        String codingSystem = coding.getSystem();
+        String code = coding.getCode();
+
+        return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
+            && INTERPRETATION_CODES.contains(code);
     }
 }

@@ -52,6 +52,16 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-10.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
         + "example-observation-resource-11.json";
+    private static final String INPUT_JSON_WITH_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "example-observation-resource-12.json";
+    private static final String INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE = TEST_FILE_DIRECTORY
+        + "example-observation-resource-13.json";
+    private static final String INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM = TEST_FILE_DIRECTORY
+        + "example-observation-resource-14.json";
+    private static final String INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
+        + "example-observation-resource-15.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_INTERPRETATIONS = TEST_FILE_DIRECTORY
+        + "example-observation-resource-16.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -72,6 +82,17 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-9.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-10.xml";
+    private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-11.xml";
+    private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-12.xml";
+    private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-13.xml";
+    private static final String OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-14.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-15.xml";
+
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -108,7 +129,7 @@ public class ObservationStatementMapperTest {
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
@@ -119,7 +140,7 @@ public class ObservationStatementMapperTest {
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     @Test
@@ -142,7 +163,12 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_CODEABLE_CONCEPT_VALUE, OUTPUT_XML_WITH_CODEABLE_CONCEPT_VALUE),
             Arguments.of(INPUT_JSON_WITH_SAMPLED_DATA_VALUE, OUTPUT_XML_WITH_SAMPLED_DATA_VALUE),
             Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_AND_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_AND_QUANTITY),
-            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE)
+            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE),
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION, OUTPUT_XML_WITH_INTERPRETATION_CODE),
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE),
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM),
+            Arguments.of(INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED, OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_INTERPRETATIONS, OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS)
         );
     }
 }

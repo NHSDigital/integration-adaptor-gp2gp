@@ -6,11 +6,11 @@
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
-        <value xsi:type="IVL_PQ"><low value="37.1" unit="Cel" inclusive="true"/></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Test comment</text>
+                <text>Interpretation Code: Another code Example with userSelected Range: Text: Test reference range text High: 20 Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
