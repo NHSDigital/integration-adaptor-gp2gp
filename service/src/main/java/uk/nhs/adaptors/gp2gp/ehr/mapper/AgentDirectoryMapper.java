@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +35,7 @@ public class AgentDirectoryMapper {
     private final OrganizationToAgentMapper organizationToAgentMapper;
 
     public String mapEHRFolderToAgentDirectory(Bundle bundle, String nhsNumber) {
-        HashSet<String> mappedOrganizationsAndPractitioner = new HashSet<>();
+        Set<String> mappedOrganizationsAndPractitioner = new HashSet<>();
         var builder = AgentDirectoryParameter.builder()
             .patientManagingOrganization(extractPatientManagingOrganization(bundle, nhsNumber))
             .observationOrganizations(prepareObservationAgentsList(bundle, mappedOrganizationsAndPractitioner))
@@ -56,7 +57,7 @@ public class AgentDirectoryMapper {
                 + nhsNumber));
     }
 
-    private List<String> prepareObservationAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
+    private List<String> prepareObservationAgentsList(Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
         List<Observation> observations = AgentDirectoryExtractor.extractObservationsWithPerformers(bundle);
 
         return observations.stream()
@@ -65,7 +66,7 @@ public class AgentDirectoryMapper {
             .collect(Collectors.toList());
     }
 
-    private List<String> prepareReferralRequestAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
+    private List<String> prepareReferralRequestAgentsList(Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
         List<ReferralRequest> referralRequests = AgentDirectoryExtractor.extractReferralRequestsWithRequester(bundle);
 
         return referralRequests.stream()
@@ -74,7 +75,7 @@ public class AgentDirectoryMapper {
             .collect(Collectors.toList());
     }
 
-    private List<String> preparePractitionerRoleAgentsList(Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
+    private List<String> preparePractitionerRoleAgentsList(Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
         List<Practitioner> practitioners = AgentDirectoryExtractor.extractRemainingPractitioners(bundle);
         var mappingTriplets = AgentDirectoryExtractor.extractAgentData(bundle, practitioners);
 
@@ -89,7 +90,7 @@ public class AgentDirectoryMapper {
             .collect(Collectors.toList());
     }
 
-    private String buildAgentPerson(Observation observation, Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
+    private String buildAgentPerson(Observation observation, Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
         var practitioner = AgentDirectoryExtractor.extractObservationResource(observation, bundle, ResourceType.Practitioner);
         var organization = AgentDirectoryExtractor.extractObservationResource(observation, bundle, ResourceType.Organization);
         if (practitioner.isPresent() && organization.isPresent()) {
@@ -116,7 +117,7 @@ public class AgentDirectoryMapper {
         return StringUtils.EMPTY;
     }
 
-    private String buildAgentPerson(ReferralRequest referralRequest, Bundle bundle, HashSet<String> mappedOrganizationsAndPractitioner) {
+    private String buildAgentPerson(ReferralRequest referralRequest, Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
         var practitioner = ResourceExtractor
             .extractResourceByReference(bundle, referralRequest.getRequester().getAgent().getReferenceElement());
         var organization = ResourceExtractor
@@ -147,7 +148,7 @@ public class AgentDirectoryMapper {
     }
 
     private String mapAgentPerson(Practitioner practitioner, PractitionerRole practitionerRole, Organization organization,
-        HashSet<String> mappedOrganizationsAndPractitioner) {
+        Set<String> mappedOrganizationsAndPractitioner) {
         if (!organizationPractitionerHasBeenMapped(practitioner, organization, mappedOrganizationsAndPractitioner)) {
             return practitionerAgentPersonMapper.mapPractitionerToAgentPerson(
                 practitioner,
@@ -159,7 +160,7 @@ public class AgentDirectoryMapper {
     }
 
     private boolean organizationPractitionerHasBeenMapped(Practitioner practitioner, Organization organization,
-        HashSet<String> mappedOrganizationsAndPractitioner) {
+        Set<String> mappedOrganizationsAndPractitioner) {
         var mappedId = createMappedId(practitioner, organization);
         var mapped = mappedOrganizationsAndPractitioner.contains(mappedId);
         if (!mapped) {
@@ -168,7 +169,7 @@ public class AgentDirectoryMapper {
         return mapped;
     }
 
-    private void addOrganizationPractitionerPairToMap(HashSet<String> mappedOrganizationsAndPractitioner, String mappedId) {
+    private void addOrganizationPractitionerPairToMap(Set<String> mappedOrganizationsAndPractitioner, String mappedId) {
         mappedOrganizationsAndPractitioner.add(mappedId);
     }
 
