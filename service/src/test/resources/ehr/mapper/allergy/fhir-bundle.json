@@ -15,7 +15,7 @@
           {
             "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
             "valueReference": {
-              "reference": "AllergyIntolerance/230D3D37-99E3-450A-AE88-B5AB802B7137"
+              "reference": "AllergyIntolerance/230D3D37-99E3-450A-AE88-B5AB802B7131"
             }
           }
         ],

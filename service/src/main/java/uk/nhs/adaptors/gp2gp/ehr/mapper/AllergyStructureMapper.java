@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
@@ -86,7 +87,7 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
-        System.out.println("yolo3");
+
         return descriptionList
             .stream()
             .filter(StringUtils::isNotEmpty)
@@ -189,7 +190,17 @@ public class AllergyStructureMapper {
                 .map(Annotation::getText)
                 .collect(Collectors.joining(StringUtils.SPACE));
         }
-        var b = messageContext.getInputBundleHolder().getRelatedCondition(allergyIntolerance.getId());
+
+        List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId());
+        for (var relatedCondition: relatedConditions) {
+            for (var annotation: relatedCondition.getNote()) {
+                if (notes == StringUtils.EMPTY) {
+                    notes = annotation.getText();
+                } else {
+                    notes = StringUtils.joinWith(StringUtils.SPACE, notes, annotation.getText());
+                }
+            }
+        }
 
         return notes;
     }

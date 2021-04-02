@@ -1,16 +1,24 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractListByEncounterReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractResourceByReference;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 public class InputBundle {
+    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private final Bundle bundle;
 
     public InputBundle(Bundle bundle) {
@@ -25,31 +33,21 @@ public class InputBundle {
         return extractListByEncounterReference(this.bundle, reference, code);
     }
 
-    public Optional<Resource> getRelatedCondition(String referenceId) {
-        System.out.println("yolo1: " + referenceId);
-        for (var entry: bundle.getEntry()) {
-            String path = entry.getResource().getResourceType().getPath();
-            if (path.equals("condition")) {
-                System.out.println(entry.getResource().getId());
-                entry.getResource().
-                System.out.println("-----------");
-                //entry.getResource().children().
-                for (var c: entry.getResource().children()) {
-                    if (c.getName().equals("extension")) {
-                        System.out.println(c.getValues().get(0).get);
-                    }
-                    //System.out.println(c.getName().equals("extension"));
-                }
-                System.out.println("-----------");
-                System.out.println("condition?" + entry.getResource().children().get(1).getName());
-                for (var extension: entry.getExtension()) {
-                    var url = extension.getUrl();
-                    System.out.println("url: " + url);
-                }
-            }
-            System.out.println("yolo 2: " + path);
-        }
-
-        return Optional.empty();
+    public List<Condition> getRelatedConditions(String referenceId) {
+        return bundle.getEntry()
+            .stream()
+            .filter(Bundle.BundleEntryComponent::hasResource)
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.Condition.equals(resource.getResourceType()))
+            .map(resource -> (Condition) resource)
+            .filter(condition -> {
+                Optional<String> reference = filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+                    .map(Extension::getValue)
+                    .map(Reference.class::cast)
+                    .map(Reference::getReference)
+                    .stream().findFirst();
+                return reference.equals(Optional.of(referenceId));
+            })
+            .collect(Collectors.toList());
     }
 }
