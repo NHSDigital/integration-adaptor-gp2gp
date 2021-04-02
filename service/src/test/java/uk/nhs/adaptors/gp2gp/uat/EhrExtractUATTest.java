@@ -26,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
@@ -95,6 +96,7 @@ public class EhrExtractUATTest {
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
+    private OutputMessageWrapperMapper outputMessageWrapperMapper;
 
     @BeforeEach
     public void setUp() {
@@ -112,6 +114,7 @@ public class EhrExtractUATTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -159,9 +162,12 @@ public class EhrExtractUATTest {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
             bundle);
-        String outputXml = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        var hl7TranslatedResponse = outputMessageWrapperMapper.map(
+            getGpcStructuredTaskDefinition,
+            ehrExtractContent);
 
-        assertThat(outputXml).isEqualTo(expectedJsonToXmlContent);
+        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testValueFilePaths() {
