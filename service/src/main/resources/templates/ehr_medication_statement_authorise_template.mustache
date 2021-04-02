@@ -1,0 +1,60 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="INT">
+        <id root="{{medicationStatementId}}"/>
+        <statusCode code="{{statusCode}}"/>
+        {{{availabilityTime}}}
+        {{{effectiveTime}}}
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    {{{medicationReferenceCode}}}
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyAuthorise>
+                <id root="{{ehrSupplyId}}"/>
+                <statusCode code="{{statusCode}}"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                {{{availabilityTime}}}
+                {{{effectiveTime}}}
+                <quantity value="{{quantityValue}}" unit="1">
+                    <translation value="{{quantityValue}}">
+                        <originalText>{{quantityText}}</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>{{ehrSupplyPertinentInformation}}</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                {{#repeatNumber}}<repeatNumber value="{{repeatNumber}}"/>{{/repeatNumber}}
+            </ehrSupplyAuthorise>
+        </component>
+        {{#hasEhrSupplyDiscontinue}}
+        <component typeCode="COMP">
+            <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
+                <id root="{{ehrSupplyDiscontinueId}}"/>
+                <statusCode code="COMPLETE"/>
+                {{#ehrSupplyDiscontinueCode}}{{{ehrSupplyDiscontinueCode}}}{{/ehrSupplyDiscontinueCode}}{{^ehrSupplyDiscontinueCode}}<code nullFlavor="UNK"><originalText>Stopped</originalText></code>{{/ehrSupplyDiscontinueCode}}
+                {{{ehrSupplyDiscontinueAvailabilityTime}}}
+                <reversalOf typeCode="REV">
+                    <id root="{{ehrSupplyId}}"/>
+                </reversalOf>
+            </ehrSupplyDiscontinue>
+        </component>
+        {{/hasEhrSupplyDiscontinue}}
+        {{#priorPrescriptionId}}
+        <predecessor typeCode="SUCC">
+            <priorMedicationRef classCode="SBADM" moodCode="INT">
+                <id root="{{priorPrescriptionId}}"/>
+            </priorMedicationRef>
+        </predecessor>
+        {{/priorPrescriptionId}}
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>{{medicationStatementPertinentInformation}}</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>

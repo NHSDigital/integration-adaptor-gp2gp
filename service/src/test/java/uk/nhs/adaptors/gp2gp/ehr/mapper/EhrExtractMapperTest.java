@@ -9,6 +9,7 @@ import java.time.Instant;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,6 +55,8 @@ public class EhrExtractMapperTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private OrganizationToAgentMapper organizationToAgentMapper;
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
@@ -72,6 +75,8 @@ public class EhrExtractMapperTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -89,9 +94,18 @@ public class EhrExtractMapperTest {
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
         );
 
+        AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
+            new PractitionerAgentPersonMapper(
+                messageContext,
+                new OrganizationToAgentMapper(messageContext)
+            ),
+            organizationToAgentMapper
+        );
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper));
+            new EncounterMapper(messageContext, encounterComponentsMapper),
+            agentDirectoryMapper);
     }
 
     @AfterEach

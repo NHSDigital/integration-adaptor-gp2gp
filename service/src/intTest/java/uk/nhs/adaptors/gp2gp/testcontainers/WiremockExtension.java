@@ -1,15 +1,16 @@
 package uk.nhs.adaptors.gp2gp.testcontainers;
 
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import uk.nhs.adaptors.gp2gp.sds.configuration.SdsConfiguration;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WiremockExtension implements BeforeAllCallback, BeforeEachCallback {
@@ -35,8 +36,6 @@ public class WiremockExtension implements BeforeAllCallback, BeforeEachCallback 
             }
         });
 
-        var sdsConfiguration = configurableApplicationContext.getBean(SdsConfiguration.class);
-        sdsConfiguration.setUrl(wireMockServer.baseUrl());
         System.setProperty("GP2GP_WIREMOCK_PORT", String.valueOf(wireMockServer.port()));
 
         return wireMockServer;
