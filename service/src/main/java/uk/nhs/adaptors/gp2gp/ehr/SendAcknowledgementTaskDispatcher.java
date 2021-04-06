@@ -33,7 +33,7 @@ public class SendAcknowledgementTaskDispatcher {
             .typeCode(POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE)
             .reasonCode(Optional.empty())
             .detail(Optional.empty())
-            .messageId(ehrRequest.getMessageId())
+            .ehrRequestMessageId(ehrRequest.getMessageId())
             .build();
 
         taskDispatcher.createTask(sendAcknowledgementTaskDefinition);

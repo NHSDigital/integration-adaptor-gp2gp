@@ -19,7 +19,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 public class SendAcknowledgementTaskDefinition extends TaskDefinition {
     private final String nhsNumber;
     private final String typeCode;
-    private final String messageId;
+    private final String ehrRequestMessageId;
     @NonNull
     private final Optional<String> reasonCode;
     @NonNull

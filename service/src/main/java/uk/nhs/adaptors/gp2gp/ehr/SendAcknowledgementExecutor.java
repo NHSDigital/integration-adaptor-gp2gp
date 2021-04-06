@@ -47,17 +47,18 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())
             .toAsid(sendAcknowledgementTaskDefinition.getToAsid())
             .typeCode(sendAcknowledgementTaskDefinition.getTypeCode())
-            .messageId(sendAcknowledgementTaskDefinition.getMessageId())
+            .messageId(sendAcknowledgementTaskDefinition.getEhrRequestMessageId())
             .build();
-        var acknowledgmentRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAckTemplateParams);
-        var outboundMessage = OutboundMessageWithPayload.builder().payload(acknowledgmentRequestBody).build();
+        var acknowledgementRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAckTemplateParams);
+        var outboundMessage = OutboundMessageWithPayload.builder().payload(acknowledgementRequestBody).build();
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
+        var positiveAckMessageId = randomIdGeneratorService.createNewId();
 
         var request = mhsRequestBuilder.buildSendAcknowledgement(stringRequestBody, sendAcknowledgementTaskDefinition.getFromOdsCode(),
-            sendAcknowledgementTaskDefinition.getConversationId());
+            sendAcknowledgementTaskDefinition.getConversationId(), positiveAckMessageId);
 
         mhsClient.sendMessageToMHS(request);
 
-        ehrExtractStatusService.updateEhrExtractStatusAcknowledgment(sendAcknowledgementTaskDefinition);
+        ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(sendAcknowledgementTaskDefinition, positiveAckMessageId);
     }
 }

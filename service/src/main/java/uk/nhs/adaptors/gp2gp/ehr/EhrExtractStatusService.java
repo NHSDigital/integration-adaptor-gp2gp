@@ -215,12 +215,13 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgment(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
+    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+        String positiveAckMessageId) {
         Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
-        update.set(ACK_MESSAGE_ID_PATH, sendAcknowledgementTaskDefinition.getMessageId());
+        update.set(ACK_MESSAGE_ID_PATH, positiveAckMessageId);
         update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
 
         sendAcknowledgementTaskDefinition.getReasonCode().ifPresent(reason -> update.set(ACK_REASON_CODE_PATH, reason));

@@ -31,7 +31,7 @@ public class MockMhsService {
     private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = ResourceReader.readAsString("COPC_IN000001UK01.json");
     private static final String STUB_ACCEPTED_RESPONSE = ResourceReader.readAsString("StubEbXmlResponse.xml");
     private static final String INTERNAL_SERVER_ERROR_RESPONSE = ResourceReader.readAsString("InternalServerError.html");
-    
+
     private final InboundProducer inboundProducer;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final HttpHeaders headers = new HttpHeaders();
@@ -74,7 +74,7 @@ public class MockMhsService {
                 return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
             }
         } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID)) {
-            LOGGER.info(String.format("Message acknowledgement accepted, conversationId: %s", correlationId));
+            LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
         }

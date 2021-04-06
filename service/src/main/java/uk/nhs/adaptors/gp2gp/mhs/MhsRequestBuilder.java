@@ -33,8 +33,9 @@ public class MhsRequestBuilder {
     private static final String CORRELATION_ID = "Correlation-Id";
     private static final String WAIT_FOR_RESPONSE = "wait-for-response";
     private static final String FALSE = "false";
-    public static final String CONTENT_TYPE = "Content-type";
+    private static final String CONTENT_TYPE = "Content-type";
     private static final String MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
+    private static final String MESSAGE_ID = "Message-Id";
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
@@ -72,7 +73,8 @@ public class MhsRequestBuilder {
             .build();
     }
 
-    public RequestHeadersSpec<?> buildSendAcknowledgement(String requestBody, String fromOdsCode, String conversationId) {
+    public RequestHeadersSpec<?> buildSendAcknowledgement(String requestBody, String fromOdsCode, String conversationId,
+        String positiveAckMessageId) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -90,6 +92,7 @@ public class MhsRequestBuilder {
             .header(INTERACTION_ID, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID)
             .header(WAIT_FOR_RESPONSE, FALSE)
             .header(CORRELATION_ID, conversationId)
+            .header(MESSAGE_ID, positiveAckMessageId)
             .body(bodyInserter);
     }
 }
