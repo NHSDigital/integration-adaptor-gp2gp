@@ -4,5 +4,18 @@
         <statusCode code="COMPLETE" />
         <availabilityTime value="{{availabilityTime}}" />
         <text>{{comment}}</text>
+        {{#hasReference}}
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="{{narrativeStatementId}}"/>
+                <code code="25821000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Original Text document">
+                    <originalText>Record Attachment</originalText>
+                </code>
+                <text mediaType="{{referenceContentType}}">
+                    <reference value="file://localhost/{{referenceTitle}}"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+        {{/hasReference}}
     </NarrativeStatement>
 </component>

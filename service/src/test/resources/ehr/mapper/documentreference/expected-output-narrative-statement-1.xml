@@ -1,0 +1,19 @@
+<component typeCode="COMP">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20200921"/>
+        <text>Type: Referral Letter (21-Sep-2020) Author Org: Organisation name Description: for 2 week rule referral - skin Absent Attachment: some title Setting: Practice Setting Display </text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="394559384658936"/>
+                <code code="25821000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Original Text document">
+                    <originalText>Record Attachment</originalText>
+                </code>
+                <text mediaType="text/richtext">
+                    <reference value="file://localhost/some title"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>

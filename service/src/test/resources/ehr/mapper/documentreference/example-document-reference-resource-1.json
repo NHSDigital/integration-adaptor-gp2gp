@@ -1,0 +1,75 @@
+{
+  "resourceType": "DocumentReference",
+  "id": "AECD4BBE-F45C-42A0-BB77-AB77BAEE3E66",
+  "meta": {
+    "versionId": "5774557612980378259",
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://EMISWeb/A82038",
+      "value": "AECD4BBE-F45C-42A0-BB77-AB77BAEE3E66"
+    }
+  ],
+  "status": "current",
+  "type": {
+    "coding": [
+      {
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+            "extension": [
+              {
+                "url": "descriptionId",
+                "valueId": "63301000000111"
+              }
+            ]
+          }
+        ],
+        "system": "http://snomed.info/sct",
+        "code": "25611000000107",
+        "display": "Referral letter",
+        "userSelected": true
+      }
+    ],
+    "text": "Referral Letter (21-Sep-2020)"
+  },
+  "subject": {
+    "reference": "Patient/7DC1C5D8-540B-4A7C-8E19-CBD3426A8CC6"
+  },
+  "created": "2020-09-21",
+  "indexed": "2020-09-21T14:17:59.607+01:00",
+  "custodian": {
+    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+  },
+  "description": "for 2 week rule referral - skin",
+  "content": [
+    {
+      "attachment": {
+        "contentType": "text/richtext",
+        "url": "https://gpcassurance-b86047.emis.thirdparty.nhs.uk/A82038/STU3/1/GPConnect/Documents/Binary/7DC1C5D8540B4A7C8E19CBD3426A8CC6AECD4BBEF45C42A0BB77AB77BAEE3E66",
+        "size": 39907,
+        "title": "some title"
+      }
+    }
+  ],
+  "context": {
+    "encounter": {
+      "reference": "Encounter/337114B6-5F62-48C3-B378-9463CF61BB70"
+    },
+    "practiceSetting": {
+      "coding": [
+        {
+          "display": "Practice Setting Display"
+        }
+      ]
+    }
+  },
+  "author": [
+    {
+      "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    }
+  ]
+}

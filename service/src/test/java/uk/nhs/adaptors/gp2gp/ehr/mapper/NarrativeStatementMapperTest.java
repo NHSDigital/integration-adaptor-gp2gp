@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,11 +32,15 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class NarrativeStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
+    private static final String DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY = "/ehr/mapper/documentreference/";
+    private static final String INPUT_JSON_BUNDLE =  DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "input-bundle.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
     private static final String INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-2.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "example-observation-resource-3.json";
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY + "example-observation-resource-4.json";
     private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY + "example-observation-resource-5.json";
+    private static final String DOCUMENT_REFERENCE_INPUT_JSON = DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "example-document-reference-resource-1.json";
+    private static final String DOCUMENT_REFERENCE_OUTPUT_XML = DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
@@ -99,4 +105,29 @@ public class NarrativeStatementMapperTest {
         assertThrows(EhrMapperException.class, ()
             -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
     }
+
+    @ParameterizedTest
+    @MethodSource("documentReferenceResourceFileParams")
+    public void When_MappingDocumentReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
+        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+
+        expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+
+        final String outputMessage = narrativeStatementMapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+    }
+
+    private static Stream<Arguments> documentReferenceResourceFileParams() {
+        return Stream.of(
+            Arguments.of(DOCUMENT_REFERENCE_INPUT_JSON, DOCUMENT_REFERENCE_OUTPUT_XML)
+        );
+    }
+
 }
