@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -114,7 +115,6 @@ public class MedicationStatementMapperTest {
     private static final String INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-no-info-prescription-text.json";
 
-
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
 
@@ -131,7 +131,9 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, mockRandomIdGeneratorService);
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "1");
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
     }
 
     @AfterEach
@@ -227,7 +229,8 @@ public class MedicationStatementMapperTest {
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
 
         RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), randomIdGeneratorService);
 
         assertThrows(EhrMapperException.class, ()
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));
