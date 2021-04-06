@@ -6,14 +6,15 @@
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-
                 <text>Code Value: test-code Test display Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
+        
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        
     </ObservationStatement>
 </component>

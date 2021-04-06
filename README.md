@@ -88,7 +88,7 @@ The adaptor uses the GP Connect API to fetch patient records and documents.
 
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
-| GP2GP_GPC_GET_URL                    | http://localhost:8110/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
+| GP2GP_GPC_GET_URL                    | http://localhost:8090/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
 | GP2GP_GPC_GET_STRUCTURED_ENDPOINT    | /fhir/Patient/$gpc.getstructuredrecord        | The path of the Get Access Structured operation on the Patient resource
 | GP2GP_GPC_GET_PATIENT_ENDPOINT       | /fhir/Patient                                 | The path of the Access Document Patient resource
 | GP2GP_GPC_GET_DOCUMENT_ENDPOINT      | /fhir/Binary/                                 | The path of the Access Document Binary resource
