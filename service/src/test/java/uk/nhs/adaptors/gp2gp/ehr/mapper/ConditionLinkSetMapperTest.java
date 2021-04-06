@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
@@ -8,8 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -32,6 +35,7 @@ public class ConditionLinkSetMapperTest {
 
     private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
     private static final String GENERATED_ID = "50233a2f-128f-4b96-bdae-6207ed11a8ea";
+    private static final String ASSERTER_ID = "C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B";
 
     private static final String CONDITION_FILE_LOCATIONS = "/ehr/mapper/condition/";
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION = CONDITION_FILE_LOCATIONS + "condition_all_included.json";
@@ -64,6 +68,7 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_STATUS_INACTIVE = EXPECTED_OUTPUT_LINKSET + "12.xml";
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
+    private static final String OUTPUT_XML_WITH_NO_RELATED_AND_AGENT = EXPECTED_OUTPUT_LINKSET + "15.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -81,7 +86,8 @@ public class ConditionLinkSetMapperTest {
         fhirParseService = new FhirParseService();
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
+        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService,
+            codeableConceptCdMapper, new ParticipantMapper());
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
@@ -93,10 +99,22 @@ public class ConditionLinkSetMapperTest {
         messageContext.resetMessageContext();
     }
 
+    @Test
+    public void When_MappingParsedConditionWithoutMappedAgent_Expect_Exception() throws IOException {
+        EhrMapperException propagatedException = new EhrMapperException("expected exception");
+        when(idMapper.get(any(Reference.class))).thenThrow(propagatedException);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_STATUS_ACTIVE);
+        Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(condition, false))
+            .isSameAs(propagatedException);
+    }
+
     @ParameterizedTest
     @MethodSource("testArguments")
     public void When_MappingParsedConditionWithRealProblem_Expect_LinkSetXml(String conditionJson, String outputXml, boolean isNested)
-        throws IOException {
+            throws IOException {
+        when(idMapper.get(any(Reference.class))).thenAnswer(answerWithObjectId());
         var jsonInput = ResourceTestFileUtils.getFileContent(conditionJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);

@@ -48,11 +48,13 @@ public class ConditionLinkSetMapper {
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .linkSetId(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
+            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
 
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
@@ -71,6 +73,13 @@ public class ConditionLinkSetMapper {
             });
 
         builder.code(buildCode(condition));
+
+        if (condition.hasAsserter()) {
+            var asserterReference = condition.getAsserter();
+            var performerReference = idMapper.get(asserterReference);
+            var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
+            builder.performer(performerParameter);
+        }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }

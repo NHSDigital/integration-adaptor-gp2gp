@@ -78,6 +78,7 @@ public class EhrExtractMapperTest {
         when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+        ParticipantMapper participantMapper = new ParticipantMapper();
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
@@ -87,10 +88,11 @@ public class EhrExtractMapperTest {
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
                 codeableConceptCdMapper,
-                new ParticipantMapper()
+                participantMapper
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
         );
