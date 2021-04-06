@@ -1,8 +1,6 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
@@ -10,6 +8,8 @@ import java.util.Collections;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
+import org.assertj.core.api.SoftAssertions;
+import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +17,9 @@ import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
 public class EhrExtractTest {
+    @InjectSoftAssertions
+    private final SoftAssertions softly = new SoftAssertions();
+
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
@@ -100,59 +103,48 @@ public class EhrExtractTest {
     }
 
     private void assertThatAcknowledgementToRequesterWasSent(Document ackToRequester) {
-        assertAll(
-            () -> assertThat(ackToRequester.get("messageId")).isNotNull(),
-            () -> assertThat(ackToRequester.get("taskId")).isNotNull(),
-            () -> assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE)
-        );
+        softly.assertThat(ackToRequester.get("messageId")).isNotNull();
+        softly.assertThat(ackToRequester.get("taskId")).isNotNull();
+        softly.assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
-        assertAll(
-            () -> assertThat(ehrContinue).isNotEmpty().isNotEmpty(),
-            () -> assertThat(ehrContinue.get("received")).isNotNull()
-        );
+        softly.assertThat(ehrContinue).isNotEmpty().isNotEmpty();
+        softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
         var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);
-        assertAll(
-            () -> assertThat(ehrExtractStatus).isNotNull(),
-            () -> assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId),
-            () -> assertThat(ehrExtractStatus.get("created")).isNotNull(),
-            () -> assertThat(ehrExtractStatus.get("updatedAt")).isNotNull(),
-            () -> assertThat(ehrRequest.get("requestId")).isEqualTo(REQUEST_ID),
-            () -> assertThat(ehrRequest.get("nhsNumber")).isEqualTo(nhsNumber),
-            () -> assertThat(ehrRequest.get("fromPartyId")).isEqualTo(FROM_PARTY_ID),
-            () -> assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID),
-            () -> assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID),
-            () -> assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID),
-            () -> assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE),
-            () -> assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE)
-        );
+        softly.assertThat(ehrExtractStatus).isNotNull();
+        softly.assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId);
+        softly.assertThat(ehrExtractStatus.get("created")).isNotNull();
+        softly.assertThat(ehrExtractStatus.get("updatedAt")).isNotNull();
+        softly.assertThat(ehrRequest.get("requestId")).isEqualTo(REQUEST_ID);
+        softly.assertThat(ehrRequest.get("nhsNumber")).isEqualTo(nhsNumber);
+        softly.assertThat(ehrRequest.get("fromPartyId")).isEqualTo(FROM_PARTY_ID);
+        softly.assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID);
+        softly.assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID);
+        softly.assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
+        softly.assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
+        softly.assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
+
     }
 
     private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
-        assertAll(
-            () -> assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION),
-            () -> assertThat(accessStructured.get("accessedAt")).isNotNull(),
-            () -> assertThat(accessStructured.get("taskId")).isNotNull()
-        );
+        softly.assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION);
+        softly.assertThat(accessStructured.get("accessedAt")).isNotNull();
+        softly.assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
     private void assertThatAccessDocumentWasFetched(Document document) {
-        assertAll(
-            () -> assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json"),
-            () -> assertThat(document.get("accessedAt")).isNotNull(),
-            () -> assertThat(document.get("taskId")).isNotNull()
-        );
+        softly.assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
+        softly.assertThat(document.get("accessedAt")).isNotNull();
+        softly.assertThat(document.get("taskId")).isNotNull();
     }
 
     private void assertThatExtractCoreMessageWasSent(Document extractCore) {
-        assertAll(
-            () -> assertThat(extractCore.get("sentAt")).isNotNull(),
-            () -> assertThat(extractCore.get("taskId")).isNotNull()
-        );
+        softly.assertThat(extractCore.get("sentAt")).isNotNull();
+        softly.assertThat(extractCore.get("taskId")).isNotNull();
     }
 
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
