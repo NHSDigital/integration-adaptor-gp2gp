@@ -131,7 +131,8 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, mockRandomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
     }
 
     @AfterEach
@@ -227,7 +228,8 @@ public class MedicationStatementMapperTest {
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
 
         RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), randomIdGeneratorService);
 
         assertThrows(EhrMapperException.class, ()
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));

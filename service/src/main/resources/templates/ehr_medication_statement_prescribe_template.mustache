@@ -35,5 +35,8 @@
                 <text>{{medicationStatementPertinentInformation}}</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </MedicationStatement>
 </component>
