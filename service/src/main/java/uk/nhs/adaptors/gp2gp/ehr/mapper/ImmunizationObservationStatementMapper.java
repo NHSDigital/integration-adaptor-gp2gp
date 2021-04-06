@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Immunization;
@@ -185,6 +186,16 @@ public class ImmunizationObservationStatementMapper {
             notes = annotations.stream()
                 .map(Annotation::getText)
                 .collect(Collectors.joining(StringUtils.SPACE));
+        }
+        List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId());
+        for (var relatedCondition: relatedConditions) {
+            for (var annotation: relatedCondition.getNote()) {
+                if (notes == StringUtils.EMPTY) {
+                    notes = annotation.getText();
+                } else {
+                    notes = StringUtils.joinWith(StringUtils.SPACE, notes, annotation.getText());
+                }
+            }
         }
         return notes;
     }

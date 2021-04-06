@@ -82,7 +82,7 @@
         },
         "note": [
           {
-            "text": "Condition.actualProblem note refers to AllergyIntolerance test"
+            "text": "Condition.actualProblem note refers to AllergyIntolerance"
           }
         ]
       }
@@ -167,10 +167,10 @@
         },
         "note": [
           {
-            "text": "Condition.actualProblem note 1 refers to AllergyIntolerance test"
+            "text": "Condition.actualProblem note 1 refers to AllergyIntolerance"
           },
           {
-            "text": "Condition.actualProblem note 2 refers to AllergyIntolerance test"
+            "text": "Condition.actualProblem note 2 refers to AllergyIntolerance"
           }
         ]
       }

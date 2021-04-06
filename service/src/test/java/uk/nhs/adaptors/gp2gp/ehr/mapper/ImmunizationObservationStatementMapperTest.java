@@ -51,6 +51,12 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-reason-not-given-text.json";
     private static final String INPUT_JSON_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-vaccine-code-given.json";
+    private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-relation-to-condition-with-one-note.json";
+    private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-relation-to-condition-with-two-notes.json";
+    private static final String INPUT_JSON_WITH_NO_RELATION_TO_CONDITION = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-no-relation-to-condition.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -65,11 +71,18 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-reason-not-given.xml";
     private static final String OUTPUT_XML_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-with-vaccine-code.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_ONE_ADDITIONAL_NOTE_FROM_RELATED_CONDITION = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-immunization-with-one-additional-note-from-related-condition.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_TWO_ADDITIONAL_NOTES_FROM_RELATED_CONDITION = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-immunization-with-two-additional-notes-from-related-condition.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-immunization-with-no-relation-to-condition.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+
     private MessageContext messageContext;
     private ImmunizationObservationStatementMapper observationStatementMapper;
     private FhirParseService fhirParseService;
@@ -113,7 +126,13 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN_TEXT, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_CONTEXT, true),
-            Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false)
+            Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE,
+                OUTPUT_XML_WITH_IMMUNIZATION_WITH_ONE_ADDITIONAL_NOTE_FROM_RELATED_CONDITION, false),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES,
+                OUTPUT_XML_WITH_IMMUNIZATION_WITH_TWO_ADDITIONAL_NOTES_FROM_RELATED_CONDITION, false),
+            Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION,
+                OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION, false)
         );
     }
 
