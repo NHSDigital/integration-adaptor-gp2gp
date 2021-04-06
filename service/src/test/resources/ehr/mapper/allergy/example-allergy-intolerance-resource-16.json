@@ -1,24 +1,30 @@
 {
     "resourceType": "AllergyIntolerance",
-    "id": "081CE989-17CD-46C6-8C22-C90F8F2487C2",
+    "id": "75691D32-C7DE-4639-AA74-24B1AF61C32B",
     "meta": {
         "profile": [
-            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+           "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
         ]
     },
     "identifier": [
         {
             "system": "https://EMISWeb/A82038",
-            "value": "081CE989-17CD-46C6-8C22-C90F8F2487C2"
+            "value": "75691D32-C7DE-4639-AA74-24B1AF61C32B"
         }
     ],
     "clinicalStatus": "active",
     "verificationStatus": "unconfirmed",
     "category": [
-        "medication"
+        "environment"
     ],
     "code": {
         "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "SN59200",
+                "display": "Allergic reaction to wasp sting",
+                "userSelected": true
+            },
             {
                 "extension": [
                     {
@@ -26,33 +32,32 @@
                         "extension": [
                             {
                                 "url": "descriptionId",
-                                "valueId": "152307010"
+                                "valueId": "442105017"
                             },
                             {
                                 "url": "descriptionDisplay",
-                                "valueString": "Allergy to penicillin"
+                                "valueString": "Allergic reaction to wasp sting"
                             }
                         ]
                     }
                 ],
                 "system": "http://snomed.info/sct",
-                "code": "91936005",
-                "display": "Allergy to penicillin",
-                "userSelected": true
+                "code": "300909004",
+                "display": "Allergic reaction to wasp sting"
             }
         ]
     },
     "patient": {
-        "reference": "Patient/7DC1C5D8-540B-4A7C-8E19-CBD3426A8CC6"
+        "reference": "Patient/55D2363D-57A2-48F4-9A74-5B2E03F5E93D"
     },
-    "onsetDateTime": "2020-07-24",
-    "assertedDate": "2020-07-24T13:38:29.323+01:00",
+    "onsetDateTime": "2010-01-14",
+    "assertedDate": "2010-01-14T09:57:28.08+00:00",
     "recorder": {
-        "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
     },
     "note": [
         {
-            "text": "Significance : Major - Episodicity : First - test, test"
+          "text": "Significance : Minor - Episodicity : First - This is a Wasp Sting allergy note"
         }
     ]
 }

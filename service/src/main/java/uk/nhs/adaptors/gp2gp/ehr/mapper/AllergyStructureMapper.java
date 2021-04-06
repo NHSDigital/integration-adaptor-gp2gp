@@ -190,7 +190,6 @@ public class AllergyStructureMapper {
                 .map(Annotation::getText)
                 .collect(Collectors.joining(StringUtils.SPACE));
         }
-
         List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId());
         for (var relatedCondition: relatedConditions) {
             for (var annotation: relatedCondition.getNote()) {
@@ -201,7 +200,6 @@ public class AllergyStructureMapper {
                 }
             }
         }
-
         return notes;
     }
 
