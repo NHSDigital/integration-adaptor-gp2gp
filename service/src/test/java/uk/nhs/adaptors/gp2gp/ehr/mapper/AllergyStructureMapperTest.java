@@ -10,8 +10,10 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -57,6 +59,8 @@ public class AllergyStructureMapperTest {
     private static final String OUTPUT_XML_USES_ENVIRONMENT_CATEGORY = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-7.xml";
     private static final String OUTPUT_XML_USES_MEDICATION_CATEGORY = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-8.xml";
     private static final String OUTPUT_XML_USES_REACTION = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-9.xml";
+    private static final String OUTPUT_XML_USES_AGENTS = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-10.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -72,12 +76,25 @@ public class AllergyStructureMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper);
+        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
+    }
+
+    @Test
+    public void When_MappingAllergyIntoleranceJsonWithAgent_Expect_AllergyStructureXmlOutput() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PATIENT_RECORDER_AND_ASSERTER);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_AGENTS);
+        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+        messageContext.setAgentReference("agent-ref");
+        var practitionerId = messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "agent-ref");
+
+        String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
+
+        assertThat(outputMessage).isEqualTo(expectedOutput.replaceAll("#practitioner-id#", practitionerId));
     }
 
     @ParameterizedTest
