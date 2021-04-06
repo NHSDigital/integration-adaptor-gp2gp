@@ -5,6 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.Encounter.EncounterParticipantComponent;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,6 +46,7 @@ public class EncounterMapper {
     public String mapEncounterToEhrComposition(Encounter encounter) {
         String components = encounterComponentsMapper.mapComponents(encounter);
 
+        final IdMapper idMapper = messageContext.getIdMapper();
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
             .encounterStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Encounter, encounter.getId()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
@@ -53,8 +57,34 @@ public class EncounterMapper {
             .displayName(buildDisplayName(encounter))
             .originalText(buildOriginalText(encounter));
 
+        final Optional<String> recReference = findParticipantWithCoding(encounter, "REC")
+            .map(idMapper::get);
+
+        recReference.ifPresent(encounterStatementTemplateParameters::author);
+
+        final Optional<String> pprfReference = findParticipantWithCoding(encounter, "PPRF")
+            .map(idMapper::getOrNew);
+
+        pprfReference.or(() -> recReference)
+            .ifPresent(encounterStatementTemplateParameters::participant2);
+
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private Optional<Reference> findParticipantWithCoding(Encounter encounter, String coding) {
+        return encounter.getParticipant().stream()
+            .filter(EncounterParticipantComponent::hasType)
+            .filter(participant -> participant.getType().stream()
+                .filter(CodeableConcept::hasCoding)
+                .anyMatch(codeableConcept -> codeableConcept.getCoding().stream()
+                    .filter(Coding::hasCode)
+                    .map(Coding::getCode)
+                    .anyMatch(coding::equals)))
+            .filter(EncounterParticipantComponent::hasIndividual)
+            .map(EncounterParticipantComponent::getIndividual)
+            .filter(Reference::hasReference)
+            .findAny();
     }
 
     private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {
