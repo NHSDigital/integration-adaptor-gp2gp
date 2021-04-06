@@ -43,7 +43,6 @@ public class EncounterMapper {
     private final MessageContext messageContext;
     private final EncounterComponentsMapper encounterComponentsMapper;
 
-    // TODO AC10
     public String mapEncounterToEhrComposition(Encounter encounter) {
         String components = encounterComponentsMapper.mapComponents(encounter);
 
@@ -62,6 +61,12 @@ public class EncounterMapper {
             .map(idMapper::getOrNew);
 
         recReference.ifPresent(encounterStatementTemplateParameters::author);
+
+        final Optional<String> pprfReference = findParticipantWithCoding(encounter, "PPRF")
+            .map(idMapper::getOrNew);
+
+        pprfReference.or(() -> recReference)
+            .ifPresent(encounterStatementTemplateParameters::participant2);
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
