@@ -6,8 +6,10 @@ import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -64,6 +66,7 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_STATUS_INACTIVE = EXPECTED_OUTPUT_LINKSET + "12.xml";
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
+    private static final String OUTPUT_XML_WITH_NO_RELATED_AND_AGENT = EXPECTED_OUTPUT_LINKSET + "15.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -81,7 +84,8 @@ public class ConditionLinkSetMapperTest {
         fhirParseService = new FhirParseService();
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
+        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService,
+            codeableConceptCdMapper, new ParticipantMapper());
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
@@ -91,6 +95,19 @@ public class ConditionLinkSetMapperTest {
     @AfterEach
     public void tearDown() {
         messageContext.resetMessageContext();
+    }
+
+    @Test
+    public void When_MappingParsedConditionAndAgentAlreadyMapped_Expect_LinkSetXml() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_NO_RELATED);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_NO_RELATED_AND_AGENT);
+        Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
+        when(messageContext.getAgentReference()).thenReturn(Optional.of("agent-ref"));
+        when(idMapper.getOrNew(ResourceType.Practitioner, "agent-ref")).thenReturn("practitioner-id");
+
+        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, false);
+
+        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
     }
 
     @ParameterizedTest

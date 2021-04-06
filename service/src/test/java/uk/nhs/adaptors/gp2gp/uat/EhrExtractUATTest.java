@@ -121,16 +121,17 @@ public class EhrExtractUATTest {
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext, new ParticipantMapper()),
+            new NarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
                 codeableConceptCdMapper,
-                new ParticipantMapper()
+                participantMapper
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
         );
