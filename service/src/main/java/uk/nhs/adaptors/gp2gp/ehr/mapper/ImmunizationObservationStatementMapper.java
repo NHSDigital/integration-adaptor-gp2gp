@@ -190,7 +190,7 @@ public class ImmunizationObservationStatementMapper {
         List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId());
         for (var relatedCondition: relatedConditions) {
             for (var annotation: relatedCondition.getNote()) {
-                if (notes == StringUtils.EMPTY) {
+                if (notes.equals(StringUtils.EMPTY)) {
                     notes = annotation.getText();
                 } else {
                     notes = StringUtils.joinWith(StringUtils.SPACE, notes, annotation.getText());
