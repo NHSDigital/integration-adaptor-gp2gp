@@ -27,6 +27,7 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final EhrExtractStatusService ehrExtractStatusService;
     private final StorageConnectorService storageConnectorService;
     private final ObjectMapper objectMapper;
+    private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Override
     public Class<SendEhrExtractCoreTaskDefinition> getTaskType() {
@@ -47,9 +48,12 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var request = mhsRequestBuilder.buildSendEhrExtractCoreRequest(
             stringRequestBody, sendEhrExtractCoreTaskDefinition.getConversationId(), sendEhrExtractCoreTaskDefinition.getFromOdsCode());
+        mhsClient.sendMessageToMHS(request);
         Instant requestSentAt = Instant.now();
-        mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition);
 
-        ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCore(sendEhrExtractCoreTaskDefinition, requestSentAt);
+        if (ehrExtractStatus.getGpcAccessDocument().getDocuments().isEmpty()) {
+            sendAcknowledgementTaskDispatcher.sendPositiveAcknowledgement(ehrExtractStatus);
+        }
     }
 }
