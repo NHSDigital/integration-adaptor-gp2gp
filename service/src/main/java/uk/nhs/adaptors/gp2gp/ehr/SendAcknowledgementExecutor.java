@@ -39,7 +39,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     @Override
     @SneakyThrows
     public void execute(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
-        LOGGER.info("SendAcknowledgement task was created, Sending Acknowledgement to Spine");
+        LOGGER.info("Sending application acknowledgement from the adaptor to the requesting system");
 
         var sendAckTemplateParams = SendAckTemplateParameters.builder()
             .creationTime(timestampService.now().toString())
