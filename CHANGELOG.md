@@ -10,10 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Issues and Limitations
 
-- No SDS support. The adaptor does not use the configuration options for SDS.
-- No Spine Secure Proxy support. The adapter makes direct requests to the GP Connect provider.
 - Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents or acknowledgements.
 - Incomplete / invalid EhrExtract message. The adaptor does not yet support the complete message standard.
+- Only supports GP2GP transfers from a single organisation (ODS Code).
 - Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-NETMINIDEV-1078499] in net.minidev:json-smart@2.3
 - Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082238] in io.netty:netty-transport-native-epoll@4.1.53.Final
 - Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.59.Final
@@ -22,16 +21,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- NIAD-840: send ack when no doc found (#131)
-- NIAD-1181: create component tests for EMIS test extracts (#132)
+- Spine Directory Service (SDS) and Spine Security Proxy (SSP) support via usage of GP Connect Consumer Adaptor
+- NIAD-840: Send application acknowledgement when all message parts are sent (no documents) (#131)
+- NIAD-1181: Create unit/component tests for EMIS test extracts (#132)
 - NIAD 913: Medication Request to Medication Statement (#130)
-- NIAD-1024: generate agent directory (#139)
+- NIAD-1024: Generate agent directory (#139)
 - NIAD-1021: Translate Observation.interpretation in ObservationStatement (#136)
-- NIAD-1154:Add GPC-Consumer Configuration to Jenkinsfile (#133)
-- NIAD-1153: gp2gp adaptor uses gpcc adaptor (#129)
+- NIAD-1154: Add GPC-Consumer Configuration to Jenkinsfile (#133)
+- NIAD-1153: GP2GP Adaptor uses GPCC Adaptor for GP Connect requests (#129)
 - NIAD-1024: Generate agent directory (#127)
 - NIAD-1113: Map Encounter type to Ehr Composition code (#125)
-- Feature/niad 1178 add healthcheck endpoint in mock mhs wiremock (#128)
+- NIAD-1178: Create /healthcheck Endpoint for Mock-MHS & Wiremock (#128)
 
 ### Fixed
 
