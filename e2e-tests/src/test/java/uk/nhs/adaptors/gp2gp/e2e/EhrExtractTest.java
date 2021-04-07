@@ -62,6 +62,8 @@ public class EhrExtractTest {
 
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
+
+        softly.assertAll();
     }
 
     @Test
@@ -80,6 +82,8 @@ public class EhrExtractTest {
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatAcknowledgementToRequesterWasSent(ackToRequester);
+
+        softly.assertAll();
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
