@@ -232,7 +232,7 @@ public class EhrExtractStatusService {
         if (updateResult.getModifiedCount() != 1) {
             throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
         }
-        LOGGER.info("Database successfully updated with Acknowledgement");
+        LOGGER.info("Database updated for sending application acknowledgement");
     }
 
     private FindAndModifyOptions getReturningUpdatedRecordOption() {
