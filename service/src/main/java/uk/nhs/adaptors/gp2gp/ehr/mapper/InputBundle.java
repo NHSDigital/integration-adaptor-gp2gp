@@ -44,7 +44,6 @@ public class InputBundle {
                     .map(Extension::getValue)
                     .map(Reference.class::cast)
                     .map(Reference::getReference)
-                    .stream().findFirst()
                     .filter(referenceId::equals)
                     .isPresent())
             .collect(Collectors.toList());
