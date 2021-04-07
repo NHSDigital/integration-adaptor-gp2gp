@@ -6,7 +6,6 @@ import org.springframework.web.reactive.function.client.WebClient.RequestHeaders
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -14,8 +13,7 @@ import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 public class MhsClient {
     private final MhsConfiguration mhsConfiguration;
 
-    public String sendEhrExtractCore(RequestHeadersSpec<? extends RequestHeadersSpec<?>> request,
-                                      SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
+    public String sendMessageToMHS(RequestHeadersSpec<? extends RequestHeadersSpec<?>> request) {
         LOGGER.info("Mhs Outbound Request, Mhs Outbound Endpoint: {}", mhsConfiguration.getUrl());
 
         return request
