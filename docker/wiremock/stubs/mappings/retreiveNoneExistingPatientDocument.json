@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/fhir\/Binary\/non-existing-id"
+    "urlPattern": "\/.*\/STU3\/1\/gpconnect\/documents\/fhir\/Binary\/non-existing-id"
   },
   "response": {
     "status": 404,

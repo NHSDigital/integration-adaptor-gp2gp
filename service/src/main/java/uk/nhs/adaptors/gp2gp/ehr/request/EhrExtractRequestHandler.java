@@ -41,6 +41,7 @@ public class EhrExtractRequestHandler {
     private static final String FROM_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String TO_ODS_CODE_PATH = SUBJECT_PATH + "/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension";
     private static final String CONTINUE_ACKNOWLEDGEMENT = "Continue Acknowledgement";
+    private static final String MESSAGE_ID_PATH = MESSAGE_HEADER_PATH + "/MessageData/MessageId";
 
     private final EhrExtractStatusService ehrExtractStatusService;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -63,7 +64,7 @@ public class EhrExtractRequestHandler {
     private EhrExtractStatus prepareEhrExtractStatus(Document header, Document payload) {
         EhrExtractStatus.EhrRequest ehrRequest = prepareEhrRequest(header, payload);
         Instant now = timestampService.now();
-        String conversationId = xPathService.getNodeValue(header, CONVERSATION_ID_PATH);
+        String conversationId = getRequiredValue(header, CONVERSATION_ID_PATH);
         return EhrExtractStatus.builder()
             .created(now)
             .updatedAt(now)
@@ -120,7 +121,8 @@ public class EhrExtractRequestHandler {
             getRequiredValue(payload, FROM_ASID_PATH),
             getRequiredValue(payload, TO_ASID_PATH),
             getRequiredValue(payload, FROM_ODS_CODE_PATH),
-            getRequiredValue(payload, TO_ODS_CODE_PATH)
+            getRequiredValue(payload, TO_ODS_CODE_PATH),
+            getRequiredValue(header, MESSAGE_ID_PATH)
         );
     }
 

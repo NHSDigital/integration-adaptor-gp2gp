@@ -31,7 +31,8 @@ public class EhrExtractStatusTestUtils {
             EhrStatusConstants.FROM_ASID,
             EhrStatusConstants.TO_ASID,
             EhrStatusConstants.FROM_ODS_CODE,
-            EhrStatusConstants.TO_ODS_CODE);
+            EhrStatusConstants.TO_ODS_CODE,
+            EhrStatusConstants.MESSAGE_ID);
     }
 
     private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument() {
