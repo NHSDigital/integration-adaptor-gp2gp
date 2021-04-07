@@ -59,6 +59,7 @@ public class EhrExtractStatus implements TimeToLive {
         private String toAsid;
         private String fromOdsCode;
         private String toOdsCode;
+        private String messageId;
     }
 
     @Data

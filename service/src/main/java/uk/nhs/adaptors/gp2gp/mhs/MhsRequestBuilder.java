@@ -29,11 +29,13 @@ import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 public class MhsRequestBuilder {
     private static final String ODS_CODE = "ods-code";
     private static final String INTERACTION_ID = "Interaction-Id";
-    private static final String MHS_OUTBOUND_INTERACTION_ID = "RCMR_IN030000UK06";
+    private static final String MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final String CORRELATION_ID = "Correlation-Id";
     private static final String WAIT_FOR_RESPONSE = "wait-for-response";
     private static final String FALSE = "false";
-    public static final String CONTENT_TYPE = "Content-type";
+    private static final String CONTENT_TYPE = "Content-type";
+    private static final String MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
+    private static final String MESSAGE_ID = "Message-Id";
 
     private final MhsConfiguration mhsConfiguration;
     private final RequestBuilderService requestBuilderService;
@@ -54,7 +56,7 @@ public class MhsRequestBuilder {
             .accept(APPLICATION_JSON)
             .header(ODS_CODE, fromOdsCode)
             .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-            .header(INTERACTION_ID, MHS_OUTBOUND_INTERACTION_ID)
+            .header(INTERACTION_ID, MHS_OUTBOUND_EXTRACT_CORE_INTERACTION_ID)
             .header(WAIT_FOR_RESPONSE, FALSE)
             .header(CORRELATION_ID, conversationId)
             .body(bodyInserter);
@@ -69,5 +71,28 @@ public class MhsRequestBuilder {
             .baseUrl(mhsConfiguration.getUrl())
             .defaultUriVariables(Collections.singletonMap("url", mhsConfiguration.getUrl()))
             .build();
+    }
+
+    public RequestHeadersSpec<?> buildSendAcknowledgement(String requestBody, String fromOdsCode, String conversationId,
+        String positiveAckMessageId) {
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
+
+        WebClient.RequestBodySpec uri = client
+            .method(HttpMethod.POST)
+            .uri(mhsConfiguration.getUrl());
+
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(requestBody);
+
+        return uri
+            .accept(APPLICATION_JSON)
+            .header(ODS_CODE, fromOdsCode)
+            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+            .header(INTERACTION_ID, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID)
+            .header(WAIT_FOR_RESPONSE, FALSE)
+            .header(CORRELATION_ID, conversationId)
+            .header(MESSAGE_ID, positiveAckMessageId)
+            .body(bodyInserter);
     }
 }
