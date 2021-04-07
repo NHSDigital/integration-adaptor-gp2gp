@@ -138,13 +138,14 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private String getAvailabilityTime(final DocumentReference documentReference) {
-        if (documentReference.hasCreatedElement()) {
-            return DateFormatUtil.toHl7Format(documentReference.getCreatedElement());
-        } else if (documentReference.hasIndexedElement()) {
-            return DateFormatUtil.toHl7Format(documentReference.getIndexedElement());
-        } else {
-            throw new EhrMapperException("Could not map availability time");
-        }
+        return Optional.of(documentReference)
+            .filter(DocumentReference::hasCreatedElement)
+            .map(DocumentReference::getCreatedElement)
+            .map(DateFormatUtil::toHl7Format)
+            .orElseGet(() -> Optional.of(documentReference)
+                .filter(DocumentReference::hasIndexedElement)
+                .map(DocumentReference::getIndexedElement)
+                .map(DateFormatUtil::toHl7Format)
+                .orElseThrow(() -> new EhrMapperException("Could not map availability time")));
     }
-
 }

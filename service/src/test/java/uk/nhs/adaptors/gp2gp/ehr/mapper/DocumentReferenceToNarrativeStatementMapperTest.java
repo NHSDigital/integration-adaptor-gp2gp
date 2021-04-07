@@ -4,30 +4,30 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY = "/ehr/mapper/documentreference/";
-    private static final String INPUT_JSON_BUNDLE =  DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "input-bundle.json";
+    private static final String INPUT_JSON_BUNDLE = DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "input-bundle.json";
 
     private static final String DOCUMENT_REFERENCE_INPUT_JSON_OPTIONAL_DATA = DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "example-document-reference-resource-1.json";
     private static final String DOCUMENT_REFERENCE_INPUT_JSON_WITH_TYPE_TEXT_ONLY = DOCUMENT_REFERENCE_TEST_FILE_DIRECTORY + "example-document-reference-resource-2.json";
@@ -58,8 +58,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
-    private CharSequence expectedOutputMessage;
-    private DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper;
+    private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
 
     @BeforeEach
@@ -69,7 +68,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        documentReferenceToNarrativeStatementMapper = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext);
     }
 
     @AfterEach
@@ -81,12 +80,11 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     @ParameterizedTest
     @MethodSource("documentReferenceResourceFileParams")
     public void When_MappingDocumentReferenceJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
 
-        final String outputMessage = documentReferenceToNarrativeStatementMapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
+        final String outputMessage = mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference);
 
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
@@ -106,6 +104,17 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
             Arguments.of(DOCUMENT_REFERENCE_INPUT_JSON_WITH_ATTACHMENT_CONTENT_TYPE, DOCUMENT_REFERENCE_OUTPUT_XML_WITH_REFERENCE_CONTENT_TYPE),
             Arguments.of(DOCUMENT_REFERENCE_INPUT_JSON_REQUIRED_DATA, DOCUMENT_REFERENCE_OUTPUT_XML_REQUIRED_DATA)
         );
+    }
+
+    @Test
+    public void When_MappingParsedDocumentReferenceJsonWithNoDates_Expect_MapperException() throws IOException {
+        final String jsonInput = ResourceTestFileUtils.getFileContent(DOCUMENT_REFERENCE_INPUT_JSON_REQUIRED_DATA);
+        final DocumentReference parsedDocumentReference = new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        parsedDocumentReference.setIndexedElement(null);
+
+        assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Could not map availability time");
     }
 
 }
