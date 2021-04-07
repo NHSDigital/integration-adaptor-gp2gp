@@ -45,6 +45,9 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_ATTACHMENT_CONTENT_TYPE = TEST_FILE_DIRECTORY
         + "example-document-reference-resource-11.json";
     private static final String INPUT_JSON_REQUIRED_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-12.json";
+    private static final String INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME = TEST_FILE_DIRECTORY
+        + "example-document-reference-resource-13.json";
+    private static final String INPUT_JSON_WITH_AUTHOR_PRACTITIONER = TEST_FILE_DIRECTORY + "example-document-reference-resource-14.json";
 
     private static final String OUTPUT_XML_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
@@ -112,7 +115,9 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PRACTICE_SETTING_DISPLAY_ONLY, OUTPUT_XML_WITH_PRACTICE_SETTING_DISPLAY_ONLY),
             Arguments.of(INPUT_JSON_WITH_ATTACHMENT_TITLE, OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE_AND_REFERENCE),
             Arguments.of(INPUT_JSON_WITH_ATTACHMENT_CONTENT_TYPE, OUTPUT_XML_WITH_REFERENCE_CONTENT_TYPE),
-            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA)
+            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_WITH_AUTHOR_PRACTITIONER, OUTPUT_XML_REQUIRED_DATA)
         );
     }
 
