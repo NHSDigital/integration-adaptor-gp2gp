@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2021-04-07
+
+### Known Issues and Limitations
+
+- No SDS support. The adaptor does not use the configuration options for SDS.
+- No Spine Secure Proxy support. The adapter makes direct requests to the GP Connect provider.
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents or acknowledgements.
+- Incomplete / invalid EhrExtract message. The adaptor does not yet support the complete message standard.
+- Denial of Service (DoS) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-NETMINIDEV-1078499] in net.minidev:json-smart@2.3
+- Information Disclosure [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1082238] in io.netty:netty-transport-native-epoll@4.1.53.Final
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.59.Final
+- HTTP Request Smuggling [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1083991] in io.netty:netty-codec-http2@4.1.59.Final
+- Man-in-the-Middle (MitM) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-ORGMONGODB-1079241] in org.mongodb:mongodb-driver-sync@4.1.1
+
+
+### Added
+
+
+### Fixed
+
+- Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.59.Final
+- HTTP Request Smuggling (new) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1083991] in io.netty:netty-codec-http2@4.1.59.Final
+
+
 ## [0.0.4] - 2021-03-10
 
 ### Known Issues and Limitations
