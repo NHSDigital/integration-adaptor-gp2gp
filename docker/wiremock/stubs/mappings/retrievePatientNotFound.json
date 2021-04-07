@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "urlPattern": "/.*/STU3/1/gpconnect/fhir/Patient[?]identifier=https://fhir[.]nhs[.]uk/Id/nhs-number%7C9876543210"
+    "urlPattern": "/.*/STU3/1/gpconnect/documents/fhir/Patient[?]identifier=https://fhir[.]nhs[.]uk/Id/nhs-number%7C9876543210"
   },
   "response": {
     "status": 200,

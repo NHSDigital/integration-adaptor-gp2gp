@@ -65,7 +65,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         when(storageDataWrapper.getHl7Response()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
-        when(mhsClient.sendEhrExtractCore(request, sendEhrExtractCoreTaskDefinition)).thenReturn("Successful Mhs Outbound Request");
+        when(mhsClient.sendMessageToMHS(request)).thenReturn("Successful Mhs Outbound Request");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
 
