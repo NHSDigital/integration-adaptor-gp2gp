@@ -20,14 +20,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - HTTP Request Smuggling [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1083991] in io.netty:netty-codec-http2@4.1.59.Final
 - Man-in-the-Middle (MitM) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-ORGMONGODB-1079241] in org.mongodb:mongodb-driver-sync@4.1.1
 
-
 ### Added
 
+- NIAD-840: send ack when no doc found (#131)
+- NIAD-1181: create component tests for EMIS test extracts (#132)
+- NIAD 913: Medication Request to Medication Statement (#130)
+- NIAD-1024: generate agent directory (#139)
+- NIAD-1021: Translate Observation.interpretation in ObservationStatement (#136)
+- NIAD-1154:Add GPC-Consumer Configuration to Jenkinsfile (#133)
+- NIAD-1153: gp2gp adaptor uses gpcc adaptor (#129)
+- NIAD-1024: Generate agent directory (#127)
+- NIAD-1113: Map Encounter type to Ehr Composition code (#125)
+- Feature/niad 1178 add healthcheck endpoint in mock mhs wiremock (#128)
 
 ### Fixed
 
 - Improper Certificate Validation [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268] in io.netty:netty-handler@4.1.59.Final
 - HTTP Request Smuggling (new) [Medium Severity][https://snyk.io/vuln/SNYK-JAVA-IONETTY-1083991] in io.netty:netty-codec-http2@4.1.59.Final
+- [Issue 116](https://github.com/nhsconnect/integration-adaptor-gp2gp/issues/116) Spine SSL context used for outbound http calls
 
 
 ## [0.0.4] - 2021-03-10
