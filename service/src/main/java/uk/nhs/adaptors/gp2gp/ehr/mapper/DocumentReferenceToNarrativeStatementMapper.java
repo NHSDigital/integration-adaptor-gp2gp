@@ -29,7 +29,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
     private final MessageContext messageContext;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
-        final String narrativeStatementId = messageContext.getIdMapper().getOrNew(ResourceType.DocumentReference, documentReference.getId());
+        final String narrativeStatementId = messageContext.getIdMapper()
+            .getOrNew(ResourceType.DocumentReference, documentReference.getId());
 
         final NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder builder =
             NarrativeStatementTemplateParameters.builder();
@@ -42,7 +43,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
             final Attachment attachment = contentAttachment.get();
             final String attachmentTitle = attachment.getTitle();
-            final String attachmentContentType = attachment.hasContentType() ? attachment.getContentType() : DEFAULT_ATTACHMENT_CONTENT_TYPE;
+            final String attachmentContentType = attachment.hasContentType()
+                ? attachment.getContentType() : DEFAULT_ATTACHMENT_CONTENT_TYPE;
 
             builder.narrativeStatementId(narrativeStatementId)
                 .hasReference(true)
