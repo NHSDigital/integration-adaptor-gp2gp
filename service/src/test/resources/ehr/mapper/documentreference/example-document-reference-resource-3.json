@@ -22,36 +22,13 @@
         "display": "Referral letter",
         "userSelected": true
       }
-    ],
-    "text": "Referral Letter (21-Sep-2020)"
+    ]
   },
-  "created": "2020-09-21",
   "indexed": "2020-09-21T14:17:59.607+01:00",
-  "custodian": {
-    "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
-  },
   "content": [
     {
       "attachment": {
-        "contentType": "text/richtext",
-        "title": "some title"
       }
     }
-  ],
-  "description": "for 2 week rule referral - skin",
-  "author": [
-    {
-      "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
-    }
-  ],
-  "context": {
-    "practiceSetting": {
-      "coding": [
-        {
-          "display": "Practice Setting Display"
-        }
-      ],
-      "text": "Practice Setting Text"
-    }
-  }
+  ]
 }

@@ -1,0 +1,8 @@
+<component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20200921141759" />
+        <text>Setting: Practice Setting Text </text>
+    </NarrativeStatement>
+</component>
