@@ -8,17 +8,20 @@ import java.util.Collections;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
-import org.junit.jupiter.api.Test;
-
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
+import org.assertj.core.api.SoftAssertions;
+import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
     @InjectSoftAssertions
-    private final SoftAssertions softly = new SoftAssertions();
+    private SoftAssertions softly;
 
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
@@ -62,8 +65,6 @@ public class EhrExtractTest {
 
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
-
-        softly.assertAll();
     }
 
     @Test
@@ -82,8 +83,6 @@ public class EhrExtractTest {
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatAcknowledgementToRequesterWasSent(ackToRequester);
-
-        softly.assertAll();
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
