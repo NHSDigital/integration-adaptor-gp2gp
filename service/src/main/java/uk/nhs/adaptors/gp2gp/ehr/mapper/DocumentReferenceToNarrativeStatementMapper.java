@@ -59,7 +59,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
 
-    private String getComment(final DocumentReference documentReference, String attachmentTitle) {
+    private String getComment(final DocumentReference documentReference, final String attachmentTitle) {
         StringBuilder commentBuilder = new StringBuilder();
 
         mapType(documentReference, commentBuilder);
@@ -72,7 +72,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
         mapSettings(documentReference, commentBuilder);
 
-        return commentBuilder.toString();
+        return commentBuilder.toString().trim();
     }
 
     private void mapSettings(final DocumentReference documentReference, final StringBuilder commentBuilder) {
@@ -101,9 +101,9 @@ public class DocumentReferenceToNarrativeStatementMapper {
         Optional.ofNullable(documentReference.getCustodian())
             .map(BaseReference::getReferenceElement)
             .filter(IIdType::hasResourceType)
-            .filter(iIdType -> iIdType.getResourceType().equals(ResourceType.Organization.name()))
-            .ifPresent(iIdType -> messageContext.getInputBundleHolder()
-                .getResource(iIdType)
+            .filter(idType -> idType.getResourceType().equals(ResourceType.Organization.name()))
+            .ifPresent(idType -> messageContext.getInputBundleHolder()
+                .getResource(idType)
                 .map(Organization.class::cast)
                 .map(Organization::getName)
                 .map(name -> commentBuilder.append("Custodian Org: ").append(name).append(StringUtils.SPACE)));
@@ -113,10 +113,10 @@ public class DocumentReferenceToNarrativeStatementMapper {
         documentReference.getAuthor().stream()
             .map(BaseReference::getReferenceElement)
             .filter(IIdType::hasResourceType)
-            .filter(iIdType -> iIdType.getResourceType().equals(ResourceType.Organization.name()))
+            .filter(idType -> idType.getResourceType().equals(ResourceType.Organization.name()))
             .findFirst()
-            .ifPresent(iIdType -> messageContext.getInputBundleHolder()
-                .getResource(iIdType)
+            .ifPresent(idType -> messageContext.getInputBundleHolder()
+                .getResource(idType)
                 .map(Organization.class::cast)
                 .map(Organization::getName)
                 .map(name -> commentBuilder.append("Author Org: ").append(name).append(StringUtils.SPACE)));

@@ -3,7 +3,7 @@
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921141759" />
-        <text>Absent Attachment: some title </text>
+        <text>Absent Attachment: some title</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>
