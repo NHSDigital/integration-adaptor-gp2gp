@@ -135,7 +135,7 @@ public class EhrExtractStatusService {
             throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Message.");
         }
 
-        LOGGER.info("Database successfully updated with EHRContinue");
+        LOGGER.info("Database successfully updated after sending EhrExtract");
         return ehrExtractStatus;
     }
 
