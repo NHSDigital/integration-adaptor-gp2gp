@@ -40,14 +40,13 @@ public class InputBundle {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> ResourceType.Condition.equals(resource.getResourceType()))
             .map(resource -> (Condition) resource)
-            .filter(condition -> {
-                Optional<String> reference = filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
+            .filter(condition -> filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
                     .map(Extension::getValue)
                     .map(Reference.class::cast)
                     .map(Reference::getReference)
-                    .stream().findFirst();
-                return reference.equals(Optional.of(referenceId));
-            })
+                    .stream().findFirst()
+                    .filter(referenceId::equals)
+                    .isPresent())
             .collect(Collectors.toList());
     }
 }
