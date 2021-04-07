@@ -9,6 +9,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtens
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
@@ -183,24 +184,15 @@ public class AllergyStructureMapper {
     }
 
     private String buildNotePertinentInformation(AllergyIntolerance allergyIntolerance) {
-        String notes = StringUtils.EMPTY;
-        if (allergyIntolerance.hasNote()) {
-            List<Annotation> annotations = allergyIntolerance.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId());
-        for (var relatedCondition: relatedConditions) {
-            for (var annotation: relatedCondition.getNote()) {
-                if (notes.equals(StringUtils.EMPTY)) {
-                    notes = annotation.getText();
-                } else {
-                    notes = StringUtils.joinWith(StringUtils.SPACE, notes, annotation.getText());
-                }
-            }
-        }
-        return notes;
+        return Stream.concat(
+            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty(),
+            messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream)
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {

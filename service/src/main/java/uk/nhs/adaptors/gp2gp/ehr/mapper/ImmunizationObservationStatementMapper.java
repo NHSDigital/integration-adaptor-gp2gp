@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
@@ -180,24 +181,15 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildNotePertinentInformation(Immunization immunization) {
-        String notes = StringUtils.EMPTY;
-        if (immunization.hasNote()) {
-            List<Annotation> annotations = immunization.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        List<Condition> relatedConditions = messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId());
-        for (var relatedCondition: relatedConditions) {
-            for (var annotation: relatedCondition.getNote()) {
-                if (notes.equals(StringUtils.EMPTY)) {
-                    notes = annotation.getText();
-                } else {
-                    notes = StringUtils.joinWith(StringUtils.SPACE, notes, annotation.getText());
-                }
-            }
-        }
-        return notes;
+        return Stream.concat(
+            immunization.hasNote() ? immunization.getNote().stream() : Stream.empty(),
+            messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream)
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildExplanationPertinentInformation(Immunization immunization) {
