@@ -146,7 +146,6 @@ public class ObservationStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
-        
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
