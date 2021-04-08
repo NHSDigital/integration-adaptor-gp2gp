@@ -182,11 +182,11 @@ public class ImmunizationObservationStatementMapper {
 
     private String buildNotePertinentInformation(Immunization immunization) {
         return Stream.concat(
-            immunization.hasNote() ? immunization.getNote().stream() : Stream.empty(),
             messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId())
                 .stream()
                 .map(Condition::getNote)
-                .flatMap(List::stream)
+                .flatMap(List::stream),
+            immunization.hasNote() ? immunization.getNote().stream() : Stream.empty()
         )
             .map(Annotation::getText)
             .collect(Collectors.joining(StringUtils.SPACE));

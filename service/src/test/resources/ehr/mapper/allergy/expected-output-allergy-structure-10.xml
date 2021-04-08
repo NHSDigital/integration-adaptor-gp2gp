@@ -25,7 +25,7 @@
                     <pertinentInformation typeCode="PERT">
                         <sequenceNumber value="+1"/>
                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active Significance : Major - Episodicity : First - test, test Condition.actualProblem note refers to AllergyIntolerance</text>
+                            <text>Status: Active Condition.actualProblem note refers to AllergyIntolerance Significance : Major - Episodicity : First - test, test</text>
                         </pertinentAnnotation>
                     </pertinentInformation>
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>

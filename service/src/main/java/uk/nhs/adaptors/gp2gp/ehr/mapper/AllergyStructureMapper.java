@@ -185,11 +185,11 @@ public class AllergyStructureMapper {
 
     private String buildNotePertinentInformation(AllergyIntolerance allergyIntolerance) {
         return Stream.concat(
-            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty(),
             messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId())
                 .stream()
                 .map(Condition::getNote)
-                .flatMap(List::stream)
+                .flatMap(List::stream),
+            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty()
         )
             .map(Annotation::getText)
             .collect(Collectors.joining(StringUtils.SPACE));

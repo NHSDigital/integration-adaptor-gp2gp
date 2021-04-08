@@ -25,7 +25,7 @@
                     <pertinentInformation typeCode="PERT">
                         <sequenceNumber value="+1"/>
                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active Significance : Minor - Episodicity : First - This is a Wasp Sting allergy note Condition.actualProblem note 1 refers to AllergyIntolerance Condition.actualProblem note 2 refers to AllergyIntolerance</text>
+                            <text>Status: Active Condition.actualProblem note 1 refers to AllergyIntolerance Condition.actualProblem note 2 refers to AllergyIntolerance Significance : Minor - Episodicity : First - This is a Wasp Sting allergy note</text>
                         </pertinentAnnotation>
                     </pertinentInformation>
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
