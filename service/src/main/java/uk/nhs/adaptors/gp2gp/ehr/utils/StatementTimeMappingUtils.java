@@ -17,6 +17,7 @@ public final class StatementTimeMappingUtils {
     private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
+    private static final String EFFECTIVE_TIME_LOW_TEMPLATE = "<low value=\"%s\"/>";
 
     private StatementTimeMappingUtils() {
     }
@@ -108,7 +109,7 @@ public final class StatementTimeMappingUtils {
                     toHl7Format(startElement),
                     toHl7Format(period.getEndElement()));
             }
-            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(startElement));
+            return String.format(EFFECTIVE_TIME_LOW_TEMPLATE, toHl7Format(startElement));
         }
         throw new EhrMapperException("Could not map Effective Time for Medication Request");
     }
