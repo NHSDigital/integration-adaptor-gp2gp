@@ -24,7 +24,8 @@ public class ParticipantMapperTest {
 
     @ParameterizedTest
     @MethodSource("getTestArguments")
-    public void When_MappingParticipantData_Expect_ParticipantXml(String reference, ParticipantType type, String expectedOutputFile) throws IOException {
+    public void When_MappingParticipantData_Expect_ParticipantXml(String reference, ParticipantType type, String expectedOutputFile)
+            throws IOException {
         var expectedOutput = ResourceTestFileUtils.getFileContent(expectedOutputFile);
 
         var actual = participantMapper.mapToParticipant(reference, type);
