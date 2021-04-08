@@ -3,7 +3,9 @@
         <id root="394559384658936"/>
         <statusCode code="ACTIVE"/>
         <availabilityTime value="20171110000000"/>
-        <low value="20171110000000"/><high value="20180815000000"/>
+        <effectiveTime>
+            <low value="20171110000000"/><high value="20180815000000"/>
+        </effectiveTime>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -19,7 +21,9 @@
                 <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <availabilityTime value="20171110000000"/>
-                <low value="20171110000000"/><high value="20180815000000"/>
+                <effectiveTime>
+                    <low value="20171110000000"/><high value="20180815000000"/>
+                </effectiveTime>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
