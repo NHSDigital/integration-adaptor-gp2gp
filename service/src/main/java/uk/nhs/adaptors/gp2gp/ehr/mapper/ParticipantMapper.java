@@ -13,9 +13,9 @@ public class ParticipantMapper {
     private static final Mustache PARTICIPANT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_participant_template.mustache");
 
-    public String mapToParticipant(String reference, String typeCode) {
+    public String mapToParticipant(String reference, ParticipantType type) {
         var participantParameters = ParticipantTemplateParameters.builder()
-            .typeCode(typeCode)
+            .typeCode(type.getCode())
             .participantId(reference)
             .build();
 
