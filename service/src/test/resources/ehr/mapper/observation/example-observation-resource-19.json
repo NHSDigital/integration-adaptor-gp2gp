@@ -7,7 +7,7 @@
   "referenceRange": [
     {
       "text": "Test reference range text",
-      "high": {
+      "low": {
         "value": 20
       }
     }
@@ -20,7 +20,7 @@
       {
         "system": "http://hl7.org/fhir/v2/0078",
         "code": "L",
-        "display": "Very High Value"
+        "display": "Low Value"
       }
     ]
   }
