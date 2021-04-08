@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -32,10 +33,12 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final String narrativeStatementId = messageContext.getIdMapper()
             .getOrNew(ResourceType.DocumentReference, documentReference.getId());
 
-        final NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder builder =
-            NarrativeStatementTemplateParameters.builder();
+        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
+            .narrativeStatementId(narrativeStatementId)
+            .availabilityTime(getAvailabilityTime(documentReference));
 
-        final Optional<Attachment> contentAttachment = documentReference.getContent().stream()
+        final Optional<Attachment> contentAttachment = documentReference.getContent()
+            .stream()
             .map(DocumentReference.DocumentReferenceContentComponent::getAttachment)
             .findFirst();
 
@@ -46,16 +49,13 @@ public class DocumentReferenceToNarrativeStatementMapper {
             final String attachmentContentType = attachment.hasContentType()
                 ? attachment.getContentType() : DEFAULT_ATTACHMENT_CONTENT_TYPE;
 
-            builder.narrativeStatementId(narrativeStatementId)
-                .hasReference(true)
+            builder.hasReference(true)
                 .comment(getComment(documentReference, attachmentTitle))
                 .availabilityTime(getAvailabilityTime(documentReference))
                 .referenceTitle(attachmentTitle)
                 .referenceContentType(attachmentContentType);
         } else {
-            builder.narrativeStatementId(narrativeStatementId)
-                .comment(getComment(documentReference, null))
-                .availabilityTime(getAvailabilityTime(documentReference));
+            builder.comment(getComment(documentReference, null));
         }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
@@ -87,11 +87,10 @@ public class DocumentReferenceToNarrativeStatementMapper {
             .ifPresentOrElse(text -> commentBuilder.append("Setting: ").append(text).append(StringUtils.SPACE),
                 () -> codeableConcept
                     .filter(CodeableConcept::hasCoding)
-                    .map(CodeableConcept::getCoding)
-                    .flatMap(coding -> coding.stream().findFirst())
+                    .map(CodeableConcept::getCodingFirstRep)
                     .filter(Coding::hasDisplay)
                     .map(Coding::getDisplay)
-                    .map(display -> commentBuilder.append("Setting: ").append(display).append(StringUtils.SPACE)));
+                    .ifPresent(display -> commentBuilder.append("Setting: ").append(display).append(StringUtils.SPACE)));
     }
 
     private void mapDescription(final DocumentReference documentReference, final StringBuilder commentBuilder) {
@@ -125,18 +124,16 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private void mapType(final DocumentReference documentReference, final StringBuilder commentBuilder) {
-        final CodeableConcept type = documentReference.getType();
+        final CodeableConcept codeableConcept = documentReference.getType();
+        final Optional<CodeableConcept> type = Optional.of(codeableConcept);
 
-        Optional.of(type)
-            .filter(CodeableConcept::hasText)
+        type.filter(CodeableConcept::hasText)
             .map(CodeableConcept::getText)
             .ifPresentOrElse(text -> commentBuilder.append("Type: ").append(text).append(StringUtils.SPACE),
-                () -> type.getCoding()
-                    .stream()
-                    .findFirst()
+                () -> type.map(CodeableConcept::getCodingFirstRep)
                     .filter(Coding::hasDisplay)
                     .map(Coding::getDisplay)
-                    .map(display -> commentBuilder.append("Type: ").append(display).append(StringUtils.SPACE)));
+                    .ifPresent(display -> commentBuilder.append("Type: ").append(display).append(StringUtils.SPACE)));
     }
 
     private String getAvailabilityTime(final DocumentReference documentReference) {
