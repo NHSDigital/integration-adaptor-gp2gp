@@ -75,6 +75,9 @@ dependencies {
 		implementation('io.netty:netty-codec-http:4.1.59.Final') {
 			because 'to fix SNYK-JAVA-IONETTY-1070799'
 		}
+		implementation('com.azure:azure-core-http-netty:1.9.1') {
+			because 'to fix SNYK-JAVA-IONETTY-1083991'
+		}
 	}
 }
 
