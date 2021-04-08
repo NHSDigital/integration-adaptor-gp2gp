@@ -130,7 +130,8 @@ public class DocumentReferenceToNarrativeStatementMapper {
         type.filter(CodeableConcept::hasText)
             .map(CodeableConcept::getText)
             .ifPresentOrElse(text -> commentBuilder.append("Type: ").append(text).append(StringUtils.SPACE),
-                () -> type.map(CodeableConcept::getCodingFirstRep)
+                () -> type.filter(CodeableConcept::hasCoding)
+                    .map(CodeableConcept::getCodingFirstRep)
                     .filter(Coding::hasDisplay)
                     .map(Coding::getDisplay)
                     .ifPresent(display -> commentBuilder.append("Type: ").append(display).append(StringUtils.SPACE)));
