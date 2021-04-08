@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Spine Directory Service (SDS) and Spine Security Proxy (SSP) support via usage of GP Connect Consumer Adaptor
+- NIAD-1154: Fix fhir base and update readme
 - NIAD-840: Send application acknowledgement when all message parts are sent (no documents) (#131)
 - NIAD-1181: Create unit/component tests for EMIS test extracts (#132)
 - NIAD 913: Medication Request to Medication Statement (#130)
