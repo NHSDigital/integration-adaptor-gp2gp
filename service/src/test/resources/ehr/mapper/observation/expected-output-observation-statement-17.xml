@@ -10,11 +10,11 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: Text: Test reference range text Low: 20 Test comment</text>
+                <text>Range: Text: Test reference range text High: 20 Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <interpretationCode code="LO" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Below low reference limit"><originalText>Low Value</originalText></interpretationCode>
+        <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
     </ObservationStatement>
 </component>
