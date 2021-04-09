@@ -19,7 +19,7 @@
     "coding": [
       {
         "system": "http://hl7.org/fhir/v2/0078",
-        "code": "HH",
+        "code": "HU",
         "display": "Very High Value"
       }
     ]
