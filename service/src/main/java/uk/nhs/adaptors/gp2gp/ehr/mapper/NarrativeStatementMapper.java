@@ -33,7 +33,7 @@ public class NarrativeStatementMapper {
             .isNested(isNested);
 
         if (observation.hasPerformer()) {
-            final String participantReference = idMapper.getOrNew(observation.getPerformerFirstRep());
+            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             narrativeStatementTemplateParameters.participant(participantBlock);
