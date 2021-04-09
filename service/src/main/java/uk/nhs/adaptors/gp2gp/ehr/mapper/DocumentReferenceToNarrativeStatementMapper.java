@@ -27,6 +27,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    private static final String DEFAULT_ATTACHMENT_FILE_EXTENSION = ".xyz";
     private final MessageContext messageContext;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
@@ -35,28 +36,30 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
         final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(narrativeStatementId)
-            .availabilityTime(getAvailabilityTime(documentReference));
+            .availabilityTime(getAvailabilityTime(documentReference))
+            .hasReference(true);
 
-        final Optional<Attachment> contentAttachment = documentReference.getContent()
-            .stream()
-            .map(DocumentReference.DocumentReferenceContentComponent::getAttachment)
-            .findFirst();
-
-        if (contentAttachment.isPresent() && contentAttachment.get().hasTitle()) {
-
-            final Attachment attachment = contentAttachment.get();
-            final String attachmentTitle = attachment.getTitle();
-            final String attachmentContentType = attachment.hasContentType()
-                ? attachment.getContentType() : DEFAULT_ATTACHMENT_CONTENT_TYPE;
-
-            builder.hasReference(true)
-                .comment(getComment(documentReference, attachmentTitle))
-                .availabilityTime(getAvailabilityTime(documentReference))
-                .referenceTitle(attachmentTitle)
-                .referenceContentType(attachmentContentType);
-        } else {
-            builder.comment(getComment(documentReference, null));
+        if (documentReference.getContent().isEmpty()) {
+            throw new EhrMapperException("No content found on documentReference");
         }
+
+        final Attachment attachment = documentReference.getContent()
+            .stream()
+            .findFirst()
+            .filter(DocumentReference.DocumentReferenceContentComponent::hasAttachment)
+            .map(DocumentReference.DocumentReferenceContentComponent::getAttachment)
+            .orElseThrow(() -> new EhrMapperException("documentReference.content[0] is missing an attachment"));
+
+        final String attachmentContentType = Optional.ofNullable(attachment.getContentType())
+            .orElseThrow(() -> new EhrMapperException("documentReference.content[0].attachment is missing contentType"));
+
+        Optional.ofNullable(attachment.getTitle())
+            .ifPresentOrElse(title -> builder.comment(getComment(documentReference, title))
+                    .referenceTitle("AbsentAttachment" + narrativeStatementId + DEFAULT_ATTACHMENT_FILE_EXTENSION)
+                    .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE),
+                () -> builder.comment(getComment(documentReference, null))
+                    .referenceTitle(narrativeStatementId + "_" + narrativeStatementId)
+                    .referenceContentType(attachmentContentType));
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }

@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.junit.jupiter.api.AfterEach;
@@ -42,12 +43,10 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_PRACTICE_SETTING_DISPLAY_ONLY = TEST_FILE_DIRECTORY
         + "example-document-reference-resource-9.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_TITLE = TEST_FILE_DIRECTORY + "example-document-reference-resource-10.json";
-    private static final String INPUT_JSON_WITH_ATTACHMENT_CONTENT_TYPE = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-11.json";
-    private static final String INPUT_JSON_REQUIRED_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-12.json";
+    private static final String INPUT_JSON_REQUIRED_DATA = TEST_FILE_DIRECTORY + "example-document-reference-resource-11.json";
     private static final String INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME = TEST_FILE_DIRECTORY
-        + "example-document-reference-resource-13.json";
-    private static final String INPUT_JSON_WITH_AUTHOR_PRACTITIONER = TEST_FILE_DIRECTORY + "example-document-reference-resource-14.json";
+        + "example-document-reference-resource-12.json";
+    private static final String INPUT_JSON_WITH_AUTHOR_PRACTITIONER = TEST_FILE_DIRECTORY + "example-document-reference-resource-13.json";
 
     private static final String OUTPUT_XML_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
@@ -61,10 +60,9 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         + "expected-output-narrative-statement-8.xml";
     private static final String OUTPUT_XML_WITH_PRACTICE_SETTING_DISPLAY_ONLY = TEST_FILE_DIRECTORY
         + "expected-output-narrative-statement-9.xml";
-    private static final String OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE_AND_REFERENCE = TEST_FILE_DIRECTORY
+    private static final String OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE = TEST_FILE_DIRECTORY
         + "expected-output-narrative-statement-10.xml";
-    private static final String OUTPUT_XML_WITH_REFERENCE_CONTENT_TYPE = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-11.xml";
-    private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-12.xml";
+    private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-11.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -113,8 +111,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_DESCRIPTION, OUTPUT_XML_WITH_DESCRIPTION),
             Arguments.of(INPUT_JSON_WITH_PRACTICE_SETTING_TEXT_ONLY, OUTPUT_XML_WITH_PRACTICE_SETTING_TEXT_ONLY),
             Arguments.of(INPUT_JSON_WITH_PRACTICE_SETTING_DISPLAY_ONLY, OUTPUT_XML_WITH_PRACTICE_SETTING_DISPLAY_ONLY),
-            Arguments.of(INPUT_JSON_WITH_ATTACHMENT_TITLE, OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE_AND_REFERENCE),
-            Arguments.of(INPUT_JSON_WITH_ATTACHMENT_CONTENT_TYPE, OUTPUT_XML_WITH_REFERENCE_CONTENT_TYPE),
+            Arguments.of(INPUT_JSON_WITH_ATTACHMENT_TITLE, OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE),
             Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_WITH_AUTHOR_PRACTITIONER, OUTPUT_XML_REQUIRED_DATA)
@@ -131,6 +128,44 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Could not map availability time");
+    }
+
+    @Test
+    public void When_MappingParsedDocumentReferenceJsonWithNoContent_Expect_MapperException() throws IOException {
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
+        final DocumentReference parsedDocumentReference =
+            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        parsedDocumentReference.setContent(null);
+
+        assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("No content found on documentReference");
+    }
+
+    @Test
+    public void When_MappingParsedDocumentReferenceJsonWithContentAndNoAttachment_Expect_MapperException() throws IOException {
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
+        final DocumentReference parsedDocumentReference =
+            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        parsedDocumentReference.getContent().get(0).setAttachment(null);
+
+        assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("documentReference.content[0] is missing an attachment");
+    }
+
+    @Test
+    public void When_MappingParsedDocumentReferenceJsonWithNoAttachmentContentType_Expect_MapperException() throws IOException {
+        final String jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_REQUIRED_DATA);
+        final DocumentReference parsedDocumentReference =
+            new FhirParseService().parseResource(jsonInput, DocumentReference.class);
+        final Attachment attachment = parsedDocumentReference.getContent().get(0).getAttachment();
+        attachment.setTitle("some title");
+        attachment.setContentType(null);
+
+        assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("documentReference.content[0].attachment is missing contentType");
     }
 
 }

@@ -17,9 +17,13 @@
   "type": {
   },
   "indexed": "2020-09-21T14:17:59.607+01:00",
+  "custodian": {
+    "reference": "Organization/INVALID"
+  },
   "content": [
     {
       "attachment": {
+        "contentType": "text/richtext"
       }
     }
   ]
