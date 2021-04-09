@@ -58,7 +58,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
                     .referenceTitle("AbsentAttachment" + narrativeStatementId + DEFAULT_ATTACHMENT_FILE_EXTENSION)
                     .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE),
                 () -> builder.comment(getComment(documentReference, null))
-                    .referenceTitle(narrativeStatementId + "_" + narrativeStatementId)
+                    .referenceTitle(narrativeStatementId + "_" + narrativeStatementId + DEFAULT_ATTACHMENT_FILE_EXTENSION)
                     .referenceContentType(attachmentContentType));
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
