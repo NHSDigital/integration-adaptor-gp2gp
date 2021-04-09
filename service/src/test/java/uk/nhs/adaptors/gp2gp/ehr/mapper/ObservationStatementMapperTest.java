@@ -76,6 +76,8 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-22.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2 = TEST_FILE_DIRECTORY
         + "example-observation-resource-23.json";
+    private static final String INPUT_JSON_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
+        + "example-observation-resource-24.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -110,7 +112,8 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-16.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-17.xml";
-
+    private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-18.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -130,7 +133,8 @@ public class ObservationStatementMapperTest {
         observationStatementMapper = new ObservationStatementMapper(messageContext,
             new StructuredObservationValueMapper(),
             new PertinentInformationObservationValueMapper(),
-            codeableConceptCdMapper);
+            codeableConceptCdMapper,
+            new ParticipantMapper());
     }
 
     @AfterEach
@@ -146,6 +150,7 @@ public class ObservationStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false);
+        System.out.println(outputMessage);
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
@@ -192,7 +197,8 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_3, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL)
+            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT)
             );
     }
 }

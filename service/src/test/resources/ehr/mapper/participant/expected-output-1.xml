@@ -1,0 +1,5 @@
+<Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="reference"/>
+    </agentRef>
+</Participant>
