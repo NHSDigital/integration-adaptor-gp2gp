@@ -54,6 +54,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-vaccine-code-given.json";
     private static final String INPUT_JSON_WITHOUT_PRACTITIONER = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-practitioner.json";
+    private static final String INPUT_JSON_WITHOUT_PRACTITIONER_ACTOR = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-practitioner-but-no-actor.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -122,7 +124,8 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN_TEXT, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_CONTEXT, true),
             Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
-            Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false)
+            Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
+            Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false)
         );
     }
 
