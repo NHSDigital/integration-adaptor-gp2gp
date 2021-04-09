@@ -83,7 +83,7 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasPerformer()) {
-            final String participantReference = idMapper.getOrNew(observation.getPerformerFirstRep());
+            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             observationStatementTemplateParametersBuilder.participant(participantBlock);
