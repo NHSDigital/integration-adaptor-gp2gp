@@ -184,7 +184,7 @@ public class ObservationStatementMapperTest {
 
         assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessageStartingWith("No ID mapping for reference Practitioner/");
+            .hasMessage("No ID mapping for reference Practitioner/something");
     }
 
     private static Stream<Arguments> resourceFileParams() {

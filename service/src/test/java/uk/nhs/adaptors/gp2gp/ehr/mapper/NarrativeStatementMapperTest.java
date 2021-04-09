@@ -114,6 +114,6 @@ public class NarrativeStatementMapperTest {
 
         assertThatThrownBy(() -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessageStartingWith("No ID mapping for reference Practitioner/");
+            .hasMessage("No ID mapping for reference Practitioner/something");
     }
 }
