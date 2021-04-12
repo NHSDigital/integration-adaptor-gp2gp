@@ -77,8 +77,10 @@ public class ConditionLinkSetMapper {
         if (condition.hasAsserter()) {
             var asserterReference = condition.getAsserter();
             var performerReference = idMapper.get(asserterReference);
-            var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
-            builder.performer(performerParameter);
+            if (performerReference.startsWith(ResourceType.Practitioner.name() + "/")) {
+                var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
+                builder.performer(performerParameter);
+            }
         }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
