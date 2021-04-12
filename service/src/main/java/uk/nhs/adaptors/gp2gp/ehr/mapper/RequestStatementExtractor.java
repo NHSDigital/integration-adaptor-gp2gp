@@ -19,12 +19,10 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 public class RequestStatementExtractor {
-    private static final String RECIPIENT_PRACTITIONER = "Recipient Practitioner: ";
-    private static final String RECIPIENT_HEALTH_CARE_SERVICE = "Recipient Healthcare Service: ";
-    private static final String RECIPIENT_ORG = "Recipient Org: ";
     private static final String NOTE_AUTHOR = "Author: ";
     private static final String NOTE_AUTHOR_RELATION = NOTE_AUTHOR + "Relation ";
     private static final String NOTE_AUTHOR_PRACTITIONER = NOTE_AUTHOR + "Practitioner ";
@@ -34,9 +32,8 @@ public class RequestStatementExtractor {
 
     public static String extractServiceRequested(ReferralRequest referralRequest) {
         return referralRequest.getServiceRequested().stream()
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .flatMap(Optional::stream)
             .collect(Collectors.joining(COMMA));
     }
 
@@ -50,20 +47,20 @@ public class RequestStatementExtractor {
         if (referenceId.getResourceType().equals(ResourceType.Practitioner.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (Practitioner) resource)
-                .map(value -> RECIPIENT_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
+                .map(Practitioner.class::cast)
+                .map(value -> "Recipient Practitioner: { " + extractHumanName(value.getNameFirstRep()) + " }")
                 .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
         } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (HealthcareService) resource)
-                .map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName())
+                .map(HealthcareService.class::cast)
+                .map(value -> "Recipient Healthcare Service: { " + value.getName() + " }")
                 .orElseThrow(() -> new EhrMapperException("Could not resolve HealthcareService Reference"));
         } else if (referenceId.getResourceType().equals(ResourceType.Organization.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (Organization) resource)
-                .map(value -> RECIPIENT_ORG + value.getName())
+                .map(Organization.class::cast)
+                .map(value -> "Recipient Org: { " + value.getName() + " }")
                 .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
         }
         throw new EhrMapperException("Recipient Reference not of expected Resource Type");
@@ -73,9 +70,8 @@ public class RequestStatementExtractor {
         var ignoreFirstReasonCode = referralRequest.getReasonCode();
         return ignoreFirstReasonCode.stream()
             .skip(1)
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .flatMap(Optional::stream)
             .collect(Collectors.joining(COMMA));
     }
 
@@ -87,13 +83,13 @@ public class RequestStatementExtractor {
             if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (RelatedPerson) resource)
+                    .map(RelatedPerson.class::cast)
                     .map(value -> NOTE_AUTHOR_RELATION + extractHumanName(value.getNameFirstRep()))
                     .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (Practitioner) resource)
+                    .map(Practitioner.class::cast)
                     .map(value -> NOTE_AUTHOR_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
                     .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
