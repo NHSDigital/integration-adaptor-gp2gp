@@ -32,7 +32,10 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 @ExtendWith(MockitoExtension.class)
 public class RequestStatementMapperTest {
     private static final String COMMON_ID_1 = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
-    private static final String COMMON_ID_2 = "4C903809-CADA-442E-8FA5-655E5EFEB1F5";
+    private static final String PATIENT_2_ID = "4C903809-CADA-442E-8FA5-655E5EFEB1F5";
+    private static final String RELATED_PERSON_ID = "f002";
+    private static final String ORGANIZATION_ID = "1F90B10F-CF14-4D6F-8C0D-585059DA4EC5";
+
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
     private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
@@ -84,8 +87,6 @@ public class RequestStatementMapperTest {
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
 
-    private Bundle bundle;
-    private CharSequence expectedOutputMessage;
     private RequestStatementMapper requestStatementMapper;
     private MessageContext messageContext;
 
@@ -93,7 +94,7 @@ public class RequestStatementMapperTest {
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
 
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
@@ -102,8 +103,9 @@ public class RequestStatementMapperTest {
         idMapper.getOrNew(ResourceType.Organization, COMMON_ID_1);
         idMapper.getOrNew(ResourceType.Device, COMMON_ID_1);
         idMapper.getOrNew(ResourceType.Patient, COMMON_ID_1);
-        idMapper.getOrNew(ResourceType.Patient, COMMON_ID_2);
-        idMapper.getOrNew(ResourceType.RelatedPerson, "f002");
+        idMapper.getOrNew(ResourceType.Patient, PATIENT_2_ID);
+        idMapper.getOrNew(ResourceType.RelatedPerson, RELATED_PERSON_ID);
+        idMapper.getOrNew(ResourceType.Organization, ORGANIZATION_ID);
         requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
@@ -151,7 +153,7 @@ public class RequestStatementMapperTest {
 
     @Test
     public void When_MappingReferralRequestJsonWithNestedTrue_Expect_RequestStatementXmlOutput() throws IOException {
-        expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
+        String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS);
         ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
 

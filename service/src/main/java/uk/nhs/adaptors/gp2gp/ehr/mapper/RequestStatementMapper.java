@@ -17,11 +17,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Device;
+import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
@@ -37,6 +40,8 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.RequestStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.RequestStatementTemplateParameters.RequestStatementTemplateParametersBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -70,18 +75,20 @@ public class RequestStatementMapper {
             .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
             .isNested(isNested)
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
-            .description(buildDescription(referralRequest))
+            .text(buildDescription(referralRequest))
             .code(buildCode(referralRequest));
 
         if (!referralRequest.hasReasonCode()) {
             requestStatementTemplateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
         }
 
-        if (referralRequest.hasRequester() && referralRequest.getRequester().hasAgent()
+        if (referralRequest.hasRequester()
+                && referralRequest.getRequester().hasAgent()
                 && referralRequest.getRequester().getAgent().hasReference()) {
-            final String agentRef = idMapper.get(referralRequest.getRequester().getAgent());
-            final String participant = participantMapper.mapToParticipant(agentRef, ParticipantType.AUTHOR);
-            requestStatementTemplateParameters.participant(participant);
+            var requester = referralRequest.getRequester();
+            Reference agentRef = requester.getAgent();
+            var onBehalfOf = requester.hasOnBehalfOf() ? requester.getOnBehalfOf() : null;
+            processAgent(agentRef, onBehalfOf, requestStatementTemplateParameters);
         }
 
         if (referralRequest.hasRecipient()) {
@@ -91,6 +98,57 @@ public class RequestStatementMapper {
         }
 
         return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, requestStatementTemplateParameters.build());
+    }
+
+    private void processAgent(Reference agent, Reference onBehalfOf,
+                              RequestStatementTemplateParametersBuilder requestStatementTemplateParameters) {
+        final IdMapper idMapper = messageContext.getIdMapper();
+
+        if (isReferenceToType(agent, ResourceType.Practitioner) && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
+            final String participantRef = idMapper.get(onBehalfOf);
+            final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
+            requestStatementTemplateParameters.participant(participant);
+
+        } else if (isReferenceToType(agent, ResourceType.Practitioner) || isReferenceToType(agent, ResourceType.Organization)) {
+            final String participantRef = idMapper.getOrNew(agent);
+            final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
+            requestStatementTemplateParameters.participant(participant);
+
+        } else if (isReferenceToType(agent, ResourceType.Device)) {
+            messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                .filter(Device.class::isInstance)
+                .map(Device.class::cast)
+                .filter(Device::hasType)
+                .map(Device::getType)
+                .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
+                .map(text -> "Requester Device: { " + text + " } ")
+                .ifPresent(requestStatementTemplateParameters::text);
+
+        } else if (isReferenceToType(agent, ResourceType.Organization)) {
+            messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                .filter(Organization.class::isInstance)
+                .map(Organization.class::cast)
+                .filter(Organization::hasName)
+                .map(Organization::getName)
+                .map(name -> "Requester Org: { " + name + " } ")
+                .ifPresent(requestStatementTemplateParameters::text);
+
+        } else if (isReferenceToType(agent, ResourceType.Patient)) {
+            messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                .filter(Patient.class::isInstance)
+                .map($ -> "Requester: Patient ")
+                .ifPresent(requestStatementTemplateParameters::text);
+
+        } else if (isReferenceToType(agent, ResourceType.RelatedPerson)) {
+            messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                .filter(RelatedPerson.class::isInstance)
+                .map(RelatedPerson.class::cast)
+                .filter(RelatedPerson::hasName)
+                .map(RelatedPerson::getNameFirstRep)
+                .map(HumanName::getNameAsSingleString)
+                .map(name -> "Requester: Relation {" + name + " } ")
+                .ifPresent(requestStatementTemplateParameters::text);
+        }
     }
 
     private String buildDescription(ReferralRequest referralRequest) {
@@ -208,7 +266,11 @@ public class RequestStatementMapper {
     }
 
     private boolean isReferenceToPractitioner(Reference reference) {
-        return reference.getReference().startsWith(ResourceType.Practitioner.name());
+        return isReferenceToType(reference, ResourceType.Practitioner);
+    }
+
+    private boolean isReferenceToType(@NonNull Reference reference, @NonNull ResourceType type) {
+        return reference.getReference().startsWith(type.name() + "/");
     }
 
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
