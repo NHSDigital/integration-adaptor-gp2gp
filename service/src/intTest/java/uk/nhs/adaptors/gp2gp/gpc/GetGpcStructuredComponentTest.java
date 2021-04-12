@@ -76,7 +76,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid
+        // temporarily ignore the test while GPC data is invalid: NIAD-1300
         assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition))
             .doesNotThrowAnyException();
 
@@ -96,12 +96,12 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid
+        // temporarily ignore the test while GPC data is invalid: NIAD-1300
         assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1))
             .doesNotThrowAnyException();
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid
+        // temporarily ignore the test while GPC data is invalid: NIAD-1300
         assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2))
             .doesNotThrowAnyException();
 
