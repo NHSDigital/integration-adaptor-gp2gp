@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.BaseReference;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -81,19 +80,12 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private void mapSettings(final DocumentReference documentReference, final StringBuilder commentBuilder) {
-        final Optional<CodeableConcept> codeableConcept = Optional.ofNullable(documentReference.getContext())
-            .map(DocumentReference.DocumentReferenceContextComponent::getPracticeSetting);
-
-        codeableConcept
-            .filter(CodeableConcept::hasText)
-            .map(CodeableConcept::getText)
-            .ifPresentOrElse(text -> commentBuilder.append("Setting: ").append(text).append(StringUtils.SPACE),
-                () -> codeableConcept
-                    .filter(CodeableConcept::hasCoding)
-                    .map(CodeableConcept::getCodingFirstRep)
-                    .filter(Coding::hasDisplay)
-                    .map(Coding::getDisplay)
-                    .ifPresent(display -> commentBuilder.append("Setting: ").append(display).append(StringUtils.SPACE)));
+        Optional.ofNullable(documentReference.getContext())
+            .map(DocumentReference.DocumentReferenceContextComponent::getPracticeSetting)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .ifPresent(setting -> commentBuilder.append("Setting: ").append(setting).append(StringUtils.SPACE));
     }
 
     private void mapDescription(final DocumentReference documentReference, final StringBuilder commentBuilder) {
@@ -127,17 +119,11 @@ public class DocumentReferenceToNarrativeStatementMapper {
     }
 
     private void mapType(final DocumentReference documentReference, final StringBuilder commentBuilder) {
-        final CodeableConcept codeableConcept = documentReference.getType();
-        final Optional<CodeableConcept> type = Optional.of(codeableConcept);
-
-        type.filter(CodeableConcept::hasText)
-            .map(CodeableConcept::getText)
-            .ifPresentOrElse(text -> commentBuilder.append("Type: ").append(text).append(StringUtils.SPACE),
-                () -> type.filter(CodeableConcept::hasCoding)
-                    .map(CodeableConcept::getCodingFirstRep)
-                    .filter(Coding::hasDisplay)
-                    .map(Coding::getDisplay)
-                    .ifPresent(display -> commentBuilder.append("Type: ").append(display).append(StringUtils.SPACE)));
+        Optional.of(documentReference.getType())
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .ifPresent(type -> commentBuilder.append("Type: ").append(type).append(StringUtils.SPACE));
     }
 
     private String getAvailabilityTime(final DocumentReference documentReference) {
