@@ -5,6 +5,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extract
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractRecipient;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractServiceRequested;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,15 +80,17 @@ public class RequestStatementMapper {
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
                 .code(buildCode());
-            text = buildDescription();
+
+            text = buildTextDescription();
+            prependDescriptionInfo();
 
             if (!referralRequest.hasReasonCode()) {
                 templateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
             }
 
             if (referralRequest.hasRequester()
-                && referralRequest.getRequester().hasAgent()
-                && referralRequest.getRequester().getAgent().hasReference()) {
+                    && referralRequest.getRequester().hasAgent()
+                    && referralRequest.getRequester().getAgent().hasReference()) {
                 var requester = referralRequest.getRequester();
                 Reference agentRef = requester.getAgent();
                 var onBehalfOf = requester.hasOnBehalfOf() ? requester.getOnBehalfOf() : null;
@@ -142,7 +145,9 @@ public class RequestStatementMapper {
                     .filter(Organization::hasName)
                     .map(Organization::getName)
                     .map(REQUESTER_ORG::concat)
-                    .ifPresent(this::prependText);
+                    .ifPresentOrElse(this::prependText, () -> {
+                        throw new EhrMapperException("Could not resolve Organization Reference");
+                    });
 
             } else if (isReferenceToType(agent, ResourceType.Patient)) {
                 messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
@@ -158,35 +163,27 @@ public class RequestStatementMapper {
                     .map(RelatedPerson::getNameFirstRep)
                     .map(RequestStatementExtractor::extractHumanName)
                     .map(REQUESTER_RELATION::concat)
-                    .ifPresent(this::prependText);
+                    .ifPresentOrElse(this::prependText, () -> {
+                        throw new EhrMapperException("Could not resolve RelatedPerson Reference");
+                    });
 
             } else if (!isReferenceToType(agent, ResourceType.Practitioner)) {
                 throw new EhrMapperException("Requester Reference not of expected Resource Type");
             }
         }
 
-        private String buildDescription() {
-            List<String> descriptionList = retrieveDescription();
-            return descriptionList.stream()
-                .filter(StringUtils::isNotEmpty)
-                .collect(Collectors.joining(StringUtils.SPACE));
+        private void prependDescriptionInfo() {
+            prependNoteDescription();
+            prependReasonCodeDescription();
+            prependRecipientDescription();
+            prependSpecialtyDescription();
+            prependServiceRequestedDescription();
+            prependPriorityDescription();
+            prependIdentifierDescription();
         }
 
-        private List<String> retrieveDescription() {
-            return List.of(
-                buildIdentifierDescription(),
-                buildPriorityDescription(),
-                buildServiceRequestedDescription(),
-                buildSpecialtyDescription(),
-                buildRecipientDescription(),
-                buildReasonCodeDescription(),
-                buildNoteDescription(),
-                buildTextDescription()
-            );
-        }
-
-        private String buildIdentifierDescription() {
-            return Optional.of(referralRequest).stream()
+        private void prependIdentifierDescription() {
+            Optional.of(referralRequest).stream()
                 .filter(ReferralRequest::hasIdentifier)
                 .map(ReferralRequest::getIdentifier)
                 .flatMap(List::stream)
@@ -195,46 +192,43 @@ public class RequestStatementMapper {
                 .map(Identifier::getValue)
                 .findAny()
                 .map(UBRN::concat)
-                .orElse(StringUtils.EMPTY);
+                .filter(StringUtils::isNotBlank)
+                .ifPresent(this::prependText);
         }
 
-        private String buildPriorityDescription() {
+        private void prependPriorityDescription() {
             if (referralRequest.hasPriority()) {
-                return PRIORITY + referralRequest.getPriority().getDisplay();
+                prependText(PRIORITY + referralRequest.getPriority().getDisplay());
             }
-            return StringUtils.EMPTY;
         }
 
-        private String buildServiceRequestedDescription() {
+        private void prependServiceRequestedDescription() {
             if (referralRequest.hasServiceRequested()) {
-                return SERVICES_REQUESTED + extractServiceRequested(referralRequest);
+                prependText(SERVICES_REQUESTED + extractServiceRequested(referralRequest));
             }
-            return StringUtils.EMPTY;
         }
 
-        private String buildSpecialtyDescription() {
-            return Optional.of(referralRequest)
-                .filter(ReferralRequest::hasSpecialty)
-                .map(ReferralRequest::getSpecialty)
-                .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
-                .map(SPECIALTY::concat)
-                .orElse(StringUtils.EMPTY);
+        private void prependSpecialtyDescription() {
+            if (referralRequest.hasSpecialty()) {
+                extractTextOrCoding(referralRequest.getSpecialty())
+                    .map(SPECIALTY::concat)
+                    .ifPresent(this::prependText);
+            }
         }
 
-        private String buildRecipientDescription() {
+        private void prependRecipientDescription() {
             if (referralRequest.hasRecipient()) {
-                return getRecipientsWithoutFirstPractitioner().stream()
+                String recipientDescription = getRecipientsWithoutFirstPractitioner().stream()
                     .filter(Reference::hasReferenceElement)
                     .map(value -> extractRecipient(messageContext, value))
                     .collect(Collectors.joining(" "));
+                prependText(recipientDescription);
             }
-
-            return StringUtils.EMPTY;
         }
 
         private List<Reference> getRecipientsWithoutFirstPractitioner() {
             boolean firstPractitionerFound = false;
-            List<Reference> recipients = new ArrayList<>(referralRequest.getRecipient().size());
+            var recipients = new ArrayList<Reference>(referralRequest.getRecipient().size());
             for (Reference reference : referralRequest.getRecipient()) {
                 if (!firstPractitionerFound && isReferenceToPractitioner(reference)) {
                     firstPractitionerFound = true;
@@ -245,25 +239,26 @@ public class RequestStatementMapper {
             return recipients;
         }
 
-        private String buildReasonCodeDescription() {
+        private void prependReasonCodeDescription() {
             if (referralRequest.hasReasonCode() && referralRequest.getReasonCode().size() > 1) {
-                return REASON_CODES + extractReasonCode(referralRequest);
+                prependText(REASON_CODES + extractReasonCode(referralRequest));
             }
-            return StringUtils.EMPTY;
         }
 
-        private String buildNoteDescription() {
+        private void prependNoteDescription() {
             if (referralRequest.hasNote()) {
-                return referralRequest.getNote().stream()
-                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value),  value.getText()))
+                String noteDescription = referralRequest.getNote().stream()
+                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
                     .collect(Collectors.joining(COMMA));
+                prependText(noteDescription);
             }
-            return StringUtils.EMPTY;
         }
 
         private String buildTextDescription() {
-            Optional<String> text = Optional.ofNullable(referralRequest.getDescription());
-            return text.orElse(StringUtils.EMPTY);
+            if (referralRequest.hasDescription()) {
+                return referralRequest.getDescription();
+            }
+            return StringUtils.EMPTY;
         }
 
         private String buildCode() {
