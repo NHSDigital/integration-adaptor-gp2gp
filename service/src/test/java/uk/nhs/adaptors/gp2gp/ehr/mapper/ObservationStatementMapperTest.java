@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -10,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -145,6 +147,8 @@ public class ObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "something");
+
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -171,6 +175,16 @@ public class ObservationStatementMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true));
+    }
+
+    @Test
+    public void When_MappingParsedObservationJsonWithUnmappedPerformer_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PARTICIPANT);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
+        assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("No ID mapping for reference Practitioner/something");
     }
 
     private static Stream<Arguments> resourceFileParams() {

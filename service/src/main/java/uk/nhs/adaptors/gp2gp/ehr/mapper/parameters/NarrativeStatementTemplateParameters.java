@@ -15,4 +15,5 @@ public class NarrativeStatementTemplateParameters {
     private boolean hasReference;
     private String referenceContentType;
     private String referenceTitle;
+    private String participant;
 }
