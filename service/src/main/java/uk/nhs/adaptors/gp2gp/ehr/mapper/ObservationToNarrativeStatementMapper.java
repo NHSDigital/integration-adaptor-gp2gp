@@ -17,7 +17,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class NarrativeStatementMapper {
+public class ObservationToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
 

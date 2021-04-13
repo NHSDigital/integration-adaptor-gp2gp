@@ -12,5 +12,8 @@ public class NarrativeStatementTemplateParameters {
     private String availabilityTime;
     private String comment;
     private boolean isNested;
+    private boolean hasReference;
+    private String referenceContentType;
+    private String referenceTitle;
     private String participant;
 }

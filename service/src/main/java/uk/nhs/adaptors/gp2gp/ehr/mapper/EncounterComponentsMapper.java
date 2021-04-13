@@ -59,7 +59,7 @@ public class EncounterComponentsMapper {
 
     private final DiaryPlanStatementMapper diaryPlanStatementMapper;
 
-    private final NarrativeStatementMapper narrativeStatementMapper;
+    private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private final ObservationStatementMapper observationStatementMapper;
     private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
     private final ConditionLinkSetMapper conditionLinkSetMapper;
@@ -107,7 +107,7 @@ public class EncounterComponentsMapper {
     private String mapObservation(Resource resource) {
         Observation observation = (Observation) resource;
         if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
-            return narrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
+            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
         }
         if (hasCode(observation.getCode(), BLOOD_CODES)) {
             return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
