@@ -27,7 +27,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class NarrativeStatementMapperTest {
+public class ObservationToNarrativeStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
@@ -44,14 +44,14 @@ public class NarrativeStatementMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private CharSequence expectedOutputMessage;
-    private NarrativeStatementMapper narrativeStatementMapper;
+    private ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        observationToNarrativeStatementMapper = new ObservationToNarrativeStatementMapper(messageContext);
     }
 
     @AfterEach
@@ -66,7 +66,7 @@ public class NarrativeStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
+        String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
@@ -86,7 +86,7 @@ public class NarrativeStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
+        String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
@@ -97,6 +97,6 @@ public class NarrativeStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         assertThrows(EhrMapperException.class, ()
-            -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+            -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
     }
 }
