@@ -9,6 +9,7 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 
 import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @AllArgsConstructor()
 public class IdMapper {
@@ -23,6 +24,14 @@ public class IdMapper {
         String mappedId = ids.getOrDefault(reference.getReference(), randomIdGeneratorService.createNewId());
         ids.put(reference.getReference(), mappedId);
 
+        return mappedId;
+    }
+
+    public String get(Reference reference) throws EhrMapperException {
+        String mappedId = ids.get(reference.getReference());
+        if (mappedId == null) {
+            throw new EhrMapperException("No ID mapping for reference " + reference.getReference());
+        }
         return mappedId;
     }
 

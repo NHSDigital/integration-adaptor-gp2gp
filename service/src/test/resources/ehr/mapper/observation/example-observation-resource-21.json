@@ -1,0 +1,27 @@
+{
+  "resourceType": "Observation",
+  "id": "Consultation3-Topic2-Category-Examination-Observation-1",
+  "effectiveDateTime": "2019-06-01T10:30:00+00:00",
+  "issued": "2019-06-01T10:30:00+00:00",
+  "comment": "Test comment",
+  "referenceRange": [
+    {
+      "text": "Test reference range text",
+      "low": {
+        "value": 20
+      }
+    }
+  ],
+  "code": {
+    "text": "test"
+  },
+  "interpretation": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v2/0078",
+        "code": "LU",
+        "display": "Low Value"
+      }
+    ]
+  }
+}

@@ -3,7 +3,9 @@
         <id root="394559384658936"/>
         <statusCode code="ACTIVE"/>
         <availabilityTime value="20171110000000"/>
-        <low value="20171110000000"/><high value="20180815000000"/>
+        <effectiveTime>
+            <low value="20171110000000"/><high value="20180815000000"/>
+        </effectiveTime>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">

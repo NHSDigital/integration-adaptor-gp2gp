@@ -62,7 +62,7 @@ public class EhrExtractMapperTest {
     private MessageContext messageContext;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() {
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
@@ -78,16 +78,18 @@ public class EhrExtractMapperTest {
         when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+
+        ParticipantMapper participantMapper = new ParticipantMapper();
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
                 codeableConceptCdMapper,
-                new ParticipantMapper()
+                participantMapper
             ),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
