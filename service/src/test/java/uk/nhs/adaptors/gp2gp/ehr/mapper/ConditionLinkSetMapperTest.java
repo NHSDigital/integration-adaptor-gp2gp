@@ -13,10 +13,9 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,15 +24,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 @ExtendWith(MockitoExtension.class)
 public class ConditionLinkSetMapperTest {
 
-    private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
     private static final String GENERATED_ID = "50233a2f-128f-4b96-bdae-6207ed11a8ea";
-
     private static final String CONDITION_FILE_LOCATIONS = "/ehr/mapper/condition/";
+    private static final String INPUT_JSON_BUNDLE =  CONDITION_FILE_LOCATIONS + "fhir-bundle.json";
+
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION = CONDITION_FILE_LOCATIONS + "condition_all_included.json";
     private static final String INPUT_JSON_NO_ACTUAL_PROBLEM = CONDITION_FILE_LOCATIONS + "condition_no_problem.json";
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION = CONDITION_FILE_LOCATIONS
@@ -48,6 +46,7 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_STATUS_INACTIVE = CONDITION_FILE_LOCATIONS + "condition_status_inactive.json";
     private static final String INPUT_JSON_DATES_PRESENT = CONDITION_FILE_LOCATIONS + "condition_dates_present.json";
     private static final String INPUT_JSON_DATES_NOT_PRESENT = CONDITION_FILE_LOCATIONS + "condition_dates_not_present.json";
+    private static final String INPUT_JSON_RELATED_LIST_REFERENCE = CONDITION_FILE_LOCATIONS + "condition_related_list_reference.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -65,9 +64,6 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
 
-    @Mock
-    private IdMapper idMapper;
-    @Mock
     private MessageContext messageContext;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -75,17 +71,22 @@ public class ConditionLinkSetMapperTest {
     private CodeableConceptCdMapper codeableConceptCdMapper;
     private ConditionLinkSetMapper conditionLinkSetMapper;
     private FhirParseService fhirParseService;
+    private Bundle bundle;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         fhirParseService = new FhirParseService();
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+
+        messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
+
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
-        when(messageContext.getIdMapper()).thenReturn(idMapper);
-        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
-        when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
-        when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
+        when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
     }
 
     @AfterEach
@@ -102,7 +103,7 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage).isEqualTo(expectedOutput);
     }
 
     private static Stream<Arguments> testArguments() {
@@ -114,20 +115,14 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION, OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED, false),
             Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),
             Arguments.of(INPUT_JSON_WITH_MINOR_SIGNIFICANCE, OUTPUT_XML_WITH_MINOR_SIGNIFICANCE, false),
-            Arguments.of(INPUT_JSON_NO_RELATED, OUTPUT_XML_WITH_NO_RELATED, false),
             Arguments.of(INPUT_JSON_MAP_ONE_RELATED_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED, false),
             Arguments.of(INPUT_JSON_MAP_TWO_RELATED, OUTPUT_XML_WITH_2_RELATED, false),
             Arguments.of(INPUT_JSON_STATUS_ACTIVE, OUTPUT_XML_WITH_STATUS_ACTIVE, false),
             Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
             Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
-            Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false)
+            Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
+            Arguments.of(INPUT_JSON_NO_RELATED, OUTPUT_XML_WITH_NO_RELATED, false),
+            Arguments.of(INPUT_JSON_RELATED_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED, false)
         );
-    }
-
-    private Answer<String> answerWithObjectId() {
-        return invocation -> {
-            Reference reference = invocation.getArgument(0);
-            return reference.getReferenceElement().getIdPart();
-        };
     }
 }
