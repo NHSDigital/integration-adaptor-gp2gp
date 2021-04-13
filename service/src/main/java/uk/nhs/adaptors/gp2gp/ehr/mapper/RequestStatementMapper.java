@@ -45,7 +45,7 @@ public class RequestStatementMapper {
     private static final String REQUESTER_PATIENT = "Requester: Patient";
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
-    private static final String NOTE = "Annotation: { %s @ %s %s }";
+    private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
@@ -104,7 +104,7 @@ public class RequestStatementMapper {
                 .filter(Device::hasType)
                 .map(Device::getType)
                 .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
-                .map(text -> "Requester Device: { " + text + " }")
+                .map("Requester Device: "::concat)
                 .ifPresentOrElse(requestStatementTemplateParameters::text, () -> {
                     throw new EhrMapperException("Could not resolve Device Reference");
                 });
@@ -115,7 +115,7 @@ public class RequestStatementMapper {
                 .map(Organization.class::cast)
                 .filter(Organization::hasName)
                 .map(Organization::getName)
-                .map(name -> "Requester Org: { " + name + " }")
+                .map("Requester Org: "::concat)
                 .ifPresent(requestStatementTemplateParameters::text);
 
         } else if (isReferenceToType(agent, ResourceType.Patient)) {
@@ -131,7 +131,7 @@ public class RequestStatementMapper {
                 .filter(RelatedPerson::hasName)
                 .map(RelatedPerson::getNameFirstRep)
                 .map(RequestStatementExtractor::extractHumanName)
-                .map(name -> "Requester: Relation { " + name + " }")
+                .map("Requester: Relation "::concat)
                 .ifPresent(requestStatementTemplateParameters::text);
         } else {
             throw new EhrMapperException("Requester Reference not of expected Resource Type");
@@ -167,20 +167,20 @@ public class RequestStatementMapper {
             .filter(val -> UBRN_SYSTEM_URL.equals(val.getSystem()))
             .map(Identifier::getValue)
             .findAny()
-            .map(val -> "UBRN: { " + val + " }")
+            .map("UBRN: "::concat)
             .orElse(StringUtils.EMPTY);
     }
 
     private String buildPriorityDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasPriority()) {
-            return "Priority: { " + referralRequest.getPriority().getDisplay() + " }";
+            return "Priority: " + referralRequest.getPriority().getDisplay();
         }
         return StringUtils.EMPTY;
     }
 
     private String buildServiceRequestedDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasServiceRequested()) {
-            return "Service(s) Requested: { " + extractServiceRequested(referralRequest) + " }";
+            return "Service(s) Requested: " + extractServiceRequested(referralRequest);
         }
         return StringUtils.EMPTY;
     }
@@ -190,7 +190,7 @@ public class RequestStatementMapper {
             .filter(ReferralRequest::hasSpecialty)
             .map(ReferralRequest::getSpecialty)
             .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
-            .map(value -> "Specialty: { " + value + " }")
+            .map("Specialty: "::concat)
             .orElse(StringUtils.EMPTY);
     }
 
@@ -228,7 +228,7 @@ public class RequestStatementMapper {
 
     private String buildReasonCodeDescription(ReferralRequest referralRequest) {
         if (referralRequest.hasReasonCode() && referralRequest.getReasonCode().size() > 1) {
-            return "Reason Codes: { " + extractReasonCode(referralRequest) + " }";
+            return "Reason Codes: " + extractReasonCode(referralRequest);
         }
         return StringUtils.EMPTY;
     }
