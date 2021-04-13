@@ -15,13 +15,9 @@
   "code": {
     "text": "test"
   },
-  "interpretation": {
-    "coding": [
-      {
-        "system": "http://hl7.org/fhir/v2/0078",
-        "code": "HH",
-        "display": "Very High Value"
-      }
-    ]
-  }
+  "performer": [
+    {
+      "reference": "Practitioner/something"
+    }
+  ]
 }

@@ -9,7 +9,7 @@
     },
     "performer": [
         {
-            "reference": "something"
+            "reference": "Practitioner/something"
         }
     ]
 }
