@@ -96,8 +96,9 @@ public class RequestStatementMapper {
             final String participantRef = idMapper.getOrNew(agent);
             final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
             requestStatementTemplateParameters.participant(participant);
+        }
 
-        } else if (isReferenceToType(agent, ResourceType.Device)) {
+        if (isReferenceToType(agent, ResourceType.Device)) {
             messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
                 .filter(Device.class::isInstance)
                 .map(Device.class::cast)
@@ -133,7 +134,8 @@ public class RequestStatementMapper {
                 .map(RequestStatementExtractor::extractHumanName)
                 .map("Requester: Relation "::concat)
                 .ifPresent(requestStatementTemplateParameters::text);
-        } else {
+
+        } else if (!isReferenceToType(agent, ResourceType.Practitioner)) {
             throw new EhrMapperException("Requester Reference not of expected Resource Type");
         }
     }
