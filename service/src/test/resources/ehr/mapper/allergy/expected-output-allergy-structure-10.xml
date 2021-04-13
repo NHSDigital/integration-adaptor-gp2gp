@@ -25,7 +25,7 @@
                     <pertinentInformation typeCode="PERT">
                         <sequenceNumber value="+1"/>
                         <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Asserted By Patient Recorded By Patient</text>
+                            <text></text>
                         </pertinentAnnotation>
                     </pertinentInformation>
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
