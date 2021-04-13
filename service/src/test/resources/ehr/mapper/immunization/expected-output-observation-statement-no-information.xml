@@ -7,5 +7,10 @@
         </effectiveTime>
         <availabilityTime value="20100630054806" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id"/>
+    </agentRef>
+</Participant>
     </ObservationStatement>
 </component>

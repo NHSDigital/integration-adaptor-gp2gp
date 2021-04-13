@@ -24,6 +24,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters.AllergyStructureTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -50,24 +51,39 @@ public class AllergyStructureMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
-            .ehrCompositionId(messageContext.getIdMapper().getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
-            .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
-            .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
+            .ehrCompositionId(idMapper.getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
+            .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
+            .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
-            .build();
+            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
-        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
+        if (allergyIntolerance.hasRecorder()) {
+            var recorderReference = allergyIntolerance.getRecorder();
+            var authorReference = idMapper.get(recorderReference);
+            var authorParameter = participantMapper.mapToParticipant(authorReference, ParticipantType.AUTHOR);
+            allergyStructureTemplateParameters.author(authorParameter);
+        }
+
+        if (allergyIntolerance.hasAsserter()) {
+            var asserterRef = allergyIntolerance.getAsserter();
+            var performerReference = idMapper.get(asserterRef);
+            var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
+            allergyStructureTemplateParameters.performer(performerParameter);
+        }
+
+        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters.build());
     }
 
-    private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParameters templateParameters) {
+    private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameters) {
         var category = allergyIntolerance.getCategory()
             .stream()
             .map(PrimitiveType::getValueAsString)
@@ -76,9 +92,9 @@ public class AllergyStructureMapper {
             .orElse(StringUtils.EMPTY);
 
         if (category.equals(ENVIRONMENT_CATEGORY)) {
-            templateParameters.setCategoryCode(UNSPECIFIED_ALLERGY_CODE);
+            templateParameters.categoryCode(UNSPECIFIED_ALLERGY_CODE);
         } else if (category.equals(MEDICATION_CATEGORY)) {
-            templateParameters.setCategoryCode(DRUG_ALLERGY_CODE);
+            templateParameters.categoryCode(DRUG_ALLERGY_CODE);
         } else {
             throw new EhrMapperException("Category could not be mapped");
         }
