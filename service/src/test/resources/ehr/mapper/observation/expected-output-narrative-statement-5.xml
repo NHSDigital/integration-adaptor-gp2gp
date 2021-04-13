@@ -1,0 +1,13 @@
+<component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20190601113000" />
+        <text>Test comment</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant>
+    </NarrativeStatement>
+</component>
