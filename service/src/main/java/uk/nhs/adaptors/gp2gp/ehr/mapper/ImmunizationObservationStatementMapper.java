@@ -57,17 +57,26 @@ public class ImmunizationObservationStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
-            .observationStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Immunization, immunization.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Immunization, immunization.getId()))
             .availabilityTime(buildAvailabilityTime(immunization))
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization))
             .isNested(isNested)
-            .code(buildCode(immunization))
-            .build();
-        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, observationStatementTemplateParameters);
+            .code(buildCode(immunization));
+
+        if (immunization.hasPractitioner() && immunization.getPractitionerFirstRep().hasActor()) {
+            var practitionerRef = immunization.getPractitionerFirstRep().getActor();
+            var participantRef = idMapper.get(practitionerRef);
+            var participantContent = participantMapper.mapToParticipant(participantRef, ParticipantType.PERFORMER);
+            observationStatementTemplateParameters.participant(participantContent);
+        }
+
+        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, observationStatementTemplateParameters.build());
     }
 
     private String buildAvailabilityTime(Immunization immunization) {

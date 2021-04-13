@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Immunization;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-reason-not-given-text.json";
     private static final String INPUT_JSON_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-vaccine-code-given.json";
+    private static final String INPUT_JSON_WITHOUT_PRACTITIONER = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-no-practitioner.json";
+    private static final String INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-practitioner-but-no-actor.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -65,6 +70,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-reason-not-given.xml";
     private static final String OUTPUT_XML_WITH_VACCINE_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-with-vaccine-code.xml";
+    private static final String OUTPUT_XML_WITHOUT_PARTICIPANT = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-without-participant.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -84,7 +91,8 @@ public class ImmunizationObservationStatementMapperTest {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = fhirParseService.parseResource(bundleInput, Bundle.class);
         messageContext.initialize(bundle);
-        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper);
+        observationStatementMapper = new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper());
     }
 
     @AfterEach
@@ -95,7 +103,9 @@ public class ImmunizationObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingImmunizationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml,
-        boolean isNested) throws IOException {
+                                                                                  boolean isNested) throws IOException {
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
 
@@ -113,7 +123,9 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_REASON_NOT_GIVEN_TEXT, OUTPUT_XML_WITH_REASON_NOT_GIVEN, false),
             Arguments.of(INPUT_JSON_WITH_PERTINENT_INFORMATION, OUTPUT_XML_WITHOUT_CONTEXT, true),
-            Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false)
+            Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
+            Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false)
         );
     }
 
@@ -122,7 +134,18 @@ public class ImmunizationObservationStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 
-        assertThrows(EhrMapperException.class, ()
-            -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false));
+        assertThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Could not map recorded date");
+    }
+
+    @Test
+    public void When_MappingParsedImmunizationJsonWithoutAgentInDirectory_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
+        Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
+
+        assertThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("No ID mapping for reference Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
     }
 }
