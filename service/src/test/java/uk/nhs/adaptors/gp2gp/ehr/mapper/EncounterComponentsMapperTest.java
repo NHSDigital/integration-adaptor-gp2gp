@@ -51,14 +51,15 @@ public class EncounterComponentsMapperTest {
     private MessageContext messageContext;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
-        NarrativeStatementMapper narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
+            new ObservationToNarrativeStatementMapper(messageContext);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
@@ -79,7 +80,7 @@ public class EncounterComponentsMapperTest {
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             diaryPlanStatementMapper,
-            narrativeStatementMapper,
+            observationToNarrativeStatementMapper,
             observationStatementMapper,
             immunizationObservationStatementMapper,
             conditionLinkSetMapper,
