@@ -70,7 +70,6 @@ public class EhrExtractMapperTest {
             .fromOdsCode(TEST_FROM_ODS_CODE)
             .toOdsCode(TEST_TO_ODS_CODE)
             .build();
-        ParticipantMapper participantMapper = new ParticipantMapper();
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
@@ -79,10 +78,12 @@ public class EhrExtractMapperTest {
         when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+
+        ParticipantMapper participantMapper = new ParticipantMapper();
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new ObservationToNarrativeStatementMapper(messageContext),
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),

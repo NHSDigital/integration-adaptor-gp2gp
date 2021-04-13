@@ -61,7 +61,7 @@ public class EncounterComponentsMapperTest {
         ParticipantMapper participantMapper = new ParticipantMapper();
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
-            new ObservationToNarrativeStatementMapper(messageContext);
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,

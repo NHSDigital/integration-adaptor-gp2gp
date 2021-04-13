@@ -19,19 +19,27 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ObservationToNarrativeStatementMapper {
 
-    private final MessageContext messageContext;
-
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
 
+    private final MessageContext messageContext;
+    private final ParticipantMapper participantMapper;
+
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
-            .isNested(isNested)
-            .build();
+            .isNested(isNested);
 
-        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters);
+        if (observation.hasPerformer()) {
+            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+            final String participantBlock = participantMapper
+                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
+            narrativeStatementTemplateParameters.participant(participantBlock);
+        }
+
+        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
     private String getAvailabilityTime(Observation observation) {
