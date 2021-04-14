@@ -17,6 +17,8 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,10 +28,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 @ExtendWith(MockitoExtension.class)
 public class ConditionLinkSetMapperTest {
 
+    private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
     private static final String GENERATED_ID = "50233a2f-128f-4b96-bdae-6207ed11a8ea";
     private static final String CONDITION_FILE_LOCATIONS = "/ehr/mapper/condition/";
     private static final String INPUT_JSON_BUNDLE =  CONDITION_FILE_LOCATIONS + "fhir-bundle.json";
@@ -68,11 +72,15 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
 
     @Mock
+    private IdMapper idMapper;
+    @Mock
+    private MessageContext messageContext;
+    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
 
-    private MessageContext messageContext;
+    private InputBundle inputBundle;
     private ConditionLinkSetMapper conditionLinkSetMapper;
     private FhirParseService fhirParseService;
     private Bundle bundle;
@@ -83,9 +91,10 @@ public class ConditionLinkSetMapperTest {
 
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        inputBundle = new InputBundle(bundle);
 
-        messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
+        when(messageContext.getIdMapper()).thenReturn(idMapper);
+        when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
 
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper);
     }
@@ -103,9 +112,10 @@ public class ConditionLinkSetMapperTest {
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
         assertThat(outputMessage).isEqualTo(expectedOutput);
@@ -115,9 +125,7 @@ public class ConditionLinkSetMapperTest {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_IS_NESTED, true),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITHOUT_IS_NESTED, false),
-            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_WITH_GENERATED_PROBLEM_IS_NESTED, true),
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
-            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION, OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED, false),
             Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),
             Arguments.of(INPUT_JSON_WITH_MINOR_SIGNIFICANCE, OUTPUT_XML_WITH_MINOR_SIGNIFICANCE, false),
             Arguments.of(INPUT_JSON_MAP_ONE_RELATED_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED, false),
@@ -126,15 +134,63 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
             Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
-            Arguments.of(INPUT_JSON_NO_RELATED, OUTPUT_XML_WITH_NO_RELATED, false),
             Arguments.of(INPUT_JSON_RELATED_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED, false)
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("testObservationArguments")
+    public void When_MappingParsedConditionWithObservation_Expect_LinkSetXml(String conditionJson, String outputXml, boolean isNested)
+        throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(conditionJson);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
+        Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
+        when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
+        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
+        assertThat(outputMessage).isEqualTo(expectedOutput);
+    }
+
+    private static Stream<Arguments> testObservationArguments() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_NO_ACTUAL_PROBLEM, OUTPUT_XML_WITH_GENERATED_PROBLEM_IS_NESTED, true),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION, OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED, false)
+        );
+    }
+
+    private Answer<String> answerWithObjectId() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return reference.getReferenceElement().getIdPart();
+        };
+    }
+
+    @Test
+    public void When_MappingParsedConditionWithNoRelated_Expect_LinkSetXml()
+        throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_NO_RELATED);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_NO_RELATED);
+        Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
+        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
+        String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, false);
+        assertThat(outputMessage).isEqualTo(expectedOutput);
     }
 
     @Test
     public void When_MappingParsedObservationJsonWithNoAgentAlreadyMapped_Expect_MapperException() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_RELATED_NON_EXISTENT);
         Condition parsedObservation = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
