@@ -45,15 +45,20 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_WITH_MAJOR_SIGNIFICANCE = CONDITION_FILE_LOCATIONS
         + "condition_major_significance.json";
     private static final String INPUT_JSON_WITH_MINOR_SIGNIFICANCE = CONDITION_FILE_LOCATIONS + "condition_all_included.json";
-    private static final String INPUT_JSON_NO_RELATED = CONDITION_FILE_LOCATIONS + "condition_no_related.json";
-    private static final String INPUT_JSON_MAP_ONE_RELATED_IGNORE_ONE = CONDITION_FILE_LOCATIONS + "condition_1_resource_1_list.json";
-    private static final String INPUT_JSON_MAP_TWO_RELATED = CONDITION_FILE_LOCATIONS + "condition_2_related.json";
+    private static final String INPUT_JSON_NO_RELATED_CLINICAL_CONTENT = CONDITION_FILE_LOCATIONS
+        + "condition_no_related_clinical_content.json";
+    private static final String INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT_IGNORE_ONE = CONDITION_FILE_LOCATIONS
+        + "condition_related_clinical_content_1_resource_1_list_reference.json";
+    private static final String INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT = CONDITION_FILE_LOCATIONS
+        + "condition_2_related_clinical_content.json";
     private static final String INPUT_JSON_STATUS_ACTIVE = CONDITION_FILE_LOCATIONS + "condition_status_active.json";
     private static final String INPUT_JSON_STATUS_INACTIVE = CONDITION_FILE_LOCATIONS + "condition_status_inactive.json";
     private static final String INPUT_JSON_DATES_PRESENT = CONDITION_FILE_LOCATIONS + "condition_dates_present.json";
     private static final String INPUT_JSON_DATES_NOT_PRESENT = CONDITION_FILE_LOCATIONS + "condition_dates_not_present.json";
-    private static final String INPUT_JSON_RELATED_LIST_REFERENCE = CONDITION_FILE_LOCATIONS + "condition_related_list_reference.json";
-    private static final String INPUT_JSON_RELATED_NON_EXISTENT = CONDITION_FILE_LOCATIONS + "condition_related_non_existent.json";
+    private static final String INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE = CONDITION_FILE_LOCATIONS
+        + "condition_related_clinical_content_list_reference.json";
+    private static final String INPUT_JSON_RELATED_CLINICAL_CONTENT_NON_EXISTENT_REFERENCE = CONDITION_FILE_LOCATIONS
+        + "condition_related_clinical_content_non_existent_reference.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -63,9 +68,9 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_CONDITION_NAMED_OBSERVATION_STATEMENT_GENERATED = EXPECTED_OUTPUT_LINKSET + "5.xml";
     private static final String OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE = EXPECTED_OUTPUT_LINKSET + "6.xml";
     private static final String OUTPUT_XML_WITH_MINOR_SIGNIFICANCE = EXPECTED_OUTPUT_LINKSET + "7.xml";
-    private static final String OUTPUT_XML_WITH_NO_RELATED = EXPECTED_OUTPUT_LINKSET + "8.xml";
-    private static final String OUTPUT_XML_WITH_1_RELATED = EXPECTED_OUTPUT_LINKSET + "9.xml";
-    private static final String OUTPUT_XML_WITH_2_RELATED = EXPECTED_OUTPUT_LINKSET + "10.xml";
+    private static final String OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT = EXPECTED_OUTPUT_LINKSET + "8.xml";
+    private static final String OUTPUT_XML_WITH_1_RELATED_CLINICAL_CONTENT = EXPECTED_OUTPUT_LINKSET + "9.xml";
+    private static final String OUTPUT_XML_WITH_2_RELATED_CLINICAL_CONTENT = EXPECTED_OUTPUT_LINKSET + "10.xml";
     private static final String OUTPUT_XML_WITH_STATUS_ACTIVE = EXPECTED_OUTPUT_LINKSET + "11.xml";
     private static final String OUTPUT_XML_WITH_STATUS_INACTIVE = EXPECTED_OUTPUT_LINKSET + "12.xml";
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
@@ -128,13 +133,13 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION, OUTPUT_XML_WITH_CONDITION_NAMED, false),
             Arguments.of(INPUT_JSON_WITH_MAJOR_SIGNIFICANCE, OUTPUT_XML_WITH_MAJOR_SIGNIFICANCE, false),
             Arguments.of(INPUT_JSON_WITH_MINOR_SIGNIFICANCE, OUTPUT_XML_WITH_MINOR_SIGNIFICANCE, false),
-            Arguments.of(INPUT_JSON_MAP_ONE_RELATED_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED, false),
-            Arguments.of(INPUT_JSON_MAP_TWO_RELATED, OUTPUT_XML_WITH_2_RELATED, false),
+            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT_IGNORE_ONE, OUTPUT_XML_WITH_1_RELATED_CLINICAL_CONTENT, false),
+            Arguments.of(INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT, OUTPUT_XML_WITH_2_RELATED_CLINICAL_CONTENT, false),
             Arguments.of(INPUT_JSON_STATUS_ACTIVE, OUTPUT_XML_WITH_STATUS_ACTIVE, false),
             Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
             Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
-            Arguments.of(INPUT_JSON_RELATED_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED, false)
+            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false)
         );
     }
 
@@ -173,8 +178,8 @@ public class ConditionLinkSetMapperTest {
     @Test
     public void When_MappingParsedConditionWithNoRelated_Expect_LinkSetXml()
         throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_NO_RELATED);
-        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_NO_RELATED);
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_NO_RELATED_CLINICAL_CONTENT);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId());
@@ -186,8 +191,8 @@ public class ConditionLinkSetMapperTest {
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithNoAgentAlreadyMapped_Expect_MapperException() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_RELATED_NON_EXISTENT);
+    public void When_MappingParsedConditionWithNonExistentReferenceInRelatedClinicalContent_Expect_MapperException() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_RELATED_CLINICAL_CONTENT_NON_EXISTENT_REFERENCE);
         Condition parsedObservation = fhirParseService.parseResource(jsonInput, Condition.class);
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
