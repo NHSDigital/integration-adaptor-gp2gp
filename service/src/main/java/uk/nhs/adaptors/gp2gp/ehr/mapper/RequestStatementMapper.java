@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
@@ -209,7 +208,6 @@ public class RequestStatementMapper {
         private String buildDeviceDescription(Reference agent) {
             if (isReferenceToType(agent, ResourceType.Device)) {
                 return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Device.class::isInstance)
                     .map(Device.class::cast)
                     .filter(Device::hasType)
                     .map(Device::getType)
@@ -223,7 +221,6 @@ public class RequestStatementMapper {
         private String buildOrganizationDescription(Reference agent) {
             if (isReferenceToType(agent, ResourceType.Organization)) {
                 return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Organization.class::isInstance)
                     .map(Organization.class::cast)
                     .filter(Organization::hasName)
                     .map(Organization::getName)
@@ -236,7 +233,6 @@ public class RequestStatementMapper {
         private String buildPatientDescription(Reference agent) {
             if (isReferenceToType(agent, ResourceType.Patient)) {
                 return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Patient.class::isInstance)
                     .map($ -> REQUESTER_PATIENT)
                     .orElse(StringUtils.EMPTY);
             }
@@ -246,7 +242,6 @@ public class RequestStatementMapper {
         private String buildRelatedPersonDescription(Reference agent) {
             if (isReferenceToType(agent, ResourceType.RelatedPerson)) {
                 return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(RelatedPerson.class::isInstance)
                     .map(RelatedPerson.class::cast)
                     .filter(RelatedPerson::hasName)
                     .map(RelatedPerson::getNameFirstRep)
