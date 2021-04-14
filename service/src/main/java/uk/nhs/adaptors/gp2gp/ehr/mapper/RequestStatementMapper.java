@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +54,10 @@ public class RequestStatementMapper {
     private static final String SERVICES_REQUESTED = "Service(s) Requested: ";
     private static final String SPECIALTY = "Specialty: ";
     private static final String REASON_CODES = "Reason Codes: ";
-
+    private static final Set<String> SUPPORTED_AGENT_TYPES = Stream.of(ResourceType.Practitioner, ResourceType.RelatedPerson,
+        ResourceType.Device, ResourceType.Patient, ResourceType.Organization)
+        .map(ResourceType::name)
+        .collect(Collectors.toSet());
     private static final String DEFAULT_REASON_CODE_XML = "<code code=\"3457005\" displayName=\"Patient referral\" codeSystem=\"2.16.840.1"
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
@@ -71,30 +76,28 @@ public class RequestStatementMapper {
         private final ReferralRequest referralRequest;
         private final boolean isNested;
         private final RequestStatementTemplateParametersBuilder templateParameters = RequestStatementTemplateParameters.builder();
-        private String text = StringUtils.EMPTY;
 
         private String map() {
+            if (hasReferencingAgent()) {
+                var requester = referralRequest.getRequester();
+                Reference agentRef = requester.getAgent();
+                if (!SUPPORTED_AGENT_TYPES.contains(agentRef.getReference().split("/")[0])) {
+                    throw new EhrMapperException("Requester Reference not of expected Resource Type");
+                }
+                var onBehalfOf = requester.hasOnBehalfOf() ? requester.getOnBehalfOf() : null;
+                processAgent(agentRef, onBehalfOf);
+            }
+
             final IdMapper idMapper = messageContext.getIdMapper();
             templateParameters
                 .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
+                .text(buildTextDescription())
                 .code(buildCode());
-
-            text = buildTextDescription();
-            prependDescriptionInfo();
 
             if (!referralRequest.hasReasonCode()) {
                 templateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
-            }
-
-            if (referralRequest.hasRequester()
-                    && referralRequest.getRequester().hasAgent()
-                    && referralRequest.getRequester().getAgent().hasReference()) {
-                var requester = referralRequest.getRequester();
-                Reference agentRef = requester.getAgent();
-                var onBehalfOf = requester.hasOnBehalfOf() ? requester.getOnBehalfOf() : null;
-                processAgent(agentRef, onBehalfOf);
             }
 
             if (referralRequest.hasRecipient()) {
@@ -103,13 +106,13 @@ public class RequestStatementMapper {
                 templateParameters.responsibleParty(responsibleParty);
             }
 
-            templateParameters.text(text);
-
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());
         }
 
-        private void prependText(String operand) {
-            text = operand + " " + text;
+        private boolean hasReferencingAgent() {
+            return referralRequest.hasRequester()
+                && referralRequest.getRequester().hasAgent()
+                && referralRequest.getRequester().getAgent().hasReference();
         }
 
         private void processAgent(Reference agent, Reference onBehalfOf) {
@@ -125,65 +128,10 @@ public class RequestStatementMapper {
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
             }
-
-            if (isReferenceToType(agent, ResourceType.Device)) {
-                messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Device.class::isInstance)
-                    .map(Device.class::cast)
-                    .filter(Device::hasType)
-                    .map(Device::getType)
-                    .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
-                    .map(REQUESTER_DEVICE::concat)
-                    .ifPresentOrElse(this::prependText, () -> {
-                        throw new EhrMapperException("Could not resolve Device Reference");
-                    });
-
-            } else if (isReferenceToType(agent, ResourceType.Organization)) {
-                messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Organization.class::isInstance)
-                    .map(Organization.class::cast)
-                    .filter(Organization::hasName)
-                    .map(Organization::getName)
-                    .map(REQUESTER_ORG::concat)
-                    .ifPresentOrElse(this::prependText, () -> {
-                        throw new EhrMapperException("Could not resolve Organization Reference");
-                    });
-
-            } else if (isReferenceToType(agent, ResourceType.Patient)) {
-                messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(Patient.class::isInstance)
-                    .map($ -> REQUESTER_PATIENT)
-                    .ifPresent(this::prependText);
-
-            } else if (isReferenceToType(agent, ResourceType.RelatedPerson)) {
-                messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
-                    .filter(RelatedPerson.class::isInstance)
-                    .map(RelatedPerson.class::cast)
-                    .filter(RelatedPerson::hasName)
-                    .map(RelatedPerson::getNameFirstRep)
-                    .map(RequestStatementExtractor::extractHumanName)
-                    .map(REQUESTER_RELATION::concat)
-                    .ifPresentOrElse(this::prependText, () -> {
-                        throw new EhrMapperException("Could not resolve RelatedPerson Reference");
-                    });
-
-            } else if (!isReferenceToType(agent, ResourceType.Practitioner)) {
-                throw new EhrMapperException("Requester Reference not of expected Resource Type");
-            }
         }
 
-        private void prependDescriptionInfo() {
-            prependNoteDescription();
-            prependReasonCodeDescription();
-            prependRecipientDescription();
-            prependSpecialtyDescription();
-            prependServiceRequestedDescription();
-            prependPriorityDescription();
-            prependIdentifierDescription();
-        }
-
-        private void prependIdentifierDescription() {
-            Optional.of(referralRequest).stream()
+        private String buildIdentifierDescription() {
+            return Optional.of(referralRequest).stream()
                 .filter(ReferralRequest::hasIdentifier)
                 .map(ReferralRequest::getIdentifier)
                 .flatMap(List::stream)
@@ -193,37 +141,40 @@ public class RequestStatementMapper {
                 .findAny()
                 .map(UBRN::concat)
                 .filter(StringUtils::isNotBlank)
-                .ifPresent(this::prependText);
+                .orElse(StringUtils.EMPTY);
         }
 
-        private void prependPriorityDescription() {
+        private String buildPriorityDescription() {
             if (referralRequest.hasPriority()) {
-                prependText(PRIORITY + referralRequest.getPriority().getDisplay());
+                return PRIORITY + referralRequest.getPriority().getDisplay();
             }
+            return StringUtils.EMPTY;
         }
 
-        private void prependServiceRequestedDescription() {
+        private String buildServiceRequestedDescription() {
             if (referralRequest.hasServiceRequested()) {
-                prependText(SERVICES_REQUESTED + extractServiceRequested(referralRequest));
+                return SERVICES_REQUESTED + extractServiceRequested(referralRequest);
             }
+            return StringUtils.EMPTY;
         }
 
-        private void prependSpecialtyDescription() {
+        private String buildSpecialtyDescription() {
             if (referralRequest.hasSpecialty()) {
-                extractTextOrCoding(referralRequest.getSpecialty())
+                return extractTextOrCoding(referralRequest.getSpecialty())
                     .map(SPECIALTY::concat)
-                    .ifPresent(this::prependText);
+                    .orElse(StringUtils.EMPTY);
             }
+            return StringUtils.EMPTY;
         }
 
-        private void prependRecipientDescription() {
+        private String buildRecipientDescription() {
             if (referralRequest.hasRecipient()) {
-                String recipientDescription = getRecipientsWithoutFirstPractitioner().stream()
+                return getRecipientsWithoutFirstPractitioner().stream()
                     .filter(Reference::hasReferenceElement)
                     .map(value -> extractRecipient(messageContext, value))
                     .collect(Collectors.joining(" "));
-                prependText(recipientDescription);
             }
+            return StringUtils.EMPTY;
         }
 
         private List<Reference> getRecipientsWithoutFirstPractitioner() {
@@ -239,26 +190,104 @@ public class RequestStatementMapper {
             return recipients;
         }
 
-        private void prependReasonCodeDescription() {
+        private String buildReasonCodeDescription() {
             if (referralRequest.hasReasonCode() && referralRequest.getReasonCode().size() > 1) {
-                prependText(REASON_CODES + extractReasonCode(referralRequest));
+                return REASON_CODES + extractReasonCode(referralRequest);
             }
+            return StringUtils.EMPTY;
         }
 
-        private void prependNoteDescription() {
+        private String buildNoteDescription() {
             if (referralRequest.hasNote()) {
-                String noteDescription = referralRequest.getNote().stream()
+                return referralRequest.getNote().stream()
                     .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
                     .collect(Collectors.joining(COMMA));
-                prependText(noteDescription);
             }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildDeviceDescription(Reference agent) {
+            if (isReferenceToType(agent, ResourceType.Device)) {
+                return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                    .filter(Device.class::isInstance)
+                    .map(Device.class::cast)
+                    .filter(Device::hasType)
+                    .map(Device::getType)
+                    .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
+                    .map(REQUESTER_DEVICE::concat)
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve Device Reference"));
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildOrganizationDescription(Reference agent) {
+            if (isReferenceToType(agent, ResourceType.Organization)) {
+                return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                    .filter(Organization.class::isInstance)
+                    .map(Organization.class::cast)
+                    .filter(Organization::hasName)
+                    .map(Organization::getName)
+                    .map(REQUESTER_ORG::concat)
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildPatientDescription(Reference agent) {
+            if (isReferenceToType(agent, ResourceType.Patient)) {
+                return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                    .filter(Patient.class::isInstance)
+                    .map($ -> REQUESTER_PATIENT)
+                    .orElse(StringUtils.EMPTY);
+            }
+            return StringUtils.EMPTY;
+        }
+
+        private String buildRelatedPersonDescription(Reference agent) {
+            if (isReferenceToType(agent, ResourceType.RelatedPerson)) {
+                return messageContext.getInputBundleHolder().getResource(agent.getReferenceElement())
+                    .filter(RelatedPerson.class::isInstance)
+                    .map(RelatedPerson.class::cast)
+                    .filter(RelatedPerson::hasName)
+                    .map(RelatedPerson::getNameFirstRep)
+                    .map(RequestStatementExtractor::extractHumanName)
+                    .map(REQUESTER_RELATION::concat)
+                    .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
+            }
+            return StringUtils.EMPTY;
         }
 
         private String buildTextDescription() {
+            StringBuilder text = new StringBuilder();
             if (referralRequest.hasDescription()) {
-                return referralRequest.getDescription();
+                text.append(referralRequest.getDescription());
             }
-            return StringUtils.EMPTY;
+            Stream<String> descriptions = Stream.of(
+                buildNoteDescription(),
+                buildReasonCodeDescription(),
+                buildRecipientDescription(),
+                buildSpecialtyDescription(),
+                buildServiceRequestedDescription(),
+                buildPriorityDescription(),
+                buildIdentifierDescription()
+            );
+
+            if (hasReferencingAgent()) {
+                Reference agent = referralRequest.getRequester().getAgent();
+                descriptions = Stream.concat(descriptions, Stream.of(
+                    buildDeviceDescription(agent),
+                    buildOrganizationDescription(agent),
+                    buildPatientDescription(agent),
+                    buildRelatedPersonDescription(agent)
+                ));
+            }
+
+            descriptions
+                .filter(StringUtils::isNotBlank)
+                .map(description -> description + " ")
+                .forEach(description -> text.insert(0, description));
+
+            return text.toString();
         }
 
         private String buildCode() {
