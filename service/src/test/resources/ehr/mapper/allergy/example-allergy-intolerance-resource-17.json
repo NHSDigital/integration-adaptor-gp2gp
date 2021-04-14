@@ -1,6 +1,6 @@
 {
     "resourceType": "AllergyIntolerance",
-    "id": "081CE989-17CD-46C6-8C22-C90F8F2487C2",
+    "id": "04288662-8B7A-4350-B69B-CE155E992A7C",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
@@ -9,7 +9,7 @@
     "identifier": [
         {
             "system": "https://EMISWeb/A82038",
-            "value": "081CE989-17CD-46C6-8C22-C90F8F2487C2"
+            "value": "04288662-8B7A-4350-B69B-CE155E992A7C"
         }
     ],
     "clinicalStatus": "active",
@@ -20,39 +20,44 @@
     "code": {
         "coding": [
             {
+                "system": "http://read.info/readv2",
+                "code": "14LK.00",
+                "display": "H/O: aspirin allergy",
+                "userSelected": true
+            },
+            {
                 "extension": [
                     {
                         "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
                         "extension": [
                             {
                                 "url": "descriptionId",
-                                "valueId": "152307010"
+                                "valueId": "433808014"
                             },
                             {
                                 "url": "descriptionDisplay",
-                                "valueString": "Allergy to penicillin"
+                                "valueString": "Aspirin allergy"
                             }
                         ]
                     }
                 ],
-                "system": "http://snomed.info/sct",
-                "code": "91936005",
-                "display": "Allergy to penicillin",
-                "userSelected": true
+              "system": "http://snomed.info/sct",
+              "code": "293586001",
+              "display": "Aspirin allergy"
             }
         ]
     },
     "patient": {
-        "reference": "Patient/7DC1C5D8-540B-4A7C-8E19-CBD3426A8CC6"
+       "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
     },
-    "onsetDateTime": "2020-07-24",
-    "assertedDate": "2020-07-24T13:38:29.323+01:00",
+    "onsetDateTime": "2010-01-13",
+    "assertedDate": "2010-01-13T11:41:26.583+00:00",
     "recorder": {
         "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
     },
     "note": [
         {
-            "text": "Significance : Major - Episodicity : First - test, test"
+            "text": "Significance : Minor - Episodicity : First - Drug Allergy - Apsrin"
         }
     ]
 }
