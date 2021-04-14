@@ -176,7 +176,7 @@ public class ConditionLinkSetMapperTest {
     }
 
     @Test
-    public void When_MappingParsedConditionWithNoRelated_Expect_LinkSetXml()
+    public void When_MappingParsedConditionWithNoRelatedClinicalContent_Expect_LinkSetXml()
         throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_NO_RELATED_CLINICAL_CONTENT);
         var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT);
