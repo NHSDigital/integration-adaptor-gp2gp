@@ -88,14 +88,13 @@ public class ConditionLinkSetMapperTest {
     private InputBundle inputBundle;
     private ConditionLinkSetMapper conditionLinkSetMapper;
     private FhirParseService fhirParseService;
-    private Bundle bundle;
 
     @BeforeEach
     public void setUp() throws IOException {
         fhirParseService = new FhirParseService();
 
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         inputBundle = new InputBundle(bundle);
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
@@ -145,8 +144,8 @@ public class ConditionLinkSetMapperTest {
 
     @ParameterizedTest
     @MethodSource("testObservationArguments")
-    public void When_MappingParsedConditionWithObservation_Expect_LinkSetXml(String conditionJson, String outputXml, boolean isNested)
-        throws IOException {
+    public void When_MappingParsedConditionWithActualProblemContentAndIsObservation_Expect_LinkSetXml(String conditionJson,
+        String outputXml, boolean isNested) throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(conditionJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
