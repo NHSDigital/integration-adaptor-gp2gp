@@ -7,13 +7,17 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,20 +71,25 @@ public class AllergyStructureMapper {
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
         if (allergyIntolerance.hasRecorder()) {
-            var recorderReference = allergyIntolerance.getRecorder();
-            var authorReference = idMapper.get(recorderReference);
-            var authorParameter = participantMapper.mapToParticipant(authorReference, ParticipantType.AUTHOR);
-            allergyStructureTemplateParameters.author(authorParameter);
+            buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.AUTHOR)
+                .ifPresent(allergyStructureTemplateParameters::author);
         }
 
         if (allergyIntolerance.hasAsserter()) {
-            var asserterRef = allergyIntolerance.getAsserter();
-            var performerReference = idMapper.get(asserterRef);
-            var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
-            allergyStructureTemplateParameters.performer(performerParameter);
+            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
+                .ifPresent(allergyStructureTemplateParameters::performer);
         }
 
         return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters.build());
+    }
+
+    private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
+        if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
+            var authorReference = messageContext.getIdMapper().get(reference);
+            return Optional.of(participantMapper.mapToParticipant(authorReference, participantType));
+        }
+
+        return Optional.empty();
     }
 
     private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameters) {
@@ -102,6 +111,7 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
+
         return descriptionList
             .stream()
             .filter(StringUtils::isNotEmpty)
@@ -197,14 +207,15 @@ public class AllergyStructureMapper {
     }
 
     private String buildNotePertinentInformation(AllergyIntolerance allergyIntolerance) {
-        String notes = StringUtils.EMPTY;
-        if (allergyIntolerance.hasNote()) {
-            List<Annotation> annotations = allergyIntolerance.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        return notes;
+        return Stream.concat(
+            messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream),
+            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty()
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {

@@ -1,0 +1,63 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "75691D32-C7DE-4639-AA74-24B1AF61C32B",
+    "meta": {
+        "profile": [
+           "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "75691D32-C7DE-4639-AA74-24B1AF61C32B"
+        }
+    ],
+    "clinicalStatus": "active",
+    "verificationStatus": "unconfirmed",
+    "category": [
+        "environment"
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "SN59200",
+                "display": "Allergic reaction to wasp sting",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "442105017"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "Allergic reaction to wasp sting"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "300909004",
+                "display": "Allergic reaction to wasp sting"
+            }
+        ]
+    },
+    "patient": {
+        "reference": "Patient/55D2363D-57A2-48F4-9A74-5B2E03F5E93D"
+    },
+    "onsetDateTime": "2010-01-14",
+    "assertedDate": "2010-01-14T09:57:28.08+00:00",
+    "recorder": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    },
+    "note": [
+        {
+          "text": "Significance : Minor - Episodicity : First - This is a Wasp Sting allergy note"
+        }
+    ]
+}
