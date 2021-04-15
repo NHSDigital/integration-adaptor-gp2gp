@@ -1,13 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Device;
 import org.hl7.fhir.dstu3.model.HealthcareService;
 import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Organization;
@@ -19,6 +16,7 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 public class RequestStatementExtractor {
@@ -34,36 +32,35 @@ public class RequestStatementExtractor {
 
     public static String extractServiceRequested(ReferralRequest referralRequest) {
         return referralRequest.getServiceRequested().stream()
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .flatMap(Optional::stream)
             .collect(Collectors.joining(COMMA));
-    }
-
-    public static String extractDevice(Device device) {
-        return extractTextOrCoding(device.getType())
-            .orElse(StringUtils.EMPTY);
     }
 
     public static String extractRecipient(MessageContext messageContext, Reference reference) {
         IIdType referenceId = reference.getReferenceElement();
-        if (referenceId.getResourceType().equals(ResourceType.Practitioner.name())) {
+        String resourceType = referenceId.getResourceType();
+        if (resourceType.equals(ResourceType.Practitioner.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (Practitioner) resource)
-                .map(value -> RECIPIENT_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
+                .map(Practitioner.class::cast)
+                .map(Practitioner::getNameFirstRep)
+                .map(RequestStatementExtractor::extractHumanName)
+                .map(RECIPIENT_PRACTITIONER::concat)
                 .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
-        } else if (referenceId.getResourceType().equals(ResourceType.HealthcareService.name())) {
+        } else if (resourceType.equals(ResourceType.HealthcareService.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (HealthcareService) resource)
-                .map(value -> RECIPIENT_HEALTH_CARE_SERVICE + value.getName())
+                .map(HealthcareService.class::cast)
+                .map(HealthcareService::getName)
+                .map(RECIPIENT_HEALTH_CARE_SERVICE::concat)
                 .orElseThrow(() -> new EhrMapperException("Could not resolve HealthcareService Reference"));
-        } else if (referenceId.getResourceType().equals(ResourceType.Organization.name())) {
+        } else if (resourceType.equals(ResourceType.Organization.name())) {
             return messageContext.getInputBundleHolder()
                 .getResource(referenceId)
-                .map(resource -> (Organization) resource)
-                .map(value -> RECIPIENT_ORG + value.getName())
+                .map(Organization.class::cast)
+                .map(Organization::getName)
+                .map(RECIPIENT_ORG::concat)
                 .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
         }
         throw new EhrMapperException("Recipient Reference not of expected Resource Type");
@@ -73,9 +70,8 @@ public class RequestStatementExtractor {
         var ignoreFirstReasonCode = referralRequest.getReasonCode();
         return ignoreFirstReasonCode.stream()
             .skip(1)
-            .map(value -> extractTextOrCoding(value))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .flatMap(Optional::stream)
             .collect(Collectors.joining(COMMA));
     }
 
@@ -87,14 +83,18 @@ public class RequestStatementExtractor {
             if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (RelatedPerson) resource)
-                    .map(value -> NOTE_AUTHOR_RELATION + extractHumanName(value.getNameFirstRep()))
+                    .map(RelatedPerson.class::cast)
+                    .map(RelatedPerson::getNameFirstRep)
+                    .map(RequestStatementExtractor::extractHumanName)
+                    .map(NOTE_AUTHOR_RELATION::concat)
                     .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
                 return messageContext.getInputBundleHolder()
                     .getResource(reference)
-                    .map(resource -> (Practitioner) resource)
-                    .map(value -> NOTE_AUTHOR_PRACTITIONER + extractHumanName(value.getNameFirstRep()))
+                    .map(Practitioner.class::cast)
+                    .map(Practitioner::getNameFirstRep)
+                    .map(RequestStatementExtractor::extractHumanName)
+                    .map(NOTE_AUTHOR_PRACTITIONER::concat)
                     .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
