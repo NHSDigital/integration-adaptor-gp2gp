@@ -121,7 +121,7 @@ pipeline {
                                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
                                     List<String> tfParams = []
-                                    Map<String,String> tfVarables = ["${tfComponent}_build_id": BUILD_TAG]
+                                    Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
                                       if (gpccDeploy) {
                                           tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
                                       }
