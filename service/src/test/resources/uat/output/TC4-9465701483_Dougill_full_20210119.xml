@@ -1,0 +1,2685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
+    <id root="test-id-3" />
+    <creationTime value="20200101010101" />
+    <versionCode code="V3NPfIT3.1.10" />
+    <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
+    <processingCode code="P" />
+    <processingModeCode code="T" />
+    <acceptAckCode code="NE" />
+    <communicationFunctionRcv typeCode="RCV">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+        </device>
+    </communicationFunctionRcv>
+    <communicationFunctionSnd typeCode="SND">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+        </device>
+    </communicationFunctionSnd>
+    <ControlActEvent classCode="CACT" moodCode="EVN">
+        <author1 typeCode="AUT">
+            <AgentSystemSDS classCode="AGNT">
+                <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                </agentSystemSDS>
+            </AgentSystemSDS>
+        </author1>
+        <subject typeCode="SUBJ" contextConductionInd="false">
+            <EhrExtract classCode="EXTRACT" moodCode="EVN">
+                <id root="test-id-1" />
+                <statusCode code="COMPLETE" />
+                <availabilityTime value="20200101010101" />
+                <recordTarget typeCode="RCT">
+                    <patient classCode="PAT">
+                        <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
+                    </patient>
+                </recordTarget>
+                <author typeCode="AUT">
+                    <time value="20200101010101" />
+                    <AgentOrgSDS classCode="AGNT">
+                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                            <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        </agentOrganizationSDS>
+                    </AgentOrgSDS>
+                </author>
+                <destination typeCode="DST">
+                    <AgentOrgSDS classCode="AGNT">
+                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                            <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                        </agentOrganizationSDS>
+                    </AgentOrgSDS>
+                </destination>
+                <component typeCode="COMP">
+                    <ehrFolder classCode="FOLDER" moodCode="EVN">
+                        <id root="test-id-2" />
+                        <statusCode code="COMPLETE" />
+                        <effectiveTime>
+                            <low value="" />
+                            <high value="" />
+                        </effectiveTime>
+                        <availabilityTime value="20200101010101" />
+                        <author typeCode="AUT">
+                            <time value="20200101010101" />
+                            <AgentOrgSDS classCode="AGNT">
+                                <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                                    <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                                </agentOrganizationSDS>
+                            </AgentOrgSDS>
+                        </author>
+                        <responsibleParty>
+                            <agentDirectory>
+                                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                                <part partCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="test-id-3"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <code nullFlavor="UNK">
+                                                <orginalText>General Medical Practitioner</orginalText>
+                                            </code>
+                                            <name>
+                                                <prefix>Dr</prefix>
+                                                <given>Peter</given>
+                                                <family>Whitcombe</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
+                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+                                            <telecom value="01133800000" use="WP"/>
+                                            <addr use="WP">
+                                                <streetAddressLine>Fulford Grange</streetAddressLine>
+                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <postalCode>LS19 6BA</postalCode>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                                <part partCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="test-id-3"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <code nullFlavor="UNK">
+                                                <orginalText>General Medical Practitioner</orginalText>
+                                            </code>
+                                            <name>
+                                                <prefix>Dr</prefix>
+                                                <given>David</given>
+                                                <family>McAvenue</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
+                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+                                            <telecom value="01133800000" use="WP"/>
+                                            <addr use="WP">
+                                                <streetAddressLine>Fulford Grange</streetAddressLine>
+                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <postalCode>LS19 6BA</postalCode>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                                <part partCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="test-id-3"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <code nullFlavor="UNK">
+                                                <orginalText>Health Care Support Worker</orginalText>
+                                            </code>
+                                            <name>
+                                                <given>Emis</given>
+                                                <family>Emis</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
+                                            <name>National</name>
+
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                                <part partCode="PART">
+                                    <Agent classCode="AGNT">
+                                        <id root="test-id-3"/>
+                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+                                            <code nullFlavor="UNK">
+                                                <orginalText>General Medical Practitioner</orginalText>
+                                            </code>
+                                            <name>
+                                                <prefix>Mr</prefix>
+                                                <given>NHS</given>
+                                                <family>Test</family>
+                                            </name>
+                                        </agentPerson>
+                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
+                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+                                            <telecom value="01133800000" use="WP"/>
+                                            <addr use="WP">
+                                                <streetAddressLine>Fulford Grange</streetAddressLine>
+                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Rawdon</streetAddressLine>
+                                                <streetAddressLine>Leeds</streetAddressLine>
+                                                <postalCode>LS19 6BA</postalCode>
+                                            </addr>
+                                        </representedOrganization>
+                                    </Agent>
+                                </part>
+                            </agentDirectory>
+                        </responsibleParty>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>Home visit note</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20090101000000"/>
+                                </effectiveTime>
+                                <availabilityTime value="20090101000000"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="2009"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20100123123926"/>
+
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1" />
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text></text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+
+                                        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
+                                            <originalText>Current smoker</originalText>
+                                        </code>
+
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+                                    <value xsi:type="PQ" value="0.500" unit="1"><translation value="0.500"><originalText>oz/week</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160619003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rolls own cigarettes">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+                                    <value xsi:type="PQ" value="350.000" unit="1"><translation value="350.000"><originalText>Cigarettes/day</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>That&apos;s some pretty heavy smoking</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="225323000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation education">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160616005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trying to give up smoking">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="161077003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Father smokes">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="161078008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mother smokes">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+                                    <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>/day</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160621008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-cigar smoker">
+                                        <originalText>Ex-cigar smoker</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="228377000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smokes drugs">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>29th Aug 2009 (Hand entered date)</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="401160008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation programme start date">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="2009"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123926"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="904231000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation counselling by telephone">
+                                        <originalText>Smoking cessation counselling by telephone</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>GP Surgery</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20100118113800"/>
+                                </effectiveTime>
+                                <availabilityTime value="20100118113800"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="20100118113800"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20100118113450"/>
+                                        <value xsi:type="PQ" value="620.000" unit="1"><translation value="620.000"><originalText>L/min</originalText></translation></value>
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1" />
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text></text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+
+                                        <code code="18491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak expiratory flow rate">
+                                        </code>
+
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+                                    <value xsi:type="PQ" value="645.000" unit="1"><translation value="645.000"><originalText>L/min</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="271306003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Best ever peak flow rate (respiratory)">
+                                        <originalText>Best ever peak flow rate</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+                                    <value xsi:type="PQ" value="630.000" unit="1"><translation value="630.000"><originalText>L/min</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="271508001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Expected peak flow rate (respiratory)">
+                                        <originalText>Predicted peak flow</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="170639000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak flow meter at home">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="170625000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inhaler technique - good">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="170636007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never disturbs sleep">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118113800"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="170658009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never restricts exercise">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <PlanStatement classCode="OBS" moodCode="INT">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100618"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113450"/>
+                                    <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+                                    </code>
+                                </PlanStatement>
+                            </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>Children&apos;s home visit note</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20100118114100"/>
+                                </effectiveTime>
+                                <availabilityTime value="20100118114100"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="20100118114100"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20100118113945" />
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1"/>
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text>Location: EMIS Test Practice Location Manufacturer: Medi-Pete Batch: 123456 Expiration: 2011-01-18 Site: Left arm GMS : GMS</text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+                                        <code code="414259000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination">
+                                        </code>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Left arm - This is some text 1</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: Medi-Pete Batch: 654321 Expiration: 2010-01-29 Site: Right arm</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="247631000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First pneumococcal conjugated vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Right arm - This is some text 2</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: Medi - Pete Batch: 1234567 Expiration: 2010-01-13 Site: Left thigh GMS : GMS</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="415507003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Second diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Left leg  - This is some text 3</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: Medi Pete Batch: AB1234 Expiration: 2010-01-31 Site: Right thigh GMS : GMS</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="314414007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First meningitis C vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Right leg - This is some text 4</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: Medi Pete Batch: cd32323 Site: Left buttock GMS : GMS</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="415712004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Third diphtheria tetanus and five component acellular pertussis, haemophilus influenzae type b, inactivated polio vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Left leg  - This is some text 5</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: Pete-medicines Batch: rere2323 Expiration: 2010-02-07 Site: Right buttock</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="247641000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Second pneumococcal conjugated vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Right leg - This is some text 6</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: some company Batch: future2030 Expiration: 2030-01-25 Site: Left arm GMS : GMS (Another Practice)</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="314415008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Second meningitis C vaccination">
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Right leg - This is some text - left arm / right leg</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114100"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118113945" />
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1"/>
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Location: EMIS Test Practice Location Manufacturer: another company Batch: past2003 Expiration: 2003-01-17 Site: Right arm GMS : Not GMS</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+                                    <code code="428975001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Vaccination with Haemophilus influenzae type B and Neisseria meningitidis serotype C combination vaccine">
+                                        <originalText>Haemophilus influenzae type B and meningitis C vaccination</originalText>
+                                    </code>
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                                <component typeCode="COMP" >
+                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <availabilityTime value="20100118114100" />
+                                        <text>Left leg  - This is some text - right arm left leg</text>
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </NarrativeStatement>
+                                </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>Residential home visit note</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20100118114700"/>
+                                </effectiveTime>
+                                <availabilityTime value="20100118114700"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="20100118114700"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20100118114710"/>
+
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1" />
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text></text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+
+                                        <code code="163106002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right posterior tibial pulse present">
+                                        </code>
+
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="163119003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left posterior tibial pulse absent">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="163108001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right dorsalis pedis pulse present">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="163121008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left dorsalis pedis absent">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is right foot colour text note</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="416694004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot colour normal">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is left foot colour text note</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="416317001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left foot colour abnormal">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="164615004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion hot">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="164612001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion cold">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="856521000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of right foot - triphasic">
+                                        <originalText>Doppler of right foot - triphasic</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="856441000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of left foot - biphasic">
+                                        <originalText>Doppler of left foot - biphasic</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114710"/>
+                                    <value xsi:type="PQ" value="10.000" unit="1"><translation value="10.000"><originalText>s</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
+                                        <originalText>Capillary refill time</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+                                    <value xsi:type="PQ" value="15.000" unit="1"><translation value="15.000"><originalText>Banana</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
+                                        <originalText>Capillary refill time</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+                                        <originalText>BOTH</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+                                        <originalText>LEFT</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+                                    <value xsi:type="PQ" value="1.400" unit="1"><translation value="1.400"><originalText>m</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+                                    <value xsi:type="PQ" value="1.900" unit="1"><translation value="1.900"><originalText>m</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="52598005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rest pain">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="81765008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No pain">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="162781005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of ankles">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Foot</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="162783008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of legs">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 1</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="857841000006108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Right foot monofilament 10g normal">
+                                        <originalText>Right foot monofilament 10g normal</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 2</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="857021000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Left foot monofilament 10g abnormal">
+                                        <originalText>Left foot monofilament 10g abnormal</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="407558007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Vibration sense of right foot absent">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="395149007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - vibration sense left foot reduced">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 12</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="6020002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tinea pedis">
+                                        <originalText>Athlete&apos;s foot</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 13</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="163683007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - gait">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 3</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="230572002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathy">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 10</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="52897009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychogryposis">
+                                        <originalText>Onychogryphosis</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 11</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="414941008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychomycosis">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 4</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="201250006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic ulcer diabetic foot">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 5</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="201251005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neuropathic diabetic ulcer - foot">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 6</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="201252003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed diabetic ulcer - foot">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 7</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="238793001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic leg ulcer">
+                                        <originalText>Arterial leg ulcer</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 8</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="238792006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed arteriovenous leg ulcer">
+                                        <originalText>Mixed venous and arterial leg ulcer</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 9</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="201724008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathic arthropathy">
+                                        <originalText>Diabetic Charcot&apos;s arthropathy</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="414911006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - right healed foot ulcer">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="414895002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - left healed foot ulcer">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="308103003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot deformity">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="414900003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - No left foot deformity">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="394671009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right diabetic foot at low risk">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="394676004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left diabetic foot at high risk">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Right Leg</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="265739006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation through metatarsal bones">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>Left Leg</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="88312006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation of leg through tibia and fibula">
+                                        <originalText>Amputation below-knee</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>This is some text 20</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="183844002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for vascular studies">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <PlanStatement classCode="OBS" moodCode="INT">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100118114700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100118114711"/>
+                                    <text>
+                                        This is some text 30
+                                    </text>
+                                    <code code="247221000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="In-house podiatry follow-up appointment">
+                                    </code>
+                                </PlanStatement>
+                            </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>GP Surgery</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20100123122700"/>
+                                </effectiveTime>
+                                <availabilityTime value="20100123122700"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="20100123122700"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20100123123144"/>
+
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1" />
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text>This is some text following the selection of Trivial Drinker</text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+
+                                        <code code="266917007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trivial drinker - &lt;1u/day">
+                                        </code>
+
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160575005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Light drinker - 1-2u/day">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160576006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Moderate drinker - 3-6u/day">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160577002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heavy drinker - 7-9u/day">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="281078001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Education about alcohol consumption">
+                                        <originalText>Advice relating to alcohol consumption</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160588008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirit drinker">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text>These are some notes on &quot;Beer Drinker&quot;</text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160589000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beer drinker">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160590009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Drinks beer and spirits">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160592001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake above recommended sensible limits">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+                                    <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>/day</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="442547005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Number of alcohol units consumed on heaviest drinking day">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123144"/>
+                                    <value xsi:type="PQ" value="150.000" unit="1"><translation value="150.000"><originalText>U/week</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="1082641000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol units consumed per week">
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component><component typeCode="COMP" >
+                                <ObservationStatement classCode="OBS" moodCode="EVN">
+                                    <id root="test-id-3" />
+                                    <statusCode code="COMPLETE" />
+                                    <effectiveTime>
+                                        <center value="20100123122700"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20100123123145"/>
+                                    <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>U/week</originalText></translation></value>
+                                    <pertinentInformation typeCode="PERT">
+                                        <sequenceNumber value="+1" />
+                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                            <text></text>
+                                        </pertinentAnnotation>
+                                    </pertinentInformation>
+
+                                    <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
+                                        <originalText>Alcohol intake</originalText>
+                                    </code>
+
+                                    <Participant typeCode="PRF" contextControlCode="OP">
+                                        <agentRef classCode="AGNT">
+                                            <id root="test-id-3"/>
+                                        </agentRef>
+                                    </Participant>
+                                </ObservationStatement>
+                            </component>
+                            </ehrComposition>
+                        </component>
+                        <component typeCode="COMP">
+                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+                                <id root="test-id-3" />
+                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+                                    <originalText>GP Surgery</originalText>
+                                </code>
+                                <statusCode code="COMPLETE" />
+                                <effectiveTime>
+                                    <center value="20110111153300"/>
+                                </effectiveTime>
+                                <availabilityTime value="20110111153300"/>
+                                <author typeCode="AUT" contextControlCode="OP">
+                                    <time value="20100113151332" />
+                                    <agentRef classCode="AGNT">
+                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                                    </agentRef>
+                                </author>
+                                <location typeCode="LOC">
+                                    <locatedEntity classCode="LOCE">
+                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                                            <name>Branch Surgery Rhing</name>
+                                        </locatedPlace>
+                                    </locatedEntity>
+                                </location>
+                                <Participant2 typeCode="RESP" contextControlCode="OP">
+                                    <agentRef classCode="AGNT">
+                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                                    </agentRef>
+                                </Participant2>
+                                <component typeCode="COMP" >
+                                    <ObservationStatement classCode="OBS" moodCode="EVN">
+                                        <id root="test-id-3" />
+                                        <statusCode code="COMPLETE" />
+                                        <effectiveTime>
+                                            <center value="20110111153300"/>
+                                        </effectiveTime>
+                                        <availabilityTime value="20110111153927"/>
+
+                                        <pertinentInformation typeCode="PERT">
+                                            <sequenceNumber value="+1" />
+                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                                                <text></text>
+                                            </pertinentAnnotation>
+                                        </pertinentInformation>
+
+                                        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
+                                            <originalText>Happy puppet syndrome</originalText>
+                                        </code>
+
+                                        <Participant typeCode="PRF" contextControlCode="OP">
+                                            <agentRef classCode="AGNT">
+                                                <id root="test-id-3"/>
+                                            </agentRef>
+                                        </Participant>
+                                    </ObservationStatement>
+                                </component><component typeCode="COMP">
+                                <CompoundStatement classCode="BATTERY" moodCode="EVN">
+                                    <id root="test-id-3"/>
+                                    <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+                                    </code>
+                                    <statusCode code="COMPLETE"/>
+                                    <effectiveTime>
+                                        <center value="20110111153300"/>
+                                    </effectiveTime>
+                                    <availabilityTime value="20110111153927"/>
+                                    <component typeCode="COMP" contextConductionInd="true">
+                                        <ObservationStatement classCode="OBS" moodCode="EVN">
+                                            <id root="test-id-3"/>
+                                            <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+                                                <originalText>Systolic blood pressure</originalText>
+                                            </code>
+                                            <statusCode code="COMPLETE"/>
+                                            <effectiveTime>
+                                                <center value="20110111153300"/>
+                                            </effectiveTime>
+                                            <availabilityTime value="20110111153927"/>
+                                            <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                                        </ObservationStatement>
+                                    </component>
+                                    <component typeCode="COMP" contextConductionInd="true">
+                                        <ObservationStatement classCode="OBS" moodCode="EVN">
+                                            <id root="test-id-3"/>
+                                            <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+                                                <originalText>Diastolic blood pressure</originalText>
+                                            </code>
+                                            <statusCode code="COMPLETE"/>
+                                            <effectiveTime>
+                                                <center value="20110111153300"/>
+                                            </effectiveTime>
+                                            <availabilityTime value="20110111153927"/>
+                                            <valueQuantity><value xsi:type="PQ" value="50.000" unit="1"><translation value="50.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                                        </ObservationStatement>
+                                    </component>
+                                    <!--<Participant typeCode="PRF" ..../>-->
+                                </CompoundStatement>
+                            </component>
+                            </ehrComposition>
+                        </component>
+                    </ehrFolder>
+                </component>
+                <inFulfillmentOf typeCode="FLFS">
+                    <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
+                        <id root="test-request-id" />
+                    </priorEhrRequest>
+                </inFulfillmentOf>
+                <limitation typeCode="LIMIT" inversionInd="true">
+                    <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
+                        <id root="76C49C11-5271-11EA-9384-E83935108FD5" />
+                        <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)" />
+                    </limitingEhrExtractSpecification>
+                </limitation>
+            </EhrExtract>
+
+        </subject>
+    </ControlActEvent>
+</RCMR_IN030000UK06>
