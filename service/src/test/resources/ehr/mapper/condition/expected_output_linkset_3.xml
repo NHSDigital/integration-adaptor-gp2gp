@@ -36,20 +36,20 @@
     </LinkSet>
 </component>
 <component typeCode="COMP" contextConductionInd="true">
-<ObservationStatement classCode="OBS" moodCode="EVN">
-    <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
-    <code><!--code placeholder--></code>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <low value="20200906"/>
-        <high value="20201004000000"/>
-    </effectiveTime>
-    <availabilityTime value="20200907101202" />
-    <pertinentInformation typeCode="PERT">
-        <sequenceNumber value="+1" />
-        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-            <text>Burning feet description</text>
-        </pertinentAnnotation>
-    </pertinentInformation>
-</ObservationStatement>
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
+        <code><!--code placeholder--></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20200906"/>
+            <high value="20201004000000"/>
+        </effectiveTime>
+        <availabilityTime value="20200907101202" />
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Burning feet description</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+  </ObservationStatement>
 </component>

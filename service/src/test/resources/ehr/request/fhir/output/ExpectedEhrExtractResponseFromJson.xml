@@ -233,6 +233,11 @@ ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSp
 
 The line below contains special characters...
 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
     </NarrativeStatement>
 </component>
     </ehrComposition>
@@ -321,6 +326,11 @@ The line below contains special characters...
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100123134800" />
         <text>This is some random free text</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
     </NarrativeStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -433,6 +443,11 @@ The line below contains special characters...
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100609" />
         <text>hhhhhhhhh</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
     </NarrativeStatement>
 </component>
     </ehrComposition>
@@ -473,6 +488,11 @@ The line below contains special characters...
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100610082200" />
         <text>This is kjkjkjkjkjkjkjkjkj</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
     </NarrativeStatement>
 </component>
     </ehrComposition>

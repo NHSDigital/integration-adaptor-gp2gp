@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class NarrativeStatementMapperTest {
+public class ObservationToNarrativeStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "example-observation-resource-1.json";
@@ -35,23 +37,25 @@ public class NarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY + "example-observation-resource-3.json";
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY + "example-observation-resource-4.json";
     private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY + "example-observation-resource-5.json";
+    private static final String INPUT_JSON_WITH_PERFORMER = TEST_FILE_DIRECTORY + "example-observation-resource-25.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
+    private static final String OUTPUT_XML_USES_AGENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private CharSequence expectedOutputMessage;
-    private NarrativeStatementMapper narrativeStatementMapper;
+    private ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        narrativeStatementMapper = new NarrativeStatementMapper(messageContext);
+        observationToNarrativeStatementMapper = new ObservationToNarrativeStatementMapper(messageContext, new ParticipantMapper());
     }
 
     @AfterEach
@@ -62,11 +66,13 @@ public class NarrativeStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "something");
+
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
+        String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
@@ -76,7 +82,8 @@ public class NarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
             Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
-            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED)
+            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT)
         );
     }
 
@@ -86,7 +93,7 @@ public class NarrativeStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        String outputMessage = narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
+        String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true);
 
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
@@ -97,6 +104,16 @@ public class NarrativeStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         assertThrows(EhrMapperException.class, ()
-            -> narrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+            -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+    }
+
+    @Test
+    public void When_MappingParsedObservationJsonWithNoAgentAlreadyMapped_Expect_MapperException() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
+        assertThatThrownBy(() -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("No ID mapping for reference Practitioner/something");
     }
 }

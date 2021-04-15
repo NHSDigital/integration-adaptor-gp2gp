@@ -23,8 +23,8 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterComponentsMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.NarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
@@ -111,6 +111,7 @@ public class EhrExtractUATTest {
             .build();
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
+        ParticipantMapper participantMapper = new ParticipantMapper();
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
@@ -121,15 +122,15 @@ public class EhrExtractUATTest {
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
                 codeableConceptCdMapper,
-                new ParticipantMapper()
+                participantMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
