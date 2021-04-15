@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.hl7.fhir.dstu3.model.Resource;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
@@ -48,11 +49,17 @@ public class ConditionLinkSetMapper {
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
+        if (!condition.hasAsserter()) {
+            throw new EhrMapperException("Condition.asserter is required");
+        }
+
+        final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .linkSetId(messageContext.getIdMapper().getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
+            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
 
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
@@ -71,6 +78,17 @@ public class ConditionLinkSetMapper {
             });
 
         builder.code(buildCode(condition));
+
+        var asserterReference = condition.getAsserter();
+        var performerReference = idMapper.get(asserterReference);
+        var referenceElement = asserterReference.getReferenceElement();
+
+        messageContext.getInputBundleHolder().getResource(referenceElement)
+            .map(Resource::getResourceType)
+            .filter(ResourceType.Practitioner::equals)
+            .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
+        var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
+        builder.performer(performerParameter);
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE, builder.build());
     }

@@ -82,7 +82,7 @@ public class EhrExtractUATTest {
             new ObservationStatementMapper(messageContext, new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(), codeableConceptCdMapper, participantMapper),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
+            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
                 codeableConceptCdMapper));
 
