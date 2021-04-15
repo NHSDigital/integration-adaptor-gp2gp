@@ -14,6 +14,10 @@ public class EncounterTemplateParameters {
     private String effectiveTime;
     private String components;
     private String code;
+    private String altCode;
     private String displayName;
     private String originalText;
+    private String authorTime;
+    private String agentRef;
+    private String particpant2;
 }

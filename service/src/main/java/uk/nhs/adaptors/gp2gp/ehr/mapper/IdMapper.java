@@ -26,6 +26,14 @@ public class IdMapper {
         return mappedId;
     }
 
+    public boolean hasIdBeenMapped(ResourceType resourceType, String id) {
+        return hasIdBeenMapped(buildReference(resourceType, id));
+    }
+
+    public boolean hasIdBeenMapped(Reference reference) {
+        return ids.containsKey(reference.getReference());
+    }
+
     private Reference buildReference(ResourceType resourceType, String id) {
         return new Reference(new IdType(resourceType.name(), id));
     }

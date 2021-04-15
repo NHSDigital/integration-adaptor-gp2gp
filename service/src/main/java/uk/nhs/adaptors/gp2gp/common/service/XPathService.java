@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -44,4 +45,12 @@ public class XPathService {
         }
     }
 
+    public String getNodeValue(Document xmlDoc, String firstExpression, String secondExpression) {
+        var firstExtraction = getNodeValue(xmlDoc, firstExpression);
+        if (StringUtils.isNotBlank(firstExtraction)) {
+            return firstExtraction;
+        } else {
+            return getNodeValue(xmlDoc, secondExpression);
+        }
+    }
 }

@@ -74,6 +74,11 @@ public class EncounterComponentsMapper {
             .orElse(StringUtils.EMPTY);
     }
 
+    public String mapResourceToComponent(Resource resource) {
+        return encounterComponents.getOrDefault(resource.getResourceType(), this::mapDefaultNotImplemented)
+            .apply(resource);
+    }
+
     private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
         return listReferencedToEncounter.getEntry()
             .stream()

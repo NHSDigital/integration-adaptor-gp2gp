@@ -24,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NarrativeStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
@@ -145,6 +146,7 @@ public class EhrExtractUATTest {
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
             new EncounterMapper(messageContext, encounterComponentsMapper),
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
             agentDirectoryMapper);
     }
 

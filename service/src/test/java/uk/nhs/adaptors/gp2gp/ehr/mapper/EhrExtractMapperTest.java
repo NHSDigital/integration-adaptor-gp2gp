@@ -106,6 +106,7 @@ public class EhrExtractMapperTest {
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
             new EncounterMapper(messageContext, encounterComponentsMapper),
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
             agentDirectoryMapper);
     }
 

@@ -51,7 +51,8 @@ public class EncounterMapper {
             .components(components)
             .code(buildCode(encounter))
             .displayName(buildDisplayName(encounter))
-            .originalText(buildOriginalText(encounter));
+            .originalText(buildOriginalText(encounter))
+            .authorTime("20100113151332");
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
