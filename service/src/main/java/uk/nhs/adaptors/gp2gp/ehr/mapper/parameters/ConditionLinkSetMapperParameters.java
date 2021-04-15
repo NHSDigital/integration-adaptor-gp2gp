@@ -25,4 +25,5 @@ public class ConditionLinkSetMapperParameters {
     private boolean generateObservationStatement;
     private String pertinentInfo;
     private String code;
+    private String performer;
 }
