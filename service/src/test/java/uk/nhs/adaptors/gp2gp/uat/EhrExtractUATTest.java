@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +32,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -41,7 +39,6 @@ import java.time.Instant;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,8 +51,6 @@ public class EhrExtractUATTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
-    @Mock
-    private OrganizationToAgentMapper organizationToAgentMapper;
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
@@ -94,11 +89,8 @@ public class EhrExtractUATTest {
         final PractitionerAgentPersonMapper practitionerAgentPersonMapper = new PractitionerAgentPersonMapper(messageContext,
             new OrganizationToAgentMapper(messageContext));
 
-        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-
         final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(practitionerAgentPersonMapper,
-            organizationToAgentMapper);
+            new OrganizationToAgentMapper(messageContext));
 
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 
