@@ -117,6 +117,10 @@ public class ObservationStatementMapperTest {
     private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-18.xml";
 
+    // TODO: Remove temp files and replace with properly formed unit tests
+    private static final String temp_json = TEST_FILE_DIRECTORY + "temp.json";
+    private static final String temp_xml = TEST_FILE_DIRECTORY+ "temp.xml";
+
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
     private MessageContext messageContext;
@@ -211,7 +215,8 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_3, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT)
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+            Arguments.of(temp_json, temp_xml)
             );
     }
 }

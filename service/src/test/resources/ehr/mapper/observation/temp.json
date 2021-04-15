@@ -1,0 +1,85 @@
+{
+    "resourceType": "Observation",
+    "id": "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "code": {
+        "text": "test"
+    },
+    "effectiveDateTime": "2010-07-14T16:32:51.42+01:00",
+    "issued": "2010-01-13T15:29:50.3+00:00",
+    "comment": "Example comment",
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                        "code": "2469",
+                        "display": "Systolic blood pressure",
+                        "userSelected": true
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                "extension": [
+                                    {
+                                        "url": "descriptionId",
+                                        "valueId": "120159016"
+                                    },
+                                    {
+                                        "url": "descriptionDisplay",
+                                        "valueString": "Systolic arterial pressure"
+                                    }
+                                ]
+                            }
+                        ],
+                        "system": "http://snomed.info/sct",
+                        "code": "72313002",
+                        "display": "Systolic arterial pressure"
+                    }
+                ]
+            },
+            "valueQuantity": {
+                "comparator":"<=",
+                "value": 120,
+                "unit": "mmHg"
+            }
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                        "code": "246A",
+                        "display": "Diastolic blood pressure",
+                        "userSelected": true
+                    },
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                "extension": [
+                                    {
+                                        "url": "descriptionId",
+                                        "valueId": "2734671000000117"
+                                    },
+                                    {
+                                        "url": "descriptionDisplay",
+                                        "valueString": "Diastolic arterial pressure"
+                                    }
+                                ]
+                            }
+                        ],
+                        "system": "http://snomed.info/sct",
+                        "code": "1091811000000102",
+                        "display": "Diastolic arterial pressure"
+                    }
+                ]
+            },
+            "valueQuantity": {
+                "value": 75,
+                "unit": "mmHg"
+            }
+        }
+    ]
+}
