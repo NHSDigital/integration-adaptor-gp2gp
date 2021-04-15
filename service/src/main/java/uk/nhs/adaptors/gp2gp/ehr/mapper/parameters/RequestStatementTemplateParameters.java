@@ -11,7 +11,9 @@ public class RequestStatementTemplateParameters {
     private boolean isNested;
     private String requestStatementId;
     private String availabilityTime;
-    private String description;
     private String defaultReasonCode;
     private String code;
+    private String participant;
+    private String responsibleParty;
+    private String text;
 }
