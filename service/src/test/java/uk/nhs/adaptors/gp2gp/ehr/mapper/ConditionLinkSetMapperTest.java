@@ -210,7 +210,7 @@ public class ConditionLinkSetMapperTest {
     private Answer<String> answerWithObjectId(ResourceType type) {
         return invocation -> {
             Reference reference = invocation.getArgument(0);
-            return type.name() + "/" + reference.getReferenceElement().getIdPart();
+            return String.format("%s-%s-new-ID", reference.getReferenceElement().getIdPart(), type.name());
         };
     }
 
