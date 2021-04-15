@@ -2,9 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import java.util.Optional;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.w3c.dom.Document;
@@ -27,6 +24,7 @@ public class XpathExtractor {
     private static final String MEDICATION_STATEMENT = "/MedicationStatement";
     private static final String LINKSET = "/LinkSet";
     private static final String PLAN_STATEMENT = "/PlanStatement";
+    private static final String NARRATIVE_STATEMENT = "/NarrativeStatement";
     private static final String AVAILABILITY_TIME = "/availabilityTime";
     private static final String EFFECTIVE_TIME = "/effectiveTime";
     private static final String CENTER = "/center";
@@ -42,6 +40,22 @@ public class XpathExtractor {
     private static final String EFFECTIVE_TIME_LOW_SELECTOR = EFFECTIVE_TIME + LOW + VALUE_SELECTOR;
     private static final String PARTICIPANT_SELECTOR = PARTICIPANT + AGENT_REF + ID + ROOT_SELECTOR;
 
+    private static final String UNCATAGORISED_OBSERVATION = COMPONENT + OBSERVATION_STATEMENT;
+    private static final String UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME = UNCATAGORISED_OBSERVATION + AVAILABILITY_SELECTOR;
+    private static final String UNCATAGORISED_OBSERVATION_AUTHOR_TIME = UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME;
+    private static final String UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER = UNCATAGORISED_OBSERVATION
+        + EFFECTIVE_TIME_CENTER_SELECTOR;
+    private static final String UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_LOW = UNCATAGORISED_OBSERVATION + EFFECTIVE_TIME_LOW_SELECTOR;
+    private static final String UNCATAGORISED_OBSERVATION_AUTHOR_REF = UNCATAGORISED_OBSERVATION + PARTICIPANT_SELECTOR;
+    private static final String UNCATAGORISED_OBSERVATION_SECOND_PARTICIPANT = UNCATAGORISED_OBSERVATION_AUTHOR_REF;
+
+    private static final String COMMENT_OBSERVATION = COMPONENT + NARRATIVE_STATEMENT;
+    private static final String COMMENT_OBSERVATION_AVAILABILITY_TIME = COMMENT_OBSERVATION + AVAILABILITY_SELECTOR;
+    private static final String COMMENT_OBSERVATION_AUTHOR_TIME = COMMENT_OBSERVATION_AVAILABILITY_TIME;
+    private static final String COMMENT_OBSERVATION_EFFECTIVE_TIME = COMMENT_OBSERVATION_AVAILABILITY_TIME;
+    private static final String COMMENT_OBSERVATION_AUTHOR_REF = COMMENT_OBSERVATION + PARTICIPANT_SELECTOR;
+    private static final String COMMENT_OBSERVATION_SECOND_PARTICIPANT = COMMENT_OBSERVATION_AUTHOR_REF;
+
     private static final String IMMUNIZATION = COMPONENT + OBSERVATION_STATEMENT;
     private static final String IMMUNIZATION_AVAILABILITY_TIME = IMMUNIZATION + AVAILABILITY_SELECTOR;
     private static final String IMMUNIZATION_AUTHOR_TIME = IMMUNIZATION_AVAILABILITY_TIME;
@@ -55,8 +69,17 @@ public class XpathExtractor {
     private static final String ALLERGY_INTOLERANCE_AUTHOR_TIME = ALLERGY_INTOLERANCE_AVAILABILITY_TIME;
     private static final String ALLERGY_INTOLERANCE_TIME_LOW = ALLERGY_INTOLERANCE + EFFECTIVE_TIME_LOW_SELECTOR;
     private static final String ALLERGY_INTOLERANCE_TIME_CENTER = ALLERGY_INTOLERANCE + EFFECTIVE_TIME_CENTER_SELECTOR;
-    private static final String ALLERGY_INTOLERANCE_AUTHOR_REF = ALLERGY_INTOLERANCE + PARTICIPANT + TYPE_CODE_AUT_QUERY + AGENT_REF + ID + ROOT_SELECTOR;
+    private static final String ALLERGY_INTOLERANCE_AUTHOR_REF = ALLERGY_INTOLERANCE + PARTICIPANT + TYPE_CODE_AUT_QUERY + AGENT_REF + ID
+        + ROOT_SELECTOR;
     private static final String ALLERGY_INTOLERANCE_SECOND_PARTICIPANT = ALLERGY_INTOLERANCE_AUTHOR_REF;
+
+    private static final String BLOOD_PRESSURE = COMPONENT + COMPOUND_STATEMENT;
+    private static final String BLOOD_PRESSURE_AVAILABILITY_TIME = BLOOD_PRESSURE + AVAILABILITY_SELECTOR;
+    private static final String BLOOD_PRESSURE_AUTHOR_TIME = BLOOD_PRESSURE_AVAILABILITY_TIME;
+    private static final String BLOOD_PRESSURE_EFFECTIVE_TIME_CENTER = BLOOD_PRESSURE + EFFECTIVE_TIME_CENTER_SELECTOR;
+    private static final String BLOOD_PRESSURE_EFFECTIVE_TIME_LOW = BLOOD_PRESSURE + EFFECTIVE_TIME_LOW_SELECTOR;
+    private static final String BLOOD_PRESSURE_AUTHOR_REF = BLOOD_PRESSURE + PARTICIPANT_SELECTOR;
+    private static final String BLOOD_PRESSURE_SECOND_PARTICIPANT = BLOOD_PRESSURE_AUTHOR_REF;
 
     private static final String REFERRAL_REQUEST = COMPONENT + REQUEST_STATEMENT;
     private static final String REFERRAL_REQUEST_AVAILABILITY_TIME = REFERRAL_REQUEST + AVAILABILITY_SELECTOR;
@@ -88,38 +111,53 @@ public class XpathExtractor {
     private static final String PROCEDURE_REQUEST_AUTHOR_REF = PROCEDURE_REQUEST + PARTICIPANT_SELECTOR;
     private static final String PROCEDURE_REQUEST_SECOND_PARTICIPANT = PROCEDURE_REQUEST_AUTHOR_REF;
 
+    private static final String DOCUMENT_REFERENCE = COMPONENT + NARRATIVE_STATEMENT;
+    private static final String DOCUMENT_REFERENCE_AVAILABILITY_TIME = DOCUMENT_REFERENCE + AVAILABILITY_SELECTOR;
+    private static final String DOCUMENT_REFERENCE_AUTHOR_TIME = DOCUMENT_REFERENCE_AVAILABILITY_TIME;
+    private static final String DOCUMENT_REFERENCE_EFFECTIVE_TIME = DOCUMENT_REFERENCE_AVAILABILITY_TIME;
+    private static final String DOCUMENT_REFERENCE_AUTHOR_REF = DOCUMENT_REFERENCE + PARTICIPANT_SELECTOR;
+    private static final String DOCUMENT_REFERENCE_SECOND_PARTICIPANT = DOCUMENT_REFERENCE_AUTHOR_REF;
+
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
-    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRRF\" contextControlCode=\"OP\">\n" +
-        "           <agentRef classCode=\"AGNT\">\n" +
-        "               <id root=\"%s\"/>\n" +
-        "           </agentRef>\n" +
-        "       </Participant2>";
+    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRRF\" contextControlCode=\"OP\">\n"
+        + "           <agentRef classCode=\"AGNT\">\n"
+        + "               <id root=\"%s\"/>\n"
+        + "           </agentRef>\n"
+        + "       </Participant2>";
 
     private static final XPathService X_PATH_SERVICE = new XPathService();
 
-    @SneakyThrows
     public static EncounterTemplateParameters
         .EncounterTemplateParametersBuilder extractValuesForUncategorizedObservation(String component) {
-        Document xmlDocument = X_PATH_SERVICE.parseDocumentFromXml(component);
-        XPath xPath = XPathFactory.newInstance().newXPath();
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME)
+            .authorTime(UNCATAGORISED_OBSERVATION_AUTHOR_TIME)
+            .effectiveTime(UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER)
+            .effectiveTimeBackup(UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_LOW)
+            .authorAgentRef(UNCATAGORISED_OBSERVATION_AUTHOR_REF)
+            .participant2(UNCATAGORISED_OBSERVATION_SECOND_PARTICIPANT)
+            .build();
 
-        System.out.println(xmlDocument);
-
-        var availabilityTime = xPath.compile("").evaluate(xmlDocument);
-        var effectiveTime = xPath.compile("").evaluate(xmlDocument);
-        var authorAgentRef = xPath.compile("").evaluate(xmlDocument);
-
-        return EncounterTemplateParameters.builder()
-            .availabilityTime(availabilityTime)
-            .effectiveTime(effectiveTime)
-            .authorTime(availabilityTime)
-            .agentRef(authorAgentRef);
+        return extractValues(component, ehrTemplateArgs);
     }
 
-    @SneakyThrows
+    public static EncounterTemplateParameters
+        .EncounterTemplateParametersBuilder extractValuesForCommentObservation(String component) {
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(COMMENT_OBSERVATION_AVAILABILITY_TIME)
+            .authorTime(COMMENT_OBSERVATION_AUTHOR_TIME)
+            .effectiveTime(COMMENT_OBSERVATION_EFFECTIVE_TIME)
+            .effectiveTimeBackup(COMMENT_OBSERVATION_EFFECTIVE_TIME)
+            .authorAgentRef(COMMENT_OBSERVATION_AUTHOR_REF)
+            .participant2(COMMENT_OBSERVATION_SECOND_PARTICIPANT)
+            .build();
+
+        return extractValues(component, ehrTemplateArgs);
+    }
+
     public static EncounterTemplateParameters
         .EncounterTemplateParametersBuilder extractValuesForImmunization(String component) {
 
@@ -145,6 +183,21 @@ public class XpathExtractor {
             .effectiveTimeBackup(ALLERGY_INTOLERANCE_TIME_LOW)
             .authorAgentRef(ALLERGY_INTOLERANCE_AUTHOR_REF)
             .participant2(ALLERGY_INTOLERANCE_SECOND_PARTICIPANT)
+            .build();
+
+        return extractValues(component, ehrTemplateArgs);
+    }
+
+    public static EncounterTemplateParameters
+        .EncounterTemplateParametersBuilder extractValuesForBloodPressure(String component) {
+
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(BLOOD_PRESSURE_AVAILABILITY_TIME)
+            .authorTime(BLOOD_PRESSURE_AUTHOR_TIME)
+            .effectiveTime(BLOOD_PRESSURE_EFFECTIVE_TIME_CENTER)
+            .effectiveTimeBackup(BLOOD_PRESSURE_EFFECTIVE_TIME_LOW)
+            .authorAgentRef(BLOOD_PRESSURE_AUTHOR_REF)
+            .participant2(BLOOD_PRESSURE_SECOND_PARTICIPANT)
             .build();
 
         return extractValues(component, ehrTemplateArgs);
@@ -210,10 +263,24 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
+    public static EncounterTemplateParameters
+        .EncounterTemplateParametersBuilder extractValuesForDocumentReference(String component) {
+
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(DOCUMENT_REFERENCE_AVAILABILITY_TIME)
+            .authorTime(DOCUMENT_REFERENCE_AUTHOR_TIME)
+            .effectiveTime(DOCUMENT_REFERENCE_EFFECTIVE_TIME)
+            .effectiveTimeBackup(DOCUMENT_REFERENCE_EFFECTIVE_TIME)
+            .authorAgentRef(DOCUMENT_REFERENCE_AUTHOR_REF)
+            .participant2(DOCUMENT_REFERENCE_SECOND_PARTICIPANT)
+            .build();
+
+        return extractValues(component, ehrTemplateArgs);
+    }
+
     @SneakyThrows
     private static EncounterTemplateParameters
         .EncounterTemplateParametersBuilder extractValues(String component, EhrTemplateArgs ehrTemplateArgs) {
-        System.out.println(ehrTemplateArgs);
         Document xmlDocument = X_PATH_SERVICE.parseDocumentFromXml(component);
         var builder = EncounterTemplateParameters.builder();
 

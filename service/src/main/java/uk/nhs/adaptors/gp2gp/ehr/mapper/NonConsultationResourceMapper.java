@@ -61,16 +61,16 @@ public class NonConsultationResourceMapper {
     private final EncounterComponentsMapper encounterComponentsMapper;
     private final Map<ResourceType, Function<String, EncounterTemplateParameters.EncounterTemplateParametersBuilder>> resourceBuilder =
         ImmutableMap.<ResourceType, Function<String, EncounterTemplateParameters.EncounterTemplateParametersBuilder>>builder()
-        .put(ResourceType.Immunization, this::buildImmunization)
-        .put(ResourceType.AllergyIntolerance, this::buildAllergyIntolerance)
-        .put(ResourceType.ReferralRequest, this::buildReferralRequest)
-        .put(ResourceType.DiagnosticReport, this::buildDiagnosticRequest)
-        .put(ResourceType.MedicationRequest, this::buildMedicationRequest)
-        .put(ResourceType.Condition, this::buildCondition)
-        .put(ResourceType.ProcedureRequest, this::buildProcedureRequest)
-        .put(ResourceType.DocumentReference, this::buildDocumentReference)
-        .put(ResourceType.QuestionnaireResponse, this::buildQuestionnaireResponse)
-        .build();
+            .put(ResourceType.Immunization, this::buildImmunization)
+            .put(ResourceType.AllergyIntolerance, this::buildAllergyIntolerance)
+            .put(ResourceType.ReferralRequest, this::buildReferralRequest)
+//            .put(ResourceType.DiagnosticReport, this::buildDiagnosticRequest)
+            .put(ResourceType.MedicationRequest, this::buildMedicationRequest)
+            .put(ResourceType.Condition, this::buildCondition)
+            .put(ResourceType.ProcedureRequest, this::buildProcedureRequest)
+            .put(ResourceType.DocumentReference, this::buildDocumentReference)
+//            .put(ResourceType.QuestionnaireResponse, this::buildQuestionnaireResponse)
+            .build();
 
     public List<String> mapRemainingResourcesToEhrCompositions(Bundle bundle) {
         return bundle.getEntry()
@@ -78,16 +78,19 @@ public class NonConsultationResourceMapper {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> !messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getId()))
             .map(this::mapResourceToEhrComposition)
+            .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
     }
 
     private String mapResourceToEhrComposition(Resource resource) {
         String component = encounterComponentsMapper.mapResourceToComponent(resource);
-        var builder = resourceBuilder.getOrDefault(resource.getResourceType(), null)
-            .apply(component);
-
+        System.out.println(component);
+        EncounterTemplateParameters.EncounterTemplateParametersBuilder builder = null;
         if (resource.getResourceType().equals(ResourceType.Observation)) {
             builder = buildObservation(component, (Observation) resource);
+        } else {
+            builder = resourceBuilder.getOrDefault(resource.getResourceType(), this::notMapped)
+                .apply(component);
         }
 
         if (builder != null) {
@@ -106,9 +109,7 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildCommentObservation(String component) {
-        return EncounterTemplateParameters.builder()
-            .effectiveTime("")
-            .availabilityTime("")
+        return XpathExtractor.extractValuesForCommentObservation(component)
             .altCode(OBSERVATION_COMMENT_CODE);
     }
 
@@ -123,9 +124,7 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildBloodPressureObservation(String component) {
-        return EncounterTemplateParameters.builder()
-            .effectiveTime("")
-            .availabilityTime("")
+        return XpathExtractor.extractValuesForBloodPressure(component)
             .altCode(BLOOD_PRESSURE_CODE_2);
     }
 
@@ -135,10 +134,7 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildDiagnosticRequest(String component) {
-        return EncounterTemplateParameters.builder()
-            .effectiveTime("")
-            .availabilityTime("")
-            .altCode(DIAGNOSTIC_REPORT_CODE);
+        return null;
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildMedicationRequest(String component) {
@@ -157,17 +153,12 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildDocumentReference(String component) {
-        return EncounterTemplateParameters.builder()
-            .effectiveTime("")
-            .availabilityTime("")
+        return XpathExtractor.extractValuesForDocumentReference(component)
             .altCode(DEFAULT_CODE);
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildQuestionnaireResponse(String component) {
-        return EncounterTemplateParameters.builder()
-            .effectiveTime("")
-            .availabilityTime("")
-            .altCode(QUESTIONNAIRE_RESPONSE_CODE);
+        return null;
     }
 
     private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildObservation(String component, Observation observation) {
@@ -184,6 +175,10 @@ public class NonConsultationResourceMapper {
         }
 
         return buildUncategorisedObservation(component);
+    }
+
+    private EncounterTemplateParameters.EncounterTemplateParametersBuilder notMapped(String component) {
+        return null;
     }
 
     private boolean hasCode(CodeableConcept code, List<String> codeLists) {

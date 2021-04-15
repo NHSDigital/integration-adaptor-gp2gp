@@ -49,7 +49,7 @@ public class EhrExtractMapper {
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle.getEntry());
         var mappedComponents = mapEncounterToEhrComponents(encounters);
-//        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
+        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
         ehrExtractTemplateParameters.setComponents(mappedComponents);
 
         return ehrExtractTemplateParameters;
