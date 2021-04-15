@@ -525,6 +525,9 @@
                 "onsetDateTime": "2020-09-06",
                 "abatementDateTime": "2020-10-04T00:00:00+01:00",
                 "assertedDate": "2020-09-07T10:12:02.093+01:00",
+                "asserter": {
+                  "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
                 "note": [
                     {
                         "text": "Condition note"
@@ -600,6 +603,31 @@
                 },
                 "comment": "Blood pressure 2"
             }
+        },
+        {
+          "resource": {
+            "resourceType": "Practitioner",
+            "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+            "meta": {
+              "versionId": "4749697187075864793",
+              "profile": [
+                "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+              ]
+            },
+            "name": [
+              {
+                "use": "official",
+                "family": "McAvenue",
+                "given": [
+                  "David"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          }
         }
     ]
 }
