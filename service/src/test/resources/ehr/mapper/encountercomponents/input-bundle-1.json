@@ -600,6 +600,24 @@
                 },
                 "comment": "Blood pressure 2"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "8747DFC5-11B7-4A77-B2F3-7720CC58C2FC"
+            }
         }
     ]
 }
