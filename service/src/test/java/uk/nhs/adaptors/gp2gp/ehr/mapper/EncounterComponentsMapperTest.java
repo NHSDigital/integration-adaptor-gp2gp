@@ -63,6 +63,7 @@ public class EncounterComponentsMapperTest {
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
@@ -72,7 +73,8 @@ public class EncounterComponentsMapperTest {
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
-            codeableConceptCdMapper);
+            codeableConceptCdMapper,
+            participantMapper);
         BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
             messageContext,
             randomIdGeneratorService,

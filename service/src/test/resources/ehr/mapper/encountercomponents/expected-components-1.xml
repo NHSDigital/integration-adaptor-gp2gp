@@ -50,6 +50,11 @@
         </qualifier>
     </code>
     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+    <Participant typeCode="PRF" contextControlCode="OP">
+        <agentRef classCode="AGNT">
+            <id root="394559384658936"/>
+        </agentRef>
+    </Participant>
 </LinkSet>
 </component>
 <component typeCode="COMP">
