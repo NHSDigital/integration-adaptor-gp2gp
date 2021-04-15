@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Immunization;
@@ -188,14 +190,15 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildNotePertinentInformation(Immunization immunization) {
-        String notes = StringUtils.EMPTY;
-        if (immunization.hasNote()) {
-            List<Annotation> annotations = immunization.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        return notes;
+        return Stream.concat(
+            messageContext.getInputBundleHolder().getRelatedConditions(immunization.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream),
+            immunization.hasNote() ? immunization.getNote().stream() : Stream.empty()
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildExplanationPertinentInformation(Immunization immunization) {

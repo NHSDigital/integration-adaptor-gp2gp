@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -109,6 +111,7 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
+
         return descriptionList
             .stream()
             .filter(StringUtils::isNotEmpty)
@@ -204,14 +207,15 @@ public class AllergyStructureMapper {
     }
 
     private String buildNotePertinentInformation(AllergyIntolerance allergyIntolerance) {
-        String notes = StringUtils.EMPTY;
-        if (allergyIntolerance.hasNote()) {
-            List<Annotation> annotations = allergyIntolerance.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        return notes;
+        return Stream.concat(
+            messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream),
+            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty()
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {

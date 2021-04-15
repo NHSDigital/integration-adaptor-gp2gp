@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
@@ -31,6 +32,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class AllergyStructureMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/allergy/";
+    private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-1.json";
     private static final String INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-2.json";
@@ -49,8 +51,14 @@ public class AllergyStructureMapperTest {
     private static final String INPUT_JSON_WITH_NO_CATEGORY = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-12.json";
     private static final String INPUT_JSON_WITH_UNSUPPORTED_CATEGORY = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-13.json";
     private static final String INPUT_JSON_WITH_NO_ASSERTED_DATE = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-14.json";
-    private static final String INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+    private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-15.json";
+    private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-16.json";
+    private static final String INPUT_JSON_WITH_NO_RELATION_TO_CONDITION = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-17.json";
+    private static final String INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-18.json";
     private static final String OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-1.xml";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-2.xml";
     private static final String OUTPUT_XML_USES_PATIENT_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
@@ -61,11 +69,16 @@ public class AllergyStructureMapperTest {
     private static final String OUTPUT_XML_USES_ENVIRONMENT_CATEGORY = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-7.xml";
     private static final String OUTPUT_XML_USES_MEDICATION_CATEGORY = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-8.xml";
     private static final String OUTPUT_XML_USES_REACTION = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-9.xml";
-    private static final String OUTPUT_XML_USES_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+    private static final String OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-10.xml";
-    private static final String OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+    private static final String OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES = TEST_FILE_DIRECTORY
         + "expected-output-allergy-structure-11.xml";
-    public static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
+    private static final String OUTPUT_XML_USES_NO_RELATION_TO_CONDITION = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-12.xml";
+    private static final String OUTPUT_XML_USES_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-13.xml";
+    private static final String OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
+        + "expected-output-allergy-structure-14.xml";
+    private static final String COMMON_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -76,11 +89,14 @@ public class AllergyStructureMapperTest {
     private MessageContext messageContext;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
         List.of(ResourceType.Patient, ResourceType.Practitioner, ResourceType.Device)
             .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, COMMON_ID));
         allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
@@ -115,6 +131,10 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY),
             Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY),
             Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
+            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES),
+            Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION),
             Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER)
         );
     }
