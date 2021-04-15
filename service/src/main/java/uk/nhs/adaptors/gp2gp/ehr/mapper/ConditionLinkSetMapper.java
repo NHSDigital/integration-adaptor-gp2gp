@@ -167,6 +167,7 @@ public class ConditionLinkSetMapper {
            .stream()
            .map(Extension::getValue)
            .map(value -> (Reference) value)
+           .filter(this::filterOutNonExistentResource)
            .filter(this::filterOutListResourceType)
            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
            .collect(Collectors.toList());
@@ -180,6 +181,16 @@ public class ConditionLinkSetMapper {
                 .collect(Collectors.joining(StringUtils.SPACE)));
         }
         return Optional.empty();
+    }
+
+    private boolean filterOutNonExistentResource(Reference reference) {
+        var referencePresent = messageContext.getInputBundleHolder()
+            .getResource(reference.getReferenceElement())
+            .isPresent();
+        if (referencePresent) {
+            return true;
+        }
+        throw new EhrMapperException("Could not resolve Condition Related Medical Content reference");
     }
 
     private boolean filterOutListResourceType(Reference reference) {
