@@ -43,6 +43,29 @@
                 "comparator":"<=",
                 "value": 120,
                 "unit": "mmHg"
+            },
+            "referenceRange":[
+                {
+                    "text":"Test reference range text",
+                    "high":{
+                        "value":30,
+                        "unit": "test-unit"
+                    },
+                    "low":{
+                        "value":20,
+                        "unit": "test-unit"
+                    }
+                }
+            ],
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "Example without userSelected",
+                        "display": "Example without userSelected"
+                    }
+                ],
+                "text": "Example interpretation text 1"
             }
         },
         {
@@ -76,9 +99,22 @@
                     }
                 ]
             },
-            "valueQuantity": {
-                "value": 75,
-                "unit": "mmHg"
+            "valueString": "test-string",
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "Another code",
+                        "display": "Example with userSelected"
+                    },
+                    {
+                        "system": "Another System",
+                        "code": "Example with userSelected",
+                        "display": "Example with userSelected",
+                        "userSelected": true
+                    }
+                ],
+                "text": "Example interpretation text 2"
             }
         }
     ]

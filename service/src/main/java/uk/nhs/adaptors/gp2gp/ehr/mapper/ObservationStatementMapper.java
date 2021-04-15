@@ -258,7 +258,7 @@ public class ObservationStatementMapper {
 
         if (component.hasReferenceRange()) {
             var referenceRange = component.getReferenceRangeFirstRep();
-            if (referenceRange.hasLow() && referenceRange.hasHigh()) {
+            if (referenceRange.hasLow() && referenceRange.hasHigh() && referenceRange.getLow().hasUnit() && referenceRange.getHigh().hasUnit()) {
                 var lowValue = referenceRange.getLow().getValue().toString();
                 var lowUnit = referenceRange.getLow().getUnit();
                 var highValue = referenceRange.getHigh().getValue().toString();
