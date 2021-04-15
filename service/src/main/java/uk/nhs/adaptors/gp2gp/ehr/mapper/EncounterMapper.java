@@ -5,7 +5,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,10 +60,11 @@ public class EncounterMapper {
             .displayName(buildDisplayName(encounter))
             .originalText(buildOriginalText(encounter));
 
-        final Optional<String> recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(idMapper::get);
+        final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
+            .map(idMapper::get)
+            .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
 
-        recReference.ifPresent(encounterStatementTemplateParameters::author);
+        encounterStatementTemplateParameters.author(recReference);
 
         messageContext.getInputBundleHolder()
             .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)

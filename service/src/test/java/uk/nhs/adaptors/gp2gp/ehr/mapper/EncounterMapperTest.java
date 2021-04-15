@@ -101,6 +101,8 @@ public class EncounterMapperTest {
         + "expected-output-encounter-12.xml";
     private static final String INPUT_JSON_WITH_NO_TYPE = TEST_FILES_DIRECTORY
         + "example-encounter-resource-13.json";
+    private static final String INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-14.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -178,5 +180,16 @@ public class EncounterMapperTest {
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("No ID mapping for reference Practitioner/%s", PRACTITIONER_ID);
+    }
+
+    @Test
+    public void When_MappingEncounterWithoutRecorderParticipant_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT);
+
+        Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
+
+        assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Encounter.participant recorder is required");
     }
 }
