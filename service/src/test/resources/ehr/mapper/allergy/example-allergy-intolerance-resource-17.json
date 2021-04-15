@@ -1,0 +1,63 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "04288662-8B7A-4350-B69B-CE155E992A7C",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "04288662-8B7A-4350-B69B-CE155E992A7C"
+        }
+    ],
+    "clinicalStatus": "active",
+    "verificationStatus": "unconfirmed",
+    "category": [
+        "medication"
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://read.info/readv2",
+                "code": "14LK.00",
+                "display": "H/O: aspirin allergy",
+                "userSelected": true
+            },
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "433808014"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "Aspirin allergy"
+                            }
+                        ]
+                    }
+                ],
+              "system": "http://snomed.info/sct",
+              "code": "293586001",
+              "display": "Aspirin allergy"
+            }
+        ]
+    },
+    "patient": {
+       "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+    },
+    "onsetDateTime": "2010-01-13",
+    "assertedDate": "2010-01-13T11:41:26.583+00:00",
+    "recorder": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    },
+    "note": [
+        {
+            "text": "Significance : Minor - Episodicity : First - Drug Allergy - Apsrin"
+        }
+    ]
+}

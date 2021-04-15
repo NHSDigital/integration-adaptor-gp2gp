@@ -3,6 +3,7 @@
         <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
         <effectiveTime>
             <low nullFlavor="UNK"/>
+            
         </effectiveTime>
         <availabilityTime value="20200907101202" />
         <conditionNamed typeCode="NAME" inversionInd="true">

@@ -1,0 +1,58 @@
+{
+    "resourceType": "AllergyIntolerance",
+    "id": "081CE989-17CD-46C6-8C22-C90F8F2487C2",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-AllergyIntolerance-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "081CE989-17CD-46C6-8C22-C90F8F2487C2"
+        }
+    ],
+    "clinicalStatus": "active",
+    "verificationStatus": "unconfirmed",
+    "category": [
+        "medication"
+    ],
+    "code": {
+        "coding": [
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "152307010"
+                            },
+                            {
+                                "url": "descriptionDisplay",
+                                "valueString": "Allergy to penicillin"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "91936005",
+                "display": "Allergy to penicillin",
+                "userSelected": true
+            }
+        ]
+    },
+    "patient": {
+        "reference": "Patient/7DC1C5D8-540B-4A7C-8E19-CBD3426A8CC6"
+    },
+    "onsetDateTime": "2020-07-24",
+    "assertedDate": "2020-07-24T13:38:29.323+01:00",
+    "recorder": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+    },
+    "note": [
+        {
+            "text": "Significance : Major - Episodicity : First - test, test"
+        }
+    ]
+}
