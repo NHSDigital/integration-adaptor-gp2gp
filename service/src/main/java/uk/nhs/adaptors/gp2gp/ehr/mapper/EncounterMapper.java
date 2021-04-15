@@ -69,8 +69,7 @@ public class EncounterMapper {
         messageContext.getInputBundleHolder()
             .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
             .filter(ListResource::hasDate)
-            .map(ListResource::getDate)
-            .map(Date::toInstant)
+            .map(ListResource::getDateElement)
             .map(DateFormatUtil::toHl7Format)
             .ifPresent(encounterStatementTemplateParameters::authorTime);
 
