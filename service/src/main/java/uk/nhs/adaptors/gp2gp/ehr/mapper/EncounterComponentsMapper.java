@@ -8,13 +8,17 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
+import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,22 +52,29 @@ public class EncounterComponentsMapper {
 
     private final Map<ResourceType, Function<Resource, String>> encounterComponents = ImmutableMap.<ResourceType, Function<Resource,
         String>>builder()
-        .put(ResourceType.List, this::mapListResource)
-        .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
-        .put(ResourceType.Observation, this::mapObservation)
-        .put(ResourceType.Immunization, this::mapImmunization)
+        .put(ResourceType.AllergyIntolerance, this::mapAllergyIntolerance)
         .put(ResourceType.Condition, this::mapCondition)
+        .put(ResourceType.DocumentReference, this::mapDocumentReference)
+        .put(ResourceType.Immunization, this::mapImmunization)
+        .put(ResourceType.List, this::mapListResource)
+        .put(ResourceType.MedicationRequest, this::mapMedicationRequest)
+        .put(ResourceType.Observation, this::mapObservation)
+        .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
+        .put(ResourceType.ReferralRequest, this::mapReferralRequest)
         .build();
 
     private final MessageContext messageContext;
 
+    private final AllergyStructureMapper allergyStructureMapper;
+    private final BloodPressureMapper bloodPressureMapper;
+    private final ConditionLinkSetMapper conditionLinkSetMapper;
     private final DiaryPlanStatementMapper diaryPlanStatementMapper;
-
+    private final DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper;
+    private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
+    private final MedicationStatementMapper medicationStatementMapper;
     private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private final ObservationStatementMapper observationStatementMapper;
-    private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
-    private final ConditionLinkSetMapper conditionLinkSetMapper;
-    private final BloodPressureMapper bloodPressureMapper;
+    private final RequestStatementMapper requestStatementMapper;
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -96,24 +107,16 @@ public class EncounterComponentsMapper {
             resource.getIdElement().getIdPart());
     }
 
+    private String mapAllergyIntolerance(Resource resource) {
+        return allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure((AllergyIntolerance) resource);
+    }
+
     private String mapCondition(Resource resource) {
         return conditionLinkSetMapper.mapConditionToLinkSet((Condition) resource, IS_NESTED);
     }
 
-    private String mapProcedureRequest(Resource resource) {
-        return diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED);
-    }
-
-    private String mapObservation(Resource resource) {
-        Observation observation = (Observation) resource;
-        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
-            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
-        }
-        if (hasCode(observation.getCode(), BLOOD_CODES)) {
-            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
-        }
-
-        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
+    private String mapDocumentReference(Resource resource) {
+        return documentReferenceToNarrativeStatementMapper.mapDocumentReferenceToNarrativeStatement((DocumentReference) resource);
     }
 
     private String mapImmunization(Resource resource) {
@@ -128,6 +131,30 @@ public class EncounterComponentsMapper {
         }
 
         return StringUtils.EMPTY;
+    }
+
+    private String mapMedicationRequest(Resource resource) {
+        return medicationStatementMapper.mapMedicationRequestToMedicationStatement((MedicationRequest) resource);
+    }
+
+    private String mapObservation(Resource resource) {
+        Observation observation = (Observation) resource;
+        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
+            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
+        }
+        if (hasCode(observation.getCode(), BLOOD_CODES)) {
+            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
+        }
+
+        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
+    }
+
+    private String mapProcedureRequest(Resource resource) {
+        return diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED);
+    }
+
+    private String mapReferralRequest(Resource resource) {
+        return requestStatementMapper.mapReferralRequestToRequestStatement((ReferralRequest) resource, IS_NESTED);
     }
 
     private boolean hasCode(CodeableConcept code, List<String> codeLists) {
