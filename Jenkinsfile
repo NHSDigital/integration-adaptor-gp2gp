@@ -121,7 +121,7 @@ pipeline {
                                     String tfCodeRepo    = "https://github.com/nhsconnect/integration-adaptors"
                                     String tfRegion      = "${TF_STATE_BUCKET_REGION}"
                                     List<String> tfParams = []
-                                    Map<String,String> tfVariables = ["${tfComponent}_build_id": BUILD_TAG]
+                                    Map<String,String> tfVarables = ["${tfComponent}_build_id": BUILD_TAG]
                                       if (gpccDeploy) {
                                           tfVariables.put("${tfGpccImagePrefix}_build_id", getLatestImageTag(gpccBranch, gpccEcrRepo, tfRegion))
                                       }
@@ -129,7 +129,7 @@ pipeline {
                                       git (branch: tfCodeBranch, url: tfCodeRepo)
                                       dir ("terraform/aws") {
                                         if (terraformInit(TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion) !=0) { error("Terraform init failed")}
-                                        if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
+                                        //if (terraform('apply', TF_STATE_BUCKET, tfProject, tfEnvironment, tfComponent, tfRegion, tfVariables) !=0 ) { error("Terraform Apply failed")}
                                       }
                                     }
                                 }  //script
