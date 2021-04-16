@@ -13097,7 +13097,7 @@
                 },
                 "status": "active",
                 "name": "EMIS Test Practice Location",
-                "description": "TO-DO",
+                "description": "",
                 "type": {
                     "text": "Main Surgery"
                 },
@@ -15827,7 +15827,7 @@
                 },
                 "status": "active",
                 "name": "EMIS Test Surgery 2",
-                "description": "TO-DO",
+                "description": "",
                 "type": {
                     "text": "Main Surgery"
                 },

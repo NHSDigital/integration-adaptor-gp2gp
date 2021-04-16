@@ -12815,7 +12815,7 @@
                 },
                 "status": "active",
                 "name": "EMIS Test Practice Location",
-                "description": "TO-DO",
+                "description": "",
                 "type": {
                     "text": "Main Surgery"
                 },
@@ -15130,7 +15130,7 @@
                 },
                 "status": "active",
                 "name": "Armitage Bridge Hospital",
-                "description": "TO-DO",
+                "description": "",
                 "type": {
                     "text": "Hospital"
                 },

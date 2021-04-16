@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Instant;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -108,7 +109,8 @@ public class EhrExtractUATTest {
     @MethodSource("testValueFilePaths")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + FILES_PREFIX + expectedOutputXml);
-        final String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
+        inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
         final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
 
         messageContext.initialize(bundle);
@@ -119,10 +121,6 @@ public class EhrExtractUATTest {
         final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
-
-        PrintWriter p = new PrintWriter(FILES_PREFIX + expectedOutputXml);
-        p.write(hl7TranslatedResponse);
-        p.close();
 
         assertThat(hl7TranslatedResponse).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
@@ -141,5 +139,11 @@ public class EhrExtractUATTest {
             Arguments.of("9465699926_Sajal_full_20210122.json", "9465699926_Sajal_full_20210122.xml"),
             Arguments.of("9465700088_Mold_full_20210119.json", "9465700088_Mold_full_20210119.xml"),
             Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml"));
+    }
+
+    // workaround until NIAD-1342 is fixed
+    private String removeEmptyDescriptions(String json) {
+        String emptyDescriptionElement = "\"description\": \"\"";
+        return json.lines().filter(l -> !l.contains(emptyDescriptionElement)).collect(Collectors.joining());
     }
 }
