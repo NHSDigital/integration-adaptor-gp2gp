@@ -123,7 +123,7 @@ public class EncounterComponentsMapperTest {
         assertThat(encounter.isPresent()).isTrue();
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
     @ParameterizedTest

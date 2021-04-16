@@ -12,6 +12,7 @@ import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.Element;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -96,6 +97,7 @@ public class EncounterComponentsMapper {
 
     private Optional<String> mapItemToComponent(ListResource.ListEntryComponent item) {
         Optional<Resource> resource = messageContext.getInputBundleHolder().getResource(item.getItem().getReferenceElement());
+        resource.map(Resource::getResourceType).ifPresent(System.out::println);
 
         return resource.map(value -> encounterComponents.getOrDefault(value.getResourceType(), this::mapDefaultNotImplemented)
             .apply(value));
