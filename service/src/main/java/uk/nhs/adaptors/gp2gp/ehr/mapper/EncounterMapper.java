@@ -57,22 +57,20 @@ public class EncounterMapper {
             .displayName(buildDisplayName(encounter))
             .originalText(buildOriginalText(encounter));
 
-        final Optional<String> recReference = findParticipantWithCoding(encounter, "REC")
-            .map(idMapper::get);
+        final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
+            .map(idMapper::get)
+            .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
 
-        recReference.ifPresent(encounterStatementTemplateParameters::author);
-
-        final Optional<String> pprfReference = findParticipantWithCoding(encounter, "PPRF")
+        final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
             .map(idMapper::getOrNew);
 
-        pprfReference.or(() -> recReference)
-            .ifPresent(encounterStatementTemplateParameters::participant2);
+        encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
     }
 
-    private Optional<Reference> findParticipantWithCoding(Encounter encounter, String coding) {
+    private Optional<Reference> findParticipantWithCoding(Encounter encounter, ParticipantCoding coding) {
         return encounter.getParticipant().stream()
             .filter(EncounterParticipantComponent::hasType)
             .filter(participant -> participant.getType().stream()
@@ -80,7 +78,7 @@ public class EncounterMapper {
                 .anyMatch(codeableConcept -> codeableConcept.getCoding().stream()
                     .filter(Coding::hasCode)
                     .map(Coding::getCode)
-                    .anyMatch(coding::equals)))
+                    .anyMatch(coding.getCoding()::equals)))
             .filter(EncounterParticipantComponent::hasIndividual)
             .map(EncounterParticipantComponent::getIndividual)
             .filter(Reference::hasReference)
