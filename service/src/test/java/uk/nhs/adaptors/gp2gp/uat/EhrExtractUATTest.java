@@ -122,7 +122,7 @@ public class EhrExtractUATTest {
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
 
-        assertThat(hl7TranslatedResponse).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
+        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testValueFilePaths() {
