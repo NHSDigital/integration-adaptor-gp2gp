@@ -1,11 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.time.Instant;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,12 +8,17 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.time.Instant;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -66,7 +65,7 @@ public class GpcDocumentTranslatorTest {
         GetGpcDocumentTaskDefinition taskDefinition = GetGpcDocumentTaskDefinition.builder()
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestPayload(taskDefinition, jsonBinaryContent, MESSAGE_ID);
+        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, jsonBinaryContent, MESSAGE_ID);
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }

@@ -1,12 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+import lombok.Data;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -23,18 +17,24 @@ import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
-
-import lombok.Data;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AgentDirectoryExtractor {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
-    private static final List<ResourceType> REMAINING_RESOURCE_TYPES = List.of(ResourceType.Immunization,
-            ResourceType.Encounter,
-            ResourceType.ReferralRequest,
-            ResourceType.AllergyIntolerance,
-            ResourceType.Condition);
+    private static final List<ResourceType> REMAINING_RESOURCE_TYPES = List.of(
+        ResourceType.Immunization,
+        ResourceType.Encounter,
+        ResourceType.ReferralRequest,
+        ResourceType.AllergyIntolerance,
+        ResourceType.Condition);
     private static final Map<ResourceType, Predicate<Resource>> RESOURCE_HAS_PRACTITIONER = Map.of(
         ResourceType.Immunization, resource -> ((Immunization) resource).hasPractitioner(),
         ResourceType.Encounter, resource -> ((Encounter) resource).hasParticipant()
@@ -53,38 +53,25 @@ public class AgentDirectoryExtractor {
     );
 
     public static List<ReferralRequest> extractReferralRequestsWithRequester(Bundle bundle) {
-        return bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType().equals(ResourceType.ReferralRequest))
-            .map(ReferralRequest.class::cast)
+        return ResourceExtractor.extractResourcesByType(bundle, ReferralRequest.class)
             .filter(ReferralRequest::hasRequester)
             .collect(Collectors.toList());
     }
 
     public static List<Observation> extractObservationsWithPerformers(Bundle bundle) {
-        return bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType().equals(ResourceType.Observation))
-            .map(Observation.class::cast)
+        return ResourceExtractor.extractResourcesByType(bundle, Observation.class)
             .filter(Observation::hasPerformer)
             .collect(Collectors.toList());
     }
 
     public static Optional<Patient> extractPatientByNhsNumber(Bundle bundle, String nhsNumber) {
-        return bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(AgentDirectoryExtractor::isPatientResource)
-            .map(Patient.class::cast)
+        return ResourceExtractor.extractResourcesByType(bundle, Patient.class)
             .filter(patient -> isNhsNumberMatching(patient, nhsNumber))
             .findFirst();
     }
 
     public static List<Practitioner> extractRemainingPractitioners(Bundle bundle) {
-        return bundle.getEntry()
-            .stream()
+        return bundle.getEntry().stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
@@ -98,11 +85,7 @@ public class AgentDirectoryExtractor {
 
     public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
 
-        List<PractitionerRole> practitionerRoles = bundle.getEntry()
-            .stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType().equals(ResourceType.PractitionerRole))
-            .map(PractitionerRole.class::cast)
+        List<PractitionerRole> practitionerRoles = ResourceExtractor.extractResourcesByType(bundle, PractitionerRole.class)
             .filter(practitionerRole -> referencesPractitioner(practitionerRole, practitioners))
             .collect(Collectors.toList());
 
@@ -175,10 +158,6 @@ public class AgentDirectoryExtractor {
     private static IIdType extractIIdTypes(Resource resource) {
         Function<Resource, IIdType> extractor = RESOURCE_EXTRACT_IIDTYPE.get(resource.getResourceType());
         return extractor.apply(resource);
-    }
-
-    private static boolean isPatientResource(Resource resource) {
-        return resource.getResourceType().equals(ResourceType.Patient);
     }
 
     private static boolean isNhsNumberMatching(Patient patient, String nhsNumber) {

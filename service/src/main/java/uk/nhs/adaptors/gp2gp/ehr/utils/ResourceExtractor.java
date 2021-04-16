@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import java.util.Optional;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -9,6 +7,9 @@ import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class ResourceExtractor {
 
@@ -23,6 +24,14 @@ public class ResourceExtractor {
         }
 
         return Optional.empty();
+    }
+
+    public static <T extends Resource> Stream<T> extractResourcesByType(Bundle bundle, Class<T> resourceClass) {
+        return bundle.getEntry().stream()
+            .filter(Bundle.BundleEntryComponent::hasResource)
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resourceClass::isInstance)
+            .map(resourceClass::cast);
     }
 
     private static boolean isReferencedResource(IIdType reference, Resource resource) {
