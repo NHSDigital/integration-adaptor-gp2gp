@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import uk.nhs.adaptors.gp2gp.DeterministicIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -35,6 +37,7 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Instant;
 import java.util.stream.Stream;
 
@@ -47,7 +50,6 @@ public class EhrExtractUATTest {
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
 
-    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
@@ -67,7 +69,7 @@ public class EhrExtractUATTest {
             .toOdsCode("test-to-ods-code")
             .build();
 
-        when(randomIdGeneratorService.createNewId()).thenReturn("test-id-1", "test-id-2", "test-id-3");
+        randomIdGeneratorService = new DeterministicIdGeneratorService();
         when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
 
         outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);

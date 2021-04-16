@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="test-id-3" />
+    <id root="8930c6d9-56ed-477a-8407-00dce8a05db4" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -27,648 +27,648 @@
         </author1>
         <subject typeCode="SUBJ" contextConductionInd="false">
             <EhrExtract classCode="EXTRACT" moodCode="EVN">
-                <id root="test-id-1" />
-                <statusCode code="COMPLETE" />
-                <availabilityTime value="20200101010101" />
-                <recordTarget typeCode="RCT">
-                    <patient classCode="PAT">
-                        <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
-                    </patient>
-                </recordTarget>
-                <author typeCode="AUT">
-                    <time value="20200101010101" />
-                    <AgentOrgSDS classCode="AGNT">
-                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                            <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
-                        </agentOrganizationSDS>
-                    </AgentOrgSDS>
-                </author>
-                <destination typeCode="DST">
-                    <AgentOrgSDS classCode="AGNT">
-                        <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                            <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
-                        </agentOrganizationSDS>
-                    </AgentOrgSDS>
-                </destination>
+    <id root="f5c1fdbb-a948-43bb-ab30-ceaa51fc0cc0" />
+    <statusCode code="COMPLETE" />
+    <availabilityTime value="20200101010101" />
+    <recordTarget typeCode="RCT">
+        <patient classCode="PAT">
+            <id root="2.16.840.1.113883.2.1.4.1" extension="1234567890" />
+        </patient>
+    </recordTarget>
+    <author typeCode="AUT">
+        <time value="20200101010101" />
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </author>
+    <destination typeCode="DST">
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </destination>
+    <component typeCode="COMP">
+        <ehrFolder classCode="FOLDER" moodCode="EVN">
+            <id root="287b3a3c-5e88-427b-a2ef-a14a20353b0c" />
+            <statusCode code="COMPLETE" />
+            <effectiveTime>
+                <low value="" />
+                <high value="" />
+            </effectiveTime>
+            <availabilityTime value="20200101010101" />
+            <author typeCode="AUT">
+                <time value="20200101010101" />
+                <AgentOrgSDS classCode="AGNT">
+                    <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                    </agentOrganizationSDS>
+                </AgentOrgSDS>
+            </author>
+            <responsibleParty>
+    <agentDirectory>
+        <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="263b2a9f-0b1d-4697-943a-328f70e068de" />
+        <agentOrganization determinerCode="INSTANCE" classCode="ORG">
+                        <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </agentOrganization>
+    </Agent>
+</part>
+            <part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                <orginalText>General Medical Practitioner</orginalText>
+            </code>
+            <name>
+                <prefix>Dr</prefix>
+                <given>David</given>
+                <family>McAvenue</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+            <part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                <orginalText>General Medical Practitioner</orginalText>
+            </code>
+            <name>
+                <prefix>Dr</prefix>
+                <given>Peter</given>
+                <family>Whitcombe</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+            <part partCode="PART">
+    <Agent classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <code nullFlavor="UNK">
+                <orginalText>General Medical Practitioner</orginalText>
+            </code>
+            <name>
+                <prefix>Mr</prefix>
+                <given>NHS</given>
+                <family>Test</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determiner="INSTANCE">
+            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
+            <telecom value="01133800000" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>Fulford Grange</streetAddressLine>
+                <streetAddressLine>Micklefield Lane</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Rawdon</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS19 6BA</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+    </agentDirectory>
+</responsibleParty>
                 <component typeCode="COMP">
-                    <ehrFolder classCode="FOLDER" moodCode="EVN">
-                        <id root="test-id-2" />
-                        <statusCode code="COMPLETE" />
-                        <effectiveTime>
-                            <low value="" />
-                            <high value="" />
-                        </effectiveTime>
-                        <availabilityTime value="20200101010101" />
-                        <author typeCode="AUT">
-                            <time value="20200101010101" />
-                            <AgentOrgSDS classCode="AGNT">
-                                <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                                    <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
-                                </agentOrganizationSDS>
-                            </AgentOrgSDS>
-                        </author>
-                        <responsibleParty>
-                            <agentDirectory>
-                                <part typeCode="PART">
-                                    <Agent classCode="AGNT">
-                                        <id root="test-id-3" />
-                                        <agentOrganization determinerCode="INSTANCE" classCode="ORG">
-                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-                                            <telecom value="01133800000" use="WP"/>
-                                            <addr use="WP">
-                                                <streetAddressLine>Fulford Grange</streetAddressLine>
-                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Leeds</streetAddressLine>
-                                                <postalCode>LS19 6BA</postalCode>
-                                            </addr>
-                                        </agentOrganization>
-                                    </Agent>
-                                </part>
-                                <part partCode="PART">
-                                    <Agent classCode="AGNT">
-                                        <id root="test-id-3"/>
-                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-                                            <code nullFlavor="UNK">
-                                                <orginalText>General Medical Practitioner</orginalText>
-                                            </code>
-                                            <name>
-                                                <prefix>Dr</prefix>
-                                                <given>David</given>
-                                                <family>McAvenue</family>
-                                            </name>
-                                        </agentPerson>
-                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
-                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-                                            <telecom value="01133800000" use="WP"/>
-                                            <addr use="WP">
-                                                <streetAddressLine>Fulford Grange</streetAddressLine>
-                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Leeds</streetAddressLine>
-                                                <postalCode>LS19 6BA</postalCode>
-                                            </addr>
-                                        </representedOrganization>
-                                    </Agent>
-                                </part>
-                                <part partCode="PART">
-                                    <Agent classCode="AGNT">
-                                        <id root="test-id-3"/>
-                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-                                            <code nullFlavor="UNK">
-                                                <orginalText>General Medical Practitioner</orginalText>
-                                            </code>
-                                            <name>
-                                                <prefix>Dr</prefix>
-                                                <given>Peter</given>
-                                                <family>Whitcombe</family>
-                                            </name>
-                                        </agentPerson>
-                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
-                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-                                            <telecom value="01133800000" use="WP"/>
-                                            <addr use="WP">
-                                                <streetAddressLine>Fulford Grange</streetAddressLine>
-                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Leeds</streetAddressLine>
-                                                <postalCode>LS19 6BA</postalCode>
-                                            </addr>
-                                        </representedOrganization>
-                                    </Agent>
-                                </part>
-                                <part partCode="PART">
-                                    <Agent classCode="AGNT">
-                                        <id root="test-id-3"/>
-                                        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-                                            <code nullFlavor="UNK">
-                                                <orginalText>General Medical Practitioner</orginalText>
-                                            </code>
-                                            <name>
-                                                <prefix>Mr</prefix>
-                                                <given>NHS</given>
-                                                <family>Test</family>
-                                            </name>
-                                        </agentPerson>
-                                        <representedOrganization classCode="ORG" determiner="INSTANCE">
-                                            <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
-                                            <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
-                                            <telecom value="01133800000" use="WP"/>
-                                            <addr use="WP">
-                                                <streetAddressLine>Fulford Grange</streetAddressLine>
-                                                <streetAddressLine>Micklefield Lane</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Rawdon</streetAddressLine>
-                                                <streetAddressLine>Leeds</streetAddressLine>
-                                                <postalCode>LS19 6BA</postalCode>
-                                            </addr>
-                                        </representedOrganization>
-                                    </Agent>
-                                </part>
-                            </agentDirectory>
-                        </responsibleParty>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100113152000"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100113152000"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP" >
-                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                        <id root="test-id-3" />
-                                        <statusCode code="COMPLETE" />
-                                        <availabilityTime value="20100113152000" />
-                                        <text>1.This is a line of text with a line break at the end.
-                                            2.This is a line of text with a line break at the end.
-                                            3.This is a line of text with a line break at the end.
-                                            4.This is a line of text with a line break at the end.
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113152000"/>
+        </effectiveTime>
+        <availabilityTime value="20100113152000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100113152000" />
+        <text>1.This is a line of text with a line break at the end.
+2.This is a line of text with a line break at the end.
+3.This is a line of text with a line break at the end.
+4.This is a line of text with a line break at the end.
 
-                                            The Line above this one was blank (with a line break)
+The Line above this one was blank (with a line break)
 
-                                            This is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,  this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,and this is the end of the long line.
+This is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,  this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line,and this is the end of the long line.
 
-                                            ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesENDOFTEXT
+ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesENDOFTEXT
 
-                                            The line below contains special characters...
-                                            ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
-                                        <Participant typeCode="PRF" contextControlCode="OP">
-                                            <agentRef classCode="AGNT">
-                                                <id root="test-id-3"/>
-                                            </agentRef>
-                                        </Participant>
-                                    </NarrativeStatement>
-                                </component>
-                            </ehrComposition>
-                        </component>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100123134800"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100123134800"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP" >
-                                    <ObservationStatement classCode="OBS" moodCode="EVN">
-                                        <id root="test-id-3" />
-                                        <statusCode code="COMPLETE" />
-                                        <effectiveTime>
-                                            <center value="20100123134800"/>
-                                        </effectiveTime>
-                                        <availabilityTime value="20100123140354"/>
-
-                                        <pertinentInformation typeCode="PERT">
-                                            <sequenceNumber value="+1" />
-                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                                <text>Significance : Major - Episodicity : First</text>
-                                            </pertinentAnnotation>
-                                        </pertinentInformation>
-
-                                        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
-                                        </code>
-
-                                        <Participant typeCode="PRF" contextControlCode="OP">
-                                            <agentRef classCode="AGNT">
-                                                <id root="test-id-3"/>
-                                            </agentRef>
-                                        </Participant>
-                                    </ObservationStatement>
-                                </component><component typeCode="COMP" >
-                                <ObservationStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <effectiveTime>
-                                        <center value="20100123134800"/>
-                                    </effectiveTime>
-                                    <availabilityTime value="20100123140354"/>
-
-                                    <pertinentInformation typeCode="PERT">
-                                        <sequenceNumber value="+1" />
-                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                            <text></text>
-                                        </pertinentAnnotation>
-                                    </pertinentInformation>
-
-                                    <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
-                                    </code>
-
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </ObservationStatement>
-                            </component><component typeCode="COMP" >
-                                <ObservationStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <effectiveTime>
-                                        <center value="20100123134800"/>
-                                    </effectiveTime>
-                                    <availabilityTime value="20100123140354"/>
-
-                                    <pertinentInformation typeCode="PERT">
-                                        <sequenceNumber value="+1" />
-                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                            <text>These are some notes !&quot;£$%^&amp;*()</text>
-                                        </pertinentAnnotation>
-                                    </pertinentInformation>
-
-                                    <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
-                                        <originalText>Irregular menstrual cycle</originalText>
-                                    </code>
-
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </ObservationStatement>
-                            </component><component typeCode="COMP" >
-                                <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <availabilityTime value="20100123134800" />
-                                    <text>This is some random free text</text>
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </NarrativeStatement>
-                            </component><component typeCode="COMP" >
-                                <ObservationStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <effectiveTime>
-                                        <center value="20100123134800"/>
-                                    </effectiveTime>
-                                    <availabilityTime value="20100123140354"/>
-
-                                    <pertinentInformation typeCode="PERT">
-                                        <sequenceNumber value="+1" />
-                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                            <text></text>
-                                        </pertinentAnnotation>
-                                    </pertinentInformation>
-
-                                    <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
-                                    </code>
-
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </ObservationStatement>
-                            </component><component typeCode="COMP" >
-                                <ObservationStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <effectiveTime>
-                                        <center value="20100123134800"/>
-                                    </effectiveTime>
-                                    <availabilityTime value="20100123140354"/>
-
-                                    <pertinentInformation typeCode="PERT">
-                                        <sequenceNumber value="+1" />
-                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                            <text>Family member : Mother</text>
-                                        </pertinentAnnotation>
-                                    </pertinentInformation>
-
-                                    <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-                                    </code>
-
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </ObservationStatement>
-                            </component><component typeCode="COMP" >
-                                <ObservationStatement classCode="OBS" moodCode="EVN">
-                                    <id root="test-id-3" />
-                                    <statusCode code="COMPLETE" />
-                                    <effectiveTime>
-                                        <center value="20100123134800"/>
-                                    </effectiveTime>
-                                    <availabilityTime value="20100123140354"/>
-
-                                    <pertinentInformation typeCode="PERT">
-                                        <sequenceNumber value="+1" />
-                                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                            <text>Family member : Father - note - this is obviously wrong?</text>
-                                        </pertinentAnnotation>
-                                    </pertinentInformation>
-
-                                    <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-                                    </code>
-
-                                    <Participant typeCode="PRF" contextControlCode="OP">
-                                        <agentRef classCode="AGNT">
-                                            <id root="test-id-3"/>
-                                        </agentRef>
-                                    </Participant>
-                                </ObservationStatement>
-                            </component>
-                            </ehrComposition>
-                        </component>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100609"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100609"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP" >
-                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                        <id root="test-id-3" />
-                                        <statusCode code="COMPLETE" />
-                                        <availabilityTime value="20100609" />
-                                        <text>hhhhhhhhh</text>
-                                        <Participant typeCode="PRF" contextControlCode="OP">
-                                            <agentRef classCode="AGNT">
-                                                <id root="test-id-3"/>
-                                            </agentRef>
-                                        </Participant>
-                                    </NarrativeStatement>
-                                </component>
-                            </ehrComposition>
-                        </component>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100610082200"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100610082200"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP" >
-                                    <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                        <id root="test-id-3" />
-                                        <statusCode code="COMPLETE" />
-                                        <availabilityTime value="20100610082200" />
-                                        <text>This is kjkjkjkjkjkjkjkjkj</text>
-                                        <Participant typeCode="PRF" contextControlCode="OP">
-                                            <agentRef classCode="AGNT">
-                                                <id root="test-id-3"/>
-                                            </agentRef>
-                                        </Participant>
-                                    </NarrativeStatement>
-                                </component>
-                            </ehrComposition>
-                        </component>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100714175500"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100714175500"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP">
-                                    <CompoundStatement classCode="BATTERY" moodCode="EVN">
-                                        <id root="test-id-3"/>
-                                        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-                                        </code>
-                                        <statusCode code="COMPLETE"/>
-                                        <effectiveTime>
-                                            <center value="20100714175500"/>
-                                        </effectiveTime>
-                                        <availabilityTime value="20100714162813"/>
-                                        <component typeCode="COMP" contextConductionInd="true">
-                                            <ObservationStatement classCode="OBS" moodCode="EVN">
-                                                <id root="test-id-3"/>
-                                                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-                                                    <originalText>Systolic blood pressure</originalText>
-                                                </code>
-                                                <statusCode code="COMPLETE"/>
-                                                <effectiveTime>
-                                                    <center value="20100714175500"/>
-                                                </effectiveTime>
-                                                <availabilityTime value="20100714162813"/>
-                                                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
-                                            </ObservationStatement>
-                                        </component>
-                                        <component typeCode="COMP" contextConductionInd="true">
-                                            <ObservationStatement classCode="OBS" moodCode="EVN">
-                                                <id root="test-id-3"/>
-                                                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-                                                    <originalText>Diastolic blood pressure</originalText>
-                                                </code>
-                                                <statusCode code="COMPLETE"/>
-                                                <effectiveTime>
-                                                    <center value="20100714175500"/>
-                                                </effectiveTime>
-                                                <availabilityTime value="20100714162813"/>
-                                                <valueQuantity><value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
-                                            </ObservationStatement>
-                                        </component>
-                                        <component typeCode="COMP" contextConductionInd="true">
-                                            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                                                <id root="test-id-3"/>
-                                                <text>This is the BP reading in a consultation with a note</text>
-                                                <statusCode code="COMPLETE"/>
-                                                <availabilityTime value="20100714175500"/>
-                                            </NarrativeStatement>
-                                        </component>
-                                        <!--<Participant typeCode="PRF" ..../>-->
-                                    </CompoundStatement>
-                                </component>
-                            </ehrComposition>
-                        </component>
-                        <component typeCode="COMP">
-                            <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-                                <id root="test-id-3" />
-                                <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
-                                    <originalText>GP Surgery</originalText>
-                                </code>
-                                <statusCode code="COMPLETE" />
-                                <effectiveTime>
-                                    <center value="20100714180700"/>
-                                </effectiveTime>
-                                <availabilityTime value="20100714180700"/>
-                                <author typeCode="AUT" contextControlCode="OP">
-                                    <time value="20100113151332" />
-                                    <agentRef classCode="AGNT">
-                                        <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
-                                    </agentRef>
-                                </author>
-                                <location typeCode="LOC">
-                                    <locatedEntity classCode="LOCE">
-                                        <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                                        <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                                            <name>Branch Surgery Rhing</name>
-                                        </locatedPlace>
-                                    </locatedEntity>
-                                </location>
-                                <Participant2 typeCode="RESP" contextControlCode="OP">
-                                    <agentRef classCode="AGNT">
-                                        <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-                                    </agentRef>
-                                </Participant2>
-                                <component typeCode="COMP" >
-                                    <ObservationStatement classCode="OBS" moodCode="EVN">
-                                        <id root="test-id-3" />
-                                        <statusCode code="COMPLETE" />
-                                        <effectiveTime>
-                                            <center value="20100714180700"/>
-                                        </effectiveTime>
-                                        <availabilityTime value="20100714163232"/>
-
-                                        <pertinentInformation typeCode="PERT">
-                                            <sequenceNumber value="+1" />
-                                            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                                                <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
-                                            </pertinentAnnotation>
-                                        </pertinentInformation>
-
-                                        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
-                                        </code>
-
-                                        <Participant typeCode="PRF" contextControlCode="OP">
-                                            <agentRef classCode="AGNT">
-                                                <id root="test-id-3"/>
-                                            </agentRef>
-                                        </Participant>
-                                    </ObservationStatement>
-                                </component>
-                            </ehrComposition>
-                        </component>
-                    </ehrFolder>
-                </component>
-                <inFulfillmentOf typeCode="FLFS">
-                    <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-                        <id root="test-request-id" />
-                    </priorEhrRequest>
-                </inFulfillmentOf>
-                <limitation typeCode="LIMIT" inversionInd="true">
-                    <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
-                        <id root="76C49C11-5271-11EA-9384-E83935108FD5" />
-                        <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)" />
-                    </limitingEhrExtractSpecification>
-                </limitation>
-            </EhrExtract>
+The line below contains special characters...
+¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123134800"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="8d1610c2-5e48-4ed5-882b-5a4a172afa35" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Significance : Major - Episodicity : First</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="5a074d71-aebd-473c-815f-cd64255b87eb" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="bc8cb16f-71df-4b02-80a2-f4dac0a04fbc" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>These are some notes !&quot;£$%^&amp;*()</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
+    <originalText>Irregular menstrual cycle</originalText>
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3316531f-5705-424c-9e1a-ee694fb411b4" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100123134800" />
+        <text>This is some random free text</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="1141eee6-ede3-4358-8554-ffed0ee59284" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Family member : Mother</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100123134800"/>
+        </effectiveTime>
+        <availabilityTime value="20100123140354"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Family member : Father - note - this is obviously wrong?</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="18bac9bd-7b26-4065-9416-7ecec8592843" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100609"/>
+        </effectiveTime>
+        <availabilityTime value="20100609"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="10b9023b-a997-4449-af63-ef3015e4c7b5" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100609" />
+        <text>hhhhhhhhh</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100610082200"/>
+        </effectiveTime>
+        <availabilityTime value="20100610082200"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100610082200" />
+        <text>This is kjkjkjkjkjkjkjkjkj</text>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="e4fae359-1369-41c1-b39e-f54bb55e307a" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714175500"/>
+        </effectiveTime>
+        <availabilityTime value="20100714175500"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+        <id root="cf58e8f8-cdd0-4345-8d7b-864ec96e9f9c"/>
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+</code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20100714175500"/>
+        </effectiveTime>
+        <availabilityTime value="20100714162813"/>
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="f9ea7b08-5c2d-4f7e-852d-c753f9e8059b"/>
+                <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic blood pressure</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100714175500"/>
+                </effectiveTime>
+                <availabilityTime value="20100714162813"/>
+                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="EVN">
+                <id root="d03e2e72-be97-411d-9ab1-c6bb53d2bc80"/>
+                <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic blood pressure</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100714175500"/>
+                </effectiveTime>
+                <availabilityTime value="20100714162813"/>
+                <valueQuantity><value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+            </ObservationStatement>
+        </component>
+        <component typeCode="COMP" contextConductionInd="true">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3"/>
+                <text>This is the BP reading in a consultation with a note</text>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="20100714175500"/>
+            </NarrativeStatement>
+        </component>
+        <!--<Participant typeCode="PRF" ..../>-->
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="fe85db22-274e-4b1d-9698-5c4809e9cd42" />
+        <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
+            <originalText>GP Surgery</originalText>
+        </code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714180700"/>
+        </effectiveTime>
+        <availabilityTime value="20100714180700"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113151332" />
+            <agentRef classCode="AGNT">
+                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="RESP" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="9a5d5a78-1f63-434c-9637-1d7e7843341b" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714180700"/>
+        </effectiveTime>
+        <availabilityTime value="20100714163232"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+        </ehrFolder>
+    </component>
+    <inFulfillmentOf typeCode="FLFS">
+        <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
+            <id root="test-request-id" />
+        </priorEhrRequest>
+    </inFulfillmentOf>
+    <limitation typeCode="LIMIT" inversionInd="true">
+        <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
+            <id root="76C49C11-5271-11EA-9384-E83935108FD5" />
+            <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)" />
+        </limitingEhrExtractSpecification>
+    </limitation>
+</EhrExtract>
 
         </subject>
     </ControlActEvent>
