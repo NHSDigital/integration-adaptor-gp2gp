@@ -57,7 +57,8 @@ public class EncounterComponentsMapper {
         ResourceType.MedicationRequest, this::mapMedicationRequest,
         ResourceType.Observation, this::mapObservation,
         ResourceType.ProcedureRequest, this::mapProcedureRequest,
-        ResourceType.ReferralRequest, this::mapReferralRequest);
+        ResourceType.ReferralRequest, this::mapReferralRequest,
+        ResourceType.DiagnosticReport, this::mapDefaultNotImplemented);
 
     private final MessageContext messageContext;
 
@@ -92,7 +93,6 @@ public class EncounterComponentsMapper {
 
     private Optional<String> mapItemToComponent(ListResource.ListEntryComponent item) {
         Optional<Resource> resource = messageContext.getInputBundleHolder().getResource(item.getItem().getReferenceElement());
-        resource.map(Resource::getResourceType).ifPresent(System.out::println);
 
         return resource.map(value -> encounterComponents.getOrDefault(value.getResourceType(), this::mapDefaultNotImplemented)
             .apply(value));
