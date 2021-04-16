@@ -12,7 +12,6 @@ import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.Element;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -24,8 +23,6 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
 
@@ -51,18 +48,16 @@ public class EncounterComponentsMapper {
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
 
-    private final Map<ResourceType, Function<Resource, String>> encounterComponents = ImmutableMap.<ResourceType, Function<Resource,
-        String>>builder()
-        .put(ResourceType.AllergyIntolerance, this::mapAllergyIntolerance)
-        .put(ResourceType.Condition, this::mapCondition)
-        .put(ResourceType.DocumentReference, this::mapDocumentReference)
-        .put(ResourceType.Immunization, this::mapImmunization)
-        .put(ResourceType.List, this::mapListResource)
-        .put(ResourceType.MedicationRequest, this::mapMedicationRequest)
-        .put(ResourceType.Observation, this::mapObservation)
-        .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
-        .put(ResourceType.ReferralRequest, this::mapReferralRequest)
-        .build();
+    private final Map<ResourceType, Function<Resource, String>> encounterComponents = Map.of(
+        ResourceType.AllergyIntolerance, this::mapAllergyIntolerance,
+        ResourceType.Condition, this::mapCondition,
+        ResourceType.DocumentReference, this::mapDocumentReference,
+        ResourceType.Immunization, this::mapImmunization,
+        ResourceType.List, this::mapListResource,
+        ResourceType.MedicationRequest, this::mapMedicationRequest,
+        ResourceType.Observation, this::mapObservation,
+        ResourceType.ProcedureRequest, this::mapProcedureRequest,
+        ResourceType.ReferralRequest, this::mapReferralRequest);
 
     private final MessageContext messageContext;
 
