@@ -8,7 +8,7 @@ import java.util.Queue;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
-public class DeterministicIdGeneratorService extends RandomIdGeneratorService {
+public class RandomIdGeneratorServiceStub extends RandomIdGeneratorService {
 
     private Queue<String> ids;
 

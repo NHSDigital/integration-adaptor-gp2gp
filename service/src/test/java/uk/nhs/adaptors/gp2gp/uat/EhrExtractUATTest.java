@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +18,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import uk.nhs.adaptors.gp2gp.DeterministicIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -70,7 +69,7 @@ public class EhrExtractUATTest {
             .toOdsCode("test-to-ods-code")
             .build();
 
-        randomIdGeneratorService = new DeterministicIdGeneratorService();
+        randomIdGeneratorService = new RandomIdGeneratorServiceStub();
         when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
 
         outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
