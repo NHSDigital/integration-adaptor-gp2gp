@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Instant;
 import java.util.stream.Stream;
 
@@ -118,6 +119,10 @@ public class EhrExtractUATTest {
         final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+
+        PrintWriter p = new PrintWriter(FILES_PREFIX + expectedOutputXml);
+        p.write(hl7TranslatedResponse);
+        p.close();
 
         assertThat(hl7TranslatedResponse).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
