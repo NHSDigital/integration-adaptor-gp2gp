@@ -78,7 +78,8 @@
         </agentRef>
     </Participant>
 </ObservationStatement>
-</component><!-- Flag/flagid1 --><component typeCode="COMP">
+</component>
+<component typeCode="COMP">
 <ObservationStatement classCode="OBS" moodCode="EVN">
     <id root="394559384658936"/>
     <statusCode code="COMPLETE"/>

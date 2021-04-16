@@ -17,6 +17,8 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+
 public class InputBundle {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private final Bundle bundle;
@@ -27,6 +29,11 @@ public class InputBundle {
 
     public Optional<Resource> getResource(IIdType reference) {
         return extractResourceByReference(this.bundle, reference);
+    }
+
+    public Resource getRequiredResource(IIdType reference) {
+        return extractResourceByReference(this.bundle, reference)
+            .orElseThrow(() -> new EhrMapperException("Resource not found: " + reference));
     }
 
     public Optional<ListResource> getListReferencedToEncounter(IIdType reference, String code) {

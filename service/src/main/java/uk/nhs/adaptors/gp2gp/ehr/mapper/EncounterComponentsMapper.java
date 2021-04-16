@@ -24,6 +24,7 @@ import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -55,6 +56,11 @@ public class EncounterComponentsMapper {
         .put(ResourceType.Observation, this::mapObservation)
         .put(ResourceType.Immunization, this::mapImmunization)
         .put(ResourceType.Condition, this::mapCondition)
+        .put(ResourceType.DiagnosticReport, this::mapDefaultNotImplemented)
+        .put(ResourceType.AllergyIntolerance, this::mapDefaultNotImplemented)
+        .put(ResourceType.DocumentReference, this::mapDefaultNotImplemented)
+        .put(ResourceType.MedicationRequest, this::mapDefaultNotImplemented)
+        .put(ResourceType.ReferralRequest, this::mapDefaultNotImplemented)
         .build();
 
     private final MessageContext messageContext;
@@ -82,16 +88,17 @@ public class EncounterComponentsMapper {
         return listReferencedToEncounter.getEntry()
             .stream()
             .map(this::mapItemToComponent)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
             .collect(Collectors.joining());
     }
 
-    private Optional<String> mapItemToComponent(ListResource.ListEntryComponent item) {
-        Optional<Resource> resource = messageContext.getInputBundleHolder().getResource(item.getItem().getReferenceElement());
-
-        return resource.map(value -> encounterComponents.getOrDefault(value.getResourceType(), this::mapDefaultNotImplemented)
-            .apply(value));
+    private String mapItemToComponent(ListResource.ListEntryComponent item) {
+        Resource resource = messageContext.getInputBundleHolder().getRequiredResource(item.getItem().getReferenceElement());
+        LOGGER.debug("Translating list entry resource {}/{}", resource.getResourceType().name(), resource.getIdElement().getIdPart());
+        if (encounterComponents.containsKey(resource.getResourceType())) {
+            return encounterComponents.get(resource.getResourceType()).apply(resource);
+        } else {
+            throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
+        }
     }
 
     private String mapDefaultNotImplemented(Resource resource) {
