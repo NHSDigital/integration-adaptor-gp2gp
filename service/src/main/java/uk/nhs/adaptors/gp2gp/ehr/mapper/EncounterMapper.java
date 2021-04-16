@@ -21,6 +21,7 @@ import com.github.mustachejava.Mustache;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
@@ -28,6 +29,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
+@Slf4j
 public class EncounterMapper {
     private static final Mustache ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE =
         TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
@@ -41,6 +43,7 @@ public class EncounterMapper {
     private final EncounterComponentsMapper encounterComponentsMapper;
 
     public String mapEncounterToEhrComposition(Encounter encounter) {
+        LOGGER.debug("Generating ehrComposition for Encounter {}", encounter.getId());
         String components = encounterComponentsMapper.mapComponents(encounter);
 
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()

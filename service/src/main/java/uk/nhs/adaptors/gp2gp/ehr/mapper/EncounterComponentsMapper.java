@@ -23,9 +23,11 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class EncounterComponentsMapper {
 
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
@@ -75,6 +77,7 @@ public class EncounterComponentsMapper {
     }
 
     private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
+        LOGGER.debug("Mapping List {} containing {} entries", listReferencedToEncounter.getId(), listReferencedToEncounter.getEntry().size());
         return listReferencedToEncounter.getEntry()
             .stream()
             .map(this::mapItemToComponent)

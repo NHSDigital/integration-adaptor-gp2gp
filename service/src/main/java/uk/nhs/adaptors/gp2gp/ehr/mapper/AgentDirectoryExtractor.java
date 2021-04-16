@@ -25,8 +25,10 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
+@Slf4j
 public class AgentDirectoryExtractor {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
@@ -88,7 +90,9 @@ public class AgentDirectoryExtractor {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
+            .peek(resource -> LOGGER.debug("{} contains a relevant practitioner reference", resource.getId()))
             .map(AgentDirectoryExtractor::extractIIdTypes)
+            .peek(reference -> LOGGER.debug("Extracted reference to {}", reference))
             .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
             .flatMap(Optional::stream)
             .map(Practitioner.class::cast)
