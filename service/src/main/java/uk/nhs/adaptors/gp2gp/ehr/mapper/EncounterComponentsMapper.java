@@ -77,7 +77,8 @@ public class EncounterComponentsMapper {
     }
 
     private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
-        LOGGER.debug("Mapping List {} containing {} entries", listReferencedToEncounter.getId(), listReferencedToEncounter.getEntry().size());
+        LOGGER.debug("Mapping List {} that contains {} entries", listReferencedToEncounter.getId(),
+            listReferencedToEncounter.getEntry().size());
         return listReferencedToEncounter.getEntry()
             .stream()
             .map(this::mapItemToComponent)

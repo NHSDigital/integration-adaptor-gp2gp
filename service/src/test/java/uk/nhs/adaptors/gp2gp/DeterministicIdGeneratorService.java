@@ -10,7 +10,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
 public class DeterministicIdGeneratorService extends RandomIdGeneratorService {
 
-    Queue<String> ids;
+    private Queue<String> ids;
 
     @SneakyThrows
     public void reset() {

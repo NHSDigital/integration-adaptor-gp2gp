@@ -41,7 +41,7 @@ public class AgentDirectoryExtractor {
         ResourceType.Immunization, resource -> ((Immunization) resource).hasPractitioner(),
         ResourceType.Encounter, resource -> ((Encounter) resource).hasParticipant()
             && ((Encounter) resource).getParticipantFirstRep().hasIndividual(),
-        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).hasRecipient(),
+        ResourceType.ReferralRequest, AgentDirectoryExtractor::referralRequestHasPractitionerRequesterAgent,
         ResourceType.AllergyIntolerance, resource -> ((AllergyIntolerance) resource).hasAsserter()
             || ((AllergyIntolerance) resource).hasRecorder(),
         ResourceType.Condition, resource -> ((Condition) resource).hasAsserter()
@@ -49,7 +49,7 @@ public class AgentDirectoryExtractor {
     private static final Map<ResourceType, Function<Resource, IIdType>> RESOURCE_EXTRACT_IIDTYPE = Map.of(
         ResourceType.Immunization, resource -> ((Immunization) resource).getPractitionerFirstRep().getActor().getReferenceElement(),
         ResourceType.Encounter, resource -> ((Encounter) resource).getParticipantFirstRep().getIndividual().getReferenceElement(),
-        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRecipientFirstRep().getReferenceElement(),
+        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRequester().getAgent().getReferenceElement(),
         ResourceType.AllergyIntolerance, AgentDirectoryExtractor::extractIIdTypeFromAllergyIntolerance,
         ResourceType.Condition, resource -> ((Condition) resource).getAsserter().getReferenceElement()
     );
@@ -203,6 +203,13 @@ public class AgentDirectoryExtractor {
             .orElseGet(() -> allergyIntolerance
                 .map(AllergyIntolerance::getRecorder)
                 .map(BaseReference::getReferenceElement).get());
+    }
+
+    private static boolean referralRequestHasPractitionerRequesterAgent(Resource resource) {
+        ReferralRequest referralRequest = (ReferralRequest) resource;
+        return referralRequest.hasRequester()
+            && referralRequest.getRequester().getAgent().getReferenceElement()
+            .getResourceType().equals(ResourceType.Practitioner.name());
     }
 
     @Data
