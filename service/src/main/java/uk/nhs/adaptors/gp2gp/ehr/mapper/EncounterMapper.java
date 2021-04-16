@@ -62,7 +62,7 @@ public class EncounterMapper {
             .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
 
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
-            .map(idMapper::getOrNew);
+            .map(idMapper::get);
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 
