@@ -185,9 +185,9 @@
         </effectiveTime>
         <availabilityTime value="20100113152000"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100113152950" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -242,9 +242,9 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100123134800"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100123140354" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -438,9 +438,9 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100609"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100609175121" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -483,9 +483,9 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100610082200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100610081925" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -528,9 +528,9 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100714175500"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100714162813" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -609,9 +609,9 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100714180700"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100714163232" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">

@@ -199,9 +199,9 @@
         </effectiveTime>
         <availabilityTime value="20100114104100"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100114103430" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -269,9 +269,9 @@
         </effectiveTime>
         <availabilityTime value="20100115101400"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100115100646" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -340,9 +340,9 @@
         </effectiveTime>
         <availabilityTime value="20100323153600"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100323155127" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -444,9 +444,9 @@
         </effectiveTime>
         <availabilityTime value="20100323153900"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100323155935" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -548,9 +548,9 @@
         </effectiveTime>
         <availabilityTime value="20100323154200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100323160749" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -639,9 +639,9 @@
         </effectiveTime>
         <availabilityTime value="20100810131700"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20100810132233" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -730,9 +730,9 @@
         </effectiveTime>
         <availabilityTime value="20111115143900"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20111115144750" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -809,9 +809,9 @@
         </effectiveTime>
         <availabilityTime value="20111115145400"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20111115145910" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
