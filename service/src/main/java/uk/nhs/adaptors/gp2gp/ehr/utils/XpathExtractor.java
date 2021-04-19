@@ -122,10 +122,10 @@ public class XpathExtractor {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
-    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRRF\" contextControlCode=\"OP\">\n"
-        + "           <agentRef classCode=\"AGNT\">\n"
-        + "               <id root=\"%s\"/>\n"
-        + "           </agentRef>\n"
+    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRRF\" contextControlCode=\"OP\">%n"
+        + "           <agentRef classCode=\"AGNT\">%n"
+        + "               <id root=\"%s\"/>%n"
+        + "           </agentRef>%n"
         + "       </Participant2>";
     private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
 
