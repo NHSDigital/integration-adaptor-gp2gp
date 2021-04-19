@@ -39,8 +39,6 @@ public class ObservationStatementMapper {
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
-
-
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final PertinentInformationObservationValueMapper pertinentInformationObservationValueMapper;
