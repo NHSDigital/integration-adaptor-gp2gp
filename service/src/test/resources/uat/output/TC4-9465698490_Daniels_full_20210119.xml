@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="e4fae359-1369-41c1-b39e-f54bb55e307a" />
+    <id root="038fc731-8526-4253-8843-9cc9a1edbd8f" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -330,7 +330,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400" />
+        <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -383,12 +383,58 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><!-- MedicationRequest/F3BEB660-1AB8-401A-AFF3-F8788E411661 -->
+</component><component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100323"/>
+        <effectiveTime>
+            <low value="20100323"/><high value="20100420"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="330062008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allopurinol 300mg tablets">
+    <originalText>Allopurinol 300mg tablets</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20100323"/>
+                <quantity value="28" unit="1">
+                    <translation value="28">
+                        <originalText>tablet</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="18bac9bd-7b26-4065-9416-7ecec8592843"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Each Day After Food</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="10b9023b-a997-4449-af63-ef3015e4c7b5" />
+        <id root="e4fae359-1369-41c1-b39e-f54bb55e307a" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -418,7 +464,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345" />
+        <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100323153900"/>
@@ -441,12 +487,58 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><!-- MedicationRequest/DAE87B52-38ED-42BD-B081-34E8BA634194 -->
+</component><component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="cf58e8f8-cdd0-4345-8d7b-864ec96e9f9c"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100323"/>
+        <effectiveTime>
+            <low value="20100323"/><high value="20100422"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="325443009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Prednisolone 5mg gastro-resistant tablets">
+    <originalText>Prednisolone 5mg gastro-resistant tablets</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="f9ea7b08-5c2d-4f7e-852d-c753f9e8059b"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20100323"/>
+                <quantity value="30" unit="1">
+                    <translation value="30">
+                        <originalText>tablet</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 30 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Each Day After Food</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
+        <id root="2f6b04c6-297a-4270-9b4e-c213b8b175ac" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -476,7 +568,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="18bac9bd-7b26-4065-9416-7ecec8592843" />
+        <id root="9a5d5a78-1f63-434c-9637-1d7e7843341b" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100323154200" />
         <text>This is just a consultation to test issue of previous courses via consultations</text>
@@ -486,12 +578,58 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><!-- MedicationRequest/44CF7CEF-4584-4A8C-85B8-763E1CE9580F -->
+</component><component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="fe85db22-274e-4b1d-9698-5c4809e9cd42"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100323"/>
+        <effectiveTime>
+            <low value="20100323"/><high value="20100420"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="324059006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doxycycline 100mg capsules">
+    <originalText>Doxycycline 100mg capsules</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="8930c6d9-56ed-477a-8407-00dce8a05db4"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20100323"/>
+                <quantity value="56" unit="1">
+                    <translation value="56">
+                        <originalText>capsule</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="51463066-3087-424c-9265-eaac461afade"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Twice A Day</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="cf58e8f8-cdd0-4345-8d7b-864ec96e9f9c" />
+        <id root="5f1edfb9-3b69-4a7a-9d22-26cfe3cd7f1b" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -519,9 +657,55 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- MedicationRequest/680CEEA8-982B-485B-BB53-7D8C15C6FCCE --><component typeCode="COMP" >
+        <component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="64d224e0-de90-49bb-af2d-eca90ba2ce0d"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100810"/>
+        <effectiveTime>
+            <low value="20100810"/><high value="20101005"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="319773006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 75mg dispersible tablets">
+    <originalText>Aspirin 75mg dispersible tablets</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="8df92722-5b5f-4324-866e-0328d5ea4286"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20100810"/>
+                <quantity value="56" unit="1">
+                    <translation value="56">
+                        <originalText>tablet</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 56 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="a8896415-81a1-4366-9e92-3afc04aef25d"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Each Day</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae" />
+        <id root="25dbe266-2210-41d4-adb0-c033f3ebed99" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100810131700" />
         <text>Fluoxetine 20mg capsules One To Be Taken Each Day</text>
@@ -536,7 +720,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="f9ea7b08-5c2d-4f7e-852d-c753f9e8059b" />
+        <id root="f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -564,12 +748,58 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- MedicationRequest/A4A4A740-A6FB-4D59-9119-B4A9CF6FAC8F -->
+        <component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="de743503-08d0-4381-903f-8c5691360b54"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20111115"/>
+        <effectiveTime>
+            <low value="20111115"/><high value="20111213"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="573711000001104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bedranol SR 80mg capsules (Sandoz Ltd)">
+    <originalText>Bedranol SR 80mg capsules (Sandoz Ltd)</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="3db5fd2d-6bdb-4cc1-9abb-548eb586f48f"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20111115"/>
+                <quantity value="28" unit="1">
+                    <translation value="28">
+                        <originalText>capsule</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day Notes: Prescriber Notes:Issue number 1 This is the 22047 repeat</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="15c6ebea-f344-443e-bbe9-26b7b8a8f038"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Each Day</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3" />
+        <id root="5bb18e92-dabb-4c22-838a-410b4a278060" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -599,7 +829,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="d03e2e72-be97-411d-9ab1-c6bb53d2bc80" />
+        <id root="5f8bbc0e-0fb7-4828-84aa-817f5243a12e" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20111115145400"/>
@@ -622,7 +852,53 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><!-- MedicationRequest/5CF3E022-961E-4D8A-B0BA-5705B9EBD55A -->
+</component><component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="4e95e2af-bf10-45bb-aaa5-2547bd42c806"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20111115"/>
+        <effectiveTime>
+            <low value="20111115"/><high value="20111213"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="322225002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin 300mg gastro-resistant tablets">
+    <originalText>Aspirin 300mg gastro-resistant tablets</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="6423ea0f-1f1c-4255-aeba-d142be836d50"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20111115"/>
+                <quantity value="168" unit="1">
+                    <translation value="168">
+                        <originalText>tablet</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day Notes: Prescriber Notes:Issue number 1 This is the generic acute for 22047</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="b857c1e3-3a27-4a58-b341-fc5dfcd8c58b"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>One To Be Taken Every Four To Six Hours When Required</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
         </ehrFolder>
