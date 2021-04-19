@@ -35,6 +35,7 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
                 encounter.getPeriod().getStartElement()));
         }
+
         return DEFAULT_TIME_VALUE;
     }
 

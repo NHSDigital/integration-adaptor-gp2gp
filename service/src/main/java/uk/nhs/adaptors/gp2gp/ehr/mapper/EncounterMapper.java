@@ -53,8 +53,16 @@ public class EncounterMapper {
             .displayName(buildDisplayName(encounter))
             .originalText(buildOriginalText(encounter));
 
+        updateEhrFolderEffectiveTime(encounter);
+
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private void updateEhrFolderEffectiveTime(Encounter encounter) {
+        if (encounter.hasPeriod()) {
+            messageContext.getEffectiveTime().updateEffectiveTimePeriod(encounter.getPeriod());
+        }
     }
 
     private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {

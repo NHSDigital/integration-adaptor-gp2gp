@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -28,6 +29,7 @@ public class EhrExtractMapper {
     private final TimestampService timestampService;
     private final EncounterMapper encounterMapper;
     private final AgentDirectoryMapper agentDirectoryMapper;
+    private final MessageContext messageContext;
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
@@ -48,6 +50,15 @@ public class EhrExtractMapper {
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle.getEntry());
         ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
+
+        EhrFolderEffectiveTime effectiveTime = messageContext.getEffectiveTime();
+        Optional<String> effectiveTimeLow = effectiveTime.getEffectiveTimeLow();
+        effectiveTimeLow.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeLow);
+
+        Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
+        effectiveTimeHigh.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeHigh);
+
+        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.isPresent() || effectiveTimeHigh.isPresent());
 
         return ehrExtractTemplateParameters;
     }
