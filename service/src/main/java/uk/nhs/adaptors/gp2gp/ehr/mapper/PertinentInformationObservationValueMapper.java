@@ -42,6 +42,11 @@ public class PertinentInformationObservationValueMapper {
             .put(DateTimeType.class, value -> processDateTimeType((DateTimeType) value))
             .put(Period.class, value -> processPeriod((Period) value))
             .build();
+    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> COMPONENT_VALUE_FUNCTIONS =
+        ImmutableMap.<Class<? extends IBaseElement>, Function<IBaseElement, String>>builder()
+            .put(Quantity.class, value -> processComponentValueQuantity((Quantity) value))
+            .put(StringType.class, value -> processComponentValueString((StringType) value))
+            .build();
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: Low %s %s High %s %s ";
@@ -61,10 +66,6 @@ public class PertinentInformationObservationValueMapper {
     private static final String COMPONENT_QUANTITY_VALUE_TEMPLATE = "Quantity Value: %s";
     private static final String COMPONENT_STRING_VALUE_TEMPLATE = "String Value: %s";
     private static final String COMPONENT_DELIMITER_TEMPLATE = "[%s]";
-
-    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> COMPONENT_VALUE_FUNCTIONS =
-        ImmutableMap.of(Quantity.class, value -> processComponentValueQuantity((Quantity) value),
-            StringType.class, value -> processComponentValueString((StringType) value));
 
     public String mapObservationValueToPertinentInformation(Type value) {
         if (!isPertinentInformation(value)) {
