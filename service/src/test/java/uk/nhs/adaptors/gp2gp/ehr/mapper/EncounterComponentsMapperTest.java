@@ -59,11 +59,28 @@ public class EncounterComponentsMapperTest {
         messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
 
         ParticipantMapper participantMapper = new ParticipantMapper();
-        DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
-        ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
-            new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
 
+        AllergyStructureMapper allergyStructureMapper
+            = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
+            messageContext,
+            randomIdGeneratorService,
+            structuredObservationValueMapper,
+            codeableConceptCdMapper
+        );
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
+            randomIdGeneratorService,
+            codeableConceptCdMapper,
+            participantMapper
+        );
+        DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+        MedicationStatementMapper medicationStatementMapper
+            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
+        ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
@@ -71,24 +88,22 @@ public class EncounterComponentsMapperTest {
             participantMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
-        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
-            randomIdGeneratorService,
-            codeableConceptCdMapper,
-            participantMapper);
-        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
-            messageContext,
-            randomIdGeneratorService,
-            structuredObservationValueMapper,
-            codeableConceptCdMapper);
+        RequestStatementMapper requestStatementMapper
+            = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            allergyStructureMapper,
+            bloodPressureMapper,
+            conditionLinkSetMapper,
             diaryPlanStatementMapper,
+            documentReferenceToNarrativeStatementMapper,
+            immunizationObservationStatementMapper,
+            medicationStatementMapper,
             observationToNarrativeStatementMapper,
             observationStatementMapper,
-            immunizationObservationStatementMapper,
-            conditionLinkSetMapper,
-            bloodPressureMapper);
+            requestStatementMapper
+        );
     }
 
     @AfterEach
@@ -108,7 +123,7 @@ public class EncounterComponentsMapperTest {
         assertThat(encounter.isPresent()).isTrue();
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
     @ParameterizedTest
