@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Component
 public final class EncounterExtractor {
-    private static final String CONSULTATION_LIST_CODE = "1149501000000101";
+    private static final String ENCOUNTER_LIST_CODE = "1149501000000101";
 
     public static List<Encounter> extractEncounterReferencesFromEncounterList(List<Bundle.BundleEntryComponent> entries) {
         var encounterReferences = extractEncounterReferencesFromConsultationList(entries);
@@ -46,7 +46,7 @@ public final class EncounterExtractor {
             && listResource.getCode().hasCoding()
             && listResource.getCode().getCoding()
             .stream()
-            .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(CONSULTATION_LIST_CODE));
+            .anyMatch(coding -> coding.hasCode() && coding.getCode().equals(ENCOUNTER_LIST_CODE));
     }
 
     private static List<String> extractEncounterReferencesFromListResource(List<ListResource.ListEntryComponent> entries) {
