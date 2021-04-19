@@ -1,0 +1,57 @@
+{
+    "resourceType": "Observation",
+    "id": "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "code": {
+        "text": "test"
+    },
+    "effectiveDateTime": "2010-07-14T16:32:51.42+01:00",
+    "issued": "2010-01-13T15:29:50.3+00:00",
+    "comment": "Example comment",
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://snomed.info/sct",
+                        "code": "91936005",
+                        "display": "Allergy to penicillin",
+                        "userSelected": true
+                    }
+                ]
+            },
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://test-system",
+                        "code": "test-code",
+                        "display": "Test display"
+                    }
+                ],
+                "text": "Test text"
+            },
+            "referenceRange": [
+                {
+                    "text": "Test reference range text",
+                    "high": {
+                        "value": 30,
+                        "unit": "test-unit-1"
+                    },
+                    "low": {
+                        "value": 20,
+                        "unit": "test-unit-2"
+                    }
+                }
+            ],
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "Example without userSelected",
+                        "display": "Example without userSelected"
+                    }
+                ],
+                "text": "Example interpretation text 1"
+            }
+        }
+    ]
+}

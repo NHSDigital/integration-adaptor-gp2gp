@@ -100,7 +100,7 @@ public class ObservationStatementMapper {
 
         if (observation.hasComponent()) {
             commentBuilder.insert(COMMENT_OFFSET,
-                pertinentInformationObservationValueMapper.prepareComponentPertinentInformation(observation));
+                pertinentInformationObservationValueMapper.mapComponentToPertinentInformation(observation));
         }
 
         if (observation.hasValue()  && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {

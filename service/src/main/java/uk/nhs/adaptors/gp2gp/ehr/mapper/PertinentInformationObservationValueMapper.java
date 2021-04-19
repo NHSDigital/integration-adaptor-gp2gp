@@ -53,15 +53,14 @@ public class PertinentInformationObservationValueMapper {
     private static final String TEXT_PREFIX = "Text: ";
     private static final String LOW_PREFIX = "Low: ";
     private static final String HIGH_PREFIX = "High: ";
-
-    private static final String COMPONENT = "Component(s): %s";
-    private static final String COMPONENT_CODE = "Code: %s";
-    private static final String COMPONENT_INTERPRETATION_CODE = "Interpretation Code: %s";
-    private static final String COMPONENT_INTERPRETATION_TEXT = "Interpretation Text: %s";
-    private static final String COMPONENT_REFERENCE_RANGE = "Range: %s %s %s %s";
-    private static final String COMPONENT_QUANTITY_VALUE = "Quantity Value: %s";
-    private static final String COMPONENT_STRING_VALUE = "String Value: %s";
-    private static final String COMPONENT_DELIMITER = "[%s]";
+    private static final String COMPONENT_TEMPLATE = "Component(s): %s ";
+    private static final String COMPONENT_CODE_TEMPLATE = "Code: %s";
+    private static final String COMPONENT_INTERPRETATION_CODE_TEMPLATE = "Interpretation Code: %s";
+    private static final String COMPONENT_INTERPRETATION_TEXT_TEMPLATE = "Interpretation Text: %s";
+    private static final String COMPONENT_REFERENCE_RANGE_TEMPLATE = "Range: %s %s %s %s";
+    private static final String COMPONENT_QUANTITY_VALUE_TEMPLATE = "Quantity Value: %s";
+    private static final String COMPONENT_STRING_VALUE_TEMPLATE = "String Value: %s";
+    private static final String COMPONENT_DELIMITER_TEMPLATE = "[%s]";
 
     private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> COMPONENT_VALUE_FUNCTIONS =
         ImmutableMap.of(Quantity.class, value -> processComponentValueQuantity((Quantity) value),
@@ -218,21 +217,41 @@ public class PertinentInformationObservationValueMapper {
             && ratio.getDenominator().hasUnit();
     }
 
-    public String prepareComponentPertinentInformation(Observation observation) {
+    public String mapComponentToPertinentInformation(Observation observation) {
         String componentPertinentInformation = observation.getComponent()
             .stream()
-            .map(this::extractComponentPertinentInformation)
+            .map(this::buildComponentPertinentInformation)
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(StringUtils.SPACE));
 
-        return String.format(COMPONENT, componentPertinentInformation);
+        return String.format(COMPONENT_TEMPLATE, componentPertinentInformation);
+    }
+
+    private String buildComponentPertinentInformation(Observation.ObservationComponentComponent component) {
+        List<String> componentPertinentInformationList = List.of(
+            extractComponentCode(component),
+            extractComponentValue(component),
+            extractComponentInterpretationCode(component),
+            extractComponentInterpretationText(component),
+            extractComponentReferenceRange(component)
+        );
+
+        var componentText = componentPertinentInformationList.stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        if (StringUtils.isNotEmpty(componentText)) {
+            return String.format(COMPONENT_DELIMITER_TEMPLATE, componentText);
+        }
+
+        return componentText;
     }
 
     private String extractComponentCode(Observation.ObservationComponentComponent component) {
         if (component.hasCode()) {
             var code = CodeableConceptMappingUtils.extractTextOrCoding(component.getCode());
             if (code.isPresent()) {
-                return String.format(COMPONENT_CODE, code.get());
+                return String.format(COMPONENT_CODE_TEMPLATE, code.get());
             }
         }
         return StringUtils.EMPTY;
@@ -262,9 +281,10 @@ public class PertinentInformationObservationValueMapper {
                     .findFirst();
 
                 if (userSelectedCoding.isPresent()) {
-                    return String.format(COMPONENT_INTERPRETATION_CODE, userSelectedCoding.get().getCode());
+                    return String.format(COMPONENT_INTERPRETATION_CODE_TEMPLATE, userSelectedCoding.get().getCode());
                 } else {
-                    return String.format(COMPONENT_INTERPRETATION_CODE, component.getInterpretation().getCodingFirstRep().getCode());
+                    return String.format(COMPONENT_INTERPRETATION_CODE_TEMPLATE,
+                        component.getInterpretation().getCodingFirstRep().getCode());
                 }
             }
         }
@@ -273,7 +293,7 @@ public class PertinentInformationObservationValueMapper {
 
     private String extractComponentInterpretationText(Observation.ObservationComponentComponent component) {
         if (component.getInterpretation().hasText()) {
-            return String.format(COMPONENT_INTERPRETATION_TEXT, component.getInterpretation().getText());
+            return String.format(COMPONENT_INTERPRETATION_TEXT_TEMPLATE, component.getInterpretation().getText());
         }
         return StringUtils.EMPTY;
     }
@@ -288,42 +308,9 @@ public class PertinentInformationObservationValueMapper {
                 var highValue = referenceRange.getHigh().getValue().toString();
                 var highUnit = referenceRange.getHigh().getUnit();
 
-                return String.format(COMPONENT_REFERENCE_RANGE, lowValue, lowUnit, highValue, highUnit);
+                return String.format(COMPONENT_REFERENCE_RANGE_TEMPLATE, lowValue, lowUnit, highValue, highUnit);
             }
         }
-        return StringUtils.EMPTY;
-    }
-
-    private String extractComponentPertinentInformation(Observation.ObservationComponentComponent component) {
-        List<String> pertinentInformationList = List.of(
-            extractComponentCode(component),
-            extractComponentValue(component),
-            extractComponentInterpretationCode(component),
-            extractComponentInterpretationText(component),
-            extractComponentReferenceRange(component)
-        );
-
-        var componentText = pertinentInformationList.stream()
-            .filter(StringUtils::isNotEmpty)
-            .collect(Collectors.joining(StringUtils.SPACE));
-
-        if (StringUtils.isNotEmpty(componentText)) {
-            return String.format(COMPONENT_DELIMITER, componentText);
-        }
-
-        return componentText;
-    }
-
-    private static String processComponentValueQuantity(Quantity value) {
-        var valueList = List.of(extractComponentValueComparator(value), extractComponentValue(value), extractComponentValueUnit(value));
-        var valueText = valueList.stream()
-            .filter(StringUtils::isNotEmpty)
-            .collect(Collectors.joining(StringUtils.SPACE));
-
-        if (StringUtils.isNotEmpty(valueText)) {
-            return String.format(COMPONENT_QUANTITY_VALUE, valueText);
-        }
-
         return StringUtils.EMPTY;
     }
 
@@ -348,7 +335,25 @@ public class PertinentInformationObservationValueMapper {
         return StringUtils.EMPTY;
     }
 
+    private static String processComponentValueQuantity(Quantity value) {
+        var valueList = List.of(
+            extractComponentValueComparator(value),
+            extractComponentValue(value),
+            extractComponentValueUnit(value)
+        );
+
+        var valueText = valueList.stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        if (StringUtils.isNotEmpty(valueText)) {
+            return String.format(COMPONENT_QUANTITY_VALUE_TEMPLATE, valueText);
+        }
+
+        return StringUtils.EMPTY;
+    }
+
     private static String processComponentValueString(StringType value) {
-        return String.format(COMPONENT_STRING_VALUE, value.getValue());
+        return String.format(COMPONENT_STRING_VALUE_TEMPLATE, value.getValue());
     }
 }

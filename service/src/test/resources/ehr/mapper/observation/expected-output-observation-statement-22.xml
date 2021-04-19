@@ -1,0 +1,20 @@
+<component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714163251"/>
+        </effectiveTime>
+        <availabilityTime value="20100113152950"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Component(s): [Code Value: test-code Example display valueCodeableConcept ] [Range Value: Low 10.1 test-unit High 20.5 test-unit ] [Ratio Value: &lt; 10 test-unit / &gt; 20 test-unit ] [Time Value: 12:30:10 ] [DateTime Value: 2017-03-01 12:50:12 ] [Period Value: Start 2017-03-01 12:50:12 End 2018-06-03 14:12:10 ] Example comment</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        
+    </ObservationStatement>
+</component>

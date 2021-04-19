@@ -1,0 +1,20 @@
+<component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714163251"/>
+        </effectiveTime>
+        <availabilityTime value="20100113152950"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Component(s): [Code: Allergy to penicillin Code Value: test-code Test display  Interpretation Code: Example without userSelected Interpretation Text: Example interpretation text 1 Range: 20 test-unit-2 30 test-unit-1] Example comment</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        
+    </ObservationStatement>
+</component>
