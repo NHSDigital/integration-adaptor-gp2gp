@@ -82,7 +82,15 @@ public class EhrExtractMapperTest {
         ParticipantMapper participantMapper = new ParticipantMapper();
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
@@ -91,11 +99,7 @@ public class EhrExtractMapperTest {
                 codeableConceptCdMapper,
                 participantMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper)
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(

@@ -46,7 +46,8 @@ public class ResourceExtractor {
                 .map(Bundle.BundleEntryComponent::getResource)
                 .filter(resource -> hasResourceType(resource, ResourceType.List.name()))
                 .map(resource -> (ListResource) resource)
-                .filter(resource -> hasEncounterReference(reference, resource) && hasCode(code, resource))
+                .filter(resource -> hasEncounterReference(reference, resource))
+                .filter(resource -> hasCode(code, resource))
                 .findFirst();
         }
 
