@@ -17,10 +17,12 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestStatus;
@@ -257,18 +259,22 @@ public class MedicationStatementMapper {
     }
 
     private String buildParticipant(MedicationRequest medicationRequest) {
-        Predicate<String> isPractitioner = s -> s.startsWith(ResourceType.Practitioner.name());
-        Predicate<String> isPractitionerRole = s -> s.startsWith(ResourceType.PractitionerRole.name());
-        Predicate<String> isOrganization = s -> s.startsWith(ResourceType.Organization.name());
-        Predicate<String> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
+        Predicate<Reference> isPractitioner = buildPredicateReferenceIsA(ResourceType.Practitioner);
+        Predicate<Reference> isPractitionerRole = buildPredicateReferenceIsA(ResourceType.PractitionerRole);
+        Predicate<Reference> isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
+        Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
 
         if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();
-            if (isRelevant.test(reference.getReference())) {
+            if (reference.hasReferenceElement() && isRelevant.test(reference)) {
                 return participantMapper.mapToParticipant(
                     messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
             }
         }
         return StringUtils.EMPTY;
+    }
+
+    private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {
+        return reference -> type.name().equals(reference.getReferenceElement().getResourceType());
     }
 }
