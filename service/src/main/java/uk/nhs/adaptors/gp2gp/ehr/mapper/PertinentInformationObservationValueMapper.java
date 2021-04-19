@@ -1,7 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -14,6 +16,7 @@ import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.Range;
 import org.hl7.fhir.dstu3.model.Ratio;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
+import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.TimeType;
 import org.hl7.fhir.dstu3.model.Type;
 import org.hl7.fhir.instance.model.api.IBaseElement;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -49,6 +53,19 @@ public class PertinentInformationObservationValueMapper {
     private static final String TEXT_PREFIX = "Text: ";
     private static final String LOW_PREFIX = "Low: ";
     private static final String HIGH_PREFIX = "High: ";
+
+    private static final String COMPONENT = "Component(s): %s";
+    private static final String COMPONENT_CODE = "Code: %s";
+    private static final String COMPONENT_INTERPRETATION_CODE = "Interpretation Code: %s";
+    private static final String COMPONENT_INTERPRETATION_TEXT = "Interpretation Text: %s";
+    private static final String COMPONENT_REFERENCE_RANGE = "Range: %s %s %s %s";
+    private static final String COMPONENT_QUANTITY_VALUE = "Quantity Value: %s";
+    private static final String COMPONENT_STRING_VALUE = "String Value: %s";
+    private static final String COMPONENT_DELIMITER = "[%s]";
+
+    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> COMPONENT_VALUE_FUNCTIONS =
+        ImmutableMap.of(Quantity.class, value -> processComponentValueQuantity((Quantity) value),
+            StringType.class, value -> processComponentValueString((StringType) value));
 
     public String mapObservationValueToPertinentInformation(Type value) {
         if (!isPertinentInformation(value)) {
@@ -199,5 +216,139 @@ public class PertinentInformationObservationValueMapper {
             && ratio.getDenominator().hasComparator()
             && ratio.getDenominator().hasValue()
             && ratio.getDenominator().hasUnit();
+    }
+
+    public String prepareComponentPertinentInformation(Observation observation) {
+        String componentPertinentInformation = observation.getComponent()
+            .stream()
+            .map(this::extractComponentPertinentInformation)
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        return String.format(COMPONENT, componentPertinentInformation);
+    }
+
+    private String extractComponentCode(Observation.ObservationComponentComponent component) {
+        if (component.hasCode()) {
+            var code = CodeableConceptMappingUtils.extractTextOrCoding(component.getCode());
+            if (code.isPresent()) {
+                return String.format(COMPONENT_CODE, code.get());
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractComponentValue(Observation.ObservationComponentComponent component) {
+        if (component.hasValue()) {
+            var value = component.getValue();
+
+            if (COMPONENT_VALUE_FUNCTIONS.containsKey(value.getClass())) {
+                return COMPONENT_VALUE_FUNCTIONS.get(value.getClass()).apply(value);
+            } else {
+                return mapObservationValueToPertinentInformation(value);
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractComponentInterpretationCode(Observation.ObservationComponentComponent component) {
+        if (component.hasInterpretation()) {
+            if (component.getInterpretation().hasCoding()) {
+                var userSelectedCoding = component
+                    .getInterpretation()
+                    .getCoding()
+                    .stream()
+                    .filter(Coding::hasUserSelected)
+                    .findFirst();
+
+                if (userSelectedCoding.isPresent()) {
+                    return String.format(COMPONENT_INTERPRETATION_CODE, userSelectedCoding.get().getCode());
+                } else {
+                    return String.format(COMPONENT_INTERPRETATION_CODE, component.getInterpretation().getCodingFirstRep().getCode());
+                }
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractComponentInterpretationText(Observation.ObservationComponentComponent component) {
+        if (component.getInterpretation().hasText()) {
+            return String.format(COMPONENT_INTERPRETATION_TEXT, component.getInterpretation().getText());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractComponentReferenceRange(Observation.ObservationComponentComponent component) {
+        if (component.hasReferenceRange()) {
+            var referenceRange = component.getReferenceRangeFirstRep();
+            if (referenceRange.hasLow() && referenceRange.hasHigh()
+                && referenceRange.getLow().hasUnit() && referenceRange.getHigh().hasUnit()) {
+                var lowValue = referenceRange.getLow().getValue().toString();
+                var lowUnit = referenceRange.getLow().getUnit();
+                var highValue = referenceRange.getHigh().getValue().toString();
+                var highUnit = referenceRange.getHigh().getUnit();
+
+                return String.format(COMPONENT_REFERENCE_RANGE, lowValue, lowUnit, highValue, highUnit);
+            }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String extractComponentPertinentInformation(Observation.ObservationComponentComponent component) {
+        List<String> pertinentInformationList = List.of(
+            extractComponentCode(component),
+            extractComponentValue(component),
+            extractComponentInterpretationCode(component),
+            extractComponentInterpretationText(component),
+            extractComponentReferenceRange(component)
+        );
+
+        var componentText = pertinentInformationList.stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        if (StringUtils.isNotEmpty(componentText)) {
+            return String.format(COMPONENT_DELIMITER, componentText);
+        }
+
+        return componentText;
+    }
+
+    private static String processComponentValueQuantity(Quantity value) {
+        var valueList = List.of(extractComponentValueComparator(value), extractComponentValue(value), extractComponentValueUnit(value));
+        var valueText = valueList.stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        if (StringUtils.isNotEmpty(valueText)) {
+            return String.format(COMPONENT_QUANTITY_VALUE, valueText);
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractComponentValueComparator(Quantity value) {
+        if (value.hasComparator()) {
+            return value.getComparator().getDisplay();
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractComponentValue(Quantity value) {
+        if (value.hasValue()) {
+            return value.getValue().toString();
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractComponentValueUnit(Quantity value) {
+        if (value.hasUnit()) {
+            return value.getUnit();
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String processComponentValueString(StringType value) {
+        return String.format(COMPONENT_STRING_VALUE, value.getValue());
     }
 }
