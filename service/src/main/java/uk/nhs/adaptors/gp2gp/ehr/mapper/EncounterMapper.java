@@ -5,6 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.Encounter.EncounterParticipantComponent;
+import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -33,6 +38,7 @@ public class EncounterMapper {
         TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
     private static final String COMPLETE_CODE = "COMPLETE";
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
+    private static final String CONSULTATION_LIST_CODE = "325851000000107";
     private static final String OTHER_REPORT_CODE = "24591000000103";
     private static final String OTHER_REPORT_DISPLAY = "Other report";
     private static final Set<String> EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
@@ -43,8 +49,9 @@ public class EncounterMapper {
     public String mapEncounterToEhrComposition(Encounter encounter) {
         String components = encounterComponentsMapper.mapComponents(encounter);
 
+        final IdMapper idMapper = messageContext.getIdMapper();
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
-            .encounterStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Encounter, encounter.getId()))
+            .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getId()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
             .status(COMPLETE_CODE)
@@ -54,8 +61,36 @@ public class EncounterMapper {
             .originalText(buildOriginalText(encounter))
             .authorTime("20100113151332");
 
+        final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
+            .map(idMapper::get)
+            .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
+
+        encounterStatementTemplateParameters.author(recReference);
+
+        messageContext.getInputBundleHolder()
+            .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
+            .filter(ListResource::hasDate)
+            .map(ListResource::getDateElement)
+            .map(DateFormatUtil::toHl7Format)
+            .ifPresent(encounterStatementTemplateParameters::authorTime);
+
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private Optional<Reference> findParticipantWithCoding(Encounter encounter, ParticipantCoding coding) {
+        return encounter.getParticipant().stream()
+            .filter(EncounterParticipantComponent::hasType)
+            .filter(participant -> participant.getType().stream()
+                .filter(CodeableConcept::hasCoding)
+                .anyMatch(codeableConcept -> codeableConcept.getCoding().stream()
+                    .filter(Coding::hasCode)
+                    .map(Coding::getCode)
+                    .anyMatch(coding.getCoding()::equals)))
+            .filter(EncounterParticipantComponent::hasIndividual)
+            .map(EncounterParticipantComponent::getIndividual)
+            .filter(Reference::hasReference)
+            .findAny();
     }
 
     private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {

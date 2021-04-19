@@ -20,4 +20,5 @@ public class EncounterTemplateParameters {
     private String authorTime;
     private String agentRef;
     private String particpant2;
+    private String author;
 }
