@@ -73,6 +73,7 @@ public class EncounterMapper {
             .ifPresent(encounterStatementTemplateParameters::authorTime);
 
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
+            .filter(idMapper::hasIdBeenMapped)
             .map(idMapper::get);
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
