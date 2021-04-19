@@ -127,6 +127,7 @@ public class XpathExtractor {
         + "               <id root=\"%s\"/>\n"
         + "           </agentRef>\n"
         + "       </Participant2>";
+    private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
 
     private static final XPathService X_PATH_SERVICE = new XPathService();
 
@@ -245,7 +246,10 @@ public class XpathExtractor {
             .participant2(CONDITION_SECOND_PARTICIPANT)
             .build();
 
-        return extractValues(component, ehrTemplateArgs);
+        var linksetComponent =
+            component.substring(0, component.indexOf(END_OF_LINKSET_COMPONENT) + END_OF_LINKSET_COMPONENT.length());
+
+        return extractValues(linksetComponent, ehrTemplateArgs);
     }
 
     public static EncounterTemplateParameters

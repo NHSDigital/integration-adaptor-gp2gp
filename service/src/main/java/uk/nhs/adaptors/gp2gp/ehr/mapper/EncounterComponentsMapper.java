@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -25,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -41,10 +41,6 @@ public class EncounterComponentsMapper {
     private static final String STANDING_BLOOD_PRESSURE_CODE = "163034007";
     private static final String SITTING_BLOOD_PRESSURE_CODE = "163035008";
     private static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
-    private static final List<String> BLOOD_CODES = Arrays.asList(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
-        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
-
-    private static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
 
@@ -72,6 +68,10 @@ public class EncounterComponentsMapper {
     private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private final ObservationStatementMapper observationStatementMapper;
     private final RequestStatementMapper requestStatementMapper;
+
+    public static final List<String> BLOOD_CODES = Arrays.asList(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
+        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
+    public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -128,7 +128,7 @@ public class EncounterComponentsMapper {
     private String mapListResource(Resource resource) {
         ListResource listResource = (ListResource) resource;
 
-        if (listResource.hasEntry() && hasCode(listResource.getCode(), COMPONENTS_LISTS)) {
+        if (listResource.hasEntry() && CodeableConceptMappingUtils.hasCode(listResource.getCode(), COMPONENTS_LISTS)) {
             return mapListResourceToComponents(listResource);
         }
 
@@ -141,10 +141,10 @@ public class EncounterComponentsMapper {
 
     private String mapObservation(Resource resource) {
         Observation observation = (Observation) resource;
-        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
+        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
             return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
         }
-        if (hasCode(observation.getCode(), BLOOD_CODES)) {
+        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), BLOOD_CODES)) {
             return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
         }
 
@@ -157,11 +157,5 @@ public class EncounterComponentsMapper {
 
     private String mapReferralRequest(Resource resource) {
         return requestStatementMapper.mapReferralRequestToRequestStatement((ReferralRequest) resource, IS_NESTED);
-    }
-
-    private boolean hasCode(CodeableConcept code, List<String> codeLists) {
-        return code != null && code.getCoding()
-            .stream()
-            .anyMatch(coding -> codeLists.contains(coding.getCode()));
     }
 }
