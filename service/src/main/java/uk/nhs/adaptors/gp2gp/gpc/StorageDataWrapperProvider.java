@@ -8,13 +8,13 @@ public final class StorageDataWrapperProvider {
     }
 
     public static StorageDataWrapper buildStorageDataWrapper(TaskDefinition taskDefinition,
-            String response,
+            String data,
             String taskId) {
         return StorageDataWrapper.builder()
             .type(taskDefinition.getTaskType().getTaskTypeHeaderValue())
             .conversationId(taskDefinition.getConversationId())
             .taskId(taskId)
-            .hl7Response(response)
+            .data(data)
             .build();
     }
 }
