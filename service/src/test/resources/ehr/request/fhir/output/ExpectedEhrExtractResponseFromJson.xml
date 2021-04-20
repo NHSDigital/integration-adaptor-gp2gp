@@ -28,7 +28,7 @@
             <statusCode code="COMPLETE" />
             <effectiveTime>
                 <low value="20100113142000" />
-                <high value="20130113152000" />
+                <high value="20130713162000" />
             </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
@@ -136,9 +136,9 @@
         </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <low value="20100714170700"/><high value="20130113152000"/>
+            <low value="20100714180700"/><high value="20130713162000"/>
         </effectiveTime>
-        <availabilityTime value="20100714170700"/>
+        <availabilityTime value="20100714180700"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100714163232" />
             <agentRef classCode="AGNT">
@@ -460,9 +460,9 @@ The line below contains special characters...
         </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100610072200"/>
+            <center value="20100610082200"/>
         </effectiveTime>
-        <availabilityTime value="20100610072200"/>
+        <availabilityTime value="20100610082200"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100610081925" />
             <agentRef classCode="AGNT">
@@ -505,9 +505,9 @@ The line below contains special characters...
         </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100714165500"/>
+            <center value="20100714175500"/>
         </effectiveTime>
-        <availabilityTime value="20100714165500"/>
+        <availabilityTime value="20100714175500"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100714162813" />
             <agentRef classCode="AGNT">

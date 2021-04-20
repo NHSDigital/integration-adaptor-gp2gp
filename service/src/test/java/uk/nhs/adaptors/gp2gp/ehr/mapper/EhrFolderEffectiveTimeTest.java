@@ -12,17 +12,17 @@ public class EhrFolderEffectiveTimeTest {
 
     private static final FhirParseService FHIR_PARSER = new FhirParseService();
 
-    private static final String INITIAL_START_DATE_HL7 = "20190328093005";
-    private static final String EARLIER_START_DATE_HL7 = "20180328093005";
-    private static final String INITIAL_END_DATE_HL7 = "20200328093005";
-    private static final String LATER_END_DATE_HL7 = "20210328093005";
+    private static final String INITIAL_START_DATE_HL7 = "20190828103005";
+    private static final String EARLIER_START_DATE_HL7 = "20180828103005";
+    private static final String INITIAL_END_DATE_HL7 = "20200828103005";
+    private static final String LATER_END_DATE_HL7 = "20210828103005";
 
-    private static final String INITIAL_START = "2019-03-28T10:30:05";
-    private static final String EARLIER_START = "2018-03-28T10:30:05";
-    private static final String LATER_START = "2020-03-28T10:30:05";
-    private static final String INITIAL_END = "2020-03-28T10:30:05";
-    private static final String EARLIER_END = "2019-03-28T10:30:05";
-    private static final String LATER_END = "2021-03-28T10:30:05";
+    private static final String INITIAL_START = "2019-08-28T10:30:05+01:00";
+    private static final String EARLIER_START = "2018-08-28T10:30:05+01:00";
+    private static final String LATER_START = "2020-08-28T10:30:05+01:00";
+    private static final String INITIAL_END = "2020-08-28T10:30:05+01:00";
+    private static final String EARLIER_END = "2019-08-28T10:30:05+01:00";
+    private static final String LATER_END = "2021-08-28T10:30:05+01:00";
 
     private static final String ENCOUNTER_WITH_FULL_DATES = "{\"resourceType\": \"Encounter\", "
         + "\"period\": { \"start\": \"%s\", \"end\": \"%s\"}}";
