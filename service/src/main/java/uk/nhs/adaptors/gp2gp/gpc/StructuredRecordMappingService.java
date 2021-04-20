@@ -42,7 +42,7 @@ public class StructuredRecordMappingService {
             .contentType(DocumentReferenceUtils.extractContentType(attachment))
             .filename(DocumentReferenceUtils.buildAttachmentFileName(referenceId, attachment))
             .length(attachment.getSize())
-            .compressed(false) //TODO: has GP2GP compressed this file https://gpitbjss.atlassian.net/browse/NIAD-1274
+            .compressed(false) // always false for GPC documents
             .largeAttachment(false) //TODO: true only if we split >5MB files into chunks https://gpitbjss.atlassian.net/browse/NIAD-1059
             .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
             .build();
