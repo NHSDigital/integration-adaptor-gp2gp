@@ -260,11 +260,9 @@ public class PertinentInformationObservationValueMapper {
         if (component.hasValue()) {
             var value = component.getValue();
 
-            if (COMPONENT_VALUE_FUNCTIONS.containsKey(value.getClass())) {
-                return COMPONENT_VALUE_FUNCTIONS.get(value.getClass()).apply(value);
-            } else {
-                return mapObservationValueToPertinentInformation(value);
-            }
+            return COMPONENT_VALUE_FUNCTIONS.getOrDefault(value.getClass(),
+                $ -> this.mapObservationValueToPertinentInformation(value)
+            ).apply(value);
         }
         return StringUtils.EMPTY;
     }
