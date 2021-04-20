@@ -259,9 +259,10 @@ public class MedicationStatementMapper {
     }
 
     private String buildParticipant(MedicationRequest medicationRequest) {
-        Predicate<Reference> isPractitioner = buildPredicateReferenceIsA(ResourceType.Practitioner);
-        Predicate<Reference> isPatient = buildPredicateReferenceIsA(ResourceType.Patient);
-        Predicate<Reference> isRelevant = isPractitioner.or(isPatient);
+        var isPractitioner = buildPredicateReferenceIsA(ResourceType.Practitioner);
+        var isPractitionerRole = buildPredicateReferenceIsA(ResourceType.PractitionerRole);
+        var isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
+        Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
 
         if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();
