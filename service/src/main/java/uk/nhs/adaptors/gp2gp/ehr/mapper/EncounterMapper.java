@@ -63,7 +63,6 @@ public class EncounterMapper {
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
             .map(idMapper::get)
             .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
-
         encounterStatementTemplateParameters.author(recReference);
 
         messageContext.getInputBundleHolder()
@@ -72,6 +71,12 @@ public class EncounterMapper {
             .map(ListResource::getDateElement)
             .map(DateFormatUtil::toHl7Format)
             .ifPresent(encounterStatementTemplateParameters::authorTime);
+
+        final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
+            .filter(idMapper::hasIdBeenMapped)
+            .map(idMapper::get);
+
+        encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
