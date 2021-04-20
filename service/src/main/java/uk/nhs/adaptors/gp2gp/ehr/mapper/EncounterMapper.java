@@ -58,8 +58,7 @@ public class EncounterMapper {
             .components(components)
             .code(buildCode(encounter))
             .displayName(buildDisplayName(encounter))
-            .originalText(buildOriginalText(encounter))
-            .authorTime("20100113151332");
+            .originalText(buildOriginalText(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
             .map(idMapper::get)

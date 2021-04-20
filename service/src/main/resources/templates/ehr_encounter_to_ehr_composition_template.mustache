@@ -16,16 +16,9 @@
         {{{availabilityTime}}}
         <author typeCode="AUT" contextControlCode="OP">
             <time value="{{authorTime}}" />
-            {{#agentRef}}
-            <agentRef classCode="AGNT">
-                <id root="{{agentRef}}" />
-            </agentRef>
-            {{/agentRef}}
-            {{^agentRef}}
             <agentRef classCode="AGNT">
                 <id root="{{{author}}}" />
             </agentRef>
-            {{/agentRef}}
         </author>
         <location typeCode="LOC">
             <locatedEntity classCode="LOCE">
@@ -35,16 +28,9 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        {{#particpant2}}
-        {{{particpant2}}}
-        {{/particpant2}}
-        {{^particpant2}}
-        <Participant2 typeCode="RESP" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
-            </agentRef>
-        </Participant2>
-        {{/particpant2}}
+        {{#participant2}}
+        {{{participant2}}}
+        {{/participant2}}
         {{{components}}}
     </ehrComposition>
 </component>

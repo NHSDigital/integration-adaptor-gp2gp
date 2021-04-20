@@ -5,7 +5,7 @@
         <center value="19781231"/>
     </effectiveTime>
     <availabilityTime value="20100114095757" />
-    <component typeCode="COMP" contextConductionInd="true">
+    <component typeCode="COMP">
         <CompoundStatement classCode="CATEGORY" moodCode="EVN">
             <id root="394559384658936"/>
             <statusCode code="COMPLETE"/>
@@ -30,6 +30,11 @@
                     </pertinentInformation>
                     <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                     <Participant typeCode="aut" contextControlCode="OP">
+                        <agentRef classCode="AGNT">
+                            <id root="394559384658936"/>
+                        </agentRef>
+                    </Participant>
+                    <Participant typeCode="prf" contextControlCode="OP">
                         <agentRef classCode="AGNT">
                             <id root="394559384658936"/>
                         </agentRef>

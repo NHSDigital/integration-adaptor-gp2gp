@@ -18,7 +18,6 @@ public class EncounterTemplateParameters {
     private String displayName;
     private String originalText;
     private String authorTime;
-    private String agentRef;
-    private String particpant2;
+    private String participant2;
     private String author;
 }

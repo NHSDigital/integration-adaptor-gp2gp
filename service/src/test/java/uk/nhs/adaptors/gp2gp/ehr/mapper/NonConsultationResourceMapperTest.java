@@ -25,37 +25,38 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 @ExtendWith(MockitoExtension.class)
 public class NonConsultationResourceMapperTest {
     private static final String FILES_DIRECTORY = "/ehr/mapper/non_consultation_bundles/";
-    private static final String UNCATAGORISED_OBSERVATION_XML = FILES_DIRECTORY + "uncatagorised-observation.xml";
+    private static final String UNCATAGORISED_OBSERVATION_XML = FILES_DIRECTORY + "uncatagorised-observation-stub.xml";
     private static final String UNCATAGORISED_OBSERVATION_BUNDLE = FILES_DIRECTORY + "uncatagorised-observation-bundle.json";
     private static final String EXPECTED_UNCATAGORISED_OBSERVATION_OUTPUT = FILES_DIRECTORY
         + "expected-uncatagorised-observation-output.xml";
-    private static final String COMMENT_OBSERVATION_XML = FILES_DIRECTORY + "comment-observation.xml";
+    private static final String COMMENT_OBSERVATION_XML = FILES_DIRECTORY + "comment-observation-stub.xml";
     private static final String COMMENT_OBSERVATION_BUNDLE = FILES_DIRECTORY + "comment-observation-bundle.json";
     private static final String EXPECTED_COMMENT_OBSERVATION_OUTPUT = FILES_DIRECTORY + "expected-comment-observation-output.xml";
-    private static final String IMMUNIZATION_XML = FILES_DIRECTORY + "immunization.xml";
+    private static final String IMMUNIZATION_XML = FILES_DIRECTORY + "immunization-stub.xml";
     private static final String IMMUNIZATION_BUNDLE = FILES_DIRECTORY + "immunization-bundle.json";
     private static final String EXPECTED_IMMUNIZATION_OUTPUT = FILES_DIRECTORY + "expected-immunization-output.xml";
-    private static final String ALLERGY_INTOLERANCE_XML = FILES_DIRECTORY + "allergy-intolerance.xml";
+    private static final String ALLERGY_INTOLERANCE_XML = FILES_DIRECTORY + "allergy-intolerance-stub.xml";
     private static final String ALLERGY_INTOLERANCE_BUNDLE = FILES_DIRECTORY + "allergy-intolerance-bundle.json";
     private static final String EXPECTED_ALLERGY_INTOLERANCE_OUTPUT = FILES_DIRECTORY + "expected-allergy-intolerance-output.xml";
-    private static final String BLOOD_PRESSURE_XML = FILES_DIRECTORY + "blood-pressure.xml";
+    private static final String BLOOD_PRESSURE_XML = FILES_DIRECTORY + "blood-pressure-stub.xml";
     private static final String BLOOD_PRESSURE_BUNDLE = FILES_DIRECTORY + "blood-pressure-bundle.json";
     private static final String EXPECTED_BLOOD_PRESSURE_OUTPUT = FILES_DIRECTORY + "expected-blood-pressure-output.xml";
-    private static final String REFERRAL_REQUEST_XML = FILES_DIRECTORY + "referral-request.xml";
+    private static final String REFERRAL_REQUEST_XML = FILES_DIRECTORY + "referral-request-stub.xml";
     private static final String REFERRAL_REQUEST_BUNDLE = FILES_DIRECTORY + "referral-request-bundle.json";
     private static final String EXPECTED_REFERRAL_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-referral-request-output.xml";
-    private static final String MEDICATION_REQUEST_XML = FILES_DIRECTORY + "medication-request.xml";
+    private static final String MEDICATION_REQUEST_XML = FILES_DIRECTORY + "medication-request-stub.xml";
     private static final String MEDICATION_REQUEST_BUNDLE = FILES_DIRECTORY + "medication-request-bundle.json";
     private static final String EXPECTED_MEDICATION_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-medication-request-output.xml";
-    private static final String CONDITION_XML = FILES_DIRECTORY + "condition.xml";
+    private static final String CONDITION_XML = FILES_DIRECTORY + "condition-stub.xml";
     private static final String CONDITION_BUNDLE = FILES_DIRECTORY + "condition-bundle.json";
     private static final String EXPECTED_CONDITION_OUTPUT = FILES_DIRECTORY + "expected-condition-output.xml";
-    private static final String PROCEDURE_REQUEST_XML = FILES_DIRECTORY + "procedure-request.xml";
+    private static final String PROCEDURE_REQUEST_XML = FILES_DIRECTORY + "procedure-request-stub.xml";
     private static final String PROCEDURE_REQUEST_BUNDLE = FILES_DIRECTORY + "procedure-request-bundle.json";
     private static final String EXPECTED_PROCEDURE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-procedure-request-output.xml";
-    private static final String DOCUMENT_REFERENCE_XML = FILES_DIRECTORY + "document-reference.xml";
+    private static final String DOCUMENT_REFERENCE_XML = FILES_DIRECTORY + "document-reference-stub.xml";
     private static final String DOCUMENT_REFERENCE_BUNDLE = FILES_DIRECTORY + "document-reference-bundle.json";
     private static final String EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-document-reference-output.xml";
+    private static final String TEST_ID = "b2175be3-29c2-465f-b2c6-323db03c2c7c";
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
     private MessageContext messageContext;
@@ -67,6 +68,7 @@ public class NonConsultationResourceMapperTest {
 
     @BeforeEach
     public void setUp() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         fhirParseService = new FhirParseService();
     }
@@ -78,12 +80,9 @@ public class NonConsultationResourceMapperTest {
 
     @ParameterizedTest
     @MethodSource("testArgs")
-    public void When_TransformingResourceToEhrComp_Expect_CorrectValuesToBeExtracted(String returnXml, String inputBundle,
+    public void When_TransformingResourceToEhrComp_Expect_CorrectValuesToBeExtracted(String stubEhrComponentMapperXml, String inputBundle,
         String output) throws IOException {
-        setupMock(encounterComponentsMapper,
-            ResourceTestFileUtils.getFileContent(returnXml),
-            "123"
-        );
+        setupMock(ResourceTestFileUtils.getFileContent(stubEhrComponentMapperXml));
         String bundle = ResourceTestFileUtils.getFileContent(inputBundle);
         String expectedOutput = ResourceTestFileUtils.getFileContent(output);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
@@ -107,10 +106,10 @@ public class NonConsultationResourceMapperTest {
         );
     }
 
-    private void setupMock(EncounterComponentsMapper encounterComponentsMapper, String returnString, String uuid) {
-        when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class))).thenReturn(returnString);
-        when(randomIdGeneratorService.createNewId()).thenReturn(uuid);
-        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext, randomIdGeneratorService,
+    private void setupMock(String stubEhrComponentMapperXml) {
+        when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class))).thenReturn(stubEhrComponentMapperXml);
+        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
+            randomIdGeneratorService,
             encounterComponentsMapper);
     }
 

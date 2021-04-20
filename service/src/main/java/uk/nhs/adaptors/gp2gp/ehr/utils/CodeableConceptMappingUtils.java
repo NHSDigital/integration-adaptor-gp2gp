@@ -22,5 +22,4 @@ public class CodeableConceptMappingUtils {
             .map(Coding::getCode)
             .anyMatch(codeLists::contains);
     }
-
 }

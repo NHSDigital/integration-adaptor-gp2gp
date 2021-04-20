@@ -36,6 +36,7 @@ public class XpathExtractor {
     private static final String VALUE_SELECTOR = "/@value";
     private static final String ROOT_SELECTOR = "/@root";
     private static final String TYPE_CODE_AUT_QUERY = "[@typeCode=\"aut\"]";
+    private static final String TYPE_CODE_PRF_QUERY = "[@typeCode=\"prf\"]";
     private static final String AVAILABILITY_SELECTOR = AVAILABILITY_TIME + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_CENTER_SELECTOR = EFFECTIVE_TIME + CENTER + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_LOW_SELECTOR = EFFECTIVE_TIME + LOW + VALUE_SELECTOR;
@@ -72,7 +73,8 @@ public class XpathExtractor {
     private static final String ALLERGY_INTOLERANCE_TIME_CENTER = ALLERGY_INTOLERANCE + EFFECTIVE_TIME_CENTER_SELECTOR;
     private static final String ALLERGY_INTOLERANCE_AUTHOR_REF = ALLERGY_INTOLERANCE + PARTICIPANT + TYPE_CODE_AUT_QUERY + AGENT_REF + ID
         + ROOT_SELECTOR;
-    private static final String ALLERGY_INTOLERANCE_SECOND_PARTICIPANT = ALLERGY_INTOLERANCE_AUTHOR_REF;
+    private static final String ALLERGY_INTOLERANCE_SECOND_PARTICIPANT = ALLERGY_INTOLERANCE + PARTICIPANT + TYPE_CODE_PRF_QUERY + AGENT_REF
+        + ID + ROOT_SELECTOR;
 
     private static final String BLOOD_PRESSURE = COMPONENT + COMPOUND_STATEMENT;
     private static final String BLOOD_PRESSURE_AVAILABILITY_TIME = BLOOD_PRESSURE + AVAILABILITY_SELECTOR;
@@ -293,11 +295,11 @@ public class XpathExtractor {
                 () -> builder.effectiveTime(DEFAULT_TIME_VALUE));
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getAuthorAgentRef())
-            .ifPresent(builder::agentRef);
+            .ifPresent(builder::author);
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getParticipant2())
             .map(XpathExtractor::buildParticipant)
-            .ifPresent(builder::particpant2);
+            .ifPresent(builder::participant2);
 
         return builder;
     }
