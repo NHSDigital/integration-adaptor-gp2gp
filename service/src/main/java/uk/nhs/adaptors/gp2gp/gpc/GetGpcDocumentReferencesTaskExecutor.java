@@ -1,24 +1,23 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
+import ca.uhn.fhir.context.FhirContext;
+import ca.uhn.fhir.parser.IParser;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.parser.IParser;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -76,10 +75,8 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
         IParser parser = ctx.newJsonParser();
 
         Bundle bundle = parser.parseResource(Bundle.class, response);
-        return bundle.getEntry()
-            .stream()
-            .filter(entry -> entry.getResource().getResourceType().equals(ResourceType.DocumentReference))
-            .map(resource -> extractUrl((DocumentReference) resource.getResource()))
+        return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
+            .map(GetGpcDocumentReferencesTaskExecutor::extractUrl)
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.toList());

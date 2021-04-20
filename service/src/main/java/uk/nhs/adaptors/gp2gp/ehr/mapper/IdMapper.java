@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import lombok.AllArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -9,8 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
-
-import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 
 @Slf4j
@@ -53,6 +52,14 @@ public class IdMapper {
         }
 
         return mappedId;
+    }
+
+    public String get(ResourceType resourceType, String id) throws EhrMapperException {
+        return get(buildReference(resourceType, id));
+    }
+
+    public boolean hasIdBeenMapped(Reference reference) {
+        return ids.containsKey(reference.getReference());
     }
 
     private Reference buildReference(ResourceType resourceType, String id) {

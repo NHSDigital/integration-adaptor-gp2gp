@@ -15,5 +15,5 @@ public class StorageDataWrapper {
     private String type;
     private String conversationId;
     private String taskId;
-    private String hl7Response;
+    private String data;
 }
