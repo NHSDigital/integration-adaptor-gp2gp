@@ -23,8 +23,6 @@ import org.hl7.fhir.instance.model.api.IBaseElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.ImmutableMap;
-
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
@@ -33,20 +31,20 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 @Component
 public class PertinentInformationObservationValueMapper {
     private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> VALUE_TO_PERTINENT_INFORMATION_FUNCTIONS =
-        ImmutableMap.<Class<? extends IBaseElement>, Function<IBaseElement, String>>builder()
-            .put(CodeableConcept.class, value -> processCodeableConcept((CodeableConcept) value))
-            .put(BooleanType.class, value -> processBooleanType((BooleanType) value))
-            .put(Range.class, value -> processRange((Range) value))
-            .put(Ratio.class, value -> processRatio((Ratio) value))
-            .put(TimeType.class, value -> processTimeType((TimeType) value))
-            .put(DateTimeType.class, value -> processDateTimeType((DateTimeType) value))
-            .put(Period.class, value -> processPeriod((Period) value))
-            .build();
+        Map.of(
+            CodeableConcept.class, value -> processCodeableConcept((CodeableConcept) value),
+            BooleanType.class, value -> processBooleanType((BooleanType) value),
+            Range.class, value -> processRange((Range) value),
+            Ratio.class, value -> processRatio((Ratio) value),
+            TimeType.class, value -> processTimeType((TimeType) value),
+            DateTimeType.class, value -> processDateTimeType((DateTimeType) value),
+            Period.class, value -> processPeriod((Period) value)
+    );
     private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> COMPONENT_VALUE_FUNCTIONS =
-        ImmutableMap.<Class<? extends IBaseElement>, Function<IBaseElement, String>>builder()
-            .put(Quantity.class, value -> processComponentValueQuantity((Quantity) value))
-            .put(StringType.class, value -> processComponentValueString((StringType) value))
-            .build();
+        Map.of(
+            Quantity.class, value -> processComponentValueQuantity((Quantity) value),
+            StringType.class, value -> processComponentValueString((StringType) value)
+    );
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
     private static final String RANGE_VALUE_TEMPLATE = "Range Value: Low %s %s High %s %s ";
@@ -272,22 +270,17 @@ public class PertinentInformationObservationValueMapper {
     }
 
     private String extractComponentInterpretationCode(Observation.ObservationComponentComponent component) {
-        if (component.hasInterpretation()) {
-            if (component.getInterpretation().hasCoding()) {
-                var userSelectedCoding = component
-                    .getInterpretation()
-                    .getCoding()
-                    .stream()
-                    .filter(Coding::hasUserSelected)
-                    .findFirst();
+        if (component.hasInterpretation() && component.getInterpretation().hasCoding()) {
+            var userSelectedCoding = component
+                .getInterpretation()
+                .getCoding()
+                .stream()
+                .filter(Coding::hasUserSelected)
+                .findFirst();
 
-                if (userSelectedCoding.isPresent()) {
-                    return String.format(COMPONENT_INTERPRETATION_CODE_TEMPLATE, userSelectedCoding.get().getCode());
-                } else {
-                    return String.format(COMPONENT_INTERPRETATION_CODE_TEMPLATE,
-                        component.getInterpretation().getCodingFirstRep().getCode());
-                }
-            }
+            var codingToUse = userSelectedCoding.orElseGet(() -> component.getInterpretation().getCodingFirstRep());
+
+            return String.format(COMPONENT_INTERPRETATION_CODE_TEMPLATE, codingToUse.getCode());
         }
         return StringUtils.EMPTY;
     }
@@ -315,21 +308,21 @@ public class PertinentInformationObservationValueMapper {
         return StringUtils.EMPTY;
     }
 
-    private static String extractComponentValueComparator(Quantity value) {
+    private static String extractComponentValueQuantityComparator(Quantity value) {
         if (value.hasComparator()) {
             return value.getComparator().getDisplay();
         }
         return StringUtils.EMPTY;
     }
 
-    private static String extractComponentValue(Quantity value) {
+    private static String extractComponentValueQuantity(Quantity value) {
         if (value.hasValue()) {
             return value.getValue().toString();
         }
         return StringUtils.EMPTY;
     }
 
-    private static String extractComponentValueUnit(Quantity value) {
+    private static String extractComponentValueQuantityUnit(Quantity value) {
         if (value.hasUnit()) {
             return value.getUnit();
         }
@@ -337,18 +330,18 @@ public class PertinentInformationObservationValueMapper {
     }
 
     private static String processComponentValueQuantity(Quantity value) {
-        var valueList = List.of(
-            extractComponentValueComparator(value),
-            extractComponentValue(value),
-            extractComponentValueUnit(value)
+        var valueQuantityList = List.of(
+            extractComponentValueQuantityComparator(value),
+            extractComponentValueQuantity(value),
+            extractComponentValueQuantityUnit(value)
         );
 
-        var valueText = valueList.stream()
+        var valueQuantityText = valueQuantityList.stream()
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.joining(StringUtils.SPACE));
 
-        if (StringUtils.isNotEmpty(valueText)) {
-            return String.format(COMPONENT_QUANTITY_VALUE_TEMPLATE, valueText);
+        if (StringUtils.isNotEmpty(valueQuantityText)) {
+            return String.format(COMPONENT_QUANTITY_VALUE_TEMPLATE, valueQuantityText);
         }
 
         return StringUtils.EMPTY;
