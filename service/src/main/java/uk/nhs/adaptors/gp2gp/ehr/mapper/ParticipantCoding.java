@@ -6,7 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ParticipantCoding {
-    RECORDER("REC");
+    RECORDER("REC"),
+    PERFORMER("PPRF");
 
     private final String coding;
 }
