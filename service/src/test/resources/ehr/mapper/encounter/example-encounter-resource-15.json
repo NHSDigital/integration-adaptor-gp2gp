@@ -34,22 +34,6 @@
         {
           "coding":[
             {
-              "system":"http://hl7.org/fhir/v3/ParticipationType",
-              "code":"PPRF",
-              "display":"primary performer"
-            }
-          ]
-        }
-      ],
-      "individual":{
-        "reference":"Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
-      }
-    },
-    {
-      "type":[
-        {
-          "coding":[
-            {
               "system":"https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-ParticipantType-1",
               "code":"REC",
               "display":"recorder"
