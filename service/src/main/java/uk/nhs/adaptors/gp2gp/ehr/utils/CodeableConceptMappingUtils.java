@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 
 public class CodeableConceptMappingUtils {
 
@@ -18,7 +19,8 @@ public class CodeableConceptMappingUtils {
     public static boolean hasCode(CodeableConcept code, List<String> codeLists) {
         return code != null && code.getCoding()
             .stream()
-            .anyMatch(coding -> codeLists.contains(coding.getCode()));
+            .map(Coding::getCode)
+            .anyMatch(codeLists::contains);
     }
 
 }

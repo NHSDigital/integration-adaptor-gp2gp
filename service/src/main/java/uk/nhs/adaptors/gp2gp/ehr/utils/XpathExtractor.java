@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class XpathExtractor {
@@ -40,14 +41,14 @@ public class XpathExtractor {
     private static final String EFFECTIVE_TIME_LOW_SELECTOR = EFFECTIVE_TIME + LOW + VALUE_SELECTOR;
     private static final String PARTICIPANT_SELECTOR = PARTICIPANT + AGENT_REF + ID + ROOT_SELECTOR;
 
-    private static final String UNCATAGORISED_OBSERVATION = COMPONENT + OBSERVATION_STATEMENT;
-    private static final String UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME = UNCATAGORISED_OBSERVATION + AVAILABILITY_SELECTOR;
-    private static final String UNCATAGORISED_OBSERVATION_AUTHOR_TIME = UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME;
-    private static final String UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER = UNCATAGORISED_OBSERVATION
+    private static final String UNCATEGORISED_OBSERVATION = COMPONENT + OBSERVATION_STATEMENT;
+    private static final String UNCATEGORISED_OBSERVATION_AVAILABILITY_TIME = UNCATEGORISED_OBSERVATION + AVAILABILITY_SELECTOR;
+    private static final String UNCATEGORISED_OBSERVATION_AUTHOR_TIME = UNCATEGORISED_OBSERVATION_AVAILABILITY_TIME;
+    private static final String UNCATEGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER = UNCATEGORISED_OBSERVATION
         + EFFECTIVE_TIME_CENTER_SELECTOR;
-    private static final String UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_LOW = UNCATAGORISED_OBSERVATION + EFFECTIVE_TIME_LOW_SELECTOR;
-    private static final String UNCATAGORISED_OBSERVATION_AUTHOR_REF = UNCATAGORISED_OBSERVATION + PARTICIPANT_SELECTOR;
-    private static final String UNCATAGORISED_OBSERVATION_SECOND_PARTICIPANT = UNCATAGORISED_OBSERVATION_AUTHOR_REF;
+    private static final String UNCATEGORISED_OBSERVATION_EFFECTIVE_TIME_LOW = UNCATEGORISED_OBSERVATION + EFFECTIVE_TIME_LOW_SELECTOR;
+    private static final String UNCATEGORISED_OBSERVATION_AUTHOR_REF = UNCATEGORISED_OBSERVATION + PARTICIPANT_SELECTOR;
+    private static final String UNCATEGORISED_OBSERVATION_SECOND_PARTICIPANT = UNCATEGORISED_OBSERVATION_AUTHOR_REF;
 
     private static final String COMMENT_OBSERVATION = COMPONENT + NARRATIVE_STATEMENT;
     private static final String COMMENT_OBSERVATION_AVAILABILITY_TIME = COMMENT_OBSERVATION + AVAILABILITY_SELECTOR;
@@ -122,7 +123,7 @@ public class XpathExtractor {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
-    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRRF\" contextControlCode=\"OP\">%n"
+    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRF\" contextControlCode=\"OP\">%n"
         + "           <agentRef classCode=\"AGNT\">%n"
         + "               <id root=\"%s\"/>%n"
         + "           </agentRef>%n"
@@ -131,22 +132,20 @@ public class XpathExtractor {
 
     private static final XPathService X_PATH_SERVICE = new XPathService();
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForUncategorizedObservation(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForUncategorizedObservation(String component) {
         var ehrTemplateArgs = EhrTemplateArgs.builder()
-            .availabilityTime(UNCATAGORISED_OBSERVATION_AVAILABILITY_TIME)
-            .authorTime(UNCATAGORISED_OBSERVATION_AUTHOR_TIME)
-            .effectiveTime(UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER)
-            .effectiveTimeBackup(UNCATAGORISED_OBSERVATION_EFFECTIVE_TIME_LOW)
-            .authorAgentRef(UNCATAGORISED_OBSERVATION_AUTHOR_REF)
-            .participant2(UNCATAGORISED_OBSERVATION_SECOND_PARTICIPANT)
+            .availabilityTime(UNCATEGORISED_OBSERVATION_AVAILABILITY_TIME)
+            .authorTime(UNCATEGORISED_OBSERVATION_AUTHOR_TIME)
+            .effectiveTime(UNCATEGORISED_OBSERVATION_EFFECTIVE_TIME_CENTER)
+            .effectiveTimeBackup(UNCATEGORISED_OBSERVATION_EFFECTIVE_TIME_LOW)
+            .authorAgentRef(UNCATEGORISED_OBSERVATION_AUTHOR_REF)
+            .participant2(UNCATEGORISED_OBSERVATION_SECOND_PARTICIPANT)
             .build();
 
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForCommentObservation(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForCommentObservation(String component) {
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(COMMENT_OBSERVATION_AVAILABILITY_TIME)
             .authorTime(COMMENT_OBSERVATION_AUTHOR_TIME)
@@ -159,8 +158,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForImmunization(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForImmunization(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(IMMUNIZATION_AVAILABILITY_TIME)
@@ -174,8 +172,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForAllergyIntolerance(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForAllergyIntolerance(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(ALLERGY_INTOLERANCE_AVAILABILITY_TIME)
@@ -189,8 +186,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForBloodPressure(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForBloodPressure(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(BLOOD_PRESSURE_AVAILABILITY_TIME)
@@ -204,8 +200,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForReferralRequest(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForReferralRequest(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(REFERRAL_REQUEST_AVAILABILITY_TIME)
@@ -219,8 +214,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForMedicationRequest(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForMedicationRequest(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(MEDICATION_REQUEST_AVAILABILITY_TIME)
@@ -234,8 +228,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForCondition(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForCondition(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(CONDITION_AVAILABILITY_TIME)
@@ -252,8 +245,7 @@ public class XpathExtractor {
         return extractValues(linksetComponent, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForProcedureRequest(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForProcedureRequest(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(PROCEDURE_REQUEST_AVAILABILITY_TIME)
@@ -267,8 +259,7 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
-    public static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValuesForDocumentReference(String component) {
+    public static EncounterTemplateParametersBuilder extractValuesForDocumentReference(String component) {
 
         var ehrTemplateArgs = EhrTemplateArgs.builder()
             .availabilityTime(DOCUMENT_REFERENCE_AVAILABILITY_TIME)
@@ -283,8 +274,7 @@ public class XpathExtractor {
     }
 
     @SneakyThrows
-    private static EncounterTemplateParameters
-        .EncounterTemplateParametersBuilder extractValues(String component, EhrTemplateArgs ehrTemplateArgs) {
+    private static EncounterTemplateParametersBuilder extractValues(String component, EhrTemplateArgs ehrTemplateArgs) {
         Document xmlDocument = X_PATH_SERVICE.parseDocumentFromXml(component);
         var builder = EncounterTemplateParameters.builder();
 

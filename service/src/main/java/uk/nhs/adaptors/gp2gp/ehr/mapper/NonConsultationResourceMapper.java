@@ -22,6 +22,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -44,7 +45,7 @@ public class NonConsultationResourceMapper {
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String QUESTIONNAIRE_RESPONSE_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication "
         + "transaction\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String LOG_TEMPLATE = "Non-consultation resources mapped: %s";
+    private static final String LOG_TEMPLATE = "Non-consultation resources mapped: {}";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -70,7 +71,7 @@ public class NonConsultationResourceMapper {
             .map(this::mapResourceToEhrComposition)
             .filter(StringUtils::isNotEmpty)
             .collect(Collectors.toList());
-        LOGGER.debug(String.format(LOG_TEMPLATE, mappedResources.size()));
+        LOGGER.debug(LOG_TEMPLATE, mappedResources.size());
         return mappedResources;
     }
 
@@ -94,69 +95,69 @@ public class NonConsultationResourceMapper {
         return StringUtils.EMPTY;
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildUncategorisedObservation(String component) {
+    private EncounterTemplateParametersBuilder buildUncategorisedObservation(String component) {
         return XpathExtractor.extractValuesForUncategorizedObservation(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildCommentObservation(String component) {
+    private EncounterTemplateParametersBuilder buildCommentObservation(String component) {
         return XpathExtractor.extractValuesForCommentObservation(component)
             .altCode(OBSERVATION_COMMENT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildImmunization(String component) {
+    private EncounterTemplateParametersBuilder buildImmunization(String component) {
         return XpathExtractor.extractValuesForImmunization(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildAllergyIntolerance(String component) {
+    private EncounterTemplateParametersBuilder buildAllergyIntolerance(String component) {
         return XpathExtractor.extractValuesForAllergyIntolerance(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildBloodPressureObservation(String component) {
+    private EncounterTemplateParametersBuilder buildBloodPressureObservation(String component) {
         return XpathExtractor.extractValuesForBloodPressure(component)
             .altCode(BLOOD_PRESSURE_CODE_2);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildReferralRequest(String component) {
+    private EncounterTemplateParametersBuilder buildReferralRequest(String component) {
         return XpathExtractor.extractValuesForReferralRequest(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildDiagnosticRequest(String component) {
+    private EncounterTemplateParametersBuilder buildDiagnosticRequest(String component) {
         return null;
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildMedicationRequest(String component) {
+    private EncounterTemplateParametersBuilder buildMedicationRequest(String component) {
         return XpathExtractor.extractValuesForMedicationRequest(component)
             .altCode(MEDICATION_REQUEST_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildCondition(String component) {
+    private EncounterTemplateParametersBuilder buildCondition(String component) {
         return XpathExtractor.extractValuesForCondition(component)
             .altCode(CONDITION_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildProcedureRequest(String component) {
+    private EncounterTemplateParametersBuilder buildProcedureRequest(String component) {
         return XpathExtractor.extractValuesForProcedureRequest(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildDocumentReference(String component) {
+    private EncounterTemplateParametersBuilder buildDocumentReference(String component) {
         return XpathExtractor.extractValuesForDocumentReference(component)
             .altCode(DEFAULT_CODE);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildQuestionnaireResponse(String component) {
+    private EncounterTemplateParametersBuilder buildQuestionnaireResponse(String component) {
         return null;
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder buildObservation(String component, Observation observation) {
+    private EncounterTemplateParametersBuilder buildObservation(String component, Observation observation) {
         return mapObservation(observation, component);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder mapObservation(Resource resource, String component) {
+    private EncounterTemplateParametersBuilder mapObservation(Resource resource, String component) {
         Observation observation = (Observation) resource;
         if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(EncounterComponentsMapper.NARRATIVE_STATEMENT_CODE))) {
             return buildCommentObservation(component);
@@ -168,14 +169,12 @@ public class NonConsultationResourceMapper {
         return buildUncategorisedObservation(component);
     }
 
-    private EncounterTemplateParameters.EncounterTemplateParametersBuilder notMapped(String component) {
+    private EncounterTemplateParametersBuilder notMapped(String component) {
         return null;
     }
 
     private boolean isMappableNonConsultationResource(Resource resource) {
-        if (resource.getResourceType().equals(ResourceType.Observation)) {
-            return true;
-        }
-        return resourceBuilder.containsKey(resource.getResourceType());
+        return resource.getResourceType().equals(ResourceType.Observation)
+            || resourceBuilder.containsKey(resource.getResourceType());
     }
 }
