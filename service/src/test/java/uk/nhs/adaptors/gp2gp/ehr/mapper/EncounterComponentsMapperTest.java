@@ -1,13 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -21,11 +13,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
@@ -59,10 +59,28 @@ public class EncounterComponentsMapperTest {
         messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
 
         ParticipantMapper participantMapper = new ParticipantMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+
+        AllergyStructureMapper allergyStructureMapper
+            = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
+            messageContext,
+            randomIdGeneratorService,
+            structuredObservationValueMapper,
+            codeableConceptCdMapper
+        );
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
+            randomIdGeneratorService,
+            codeableConceptCdMapper,
+            participantMapper
+        );
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+        MedicationStatementMapper medicationStatementMapper
+            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
-        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
@@ -70,23 +88,22 @@ public class EncounterComponentsMapperTest {
             participantMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
-        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
-            randomIdGeneratorService,
-            codeableConceptCdMapper);
-        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
-            messageContext,
-            randomIdGeneratorService,
-            structuredObservationValueMapper,
-            codeableConceptCdMapper);
+        RequestStatementMapper requestStatementMapper
+            = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            allergyStructureMapper,
+            bloodPressureMapper,
+            conditionLinkSetMapper,
             diaryPlanStatementMapper,
+            documentReferenceToNarrativeStatementMapper,
+            immunizationObservationStatementMapper,
+            medicationStatementMapper,
             observationToNarrativeStatementMapper,
             observationStatementMapper,
-            immunizationObservationStatementMapper,
-            conditionLinkSetMapper,
-            bloodPressureMapper);
+            requestStatementMapper
+        );
     }
 
     @AfterEach
@@ -106,7 +123,7 @@ public class EncounterComponentsMapperTest {
         assertThat(encounter.isPresent()).isTrue();
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
     @ParameterizedTest
@@ -124,10 +141,7 @@ public class EncounterComponentsMapperTest {
     }
 
     private Optional<Encounter> extractEncounter(Bundle bundle) {
-        return bundle.getEntry().stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> ResourceType.Encounter.equals(resource.getResourceType()))
-            .map(resource -> (Encounter) resource)
+        return ResourceExtractor.extractResourcesByType(bundle, Encounter.class)
             .findFirst();
     }
 

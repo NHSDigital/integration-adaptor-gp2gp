@@ -112,9 +112,9 @@
         </effectiveTime>
         <availabilityTime value="20110211135300"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20110211140243" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="test-id-3" />
             </agentRef>
         </author>
         <location typeCode="LOC">

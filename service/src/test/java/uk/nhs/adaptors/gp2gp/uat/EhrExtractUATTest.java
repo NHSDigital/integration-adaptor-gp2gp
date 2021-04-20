@@ -14,14 +14,17 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ConditionLinkSetMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.DiaryPlanStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.DocumentReferenceToNarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterComponentsMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
@@ -30,6 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -120,7 +124,15 @@ public class EhrExtractUATTest {
         messageContext = new MessageContext(randomIdGeneratorService);
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
@@ -129,10 +141,7 @@ public class EhrExtractUATTest {
                 codeableConceptCdMapper,
                 participantMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper)
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
