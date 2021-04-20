@@ -1,0 +1,17 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="{{observationStatementId}}"/>
+        {{{codeElement}}}
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{{availabilityTimeElement}}}
+        {{{value}}}
+        {{{referenceRange}}}
+        {{{interpretation}}}
+        {{#participant}}
+            {{{.}}}
+        {{/participant}}
+    </ObservationStatement>
+</component>

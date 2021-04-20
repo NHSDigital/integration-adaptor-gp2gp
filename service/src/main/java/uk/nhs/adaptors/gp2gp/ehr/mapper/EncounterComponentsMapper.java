@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -57,7 +59,7 @@ public class EncounterComponentsMapper {
         ResourceType.Observation, this::mapObservation,
         ResourceType.ProcedureRequest, this::mapProcedureRequest,
         ResourceType.ReferralRequest, this::mapReferralRequest,
-        ResourceType.DiagnosticReport, this::mapDefaultNotImplemented);
+        ResourceType.DiagnosticReport, this::mapDiagnosticReport);
 
     private final MessageContext messageContext;
 
@@ -71,6 +73,7 @@ public class EncounterComponentsMapper {
     private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private final ObservationStatementMapper observationStatementMapper;
     private final RequestStatementMapper requestStatementMapper;
+    private final DiagnosticReportMapper diagnosticReportMapper;
 
     public static final List<String> BLOOD_CODES = List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
         BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
@@ -176,5 +179,9 @@ public class EncounterComponentsMapper {
 
     private String mapReferralRequest(Resource resource) {
         return requestStatementMapper.mapReferralRequestToRequestStatement((ReferralRequest) resource, IS_NESTED);
+    }
+
+    private String mapDiagnosticReport(Resource resource) {
+        return diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource);
     }
 }
