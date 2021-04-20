@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -46,14 +47,15 @@ public class EncounterComponentsMapper {
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
 
-    private final Map<ResourceType, Function<Resource, String>> encounterComponents = ImmutableMap.<ResourceType, Function<Resource,
-        String>>builder()
-        .put(ResourceType.List, this::mapListResource)
-        .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
-        .put(ResourceType.Observation, this::mapObservation)
-        .put(ResourceType.Immunization, this::mapImmunization)
-        .put(ResourceType.Condition, this::mapCondition)
-        .build();
+    private final Map<ResourceType, Function<Resource, String>> encounterComponents =
+        ImmutableMap.<ResourceType, Function<Resource, String>>builder()
+            .put(ResourceType.List, this::mapListResource)
+            .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
+//            .put(ResourceType.Observation, this::mapObservation)
+            .put(ResourceType.Immunization, this::mapImmunization)
+            .put(ResourceType.Condition, this::mapCondition)
+//            .put(ResourceType.DiagnosticReport, this::mapDiagnosticReport)
+            .build();
 
     private final MessageContext messageContext;
 
@@ -64,6 +66,7 @@ public class EncounterComponentsMapper {
     private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
     private final ConditionLinkSetMapper conditionLinkSetMapper;
     private final BloodPressureMapper bloodPressureMapper;
+//    private final DiagnosticReportMapper diagnosticReportMapper;
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -104,17 +107,21 @@ public class EncounterComponentsMapper {
         return diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED);
     }
 
-    private String mapObservation(Resource resource) {
-        Observation observation = (Observation) resource;
-        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
-            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
-        }
-        if (hasCode(observation.getCode(), BLOOD_CODES)) {
-            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
-        }
+//    private String mapObservation(Resource resource) {
+//        Observation observation = (Observation) resource;
+//        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
+//            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
+//        }
+//        if (hasCode(observation.getCode(), BLOOD_CODES)) {
+//            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
+//        }
+//
+//        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
+//    }
 
-        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
-    }
+//    private String mapDiagnosticReport(Resource resource) {
+//        return diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource, IS_NESTED);
+//    }
 
     private String mapImmunization(Resource resource) {
         return immunizationObservationStatementMapper.mapImmunizationToObservationStatement((Immunization) resource, IS_NESTED);
