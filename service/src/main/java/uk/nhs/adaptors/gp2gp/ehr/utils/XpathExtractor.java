@@ -125,11 +125,6 @@ public class XpathExtractor {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
     private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
-    private static final String PARTICIPANT_TEMPLATE = "<Participant2 typeCode=\"PPRF\" contextControlCode=\"OP\">%n"
-        + "           <agentRef classCode=\"AGNT\">%n"
-        + "               <id root=\"%s\"/>%n"
-        + "           </agentRef>%n"
-        + "       </Participant2>";
     private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
 
     private static final XPathService X_PATH_SERVICE = new XPathService();
@@ -298,7 +293,6 @@ public class XpathExtractor {
             .ifPresent(builder::author);
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getParticipant2())
-            .map(XpathExtractor::buildParticipant)
             .ifPresent(builder::participant2);
 
         return builder;
@@ -327,10 +321,6 @@ public class XpathExtractor {
 
     private static String buildEffectiveTimeTemplate(String time) {
         return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, time);
-    }
-
-    private static String buildParticipant(String participantId) {
-        return String.format(PARTICIPANT_TEMPLATE, participantId);
     }
 
     @Data

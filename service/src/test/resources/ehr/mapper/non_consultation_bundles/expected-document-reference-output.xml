@@ -22,10 +22,10 @@
             </locatedEntity>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
-           <agentRef classCode="AGNT">
-               <id root="394559384658936"/>
-           </agentRef>
-       </Participant2>
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />

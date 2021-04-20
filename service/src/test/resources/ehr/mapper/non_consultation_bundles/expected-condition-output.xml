@@ -22,10 +22,10 @@
             </locatedEntity>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
-           <agentRef classCode="AGNT">
-               <id root="394559384658936"/>
-           </agentRef>
-       </Participant2>
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
