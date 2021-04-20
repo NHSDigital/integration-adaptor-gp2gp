@@ -6,7 +6,11 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 import java.util.Optional;
 
-public class DocumentReferenceUtils {
+public final class DocumentReferenceUtils {
+
+    private DocumentReferenceUtils() {
+    }
+
     public static Attachment extractAttachment(DocumentReference documentReference) {
         return documentReference.getContent()
             .stream()
