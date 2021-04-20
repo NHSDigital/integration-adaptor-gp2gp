@@ -166,7 +166,7 @@ public class EhrExtractUATTest {
         messageContext.resetMessageContext();
     }
 
-    @Disabled
+    @Disabled("These tests are being fixed in NIAD-1288")
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {

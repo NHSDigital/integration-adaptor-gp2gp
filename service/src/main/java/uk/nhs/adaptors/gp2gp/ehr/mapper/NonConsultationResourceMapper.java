@@ -45,7 +45,6 @@ public class NonConsultationResourceMapper {
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String QUESTIONNAIRE_RESPONSE_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication "
         + "transaction\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String LOG_TEMPLATE = "Non-consultation resources mapped: {}";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -69,17 +68,16 @@ public class NonConsultationResourceMapper {
             .filter(resource -> !messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getId()))
             .filter(this::isMappableNonConsultationResource)
             .map(this::mapResourceToEhrComposition)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
-        LOGGER.debug(LOG_TEMPLATE, mappedResources.size());
+        LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
         String component = encounterComponentsMapper.mapResourceToComponent(resource);
-        EncounterTemplateParametersBuilder builder = null;
+        EncounterTemplateParametersBuilder builder;
         if (resource.getResourceType().equals(ResourceType.Observation)) {
             builder = buildForObservation(component, (Observation) resource);
         } else {

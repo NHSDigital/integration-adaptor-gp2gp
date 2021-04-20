@@ -309,10 +309,7 @@ public class XpathExtractor {
     }
 
     private static Optional<String> buildOptional(String inputString) {
-        if (StringUtils.isNotBlank(inputString)) {
-            return Optional.of(inputString);
-        }
-        return Optional.empty();
+        return Optional.of(inputString).filter(StringUtils::isNotBlank);
     }
 
     private static String buildAvailabilityTimeTemplate(String time) {

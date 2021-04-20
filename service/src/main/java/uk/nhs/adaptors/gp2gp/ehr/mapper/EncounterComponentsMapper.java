@@ -69,7 +69,7 @@ public class EncounterComponentsMapper {
     private final ObservationStatementMapper observationStatementMapper;
     private final RequestStatementMapper requestStatementMapper;
 
-    public static final List<String> BLOOD_CODES = Arrays.asList(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
+    public static final List<String> BLOOD_CODES = List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
         BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
     public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
 
