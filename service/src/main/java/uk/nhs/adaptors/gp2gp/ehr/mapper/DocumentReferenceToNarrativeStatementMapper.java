@@ -16,6 +16,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplatePar
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.Optional;
@@ -26,38 +27,33 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
-    private static final String DEFAULT_ATTACHMENT_FILE_EXTENSION = ".xyz";
     private final MessageContext messageContext;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
-        final String narrativeStatementId = messageContext.getIdMapper()
-            .getOrNew(ResourceType.DocumentReference, documentReference.getId());
-
-        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(narrativeStatementId)
-            .availabilityTime(getAvailabilityTime(documentReference))
-            .hasReference(true);
-
         if (documentReference.getContent().isEmpty()) {
             throw new EhrMapperException("No content found on documentReference");
         }
 
-        final Attachment attachment = documentReference.getContent()
-            .stream()
-            .findFirst()
-            .filter(DocumentReference.DocumentReferenceContentComponent::hasAttachment)
-            .map(DocumentReference.DocumentReferenceContentComponent::getAttachment)
-            .orElseThrow(() -> new EhrMapperException("documentReference.content[0] is missing an attachment"));
+        final String narrativeStatementId = messageContext.getIdMapper()
+            .getOrNew(ResourceType.DocumentReference, documentReference.getId());
 
-        final String attachmentContentType = Optional.ofNullable(attachment.getContentType())
-            .orElseThrow(() -> new EhrMapperException("documentReference.content[0].attachment is missing contentType"));
+        final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
+        final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
+        final String fileName = DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
+
+        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
+            .narrativeStatementId(narrativeStatementId)
+            .availabilityTime(getAvailabilityTime(documentReference))
+            .hasReference(true)
+            .referenceTitle(fileName);
 
         Optional.ofNullable(attachment.getTitle())
-            .ifPresentOrElse(title -> builder.comment(getComment(documentReference, title))
-                    .referenceTitle("AbsentAttachment" + narrativeStatementId + DEFAULT_ATTACHMENT_FILE_EXTENSION)
+            .ifPresentOrElse(
+                title -> builder
+                    .comment(getComment(documentReference, title))
                     .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE),
-                () -> builder.comment(getComment(documentReference, null))
-                    .referenceTitle(narrativeStatementId + "_" + narrativeStatementId + DEFAULT_ATTACHMENT_FILE_EXTENSION)
+                () -> builder
+                    .comment(getComment(documentReference, null))
                     .referenceContentType(attachmentContentType));
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
