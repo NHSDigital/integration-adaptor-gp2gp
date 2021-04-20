@@ -17,7 +17,7 @@ public final class DocumentReferenceUtils {
     // By default tika is using .mpga as default extension for audio/mpeg
     // but we need .mp3 to be the default one.
     // There is a way to add custom media types in a custom-mimetypes.xml
-    // but I see now way of changing order of existing file extensions
+    // but I see no way of changing order of existing file extensions
     // Because of that all extensions have been copied from the original tika project
     // https://raw.githubusercontent.com/apache/tika/master/tika-core/src/main/resources/org/apache/tika/mime/tika-mimetypes.xml
     private static final MimeTypes MIME_TYPES = MimeTypes.getDefaultMimeTypes();

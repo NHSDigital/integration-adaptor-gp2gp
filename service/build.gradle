@@ -52,7 +52,7 @@ dependencies {
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
 	implementation 'org.apache.tika:tika-core:1.26'
 
-    // Fhir
+	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.2.1'
 
 	// Test
