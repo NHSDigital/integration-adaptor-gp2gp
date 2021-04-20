@@ -1,16 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-import java.util.UUID;
-
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -32,6 +20,17 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.gpc.exception.GpConnectException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -68,13 +67,13 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(taskDefinition.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
-        assertThat(storageDataWrapper.getHl7Response()).contains(EhrStatusConstants.DOCUMENT_ID);
+        assertThat(storageDataWrapper.getData()).contains(EhrStatusConstants.DOCUMENT_ID);
 
         String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
             .getDocuments()
             .get(0)
             .getMessageId();
-        assertThat(storageDataWrapper.getHl7Response()).contains(messageId);
+        assertThat(storageDataWrapper.getData()).contains(messageId);
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
