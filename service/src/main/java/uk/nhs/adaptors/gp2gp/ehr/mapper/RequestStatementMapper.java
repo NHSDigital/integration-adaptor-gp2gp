@@ -114,10 +114,11 @@ public class RequestStatementMapper {
                 && referralRequest.getRequester().getAgent().hasReference();
         }
 
-        private void processAgent(Reference agent, Reference onBehalfOf) {
+        private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
             final IdMapper idMapper = messageContext.getIdMapper();
 
-            if (isReferenceToType(agent, ResourceType.Practitioner) && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
+            if (isReferenceToType(agent, ResourceType.Practitioner)
+                    && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
                 final String participantRef = idMapper.get(onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
