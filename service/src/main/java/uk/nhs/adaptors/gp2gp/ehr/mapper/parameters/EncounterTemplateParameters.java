@@ -18,4 +18,5 @@ public class EncounterTemplateParameters {
     private String originalText;
     private String author;
     private String authorTime;
+    private String participant2;
 }
