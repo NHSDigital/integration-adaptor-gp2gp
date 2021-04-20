@@ -103,6 +103,10 @@ public class EncounterMapperTest {
         + "example-encounter-resource-13.json";
     private static final String INPUT_JSON_WITHOUT_RECORDER_PARTICIPANT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-14.json";
+    private static final String INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-15.json";
+    private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
+        + "expected-output-encounter-13.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -116,6 +120,7 @@ public class EncounterMapperTest {
 
     @BeforeEach
     public void setUp() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
         lenient().when(bundle.getEntry()).thenReturn(List.of(BUNDLE_WITH_CONSULTATION));
@@ -156,7 +161,8 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
-            Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT)
+            Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
+            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
         );
     }
 

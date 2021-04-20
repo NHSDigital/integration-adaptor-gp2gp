@@ -38,6 +38,10 @@ public class IdMapper {
         return get(buildReference(resourceType, id));
     }
 
+    public boolean hasIdBeenMapped(Reference reference) {
+        return ids.containsKey(reference.getReference());
+    }
+
     private Reference buildReference(ResourceType resourceType, String id) {
         return new Reference(new IdType(resourceType.name(), id));
     }

@@ -155,7 +155,7 @@
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -212,7 +212,7 @@
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -269,7 +269,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -434,7 +434,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -479,7 +479,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -524,7 +524,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="RESP" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id-3" />
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
