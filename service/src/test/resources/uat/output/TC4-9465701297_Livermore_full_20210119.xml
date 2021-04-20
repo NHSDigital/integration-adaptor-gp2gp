@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="bc8f0e5d-53ed-45cc-a45c-de4933e064ef" />
+    <id root="e4ec396c-f254-426c-92da-7df2aeb8aac6" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -203,7 +203,7 @@
 </responsibleParty>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06" />
+        <id root="8d1610c2-5e48-4ed5-882b-5a4a172afa35" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Other</originalText>
         </code>
@@ -213,9 +213,9 @@
         </effectiveTime>
         <availabilityTime value="20200904132700"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200904133405" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -231,12 +231,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/7DC6334F-07B8-4B69-816B-65E001E65DFD -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20200904132700" />
+        <text>Type: Discharge to home Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharge to home from Dr  A  Richard Holder at EMIS LV Test Practice 1 (04-Sep-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/pdf">
+                    <reference value="file://localhost/6f7ae308-ad99-48b4-ae9e-72855a6baa06_6f7ae308-ad99-48b4-ae9e-72855a6baa06.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8d1610c2-5e48-4ed5-882b-5a4a172afa35" />
+        <id root="bc8cb16f-71df-4b02-80a2-f4dac0a04fbc" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -246,9 +262,9 @@
         </effectiveTime>
         <availabilityTime value="20200904133300"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200904134532" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -264,12 +280,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/D70BD72D-7CAA-4B8E-AF82-434A297F7510 -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5a074d71-aebd-473c-815f-cd64255b87eb" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20200904133300" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (04-Sep-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/pdf">
+                    <reference value="file://localhost/5a074d71-aebd-473c-815f-cd64255b87eb_5a074d71-aebd-473c-815f-cd64255b87eb.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039" />
+        <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Other</originalText>
         </code>
@@ -279,9 +311,9 @@
         </effectiveTime>
         <availabilityTime value="20200904134400"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200904134806" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -299,7 +331,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
+        <id root="3316531f-5705-424c-9e1a-ee694fb411b4"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -309,7 +341,7 @@
         <availabilityTime value="20200904134806"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="bc8cb16f-71df-4b02-80a2-f4dac0a04fbc"/>
+                <id root="1141eee6-ede3-4358-8554-ffed0ee59284"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -322,7 +354,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="3316531f-5705-424c-9e1a-ee694fb411b4"/>
+                <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -335,7 +367,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="1141eee6-ede3-4358-8554-ffed0ee59284"/>
+                <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400"/>
                 <text>ewqe Interpretation(s): Abnormal</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20200904"/>
@@ -348,7 +380,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400" />
+        <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -358,9 +390,9 @@
         </effectiveTime>
         <availabilityTime value="20200907095000"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200907095119" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -376,12 +408,34 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/85CAB98E-C835-491B-9D6E-30A9FC869A8A -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="18bac9bd-7b26-4065-9416-7ecec8592843" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20200901"/>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
+        <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
+    <originalText>2 week rule referral - colorectal</originalText>
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345" />
+        <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -391,9 +445,9 @@
         </effectiveTime>
         <availabilityTime value="20200907100100"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -414,7 +468,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="10b9023b-a997-4449-af63-ef3015e4c7b5" />
+        <id root="cf58e8f8-cdd0-4345-8d7b-864ec96e9f9c" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -424,9 +478,9 @@
         </effectiveTime>
         <availabilityTime value="20200907100800"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -447,7 +501,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="18bac9bd-7b26-4065-9416-7ecec8592843" />
+        <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -457,9 +511,9 @@
         </effectiveTime>
         <availabilityTime value="20200907101400"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200907101503" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -475,12 +529,34 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/D2EA00FC-7B85-46C5-A0B7-E49C53C054D0 -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="d03e2e72-be97-411d-9ab1-c6bb53d2bc80" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20200907"/>
+        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Investigation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon follow up investigation.</text>
+        <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
+    <originalText>Admission to hospital</originalText>
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="d03e2e72-be97-411d-9ab1-c6bb53d2bc80" />
+        <id root="d81d22b7-5216-44e8-b306-dd542f214792" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -490,9 +566,9 @@
         </effectiveTime>
         <availabilityTime value="20200907174500"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201105134936" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -510,7 +586,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
+        <id root="e4fae359-1369-41c1-b39e-f54bb55e307a" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20200907174500"/>
@@ -535,7 +611,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae"/>
+        <id root="9a5d5a78-1f63-434c-9637-1d7e7843341b"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -545,7 +621,7 @@
         <availabilityTime value="20201105134936"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="cf58e8f8-cdd0-4345-8d7b-864ec96e9f9c"/>
+                <id root="fe85db22-274e-4b1d-9698-5c4809e9cd42"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -558,7 +634,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="f9ea7b08-5c2d-4f7e-852d-c753f9e8059b"/>
+                <id root="8930c6d9-56ed-477a-8407-00dce8a05db4"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -576,7 +652,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3" />
+        <id root="64d224e0-de90-49bb-af2d-eca90ba2ce0d" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -586,9 +662,9 @@
         </effectiveTime>
         <availabilityTime value="20200907174500"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200907174542" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -604,12 +680,33 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/212E9217-3DE1-487E-9E6B-E25B8FEAF949 -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="2f6b04c6-297a-4270-9b4e-c213b8b175ac" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20200907"/>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required, Annotation:  @  Priority:Soon This referral will be rejected</text>
+        <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="e4fae359-1369-41c1-b39e-f54bb55e307a" />
+        <id root="a8896415-81a1-4366-9e92-3afc04aef25d" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -619,9 +716,9 @@
         </effectiveTime>
         <availabilityTime value="20200907175200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20200907175307" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -637,12 +734,34 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/04B6D5EB-FD7C-4A05-8B2A-B03F2F982BC3 -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="9326c01e-488b-4edf-b9c9-529e69ee0361" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20200907"/>
+        <text>Priority: ASAP Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
+        <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
+    <originalText>Admission by A &amp; E doctor</originalText>
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="fe85db22-274e-4b1d-9698-5c4809e9cd42" />
+        <id root="5f1edfb9-3b69-4a7a-9d22-26cfe3cd7f1b" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -652,9 +771,9 @@
         </effectiveTime>
         <availabilityTime value="20201105134200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201105134343" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -672,7 +791,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9a5d5a78-1f63-434c-9637-1d7e7843341b" />
+        <id root="25dbe266-2210-41d4-adb0-c033f3ebed99" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201105134200" />
         <text>typee soenermewe</text>
@@ -687,7 +806,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="51463066-3087-424c-9265-eaac461afade" />
+        <id root="ca8df9cd-0555-4ac3-8852-afefc5615854" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -697,9 +816,9 @@
         </effectiveTime>
         <availabilityTime value="20201105134300"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201105134554" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -717,7 +836,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8930c6d9-56ed-477a-8407-00dce8a05db4" />
+        <id root="de743503-08d0-4381-903f-8c5691360b54" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201105134300"/>
@@ -742,7 +861,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="d81d22b7-5216-44e8-b306-dd542f214792" />
+        <id root="3db5fd2d-6bdb-4cc1-9abb-548eb586f48f" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201105134300"/>
@@ -770,7 +889,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2f6b04c6-297a-4270-9b4e-c213b8b175ac" />
+        <id root="f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Other</originalText>
         </code>
@@ -780,9 +899,9 @@
         </effectiveTime>
         <availabilityTime value="20201109115800"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201109120031" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -798,12 +917,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/9F24CF4E-4D6B-4D6E-94BF-BF94E6DE9239 -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="15c6ebea-f344-443e-bbe9-26b7b8a8f038" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201109115800" />
+        <text>Type: Seen by physiotherapist Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Seen by physiotherapist from NHS e-Referral Service (09-Nov-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="15c6ebea-f344-443e-bbe9-26b7b8a8f038"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/15c6ebea-f344-443e-bbe9-26b7b8a8f038_15c6ebea-f344-443e-bbe9-26b7b8a8f038.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="64d224e0-de90-49bb-af2d-eca90ba2ce0d" />
+        <id root="4e95e2af-bf10-45bb-aaa5-2547bd42c806" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Hospital outpatient report</originalText>
         </code>
@@ -813,9 +948,9 @@
         </effectiveTime>
         <availabilityTime value="20201109115900"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201109120203" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -831,12 +966,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/4856A444-9353-4935-B419-8D1A2505FAE4 -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5f8bbc0e-0fb7-4828-84aa-817f5243a12e" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201109115900" />
+        <text>Type: Formal complaint about hospital care RE: self Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Formal complaint about hospital care RE: self from NHS e-Referral Service (09-Nov-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="5f8bbc0e-0fb7-4828-84aa-817f5243a12e"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/5f8bbc0e-0fb7-4828-84aa-817f5243a12e_5f8bbc0e-0fb7-4828-84aa-817f5243a12e.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9326c01e-488b-4edf-b9c9-529e69ee0361" />
+        <id root="b857c1e3-3a27-4a58-b341-fc5dfcd8c58b" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Other</originalText>
         </code>
@@ -846,9 +997,9 @@
         </effectiveTime>
         <availabilityTime value="20201109120700"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201109121206" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -864,9 +1015,25 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/18131B9F-7926-4620-96C4-602678EAB2E4 --><component typeCode="COMP" >
+        <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8df92722-5b5f-4324-866e-0328d5ea4286" />
+        <id root="6423ea0f-1f1c-4255-aeba-d142be836d50" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201106000000" />
+        <text>Type: Chesty cough Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: from TEMPLE SOWERBY MEDICAL PRACTICE (09-Nov-2020) - More text</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="6423ea0f-1f1c-4255-aeba-d142be836d50"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/6423ea0f-1f1c-4255-aeba-d142be836d50_6423ea0f-1f1c-4255-aeba-d142be836d50.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component><component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="1e5d6932-c778-4997-b624-8709d2fbb189" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109" />
         <text>This is an added comment</text>
@@ -881,7 +1048,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3db5fd2d-6bdb-4cc1-9abb-548eb586f48f" />
+        <id root="55b1bb28-8973-4cf4-b9a6-9ff49547f465" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -891,9 +1058,9 @@
         </effectiveTime>
         <availabilityTime value="20201110115000"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201110115342" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -911,7 +1078,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="a8896415-81a1-4366-9e92-3afc04aef25d" />
+        <id root="5bb18e92-dabb-4c22-838a-410b4a278060" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201110115000"/>
@@ -937,7 +1104,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="25dbe266-2210-41d4-adb0-c033f3ebed99"/>
+        <id root="038fc731-8526-4253-8843-9cc9a1edbd8f"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -947,7 +1114,7 @@
         <availabilityTime value="20201110115343"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="5f1edfb9-3b69-4a7a-9d22-26cfe3cd7f1b"/>
+                <id root="6be78b29-6df2-46f2-bda2-1e7d45efe594"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -960,7 +1127,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="de743503-08d0-4381-903f-8c5691360b54"/>
+                <id root="72db5398-c825-4498-88ca-899a3653ec04"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -978,7 +1145,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ca8df9cd-0555-4ac3-8852-afefc5615854" />
+        <id root="ed098b6c-d654-4010-8f61-9deeb86e5e4b" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -988,9 +1155,9 @@
         </effectiveTime>
         <availabilityTime value="20201110115600"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201110115806" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1006,12 +1173,53 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- AllergyIntolerance/182C0673-7EC7-4582-B6E4-5608408987AB -->
+        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+    <id root="ec9f0ebd-415e-4ed6-ba09-c31a807bb7b1"/>
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <center value="20201110115600"/>
+    </effectiveTime>
+    <availabilityTime value="20201110115806" />
+    <component typeCode="COMP" contextConductionInd="true">
+        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+            <id root="df71ec06-9453-4ae7-9c3c-e42871252772"/>
+            <statusCode code="COMPLETE"/>
+            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+            <effectiveTime>
+                <center value="20201110115600"/>
+            </effectiveTime>
+            <availabilityTime value="20201110115806" />
+            <component typeCode="COMP" contextConductionInd="true">
+                <ObservationStatement classCode="OBS" moodCode="ENV">
+                    <id root="3d5e3d14-66fd-4e2f-b52f-d30bd253f355"/>
+                    <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <center value="20201110115600"/>
+                    </effectiveTime>
+                    <availabilityTime value="20201110115806" />
+                    <pertinentInformation typeCode="PERT">
+                        <sequenceNumber value="+1"/>
+                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                            <text>Status: Active</text>
+                        </pertinentAnnotation>
+                    </pertinentInformation>
+                    <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+</code>
+                    <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff"/>
+    </agentRef>
+</Participant>
+                </ObservationStatement>
+            </component>
+        </CompoundStatement>
+    </component>
+</ehrComposition>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="15c6ebea-f344-443e-bbe9-26b7b8a8f038" />
+        <id root="e984fd8f-391c-4e6e-9309-1bde587e23ef" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -1021,9 +1229,9 @@
         </effectiveTime>
         <availabilityTime value="20201110122500"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201110122713" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1039,12 +1247,35 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="99792b9d-0715-4f2a-9934-1d5d4e975284" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20201110"/>
+        <text>Priority: Routine Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
+</text>
+        <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
+    <originalText>Refer to counsellor</originalText>
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5" />
+        <id root="f9e24109-04d1-4578-9aad-2c80ea0d17ed" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Children&apos;s home visit note</originalText>
         </code>
@@ -1054,9 +1285,9 @@
         </effectiveTime>
         <availabilityTime value="20201118111600"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201118112117" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1072,12 +1303,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/D8F1D582-3349-4514-969A-BF2DC3746E93 -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="db7c94b1-01a6-491f-ac41-a36d88023069" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201118111600" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (18-Nov-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="db7c94b1-01a6-491f-ac41-a36d88023069"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/db7c94b1-01a6-491f-ac41-a36d88023069_db7c94b1-01a6-491f-ac41-a36d88023069.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6423ea0f-1f1c-4255-aeba-d142be836d50" />
+        <id root="b90a10b6-d8d3-4fdc-a253-5c2ca3350613" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1087,9 +1334,9 @@
         </effectiveTime>
         <availabilityTime value="20201216111000"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201216111319" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1105,9 +1352,25 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/8747DFC5-11B7-4A77-B2F3-7720CC58C2FC --><component typeCode="COMP" >
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="bded2793-f5b5-43ac-b8db-7ea04620ca86" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201216111000" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (16-Dec-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="bded2793-f5b5-43ac-b8db-7ea04620ca86"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/bded2793-f5b5-43ac-b8db-7ea04620ca86_bded2793-f5b5-43ac-b8db-7ea04620ca86.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5f8bbc0e-0fb7-4828-84aa-817f5243a12e" />
+        <id root="137cda70-9a78-43e2-930d-2758c7e11d8d" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201216111000"/>
@@ -1132,7 +1395,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4e95e2af-bf10-45bb-aaa5-2547bd42c806" />
+        <id root="884e7627-796c-4c70-870a-d61b88ad2e57" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201216111000"/>
@@ -1160,7 +1423,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1e5d6932-c778-4997-b624-8709d2fbb189" />
+        <id root="0933f2fd-f15d-47fb-9b74-8b48c1a491a4" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Outbound Referral</originalText>
         </code>
@@ -1170,9 +1433,9 @@
         </effectiveTime>
         <availabilityTime value="20201216113300"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201216113449" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1188,12 +1451,34 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- ReferralRequest/4600DF36-188D-4CE2-9FB2-45D394F66D57 -->
+        <component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="d0152980-c786-4d93-b06d-7ee55cafdda9" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20201216"/>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
+    <originalText>2 week rule referral - lung</originalText>
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="b857c1e3-3a27-4a58-b341-fc5dfcd8c58b" />
+        <id root="04aaa10e-3d26-4c86-8932-4bb384c94253" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1203,9 +1488,9 @@
         </effectiveTime>
         <availabilityTime value="20201217110000"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201221110421" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1221,12 +1506,58 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- MedicationRequest/6F189BE6-E134-4249-AB13-529C3B09C6E1 -->
+        <component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="1ab108ca-e906-4055-8f54-7daed6ee3eba"/>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20201217"/>
+        <effectiveTime>
+            <low value="20201217"/><high value="20210114"/>
+        </effectiveTime>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="317972000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Furosemide 40mg tablets">
+    <originalText>Furosemide 40mg tablets</originalText>
+</code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="f4bf142b-6d5c-4e01-933f-a817fd992e9b"/>
+                <statusCode code="COMPLETE"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <availabilityTime value="20201217"/>
+                <quantity value="28" unit="1">
+                    <translation value="28">
+                        <originalText>tablet</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                <inFulfillmentOf typeCode="FLFS">
+    <priorMedicationRef moodCode="INT">
+        <id root="797f53b7-4d96-4bbe-84cc-3110db040d90"/>
+    </priorMedicationRef>
+</inFulfillmentOf>
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>twice daily as advised</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+    </MedicationStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="70fa5735-11cb-4e5c-825a-e5688fdc888c" />
+        <id root="e9e90d5a-6e92-4ef0-bb5f-16de962c93bc" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1236,9 +1567,9 @@
         </effectiveTime>
         <availabilityTime value="20201217124900"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201217125755" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1256,7 +1587,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="5bb18e92-dabb-4c22-838a-410b4a278060"/>
+        <id root="4209a033-4f0c-490e-8753-607e2799c3d8"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1266,7 +1597,7 @@
         <availabilityTime value="20201217125756"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="038fc731-8526-4253-8843-9cc9a1edbd8f"/>
+                <id root="82a39454-299f-432e-993e-5a6232b4e099"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1279,7 +1610,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="6be78b29-6df2-46f2-bda2-1e7d45efe594"/>
+                <id root="70fa5735-11cb-4e5c-825a-e5688fdc888c"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1294,7 +1625,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="72db5398-c825-4498-88ca-899a3653ec04"/>
+        <id root="ba6ea7cb-3e2f-46fa-918c-c0b5178c1d4e"/>
         <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
     <originalText>Standing blood pressure reading</originalText>
 </code>
@@ -1305,7 +1636,7 @@
         <availabilityTime value="20201217125757"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="55b1bb28-8973-4cf4-b9a6-9ff49547f465"/>
+                <id root="85e19135-f780-437d-9633-24bf6c7e5d82"/>
                 <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1318,7 +1649,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="ec9f0ebd-415e-4ed6-ba09-c31a807bb7b1"/>
+                <id root="919ae1b8-6bbb-49ef-9fa0-0c04d35be310"/>
                 <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1330,7 +1661,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="df71ec06-9453-4ae7-9c3c-e42871252772"/>
+                <id root="cf670325-7982-46ba-9a52-85c3c78fe40a"/>
                 <text>Diastolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1340,7 +1671,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="3d5e3d14-66fd-4e2f-b52f-d30bd253f355"/>
+        <id root="c59316b2-2578-412c-8d00-5040c86bf306"/>
         <code code="163034007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing blood pressure">
     <originalText>Standing blood pressure reading</originalText>
 </code>
@@ -1351,7 +1682,7 @@
         <availabilityTime value="20201217125757"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="ed098b6c-d654-4010-8f61-9deeb86e5e4b"/>
+                <id root="f80f3da3-0728-4880-be71-c71251a49d08"/>
                 <code code="400974009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing systolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1363,7 +1694,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="c0f4e057-c4a5-481c-bf13-d871d37bd037"/>
+                <id root="f0a2fe75-1856-47ad-9a20-570c9e4cf904"/>
                 <code code="400975005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Standing diastolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1376,7 +1707,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="99792b9d-0715-4f2a-9934-1d5d4e975284"/>
+                <id root="bd418aaa-36ed-476e-967c-7ccba1d0aaed"/>
                 <text>Systolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1386,7 +1717,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="e984fd8f-391c-4e6e-9309-1bde587e23ef" />
+        <id root="7cb9f236-03cb-4aad-bb0d-534201961315" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201217124900"/>
@@ -1412,7 +1743,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="db7c94b1-01a6-491f-ac41-a36d88023069"/>
+        <id root="90ab2301-dc3c-4a37-8eab-aa171db2b88e"/>
         <code code="163035008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting blood pressure">
     <originalText>Sitting blood pressure reading</originalText>
 </code>
@@ -1423,7 +1754,7 @@
         <availabilityTime value="20201217125758"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="f9e24109-04d1-4578-9aad-2c80ea0d17ed"/>
+                <id root="09a882da-c219-4146-97ef-3fd9a57135b0"/>
                 <code code="407554009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting systolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1436,7 +1767,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="bded2793-f5b5-43ac-b8db-7ea04620ca86"/>
+                <id root="1a4049b6-a065-4cb1-b222-77fbe702ea14"/>
                 <code code="407555005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Sitting diastolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1448,7 +1779,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="137cda70-9a78-43e2-930d-2758c7e11d8d"/>
+                <id root="7b1930d5-a8e5-4843-b8ab-49cd39f484dd"/>
                 <text>Diastolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1458,7 +1789,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="884e7627-796c-4c70-870a-d61b88ad2e57"/>
+        <id root="236b2a90-d7b4-4232-8e3e-6f08f0278d08"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1468,7 +1799,7 @@
         <availabilityTime value="20201217125758"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="b90a10b6-d8d3-4fdc-a253-5c2ca3350613"/>
+                <id root="97ce760a-7759-4fea-b5a9-8667e06f86a4"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1480,7 +1811,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="8c058d76-fff1-4eae-8e82-4351a110a454"/>
+                <id root="5f44fd1c-bc5b-4b5f-8861-79f254d0d969"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1493,7 +1824,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="d0152980-c786-4d93-b06d-7ee55cafdda9"/>
+                <id root="9ba8797d-09d2-43aa-9e81-654b8b15c088"/>
                 <text>Systolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1503,7 +1834,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="0933f2fd-f15d-47fb-9b74-8b48c1a491a4"/>
+        <id root="b4c0fcd1-d4b2-40f8-9b18-7b4c0af946db"/>
         <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
     <originalText>Lying blood pressure reading</originalText>
 </code>
@@ -1514,7 +1845,7 @@
         <availabilityTime value="20201217125758"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="1ab108ca-e906-4055-8f54-7daed6ee3eba"/>
+                <id root="432103e4-651e-417c-97ed-37e4e8649c89"/>
                 <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1527,7 +1858,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="f4bf142b-6d5c-4e01-933f-a817fd992e9b"/>
+                <id root="6a894b1b-f266-415c-83e6-375a4296c1c4"/>
                 <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1539,7 +1870,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="382e9f46-b7a6-4267-bc80-0aad7e055d00"/>
+                <id root="d2b6d4b5-ca07-4ce2-8a0a-40f4fd8cdef9"/>
                 <text>Diastolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1549,7 +1880,7 @@
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="797f53b7-4d96-4bbe-84cc-3110db040d90"/>
+        <id root="356f257a-a7d7-45dd-8b76-09c1db97b40b"/>
         <code code="163033001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying blood pressure">
     <originalText>Lying blood pressure reading</originalText>
 </code>
@@ -1560,7 +1891,7 @@
         <availabilityTime value="20201217125758"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="04aaa10e-3d26-4c86-8932-4bb384c94253"/>
+                <id root="df996c91-d888-4d2d-9d3a-5523480337b1"/>
                 <code code="407556006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying systolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1572,7 +1903,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="4209a033-4f0c-490e-8753-607e2799c3d8"/>
+                <id root="f972cfdf-b4d7-4392-a96a-4d1bd8d14f14"/>
                 <code code="407557002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lying diastolic blood pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1585,7 +1916,7 @@
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="82a39454-299f-432e-993e-5a6232b4e099"/>
+                <id root="b99e92d0-1d69-4cf9-a960-3c0b26caf1ad"/>
                 <text>Systolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201217124900"/>
@@ -1598,7 +1929,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ba6ea7cb-3e2f-46fa-918c-c0b5178c1d4e" />
+        <id root="4cf7decb-3ae2-42c3-97f0-bb440f28d385" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Other</originalText>
         </code>
@@ -1608,9 +1939,9 @@
         </effectiveTime>
         <availabilityTime value="20201222101100"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20201222101656" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1626,12 +1957,28 @@
                 <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
             </agentRef>
         </Participant2>
-        <!-- DocumentReference/02434F5B-19D4-42B1-9D54-B2767DB668E3 -->
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="98e65972-3b3a-48b0-bef2-f662f905a09f" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201222101100" />
+        <text>Type: Discharged from outpatients Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharged from outpatients from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="98e65972-3b3a-48b0-bef2-f662f905a09f"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="application/pdf">
+                    <reference value="file://localhost/98e65972-3b3a-48b0-bef2-f662f905a09f_98e65972-3b3a-48b0-bef2-f662f905a09f.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+    </NarrativeStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9ba8797d-09d2-43aa-9e81-654b8b15c088" />
+        <id root="268efbf2-65a8-4b1c-8490-85a0528f86e3" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1641,9 +1988,9 @@
         </effectiveTime>
         <availabilityTime value="20210111131700"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20210113133422" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1661,7 +2008,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="85e19135-f780-437d-9633-24bf6c7e5d82" />
+        <id root="7884ecd7-033d-433c-bfde-9d459da8bc6f" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1686,7 +2033,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="919ae1b8-6bbb-49ef-9fa0-0c04d35be310" />
+        <id root="6acd49d4-7514-436a-93c3-6bce26d8e3ea" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1711,7 +2058,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="cf670325-7982-46ba-9a52-85c3c78fe40a" />
+        <id root="bc8f0e5d-53ed-45cc-a45c-de4933e064ef" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1736,7 +2083,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="c59316b2-2578-412c-8d00-5040c86bf306" />
+        <id root="b88a5fec-a207-4e2a-93c4-04402d84c1be" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1761,7 +2108,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="f80f3da3-0728-4880-be71-c71251a49d08" />
+        <id root="8dd1bb6c-f391-4e1f-b68f-a427448828ca" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1786,7 +2133,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="f0a2fe75-1856-47ad-9a20-570c9e4cf904" />
+        <id root="71f21980-0bab-4831-944c-365717037140" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1811,7 +2158,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="bd418aaa-36ed-476e-967c-7ccba1d0aaed" />
+        <id root="f5392292-a88d-4fc2-8840-a6ebff39fa46" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1836,7 +2183,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7cb9f236-03cb-4aad-bb0d-534201961315" />
+        <id root="c8334d51-35ca-445e-ae5f-08fab08ca230" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1861,7 +2208,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="90ab2301-dc3c-4a37-8eab-aa171db2b88e" />
+        <id root="73ce838c-ab98-4bb2-8c69-4f6508be99a0" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1886,7 +2233,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="09a882da-c219-4146-97ef-3fd9a57135b0" />
+        <id root="bda5c09f-6c0d-4e7d-9732-9533f4fae45e" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1911,7 +2258,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1a4049b6-a065-4cb1-b222-77fbe702ea14" />
+        <id root="16a8f240-9b4c-4eff-9b97-723e341d9aad" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1936,7 +2283,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7b1930d5-a8e5-4843-b8ab-49cd39f484dd" />
+        <id root="0ab4b3c4-6f23-45ff-955d-35bb6e6d239b" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1961,7 +2308,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="236b2a90-d7b4-4232-8e3e-6f08f0278d08" />
+        <id root="82376d4d-0a24-4b25-9a8a-cc84beffde0d" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210111131700"/>
@@ -1986,7 +2333,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="97ce760a-7759-4fea-b5a9-8667e06f86a4" />
+        <id root="ca4a0d10-4c71-4e4f-98bf-9023c5f41d21" />
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210111131700" />
         <text>Some additional text which is not added with a code</text>
@@ -1998,7 +2345,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="5f44fd1c-bc5b-4b5f-8861-79f254d0d969" />
+        <id root="409c8344-ffb9-40c9-a802-d71602f56263" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210127"/>
@@ -2012,7 +2359,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6acd49d4-7514-436a-93c3-6bce26d8e3ea" />
+        <id root="1610a282-3af8-4763-bb7a-6f1bb96087da" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -2022,9 +2369,9 @@
         </effectiveTime>
         <availabilityTime value="20210113113200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20210113120407" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2042,7 +2389,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="b4c0fcd1-d4b2-40f8-9b18-7b4c0af946db" />
+        <id root="dadbe0c4-2702-4cdc-9bcc-6e3e7c2918b7" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2067,7 +2414,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="432103e4-651e-417c-97ed-37e4e8649c89" />
+        <id root="c3a25ecf-e2b2-4861-a649-dc429738f252" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2092,7 +2439,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6a894b1b-f266-415c-83e6-375a4296c1c4" />
+        <id root="6fb2b95c-55d8-4bf6-a786-1a8465bd4da9" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2117,7 +2464,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="d2b6d4b5-ca07-4ce2-8a0a-40f4fd8cdef9" />
+        <id root="237f6f45-b73c-4bc2-bda2-19c54287b540" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2142,7 +2489,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="356f257a-a7d7-45dd-8b76-09c1db97b40b" />
+        <id root="3794f0fe-eca1-4f8c-a321-598fbd1b568c" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2167,7 +2514,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="df996c91-d888-4d2d-9d3a-5523480337b1" />
+        <id root="00727d84-1710-4a66-a5e9-c419a17ed9c2" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2192,7 +2539,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="f972cfdf-b4d7-4392-a96a-4d1bd8d14f14" />
+        <id root="5654e733-a9e5-4086-ad63-3a3c72a8e1b3" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2217,7 +2564,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="b99e92d0-1d69-4cf9-a960-3c0b26caf1ad" />
+        <id root="4067dd8e-2b9b-4270-a382-ce035d7d352d" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2242,7 +2589,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="e9e90d5a-6e92-4ef0-bb5f-16de962c93bc" />
+        <id root="681febf5-6290-4aa0-927c-b1047ae8d21d" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2267,7 +2614,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="98e65972-3b3a-48b0-bef2-f662f905a09f" />
+        <id root="f696636a-f010-4bf6-8afc-7a0f151e5a5a" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2292,7 +2639,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4cf7decb-3ae2-42c3-97f0-bb440f28d385" />
+        <id root="f599e6dd-92aa-4cc7-baf0-20530ee1108b" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2317,7 +2664,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7884ecd7-033d-433c-bfde-9d459da8bc6f" />
+        <id root="9a4cf638-aba1-4cf9-8055-c5846ee42542" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210113113200"/>
@@ -2340,7 +2687,49 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><!-- ReferralRequest/58BC7521-C78E-4F0C-8BE5-0601A8AE0C69 --><!-- ReferralRequest/0E6E0156-6915-428B-B5D2-983A6A8C7488 -->
+</component><component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="3a3b1b6f-7dc5-4be3-a496-0bc243583eba" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20210113"/>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component><component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="d9afffa2-cd54-4998-8fe9-25e0324b0a8c" />
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20210113"/>
+        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+</code>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
+            </agentRef>
+        </responsibleParty>
+    </RequestStatement>
+</component>
     </ehrComposition>
 </component>
         </ehrFolder>
