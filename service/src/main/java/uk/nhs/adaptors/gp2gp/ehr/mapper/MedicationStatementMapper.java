@@ -266,7 +266,7 @@ public class MedicationStatementMapper {
 
         if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
             final var reference = medicationRequest.getRecorder();
-            if (reference.hasReferenceElement() && isRelevant.test(reference)) {
+            if (isRelevant.test(reference)) {
                 return participantMapper.mapToParticipant(
                     messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
             }
