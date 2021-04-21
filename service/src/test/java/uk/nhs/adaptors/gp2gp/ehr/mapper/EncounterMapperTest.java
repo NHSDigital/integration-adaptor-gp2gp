@@ -105,6 +105,10 @@ public class EncounterMapperTest {
         + "example-encounter-resource-14.json";
     private static final String INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-15.json";
+    private static final String INPUT_JSON_WITH_PERFORMER_PARTICIPANT_INVALID_ID = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-16.json";
+    private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-17.json";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
 
@@ -162,7 +166,9 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_NOT_SNOMED_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
-            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
+            Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
+            // workaround scenario until NIAD-1340 is done
+            Arguments.of(INPUT_JSON_WITH_PERFORMER_PARTICIPANT_INVALID_ID, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
         );
     }
 
@@ -177,15 +183,15 @@ public class EncounterMapperTest {
             .hasMessage("Could not map Encounter type");
     }
 
-    @Test
-    public void When_MappingEncounterWithUnmappedParticipant_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_TIME);
+    @Test // workaround until NIAD-1340 is done
+    public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("No ID mapping for reference Practitioner/%s", PRACTITIONER_ID);
+            .hasMessage("Encounter.participant recorder is required");
     }
 
     @Test
