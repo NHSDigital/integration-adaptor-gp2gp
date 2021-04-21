@@ -1,12 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.AllArgsConstructor;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -31,28 +30,21 @@ public class IdMapper {
     }
 
     public String get(Reference reference) {
-
-        String mappedId = ids.get(reference.getReference());
-
-        if (StringUtils.isBlank(mappedId)) {
-
-            // workaround until NIAD-1340 is done
-            final String resourceType = reference.getReferenceElement().getResourceType();
-
-            final Optional<String> id = ids.entrySet()
-                .stream()
-                .filter(map -> map.getKey().startsWith(resourceType))
-                .map(Map.Entry::getValue)
-                .findFirst();
-
-            if (id.isPresent()) {
-                mappedId = id.get();
-            } else {
-                LOGGER.debug("No ID mapping for reference " + reference.getReference());
-            }
+        final String referenceValue = reference.getReference();
+        if (hasIdBeenMapped(reference)) {
+            return ids.get(referenceValue);
         }
 
-        return mappedId;
+        // workaround until NIAD-1340 is done
+        return ids.entrySet()
+            .stream()
+            .filter(map -> map.getKey().startsWith(reference.getReferenceElement().getResourceType()))
+            .map(Map.Entry::getValue)
+            .findFirst()
+            .orElseGet(() -> {
+                LOGGER.debug("No ID mapping for reference " + referenceValue);
+                return null;
+            });
     }
 
     public String get(ResourceType resourceType, String id) throws EhrMapperException {
