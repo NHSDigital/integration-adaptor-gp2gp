@@ -1,13 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -21,11 +13,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
@@ -141,10 +141,7 @@ public class EncounterComponentsMapperTest {
     }
 
     private Optional<Encounter> extractEncounter(Bundle bundle) {
-        return bundle.getEntry().stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> ResourceType.Encounter.equals(resource.getResourceType()))
-            .map(resource -> (Encounter) resource)
+        return ResourceExtractor.extractResourcesByType(bundle, Encounter.class)
             .findFirst();
     }
 

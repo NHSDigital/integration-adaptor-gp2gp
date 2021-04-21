@@ -1,38 +1,6 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static org.assertj.core.api.Assumptions.assumeThatCode;
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
-import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
-import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
-import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
@@ -45,6 +13,35 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.w3c.dom.Document;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
+import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
+import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
+import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThatCode;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -167,7 +164,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
 
-        String hl7Response = storageDataWrapper.getHl7Response();
+        String hl7Response = storageDataWrapper.getData();
         assertThat(hl7Response).contains(EXPECTED_PAYLOAD_TYPE);
         assertThat(hl7Response).contains(EHR_COMPOSITION_ELEMENT);
         assertThat(hl7Response).contains(COMPONENT_ELEMENT);
