@@ -47,7 +47,7 @@ public class PertinentInformationObservationValueMapper {
     );
     private static final String CODEABLE_CONCEPT_VALUE_TEMPLATE = "Code Value: %s %s ";
     private static final String BOOLEAN_VALUE_TEMPLATE = "Boolean Value: %s ";
-    private static final String RANGE_VALUE_TEMPLATE = "Range Value: Low %s %s High %s %s ";
+    private static final String RANGE_VALUE_TEMPLATE = "Range Value: %s ";
     private static final String RATIO_VALUE_TEMPLATE = "Ratio Value: %s %s %s / %s %s %s ";
     private static final String TIME_VALUE_TEMPLATE = "Time Value: %s ";
     private static final String DATE_TIME_VALUE_TEMPLATE = "DateTime Value: %s ";
@@ -60,7 +60,9 @@ public class PertinentInformationObservationValueMapper {
     private static final String COMPONENT_CODE_TEMPLATE = "Code: %s";
     private static final String COMPONENT_INTERPRETATION_CODE_TEMPLATE = "Interpretation Code: %s";
     private static final String COMPONENT_INTERPRETATION_TEXT_TEMPLATE = "Interpretation Text: %s";
-    private static final String COMPONENT_REFERENCE_RANGE_TEMPLATE = "Range: %s %s %s %s";
+    private static final String COMPONENT_REFERENCE_RANGE_TEMPLATE = "Range: %s";
+    private static final String RANGE_LOW_TEMPLATE = "Low %s %s";
+    private static final String RANGE_HIGH_TEMPLATE = "High %s %s";
     private static final String COMPONENT_QUANTITY_VALUE_TEMPLATE = "Quantity Value: %s";
     private static final String COMPONENT_STRING_VALUE_TEMPLATE = "String Value: %s";
     private static final String COMPONENT_DELIMITER_TEMPLATE = "[%s]";
@@ -137,12 +139,31 @@ public class PertinentInformationObservationValueMapper {
     }
 
     private static String processRange(Range value) {
-        if (isLowValuePresent(value) && isHighValuePresent(value)) {
-            return String.format(RANGE_VALUE_TEMPLATE,
-                value.getLow().getValue(),
-                value.getLow().getUnit(),
-                value.getHigh().getValue(),
-                value.getHigh().getUnit());
+        List<String> rangeList = List.of(
+            extractRangeLow(value),
+            extractRangeHigh(value)
+        );
+
+        var rangeText = rangeList.stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        if (StringUtils.isNotEmpty(rangeText)) {
+            return String.format(RANGE_VALUE_TEMPLATE, rangeText);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractRangeLow(Range value) {
+        if (value.getLow().hasValue() && value.getLow().hasUnit()) {
+            return String.format(RANGE_LOW_TEMPLATE, value.getLow().getValue(), value.getLow().getUnit());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractRangeHigh(Range value) {
+        if (value.getHigh().hasValue() && value.getHigh().hasUnit()) {
+            return String.format(RANGE_HIGH_TEMPLATE, value.getHigh().getValue(), value.getHigh().getUnit());
         }
         return StringUtils.EMPTY;
     }
@@ -188,18 +209,6 @@ public class PertinentInformationObservationValueMapper {
         }
 
         return StringUtils.EMPTY;
-    }
-
-    private static boolean isLowValuePresent(Range range) {
-        return range.hasLow()
-            && range.getLow().hasValue()
-            && range.getLow().hasUnit();
-    }
-
-    private static boolean isHighValuePresent(Range range) {
-        return range.hasHigh()
-            && range.getHigh().hasValue()
-            && range.getHigh().hasUnit();
     }
 
     private static boolean isNumeratorPresent(Ratio ratio) {
@@ -292,16 +301,32 @@ public class PertinentInformationObservationValueMapper {
 
     private String extractComponentReferenceRange(Observation.ObservationComponentComponent component) {
         if (component.hasReferenceRange()) {
-            var referenceRange = component.getReferenceRangeFirstRep();
-            if (referenceRange.getLow().hasValue() && referenceRange.getHigh().hasValue()
-                && referenceRange.getLow().hasUnit() && referenceRange.getHigh().hasUnit()) {
-                var lowValue = referenceRange.getLow().getValue().toString();
-                var lowUnit = referenceRange.getLow().getUnit();
-                var highValue = referenceRange.getHigh().getValue().toString();
-                var highUnit = referenceRange.getHigh().getUnit();
+            List<String> componentReferenceRangeList = List.of(
+                extractComponentReferenceRangeLow(component.getReferenceRangeFirstRep()),
+                extractComponentReferenceRangeHigh(component.getReferenceRangeFirstRep())
+            );
 
-                return String.format(COMPONENT_REFERENCE_RANGE_TEMPLATE, lowValue, lowUnit, highValue, highUnit);
+            var componentReferenceRangeText = componentReferenceRangeList.stream()
+                .filter(StringUtils::isNotEmpty)
+                .collect(Collectors.joining(StringUtils.SPACE));
+
+            if (StringUtils.isNotEmpty(componentReferenceRangeText)) {
+                return String.format(COMPONENT_REFERENCE_RANGE_TEMPLATE, componentReferenceRangeText);
             }
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractComponentReferenceRangeLow(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.getLow().hasValue() && referenceRange.getLow().hasUnit()) {
+            return String.format(RANGE_LOW_TEMPLATE, referenceRange.getLow().getValue(), referenceRange.getLow().getUnit());
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private static String extractComponentReferenceRangeHigh(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.getHigh().hasValue() && referenceRange.getHigh().hasUnit()) {
+            return String.format(RANGE_HIGH_TEMPLATE, referenceRange.getHigh().getValue(), referenceRange.getHigh().getUnit());
         }
         return StringUtils.EMPTY;
     }

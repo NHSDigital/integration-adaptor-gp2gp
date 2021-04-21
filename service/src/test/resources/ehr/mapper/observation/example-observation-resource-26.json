@@ -31,14 +31,14 @@
             },
             "referenceRange": [
                 {
-                    "text": "Test reference range text",
+                    "text": "Low and high",
                     "high": {
-                        "value": 30,
-                        "unit": "test-unit-1"
+                        "value": 0.6,
+                        "unit": "mg/L"
                     },
                     "low": {
-                        "value": 20,
-                        "unit": "test-unit-2"
+                        "value": 0.1,
+                        "unit": "mg/L"
                     }
                 }
             ],
@@ -52,6 +52,28 @@
                 ],
                 "text": "Example interpretation text 1"
             }
+        },
+        {
+            "referenceRange": [
+                {
+                    "text": "Low only",
+                    "low": {
+                        "value":  0.1,
+                        "unit": "mg/L"
+                    }
+                }
+            ]
+        },
+        {
+            "referenceRange": [
+                {
+                    "text": "High only",
+                    "low": {
+                        "value": 0.6,
+                        "unit": "mg/L"
+                    }
+                }
+            ]
         }
     ]
 }

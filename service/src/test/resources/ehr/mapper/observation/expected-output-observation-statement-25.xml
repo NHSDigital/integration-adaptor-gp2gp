@@ -10,7 +10,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Component(s): [Code: Allergy to penicillin Code Value: test-code Test display Interpretation Code: Example without userSelected Interpretation Text: Example interpretation text 1 Range: 20 test-unit 30 test-unit] [Code: BMD - Left Femur String Value: test-string Interpretation Code: Example with userSelected Interpretation Text: Example interpretation text 2] [String Value: Example of a valueString] [Quantity Value: 7.2 g/dl] Example comment</text>
+                <text>Component(s): [Code: Allergy to penicillin Code Value: test-code Test display Interpretation Code: Example without userSelected Interpretation Text: Example interpretation text 1 Range: Low 20 test-unit High 30 test-unit] [Code: BMD - Left Femur String Value: test-string Interpretation Code: Example with userSelected Interpretation Text: Example interpretation text 2] [String Value: Example of a valueString] [Quantity Value: 7.2 g/dl] Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
