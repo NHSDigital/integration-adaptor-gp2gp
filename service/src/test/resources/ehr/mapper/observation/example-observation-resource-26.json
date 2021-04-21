@@ -68,7 +68,7 @@
             "referenceRange": [
                 {
                     "text": "High only",
-                    "low": {
+                    "high": {
                         "value": 10.7,
                         "unit": "cm"
                     }
