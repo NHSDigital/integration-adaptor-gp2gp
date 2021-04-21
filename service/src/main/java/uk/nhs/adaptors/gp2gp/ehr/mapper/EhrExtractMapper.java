@@ -25,6 +25,7 @@ public class EhrExtractMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EncounterMapper encounterMapper;
+    private final NonConsultationResourceMapper nonConsultationResourceMapper;
     private final AgentDirectoryMapper agentDirectoryMapper;
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
@@ -46,7 +47,9 @@ public class EhrExtractMapper {
             bundle, getGpcStructuredTaskDefinition.getNhsNumber()));
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
-        ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
+        var mappedComponents = mapEncounterToEhrComponents(encounters);
+        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
+        ehrExtractTemplateParameters.setComponents(mappedComponents);
 
         return ehrExtractTemplateParameters;
     }
