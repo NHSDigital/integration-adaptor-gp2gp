@@ -26,6 +26,14 @@ public class IdMapper {
         return mappedId;
     }
 
+    public boolean hasIdBeenMapped(ResourceType resourceType, String id) {
+        return hasIdBeenMapped(buildReference(resourceType, id));
+    }
+
+    public boolean hasIdBeenMapped(Reference reference) {
+        return ids.containsKey(reference.getReference());
+    }
+
     public String get(Reference reference) throws EhrMapperException {
         String mappedId = ids.get(reference.getReference());
         if (mappedId == null) {
@@ -36,10 +44,6 @@ public class IdMapper {
 
     public String get(ResourceType resourceType, String id) throws EhrMapperException {
         return get(buildReference(resourceType, id));
-    }
-
-    public boolean hasIdBeenMapped(Reference reference) {
-        return ids.containsKey(reference.getReference());
     }
 
     private Reference buildReference(ResourceType resourceType, String id) {
