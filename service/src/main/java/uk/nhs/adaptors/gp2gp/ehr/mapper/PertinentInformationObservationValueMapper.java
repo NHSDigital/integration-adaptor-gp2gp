@@ -293,7 +293,7 @@ public class PertinentInformationObservationValueMapper {
     private String extractComponentReferenceRange(Observation.ObservationComponentComponent component) {
         if (component.hasReferenceRange()) {
             var referenceRange = component.getReferenceRangeFirstRep();
-            if (referenceRange.hasLow() && referenceRange.hasHigh()
+            if (referenceRange.getLow().hasValue() && referenceRange.getHigh().hasValue()
                 && referenceRange.getLow().hasUnit() && referenceRange.getHigh().hasUnit()) {
                 var lowValue = referenceRange.getLow().getValue().toString();
                 var lowUnit = referenceRange.getLow().getUnit();
