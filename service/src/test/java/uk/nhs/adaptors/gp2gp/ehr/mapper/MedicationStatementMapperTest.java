@@ -114,6 +114,8 @@ public class MedicationStatementMapperTest {
         + "medication-statement-with-authorise-default-status-reason-code.xml";
     private static final String INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-no-info-prescription-text.json";
+    private static final String INPUT_JSON_WITH_NO_RECORDER_REFERENCE = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-recorder-reference.json";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -249,7 +251,8 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
             INPUT_JSON_WITH_ORDER_NO_BASED_ON,
-            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE
+            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
+            INPUT_JSON_WITH_NO_RECORDER_REFERENCE
             );
     }
 }

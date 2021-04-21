@@ -271,7 +271,7 @@ public class MedicationStatementMapper {
                     messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
             }
         }
-        return StringUtils.EMPTY;
+        throw new EhrMapperException("Missing recorder of type Practitioner, PractitionerRole or Organization");
     }
 
     private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {
