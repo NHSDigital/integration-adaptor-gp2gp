@@ -261,7 +261,7 @@ public class PertinentInformationObservationValueMapper {
             var value = component.getValue();
 
             return COMPONENT_VALUE_FUNCTIONS.getOrDefault(value.getClass(),
-                $ -> this.mapObservationValueToPertinentInformation(value)
+                $ -> this.mapObservationValueToPertinentInformation(value).trim()
             ).apply(value);
         }
         return StringUtils.EMPTY;
