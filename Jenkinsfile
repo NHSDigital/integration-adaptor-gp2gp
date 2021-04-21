@@ -1,7 +1,7 @@
 String tfProject      = "nia"
 String tfEnvironment  = "build1"
 String tfComponent    = "gp2gp"
-String redirectEnv    = "build1"          // Name of environment where TF deployment needs to be re-directed
+String redirectEnv    = "ptl"          // Name of environment where TF deployment needs to be re-directed
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
 Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
