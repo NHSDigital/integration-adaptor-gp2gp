@@ -9,7 +9,7 @@
                 <id root="394559384658936"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachment394559384658936.xyz"/>
+                    <reference value="file://localhost/AbsentAttachment394559384658936.rtx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
