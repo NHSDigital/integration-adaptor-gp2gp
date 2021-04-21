@@ -34,7 +34,7 @@ class DocumentReferenceUtilsTest {
             .setTitle(FILE_MISSING_ATTACHMENT_TITLE);
 
         assertThat(DocumentReferenceUtils.buildAttachmentFileName(NARRATIVE_STATEMENT_ID, attachment))
-            .isEqualTo("AbsentAttachment3b24b89b-fd14-49f9-ba12-3b4212b60080.xyz");
+            .isEqualTo("AbsentAttachment3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
     }
 
     @Test
@@ -43,6 +43,6 @@ class DocumentReferenceUtilsTest {
             .setContentType(TEXT_PLAIN_CONTENT_TYPE);
 
         assertThat(DocumentReferenceUtils.buildAttachmentFileName(NARRATIVE_STATEMENT_ID, attachment))
-            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080_3b24b89b-fd14-49f9-ba12-3b4212b60080.xyz");
+            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080_3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
     }
 }
