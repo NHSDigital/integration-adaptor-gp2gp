@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
 import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
 
@@ -64,6 +65,8 @@ public class InboundMessageHandler {
             ehrExtractRequestHandler.handleStart(ebXmlDocument, payloadDocument);
         } else if (CONTINUE_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getPayload());
+        } else if (ACKNOWLEDGMENT_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handleAcknowledgement(conversationId, payloadDocument);
         } else {
             throw new UnsupportedInteractionException(interactionId);
         }
