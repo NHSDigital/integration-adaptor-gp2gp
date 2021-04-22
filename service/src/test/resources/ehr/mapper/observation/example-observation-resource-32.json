@@ -1,0 +1,112 @@
+{
+    "resourceType": "Observation",
+    "id": "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "code": {
+        "text": "test"
+    },
+    "effectiveDateTime": "2010-07-14T16:32:51.42+01:00",
+    "issued": "2010-01-13T15:29:50.3+00:00",
+    "comment": "Example comment",
+    "component": [
+        {
+            "code": {
+                "coding": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                "extension": [
+                                    {
+                                        "url": "descriptionId",
+                                        "valueId": "152307010"
+                                    },
+                                    {
+                                        "url": "descriptionDisplay",
+                                        "valueString": "Allergy to penicillin"
+                                    }
+                                ]
+                            }
+                        ],
+                        "system": "http://snomed.info/sct",
+                        "code": "91936005",
+                        "display": "Allergy to penicillin",
+                        "userSelected": true
+                    }
+                ]
+            },
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "http://test-system",
+                        "code": "test-code",
+                        "display": "Test display"
+                    }
+                ],
+                "text": "Test text"
+            },
+            "referenceRange": [
+                {
+                    "text": "Test reference range text",
+                    "high": {
+                        "value": 30,
+                        "unit": "test-unit"
+                    },
+                    "low": {
+                        "value": 20,
+                        "unit": "test-unit"
+                    }
+                }
+            ],
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "Example without userSelected",
+                        "display": "Example without userSelected"
+                    }
+                ],
+                "text": "Example interpretation text 1"
+            }
+        },
+        {
+            "code": {
+                "coding": [
+                    {
+                        "system": "http://loinc.org",
+                        "code": "24701-5",
+                        "display": "Femur DXA Bone density"
+                    }
+                ],
+                "text": "BMD - Left Femur"
+            },
+            "valueString": "test-string",
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "Another code",
+                        "display": "Example with userSelected"
+                    },
+                    {
+                        "system": "Another System",
+                        "code": "Example with userSelected",
+                        "display": "Example with userSelected",
+                        "userSelected": true
+                    }
+                ],
+                "text": "Example interpretation text 2"
+            }
+        },
+        {
+            "valueString": "Example of a valueString"
+        },
+        {
+            "valueQuantity": {
+                "value": 7.2,
+                "unit": "g/dl",
+                "system": "http://unitsofmeasure.org",
+                "code": "g/dL"
+            }
+        }
+    ]
+}
