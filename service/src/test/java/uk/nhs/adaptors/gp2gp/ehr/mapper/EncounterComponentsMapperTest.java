@@ -80,7 +80,7 @@ public class EncounterComponentsMapperTest {
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(messageContext);
         MedicationStatementMapper medicationStatementMapper
-            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService);
+            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
