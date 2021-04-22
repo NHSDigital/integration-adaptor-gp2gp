@@ -351,6 +351,30 @@
                     }
                 ]
             }
+        },
+        {
+          "resource": {
+            "resourceType": "Practitioner",
+            "id": "1",
+            "meta": {
+              "versionId": "4749697187075864793",
+              "profile": [
+                "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+              ]
+            },
+            "name": [
+              {
+                "use": "official",
+                "given": [
+                  "David"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          }
         }
     ]
 }
