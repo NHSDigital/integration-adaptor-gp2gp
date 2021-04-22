@@ -134,6 +134,8 @@ public class MedicationStatementMapperTest {
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
         messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "1");
+        messageContext.getIdMapper().getOrNew(ResourceType.Organization, "2");
+        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, "3");
         medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
             new ParticipantMapper(), mockRandomIdGeneratorService);
     }
