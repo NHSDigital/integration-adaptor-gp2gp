@@ -8,6 +8,7 @@ import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Immunization;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient;
@@ -34,6 +35,7 @@ public class AgentDirectoryExtractor {
         ResourceType.Encounter,
         ResourceType.ReferralRequest,
         ResourceType.AllergyIntolerance,
+        ResourceType.MedicationRequest,
         ResourceType.Condition);
     private static final Map<ResourceType, Predicate<Resource>> RESOURCE_HAS_PRACTITIONER = Map.of(
         ResourceType.Immunization, resource -> ((Immunization) resource).hasPractitioner(),
@@ -42,6 +44,7 @@ public class AgentDirectoryExtractor {
         ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).hasRecipient(),
         ResourceType.AllergyIntolerance, resource -> ((AllergyIntolerance) resource).hasAsserter()
             || ((AllergyIntolerance) resource).hasRecorder(),
+        ResourceType.MedicationRequest, resource -> ((MedicationRequest) resource).hasRecorder(),
         ResourceType.Condition, resource -> ((Condition) resource).hasAsserter()
     );
     private static final Map<ResourceType, Function<Resource, IIdType>> RESOURCE_EXTRACT_IIDTYPE = Map.of(
@@ -49,6 +52,7 @@ public class AgentDirectoryExtractor {
         ResourceType.Encounter, resource -> ((Encounter) resource).getParticipantFirstRep().getIndividual().getReferenceElement(),
         ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRecipientFirstRep().getReferenceElement(),
         ResourceType.AllergyIntolerance, AgentDirectoryExtractor::extractIIdTypeFromAllergyIntolerance,
+        ResourceType.MedicationRequest, resource -> ((MedicationRequest) resource).getRecorder().getReferenceElement(),
         ResourceType.Condition, resource -> ((Condition) resource).getAsserter().getReferenceElement()
     );
 

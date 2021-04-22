@@ -134,7 +134,7 @@ public class EhrExtractUATTest {
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
             new DocumentReferenceToNarrativeStatementMapper(messageContext),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
