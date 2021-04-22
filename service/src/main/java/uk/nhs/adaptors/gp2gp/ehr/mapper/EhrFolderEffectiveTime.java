@@ -14,14 +14,14 @@ public class EhrFolderEffectiveTime {
     private String effectiveTimeHighHl7Format;
 
     public Optional<String> getEffectiveTimeLow() {
-        return effectiveTimeLowHl7Format != null ? Optional.of(effectiveTimeLowHl7Format) : Optional.empty();
+        return Optional.ofNullable(effectiveTimeLowHl7Format);
     }
 
     public Optional<String> getEffectiveTimeHigh() {
-        return effectiveTimeHighHl7Format != null ? Optional.of(effectiveTimeHighHl7Format) : Optional.empty();
+        return Optional.ofNullable(effectiveTimeHighHl7Format);
     }
 
-    public void updateEffectiveTimeLowFormated(String newEffectiveTimeHl7Format) {
+    public void updateEffectiveTimeLowFormatted(String newEffectiveTimeHl7Format) {
         DateTimeType newEffectiveTimeLow = DateFormatUtil.toDateTypeTime(newEffectiveTimeHl7Format);
         updateEffectiveTimeLow(newEffectiveTimeLow).ifPresent(effectiveTimeToUpdate -> {
             effectiveTimeLow = effectiveTimeToUpdate;

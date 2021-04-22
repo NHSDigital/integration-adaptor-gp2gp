@@ -1,15 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import java.util.stream.Stream;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Period;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 
@@ -41,11 +39,10 @@ public class EhrFolderEffectiveTimeTest {
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(INITIAL_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(INITIAL_END_DATE_HL7);
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(INITIAL_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
+        );
     }
 
     @Test
@@ -55,10 +52,10 @@ public class EhrFolderEffectiveTimeTest {
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(onlyStartPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(INITIAL_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isFalse();
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(INITIAL_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).isEmpty()
+        );
     }
 
     @Test
@@ -68,8 +65,10 @@ public class EhrFolderEffectiveTimeTest {
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(onlyEndPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isFalse();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isFalse();
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).isEmpty(),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).isEmpty()
+        );
     }
 
     @Test
@@ -81,11 +80,10 @@ public class EhrFolderEffectiveTimeTest {
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(newPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(EARLIER_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(INITIAL_END_DATE_HL7);
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(EARLIER_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
+        );
     }
 
     @Test
@@ -97,11 +95,10 @@ public class EhrFolderEffectiveTimeTest {
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(newPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(INITIAL_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(LATER_END_DATE_HL7);
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(INITIAL_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(LATER_END_DATE_HL7)
+        );
     }
 
     @Test
@@ -113,60 +110,39 @@ public class EhrFolderEffectiveTimeTest {
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(newPeriod);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(INITIAL_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(INITIAL_END_DATE_HL7);
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(INITIAL_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
+        );
     }
 
     @ParameterizedTest
-    @MethodSource("earlierLowDateInHl7PartDateFormat")
+    @ValueSource(strings = {"20180828103005", "20180828", "201808", "2018"})
     public void When_UpdatingEffectiveTimeWithStartEarlierInHl7Format_Expect_Updated(String earlierDatePartHl7Format) {
         Period initialPeriod = getPeriod(String.format(ENCOUNTER_WITH_FULL_DATES, INITIAL_START, INITIAL_END));
 
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
-        ehrFolderEffectiveTime.updateEffectiveTimeLowFormated(earlierDatePartHl7Format);
+        ehrFolderEffectiveTime.updateEffectiveTimeLowFormatted(earlierDatePartHl7Format);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(earlierDatePartHl7Format);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(INITIAL_END_DATE_HL7);
-    }
-
-    private static Stream<Arguments> earlierLowDateInHl7PartDateFormat() {
-        return Stream.of(
-            Arguments.of("20180828103005"),
-            Arguments.of("20180828"),
-            Arguments.of("201808"),
-            Arguments.of("2018")
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(earlierDatePartHl7Format),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("laterLowDateInHl7PartDateFormat")
+    @ValueSource(strings = {"20190828103005", "20190828", "201908", "2019"})
     public void When_UpdatingEffectiveTimePeriodWithStartLaterParsedFromHl7DateFormat_Expect_NoneUpdated(String laterDatePartHl7Format) {
         Period initialPeriod = getPeriod(String.format(ENCOUNTER_WITH_FULL_DATES, EARLIER_START, INITIAL_END));
 
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
-        ehrFolderEffectiveTime.updateEffectiveTimeLowFormated(laterDatePartHl7Format);
+        ehrFolderEffectiveTime.updateEffectiveTimeLowFormatted(laterDatePartHl7Format);
 
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow().get()).isEqualTo(EARLIER_START_DATE_HL7);
-
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().isPresent()).isTrue();
-        assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh().get()).isEqualTo(INITIAL_END_DATE_HL7);
-    }
-
-    private static Stream<Arguments> laterLowDateInHl7PartDateFormat() {
-        return Stream.of(
-            Arguments.of("20190828103005"),
-            Arguments.of("20190828"),
-            Arguments.of("201908"),
-            Arguments.of("2019")
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(EARLIER_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
         );
     }
 

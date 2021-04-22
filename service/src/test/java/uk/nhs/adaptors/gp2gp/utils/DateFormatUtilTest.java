@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -67,21 +68,12 @@ public class DateFormatUtilTest {
     }
 
     @ParameterizedTest
-    @MethodSource("convertedBackDates")
+    @CsvSource({"20190328103005,20190328103005", "1973,19730101000000", "200808,20080801000000", "20190728,20190728000000"})
     public void When_FormattingDateTimeTypeFromHl7FormatTextBackToDate_Expect_Hl7InUkZone(String firstParsedDate,
         String expectedConvertedBackDateTimeTpeString) {
         BaseDateTimeType convertedBackToDateTimeType = toDateTypeTime(firstParsedDate);
 
         assertThat(toHl7Format(convertedBackToDateTimeType)).isEqualTo(expectedConvertedBackDateTimeTpeString);
-    }
-
-    private static Stream<Arguments> convertedBackDates() {
-        return Stream.of(
-            Arguments.of("20190328103005", "20190328103005"),
-            Arguments.of("1973", "19730101000000"),
-            Arguments.of("200808", "20080801000000"),
-            Arguments.of("20190728", "20190728000000")
-        );
     }
 
     private static Stream<Arguments> instantParams() {

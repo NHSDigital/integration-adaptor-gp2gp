@@ -94,13 +94,11 @@ public class DateFormatUtil {
 
         formatter.setTimeZone(TimeZone.getTimeZone(UK_ZONE_ID));
 
-        Date date = null;
         try {
-            date = formatter.parse(effectiveTimeHl7Format);
+            Date date = formatter.parse(effectiveTimeHl7Format);
+            return new DateTimeType(date, TemporalPrecisionEnum.SECOND, TimeZone.getTimeZone(UK_ZONE_ID));
         } catch (ParseException e) {
             throw new EhrMapperException("Unable to parse Hl7 date to Fhir date format: " + effectiveTimeHl7Format);
         }
-
-        return new DateTimeType(date, TemporalPrecisionEnum.SECOND, TimeZone.getTimeZone(UK_ZONE_ID));
     }
 }

@@ -60,7 +60,7 @@ public class EhrExtractMapper {
         Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
         effectiveTimeHigh.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeHigh);
 
-        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.isPresent() || effectiveTimeHigh.isPresent());
+        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.or(() -> effectiveTimeHigh).isPresent());
 
         return ehrExtractTemplateParameters;
     }

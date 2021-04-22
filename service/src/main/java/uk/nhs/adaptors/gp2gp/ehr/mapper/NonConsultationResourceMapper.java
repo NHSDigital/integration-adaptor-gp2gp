@@ -94,7 +94,7 @@ public class NonConsultationResourceMapper {
             EncounterTemplateParameters build = builder.build();
 
             String effectiveTime = build.getEffectiveTime();
-            messageContext.getEffectiveTime().updateEffectiveTimeLowFormated(effectiveTime);
+            messageContext.getEffectiveTime().updateEffectiveTimeLowFormatted(effectiveTime);
             build.setEffectiveTime(prepareEffectiveTimeForNonConsultation(effectiveTime));
 
             return Optional.of(
