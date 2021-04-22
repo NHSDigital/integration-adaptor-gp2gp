@@ -98,7 +98,7 @@ public class DateFormatUtil {
             Date date = formatter.parse(effectiveTimeHl7Format);
             return new DateTimeType(date, TemporalPrecisionEnum.SECOND, TimeZone.getTimeZone(UK_ZONE_ID));
         } catch (ParseException e) {
-            throw new EhrMapperException("Unable to parse Hl7 date to Fhir date format: " + effectiveTimeHl7Format);
+            throw new EhrMapperException("Unable to parse Hl7 date to Fhir date format: " + effectiveTimeHl7Format, e);
         }
     }
 }
