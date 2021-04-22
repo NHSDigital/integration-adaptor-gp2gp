@@ -1,0 +1,102 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Immunization",
+                "id": "C93659E1-1107-441C-BE25-C5EF4B7831D1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Immunization-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1",
+                        "valueDateTime": "2010-06-30T05:48:06.91+01:00"
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://read.info/readv2",
+                                    "code": "65M1.00",
+                                    "display": "Measles/mumps/rubella vaccn.",
+                                    "userSelected": true
+                                },
+                                {
+                                    "extension": [
+                                        {
+                                            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                            "extension": [
+                                                {
+                                                    "url": "descriptionId",
+                                                    "valueId": "65004017"
+                                                },
+                                                {
+                                                    "url": "descriptionDisplay",
+                                                    "valueString": "Measles-mumps-rubella vaccination"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "system": "http://snomed.info/sct",
+                                    "code": "38598009",
+                                    "display": "Measles-mumps-rubella vaccination"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "C93659E1-1107-441C-BE25-C5EF4B7831D1"
+                    }
+                ],
+                "status": "completed",
+                "notGiven": false,
+                "vaccineCode": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/v3/NullFlavor",
+                            "code": "UNK",
+                            "display": "unknown"
+                        }
+                    ]
+                },
+                "patient": {
+                    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+                },
+                "encounter": {
+                    "reference": "Encounter/6CE8318F-2230-47CE-86CC-5210130A00F5"
+                },
+                "date": "2010-06-30T05:59:00+01:00",
+                "primarySource": true,
+                "practitioner": [
+                    {
+                        "role": {
+                            "coding": [
+                                {
+                                    "system": "http://hl7.org/fhir/v2/0443",
+                                    "code": "AP",
+                                    "display": "Administering Provider"
+                                }
+                            ]
+                        },
+                        "actor": {
+                            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -9,38 +9,54 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 
 public class EhrFolderEffectiveTime {
     private DateTimeType effectiveTimeLow;
+    private String effectiveTimeLowHl7Format;
     private DateTimeType effectiveTimeHigh;
+    private String effectiveTimeHighHl7Format;
 
     public Optional<String> getEffectiveTimeLow() {
-        return effectiveTimeLow != null ? Optional.of(DateFormatUtil.toHl7Format(effectiveTimeLow)) : Optional.empty();
+        return effectiveTimeLowHl7Format != null ? Optional.of(effectiveTimeLowHl7Format) : Optional.empty();
     }
 
     public Optional<String> getEffectiveTimeHigh() {
-        return effectiveTimeHigh != null ? Optional.of(DateFormatUtil.toHl7Format(effectiveTimeHigh)) : Optional.empty();
+        return effectiveTimeHighHl7Format != null ? Optional.of(effectiveTimeHighHl7Format) : Optional.empty();
+    }
+
+    public void updateEffectiveTimeLowFormated(String newEffectiveTimeHl7Format) {
+        DateTimeType newEffectiveTimeLow = DateFormatUtil.toDateTypeTime(newEffectiveTimeHl7Format);
+        updateEffectiveTimeLow(newEffectiveTimeLow).ifPresent(effectiveTimeToUpdate -> {
+            effectiveTimeLow = effectiveTimeToUpdate;
+            effectiveTimeLowHl7Format = newEffectiveTimeHl7Format;
+        });
     }
 
     public void updateEffectiveTimePeriod(Period period) {
         if (period.hasStart()) {
-            updateEffectiveTimeLow(period.getStartElement());
+            updateEffectiveTimeLow(period.getStartElement()).ifPresent(effectiveTimeToUpdate -> {
+                effectiveTimeLow = effectiveTimeToUpdate;
+                effectiveTimeLowHl7Format = DateFormatUtil.toHl7Format(effectiveTimeToUpdate);
+            });
             if (period.hasEnd()) {
-                updateEffectiveTimeHigh(period.getEndElement());
+                updateEffectiveTimeHigh(period.getEndElement()).ifPresent(effectiveTimeToUpdate -> {
+                    effectiveTimeHigh = effectiveTimeToUpdate;
+                    effectiveTimeHighHl7Format = DateFormatUtil.toHl7Format(effectiveTimeToUpdate);
+                });
             }
         }
     }
 
-    private void updateEffectiveTimeLow(DateTimeType newEffectiveTimeLow) {
-        if (effectiveTimeLow == null) {
-            effectiveTimeLow = newEffectiveTimeLow;
-        } else if (effectiveTimeLow.after(newEffectiveTimeLow)) {
-            effectiveTimeLow = newEffectiveTimeLow;
+    private Optional<DateTimeType> updateEffectiveTimeLow(DateTimeType newEffectiveTimeLow) {
+        if (effectiveTimeLow == null || effectiveTimeLow.after(newEffectiveTimeLow)) {
+            return Optional.of(newEffectiveTimeLow);
         }
+
+        return Optional.empty();
     }
 
-    private void updateEffectiveTimeHigh(DateTimeType newEffectiveTimeHigh) {
-        if (effectiveTimeHigh == null) {
-            effectiveTimeHigh = newEffectiveTimeHigh;
-        } else if (effectiveTimeHigh.before(newEffectiveTimeHigh)) {
-            effectiveTimeHigh = newEffectiveTimeHigh;
+    private Optional<DateTimeType> updateEffectiveTimeHigh(DateTimeType newEffectiveTimeHigh) {
+        if (effectiveTimeHigh == null || effectiveTimeHigh.before(newEffectiveTimeHigh)) {
+            return Optional.of(newEffectiveTimeHigh);
         }
+
+        return Optional.empty();
     }
 }

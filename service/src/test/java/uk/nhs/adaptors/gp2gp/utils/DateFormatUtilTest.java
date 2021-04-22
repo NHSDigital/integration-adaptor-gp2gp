@@ -2,11 +2,14 @@ package uk.nhs.adaptors.gp2gp.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toDateTypeTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -62,6 +65,31 @@ public class DateFormatUtilTest {
 
         String actual = toTextFormat(observation.getValueDateTimeType());
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @MethodSource("convertedBackDates")
+    public void When_FormattingDateTimeTypeFromHl7FormatTextBackToDate_Expect_Hl7InUkZone(String fhirDate,
+        String expectedConvertedBackDateTimeTpeString) {
+        String observationJson = String.format(DATETIME_OBSERVATION_TEMPLATE, fhirDate);
+        Observation observation = FHIR_PARSER.parseResource(observationJson, Observation.class);
+        DateTimeType beforeParsingToHl7FormatDateTimeType = observation.getValueDateTimeType();
+        String dateInHl7Format = toHl7Format(beforeParsingToHl7FormatDateTimeType);
+
+        BaseDateTimeType convertedBackToDateTimeType = toDateTypeTime(dateInHl7Format);
+
+        assertThat(toHl7Format(convertedBackToDateTimeType)).isEqualTo(expectedConvertedBackDateTimeTpeString);
+    }
+
+    private static Stream<Arguments> convertedBackDates() {
+        return Stream.of(
+            Arguments.of("2019-03-28T10:30:05+00:00", "20190328103005"),
+            Arguments.of("2019-03-28T10:30:05+01:00", "20190328093005"),
+            Arguments.of("2019-03-28T10:30:05", "20190328093005"),
+            Arguments.of("1973", "19730101000000"),
+            Arguments.of("2008-08", "20080801000000"),
+            Arguments.of("2019-07-28", "20190728000000")
+        );
     }
 
     private static Stream<Arguments> instantParams() {
