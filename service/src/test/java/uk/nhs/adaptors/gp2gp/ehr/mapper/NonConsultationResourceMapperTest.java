@@ -4,6 +4,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -56,6 +57,7 @@ public class NonConsultationResourceMapperTest {
     private static final String DOCUMENT_REFERENCE_XML = FILES_DIRECTORY + "document-reference-stub.xml";
     private static final String DOCUMENT_REFERENCE_BUNDLE = FILES_DIRECTORY + "document-reference-bundle.json";
     private static final String EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-document-reference-output.xml";
+    private static final String DUPLICATE_RESOURCES_BUNDLE = FILES_DIRECTORY + "duplicate-resource-bundle.json";
     private static final String TEST_ID = "b2175be3-29c2-465f-b2c6-323db03c2c7c";
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
@@ -85,6 +87,17 @@ public class NonConsultationResourceMapperTest {
         setupMock(ResourceTestFileUtils.getFileContent(stubEhrComponentMapperXml));
         String bundle = ResourceTestFileUtils.getFileContent(inputBundle);
         String expectedOutput = ResourceTestFileUtils.getFileContent(output);
+        Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
+
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
+        assertThat(translatedOutput).isEqualTo(expectedOutput);
+    }
+
+    @Test
+    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() throws IOException {
+        setupMock(ResourceTestFileUtils.getFileContent(REFERRAL_REQUEST_XML));
+        String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCES_BUNDLE);
+        String expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_REFERRAL_REQUEST_OUTPUT);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
