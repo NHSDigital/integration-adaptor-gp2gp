@@ -125,6 +125,12 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
 
+## How to operate the adaptor
+
+The following sections describe how to run the adaptor for development and testing.
+
+Refer to [OPERATING.md](./OPERATING.md)
+
 ## How to run service:
 
 The following steps use Docker to provide mocks of adaptor dependencies and infrastructure for local testing and 
