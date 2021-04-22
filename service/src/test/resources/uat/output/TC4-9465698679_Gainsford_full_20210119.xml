@@ -546,7 +546,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100226" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -559,7 +559,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -606,6 +606,11 @@
                 <text>One To Be Taken Twice A Day</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>

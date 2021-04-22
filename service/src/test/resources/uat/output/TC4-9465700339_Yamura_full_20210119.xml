@@ -3984,7 +3984,7 @@ with special characters
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20060906" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3997,7 +3997,7 @@ with special characters
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4044,6 +4044,11 @@ with special characters
                 <text>2X5ML SPOON DAILY</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>

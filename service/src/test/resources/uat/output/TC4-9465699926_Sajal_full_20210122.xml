@@ -1572,6 +1572,11 @@
                 <text>take one each morning</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -1663,6 +1668,11 @@
                 <text>take one daily</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -1806,6 +1816,11 @@
                 <text>od</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -1885,6 +1900,11 @@
                 <text>od</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -3874,7 +3894,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3887,7 +3907,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3934,6 +3954,11 @@ Dosage: 0.5 ml</text>
                 <text>od</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -3950,7 +3975,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3963,7 +3988,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4010,6 +4035,11 @@ Dosage: 0.5 ml</text>
                 <text>take one daily</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -4026,7 +4056,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4039,7 +4069,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4086,6 +4116,11 @@ Dosage: 0.5 ml</text>
                 <text>take one each morning</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>

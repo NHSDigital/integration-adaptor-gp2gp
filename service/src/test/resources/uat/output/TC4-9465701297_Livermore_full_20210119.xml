@@ -1551,6 +1551,11 @@
                 <text>twice daily as advised</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -2744,7 +2749,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201102" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2757,7 +2762,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2804,6 +2809,11 @@
                 <text>One To Be Taken Every 4-6 Hours Up To Four Times A Day</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -2820,7 +2830,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201217" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2833,7 +2843,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2885,6 +2895,11 @@
                 <text>One To Be Taken Each Morning</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -2901,7 +2916,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201217" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2914,7 +2929,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2961,6 +2976,11 @@
                 <text>twice daily as advised</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -2977,7 +2997,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201221" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2990,7 +3010,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3042,6 +3062,11 @@
                 <text>One To Be Taken Each Morning</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -3058,7 +3083,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201221" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3071,7 +3096,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3118,6 +3143,11 @@
                 <text>Twice daily as advised</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
@@ -3134,7 +3164,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201221" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3147,7 +3177,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3195,6 +3225,11 @@
                 <text>Twice daily as advised</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
     </ehrComposition>
