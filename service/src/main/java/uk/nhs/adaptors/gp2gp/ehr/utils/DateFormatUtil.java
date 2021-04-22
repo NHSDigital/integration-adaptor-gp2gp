@@ -26,9 +26,9 @@ public class DateFormatUtil {
     private static final DateTimeFormatter HL7_SECONDS_COMPUTER_READABLE = DateTimeFormatter.ofPattern(HL7_DATETIME_FORMAT);
     private static final DateTimeFormatter HL7_SECONDS_HUMAN_READABLE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final String FORMAT_TWO_DIGITS = "%02d";
-    public static final int MONTH_PRECISION = 6;
-    public static final int DAY_PRECISION = 8;
-    public static final int YEAR_PRECISION = 4;
+    private static final int MONTH_PRECISION = 6;
+    private static final int DAY_PRECISION = 8;
+    private static final int YEAR_PRECISION = 4;
 
     public static String toHl7Format(Instant instant) {
         return instant.atZone(UK_ZONE_ID).format(HL7_SECONDS_COMPUTER_READABLE);
