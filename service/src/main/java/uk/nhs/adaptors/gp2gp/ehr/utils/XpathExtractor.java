@@ -35,8 +35,8 @@ public class XpathExtractor {
     private static final String ID = "/id";
     private static final String VALUE_SELECTOR = "/@value";
     private static final String ROOT_SELECTOR = "/@root";
-    private static final String TYPE_CODE_AUT_QUERY = "[@typeCode=\"aut\"]";
-    private static final String TYPE_CODE_PRF_QUERY = "[@typeCode=\"prf\"]";
+    private static final String TYPE_CODE_AUT_QUERY = "[@typeCode=\"AUT\"]";
+    private static final String TYPE_CODE_PRF_QUERY = "[@typeCode=\"PRF\"]";
     private static final String AVAILABILITY_SELECTOR = AVAILABILITY_TIME + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_CENTER_SELECTOR = EFFECTIVE_TIME + CENTER + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_LOW_SELECTOR = EFFECTIVE_TIME + LOW + VALUE_SELECTOR;
