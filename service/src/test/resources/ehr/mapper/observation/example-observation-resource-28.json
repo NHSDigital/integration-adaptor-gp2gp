@@ -9,12 +9,7 @@
     "comment": "Example comment",
     "component": [
         {
-            "valueQuantity": {
-                "value": 7.2,
-                "unit": "g/dl",
-                "system": "http://unitsofmeasure.org",
-                "code": "g/dL"
-            }
+            "valueString": "Example of a valueString"
         }
     ]
 }

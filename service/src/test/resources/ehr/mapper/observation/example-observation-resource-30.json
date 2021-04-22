@@ -1,0 +1,30 @@
+{
+    "resourceType": "Observation",
+    "id": "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "code": {
+        "text": "test"
+    },
+    "effectiveDateTime": "2010-07-14T16:32:51.42+01:00",
+    "issued": "2010-01-13T15:29:50.3+00:00",
+    "comment": "Example comment",
+    "component": [
+        {
+            "interpretation": {
+                "coding": [
+                    {
+                        "system": "Another System",
+                        "code": "First interpretation code",
+                        "display": "First interpretation display"
+                    },
+                    {
+                        "system": "Another System",
+                        "code": "Second interpretation code with userSelected true",
+                        "display": "Second interpretation display with userSelected true",
+                        "userSelected": true
+                    }
+                ],
+                "text": "Example interpretation text"
+            }
+        }
+    ]
+}
