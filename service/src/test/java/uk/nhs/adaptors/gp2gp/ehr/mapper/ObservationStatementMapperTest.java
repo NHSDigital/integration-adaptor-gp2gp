@@ -80,9 +80,9 @@ public class ObservationStatementMapperTest {
     private static final String INPUT_JSON_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
         + "example-observation-resource-24.json";
     private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_ID = TEST_FILE_DIRECTORY
-        + "example-observation-resource-28.json";
+        + "example-observation-resource-34.json";
     private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-29.json";
+        + "example-observation-resource-35.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -120,7 +120,7 @@ public class ObservationStatementMapperTest {
     private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-18.xml";
     private static final String OUTPUT_XML_USES_AGENT_WITHOUT_ID = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-19.xml";
+        + "expected-output-observation-statement-27.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
