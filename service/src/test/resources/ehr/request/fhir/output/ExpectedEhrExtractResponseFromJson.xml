@@ -193,9 +193,9 @@
         </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100113142000"/>
+            <center value="20100113152000"/>
         </effectiveTime>
-        <availabilityTime value="20100113142000"/>
+        <availabilityTime value="20100113152000"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113152950" />
             <agentRef classCode="AGNT">
@@ -250,9 +250,9 @@ The line below contains special characters...
         </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100123124800"/>
+            <center value="20100123134800"/>
         </effectiveTime>
-        <availabilityTime value="20100123124800"/>
+        <availabilityTime value="20100123134800"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100123140354" />
             <agentRef classCode="AGNT">
