@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
+import org.apache.tika.mime.MimeTypeException;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -17,6 +18,8 @@ class DocumentReferenceUtilsTest {
     private static final String NARRATIVE_STATEMENT_ID = "3b24b89b-fd14-49f9-ba12-3b4212b60080";
     private static final String FILE_MISSING_ATTACHMENT_TITLE = "Reason why file is missing";
     private static final Map<String, String> SUPPORTED_MIME_TYPES;
+    private static final String UNSUPPORTED_CONTENT_TYPE = "unknown/unknown";
+    private static final String INVALID_CONTENT_TYPE = "invalid content type";
 
     static {
         SUPPORTED_MIME_TYPES = Map.ofEntries(
@@ -50,6 +53,23 @@ class DocumentReferenceUtilsTest {
                 assertThat(fileName).endsWith(entry.getValue());
             })
             .toArray(Executable[]::new));
+    }
+
+    @Test
+    void When_UnsupportedMimeTypeIsProvided_Expect_Exception() {
+        assertThatThrownBy(() -> DocumentReferenceUtils.buildAttachmentFileName(
+            NARRATIVE_STATEMENT_ID, new Attachment().setContentType(UNSUPPORTED_CONTENT_TYPE)))
+            .isInstanceOf(EhrMapperException.class)
+            .hasMessage("Unsupported Content-Type: unknown/unknown");
+    }
+
+    @Test
+    void When_InvalidMimeTypeIsProvided_Expect_Exception() {
+        assertThatThrownBy(() -> DocumentReferenceUtils.buildAttachmentFileName(
+            NARRATIVE_STATEMENT_ID, new Attachment().setContentType(INVALID_CONTENT_TYPE)))
+            .isInstanceOf(EhrMapperException.class)
+            .hasMessage("Unhandled exception while parsing Content-Type: invalid content type")
+            .hasCauseInstanceOf(MimeTypeException.class);
     }
 
     @Test
