@@ -13,5 +13,10 @@
             </pertinentAnnotation>
         </pertinentInformation>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id"/>
+    </agentRef>
+</Participant>
     </ObservationStatement>
 </component>

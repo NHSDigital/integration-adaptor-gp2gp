@@ -76,6 +76,167 @@
           "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
         }
       }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "0E2AAD20-7449-45B5-B0E6-BC6163E42789-PROB",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+            "valueReference": {
+              "reference": "Immunization/0E2AAD20-7449-45B5-B0E6-BC6163E42789"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+            "valueCode": "minor"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "0E2AAD20-7449-45B5-B0E6-BC6163E42789"
+          }
+        ],
+        "clinicalStatus": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "extension": [
+                {
+                  "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "descriptionId",
+                      "valueId": "264274018"
+                    },
+                    {
+                      "url": "descriptionDisplay",
+                      "valueString": "Measles mumps and rubella vaccination - second dose"
+                    }
+                  ]
+                }
+              ],
+              "system": "http://snomed.info/sct",
+              "code": "170433008",
+              "display": "Measles mumps and rubella vaccination - second dose",
+              "userSelected": true
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
+        },
+        "onsetDateTime": "2020-11-02",
+        "assertedDate": "2020-11-02T11:12:41.667+00:00",
+        "asserter": {
+          "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+        },
+        "note": [
+          {
+            "text": "Condition.actualProblem note refers to Immunization"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "04288662-8B7A-4350-B69B-CE155E992A7C-PROB",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+          ]
+        },
+        "extension": [
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+            "valueReference": {
+              "reference": "Immunization/04288662-8B7A-4350-B69B-CE155E992A7C"
+            }
+          },
+          {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+            "valueCode": "minor"
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "04288662-8B7A-4350-B69B-CE155E992A7C"
+          }
+        ],
+        "clinicalStatus": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "extension": [
+                {
+                  "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                  "extension": [
+                    {
+                      "url": "descriptionId",
+                      "valueId": "264274018"
+                    },
+                    {
+                      "url": "descriptionDisplay",
+                      "valueString": "Measles mumps and rubella vaccination - second dose"
+                    }
+                  ]
+                }
+              ],
+              "system": "http://snomed.info/sct",
+              "code": "170433008",
+              "display": "Measles mumps and rubella vaccination - second dose",
+              "userSelected": true
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
+        },
+        "onsetDateTime": "2020-11-02",
+        "assertedDate": "2020-11-02T11:12:41.667+00:00",
+        "asserter": {
+          "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+        },
+        "note": [
+          {
+            "text": "Condition.actualProblem note 1 refers to Immunization"
+          },
+          {
+            "text": "Condition.actualProblem note 2 refers to Immunization"
+          }
+        ]
+      }
     }
   ]
 }

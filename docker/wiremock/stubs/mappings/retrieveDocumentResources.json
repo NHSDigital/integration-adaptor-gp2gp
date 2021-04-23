@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "GET",
-    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/2/DocumentReference?_include=DocumentReference%3Asubject%3APatient&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"
+    "urlPattern": "/.*/STU3/1/gpconnect/documents/fhir/Patient/2/DocumentReference[?]_include=DocumentReference%3Asubject%3APatient&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner"
   },
   "response": {
     "status": 200,

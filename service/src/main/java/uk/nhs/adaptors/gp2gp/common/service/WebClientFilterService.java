@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
-import uk.nhs.adaptors.gp2gp.sds.exception.SdsException;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
@@ -22,11 +21,10 @@ import uk.nhs.adaptors.gp2gp.mhs.InvalidOutboundMessageException;
 public class WebClientFilterService {
 
     private static final Map<RequestType, Function<String, Exception>> REQUEST_TYPE_TO_EXCEPTION_MAP = Map.of(
-        RequestType.GPC, GpConnectException::new,
-        RequestType.SDS, SdsException::new);
+        RequestType.GPC, GpConnectException::new);
 
     public enum RequestType {
-        GPC, SDS, MHS_OUTBOUND
+        GPC, MHS_OUTBOUND
     }
 
     public ExchangeFilterFunction errorHandlingFilter(RequestType requestType, HttpStatus httpStatus) {

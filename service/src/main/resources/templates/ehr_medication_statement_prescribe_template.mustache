@@ -1,0 +1,46 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <MedicationStatement classCode="SBADM" moodCode="ORD">
+        <id root="{{medicationStatementId}}"/>
+        <statusCode code="{{statusCode}}"/>
+        {{{availabilityTime}}}
+        {{#effectiveTime}}
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{/effectiveTime}}
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    {{{medicationReferenceCode}}}
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyPrescribe>
+                <id root="{{ehrSupplyId}}"/>
+                <statusCode code="{{statusCode}}"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                {{{availabilityTime}}}
+                <quantity value="{{quantityValue}}" unit="1">
+                    <translation value="{{quantityValue}}">
+                        <originalText>{{quantityText}}</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>{{ehrSupplyPertinentInformation}}</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+                {{{basedOn}}}
+            </ehrSupplyPrescribe>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>{{medicationStatementPertinentInformation}}</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
+    </MedicationStatement>
+</component>

@@ -13,4 +13,11 @@ public class EncounterTemplateParameters {
     private String availabilityTime;
     private String effectiveTime;
     private String components;
+    private String code;
+    private String altCode;
+    private String displayName;
+    private String originalText;
+    private String authorTime;
+    private String participant2;
+    private String author;
 }

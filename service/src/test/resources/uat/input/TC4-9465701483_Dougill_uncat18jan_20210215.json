@@ -1,0 +1,3672 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "List",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ClinicalSetting-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "http://snomed.info/sct",
+                                    "code": "1060971000000108",
+                                    "display": "General practice service"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "status": "current",
+                "mode": "snapshot",
+                "title": "Uncategorised data",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "826501000000100",
+                            "display": "Miscellaneous record"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "date": "2021-02-15T16:18:09.46+00:00",
+                "orderedBy": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/list-order",
+                            "code": "event-date",
+                            "display": "Sorted by Event Date"
+                        }
+                    ]
+                },
+                "entry": [
+                    {
+                        "item": {
+                            "reference": "Observation/464B7136-8DCA-4BF0-A535-3D3A33FF4894"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/5C78FCFA-A309-4870-B321-AC2E4203B3C5"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/9316ED0D-5E9E-4582-8120-74A24FFCD1F5"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/176D3C7C-BA2D-401D-9094-9C60675C3A25"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/F26245C1-F017-4217-9EA2-F17A897E1AFC"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/F548999D-49F7-489D-97F2-FEDF96010B0E"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/B64F42E8-66EA-4BC1-B018-4270B21714BA"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/30260AAC-E18D-4278-9E1D-571E668E97B0"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/ABCFB8D4-51B3-41A2-B6F7-98A6CA26B5A3"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/5979B6C5-203A-4D47-9B68-AA24B75BD143"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/62C9F75A-F83A-41C5-A894-CE6F79C354ED"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/DB3063D7-C708-41DC-B8E6-6C8E6A613294"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/29219831-42E7-46D5-80BF-8B77E969142E"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/A43EDF8B-32BE-457F-9A28-41A53616BC89"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/76C184AC-F61D-43E0-A4EA-48D2CE20C089"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/DC5EE48F-8E5E-4747-92E3-339DF0E69DB6"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/57CF8383-1345-44E7-9B88-21E4C0B621C5"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/4CE22D16-C07A-4320-B790-ED35A4EAF52C"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/3CF1E9CB-301A-413F-B8F7-2A54C8701EE8"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/45A7BBB4-A94E-45BC-B856-D8DB48B82C0E"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/D9B069E7-4CDC-449B-958D-E0C070F03EC9"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/BC4848D9-9CF4-40D0-A4A2-B4ADD0447531"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/5104B12C-3A72-4AFC-BD36-833A59B18647"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/5D35FEA5-BC65-405B-884A-3BD11E4283D7"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/541DD7AC-FA08-4EBA-BC8E-B28BFFE0C690"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/DC2BE07F-6132-40AB-BADC-75D7B2C5192D"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/C9575BF0-EAA0-4A0C-9C1B-2A31A69162AE"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/19D33E61-E967-418D-928C-B416EC47D057"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/74C2765C-CCA7-43BC-A7B0-5393D6918249"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/7A34FD48-0EA1-4329-AF3A-A72FEA928173"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/60CD4340-E0EF-4764-8990-4E691096D869"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/676AFF06-D8E3-4C75-A93F-DFC2CDC5E73D"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/9EEDC59C-BE3D-4FC3-A626-9F781215CAD2"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/2393213F-01CA-47A7-B0E7-667217B2EF59"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/8A2358F4-CCC5-4375-B0BE-EE92E9CA7C62"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/8FB88AFC-9930-47F9-81D1-D01F9635C7B5"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/9ABA4821-1FE4-4F06-BFBA-FB685C7C290D"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/3823BE08-0EA3-418C-AB4B-5CDC254CDDD7"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/E1FEB394-2C8A-4A9E-98B6-97D5958A8121"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/35539B4A-2A6A-4C9F-82AC-AC852886A75A"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/D1757394-086F-461B-8D38-E0BC027C7875"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/5CE6C4D4-9E09-4A9C-A74D-8A34DA14C545"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/F4516B09-CEFA-42EE-8298-2D52A37DFE8E"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/7EC24C95-5ED1-4CB0-A648-3E5CE7DF6518"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/C2CCB9E0-7228-4B6D-9CF1-8989504C3D30"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/4E176418-A512-4159-B58A-F062E79D15B2"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/EEBE76EF-2F17-4387-864E-9ABAF616DDBD"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/D94FE73D-B273-4B2B-9871-E8F0EB99D297"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/9ED98727-7C31-4355-B223-42F4EFB66653"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/83829E34-DE25-419F-8EDA-110844560454"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/F4B45366-A5AB-40FB-8382-32CFBF013006"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/42CFFB52-2C09-4344-85F3-2FCE02C4CE24"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Observation/4D10FF79-FF48-4370-BABE-56A031B55AD5"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F",
+                "meta": {
+                    "versionId": "5548779704829943119",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "preferredBranchSurgery",
+                                "valueReference": {
+                                    "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ],
+                                    "text": "Number present and verified"
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "1234567890"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Dougill",
+                        "given": [
+                            "Cedar",
+                            "Ursella"
+                        ],
+                        "prefix": [
+                            "Ms"
+                        ]
+                    },
+                    {
+                        "use": "old",
+                        "family": "Pwtestpatient"
+                    }
+                ],
+                "gender": "female",
+                "birthDate": "1972-10-01",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "Willowcroft House",
+                            "Barrow Road",
+                            "New Holland"
+                        ],
+                        "city": "Barrow-Upon-Humber",
+                        "postalCode": "DN19 7PH"
+                    }
+                ],
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "464B7136-8DCA-4BF0-A535-3D3A33FF4894",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "464B7136-8DCA-4BF0-A535-3D3A33FF4894"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "663f.00",
+                            "display": "Asthma never restricts exercise",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "264569010"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "170658009",
+                            "display": "Asthma never restricts exercise"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.563+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "5C78FCFA-A309-4870-B321-AC2E4203B3C5",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5C78FCFA-A309-4870-B321-AC2E4203B3C5"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "663H.00",
+                            "display": "Inhaler technique - good",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "264534013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "170625000",
+                            "display": "Inhaler technique - good"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.547+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9316ED0D-5E9E-4582-8120-74A24FFCD1F5",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "9316ED0D-5E9E-4582-8120-74A24FFCD1F5"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "663O000",
+                            "display": "Asthma never disturbs sleep",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "264545011"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "170636007",
+                            "display": "Asthma never disturbs sleep"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.547+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "176D3C7C-BA2D-401D-9094-9C60675C3A25",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "176D3C7C-BA2D-401D-9094-9C60675C3A25"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "663S.00",
+                            "display": "Peak flow meter at home",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "264548013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "170639000",
+                            "display": "Peak flow meter at home"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.53+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "F26245C1-F017-4217-9EA2-F17A897E1AFC",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "F26245C1-F017-4217-9EA2-F17A897E1AFC"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "339H.00",
+                            "display": "Predicted peak flow",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "213601000006118"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Predicted peak flow"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "271508001",
+                            "display": "Expected peak flow rate (respiratory)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.53+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 630.000,
+                    "unit": "L/min"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "F548999D-49F7-489D-97F2-FEDF96010B0E",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "F548999D-49F7-489D-97F2-FEDF96010B0E"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "339D.00",
+                            "display": "Best ever peak flow rate",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "406034010"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Best ever peak flow rate"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "271306003",
+                            "display": "Best ever peak flow rate (respiratory)"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.5+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 645.000,
+                    "unit": "L/min"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "B64F42E8-66EA-4BC1-B018-4270B21714BA",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "B64F42E8-66EA-4BC1-B018-4270B21714BA"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "3395.00",
+                            "display": "Peak exp. flow rate: PEFR/PFR",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "31196014"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "18491006",
+                            "display": "Peak expiratory flow rate"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/B7E5AE3B-260D-4BEB-962A-BC489C30041F"
+                },
+                "effectiveDateTime": "2010-01-18T11:38:00+00:00",
+                "issued": "2010-01-18T11:34:50.483+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 620.000,
+                    "unit": "L/min"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "30260AAC-E18D-4278-9E1D-571E668E97B0",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "30260AAC-E18D-4278-9E1D-571E668E97B0"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "8HR7.00",
+                            "display": "Refer for vascular studies",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "284048013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "183844002",
+                            "display": "Refer for vascular studies"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.473+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 20"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "ABCFB8D4-51B3-41A2-B6F7-98A6CA26B5A3",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "ABCFB8D4-51B3-41A2-B6F7-98A6CA26B5A3"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "7L06400",
+                            "display": "Amputation below knee",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "146411012"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Amputation below-knee"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "88312006",
+                            "display": "Amputation of leg through tibia and fibula"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.457+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Left Leg"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "5979B6C5-203A-4D47-9B68-AA24B75BD143",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5979B6C5-203A-4D47-9B68-AA24B75BD143"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5K.00",
+                            "display": "O/E - Left diabetic foot at high risk",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "1488398016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "394676004",
+                            "display": "O/E - Left diabetic foot at high risk"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.44+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "62C9F75A-F83A-41C5-A894-CE6F79C354ED",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "62C9F75A-F83A-41C5-A894-CE6F79C354ED"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "7L07300",
+                            "display": "Amputation through metatarsal bones",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "394609011"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "265739006",
+                            "display": "Amputation through metatarsal bones"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.44+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Right Leg"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "DB3063D7-C708-41DC-B8E6-6C8E6A613294",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "DB3063D7-C708-41DC-B8E6-6C8E6A613294"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5E.00",
+                            "display": "O/E - Right diabetic foot at low risk",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "1488393013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "394671009",
+                            "display": "O/E - Right diabetic foot at low risk"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.427+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "29219831-42E7-46D5-80BF-8B77E969142E",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "29219831-42E7-46D5-80BF-8B77E969142E"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5N.00",
+                            "display": "O/E - No left foot deformity",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2534100014"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "414900003",
+                            "display": "O/E - No left foot deformity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.41+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "A43EDF8B-32BE-457F-9A28-41A53616BC89",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "A43EDF8B-32BE-457F-9A28-41A53616BC89"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5T.00",
+                            "display": "O/E - left healed foot ulcer",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2533104014"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "414895002",
+                            "display": "O/E - left healed foot ulcer"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.397+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "76C184AC-F61D-43E0-A4EA-48D2CE20C089",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "76C184AC-F61D-43E0-A4EA-48D2CE20C089"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G58.00",
+                            "display": "O/E - Right foot deformity",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "451408018"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "308103003",
+                            "display": "O/E - Right foot deformity"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.397+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "DC5EE48F-8E5E-4747-92E3-339DF0E69DB6",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "DC5EE48F-8E5E-4747-92E3-339DF0E69DB6"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5S.00",
+                            "display": "O/E - right healed foot ulcer",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2533103015"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "414911006",
+                            "display": "O/E - right healed foot ulcer"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.38+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "57CF8383-1345-44E7-9B88-21E4C0B621C5",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "57CF8383-1345-44E7-9B88-21E4C0B621C5"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M271400",
+                            "display": "Mixed venous and arterial leg ulcer",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "357893018"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Mixed venous and arterial leg ulcer"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "238792006",
+                            "display": "Mixed arteriovenous leg ulcer"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.363+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 8"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "4CE22D16-C07A-4320-B790-ED35A4EAF52C",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "4CE22D16-C07A-4320-B790-ED35A4EAF52C"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "N030100",
+                            "display": "Diabetic Charcot arthropathy",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "309739014"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Diabetic Charcot's arthropathy"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "201724008",
+                            "display": "Diabetic neuropathic arthropathy"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.363+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 9"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "3CF1E9CB-301A-413F-B8F7-2A54C8701EE8",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "3CF1E9CB-301A-413F-B8F7-2A54C8701EE8"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M271200",
+                            "display": "Mixed diabetic ulcer - foot",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "309180011"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "201252003",
+                            "display": "Mixed diabetic ulcer - foot"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.35+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 6"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "45A7BBB4-A94E-45BC-B856-D8DB48B82C0E",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "45A7BBB4-A94E-45BC-B856-D8DB48B82C0E"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M271300",
+                            "display": "Arterial leg ulcer",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "357894012"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Arterial leg ulcer"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "238793001",
+                            "display": "Ischaemic leg ulcer"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.35+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 7"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "D9B069E7-4CDC-449B-958D-E0C070F03EC9",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D9B069E7-4CDC-449B-958D-E0C070F03EC9"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M271100",
+                            "display": "Neuropathic diabetic ulcer - foot",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "309179013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "201251005",
+                            "display": "Neuropathic diabetic ulcer - foot"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.333+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 5"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "BC4848D9-9CF4-40D0-A4A2-B4ADD0447531",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "BC4848D9-9CF4-40D0-A4A2-B4ADD0447531"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M271000",
+                            "display": "Ischaemic ulcer diabetic foot",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "309177010"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "201250006",
+                            "display": "Ischaemic ulcer diabetic foot"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.317+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 4"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "5104B12C-3A72-4AFC-BD36-833A59B18647",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5104B12C-3A72-4AFC-BD36-833A59B18647"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "AB01.11",
+                            "display": "Onychomycosis",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2533089015"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "414941008",
+                            "display": "Onychomycosis"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.3+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 11"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "5D35FEA5-BC65-405B-884A-3BD11E4283D7",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5D35FEA5-BC65-405B-884A-3BD11E4283D7"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "M23yC00",
+                            "display": "Onychogryphosis",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "88023016"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Onychogryphosis"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "52897009",
+                            "display": "Onychogryposis"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.287+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 10"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "541DD7AC-FA08-4EBA-BC8E-B28BFFE0C690",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "541DD7AC-FA08-4EBA-BC8E-B28BFFE0C690"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "G73z000",
+                            "display": "Intermittent claudication",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "105536013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "63491006",
+                            "display": "Intermittent claudication"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.27+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "DC2BE07F-6132-40AB-BADC-75D7B2C5192D",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "DC2BE07F-6132-40AB-BADC-75D7B2C5192D"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "F372.12",
+                            "display": "Diabetic neuropathy",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "345486016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "230572002",
+                            "display": "Diabetic neuropathy"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.27+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 3"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "C9575BF0-EAA0-4A0C-9C1B-2A31A69162AE",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "C9575BF0-EAA0-4A0C-9C1B-2A31A69162AE"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "G73z000",
+                            "display": "Intermittent claudication",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "105536013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "63491006",
+                            "display": "Intermittent claudication"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.253+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "19D33E61-E967-418D-928C-B416EC47D057",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "19D33E61-E967-418D-928C-B416EC47D057"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "299..00",
+                            "display": "O/E - gait",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "254946015"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163683007",
+                            "display": "O/E - gait"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.24+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 13"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "74C2765C-CCA7-43BC-A7B0-5393D6918249",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "74C2765C-CCA7-43BC-A7B0-5393D6918249"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "AB04.11",
+                            "display": "Athlete's foot",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "11003018"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Athlete's foot"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "6020002",
+                            "display": "Tinea pedis"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.223+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 12"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "7A34FD48-0EA1-4329-AF3A-A72FEA928173",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "7A34FD48-0EA1-4329-AF3A-A72FEA928173"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "29H8.00",
+                            "display": "O/E - vibration sense left foot reduced",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "1488847017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "395149007",
+                            "display": "O/E - vibration sense left foot reduced"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.207+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "60CD4340-E0EF-4764-8990-4E691096D869",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "60CD4340-E0EF-4764-8990-4E691096D869"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "29HA.00",
+                            "display": "O/E - Vibration sense of right foot absent",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2159159017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "407558007",
+                            "display": "O/E - Vibration sense of right foot absent"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.19+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "676AFF06-D8E3-4C75-A93F-DFC2CDC5E73D",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "676AFF06-D8E3-4C75-A93F-DFC2CDC5E73D"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                            "code": "EMISQLE7",
+                            "display": "Left foot monofilament 10g abnormal",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "857021000006110"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Left foot monofilament 10g abnormal"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "857021000006106",
+                            "display": "Left foot monofilament 10g abnormal"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.177+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 2"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9EEDC59C-BE3D-4FC3-A626-9F781215CAD2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "9EEDC59C-BE3D-4FC3-A626-9F781215CAD2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                            "code": "EMISQRI6",
+                            "display": "Right foot monofilament 10g normal",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "857841000006112"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Right foot monofilament 10g normal"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "857841000006108",
+                            "display": "Right foot monofilament 10g normal"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.16+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some text 1"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "2393213F-01CA-47A7-B0E7-667217B2EF59",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "2393213F-01CA-47A7-B0E7-667217B2EF59"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "22C4.00",
+                            "display": "O/E - oedema of legs",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "253720016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "162783008",
+                            "display": "O/E - oedema of legs"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.147+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Left Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "8A2358F4-CCC5-4375-B0BE-EE92E9CA7C62",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "8A2358F4-CCC5-4375-B0BE-EE92E9CA7C62"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "22C2.00",
+                            "display": "O/E - oedema of ankles",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "253712018"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "162781005",
+                            "display": "O/E - oedema of ankles"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.13+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Right Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "8FB88AFC-9930-47F9-81D1-D01F9635C7B5",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "8FB88AFC-9930-47F9-81D1-D01F9635C7B5"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "1DCB.00",
+                            "display": "No pain",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "504788016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "81765008",
+                            "display": "No pain"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.1+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Left Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9ABA4821-1FE4-4F06-BFBA-FB685C7C290D",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "9ABA4821-1FE4-4F06-BFBA-FB685C7C290D"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "1DCA.00",
+                            "display": "Rest pain",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "87530017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "52598005",
+                            "display": "Rest pain"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.083+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Right Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "3823BE08-0EA3-418C-AB4B-5CDC254CDDD7",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "3823BE08-0EA3-418C-AB4B-5CDC254CDDD7"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "16I..00",
+                            "display": "Claudication distance",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "375462013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "252094004",
+                            "display": "Claudication distance"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.067+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 1.900,
+                    "unit": "m"
+                },
+                "comment": "Left Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "E1FEB394-2C8A-4A9E-98B6-97D5958A8121",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "E1FEB394-2C8A-4A9E-98B6-97D5958A8121"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "16I..00",
+                            "display": "Claudication distance",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "375462013"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "252094004",
+                            "display": "Claudication distance"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.05+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 1.400,
+                    "unit": "m"
+                },
+                "comment": "Right Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "35539B4A-2A6A-4C9F-82AC-AC852886A75A",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "35539B4A-2A6A-4C9F-82AC-AC852886A75A"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "196411000000103",
+                            "display": "Transfer-degraded record entry"
+                        }
+                    ],
+                    "text": "BOTH"
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.037+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "D1757394-086F-461B-8D38-E0BC027C7875",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D1757394-086F-461B-8D38-E0BC027C7875"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "196411000000103",
+                            "display": "Transfer-degraded record entry"
+                        }
+                    ],
+                    "text": "LEFT"
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.037+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "5CE6C4D4-9E09-4A9C-A74D-8A34DA14C545",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5CE6C4D4-9E09-4A9C-A74D-8A34DA14C545"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24J0.00",
+                            "display": "Capillary refill time",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "26329014"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Capillary refill time"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "15527001",
+                            "display": "Capillary filling"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:11.02+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 15.000,
+                    "unit": "Banana"
+                },
+                "comment": "Left Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "F4516B09-CEFA-42EE-8298-2D52A37DFE8E",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "F4516B09-CEFA-42EE-8298-2D52A37DFE8E"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                            "code": "EMISQDO2",
+                            "display": "Doppler of left foot - biphasic",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "856441000006111"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Doppler of left foot - biphasic"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "856441000006107",
+                            "display": "Doppler of left foot - biphasic"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.99+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "7EC24C95-5ED1-4CB0-A648-3E5CE7DF6518",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "7EC24C95-5ED1-4CB0-A648-3E5CE7DF6518"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24J0.00",
+                            "display": "Capillary refill time",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "26329014"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Capillary refill time"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "15527001",
+                            "display": "Capillary filling"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.99+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "valueQuantity": {
+                    "value": 10.000,
+                    "unit": "s"
+                },
+                "comment": "Right Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "C2CCB9E0-7228-4B6D-9CF1-8989504C3D30",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "C2CCB9E0-7228-4B6D-9CF1-8989504C3D30"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "https://fhir.hl7.org.uk/Id/egton-codes",
+                            "code": "EMISQDO6",
+                            "display": "Doppler of right foot - triphasic",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "856521000006117"
+                                        },
+                                        {
+                                            "url": "descriptionDisplay",
+                                            "valueString": "Doppler of right foot - triphasic"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "856521000006101",
+                            "display": "Doppler of right foot - triphasic"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.973+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "4E176418-A512-4159-B58A-F062E79D15B2",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "4E176418-A512-4159-B58A-F062E79D15B2"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2HE4.00",
+                            "display": "O/E - skin over lesion hot",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "256122014"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "164615004",
+                            "display": "O/E - skin over lesion hot"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.957+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Right Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "EEBE76EF-2F17-4387-864E-9ABAF616DDBD",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "EEBE76EF-2F17-4387-864E-9ABAF616DDBD"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2HE2.00",
+                            "display": "O/E - skin over lesion cold",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "256118016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "164612001",
+                            "display": "O/E - skin over lesion cold"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.957+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "Left Foot"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "D94FE73D-B273-4B2B-9871-E8F0EB99D297",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D94FE73D-B273-4B2B-9871-E8F0EB99D297"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5c.00",
+                            "display": "O/E - Left foot colour abnormal",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2548826014"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "416317001",
+                            "display": "O/E - Left foot colour abnormal"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.94+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is left foot colour text note"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9ED98727-7C31-4355-B223-42F4EFB66653",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "9ED98727-7C31-4355-B223-42F4EFB66653"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "2G5Z.00",
+                            "display": "O/E - Right foot colour normal",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2549220017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "416694004",
+                            "display": "O/E - Right foot colour normal"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.927+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is right foot colour text note"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "83829E34-DE25-419F-8EDA-110844560454",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "83829E34-DE25-419F-8EDA-110844560454"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24F9.00",
+                            "display": "O/E - L.dorsalis pedis absent",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2667525012"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163121008",
+                            "display": "On examination - left dorsalis pedis absent"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.91+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "F4B45366-A5AB-40FB-8382-32CFBF013006",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "F4B45366-A5AB-40FB-8382-32CFBF013006"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24E8.00",
+                            "display": "O/E - R.dorsalis pedis present",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2667841017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163108001",
+                            "display": "On examination - right dorsalis pedis pulse present"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.897+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "42CFFB52-2C09-4344-85F3-2FCE02C4CE24",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "42CFFB52-2C09-4344-85F3-2FCE02C4CE24"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24F7.00",
+                            "display": "O/E - L.post.tib. pulse absent",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2667523017"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163119003",
+                            "display": "On examination - left posterior tibial pulse absent"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.863+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "4D10FF79-FF48-4370-BABE-56A031B55AD5",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "4D10FF79-FF48-4370-BABE-56A031B55AD5"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "24E6.00",
+                            "display": "O/E - R.post.tib.pulse present",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2666761012"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "163106002",
+                            "display": "On examination - right posterior tibial pulse present"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/0CEEBCCD-76F5-4ECC-9B4B-2CD6E09CDE9F"
+                },
+                "context": {
+                    "reference": "Encounter/62B17FF3-AC74-4118-A567-B34D09798DCA"
+                },
+                "effectiveDateTime": "2010-01-18T11:47:00+00:00",
+                "issued": "2010-01-18T11:47:10.85+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "5E496953-065B-41F2-9577-BE8F2FBD0757",
+                "meta": {
+                    "versionId": "1112974926854455048",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
+                        "valueReference": {
+                            "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "A82038"
+                    }
+                ],
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    }
+                ],
+                "name": "TEMPLE SOWERBY MEDICAL PRACTICE",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01133800000",
+                        "use": "work",
+                        "rank": 1
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "type": "physical",
+                        "line": [
+                            "Fulford Grange",
+                            "Micklefield Lane",
+                            "Rawdon",
+                            "Rawdon"
+                        ],
+                        "city": "Leeds",
+                        "district": "Yorkshire",
+                        "postalCode": "LS19 6BA"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "meta": {
+                    "versionId": "4749697187075864793",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "McAvenue",
+                        "given": [
+                            "David"
+                        ],
+                        "prefix": [
+                            "Dr"
+                        ]
+                    }
+                ],
+                "gender": "male"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "EB3994A6-5A87-4B53-A414-913137072F57",
+                "meta": {
+                    "versionId": "5019450143199176900",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "status": "active",
+                "name": "EMIS Test Practice Location",
+                "description": "none",
+                "type": {
+                    "text": "Main Surgery"
+                },
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01133800000",
+                        "use": "work",
+                        "rank": 1
+                    }
+                ],
+                "address": {
+                    "use": "work",
+                    "type": "physical",
+                    "line": [
+                        "Fulford Grange",
+                        "Micklefield Lane",
+                        "Rawdon",
+                        "Rawdon"
+                    ],
+                    "city": "Leeds",
+                    "district": "Yorkshire",
+                    "postalCode": "LS19 6BA"
+                },
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757",
+                    "display": "TEMPLE SOWERBY MEDICAL PRACTICE"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "6D340A1BBC154D4E93CFBBCB5B74DF735E496953065B41F29577BE8F2FBD0757",
+                "meta": {
+                    "versionId": "8380942905747068072",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
+                "organization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

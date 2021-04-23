@@ -9,6 +9,7 @@ import java.time.Instant;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,12 +55,14 @@ public class EhrExtractMapperTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private OrganizationToAgentMapper organizationToAgentMapper;
 
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setUp() {
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber(TEST_NHS_NUMBER)
             .conversationId(TEST_CONVERSATION_ID)
@@ -72,26 +75,46 @@ public class EhrExtractMapperTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+
+        ParticipantMapper participantMapper = new ParticipantMapper();
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new NarrativeStatementMapper(messageContext),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
                 new StructuredObservationValueMapper(),
                 new PertinentInformationObservationValueMapper(),
-                codeableConceptCdMapper
+                codeableConceptCdMapper,
+                participantMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper),
-            new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper)
+        );
+
+        AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
+            new PractitionerAgentPersonMapper(
+                messageContext,
+                new OrganizationToAgentMapper(messageContext)
+            ),
+            organizationToAgentMapper
         );
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper));
+            new EncounterMapper(messageContext, encounterComponentsMapper),
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
+            agentDirectoryMapper);
     }
 
     @AfterEach
@@ -110,6 +133,6 @@ public class EhrExtractMapperTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
+        assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
 }

@@ -13,7 +13,6 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SendEhrExtractCoreTaskDispatcher {
-
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
@@ -29,5 +28,6 @@ public class SendEhrExtractCoreTaskDispatcher {
             .build();
 
         taskDispatcher.createTask(sendEhrExtractCoreTaskDefinition);
+        LOGGER.info("SendEhrExtractCoreTaskDefinition added to task queue.");
     }
 }

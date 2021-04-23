@@ -1,0 +1,112 @@
+{
+  "resourceType": "Immunization",
+  "id": "0E2AAD20-7449-45B5-B0E6-BC6163E42789",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Immunization-1"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1",
+      "valueDateTime": "2020-11-02T11:12:41.667+00:00"
+    },
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "extension": [
+              {
+                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                "extension": [
+                  {
+                    "url": "descriptionId",
+                    "valueId": "264274018"
+                  },
+                  {
+                    "url": "descriptionDisplay",
+                    "valueString": "Measles mumps and rubella vaccination - second dose"
+                  }
+                ]
+              }
+            ],
+            "system": "http://snomed.info/sct",
+            "code": "170433008",
+            "display": "Measles mumps and rubella vaccination - second dose",
+            "userSelected": true
+          }
+        ]
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://EMISWeb/A82038",
+      "value": "0E2AAD20-7449-45B5-B0E6-BC6163E42789"
+    }
+  ],
+  "status": "completed",
+  "notGiven": false,
+  "vaccineCode": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v3/NullFlavor",
+        "code": "UNK",
+        "display": "unknown"
+      }
+    ]
+  },
+  "patient": {
+    "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
+  },
+  "date": "2020-11-02",
+  "primarySource": true,
+  "lotNumber": "123213",
+  "expirationDate": "2020-11-14",
+  "site": {
+    "coding": [
+      {
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+            "extension": [
+              {
+                "url": "descriptionId",
+                "valueId": "1697821000006118"
+              },
+              {
+                "url": "descriptionDisplay",
+                "valueString": "Left arm"
+              }
+            ]
+          }
+        ],
+        "system": "http://snomed.info/sct",
+        "code": "1697821000006102",
+        "display": "Left arm"
+      }
+    ]
+  },
+  "practitioner": [
+    {
+      "role": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/v2/0443",
+            "code": "AP",
+            "display": "Administering Provider"
+          }
+        ]
+      },
+      "actor": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+      }
+    }
+  ],
+  "note": [
+    {
+      "text": "Manufacturer : wefew, GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)"
+    }
+  ]
+}

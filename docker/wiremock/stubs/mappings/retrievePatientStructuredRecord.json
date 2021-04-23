@@ -2,12 +2,12 @@
   "priority": 1,
   "request": {
     "method": "POST",
-    "url": "/GP0001/STU3/1/gpconnect/fhir/Patient/$gpc.getstructuredrecord",
+    "urlPattern": "/.*/STU3/1/gpconnect/structured/fhir/Patient/[$]gpc[.]getstructuredrecord",
     "bodyPatterns" : [ {
       "matchesJsonPath" : "$.parameter[?(@.name == 'patientNHSNumber')]"
     },
     {
-      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286' || @.value == '9690937294')]"
+      "matchesJsonPath" : "$.parameter[0].valueIdentifier[?(@.value == '9690937286')]"
     }]
   },
   "response": {

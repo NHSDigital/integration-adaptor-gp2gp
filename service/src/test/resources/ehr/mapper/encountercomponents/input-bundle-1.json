@@ -265,8 +265,121 @@
                         "item": {
                             "reference": "Observation/bloodpressure3"
                         }
+                    },
+                    {
+                        "item": {
+                            "reference": "AllergyIntolerance/allergyintolerance1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "DocumentReference/documentreference1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "MedicationRequest/medicationrequest1"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "ReferralRequest/referralrequest1"
+                        }
                     }
                 ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "AllergyIntolerance",
+                "id": "allergyintolerance1",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                        "extension": [
+                            {
+                                "url": "reasonEnded",
+                                "valueString": "Patient reports no subsequent recurrence on same medication"
+                            }
+                        ]
+                    }
+                ],
+                "clinicalStatus": "resolved",
+                "type": "allergy",
+                "category": [
+                    "medication"
+                ],
+                "criticality": "low",
+                "onsetDateTime": "1978-12-31",
+                "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                "note": [
+                    {
+                        "text": "Example note text"
+                    }
+                ],
+                "lastOccurrence": "1978-12-31",
+                "code": {
+                    "text": "test"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "documentreference1",
+                "meta": {
+                    "versionId": "5774557612980378259",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "AECD4BBE-F45C-42A0-BB77-AB77BAEE3E66"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25611000000107",
+                            "display": "Referral letter",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "Referral Letter (21-Sep-2020)"
+                },
+                "created": "2020-09-21",
+                "indexed": "2020-09-21T14:17:59.607+01:00",
+                "custodian": {
+                    "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "text/richtext",
+                            "title": "some title"
+                        }
+                    }
+                ],
+                "description": "for 2 week rule referral - skin",
+                "author": [
+                    {
+                        "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "context": {
+                    "practiceSetting": {
+                        "coding": [
+                            {
+                                "display": "Practice Setting Display"
+                            }
+                        ],
+                        "text": "Practice Setting Text"
+                    }
+                }
             }
         },
         {
@@ -356,6 +469,221 @@
                 "note": [
                     {
                         "text": "immunization note"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType":"MedicationRequest",
+                "id":"medicationrequest1",
+                "meta":{
+                    "profile":[
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension":[
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1",
+                        "extension": [
+                            {
+                                "url": "numberOfRepeatPrescriptionsAllowed",
+                                "valuePositiveInt": 12
+                            },
+                            {
+                                "url": "numberOfRepeatPrescriptionsIssued",
+                                "valuePositiveInt": 11
+                            }
+                        ]
+                    }
+                ],
+                "identifier":[
+                    {
+                        "system":"https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value":"f2489066-7082-11eb-bb13-00505692d4aa"
+                    }
+                ],
+                "status":"active",
+                "intent":"order",
+                "medicationReference":{
+                    "reference":"Medication/20"
+                },
+                "subject":{
+                    "reference":"Patient/2"
+                },
+                "authoredOn":"2017-11-10T00:00:00+00:00",
+                "recorder":{
+                    "reference":"Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
+                "dosageInstruction":[
+                    {
+                        "text":"1 tablet once a day",
+                        "patientInstruction":"Take in morning"
+                    }
+                ],
+                "dispenseRequest":{
+                    "validityPeriod":{
+                        "start":"2017-11-10T00:00:00+00:00",
+                        "end":"2018-08-15T00:00:00+01:00"
+                    }
+                },
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/medicationrequest2"
+                    }
+                ]
+            }
+
+        },
+        {
+            "resource": {
+                "resourceType":"MedicationRequest",
+                "id":"medicationrequest2",
+                "meta":{
+                    "profile":[
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationRepeatInformation-1",
+                        "extension": [
+                            {
+                                "url": "numberOfRepeatPrescriptionsAllowed",
+                                "valueUnsignedInt": 12
+                            },
+                            {
+                                "url": "numberOfRepeatPrescriptionsIssued",
+                                "valueUnsignedInt": 0
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "repeat",
+                                    "display": "Repeat"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1",
+                        "extension": [
+                            {
+                                "url": "statusReason",
+                                "valueCodeableConcept": {
+                                    "text": "Clinical Contra-indication"
+                                }
+                            },
+                            {
+                                "url": "statusChangeDate",
+                                "valueDateTime": "2010-01-18T14:33:16.397+00:00"
+                            }
+                        ]
+                    }
+                ],
+                "identifier":[
+                    {
+                        "system":"https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value":"f2489066-7082-11eb-bb13-00505692d4aa"
+                    }
+                ],
+                "groupIdentifier":{
+                    "value":"M-3"
+                },
+                "status":"active",
+                "intent":"plan",
+                "medicationReference":{
+                    "reference":"Medication/20"
+                },
+                "subject":{
+                    "reference":"Patient/2"
+                },
+                "authoredOn":"2017-11-10T00:00:00+00:00",
+                "recorder":{
+                    "reference":"Practitioner/1"
+                },
+                "dosageInstruction":[
+                    {
+                        "text":"1 tablet once a day",
+                        "patientInstruction":"Take in morning"
+                    }
+                ],
+                "dispenseRequest":{
+                    "validityPeriod":{
+                        "start":"2017-11-10T00:00:00+00:00",
+                        "end":"2018-08-15T00:00:00+01:00"
+                    },
+                    "quantity": {
+                        "value": 100,
+                        "unit": "device"
+                    },
+                    "expectedSupplyDuration":{
+                        "value":28,
+                        "unit":"day",
+                        "system":"http://unitsofmeasure.org",
+                        "code":"d"
+                    },
+                    "performer":{
+                        "reference":"Organization/1"
+                    }
+                },
+                "note": [
+                    {
+                        "text": "Example note text 1"
+                    },
+                    {
+                        "text": "Example note text 2"
+                    },
+                    {
+                        "text": "Example note text 3"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Medication",
+                "id": "20",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "430127000",
+                            "display": "Oral Form Oxycodone (product)"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "referralrequest1",
+                "authoredOn": "2010-01-19",
+                "priority": "routine",
+                "description": "Referred for investigation into low blood pressure",
+                "specialty": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/v3/NullFlavor",
+                            "code": "UNK",
+                            "display": "unknown"
+                        }
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "B154D1A3-D631-49BD-8B67-2F76D7D85865"
+                    },
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ubr-number",
+                        "value": "bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4"
                     }
                 ]
             }
@@ -525,6 +853,9 @@
                 "onsetDateTime": "2020-09-06",
                 "abatementDateTime": "2020-10-04T00:00:00+01:00",
                 "assertedDate": "2020-09-07T10:12:02.093+01:00",
+                "asserter": {
+                  "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                },
                 "note": [
                     {
                         "text": "Condition note"
@@ -600,6 +931,49 @@
                 },
                 "comment": "Blood pressure 2"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "8747DFC5-11B7-4A77-B2F3-7720CC58C2FC"
+            }
+        },
+        {
+          "resource": {
+            "resourceType": "Practitioner",
+            "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+            "meta": {
+              "versionId": "4749697187075864793",
+              "profile": [
+                "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+              ]
+            },
+            "name": [
+              {
+                "use": "official",
+                "family": "McAvenue",
+                "given": [
+                  "David"
+                ],
+                "prefix": [
+                  "Dr"
+                ]
+              }
+            ],
+            "gender": "male"
+          }
         }
     ]
 }

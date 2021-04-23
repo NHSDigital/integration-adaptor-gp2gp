@@ -1,14 +1,22 @@
 # integration-adaptor-gp2gp
 National Integration Adaptor - GP2GP
 
-The existing GP2GP solution is based on a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, and perpetuation of these standards in the long term presents a risk to the continued operation of GP2GP across all suppliers.
+The existing GP2GP solution is based on a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
+on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, 
+and perpetuation of these standards in the long term presents a risk to the continued operation of GP2GP across all 
+suppliers.
 
-A hybrid solution approach has been selected as the best option for GP2GP adoption by NMEs and transition by existing incumbent suppliers.
+A hybrid solution approach has been selected as the best option for GP2GP adoption by NMEs and transition by existing 
+incumbent suppliers.
 
-The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using the supplier's existing GP Connect Provider implementation to extract the Electronic Health Record. Suppliers that have not already implemented a GP2GP 2.2 producer, or those wishing to decommission their existing producer, may deploy the GP2GP adaptor in its place.
+The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using the supplier's existing GP Connect 
+Provider implementation to extract the Electronic Health Record. Suppliers that have not already implemented a 
+GP2GP 2.2 producer, or those wishing to decommission their existing producer, may deploy the GP2GP adaptor in its place.
 
 ## Requirements:
-1. JDK 11
+
+* JDK 11 - We develop the adaptor in Java with Spring Boot
+* Docker - We release the adaptor using Docker images on [Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gp2gp-adaptor)
 
 ## Configuration
 
@@ -51,6 +59,17 @@ The adaptor requires a Mongodb-compatible database to manage its internal state.
 | GP2GP_MONGO_TTL                      | P7D                       | (Optional) Time-to-live value for inbound and outbound state collection documents as an [ISO 8601 Duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).
 | GP2GP_COSMOS_DB_ENABLED              | false                     | (Optional) If true the adaptor will enable features and workarounds to support Azure Cosmos DB.
 
+**Trust Store Configuration Options**
+
+You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not 
+replace Java's default trust store. At runtime the application adds these additional certificates to the default trust 
+store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.
+
+| Environment Variable                | Default       | Description
+| ------------------------------------|---------------|-------------
+| GP2GP_SSL_TRUST_STORE_URL           |               | (Optional) URL of the trust store JKS. The only scheme currently supported is `s3://`
+| GP2GP_SSL_TRUST_STORE_PASSWORD      |               | (Optional) Password used to access the trust store
+
 ### File Storage Configuration Options
 
 The adaptor uses AWS S3 or Azure Storage Blob to stage translated GP2GP HL7 and ebXML documents.
@@ -75,7 +94,6 @@ queue its own internal asynchronous tasks
 | GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
 | GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
 | GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
 
@@ -84,54 +102,28 @@ will be used. At least one URL is required.
 
 ### GP Connect API Configuration Options
 
-The adaptor uses the GP Connect API to fetch patient records and documents.
+The adaptor fetches patient records and documents with the GP Connect Consumer Adaptor 
+([Github](https://github.com/nhsconnect/integration-adaptor-gpc-consumer) / 
+[Dockerhub](https://hub.docker.com/repository/docker/nhsdev/nia-gpc-consumer-adaptor)) consuming the 
+[GP Connect API](https://developer.nhs.uk/apis/gpconnect/).
 
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
-| GP2GP_GPC_GET_URL                    | http://localhost:8110/GP0001/STU3/1/gpconnect | The base URL of the GP Connect API provider
-| GP2GP_GPC_GET_STRUCTURED_ENDPOINT    | /fhir/Patient/$gpc.getstructuredrecord        | The path of the Get Access Structured operation on the Patient resource
-| GP2GP_GPC_GET_PATIENT_ENDPOINT       | /fhir/Patient                                 | The path of the Access Document Patient resource
-| GP2GP_GPC_GET_DOCUMENT_ENDPOINT      | /fhir/Binary/                                 | The path of the Access Document Binary resource
-| GP2GP_SPINE_CLIENT_CERT              |                                               | The content of the PEM-formatted client endpoint certificate
-| GP2GP_SPINE_CLIENT_KEY               |                                               | The content of the PEM-formatted client private key
-| GP2GP_SPINE_ROOT_CA_CERT             |                                               | The content of the PEM-formatted certificate of the issuing Root CA.
-| GP2GP_SPINE_SUB_CA_CERT              |                                               | The content of the PEM-formatted certificate of the issuing Sub CA.
+| GP2GP_GPC_GET_URL                    | http://localhost:8090/GP0001/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /structured/fhir                              | The path segment for Get Access Structured FHIR server
+| GP2GP_GPC_DOCUMENTS_FHIR_BASE        | /documents/fhir                               | The path segment for Get Access Documents FHIR server
 | GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
 
-Configure these if you access the OpenTest or HSCN networks via an HTTP proxy. This is NOT the configuration for Spine
-Secure Proxy (SSP).
-
-| Environment Variable                 | Default                   | Description
-| -------------------------------------|---------------------------|-------------
-| GP2GP_GPC_ENABLE_HTTP_PROXY          | false                     | Enable your environment requires you to access HSCN or OpenTest networks via an HTTP proxy
-| GP2GP_GPC_HTTP_PROXY                 | gp2gp                     | HTTP proxy address
-| GP2GP_GPC_HTTP_PROXY_PORT            | gp2gp                     | HTTP proxy port
+(*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
 ### MHS Adaptor Configuration Options
 
-The GP2GP uses the [MHS Adaptor]() to send/receive messages to/from Spine.
+The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adaptor-mhs) to send/receive messages to/from Spine.
 
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
-
-### SDS API Configuration Options
-
-The GP2GP uses the [SDS API]() to discover GPC endpoints.
-
-| Environment Variable                 | Default                                       | Description
-| -------------------------------------|-----------------------------------------------|-------------
-| GP2GP_SDS_URL                        | http://localhost:8110/                        | URL to the SDS API
-| GP2GP_SDS_APIKEY                     |                                               | Secret key used to authenticate with the API
-
-### Trust Store Configuration Options
-
-You can configure a trust store with private CA certificates if required for TLS connections. The trust store does not replace Java's default trust store. At runtime the application adds these additional certificates to the default trust store. Only an s3:// url is currently supported, and the current use-case is to support AWS DocumentDb.
-
-| Environment Variable                | Default       | Description
-| ------------------------------------|---------------|-------------
-| GP2GP_SSL_TRUST_STORE_URL           |               | (Optional) URL of the trust store JKS. The only scheme currently supported is `s3://`
-| GP2GP_SSL_TRUST_STORE_PASSWORD      |               | (Optional) Password used to access the trust store
+| GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
 
 ## How to run service:
 
@@ -182,7 +174,6 @@ An easy way to override the default configuration is to use an EnvFile with the 
 To override environment variables choose an example file e.g. 
 (service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
 changes in this copy. 
-
 
 ## How to run tests
 
