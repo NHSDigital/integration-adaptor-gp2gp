@@ -90,7 +90,7 @@ public class EhrExtractMapperTest {
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
             new DocumentReferenceToNarrativeStatementMapper(messageContext),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
@@ -113,6 +113,7 @@ public class EhrExtractMapperTest {
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
             timestampService,
             new EncounterMapper(messageContext, encounterComponentsMapper),
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
             agentDirectoryMapper);
     }
 

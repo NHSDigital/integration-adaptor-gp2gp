@@ -11,12 +11,18 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.pres
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestStatus;
@@ -41,6 +47,14 @@ public class MedicationStatementMapper {
     private static final Mustache MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE =
         TemplateUtils.loadTemplate("ehr_medication_statement_prescribe_template.mustache");
 
+    private static final Map<String, Mustache> TEMPLATE_MAPPINGS = Map.of(
+        MedicationRequestIntent.PLAN.getDisplay(), MEDICATION_STATEMENT_AUTHORISE_TEMPLATE,
+        MedicationRequestIntent.ORDER.getDisplay(), MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE
+    );
+
+    private static final Function<String, Optional<Mustache>> DISPLAY_TO_TEMPLATE_MAPPER =
+        display -> Optional.ofNullable(TEMPLATE_MAPPINGS.get(display));
+
     private static final String ACTIVE_STATUS_CODE = "ACTIVE";
     private static final String COMPLETE_STATUS_CODE = "COMPLETE";
     private static final String NOTES = "Notes: %s";
@@ -55,6 +69,7 @@ public class MedicationStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
@@ -75,6 +90,7 @@ public class MedicationStatementMapper {
         var ehrSupplyDiscontinueAvailabilityTime = buildStatusReasonStoppedAvailabilityTime(medicationRequest);
         var priorPrescriptionId = buildPriorPrescription(medicationRequest);
         var basedOn = buildBasedOn(medicationRequest);
+        var participant = buildParticipant(medicationRequest);
 
         var medicationStatementTemplateParameters = MedicationStatementTemplateParameters.builder()
             .medicationStatementId(medicationStatementId)
@@ -94,15 +110,13 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
             .priorPrescriptionId(priorPrescriptionId)
             .basedOn(basedOn)
+            .participant(participant)
             .build();
 
-        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_AUTHORISE_TEMPLATE, medicationStatementTemplateParameters);
-        } else if (MedicationRequestIntent.ORDER.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return TemplateUtils.fillTemplate(MEDICATION_STATEMENT_PRESCRIBE_TEMPLATE, medicationStatementTemplateParameters);
-        }
+        final var template = DISPLAY_TO_TEMPLATE_MAPPER.apply(medicationRequest.getIntent().getDisplay())
+            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request intent"));
 
-        throw new EhrMapperException("Could not resolve Medication Request intent");
+        return TemplateUtils.fillTemplate(template, medicationStatementTemplateParameters);
     }
 
     private String buildStatusCode(MedicationRequest medicationRequest) {
@@ -242,5 +256,25 @@ public class MedicationStatementMapper {
             return extractIdFromPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
         }
         return StringUtils.EMPTY;
+    }
+
+    private String buildParticipant(MedicationRequest medicationRequest) {
+        var isPractitioner = buildPredicateReferenceIsA(ResourceType.Practitioner);
+        var isPractitionerRole = buildPredicateReferenceIsA(ResourceType.PractitionerRole);
+        var isOrganization = buildPredicateReferenceIsA(ResourceType.Organization);
+        Predicate<Reference> isRelevant = isPractitioner.or(isPractitionerRole).or(isOrganization);
+
+        if (medicationRequest.hasRecorder() && medicationRequest.getRecorder().hasReference()) {
+            final var reference = medicationRequest.getRecorder();
+            if (isRelevant.test(reference)) {
+                return participantMapper.mapToParticipant(
+                    messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
+            }
+        }
+        throw new EhrMapperException("Missing recorder of type Practitioner, PractitionerRole or Organization");
+    }
+
+    private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {
+        return reference -> type.name().equals(reference.getReferenceElement().getResourceType());
     }
 }
