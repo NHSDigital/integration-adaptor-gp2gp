@@ -1,6 +1,6 @@
 <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="compoundStatementId"/> <!-- compoundStatementId -->
+        <id root="{{compoundStatementId}}"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -8,9 +8,9 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="issued"/> <!-- issued -->
+        <availabilityTime value="{{diagnosticReportIssuedDate}}"/>
         {{#specimens}}
-        {{{.}}}
+            {{{.}}}
         {{/specimens}}
     </CompoundStatement>
 </component>
