@@ -15,7 +15,8 @@ yyyy-MM-dd HH:mm:ss.SSS Level=INFO Logger=u.n.a.g.e.m.AgentDirectoryExtractor Co
 * Level: The logging level DEBUG/INFO/WARN/ERROR
 * Logger: The name of the Java class that emitted the message
 * ConversationId: The identifier correlating all GP2GP message for a single patient transfer
-* TaskId: The unique identifier of the 
+* TaskId: The unique identifier of the task
+* Message: The log message
 
 ## Object Storage (AWS S3 / Azure Blob)
 
@@ -80,7 +81,7 @@ TODO: Database query to detect incomplete transfers not updated after an amount 
 ## Retention of patient data
 
 The adaptor does NOT fulfill the supplier's obligation under NPFIT-FNT-TO-IG-DES-0115.01 for
-data retention. The adaptor does also NOT fulfill HSCIC-PC-BLD-0068.26 requirements 
+long-term data retention. The adaptor does also NOT fulfill HSCIC-PC-BLD-0068.26 requirements 
 related to data retention including BR15 and S63.
 
 The adaptor downloads and translates the patient's record in its entirety (including attachments)
@@ -96,3 +97,18 @@ The adaptor's database records:
 
 The supplier MUST configure the `GP2GP_MONGO_TTL` variable to remove the database records
 after a reasonable time period.
+
+The adaptor's queued messages contain:
+* the patient's NHS number
+* identifiers (ODS & ASID) of the two GP practices involved in the transfer
+* metadata about the transfer process
+
+The supplier MUST monitor the broker's deadletter queues to investigate any errors and clear 
+old messages after a reasonable time perior.
+
+## Exemplar Deployment
+
+https://github.com/nhsconnect/integration-adaptors/tree/develop/terraform/aws/components/gp2gp
+
+We provide Terraform scripts to perform an exemplar deployment of the GP2GP adaptor and its
+dependencies into AWS.
