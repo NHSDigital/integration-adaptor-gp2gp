@@ -75,9 +75,10 @@ public class EhrAcknowledgementTest {
                 () -> assertThat(ack.getConversationClosed()).isNull(),
                 () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
                 () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
-                () -> assertThat(ack.getErrors()).isNotEmpty(),
-                () -> assertThat(ack.getErrors().get(0).getCode()).isEqualTo(BUSINESS_ERROR_CODE),
-                () -> assertThat(ack.getErrors().get(0).getDisplay()).isEqualTo(BUSINESS_ERROR_DISPLAY)
+                () -> assertThat(ack.getErrors()).isNotEmpty()
+                    .first().satisfies(error -> assertAll(
+                        () -> assertThat(error.getCode()).isEqualTo(BUSINESS_ERROR_CODE),
+                        () -> assertThat(error.getDisplay()).isEqualTo(BUSINESS_ERROR_DISPLAY)))
             ));
     }
 
