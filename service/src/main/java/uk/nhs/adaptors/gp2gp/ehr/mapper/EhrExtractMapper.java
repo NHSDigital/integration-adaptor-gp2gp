@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -14,9 +18,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.EncounterExtractor;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class EhrExtractMapper {
@@ -27,6 +28,7 @@ public class EhrExtractMapper {
     private final EncounterMapper encounterMapper;
     private final NonConsultationResourceMapper nonConsultationResourceMapper;
     private final AgentDirectoryMapper agentDirectoryMapper;
+    private final MessageContext messageContext;
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
@@ -50,6 +52,15 @@ public class EhrExtractMapper {
         var mappedComponents = mapEncounterToEhrComponents(encounters);
         mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
         ehrExtractTemplateParameters.setComponents(mappedComponents);
+
+        EhrFolderEffectiveTime effectiveTime = messageContext.getEffectiveTime();
+        Optional<String> effectiveTimeLow = effectiveTime.getEffectiveTimeLow();
+        effectiveTimeLow.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeLow);
+
+        Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
+        effectiveTimeHigh.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeHigh);
+
+        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.or(() -> effectiveTimeHigh).isPresent());
 
         return ehrExtractTemplateParameters;
     }
