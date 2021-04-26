@@ -1,6 +1,6 @@
 <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
-        <id root="394559384658936" />
+        <id root="II-for-ReferralRequest-ReferralRequest/E63AF323-919F-4D5F-9A1D-BA933BC230BC" />
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -9,7 +9,7 @@
         <text>UBRN: bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4 Priority: Routine Specialty: unknown Recipient Org: Organisation name Recipient Healthcare Service: Consulting psychologists and/or psychology services Recipient Practitioner: Arthur George Referred for investigation into low blood pressure</text>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
-                <id root="394559384658936"/>
+                <id root="II-for-Practitioner/567B852A-5775-4AEF-BB77-504D820F11F7"/>
             </agentRef>
         </responsibleParty>
     </RequestStatement>

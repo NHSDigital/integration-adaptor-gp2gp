@@ -100,9 +100,11 @@ public class RequestStatementMapper {
             }
 
             if (referralRequest.hasRecipient()) {
-                final Reference recipient = referralRequest.getRecipientFirstRep();
-                final var responsibleParty = idMapper.get(recipient);
-                templateParameters.responsibleParty(responsibleParty);
+                referralRequest.getRecipient().stream()
+                    .filter(RequestStatementMapper::isReferenceToPractitioner)
+                    .findAny()
+                    .map(idMapper::get)
+                    .ifPresent(templateParameters::responsibleParty);
             }
 
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -11,6 +13,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
@@ -24,20 +27,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import lombok.SneakyThrows;
+import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
 public class RequestStatementMapperTest {
-    private static final String COMMON_ID_1 = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
-    private static final String PATIENT_2_ID = "4C903809-CADA-442E-8FA5-655E5EFEB1F5";
-    private static final String RELATED_PERSON_ID = "f002";
-    private static final String ORGANIZATION_ID = "1F90B10F-CF14-4D6F-8C0D-585059DA4EC5";
-
-    private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
 
     // INPUT FILES
@@ -120,30 +117,43 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-with-multiple-recipients.xml";
 
     @Mock
-    private RandomIdGeneratorService randomIdGeneratorService;
-    @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private MessageContext messageContext;
+    @Mock
+    private IdMapper idMapper;
+    private InputBundle inputBundle;
 
     private RequestStatementMapper requestStatementMapper;
-    private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        inputBundle = new InputBundle(bundle);
 
-        messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
-        var idMapper = messageContext.getIdMapper();
-        idMapper.getOrNew(ResourceType.Practitioner, COMMON_ID_1);
-        idMapper.getOrNew(ResourceType.Organization, COMMON_ID_1);
-        idMapper.getOrNew(ResourceType.Device, COMMON_ID_1);
-        idMapper.getOrNew(ResourceType.Patient, COMMON_ID_1);
-        idMapper.getOrNew(ResourceType.Patient, PATIENT_2_ID);
-        idMapper.getOrNew(ResourceType.RelatedPerson, RELATED_PERSON_ID);
-        idMapper.getOrNew(ResourceType.Organization, ORGANIZATION_ID);
+        lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
+        lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        lenient().when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockIdForResourceAndId());
+        lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(mockIdForReference());
+        lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+
         requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
+    }
+
+    private Answer<String> mockIdForResourceAndId() {
+        return invocation -> {
+            ResourceType resourceType = invocation.getArgument(0);
+            String originalId = invocation.getArgument(1);
+            return String.format("II-for-%s-%s", resourceType.name(), originalId);
+        };
+    }
+
+    private Answer<String> mockIdForReference() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return String.format("II-for-%s", reference.getReference());
+        };
     }
 
     @AfterEach
@@ -185,8 +195,8 @@ public class RequestStatementMapperTest {
 
     private static Stream<Arguments> resourceFileParamsReasonCodes() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_WITH_ONE_REASON_CODE),
-            Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
+            arguments(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_WITH_ONE_REASON_CODE),
+            arguments(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
         );
     }
 
