@@ -185,6 +185,56 @@
         },
         {
             "resource": {
+                "resourceType": "Practitioner",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF74",
+                "meta": {
+                    "versionId": "1098667621224880139",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Roberts",
+                        "given": [
+                            "Thomas"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "unknown"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF75",
+                "meta": {
+                    "versionId": "1098667621224880139",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Little",
+                        "given": [
+                            "Robert"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "unknown"
+            }
+        },
+        {
+            "resource": {
                 "resourceType": "HealthcareService",
                 "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
                 "text": {

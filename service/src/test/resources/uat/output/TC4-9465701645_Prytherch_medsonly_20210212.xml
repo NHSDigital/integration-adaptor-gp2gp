@@ -54,10 +54,6 @@
         <ehrFolder classCode="FOLDER" moodCode="EVN">
             <id root="test-id-2" />
             <statusCode code="COMPLETE" />
-            <effectiveTime>
-                <low value="" />
-                <high value="" />
-            </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
                 <time value="20200101010101" />

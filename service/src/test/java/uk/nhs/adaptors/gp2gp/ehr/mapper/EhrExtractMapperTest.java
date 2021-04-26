@@ -117,11 +117,12 @@ public class EhrExtractMapperTest {
 
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
 
-            ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-            timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper),
-            nonConsultationResourceMapper,
-            agentDirectoryMapper);
+        ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
+        timestampService,
+        new EncounterMapper(messageContext, encounterComponentsMapper),
+        nonConsultationResourceMapper,
+        agentDirectoryMapper,
+        messageContext);
     }
 
     @AfterEach
