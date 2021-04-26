@@ -20540,7 +20540,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100118143722" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -20613,7 +20613,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100323164511" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -20686,7 +20686,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100323164106" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -20759,7 +20759,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100809142758" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -20832,7 +20832,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110928102232" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
             </agentRef>
         </author>
         <location typeCode="LOC">
