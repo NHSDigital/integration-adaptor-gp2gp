@@ -68,17 +68,12 @@ public class EhrExtractAckHandler {
 
     private List<ErrorDetails> extractErrorCodes(Document document, String xPath) {
         NodeList errors = xPathService.getNodes(document, xPath);
-        List<ErrorDetails> errorDetailsList = new ArrayList<>();
-        for (int i = 0; i < errors.getLength(); i++) {
-            Node error = errors.item(i);
-            ErrorDetails errorDetails = ErrorDetails.builder()
-                    .code(error.getAttributes().getNamedItem(CODE_ATTRIBUTE).getNodeValue())
-                    .display(error.getAttributes().getNamedItem(DISPLAY_ATTRIBUTE).getNodeValue())
-                    .build();
-
-            errorDetailsList.add(errorDetails);
-        }
-
-        return errorDetailsList;
+        return IntStream.range(0, errors.getLength())
+            .mapToObj(errors::item)
+            .map(error -> ErrorDetails.builder()
+                .code(error.getAttributes().getNamedItem(CODE_ATTRIBUTE).getNodeValue())
+                .display(error.getAttributes().getNamedItem(DISPLAY_ATTRIBUTE).getNodeValue())
+                .build())
+            .collect(Collectors.toList());
     }
 }
