@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="797f53b7-4d96-4bbe-84cc-3110db040d90" />
+    <id root="cf670325-7982-46ba-9a52-85c3c78fe40a" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -55,8 +55,8 @@
             <id root="287b3a3c-5e88-427b-a2ef-a14a20353b0c" />
             <statusCode code="COMPLETE" />
             <effectiveTime>
-                <low value="" />
-                <high value="" />
+                <low value="20201222" />
+                
             </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
@@ -172,7 +172,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -186,7 +186,7 @@
                 <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/bmp">
-                    <reference value="file://localhost/b65d8afd-6632-4aeb-9d9f-116149edd69c_b65d8afd-6632-4aeb-9d9f-116149edd69c.xyz"/>
+                    <reference value="file://localhost/b65d8afd-6632-4aeb-9d9f-116149edd69c_b65d8afd-6632-4aeb-9d9f-116149edd69c.bmp"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -221,7 +221,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -235,7 +235,7 @@
                 <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/6f7ae308-ad99-48b4-ae9e-72855a6baa06_6f7ae308-ad99-48b4-ae9e-72855a6baa06.xyz"/>
+                    <reference value="file://localhost/6f7ae308-ad99-48b4-ae9e-72855a6baa06_6f7ae308-ad99-48b4-ae9e-72855a6baa06.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -270,7 +270,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -284,7 +284,7 @@
                 <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/5a074d71-aebd-473c-815f-cd64255b87eb_5a074d71-aebd-473c-815f-cd64255b87eb.xyz"/>
+                    <reference value="file://localhost/5a074d71-aebd-473c-815f-cd64255b87eb_5a074d71-aebd-473c-815f-cd64255b87eb.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -319,7 +319,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -333,7 +333,7 @@
                 <id root="3316531f-5705-424c-9e1a-ee694fb411b4"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="audio/x-au">
-                    <reference value="file://localhost/3316531f-5705-424c-9e1a-ee694fb411b4_3316531f-5705-424c-9e1a-ee694fb411b4.xyz"/>
+                    <reference value="file://localhost/3316531f-5705-424c-9e1a-ee694fb411b4_3316531f-5705-424c-9e1a-ee694fb411b4.au"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -368,7 +368,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -382,7 +382,7 @@
                 <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/3bfd78de-03bf-44fd-96bc-cdf3db2cc039_3bfd78de-03bf-44fd-96bc-cdf3db2cc039.xyz"/>
+                    <reference value="file://localhost/3bfd78de-03bf-44fd-96bc-cdf3db2cc039_3bfd78de-03bf-44fd-96bc-cdf3db2cc039.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -417,7 +417,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -431,7 +431,7 @@
                 <id root="573a6887-7bbe-4c03-b2a9-8f71d61f7345"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/573a6887-7bbe-4c03-b2a9-8f71d61f7345_573a6887-7bbe-4c03-b2a9-8f71d61f7345.xyz"/>
+                    <reference value="file://localhost/573a6887-7bbe-4c03-b2a9-8f71d61f7345_573a6887-7bbe-4c03-b2a9-8f71d61f7345.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -466,7 +466,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -480,7 +480,7 @@
                 <id root="18bac9bd-7b26-4065-9416-7ecec8592843"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/18bac9bd-7b26-4065-9416-7ecec8592843_18bac9bd-7b26-4065-9416-7ecec8592843.xyz"/>
+                    <reference value="file://localhost/18bac9bd-7b26-4065-9416-7ecec8592843_18bac9bd-7b26-4065-9416-7ecec8592843.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -515,7 +515,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -529,7 +529,7 @@
                 <id root="a4678e5e-4c76-4c27-91b8-ad7b5b0480ae"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/a4678e5e-4c76-4c27-91b8-ad7b5b0480ae_a4678e5e-4c76-4c27-91b8-ad7b5b0480ae.xyz"/>
+                    <reference value="file://localhost/a4678e5e-4c76-4c27-91b8-ad7b5b0480ae_a4678e5e-4c76-4c27-91b8-ad7b5b0480ae.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -564,7 +564,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -578,7 +578,7 @@
                 <id root="f9ea7b08-5c2d-4f7e-852d-c753f9e8059b"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/gif">
-                    <reference value="file://localhost/f9ea7b08-5c2d-4f7e-852d-c753f9e8059b_f9ea7b08-5c2d-4f7e-852d-c753f9e8059b.xyz"/>
+                    <reference value="file://localhost/f9ea7b08-5c2d-4f7e-852d-c753f9e8059b_f9ea7b08-5c2d-4f7e-852d-c753f9e8059b.gif"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -613,7 +613,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -627,7 +627,7 @@
                 <id root="8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/html">
-                    <reference value="file://localhost/8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3_8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3.xyz"/>
+                    <reference value="file://localhost/8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3_8f2d066f-e3db-4d1a-a39f-e19f55a5d6d3.html"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -662,7 +662,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -676,7 +676,7 @@
                 <id root="9a5d5a78-1f63-434c-9637-1d7e7843341b"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/html">
-                    <reference value="file://localhost/9a5d5a78-1f63-434c-9637-1d7e7843341b_9a5d5a78-1f63-434c-9637-1d7e7843341b.xyz"/>
+                    <reference value="file://localhost/9a5d5a78-1f63-434c-9637-1d7e7843341b_9a5d5a78-1f63-434c-9637-1d7e7843341b.html"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -711,7 +711,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -725,7 +725,7 @@
                 <id root="8930c6d9-56ed-477a-8407-00dce8a05db4"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/jpeg">
-                    <reference value="file://localhost/8930c6d9-56ed-477a-8407-00dce8a05db4_8930c6d9-56ed-477a-8407-00dce8a05db4.xyz"/>
+                    <reference value="file://localhost/8930c6d9-56ed-477a-8407-00dce8a05db4_8930c6d9-56ed-477a-8407-00dce8a05db4.jpg"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -760,7 +760,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -774,7 +774,7 @@
                 <id root="51463066-3087-424c-9265-eaac461afade"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="audio/mpeg">
-                    <reference value="file://localhost/51463066-3087-424c-9265-eaac461afade_51463066-3087-424c-9265-eaac461afade.xyz"/>
+                    <reference value="file://localhost/51463066-3087-424c-9265-eaac461afade_51463066-3087-424c-9265-eaac461afade.mp3"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -809,7 +809,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -823,7 +823,7 @@
                 <id root="64d224e0-de90-49bb-af2d-eca90ba2ce0d"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="video/mpeg">
-                    <reference value="file://localhost/64d224e0-de90-49bb-af2d-eca90ba2ce0d_64d224e0-de90-49bb-af2d-eca90ba2ce0d.xyz"/>
+                    <reference value="file://localhost/64d224e0-de90-49bb-af2d-eca90ba2ce0d_64d224e0-de90-49bb-af2d-eca90ba2ce0d.mpeg"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -858,7 +858,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -872,7 +872,7 @@
                 <id root="9326c01e-488b-4edf-b9c9-529e69ee0361"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="video/mpeg">
-                    <reference value="file://localhost/9326c01e-488b-4edf-b9c9-529e69ee0361_9326c01e-488b-4edf-b9c9-529e69ee0361.xyz"/>
+                    <reference value="file://localhost/9326c01e-488b-4edf-b9c9-529e69ee0361_9326c01e-488b-4edf-b9c9-529e69ee0361.mpeg"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -907,7 +907,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -921,7 +921,7 @@
                 <id root="25dbe266-2210-41d4-adb0-c033f3ebed99"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="video/mpeg">
-                    <reference value="file://localhost/25dbe266-2210-41d4-adb0-c033f3ebed99_25dbe266-2210-41d4-adb0-c033f3ebed99.xyz"/>
+                    <reference value="file://localhost/25dbe266-2210-41d4-adb0-c033f3ebed99_25dbe266-2210-41d4-adb0-c033f3ebed99.mpeg"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -956,7 +956,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -970,7 +970,7 @@
                 <id root="de743503-08d0-4381-903f-8c5691360b54"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/pdf">
-                    <reference value="file://localhost/de743503-08d0-4381-903f-8c5691360b54_de743503-08d0-4381-903f-8c5691360b54.xyz"/>
+                    <reference value="file://localhost/de743503-08d0-4381-903f-8c5691360b54_de743503-08d0-4381-903f-8c5691360b54.pdf"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1005,7 +1005,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1019,7 +1019,7 @@
                 <id root="ca8df9cd-0555-4ac3-8852-afefc5615854"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/png">
-                    <reference value="file://localhost/ca8df9cd-0555-4ac3-8852-afefc5615854_ca8df9cd-0555-4ac3-8852-afefc5615854.xyz"/>
+                    <reference value="file://localhost/ca8df9cd-0555-4ac3-8852-afefc5615854_ca8df9cd-0555-4ac3-8852-afefc5615854.png"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1054,7 +1054,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1068,7 +1068,7 @@
                 <id root="f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/richtext">
-                    <reference value="file://localhost/f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5_f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5.xyz"/>
+                    <reference value="file://localhost/f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5_f8e59bf6-55ab-4b7e-9c5f-b0c25f61dfd5.rtx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1103,7 +1103,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1117,7 +1117,7 @@
                 <id root="4e95e2af-bf10-45bb-aaa5-2547bd42c806"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    <reference value="file://localhost/4e95e2af-bf10-45bb-aaa5-2547bd42c806_4e95e2af-bf10-45bb-aaa5-2547bd42c806.xyz"/>
+                    <reference value="file://localhost/4e95e2af-bf10-45bb-aaa5-2547bd42c806_4e95e2af-bf10-45bb-aaa5-2547bd42c806.docx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1152,7 +1152,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1166,7 +1166,7 @@
                 <id root="1e5d6932-c778-4997-b624-8709d2fbb189"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/msword">
-                    <reference value="file://localhost/1e5d6932-c778-4997-b624-8709d2fbb189_1e5d6932-c778-4997-b624-8709d2fbb189.xyz"/>
+                    <reference value="file://localhost/1e5d6932-c778-4997-b624-8709d2fbb189_1e5d6932-c778-4997-b624-8709d2fbb189.doc"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1201,7 +1201,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1215,7 +1215,7 @@
                 <id root="5bb18e92-dabb-4c22-838a-410b4a278060"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/5bb18e92-dabb-4c22-838a-410b4a278060_5bb18e92-dabb-4c22-838a-410b4a278060.xyz"/>
+                    <reference value="file://localhost/5bb18e92-dabb-4c22-838a-410b4a278060_5bb18e92-dabb-4c22-838a-410b4a278060.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1250,7 +1250,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1264,7 +1264,7 @@
                 <id root="6be78b29-6df2-46f2-bda2-1e7d45efe594"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/msword">
-                    <reference value="file://localhost/6be78b29-6df2-46f2-bda2-1e7d45efe594_6be78b29-6df2-46f2-bda2-1e7d45efe594.xyz"/>
+                    <reference value="file://localhost/6be78b29-6df2-46f2-bda2-1e7d45efe594_6be78b29-6df2-46f2-bda2-1e7d45efe594.doc"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1299,7 +1299,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1313,7 +1313,7 @@
                 <id root="55b1bb28-8973-4cf4-b9a6-9ff49547f465"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/tiff">
-                    <reference value="file://localhost/55b1bb28-8973-4cf4-b9a6-9ff49547f465_55b1bb28-8973-4cf4-b9a6-9ff49547f465.xyz"/>
+                    <reference value="file://localhost/55b1bb28-8973-4cf4-b9a6-9ff49547f465_55b1bb28-8973-4cf4-b9a6-9ff49547f465.tiff"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1348,7 +1348,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1362,7 +1362,7 @@
                 <id root="df71ec06-9453-4ae7-9c3c-e42871252772"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/msword">
-                    <reference value="file://localhost/df71ec06-9453-4ae7-9c3c-e42871252772_df71ec06-9453-4ae7-9c3c-e42871252772.xyz"/>
+                    <reference value="file://localhost/df71ec06-9453-4ae7-9c3c-e42871252772_df71ec06-9453-4ae7-9c3c-e42871252772.doc"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1397,7 +1397,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1411,7 +1411,7 @@
                 <id root="ed098b6c-d654-4010-8f61-9deeb86e5e4b"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="image/tiff">
-                    <reference value="file://localhost/ed098b6c-d654-4010-8f61-9deeb86e5e4b_ed098b6c-d654-4010-8f61-9deeb86e5e4b.xyz"/>
+                    <reference value="file://localhost/ed098b6c-d654-4010-8f61-9deeb86e5e4b_ed098b6c-d654-4010-8f61-9deeb86e5e4b.tiff"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1446,7 +1446,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1460,7 +1460,7 @@
                 <id root="99792b9d-0715-4f2a-9934-1d5d4e975284"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/99792b9d-0715-4f2a-9934-1d5d4e975284_99792b9d-0715-4f2a-9934-1d5d4e975284.xyz"/>
+                    <reference value="file://localhost/99792b9d-0715-4f2a-9934-1d5d4e975284_99792b9d-0715-4f2a-9934-1d5d4e975284.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1495,7 +1495,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1509,7 +1509,7 @@
                 <id root="db7c94b1-01a6-491f-ac41-a36d88023069"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/xml">
-                    <reference value="file://localhost/db7c94b1-01a6-491f-ac41-a36d88023069_db7c94b1-01a6-491f-ac41-a36d88023069.xyz"/>
+                    <reference value="file://localhost/db7c94b1-01a6-491f-ac41-a36d88023069_db7c94b1-01a6-491f-ac41-a36d88023069.xml"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1544,7 +1544,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1558,7 +1558,7 @@
                 <id root="bded2793-f5b5-43ac-b8db-7ea04620ca86"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                    <reference value="file://localhost/bded2793-f5b5-43ac-b8db-7ea04620ca86_bded2793-f5b5-43ac-b8db-7ea04620ca86.xyz"/>
+                    <reference value="file://localhost/bded2793-f5b5-43ac-b8db-7ea04620ca86_bded2793-f5b5-43ac-b8db-7ea04620ca86.xlsx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1593,7 +1593,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1607,7 +1607,7 @@
                 <id root="884e7627-796c-4c70-870a-d61b88ad2e57"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/884e7627-796c-4c70-870a-d61b88ad2e57_884e7627-796c-4c70-870a-d61b88ad2e57.xyz"/>
+                    <reference value="file://localhost/884e7627-796c-4c70-870a-d61b88ad2e57_884e7627-796c-4c70-870a-d61b88ad2e57.bin"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1642,7 +1642,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1656,7 +1656,7 @@
                 <id root="8c058d76-fff1-4eae-8e82-4351a110a454"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-                    <reference value="file://localhost/8c058d76-fff1-4eae-8e82-4351a110a454_8c058d76-fff1-4eae-8e82-4351a110a454.xyz"/>
+                    <reference value="file://localhost/8c058d76-fff1-4eae-8e82-4351a110a454_8c058d76-fff1-4eae-8e82-4351a110a454.docx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1691,7 +1691,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1705,7 +1705,7 @@
                 <id root="0933f2fd-f15d-47fb-9b74-8b48c1a491a4"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachment0933f2fd-f15d-47fb-9b74-8b48c1a491a4.xyz"/>
+                    <reference value="file://localhost/AbsentAttachment0933f2fd-f15d-47fb-9b74-8b48c1a491a4.docx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1740,7 +1740,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af" />
+                <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1754,11 +1754,182 @@
                 <id root="f4bf142b-6d5c-4e01-933f-a817fd992e9b"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachmentf4bf142b-6d5c-4e01-933f-a817fd992e9b.xyz"/>
+                    <reference value="file://localhost/AbsentAttachmentf4bf142b-6d5c-4e01-933f-a817fd992e9b.docx"/>
                 </text>
             </referredToExternalDocument>
         </reference>
     </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="82a39454-299f-432e-993e-5a6232b4e099" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210104"/>
+        </effectiveTime>
+        <availabilityTime value="20210113143742"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210113143742" />
+            <agentRef classCode="AGNT">
+                <id root="" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root=""/>
+            </agentRef>
+        </Participant2>
+        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+    <id root="797f53b7-4d96-4bbe-84cc-3110db040d90"/>
+    <statusCode code="COMPLETE"/>
+    <effectiveTime>
+        <center value="20210104"/>
+    </effectiveTime>
+    <availabilityTime value="20210113143742" />
+    <component typeCode="COMP" contextConductionInd="true">
+        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+            <id root="04aaa10e-3d26-4c86-8932-4bb384c94253"/>
+            <statusCode code="COMPLETE"/>
+            <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+            <effectiveTime>
+                <center value="20210104"/>
+            </effectiveTime>
+            <availabilityTime value="20210113143742" />
+            <component typeCode="COMP" contextConductionInd="true">
+                <ObservationStatement classCode="OBS" moodCode="ENV">
+                    <id root="4209a033-4f0c-490e-8753-607e2799c3d8"/>
+                    <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <center value="20210104"/>
+                    </effectiveTime>
+                    <availabilityTime value="20210113143742" />
+                    <pertinentInformation typeCode="PERT">
+                        <sequenceNumber value="+1"/>
+                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                            <text>Status: Active</text>
+                        </pertinentAnnotation>
+                    </pertinentInformation>
+                    <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+</code>
+                    <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+                </ObservationStatement>
+            </component>
+        </CompoundStatement>
+    </component>
+</ehrComposition>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="ba6ea7cb-3e2f-46fa-918c-c0b5178c1d4e" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131519"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222131519" />
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="70fa5735-11cb-4e5c-825a-e5688fdc888c" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131519"/>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="919ae1b8-6bbb-49ef-9fa0-0c04d35be310" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201222131511"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131511"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201222131511" />
+            <agentRef classCode="AGNT">
+                <id root="" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root=""/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="85e19135-f780-437d-9633-24bf6c7e5d82" />
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20311220"/>
+        </effectiveTime>
+        <availabilityTime value="20201222131511"/>
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
+    </PlanStatement>
 </component>
     </ehrComposition>
 </component>
