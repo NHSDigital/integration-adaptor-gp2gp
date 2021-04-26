@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import java.time.Instant;
@@ -21,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
@@ -36,6 +40,7 @@ public class EhrExtractStatusService {
     private static final String SENT_AT = "sentAt";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
+    private static final String RECEIVED_ACK = "ehrReceivedAcknowledgement";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
@@ -50,6 +55,10 @@ public class EhrExtractStatusService {
     private static final String TYPE_CODE = "typeCode";
     private static final String REASON_CODE = "reasonCode";
     private static final String DETAIL_CODE = "detail";
+    private static final String ROOT_ID = "rootId";
+    private static final String CONVERSATION_CLOSED = "conversationClosed";
+    private static final String MESSAGE_REF = "messageRef";
+    private static final String ERRORS = "errors";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -67,6 +76,11 @@ public class EhrExtractStatusService {
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
     private static final String ACK_REASON_CODE_PATH = ACK_TO_REQUESTER + DOT + REASON_CODE;
     private static final String ACK_DETAIL_CODE_PATH = ACK_TO_REQUESTER + DOT + DETAIL_CODE;
+    private static final String RECEIVED_ACK_TIMESTAMP = RECEIVED_ACK + DOT + RECEIVED;
+    private static final String RECEIVED_ACK_ROOT_ID = RECEIVED_ACK + DOT + ROOT_ID;
+    private static final String RECEIVED_ACK_MESSAGE_REF = RECEIVED_ACK + DOT + MESSAGE_REF;
+    private static final String RECEIVED_ACK_CONVERSATION_CLOSED = RECEIVED_ACK + DOT + CONVERSATION_CLOSED;
+    private static final String RECEIVED_ACK_ERRORS = RECEIVED_ACK + DOT + ERRORS;
 
     private final MongoTemplate mongoTemplate;
 
@@ -158,6 +172,38 @@ public class EhrExtractStatusService {
         }
 
         LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
+        return ehrExtractStatus;
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
+        Query query = createQueryForConversationId(conversationId);
+
+        Update update = createUpdateWithUpdatedAt();
+        update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
+        update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
+        update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
+        update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
+
+        if (!isEmpty(ack.getErrors())) {
+            ack.getErrors().stream()
+                .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
+                    .code(error.getCode())
+                    .display(error.getDisplay())
+                    .build()));
+        }
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
+                + "' that is not recognised");
+        }
+
+        LOGGER.info("Database successfully updated with EHRAcknowledgement, Conversation-Id: " + conversationId);
         return ehrExtractStatus;
     }
 
