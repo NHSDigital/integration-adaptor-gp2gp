@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -89,10 +91,16 @@ public class NonConsultationResourceMapper {
             builder.encounterStatementId(randomIdGeneratorService.createNewId())
                 .status(COMPLETE_CODE)
                 .components(component);
+            EncounterTemplateParameters build = builder.build();
+
+            String effectiveTime = build.getEffectiveTime();
+            messageContext.getEffectiveTime().updateEffectiveTimeLowFormatted(effectiveTime);
+            build.setEffectiveTime(prepareEffectiveTimeForNonConsultation(effectiveTime));
+
             return Optional.of(
                 TemplateUtils.fillTemplate(
                     ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
-                    builder.build())
+                    build)
             );
         }
         return Optional.empty();
