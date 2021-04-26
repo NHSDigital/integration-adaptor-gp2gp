@@ -59,7 +59,7 @@ public class EhrExtractAckHandler {
             LOGGER.info("Application Acknowledgement Reject ({}) received, messageRef: {}", messageRef, ackTypeCode);
             ackBuilder.errors(extractErrorCodes(document, ACK_DETAILS_XPATH));
         } else {
-            throw new InvalidInboundMessageException("Unsupported MCCI_IN010000UK13/acknowledgement/@typeCode: " + ackTypeCode);
+            throw new InvalidInboundMessageException(String.format("Unsupported %s: %s", ACK_TYPE_CODE_XPATH, ackTypeCode));
         }
 
         ehrExtractStatusService.updateEhrExtractStatusAck(conversationId, ackBuilder.build());
