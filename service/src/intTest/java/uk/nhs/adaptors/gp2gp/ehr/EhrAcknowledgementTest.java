@@ -51,12 +51,14 @@ public class EhrAcknowledgementTest {
     public void When_EhrReceivedAckAA_Expect_DbUpdatedAndNoErrors() {
         Optional<EhrExtractStatus> ehrExtract = setUpAndHandleAck(positiveAck);
 
-        EhrReceivedAcknowledgement ack = ehrExtract.get().getEhrReceivedAcknowledgement();
-        assertThat(ack.getReceived()).isNotNull();
-        assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed());
-        assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF);
-        assertThat(ack.getRootId()).isEqualTo(ROOT_ID);
-        assertThat(ack.getErrors()).isNull();
+        assertThat(ehrExtract).isPresent()
+            .map(EhrExtractStatus::getEhrReceivedAcknowledgement)
+            .hasValueSatisfying(ack -> assertAll(
+                () -> assertThat(ack.getReceived()).isEqualTo(ack.getConversationClosed()),
+                () -> assertThat(ack.getMessageRef()).isEqualTo(MESSAGE_REF),
+                () -> assertThat(ack.getRootId()).isEqualTo(ROOT_ID),
+                () -> assertThat(ack.getErrors()).isNull()
+            ));
     }
 
     @SneakyThrows
