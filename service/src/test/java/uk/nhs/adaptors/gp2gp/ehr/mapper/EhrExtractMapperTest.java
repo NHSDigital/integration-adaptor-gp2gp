@@ -36,7 +36,10 @@ public class EhrExtractMapperTest {
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
+    private static final String DUPLICATE_RESOURCE_BUNDLE = INPUT_PATH + "duplicated-resource-bundle.json";
+    private static final String ONE_CONSULTATION_RESOURCE_BUNDLE = INPUT_PATH + "1-consultation-resource.json";
     private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
+    private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
     private static final String TEST_ID_3 = "test-id-3";
@@ -58,6 +61,7 @@ public class EhrExtractMapperTest {
     @Mock
     private OrganizationToAgentMapper organizationToAgentMapper;
 
+    private NonConsultationResourceMapper nonConsultationResourceMapper;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -110,12 +114,16 @@ public class EhrExtractMapperTest {
             organizationToAgentMapper
         );
 
+        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
+            randomIdGeneratorService,
+            encounterComponentsMapper);
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-            timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper),
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
-            agentDirectoryMapper,
-            messageContext);
+        timestampService,
+        new EncounterMapper(messageContext, encounterComponentsMapper),
+        nonConsultationResourceMapper,
+        agentDirectoryMapper,
+        messageContext);
     }
 
     @AfterEach
@@ -135,5 +143,28 @@ public class EhrExtractMapperTest {
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
+    }
+
+    @Test
+    public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() throws IOException {
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        messageContext.initialize(bundle);
+
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+            getGpcStructuredTaskDefinition,
+            bundle);
+        String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+    }
+
+    @Test
+    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() throws IOException {
+        String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCE_BUNDLE);
+        Bundle parsedBundle = new FhirParseService().parseResource(bundle, Bundle.class);
+        messageContext.initialize(parsedBundle);
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+        assertThat(translatedOutput.size()).isEqualTo(1);
     }
 }
