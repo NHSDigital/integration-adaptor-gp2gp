@@ -122,8 +122,6 @@ public class XpathExtractor {
     private static final String DOCUMENT_REFERENCE_SECOND_PARTICIPANT = DOCUMENT_REFERENCE_AUTHOR_REF;
 
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
-    private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
-    private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
 
@@ -285,9 +283,7 @@ public class XpathExtractor {
                 () -> builder.availabilityTime(DEFAULT_AVAILABILITY_TIME_VALUE));
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getEffectiveTime(), ehrTemplateArgs.getEffectiveTimeBackup())
-            .map(XpathExtractor::buildEffectiveTimeTemplate)
-            .ifPresentOrElse(builder::effectiveTime,
-                () -> builder.effectiveTime(DEFAULT_TIME_VALUE));
+            .ifPresent(builder::effectiveTime);
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getAuthorAgentRef())
             .ifPresent(builder::author);
@@ -314,10 +310,6 @@ public class XpathExtractor {
 
     private static String buildAvailabilityTimeTemplate(String time) {
         return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, time);
-    }
-
-    private static String buildEffectiveTimeTemplate(String time) {
-        return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, time);
     }
 
     @Data

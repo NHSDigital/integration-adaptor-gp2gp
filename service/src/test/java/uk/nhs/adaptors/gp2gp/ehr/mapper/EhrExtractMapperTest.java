@@ -114,7 +114,8 @@ public class EhrExtractMapperTest {
             timestampService,
             new EncounterMapper(messageContext, encounterComponentsMapper),
             new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
-            agentDirectoryMapper);
+            agentDirectoryMapper,
+            messageContext);
     }
 
     @AfterEach

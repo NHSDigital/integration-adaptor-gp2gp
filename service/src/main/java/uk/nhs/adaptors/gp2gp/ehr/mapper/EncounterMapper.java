@@ -78,8 +78,16 @@ public class EncounterMapper {
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 
+        updateEhrFolderEffectiveTime(encounter);
+
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
             encounterStatementTemplateParameters.build());
+    }
+
+    private void updateEhrFolderEffectiveTime(Encounter encounter) {
+        if (encounter.hasPeriod()) {
+            messageContext.getEffectiveTime().updateEffectiveTimePeriod(encounter.getPeriod());
+        }
     }
 
     private Optional<Reference> findParticipantWithCoding(Encounter encounter, ParticipantCoding coding) {

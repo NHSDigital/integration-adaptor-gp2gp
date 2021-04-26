@@ -2,16 +2,19 @@ package uk.nhs.adaptors.gp2gp.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toDateTypeTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -62,6 +65,15 @@ public class DateFormatUtilTest {
 
         String actual = toTextFormat(observation.getValueDateTimeType());
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"20190328103005,20190328103005", "1973,19730101000000", "200808,20080801000000", "20190728,20190728000000"})
+    public void When_FormattingDateTimeTypeFromHl7FormatTextBackToDate_Expect_Hl7InUkZone(String firstParsedDate,
+        String expectedConvertedBackDateTimeTypeString) {
+        BaseDateTimeType convertedBackToDateTimeType = toDateTypeTime(firstParsedDate);
+
+        assertThat(toHl7Format(convertedBackToDateTimeType)).isEqualTo(expectedConvertedBackDateTimeTypeString);
     }
 
     private static Stream<Arguments> instantParams() {
