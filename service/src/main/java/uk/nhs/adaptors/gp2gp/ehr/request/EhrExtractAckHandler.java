@@ -35,7 +35,6 @@ public class EhrExtractAckHandler {
     private static final String CODE_ATTRIBUTE = "code";
     private static final String DISPLAY_ATTRIBUTE = "displayName";
 
-
     private final XPathService xPathService;
     private final EhrExtractStatusService ehrExtractStatusService;
 
