@@ -55,8 +55,8 @@
             <id root="287b3a3c-5e88-427b-a2ef-a14a20353b0c" />
             <statusCode code="COMPLETE" />
             <effectiveTime>
-                <low value="" />
-                <high value="" />
+                <low value="20200615" />
+                
             </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
