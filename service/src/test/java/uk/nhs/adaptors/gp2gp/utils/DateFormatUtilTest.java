@@ -70,10 +70,10 @@ public class DateFormatUtilTest {
     @ParameterizedTest
     @CsvSource({"20190328103005,20190328103005", "1973,19730101000000", "200808,20080801000000", "20190728,20190728000000"})
     public void When_FormattingDateTimeTypeFromHl7FormatTextBackToDate_Expect_Hl7InUkZone(String firstParsedDate,
-        String expectedConvertedBackDateTimeTpeString) {
+        String expectedConvertedBackDateTimeTypeString) {
         BaseDateTimeType convertedBackToDateTimeType = toDateTypeTime(firstParsedDate);
 
-        assertThat(toHl7Format(convertedBackToDateTimeType)).isEqualTo(expectedConvertedBackDateTimeTpeString);
+        assertThat(toHl7Format(convertedBackToDateTimeType)).isEqualTo(expectedConvertedBackDateTimeTypeString);
     }
 
     private static Stream<Arguments> instantParams() {
