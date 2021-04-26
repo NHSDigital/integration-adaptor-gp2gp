@@ -185,7 +185,7 @@ public class EhrExtractStatusService {
         update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
 
         if (!isEmpty(ack.getErrors())) {
-            ack.getErrors().stream()
+            ack.getErrors()
                 .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
                     .code(error.getCode())
                     .display(error.getDisplay())
