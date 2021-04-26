@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -38,51 +39,81 @@ public class RequestStatementMapperTest {
 
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
+
+    // INPUT FILES
     private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
-    private static final String INPUT_JSON_WITH_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "example-referral-request-resource-1.json";
-    private static final String INPUT_JSON_WITH_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "example-referral-request-resource-2.json";
-    private static final String INPUT_JSON_WITH_ONE_REASON_CODE = TEST_FILE_DIRECTORY + "example-referral-request-resource-3.json";
-    private static final String INPUT_JSON_WITH_PRACTITIONER_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-4.json";
-    private static final String INPUT_JSON_WITH_REASON_CODES = TEST_FILE_DIRECTORY + "example-referral-request-resource-5.json";
-    private static final String INPUT_JSON_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY + "example-referral-request-resource-6.json";
-    private static final String INPUT_JSON_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-7.json";
-    private static final String INPUT_JSON_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-8.json";
-    private static final String INPUT_JSON_WITH_PATIENT_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-9.json";
-    private static final String INPUT_JSON_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "example-referral-request-resource-10.json";
+    private static final String INPUT_JSON_WITH_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "example-referral-request-no-optional-fields.json";
+    private static final String INPUT_JSON_WITH_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-optional-fields.json";
+    private static final String INPUT_JSON_WITH_ONE_REASON_CODE = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-one-reason-code.json";
+    private static final String INPUT_JSON_WITH_PRACTITIONER_REQUESTER = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-practitioner-requester.json";
+    private static final String INPUT_JSON_WITH_REASON_CODES = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-reason-codes.json";
+    private static final String INPUT_JSON_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-services-requested.json";
+    private static final String INPUT_JSON_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-device-requester.json";
+    private static final String INPUT_JSON_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-org-requester.json";
+    private static final String INPUT_JSON_WITH_PATIENT_REQUESTER = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-patient-requester.json";
+    private static final String INPUT_JSON_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-relation-requester.json";
     private static final String INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-11.json";
+        + "example-referral-request-with-one-practitioner-recipient.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-12.json";
-    private static final String INPUT_JSON_WITH_NOTES = TEST_FILE_DIRECTORY + "example-referral-request-resource-13.json";
+        + "example-referral-request-with-multiple-practitioner-recipients.json";
+    private static final String INPUT_JSON_WITH_NOTES = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-notes.json";
     private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-14.json";
+        + "example-referral-request-with-incorrect-resource-type-recipient.json";
     private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-15.json";
+        + "example-referral-request-with-incorrect-resource-type-author.json";
     private static final String INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-19.json";
+        + "example-referral-request-with-incorrect-resource-type-requester.json";
     private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-16.json";
+        + "example-referral-request-no-resolved-reference-requester.json";
     private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-17.json";
+        + "example-referral-request-no-resolved-reference-recipient.json";
     private static final String INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-18.json";
+        + "example-referral-request-no-resolved-reference-note-author.json";
     private static final String INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF = TEST_FILE_DIRECTORY
-        + "example-referral-request-resource-20.json";
-    private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-1.xml";
-    private static final String OUTPUT_XML_USES_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY + "expected-output-request-statement-2.xml";
-    private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-request-statement-3.xml";
-    private static final String OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE = TEST_FILE_DIRECTORY + "expected-output-request-statement-4.xml";
-    private static final String OUTPUT_XML_WITH_REASON_CODES = TEST_FILE_DIRECTORY + "expected-output-request-statement-5.xml";
-    private static final String OUTPUT_XML_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY + "expected-output-request-statement-6.xml";
-    private static final String OUTPUT_XML_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-7.xml";
-    private static final String OUTPUT_XML_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-8.xml";
-    private static final String OUTPUT_XML_WITH_PATIENT_REQUESTER  = TEST_FILE_DIRECTORY + "expected-output-request-statement-9.xml";
-    private static final String OUTPUT_XML_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY + "expected-output-request-statement-10.xml";
-    private static final String OUTPUT_XML_WITH_RECIPIENTS = TEST_FILE_DIRECTORY + "expected-output-request-statement-11.xml";
-    private static final String OUTPUT_XML_WITH_RECIPIENTS_AND_PRACTITIONER = TEST_FILE_DIRECTORY
-        + "expected-output-request-statement-12.xml";
-    private static final String OUTPUT_XML_WITH_NOTES = TEST_FILE_DIRECTORY + "expected-output-request-statement-13.xml";
-    private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY + "expected-output-request-statement-14.xml";
+        + "example-referral-request-no-onbehalfof.json";
+
+    // OUTPUT FILES
+    private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-no-optional-fields.xml";
+    private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS_NESTED = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-no-optional-fields-nested.xml";
+    private static final String OUTPUT_XML_WITH_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-optional-fields.xml";
+    private static final String OUTPUT_XML_WITH_ONE_REASON_CODE = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-one-reason-code.xml";
+    private static final String OUTPUT_XML_WITH_PRACTITIONER_REQUESTER = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-practitioner-requester.xml";
+    private static final String OUTPUT_XML_WITH_REASON_CODES = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-reason-codes.xml";
+    private static final String OUTPUT_XML_WITH_SERVICES_REQUESTED = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-services-requested.xml";
+    private static final String OUTPUT_XML_WITH_DEVICE_REQUESTER = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-device-requester.xml";
+    private static final String OUTPUT_XML_WITH_ORG_REQUESTER = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-org-requester.xml";
+    private static final String OUTPUT_XML_WITH_PATIENT_REQUESTER = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-patient-requester.xml";
+    private static final String OUTPUT_XML_WITH_RELATION_REQUESTER = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-relation-requester.xml";
+    private static final String OUTPUT_XML_WITH_ONE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-one-practitioner-recipient.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-multiple-practitioner-recipients.xml";
+    private static final String OUTPUT_XML_WITH_NOTES = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-notes.xml";
+    private static final String OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-no-onbehalfof.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -119,23 +150,23 @@ public class RequestStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
-        assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
+        assertThatInputMapsToExpectedOutput(inputJson, outputXml);
     }
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_WITH_PARTICIPANT),
-            Arguments.of(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
-            Arguments.of(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
-            Arguments.of(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_RECIPIENTS),
-            Arguments.of(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_RECIPIENTS_AND_PRACTITIONER),
-            Arguments.of(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
-            Arguments.of(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_USES_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PARTICIPANT)
+            arguments(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
+            arguments(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_WITH_OPTIONAL_FIELDS),
+            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER),
+            arguments(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
+            arguments(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
+            arguments(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
+            arguments(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
+            arguments(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
+            arguments(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_ONE_PRACTITIONER_RECIPIENT),
+            arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT),
+            arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
+            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF)
             );
     }
 
@@ -144,19 +175,19 @@ public class RequestStatementMapperTest {
     public void When_MappingObservationJsonWithReason_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        assertThatInputMapsToExpectedOutput(inputJson, outputXml, false);
+        assertThatInputMapsToExpectedOutput(inputJson, outputXml);
     }
 
     private static Stream<Arguments> resourceFileParamsReasonCodes() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_DOES_NOT_USE_DEFAULT_CODE),
+            Arguments.of(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_WITH_ONE_REASON_CODE),
             Arguments.of(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
         );
     }
 
     @Test
     public void When_MappingReferralRequestJsonWithNestedTrue_Expect_RequestStatementXmlOutput() throws IOException {
-        String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
+        String expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NO_OPTIONAL_FIELDS_NESTED);
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS);
         ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
 
@@ -179,22 +210,22 @@ public class RequestStatementMapperTest {
 
     private static Stream<Arguments> resourceFileParamsWithUnexpectedReferences() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
-            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
-            Arguments.of(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
-            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
-            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
-            Arguments.of(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference")
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference")
             );
     }
 
     @SneakyThrows
-    private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath, boolean isNested) {
+    private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath) {
         var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
         var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
         var referralRequest = new FhirParseService().parseResource(input, ReferralRequest.class);
 
-        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, isNested);
+        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, false);
 
         assertThat(outputMessage).isEqualTo(expected);
     }
