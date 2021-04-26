@@ -41,7 +41,7 @@
                 </text>
             </referredToExternalDocument>
         </reference>
-        <Participant typeCode="aut" contextControlCode="OP">
+        <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="394559384658936"/>
             </agentRef>
