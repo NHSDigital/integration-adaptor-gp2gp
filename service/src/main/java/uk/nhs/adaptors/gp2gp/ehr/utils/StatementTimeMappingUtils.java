@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
@@ -22,6 +23,14 @@ public final class StatementTimeMappingUtils {
     private StatementTimeMappingUtils() {
     }
 
+    public static String prepareEffectiveTimeForNonConsultation(String effectiveTime) {
+        if (StringUtils.isNotBlank(effectiveTime)) {
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, effectiveTime);
+        }
+
+        return DEFAULT_TIME_VALUE;
+    }
+
     public static String prepareEffectiveTimeForEncounter(Encounter encounter) {
         if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
             Period period = encounter.getPeriod();
@@ -35,6 +44,7 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
                 encounter.getPeriod().getStartElement()));
         }
+
         return DEFAULT_TIME_VALUE;
     }
 
