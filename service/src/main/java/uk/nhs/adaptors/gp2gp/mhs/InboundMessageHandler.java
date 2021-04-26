@@ -1,25 +1,24 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
-import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
-
-import javax.jms.JMSException;
-import javax.jms.Message;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.ACKNOWLEDGMENT_REQUEST;
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.CONTINUE_REQUEST;
+import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUEST;
 
 @Component
 @Slf4j
@@ -64,6 +63,8 @@ public class InboundMessageHandler {
             ehrExtractRequestHandler.handleStart(ebXmlDocument, payloadDocument);
         } else if (CONTINUE_REQUEST.getInteractionId().equals(interactionId)) {
             ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getPayload());
+        } else if (ACKNOWLEDGMENT_REQUEST.getInteractionId().equals(interactionId)) {
+            ehrExtractRequestHandler.handleAcknowledgement(conversationId, payloadDocument);
         } else {
             throw new UnsupportedInteractionException(interactionId);
         }

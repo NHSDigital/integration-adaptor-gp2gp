@@ -1,7 +1,11 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
-import java.io.IOException;
-import java.io.StringReader;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,11 +14,10 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
+import java.io.StringReader;
 
-import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+import static javax.xml.xpath.XPathConstants.NODESET;
 
 @Component
 public class XPathService {
@@ -36,12 +39,20 @@ public class XPathService {
     public String getNodeValue(Document xmlDoc, String expression) {
         try {
             XPathExpression xPathExpression = XPathFactory.newInstance()
-                .newXPath()
-                .compile(expression);
+                    .newXPath()
+                    .compile(expression);
             return (String) xPathExpression.evaluate(xmlDoc, XPathConstants.STRING);
         } catch (XPathExpressionException e) {
             throw new IllegalArgumentException("Invalid xpath expression " + expression, e);
         }
     }
 
+    @SneakyThrows
+    public NodeList getNodes(Document document, String xPath) {
+        XPathExpression xPathExpression = XPathFactory.newInstance()
+                .newXPath()
+                .compile(xPath);
+
+        return ((NodeList) xPathExpression.evaluate(document, NODESET));
+    }
 }
