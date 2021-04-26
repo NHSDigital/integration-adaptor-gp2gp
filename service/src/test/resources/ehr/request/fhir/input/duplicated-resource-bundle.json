@@ -1,0 +1,79 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "AllergyIntolerance",
+                "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                        "extension": [
+                            {
+                                "url": "reasonEnded",
+                                "valueString": "Patient reports no subsequent recurrence on same medication"
+                            }
+                        ]
+                    }
+                ],
+                "clinicalStatus": "resolved",
+                "type": "allergy",
+                "category": [
+                    "medication"
+                ],
+                "criticality": "low",
+                "onsetDateTime": "1978-12-31",
+                "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                "note": [
+                    {
+                        "text": "Example note text"
+                    }
+                ],
+                "lastOccurrence": "1978-12-31",
+                "code": {
+                    "text": "test"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "AllergyIntolerance",
+                "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                        "extension": [
+                            {
+                                "url": "reasonEnded",
+                                "valueString": "Patient reports no subsequent recurrence on same medication"
+                            }
+                        ]
+                    }
+                ],
+                "clinicalStatus": "resolved",
+                "type": "allergy",
+                "category": [
+                    "medication"
+                ],
+                "criticality": "low",
+                "onsetDateTime": "1978-12-31",
+                "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                "note": [
+                    {
+                        "text": "Example note text"
+                    }
+                ],
+                "lastOccurrence": "1978-12-31",
+                "code": {
+                    "text": "test"
+                }
+            }
+        }
+    ]
+}

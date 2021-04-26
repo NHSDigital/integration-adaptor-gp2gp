@@ -67,7 +67,7 @@ public class NonConsultationResourceMapper {
         var mappedResources = bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> !messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getId()))
+            .filter(resource -> !hasIdBeenMapped(resource))
             .filter(this::isMappableNonConsultationResource)
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
@@ -189,5 +189,9 @@ public class NonConsultationResourceMapper {
     private boolean isMappableNonConsultationResource(Resource resource) {
         return resource.getResourceType().equals(ResourceType.Observation)
             || resourceBuilder.containsKey(resource.getResourceType());
+    }
+
+    private boolean hasIdBeenMapped(Resource resource) {
+        return messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getId());
     }
 }

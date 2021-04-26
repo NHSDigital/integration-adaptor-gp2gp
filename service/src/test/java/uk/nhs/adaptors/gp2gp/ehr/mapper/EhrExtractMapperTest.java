@@ -13,6 +13,7 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -39,6 +40,9 @@ public class EhrExtractMapperTest {
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
+    private static final String DUPLICATE_RESOURCE_BUNDLE = INPUT_PATH + "duplicated-resource-bundle.json";
+    private static final String ONE_CONSULTATION_RESOURCE_BUNDLE = INPUT_PATH + "1-consultation-resource.json";
+    private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
     private static final String FHIR_BUNDLE_WITHOUT_EFFECTIVE_TIME = "fhir-bundle-without-effective-time.json";
     private static final String FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME = "fhir-bundle-without-high-effective-time.json";
     private static final String FHIR_BUNDLE_WITH_EFFECTIVE_TIME = "fhir-bundle-with-effective-time.json";
@@ -67,6 +71,7 @@ public class EhrExtractMapperTest {
     @Mock
     private OrganizationToAgentMapper organizationToAgentMapper;
 
+    private NonConsultationResourceMapper nonConsultationResourceMapper;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -119,12 +124,16 @@ public class EhrExtractMapperTest {
             organizationToAgentMapper
         );
 
+        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
+            randomIdGeneratorService,
+            encounterComponentsMapper);
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-            timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper),
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
-            agentDirectoryMapper,
-            messageContext);
+        timestampService,
+        new EncounterMapper(messageContext, encounterComponentsMapper),
+        nonConsultationResourceMapper,
+        agentDirectoryMapper,
+        messageContext);
     }
 
     @AfterEach
@@ -154,5 +163,28 @@ public class EhrExtractMapperTest {
             Arguments.of(FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME, EXPECTED_XML_WITHOUT_HIGH_EFFECTIVE_TIME),
             Arguments.of(FHIR_BUNDLE_WITH_EFFECTIVE_TIME, EXPECTED_XML_WITH_EFFECTIVE_TIME)
         );
+    }
+
+    @Test
+    public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() throws IOException {
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        messageContext.initialize(bundle);
+
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+            getGpcStructuredTaskDefinition,
+            bundle);
+        String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+    }
+
+    @Test
+    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() throws IOException {
+        String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCE_BUNDLE);
+        Bundle parsedBundle = new FhirParseService().parseResource(bundle, Bundle.class);
+        messageContext.initialize(parsedBundle);
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+        assertThat(translatedOutput.size()).isEqualTo(1);
     }
 }

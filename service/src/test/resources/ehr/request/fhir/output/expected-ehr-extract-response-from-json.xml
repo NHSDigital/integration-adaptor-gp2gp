@@ -7363,7 +7363,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113145710" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="test-id-3" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -7434,7 +7434,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113140445" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="test-id-3" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -7505,7 +7505,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113114126" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="test-id-3" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -7576,7 +7576,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113113756" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id root="test-id-3" />
             </agentRef>
         </author>
         <location typeCode="LOC">
