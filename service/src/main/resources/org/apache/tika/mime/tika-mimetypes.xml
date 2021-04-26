@@ -4945,6 +4945,7 @@
 
 	<mime-type type="audio/basic">
 		<_comment>uLaw/AU Audio File</_comment>
+		<alias type="audio/x-au"/>
 		<magic priority="20">
 			<match value=".snd" type="string" offset="0">
 				<match value="1" type="big32" offset="12"/>
