@@ -82,6 +82,8 @@ public class RequestStatementMapperTest {
         + "example-referral-request-no-resolved-reference-note-author.json";
     private static final String INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF = TEST_FILE_DIRECTORY
         + "example-referral-request-no-onbehalfof.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-multiple-recipients.json";
 
     // OUTPUT FILES
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -114,6 +116,8 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-with-notes.xml";
     private static final String OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-no-onbehalfof.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-multiple-recipients.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -166,7 +170,8 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_ONE_PRACTITIONER_RECIPIENT),
             arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT),
             arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
-            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF)
+            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
+            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS)
             );
     }
 
