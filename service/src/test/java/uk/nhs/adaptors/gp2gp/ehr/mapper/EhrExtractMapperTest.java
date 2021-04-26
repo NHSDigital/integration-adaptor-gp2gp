@@ -10,7 +10,6 @@ import java.time.Instant;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -115,7 +114,9 @@ public class EhrExtractMapperTest {
             organizationToAgentMapper
         );
 
-        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
+        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
+            randomIdGeneratorService,
+            encounterComponentsMapper);
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
         timestampService,
