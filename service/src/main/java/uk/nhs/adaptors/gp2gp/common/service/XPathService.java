@@ -65,6 +65,6 @@ public class XPathService {
             .newXPath()
             .compile(xPath);
 
-        return ((NodeList) xPathExpression.evaluate(document, NODESET));
+        return (NodeList) xPathExpression.evaluate(document, NODESET);
     }
 }
