@@ -1,15 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import lombok.AllArgsConstructor;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
-
-import lombok.AllArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @AllArgsConstructor()
 public class IdMapper {
@@ -27,12 +26,24 @@ public class IdMapper {
         return mappedId;
     }
 
+    public boolean hasIdBeenMapped(ResourceType resourceType, String id) {
+        return hasIdBeenMapped(buildReference(resourceType, id));
+    }
+
+    public boolean hasIdBeenMapped(Reference reference) {
+        return ids.containsKey(reference.getReference());
+    }
+
     public String get(Reference reference) throws EhrMapperException {
         String mappedId = ids.get(reference.getReference());
         if (mappedId == null) {
             throw new EhrMapperException("No ID mapping for reference " + reference.getReference());
         }
         return mappedId;
+    }
+
+    public String get(ResourceType resourceType, String id) throws EhrMapperException {
+        return get(buildReference(resourceType, id));
     }
 
     private Reference buildReference(ResourceType resourceType, String id) {

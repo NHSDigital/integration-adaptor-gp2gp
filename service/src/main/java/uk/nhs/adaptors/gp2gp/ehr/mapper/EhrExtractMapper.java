@@ -1,16 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.github.mustachejava.Mustache;
+import lombok.RequiredArgsConstructor;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
@@ -27,14 +26,17 @@ public class EhrExtractMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
     private final EncounterMapper encounterMapper;
+    private final NonConsultationResourceMapper nonConsultationResourceMapper;
     private final AgentDirectoryMapper agentDirectoryMapper;
+    private final MessageContext messageContext;
 
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
     }
 
-    public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-        Bundle bundle) {
+    public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
+            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
+            Bundle bundle) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
@@ -43,11 +45,22 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
-        ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle,
-            getGpcStructuredTaskDefinition.getNhsNumber()));
+        ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(
+            bundle, getGpcStructuredTaskDefinition.getNhsNumber()));
 
-        var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle.getEntry());
-        ehrExtractTemplateParameters.setComponents(mapEncounterToEhrComponents(encounters));
+        var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
+        var mappedComponents = mapEncounterToEhrComponents(encounters);
+        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
+        ehrExtractTemplateParameters.setComponents(mappedComponents);
+
+        EhrFolderEffectiveTime effectiveTime = messageContext.getEffectiveTime();
+        Optional<String> effectiveTimeLow = effectiveTime.getEffectiveTimeLow();
+        effectiveTimeLow.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeLow);
+
+        Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
+        effectiveTimeHigh.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeHigh);
+
+        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.or(() -> effectiveTimeHigh).isPresent());
 
         return ehrExtractTemplateParameters;
     }

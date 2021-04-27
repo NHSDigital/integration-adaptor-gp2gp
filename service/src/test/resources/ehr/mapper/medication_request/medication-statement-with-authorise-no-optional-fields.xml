@@ -42,5 +42,10 @@
                 <text>1 tablet once a day</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>

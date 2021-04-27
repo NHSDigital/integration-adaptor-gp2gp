@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -113,7 +114,8 @@ public class MedicationStatementMapperTest {
         + "medication-statement-with-authorise-default-status-reason-code.xml";
     private static final String INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-no-info-prescription-text.json";
-
+    private static final String INPUT_JSON_WITH_NO_RECORDER_REFERENCE = TEST_FILE_DIRECTORY
+        + "medication-request-with-no-recorder-reference.json";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -131,7 +133,11 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, mockRandomIdGeneratorService);
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "1");
+        messageContext.getIdMapper().getOrNew(ResourceType.Organization, "2");
+        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, "3");
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), mockRandomIdGeneratorService);
     }
 
     @AfterEach
@@ -227,7 +233,8 @@ public class MedicationStatementMapperTest {
         MedicationRequest parsedMedicationRequest = new FhirParseService().parseResource(jsonInput, MedicationRequest.class);
 
         RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
-        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, randomIdGeneratorService);
+        medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
+            new ParticipantMapper(), randomIdGeneratorService);
 
         assertThrows(EhrMapperException.class, ()
             -> medicationStatementMapper.mapMedicationRequestToMedicationStatement(parsedMedicationRequest));
@@ -246,7 +253,8 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_NO_DOSAGE_INSTRUCTION,
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
             INPUT_JSON_WITH_ORDER_NO_BASED_ON,
-            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE
+            INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
+            INPUT_JSON_WITH_NO_RECORDER_REFERENCE
             );
     }
 }
