@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -47,6 +48,7 @@ public class NonConsultationResourceMapper {
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String QUESTIONNAIRE_RESPONSE_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication "
         + "transaction\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
+    private static final String NULL_FLAVOR = "nullFlavor";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -56,7 +58,6 @@ public class NonConsultationResourceMapper {
             ResourceType.Immunization, this::buildForImmunization,
             ResourceType.AllergyIntolerance, this::buildForAllergyIntolerance,
             ResourceType.ReferralRequest, this::buildForReferralRequest,
-            ResourceType.DiagnosticReport, this::buildForDiagnosticRequest,
             ResourceType.MedicationRequest, this::buildForMedicationRequest,
             ResourceType.Condition, this::buildForCondition,
             ResourceType.ProcedureRequest, this::buildForProcedureRequest,
@@ -82,6 +83,8 @@ public class NonConsultationResourceMapper {
         EncounterTemplateParametersBuilder builder;
         if (resource.getResourceType().equals(ResourceType.Observation)) {
             builder = buildForObservation(component, (Observation) resource);
+        } else if (resource.getResourceType().equals(ResourceType.DiagnosticReport)) {
+            builder = buildForDiagnosticReport(component, (DiagnosticReport) resource);
         } else {
             builder = resourceBuilder.getOrDefault(resource.getResourceType(), this::notMapped)
                 .apply(component);
@@ -136,9 +139,26 @@ public class NonConsultationResourceMapper {
             .altCode(DEFAULT_CODE);
     }
 
-    // TODO: Add builder once NIAD-910 has been completed
-    private EncounterTemplateParametersBuilder buildForDiagnosticRequest(String component) {
-        return null;
+    private EncounterTemplateParametersBuilder buildForDiagnosticReport(String component, DiagnosticReport diagnosticReport) {
+        boolean isAgentPerson = false;
+
+        if (diagnosticReport.hasPerformer()) {
+            var agent = Optional.ofNullable(diagnosticReport.getPerformerFirstRep().getActor());
+            if (agent.isPresent()) {
+                isAgentPerson = agent.get().getReferenceElement().getResourceType().equals(ResourceType.Practitioner.name());
+            }
+        }
+
+        var diagnosticReportXml = XpathExtractor.extractValuesForDiagnosticReport(component)
+            .altCode(DIAGNOSTIC_REPORT_CODE);
+
+        if (!isAgentPerson) {
+            diagnosticReportXml
+                .author(NULL_FLAVOR)
+                .participant2(NULL_FLAVOR);
+        }
+
+        return diagnosticReportXml;
     }
 
     private EncounterTemplateParametersBuilder buildForMedicationRequest(String component) {
@@ -188,6 +208,7 @@ public class NonConsultationResourceMapper {
 
     private boolean isMappableNonConsultationResource(Resource resource) {
         return resource.getResourceType().equals(ResourceType.Observation)
+            || resource.getResourceType().equals(ResourceType.DiagnosticReport)
             || resourceBuilder.containsKey(resource.getResourceType());
     }
 

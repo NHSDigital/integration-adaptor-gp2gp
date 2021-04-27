@@ -56,6 +56,9 @@ public class NonConsultationResourceMapperTest {
     private static final String DOCUMENT_REFERENCE_XML = FILES_DIRECTORY + "document-reference-stub.xml";
     private static final String DOCUMENT_REFERENCE_BUNDLE = FILES_DIRECTORY + "document-reference-bundle.json";
     private static final String EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-document-reference-output.xml";
+    private static final String DIAGNOSTIC_REPORT_XML = FILES_DIRECTORY + "diagnostic-report-stub.xml";
+    private static final String DIAGNOSTIC_REPORT_BUNDLE = FILES_DIRECTORY + "diagnostic-report-bundle.json";
+    private static final String EXPECTED_DIAGNOSTIC_REPORT_OUTPUT = FILES_DIRECTORY + "expected-diagnostic-report-output.xml";
     private static final String TEST_ID = "b2175be3-29c2-465f-b2c6-323db03c2c7c";
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
@@ -102,8 +105,9 @@ public class NonConsultationResourceMapperTest {
             Arguments.of(MEDICATION_REQUEST_XML, MEDICATION_REQUEST_BUNDLE, EXPECTED_MEDICATION_REQUEST_OUTPUT),
             Arguments.of(CONDITION_XML, CONDITION_BUNDLE, EXPECTED_CONDITION_OUTPUT),
             Arguments.of(PROCEDURE_REQUEST_XML, PROCEDURE_REQUEST_BUNDLE, EXPECTED_PROCEDURE_REQUEST_OUTPUT),
-            Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT)
-        );
+            Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT),
+            Arguments.of(DIAGNOSTIC_REPORT_XML, DIAGNOSTIC_REPORT_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_OUTPUT)
+            );
     }
 
     private void setupMock(String stubEhrComponentMapperXml) {

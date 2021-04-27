@@ -121,6 +121,13 @@ public class XpathExtractor {
     private static final String DOCUMENT_REFERENCE_AUTHOR_REF = DOCUMENT_REFERENCE + PARTICIPANT_SELECTOR;
     private static final String DOCUMENT_REFERENCE_SECOND_PARTICIPANT = DOCUMENT_REFERENCE_AUTHOR_REF;
 
+    private static final String DIAGNOSTIC_REPORT = COMPONENT + COMPOUND_STATEMENT;
+    private static final String DIAGNOSTIC_REPORT_AVAILABILITY_TIME = DIAGNOSTIC_REPORT + AVAILABILITY_SELECTOR;
+    private static final String DIAGNOSTIC_REPORT_EFFECTIVE_TIME = DIAGNOSTIC_REPORT_AVAILABILITY_TIME;
+    private static final String DIAGNOSTIC_REPORT_AUTHOR_TIME = DIAGNOSTIC_REPORT_AVAILABILITY_TIME;
+    private static final String DIAGNOSTIC_REPORT_AUTHOR_REF = DIAGNOSTIC_REPORT + PARTICIPANT_SELECTOR;
+    private static final String DIAGNOSTIC_REPORT_PARTICIPANT = DIAGNOSTIC_REPORT_AUTHOR_REF;
+
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
@@ -266,6 +273,19 @@ public class XpathExtractor {
             .build();
 
         return extractValues(component, ehrTemplateArgs);
+    }
+
+    public static EncounterTemplateParametersBuilder extractValuesForDiagnosticReport(String component) {
+
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(DIAGNOSTIC_REPORT_AVAILABILITY_TIME)
+            .authorTime(DIAGNOSTIC_REPORT_AUTHOR_TIME)
+            .effectiveTime(DIAGNOSTIC_REPORT_EFFECTIVE_TIME)
+            .effectiveTimeBackup(DIAGNOSTIC_REPORT_EFFECTIVE_TIME)
+            .authorAgentRef(DIAGNOSTIC_REPORT_AUTHOR_REF)
+            .participant2(DIAGNOSTIC_REPORT_PARTICIPANT);
+
+        return extractValues(component, ehrTemplateArgs.build());
     }
 
     @SneakyThrows
