@@ -48,7 +48,6 @@ public class XPathServiceTest {
     public void When_GetNodesWithValidXPath_Expect_NodeListReturned() {
         var document = new XPathService().parseDocumentFromXml("<elements><element>value</element><element>value2</element></elements>");
         NodeList nodes = new XPathService().getNodes(document, "//element");
-        assertThat(nodes.getLength()).isEqualTo(2);
         assertAll(
             () -> assertThat(nodes.getLength()).isEqualTo(2),
             () -> assertThat(nodes.item(0).getTextContent()).isEqualTo("value"),
