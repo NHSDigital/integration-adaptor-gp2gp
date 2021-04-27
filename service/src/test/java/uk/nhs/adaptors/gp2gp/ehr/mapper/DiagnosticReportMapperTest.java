@@ -13,7 +13,7 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class DiagnosticReportMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
 
     @Mock
-    private ObservationMapper observationMapper;
+    private SpecimenMapper specimenMapper;
 
     private MessageContext messageContext;
     private FhirParseService fhirParseService;
@@ -60,7 +60,7 @@ public class DiagnosticReportMapperTest {
 
         DiagnosticReport diagnosticReport = fhirParseService.parseResource(jsonDiagnosticReportInput, DiagnosticReport.class);
 
-        DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(messageContext, observationMapper);
+        DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(messageContext, specimenMapper);
 
         String outputMessage = diagnosticReportMapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
 
