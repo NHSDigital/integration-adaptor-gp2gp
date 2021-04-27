@@ -14,28 +14,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.NarrativeStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class ObservationMapper {
 
-    private static final Mustache OBSERVATION_NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("observation_narrative_statement_template.mustache");
+    private static final Mustache OBSERVATION_NARRATIVE_STATEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("observation_narrative_statement_template.mustache");
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
+    private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = ImmutableList.of(SampledData.class, Attachment.class);
 
@@ -47,13 +52,56 @@ public class ObservationMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public String mapObservationToNarrativeStatement(Observation observation) {
+    public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen, List<Observation> observations) {
+        List<Observation> derivedObservations = observations.stream()
+            .filter(observation ->
+                observation.getRelated().stream().anyMatch(
+                    observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM &&
+                        observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId())
+                )
+            )
+            .collect(Collectors.toList());
+
+        String observationStatement = mapObservationToObservationStatement(observationAssociatedWithSpecimen);
+
+        StringBuilder narrativeStatementsBlock = new StringBuilder();
+
+        if (observationAssociatedWithSpecimen.hasComment()) {
+            narrativeStatementsBlock.append(
+                mapObservationToNarrativeStatement(observationAssociatedWithSpecimen)
+            );
+        }
+
+        derivedObservations.forEach(derivedObservation -> {
+            if (derivedObservation.hasComment()) {
+                narrativeStatementsBlock.append(
+                    mapObservationToNarrativeStatement(derivedObservation)
+                );
+            }
+        });
+
+        final IdMapper idMapper = messageContext.getIdMapper();
+
+        var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
+            .compoundStatementId(
+                idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getId())
+            )
+            .observationStatement(observationStatement)
+            .narrativeStatements(narrativeStatementsBlock.toString());
+
+        return TemplateUtils.fillTemplate(
+            OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
+            observationCompoundStatementTemplateParameters.build()
+        );
+    }
+
+    private String mapObservationToNarrativeStatement(Observation observation) {
         final IdMapper idMapper = messageContext.getIdMapper();
 
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
-            .commentType("comment type here") // TODO: LABORATORY RESULT COMMENT(E141) or USER COMMENT here
-            .issuedDate("issued date here")
+            .commentType(prepareCommentType(observation).getCode())
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation))
             .comment(observation.getComment());
 
         if (observation.hasPerformer()) {
@@ -66,14 +114,14 @@ public class ObservationMapper {
         return TemplateUtils.fillTemplate(OBSERVATION_NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
-    public String mapObservationToObservationStatement(Observation observation) {
+    private String mapObservationToObservationStatement(Observation observation) {
         final IdMapper idMapper = messageContext.getIdMapper();
 
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
             .code(prepareCode(observation))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-            .issuedDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()));
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
 
         if (observation.hasValue()) {
             Type value = observation.getValue();
@@ -122,6 +170,14 @@ public class ObservationMapper {
             return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
         }
         throw new EhrMapperException("Observation code is not present");
+    }
+
+    private CommentType prepareCommentType(Observation observation) {
+        if (observation.hasSpecimen()) {
+            return CommentType.LABORATORY_RESULT_COMMENT;
+        }
+
+        return CommentType.USER_COMMENT;
     }
 
     private boolean isInterpretationCode(Coding coding) {

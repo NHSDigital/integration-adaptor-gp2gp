@@ -15,8 +15,6 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.DiagnosticReportCompoundStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.ObservationCompoundStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.SpecimenCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -31,100 +29,22 @@ public class DiagnosticReportMapper {
 
     private static final Mustache DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("diagnostic_report_compound_statement_template.mustache");
-    private static final Mustache SPECIMEN_COMPOUND_STATEMENT_TEMPLATE =
-        TemplateUtils.loadTemplate("specimen_compound_statement_template.mustache");
-    private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
-        TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
-    private static final String EFFECTIVE_TIME_TEMPLATE = "<effectiveTime><center value=\"%s\"></effectiveTime>";
 
     private final MessageContext messageContext;
-
-    private final ObservationMapper observationMapper;
+    private final SpecimenMapper specimenMapper;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
-        final IdMapper idMapper = messageContext.getIdMapper();
-
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
-
         List<Observation> observations = fetchObservations(diagnosticReport);
 
         StringBuilder specimensBlock = new StringBuilder();
-        specimens.forEach(specimen -> {
-            List<Observation> observationsAssociatedWithSpecimen = observations.stream()
-                .filter(Observation::hasSpecimen)
-                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-                .collect(Collectors.toList());
-
-            StringBuilder observationsBlock = new StringBuilder();
-            observationsAssociatedWithSpecimen.forEach(observationAssociatedWithSpecimen -> {
-                List<Observation> derivedObservations = observations.stream()
-                    .filter(observation ->
-                        observation.getRelated().stream().anyMatch(
-                            observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM &&
-                                observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId())
-                        )
-                    )
-                    .collect(Collectors.toList());
-
-                String observationStatement = observationMapper.mapObservationToObservationStatement(observationAssociatedWithSpecimen);
-
-                StringBuilder narrativeStatementsBlock = new StringBuilder();
-
-                if (observationAssociatedWithSpecimen.hasComment()) {
-                    narrativeStatementsBlock.append(
-                        observationMapper.mapObservationToNarrativeStatement(observationAssociatedWithSpecimen)
-                    );
-                }
-
-                derivedObservations.forEach(derivedObservation -> {
-                    if (derivedObservation.hasComment()) {
-                        narrativeStatementsBlock.append(
-                            observationMapper.mapObservationToNarrativeStatement(derivedObservation)
-                        );
-                    }
-                });
-
-                var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
-                    .compoundStatementId(
-                        idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getId())
-                    )
-                    .observationStatement(observationStatement)
-                    .narrativeStatements(narrativeStatementsBlock.toString());
-
-                observationsBlock.append(
-                    TemplateUtils.fillTemplate(
-                        OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
-                        observationCompoundStatementTemplateParameters.build()
-                    )
-                );
-            });
-
-            var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
-                .compoundStatementId(idMapper.getOrNew(ResourceType.Specimen, specimen.getId()))
-                .diagnosticReportIssuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
-                .accessionIdentifier(specimen.getAccessionIdentifier().getValue())
-                .effectiveTime(generateEffectiveTimeElement(specimen))
-                .observations(observationsBlock.toString());
-
-            if (specimen.getType().hasCoding()) {
-                specimen.getType().getCoding().stream()
-                    .findFirst()
-                    .ifPresent(coding ->
-                        specimenCompoundStatementTemplateParameters.type(
-                            coding.getDisplay()
-                        )
-                    );
-            } else if (specimen.getType().hasText())  {
-                specimenCompoundStatementTemplateParameters.type(specimen.getType().getText());
-            }
-
+        specimens.forEach(specimen ->
             specimensBlock.append(
-                TemplateUtils.fillTemplate(
-                    SPECIMEN_COMPOUND_STATEMENT_TEMPLATE,
-                    specimenCompoundStatementTemplateParameters.build()
-                )
-            );
-        });
+                specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport)
+            )
+        );
+
+        final IdMapper idMapper = messageContext.getIdMapper();
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getId()))
@@ -155,23 +75,5 @@ public class DiagnosticReportMapper {
             .flatMap(Optional::stream)
             .map(Observation.class::cast)
             .collect(Collectors.toList());
-    }
-
-    private String generateEffectiveTimeElement(Specimen specimen) {
-        if (specimen.getCollection().hasCollectedDateTimeType()) {
-            return String.format(
-                EFFECTIVE_TIME_TEMPLATE,
-                DateFormatUtil.toHl7Format(specimen.getCollection().getCollectedDateTimeType())
-            );
-        }
-
-        if (specimen.hasReceivedTime()) {
-            return String.format(
-                EFFECTIVE_TIME_TEMPLATE,
-                DateFormatUtil.toHl7Format(specimen.getReceivedTimeElement())
-            );
-        }
-
-        return StringUtils.EMPTY;
     }
 }
