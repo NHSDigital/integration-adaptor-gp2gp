@@ -49,6 +49,7 @@ public class EhrExtractRequestHandler {
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final EhrExtractAckHandler ackHandler;
 
     public void handleStart(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
@@ -163,5 +164,9 @@ public class EhrExtractRequestHandler {
             .build();
         taskDispatcher.createTask(sendEhrContinueTaskDefinition);
         LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
+    }
+
+    public void handleAcknowledgement(String conversationId, Document payload) {
+        ackHandler.handle(conversationId, payload);
     }
 }
