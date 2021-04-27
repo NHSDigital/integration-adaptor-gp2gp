@@ -16,6 +16,8 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -82,7 +84,6 @@ public class EncounterComponentsMapperTest {
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
-        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
