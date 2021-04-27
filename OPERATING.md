@@ -24,15 +24,15 @@ TODO: Document storage scheme
 
 ## AMQP Message Broker Requirements
 
-* The broker must be configured with a limited number of retries and deadletter queues
-* It is the responsibility of the GP supplier to configure adequate monitoring against the deadletter queues that allows ALL undeliverable messages to be investigated fully.
+* The broker must be configured with a limited number of retries and dead-letter queues
+* It is the responsibility of the GP supplier to configure adequate monitoring against the dead-letter queues that allows ALL undeliverable messages to be investigated fully.
 * The broker must use persistent queues to avoid loss of data
 
 **Using AmazonMQ**
 
 * A persistent broker (not in-memory) must be used to avoid data loss.
-* A configuration profile that includes settings for [retry and deadlettering](https://activemq.apache.org/message-redelivery-and-dlq-handling.html) must be applied.
-* AmazonMQ uses the scheme `amqp+ssl://` but this **MUST** be changed the to `amqps://` when configuring the adaptor.
+* A configuration profile that includes settings for [retry and dead-lettering](https://activemq.apache.org/message-redelivery-and-dlq-handling.html) must be applied.
+* AmazonMQ uses the scheme `amqp+ssl://` but this **MUST** be changed to `amqps://` when configuring the adaptor.
 
 **Using Azure Service Bus**
 
@@ -50,8 +50,8 @@ TODO: Document task queue payloads
 ## Database Requirements
 
 * The GP2GP adaptor must be used with Mongodb-compatible database such as Amazon Document DB or Azure Cosmos
-* The adaptor stores the status, status, and metadata for each patient transfer
-* Deleting the mongodb database, its collections, or its records will cause any in-progress transfers fail
+* The adaptor stores the identifiers, status, and metadata for each patient transfer
+* Deleting the mongodb database, its collections, or its records will cause any in-progress transfers to fail
 * The database should be used to monitor for any failed or incomplete transfers
 
 **Amazon Document DB Tips**
@@ -103,8 +103,8 @@ The adaptor's queued messages contain:
 * identifiers (ODS & ASID) of the two GP practices involved in the transfer
 * metadata about the transfer process
 
-The supplier MUST monitor the broker's deadletter queues to investigate any errors and clear 
-old messages after a reasonable time perior.
+The supplier MUST monitor the broker's dead-letter queues to investigate any errors and clear 
+old messages after a reasonable time period.
 
 ## Exemplar Deployment
 
