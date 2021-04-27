@@ -26,12 +26,9 @@
         <ehrFolder classCode="FOLDER" moodCode="EVN">
             <id root="{{ehrFolderId}}" />
             <statusCode code="COMPLETE" />
-            {{#hasEffectiveTime}}
             <effectiveTime>
-                {{#effectiveTimeLow}}<low value="{{.}}" />{{/effectiveTimeLow}}
-                {{#effectiveTimeHigh}}<high value="{{.}}" />{{/effectiveTimeHigh}}
+                {{{effectiveTime}}}
             </effectiveTime>
-            {{/hasEffectiveTime}}
             <availabilityTime value="{{availabilityTime}}" />
             <author typeCode="AUT">
                 <time value="{{availabilityTime}}" />

@@ -27,8 +27,7 @@
             <id root="test-id-2" />
             <statusCode code="COMPLETE" />
             <effectiveTime>
-                <low value="19880101" />
-                <high value="20130713162000" />
+                <low value="19880101"/><high value="20130713162000"/>
             </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
