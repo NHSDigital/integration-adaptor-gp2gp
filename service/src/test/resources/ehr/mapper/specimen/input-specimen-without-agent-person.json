@@ -1,0 +1,28 @@
+{
+    "resourceType": "Specimen",
+    "id": "96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
+        }
+    ],
+    "accessionIdentifier": {
+        "value": "CH000056DN"
+    },
+    "type": {
+        "text": "URINE"
+    },
+    "subject": {
+        "reference": "Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
+    },
+    "receivedTime": "2010-02-24T15:41:00+00:00",
+    "collection": {
+        "collectedDateTime": "2010-02-23T00:00:00+00:00"
+    }
+}
