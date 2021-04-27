@@ -55,7 +55,6 @@ public class EhrExtractUATTest {
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
 
-    private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private TimestampService timestampService;
 
@@ -74,7 +73,7 @@ public class EhrExtractUATTest {
             .toOdsCode("test-to-ods-code")
             .build();
 
-        randomIdGeneratorService = new RandomIdGeneratorServiceStub();
+        final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorServiceStub();
         when(timestampService.now()).thenReturn(Instant.parse("2020-01-01T01:01:01.01Z"));
 
         outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);

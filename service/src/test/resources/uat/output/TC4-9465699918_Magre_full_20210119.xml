@@ -1706,11 +1706,6 @@
         <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
     </agentRef>
 </Participant>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
-            </agentRef>
-        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1820,11 +1815,6 @@
         <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
     </agentRef>
 </Participant>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
-            </agentRef>
-        </responsibleParty>
     </RequestStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -1950,11 +1940,6 @@
         <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
     </agentRef>
 </Participant>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
-            </agentRef>
-        </responsibleParty>
     </RequestStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -2021,11 +2006,6 @@
         <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
     </agentRef>
 </Participant>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
-            </agentRef>
-        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
