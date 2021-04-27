@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.common.service;
 
+import static javax.xml.xpath.XPathConstants.NODESET;
+
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -14,8 +16,11 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import lombok.SneakyThrows;
 
 @Component
 public class XPathService {
@@ -52,5 +57,14 @@ public class XPathService {
         } else {
             return getNodeValue(xmlDoc, secondExpression);
         }
+    }
+
+    @SneakyThrows
+    public NodeList getNodes(Document document, String xPath) {
+        XPathExpression xPathExpression = XPathFactory.newInstance()
+            .newXPath()
+            .compile(xPath);
+
+        return (NodeList) xPathExpression.evaluate(document, NODESET);
     }
 }
