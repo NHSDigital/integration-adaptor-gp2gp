@@ -39,6 +39,7 @@ public class InboundMessageHandlerTest {
     private static final String INBOUND_MESSAGE_CONTENT = "inboundMessage";
     private static final String UNKNOWN_INTERACTION_ID = "RCMR_UNKNOWN";
     private static final String INVALID_EBXML_CONTENT = "NOT VALID XML";
+
     @Mock
     private ObjectMapper objectMapper;
     @Mock
@@ -76,11 +77,7 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageIsEhrExtractRequest_Expect_RequestHandlerCalled() {
-        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
-        var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML(EBXML_CONTENT);
-        inboundMessage.setPayload(PAYLOAD_CONTENT);
-        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
+        setUpEhrExtract(EBXML_CONTENT);
         Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/RCMR_IN010000UK05_header.xml");
         Document payload = mock(Document.class);
         doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
@@ -93,12 +90,22 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
+    public void When_MessageIsEhrExtractRequestAck_Expect_RequestAckHandlerCalled() {
+        setUpEhrExtract(EBXML_CONTENT);
+        Document header = ResourceHelper.loadClasspathResourceAsXml("/ehr/request/MCCI_IN010000UK13_header.xml");
+        Document payload = mock(Document.class);
+        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
+        doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
+
+        inboundMessageHandler.handle(message);
+
+        verify(ehrExtractRequestHandler).handleAcknowledgement("75049C80-5271-11EA-9384-E83935108FD5", payload);
+    }
+
+    @Test
+    @SneakyThrows
     public void When_MessageIsForUnknownInteraction_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
-        var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML(EBXML_CONTENT);
-        inboundMessage.setPayload(PAYLOAD_CONTENT);
-        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
+        setUpEhrExtract(EBXML_CONTENT);
         Document header = mock(Document.class);
         Document payload = mock(Document.class);
         doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
@@ -115,12 +122,7 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessageHeaderCannotBeParsed_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
-        var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML(INVALID_EBXML_CONTENT);
-        inboundMessage.setPayload(PAYLOAD_CONTENT);
-        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
-        Document payload = mock(Document.class);
+        setUpEhrExtract(INVALID_EBXML_CONTENT);
         doCallRealMethod().when(xPathService).parseDocumentFromXml(INVALID_EBXML_CONTENT);
 
         assertThatExceptionOfType(InvalidInboundMessageException.class)
@@ -131,11 +133,7 @@ public class InboundMessageHandlerTest {
     @Test
     @SneakyThrows
     public void When_MessagePayloadCannotBeParsed_Expect_ExceptionIsThrown() {
-        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
-        var inboundMessage = new InboundMessage();
-        inboundMessage.setEbXML(EBXML_CONTENT);
-        inboundMessage.setPayload(PAYLOAD_CONTENT);
-        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
+        setUpEhrExtract(EBXML_CONTENT);
         Document header = mock(Document.class);
         doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
         doCallRealMethod().when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
@@ -145,4 +143,11 @@ public class InboundMessageHandlerTest {
             .withMessageContaining("XML payload");
     }
 
+    private void setUpEhrExtract(String ebxmlContent) throws JMSException, JsonProcessingException {
+        when(message.getBody(String.class)).thenReturn(INBOUND_MESSAGE_CONTENT);
+        var inboundMessage = new InboundMessage();
+        inboundMessage.setEbXML(ebxmlContent);
+        inboundMessage.setPayload(PAYLOAD_CONTENT);
+        when(objectMapper.readValue(INBOUND_MESSAGE_CONTENT, InboundMessage.class)).thenReturn(inboundMessage);
+    }
 }
