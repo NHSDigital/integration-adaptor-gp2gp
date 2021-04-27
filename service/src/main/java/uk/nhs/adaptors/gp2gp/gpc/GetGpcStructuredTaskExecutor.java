@@ -46,17 +46,17 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         var hl7TranslatedResponse = StringUtils.EMPTY;
 
         try {
-            Bundle bundle = fhirParseService.parseResource(response, Bundle.class);
-            messageContext.initialize(bundle);
-
-            var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
-                structuredTaskDefinition,
-                bundle);
-            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-
-            hl7TranslatedResponse = outputMessageWrapperMapper.map(
-                structuredTaskDefinition,
-                ehrExtractContent);
+//            Bundle bundle = fhirParseService.parseResource(response, Bundle.class);
+//            messageContext.initialize(bundle);
+//
+//            var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+//                structuredTaskDefinition,
+//                bundle);
+//            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+//
+//            hl7TranslatedResponse = outputMessageWrapperMapper.map(
+//                structuredTaskDefinition,
+//                ehrExtractContent);
         } finally {
             messageContext.resetMessageContext();
         }
