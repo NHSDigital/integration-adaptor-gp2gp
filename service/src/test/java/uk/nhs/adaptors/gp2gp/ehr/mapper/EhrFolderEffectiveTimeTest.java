@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.Period;
 import org.junit.jupiter.api.Test;
@@ -139,6 +140,20 @@ public class EhrFolderEffectiveTimeTest {
         EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
         ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
         ehrFolderEffectiveTime.updateEffectiveTimeLowFormatted(laterDatePartHl7Format);
+
+        assertAll(
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(EARLIER_START_DATE_HL7),
+            () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeHigh()).contains(INITIAL_END_DATE_HL7)
+        );
+    }
+
+    @Test
+    public void When_UpdatingEffectiveTimePeriodWithEmptyStart_Expect_NoneUpdated() {
+        Period initialPeriod = getPeriod(String.format(ENCOUNTER_WITH_FULL_DATES, EARLIER_START, INITIAL_END));
+
+        EhrFolderEffectiveTime ehrFolderEffectiveTime = new EhrFolderEffectiveTime();
+        ehrFolderEffectiveTime.updateEffectiveTimePeriod(initialPeriod);
+        ehrFolderEffectiveTime.updateEffectiveTimeLowFormatted(StringUtils.EMPTY);
 
         assertAll(
             () -> assertThat(ehrFolderEffectiveTime.getEffectiveTimeLow()).contains(EARLIER_START_DATE_HL7),
