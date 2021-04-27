@@ -22,6 +22,9 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -80,6 +83,11 @@ public class EhrExtractMapperTest {
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
+
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
@@ -95,7 +103,9 @@ public class EhrExtractMapperTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new DiagnosticReportMapper(
+                messageContext, specimenMapper)
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(

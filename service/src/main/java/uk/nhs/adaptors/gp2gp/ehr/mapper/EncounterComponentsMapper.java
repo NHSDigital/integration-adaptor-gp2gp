@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.ImmutableMap;
 
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -51,10 +52,10 @@ public class EncounterComponentsMapper {
         ImmutableMap.<ResourceType, Function<Resource, String>>builder()
             .put(ResourceType.List, this::mapListResource)
             .put(ResourceType.ProcedureRequest, this::mapProcedureRequest)
-//            .put(ResourceType.Observation, this::mapObservation)
+            .put(ResourceType.Observation, this::mapObservation)
             .put(ResourceType.Immunization, this::mapImmunization)
             .put(ResourceType.Condition, this::mapCondition)
-//            .put(ResourceType.DiagnosticReport, this::mapDiagnosticReport)
+            .put(ResourceType.DiagnosticReport, this::mapDiagnosticReport)
             .build();
 
     private final MessageContext messageContext;
@@ -66,7 +67,7 @@ public class EncounterComponentsMapper {
     private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
     private final ConditionLinkSetMapper conditionLinkSetMapper;
     private final BloodPressureMapper bloodPressureMapper;
-//    private final DiagnosticReportMapper diagnosticReportMapper;
+    private final DiagnosticReportMapper diagnosticReportMapper;
 
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
@@ -107,21 +108,21 @@ public class EncounterComponentsMapper {
         return diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED);
     }
 
-//    private String mapObservation(Resource resource) {
-//        Observation observation = (Observation) resource;
-//        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
-//            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
-//        }
-//        if (hasCode(observation.getCode(), BLOOD_CODES)) {
-//            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
-//        }
-//
-//        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
-//    }
+    private String mapObservation(Resource resource) {
+        Observation observation = (Observation) resource;
+        if (hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
+            return observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(observation, IS_NESTED);
+        }
+        if (hasCode(observation.getCode(), BLOOD_CODES)) {
+            return bloodPressureMapper.mapBloodPressure(observation, IS_NESTED);
+        }
 
-//    private String mapDiagnosticReport(Resource resource) {
-//        return diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource, IS_NESTED);
-//    }
+        return observationStatementMapper.mapObservationToObservationStatement(observation, IS_NESTED);
+    }
+
+    private String mapDiagnosticReport(Resource resource) {
+        return diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource);
+    }
 
     private String mapImmunization(Resource resource) {
         return immunizationObservationStatementMapper.mapImmunizationToObservationStatement((Immunization) resource, IS_NESTED);

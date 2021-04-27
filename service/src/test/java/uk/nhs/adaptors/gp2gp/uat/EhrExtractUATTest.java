@@ -31,6 +31,9 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -110,7 +113,11 @@ public class EhrExtractUATTest {
             .build();
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ParticipantMapper participantMapper = new ParticipantMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
@@ -133,7 +140,9 @@ public class EhrExtractUATTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new DiagnosticReportMapper(
+                messageContext, specimenMapper)
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(

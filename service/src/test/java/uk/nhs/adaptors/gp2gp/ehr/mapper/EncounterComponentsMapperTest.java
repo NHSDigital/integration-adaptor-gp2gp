@@ -24,6 +24,9 @@ import org.mockito.quality.Strictness;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -63,6 +66,9 @@ public class EncounterComponentsMapperTest {
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
@@ -80,6 +86,10 @@ public class EncounterComponentsMapperTest {
             randomIdGeneratorService,
             structuredObservationValueMapper,
             codeableConceptCdMapper);
+        DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
+            messageContext,
+            specimenMapper
+        );
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -88,7 +98,9 @@ public class EncounterComponentsMapperTest {
             observationStatementMapper,
             immunizationObservationStatementMapper,
             conditionLinkSetMapper,
-            bloodPressureMapper);
+            bloodPressureMapper,
+            diagnosticReportMapper
+            );
     }
 
     @AfterEach
