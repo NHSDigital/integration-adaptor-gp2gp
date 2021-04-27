@@ -1,20 +1,23 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.github.mustachejava.Mustache;
+
 import lombok.RequiredArgsConstructor;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.EncounterExtractor;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
@@ -35,8 +38,8 @@ public class EhrExtractMapper {
     }
 
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
-            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
-            Bundle bundle) {
+        GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
+        Bundle bundle) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
@@ -53,14 +56,9 @@ public class EhrExtractMapper {
         mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
         ehrExtractTemplateParameters.setComponents(mappedComponents);
 
-        EhrFolderEffectiveTime effectiveTime = messageContext.getEffectiveTime();
-        Optional<String> effectiveTimeLow = effectiveTime.getEffectiveTimeLow();
-        effectiveTimeLow.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeLow);
-
-        Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
-        effectiveTimeHigh.ifPresent(ehrExtractTemplateParameters::setEffectiveTimeHigh);
-
-        ehrExtractTemplateParameters.setHasEffectiveTime(effectiveTimeLow.or(() -> effectiveTimeHigh).isPresent());
+        ehrExtractTemplateParameters.setEffectiveTime(
+            StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
+        );
 
         return ehrExtractTemplateParameters;
     }
