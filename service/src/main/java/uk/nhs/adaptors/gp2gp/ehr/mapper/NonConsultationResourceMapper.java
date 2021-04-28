@@ -11,8 +11,10 @@ import java.util.stream.Collectors;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -143,10 +145,12 @@ public class NonConsultationResourceMapper {
         boolean isAgentPerson = false;
 
         if (diagnosticReport.hasPerformer()) {
-            var agent = Optional.ofNullable(diagnosticReport.getPerformerFirstRep().getActor());
-            if (agent.isPresent()) {
-                isAgentPerson = agent.get().getReferenceElement().getResourceType().equals(ResourceType.Practitioner.name());
-            }
+            isAgentPerson = Optional.of(diagnosticReport.getPerformerFirstRep())
+                .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+                .map(Reference::getReferenceElement)
+                .filter(IIdType::hasResourceType)
+                .filter(idType -> idType.getResourceType().equals(ResourceType.Practitioner.name()))
+                .isPresent();
         }
 
         var diagnosticReportXml = XpathExtractor.extractValuesForDiagnosticReport(component)

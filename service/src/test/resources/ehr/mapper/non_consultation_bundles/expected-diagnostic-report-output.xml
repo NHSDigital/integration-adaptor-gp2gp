@@ -26,13 +26,9 @@
                 <id root="nullFlavor"/>
             </agentRef>
         </Participant2>
-        <!-- Example transformation of the FHIR Resources in the spreadsheet (Example 1) -->
-<!-- For simplicity - agent references are omitted -->
-<component typeCode="COMP">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <!-- generated id -->
         <id root="CE3B4268-4D1C-11E3-A2DD-010000000161"/>
-        <!-- codes are fixed boilerplate -->
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -40,43 +36,28 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <!-- From DiagnosticReport.issued -->
         <availabilityTime value="20100225154100"/>
-        <!-- This is the 1st specimen Compound corresponding to SPEC 0 -->
         <component typeCode="COMP" contextConductionInd="true">
             <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-                <!-- generated id -->
                 <id root="BD58B2C3-97EE-4FF1-936D-8CC592E6DA2C"/>
-                <!-- codes are fixed boilerplate -->
                 <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center nullFlavor="NI"/>
                 </effectiveTime>
-                <!-- Just replicates the report level availability time -->
                 <availabilityTime value="20100225154100"/>
                 <specimen typeCode="SPC">
                     <specimenRole classCode="SPEC">
                         <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
-                        <!-- Identifier from accessionIdentifier  -->
                         <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DN"/>
-                        <!-- effectiveTime from collection.collectionDateTime  in this case   -->
                         <effectiveTime>
                             <center value="20100223000000"/>
                         </effectiveTime>
-                        <!-- material from the type code - in this case there was no code as such just the text field  -->
                         <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                             <desc>URINE</desc>
                         </specimenSpecimenMaterial>
                     </specimenRole>
                 </specimen>
-                <!-- Now follows the results for the specimen  by filtering DiagnosticReport.results for each specimen -->
-                <!-- There are 2 Observations in results for this specimen, B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 and B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 -->
-                <!-- B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 is a standalone result because it only references comment observations in it's related has-member linkages -->
-                <!-- B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM is an Observation(Comment) -->
-                <!-- We know that if there is any text (user comment, result text etc ....) associated with the result Observation then the ObservationStatement is output in a CompoundStatement -->
-                <!-- The CompoundStatement contains the ObservationStatement and any of the generated NarrativeStatements containing the text -->
-                <!-- The CompoundStatement takes its details (code, dates) from the ObservationStatement generated from the result Observation -->
                 <component typeCode="COMP" contextConductionInd="true">
                     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                         <id root="6955ABC8-E9C7-4DD5-B012-185727301FD4"/>
@@ -88,7 +69,6 @@
                             <center value="20100223000000"/>
                         </effectiveTime>
                         <availabilityTime value="20100225154100"/>
-                        <!-- The Observation doesn't have any value just a lab comment -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <ObservationStatement classCode="OBS" moodCode="EVN">
                                 <id root="C725E747-2BDD-447A-A3E0-026FE6C3AD88"/>
@@ -102,7 +82,6 @@
                                 <availabilityTime value="20100225154100"/>
                             </ObservationStatement>
                         </component>
-                        <!-- This is the lab comment -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <NarrativeStatement classCode="OBS" moodCode="EVN">
                                 <id root="6035E061-FD34-444B-8171-DBDD153FDE1D"/>
@@ -116,8 +95,6 @@
                                 <availabilityTime value="20100223000000"/>
                             </NarrativeStatement>
                         </component>
-                        <!-- This is the user comment from the Observation (Comment) -->
-                        <!-- Note the dates - the dates of the comment come from when the filing comment was made -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <NarrativeStatement classCode="OBS" moodCode="EVN">
                                 <id root="6035E061-FD34-444B-8171-DBDD153FDE1D"/>
@@ -131,11 +108,8 @@
                         </component>
                     </CompoundStatement>
                 </component>
-                <!-- end of result -->
             </CompoundStatement>
         </component>
-        <!-- end of specimen 0 -->
-        <!-- This is the 2nd specimen Compound corresponding to SPEC 1 -->
         <component typeCode="COMP" contextConductionInd="true">
             <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                 <id root="BD58B2C3-97EE-4FF1-936D-8CC592E6DA2D"/>
@@ -144,26 +118,19 @@
                 <effectiveTime>
                     <center nullFlavor="NI"/>
                 </effectiveTime>
-                <!-- Just replicates the report level availability time -->
                 <availabilityTime value="20100225154100"/>
                 <specimen typeCode="SPC">
                     <specimenRole classCode="SPEC">
                         <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
-                        <!-- Identifier from accessionIdentifier  -->
                         <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DO"/>
-                        <!-- effectiveTime from collection.collectionDateTime  in this case   -->
                         <effectiveTime>
                             <center value="20100223154100"/>
                         </effectiveTime>
-                        <!-- material from the type code - in this case there was no code as such just the text field  -->
                         <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                             <desc>SERUM</desc>
                         </specimenSpecimenMaterial>
                     </specimenRole>
                 </specimen>
-                <!-- Now follows the results for the specimen  by filtering DiagnosticReport.results for each specimen -->
-                <!-- There are 2 Observations - one individual result 6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78 and an Observation(Comment) 6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM -->
-                <!-- We know that 6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78 is an individual result because it's related Observations are all Observation (Comment) -->
                 <component typeCode="COMP" contextConductionInd="true">
                     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                         <id root="6955ABC8-E9C7-4DD5-B012-185727301FE64"/>
@@ -175,7 +142,6 @@
                             <center value="20100223000000"/>
                         </effectiveTime>
                         <availabilityTime value="20100225154100"/>
-                        <!-- The Observation has a value -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <ObservationStatement classCode="OBS" moodCode="EVN">
                                 <id root="C725E747-2BDD-447A-A3E0-026FE6C3AD88"/>
@@ -198,8 +164,6 @@
                                 </referenceRange>
                             </ObservationStatement>
                         </component>
-                        <!-- This is the user comment from the Observation (Comment) -->
-                        <!-- Note the dates - the dates of the comment come from when the filing comment was made -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <NarrativeStatement classCode="OBS" moodCode="EVN">
                                 <id root="6035E061-FD34-444B-8171-DBDD243FDE1D"/>
@@ -213,11 +177,8 @@
                         </component>
                     </CompoundStatement>
                 </component>
-                <!-- end of result -->
             </CompoundStatement>
         </component>
-        <!-- end of specimen 1-->
-        <!-- This is the 3nd specimen Compound corresponding to SPEC 2 -->
         <component typeCode="COMP" contextConductionInd="true">
             <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                 <id root="BD58B2C3-97EE-4FF1-936D-9CC592E6DA2D"/>
@@ -226,26 +187,19 @@
                 <effectiveTime>
                     <center nullFlavor="NI"/>
                 </effectiveTime>
-                <!-- Just replicates the report level availability time -->
                 <availabilityTime value="20100225154100"/>
                 <specimen typeCode="SPC">
                     <specimenRole classCode="SPEC">
                         <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
-                        <!-- Identifier from accessionIdentifier  -->
                         <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DP"/>
-                        <!-- effectiveTime from collection.collectionDateTime  in this case   -->
                         <effectiveTime>
                             <center value="20100224154100"/>
                         </effectiveTime>
-                        <!-- material from the type code - in this case there was no code as such just the text field  -->
                         <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                             <desc>SERUM</desc>
                         </specimenSpecimenMaterial>
                     </specimenRole>
                 </specimen>
-                <!-- Now follows the results for the specimen  by filtering DiagnosticReport.results for each specimen -->
-                <!-- There are 2 Observations - one individual result D0A358C9-4833-4827-B14B-E8515C25CB12 and an Observation(Comment) D0A358C9-4833-4827-B14B-E8515C25CB12-COMM -->
-                <!-- We know that D0A358C9-4833-4827-B14B-E8515C25CB12 is an individual result because it's related Observations are all Observation (Comment) -->
                 <component typeCode="COMP" contextConductionInd="true">
                     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                         <id root="6955ABC8-E9C7-4DD5-B012-185727301FE69"/>
@@ -257,7 +211,6 @@
                             <center value="20100223000000"/>
                         </effectiveTime>
                         <availabilityTime value="20100225154100"/>
-                        <!-- The Observation doesn't have any value just a lab comment -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <ObservationStatement classCode="OBS" moodCode="EVN">
                                 <id root="C725E747-2BDD-447A-A3E0-026FE6C3AD88"/>
@@ -271,7 +224,6 @@
                                 <availabilityTime value="20100225154100"/>
                             </ObservationStatement>
                         </component>
-                        <!-- This is the lab comment from the comment field-->
                         <component typeCode="COMP" contextConductionInd="true">
                             <NarrativeStatement classCode="OBS" moodCode="EVN">
                                 <id root="6035E061-FD34-444B-8171-DBDD153FDE1D"/>
@@ -283,8 +235,6 @@
                                 <availabilityTime value="20100223000000"/>
                             </NarrativeStatement>
                         </component>
-                        <!-- This is the user comment from the Observation (Comment) -->
-                        <!-- Note the dates - the dates of the comment come from when the filing comment was made -->
                         <component typeCode="COMP" contextConductionInd="true">
                             <NarrativeStatement classCode="OBS" moodCode="EVN">
                                 <id root="6035E061-FD34-444B-8171-DBDD243FDE1D"/>
@@ -298,12 +248,9 @@
                         </component>
                     </CompoundStatement>
                 </component>
-                <!-- end of result -->
             </CompoundStatement>
         </component>
-        <!-- end of specimen 2-->
     </CompoundStatement>
 </component>
-        <!-- end of report -->
     </ehrComposition>
 </component>

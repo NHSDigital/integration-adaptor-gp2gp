@@ -9,6 +9,11 @@
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
+        <Participant typeCode="AUT" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant>
         <component typeCode="COMP" contextConductionInd="true">
             <CompoundStatement classCode="CLUSTER" moodCode="EVN">
                 <id root="BD58B2C3-97EE-4FF1-936D-8CC592E6DA2C"/>
