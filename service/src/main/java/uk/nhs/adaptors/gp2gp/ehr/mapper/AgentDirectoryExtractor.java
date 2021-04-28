@@ -95,10 +95,10 @@ public class AgentDirectoryExtractor {
     // workaround for NIAD-1300
     private static Resource getPractitionerIfPractitionerRole(Resource resource, Bundle bundle) {
         if (resource.getResourceType().equals(ResourceType.PractitionerRole)) {
-            LOGGER.warn("Encountered a PractitionerRole where Practitioner was expected. "
-                + "Swapping PractitionerRole for its Practitioner. The related organisation may "
-                + "be mapped incorrectly");
             var practitionerReference = ((PractitionerRole) resource).getPractitioner();
+            LOGGER.warn("Encountered a PractitionerRole {} where Practitioner was expected."
+                + "Swapping PractitionerRole for its Practitioner {}. The related organisation may "
+                + "be mapped incorrectly", resource.getId(), practitionerReference.getReference());
             return ResourceExtractor.extractResourceByReference(bundle, practitionerReference.getReferenceElement())
                 .orElseThrow(() -> new EhrMapperException("Unable to locate resource " + practitionerReference.getReference()
                     + " in the bundle"));
