@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
@@ -31,8 +31,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class DiagnosticReportMapperTest {
-    private static final String TEST_ID = "394559384658936";
-    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnostic_report/";
+    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String INPUT_JSON_BUNDLE = "fhir-bundle.json";
     private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
     private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
@@ -43,8 +42,6 @@ public class DiagnosticReportMapperTest {
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
 
     @Mock
-    private RandomIdGeneratorService randomIdGeneratorService;
-    @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private DiagnosticReportMapper mapper;
@@ -52,10 +49,9 @@ public class DiagnosticReportMapperTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         final String bundleInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + INPUT_JSON_BUNDLE);
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
-        messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext = new MessageContext(new RandomIdGeneratorServiceStub());
         messageContext.initialize(bundle);
 
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
