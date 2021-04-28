@@ -169,12 +169,6 @@ Run `uk.nhs.adaptors.gp2gp.Gp2gpApplication` in your IDE or `java -jar build/lib
 
 ### Using Envfile for IntelliJ
 
-An easy way to override the default configuration is to use an EnvFile with the EnvFile IntelliJ plugin.
-
-To override environment variables choose an example file e.g. 
-(service/env.opentest.example.yml)[service/env.opentest.example.yml] and copy it to `service/env.yml`. Make your 
-changes in this copy. 
-
 ## How to run tests
 
 **Warning**: Gradle uses a [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) to re-use compile and
