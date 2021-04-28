@@ -52,9 +52,9 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String TEST_EXCEPTION_MESSAGE = "The following error occurred during GPC request: ";
     private static final String EXPECTED_PAYLOAD_TYPE = "RCMR_IN030000UK06";
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
-    private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
+    private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\\\"COMPOSITION\\\" moodCode=\\\"EVN\\\">";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
-    private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\" >";
+    private static final String COMPONENT_ELEMENT = "<component typeCode=\\\"COMP\\\" >";
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
