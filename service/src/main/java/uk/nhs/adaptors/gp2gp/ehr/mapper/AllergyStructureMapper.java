@@ -7,13 +7,17 @@ import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters.AllergyStructureTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -50,24 +55,44 @@ public class AllergyStructureMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
+        final IdMapper idMapper = messageContext.getIdMapper();
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
-            .ehrCompositionId(messageContext.getIdMapper().getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
-            .allergyStructureId(messageContext.getIdMapper().getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
-            .observationId(messageContext.getIdMapper().getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
+            .ehrCompositionId(idMapper.getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
+            .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
+            .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()))
-            .build();
+            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
-        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters);
+        if (allergyIntolerance.hasRecorder()) {
+            buildParticipant(allergyIntolerance.getRecorder(), ParticipantType.AUTHOR)
+                .ifPresent(allergyStructureTemplateParameters::author);
+        }
+
+        if (allergyIntolerance.hasAsserter()) {
+            buildParticipant(allergyIntolerance.getAsserter(), ParticipantType.PERFORMER)
+                .ifPresent(allergyStructureTemplateParameters::performer);
+        }
+
+        return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters.build());
     }
 
-    private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParameters templateParameters) {
+    private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
+        if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
+            var authorReference = messageContext.getIdMapper().get(reference);
+            return Optional.of(participantMapper.mapToParticipant(authorReference, participantType));
+        }
+
+        return Optional.empty();
+    }
+
+    private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameters) {
         var category = allergyIntolerance.getCategory()
             .stream()
             .map(PrimitiveType::getValueAsString)
@@ -76,9 +101,9 @@ public class AllergyStructureMapper {
             .orElse(StringUtils.EMPTY);
 
         if (category.equals(ENVIRONMENT_CATEGORY)) {
-            templateParameters.setCategoryCode(UNSPECIFIED_ALLERGY_CODE);
+            templateParameters.categoryCode(UNSPECIFIED_ALLERGY_CODE);
         } else if (category.equals(MEDICATION_CATEGORY)) {
-            templateParameters.setCategoryCode(DRUG_ALLERGY_CODE);
+            templateParameters.categoryCode(DRUG_ALLERGY_CODE);
         } else {
             throw new EhrMapperException("Category could not be mapped");
         }
@@ -86,6 +111,7 @@ public class AllergyStructureMapper {
 
     private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
         List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
+
         return descriptionList
             .stream()
             .filter(StringUtils::isNotEmpty)
@@ -181,14 +207,15 @@ public class AllergyStructureMapper {
     }
 
     private String buildNotePertinentInformation(AllergyIntolerance allergyIntolerance) {
-        String notes = StringUtils.EMPTY;
-        if (allergyIntolerance.hasNote()) {
-            List<Annotation> annotations = allergyIntolerance.getNote();
-            notes = annotations.stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE));
-        }
-        return notes;
+        return Stream.concat(
+            messageContext.getInputBundleHolder().getRelatedConditions(allergyIntolerance.getId())
+                .stream()
+                .map(Condition::getNote)
+                .flatMap(List::stream),
+            allergyIntolerance.hasNote() ? allergyIntolerance.getNote().stream() : Stream.empty()
+        )
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
     }
 
     private String buildCode(AllergyIntolerance allergyIntolerance) {

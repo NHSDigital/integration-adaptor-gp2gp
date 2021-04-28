@@ -1,0 +1,22 @@
+<component typeCode="COMP" >
+	<ObservationStatement classCode="OBS" moodCode="EVN">
+		<id root="test-id" />
+		<statusCode code="COMPLETE" />
+		<effectiveTime>
+			<center value="20201102"/>
+		</effectiveTime>
+		<availabilityTime value="20201102111241" />
+		<pertinentInformation typeCode="PERT">
+			<sequenceNumber value="+1"/>
+			<pertinentAnnotation classCode="OBS" moodCode="EVN">
+				<text>Batch: 123213 Expiration: 2020-11-14 Site: Left arm Condition.actualProblem note refers to Immunization Manufacturer : wefew, GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
+			</pertinentAnnotation>
+		</pertinentInformation>
+		<code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+		<Participant typeCode="PRF" contextControlCode="OP">
+	<agentRef classCode="AGNT">
+		<id root="test-id"/>
+	</agentRef>
+</Participant>
+	</ObservationStatement>
+</component>

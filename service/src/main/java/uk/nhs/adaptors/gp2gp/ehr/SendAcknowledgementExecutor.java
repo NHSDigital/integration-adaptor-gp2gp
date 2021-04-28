@@ -1,14 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.Mustache;
-
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
@@ -16,7 +14,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.SendAckTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
-import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessageWithPayload;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -50,7 +48,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
             .messageId(sendAcknowledgementTaskDefinition.getEhrRequestMessageId())
             .build();
         var acknowledgementRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAckTemplateParams);
-        var outboundMessage = OutboundMessageWithPayload.builder().payload(acknowledgementRequestBody).build();
+        var outboundMessage = OutboundMessage.builder().payload(acknowledgementRequestBody).build();
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
         var positiveAckMessageId = randomIdGeneratorService.createNewId();
 

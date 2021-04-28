@@ -10,7 +10,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100113151332" />
             <agentRef classCode="AGNT">
-                <id root="1E473786-E7FA-785E-C911-A8D38FB56F20" />
+                <id root="test-id" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -21,9 +21,9 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="RESP" contextControlCode="OP">
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="C5DEFBF3-0174-BC6F-182C-B777B9C6FF43" />
+                <id root="test-id" />
             </agentRef>
         </Participant2>
 

@@ -3,7 +3,11 @@
         <id root="{{medicationStatementId}}"/>
         <statusCode code="{{statusCode}}"/>
         {{{availabilityTime}}}
-        {{{effectiveTime}}}
+        {{#effectiveTime}}
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{/effectiveTime}}
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -35,5 +39,8 @@
                 <text>{{medicationStatementPertinentInformation}}</text>
             </pertinentMedicationDosage>
         </pertinentInformation>
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </MedicationStatement>
 </component>

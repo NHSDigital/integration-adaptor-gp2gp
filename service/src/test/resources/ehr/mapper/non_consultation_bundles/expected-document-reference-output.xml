@@ -1,0 +1,52 @@
+<component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="b2175be3-29c2-465f-b2c6-323db03c2c7c" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20200921"/>
+        </effectiveTime>
+        <availabilityTime value="20200921"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20200921" />
+            <agentRef classCode="AGNT">
+                <id root="394559384658936" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20200921" />
+        <text>Type: Referral Letter (21-Sep-2020) Author Org: Organisation name Custodian Org: Organisation name Description: for 2 week rule referral - skin Absent Attachment: some title Setting: Practice Setting Text</text>
+        <reference typeCode="REFR">
+            <referredToExternalDocument classCode="DOC" moodCode="EVN">
+                <id root="394559384658936"/>
+                <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment394559384658936.xyz"/>
+                </text>
+            </referredToExternalDocument>
+        </reference>
+        <Participant typeCode="AUT" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
