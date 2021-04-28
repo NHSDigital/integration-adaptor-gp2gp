@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import com.github.mustachejava.Mustache;
 import com.google.common.collect.ImmutableList;
@@ -20,9 +20,9 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.ObservationCompoundStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.ObservationStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.NarrativeStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -56,8 +56,8 @@ public class ObservationMapper {
         List<Observation> derivedObservations = observations.stream()
             .filter(observation ->
                 observation.getRelated().stream().anyMatch(
-                    observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM &&
-                        observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId())
+                    observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM
+                        && observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId())
                 )
             )
             .collect(Collectors.toList());
@@ -150,7 +150,7 @@ public class ObservationMapper {
                 .ifPresent(coding ->
                     observationStatementTemplateParametersBuilder.interpretation(
                         structuredObservationValueMapper.mapInterpretation(coding))
-                );
+            );
         }
 
         if (observation.hasPerformer()) {
