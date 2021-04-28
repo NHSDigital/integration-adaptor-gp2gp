@@ -63,6 +63,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-no-practitioner.json";
     private static final String INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-practitioner-but-no-actor.json";
+    private static final String INPUT_JSON_WITH_PRACTITIONER_INVALID_ID = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-practitioner-invalid-id.json";
+    private static final String INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-practitioner-invalid-reference-resource-type.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -85,6 +89,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-immunization-with-two-additional-notes-from-related-condition.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-immunization-with-no-relation-to-condition.xml";
+    private static final String OUTPUT_XML_WITH_PARTICIPANT_WITHOUT_ID = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-immunization-with-participant-without-id.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -146,7 +152,10 @@ public class ImmunizationObservationStatementMapperTest {
                 OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION, false),
             Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
             Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false)
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_INVALID_ID, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_WITH_PARTICIPANT_WITHOUT_ID, false)
         );
     }
 

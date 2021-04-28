@@ -38,11 +38,16 @@ public class ObservationToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY + "example-observation-resource-4.json";
     private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY + "example-observation-resource-5.json";
     private static final String INPUT_JSON_WITH_PERFORMER = TEST_FILE_DIRECTORY + "example-observation-resource-25.json";
+    private static final String INPUT_JSON_WITH_PERFORMER_INVALID_ID = TEST_FILE_DIRECTORY
+        + "example-observation-with-performer-invalid-id.json";
+    private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
+        + "example-observation-with-performer-invalid-ref-resource-type.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
     private static final String OUTPUT_XML_USES_AGENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
+    private static final String OUTPUT_XML_USES_AGENT_WITHOUT_ID = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-6.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -50,16 +55,6 @@ public class ObservationToNarrativeStatementMapperTest {
     private CharSequence expectedOutputMessage;
     private ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
     private MessageContext messageContext;
-
-    private static Stream<Arguments> resourceFileParams() {
-        return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
-            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
-            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT)
-        );
-    }
 
     @BeforeEach
     public void setUp() {
@@ -87,6 +82,19 @@ public class ObservationToNarrativeStatementMapperTest {
         assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
     }
 
+    private static Stream<Arguments> resourceFileParams() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
+            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
+            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT),
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
+            Arguments.of(INPUT_JSON_WITH_PERFORMER_INVALID_ID, OUTPUT_XML_USES_AGENT),
+            Arguments.of(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_USES_AGENT_WITHOUT_ID)
+        );
+    }
+
     @Test
     public void When_MappingObservationJsonWithNestedTrue_Expect_NarrativeStatementXmlOutput() throws IOException {
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(OUTPUT_XML_USES_NESTED_COMPONENT);
@@ -112,7 +120,7 @@ public class ObservationToNarrativeStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        // workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
+        // TODO: workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
         assumeThatThrownBy(() -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("No ID mapping for reference Practitioner/something");

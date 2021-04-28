@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @ExtendWith(MockitoExtension.class)
 public class IdMapperTest {
@@ -93,22 +91,35 @@ public class IdMapperTest {
 
     @Test
     public void When_GettingExtantId_Expect_ExtantIdReturned() {
-        String id = randomIdGeneratorService.createNewId();
-        var reference = new Reference(new IdType(ResourceType.Person.name(), id));
-        String expected = idMapper.getOrNew(reference);
+        final String id = randomIdGeneratorService.createNewId();
+        final Reference reference = new Reference(new IdType(ResourceType.Person.name(), id));
+        final String expected = idMapper.getOrNew(reference);
 
-        String actual = idMapper.get(reference);
+        final String actual = idMapper.get(reference);
 
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void When_GettingMissingId_Expect_Exception() {
-        String id = randomIdGeneratorService.createNewId();
-        var reference = new Reference(new IdType(ResourceType.Person.name(), id));
+    public void When_GettingExtantResourceType_Expect_ExtantIdReturned() {
+        final String firstFhirId = randomIdGeneratorService.createNewId();
+        final String secondFhirId = randomIdGeneratorService.createNewId();
 
-        assertThatThrownBy(() -> idMapper.get(reference))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("No ID mapping for reference Person/%s", id);
+        final Reference reference = new Reference(new IdType(ResourceType.Appointment.name(), firstFhirId));
+        final String expected = idMapper.getOrNew(reference);
+
+        final Reference newReference = new Reference(new IdType(ResourceType.Appointment.name(), secondFhirId));
+        final String actual = idMapper.get(newReference);
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void When_GettingMissingResourceType_Expect_NullIdReturned() {
+        final String id = randomIdGeneratorService.createNewId();
+        final Reference reference = new Reference(new IdType(ResourceType.Person.name(), id));
+
+        final String actual = idMapper.get(reference);
+        assertThat(actual).isNull();
     }
 }

@@ -1,0 +1,30 @@
+@startuml
+class AgentDirectory {
+    idGenerator: RandomIdGenerator
+    agentDirectory: Map<AgentKey, String>
+    getAgentId(Reference ref): String
+    getAgentId(Reference ref1, ref2): String
+    getEntries(): Set<Entry<AgentKey, String>>
+}
+
+note bottom of AgentDirectory
+getAgentId(ref) - ref must be one of: Practitioner, Organization, PractitionerRole
+References to PractitionerRole must be resolved in the bundle and decomposed into Pract/Org references
+getAgentRef(ref1, ref2) - ref1 and ref2 must be Practitioner and Organization
+Reference has no generic type so order is unspecified. Method must assert that only one of each type is provided.
+end note
+
+class AgentKey {
+    practitionerReference: String
+    organizationReference: String
+    hashCode(): int
+    equals(a, b): boolean
+}
+
+note top of AgentKey
+The references are string representations of FHIR references e.g. 
+"Practitioner/UUID". May be null. At least one must be provided. 
+Needs a valid equals/hashCode implementation for use as a Map key.
+end note
+
+@enduml
