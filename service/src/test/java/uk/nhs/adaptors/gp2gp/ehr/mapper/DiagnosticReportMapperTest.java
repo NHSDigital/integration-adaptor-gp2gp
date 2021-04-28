@@ -15,9 +15,9 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -33,14 +33,14 @@ import static org.mockito.Mockito.when;
 public class DiagnosticReportMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnostic_report/";
-    private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "fhir-bundle.json";
-    private static final String INPUT_JSON_REQUIRED_DATA = TEST_FILE_DIRECTORY + "diagnostic-report-with-required-data.json";
-    private static final String INPUT_JSON_EMPTY_SPECIMENS = TEST_FILE_DIRECTORY + "diagnostic-report-with-empty-specimens.json";
-    private static final String INPUT_JSON_ONE_SPECIMEN = TEST_FILE_DIRECTORY + "diagnostic-report-with-one-specimen.json";
-    private static final String INPUT_JSON_MULTI_SPECIMENS = TEST_FILE_DIRECTORY + "diagnostic-report-with-multi-specimens.json";
-    private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "diagnostic-report-with-required-data.xml";
-    private static final String OUTPUT_XML_ONE_SPECIMEN = TEST_FILE_DIRECTORY + "diagnostic-report-with-one-specimen.xml";
-    private static final String OUTPUT_XML_MULTI_SPECIMENS = TEST_FILE_DIRECTORY + "diagnostic-report-with-multi-specimens.xml";
+    private static final String INPUT_JSON_BUNDLE = "fhir-bundle.json";
+    private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
+    private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
+    private static final String INPUT_JSON_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.json";
+    private static final String INPUT_JSON_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.json";
+    private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
+    private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
+    private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -53,7 +53,7 @@ public class DiagnosticReportMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        final String bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        final String bundleInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + INPUT_JSON_BUNDLE);
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
@@ -75,8 +75,8 @@ public class DiagnosticReportMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingDiagnosticReportJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
-        final String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        final CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + outputXml);
+        final String jsonInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + inputJson);
         final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
