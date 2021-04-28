@@ -21,7 +21,6 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
-import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
