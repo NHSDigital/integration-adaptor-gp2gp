@@ -1,6 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import lombok.Data;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -18,15 +24,13 @@ import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+@Slf4j
 public class AgentDirectoryExtractor {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
@@ -82,9 +86,24 @@ public class AgentDirectoryExtractor {
             .map(AgentDirectoryExtractor::extractIIdTypes)
             .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
             .flatMap(Optional::stream)
+            .map(resource -> getPractitionerIfPractitionerRole(resource, bundle))
             .map(Practitioner.class::cast)
             .distinct()
             .collect(Collectors.toList());
+    }
+
+    // workaround for NIAD-1300
+    private static Resource getPractitionerIfPractitionerRole(Resource resource, Bundle bundle) {
+        if (resource.getResourceType().equals(ResourceType.PractitionerRole)) {
+            LOGGER.warn("Encountered a PractitionerRole where Practitioner was expected. " +
+                "Swapping PractitionerRole for its Practitioner. The related organisation may " +
+                " be mapped incorrectly");
+            var practitionerReference = ((PractitionerRole) resource).getPractitioner();
+            return ResourceExtractor.extractResourceByReference(bundle, practitionerReference.getReferenceElement())
+                .orElseThrow(() -> new EhrMapperException("Unable to locate resource " + practitionerReference.getReference() + " in the " +
+                    "bundle"));
+        }
+        return resource;
     }
 
     public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {

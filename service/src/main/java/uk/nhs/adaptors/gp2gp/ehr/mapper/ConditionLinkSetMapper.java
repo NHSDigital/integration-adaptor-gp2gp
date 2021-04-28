@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.hl7.fhir.dstu3.model.Resource;
+
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
@@ -26,6 +28,7 @@ import com.github.mustachejava.Mustache;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class ConditionLinkSetMapper {
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
@@ -184,13 +187,17 @@ public class ConditionLinkSetMapper {
     }
 
     private boolean filterOutNonExistentResource(Reference reference) {
+
         var referencePresent = messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
             .isPresent();
         if (referencePresent) {
             return true;
         }
-        throw new EhrMapperException("Could not resolve Condition Related Medical Content reference");
+
+        // workaround for NIAD-1409 should throw an exception but public demonstrator include invalid references
+        LOGGER.warn("Condition related clinical context extension uses invalid reference: {}", reference.getReference());
+        return false;
     }
 
     private boolean filterOutListResourceType(Reference reference) {

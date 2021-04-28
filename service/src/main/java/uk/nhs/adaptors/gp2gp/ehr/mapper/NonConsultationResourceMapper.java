@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Resource;
@@ -79,6 +80,13 @@ public class NonConsultationResourceMapper {
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
         String component = encounterComponentsMapper.mapResourceToComponent(resource);
+
+        // workaround for NIAD-1410
+        if (StringUtils.isBlank(component)) {
+            LOGGER.warn("Skipping {}. The mapping output contains blank XML statement content", resource.getResourceType());
+            return Optional.empty();
+        }
+
         EncounterTemplateParametersBuilder builder;
         if (resource.getResourceType().equals(ResourceType.Observation)) {
             builder = buildForObservation(component, (Observation) resource);
