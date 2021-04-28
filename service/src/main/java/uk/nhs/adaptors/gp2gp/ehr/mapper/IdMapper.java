@@ -43,7 +43,7 @@ public class IdMapper {
             return ids.get(referenceValue);
         }
 
-        // workaround until NIAD-1340 is done
+        // TODO, workaround until NIAD-1340 is done
         return ids.entrySet()
             .stream()
             .filter(map -> map.getKey().startsWith(reference.getReferenceElement().getResourceType()))

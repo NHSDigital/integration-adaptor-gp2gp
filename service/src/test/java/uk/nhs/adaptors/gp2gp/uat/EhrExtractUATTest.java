@@ -158,7 +158,7 @@ public class EhrExtractUATTest {
         );
     }
 
-    // workaround until NIAD-1342 is fixed
+    // TODO, workaround until NIAD-1342 is fixed
     private String removeEmptyDescriptions(String json) {
         String emptyDescriptionElement = "\"description\": \"\"";
         return json.lines().filter(l -> !l.contains(emptyDescriptionElement)).collect(Collectors.joining());

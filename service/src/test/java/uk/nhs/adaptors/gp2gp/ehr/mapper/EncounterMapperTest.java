@@ -167,7 +167,7 @@ public class EncounterMapperTest {
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT),
             Arguments.of(INPUT_JSON_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT, OUTPUT_XML_WITH_TYPE_AND_NO_CODING_AND_TEXT_AND_NO_TEXT),
             Arguments.of(INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2),
-            // workaround scenario until NIAD-1340 is done
+            // TODO, workaround scenario until NIAD-1340 is done
             Arguments.of(INPUT_JSON_WITH_PERFORMER_PARTICIPANT_INVALID_ID, OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2)
         );
     }
@@ -183,7 +183,7 @@ public class EncounterMapperTest {
             .hasMessage("Could not map Encounter type");
     }
 
-    @Test // workaround until NIAD-1340 is done
+    @Test // TODO, workaround until NIAD-1340 is done
     public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 

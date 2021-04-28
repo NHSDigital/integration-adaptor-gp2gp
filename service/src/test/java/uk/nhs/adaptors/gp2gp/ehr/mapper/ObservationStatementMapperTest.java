@@ -248,7 +248,7 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
             Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
             Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
-            // following two are workaround scenarios until NIAD-1340 is done
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
             Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_ID, OUTPUT_XML_WITH_PARTICIPANT),
             Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_USES_AGENT_WITHOUT_ID)
             );

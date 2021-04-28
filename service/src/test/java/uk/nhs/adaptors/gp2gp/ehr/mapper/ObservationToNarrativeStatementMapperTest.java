@@ -88,7 +88,7 @@ public class ObservationToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
             Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
             Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT),
-            // following two are workaround scenarios until NIAD-1340 is done
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
             Arguments.of(INPUT_JSON_WITH_PERFORMER_INVALID_ID, OUTPUT_XML_USES_AGENT),
             Arguments.of(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_USES_AGENT_WITHOUT_ID)
         );

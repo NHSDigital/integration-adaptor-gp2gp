@@ -152,7 +152,7 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
             Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
             Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
-            // following two are workaround scenarios until NIAD-1340 is done
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
             Arguments.of(INPUT_JSON_WITH_PRACTITIONER_INVALID_ID, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_WITH_PARTICIPANT_WITHOUT_ID, false)
         );
