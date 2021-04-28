@@ -9,9 +9,9 @@ import lombok.Setter;
 @Builder
 public class ObservationStatementTemplateParameters {
     private String observationStatementId;
-    private String code;
+    private String codeElement;
     private String effectiveTime;
-    private String availabilityTime;
+    private String availabilityTimeElement;
     private String value;
     private String referenceRange;
     private String interpretation;

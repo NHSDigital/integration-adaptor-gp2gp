@@ -10,7 +10,8 @@ import lombok.Setter;
 public class NarrativeStatementTemplateParameters {
     private String narrativeStatementId;
     private String commentType;
-    private String availabilityTime;
+    private String issuedDate;
     private String comment;
+    private String availabilityTimeElement;
     private String participant;
 }

@@ -9,6 +9,9 @@ import lombok.Setter;
 @Builder
 public class ObservationCompoundStatementTemplateParameters {
     private String compoundStatementId;
+    private String codeElement;
+    private String effectiveTime;
+    private String availabilityTimeElement;
     private String observationStatement;
     private String narrativeStatements;
 }
