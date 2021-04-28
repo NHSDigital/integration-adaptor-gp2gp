@@ -53,8 +53,8 @@ public class AgentDirectoryMapper {
             .map(Optional::get)
             .map(Organization.class::cast)
             .map(organizationToAgentMapper::mapOrganizationToAgent)
-            .orElseThrow(() -> new EhrMapperException("No patient or managing organization found in ehrFolder with NHS Number: "
-                + nhsNumber));
+            .orElseThrow(() -> new EhrMapperException("The ASR bundle does not contain a Patient resource with the correct identifier "
+                + "and a managingOrganization"));
     }
 
     private List<String> prepareObservationAgentsList(Bundle bundle, Set<String> mappedOrganizationsAndPractitioner) {
