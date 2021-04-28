@@ -44,15 +44,22 @@ public class IdMapper {
         }
 
         // TODO, workaround until NIAD-1340 is done
-        return ids.entrySet()
+        LOGGER.warn("No existing mapping was found for {}. Attempting to substitute a "
+            + "different resource as a workaround", referenceValue);
+        var replacement = ids.entrySet()
             .stream()
             .filter(map -> map.getKey().startsWith(reference.getReferenceElement().getResourceType()))
-            .map(Map.Entry::getValue)
-            .findFirst()
-            .orElseGet(() -> {
-                LOGGER.debug("No ID mapping for reference " + referenceValue);
-                return null;
-            });
+            .findFirst();
+
+        if (replacement.isPresent()) {
+            var entry = replacement.get();
+            LOGGER.warn("Replacing unmapped resource {} with {} => {}", referenceValue,
+                entry.getKey(), entry.getValue());
+            return entry.getValue();
+        }
+
+        LOGGER.warn("Unable to find a replacement resource for {}", referenceValue);
+        return null;
     }
 
     public String get(ResourceType resourceType, String id) throws EhrMapperException {

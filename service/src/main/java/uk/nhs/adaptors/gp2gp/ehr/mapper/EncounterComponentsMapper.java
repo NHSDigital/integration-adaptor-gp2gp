@@ -76,6 +76,8 @@ public class EncounterComponentsMapper {
         BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
     public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
 
+    private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
+
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
             messageContext.getInputBundleHolder().getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
@@ -100,8 +102,19 @@ public class EncounterComponentsMapper {
     }
 
     private String mapItemToComponent(ListResource.ListEntryComponent item) {
+        final String referenceValue = item.getItem().getReference();
+        LOGGER.debug("Processing list item {}", referenceValue);
+
+        // TODO: workaround for NIAD-1409 where text appears instead of a resource reference
+        if (referenceValue == null || NIAD_1409_INVALID_REFERENCE.equals(referenceValue)) {
+            LOGGER.warn("Detected an invalid reference in the GP Connect Demonstrator dataset. "
+                + "Skipping resource with reference=\"{}\" display=\"{}\"", referenceValue,
+                item.getItem().getDisplay());
+            return StringUtils.EMPTY;
+        }
+
         Resource resource = messageContext.getInputBundleHolder().getRequiredResource(item.getItem().getReferenceElement());
-        LOGGER.debug("Translating list entry resource {}/{}", resource.getResourceType().name(), resource.getIdElement().getIdPart());
+        LOGGER.debug("Translating list entry resource {}", resource.getId());
         if (encounterComponents.containsKey(resource.getResourceType())) {
             return encounterComponents.get(resource.getResourceType()).apply(resource);
         } else {
