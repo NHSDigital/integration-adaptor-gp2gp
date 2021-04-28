@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
@@ -15,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
@@ -23,7 +26,6 @@ import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,6 +46,7 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA = TEST_DIRECTORY + "input-bundle-6.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE = TEST_DIRECTORY + "input-bundle-7.json";
     private static final String INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY = TEST_DIRECTORY + "input-bundle-8.json";
+    private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -131,10 +134,9 @@ public class EncounterComponentsMapperTest {
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
-        Optional<Encounter> encounter = extractEncounter(bundle);
-        assertThat(encounter.isPresent()).isTrue();
+        var encounter = extractEncounter(bundle);
 
-        String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
         assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
@@ -145,16 +147,45 @@ public class EncounterComponentsMapperTest {
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
-        Optional<Encounter> encounter = extractEncounter(bundle);
-        assertThat(encounter.isPresent()).isTrue();
+        var encounter = extractEncounter(bundle);
 
-        String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
         assertThat(mappedXml).isEmpty();
     }
 
-    private Optional<Encounter> extractEncounter(Bundle bundle) {
-        return ResourceExtractor.extractResourcesByType(bundle, Encounter.class)
-            .findFirst();
+
+    @Test
+    public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Resource not found")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unsupported resource in consultation list: Flag/flagid1")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    private Encounter extractEncounter(Bundle bundle) {
+        return (Encounter) bundle.getEntry().stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.Encounter.equals(resource.getResourceType()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Encounter not found in test fixture"));
     }
 
     private static Stream<Arguments> emptyResult() {
@@ -164,7 +195,6 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_CATEGORY_LIST),
             Arguments.of(INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST),
             Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
-            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE),
             Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
         );
     }

@@ -27,9 +27,12 @@ import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class EncounterComponentsMapper {
 
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
@@ -91,19 +94,22 @@ public class EncounterComponentsMapper {
     }
 
     private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
+        LOGGER.debug("Mapping List {} that contains {} entries", listReferencedToEncounter.getId(),
+            listReferencedToEncounter.getEntry().size());
         return listReferencedToEncounter.getEntry()
             .stream()
             .map(this::mapItemToComponent)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
             .collect(Collectors.joining());
     }
 
-    private Optional<String> mapItemToComponent(ListResource.ListEntryComponent item) {
-        Optional<Resource> resource = messageContext.getInputBundleHolder().getResource(item.getItem().getReferenceElement());
-
-        return resource.map(value -> encounterComponents.getOrDefault(value.getResourceType(), this::mapDefaultNotImplemented)
-            .apply(value));
+    private String mapItemToComponent(ListResource.ListEntryComponent item) {
+        Resource resource = messageContext.getInputBundleHolder().getRequiredResource(item.getItem().getReferenceElement());
+        LOGGER.debug("Translating list entry resource {}/{}", resource.getResourceType().name(), resource.getIdElement().getIdPart());
+        if (encounterComponents.containsKey(resource.getResourceType())) {
+            return encounterComponents.get(resource.getResourceType()).apply(resource);
+        } else {
+            throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
+        }
     }
 
     private String mapDefaultNotImplemented(Resource resource) {

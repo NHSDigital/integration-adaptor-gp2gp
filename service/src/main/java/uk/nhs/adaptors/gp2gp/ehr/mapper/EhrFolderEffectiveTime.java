@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Period;
 
@@ -22,11 +23,13 @@ public class EhrFolderEffectiveTime {
     }
 
     public void updateEffectiveTimeLowFormatted(String newEffectiveTimeHl7Format) {
-        DateTimeType newEffectiveTimeLow = DateFormatUtil.toDateTypeTime(newEffectiveTimeHl7Format);
-        updateEffectiveTimeLow(newEffectiveTimeLow).ifPresent(effectiveTimeToUpdate -> {
-            effectiveTimeLow = effectiveTimeToUpdate;
-            effectiveTimeLowHl7Formatted = newEffectiveTimeHl7Format;
-        });
+        if (StringUtils.isNotBlank(newEffectiveTimeHl7Format)) {
+            DateTimeType newEffectiveTimeLow = DateFormatUtil.toDateTypeTime(newEffectiveTimeHl7Format);
+            updateEffectiveTimeLow(newEffectiveTimeLow).ifPresent(effectiveTimeToUpdate -> {
+                effectiveTimeLow = effectiveTimeToUpdate;
+                effectiveTimeLowHl7Formatted = newEffectiveTimeHl7Format;
+            });
+        }
     }
 
     public void updateEffectiveTimePeriod(Period period) {
