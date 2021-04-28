@@ -1,10 +1,9 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnostic_report.DiagnosticReportCompoundStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
