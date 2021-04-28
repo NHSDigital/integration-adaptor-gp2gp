@@ -1,7 +1,7 @@
 # integration-adaptor-gp2gp
 National Integration Adaptor - GP2GP
 
-The existing GP2GP solution is based on a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
+The existing GP2GP solution uses a legacy messaging standard and infrastructure (HL7v3 and Spine TMS). Reliance 
 on these standards going forward presents a significant barrier to successful GP2GP implementation by new suppliers, 
 and perpetuation of these standards in the long term presents a risk to the continued operation of GP2GP across all 
 suppliers.
@@ -9,9 +9,9 @@ suppliers.
 A hybrid solution approach has been selected as the best option for GP2GP adoption by NMEs and transition by existing 
 incumbent suppliers.
 
-The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2 producer using the supplier's existing GP Connect 
+The "National Integration Adaptor - GP2GP" implements a GP2GP 2.2b producer using the supplier's existing GP Connect 
 Provider implementation to extract the Electronic Health Record. Suppliers that have not already implemented a 
-GP2GP 2.2 producer, or those wishing to decommission their existing producer, may deploy the GP2GP adaptor in its place.
+GP2GP 2.2b producer, or those wishing to decommission their existing producer, may deploy the GP2GP adaptor in its place.
 
 ## Requirements:
 
@@ -94,7 +94,6 @@ queue its own internal asynchronous tasks
 | GP2GP_AMQP_USERNAME                  |                           | (Optional) username for the AMQP server
 | GP2GP_AMQP_PASSWORD                  |                           | (Optional) password for the AMQP server
 | GP2GP_AMQP_MAX_REDELIVERIES          | 3                         | The number of times an message will be retried to be delivered to consumer. After exhausting all retires, it will be put on DLQ.<queue_name> dead letter queue
-| GP2GP_MHS_OUTBOUND_URL               |                           | URL of the MHS Outbound Endpoint
 | GP2GP_TASK_QUEUE                     | gp2gpTaskQueue            | Defines name of internal taskQueue.
 
 (*) Active/Standby: The first broker in the list always used unless there is an error, in which case the other URLs 
@@ -124,6 +123,12 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+
+## How to operate the adaptor
+
+The following sections describe how to run the adaptor for development and testing.
+
+Refer to [OPERATING.md](./OPERATING.md) for how to operate the adaptor in a live environment.
 
 ## How to run service:
 
