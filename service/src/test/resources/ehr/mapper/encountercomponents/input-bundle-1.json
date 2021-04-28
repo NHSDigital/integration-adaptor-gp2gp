@@ -141,11 +141,6 @@
                 "entry": [
                     {
                         "item": {
-                            "reference": "Flag/flagid1"
-                        }
-                    },
-                    {
-                        "item": {
                             "reference": "List/category2"
                         }
                     }

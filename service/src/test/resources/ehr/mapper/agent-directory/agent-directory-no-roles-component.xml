@@ -74,18 +74,6 @@
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
                 <prefix>Dr</prefix>
-                <given>David</given>
-                <family>McAvenue</family>
-            </name>
-        </agentPerson>
-    </Agent>
-</part>
-            <part partCode="PART">
-    <Agent classCode="AGNT">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <name>
-                <prefix>Dr</prefix>
                 <given>Peter</given>
                 <family>Whitcombe</family>
             </name>
@@ -97,9 +85,9 @@
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
-                <prefix>Mr</prefix>
-                <given>NHS</given>
-                <family>Test</family>
+                <prefix>Dr</prefix>
+                <given>David</given>
+                <family>McAvenue</family>
             </name>
         </agentPerson>
     </Agent>
