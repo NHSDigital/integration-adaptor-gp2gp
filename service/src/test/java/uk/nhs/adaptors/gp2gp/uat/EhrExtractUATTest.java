@@ -45,6 +45,9 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapp
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -80,7 +83,11 @@ public class EhrExtractUATTest {
         messageContext = new MessageContext(randomIdGeneratorService);
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ParticipantMapper participantMapper = new ParticipantMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -101,7 +108,9 @@ public class EhrExtractUATTest {
                 codeableConceptCdMapper,
                 participantMapper
             ),
-            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper)
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new DiagnosticReportMapper(
+                messageContext, specimenMapper)
         );
 
         OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);

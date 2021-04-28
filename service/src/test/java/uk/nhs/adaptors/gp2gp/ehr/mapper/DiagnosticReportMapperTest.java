@@ -12,8 +12,8 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;

@@ -18,6 +18,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
