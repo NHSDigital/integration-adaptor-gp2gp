@@ -184,7 +184,7 @@ public class EncounterMapperTest {
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
 
-        // workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
+        // TODO: workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
         assumeThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("No ID mapping for reference Practitioner/%s", PRACTITIONER_ID);

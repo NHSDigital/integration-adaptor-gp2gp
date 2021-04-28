@@ -195,7 +195,7 @@ public class ConditionLinkSetMapper {
             return true;
         }
 
-        // workaround for NIAD-1409 should throw an exception but public demonstrator include invalid references
+        // TODO: workaround for NIAD-1409 should throw an exception but public demonstrator includes invalid references
         LOGGER.warn("Condition related clinical context extension uses invalid reference: {}", reference.getReference());
         return false;
     }

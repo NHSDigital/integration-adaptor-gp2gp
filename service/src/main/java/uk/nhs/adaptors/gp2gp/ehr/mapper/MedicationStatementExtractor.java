@@ -125,7 +125,7 @@ public class MedicationStatementExtractor {
         LOGGER.debug("Ensuring the bundle contains Plan MedicationRequest {}", reference.getReference());
 
         if (reference.getReferenceElement().getResourceType() == null) {
-            // Workaround for NIAD-1407
+            // TODO: workaround for NIAD-1407 the type should never be assumed
             LOGGER.warn("Reference {} is missing a resource type. Assuming MedicationRequest resource type.", reference.getReference());
             reference = IdMapper.buildReference(ResourceType.MedicationRequest,
                 reference.getReferenceElement().getIdPart());

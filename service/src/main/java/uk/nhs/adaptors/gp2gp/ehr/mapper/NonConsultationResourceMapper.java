@@ -81,7 +81,7 @@ public class NonConsultationResourceMapper {
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
         String component = encounterComponentsMapper.mapResourceToComponent(resource);
 
-        // workaround for NIAD-1410
+        // TODO: workaround for NIAD-1410, should the mapper output ever be blank?
         if (StringUtils.isBlank(component)) {
             LOGGER.warn("Skipping {}. The mapping output contains blank XML statement content", resource.getResourceType());
             return Optional.empty();

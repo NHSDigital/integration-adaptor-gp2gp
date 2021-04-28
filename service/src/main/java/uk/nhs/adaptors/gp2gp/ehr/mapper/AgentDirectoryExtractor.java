@@ -92,7 +92,7 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
     }
 
-    // workaround for NIAD-1300
+    // TODO: workaround for NIAD-1300, remove once PractitionerRole references not used in GPC demonstrator
     private static Resource getPractitionerIfPractitionerRole(Resource resource, Bundle bundle) {
         if (resource.getResourceType().equals(ResourceType.PractitionerRole)) {
             var practitionerReference = ((PractitionerRole) resource).getPractitioner();

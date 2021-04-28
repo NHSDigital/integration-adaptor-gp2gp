@@ -237,7 +237,7 @@ public class ConditionLinkSetMapperTest {
 
         when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
-        // workaround for NIAD-1409 should throw an exception but public demonstrator include invalid references
+        // TODO: workaround for NIAD-1409 should throw an exception but public demonstrator include invalid references
         assumeThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Could not resolve Condition Related Medical Content reference");

@@ -48,7 +48,7 @@ public class IdMapper {
         String mappedId = ids.get(reference.getReference());
         if (mappedId == null) {
             if (requiresTemporaryPlaceholder(reference)) {
-                // workaround for missing agents NIAD-1340
+                // TODO workaround for missing agents NIAD-1340
                 LOGGER.warn("Using a temporary placeholder HL7 II for {}", reference.getReference());
                 return PLACEHOLDER_ID;
             }

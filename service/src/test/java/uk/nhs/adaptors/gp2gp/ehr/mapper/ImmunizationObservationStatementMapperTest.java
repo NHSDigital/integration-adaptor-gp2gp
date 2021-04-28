@@ -165,7 +165,7 @@ public class ImmunizationObservationStatementMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERTINENT_INFORMATION);
         Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
 
-        // workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
+        // TODO: workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
         assumeThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("No ID mapping for reference Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
