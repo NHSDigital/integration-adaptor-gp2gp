@@ -43,27 +43,27 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
 
         var response = gpcClient.getStructuredRecord(structuredTaskDefinition);
-        var hl7TranslatedResponse = StringUtils.EMPTY;
+//        var hl7TranslatedResponse = StringUtils.EMPTY;
 
-        try {
-//            Bundle bundle = fhirParseService.parseResource(response, Bundle.class);
-//            messageContext.initialize(bundle);
-//
-//            var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
-//                structuredTaskDefinition,
-//                bundle);
-//            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-//
-//            hl7TranslatedResponse = outputMessageWrapperMapper.map(
-//                structuredTaskDefinition,
-//                ehrExtractContent);
-        } finally {
-            messageContext.resetMessageContext();
-        }
+//        try {
+////            Bundle bundle = fhirParseService.parseResource(response, Bundle.class);
+////            messageContext.initialize(bundle);
+////
+////            var ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+////                structuredTaskDefinition,
+////                bundle);
+////            String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+////
+////            hl7TranslatedResponse = outputMessageWrapperMapper.map(
+////                structuredTaskDefinition,
+////                ehrExtractContent);
+//        } finally {
+//            messageContext.resetMessageContext();
+//        }
 
         String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
         storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,
-            hl7TranslatedResponse,
+            "hl7TranslatedResponse",
             structuredTaskDefinition.getTaskId()),
             fileName);
 
