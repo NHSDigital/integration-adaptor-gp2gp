@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RandomIdGeneratorService {
     public String createNewId() {
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().toUpperCase();
     }
 }
