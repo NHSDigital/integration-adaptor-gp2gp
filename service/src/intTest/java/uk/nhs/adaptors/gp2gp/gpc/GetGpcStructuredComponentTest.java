@@ -73,9 +73,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
@@ -93,14 +91,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 

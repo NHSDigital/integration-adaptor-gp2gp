@@ -76,17 +76,14 @@ public class EhrExtractTest {
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> {
-            var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-            assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS);
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS);
 
-            var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
-            assertThatNotDocumentsWereAdded(gpcAccessDocument);
+        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
+        assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
-            var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-            assertThatAcknowledgementToRequesterWasSent(ackToRequester);
-        }).doesNotThrowAnyException();
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
