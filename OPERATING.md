@@ -37,7 +37,7 @@ TODO: Document storage scheme
 **Using Azure Service Bus**
 
 * The ASB must use [MaxDeliveryCount and dead-lettering](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues#exceeding-maxdeliverycount)
-* Azure Service Bus may require some parameters as part of the URL configuration. For example: `NHAIS_AMQP_BROKERS=amqps://<NAME>.servicebus.windows.net/;SharedAccessKeyName=<KEY NAME>;SharedAccessKey=<KEY VALUE>`
+* Azure Service Bus may require some parameters as part of the URL configuration. For example: `GP2GP_AMQP_BROKERS=amqps://<NAME>.servicebus.windows.net/;SharedAccessKeyName=<KEY NAME>;SharedAccessKey=<KEY VALUE>`
 
 ## Message Queues and Content
 
