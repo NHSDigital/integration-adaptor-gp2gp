@@ -35,15 +35,6 @@
       "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
     },
     "issued":"2010-02-25T15:41:00+00:00",
-    "specimen":[
-      {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
-      },
-      {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1"
-      },
-      {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2"
-      }
+    "result":[
     ]
 }

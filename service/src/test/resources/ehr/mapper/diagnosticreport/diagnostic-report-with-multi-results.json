@@ -35,15 +35,24 @@
       "reference":"Patient/DAED5527-1985-45D9-993E-C5FF51F36828"
     },
     "issued":"2010-02-25T15:41:00+00:00",
-    "specimen":[
+    "result":[
       {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0"
+        "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2"
       },
       {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1"
+        "reference":"Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM"
       },
       {
-        "reference":"Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2"
+        "reference":"Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78"
+      },
+      {
+        "reference":"Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM"
+      },
+      {
+        "reference":"Observation/D0A358C9-4833-4827-B14B-E8515C25CB12"
+      },
+      {
+        "reference":"Observation/D0A358C9-4833-4827-B14B-E8515C25CB12-COMM"
       }
     ]
 }

@@ -1,6 +1,6 @@
 <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400"/>
+        <id root="2d70f602-6bb1-47e0-b2ec-39912a59787d"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -11,7 +11,7 @@
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="ca4ad477-c33b-4fe7-8417-a242bb3d23af"/>
+        <id root="f5c1fdbb-a948-43bb-ab30-ceaa51fc0cc0"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -28,77 +28,11 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-            <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="f5c1fdbb-a948-43bb-ab30-ceaa51fc0cc0"/>
-        
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            
-        </effectiveTime>
-        <availabilityTime value=""/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="f5c1fdbb-a948-43bb-ab30-ceaa51fc0cc0"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-        
-        
-        
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="f5c1fdbb-a948-43bb-ab30-ceaa51fc0cc0"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
-
-            NEGATIVE
-     In normal pregnancies the test will usually be positive from the
-     second day after the expected menstruation.</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
-
-            (q) - Normal - No Action</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201215151704"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-
-    </CompoundStatement>
-</component>
-
     </CompoundStatement>
 </component>
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="8d1610c2-5e48-4ed5-882b-5a4a172afa35"/>
+        <id root="287b3a3c-5e88-427b-a2ef-a14a20353b0c"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -115,59 +49,11 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-            <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
-        
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            
-        </effectiveTime>
-        <availabilityTime value=""/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="b65d8afd-6632-4aeb-9d9f-116149edd69c"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-        <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
-        
-        
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="cdfc5df7-2d1b-4ebb-be5c-6bd2e19405ff"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
-
-            (q) - Normal - No Action</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-
-    </CompoundStatement>
-</component>
-
     </CompoundStatement>
 </component>
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039"/>
+        <id root="263b2a9f-0b1d-4697-943a-328f70e068de"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -184,70 +70,6 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-            <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
-        
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            
-        </effectiveTime>
-        <availabilityTime value=""/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-        
-        
-        
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5a074d71-aebd-473c-815f-cd64255b87eb"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
-
-            Test not available</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3316531f-5705-424c-9e1a-ee694fb411b4"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
-
-            (q) - Normal - No Action</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201215151713"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root=""/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-
-    </CompoundStatement>
-</component>
-
     </CompoundStatement>
 </component>
 

@@ -34,10 +34,15 @@ public class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String INPUT_JSON_BUNDLE = "fhir-bundle.json";
     private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
+    private static final String INPUT_JSON_OPTIONAL_DATA = "diagnostic-report-with-optional-data.json";
     private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
+    private static final String INPUT_JSON_EMPTY_RESULTS = "diagnostic-report-with-empty-results.json";
     private static final String INPUT_JSON_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.json";
+    private static final String INPUT_JSON_ONE_RESULT = "diagnostic-report-with-one-result.json";
     private static final String INPUT_JSON_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.json";
+    private static final String INPUT_JSON_MULTI_RESULTS = "diagnostic-report-with-multi-results.json";
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
+    private static final String OUTPUT_XML_OPTIONAL_DATA = "diagnostic-report-with-optional-data.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
 
@@ -82,8 +87,13 @@ public class DiagnosticReportMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_OPTIONAL_DATA, OUTPUT_XML_OPTIONAL_DATA),
             Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
-            Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS));
+            Arguments.of(INPUT_JSON_ONE_RESULT, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
+            Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA)
+        );
     }
 }
