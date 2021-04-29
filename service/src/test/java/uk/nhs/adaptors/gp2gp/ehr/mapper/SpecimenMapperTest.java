@@ -33,8 +33,8 @@ public class SpecimenMapperTest {
 
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/specimen/";
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
-    private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-1.json";
-    private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-2.json";
+    private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
+    private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
 
     private SpecimenMapper specimenMapper;
 

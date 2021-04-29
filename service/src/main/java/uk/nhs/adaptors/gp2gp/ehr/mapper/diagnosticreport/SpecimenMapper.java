@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
+
 import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
@@ -86,7 +89,7 @@ public class SpecimenMapper {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
             if (collection.hasCollectedDateTimeType()) {
                 return Optional.of(collection.getCollectedDateTimeType());
-            } else if (collection.hasCollectedPeriod()) {
+            } else if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasStartElement()) {
                 return Optional.of(collection.getCollectedPeriod().getStartElement());
             }
         }
@@ -231,20 +234,6 @@ public class SpecimenMapper {
             }
 
             return Optional.empty();
-        }
-
-        private String newLine(Object... values) {
-            return StringUtils.joinWith(StringUtils.LF, values);
-        }
-
-        private String withSpace(Object... values) {
-            return StringUtils.join(values, StringUtils.SPACE);
-        }
-
-        private String withSpace(List<String> values) {
-            return values.stream()
-                .filter(StringUtils::isNotBlank)
-                .collect(Collectors.joining(StringUtils.SPACE));
         }
     }
 }
