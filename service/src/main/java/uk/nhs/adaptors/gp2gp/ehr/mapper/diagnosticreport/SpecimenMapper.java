@@ -64,16 +64,16 @@ public class SpecimenMapper {
         );
     }
 
-    private static Optional<String> buildEffectiveTimeForSpecimen(Specimen specimen) {
+    private Optional<String> buildEffectiveTimeForSpecimen(Specimen specimen) {
         return getEffectiveTime(specimen)
             .map(date -> String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, DateFormatUtil.toHl7Format(date)));
     }
 
-    private static Optional<DateTimeType> getEffectiveTime(Specimen specimen) {
+    private Optional<DateTimeType> getEffectiveTime(Specimen specimen) {
         return getCollectionDate(specimen).or(() -> getReceivedTime(specimen));
     }
 
-    private static Optional<DateTimeType> getReceivedTime(Specimen specimen) {
+    private Optional<DateTimeType> getReceivedTime(Specimen specimen) {
         if (specimen.hasReceivedTime()) {
             return Optional.of(specimen.getReceivedTimeElement());
         }
@@ -81,7 +81,7 @@ public class SpecimenMapper {
         return Optional.empty();
     }
 
-    private static Optional<DateTimeType> getCollectionDate(Specimen specimen) {
+    private Optional<DateTimeType> getCollectionDate(Specimen specimen) {
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
             if (collection.hasCollectedDateTimeType()) {
