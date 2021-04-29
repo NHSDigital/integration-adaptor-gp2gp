@@ -1266,10 +1266,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201128"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1282,12 +1282,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201128"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201128"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="10" unit="1">
                     <translation value="10">
                         <originalText>ml</originalText>
@@ -1298,7 +1299,6 @@
                         <text>Expected Supply Duration: 3 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1347,10 +1347,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201128"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1363,24 +1363,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125"/>
                 <quantity value="10" unit="1">
                     <translation value="10">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 3 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 3 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1429,10 +1429,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1445,12 +1445,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="15" unit="1">
                     <translation value="15">
                         <originalText>piece</originalText>
@@ -1461,16 +1462,15 @@
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
-                <statusCode code="COMPLETE"/>
                 <code nullFlavor="UNK">
     <originalText>just need to end it</originalText>
 </code>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125143423"/>
                 <reversalOf typeCode="REV">
                     <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
@@ -1523,10 +1523,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1539,24 +1539,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125"/>
                 <quantity value="15" unit="1">
                     <translation value="15">
                         <originalText>piece</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day Notes: Cancellation Reason: At the Patient&apos;s Request, Cancellation Date: 2020-11-25</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day Notes: Cancellation Reason: At the Patient&apos;s Request, Cancellation Date: 2020-11-25</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1605,10 +1605,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201202"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1621,12 +1621,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201202"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201202"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
@@ -1637,7 +1638,6 @@
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1686,10 +1686,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201223"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1702,24 +1702,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="82A39454-299F-432E-993E-5A6232B4E099"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1768,10 +1768,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1784,28 +1784,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 10 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1854,10 +1854,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201205"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1870,24 +1870,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 10 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 10 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1936,10 +1936,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1952,28 +1952,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 10 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2022,10 +2022,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2038,28 +2038,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 10 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2108,10 +2108,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
         <statusCode code="ACTIVE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2124,28 +2124,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="6A894B1B-F266-415C-83E6-375A4296C1C4"/>
-                <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                    <effectiveTime>
+                        <low value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="4"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 10 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="4"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2194,10 +2194,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201125"/>
         <effectiveTime>
             <low value="20201125"/><high value="20201125"/>
         </effectiveTime>
+        <availabilityTime value="20201125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2210,12 +2210,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201125"/><high value="20201125"/>
+                    </effectiveTime>
                 <availabilityTime value="20201125"/>
-                <effectiveTime>
-                    <low value="20201125"/><high value="20201125"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="40" unit="1">
                     <translation value="40">
                         <originalText>tablet</originalText>
@@ -2226,7 +2227,6 @@
                         <text>Expected Supply Duration: 10 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2275,10 +2275,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/><high value="20201126"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2291,28 +2291,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201126"/><high value="20201126"/>
+                    </effectiveTime>
                 <availabilityTime value="20201126"/>
-                <effectiveTime>
-                    <low value="20201126"/><high value="20201126"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 20 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2361,10 +2361,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/><high value="20201216"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2377,24 +2377,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201126"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 20 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 20 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2443,10 +2443,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
         <statusCode code="ACTIVE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2459,28 +2459,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
-                <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                    <effectiveTime>
+                        <low value="20201126"/>
+                    </effectiveTime>
                 <availabilityTime value="20201126"/>
-                <effectiveTime>
-                    <low value="20201126"/>
-                </effectiveTime>
+                <repeatNumber value="11"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 20 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="11"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2529,10 +2529,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/><high value="20201126"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2545,12 +2545,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201126"/><high value="20201126"/>
+                    </effectiveTime>
                 <availabilityTime value="20201126"/>
-                <effectiveTime>
-                    <low value="20201126"/><high value="20201126"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>tablet</originalText>
@@ -2561,7 +2562,6 @@
                         <text>Expected Supply Duration: 20 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2610,10 +2610,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/><high value="20201224"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2626,12 +2626,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201126"/><high value="20201224"/>
+                    </effectiveTime>
                 <availabilityTime value="20201126"/>
-                <effectiveTime>
-                    <low value="20201126"/><high value="20201224"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
@@ -2642,7 +2643,6 @@
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2691,10 +2691,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201126"/>
         <effectiveTime>
             <low value="20201126"/><high value="20201224"/>
         </effectiveTime>
+        <availabilityTime value="20201126"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2707,24 +2707,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201126"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2773,10 +2773,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201202"/>
         <effectiveTime>
             <low value="20201202"/><high value="20201209"/>
         </effectiveTime>
+        <availabilityTime value="20201202"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2789,28 +2789,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201202"/><high value="20201209"/>
+                    </effectiveTime>
                 <availabilityTime value="20201202"/>
-                <effectiveTime>
-                    <low value="20201202"/><high value="20201209"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2859,10 +2859,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201202"/>
         <effectiveTime>
             <low value="20201202"/><high value="20201230"/>
         </effectiveTime>
+        <availabilityTime value="20201202"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2875,24 +2875,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201202"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2941,10 +2941,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201209"/>
         <effectiveTime>
             <low value="20201209"/><high value="20201216"/>
         </effectiveTime>
+        <availabilityTime value="20201209"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2957,28 +2957,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201209"/><high value="20201216"/>
+                    </effectiveTime>
                 <availabilityTime value="20201209"/>
-                <effectiveTime>
-                    <low value="20201209"/><high value="20201216"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3027,10 +3027,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201209"/>
         <effectiveTime>
             <low value="20201209"/><high value="20210106"/>
         </effectiveTime>
+        <availabilityTime value="20201209"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3043,24 +3043,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201209"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3109,10 +3109,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201216"/>
         <effectiveTime>
             <low value="20201216"/><high value="20210113"/>
         </effectiveTime>
+        <availabilityTime value="20201216"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3125,28 +3125,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201216"/><high value="20210113"/>
+                    </effectiveTime>
                 <availabilityTime value="20201216"/>
-                <effectiveTime>
-                    <low value="20201216"/><high value="20210113"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3195,10 +3195,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201216"/>
         <effectiveTime>
             <low value="20201216"/><high value="20210113"/>
         </effectiveTime>
+        <availabilityTime value="20201216"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3211,24 +3211,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201216"/>
                 <quantity value="100" unit="1">
                     <translation value="100">
                         <originalText>ml</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3277,10 +3277,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201226"/>
         <effectiveTime>
             <low value="20201226"/><high value="20210123"/>
         </effectiveTime>
+        <availabilityTime value="20201226"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3293,28 +3293,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20201226"/><high value="20210123"/>
+                    </effectiveTime>
                 <availabilityTime value="20201226"/>
-                <effectiveTime>
-                    <low value="20201226"/><high value="20210123"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3363,10 +3363,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20201226"/>
         <effectiveTime>
             <low value="20201226"/><high value="20210123"/>
         </effectiveTime>
+        <availabilityTime value="20201226"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3379,24 +3379,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201226"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3445,10 +3445,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210125"/>
         <effectiveTime>
             <low value="20210125"/><high value="20210222"/>
         </effectiveTime>
+        <availabilityTime value="20210125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3461,28 +3461,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210125"/><high value="20210222"/>
+                    </effectiveTime>
                 <availabilityTime value="20210125"/>
-                <effectiveTime>
-                    <low value="20210125"/><high value="20210222"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3531,10 +3531,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="10720133-30C3-4145-9184-8713284C5A90"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210125"/>
         <effectiveTime>
             <low value="20210125"/><high value="20210222"/>
         </effectiveTime>
+        <availabilityTime value="20210125"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3547,24 +3547,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210125"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3613,10 +3613,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210224"/>
         <effectiveTime>
             <low value="20210224"/><high value="20210324"/>
         </effectiveTime>
+        <availabilityTime value="20210224"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3629,28 +3629,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210224"/><high value="20210324"/>
+                    </effectiveTime>
                 <availabilityTime value="20210224"/>
-                <effectiveTime>
-                    <low value="20210224"/><high value="20210324"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3699,10 +3699,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210224"/>
         <effectiveTime>
             <low value="20210224"/><high value="20210324"/>
         </effectiveTime>
+        <availabilityTime value="20210224"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3715,24 +3715,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210224"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3781,10 +3781,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210326"/>
         <effectiveTime>
             <low value="20210326"/><high value="20210423"/>
         </effectiveTime>
+        <availabilityTime value="20210326"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3797,28 +3797,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210326"/><high value="20210423"/>
+                    </effectiveTime>
                 <availabilityTime value="20210326"/>
-                <effectiveTime>
-                    <low value="20210326"/><high value="20210423"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3867,10 +3867,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210326"/>
         <effectiveTime>
             <low value="20210326"/><high value="20210423"/>
         </effectiveTime>
+        <availabilityTime value="20210326"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3883,24 +3883,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210326"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3949,10 +3949,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210425"/>
         <effectiveTime>
             <low value="20210425"/><high value="20210523"/>
         </effectiveTime>
+        <availabilityTime value="20210425"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3965,28 +3965,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210425"/><high value="20210523"/>
+                    </effectiveTime>
                 <availabilityTime value="20210425"/>
-                <effectiveTime>
-                    <low value="20210425"/><high value="20210523"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4035,10 +4035,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210425"/>
         <effectiveTime>
             <low value="20210425"/><high value="20210523"/>
         </effectiveTime>
+        <availabilityTime value="20210425"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4051,24 +4051,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210425"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4117,10 +4117,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210525"/>
         <effectiveTime>
             <low value="20210525"/><high value="20210622"/>
         </effectiveTime>
+        <availabilityTime value="20210525"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4133,28 +4133,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210525"/><high value="20210622"/>
+                    </effectiveTime>
                 <availabilityTime value="20210525"/>
-                <effectiveTime>
-                    <low value="20210525"/><high value="20210622"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4203,10 +4203,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210525"/>
         <effectiveTime>
             <low value="20210525"/><high value="20210622"/>
         </effectiveTime>
+        <availabilityTime value="20210525"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4219,24 +4219,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210525"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4285,10 +4285,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210624"/>
         <effectiveTime>
             <low value="20210624"/><high value="20210722"/>
         </effectiveTime>
+        <availabilityTime value="20210624"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4301,28 +4301,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210624"/><high value="20210722"/>
+                    </effectiveTime>
                 <availabilityTime value="20210624"/>
-                <effectiveTime>
-                    <low value="20210624"/><high value="20210722"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4371,10 +4371,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210624"/>
         <effectiveTime>
             <low value="20210624"/><high value="20210722"/>
         </effectiveTime>
+        <availabilityTime value="20210624"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4387,24 +4387,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="7374E13A-D408-460C-A021-3441347C5027"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210624"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4453,10 +4453,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210724"/>
         <effectiveTime>
             <low value="20210724"/><high value="20210821"/>
         </effectiveTime>
+        <availabilityTime value="20210724"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4469,28 +4469,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210724"/><high value="20210821"/>
+                    </effectiveTime>
                 <availabilityTime value="20210724"/>
-                <effectiveTime>
-                    <low value="20210724"/><high value="20210821"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4539,10 +4539,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210724"/>
         <effectiveTime>
             <low value="20210724"/><high value="20210821"/>
         </effectiveTime>
+        <availabilityTime value="20210724"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4555,24 +4555,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="162EF189-0270-449D-8FE0-BB82E6FF051F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210724"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4621,10 +4621,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210823"/>
         <effectiveTime>
             <low value="20210823"/><high value="20210920"/>
         </effectiveTime>
+        <availabilityTime value="20210823"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4637,28 +4637,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210823"/><high value="20210920"/>
+                    </effectiveTime>
                 <availabilityTime value="20210823"/>
-                <effectiveTime>
-                    <low value="20210823"/><high value="20210920"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4707,10 +4707,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210823"/>
         <effectiveTime>
             <low value="20210823"/><high value="20210920"/>
         </effectiveTime>
+        <availabilityTime value="20210823"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4723,24 +4723,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210823"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4789,10 +4789,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210922"/>
         <effectiveTime>
             <low value="20210922"/><high value="20211020"/>
         </effectiveTime>
+        <availabilityTime value="20210922"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4805,28 +4805,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20210922"/><high value="20211020"/>
+                    </effectiveTime>
                 <availabilityTime value="20210922"/>
-                <effectiveTime>
-                    <low value="20210922"/><high value="20211020"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4875,10 +4875,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20210922"/>
         <effectiveTime>
             <low value="20210922"/><high value="20211020"/>
         </effectiveTime>
+        <availabilityTime value="20210922"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4891,24 +4891,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="49259291-5B92-4C0B-BE40-C299A8B02677"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20210922"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4957,10 +4957,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20211022"/>
         <effectiveTime>
             <low value="20211022"/><high value="20211119"/>
         </effectiveTime>
+        <availabilityTime value="20211022"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4973,28 +4973,28 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20211022"/><high value="20211119"/>
+                    </effectiveTime>
                 <availabilityTime value="20211022"/>
-                <effectiveTime>
-                    <low value="20211022"/><high value="20211119"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5043,10 +5043,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20211022"/>
         <effectiveTime>
             <low value="20211022"/><high value="20211119"/>
         </effectiveTime>
+        <availabilityTime value="20211022"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5059,24 +5059,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20211022"/>
                 <quantity value="20" unit="1">
                     <translation value="20">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
