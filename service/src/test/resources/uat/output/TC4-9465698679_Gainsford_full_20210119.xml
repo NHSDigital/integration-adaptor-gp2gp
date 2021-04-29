@@ -233,11 +233,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6f7ae308-ad99-48b4-ae9e-72855a6baa06" />
+        <code code="961281000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Surveillance">
+    <originalText>Surveillance</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
         <availabilityTime value="20100123132734"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -245,10 +249,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="961281000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Surveillance">
-    <originalText>Surveillance</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -313,11 +313,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141eee6-ede3-4358-8554-ffed0ee59284" />
+        <code code="980981000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Threats/reports of violence">
+    <originalText>Threats/reports of violence</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
         <availabilityTime value="20100123132734"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -325,10 +329,6 @@
                 <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="980981000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Threats/reports of violence">
-    <originalText>Threats/reports of violence</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -339,11 +339,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3bfd78de-03bf-44fd-96bc-cdf3db2cc039" />
+        <code code="915831000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Patient died">
+    <originalText>Patient died</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
         <availabilityTime value="20100123132734"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -351,10 +355,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="915831000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Patient died">
-    <originalText>Patient died</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -365,11 +365,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6dffaec4-7527-4d80-a2bd-81bdeba04400" />
+        <code code="1662951000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Betel nut chewer">
+    <originalText>Betel nut chewer</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
         <availabilityTime value="20100123132734"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -377,10 +381,6 @@
                 <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1662951000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Betel nut chewer">
-    <originalText>Betel nut chewer</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -432,11 +432,15 @@
 </ehrComposition><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1ab77ac2-0026-4c4b-a168-daa15d108ba8" />
+        <code code="940541000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: allergies">
+    <originalText>H/O: allergies</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
         <availabilityTime value="20100123132734"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -444,10 +448,6 @@
                 <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="940541000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: allergies">
-    <originalText>H/O: allergies</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3100,11 +3100,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="aeb66d16-e1fa-462a-bc70-fbd16000e308" />
+        <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
         <availabilityTime value="20100114094202"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3112,9 +3115,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3156,11 +3156,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="dc14952f-f66e-40d2-b400-0e370e6edb63" />
+        <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
+    <originalText>Roman Catholic</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
         <availabilityTime value="20100114094202"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3168,10 +3172,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
-    <originalText>Roman Catholic</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3213,11 +3213,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5de8cdda-866f-4cd9-9bb3-527a86dd49a9" />
+        <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
         <availabilityTime value="20100114094202"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3225,9 +3228,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3269,11 +3269,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="87102979-c329-4194-819b-d057aaea625b" />
+        <code code="38070000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cohabiting">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
         <availabilityTime value="20100114094202"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3281,9 +3284,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="38070000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cohabiting">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3325,11 +3325,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="088fa6f5-206b-4a4a-ad9a-d95f80c33ccf" />
+        <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100222"/>
         </effectiveTime>
         <availabilityTime value="20100222134120"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3337,9 +3340,6 @@
                 <text>Significance : Major - Episodicity : First - hhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3381,11 +3381,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ec6ff2c4-625c-4382-8ed1-b3cd5c512dbf" />
+        <code code="856901000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cervical smear adequate">
+    <originalText>Cervical smear adequate</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101001"/>
         </effectiveTime>
         <availabilityTime value="20101001110006"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3393,10 +3397,6 @@
                 <text>Significance : Minor - Episodicity : First - What does this really mean?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="856901000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cervical smear adequate">
-    <originalText>Cervical smear adequate</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3438,11 +3438,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="689ee4e9-4a30-4007-adf0-07aaa958c49c" />
+        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
+    <originalText>Happy puppet syndrome</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101012"/>
         </effectiveTime>
         <availabilityTime value="20101012145055"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3450,10 +3454,6 @@
                 <text>Significance : Major - Episodicity : First - hhh €</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3495,11 +3495,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ee5ef8fb-5b0f-4d22-93e4-6e79489fef64" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20190313"/>
         </effectiveTime>
         <availabilityTime value="20190313090328"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3507,10 +3511,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">

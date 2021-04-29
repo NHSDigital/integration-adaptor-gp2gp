@@ -1,12 +1,12 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100630055900"/>
         </effectiveTime>
         <availabilityTime value="20100630054806" />
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id"/>

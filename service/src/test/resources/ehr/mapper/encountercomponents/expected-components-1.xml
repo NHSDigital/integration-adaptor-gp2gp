@@ -60,6 +60,7 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100630055900"/>
@@ -71,7 +72,6 @@
                 <text>immunization note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -82,11 +82,13 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -94,8 +96,6 @@
                 <text>observation uncategorised</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         
     </ObservationStatement>
 </component><component typeCode="COMP">
