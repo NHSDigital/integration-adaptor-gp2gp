@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="CF670325-7982-46BA-9A52-85C3C78FE40A" />
+    <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -1763,7 +1763,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="82A39454-299F-432E-993E-5A6232B4E099" />
+        <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1789,53 +1789,45 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20210104"/>
-    </effectiveTime>
-    <availabilityTime value="20210113143742" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
-            <statusCode code="COMPLETE"/>
-            <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
-            <effectiveTime>
-                <center value="20210104"/>
-            </effectiveTime>
-            <availabilityTime value="20210113143742" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20210104"/>
-                    </effectiveTime>
-                    <availabilityTime value="20210113143742" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
+        <statusCode code="COMPLETE"/>
+        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <effectiveTime>
+            <center value="20210104"/>
+        </effectiveTime>
+        <availabilityTime value="20210113143742" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20210104"/>
+                </effectiveTime>
+                <availabilityTime value="20210113143742" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
 </code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1863,7 +1855,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
+        <id root="82A39454-299F-432E-993E-5A6232B4E099" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201222"/>
@@ -1892,7 +1884,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
+        <id root="85E19135-F780-437D-9633-24BF6C7E5D82" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1920,7 +1912,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="85E19135-F780-437D-9633-24BF6C7E5D82" />
+        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20311220"/>
