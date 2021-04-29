@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Duration;
@@ -25,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,6 @@ public class SpecimenMapper {
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
-    private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
@@ -49,13 +50,13 @@ public class SpecimenMapper {
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getId()))
             .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
-            .effectiveTime(prepareEffectiveTimeForSpecimen(specimen))
             .observations(mappedObservations);
 
         buildType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::type);
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildPertinentInformation(specimen).ifPresent(specimenCompoundStatementTemplateParameters::pertinentInformation);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
+        buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
 
         return TemplateUtils.fillTemplate(
             SPECIMEN_COMPOUND_STATEMENT_TEMPLATE,
@@ -63,30 +64,34 @@ public class SpecimenMapper {
         );
     }
 
-    public static String prepareEffectiveTimeForSpecimen(Specimen specimen) {
-        Optional<DateTimeType> effectiveDate = getCollectionDateTime(specimen);
-
-        return effectiveDate.map(date -> String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, DateFormatUtil.toHl7Format(date)))
-            .orElse(DEFAULT_TIME_VALUE);
+    private static Optional<String> buildEffectiveTimeForSpecimen(Specimen specimen) {
+        return getEffectiveTime(specimen)
+            .map(date -> String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, DateFormatUtil.toHl7Format(date)));
     }
 
-    private static Optional<DateTimeType> getCollectionDateTime(Specimen specimen) {
-        Optional<DateTimeType> effectiveDate = Optional.empty();
+    private static Optional<DateTimeType> getEffectiveTime(Specimen specimen) {
+        return getCollectionDate(specimen).or(() -> getReceivedTime(specimen));
+    }
 
+    private static Optional<DateTimeType> getReceivedTime(Specimen specimen) {
         if (specimen.hasReceivedTime()) {
-            effectiveDate = Optional.of(specimen.getReceivedTimeElement());
+            return Optional.of(specimen.getReceivedTimeElement());
         }
 
+        return Optional.empty();
+    }
+
+    private static Optional<DateTimeType> getCollectionDate(Specimen specimen) {
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
             if (collection.hasCollectedDateTimeType()) {
-                effectiveDate = Optional.of(collection.getCollectedDateTimeType());
+                return Optional.of(collection.getCollectedDateTimeType());
             } else if (collection.hasCollectedPeriod()) {
-                effectiveDate = Optional.of(collection.getCollectedPeriod().getStartElement());
+                return Optional.of(collection.getCollectedPeriod().getStartElement());
             }
         }
 
-        return effectiveDate;
+        return Optional.empty();
     }
 
     private Optional<String> buildParticipant(Specimen specimen) {
@@ -100,7 +105,7 @@ public class SpecimenMapper {
     }
 
     private Optional<String> buildAccessionIdentifier(Specimen specimen) {
-        if (specimen.hasAccessionIdentifier()) {
+        if (specimen.hasAccessionIdentifier() && specimen.getAccessionIdentifier().hasValue()) {
             return Optional.of(specimen.getAccessionIdentifier().getValue());
         }
 
@@ -153,9 +158,11 @@ public class SpecimenMapper {
             }
         }
 
-        specimen.getNote().forEach(note -> pertinentInformationBuilder.note(note.getText()));
+        specimen.getNote().stream()
+            .map(Annotation::getText)
+            .forEach(pertinentInformationBuilder::note);
 
-        return getCollectionDateTime(specimen)
+        return getEffectiveTime(specimen)
             .map(pertinentInformationBuilder::build)
             .orElseGet(pertinentInformationBuilder::build);
     }
@@ -181,15 +188,23 @@ public class SpecimenMapper {
         }
 
         public void fastingDuration(Duration fastingDuration) {
-            pertinentInformation = newLine(
-                withSpace(FASTING_DURATION, fastingDuration.getValue().toString(), fastingDuration.getUnit()),
-                pertinentInformation);
+            List<String> fastingDurationElements = List.of(
+                FASTING_DURATION,
+                Objects.toString(fastingDuration.getValue(), StringUtils.EMPTY),
+                fastingDuration.getUnit()
+            );
+
+            pertinentInformation = newLine(withSpace(fastingDurationElements), pertinentInformation);
         }
 
         public void quantity(SimpleQuantity quantity) {
-            pertinentInformation = newLine(
-                withSpace(QUANTITY, quantity.getValue().toString(), quantity.getUnit()),
-                pertinentInformation);
+            List<String> quantityElements = List.of(
+                QUANTITY,
+                Objects.toString(quantity.getValue(), StringUtils.EMPTY),
+                quantity.getUnit()
+            );
+
+            pertinentInformation = newLine(withSpace(quantityElements), pertinentInformation);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
@@ -218,15 +233,18 @@ public class SpecimenMapper {
             return Optional.empty();
         }
 
-        private String newLine(String text, String pertinentInformation) {
-            return StringUtils.joinWith(
-                StringUtils.LF,
-                text,
-                pertinentInformation);
+        private String newLine(Object... values) {
+            return StringUtils.joinWith(StringUtils.LF, values);
         }
 
         private String withSpace(Object... values) {
-            return StringUtils.joinWith(StringUtils.SPACE, values);
+            return StringUtils.join(values, StringUtils.SPACE);
+        }
+
+        private String withSpace(List<String> values) {
+            return values.stream()
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining(StringUtils.SPACE));
         }
     }
 }

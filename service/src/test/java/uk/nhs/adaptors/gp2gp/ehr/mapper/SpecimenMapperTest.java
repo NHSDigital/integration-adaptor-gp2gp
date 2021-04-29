@@ -7,7 +7,6 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -53,7 +52,7 @@ public class SpecimenMapperTest {
         lenient().when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockId());
         lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockReference());
 
-        observations = Arrays.asList(
+        observations = List.of(
             parseObservation(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
             parseObservation(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
         );
@@ -89,7 +88,10 @@ public class SpecimenMapperTest {
             Arguments.of("input-specimen-without-fasting-duration.json", "expected-specimen-without-fasting-duration.xml"),
             Arguments.of("input-specimen-without-quantity.json", "expected-specimen-without-quantity.xml"),
             Arguments.of("input-specimen-without-body-site.json", "expected-specimen-without-body-site.xml"),
-            Arguments.of("input-specimen-without-notes.json", "expected-specimen-without-notes.xml")
+            Arguments.of("input-specimen-without-notes.json", "expected-specimen-without-notes.xml"),
+            Arguments.of("input-specimen-without-effective-time.json", "expected-specimen-without-effective-time.xml"),
+            Arguments.of("input-specimen-with-empty-duration-value.json", "expected-specimen-with-empty-duration-value.xml"),
+            Arguments.of("input-specimen-with-empty-quantity-value.json", "expected-specimen-with-empty-quantity-value.xml")
         );
     }
 
