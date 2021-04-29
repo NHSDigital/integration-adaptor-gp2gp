@@ -76,6 +76,7 @@ services:
     ports:
       - "8090:8090"
     environment:
+      - GPC_CONSUMER_LOGGING_LEVEL
       - GPC_CONSUMER_SERVER_PORT
       - GPC_CONSUMER_SPINE_CLIENT_CERT
       - GPC_CONSUMER_SPINE_CLIENT_KEY
