@@ -1105,6 +1105,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1159,6 +1160,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1213,6 +1215,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -6464,6 +6467,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
