@@ -36,19 +36,18 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
 
-        StringBuilder specimensBlock = new StringBuilder();
-        specimens.forEach(specimen ->
-            specimensBlock.append(
-                specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport)
-            )
-        );
+        String diagnosticReportIssuedDate = DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement());
+
+        String mappedSpecimens = specimens.stream()
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReportIssuedDate))
+            .collect(Collectors.joining());
 
         final IdMapper idMapper = messageContext.getIdMapper();
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getId()))
-            .diagnosticReportIssuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
-            .specimens(specimensBlock.toString());
+            .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
+            .specimens(mappedSpecimens);
 
         String temp = TemplateUtils.fillTemplate(
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,

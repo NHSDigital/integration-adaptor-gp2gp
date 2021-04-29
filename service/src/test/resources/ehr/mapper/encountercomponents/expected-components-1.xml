@@ -289,7 +289,9 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DN"/>
-                <effectiveTime><center value="20100223000000"></effectiveTime>
+                <effectiveTime>
+                    <center value="20100223000000"/>
+                </effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>URINE</desc>
                 </specimenSpecimenMaterial>
@@ -298,12 +300,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -327,7 +329,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
+            CommentDate:20100225154100
 
             NEGATIVE
      In normal pregnancies the test will usually be positive from the
@@ -345,7 +347,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151704
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
@@ -376,7 +378,9 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DO"/>
-                <effectiveTime><center value="20100223154100"></effectiveTime>
+                <effectiveTime>
+                    <center value="20100223154100"/>
+                </effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>SERUM</desc>
                 </specimenSpecimenMaterial>
@@ -385,12 +389,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -414,7 +418,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151713
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
@@ -445,7 +449,9 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DP"/>
-                <effectiveTime><center value="20100224154100"></effectiveTime>
+                <effectiveTime>
+                    <center value="20100224154100"/>
+                </effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>SERUM</desc>
                 </specimenSpecimenMaterial>
@@ -454,12 +460,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -483,7 +489,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
+            CommentDate:20100225154100
 
             Test not available</text>
         <statusCode code="COMPLETE"/>
@@ -499,7 +505,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151713
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>

@@ -14,4 +14,6 @@ public class SpecimenCompoundStatementTemplateParameters {
     private String effectiveTime;
     private String type;
     private String observations;
+    private String participant;
+    private String pertinentInformation;
 }

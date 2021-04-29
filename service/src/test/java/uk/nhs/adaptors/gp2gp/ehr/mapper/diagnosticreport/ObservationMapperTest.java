@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -18,7 +18,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
@@ -99,7 +98,7 @@ public class ObservationMapperTest {
             observations
         );
 
-         assertThat(compoundStatementXml).isEqualToIgnoringWhitespace(expectedXmlOutput);
+        assertThat(compoundStatementXml).isEqualToIgnoringWhitespace(expectedXmlOutput);
     }
 
     private static Stream<Arguments> resourceFileParams() {

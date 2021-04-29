@@ -25,8 +25,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.ObservationMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnostic_report.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
