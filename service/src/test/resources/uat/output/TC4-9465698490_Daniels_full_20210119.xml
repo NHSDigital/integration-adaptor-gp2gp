@@ -257,11 +257,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <code code="88551000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review with patient">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
         <availabilityTime value="20100114103430"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -269,9 +272,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="88551000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Medication review with patient">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -327,11 +327,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
+    <originalText>Medication review</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100115"/>
         </effectiveTime>
         <availabilityTime value="20100115100646"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -339,10 +343,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Medication review</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -398,11 +398,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100323153600"/>
         </effectiveTime>
         <availabilityTime value="20100323155127"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -410,9 +413,6 @@
                 <text>Significance : Major - Episodicity : First - This is problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -507,11 +507,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100323153900"/>
         </effectiveTime>
         <availabilityTime value="20100323155935"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -519,9 +522,6 @@
                 <text>Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="90560007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Gout">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -892,11 +892,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50" />
+        <code code="190460008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemorrhage of parathyroid">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20111115145400"/>
         </effectiveTime>
         <availabilityTime value="20111115145911"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -904,9 +907,6 @@
                 <text>This is a note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="190460008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemorrhage of parathyroid">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -20883,11 +20883,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE233834-A2B1-4805-BE0C-A2FBEBF33DB9" />
+        <code code="160504008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Marital state unknown">
+    <originalText>Civil state unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100114101000"/>
         </effectiveTime>
         <availabilityTime value="20100114101035"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -20895,10 +20899,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160504008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Marital state unknown">
-    <originalText>Civil state unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -20940,11 +20940,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="885B48E7-9BF2-4FB1-9E7B-ECDA1D853527" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20181030"/>
         </effectiveTime>
         <availabilityTime value="20181030125717"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -20952,10 +20956,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
