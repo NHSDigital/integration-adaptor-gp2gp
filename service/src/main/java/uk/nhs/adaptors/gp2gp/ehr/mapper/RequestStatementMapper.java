@@ -125,7 +125,7 @@ public class RequestStatementMapper {
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
-            } else if (isReferenceToType(agent, ResourceType.Practitioner) || isReferenceToType(agent, ResourceType.Organization)) {
+            } else if (isReferenceToType(agent, ResourceType.Practitioner)) {
                 final String participantRef = idMapper.getOrNew(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
