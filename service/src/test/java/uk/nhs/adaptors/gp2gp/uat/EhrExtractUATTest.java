@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
