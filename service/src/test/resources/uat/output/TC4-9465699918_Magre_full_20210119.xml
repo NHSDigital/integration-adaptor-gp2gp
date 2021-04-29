@@ -6349,6 +6349,8 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5" />
+        <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20200106"/>
@@ -6360,8 +6362,6 @@
                 <text>Batch: hep12345 Parent present</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6369,7 +6369,6 @@
 </Participant>
     </ObservationStatement>
 </component>
-
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -6403,6 +6402,8 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
+        <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201020"/>
@@ -6414,8 +6415,6 @@
                 <text>Manufacturer: Acme Pharmaceuticals Batch: FLU-87654</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6423,7 +6422,6 @@
 </Participant>
     </ObservationStatement>
 </component>
-
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
