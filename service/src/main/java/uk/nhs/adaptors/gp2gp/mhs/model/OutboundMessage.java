@@ -56,7 +56,7 @@ public class OutboundMessage {
         @JsonProperty("original_base64")
         private boolean originalBase64;
         private int length;
-        @JsonProperty("reference_id")
+        @JsonProperty("domain_data")
         private String domainData;
     }
 }

@@ -1,42 +1,34 @@
-<ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="{{ehrCompositionId}}"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        {{{effectiveTime}}}
-    </effectiveTime>
-    <availabilityTime value="{{availabilityTime}}" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="{{allergyStructureId}}"/>
-            <statusCode code="COMPLETE"/>
-            {{{categoryCode}}}
-            <effectiveTime>
-                {{{effectiveTime}}}
-            </effectiveTime>
-            <availabilityTime value="{{availabilityTime}}" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="{{observationId}}"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        {{{effectiveTime}}}
-                    </effectiveTime>
-                    <availabilityTime value="{{availabilityTime}}" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>{{pertinentInformation}}</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    {{{code}}}
-                    {{#author}}
-                    {{{.}}}
-                    {{/author}}
-                    {{#performer}}
-                    {{{.}}}
-                    {{/performer}}
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="{{allergyStructureId}}"/>
+        <statusCode code="COMPLETE"/>
+        {{{categoryCode}}}
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        <availabilityTime value="{{availabilityTime}}" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="{{observationId}}"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    {{{effectiveTime}}}
+                </effectiveTime>
+                <availabilityTime value="{{availabilityTime}}" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>{{pertinentInformation}}</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                {{{code}}}
+                {{#author}}
+                {{{.}}}
+                {{/author}}
+                {{#performer}}
+                {{{.}}}
+                {{/performer}}
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>

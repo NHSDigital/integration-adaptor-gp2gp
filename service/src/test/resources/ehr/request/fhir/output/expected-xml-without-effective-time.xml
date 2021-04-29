@@ -116,42 +116,34 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="test-id-3"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center nullFlavor="UNK"/>
-    </effectiveTime>
-    <availabilityTime value="20100114095757" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="test-id-3"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center nullFlavor="UNK"/>
-            </effectiveTime>
-            <availabilityTime value="20100114095757" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="test-id-3"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center nullFlavor="UNK"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100114095757" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text></text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime value="20100114095757" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="test-id-3"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center nullFlavor="UNK"/>
+                </effectiveTime>
+                <availabilityTime value="20100114095757" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text></text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
         </ehrFolder>
