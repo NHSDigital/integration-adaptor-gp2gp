@@ -3791,6 +3791,8 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
+        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201102"/>
@@ -3802,8 +3804,6 @@
                 <text>Manufacturer: wefew Batch: 123213 Expiration: 2020-11-14 Site: Left arm (Combined with Cough) GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
