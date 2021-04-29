@@ -155,42 +155,34 @@
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
-</component><ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="394559384658936"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="19781231"/>
-    </effectiveTime>
-    <availabilityTime value="20100114095757" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="394559384658936"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center value="19781231"/>
-            </effectiveTime>
-            <availabilityTime value="20100114095757" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="394559384658936"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="19781231"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100114095757" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Reason Ended: Patient reports no subsequent recurrence on same medication Status: Resolved Type: Allergy Criticality: Low Risk Last Occurred: 1978-12-31 Example note text</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition><component typeCode="COMP" >
+</component><component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="394559384658936"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center value="19781231"/>
+        </effectiveTime>
+        <availabilityTime value="20100114095757" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="394559384658936"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="19781231"/>
+                </effectiveTime>
+                <availabilityTime value="20100114095757" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Reason Ended: Patient reports no subsequent recurrence on same medication Status: Resolved Type: Allergy Criticality: Low Risk Last Occurred: 1978-12-31 Example note text</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
         <statusCode code="COMPLETE" />

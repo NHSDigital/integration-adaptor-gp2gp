@@ -7379,47 +7379,39 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="test-id-3"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20100113"/>
-    </effectiveTime>
-    <availabilityTime value="20100113145710" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="test-id-3"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center value="20100113"/>
-            </effectiveTime>
-            <availabilityTime value="20100113145710" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="test-id-3"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20100113"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100113145710" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active This is text for a warfarin allergy Significance : Major - Episodicity : First - This is text for a warfarin allergy</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113145710" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="test-id-3"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100113"/>
+                </effectiveTime>
+                <availabilityTime value="20100113145710" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active This is text for a warfarin allergy Significance : Major - Episodicity : First - This is text for a warfarin allergy</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -7450,47 +7442,39 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="test-id-3"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20100113"/>
-    </effectiveTime>
-    <availabilityTime value="20100113140445" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="test-id-3"/>
-            <statusCode code="COMPLETE"/>
-            <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
-            <effectiveTime>
-                <center value="20100113"/>
-            </effectiveTime>
-            <availabilityTime value="20100113140445" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="test-id-3"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20100113"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100113140445" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010) Significance : Major - Episodicity : First - This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <statusCode code="COMPLETE"/>
+        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113140445" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="test-id-3"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100113"/>
+                </effectiveTime>
+                <availabilityTime value="20100113140445" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010) Significance : Major - Episodicity : First - This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -7521,47 +7505,39 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="test-id-3"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20100113"/>
-    </effectiveTime>
-    <availabilityTime value="20100113114126" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="test-id-3"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center value="20100113"/>
-            </effectiveTime>
-            <availabilityTime value="20100113114126" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="test-id-3"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20100113"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100113114126" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active Drug Allergy - Apsrin Significance : Minor - Episodicity : First - Drug Allergy - Apsrin</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113114126" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="test-id-3"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100113"/>
+                </effectiveTime>
+                <availabilityTime value="20100113114126" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Drug Allergy - Apsrin Significance : Minor - Episodicity : First - Drug Allergy - Apsrin</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -7592,47 +7568,39 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="test-id-3"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20100113"/>
-    </effectiveTime>
-    <availabilityTime value="20100113113756" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="test-id-3"/>
-            <statusCode code="COMPLETE"/>
-            <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
-            <effectiveTime>
-                <center value="20100113"/>
-            </effectiveTime>
-            <availabilityTime value="20100113113756" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="test-id-3"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20100113"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100113113756" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active This is a peanut allergy, (Replaced Allergic gastroenteritis)</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+        <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="test-id-3"/>
+        <statusCode code="COMPLETE"/>
+        <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113113756" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="test-id-3"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20100113"/>
+                </effectiveTime>
+                <availabilityTime value="20100113113756" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active This is a peanut allergy, (Replaced Allergic gastroenteritis)</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
