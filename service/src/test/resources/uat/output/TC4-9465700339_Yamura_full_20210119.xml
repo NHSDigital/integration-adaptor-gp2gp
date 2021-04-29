@@ -2046,17 +2046,17 @@ And more stuff</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="09a882da-c219-4146-97ef-3fd9a57135b0" />
+        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
+    <originalText>O/E - BP reading</originalText>
+</code>
+        <text>
+            Recall Status:Outstanding. NOTES: These are the recall notes.
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20051123"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
-            <text>
-            Recall Status:Outstanding. NOTES: These are the recall notes.
-            </text>
-        <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
-    <originalText>O/E - BP reading</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2153,31 +2153,31 @@ And more stuff</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="97ce760a-7759-4fea-b5a9-8667e06f86a4" />
+        <code code="73211009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetes mellitus">
+    <originalText>Insulin dependent diabetes mellitus</originalText>
+</code>
+        <text>
+            Trigger for recall: Follow-up diabetic assessment [66A2.00], Recall Status:Outstanding. NOTES: Recall with no set-up date.
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20060521"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
-            <text>
-            Trigger for recall: Follow-up diabetic assessment [66A2.00], Recall Status:Outstanding. NOTES: Recall with no set-up date.
-            </text>
-        <code code="73211009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetes mellitus">
-    <originalText>Insulin dependent diabetes mellitus</originalText>
-</code>
     </PlanStatement>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="5f44fd1c-bc5b-4b5f-8861-79f254d0d969" />
+        <code code="243787009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Antenatal screening">
+</code>
+        <text>
+            Recall Status:Outstanding. NOTES: Partial set up date.
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20061021"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
-            <text>
-            Recall Status:Outstanding. NOTES: Partial set up date.
-            </text>
-        <code code="243787009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Antenatal screening">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2215,17 +2215,17 @@ And more stuff</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="b4c0fcd1-d4b2-40f8-9b18-7b4c0af946db" />
+        <code code="193031009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cluster headache">
+    <originalText>Migrainous neuralgia</originalText>
+</code>
+        <text>
+            Recall Status:Outstanding.
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20040211"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
-            <text>
-            Recall Status:Outstanding.
-            </text>
-        <code code="193031009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cluster headache">
-    <originalText>Migrainous neuralgia</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -5892,13 +5892,13 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="7f80410a-6158-43c4-9e5e-0cfb1f25e781" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20330328"/>
         </effectiveTime>
         <availabilityTime value="20210107114034"/>
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>

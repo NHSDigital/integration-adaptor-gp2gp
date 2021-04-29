@@ -711,13 +711,13 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="fe85db22-274e-4b1d-9698-5c4809e9cd42" />
+        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100618"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2233,16 +2233,16 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="5f44fd1c-bc5b-4b5f-8861-79f254d0d969" />
+        <code code="247221000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="In-house podiatry follow-up appointment">
+</code>
+        <text>
+            This is some text 30
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
-            <text>
-            This is some text 30
-            </text>
-        <code code="247221000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="In-house podiatry follow-up appointment">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -3335,13 +3335,13 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="3a3b1b6f-7dc5-4be3-a496-0bc243583eba" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20031001"/>
         </effectiveTime>
         <availabilityTime value="20201026122505"/>
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
