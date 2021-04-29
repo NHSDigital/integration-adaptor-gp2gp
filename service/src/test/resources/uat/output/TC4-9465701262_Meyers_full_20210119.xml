@@ -880,7 +880,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
         <statusCode code="COMPLETE" />
@@ -5700,6 +5701,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -5753,6 +5755,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">

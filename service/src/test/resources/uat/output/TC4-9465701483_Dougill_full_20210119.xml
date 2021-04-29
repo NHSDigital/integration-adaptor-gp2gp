@@ -774,7 +774,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
         <statusCode code="COMPLETE" />
@@ -808,7 +809,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
         <statusCode code="COMPLETE" />
@@ -842,7 +844,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
         <statusCode code="COMPLETE" />
@@ -876,7 +879,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
         <statusCode code="COMPLETE" />
@@ -910,7 +914,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
         <statusCode code="COMPLETE" />
@@ -944,7 +949,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
         <statusCode code="COMPLETE" />
@@ -978,7 +984,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
         <statusCode code="COMPLETE" />
@@ -1013,7 +1020,8 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" >
+</component>
+<component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
         <statusCode code="COMPLETE" />
