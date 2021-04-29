@@ -254,11 +254,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Mucor mycetomatis</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20081125"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -266,10 +270,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Mucor mycetomatis</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -313,11 +313,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Perineal incision</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20090204"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -325,10 +329,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Perineal incision</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -372,11 +372,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Nuchal pain</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100104"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -384,10 +388,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -476,11 +476,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Salmonella shamba</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -488,10 +492,6 @@
                 <text>Significance : Minor - Episodicity : First - Short duration minor problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Salmonella shamba</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -502,11 +502,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Sympathotonic orthostatic hypotension</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -514,10 +518,6 @@
                 <text>Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Sympathotonic orthostatic hypotension</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -528,11 +528,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Breath smells unpleasant</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -540,10 +544,6 @@
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Breath smells unpleasant</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -566,11 +566,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -578,9 +581,6 @@
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -591,11 +591,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
+        <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -603,9 +606,6 @@
                 <text>Significance : Minor - Episodicity : First - Ended on 16/06/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -616,11 +616,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Mucor mycetomatis</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20081125000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -628,10 +632,6 @@
                 <text>Significance : Minor - Episodicity : First - Chronic Problem with no end date</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Mucor mycetomatis</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -654,11 +654,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Breath smells unpleasant</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -666,10 +670,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Breath smells unpleasant</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -680,11 +680,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
+        <code code="162950006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - breath sounds normal">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -692,9 +695,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="162950006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - breath sounds normal">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -705,11 +705,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <code code="32398004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bronchitis">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -717,9 +720,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="32398004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bronchitis">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -730,11 +730,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D81D22B7-5216-44E8-B306-DD542F214792" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Demoted at work</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -742,10 +746,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Demoted at work</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -756,11 +756,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Salmonella shamba</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -768,10 +772,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Salmonella shamba</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -782,11 +782,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
+        <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -794,9 +797,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -807,11 +807,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Sympathotonic orthostatic hypotension</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -819,10 +823,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Sympathotonic orthostatic hypotension</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -833,11 +833,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8DF92722-5B5F-4324-866E-0328D5EA4286" />
+        <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -845,9 +848,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -936,11 +936,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B" />
+        <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -948,9 +951,6 @@
                 <text>Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -961,11 +961,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Perineal incision</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20090204000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -973,10 +977,6 @@
                 <text>Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Perineal incision</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -987,11 +987,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Toxic plant</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -999,10 +1003,6 @@
                 <text>Significance : Minor - Episodicity : First - Ended on 16/12/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Toxic plant</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1013,11 +1013,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Angettes 75mg tablet</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1025,10 +1029,6 @@
                 <text>Significance : Minor - Episodicity : First - This is a problem based on a medication - no end</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Angettes 75mg tablet</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1039,11 +1039,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Toxic plant</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1051,10 +1055,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Toxic plant</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1065,11 +1065,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Angettes 75mg tablet</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1077,10 +1081,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Angettes 75mg tablet</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1091,11 +1091,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1103,9 +1106,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1149,11 +1149,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1161,10 +1165,6 @@
                 <text>Significance : Minor - Episodicity : First - This problem was created within a consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1175,11 +1175,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <code code="367391008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Malaise">
+    <originalText>Feels unwell</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1187,10 +1191,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="367391008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Malaise">
-    <originalText>Feels unwell</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1201,11 +1201,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B" />
+        <code code="164045002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - eye movements normal">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1213,9 +1216,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="164045002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - eye movements normal">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1226,11 +1226,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1238,10 +1242,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1318,11 +1318,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Nuchal pain</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1330,10 +1334,6 @@
                 <text>Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1344,11 +1344,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Nuchal pain</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100104000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1356,10 +1360,6 @@
                 <text>Significance : Minor - Episodicity : First - Ended on 27/05/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1403,11 +1403,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Demoted at work</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307150200"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1415,10 +1419,6 @@
                 <text>This is the same code as an existing code linked to a problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Demoted at work</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1462,11 +1462,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Breath smells unpleasant</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307151300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1474,10 +1478,6 @@
                 <text>This is the note to the problem linked &apos;Breath smells unpleasant&apos;</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Breath smells unpleasant</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1680,11 +1680,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Keeps pets</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307154400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1692,10 +1696,6 @@
                 <text>This is the auto consultation note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Keeps pets</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1706,11 +1706,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00" />
+        <code code="509341000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Petit-mal epilepsy">
+    <originalText>Petit mal (minor) epilepsy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307154400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1718,10 +1722,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="509341000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Petit-mal epilepsy">
-    <originalText>Petit mal (minor) epilepsy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1933,11 +1933,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Oesophageal brushings sample</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307160100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1945,10 +1949,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Oesophageal brushings sample</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1959,11 +1959,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Result comments</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307160100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1971,10 +1975,6 @@
                 <text>This is the microbiology result</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Result comments</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2211,11 +2211,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Restlessness and agitation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2223,10 +2227,6 @@
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2237,11 +2237,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Restlessness and agitation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2249,10 +2253,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2263,22 +2263,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Heart rate</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
         <value xsi:type="PQ" value="34.000" unit="1"><translation value="34.000"><originalText>Beats</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>and</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Heart rate</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2289,11 +2289,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
+        <code code="163074001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - heart sounds normal">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2301,9 +2304,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163074001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - heart sounds normal">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2314,11 +2314,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B" />
+        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
+    <originalText>Tired all the time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2326,10 +2330,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
-    <originalText>Tired all the time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2386,11 +2386,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
+        <code code="14304000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Disorder of thyroid gland">
+    <originalText>Disorder of thyroid gland</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2398,10 +2402,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="14304000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Disorder of thyroid gland">
-    <originalText>Disorder of thyroid gland</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2445,11 +2445,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FH: Atrial Septum Defect</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307162900"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2457,10 +2461,6 @@
                 <text>This is the FH as a problem member</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FH: Atrial Septum Defect</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2575,11 +2575,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Examination of eye</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2587,10 +2591,6 @@
                 <text>Blah opthalmology comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Examination of eye</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2601,11 +2601,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Cataract extractions</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2613,10 +2617,6 @@
                 <text>Side: Left</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Cataract extractions</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2627,11 +2627,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0" />
+        <code code="162811006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - cataract present">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2639,9 +2642,6 @@
                 <text>Side: Right</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="162811006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - cataract present">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2652,11 +2652,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Screened By Hospital Clinic</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2664,10 +2668,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Screened By Hospital Clinic</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2678,11 +2678,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Digital Fundus Camera</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2690,10 +2694,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Digital Fundus Camera</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2704,11 +2704,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Photography (Dilated)</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2716,10 +2720,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Photography (Dilated)</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2763,12 +2763,16 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Alcohol units</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307165400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
         <value xsi:type="PQ" value="13.000" unit="1"><translation value="13.000"><originalText>{units}/wk</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2776,10 +2780,6 @@
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>< 21.000 {units}/wk</text><value></value></referenceInterpretationRange></referenceRange>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Alcohol units</originalText>
-</code>
-        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2900,11 +2900,14 @@ Sent: 07 Mar 2011 16:58</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
+        <code code="394995008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital prescription">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2916,9 +2919,6 @@ Script notes: script notes
 Administrative notes: blah notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="394995008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital prescription">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2962,11 +2962,15 @@ Administrative notes: blah notes</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Harmful substance use</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2974,10 +2978,6 @@ Administrative notes: blah notes</text>
                 <text>Alcohol - Spirits. Used 2-6 days per week. (Primary) Route=Smoke, Age first use=12 years</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Harmful substance use</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3021,11 +3021,15 @@ Administrative notes: blah notes</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Immunisation consent given</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3033,10 +3037,6 @@ Administrative notes: blah notes</text>
                 <text>Consent: ACT-HIB DTP</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Immunisation consent given</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3047,11 +3047,15 @@ Administrative notes: blah notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Immunisation consent not given</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3059,10 +3063,6 @@ Administrative notes: blah notes</text>
                 <text>Refusal: BCG. Immunisation: Tuberculosis (BCG) vaccination</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Immunisation consent not given</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3073,11 +3073,15 @@ Administrative notes: blah notes</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Agrippal S1 1. Agrippal S1 1</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3088,10 +3092,6 @@ Dosage: 0.5 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Agrippal S1 1. Agrippal S1 1</originalText>
-</code>
-        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3101,11 +3101,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>HNIG 1</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3119,10 +3123,6 @@ Notes: hhhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>HNIG 1</originalText>
-</code>
-        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3132,11 +3132,15 @@ Notes: hhhhh</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Almevax 1. Almevax 1</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3146,10 +3150,6 @@ Batch No: hh
 Dosage: 0.5 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Almevax 1. Almevax 1</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3193,11 +3193,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Restlessness and agitation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3205,10 +3209,6 @@ Dosage: 0.5 ml</text>
                 <text>(Ongoing Episode). This is also linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3252,11 +3252,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Hairy ear</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3264,10 +3268,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First - This is exacerbation level two</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Hairy ear</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3278,11 +3278,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
+        <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
+    <originalText>Cognitive - behaviour therapy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3290,10 +3294,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First - Ended on 08/03/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
-    <originalText>Cognitive - behaviour therapy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3304,11 +3304,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Habitual pulling own hair</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3316,10 +3320,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Habitual pulling own hair</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3330,11 +3330,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Corneal specular microscopy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3342,10 +3346,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Corneal specular microscopy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3356,11 +3356,14 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3C79FB75-82F0-4A37-BA9D-2C897B8885D0" />
+        <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3368,9 +3371,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First - This is exacerbation level one</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3381,11 +3381,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Habitual pulling own hair</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3393,10 +3397,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Habitual pulling own hair</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3407,11 +3407,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92" />
+        <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
+    <originalText>Cognitive - behaviour therapy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3419,10 +3423,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
-    <originalText>Cognitive - behaviour therapy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3433,11 +3433,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Hairy ear</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3445,10 +3449,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Hairy ear</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3459,11 +3459,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Corneal specular microscopy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3471,10 +3475,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Corneal specular microscopy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3485,11 +3485,14 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
+        <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3497,9 +3500,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3543,11 +3543,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Restlessness and agitation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308122600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3555,10 +3559,6 @@ Dosage: 0.5 ml</text>
                 <text>(Ongoing Episode)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3602,11 +3602,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Restlessness and agitation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110308123100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3614,10 +3618,6 @@ Dosage: 0.5 ml</text>
                 <text>(Ongoing Episode). This is another entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3661,11 +3661,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Nuchal pain</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110609091400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3673,10 +3677,6 @@ Dosage: 0.5 ml</text>
                 <text>(Severity: Minor). This is another one but noty explicitly linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3720,11 +3720,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Bite of ferret</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110902"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3732,10 +3736,6 @@ Dosage: 0.5 ml</text>
                 <text>Significance : Minor - Episodicity : First - This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Bite of ferret</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3746,11 +3746,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Flexible sigmoidoscope</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110902160300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3758,10 +3762,6 @@ Dosage: 0.5 ml</text>
                 <text>This is problem linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Flexible sigmoidoscope</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3772,11 +3772,15 @@ Dosage: 0.5 ml</text>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Bite of ferret</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110902160300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3784,10 +3788,6 @@ Dosage: 0.5 ml</text>
                 <text>This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Bite of ferret</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3831,11 +3831,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63" />
+        <code code="75053002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Kawasaki disease">
+    <originalText>Kawasaki&apos;s disease</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110902160900"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3843,10 +3847,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="75053002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Kawasaki disease">
-    <originalText>Kawasaki&apos;s disease</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5642,11 +5642,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201106"/>
         </effectiveTime>
         <availabilityTime value="20201106095918"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -5654,10 +5658,6 @@ Dosage: 0.5 ml</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5741,11 +5741,15 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Full blood count</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -5755,10 +5759,6 @@ cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Full blood count</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5800,22 +5800,22 @@ red blood cell seen, Note low platelets</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D" />
+        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
+    <originalText>Mean cell volume</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
-    <originalText>Mean cell volume</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5857,12 +5857,16 @@ red blood cell seen, Note low platelets</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
+        <code code="364712009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Laboratory test observable">
+    <originalText>Full blood count; Plasma viscosity</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         
+        <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -5871,10 +5875,6 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
-        <code code="364712009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Laboratory test observable">
-    <originalText>Full blood count; Plasma viscosity</originalText>
-</code>
-        <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5915,21 +5915,21 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F4E72E8A-13BD-4C83-A448-32718731EC94" />
+        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5971,22 +5971,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Eosinophil count - observation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Eosinophil count - observation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6028,22 +6028,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="155DFA49-019C-47F0-9DDE-EA68774988B2" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Haemoglobin concentration</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Haemoglobin concentration</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6085,21 +6085,21 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
+        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>Unknown UoM</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6141,21 +6141,21 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
+        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6197,22 +6197,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
+        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
+    <originalText>Mean cell haemoglobin</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
-    <originalText>Mean cell haemoglobin</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6254,22 +6254,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Mean cell haemoglobin concentration</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Mean cell haemoglobin concentration</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6311,22 +6311,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Monocyte count - observation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Monocyte count - observation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6368,21 +6368,21 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
+        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6424,22 +6424,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4B331DB8-AC77-4438-A646-56E500E73885" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Platelet count - observation</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Platelet count - observation</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6481,22 +6481,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Red blood cell count</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Red blood cell count</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6538,22 +6538,22 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="692FAEB8-5071-400B-B689-689F871F58DE" />
+        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
+    <originalText>Total white blood count</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
-    <originalText>Total white blood count</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6595,21 +6595,21 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
+        <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>mPas</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
