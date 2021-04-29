@@ -8368,12 +8368,12 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="test-id-3" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20300225"/>
         </effectiveTime>
         <availabilityTime value="20201026115836"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </PlanStatement>
 </component>
     </ehrComposition>
