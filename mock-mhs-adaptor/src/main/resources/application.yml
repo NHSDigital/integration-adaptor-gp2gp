@@ -1,6 +1,13 @@
 server:
   port: ${MOCK_MHS_SERVER_PORT:8081}
 
+logging:
+  level:
+    uk:
+      nhs:
+        adaptors:
+          mockmhsservice: DEBUG
+
 management:
   endpoints:
     web:

@@ -16444,6 +16444,63 @@
                     }
                 ]
             }
+        },
+        {
+            "fullUrl": "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/DocumentReference/27863182736",
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "27863182736",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+                    ]
+                },
+                "masterIdentifier": {
+                    "system": "LocalSystem/1",
+                    "value": "bb2374e2-dde2-11e9-9d36-2a2ae2dbcce4"
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb237762-dde2-11e9-9d36-2a2ae2dbcce4"
+                    }
+                ],
+                "status": "current",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "824331000000106",
+                            "display": "Inpatient final discharge letter"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/2"
+                },
+                "created": "2019-06-24T09:35:00+11:00",
+                "indexed": "2019-07-02T09:43:41+11:00",
+                "author": [
+                    {
+                        "reference": "Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7"
+                    }
+                ],
+                "description": "Discharge Summary",
+                "content": [
+                    {
+                        "attachment": {
+                            "contentType": "application/msword",
+                            "url": "{{request.baseUrl}}/GP0001/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
+                            "size": 3654
+                        }
+                    }
+                ],
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/4"
+                    }
+                }
+            }
         }
     ]
 }
