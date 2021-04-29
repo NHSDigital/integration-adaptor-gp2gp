@@ -223,11 +223,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
+        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
+    <originalText>Current smoker</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -235,10 +239,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
-    <originalText>Current smoker</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -249,21 +249,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
+        <code code="160619003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rolls own cigarettes">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
         <value xsi:type="PQ" value="0.500" unit="1"><translation value="0.500"><originalText>oz/week</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160619003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rolls own cigarettes">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -274,21 +274,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
         <value xsi:type="PQ" value="350.000" unit="1"><translation value="350.000"><originalText>Cigarettes/day</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>That&apos;s some pretty heavy smoking</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="77176002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoker">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -299,11 +299,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <code code="225323000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation education">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -311,9 +314,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="225323000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation education">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -324,11 +324,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <code code="160616005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trying to give up smoking">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -336,9 +339,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160616005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trying to give up smoking">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -349,11 +349,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <code code="161077003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Father smokes">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -361,9 +364,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="161077003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Father smokes">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -374,11 +374,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <code code="161078008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mother smokes">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -386,9 +389,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="161078008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mother smokes">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -399,22 +399,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
+        <code code="160621008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-cigar smoker">
+    <originalText>Ex-cigar smoker</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>/day</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160621008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ex-cigar smoker">
-    <originalText>Ex-cigar smoker</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -425,11 +425,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="228377000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smokes drugs">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -437,9 +440,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="228377000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smokes drugs">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -450,11 +450,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5" />
+        <code code="401160008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation programme start date">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -462,9 +465,6 @@
                 <text>29th Aug 2009 (Hand entered date)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="401160008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation programme start date">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -475,11 +475,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
+        <code code="904231000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation counselling by telephone">
+    <originalText>Smoking cessation counselling by telephone</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="2009"/>
         </effectiveTime>
         <availabilityTime value="20100123123926"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -487,10 +491,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="904231000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking cessation counselling by telephone">
-    <originalText>Smoking cessation counselling by telephone</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -534,21 +534,21 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <code code="18491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak expiratory flow rate">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
         <value xsi:type="PQ" value="620.000" unit="1"><translation value="620.000"><originalText>L/min</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="18491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak expiratory flow rate">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -559,22 +559,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C" />
+        <code code="271306003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Best ever peak flow rate (respiratory)">
+    <originalText>Best ever peak flow rate</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
         <value xsi:type="PQ" value="645.000" unit="1"><translation value="645.000"><originalText>L/min</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="271306003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Best ever peak flow rate (respiratory)">
-    <originalText>Best ever peak flow rate</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -585,22 +585,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <code code="271508001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Expected peak flow rate (respiratory)">
+    <originalText>Predicted peak flow</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
         <value xsi:type="PQ" value="630.000" unit="1"><translation value="630.000"><originalText>L/min</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="271508001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Expected peak flow rate (respiratory)">
-    <originalText>Predicted peak flow</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -611,11 +611,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
+        <code code="170639000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak flow meter at home">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -623,9 +626,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="170639000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peak flow meter at home">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -636,11 +636,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <code code="170625000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inhaler technique - good">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -648,9 +651,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="170625000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inhaler technique - good">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -661,11 +661,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A" />
+        <code code="170636007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never disturbs sleep">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -673,9 +676,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="170636007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never disturbs sleep">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -686,11 +686,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
+        <code code="170658009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never restricts exercise">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118113800"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -698,9 +701,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="170658009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma never restricts exercise">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1069,11 +1069,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <code code="163106002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right posterior tibial pulse present">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1081,9 +1084,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163106002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right posterior tibial pulse present">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1094,11 +1094,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B" />
+        <code code="163119003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left posterior tibial pulse absent">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1106,9 +1109,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163119003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left posterior tibial pulse absent">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1119,11 +1119,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
+        <code code="163108001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right dorsalis pedis pulse present">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1131,9 +1134,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163108001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - right dorsalis pedis pulse present">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1144,11 +1144,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <code code="163121008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left dorsalis pedis absent">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1156,9 +1159,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163121008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="On examination - left dorsalis pedis absent">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1169,11 +1169,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594" />
+        <code code="416694004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot colour normal">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1181,9 +1184,6 @@
                 <text>This is right foot colour text note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="416694004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot colour normal">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1194,11 +1194,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="72DB5398-C825-4498-88CA-899A3653EC04" />
+        <code code="416317001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left foot colour abnormal">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1206,9 +1209,6 @@
                 <text>This is left foot colour text note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="416317001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left foot colour abnormal">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1219,11 +1219,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <code code="164615004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion hot">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1231,9 +1234,6 @@
                 <text>Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="164615004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion hot">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1244,11 +1244,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1" />
+        <code code="164612001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion cold">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1256,9 +1259,6 @@
                 <text>Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="164612001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - skin over lesion cold">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1269,11 +1269,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772" />
+        <code code="856521000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of right foot - triphasic">
+    <originalText>Doppler of right foot - triphasic</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1281,10 +1285,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="856521000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of right foot - triphasic">
-    <originalText>Doppler of right foot - triphasic</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1295,11 +1295,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355" />
+        <code code="856441000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of left foot - biphasic">
+    <originalText>Doppler of left foot - biphasic</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1307,10 +1311,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="856441000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Doppler of left foot - biphasic">
-    <originalText>Doppler of left foot - biphasic</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1321,22 +1321,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
+        <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
+    <originalText>Capillary refill time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114710"/>
         <value xsi:type="PQ" value="10.000" unit="1"><translation value="10.000"><originalText>s</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
-    <originalText>Capillary refill time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1347,22 +1347,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
+        <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
+    <originalText>Capillary refill time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
         <value xsi:type="PQ" value="15.000" unit="1"><translation value="15.000"><originalText>Banana</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="15527001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Capillary filling">
-    <originalText>Capillary refill time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1373,11 +1373,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>BOTH</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1385,10 +1389,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>BOTH</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1399,11 +1399,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>LEFT</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1411,10 +1415,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>LEFT</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1425,21 +1425,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
+        <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
         <value xsi:type="PQ" value="1.400" unit="1"><translation value="1.400"><originalText>m</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1450,21 +1450,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED" />
+        <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
         <value xsi:type="PQ" value="1.900" unit="1"><translation value="1.900"><originalText>m</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="252094004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Claudication distance">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1475,11 +1475,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
+        <code code="52598005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rest pain">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1487,9 +1490,6 @@
                 <text>Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="52598005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rest pain">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1500,11 +1500,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
+        <code code="81765008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No pain">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1512,9 +1515,6 @@
                 <text>Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="81765008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No pain">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1525,11 +1525,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
+        <code code="162781005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of ankles">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1537,9 +1540,6 @@
                 <text>Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="162781005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of ankles">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1550,11 +1550,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+        <code code="162783008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of legs">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1562,9 +1565,6 @@
                 <text>Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="162783008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - oedema of legs">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1575,11 +1575,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
+        <code code="857841000006108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Right foot monofilament 10g normal">
+    <originalText>Right foot monofilament 10g normal</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1587,10 +1591,6 @@
                 <text>This is some text 1</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="857841000006108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Right foot monofilament 10g normal">
-    <originalText>Right foot monofilament 10g normal</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1601,11 +1601,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9" />
+        <code code="857021000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Left foot monofilament 10g abnormal">
+    <originalText>Left foot monofilament 10g abnormal</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1613,10 +1617,6 @@
                 <text>This is some text 2</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="857021000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Left foot monofilament 10g abnormal">
-    <originalText>Left foot monofilament 10g abnormal</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1627,11 +1627,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+        <code code="407558007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Vibration sense of right foot absent">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1639,9 +1642,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="407558007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Vibration sense of right foot absent">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1652,11 +1652,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
+        <code code="395149007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - vibration sense left foot reduced">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1664,9 +1667,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="395149007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - vibration sense left foot reduced">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1677,11 +1677,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
+        <code code="6020002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tinea pedis">
+    <originalText>Athlete&apos;s foot</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1689,10 +1693,6 @@
                 <text>This is some text 12</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="6020002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tinea pedis">
-    <originalText>Athlete&apos;s foot</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1703,11 +1703,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="382E9F46-B7A6-4267-BC80-0AAD7E055D00" />
+        <code code="163683007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - gait">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1715,9 +1718,6 @@
                 <text>This is some text 13</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="163683007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - gait">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1728,11 +1728,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
+        <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1740,9 +1743,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1753,11 +1753,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="04AAA10E-3D26-4C86-8932-4BB384C94253" />
+        <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1765,9 +1768,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="63491006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Intermittent claudication">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1778,11 +1778,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
+        <code code="230572002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathy">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1790,9 +1793,6 @@
                 <text>This is some text 3</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="230572002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathy">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1803,11 +1803,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="82A39454-299F-432E-993E-5A6232B4E099" />
+        <code code="52897009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychogryposis">
+    <originalText>Onychogryphosis</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1815,10 +1819,6 @@
                 <text>This is some text 10</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="52897009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychogryposis">
-    <originalText>Onychogryphosis</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1829,11 +1829,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C" />
+        <code code="414941008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychomycosis">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1841,9 +1844,6 @@
                 <text>This is some text 11</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="414941008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Onychomycosis">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1854,11 +1854,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <code code="201250006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic ulcer diabetic foot">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1866,9 +1869,6 @@
                 <text>This is some text 4</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="201250006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic ulcer diabetic foot">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1879,11 +1879,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82" />
+        <code code="201251005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neuropathic diabetic ulcer - foot">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1891,9 +1894,6 @@
                 <text>This is some text 5</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="201251005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neuropathic diabetic ulcer - foot">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1904,11 +1904,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
+        <code code="201252003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed diabetic ulcer - foot">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1916,9 +1919,6 @@
                 <text>This is some text 6</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="201252003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed diabetic ulcer - foot">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1929,11 +1929,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CF670325-7982-46BA-9A52-85C3C78FE40A" />
+        <code code="238793001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic leg ulcer">
+    <originalText>Arterial leg ulcer</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1941,10 +1945,6 @@
                 <text>This is some text 7</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="238793001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic leg ulcer">
-    <originalText>Arterial leg ulcer</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1955,11 +1955,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C59316B2-2578-412C-8D00-5040C86BF306" />
+        <code code="238792006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed arteriovenous leg ulcer">
+    <originalText>Mixed venous and arterial leg ulcer</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1967,10 +1971,6 @@
                 <text>This is some text 8</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="238792006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mixed arteriovenous leg ulcer">
-    <originalText>Mixed venous and arterial leg ulcer</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1981,11 +1981,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
+        <code code="201724008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathic arthropathy">
+    <originalText>Diabetic Charcot&apos;s arthropathy</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -1993,10 +1997,6 @@
                 <text>This is some text 9</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="201724008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diabetic neuropathic arthropathy">
-    <originalText>Diabetic Charcot&apos;s arthropathy</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2007,11 +2007,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904" />
+        <code code="414911006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - right healed foot ulcer">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2019,9 +2022,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="414911006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - right healed foot ulcer">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2032,11 +2032,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED" />
+        <code code="414895002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - left healed foot ulcer">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2044,9 +2047,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="414895002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - left healed foot ulcer">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2057,11 +2057,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7CB9F236-03CB-4AAD-BB0D-534201961315" />
+        <code code="308103003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot deformity">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2069,9 +2072,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="308103003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right foot deformity">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2082,11 +2082,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E" />
+        <code code="414900003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - No left foot deformity">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2094,9 +2097,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="414900003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - No left foot deformity">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2107,11 +2107,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
+        <code code="394671009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right diabetic foot at low risk">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2119,9 +2122,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="394671009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Right diabetic foot at low risk">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2132,11 +2132,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1A4049B6-A065-4CB1-B222-77FBE702EA14" />
+        <code code="394676004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left diabetic foot at high risk">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2144,9 +2147,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="394676004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - Left diabetic foot at high risk">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2157,11 +2157,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
+        <code code="265739006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation through metatarsal bones">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2169,9 +2172,6 @@
                 <text>Right Leg</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="265739006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation through metatarsal bones">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2182,11 +2182,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08" />
+        <code code="88312006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation of leg through tibia and fibula">
+    <originalText>Amputation below-knee</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2194,10 +2198,6 @@
                 <text>Left Leg</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="88312006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amputation of leg through tibia and fibula">
-    <originalText>Amputation below-knee</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2208,11 +2208,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4" />
+        <code code="183844002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for vascular studies">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2220,9 +2223,6 @@
                 <text>This is some text 20</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="183844002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for vascular studies">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2280,11 +2280,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB" />
+        <code code="266917007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trivial drinker - &lt;1u/day">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2292,9 +2295,6 @@
                 <text>This is some text following the selection of Trivial Drinker</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="266917007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trivial drinker - &lt;1u/day">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2305,11 +2305,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
+        <code code="160575005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Light drinker - 1-2u/day">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2317,9 +2320,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160575005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Light drinker - 1-2u/day">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2330,11 +2330,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4" />
+        <code code="160576006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Moderate drinker - 3-6u/day">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2342,9 +2345,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160576006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Moderate drinker - 3-6u/day">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2355,11 +2355,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
+        <code code="160577002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heavy drinker - 7-9u/day">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2367,9 +2370,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160577002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heavy drinker - 7-9u/day">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2380,11 +2380,15 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B" />
+        <code code="281078001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Education about alcohol consumption">
+    <originalText>Advice relating to alcohol consumption</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2392,10 +2396,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="281078001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Education about alcohol consumption">
-    <originalText>Advice relating to alcohol consumption</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2406,11 +2406,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
+        <code code="160588008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirit drinker">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2418,9 +2421,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160588008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Spirit drinker">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2431,11 +2431,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14" />
+        <code code="160589000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beer drinker">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2443,9 +2446,6 @@
                 <text>These are some notes on &quot;Beer Drinker&quot;</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160589000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beer drinker">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2456,11 +2456,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD" />
+        <code code="160590009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Drinks beer and spirits">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2468,9 +2471,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160590009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Drinks beer and spirits">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2481,11 +2481,14 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC" />
+        <code code="160592001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake above recommended sensible limits">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2493,9 +2496,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160592001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake above recommended sensible limits">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2506,21 +2506,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
+        <code code="442547005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Number of alcohol units consumed on heaviest drinking day">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
         <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>/day</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="442547005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Number of alcohol units consumed on heaviest drinking day">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2531,21 +2531,21 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385" />
+        <code code="1082641000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol units consumed per week">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123144"/>
         <value xsi:type="PQ" value="150.000" unit="1"><translation value="150.000"><originalText>U/week</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1082641000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol units consumed per week">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2556,22 +2556,22 @@
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
+        <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
+    <originalText>Alcohol intake</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123122700"/>
         </effectiveTime>
         <availabilityTime value="20100123123145"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>U/week</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
-    <originalText>Alcohol intake</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2615,11 +2615,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
+        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
+    <originalText>Happy puppet syndrome</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2627,10 +2631,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2712,11 +2712,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230" />
+        <code code="265157000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total prosthetic replacement of hip joint using cement">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110104"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2724,9 +2727,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="265157000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total prosthetic replacement of hip joint using cement">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2768,11 +2768,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Some freetext</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2780,10 +2784,6 @@
                 <text>This is total freetext madness</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Some freetext</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2825,11 +2825,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B" />
+        <code code="228279004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Very heavy drinker">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2837,9 +2840,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="228279004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Very heavy drinker">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2881,11 +2881,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Option C</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2893,10 +2897,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Option C</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2938,11 +2938,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Option A</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -2950,10 +2954,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Option A</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2995,11 +2995,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
+        <code code="165127005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Surgical biopsy - administration">
+    <originalText>Surgical biopsy (admin) NOS</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3007,10 +3011,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="165127005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Surgical biopsy - administration">
-    <originalText>Surgical biopsy (admin) NOS</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3052,11 +3052,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
+        <code code="265170009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total prosthetic replacement of knee joint using cement">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3064,9 +3067,6 @@
                 <text>cementing the agreement</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="265170009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total prosthetic replacement of knee joint using cement">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3108,11 +3108,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Comments</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3120,10 +3124,6 @@
                 <text>Aaaargh</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Comments</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3165,11 +3165,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D" />
+        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
+    <originalText>Tired all the time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20110111153300"/>
         </effectiveTime>
         <availabilityTime value="20110111153927"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3177,10 +3181,6 @@
                 <text>Notes on the tired all the time entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
-    <originalText>Tired all the time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3222,11 +3222,14 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A" />
+        <code code="270426007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Did not attend - no reason">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20160324"/>
         </effectiveTime>
         <availabilityTime value="20160324080039"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3234,9 +3237,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="270426007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Did not attend - no reason">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3278,11 +3278,15 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026122505"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3290,10 +3294,6 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">

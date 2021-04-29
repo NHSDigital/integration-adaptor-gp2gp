@@ -1,11 +1,13 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714163251"/>
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -13,8 +15,6 @@
                 <text>Component(s): [Quantity Value: 7.2 g/dl] Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         
     </ObservationStatement>
 </component>

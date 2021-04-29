@@ -281,11 +281,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -293,9 +296,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -306,11 +306,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -318,9 +321,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -331,11 +331,15 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
+    <originalText>Irregular menstrual cycle</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -343,10 +347,6 @@ The line below contains special characters...
                 <text>These are some notes !&quot;£$%^&amp;*()</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
-    <originalText>Irregular menstrual cycle</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -369,11 +369,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -381,9 +384,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -394,11 +394,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -406,9 +409,6 @@ The line below contains special characters...
                 <text>Family member : Mother</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -419,11 +419,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -431,9 +434,6 @@ The line below contains special characters...
                 <text>Family member : Father - note - this is obviously wrong?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -648,11 +648,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
+        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714180700"/>
         </effectiveTime>
         <availabilityTime value="20100714163232"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -660,9 +663,6 @@ The line below contains special characters...
                 <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8096,11 +8096,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
+        <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="19880101"/>
         </effectiveTime>
         <availabilityTime value="20100113154141"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8108,9 +8111,6 @@ The line below contains special characters...
                 <text>Engraver (entry added 13/1/2010, but marked as 01/1/1988 as date of entry)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8152,11 +8152,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
+        <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8164,9 +8167,6 @@ The line below contains special characters...
                 <text>Family member : Uncle</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8208,22 +8208,22 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
+        <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic blood pressure</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mmHg</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic blood pressure</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8265,22 +8265,22 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
+        <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic blood pressure</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mmHg</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic blood pressure</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8322,11 +8322,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
+        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
+    <originalText>Heart attack</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145739"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8334,10 +8338,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8379,11 +8379,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
+        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
+    <originalText>Happy puppet syndrome</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145725"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8391,10 +8395,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - Happy Puppet</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8436,11 +8436,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
+        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
+    <originalText>Allergic rhinitis due to pollens</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113114111"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8448,10 +8452,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
-    <originalText>Allergic rhinitis due to pollens</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8493,11 +8493,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100609160800"/>
         </effectiveTime>
         <availabilityTime value="20100609160409"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8505,9 +8508,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8549,11 +8549,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
+        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163251"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8561,9 +8564,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8605,11 +8605,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
+    <originalText>Tired all the time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163124"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8617,10 +8621,6 @@ The line below contains special characters...
                 <text>This is descriptive text `¬¦!&quot;£$%^&amp;*()-_+={}[]~#@&apos;:;&lt;,|\&gt;./?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
-    <originalText>Tired all the time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8741,11 +8741,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026115854"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8753,10 +8757,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
