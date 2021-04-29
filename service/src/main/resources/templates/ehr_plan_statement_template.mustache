@@ -1,16 +1,16 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="{{id}}" />
+        {{{code}}}
+        {{#text}}
+        <text>
+            {{.}}
+        </text>
+        {{/text}}
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center {{{effectiveTime}}}/>
         </effectiveTime>
         {{#availabilityTime}}<availabilityTime value="{{availabilityTime}}"/>{{/availabilityTime}}
-        {{#text}}
-            <text>
-            {{text}}
-            </text>
-        {{/text}}
-        {{{code}}}
     </PlanStatement>
 </component>

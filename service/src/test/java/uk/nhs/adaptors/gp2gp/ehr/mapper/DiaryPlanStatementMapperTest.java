@@ -117,7 +117,7 @@ public class DiaryPlanStatementMapperTest {
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
         String mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, false);
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
     private static Stream<Arguments> testData() {

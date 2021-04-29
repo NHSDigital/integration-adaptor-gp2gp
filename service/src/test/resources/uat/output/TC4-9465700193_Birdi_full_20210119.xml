@@ -1913,13 +1913,13 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20311220"/>
         </effectiveTime>
         <availabilityTime value="20201222131511"/>
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>

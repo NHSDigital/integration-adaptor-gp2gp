@@ -319,17 +319,17 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <code code="285365001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in toe">
+    <originalText>Toe pain</originalText>
+</code>
+        <text>
+            Part of a consultation
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
         <availabilityTime value="20201117132149"/>
-            <text>
-            Part of a consultation
-            </text>
-        <code code="285365001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in toe">
-    <originalText>Toe pain</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -437,16 +437,16 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
+</code>
+        <text>
+            Added from a problem within a consultation
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20221117"/>
         </effectiveTime>
         <availabilityTime value="20201117133032"/>
-            <text>
-            Added from a problem within a consultation
-            </text>
-        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
-</code>
     </PlanStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -816,14 +816,14 @@
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="8DF92722-5B5F-4324-866E-0328D5EA4286" />
+        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
+    <originalText>Medication review</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20211118"/>
         </effectiveTime>
         <availabilityTime value="20201117133617"/>
-        <code code="182836005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Review of medication">
-    <originalText>Medication review</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6516,13 +6516,13 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="F4E72E8A-13BD-4C83-A448-32718731EC94" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="19770410"/>
         </effectiveTime>
         <availabilityTime value="20201015110531"/>
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6558,17 +6558,17 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45" />
+        <code code="1893261000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Back area trigger point">
+    <originalText>Back area trigger point</originalText>
+</code>
+        <text>
+            Past dated diary entry - emis code
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20181117"/>
         </effectiveTime>
         <availabilityTime value="20201117130146"/>
-            <text>
-            Past dated diary entry - emis code
-            </text>
-        <code code="1893261000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Back area trigger point">
-    <originalText>Back area trigger point</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6604,13 +6604,13 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="155DFA49-019C-47F0-9DDE-EA68774988B2" />
+        <code code="385954004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Foot care assessment">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20191117"/>
         </effectiveTime>
         <availabilityTime value="20201117125822"/>
-        <code code="385954004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Foot care assessment">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6646,13 +6646,13 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
+        <code code="134186004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Over 75 health check">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20210410"/>
         </effectiveTime>
         <availabilityTime value="20201015110532"/>
-        <code code="134186004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Over 75 health check">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6688,16 +6688,16 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
+        <code code="279039007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Low back pain">
+</code>
+        <text>
+            Current dated diary entry - snomed code
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20301117"/>
         </effectiveTime>
         <availabilityTime value="20201117130055"/>
-            <text>
-            Current dated diary entry - snomed code
-            </text>
-        <code code="279039007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Low back pain">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6733,14 +6733,14 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
+        <code code="904841000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dermatology referral">
+    <originalText>Dermatology referral</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20311117"/>
         </effectiveTime>
         <availabilityTime value="20201117130356"/>
-        <code code="904841000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dermatology referral">
-    <originalText>Dermatology referral</originalText>
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6776,16 +6776,16 @@
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
+        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
+</code>
+        <text>
+            Diary entry created by Patient age of 99 years - special characters!&apos;£$%^7*()-={}][|&quot;:/.,
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20450410"/>
         </effectiveTime>
         <availabilityTime value="20201117130722"/>
-            <text>
-            Diary entry created by Patient age of 99 years - special characters!&apos;£$%^7*()-={}][|&quot;:/.,
-            </text>
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
