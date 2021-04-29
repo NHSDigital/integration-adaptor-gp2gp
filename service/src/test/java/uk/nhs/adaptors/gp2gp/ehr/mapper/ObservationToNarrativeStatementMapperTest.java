@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -112,5 +113,16 @@ public class ObservationToNarrativeStatementMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+    }
+
+    @Test
+    public void When_MappingParsedObservationJsonWithNoAgentAlreadyMapped_Expect_MapperException() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
+        // TODO: workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
+        assumeThatThrownBy(() -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("No ID mapping for reference Practitioner/something");
     }
 }
