@@ -705,10 +705,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20181027"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -721,12 +721,13 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20181027"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20181027"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
@@ -737,7 +738,6 @@ The line below contains special characters...
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -786,10 +786,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -802,24 +802,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -868,10 +868,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20181027"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -884,12 +884,13 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20181027"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20181027"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>tablet</originalText>
@@ -900,7 +901,6 @@ The line below contains special characters...
                         <text>Expected Supply Duration: 1 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -949,10 +949,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100114"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -965,24 +965,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 1 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 1 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1031,10 +1031,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100113"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1047,12 +1047,13 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20100113"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20100113"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
@@ -1063,7 +1064,6 @@ The line below contains special characters...
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1112,10 +1112,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1128,24 +1128,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1194,10 +1194,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1210,24 +1210,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1276,10 +1276,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1292,24 +1292,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1358,10 +1358,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1374,24 +1374,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1440,10 +1440,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1456,24 +1456,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1522,10 +1522,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1538,24 +1538,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1604,10 +1604,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1620,24 +1620,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1686,10 +1686,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1702,24 +1702,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1768,10 +1768,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1784,24 +1784,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F80F3DA3-0728-4880-BE71-C71251A49D08"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1850,10 +1850,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1866,24 +1866,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1932,10 +1932,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1948,24 +1948,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2014,10 +2014,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2030,24 +2030,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2096,10 +2096,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2112,24 +2112,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2178,10 +2178,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2194,24 +2194,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2260,10 +2260,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2276,24 +2276,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2342,10 +2342,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2358,24 +2358,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="71F21980-0BAB-4831-944C-365717037140"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2424,10 +2424,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2440,24 +2440,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2506,10 +2506,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2522,24 +2522,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2588,10 +2588,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2604,24 +2604,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2670,10 +2670,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2686,24 +2686,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2752,10 +2752,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2768,24 +2768,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2834,10 +2834,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2850,24 +2850,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2916,10 +2916,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -2932,24 +2932,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2998,10 +2998,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3014,24 +3014,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3080,10 +3080,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3096,24 +3096,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3162,10 +3162,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3178,24 +3178,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3244,10 +3244,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3260,24 +3260,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3326,10 +3326,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3342,24 +3342,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3408,10 +3408,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3424,24 +3424,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="10720133-30C3-4145-9184-8713284C5A90"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3490,10 +3490,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3506,24 +3506,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3572,10 +3572,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3588,24 +3588,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3654,10 +3654,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3670,24 +3670,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3736,10 +3736,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3752,24 +3752,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3818,10 +3818,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100226"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3834,12 +3834,13 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20100226"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20100226"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
@@ -3850,7 +3851,6 @@ The line below contains special characters...
                         <text>Expected Supply Duration: 1825 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3899,10 +3899,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20150112"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3915,24 +3915,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 1825 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 1825 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3981,10 +3981,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100113"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3997,12 +3997,13 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20100113"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20100113"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
@@ -4013,7 +4014,6 @@ The line below contains special characters...
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4062,10 +4062,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4078,24 +4078,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4144,10 +4144,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4160,24 +4160,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4226,10 +4226,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4242,24 +4242,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4308,10 +4308,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7314452F-9848-403F-8684-D7E0B2163F88"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4324,24 +4324,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4390,10 +4390,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4406,24 +4406,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4472,10 +4472,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4488,24 +4488,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4554,10 +4554,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4570,24 +4570,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4636,10 +4636,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4652,24 +4652,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4718,10 +4718,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4734,24 +4734,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4800,10 +4800,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4816,24 +4816,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4882,10 +4882,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4898,24 +4898,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4964,10 +4964,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4980,24 +4980,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5046,10 +5046,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5062,24 +5062,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5128,10 +5128,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5144,24 +5144,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5210,10 +5210,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="452AFD1A-B615-4E2C-A733-544A3426DA24"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5226,24 +5226,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5292,10 +5292,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20101117"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5308,28 +5308,28 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20101117"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20101117"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5378,10 +5378,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5394,24 +5394,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5460,10 +5460,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100210"/>
         <effectiveTime>
             <low value="20100210"/><high value="20100310"/>
         </effectiveTime>
+        <availabilityTime value="20100210"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5476,24 +5476,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="300330A9-5389-444B-A23E-6402355AB06C"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100210"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5542,10 +5542,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100310"/>
         <effectiveTime>
             <low value="20100310"/><high value="20100407"/>
         </effectiveTime>
+        <availabilityTime value="20100310"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5558,24 +5558,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100310"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5624,10 +5624,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100407"/>
         <effectiveTime>
             <low value="20100407"/><high value="20100505"/>
         </effectiveTime>
+        <availabilityTime value="20100407"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5640,24 +5640,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100407"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5706,10 +5706,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B16209E7-8BA5-4533-B801-8A82645C6D04"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100505"/>
         <effectiveTime>
             <low value="20100505"/><high value="20100602"/>
         </effectiveTime>
+        <availabilityTime value="20100505"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5722,24 +5722,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100505"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5788,10 +5788,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100602"/>
         <effectiveTime>
             <low value="20100602"/><high value="20100630"/>
         </effectiveTime>
+        <availabilityTime value="20100602"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5804,24 +5804,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100602"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5870,10 +5870,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100630"/>
         <effectiveTime>
             <low value="20100630"/><high value="20100728"/>
         </effectiveTime>
+        <availabilityTime value="20100630"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5886,24 +5886,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100630"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -5952,10 +5952,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100728"/>
         <effectiveTime>
             <low value="20100728"/><high value="20100825"/>
         </effectiveTime>
+        <availabilityTime value="20100728"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -5968,24 +5968,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="9D3A6496-5CFB-4337-9F66-47315F1A8F90"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100728"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6034,10 +6034,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100825"/>
         <effectiveTime>
             <low value="20100825"/><high value="20100922"/>
         </effectiveTime>
+        <availabilityTime value="20100825"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6050,24 +6050,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100825"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6116,10 +6116,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100922"/>
         <effectiveTime>
             <low value="20100922"/><high value="20101020"/>
         </effectiveTime>
+        <availabilityTime value="20100922"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6132,24 +6132,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100922"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6198,10 +6198,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20101020"/>
         <effectiveTime>
             <low value="20101020"/><high value="20101117"/>
         </effectiveTime>
+        <availabilityTime value="20101020"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6214,24 +6214,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="A2D4EEF1-8B00-40EC-8C0F-F6884052927A"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101020"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6280,10 +6280,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F4E72E8A-13BD-4C83-A448-32718731EC94"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100602"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6296,28 +6296,28 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100113"/><high value="20100602"/>
+                    </effectiveTime>
                 <availabilityTime value="20100113"/>
-                <effectiveTime>
-                    <low value="20100113"/><high value="20100602"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6366,10 +6366,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="155DFA49-019C-47F0-9DDE-EA68774988B2"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100113"/>
         <effectiveTime>
             <low value="20100113"/><high value="20100210"/>
         </effectiveTime>
+        <availabilityTime value="20100113"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6382,24 +6382,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="411235D8-7D97-4319-BE0B-25C0E7D55C55"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100113"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6448,10 +6448,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100210"/>
         <effectiveTime>
             <low value="20100210"/><high value="20100310"/>
         </effectiveTime>
+        <availabilityTime value="20100210"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6464,24 +6464,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="481EC303-CEC9-48AD-85E1-867936431C48"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100210"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6530,10 +6530,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100310"/>
         <effectiveTime>
             <low value="20100310"/><high value="20100407"/>
         </effectiveTime>
+        <availabilityTime value="20100310"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6546,24 +6546,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100310"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6612,10 +6612,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100407"/>
         <effectiveTime>
             <low value="20100407"/><high value="20100505"/>
         </effectiveTime>
+        <availabilityTime value="20100407"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6628,24 +6628,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100407"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6694,10 +6694,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100505"/>
         <effectiveTime>
             <low value="20100505"/><high value="20100602"/>
         </effectiveTime>
+        <availabilityTime value="20100505"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6710,24 +6710,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="72585281-F548-4159-8AAE-A372CFC2567E"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100505"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6776,10 +6776,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100226"/>
         <effectiveTime>
             <low value="20100226"/><high value="20181027"/>
         </effectiveTime>
+        <availabilityTime value="20100226"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6792,28 +6792,28 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20100226"/><high value="20181027"/>
+                    </effectiveTime>
                 <availabilityTime value="20100226"/>
-                <effectiveTime>
-                    <low value="20100226"/><high value="20181027"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 1825 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6862,10 +6862,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A555DD62-B352-45A2-A601-C21F28340B1D"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100226"/>
         <effectiveTime>
             <low value="20100226"/><high value="20150225"/>
         </effectiveTime>
+        <availabilityTime value="20100226"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6878,24 +6878,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="EFD99868-BD82-4213-9586-11755332A60D"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100226"/>
                 <quantity value="1" unit="1">
                     <translation value="1">
                         <originalText>device</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 1825 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 1825 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -6944,10 +6944,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9"/>
         <statusCode code="ACTIVE"/>
-        <availabilityTime value="20100602"/>
         <effectiveTime>
             <low value="20100602"/>
         </effectiveTime>
+        <availabilityTime value="20100602"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -6960,28 +6960,28 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53"/>
-                <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                    <effectiveTime>
+                        <low value="20100602"/>
+                    </effectiveTime>
                 <availabilityTime value="20100602"/>
-                <effectiveTime>
-                    <low value="20100602"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -7030,10 +7030,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100602"/>
         <effectiveTime>
             <low value="20100602"/><high value="20100630"/>
         </effectiveTime>
+        <availabilityTime value="20100602"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -7046,24 +7046,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100602"/>
                 <quantity value="30" unit="1">
                     <translation value="30">
                         <originalText>gram</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -7112,10 +7112,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394"/>
         <statusCode code="ACTIVE"/>
-        <availabilityTime value="20101117"/>
         <effectiveTime>
             <low value="20101117"/>
         </effectiveTime>
+        <availabilityTime value="20101117"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -7128,28 +7128,28 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
-                <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                    <effectiveTime>
+                        <low value="20101117"/>
+                    </effectiveTime>
                 <availabilityTime value="20101117"/>
-                <effectiveTime>
-                    <low value="20101117"/>
-                </effectiveTime>
+                <repeatNumber value="1"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
+                        </priorMedicationRef>
+                    </predecessor>
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="1"/>
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
-                    </priorMedicationRef>
-                </predecessor>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -7198,10 +7198,10 @@ The line below contains special characters...
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20101117"/>
         <effectiveTime>
             <low value="20101117"/><high value="20101215"/>
         </effectiveTime>
+        <availabilityTime value="20101117"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -7214,24 +7214,24 @@ The line below contains special characters...
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101117"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablet</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Expected Supply Duration: 28 day</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Expected Supply Duration: 28 day</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -8798,13 +8798,13 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20300225"/>
         </effectiveTime>
         <availabilityTime value="20201026115836"/>
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
     </PlanStatement>
 </component>
     </ehrComposition>
