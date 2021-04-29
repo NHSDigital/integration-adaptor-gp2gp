@@ -1,12 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.Optional;
-import java.util.stream.Stream;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -21,11 +15,21 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
@@ -41,6 +45,7 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA = TEST_DIRECTORY + "input-bundle-6.json";
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE = TEST_DIRECTORY + "input-bundle-7.json";
     private static final String INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY = TEST_DIRECTORY + "input-bundle-8.json";
+    private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -59,10 +64,31 @@ public class EncounterComponentsMapperTest {
         messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
 
         ParticipantMapper participantMapper = new ParticipantMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+
+        AllergyStructureMapper allergyStructureMapper
+            = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
+            messageContext,
+            randomIdGeneratorService,
+            structuredObservationValueMapper,
+            codeableConceptCdMapper
+        );
+        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
+            randomIdGeneratorService,
+            codeableConceptCdMapper,
+            participantMapper
+        );
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+        MedicationStatementMapper medicationStatementMapper
+            = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
-        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
@@ -71,24 +97,27 @@ public class EncounterComponentsMapperTest {
             participantMapper);
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
-        ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
-            randomIdGeneratorService,
-            codeableConceptCdMapper,
-            participantMapper);
-        BloodPressureMapper bloodPressureMapper = new BloodPressureMapper(
+        RequestStatementMapper requestStatementMapper
+            = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
             messageContext,
-            randomIdGeneratorService,
-            structuredObservationValueMapper,
-            codeableConceptCdMapper);
+            specimenMapper
+        );
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            allergyStructureMapper,
+            bloodPressureMapper,
+            conditionLinkSetMapper,
             diaryPlanStatementMapper,
+            documentReferenceToNarrativeStatementMapper,
+            immunizationObservationStatementMapper,
+            medicationStatementMapper,
             observationToNarrativeStatementMapper,
             observationStatementMapper,
-            immunizationObservationStatementMapper,
-            conditionLinkSetMapper,
-            bloodPressureMapper);
+            requestStatementMapper,
+            diagnosticReportMapper
+        );
     }
 
     @AfterEach
@@ -104,11 +133,10 @@ public class EncounterComponentsMapperTest {
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
-        Optional<Encounter> encounter = extractEncounter(bundle);
-        assertThat(encounter.isPresent()).isTrue();
+        var encounter = extractEncounter(bundle);
 
-        String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+        assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
     @ParameterizedTest
@@ -118,19 +146,45 @@ public class EncounterComponentsMapperTest {
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
 
-        Optional<Encounter> encounter = extractEncounter(bundle);
-        assertThat(encounter.isPresent()).isTrue();
+        var encounter = extractEncounter(bundle);
 
-        String mappedXml = encounterComponentsMapper.mapComponents(encounter.get());
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
         assertThat(mappedXml).isEmpty();
     }
 
-    private Optional<Encounter> extractEncounter(Bundle bundle) {
-        return bundle.getEntry().stream()
+
+    @Test
+    public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Resource not found")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    @Test
+    public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        var encounter = extractEncounter(bundle);
+
+        assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
+            .hasMessageContaining("Unsupported resource in consultation list: Flag/flagid1")
+            .isInstanceOf(EhrMapperException.class);
+    }
+
+    private Encounter extractEncounter(Bundle bundle) {
+        return (Encounter) bundle.getEntry().stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> ResourceType.Encounter.equals(resource.getResourceType()))
-            .map(resource -> (Encounter) resource)
-            .findFirst();
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Encounter not found in test fixture"));
     }
 
     private static Stream<Arguments> emptyResult() {
@@ -140,7 +194,6 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_EMPTY_CATEGORY_LIST),
             Arguments.of(INPUT_BUNDLE_WITHOUT_CONSULTATION_LIST),
             Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
-            Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE),
             Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
         );
     }

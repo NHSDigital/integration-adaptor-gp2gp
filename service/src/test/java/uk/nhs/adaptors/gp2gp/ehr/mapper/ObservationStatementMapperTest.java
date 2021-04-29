@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -80,6 +79,26 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-23.json";
     private static final String INPUT_JSON_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
         + "example-observation-resource-24.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "example-observation-resource-26.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "example-observation-resource-27.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_VALUE_STRING = TEST_FILE_DIRECTORY
+        + "example-observation-resource-28.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_VALUE_OTHER_TYPES = TEST_FILE_DIRECTORY
+        + "example-observation-resource-29.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_USER_SELECTED_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "example-observation-resource-30.json";
+    private static final String INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "example-observation-resource-31.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_COMPONENTS = TEST_FILE_DIRECTORY
+        + "example-observation-resource-32.json";
+    private static final String INPUT_JSON_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
+        + "example-observation-resource-33.json";
+    private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_ID = TEST_FILE_DIRECTORY
+        + "example-observation-resource-34.json";
+    private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
+        + "example-observation-resource-35.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -116,6 +135,24 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-17.xml";
     private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-18.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-19.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-20.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_STRING = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-21.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_OTHER_TYPES = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-22.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_USER_SELECTED_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-23.xml";
+    private static final String OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-24.xml";
+    private static final String OUTPUT_XML_WITH_MULTIPLE_COMPONENTS = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-25.xml";
+    private static final String OUTPUT_XML_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-26.xml";
+    private static final String OUTPUT_XML_USES_AGENT_WITHOUT_ID = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-27.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -177,16 +214,6 @@ public class ObservationStatementMapperTest {
             -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true));
     }
 
-    @Test
-    public void When_MappingParsedObservationJsonWithUnmappedPerformer_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PARTICIPANT);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
-
-        assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("No ID mapping for reference Practitioner/something");
-    }
-
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
@@ -211,7 +238,19 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_3, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
             Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT)
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_OPTIONAL_FIELDS, OUTPUT_XML_WITH_COMPONENT_OPTIONAL_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_QUANTITY, OUTPUT_XML_WITH_COMPONENT_VALUE_QUANTITY),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_STRING, OUTPUT_XML_WITH_COMPONENT_VALUE_STRING),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_OTHER_TYPES, OUTPUT_XML_WITH_COMPONENT_VALUE_OTHER_TYPES),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_USER_SELECTED_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_USER_SELECTED_INTERPRETATION),
+            Arguments.of(INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
+            Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+            // TODO, following two are workaround scenarios until NIAD-1340 is done
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_ID, OUTPUT_XML_WITH_PARTICIPANT),
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_USES_AGENT_WITHOUT_ID)
             );
     }
 }

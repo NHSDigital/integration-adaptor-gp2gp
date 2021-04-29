@@ -1,19 +1,17 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.io.IOException;
-import java.util.List;
-
+import com.google.common.collect.ImmutableList;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import com.google.common.collect.ImmutableList;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EncounterExtractorTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/request/fhir/";
@@ -53,7 +51,7 @@ public class EncounterExtractorTest {
 
     @Test
     public void When_ExtractingEncounters_Expect_EncountersExtractedByReferences() {
-        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(fullBundle.getEntry());
+        List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(fullBundle);
 
         assertThat(encounters.size()).isEqualTo(EXPECTED_ENCOUNTER_NUMBER);
 
@@ -65,7 +63,7 @@ public class EncounterExtractorTest {
     @Test
     public void When_ExtractingEncountersFromEntriesWithEmptyConsultationList_Expect_NoEncountersExtracted() {
         List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(
-            bundleWithEmptyConsultationList.getEntry());
+            bundleWithEmptyConsultationList);
 
         assertThat(encounters.isEmpty()).isTrue();
     }
@@ -73,7 +71,7 @@ public class EncounterExtractorTest {
     @Test
     public void When_ExtractingEncountersFromEntriesWithNoConsultationList_Expect_NoEncountersExtracted() {
         List<Encounter> encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(
-            bundleWithNoConsultationList.getEntry());
+            bundleWithNoConsultationList);
 
         assertThat(encounters.isEmpty()).isTrue();
     }

@@ -1,0 +1,16 @@
+<configuration>
+    <appender name="TEXT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} Level=%-5level Logger=%logger{36} %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+
+    <root level="${GP2GP_ROOT_LOGGING_LEVEL:-WARN}">
+        <appender-ref ref="TEXT}"/>
+    </root>
+
+    <logger name="uk.nhs.adaptors.gp2gp" level="${GP2GP_LOGGING_LEVEL:-DEBUG}" />
+    <logger name="reactor.netty.http.client" level="${GP2GP_LOGGING_LEVEL:-WARN}" />
+</configuration>

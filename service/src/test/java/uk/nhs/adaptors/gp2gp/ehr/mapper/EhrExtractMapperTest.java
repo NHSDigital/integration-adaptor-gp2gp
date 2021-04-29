@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -14,6 +15,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
@@ -22,6 +26,9 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -36,7 +43,16 @@ public class EhrExtractMapperTest {
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
-    private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
+    private static final String DUPLICATE_RESOURCE_BUNDLE = INPUT_PATH + "duplicated-resource-bundle.json";
+    private static final String ONE_CONSULTATION_RESOURCE_BUNDLE = INPUT_PATH + "1-consultation-resource.json";
+    private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
+    private static final String FHIR_BUNDLE_WITHOUT_EFFECTIVE_TIME = "fhir-bundle-without-effective-time.json";
+    private static final String FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME = "fhir-bundle-without-high-effective-time.json";
+    private static final String FHIR_BUNDLE_WITH_EFFECTIVE_TIME = "fhir-bundle-with-effective-time.json";
+    private static final String EXPECTED_XML_TO_JSON_FILE = "expected-ehr-extract-response-from-json.xml";
+    private static final String EXPECTED_XML_WITHOUT_EFFECTIVE_TIME = "expected-xml-without-effective-time.xml";
+    private static final String EXPECTED_XML_WITHOUT_HIGH_EFFECTIVE_TIME = "expected-xml-without-high-effective-time.xml";
+    private static final String EXPECTED_XML_WITH_EFFECTIVE_TIME = "expected-xml-with-effective-time.xml";
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
     private static final String TEST_ID_3 = "test-id-3";
@@ -58,6 +74,7 @@ public class EhrExtractMapperTest {
     @Mock
     private OrganizationToAgentMapper organizationToAgentMapper;
 
+    private NonConsultationResourceMapper nonConsultationResourceMapper;
     private EhrExtractMapper ehrExtractMapper;
     private MessageContext messageContext;
 
@@ -80,9 +97,22 @@ public class EhrExtractMapperTest {
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
+        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
+
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
             new ObservationStatementMapper(
                 messageContext,
@@ -91,11 +121,9 @@ public class EhrExtractMapperTest {
                 codeableConceptCdMapper,
                 participantMapper
             ),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper)
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new DiagnosticReportMapper(
+                messageContext, specimenMapper)
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
@@ -106,10 +134,16 @@ public class EhrExtractMapperTest {
             organizationToAgentMapper
         );
 
+        nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
+            randomIdGeneratorService,
+            encounterComponentsMapper);
+
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-            timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper),
-            agentDirectoryMapper);
+        timestampService,
+        new EncounterMapper(messageContext, encounterComponentsMapper),
+        nonConsultationResourceMapper,
+        agentDirectoryMapper,
+        messageContext);
     }
 
     @AfterEach
@@ -117,10 +151,11 @@ public class EhrExtractMapperTest {
         messageContext.resetMessageContext();
     }
 
-    @Test
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() throws IOException {
-        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
+    @ParameterizedTest
+    @MethodSource("testData")
+    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput(String input, String expected) throws IOException {
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + expected);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + input);
         Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
         messageContext.initialize(bundle);
 
@@ -129,5 +164,37 @@ public class EhrExtractMapperTest {
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
+    }
+
+    private static Stream<Arguments> testData() {
+        return Stream.of(
+            Arguments.of(JSON_INPUT_FILE, EXPECTED_XML_TO_JSON_FILE),
+            Arguments.of(FHIR_BUNDLE_WITHOUT_EFFECTIVE_TIME, EXPECTED_XML_WITHOUT_EFFECTIVE_TIME),
+            Arguments.of(FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME, EXPECTED_XML_WITHOUT_HIGH_EFFECTIVE_TIME),
+            Arguments.of(FHIR_BUNDLE_WITH_EFFECTIVE_TIME, EXPECTED_XML_WITH_EFFECTIVE_TIME)
+        );
+    }
+
+    @Test
+    public void When_MappingJsonBody_Expect_OnlyOneConsultationResource() throws IOException {
+        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE);
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        messageContext.initialize(bundle);
+
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+            getGpcStructuredTaskDefinition,
+            bundle);
+        String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+    }
+
+    @Test
+    public void When_TransformingResourceToEhrComp_Expect_NoDuplicateMappings() throws IOException {
+        String bundle = ResourceTestFileUtils.getFileContent(DUPLICATE_RESOURCE_BUNDLE);
+        Bundle parsedBundle = new FhirParseService().parseResource(bundle, Bundle.class);
+        messageContext.initialize(parsedBundle);
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+        assertThat(translatedOutput.size()).isEqualTo(1);
     }
 }
