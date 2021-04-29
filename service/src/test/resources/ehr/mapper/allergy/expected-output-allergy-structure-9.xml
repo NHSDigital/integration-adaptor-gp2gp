@@ -1,36 +1,28 @@
-<ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="394559384658936"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="19781231"/>
-    </effectiveTime>
-    <availabilityTime value="20100114095757" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="394559384658936"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center value="19781231"/>
-            </effectiveTime>
-            <availabilityTime value="20100114095757" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="394559384658936"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="19781231"/>
-                    </effectiveTime>
-                    <availabilityTime value="20100114095757" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Reaction 1 Description: example description Exposure Route: Topical route Severity: MILD Manifestation(s): Manifestation 1, Manifestation 2, Manifestation 3, Reaction 2 Description: example description 2 Exposure Route: Topical route Severity: MILD, Reaction 3 Description: example description 3 Severity: MILD, Reaction 4 Description: example description 4</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="394559384658936"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center value="19781231"/>
+        </effectiveTime>
+        <availabilityTime value="20100114095757" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="394559384658936"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="19781231"/>
+                </effectiveTime>
+                <availabilityTime value="20100114095757" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Reaction 1 Description: example description Exposure Route: Topical route Severity: MILD Manifestation(s): Manifestation 1, Manifestation 2, Manifestation 3, Reaction 2 Description: example description 2 Exposure Route: Topical route Severity: MILD, Reaction 3 Description: example description 3 Severity: MILD, Reaction 4 Description: example description 4</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>

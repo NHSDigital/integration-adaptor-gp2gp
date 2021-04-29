@@ -12,16 +12,19 @@ import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
 import com.github.mustachejava.Mustache;
 
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.InFulfilmentOfTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+@Slf4j
 public class MedicationStatementExtractor {
     private static final Mustache IN_FULFILMENT_OF_TEMPLATE =
         TemplateUtils.loadTemplate("in_fulfilment_of_template.mustache");
@@ -119,14 +122,26 @@ public class MedicationStatementExtractor {
     }
 
     public static String extractIdFromPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
-        messageContext.getInputBundleHolder()
-            .getResource(reference.getReferenceElement())
-            .map(MedicationRequest.class::cast)
-            .filter(value -> MedicationRequestIntent.PLAN.getDisplay().equals(value.getIntent().getDisplay()))
-            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication Request reference"));
+        LOGGER.debug("Ensuring the bundle contains Plan MedicationRequest {}", reference.getReference());
 
-        return messageContext.getMedicationRequestIdMapper()
-            .getOrNew(reference.getReference());
+        if (reference.getReferenceElement().getResourceType() == null) {
+            // TODO: workaround for NIAD-1407 the type should never be assumed
+            LOGGER.warn("Reference {} is missing a resource type. Assuming MedicationRequest resource type.", reference.getReference());
+            reference = IdMapper.buildReference(ResourceType.MedicationRequest,
+                reference.getReferenceElement().getIdPart());
+        }
+
+        var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
+        if (resource.isEmpty()) {
+            throw new EhrMapperException("Could not resolve Medication Request reference " + reference.getReference());
+        }
+
+        var medicationRequest = (MedicationRequest) resource.get();
+        if (!MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+            throw new EhrMapperException("Referenced MedicationRequest does not have plan intent " + reference.getReference());
+        }
+
+        return messageContext.getMedicationRequestIdMapper().getOrNew(reference.getReference());
     }
 
     public static String buildBasedOnCode(String id) {
