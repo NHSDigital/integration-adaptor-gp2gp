@@ -541,10 +541,10 @@
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
         <statusCode code="ACTIVE"/>
-        <availabilityTime value="20100226"/>
         <effectiveTime>
             <low value="20100226"/>
         </effectiveTime>
+        <availabilityTime value="20100226"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -557,12 +557,13 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
-                <statusCode code="ACTIVE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="ACTIVE"/>
+                    <effectiveTime>
+                        <low value="20100226"/>
+                    </effectiveTime>
                 <availabilityTime value="20100226"/>
-                <effectiveTime>
-                    <low value="20100226"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="10" unit="1">
                     <translation value="10">
                         <originalText>tablet</originalText>
@@ -573,7 +574,6 @@
                         <text>Expected Supply Duration: 5 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">

@@ -1522,10 +1522,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1538,24 +1538,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablets</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is going to be problem linked</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is going to be problem linked</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1618,10 +1618,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1634,24 +1634,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
                 <quantity value="6" unit="1">
                     <translation value="6">
                         <originalText>tablets</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: This is teh script note. This is the administrative note Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is teh script note. This is the administrative note</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: This is teh script note. This is the administrative note Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is teh script note. This is the administrative note</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1766,10 +1766,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1782,24 +1782,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablets</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 2 This is going to be problem linked</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 2 This is going to be problem linked</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -1850,10 +1850,10 @@
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -1866,24 +1866,24 @@
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
                 <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablets</originalText>
                     </translation>
                 </quantity>
-                <pertinentInformation typeCode="PERT">
-                    <pertinentSupplyAnnotation>
-                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is going to be problem linked</text>
-                    </pertinentSupplyAnnotation>
-                </pertinentInformation>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
         <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
     </priorMedicationRef>
 </inFulfillmentOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:Issue number 1 This is going to be problem linked</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyPrescribe>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3889,10 +3889,10 @@ Dosage: 0.5 ml</text>
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3905,12 +3905,13 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20110307"/>
+                    </effectiveTime>
                 <availabilityTime value="20110307"/>
-                <effectiveTime>
-                    <low value="20110307"/>
-                </effectiveTime>
+                <repeatNumber value="6"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablets</originalText>
@@ -3921,7 +3922,6 @@ Dosage: 0.5 ml</text>
                         <text>Patient Instruction: This is going to be problem linked Expected Supply Duration: 28 day Notes: Patient Notes:This is going to be problem linked</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="6"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3970,10 +3970,10 @@ Dosage: 0.5 ml</text>
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="10720133-30C3-4145-9184-8713284C5A90"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -3986,12 +3986,13 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20110307"/><high value="20110404"/>
+                    </effectiveTime>
                 <availabilityTime value="20110307"/>
-                <effectiveTime>
-                    <low value="20110307"/><high value="20110404"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="6" unit="1">
                     <translation value="6">
                         <originalText>tablets</originalText>
@@ -4002,7 +4003,6 @@ Dosage: 0.5 ml</text>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -4051,10 +4051,10 @@ Dosage: 0.5 ml</text>
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
         <statusCode code="COMPLETE"/>
-        <availabilityTime value="20110307"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
         </effectiveTime>
+        <availabilityTime value="20110307"/>
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -4067,12 +4067,13 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
-                <statusCode code="COMPLETE"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                    <effectiveTime>
+                        <low value="20110307"/><high value="20110404"/>
+                    </effectiveTime>
                 <availabilityTime value="20110307"/>
-                <effectiveTime>
-                    <low value="20110307"/><high value="20110404"/>
-                </effectiveTime>
+                <repeatNumber value="0"/>
                 <quantity value="28" unit="1">
                     <translation value="28">
                         <originalText>tablets</originalText>
@@ -4083,7 +4084,6 @@ Dosage: 0.5 ml</text>
                         <text>Expected Supply Duration: 28 day</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                <repeatNumber value="0"/>
             </ehrSupplyAuthorise>
         </component>
         <pertinentInformation typeCode="PERT">
