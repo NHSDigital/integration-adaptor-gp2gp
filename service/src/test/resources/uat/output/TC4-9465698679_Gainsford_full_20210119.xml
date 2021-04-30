@@ -537,7 +537,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
         <statusCode code="ACTIVE"/>
