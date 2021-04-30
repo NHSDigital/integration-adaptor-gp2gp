@@ -6,7 +6,7 @@
     "valueString":"test-string",
     "referenceRange":[
         {
-            "text":"Test reference range text",
+            "text":"10 <= x <= 20",
             "low":{
                 "value":10
             },

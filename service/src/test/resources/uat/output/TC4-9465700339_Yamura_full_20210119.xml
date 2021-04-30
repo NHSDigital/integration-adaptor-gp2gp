@@ -3130,7 +3130,13 @@ with special characters
                 <text>Upper range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>< 2.000 mm/h</text><value></value></referenceInterpretationRange></referenceRange>
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>&lt; 2.000 mm/h</text>
+        <value></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3156,7 +3162,13 @@ with special characters
                 <text>Lower range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>> 3.000 nmol/L</text><value></value></referenceInterpretationRange></referenceRange>
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>&gt; 3.000 nmol/L</text>
+        <value></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
