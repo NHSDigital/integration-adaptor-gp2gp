@@ -6221,8 +6221,8 @@
         <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="A8B2DE9A-C1CA-4534-9B30-7783301F6BAA"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
@@ -6230,6 +6230,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
+                <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20200724"/>
@@ -6241,8 +6243,6 @@
                         <text>Status: Active</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
@@ -6285,8 +6285,8 @@
         <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20200724"/>
         </effectiveTime>
@@ -6294,6 +6294,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E50C922A-91C0-4225-A2FE-5E3A3066357E"/>
+                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20200724"/>
@@ -6305,8 +6307,6 @@
                         <text>Status: Active test, test Significance : Major - Episodicity : First - test, test</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
