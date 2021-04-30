@@ -41,10 +41,13 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_ONE_RESULT = "diagnostic-report-with-one-result.json";
     private static final String INPUT_JSON_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.json";
     private static final String INPUT_JSON_MULTI_RESULTS = "diagnostic-report-with-multi-results.json";
+    private static final String INPUT_JSON_PERFORMER = "diagnostic-report-with-performer.json";
+    private static final String INPUT_JSON_PERFORMER_NO_ACTOR = "diagnostic-report-with-performer-no-actor.json";
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_OPTIONAL_DATA = "diagnostic-report-with-optional-data.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
+    private static final String OUTPUT_XML_PARTICIPANT = "diagnostic-report-with-participant.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -65,7 +68,7 @@ public class DiagnosticReportMapperTest {
             new StructuredObservationValueMapper(), codeableConceptCdMapper, new ParticipantMapper());
         final SpecimenMapper specimenMapper = new SpecimenMapper(messageContext,
             observationMapper);
-        mapper = new DiagnosticReportMapper(messageContext, specimenMapper);
+        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper());
     }
 
     @AfterEach
@@ -93,7 +96,9 @@ public class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
             Arguments.of(INPUT_JSON_ONE_RESULT, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
-            Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA)
+            Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_PERFORMER, OUTPUT_XML_PARTICIPANT),
+            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA)
         );
     }
 }

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -31,31 +33,33 @@ public class DiagnosticReportMapper {
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
 
-        StringBuilder specimensBlock = new StringBuilder();
-        specimens.forEach(specimen ->
-            specimensBlock.append(
-                specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport)
-            )
-        );
+        String mappedSpecimens = specimens.stream()
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
+            .collect(Collectors.joining());
 
         final IdMapper idMapper = messageContext.getIdMapper();
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getId()))
             .diagnosticReportIssuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
-            .specimens(specimensBlock.toString());
+            .specimens(mappedSpecimens);
 
-        String temp = TemplateUtils.fillTemplate(
+        if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
+            final String participantReference = idMapper.get(diagnosticReport.getPerformerFirstRep().getActor());
+            final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
+            diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
+        }
+
+        return TemplateUtils.fillTemplate(
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
-
-        return temp;
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
