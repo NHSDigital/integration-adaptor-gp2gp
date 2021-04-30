@@ -290,12 +290,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -319,7 +319,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
+            CommentDate:20100225154100
 
             NEGATIVE
      In normal pregnancies the test will usually be positive from the
@@ -337,7 +337,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151704
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
@@ -377,12 +377,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -406,7 +406,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151713
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
@@ -446,12 +446,12 @@
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
-        
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            
+            <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value=""/>
+        <availabilityTime value="20100225154100"/>
         <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -475,7 +475,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:
+            CommentDate:20100225154100
 
             Test not available</text>
         <statusCode code="COMPLETE"/>
@@ -491,7 +491,7 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
-            CommentDate:
+            CommentDate:20201215151713
 
             (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
