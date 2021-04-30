@@ -224,8 +224,6 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100113152000" />
         <text>1.This is a line of text with a line break at the end.
 2.This is a line of text with a line break at the end.
 3.This is a line of text with a line break at the end.
@@ -239,6 +237,8 @@ ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSp
 
 The line below contains special characters...
 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100113152000" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -357,9 +357,9 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <text>This is some random free text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100123134800" />
-        <text>This is some random free text</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -477,9 +477,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
+        <text>hhhhhhhhh</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100609" />
-        <text>hhhhhhhhh</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -522,9 +522,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100610082200" />
-        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>

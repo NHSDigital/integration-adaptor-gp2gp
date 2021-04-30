@@ -11,9 +11,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <text>observation comment</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100113152950" />
-        <text>observation comment</text>
     </NarrativeStatement>
 </component><component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
@@ -185,9 +185,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <text>Type: Referral Letter (21-Sep-2020) Description: for 2 week rule referral - skin Absent Attachment: some title Setting: Practice Setting Text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921" />
-        <text>Type: Referral Letter (21-Sep-2020) Description: for 2 week rule referral - skin Absent Attachment: some title Setting: Practice Setting Text</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>

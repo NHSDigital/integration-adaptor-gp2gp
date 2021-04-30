@@ -2798,14 +2798,14 @@ breaks.</text>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20060605" />
         <text>This is a general Vision notepad entry
 
 
 with special characters
 
 %!`¬!£&quot;£$%^&amp;*()-_+={[}];:@&apos;/?.&gt;,&lt; and line breaks</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20060605" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3261,9 +3261,9 @@ with special characters
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E" />
+        <text>Loratadine 5mg/5ml oral solution</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060906" />
-        <text>Loratadine 5mg/5ml oral solution</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4287,9 +4287,9 @@ with special characters
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
+        <text>Smoking status on date of event: Smoker NOTES: No start date.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Smoking status on date of event: Smoker NOTES: No start date.</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4330,11 +4330,11 @@ with special characters
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20050201" />
         <text>These are the target BP notes
 With some
 Line breaks in the notes</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20050201" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4375,9 +4375,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
+        <text>Started drinking: 27/10/2001</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Started drinking: 27/10/2001</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4418,9 +4418,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
+        <text>Drinking status on eventdate: Current drinker</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Drinking status on eventdate: Current drinker</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4461,9 +4461,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
+        <text>Placed on register: 01/02/2005</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Placed on register: 01/02/2005</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4504,9 +4504,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
+        <text>Removed from register: 08/08/2005</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Removed from register: 08/08/2005</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4547,9 +4547,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
+        <text>Edited By Dave from original</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
-        <text>Edited By Dave from original</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -4871,9 +4871,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
+        <text>Smoking status on date of event: Smoker</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
-        <text>Smoking status on date of event: Smoker</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4914,9 +4914,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
+        <text>Smoking status on date of event: Ex-smoker NOTES: No end date.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
-        <text>Smoking status on date of event: Ex-smoker NOTES: No end date.</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4957,9 +4957,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
+        <text>Smoking status on date of event: Ex-smoker NOTES: Some notes.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
-        <text>Smoking status on date of event: Ex-smoker NOTES: Some notes.</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5000,9 +5000,9 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
+        <text>Posture for BP recording: Sitting, Cuff size used: Standard NOTES: Second BP notes.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
-        <text>Posture for BP recording: Sitting, Cuff size used: Standard NOTES: Second BP notes.</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5043,11 +5043,11 @@ Line breaks in the notes</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20060425" />
         <text>Korotkoff level: 2, Posture for BP recording: Sitting, Cuff size used: Standard NOTES: First BP Notes
 
 and extending onto other lines as well.</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20060425" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5672,9 +5672,9 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7" />
+        <text>Started drinking: 27/10/2000</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20061027" />
-        <text>Started drinking: 27/10/2000</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5715,9 +5715,9 @@ and extending onto other lines as well.</text>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D" />
+        <text>Drinking status on eventdate: Ex-drinker NOTES: The stopper.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20061027" />
-        <text>Drinking status on eventdate: Ex-drinker NOTES: The stopper.</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>

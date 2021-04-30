@@ -431,9 +431,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <text>Current Home Address: The House, 1 Aire Street, Leeds LS1 4HT</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209084800" />
-        <text>Current Home Address: The House, 1 Aire Street, Leeds LS1 4HT</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -554,9 +554,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C" />
+        <text>This is another problem linked entry - this time an autoconsult</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209114800" />
-        <text>This is another problem linked entry - this time an autoconsult</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -642,9 +642,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A" />
+        <text>This problem is going to be relegated (Comments From Relegated Demoted at work (Ua0Uz) Problem)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209114800" />
-        <text>This problem is going to be relegated (Comments From Relegated Demoted at work (Ua0Uz) Problem)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -891,9 +891,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D" />
+        <text>** Care started at Testvale Surgery (GMS) **</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209" />
-        <text>** Care started at Testvale Surgery (GMS) **</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
@@ -1605,9 +1605,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
+        <text>This is the auto consultation note</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110307154400" />
-        <text>This is the auto consultation note</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1668,9 +1668,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
+        <text>Inactive Diary Entry - Asthma - Status: Awaiting Result, In 3 years time</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20140303000000" />
-        <text>Inactive Diary Entry - Asthma - Status: Awaiting Result, In 3 years time</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2066,9 +2066,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
+        <text>This quick notes is going to be problem linked</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110307161800" />
-        <text>This quick notes is going to be problem linked</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2856,10 +2856,10 @@ Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:U
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20110307165500" />
         <text>Type: Other digital signal Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Recipient: Mr Quentin Quigley (Fictional Hospital)
 Sent: 07 Mar 2011 16:58</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20110307165500" />
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
