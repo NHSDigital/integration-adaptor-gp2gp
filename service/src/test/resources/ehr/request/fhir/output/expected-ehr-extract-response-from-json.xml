@@ -236,8 +236,6 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100113152000" />
         <text>1.This is a line of text with a line break at the end.
 2.This is a line of text with a line break at the end.
 3.This is a line of text with a line break at the end.
@@ -251,6 +249,8 @@ ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSp
 
 The line below contains special characters...
 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100113152000" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -341,9 +341,9 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
+        <text>This is some random free text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100123134800" />
-        <text>This is some random free text</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -458,9 +458,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
+        <text>hhhhhhhhh</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100609" />
-        <text>hhhhhhhhh</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -503,9 +503,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3" />
+        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100610082200" />
-        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>

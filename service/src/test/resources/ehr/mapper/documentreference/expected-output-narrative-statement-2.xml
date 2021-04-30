@@ -1,9 +1,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <text>Type: Referral Letter (21-Sep-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921141759" />
-        <text>Type: Referral Letter (21-Sep-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="394559384658936"/>
