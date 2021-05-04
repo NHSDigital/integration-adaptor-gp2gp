@@ -119,13 +119,13 @@ public class RequestStatementMapper {
         private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
             final IdMapper idMapper = messageContext.getIdMapper();
 
-            if (isReferenceToType(agent, ResourceType.Practitioner)
+            if (isReferenceToPractitioner(agent)
                     && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
                 final String participantRef = idMapper.get(onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
-            } else if (isReferenceToType(agent, ResourceType.Practitioner) || isReferenceToType(agent, ResourceType.Organization)) {
+            } else if (isReferenceToPractitioner(agent)) {
                 final String participantRef = idMapper.getOrNew(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);

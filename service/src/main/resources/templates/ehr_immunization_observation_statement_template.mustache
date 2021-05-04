@@ -1,6 +1,7 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="{{ObservationStatementId}}" />
+        {{{code}}}
         <statusCode code="COMPLETE" />
         <effectiveTime>
             {{#effectiveTime}}<center value="{{effectiveTime}}"/>{{/effectiveTime}}{{^effectiveTime}}<center nullFlavor="UNK"/>{{/effectiveTime}}
@@ -14,7 +15,6 @@
             </pertinentAnnotation>
         </pertinentInformation>
         {{/pertinentInformation}}
-        {{{code}}}
         {{#participant}}
         {{{.}}}
         {{/participant}}

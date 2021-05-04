@@ -52,23 +52,20 @@ public class EhrExtractTest {
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> {
-            var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-            assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER);
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER);
 
-            var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
-            assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
-            var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-            assertThatAccessDocumentWasFetched(singleDocument);
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(singleDocument);
 
-            var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
-            assertThatExtractCoreMessageWasSent(ehrExtractCore);
+        var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
+        assertThatExtractCoreMessageWasSent(ehrExtractCore);
 
-            var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
-            assertThatExtractContinueMessageWasSent(ehrContinue);
-        }).doesNotThrowAnyException();
+        var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
+        assertThatExtractContinueMessageWasSent(ehrContinue);
     }
 
     @Test
@@ -79,17 +76,14 @@ public class EhrExtractTest {
         ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> {
-            var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-            assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS);
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS);
 
-            var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
-            assertThatNotDocumentsWereAdded(gpcAccessDocument);
+        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
+        assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
-            var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-            assertThatAcknowledgementToRequesterWasSent(ackToRequester);
-        }).doesNotThrowAnyException();
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {

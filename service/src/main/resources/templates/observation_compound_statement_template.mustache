@@ -1,12 +1,12 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="{{compoundStatementId}}"/>
-        {{{code}}}
+        {{{codeElement}}}
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             {{{effectiveTime}}}
         </effectiveTime>
-        <availabilityTime value="{{issuedDate}}"/>
+        {{{availabilityTimeElement}}}
         {{{observationStatement}}}
         {{#narrativeStatements}}
             {{{.}}}

@@ -152,7 +152,8 @@ public class EhrExtractUATTest {
     }
 
     private static Stream<Arguments> testValueFilePaths() {
-        return Stream.of(Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
+        return Stream.of(
+            Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
             Arguments.of("9465701483_Nel_full_20210119.json", "9465701483_Nel_full_20210119.xml"),
             Arguments.of("9465701459_Nel_full_20210119.json", "9465701459_Nel_full_20210119.xml"),
             Arguments.of("9465698679_Gainsford_full_20210119.json", "9465698679_Gainsford_full_20210119.xml"),
