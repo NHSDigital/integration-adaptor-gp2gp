@@ -270,8 +270,8 @@
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-
-
+        
+        
         <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -350,15 +350,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20081125"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -409,15 +409,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20090204"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -468,15 +468,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20100104"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -572,15 +572,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Short duration minor problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -598,15 +598,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -624,15 +624,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -661,15 +661,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -686,15 +686,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Ended on 16/06/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -712,15 +712,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20081125000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Chronic Problem with no end date</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -750,15 +750,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -775,15 +775,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -800,15 +800,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -826,15 +826,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -852,15 +852,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -877,15 +877,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -903,15 +903,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -928,15 +928,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101209114800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1031,15 +1031,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1057,15 +1057,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20090204000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1083,15 +1083,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Ended on 16/12/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1109,15 +1109,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is a problem based on a medication - no end</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1135,15 +1135,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1161,15 +1161,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1186,15 +1186,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216080600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1245,15 +1245,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This problem was created within a consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1271,15 +1271,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1296,15 +1296,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1322,15 +1322,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216081700"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1414,15 +1414,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20101216"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1440,15 +1440,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20100104000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Ended on 27/05/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1499,15 +1499,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307150200"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is the same code as an existing code linked to a problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1558,15 +1558,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307151300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is the note to the problem linked &apos;Breath smells unpleasant&apos;</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1606,7 +1606,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
         <statusCode code="COMPLETE"/>
@@ -1702,7 +1702,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
         <statusCode code="COMPLETE"/>
@@ -1776,15 +1776,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307154400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is the auto consultation note</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1802,15 +1802,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307154400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1850,7 +1850,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
@@ -1934,7 +1934,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
         <statusCode code="COMPLETE"/>
@@ -2029,15 +2029,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307160100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2055,15 +2055,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307160100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is the microbiology result</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2307,15 +2307,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2333,15 +2333,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2360,14 +2360,14 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
         <value xsi:type="PQ" value="34.000" unit="1"><translation value="34.000"><originalText>Beats</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>and</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2384,15 +2384,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2410,15 +2410,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2482,15 +2482,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307162500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2541,15 +2541,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307162900"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is the FH as a problem member</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2671,15 +2671,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Blah opthalmology comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2697,15 +2697,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Side: Left</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2722,15 +2722,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Side: Right</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2748,15 +2748,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2774,15 +2774,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2800,15 +2800,15 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20110307165100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2860,7 +2860,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
         <value xsi:type="PQ" value="13.000" unit="1"><translation value="13.000"><originalText>{units}/wk</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2995,8 +2995,8 @@ Sent: 07 Mar 2011 16:58</text>
             <center value="20110307170000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3007,7 +3007,7 @@ Script notes: script notes
 Administrative notes: blah notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3058,15 +3058,15 @@ Administrative notes: blah notes</text>
             <center value="20110307000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Alcohol - Spirits. Used 2-6 days per week. (Primary) Route=Smoke, Age first use=12 years</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3117,15 +3117,15 @@ Administrative notes: blah notes</text>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Consent: ACT-HIB DTP</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3143,15 +3143,15 @@ Administrative notes: blah notes</text>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Refusal: BCG. Immunisation: Tuberculosis (BCG) vaccination</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3169,8 +3169,8 @@ Administrative notes: blah notes</text>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3179,7 +3179,7 @@ Batch No: hhh
 Dosage: 0.5 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3197,8 +3197,8 @@ Dosage: 0.5 ml</text>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3210,7 +3210,7 @@ Dosage: 0.5 ml
 Notes: hhhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3228,8 +3228,8 @@ Notes: hhhhh</text>
             <center value="20110307170500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3238,7 +3238,7 @@ Batch No: hh
 Dosage: 0.5 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3289,15 +3289,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121500"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>(Ongoing Episode). This is also linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3348,15 +3348,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is exacerbation level two</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3374,15 +3374,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - Ended on 08/03/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3400,15 +3400,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3426,15 +3426,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3451,15 +3451,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is exacerbation level one</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3477,15 +3477,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3503,15 +3503,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3529,15 +3529,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3555,15 +3555,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3580,15 +3580,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308121800"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3639,15 +3639,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308122600"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>(Ongoing Episode)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3698,15 +3698,15 @@ Dosage: 0.5 ml</text>
             <center value="20110308123100"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>(Ongoing Episode). This is another entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3757,15 +3757,15 @@ Dosage: 0.5 ml</text>
             <center value="20110609091400"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>(Severity: Minor). This is another one but noty explicitly linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3816,15 +3816,15 @@ Dosage: 0.5 ml</text>
             <center value="20110902"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Significance : Minor - Episodicity : First - This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3842,15 +3842,15 @@ Dosage: 0.5 ml</text>
             <center value="20110902160300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is problem linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3868,15 +3868,15 @@ Dosage: 0.5 ml</text>
             <center value="20110902160300"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3927,15 +3927,15 @@ Dosage: 0.5 ml</text>
             <center value="20110902160900"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3973,7 +3973,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
         <statusCode code="COMPLETE"/>
@@ -4054,7 +4054,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
         <statusCode code="COMPLETE"/>
@@ -4135,7 +4135,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
         <statusCode code="COMPLETE"/>
@@ -4221,7 +4221,7 @@ Dosage: 0.5 ml</text>
         <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
         <effectiveTime>
             <low value="20101209"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4351,7 +4351,7 @@ Dosage: 0.5 ml</text>
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
         <effectiveTime>
             <low value="20101209"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4436,7 +4436,7 @@ Dosage: 0.5 ml</text>
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E" />
         <effectiveTime>
             <low value="20101209"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4564,7 +4564,7 @@ Dosage: 0.5 ml</text>
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
         <effectiveTime>
             <low value="20081125000000"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4674,7 +4674,7 @@ Dosage: 0.5 ml</text>
         <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752" />
         <effectiveTime>
             <low value="20101216"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4868,7 +4868,7 @@ Dosage: 0.5 ml</text>
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571" />
         <effectiveTime>
             <low value="20101216"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -4948,7 +4948,7 @@ Dosage: 0.5 ml</text>
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800" />
         <effectiveTime>
             <low value="20101216"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5033,7 +5033,7 @@ Dosage: 0.5 ml</text>
         <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798" />
         <effectiveTime>
             <low value="20101216"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5213,7 +5213,7 @@ Dosage: 0.5 ml</text>
         <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60" />
         <effectiveTime>
             <low value="20110307"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5318,7 +5318,7 @@ Dosage: 0.5 ml</text>
         <id root="6CD96448-3DD9-4E6D-857A-798F79824F26" />
         <effectiveTime>
             <low value="20110308"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5448,7 +5448,7 @@ Dosage: 0.5 ml</text>
         <id root="49C185EE-784C-497C-A7E0-C63A25C057B7" />
         <effectiveTime>
             <low value="20110308"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5513,7 +5513,7 @@ Dosage: 0.5 ml</text>
         <id root="F586B623-14FE-4F2B-80D9-953DC28B9828" />
         <effectiveTime>
             <low value="20110308"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5578,7 +5578,7 @@ Dosage: 0.5 ml</text>
         <id root="E74F00A1-5189-4806-979F-5A57701BFF13" />
         <effectiveTime>
             <low value="20110308"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5667,7 +5667,7 @@ Dosage: 0.5 ml</text>
         <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F" />
         <effectiveTime>
             <low value="20110902"/>
-
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5738,15 +5738,15 @@ Dosage: 0.5 ml</text>
             <center value="20201106"/>
         </effectiveTime>
         <availabilityTime value="20201106095918"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5837,8 +5837,8 @@ Dosage: 0.5 ml</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-
-
+        
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -5847,7 +5847,7 @@ cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5897,14 +5897,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5953,14 +5953,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6010,14 +6010,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6067,14 +6067,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6123,14 +6123,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>Unknown UoM</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6179,14 +6179,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6236,14 +6236,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6293,14 +6293,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6350,14 +6350,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6406,14 +6406,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6463,14 +6463,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6520,14 +6520,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6577,14 +6577,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6633,14 +6633,14 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>mPas</originalText></translation></value>
-
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
