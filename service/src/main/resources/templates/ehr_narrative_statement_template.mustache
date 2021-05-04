@@ -1,9 +1,12 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="{{narrativeStatementId}}" />
+        <text>{{comment}}</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="{{availabilityTime}}" />
-        <text>{{comment}}</text>
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
         {{#hasReference}}
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
@@ -15,8 +18,5 @@
             </referredToExternalDocument>
         </reference>
         {{/hasReference}}
-        {{#participant}}
-        {{{.}}}
-        {{/participant}}
     </NarrativeStatement>
 </component>

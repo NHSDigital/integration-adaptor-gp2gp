@@ -224,8 +224,6 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100113152000" />
         <text>1.This is a line of text with a line break at the end.
 2.This is a line of text with a line break at the end.
 3.This is a line of text with a line break at the end.
@@ -239,6 +237,8 @@ ThisIsALongLineWithoutSpacesThisIsALongLineWithoutSpacesThisIsALongLineWithoutSp
 
 The line below contains special characters...
 ¬`1234567890!&quot;£$%^&amp;*()_+=-{}][~@#&apos;:;&lt;&gt;?,./|\</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100113152000" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -281,11 +281,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -293,9 +296,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76376003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Endometriosis of uterus">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -306,11 +306,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -318,9 +321,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="21522001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Abdominal pain">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -331,11 +331,15 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
+    <originalText>Irregular menstrual cycle</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -343,10 +347,6 @@ The line below contains special characters...
                 <text>These are some notes !&quot;£$%^&amp;*()</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="80182007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Irregular periods">
-    <originalText>Irregular menstrual cycle</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -357,9 +357,9 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <text>This is some random free text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100123134800" />
-        <text>This is some random free text</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -369,11 +369,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -381,9 +384,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="161779006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="H/O: menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -394,11 +394,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400" />
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -406,9 +409,6 @@ The line below contains special characters...
                 <text>Family member : Mother</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -419,11 +419,14 @@ The line below contains special characters...
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -431,9 +434,6 @@ The line below contains special characters...
                 <text>Family member : Father - note - this is obviously wrong?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="160393005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Menstrual disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -477,9 +477,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
+        <text>hhhhhhhhh</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100609" />
-        <text>hhhhhhhhh</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -522,9 +522,9 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100610082200" />
-        <text>This is kjkjkjkjkjkjkjkjkj</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -648,11 +648,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42" />
+        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714180700"/>
         </effectiveTime>
         <availabilityTime value="20100714163232"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -660,9 +663,6 @@ The line below contains special characters...
                 <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="197480006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anxiety disorder">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -701,7 +701,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
         <statusCode code="COMPLETE"/>
@@ -782,7 +782,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
         <statusCode code="COMPLETE"/>
@@ -864,7 +864,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
         <statusCode code="COMPLETE"/>
@@ -945,7 +945,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
         <statusCode code="COMPLETE"/>
@@ -1027,7 +1027,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
         <statusCode code="COMPLETE"/>
@@ -1108,7 +1108,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <statusCode code="COMPLETE"/>
@@ -1190,7 +1190,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
         <statusCode code="COMPLETE"/>
@@ -1272,7 +1272,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
         <statusCode code="COMPLETE"/>
@@ -1354,7 +1354,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
         <statusCode code="COMPLETE"/>
@@ -1436,7 +1436,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <statusCode code="COMPLETE"/>
@@ -1518,7 +1518,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
         <statusCode code="COMPLETE"/>
@@ -1600,7 +1600,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
         <statusCode code="COMPLETE"/>
@@ -1682,7 +1682,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E"/>
         <statusCode code="COMPLETE"/>
@@ -1764,7 +1764,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
         <statusCode code="COMPLETE"/>
@@ -1846,7 +1846,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
         <statusCode code="COMPLETE"/>
@@ -1928,7 +1928,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
         <statusCode code="COMPLETE"/>
@@ -2010,7 +2010,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
         <statusCode code="COMPLETE"/>
@@ -2092,7 +2092,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
         <statusCode code="COMPLETE"/>
@@ -2174,7 +2174,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
         <statusCode code="COMPLETE"/>
@@ -2256,7 +2256,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
         <statusCode code="COMPLETE"/>
@@ -2338,7 +2338,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA"/>
         <statusCode code="COMPLETE"/>
@@ -2420,7 +2420,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
         <statusCode code="COMPLETE"/>
@@ -2502,7 +2502,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
         <statusCode code="COMPLETE"/>
@@ -2584,7 +2584,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
         <statusCode code="COMPLETE"/>
@@ -2666,7 +2666,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
         <statusCode code="COMPLETE"/>
@@ -2748,7 +2748,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
         <statusCode code="COMPLETE"/>
@@ -2830,7 +2830,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
         <statusCode code="COMPLETE"/>
@@ -2912,7 +2912,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
         <statusCode code="COMPLETE"/>
@@ -2994,7 +2994,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
         <statusCode code="COMPLETE"/>
@@ -3076,7 +3076,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C"/>
         <statusCode code="COMPLETE"/>
@@ -3158,7 +3158,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
         <statusCode code="COMPLETE"/>
@@ -3240,7 +3240,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
         <statusCode code="COMPLETE"/>
@@ -3322,7 +3322,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
         <statusCode code="COMPLETE"/>
@@ -3404,7 +3404,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
         <statusCode code="COMPLETE"/>
@@ -3486,7 +3486,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
         <statusCode code="COMPLETE"/>
@@ -3568,7 +3568,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
         <statusCode code="COMPLETE"/>
@@ -3650,7 +3650,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
         <statusCode code="COMPLETE"/>
@@ -3732,7 +3732,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
         <statusCode code="COMPLETE"/>
@@ -3814,7 +3814,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
         <statusCode code="COMPLETE"/>
@@ -3895,7 +3895,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2"/>
         <statusCode code="COMPLETE"/>
@@ -3977,7 +3977,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
         <statusCode code="COMPLETE"/>
@@ -4058,7 +4058,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <statusCode code="COMPLETE"/>
@@ -4140,7 +4140,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
         <statusCode code="COMPLETE"/>
@@ -4222,7 +4222,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
         <statusCode code="COMPLETE"/>
@@ -4304,7 +4304,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7314452F-9848-403F-8684-D7E0B2163F88"/>
         <statusCode code="COMPLETE"/>
@@ -4386,7 +4386,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6"/>
         <statusCode code="COMPLETE"/>
@@ -4468,7 +4468,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF"/>
         <statusCode code="COMPLETE"/>
@@ -4550,7 +4550,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824"/>
         <statusCode code="COMPLETE"/>
@@ -4632,7 +4632,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
         <statusCode code="COMPLETE"/>
@@ -4714,7 +4714,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
         <statusCode code="COMPLETE"/>
@@ -4796,7 +4796,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
         <statusCode code="COMPLETE"/>
@@ -4878,7 +4878,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
         <statusCode code="COMPLETE"/>
@@ -4960,7 +4960,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
         <statusCode code="COMPLETE"/>
@@ -5042,7 +5042,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
         <statusCode code="COMPLETE"/>
@@ -5124,7 +5124,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
         <statusCode code="COMPLETE"/>
@@ -5206,7 +5206,7 @@ The line below contains special characters...
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="452AFD1A-B615-4E2C-A733-544A3426DA24"/>
         <statusCode code="COMPLETE"/>
@@ -5288,7 +5288,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
         <statusCode code="COMPLETE"/>
@@ -5374,7 +5374,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
         <statusCode code="COMPLETE"/>
@@ -5456,7 +5456,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185"/>
         <statusCode code="COMPLETE"/>
@@ -5538,7 +5538,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
         <statusCode code="COMPLETE"/>
@@ -5620,7 +5620,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
         <statusCode code="COMPLETE"/>
@@ -5702,7 +5702,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B16209E7-8BA5-4533-B801-8A82645C6D04"/>
         <statusCode code="COMPLETE"/>
@@ -5784,7 +5784,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
         <statusCode code="COMPLETE"/>
@@ -5866,7 +5866,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
         <statusCode code="COMPLETE"/>
@@ -5948,7 +5948,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
         <statusCode code="COMPLETE"/>
@@ -6030,7 +6030,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
         <statusCode code="COMPLETE"/>
@@ -6112,7 +6112,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
         <statusCode code="COMPLETE"/>
@@ -6194,7 +6194,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
         <statusCode code="COMPLETE"/>
@@ -6276,7 +6276,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F4E72E8A-13BD-4C83-A448-32718731EC94"/>
         <statusCode code="COMPLETE"/>
@@ -6362,7 +6362,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="155DFA49-019C-47F0-9DDE-EA68774988B2"/>
         <statusCode code="COMPLETE"/>
@@ -6444,7 +6444,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651"/>
         <statusCode code="COMPLETE"/>
@@ -6526,7 +6526,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
         <statusCode code="COMPLETE"/>
@@ -6608,7 +6608,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA"/>
         <statusCode code="COMPLETE"/>
@@ -6690,7 +6690,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC"/>
         <statusCode code="COMPLETE"/>
@@ -6772,7 +6772,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7"/>
         <statusCode code="COMPLETE"/>
@@ -6858,7 +6858,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A555DD62-B352-45A2-A601-C21F28340B1D"/>
         <statusCode code="COMPLETE"/>
@@ -6940,7 +6940,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9"/>
         <statusCode code="ACTIVE"/>
@@ -7026,7 +7026,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8"/>
         <statusCode code="COMPLETE"/>
@@ -7108,7 +7108,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394"/>
         <statusCode code="ACTIVE"/>
@@ -7194,7 +7194,7 @@ The line below contains special characters...
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C"/>
         <statusCode code="COMPLETE"/>
@@ -8096,11 +8096,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
+        <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="19880101"/>
         </effectiveTime>
         <availabilityTime value="20100113154141"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8108,9 +8111,6 @@ The line below contains special characters...
                 <text>Engraver (entry added 13/1/2010, but marked as 01/1/1988 as date of entry)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8152,11 +8152,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
+        <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8164,9 +8167,6 @@ The line below contains special characters...
                 <text>Family member : Uncle</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8208,22 +8208,22 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
+        <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
+    <originalText>Systolic blood pressure</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mmHg</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
-    <originalText>Systolic blood pressure</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8265,22 +8265,22 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
+        <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
+    <originalText>Diastolic blood pressure</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mmHg</originalText></translation></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
-    <originalText>Diastolic blood pressure</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8322,11 +8322,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
+        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
+    <originalText>Heart attack</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145739"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8334,10 +8338,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8379,11 +8379,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
+        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
+    <originalText>Happy puppet syndrome</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145725"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8391,10 +8395,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - Happy Puppet</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8436,11 +8436,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
+        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
+    <originalText>Allergic rhinitis due to pollens</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113114111"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8448,10 +8452,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
-    <originalText>Allergic rhinitis due to pollens</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8493,11 +8493,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100609160800"/>
         </effectiveTime>
         <availabilityTime value="20100609160409"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8505,9 +8508,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8549,11 +8549,14 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
+        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163251"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8561,9 +8564,6 @@ The line below contains special characters...
                 <text>Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8605,11 +8605,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
+    <originalText>Tired all the time</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163124"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8617,10 +8621,6 @@ The line below contains special characters...
                 <text>This is descriptive text `¬¦!&quot;£$%^&amp;*()-_+={}[]~#@&apos;:;&lt;,|\&gt;./?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
-    <originalText>Tired all the time</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -8741,11 +8741,15 @@ The line below contains special characters...
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
+</code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026115854"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -8753,10 +8757,6 @@ The line below contains special characters...
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
