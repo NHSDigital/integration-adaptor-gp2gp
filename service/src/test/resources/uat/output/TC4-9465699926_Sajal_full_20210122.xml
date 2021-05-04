@@ -1518,7 +1518,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
         <statusCode code="COMPLETE"/>
@@ -1614,7 +1614,7 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <statusCode code="COMPLETE"/>
@@ -1762,7 +1762,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
         <statusCode code="COMPLETE"/>
@@ -1846,7 +1846,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
@@ -3891,7 +3891,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
         <statusCode code="COMPLETE"/>
@@ -3972,7 +3972,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="10720133-30C3-4145-9184-8713284C5A90"/>
         <statusCode code="COMPLETE"/>
@@ -4053,7 +4053,7 @@ Dosage: 0.5 ml</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
         <statusCode code="COMPLETE"/>
