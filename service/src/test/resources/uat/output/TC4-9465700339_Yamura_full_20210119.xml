@@ -297,7 +297,7 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
         <statusCode code="COMPLETE"/>
@@ -1836,7 +1836,7 @@ And more stuff</text>
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
         <statusCode code="COMPLETE"/>
@@ -1870,7 +1870,7 @@ And more stuff</text>
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
@@ -3375,7 +3375,7 @@ with special characters
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <statusCode code="COMPLETE"/>

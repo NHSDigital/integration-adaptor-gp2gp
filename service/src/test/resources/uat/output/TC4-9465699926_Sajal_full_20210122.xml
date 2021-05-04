@@ -1249,7 +1249,7 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <statusCode code="COMPLETE"/>
@@ -2108,7 +2108,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
         <statusCode code="COMPLETE"/>
@@ -2142,7 +2142,7 @@
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
         <statusCode code="COMPLETE"/>

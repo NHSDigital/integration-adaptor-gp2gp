@@ -1789,7 +1789,7 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
         <statusCode code="COMPLETE"/>

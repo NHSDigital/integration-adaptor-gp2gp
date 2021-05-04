@@ -6218,7 +6218,7 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="A8B2DE9A-C1CA-4534-9B30-7783301F6BAA"/>
         <statusCode code="COMPLETE"/>
@@ -6282,7 +6282,7 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
         <statusCode code="COMPLETE"/>

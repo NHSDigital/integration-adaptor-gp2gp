@@ -116,7 +116,7 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="test-id-3"/>
         <statusCode code="COMPLETE"/>

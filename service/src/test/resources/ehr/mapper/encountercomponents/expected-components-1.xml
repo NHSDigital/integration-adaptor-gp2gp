@@ -155,7 +155,7 @@
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="394559384658936"/>
         <statusCode code="COMPLETE"/>

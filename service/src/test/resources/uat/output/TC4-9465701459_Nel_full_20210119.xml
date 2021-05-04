@@ -7837,7 +7837,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
         <statusCode code="COMPLETE"/>
@@ -7901,7 +7901,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
         <statusCode code="COMPLETE"/>
@@ -7965,7 +7965,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
         <statusCode code="COMPLETE"/>
@@ -8029,7 +8029,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
         <statusCode code="COMPLETE"/>
