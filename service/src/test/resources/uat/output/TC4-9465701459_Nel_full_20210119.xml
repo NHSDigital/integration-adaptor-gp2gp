@@ -585,7 +585,7 @@ The line below contains special characters...
                     <center value="20100714175500"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162813"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -599,7 +599,7 @@ The line below contains special characters...
                     <center value="20100714175500"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162813"/>
-                <valueQuantity><value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -8680,7 +8680,7 @@ The line below contains special characters...
                     <center value="20100714"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162749"/>
-                <valueQuantity><value xsi:type="PQ" value="134.000" unit="1"><translation value="134.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="134.000" unit="1"><translation value="134.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -8694,7 +8694,7 @@ The line below contains special characters...
                     <center value="20100714"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162749"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">

@@ -2357,7 +2357,7 @@
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2370,7 +2370,7 @@
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2521,7 +2521,7 @@
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2534,7 +2534,7 @@
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
