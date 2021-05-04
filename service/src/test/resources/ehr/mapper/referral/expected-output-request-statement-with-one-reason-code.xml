@@ -1,11 +1,11 @@
 <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="II-for-ReferralRequest-ReferralRequest/E63AF323-919F-4D5F-9A1D-BA933BC230BC" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <text></text>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-        <text></text>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </RequestStatement>
 </component>

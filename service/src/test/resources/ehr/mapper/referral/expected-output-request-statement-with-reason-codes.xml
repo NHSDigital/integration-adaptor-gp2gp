@@ -1,11 +1,11 @@
 <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="II-for-ReferralRequest-ReferralRequest/E63AF323-919F-4D5F-9A1D-BA933BC230BC" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <text>UBRN: bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4 Priority: Routine Specialty: unknown Reason Codes: Non-urgent hospital admission,Referral to private doctor,Neurosurgical referral Referred for investigation into low blood pressure</text>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100119"/>
-        <text>UBRN: bb2378b6-dde2-11e9-9d36-2a2ae2dbcce4 Priority: Routine Specialty: unknown Reason Codes: Non-urgent hospital admission,Referral to private doctor,Neurosurgical referral Referred for investigation into low blood pressure</text>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
     </RequestStatement>
 </component>
