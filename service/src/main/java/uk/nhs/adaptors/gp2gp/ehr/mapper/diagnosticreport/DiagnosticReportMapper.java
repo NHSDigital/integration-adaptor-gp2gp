@@ -49,12 +49,10 @@ public class DiagnosticReportMapper {
             .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
             .specimens(mappedSpecimens);
 
-        String temp = TemplateUtils.fillTemplate(
+        return TemplateUtils.fillTemplate(
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
             diagnosticReportCompoundStatementTemplateParameters.build()
         );
-
-        return temp;
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {

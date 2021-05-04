@@ -1,41 +1,33 @@
-<ehrComposition classCode="COMPOSITION" moodCode="EVN">
-    <id root="394559384658936"/>
-    <statusCode code="COMPLETE"/>
-    <effectiveTime>
-        <center value="20200724"/>
-    </effectiveTime>
-    <availabilityTime value="20200724133829" />
-    <component typeCode="COMP" contextConductionInd="true">
-        <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-            <id root="394559384658936"/>
-            <statusCode code="COMPLETE"/>
-            <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
-            <effectiveTime>
-                <center value="20200724"/>
-            </effectiveTime>
-            <availabilityTime value="20200724133829" />
-            <component typeCode="COMP" contextConductionInd="true">
-                <ObservationStatement classCode="OBS" moodCode="ENV">
-                    <id root="394559384658936"/>
-                    <statusCode code="COMPLETE"/>
-                    <effectiveTime>
-                        <center value="20200724"/>
-                    </effectiveTime>
-                    <availabilityTime value="20200724133829" />
-                    <pertinentInformation typeCode="PERT">
-                        <sequenceNumber value="+1"/>
-                        <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                            <text>Status: Active Condition.actualProblem note refers to AllergyIntolerance Significance : Major - Episodicity : First - test, test</text>
-                        </pertinentAnnotation>
-                    </pertinentInformation>
-                    <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-                    <Participant typeCode="AUT" contextControlCode="OP">
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="394559384658936"/>
+        <statusCode code="COMPLETE"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <effectiveTime>
+            <center value="20200724"/>
+        </effectiveTime>
+        <availabilityTime value="20200724133829" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="394559384658936"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20200724"/>
+                </effectiveTime>
+                <availabilityTime value="20200724133829" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Condition.actualProblem note refers to AllergyIntolerance Significance : Major - Episodicity : First - test, test</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+                <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-                </ObservationStatement>
-            </component>
-        </CompoundStatement>
-    </component>
-</ehrComposition>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>

@@ -1,11 +1,13 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -13,8 +15,6 @@
                 <text>Range: Text: Test reference range text High: 20 Interpretation Code: Another code Example with userSelected Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         
     </ObservationStatement>
 </component>

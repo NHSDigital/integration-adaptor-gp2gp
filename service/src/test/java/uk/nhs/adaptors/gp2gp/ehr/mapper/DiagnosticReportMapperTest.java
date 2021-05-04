@@ -21,7 +21,7 @@ import java.io.IOException;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class DiagnosticReportMapperTest {
-    private static final String DIAGNOSTIC_REPORT_FILE_LOCATION = "/ehr/mapper/diagnostic_report/";
+    private static final String DIAGNOSTIC_REPORT_FILE_LOCATION = "/ehr/mapper/diagnosticreport/";
 
     private static final String INPUT_JSON_BUNDLE = DIAGNOSTIC_REPORT_FILE_LOCATION + "fhir_bundle.json";
     private static final String INPUT_JSON_DIAGNOSTIC_REPORT = DIAGNOSTIC_REPORT_FILE_LOCATION + "diagnostic_report.json";

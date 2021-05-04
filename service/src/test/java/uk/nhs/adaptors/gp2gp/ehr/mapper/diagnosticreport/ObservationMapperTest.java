@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationMapperTest {
-    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnostic_report/";
+    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
 
     private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON = TEST_FILE_DIRECTORY
         + "observation_associated_with_specimen_1.json";
