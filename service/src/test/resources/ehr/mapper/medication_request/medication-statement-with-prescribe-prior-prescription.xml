@@ -1,4 +1,4 @@
-<component typeCode="COMP" contextConductionInd="true">
+<component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="456"/>
         <statusCode code="ACTIVE"/>

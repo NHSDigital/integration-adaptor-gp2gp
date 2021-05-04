@@ -492,7 +492,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <statusCode code="COMPLETE"/>
@@ -576,7 +576,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
         <statusCode code="COMPLETE"/>
@@ -627,7 +627,7 @@
     </agentRef>
 </Participant>
     </MedicationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
         <statusCode code="COMPLETE"/>
@@ -711,7 +711,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8DF92722-5B5F-4324-866E-0328D5EA4286"/>
         <statusCode code="COMPLETE"/>
@@ -795,7 +795,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
         <statusCode code="COMPLETE"/>
@@ -891,7 +891,7 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
         <statusCode code="COMPLETE"/>
@@ -1020,7 +1020,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
         <statusCode code="COMPLETE"/>
@@ -1149,7 +1149,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
         <statusCode code="COMPLETE"/>
@@ -1233,7 +1233,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
         <statusCode code="COMPLETE"/>
@@ -1317,7 +1317,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
         <statusCode code="COMPLETE"/>
@@ -1368,7 +1368,7 @@
     </agentRef>
 </Participant>
     </MedicationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
         <statusCode code="COMPLETE"/>
@@ -1452,7 +1452,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E"/>
         <statusCode code="COMPLETE"/>
@@ -1503,7 +1503,7 @@
     </agentRef>
 </Participant>
     </MedicationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
         <statusCode code="COMPLETE"/>
@@ -1554,7 +1554,7 @@
     </agentRef>
 </Participant>
     </MedicationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
         <statusCode code="COMPLETE"/>
@@ -1605,7 +1605,7 @@
     </agentRef>
 </Participant>
     </MedicationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
         <statusCode code="COMPLETE"/>
@@ -2413,7 +2413,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
         <statusCode code="ACTIVE"/>
@@ -2494,7 +2494,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
         <statusCode code="ACTIVE"/>
@@ -2580,7 +2580,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
         <statusCode code="ACTIVE"/>
@@ -2661,7 +2661,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
         <statusCode code="COMPLETE"/>
@@ -2743,7 +2743,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
         <statusCode code="COMPLETE"/>
@@ -2824,7 +2824,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
         <statusCode code="ACTIVE"/>
@@ -2905,7 +2905,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
         <statusCode code="COMPLETE"/>
@@ -2987,7 +2987,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
         <statusCode code="COMPLETE"/>
@@ -3081,7 +3081,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
         <statusCode code="COMPLETE"/>
@@ -3162,7 +3162,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
         <statusCode code="COMPLETE"/>
@@ -3243,7 +3243,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
         <statusCode code="ACTIVE"/>
@@ -3324,7 +3324,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
         <statusCode code="COMPLETE"/>
@@ -3406,7 +3406,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
         <statusCode code="COMPLETE"/>
@@ -3488,7 +3488,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
         <statusCode code="COMPLETE"/>
@@ -3570,7 +3570,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
         <statusCode code="COMPLETE"/>
@@ -3652,7 +3652,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
         <statusCode code="COMPLETE"/>
@@ -3734,7 +3734,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
         <statusCode code="COMPLETE"/>
@@ -3815,7 +3815,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
         <statusCode code="ACTIVE"/>
@@ -3896,7 +3896,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
         <statusCode code="COMPLETE"/>
@@ -3978,7 +3978,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <statusCode code="ACTIVE"/>
@@ -4064,7 +4064,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
         <statusCode code="COMPLETE"/>
@@ -4145,7 +4145,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
         <statusCode code="ACTIVE"/>
@@ -4226,7 +4226,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7374E13A-D408-460C-A021-3441347C5027"/>
         <statusCode code="ACTIVE"/>
@@ -4307,7 +4307,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
         <statusCode code="COMPLETE"/>
@@ -4389,7 +4389,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
         <statusCode code="COMPLETE"/>
@@ -4471,7 +4471,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
         <statusCode code="COMPLETE"/>
@@ -4553,7 +4553,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
         <statusCode code="COMPLETE"/>
@@ -4635,7 +4635,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
         <statusCode code="COMPLETE"/>
@@ -4717,7 +4717,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
         <statusCode code="COMPLETE"/>
@@ -4798,7 +4798,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
         <statusCode code="COMPLETE"/>
@@ -4879,7 +4879,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537"/>
         <statusCode code="COMPLETE"/>
@@ -4960,7 +4960,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
         <statusCode code="COMPLETE"/>
@@ -5042,7 +5042,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
         <statusCode code="ACTIVE"/>
@@ -5123,7 +5123,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
         <statusCode code="ACTIVE"/>
@@ -5204,7 +5204,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
         <statusCode code="ACTIVE"/>
@@ -5290,7 +5290,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
         <statusCode code="COMPLETE"/>
@@ -5372,7 +5372,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
         <statusCode code="ACTIVE"/>
@@ -5458,7 +5458,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="300330A9-5389-444B-A23E-6402355AB06C"/>
         <statusCode code="COMPLETE"/>
@@ -5539,7 +5539,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
         <statusCode code="COMPLETE"/>
@@ -5621,7 +5621,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
         <statusCode code="COMPLETE"/>
@@ -5702,7 +5702,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B"/>
         <statusCode code="COMPLETE"/>
@@ -5784,7 +5784,7 @@
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
         <statusCode code="ACTIVE"/>
