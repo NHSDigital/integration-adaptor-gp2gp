@@ -35,6 +35,7 @@ import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.w3c.dom.Document;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -50,6 +51,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
 @DirtiesContext
+@Slf4j
 public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String PATIENT_NOT_FOUND = "PATIENT_NOT_FOUND";
     private static final String INVALID_NHS_NUMBER = "INVALID_NHS_NUMBER";
@@ -154,6 +156,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private StorageDataWrapper getStorageDataWrapper(EhrExtractStatus ehrExtractStatus) throws IOException {
         var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        LOGGER.info("TEST DATA: storageDataWrapperString" + storageDataWrapperString);
         return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
 
