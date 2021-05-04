@@ -79,7 +79,7 @@ public class ObservationToNarrativeStatementMapperTest {
 
         String outputMessage = observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, false);
 
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutputMessage);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     private static Stream<Arguments> resourceFileParams() {

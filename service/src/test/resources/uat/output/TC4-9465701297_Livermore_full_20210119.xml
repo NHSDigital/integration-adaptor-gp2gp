@@ -233,9 +233,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
+        <text>Type: Discharge to home Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharge to home from Dr  A  Richard Holder at EMIS LV Test Practice 1 (04-Sep-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200904132700" />
-        <text>Type: Discharge to home Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharge to home from Dr  A  Richard Holder at EMIS LV Test Practice 1 (04-Sep-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
@@ -282,9 +282,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (04-Sep-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200904133300" />
-        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (04-Sep-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
@@ -786,9 +786,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <text>typee soenermewe</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201105134200" />
-        <text>typee soenermewe</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -914,9 +914,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038" />
+        <text>Type: Seen by physiotherapist Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Seen by physiotherapist from NHS e-Referral Service (09-Nov-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109115800" />
-        <text>Type: Seen by physiotherapist Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Seen by physiotherapist from NHS e-Referral Service (09-Nov-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
@@ -963,9 +963,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <text>Type: Formal complaint about hospital care RE: self Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Formal complaint about hospital care RE: self from NHS e-Referral Service (09-Nov-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109115900" />
-        <text>Type: Formal complaint about hospital care RE: self Author Org: NHS e-Referral Service Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Formal complaint about hospital care RE: self from NHS e-Referral Service (09-Nov-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
@@ -1012,9 +1012,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50" />
+        <text>Type: Chesty cough Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: from TEMPLE SOWERBY MEDICAL PRACTICE (09-Nov-2020) - More text</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201106000000" />
-        <text>Type: Chesty cough Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: from TEMPLE SOWERBY MEDICAL PRACTICE (09-Nov-2020) - More text</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
@@ -1028,9 +1028,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <text>This is an added comment</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109" />
-        <text>This is an added comment</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1292,9 +1292,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (18-Nov-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201118111600" />
-        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (18-Nov-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
@@ -1341,9 +1341,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (16-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201216111000" />
-        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (16-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
@@ -1492,7 +1492,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
         <statusCode code="COMPLETE"/>
@@ -1951,9 +1951,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC" />
+        <text>Type: Discharged from outpatients Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharged from outpatients from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222101100" />
-        <text>Type: Discharged from outpatients Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Discharged from outpatients from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
@@ -2325,9 +2325,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D" />
+        <text>Some additional text which is not added with a code</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210111131700" />
-        <text>Some additional text which is not added with a code</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2746,7 +2746,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
         <statusCode code="ACTIVE"/>
@@ -2827,7 +2827,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7"/>
         <statusCode code="ACTIVE"/>
@@ -2913,7 +2913,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C"/>
         <statusCode code="COMPLETE"/>
@@ -2994,7 +2994,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
         <statusCode code="ACTIVE"/>
@@ -3080,7 +3080,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
         <statusCode code="COMPLETE"/>
@@ -3161,7 +3161,7 @@
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
         <statusCode code="COMPLETE"/>
