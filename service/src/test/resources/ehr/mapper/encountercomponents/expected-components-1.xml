@@ -198,7 +198,7 @@
             </referredToExternalDocument>
         </reference>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="394559384658936"/>
         <statusCode code="ACTIVE"/>

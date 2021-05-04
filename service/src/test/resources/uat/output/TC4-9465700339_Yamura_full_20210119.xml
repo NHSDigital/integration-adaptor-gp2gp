@@ -3967,7 +3967,7 @@ with special characters
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
         <statusCode code="COMPLETE"/>
