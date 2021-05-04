@@ -281,7 +281,7 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DN"/>
-                <effectiveTime><center value="20100223000000"></effectiveTime>
+                <effectiveTime><center value="20100223000000"/></effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>URINE</desc>
                 </specimenSpecimenMaterial>
@@ -368,7 +368,7 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DO"/>
-                <effectiveTime><center value="20100223154100"></effectiveTime>
+                <effectiveTime><center value="20100223154100"/></effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>SERUM</desc>
                 </specimenSpecimenMaterial>
@@ -437,7 +437,7 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DP"/>
-                <effectiveTime><center value="20100224154100"></effectiveTime>
+                <effectiveTime><center value="20100224154100"/></effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>SERUM</desc>
                 </specimenSpecimenMaterial>

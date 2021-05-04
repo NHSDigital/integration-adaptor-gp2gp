@@ -28,7 +28,7 @@ public class SpecimenMapper {
 
     private static final Mustache SPECIMEN_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("specimen_compound_statement_template.mustache");
-    private static final String EFFECTIVE_TIME_TEMPLATE = "<effectiveTime><center value=\"%s\"></effectiveTime>";
+    private static final String EFFECTIVE_TIME_TEMPLATE = "<effectiveTime><center value=\"%s\"/></effectiveTime>";
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;

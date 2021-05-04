@@ -242,7 +242,7 @@
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="Unknown"/>
-                <effectiveTime><center value="20020330092100"></effectiveTime>
+                <effectiveTime><center value="20020330092100"/></effectiveTime>
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>VENOUS BLOOD</desc>
                 </specimenSpecimenMaterial>
