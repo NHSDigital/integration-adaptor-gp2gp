@@ -282,9 +282,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
+        <text>Inactive Diary Entry - Medication review</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110114" />
-        <text>Inactive Diary Entry - Medication review</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -616,9 +616,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <text>This is just a consultation to test issue of previous courses via consultations</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100323154200" />
-        <text>This is just a consultation to test issue of previous courses via consultations</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -763,9 +763,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
+        <text>Fluoxetine 20mg capsules One To Be Taken Each Day</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100810131700" />
-        <text>Fluoxetine 20mg capsules One To Be Taken Each Day</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>

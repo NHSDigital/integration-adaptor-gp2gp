@@ -388,9 +388,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <text>This is just some text without a coded entry</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20181203095000" />
-        <text>This is just some text without a coded entry</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -450,9 +450,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5" />
+        <text>Haematology - Venous blood specimen (Test request : Full Blood Count)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20181205" />
-        <text>Haematology - Venous blood specimen (Test request : Full Blood Count)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -882,9 +882,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <text>Test note</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200124122800" />
-        <text>Test note</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -978,9 +978,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <text>Issued salbutamol</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200128134300" />
-        <text>Issued salbutamol</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1107,9 +1107,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
+        <text>Issued repeat medication for Furosemide</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200206142600" />
-        <text>Issued repeat medication for Furosemide</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1818,9 +1818,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD" />
+        <text>Type: Referral Letter (21-Sep-2020) Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: for 2 week rule referral - brain</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921" />
-        <text>Type: Referral Letter (21-Sep-2020) Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: for 2 week rule referral - brain</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
@@ -1943,9 +1943,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
+        <text>Type: Referral Letter (21-Sep-2020) Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: for 2 week rule referral - skin</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20200921" />
-        <text>Type: Referral Letter (21-Sep-2020) Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: for 2 week rule referral - skin</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
@@ -2359,9 +2359,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
+        <text>Advice given re use of inhalers and managing flare ups</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210112113300" />
-        <text>Advice given re use of inhalers and managing flare ups</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>

@@ -367,9 +367,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <text>Created consultation with same date and time as existing consultation</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109132500" />
-        <text>Created consultation with same date and time as existing consultation</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -509,9 +509,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (17-Nov-2020) Absent Attachment: File size 18551238 bytes greater than maximum allowable (5MB)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117110200" />
-        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (17-Nov-2020) Absent Attachment: File size 18551238 bytes greater than maximum allowable (5MB)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
@@ -525,9 +525,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <text>This is some text in the comment field on the Attach Document screen</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>This is some text in the comment field on the Attach Document screen</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -570,9 +570,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <text>Type: Postoperative urine specimen collection Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Postoperative urine specimen collection (17-Nov-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117000000" />
-        <text>Type: Postoperative urine specimen collection Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Postoperative urine specimen collection (17-Nov-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
@@ -611,9 +611,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <text>Very special characters !@£$567890-=][[]:&quot;|\&apos;;&lt;&gt;//.,</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Very special characters !@£$567890-=][[]:&quot;|\&apos;;&lt;&gt;//.,</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -656,9 +656,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
+        <text>Doctor only Confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Doctor only Confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -701,9 +701,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <text>Clinician Only Confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Clinician Only Confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -746,9 +746,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
+        <text>Org Clinician Only confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Org Clinician Only confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -884,9 +884,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <text>Biochemistry - Venous blood specimen (Test request : Serum electrolytes, Test request : Liver Function Tests, Test request : Blood Glucose)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201118135600" />
-        <text>Biochemistry - Venous blood specimen (Test request : Serum electrolytes, Test request : Liver Function Tests, Test request : Blood Glucose)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -896,9 +896,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B" />
+        <text>Biochemistry - Urine specimen (Test request : Urinary Microalbumin)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201118135600" />
-        <text>Biochemistry - Urine specimen (Test request : Urinary Microalbumin)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -1007,9 +1007,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (15-Oct-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201015000000" />
-        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (15-Oct-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
@@ -1056,9 +1056,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (04-Sep-2019)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20190904000000" />
-        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (04-Sep-2019)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
