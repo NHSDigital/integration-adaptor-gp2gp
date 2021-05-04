@@ -124,6 +124,7 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+        System.out.println(mappedXml);
         assertThat(mappedXml).isEqualTo(expectedXml);
     }
 
