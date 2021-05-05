@@ -1,11 +1,24 @@
 <component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="{{linkSetId}}" />
+        <code code="{{clinicalStatusCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="{{clinicalStatusDisplay}}">
+            <originalText>{{clinicalStatusDisplay}}, {{qualifierDisplay}}</originalText>
+            <qualifier inverted="false">
+                <name code="{{qualifierCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="{{qualifierSignificance}}"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             {{#effectiveTimeLow}}<low value="{{effectiveTimeLow}}"/>{{/effectiveTimeLow}}{{^effectiveTimeLow}}<low nullFlavor="UNK"/>{{/effectiveTimeLow}}
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
         <availabilityTime value="{{availabilityTime}}" />
+        {{#relatedClinicalContent}}
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="{{.}}"/>
+                </statementRef>
+            </component>
+        {{/relatedClinicalContent}}
         {{#conditionNamed}}
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
@@ -13,20 +26,6 @@
             </namedStatementRef>
         </conditionNamed>
         {{/conditionNamed}}
-        {{#relatedClinicalContent}}
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="{{.}}"/>
-            </statementRef>
-        </component>
-        {{/relatedClinicalContent}}
-        <code code="{{clinicalStatusCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="{{clinicalStatusDisplay}}">
-            <originalText>{{clinicalStatusDisplay}}, {{qualifierDisplay}}</originalText>
-            <qualifier inverted="false">
-                <name code="{{qualifierCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="{{qualifierSignificance}}"/>
-            </qualifier>
-        </code>
-        {{{code}}}
         {{#performer}}
         {{{.}}}
         {{/performer}}
