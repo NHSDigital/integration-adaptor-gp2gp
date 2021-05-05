@@ -317,6 +317,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -406,6 +407,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -477,6 +479,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -516,5 +519,10 @@
     </CompoundStatement>
 </component>
 
+            <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>

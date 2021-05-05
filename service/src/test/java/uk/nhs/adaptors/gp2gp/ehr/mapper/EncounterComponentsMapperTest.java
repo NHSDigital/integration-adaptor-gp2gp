@@ -100,7 +100,7 @@ public class EncounterComponentsMapperTest {
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
             messageContext,
-            specimenMapper
+            specimenMapper, participantMapper
         );
 
         encounterComponentsMapper = new EncounterComponentsMapper(

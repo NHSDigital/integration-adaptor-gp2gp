@@ -282,6 +282,7 @@
 </Participant>
     </ObservationStatement>
 </component>
+
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
