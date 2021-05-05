@@ -2659,7 +2659,7 @@
                     <center value="20110111153300"/>
                 </effectiveTime>
                 <availabilityTime value="20110111153927"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2673,7 +2673,7 @@
                     <center value="20110111153300"/>
                 </effectiveTime>
                 <availabilityTime value="20110111153927"/>
-                <valueQuantity><value xsi:type="PQ" value="50.000" unit="1"><translation value="50.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="50.000" unit="1"><translation value="50.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->

@@ -297,7 +297,7 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -401,7 +401,7 @@
                     <center value="20050201113300"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -414,7 +414,7 @@
                     <center value="20050201113300"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -999,6 +999,7 @@
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1836,7 +1837,7 @@ And more stuff</text>
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="70FA5735-11CB-4E5C-825A-E5688FDC888C"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -1870,7 +1871,7 @@ And more stuff</text>
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
@@ -2622,7 +2623,7 @@ And more stuff</text>
                     <center value="20060425122200"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="182.000" unit="1"><translation value="182.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="182.000" unit="1"><translation value="182.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2635,7 +2636,7 @@ And more stuff</text>
                     <center value="20060425122200"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="92.000" unit="1"><translation value="92.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="92.000" unit="1"><translation value="92.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -3375,7 +3376,7 @@ with special characters
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -5373,7 +5374,7 @@ and extending onto other lines as well.</text>
                     <center value="20060425122200"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="181.000" unit="1"><translation value="181.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="181.000" unit="1"><translation value="181.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -5461,7 +5462,7 @@ and extending onto other lines as well.</text>
                     <center value="20060425122200"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -5525,7 +5526,7 @@ and extending onto other lines as well.</text>
                     <center value="20060425163000"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="180.000" unit="1"><translation value="180.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -5613,7 +5614,7 @@ and extending onto other lines as well.</text>
                     <center value="20060425163000"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">

@@ -1339,7 +1339,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -2198,7 +2198,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -2232,7 +2232,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
@@ -2447,7 +2447,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2460,7 +2460,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2611,7 +2611,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2624,7 +2624,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -2912,6 +2912,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>

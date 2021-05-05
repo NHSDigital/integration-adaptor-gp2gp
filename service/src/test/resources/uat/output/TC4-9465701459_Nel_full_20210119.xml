@@ -585,7 +585,7 @@ The line below contains special characters...
                     <center value="20100714175500"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162813"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -599,7 +599,7 @@ The line below contains special characters...
                     <center value="20100714175500"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162813"/>
-                <valueQuantity><value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="75.000" unit="1"><translation value="75.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -7818,7 +7818,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -7882,7 +7882,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
@@ -7946,7 +7946,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -8010,7 +8010,7 @@ The line below contains special characters...
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
@@ -8661,7 +8661,7 @@ The line below contains special characters...
                     <center value="20100714"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162749"/>
-                <valueQuantity><value xsi:type="PQ" value="134.000" unit="1"><translation value="134.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="134.000" unit="1"><translation value="134.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -8675,7 +8675,7 @@ The line below contains special characters...
                     <center value="20100714"/>
                 </effectiveTime>
                 <availabilityTime value="20100714162749"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
