@@ -1,8 +1,8 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="{{allergyStructureId}}"/>
-        <statusCode code="COMPLETE"/>
         {{{categoryCode}}}
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             {{{effectiveTime}}}
         </effectiveTime>
@@ -10,6 +10,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="{{observationId}}"/>
+                {{{code}}}
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     {{{effectiveTime}}}
@@ -21,7 +22,6 @@
                         <text>{{pertinentInformation}}</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                {{{code}}}
                 {{#author}}
                 {{{.}}}
                 {{/author}}
