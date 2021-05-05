@@ -7840,8 +7840,8 @@ The line below contains special characters...
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
@@ -7849,6 +7849,8 @@ The line below contains special characters...
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
+                <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20100113"/>
@@ -7860,8 +7862,6 @@ The line below contains special characters...
                         <text>Status: Active This is text for a warfarin allergy Significance : Major - Episodicity : First - This is text for a warfarin allergy</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7904,8 +7904,8 @@ The line below contains special characters...
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
@@ -7913,6 +7913,8 @@ The line below contains special characters...
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
+                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20100113"/>
@@ -7924,8 +7926,6 @@ The line below contains special characters...
                         <text>Status: Active This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010) Significance : Major - Episodicity : First - This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7968,8 +7968,8 @@ The line below contains special characters...
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
@@ -7977,6 +7977,8 @@ The line below contains special characters...
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
+                <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20100113"/>
@@ -7988,8 +7990,6 @@ The line below contains special characters...
                         <text>Status: Active Drug Allergy - Apsrin Significance : Minor - Episodicity : First - Drug Allergy - Apsrin</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8032,8 +8032,8 @@ The line below contains special characters...
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
@@ -8041,6 +8041,8 @@ The line below contains special characters...
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
+                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20100113"/>
@@ -8052,8 +8054,6 @@ The line below contains special characters...
                         <text>Status: Active This is a peanut allergy, (Replaced Allergic gastroenteritis)</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
