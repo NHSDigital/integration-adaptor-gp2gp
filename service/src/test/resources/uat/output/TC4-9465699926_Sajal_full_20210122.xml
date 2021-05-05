@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -1249,11 +1249,11 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
@@ -1261,6 +1261,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
+                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20101216081700"/>
@@ -1272,8 +1274,6 @@
                         <text>Status: Active This is a non-specific adverse reaction to drugs</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2108,11 +2108,11 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20110307000000"/>
         </effectiveTime>
@@ -2120,6 +2120,9 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+    <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20110307000000"/>
@@ -2131,9 +2134,6 @@
                         <text>Status: Active This is a problem linked drug sensitivity - to nuchal pain</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
-    <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2142,11 +2142,11 @@
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20110307162000"/>
         </effectiveTime>
@@ -2154,6 +2154,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
+                <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20110307162000"/>
@@ -2165,8 +2167,6 @@
                         <text>Status: Active This non drug allergy is problem linked (nuchal pain)</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2357,7 +2357,7 @@
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2370,7 +2370,7 @@
                     <center value="20110307162500"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2521,7 +2521,7 @@
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="125.000" unit="1"><translation value="125.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2534,7 +2534,7 @@
                     <center value="20110307164600"/>
                 </effectiveTime>
                 <availabilityTime value="20110922110028"/>
-                <valueQuantity><value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="70.000" unit="1"><translation value="70.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -2822,6 +2822,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -4131,30 +4132,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2" />
-        <effectiveTime>
-            <low value="20101209"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Salmonella shamba</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101209"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4196,30 +4194,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
-        <effectiveTime>
-            <low value="20101209000000"/>
-            <high value="20110511000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Sympathotonic orthostatic hypotension</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101209000000"/>
+            <high value="20110511000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4261,50 +4256,47 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
-        <effectiveTime>
-            <low value="20101209"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Breath smells unpleasant</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101209"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4346,29 +4338,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
-        <effectiveTime>
-            <low value="20101209"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
-</code>
+        <effectiveTime>
+            <low value="20101209"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4410,29 +4400,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
-        <effectiveTime>
-            <low value="20101209"/>
-            <high value="20110616000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
-</code>
+        <effectiveTime>
+            <low value="20101209"/>
+            <high value="20110616000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4474,75 +4462,72 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
-        <effectiveTime>
-            <low value="20081125000000"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7374E13A-D408-460C-A021-3441347C5027"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Mucor mycetomatis</originalText>
-</code>
+        <effectiveTime>
+            <low value="20081125000000"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="7374E13A-D408-460C-A021-3441347C5027"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4584,29 +4569,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="7314452F-9848-403F-8684-D7E0B2163F88" />
-        <effectiveTime>
-            <low value="20101216"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
-</code>
+        <effectiveTime>
+            <low value="20101216"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4648,30 +4631,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
-        <effectiveTime>
-            <low value="20090204000000"/>
-            <high value="20100113000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="162EF189-0270-449D-8FE0-BB82E6FF051F"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Perineal incision</originalText>
-</code>
+        <effectiveTime>
+            <low value="20090204000000"/>
+            <high value="20100113000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="162EF189-0270-449D-8FE0-BB82E6FF051F"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4713,30 +4693,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
-        <effectiveTime>
-            <low value="20101216"/>
-            <high value="20101216000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Toxic plant</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101216"/>
+            <high value="20101216000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4778,45 +4755,42 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
-        <effectiveTime>
-            <low value="20101216"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Angettes 75mg tablet</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101216"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4858,50 +4832,47 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B" />
-        <effectiveTime>
-            <low value="20101216"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="49259291-5B92-4C0B-BE40-C299A8B02677"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101216"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="49259291-5B92-4C0B-BE40-C299A8B02677"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4943,80 +4914,77 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537" />
-        <effectiveTime>
-            <low value="20101216"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
+        <effectiveTime>
+            <low value="20101216"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5058,30 +5026,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7" />
-        <effectiveTime>
-            <low value="20100104000000"/>
-            <high value="20100527000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Nuchal pain</originalText>
-</code>
+        <effectiveTime>
+            <low value="20100104000000"/>
+            <high value="20100527000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5123,70 +5088,67 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="6D62CF66-D522-4412-A2CB-3134819B46A0" />
-        <effectiveTime>
-            <low value="20110307"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="6567C77F-08E8-4994-B30D-D06B63A6E184"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Restlessness and agitation</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110307"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="6567C77F-08E8-4994-B30D-D06B63A6E184"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5228,30 +5190,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="300330A9-5389-444B-A23E-6402355AB06C" />
-        <effectiveTime>
-            <low value="20110308"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Hairy ear</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110308"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5293,30 +5252,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863" />
-        <effectiveTime>
-            <low value="20110308"/>
-            <high value="20110308000000"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
-    <originalText>Cognitive - behaviour therapy</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110308"/>
+            <high value="20110308000000"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5358,30 +5314,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05" />
-        <effectiveTime>
-            <low value="20110308"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Habitual pulling own hair</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110308"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5423,30 +5376,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0" />
-        <effectiveTime>
-            <low value="20110308"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Corneal specular microscopy</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110308"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5488,54 +5438,52 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898" />
-        <effectiveTime>
-            <low value="20110308"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="4617268B-1554-4618-8D2D-69A808C0A48D"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
-</code>
+        <effectiveTime>
+            <low value="20110308"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="4617268B-1554-4618-8D2D-69A808C0A48D"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5577,30 +5525,27 @@ Dosage: 0.5 ml</text>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE" />
-        <effectiveTime>
-            <low value="20110902"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Bite of ferret</originalText>
-</code>
+        <effectiveTime>
+            <low value="20110902"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -6624,7 +6569,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">

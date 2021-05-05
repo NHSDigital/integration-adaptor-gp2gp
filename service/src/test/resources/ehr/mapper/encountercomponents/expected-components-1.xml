@@ -18,38 +18,37 @@
 </component><component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
-        <effectiveTime>
-            <low value="20200906"/>
-            <high value="20201004000000"/>
-        </effectiveTime>
-        <availabilityTime value="20200907101202" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="394559384658936"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="394559384658936"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="394559384658936"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="394559384658936"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <effectiveTime>
+            <low value="20200906"/>
+            <high value="20201004000000"/>
+        </effectiveTime>
+        <availabilityTime value="20200907101202" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="394559384658936"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="394559384658936"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="394559384658936"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="394559384658936"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -155,11 +154,11 @@
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="394559384658936"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
@@ -167,6 +166,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="394559384658936"/>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="19781231"/>
@@ -178,7 +178,6 @@
                         <text>Reason Ended: Patient reports no subsequent recurrence on same medication Status: Resolved Type: Allergy Criticality: Low Risk Last Occurred: 1978-12-31 Example note text</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
             </ObservationStatement>
         </component>
     </CompoundStatement>
@@ -250,6 +249,7 @@
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="394559384658936" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
