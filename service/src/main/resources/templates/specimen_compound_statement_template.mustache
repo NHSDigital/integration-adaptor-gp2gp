@@ -10,13 +10,34 @@
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
                 <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
-                <id root="2.16.840.1.113883.2.1.4.5.2" extension="{{accessionIdentifier}}"/>
-                {{{effectiveTime}}}
+                {{#accessionIdentifier}}
+                <id root="2.16.840.1.113883.2.1.4.5.2" extension="{{{.}}}"/>
+                {{/accessionIdentifier}}
+                {{#effectiveTime}}
+                <effectiveTime>
+                    {{{.}}}
+                </effectiveTime>
+                {{/effectiveTime}}
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
                     <desc>{{type}}</desc>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
+        {{#pertinentInformation}}
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>{{{.}}}</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        {{/pertinentInformation}}
+        {{#participant}}
+        <Participant typeCode="AUT" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="{{{.}}}"/>
+            </agentRef>
+        </Participant>
+        {{/participant}}
         {{#observations}}
             {{{.}}}
         {{/observations}}

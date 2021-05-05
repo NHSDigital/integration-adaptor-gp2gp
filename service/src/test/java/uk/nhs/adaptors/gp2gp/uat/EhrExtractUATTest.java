@@ -70,10 +70,12 @@ public class EhrExtractUATTest {
     public void setUp() {
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
             .nhsNumber("1234567890")
-            .conversationId("test-conversation-id")
-            .requestId("test-request-id")
-            .fromOdsCode("test-from-ods-code")
-            .toOdsCode("test-to-ods-code")
+            .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
+            .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
+            .fromOdsCode("GP2GPTEST")
+            .toOdsCode("GP2GPTEST")
+            .toAsid("GP2GPTEST")
+            .fromAsid("GP2GPTEST")
             .build();
 
         final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorServiceStub();
@@ -95,7 +97,7 @@ public class EhrExtractUATTest {
             new BloodPressureMapper(
                 messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
             new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
+                messageContext, randomIdGeneratorService, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
             new DocumentReferenceToNarrativeStatementMapper(messageContext),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
