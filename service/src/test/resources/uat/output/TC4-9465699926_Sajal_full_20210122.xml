@@ -1249,7 +1249,7 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -2108,7 +2108,7 @@
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
@@ -2142,7 +2142,7 @@
             </ObservationStatement>
         </component>
     </CompoundStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>

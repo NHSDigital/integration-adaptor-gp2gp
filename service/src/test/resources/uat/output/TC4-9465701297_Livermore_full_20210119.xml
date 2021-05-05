@@ -1167,7 +1167,7 @@
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
