@@ -1252,8 +1252,8 @@
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
@@ -1261,6 +1261,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
+                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20101216081700"/>
@@ -1272,8 +1274,6 @@
                         <text>Status: Active This is a non-specific adverse reaction to drugs</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2111,8 +2111,8 @@
         <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20110307000000"/>
         </effectiveTime>
@@ -2120,6 +2120,9 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
+                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+    <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20110307000000"/>
@@ -2131,9 +2134,6 @@
                         <text>Status: Active This is a problem linked drug sensitivity - to nuchal pain</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
-    <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2145,8 +2145,8 @@
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20110307162000"/>
         </effectiveTime>
@@ -2154,6 +2154,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
+                <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20110307162000"/>
@@ -2165,8 +2167,6 @@
                         <text>Status: Active This non drug allergy is problem linked (nuchal pain)</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>

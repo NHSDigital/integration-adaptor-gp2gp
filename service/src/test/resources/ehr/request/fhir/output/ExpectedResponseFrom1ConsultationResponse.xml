@@ -119,8 +119,8 @@
         <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="test-id-3"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
@@ -128,6 +128,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="test-id-3"/>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="19781231"/>
@@ -139,7 +140,6 @@
                         <text>Reason Ended: Patient reports no subsequent recurrence on same medication Status: Resolved Type: Allergy Criticality: Low Risk Last Occurred: 1978-12-31 Example note text</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
             </ObservationStatement>
         </component>
     </CompoundStatement>

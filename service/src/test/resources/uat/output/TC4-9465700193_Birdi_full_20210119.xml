@@ -1792,8 +1792,8 @@
         <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20210104"/>
         </effectiveTime>
@@ -1801,6 +1801,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
+                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20210104"/>
@@ -1812,8 +1814,6 @@
                         <text>Status: Active</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
