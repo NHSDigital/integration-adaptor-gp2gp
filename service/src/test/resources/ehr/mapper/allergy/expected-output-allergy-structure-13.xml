@@ -1,8 +1,8 @@
-<component typeCode="COMP" contextConductionInd="true">
+<component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="394559384658936"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
@@ -10,6 +10,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="394559384658936"/>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="19781231"/>
@@ -21,7 +22,6 @@
                         <text></text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>

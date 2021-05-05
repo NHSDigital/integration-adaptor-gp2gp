@@ -16,7 +16,7 @@
                     <center nullFlavor="UNK"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value>
                 <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>Systolic reference range text</text>
@@ -35,7 +35,7 @@
                     <center nullFlavor="UNK"/>
                 </effectiveTime>
                 <availabilityTime value="20131118094149"/>
-                <valueQuantity><value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="75" unit="1"><translation value="75"><originalText>mmHg</originalText></translation></value>
                 <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>Diastolic reference range text</text>
