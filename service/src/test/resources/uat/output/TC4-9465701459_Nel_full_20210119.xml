@@ -7285,6 +7285,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100123134800"/>
             
@@ -7377,6 +7378,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             
@@ -7434,6 +7436,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             
@@ -7491,6 +7494,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             
@@ -7565,6 +7569,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             <high value="20100323000000"/>
@@ -7639,6 +7644,7 @@ The line below contains special characters...
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             
@@ -7713,6 +7719,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
             
@@ -7770,6 +7777,7 @@ The line below contains special characters...
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100714"/>
             
