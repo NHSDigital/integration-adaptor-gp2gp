@@ -5130,8 +5130,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
-</code>
         <effectiveTime>
             <low value="20201109132500"/>
             
@@ -5209,8 +5207,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
-</code>
         <effectiveTime>
             <low value="20201101"/>
             
@@ -5273,8 +5269,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
-</code>
         <effectiveTime>
             <low value="20201102"/>
             <high value="20201117000000"/>
@@ -5332,8 +5326,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="29857009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chest pain">
-</code>
         <effectiveTime>
             <low value="20201104"/>
             <high value="20201202000000"/>
@@ -5391,9 +5383,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
-</code>
         <effectiveTime>
             <low value="20201109"/>
             
@@ -5451,8 +5440,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="50417007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lower respiratory tract infection">
-</code>
         <effectiveTime>
             <low value="20201109"/>
             <high value="20201117000000"/>
@@ -5510,8 +5497,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="233604007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pneumonia">
-</code>
         <effectiveTime>
             <low value="20201116"/>
             
@@ -5569,8 +5554,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
-</code>
         <effectiveTime>
             <low value="20201117"/>
             
@@ -5628,8 +5611,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="185660003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adult abnormal - 2nd recall">
-</code>
         <effectiveTime>
             <low value="20201216"/>
             

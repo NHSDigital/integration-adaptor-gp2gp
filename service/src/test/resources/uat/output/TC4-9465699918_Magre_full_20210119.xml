@@ -5874,8 +5874,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="18165001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Jaundice">
-</code>
         <effectiveTime>
             <low value="20181203095000"/>
             <high value="20201215000000"/>
@@ -5973,8 +5971,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="1240761000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Suspected COVID-19">
-</code>
         <effectiveTime>
             <low value="20201214101800"/>
             
@@ -6067,8 +6063,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
-</code>
         <effectiveTime>
             <low value="20190902"/>
             
@@ -6151,8 +6145,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
-</code>
         <effectiveTime>
             <low value="20200724"/>
             <high value="20200724000000"/>

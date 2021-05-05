@@ -73,7 +73,6 @@ public class EncounterComponentsMapperTest {
         );
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
-            codeableConceptCdMapper,
             participantMapper
         );
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
@@ -124,7 +123,6 @@ public class EncounterComponentsMapperTest {
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
-        System.out.println(mappedXml);
         assertThat(mappedXml).isEqualTo(expectedXml);
     }
 

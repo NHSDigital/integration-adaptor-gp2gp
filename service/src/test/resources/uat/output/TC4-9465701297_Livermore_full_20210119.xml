@@ -3252,8 +3252,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="36031001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
-</code>
         <effectiveTime>
             <low value="20200906"/>
             <high value="20201004000000"/>
@@ -3326,8 +3324,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
-</code>
         <effectiveTime>
             <low value="20201102"/>
             
@@ -3402,9 +3398,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
-    <originalText>[RFC] Chest infection</originalText>
-</code>
         <effectiveTime>
             <low value="20201105"/>
             
@@ -3482,8 +3475,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
-</code>
         <effectiveTime>
             <low value="20201116"/>
             
@@ -3561,8 +3552,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="90176007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
-</code>
         <effectiveTime>
             <low value="20201116"/>
             <high value="20201214000000"/>
@@ -3620,8 +3609,6 @@
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="162397003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
-</code>
         <effectiveTime>
             <low value="20201116"/>
             <high value="20201214000000"/>
@@ -3679,8 +3666,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="787381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
-</code>
         <effectiveTime>
             <low value="20210106"/>
             
@@ -3738,8 +3723,6 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="103735009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
-</code>
         <effectiveTime>
             <low value="20210113"/>
             
