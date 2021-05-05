@@ -1,6 +1,6 @@
 <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="F5C1FDBB-A948-43BB-AB30-CEAA51FC0CC0"/>
+        <id root="II-for-DiagnosticReport-DiagnosticReport/96B93E28-293D-46E7-B4C2-D477EEBF7098"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>

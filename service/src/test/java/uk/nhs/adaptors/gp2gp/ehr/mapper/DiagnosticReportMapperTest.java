@@ -3,6 +3,9 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.Specimen;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,10 +16,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
+import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -26,6 +28,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +37,6 @@ public class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String INPUT_JSON_BUNDLE = "fhir-bundle.json";
     private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
-    private static final String INPUT_JSON_OPTIONAL_DATA = "diagnostic-report-with-optional-data.json";
     private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
     private static final String INPUT_JSON_EMPTY_RESULTS = "diagnostic-report-with-empty-results.json";
     private static final String INPUT_JSON_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.json";
@@ -44,30 +46,36 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_PERFORMER = "diagnostic-report-with-performer.json";
     private static final String INPUT_JSON_PERFORMER_NO_ACTOR = "diagnostic-report-with-performer-no-actor.json";
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
-    private static final String OUTPUT_XML_OPTIONAL_DATA = "diagnostic-report-with-optional-data.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
     private static final String OUTPUT_XML_PARTICIPANT = "diagnostic-report-with-participant.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private SpecimenMapper specimenMapper;
+    @Mock
+    private MessageContext messageContext;
+    @Mock
+    private IdMapper idMapper;
 
     private DiagnosticReportMapper mapper;
-    private MessageContext messageContext;
 
     @BeforeEach
     public void setUp() throws IOException {
-        final String bundleInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + INPUT_JSON_BUNDLE);
-        final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
-        messageContext = new MessageContext(new RandomIdGeneratorServiceStub());
-        messageContext.initialize(bundle);
+        final Bundle bundle = new FhirParseService()
+            .parseResource(ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + INPUT_JSON_BUNDLE), Bundle.class);
+
+        when(messageContext.getIdMapper()).thenReturn(idMapper);
+        when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockIdForResourceAndId());
+        when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+
+        when(specimenMapper.mapSpecimenToCompoundStatement(any(), any(), anyString())).thenAnswer(mockSpecimenMapping());
 
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        final ObservationMapper observationMapper = new ObservationMapper(messageContext,
-            new StructuredObservationValueMapper(), codeableConceptCdMapper, new ParticipantMapper());
-        final SpecimenMapper specimenMapper = new SpecimenMapper(messageContext,
-            observationMapper);
+
         mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper());
     }
 
@@ -84,13 +92,11 @@ public class DiagnosticReportMapperTest {
         final DiagnosticReport diagnosticReport = new FhirParseService().parseResource(jsonInput, DiagnosticReport.class);
 
         final String outputMessage = mapper.mapDiagnosticReportToCompoundStatement(diagnosticReport);
-
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_OPTIONAL_DATA, OUTPUT_XML_OPTIONAL_DATA),
             Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
@@ -101,4 +107,27 @@ public class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA)
         );
     }
+
+    private Answer<String> mockIdForResourceAndId() {
+        return invocation -> {
+            ResourceType resourceType = invocation.getArgument(0);
+            String originalId = invocation.getArgument(1);
+            return String.format("II-for-%s-%s", resourceType.name(), originalId);
+        };
+    }
+
+    private Answer<String> mockIdForReference() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return String.format("II-for-%s", reference.getReference());
+        };
+    }
+
+    private Answer<String> mockSpecimenMapping() {
+        return invocation -> {
+            Specimen specimen = invocation.getArgument(0);
+            return String.format("<!-- Mapped Specimen with id: %s -->", specimen.getId());
+        };
+    }
+
 }
