@@ -348,7 +348,7 @@
                     <center value="20200904"/>
                 </effectiveTime>
                 <availabilityTime value="20200904134806"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -361,7 +361,7 @@
                     <center value="20200904"/>
                 </effectiveTime>
                 <availabilityTime value="20200904134806"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -623,7 +623,7 @@
                     <center value="20200907174500"/>
                 </effectiveTime>
                 <availabilityTime value="20201105134936"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -636,7 +636,7 @@
                     <center value="20200907174500"/>
                 </effectiveTime>
                 <availabilityTime value="20201105134936"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -1116,7 +1116,7 @@
                     <center value="20201110115000"/>
                 </effectiveTime>
                 <availabilityTime value="20201110115343"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1129,7 +1129,7 @@
                     <center value="20201110115000"/>
                 </effectiveTime>
                 <availabilityTime value="20201110115343"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -1596,7 +1596,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125756"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1609,7 +1609,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125756"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -1635,7 +1635,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125757"/>
-                <valueQuantity><value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1693,7 +1693,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125757"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1753,7 +1753,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1810,7 +1810,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1844,7 +1844,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1902,7 +1902,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4631,7 +4631,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217130131"/>
-                <valueQuantity><value xsi:type="PQ" value="127.000" unit="1"><translation value="127.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="127.000" unit="1"><translation value="127.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4644,7 +4644,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217130131"/>
-                <valueQuantity><value xsi:type="PQ" value="98.000" unit="1"><translation value="98.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="98.000" unit="1"><translation value="98.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -4701,7 +4701,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125908"/>
-                <valueQuantity><value xsi:type="PQ" value="132.000" unit="1"><translation value="132.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="132.000" unit="1"><translation value="132.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4714,7 +4714,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125908"/>
-                <valueQuantity><value xsi:type="PQ" value="95.000" unit="1"><translation value="95.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="95.000" unit="1"><translation value="95.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -4771,7 +4771,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125844"/>
-                <valueQuantity><value xsi:type="PQ" value="121.000" unit="1"><translation value="121.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="121.000" unit="1"><translation value="121.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4784,7 +4784,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125844"/>
-                <valueQuantity><value xsi:type="PQ" value="101.000" unit="1"><translation value="101.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="101.000" unit="1"><translation value="101.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
