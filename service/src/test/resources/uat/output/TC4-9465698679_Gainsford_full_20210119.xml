@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -621,30 +621,27 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
-        <effectiveTime>
-            <low value="19781231"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100114095333" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
-    <originalText>Adverse reaction to amoxycillin</originalText>
-</code>
+        <effectiveTime>
+            <low value="19781231"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100114095333" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -703,30 +700,27 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
-        <effectiveTime>
-            <low value="20090112"/>
-            <high value="20120517000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114095356" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
-</code>
+        <effectiveTime>
+            <low value="20090112"/>
+            <high value="20120517000000"/>
+        </effectiveTime>
+        <availabilityTime value="20100114095356" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -779,6 +773,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100114"/>
             <high value="20120517000000"/>
@@ -789,14 +789,6 @@
                 <id root="A8896415-81A1-4366-9E92-3AFC04AEF25D"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="704280005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Combined calcium and vitamin D3 preparation allergy">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -849,30 +841,27 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B" />
-        <effectiveTime>
-            <low value="20100114"/>
-            <high value="20100114000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114095757" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
-    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
-</code>
+        <effectiveTime>
+            <low value="20100114"/>
+            <high value="20100114000000"/>
+        </effectiveTime>
+        <availabilityTime value="20100114095757" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="3DB5FD2D-6BDB-4CC1-9ABB-548EB586F48F"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -925,6 +914,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100114"/>
             <high value="20170130000000"/>
@@ -935,14 +930,6 @@
                 <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="300909004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic reaction to wasp sting">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1001,6 +988,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100114"/>
             
@@ -1011,15 +1004,6 @@
                 <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
-    <originalText>Drug hypersensitivity NOS</originalText>
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1078,6 +1062,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100114"/>
             
@@ -1088,14 +1078,6 @@
                 <id root="5BB18E92-DABB-4C22-838A-410B4A278060"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to eggs">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1148,6 +1130,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100114"/>
             <high value="20100524000000"/>
@@ -1158,14 +1146,6 @@
                 <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1224,6 +1204,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20100222"/>
             
@@ -1234,14 +1220,6 @@
                 <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1283,6 +1261,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20101001"/>
             
@@ -1293,15 +1277,6 @@
                 <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="856901000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cervical smear adequate">
-    <originalText>Cervical smear adequate</originalText>
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1343,6 +1318,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20101012"/>
             
@@ -1353,15 +1334,6 @@
                 <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1403,6 +1375,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20190128"/>
             <high value="20190225000000"/>
@@ -1413,14 +1391,6 @@
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="293433001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction caused by simvastatin">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1479,6 +1449,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20190321"/>
             
@@ -1489,15 +1465,6 @@
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="292954005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Penicillin adverse reaction">
-    <originalText>Adverse reaction to penicillins</originalText>
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3379,7 +3346,7 @@
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">
