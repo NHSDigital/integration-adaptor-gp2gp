@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -64,7 +64,7 @@ public class SpecimenMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
-        lenient().when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockId());
+        lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockId());
         lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockReference());
 
         observations = List.of(
@@ -102,7 +102,7 @@ public class SpecimenMapperTest {
 
         Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/Default-1"));
 
-        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenReturn("some-id");
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenReturn(MOCK_EMPTY_OBSERVATION);
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
@@ -136,7 +136,7 @@ public class SpecimenMapperTest {
     private Answer<String> mockId() {
         return invocation -> {
             ResourceType resourceType = invocation.getArgument(0);
-            String originalId = invocation.getArgument(1);
+            String originalId = invocation.getArgument(1).toString();
             return String.format("ID-for-%s-%s", resourceType.name(), originalId);
         };
     }

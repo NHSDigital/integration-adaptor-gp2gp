@@ -67,7 +67,7 @@ public class ObservationMapper {
 
         var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
             .compoundStatementId(
-                idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getId())
+                idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement())
             )
             .codeElement(prepareCodeElement(observationAssociatedWithSpecimen))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen))
@@ -101,7 +101,7 @@ public class ObservationMapper {
 
     private String mapObservationToNarrativeStatement(IdMapper idMapper, Observation observation) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
+            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .commentType(prepareCommentType(observation).getCode())
             .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
             .comment(observation.getComment())
@@ -119,7 +119,7 @@ public class ObservationMapper {
 
     private String mapObservationToObservationStatement(IdMapper idMapper, Observation observation) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .codeElement(prepareCodeElement(observation))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));

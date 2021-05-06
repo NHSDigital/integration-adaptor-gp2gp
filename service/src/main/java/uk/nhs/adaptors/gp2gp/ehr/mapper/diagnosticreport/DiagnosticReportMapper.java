@@ -62,7 +62,7 @@ public class DiagnosticReportMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
-            .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getId()))
+            .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
             .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
             .specimens(mappedSpecimens);
 
@@ -89,7 +89,7 @@ public class DiagnosticReportMapper {
 
         if (!codedDiagnosisText.isEmpty()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                    diagnosticReport, codedDiagnosisText
+                diagnosticReport, codedDiagnosisText
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
@@ -153,15 +153,15 @@ public class DiagnosticReportMapper {
 
     private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String comment) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-                .narrativeStatementId(randomIdGeneratorService.createNewId())
-                .commentType(CommentType.LABORATORY_RESULT_COMMENT.getCode())
-                .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
-                .comment(comment)
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
+            .narrativeStatementId(randomIdGeneratorService.createNewId())
+            .commentType(CommentType.LABORATORY_RESULT_COMMENT.getCode())
+            .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
+            .comment(comment)
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
 
         return TemplateUtils.fillTemplate(
-                NARRATIVE_STATEMENT_TEMPLATE,
-                narrativeStatementTemplateParameters.build()
+            NARRATIVE_STATEMENT_TEMPLATE,
+            narrativeStatementTemplateParameters.build()
         );
     }
 
@@ -170,8 +170,8 @@ public class DiagnosticReportMapper {
 
         if (codeableConcept.hasCoding()) {
             codedDiagnosisText = codeableConcept.getCoding().stream()
-                    .map(Coding::getDisplay)
-                    .collect(Collectors.toList());
+                .map(Coding::getDisplay)
+                .collect(Collectors.toList());
         }
 
         if (codeableConcept.hasText()) {

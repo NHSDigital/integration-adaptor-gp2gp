@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
@@ -82,7 +83,7 @@ public class DiagnosticReportMapperTest {
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
-        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockIdForResourceAndId());
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
 
         when(specimenMapper.mapSpecimenToCompoundStatement(any(), any(), anyString())).thenAnswer(mockSpecimenMapping());
@@ -131,7 +132,7 @@ public class DiagnosticReportMapperTest {
     private Answer<String> mockIdForResourceAndId() {
         return invocation -> {
             ResourceType resourceType = invocation.getArgument(0);
-            String originalId = invocation.getArgument(1);
+            String originalId = invocation.getArgument(1).toString();
             return String.format("II-for-%s-%s", resourceType.name(), originalId);
         };
     }

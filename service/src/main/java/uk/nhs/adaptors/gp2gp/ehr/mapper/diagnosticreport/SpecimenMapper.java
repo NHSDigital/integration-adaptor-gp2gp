@@ -51,7 +51,7 @@ public class SpecimenMapper {
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
-            .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getId()))
+            .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
             .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
             .observations(mappedObservations);
 

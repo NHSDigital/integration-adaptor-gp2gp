@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -29,7 +30,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -88,7 +88,7 @@ public class ObservationMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenReturn("some-id");
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
@@ -105,7 +105,7 @@ public class ObservationMapperTest {
 
     @Test
     public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenReturn("some-id");
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(
             TEST_FILE_DIRECTORY + "input_default_observation.json"
