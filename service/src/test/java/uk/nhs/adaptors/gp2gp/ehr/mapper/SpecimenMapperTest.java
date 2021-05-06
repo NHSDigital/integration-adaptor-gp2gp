@@ -7,6 +7,7 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -15,6 +16,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -35,6 +37,19 @@ public class SpecimenMapperTest {
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
+
+    private static final String MOCK_EMPTY_OBSERVATION =
+        "<component typeCode=\"COMP\" contextConductionInd=\"true\">\n"
+            + "<NarrativeStatement classCode=\"OBS\" moodCode=\"EVN\">\n"
+                + "<id root=\"generated id\"/>\n"
+                + "<text mediaType=\"text/x-h7uk-pmip\">CommentType:AGGREGATE COMMENT SET\n"
+                + "CommentDate: 20100225154100\n"
+                + "\n"
+                + "EMPTY REPORT</text>\n"
+                + "<statusCode code=\"COMPLETE\"/>\n"
+                + "<availabilityTime value=\"20100225154100\"/>\n"
+            + "</NarrativeStatement>\n"
+        + "</component>";
 
     private SpecimenMapper specimenMapper;
 
@@ -57,8 +72,6 @@ public class SpecimenMapperTest {
             parseObservation(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
         );
 
-        when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenAnswer(mockObservationMapping());
-
         specimenMapper = new SpecimenMapper(messageContext, observationMapper);
     }
 
@@ -69,9 +82,34 @@ public class SpecimenMapperTest {
         var expected = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
 
+        when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenAnswer(mockObservationMapping());
+
         String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT_DATE);
 
         assertThat(outputMessage).isEqualTo(expected);
+    }
+
+    @Test
+    public void When_MappingDefaultSpecimenJson_Expect_DefaultSpecimenStatementXmlOutput() throws IOException {
+        String jsonInput = ResourceTestFileUtils.getFileContent(
+            TEST_FILE_DIRECTORY + "input_default_specimen.json"
+        );
+        Specimen specimen = new FhirParseService().parseResource(jsonInput, Specimen.class);
+
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+            TEST_FILE_DIRECTORY + "expected_output_default_specimen.xml"
+        );
+
+        Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/Default-1"));
+
+        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenReturn("some-id");
+        when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenReturn(MOCK_EMPTY_OBSERVATION);
+
+        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
+            specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT_DATE
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
     private static Stream<Arguments> testData() {

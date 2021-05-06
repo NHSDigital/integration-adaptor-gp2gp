@@ -4,6 +4,7 @@ import com.github.mustachejava.Mustache;
 import com.google.common.collect.ImmutableList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -12,7 +13,6 @@ import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -73,8 +73,6 @@ public class ObservationMapper {
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen))
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen));
 
-        String observationStatement = mapObservationToObservationStatement(idMapper, observationAssociatedWithSpecimen);
-
         StringBuilder narrativeStatementsBlock = new StringBuilder();
 
         if (observationAssociatedWithSpecimen.hasComment()) {
@@ -92,7 +90,7 @@ public class ObservationMapper {
         });
 
         observationCompoundStatementTemplateParameters
-            .observationStatement(observationStatement)
+            .observationStatement(prepareObservationStatement(idMapper, observationAssociatedWithSpecimen))
             .narrativeStatements(narrativeStatementsBlock.toString());
 
         return TemplateUtils.fillTemplate(
@@ -168,14 +166,27 @@ public class ObservationMapper {
             observationStatementTemplateParametersBuilder.build());
     }
 
+    private String prepareObservationStatement(IdMapper idMapper, Observation observation) {
+        if (observation.hasCode()) {
+            return mapObservationToObservationStatement(idMapper, observation);
+        }
+
+        return StringUtils.EMPTY;
+    }
+
     private String prepareCodeElement(Observation observation) {
         if (observation.hasCode()) {
             return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
         }
-        throw new EhrMapperException("Observation code is not present");
+
+        return StringUtils.EMPTY;
     }
 
     private CommentType prepareCommentType(Observation observation) {
+        if (observation.getComment().equals("EMPTY REPORT")) {
+            return CommentType.AGGREGATE_COMMENT_SET;
+        }
+
         if (observation.hasSpecimen()) {
             return CommentType.LABORATORY_RESULT_COMMENT;
         }

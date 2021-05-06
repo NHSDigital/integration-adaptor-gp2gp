@@ -35,7 +35,9 @@ import static org.mockito.Mockito.when;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class DiagnosticReportMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
-    private static final String INPUT_JSON_BUNDLE = "fhir-bundle.json";
+
+    private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
+
     private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
     private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
     private static final String INPUT_JSON_EMPTY_RESULTS = "diagnostic-report-with-empty-results.json";
@@ -45,6 +47,7 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTI_RESULTS = "diagnostic-report-with-multi-results.json";
     private static final String INPUT_JSON_PERFORMER = "diagnostic-report-with-performer.json";
     private static final String INPUT_JSON_PERFORMER_NO_ACTOR = "diagnostic-report-with-performer-no-actor.json";
+
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
@@ -96,7 +99,8 @@ public class DiagnosticReportMapperTest {
     }
 
     private static Stream<Arguments> resourceFileParams() {
-        return Stream.of(Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
+        return Stream.of(
+            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),

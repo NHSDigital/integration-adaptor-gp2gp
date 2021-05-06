@@ -6,6 +6,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,6 +22,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -99,6 +101,26 @@ public class ObservationMapperTest {
         );
 
         assertThat(compoundStatementXml).isEqualToIgnoringWhitespace(expectedXmlOutput);
+    }
+
+    @Test
+    public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
+        when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenReturn("some-id");
+
+        String jsonInput = ResourceTestFileUtils.getFileContent(
+            TEST_FILE_DIRECTORY + "input_default_observation.json"
+        );
+        Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+            TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
+        );
+
+        String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
+            observationAssociatedWithSpecimen,
+            Collections.emptyList()
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
     private static Stream<Arguments> resourceFileParams() {

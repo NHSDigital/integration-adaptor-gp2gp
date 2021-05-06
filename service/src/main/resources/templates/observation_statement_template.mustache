@@ -7,9 +7,15 @@
             {{{effectiveTime}}}
         </effectiveTime>
         {{{availabilityTimeElement}}}
-        {{{value}}}
-        {{{referenceRange}}}
-        {{{interpretation}}}
+        {{#value}}
+            {{{.}}}
+        {{/value}}
+        {{#referenceRange}}
+            {{{.}}}
+        {{/referenceRange}}
+        {{#interpretation}}
+            {{{.}}}
+        {{/interpretation}}
         {{#participant}}
             {{{.}}}
         {{/participant}}

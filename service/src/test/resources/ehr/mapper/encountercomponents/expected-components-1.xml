@@ -307,9 +307,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        
-        
-        
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -317,7 +314,6 @@
 </Participant>
     </ObservationStatement>
 </component>
-
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -335,8 +331,7 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -352,13 +347,10 @@
 </Participant>
     </NarrativeStatement>
 </component>
-
     </CompoundStatement>
 </component>
-
     </CompoundStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -397,9 +389,7 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
-        
-        
+            <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -407,7 +397,6 @@
 </Participant>
     </ObservationStatement>
 </component>
-
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -424,13 +413,10 @@
 </Participant>
     </NarrativeStatement>
 </component>
-
     </CompoundStatement>
 </component>
-
     </CompoundStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -469,9 +455,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        
-        
-        
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -479,7 +462,6 @@
 </Participant>
     </ObservationStatement>
 </component>
-
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -495,8 +477,7 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component>
-<component typeCode="COMP" contextConductionInd="true">
+</component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -512,13 +493,10 @@
 </Participant>
     </NarrativeStatement>
 </component>
-
     </CompoundStatement>
 </component>
-
     </CompoundStatement>
 </component>
-
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>

@@ -1,0 +1,14 @@
+{
+    "resourceType":"Observation",
+    "id":"Default-1",
+    "meta":{
+        "profile":[
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+        ]
+    },
+    "issued":"2010-02-25T15:41:00+00:00",
+    "comment":"EMPTY REPORT",
+    "specimen":{
+        "reference":"Specimen/Default-1"
+    }
+}

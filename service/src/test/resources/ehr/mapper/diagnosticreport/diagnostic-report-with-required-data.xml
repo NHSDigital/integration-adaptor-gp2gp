@@ -9,5 +9,6 @@
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
+            <!-- Mapped Specimen with id: Specimen/Default-1 -->
     </CompoundStatement>
 </component>

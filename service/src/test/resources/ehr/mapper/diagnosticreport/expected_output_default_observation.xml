@@ -1,0 +1,23 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="some-id"/>
+        
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="UNK"/>
+        </effectiveTime>
+        <availabilityTime value="20100225154100"/>
+        
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="some-id"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:20100225154100
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>
