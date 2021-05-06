@@ -33,8 +33,8 @@ public class StructuredRecordMappingService {
 
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        var referenceId = messageContext.getIdMapper().get(ResourceType.DocumentReference, documentReference.getId());
-        var manifestReferenceId = messageContext.getIdMapper().getOrNew(ResourceType.DocumentManifest, documentReference.getId());
+        var referenceId = messageContext.getIdMapper().get(ResourceType.DocumentReference, documentReference.getIdElement());
+        var manifestReferenceId = messageContext.getIdMapper().getOrNew(ResourceType.DocumentManifest, documentReference.getIdElement());
 
         return OutboundMessage.ExternalAttachment.builder()
             .referenceId(referenceId)

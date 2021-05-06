@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
@@ -13,6 +12,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -172,7 +172,7 @@ public class RequestStatementMapperTest {
 
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
-        lenient().when(idMapper.getOrNew(any(ResourceType.class), anyString())).thenAnswer(mockIdForResourceAndId());
+        lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(mockIdForReference());
         lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
 
@@ -182,8 +182,8 @@ public class RequestStatementMapperTest {
     private Answer<String> mockIdForResourceAndId() {
         return invocation -> {
             ResourceType resourceType = invocation.getArgument(0);
-            String originalId = invocation.getArgument(1);
-            return String.format("II-for-%s-%s", resourceType.name(), originalId);
+            IdType idType = invocation.getArgument(1);
+            return String.format("II-for-%s-%s", resourceType, idType.getIdPart());
         };
     }
 

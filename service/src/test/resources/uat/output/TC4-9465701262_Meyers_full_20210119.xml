@@ -5143,27 +5143,27 @@
         <availabilityTime value="20201117132807" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
+                    <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+                    <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
+                    <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
+                    <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
+                <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5953,7 +5953,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4617268B-1554-4618-8D2D-69A808C0A48D" />
+        <id root="867553AF-2B39-48F7-BE0B-DE854814CED5" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
 </code>
         <statusCode code="COMPLETE" />
@@ -6009,7 +6009,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC" />
+        <id root="6D62CF66-D522-4412-A2CB-3134819B46A0" />
         <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
 </code>
         <statusCode code="COMPLETE" />
@@ -6065,7 +6065,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C" />
+        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62" />
         <code code="29857009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chest pain">
 </code>
         <statusCode code="COMPLETE" />
@@ -6121,7 +6121,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9D3A6496-5CFB-4337-9F66-47315F1A8F90" />
+        <id root="D27E4A12-8EA6-44D7-AB94-821503546B45" />
         <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
     <originalText>Heart attack</originalText>
 </code>
@@ -6178,7 +6178,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A" />
+        <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC" />
         <code code="50417007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lower respiratory tract infection">
 </code>
         <statusCode code="COMPLETE" />
@@ -6234,7 +6234,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE" />
+        <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7" />
         <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
 </code>
         <statusCode code="COMPLETE" />
@@ -6290,7 +6290,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F" />
+        <id root="300330A9-5389-444B-A23E-6402355AB06C" />
         <code code="233604007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pneumonia">
 </code>
         <statusCode code="COMPLETE" />
@@ -6346,7 +6346,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64" />
+        <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047" />
         <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
 </code>
         <statusCode code="COMPLETE" />
@@ -6402,7 +6402,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="162AC22E-A36E-4E14-A9FC-9DFDC4B7BCFF" />
+        <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A" />
         <code code="185660003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adult abnormal - 2nd recall">
 </code>
         <statusCode code="COMPLETE" />
