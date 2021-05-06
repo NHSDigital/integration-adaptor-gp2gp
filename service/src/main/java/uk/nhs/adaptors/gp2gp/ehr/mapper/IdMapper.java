@@ -34,7 +34,7 @@ public class IdMapper {
         MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
         MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
         if (isResourceMapped) {
-            mappedId.setIsResourceMapped(true);
+            mappedId.setResourceMapped(true);
         }
 
         ids.put(reference.getReference(), mappedId);
@@ -49,7 +49,7 @@ public class IdMapper {
 
     public boolean hasIdBeenMapped(Reference reference) {
         MappedId mappedId = ids.get(reference.getReference());
-        return mappedId != null && mappedId.getIsResourceMapped();
+        return mappedId != null && mappedId.isResourceMapped();
     }
 
     public String get(Reference reference) {
@@ -90,6 +90,6 @@ public class IdMapper {
     @AllArgsConstructor
     private static class MappedId {
         private String id;
-        private Boolean isResourceMapped;
+        private boolean isResourceMapped;
     }
 }
