@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 
+import com.github.mustachejava.DefaultMustacheFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import com.github.mustachejava.Mustache;
@@ -28,5 +30,10 @@ public class TemplateUtils {
         }
 
         return data;
+    }
+
+    public static Mustache compileTemplate(String templateContent) {
+        MustacheFactory mf = new DefaultMustacheFactory();
+        return mf.compile(new StringReader(templateContent), "ad hoc template");
     }
 }
