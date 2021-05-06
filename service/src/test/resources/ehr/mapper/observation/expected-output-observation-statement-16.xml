@@ -8,7 +8,10 @@
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
         
-        <interpretationCode code="LO" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Below low reference limit"><originalText>Low Value</originalText></interpretationCode>
+        <interpretationCode code="LO" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Below low reference limit">
+    <originalText>Low Value</originalText>
+</interpretationCode>
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
