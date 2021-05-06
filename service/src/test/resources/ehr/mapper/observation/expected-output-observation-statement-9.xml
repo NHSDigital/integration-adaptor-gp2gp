@@ -15,6 +15,12 @@
                 <text>Range Units: test-unit Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>Test reference range text</text><value><low value="20"/><high value="30"/></value></referenceInterpretationRange></referenceRange>
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>Test reference range text</text>
+        <value><low value="20"/><high value="30"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
     </ObservationStatement>
 </component>
