@@ -55,6 +55,8 @@
             </NarrativeStatement>
         </component>
         {{/narrativeId}}
-        <!--<Participant typeCode="PRF" ..../>-->
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </CompoundStatement>
 </component>

@@ -98,7 +98,8 @@ public class EhrExtractMapperTest {
             messageContext,
             new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+                codeableConceptCdMapper, new ParticipantMapper()),
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),

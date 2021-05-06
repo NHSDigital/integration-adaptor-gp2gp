@@ -69,7 +69,8 @@ public class EncounterComponentsMapperTest {
             messageContext,
             randomIdGeneratorService,
             structuredObservationValueMapper,
-            codeableConceptCdMapper
+            codeableConceptCdMapper,
+            new ParticipantMapper()
         );
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
