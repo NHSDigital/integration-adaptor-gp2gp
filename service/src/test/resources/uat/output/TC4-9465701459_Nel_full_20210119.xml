@@ -7511,7 +7511,8 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
-        <code><!--code placeholder--></code>
+        <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
+</code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
@@ -7585,7 +7586,8 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
-        <code><!--code placeholder--></code>
+        <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
+</code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
@@ -7659,7 +7661,8 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
-        <code><!--code placeholder--></code>
+        <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
+</code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>

@@ -34,7 +34,7 @@
 {{#generateObservationStatement}}<component typeCode="COMP"{{#isNested}} contextConductionInd="true"{{/isNested}}>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="{{conditionNamed}}"/>
-        <code><!--code placeholder--></code>
+        {{{code}}}
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             {{#effectiveTimeLow}}<low value="{{effectiveTimeLow}}"/>{{/effectiveTimeLow}}{{^effectiveTimeLow}}<low nullFlavor="UNK"/>{{/effectiveTimeLow}}

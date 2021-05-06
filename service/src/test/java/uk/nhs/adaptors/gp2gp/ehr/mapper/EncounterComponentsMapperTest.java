@@ -73,6 +73,7 @@ public class EncounterComponentsMapperTest {
         );
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
+            codeableConceptCdMapper,
             participantMapper
         );
         DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
