@@ -4144,6 +4144,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101209"/>
             
@@ -4206,6 +4207,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101209000000"/>
             <high value="20110511000000"/>
@@ -4268,6 +4270,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101209"/>
             
@@ -4350,6 +4353,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101209"/>
             
@@ -4412,6 +4416,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101209"/>
             <high value="20110616000000"/>
@@ -4474,6 +4479,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20081125000000"/>
             
@@ -4581,6 +4587,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101216"/>
             
@@ -4643,6 +4650,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20090204000000"/>
             <high value="20100113000000"/>
@@ -4705,6 +4713,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101216"/>
             <high value="20101216000000"/>
@@ -4767,6 +4776,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101216"/>
             
@@ -4844,6 +4854,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101216"/>
             
@@ -4926,6 +4937,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20101216"/>
             
@@ -5038,6 +5050,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100104000000"/>
             <high value="20100527000000"/>
@@ -5100,6 +5113,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/>
             
@@ -5202,6 +5216,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
             
@@ -5264,6 +5279,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
             <high value="20110308000000"/>
@@ -5326,6 +5342,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
             
@@ -5388,6 +5405,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
             
@@ -5450,6 +5468,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
             
@@ -5537,6 +5556,7 @@ Dosage: 0.5 ml</text>
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110902"/>
             
