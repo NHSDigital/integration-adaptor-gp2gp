@@ -272,7 +272,10 @@
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
+            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
+    <originalText>Abnormal</originalText>
+</interpretationCode>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
