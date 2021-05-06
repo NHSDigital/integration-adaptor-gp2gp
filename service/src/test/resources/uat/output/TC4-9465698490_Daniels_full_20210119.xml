@@ -2427,7 +2427,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100210131526"/>
                 <reversalOf typeCode="REV">
-                    <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -2767,7 +2769,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100114103827"/>
                 <reversalOf typeCode="REV">
-                    <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -3270,7 +3274,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100115095837"/>
                 <reversalOf typeCode="REV">
-                    <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -3609,7 +3615,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143316"/>
                 <reversalOf typeCode="REV">
-                    <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -7633,7 +7641,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143722"/>
                 <reversalOf typeCode="REV">
-                    <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -7977,7 +7987,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110928102232"/>
                 <reversalOf typeCode="REV">
-                    <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -8316,7 +8328,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100809142743"/>
                 <reversalOf typeCode="REV">
-                    <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -8898,7 +8912,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100323164106"/>
                 <reversalOf typeCode="REV">
-                    <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -9319,7 +9335,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100809142758"/>
                 <reversalOf typeCode="REV">
-                    <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -14348,7 +14366,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100817000000"/>
                 <reversalOf typeCode="REV">
-                    <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -16163,7 +16183,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100817110337"/>
                 <reversalOf typeCode="REV">
-                    <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -18146,7 +18168,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101001120819"/>
                 <reversalOf typeCode="REV">
-                    <id root="A728CE1B-E677-4636-B41A-0B56088F11C5"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="A728CE1B-E677-4636-B41A-0B56088F11C5"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -18900,7 +18924,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110120143823"/>
                 <reversalOf typeCode="REV">
-                    <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -19735,7 +19761,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20111115145200"/>
                 <reversalOf typeCode="REV">
-                    <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -19997,7 +20025,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20111115150250"/>
                 <reversalOf typeCode="REV">
-                    <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
