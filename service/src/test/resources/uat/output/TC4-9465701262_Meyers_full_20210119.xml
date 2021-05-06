@@ -1105,24 +1105,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
+</code>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201101"/>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
-        <code code="305230000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by GP">
-</code>
-        <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
-    </agentRef>
-</Participant>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </responsibleParty>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
+    </agentRef>
+</Participant>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1160,24 +1160,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
+</code>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201125"/>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
-        <code code="183835003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer for angiogram">
-</code>
-        <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </responsibleParty>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1215,24 +1215,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
+</code>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required linked to a problem</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201125"/>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required linked to a problem</text>
-        <code code="390884006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Heart failure follow-up">
-</code>
-        <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
-    </agentRef>
-</Participant>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </responsibleParty>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
+    </agentRef>
+</Participant>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -6457,24 +6457,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
+        <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
+</code>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Reason for referral comments field</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20190801"/>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Reason for referral comments field</text>
-        <code code="183450002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to burn unit">
-</code>
-        <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </responsibleParty>
+        <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
     </RequestStatement>
 </component>
     </ehrComposition>
