@@ -2779,7 +2779,13 @@
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>< 21.000 {units}/wk</text><value></value></referenceInterpretationRange></referenceRange>
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>&lt; 21.000 {units}/wk</text>
+        <value></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -5811,7 +5817,10 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
         
-        <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal"><originalText>Abnormal</originalText></interpretationCode>
+        <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
+    <originalText>Abnormal</originalText>
+</interpretationCode>
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
