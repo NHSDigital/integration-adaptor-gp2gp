@@ -1786,7 +1786,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -1894,7 +1894,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201222131511" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1907,7 +1907,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >

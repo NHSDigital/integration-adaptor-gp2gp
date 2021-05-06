@@ -5350,7 +5350,7 @@ and extending onto other lines as well.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20131118094149" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5363,7 +5363,7 @@ and extending onto other lines as well.</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5426,7 +5426,7 @@ and extending onto other lines as well.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20131118094149" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5439,7 +5439,7 @@ and extending onto other lines as well.</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5502,7 +5502,7 @@ and extending onto other lines as well.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20131118094149" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5515,7 +5515,7 @@ and extending onto other lines as well.</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5578,7 +5578,7 @@ and extending onto other lines as well.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20131118094149" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5591,7 +5591,7 @@ and extending onto other lines as well.</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5854,7 +5854,7 @@ and extending onto other lines as well.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20210107114034" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5867,7 +5867,7 @@ and extending onto other lines as well.</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >

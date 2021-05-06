@@ -7823,7 +7823,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -7887,7 +7887,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -7951,7 +7951,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -8015,7 +8015,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -8632,7 +8632,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100714162749" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -8645,7 +8645,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -8768,7 +8768,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201026115836" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -8781,7 +8781,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
