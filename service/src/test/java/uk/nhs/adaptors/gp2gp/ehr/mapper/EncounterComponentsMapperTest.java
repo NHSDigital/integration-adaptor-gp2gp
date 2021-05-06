@@ -29,6 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
     private static final String TEST_ID = "394559384658936";
@@ -59,7 +61,7 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        IdType conditionId = new IdType(ResourceType.Practitioner.name(), "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+        IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
         messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
 
         ParticipantMapper participantMapper = new ParticipantMapper();

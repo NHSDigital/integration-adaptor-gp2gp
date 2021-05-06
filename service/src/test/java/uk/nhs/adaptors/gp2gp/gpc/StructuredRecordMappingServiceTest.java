@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.Test;
@@ -67,14 +66,14 @@ class StructuredRecordMappingServiceTest {
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
         DocumentReference documentReference1 = new DocumentReference();
-        documentReference1.setId(new IdType(ResourceType.DocumentReference.name(), ID_1));
+        documentReference1.setId(buildIdType(ResourceType.DocumentReference, ID_1));
         documentReference1.getContentFirstRep().setAttachment(new Attachment()
             .setTitle("some title")
             .setSize(ATTACHMENT_1_SIZE)
             .setContentType("text/plain"));
 
         DocumentReference documentReference2 = new DocumentReference();
-        documentReference2.setId(new IdType(ResourceType.DocumentReference.name(), ID_2));
+        documentReference2.setId(buildIdType(ResourceType.DocumentReference, ID_2));
         documentReference2.getContentFirstRep().setAttachment(new Attachment()
             .setSize(ATTACHMENT_2_SIZE)
             .setContentType("text/html"));

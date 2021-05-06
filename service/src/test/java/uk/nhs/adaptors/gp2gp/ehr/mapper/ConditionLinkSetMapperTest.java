@@ -7,6 +7,8 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
@@ -103,7 +105,7 @@ public class ConditionLinkSetMapperTest {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
-        IdType conditionId = new IdType(ResourceType.Condition.name(), CONDITION_ID);
+        IdType conditionId = buildIdType(ResourceType.Condition, CONDITION_ID);
         lenient().when(idMapper.getOrNew(ResourceType.Condition, conditionId)).thenReturn(CONDITION_ID);
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId(ResourceType.Condition));
 

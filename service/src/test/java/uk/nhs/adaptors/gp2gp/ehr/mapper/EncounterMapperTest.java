@@ -7,6 +7,8 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
@@ -17,7 +19,6 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -142,7 +143,7 @@ public class EncounterMapperTest {
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, new IdType(ResourceType.Practitioner.name(), PRACTITIONER_ID));
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, PRACTITIONER_ID));
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);

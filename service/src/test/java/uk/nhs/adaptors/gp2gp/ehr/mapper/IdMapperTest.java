@@ -2,7 +2,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import org.hl7.fhir.dstu3.model.IdType;
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,9 +27,9 @@ public class IdMapperTest {
     public void When_FetchingSameIdTwiceForTheSameResource_Expect_SameMappedIdReturned() {
         String fhirId = randomIdGeneratorService.createNewId();
 
-        String mappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), fhirId));
+        String mappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, fhirId));
 
-        assertThat(idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), fhirId))).isEqualTo(mappedId);
+        assertThat(idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, fhirId))).isEqualTo(mappedId);
     }
 
     @Test
@@ -36,8 +37,8 @@ public class IdMapperTest {
         String firstFhirId = randomIdGeneratorService.createNewId();
         String secondFhirId = randomIdGeneratorService.createNewId();
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), firstFhirId));
-        String secondMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), secondFhirId));
+        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, firstFhirId));
+        String secondMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, secondFhirId));
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
     }
@@ -46,8 +47,8 @@ public class IdMapperTest {
     public void When_FetchingSameIdForDifferentResources_Expect_NewMappedIdsReturned() {
         String sameFhirId = randomIdGeneratorService.createNewId();
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), sameFhirId));
-        String secondMappedId = idMapper.getOrNew(ResourceType.Encounter, new IdType(ResourceType.Encounter.name(), sameFhirId));
+        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, buildIdType(ResourceType.Appointment, sameFhirId));
+        String secondMappedId = idMapper.getOrNew(ResourceType.Encounter, buildIdType(ResourceType.Encounter, sameFhirId));
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
     }
@@ -56,7 +57,7 @@ public class IdMapperTest {
     public void When_FetchingSameIdTwiceForTheSameResourceReference_Expect_SameMappedIdReturned() {
         String fhirId = randomIdGeneratorService.createNewId();
 
-        Reference reference = new Reference(new IdType(ResourceType.Appointment.name(), fhirId));
+        Reference reference = new Reference(buildIdType(ResourceType.Appointment, fhirId));
         String mappedId = idMapper.getOrNew(reference);
 
         assertThat(idMapper.getOrNew(reference)).isEqualTo(mappedId);
@@ -67,10 +68,10 @@ public class IdMapperTest {
         String firstFhirId = randomIdGeneratorService.createNewId();
         String secondFhirId = randomIdGeneratorService.createNewId();
 
-        Reference firstReference = new Reference(new IdType(ResourceType.Appointment.name(), firstFhirId));
+        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, firstFhirId));
         String firstMappedId = idMapper.getOrNew(firstReference);
 
-        Reference secondReference = new Reference(new IdType(ResourceType.Appointment.name(), secondFhirId));
+        Reference secondReference = new Reference(buildIdType(ResourceType.Appointment, secondFhirId));
         String secondMappedId = idMapper.getOrNew(secondReference);
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
@@ -80,10 +81,10 @@ public class IdMapperTest {
     public void When_FetchingSameIdForDifferentResourcesReference_Expect_NewMappedIdsReturned() {
         String sameFhirId = randomIdGeneratorService.createNewId();
 
-        Reference firstReference = new Reference(new IdType(ResourceType.Appointment.name(), sameFhirId));
+        Reference firstReference = new Reference(buildIdType(ResourceType.Appointment, sameFhirId));
         String firstMappedId = idMapper.getOrNew(firstReference);
 
-        Reference secondReference = new Reference(new IdType(ResourceType.Encounter.name(), sameFhirId));
+        Reference secondReference = new Reference(buildIdType(ResourceType.Encounter, sameFhirId));
         String secondMappedId = idMapper.getOrNew(secondReference);
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
@@ -92,7 +93,7 @@ public class IdMapperTest {
     @Test
     public void When_GettingExtantId_Expect_ExtantIdReturned() {
         final String id = randomIdGeneratorService.createNewId();
-        final Reference reference = new Reference(new IdType(ResourceType.Person.name(), id));
+        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
         final String expected = idMapper.getOrNew(reference);
 
         final String actual = idMapper.get(reference);
@@ -105,10 +106,10 @@ public class IdMapperTest {
         final String firstFhirId = randomIdGeneratorService.createNewId();
         final String secondFhirId = randomIdGeneratorService.createNewId();
 
-        final Reference reference = new Reference(new IdType(ResourceType.Appointment.name(), firstFhirId));
+        final Reference reference = new Reference(buildIdType(ResourceType.Appointment, firstFhirId));
         final String expected = idMapper.getOrNew(reference);
 
-        final Reference newReference = new Reference(new IdType(ResourceType.Appointment.name(), secondFhirId));
+        final Reference newReference = new Reference(buildIdType(ResourceType.Appointment, secondFhirId));
         final String actual = idMapper.get(newReference);
 
         assertThat(actual).isEqualTo(expected);
@@ -117,7 +118,7 @@ public class IdMapperTest {
     @Test
     public void When_GettingMissingResourceType_Expect_NullIdReturned() {
         final String id = randomIdGeneratorService.createNewId();
-        final Reference reference = new Reference(new IdType(ResourceType.Person.name(), id));
+        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
 
         final String actual = idMapper.get(reference);
         assertThat(actual).isNull();
