@@ -20495,6 +20495,7 @@
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100323153600"/>
             
