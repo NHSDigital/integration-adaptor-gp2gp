@@ -66,8 +66,8 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <responsibleParty>
-    <agentDirectory>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
@@ -86,20 +86,20 @@
         </agentOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>David</given>
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -114,20 +114,20 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Mr</prefix>
                 <given>GPONE</given>
                 <family>TEMPLE SOWERBY</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -142,20 +142,20 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>Peter</given>
                 <family>Whitcombe</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -170,20 +170,20 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>Peter</given>
                 <family>Farrell</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -1659,7 +1659,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
+        <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1918,7 +1918,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
+        <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2112,7 +2112,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
+        <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -3112,7 +3112,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
+        <id root="DF71EC06-9453-4AE7-9C3C-E42871252772" />
         <code code="202307002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ankylosis of the elbow joint">
 </code>
         <statusCode code="COMPLETE" />
@@ -3168,7 +3168,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7" />
+        <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
         <code code="856901000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cervical smear adequate">
     <originalText>Cervical smear adequate</originalText>
 </code>
@@ -3225,7 +3225,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33" />
+        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
         <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
     <originalText>Happy puppet syndrome</originalText>
 </code>

@@ -66,8 +66,8 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <responsibleParty>
-    <agentDirectory>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
@@ -86,20 +86,20 @@
         </agentOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Mr</prefix>
                 <given>GPONE</given>
                 <family>TEMPLE SOWERBY</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -114,20 +114,20 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>David</given>
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>

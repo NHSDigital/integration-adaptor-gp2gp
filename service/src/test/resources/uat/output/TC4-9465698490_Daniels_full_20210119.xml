@@ -66,8 +66,8 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <responsibleParty>
-    <agentDirectory>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="263B2A9F-0B1D-4697-943A-328F70E068DE" />
@@ -86,20 +86,20 @@
         </agentOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>David</given>
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -114,7 +114,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -122,26 +122,26 @@
                 <family>External User</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>National</name>
 
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Mr</prefix>
                 <given>NHS</given>
                 <family>Test</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -156,20 +156,20 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
+        <code nullFlavor="UNK">
+            <originalText>General Medical Practitioner</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>General Medical Practitioner</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>Peter</given>
                 <family>Whitcombe</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -184,39 +184,39 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
+        <code nullFlavor="UNK">
+            <originalText>Clerical Worker</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>Clerical Worker</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>David</given>
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>National</name>
 
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
+        <code nullFlavor="UNK">
+            <originalText>Clerical Worker</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <code nullFlavor="UNK">
-                <orginalText>Clerical Worker</orginalText>
-            </code>
             <name>
                 <prefix>Dr</prefix>
                 <given>Peter</given>
                 <family>Whitcombe</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <name>National</name>
 
         </representedOrganization>
@@ -2427,7 +2427,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100210131526"/>
                 <reversalOf typeCode="REV">
-                    <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -2767,7 +2769,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100114103827"/>
                 <reversalOf typeCode="REV">
-                    <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -3270,7 +3274,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100115095837"/>
                 <reversalOf typeCode="REV">
-                    <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -3609,7 +3615,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143316"/>
                 <reversalOf typeCode="REV">
-                    <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -7633,7 +7641,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143722"/>
                 <reversalOf typeCode="REV">
-                    <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -7977,7 +7987,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110928102232"/>
                 <reversalOf typeCode="REV">
-                    <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -8316,7 +8328,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100809142743"/>
                 <reversalOf typeCode="REV">
-                    <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -8898,7 +8912,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100323164106"/>
                 <reversalOf typeCode="REV">
-                    <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -9319,7 +9335,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100809142758"/>
                 <reversalOf typeCode="REV">
-                    <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -14348,7 +14366,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100817000000"/>
                 <reversalOf typeCode="REV">
-                    <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -16163,7 +16183,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100817110337"/>
                 <reversalOf typeCode="REV">
-                    <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -18146,7 +18168,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20101001120819"/>
                 <reversalOf typeCode="REV">
-                    <id root="A728CE1B-E677-4636-B41A-0B56088F11C5"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="A728CE1B-E677-4636-B41A-0B56088F11C5"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -18900,7 +18924,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110120143823"/>
                 <reversalOf typeCode="REV">
-                    <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -19735,7 +19761,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20111115145200"/>
                 <reversalOf typeCode="REV">
-                    <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -19997,7 +20025,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20111115150250"/>
                 <reversalOf typeCode="REV">
-                    <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
@@ -20473,47 +20503,47 @@
         <availabilityTime value="20100323155127" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="5D48CB27-F7F3-4572-B368-AA1A98E24178"/>
+                    <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="AF67830C-4710-4730-8ECE-F7C754931108"/>
+                    <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="5FB6FBC6-3677-4672-A356-346CBA4107F0"/>
+                    <id root="0A4B8365-FEE6-4352-B941-5CCC40F3AE63"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="24AD19A5-0C6D-47BD-BE4B-ADFA99F835DC"/>
+                    <id root="B2342509-6683-4342-8BD1-BB759AAC9BB9"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="257B12B4-BBDD-4EFE-9E87-13C62C361F40"/>
+                    <id root="1E177544-82E7-4D6A-8473-69BC8FC74AB1"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="5F9C871A-9927-4F9F-ACF1-ABB290B70D29"/>
+                    <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D"/>
+                    <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="86729BDB-1166-420A-9461-69459E1B2842"/>
+                    <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="EEBCA2A1-AEC6-482F-9A31-DDA997D4F5A5"/>
+                <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">

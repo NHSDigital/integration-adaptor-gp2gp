@@ -73,7 +73,7 @@ public class MedicationStatementMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
-        var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId());
+        var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getIdElement());
         var statusCode = buildStatusCode(medicationRequest);
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest);
         var availabilityTime = StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest);

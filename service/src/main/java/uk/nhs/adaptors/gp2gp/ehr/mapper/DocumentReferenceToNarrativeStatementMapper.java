@@ -35,7 +35,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         }
 
         final String narrativeStatementId = messageContext.getIdMapper()
-            .getOrNew(ResourceType.DocumentReference, documentReference.getId());
+            .getOrNew(ResourceType.DocumentReference, documentReference.getIdElement());
 
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);

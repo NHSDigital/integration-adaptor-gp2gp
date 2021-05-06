@@ -89,7 +89,7 @@ public class RequestStatementMapper {
 
             final IdMapper idMapper = messageContext.getIdMapper();
             templateParameters
-                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
+                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getIdElement()))
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
                 .text(buildTextDescription())

@@ -52,7 +52,7 @@ public class DiaryPlanStatementMapper {
 
         PlanStatementMapperParameters.PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getId()))
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
             .availabilityTime(buildAvailabilityTime(procedureRequest));
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);

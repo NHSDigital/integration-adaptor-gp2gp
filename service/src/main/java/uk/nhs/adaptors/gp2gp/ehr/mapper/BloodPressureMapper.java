@@ -61,7 +61,7 @@ public class BloodPressureMapper {
     public String mapBloodPressure(Observation observation, boolean isNested) {
         BloodPressureParametersBuilder builder = BloodPressureParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getId()))
+            .id(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getIdElement()))
             .effectiveTime(prepareEffectiveTimeForObservation(observation))
             .availabilityTime(prepareAvailabilityTimeForObservation(observation))
             .compoundStatementCode(buildBloodPressureCode(observation));

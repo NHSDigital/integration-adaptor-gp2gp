@@ -54,7 +54,7 @@ public class EncounterMapper {
 
         final IdMapper idMapper = messageContext.getIdMapper();
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
-            .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getId()))
+            .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getIdElement()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
             .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
             .status(COMPLETE_CODE)
