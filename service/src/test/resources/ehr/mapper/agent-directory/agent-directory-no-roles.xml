@@ -1,5 +1,5 @@
-<responsibleParty>
-    <agentDirectory>
+<responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <ORGANIZATION/>
             <AGENT_PERSON/>
             <AGENT_PERSON/>
