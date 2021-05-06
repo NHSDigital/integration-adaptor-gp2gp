@@ -95,10 +95,6 @@ public class RequestStatementMapper {
                 .text(buildTextDescription())
                 .code(buildCode());
 
-            if (!referralRequest.hasReasonCode()) {
-                templateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
-            }
-
             if (referralRequest.hasRecipient()) {
                 referralRequest.getRecipient().stream()
                     .filter(RequestStatementMapper::isReferenceToPractitioner)
@@ -292,7 +288,7 @@ public class RequestStatementMapper {
             if (referralRequest.hasReasonCode()) {
                 return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
             }
-            return StringUtils.EMPTY;
+            return DEFAULT_REASON_CODE_XML;
         }
     }
 

@@ -1692,15 +1692,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
+        <code code="905091000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mental illness referral">
+    <originalText>Mental illness referral</originalText>
+</code>
+        <text>Priority: Routine Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200921"/>
-        <text>Priority: Routine Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
-        <code code="905091000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mental illness referral">
-    <originalText>Mental illness referral</originalText>
-</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -1802,15 +1802,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14" />
+        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
+    <originalText>2 week rule referral - brain</originalText>
+</code>
+        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required 12</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200921"/>
-        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required 12</text>
-        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
-    <originalText>2 week rule referral - brain</originalText>
-</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -1928,15 +1928,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA" />
+        <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
+    <originalText>2 week rule referral - skin</originalText>
+</code>
+        <text>Priority: Urgent Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required skin</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200921"/>
-        <text>Priority: Urgent Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required skin</text>
-        <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
-    <originalText>2 week rule referral - skin</originalText>
-</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -1995,15 +1995,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="71F21980-0BAB-4831-944C-365717037140" />
+        <code code="2008431000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
+    <originalText>Advice and guidance request sent</originalText>
+</code>
+        <text>Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200921"/>
-        <text>Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon </text>
-        <code code="2008431000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Advice and guidance request sent">
-    <originalText>Advice and guidance request sent</originalText>
-</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
