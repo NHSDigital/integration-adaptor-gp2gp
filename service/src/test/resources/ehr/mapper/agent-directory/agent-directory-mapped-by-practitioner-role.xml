@@ -1,5 +1,5 @@
-<responsibleParty>
-    <agentDirectory>
+<responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757" />
@@ -28,7 +28,7 @@
                 <family>McAvenue</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>
@@ -53,7 +53,7 @@
                 <family>Whitcombe</family>
             </name>
         </agentPerson>
-        <representedOrganization classCode="ORG" determiner="INSTANCE">
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
             <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
             <telecom value="01133800000" use="WP"/>

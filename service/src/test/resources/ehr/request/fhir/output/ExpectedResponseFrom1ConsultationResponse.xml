@@ -38,8 +38,8 @@
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
-            <responsibleParty>
-    <agentDirectory>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
             <part partCode="PART">
     <Agent classCode="AGNT">

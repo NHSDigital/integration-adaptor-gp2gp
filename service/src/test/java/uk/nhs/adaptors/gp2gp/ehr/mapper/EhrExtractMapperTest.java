@@ -153,6 +153,7 @@ public class EhrExtractMapperTest {
             getGpcStructuredTaskDefinition,
             bundle);
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        System.out.println(output);
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
 
