@@ -54,7 +54,9 @@
                 <statusCode code="COMPLETE"/>
                 {{{ehrSupplyDiscontinueAvailabilityTime}}}
                 <reversalOf typeCode="REV">
-                    <id root="{{ehrSupplyId}}"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="{{ehrSupplyId}}"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
