@@ -70,7 +70,8 @@ public class BloodPressureMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), mockCodeableConceptCdMapper, new ParticipantMapper());
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            mockCodeableConceptCdMapper, new ParticipantMapper());
     }
 
     @AfterEach
@@ -145,7 +146,8 @@ public class BloodPressureMapperTest {
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper, new ParticipantMapper());
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            codeableConceptCdMapper, new ParticipantMapper());
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
@@ -159,7 +161,8 @@ public class BloodPressureMapperTest {
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper, new ParticipantMapper());
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            codeableConceptCdMapper, new ParticipantMapper());
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
