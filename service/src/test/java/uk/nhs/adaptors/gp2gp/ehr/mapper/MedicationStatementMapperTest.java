@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
@@ -133,9 +135,9 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "1");
-        messageContext.getIdMapper().getOrNew(ResourceType.Organization, "2");
-        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, "3");
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, "1"));
+        messageContext.getIdMapper().getOrNew(ResourceType.Organization, buildIdType(ResourceType.Organization, "2"));
+        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, buildIdType(ResourceType.PractitionerRole, "3"));
         medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
             new ParticipantMapper(), mockRandomIdGeneratorService);
     }
