@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0" />
+    <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -7292,42 +7292,42 @@ The line below contains special characters...
         <availabilityTime value="20100123140354" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="D651DDAA-03BA-4723-960A-FD13C13CE367"/>
+                    <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="C86076C5-C69D-45EB-BEC4-1F1B310E80FC"/>
+                    <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="438199E9-C87F-406F-AEB8-E4E330A4D1AD"/>
+                    <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="D3041FE6-2820-4938-8024-1FC80F2A694F"/>
+                    <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="ECF49E18-DB40-4001-954B-2666006B598B"/>
+                    <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7"/>
+                    <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="C0D0904E-CBCF-42E6-A9C8-5ED28DECBD46"/>
+                    <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9"/>
+                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -8278,177 +8278,6 @@ The line below contains special characters...
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145739"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145739" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145739"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145725"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145725" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
-        <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
-    <originalText>Happy puppet syndrome</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145725"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - Happy Puppet</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113114111"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113114111" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
-        <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
-    <originalText>Allergic rhinitis due to pollens</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113114111"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
             <center value="20100609160800"/>
         </effectiveTime>
         <availabilityTime value="20100609160409"/>
@@ -8473,7 +8302,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
@@ -8501,63 +8330,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100714"/>
-        </effectiveTime>
-        <availabilityTime value="20100714163251"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714163251" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
-        <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100714"/>
-        </effectiveTime>
-        <availabilityTime value="20100714163251"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
+        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8585,7 +8358,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
         <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
     <originalText>Tired all the time</originalText>
 </code>
@@ -8614,7 +8387,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB" />
+        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8642,7 +8415,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02"/>
+        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8652,7 +8425,7 @@ The line below contains special characters...
         <availabilityTime value="20100714162749"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C"/>
+                <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
     <originalText>Systolic blood pressure</originalText>
 </code>
@@ -8666,7 +8439,7 @@ The line below contains special characters...
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A"/>
+                <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
     <originalText>Diastolic blood pressure</originalText>
 </code>
@@ -8680,7 +8453,7 @@ The line below contains special characters...
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="1B1B2854-A658-4764-875B-49CBD3C516EB"/>
+                <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5"/>
                 <text>This is the standalone BP Interpretation(s): Abnormal</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100714"/>
@@ -8693,7 +8466,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E" />
+        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8721,7 +8494,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
+        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -8750,7 +8523,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
+        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8778,7 +8551,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
+        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />

@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.IdType;
 import org.junit.jupiter.api.Test;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -102,7 +103,8 @@ public class ConditionLinkSetMapperTest {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
-        lenient().when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
+        IdType conditionId = new IdType(ResourceType.Condition.name(), CONDITION_ID);
+        lenient().when(idMapper.getOrNew(ResourceType.Condition, conditionId)).thenReturn(CONDITION_ID);
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId(ResourceType.Condition));
 
         conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService,

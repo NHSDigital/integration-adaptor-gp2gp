@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +59,8 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+        IdType conditionId = new IdType(ResourceType.Practitioner.name(), "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();

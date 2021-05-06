@@ -26,9 +26,9 @@ public class IdMapperTest {
     public void When_FetchingSameIdTwiceForTheSameResource_Expect_SameMappedIdReturned() {
         String fhirId = randomIdGeneratorService.createNewId();
 
-        String mappedId = idMapper.getOrNew(ResourceType.Appointment, fhirId);
+        String mappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), fhirId));
 
-        assertThat(idMapper.getOrNew(ResourceType.Appointment, fhirId)).isEqualTo(mappedId);
+        assertThat(idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), fhirId))).isEqualTo(mappedId);
     }
 
     @Test
@@ -36,8 +36,8 @@ public class IdMapperTest {
         String firstFhirId = randomIdGeneratorService.createNewId();
         String secondFhirId = randomIdGeneratorService.createNewId();
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, firstFhirId);
-        String secondMappedId = idMapper.getOrNew(ResourceType.Appointment, secondFhirId);
+        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), firstFhirId));
+        String secondMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), secondFhirId));
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
     }
@@ -46,8 +46,8 @@ public class IdMapperTest {
     public void When_FetchingSameIdForDifferentResources_Expect_NewMappedIdsReturned() {
         String sameFhirId = randomIdGeneratorService.createNewId();
 
-        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, sameFhirId);
-        String secondMappedId = idMapper.getOrNew(ResourceType.Encounter, sameFhirId);
+        String firstMappedId = idMapper.getOrNew(ResourceType.Appointment, new IdType(ResourceType.Appointment.name(), sameFhirId));
+        String secondMappedId = idMapper.getOrNew(ResourceType.Encounter, new IdType(ResourceType.Encounter.name(), sameFhirId));
 
         assertThat(firstMappedId).isNotEqualTo(secondMappedId);
     }

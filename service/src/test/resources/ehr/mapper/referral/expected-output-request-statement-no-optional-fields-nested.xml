@@ -1,6 +1,6 @@
 <component typeCode="COMP" contextConductionInd="true">
     <RequestStatement classCode="OBS" moodCode="RQO">
-        <id root="II-for-ReferralRequest-ReferralRequest/E63AF323-919F-4D5F-9A1D-BA933BC230BC" />
+        <id root="II-for-ReferralRequest-E63AF323-919F-4D5F-9A1D-BA933BC230BC" />
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>

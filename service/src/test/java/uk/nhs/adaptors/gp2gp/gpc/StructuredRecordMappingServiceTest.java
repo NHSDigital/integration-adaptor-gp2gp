@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -21,6 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @ExtendWith(MockitoExtension.class)
 class StructuredRecordMappingServiceTest {
@@ -41,6 +46,8 @@ class StructuredRecordMappingServiceTest {
     @Mock
     private MessageContext messageContext;
     @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
+
     private IdMapper idMapper;
 
     @InjectMocks
@@ -48,25 +55,34 @@ class StructuredRecordMappingServiceTest {
 
     @Test
     void When_GettingExternalAttachments_Expect_AllDocumentReferenceResourcesAreMapped() {
+        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, NEW_DOC_REF_ID_2,
+            NEW_DOC_MANIFEST_ID_2);
+
+        idMapper = new IdMapper(randomIdGeneratorService);
+        idMapper.getOrNew(ResourceType.DocumentReference, buildIdType(ResourceType.DocumentReference, ID_1));
+        idMapper.getOrNew(ResourceType.DocumentManifest, buildIdType(ResourceType.DocumentManifest, ID_1));
+        idMapper.getOrNew(ResourceType.DocumentReference, buildIdType(ResourceType.DocumentReference, ID_2));
+        idMapper.getOrNew(ResourceType.DocumentManifest, buildIdType(ResourceType.DocumentManifest, ID_2));
+
         when(messageContext.getIdMapper()).thenReturn(idMapper);
-        when(idMapper.get(ResourceType.DocumentReference, ID_1)).thenReturn(NEW_DOC_REF_ID_1);
-        when(idMapper.getOrNew(ResourceType.DocumentManifest, ID_1)).thenReturn(NEW_DOC_MANIFEST_ID_1);
-        when(idMapper.get(ResourceType.DocumentReference, ID_2)).thenReturn(NEW_DOC_REF_ID_2);
-        when(idMapper.getOrNew(ResourceType.DocumentManifest, ID_2)).thenReturn(NEW_DOC_MANIFEST_ID_2);
+
+        DocumentReference documentReference1 = new DocumentReference();
+        documentReference1.setId(new IdType(ResourceType.DocumentReference.name(), ID_1));
+        documentReference1.getContentFirstRep().setAttachment(new Attachment()
+            .setTitle("some title")
+            .setSize(ATTACHMENT_1_SIZE)
+            .setContentType("text/plain"));
+
+        DocumentReference documentReference2 = new DocumentReference();
+        documentReference2.setId(new IdType(ResourceType.DocumentReference.name(), ID_2));
+        documentReference2.getContentFirstRep().setAttachment(new Attachment()
+            .setSize(ATTACHMENT_2_SIZE)
+            .setContentType("text/html"));
 
         var bundle = new Bundle()
             .addEntry(new Bundle.BundleEntryComponent().setResource(new Patient()))
-            .addEntry(new Bundle.BundleEntryComponent().setResource(new DocumentReference() {{
-                    getContentFirstRep().setAttachment(new Attachment()
-                        .setTitle("some title")
-                        .setSize(ATTACHMENT_1_SIZE)
-                        .setContentType("text/plain"));
-                }}.setId(ID_1)))
-            .addEntry(new Bundle.BundleEntryComponent().setResource(new DocumentReference() {{
-                    getContentFirstRep().setAttachment(new Attachment()
-                        .setSize(ATTACHMENT_2_SIZE)
-                        .setContentType("text/html"));
-                }}.setId(ID_2)));
+            .addEntry(new Bundle.BundleEntryComponent().setResource(documentReference1))
+            .addEntry(new Bundle.BundleEntryComponent().setResource(documentReference2));
 
         var actualExternalAttachments = structuredRecordMappingService.getExternalAttachments(bundle);
 

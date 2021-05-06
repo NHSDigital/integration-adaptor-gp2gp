@@ -27,7 +27,7 @@ public class ObservationToNarrativeStatementMapper {
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
+            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
             .isNested(isNested);

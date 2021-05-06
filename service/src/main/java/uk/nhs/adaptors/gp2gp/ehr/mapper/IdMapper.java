@@ -18,7 +18,7 @@ public class IdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final Map<String, String> ids = new HashMap<>();
 
-    public String getOrNew(ResourceType resourceType, String id) {
+    public String getOrNew(ResourceType resourceType, IdType id) {
         return getOrNew(buildReference(resourceType, id));
     }
 
@@ -29,7 +29,7 @@ public class IdMapper {
         return mappedId;
     }
 
-    public boolean hasIdBeenMapped(ResourceType resourceType, String id) {
+    public boolean hasIdBeenMapped(ResourceType resourceType, IdType id) {
         return hasIdBeenMapped(buildReference(resourceType, id));
     }
 
@@ -62,12 +62,11 @@ public class IdMapper {
         return null;
     }
 
-    public String get(ResourceType resourceType, String id) throws EhrMapperException {
+    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
         return get(buildReference(resourceType, id));
     }
 
-    public static Reference buildReference(ResourceType resourceType, String id) {
-        return new Reference(new IdType(resourceType.name(), id));
+    private static Reference buildReference(ResourceType resourceType, IdType id) {
+        return new Reference(new IdType(resourceType.name(), id.getIdPart()));
     }
-
 }

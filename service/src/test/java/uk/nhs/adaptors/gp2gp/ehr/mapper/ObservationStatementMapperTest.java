@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
@@ -185,7 +186,7 @@ public class ObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "something");
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, new IdType(ResourceType.Practitioner.name(), "something"));
 
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
