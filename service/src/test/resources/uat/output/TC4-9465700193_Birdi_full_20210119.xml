@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -177,9 +177,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222144600" />
-        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -226,9 +226,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
+        <text>Type: Letter from specialist Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Special Characters in filename</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222144700" />
-        <text>Type: Letter from specialist Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Special Characters in filename</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
@@ -275,9 +275,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145200" />
-        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
@@ -324,9 +324,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145200" />
-        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -373,9 +373,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145300" />
-        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -422,9 +422,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145300" />
-        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
@@ -471,9 +471,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145300" />
-        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
@@ -520,9 +520,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145800" />
-        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -569,9 +569,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145900" />
-        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
@@ -618,9 +618,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222145900" />
-        <text>Type: Date records held from Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Date records held from (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
@@ -667,9 +667,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222150000" />
-        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
@@ -716,9 +716,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222150000" />
-        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
@@ -765,9 +765,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
+        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222150500" />
-        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
@@ -814,9 +814,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
+        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222150700" />
-        <text>Type: Sore throat Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Sore throat (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
@@ -863,9 +863,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151100" />
-        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
@@ -912,9 +912,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151200" />
-        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
@@ -961,9 +961,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151200" />
-        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
@@ -1010,9 +1010,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222000000" />
-        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
@@ -1059,9 +1059,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151300" />
-        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
@@ -1108,9 +1108,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151300" />
-        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806"/>
@@ -1157,9 +1157,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151400" />
-        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
@@ -1206,9 +1206,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5BB18E92-DABB-4C22-838A-410B4A278060" />
+        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151400" />
-        <text>Type: Third meningitis C vaccination Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Third meningitis C vaccination (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5BB18E92-DABB-4C22-838A-410B4A278060"/>
@@ -1255,9 +1255,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151500" />
-        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
@@ -1304,9 +1304,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <text>Type: Letter sent to patient Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151500" />
-        <text>Type: Letter sent to patient Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
@@ -1353,9 +1353,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772" />
+        <text>Type: Diabetes monitoring first letter Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Diabetes monitoring first letter (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151600" />
-        <text>Type: Diabetes monitoring first letter Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Diabetes monitoring first letter (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
@@ -1402,9 +1402,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151600" />
-        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B"/>
@@ -1451,9 +1451,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284" />
+        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151700" />
-        <text>Type: Breathless - mild exertion Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Breathless - mild exertion (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
@@ -1500,9 +1500,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069" />
+        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151700" />
-        <text>Type: Letter from specialist Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter from specialist (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
@@ -1549,9 +1549,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
+        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151900" />
-        <text>Type: Referral for further care Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
@@ -1598,9 +1598,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201222151900" />
-        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (22-Dec-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
@@ -1647,9 +1647,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from TEMPLE SOWERBY MEDICAL PRACTICE (06-Jan-2021)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210106150000" />
-        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from TEMPLE SOWERBY MEDICAL PRACTICE (06-Jan-2021)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
@@ -1696,9 +1696,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr David McAvenue at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5265867 bytes greater than maximum allowable (5MB)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210106150300" />
-        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr David McAvenue at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5265867 bytes greater than maximum allowable (5MB)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
@@ -1745,9 +1745,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
+        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr Peter Whitcombe, General Medical Practitioner at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5918228 bytes greater than maximum allowable (5MB)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210106151800" />
-        <text>Type: Letter sent to patient Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Letter sent to patient from Dr Peter Whitcombe, General Medical Practitioner at EMIS LV Test Practice 1 (06-Jan-2021) Absent Attachment: File size 5918228 bytes greater than maximum allowable (5MB)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
@@ -1789,11 +1789,11 @@
                 <id root=""/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
-        <statusCode code="COMPLETE"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20210104"/>
         </effectiveTime>
@@ -1801,6 +1801,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
+                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20210104"/>
@@ -1812,8 +1814,6 @@
                         <text>Status: Active</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="716186003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="No known allergy">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1928,7 +1928,7 @@
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">

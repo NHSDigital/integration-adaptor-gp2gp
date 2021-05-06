@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -778,9 +778,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
+        <text>Left arm - This is some text 1</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Left arm - This is some text 1</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -813,9 +813,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D" />
+        <text>Right arm - This is some text 2</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Right arm - This is some text 2</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -848,9 +848,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
+        <text>Left leg  - This is some text 3</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Left leg  - This is some text 3</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -883,9 +883,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <text>Right leg - This is some text 4</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Right leg - This is some text 4</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -918,9 +918,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54" />
+        <text>Left leg  - This is some text 5</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Left leg  - This is some text 5</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -953,9 +953,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854" />
+        <text>Right leg - This is some text 6</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Right leg - This is some text 6</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -988,9 +988,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5" />
+        <text>Right leg - This is some text - left arm / right leg</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Right leg - This is some text - left arm / right leg</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -1024,9 +1024,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4E95E2AF-BF10-45BB-AAA5-2547BD42C806" />
+        <text>Left leg  - This is some text - right arm left leg</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100118114100" />
-        <text>Left leg  - This is some text - right arm left leg</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -2659,7 +2659,7 @@
                     <center value="20110111153300"/>
                 </effectiveTime>
                 <availabilityTime value="20110111153927"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2673,7 +2673,7 @@
                     <center value="20110111153300"/>
                 </effectiveTime>
                 <availabilityTime value="20110111153927"/>
-                <valueQuantity><value xsi:type="PQ" value="50.000" unit="1"><translation value="50.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="50.000" unit="1"><translation value="50.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -3350,7 +3350,7 @@
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">

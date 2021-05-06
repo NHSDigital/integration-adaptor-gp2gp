@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -367,9 +367,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
+        <text>Created consultation with same date and time as existing consultation</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201109132500" />
-        <text>Created consultation with same date and time as existing consultation</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -509,9 +509,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (17-Nov-2020) Absent Attachment: File size 18551238 bytes greater than maximum allowable (5MB)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117110200" />
-        <text>Type: Referral for further care Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Referral for further care from Dr David McAvenue at EMIS LV Test Practice 1 (17-Nov-2020) Absent Attachment: File size 18551238 bytes greater than maximum allowable (5MB)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
@@ -525,9 +525,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+        <text>This is some text in the comment field on the Attach Document screen</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>This is some text in the comment field on the Attach Document screen</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -570,9 +570,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B" />
+        <text>Type: Postoperative urine specimen collection Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Postoperative urine specimen collection (17-Nov-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117000000" />
-        <text>Type: Postoperative urine specimen collection Author Org: TEMPLE SOWERBY MEDICAL PRACTICE Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Postoperative urine specimen collection (17-Nov-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
@@ -611,9 +611,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3" />
+        <text>Very special characters !@£$567890-=][[]:&quot;|\&apos;;&lt;&gt;//.,</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Very special characters !@£$567890-=][[]:&quot;|\&apos;;&lt;&gt;//.,</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -656,9 +656,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B" />
+        <text>Doctor only Confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Doctor only Confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -701,9 +701,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
+        <text>Clinician Only Confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Clinician Only Confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -746,9 +746,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE" />
+        <text>Org Clinician Only confidentiality</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201117" />
-        <text>Org Clinician Only confidentiality</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -884,9 +884,9 @@
 <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99" />
+        <text>Biochemistry - Venous blood specimen (Test request : Serum electrolytes, Test request : Liver Function Tests, Test request : Blood Glucose)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201118135600" />
-        <text>Biochemistry - Venous blood specimen (Test request : Serum electrolytes, Test request : Liver Function Tests, Test request : Blood Glucose)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -896,9 +896,9 @@
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B" />
+        <text>Biochemistry - Urine specimen (Test request : Urinary Microalbumin)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201118135600" />
-        <text>Biochemistry - Urine specimen (Test request : Urinary Microalbumin)</text>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -1007,9 +1007,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038" />
+        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (15-Oct-2020)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201015000000" />
-        <text>Type: Active monitoring Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Active monitoring (15-Oct-2020)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
@@ -1056,9 +1056,9 @@
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E" />
+        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (04-Sep-2019)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20190904000000" />
-        <text>Type: Clinical report Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Clinical report (04-Sep-2019)</text>
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
@@ -1105,6 +1105,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1159,6 +1160,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1213,6 +1215,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -1262,7 +1265,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
         <statusCode code="COMPLETE"/>
@@ -1343,7 +1346,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
         <statusCode code="COMPLETE"/>
@@ -1425,7 +1428,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
         <statusCode code="COMPLETE"/>
@@ -1519,7 +1522,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
         <statusCode code="COMPLETE"/>
@@ -1601,7 +1604,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
         <statusCode code="COMPLETE"/>
@@ -1682,7 +1685,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
         <statusCode code="COMPLETE"/>
@@ -1764,7 +1767,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="85E19135-F780-437D-9633-24BF6C7E5D82"/>
         <statusCode code="COMPLETE"/>
@@ -1850,7 +1853,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
         <statusCode code="COMPLETE"/>
@@ -1932,7 +1935,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
         <statusCode code="COMPLETE"/>
@@ -2018,7 +2021,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
         <statusCode code="COMPLETE"/>
@@ -2104,7 +2107,7 @@
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
         <statusCode code="ACTIVE"/>
@@ -2190,7 +2193,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
         <statusCode code="COMPLETE"/>
@@ -2271,7 +2274,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
         <statusCode code="COMPLETE"/>
@@ -2357,7 +2360,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
         <statusCode code="COMPLETE"/>
@@ -2439,7 +2442,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
         <statusCode code="ACTIVE"/>
@@ -2525,7 +2528,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
         <statusCode code="COMPLETE"/>
@@ -2606,7 +2609,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
         <statusCode code="COMPLETE"/>
@@ -2687,7 +2690,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
         <statusCode code="COMPLETE"/>
@@ -2769,7 +2772,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
         <statusCode code="COMPLETE"/>
@@ -2855,7 +2858,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
         <statusCode code="COMPLETE"/>
@@ -2937,7 +2940,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
         <statusCode code="COMPLETE"/>
@@ -3023,7 +3026,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
         <statusCode code="COMPLETE"/>
@@ -3105,7 +3108,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
         <statusCode code="COMPLETE"/>
@@ -3191,7 +3194,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
         <statusCode code="COMPLETE"/>
@@ -3273,7 +3276,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
         <statusCode code="COMPLETE"/>
@@ -3359,7 +3362,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
         <statusCode code="COMPLETE"/>
@@ -3441,7 +3444,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
         <statusCode code="COMPLETE"/>
@@ -3527,7 +3530,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="10720133-30C3-4145-9184-8713284C5A90"/>
         <statusCode code="COMPLETE"/>
@@ -3609,7 +3612,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235"/>
         <statusCode code="COMPLETE"/>
@@ -3695,7 +3698,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
         <statusCode code="COMPLETE"/>
@@ -3777,7 +3780,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
         <statusCode code="COMPLETE"/>
@@ -3863,7 +3866,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
         <statusCode code="COMPLETE"/>
@@ -3945,7 +3948,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="938365F3-8C68-4189-A550-FAB37F4F59C8"/>
         <statusCode code="COMPLETE"/>
@@ -4031,7 +4034,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
         <statusCode code="COMPLETE"/>
@@ -4113,7 +4116,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
         <statusCode code="COMPLETE"/>
@@ -4199,7 +4202,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
         <statusCode code="COMPLETE"/>
@@ -4281,7 +4284,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
         <statusCode code="COMPLETE"/>
@@ -4367,7 +4370,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
         <statusCode code="COMPLETE"/>
@@ -4449,7 +4452,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
         <statusCode code="COMPLETE"/>
@@ -4535,7 +4538,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
         <statusCode code="COMPLETE"/>
@@ -4617,7 +4620,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
         <statusCode code="COMPLETE"/>
@@ -4703,7 +4706,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
         <statusCode code="COMPLETE"/>
@@ -4785,7 +4788,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
         <statusCode code="COMPLETE"/>
@@ -4871,7 +4874,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
         <statusCode code="COMPLETE"/>
@@ -4953,7 +4956,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
         <statusCode code="COMPLETE"/>
@@ -5039,7 +5042,7 @@
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
         <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
         <statusCode code="COMPLETE"/>
@@ -5124,44 +5127,42 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D" />
-        <effectiveTime>
-            <low value="20201109132500"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20201117132807" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
-</code>
+        <effectiveTime>
+            <low value="20201109132500"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20201117132807" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5203,29 +5204,27 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145" />
-        <effectiveTime>
-            <low value="20201101"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20201118141948" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="867553AF-2B39-48F7-BE0B-DE854814CED5"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="38341003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hypertensive disorder">
-</code>
+        <effectiveTime>
+            <low value="20201101"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20201118141948" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="867553AF-2B39-48F7-BE0B-DE854814CED5"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5267,6 +5266,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="452AFD1A-B615-4E2C-A733-544A3426DA24" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201102"/>
             <high value="20201117000000"/>
@@ -5277,14 +5282,6 @@
                 <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="49727002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cough">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5326,6 +5323,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201104"/>
             <high value="20201202000000"/>
@@ -5336,14 +5339,6 @@
                 <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="29857009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chest pain">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5385,6 +5380,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201109"/>
             
@@ -5395,15 +5396,6 @@
                 <id root="D27E4A12-8EA6-44D7-AB94-821503546B45"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
-    <originalText>Heart attack</originalText>
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5445,6 +5437,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201109"/>
             <high value="20201117000000"/>
@@ -5455,14 +5453,6 @@
                 <id root="D20DC48D-2202-4E6A-A1A0-1C6A27C50CAC"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="50417007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lower respiratory tract infection">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5504,6 +5494,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201116"/>
             
@@ -5514,14 +5510,6 @@
                 <id root="300330A9-5389-444B-A23E-6402355AB06C"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="233604007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pneumonia">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5563,6 +5551,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201117"/>
             
@@ -5573,14 +5567,6 @@
                 <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="414545008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Ischaemic heart disease">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5622,6 +5608,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="6CD96448-3DD9-4E6D-857A-798F79824F26" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201216"/>
             
@@ -5632,14 +5624,6 @@
                 <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="185660003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adult abnormal - 2nd recall">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6464,6 +6448,7 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
@@ -6794,7 +6779,7 @@
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">
