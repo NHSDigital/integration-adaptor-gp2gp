@@ -1476,7 +1476,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20201125143423"/>
                 <reversalOf typeCode="REV">
-                    <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
