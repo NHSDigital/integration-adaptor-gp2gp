@@ -25,11 +25,11 @@ public class StructuredObservationValueMapper {
         Quantity.class, value -> ObservationValueQuantityMapper.processQuantity((Quantity) value),
         StringType.class, value -> processStringType((StringType) value)
     );
-    private static final Mustache STRING_VALUE_TEMPLATE = TemplateUtils.compileTemplate("<value xsi:type=\"ST\">{{value}}</value>");
+    private static final Mustache STRING_VALUE_TEMPLATE = TemplateUtils.compileTemplate("<value xsi:type=\"ST\">{{.}}</value>");
     private static final Mustache REF_RANGE_TEMPLATE = TemplateUtils.loadTemplate("ehr_reference_range_template.mustache");
 
-    private static final Mustache LOW_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<low value=\"{{{low}}}\"/>");
-    private static final Mustache HIGH_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<high value=\"{{{high}}}\"/>");
+    private static final Mustache LOW_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<low value=\"{{{.}}}\"/>");
+    private static final Mustache HIGH_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<high value=\"{{{.}}}\"/>");
     private static final Mustache INTERPRETATION_CODE_TEMPLATE = TemplateUtils.loadTemplate("ehr_interpretation_code_template.mustache");
 
     public String mapObservationValueToStructuredElement(IBaseElement value) {
@@ -82,11 +82,11 @@ public class StructuredObservationValueMapper {
             String rangeValue = StringUtils.EMPTY;
 
             if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
-                rangeValue += TemplateUtils.fillTemplate(LOW_RANGE_TEMPLATE, Map.of("low", referenceRange.getLow().getValue()));
+                rangeValue += TemplateUtils.fillTemplate(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
 
             }
             if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
-                rangeValue += TemplateUtils.fillTemplate(HIGH_RANGE_TEMPLATE, Map.of("high", referenceRange.getHigh().getValue()));
+                rangeValue += TemplateUtils.fillTemplate(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
             }
             return TemplateUtils.fillTemplate(REF_RANGE_TEMPLATE, ReferenceRangeTemplateParameters.builder()
                 .text(referenceRange.getText())
@@ -101,7 +101,7 @@ public class StructuredObservationValueMapper {
 
     private static String processStringType(StringType value) {
         if (value.hasValue()) {
-            return TemplateUtils.fillTemplate(STRING_VALUE_TEMPLATE, Map.of("value", value.getValue()));
+            return TemplateUtils.fillTemplate(STRING_VALUE_TEMPLATE, value.getValue());
         }
         return StringUtils.EMPTY;
     }
