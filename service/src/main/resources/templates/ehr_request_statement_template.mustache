@@ -1,21 +1,15 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="{{requestStatementId}}" />
+        {{#code}}
+        {{{code}}}
+        {{/code}}
+        <text>{{text}}</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         {{{availabilityTime}}}
-        {{#defaultReasonCode}}
-        {{{defaultReasonCode}}}
-        {{/defaultReasonCode}}
-        <text>{{text}}</text>
-        {{#code}}
-        {{{code}}}
-        {{/code}}
-        {{#participant}}
-        {{{.}}}
-        {{/participant}}
         {{#responsibleParty}}
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
@@ -23,5 +17,8 @@
             </agentRef>
         </responsibleParty>
         {{/responsibleParty}}
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </RequestStatement>
 </component>
