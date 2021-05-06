@@ -18,7 +18,7 @@
         </agentOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -43,7 +43,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -68,7 +68,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -80,7 +80,7 @@
         </agentPerson>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -92,7 +92,7 @@
         </agentPerson>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -104,7 +104,7 @@
         </agentPerson>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
@@ -116,7 +116,7 @@
         </agentPerson>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">

@@ -41,7 +41,7 @@
             <responsibleParty typeCode="RESP">
     <agentDirectory classCode="AGNT">
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
@@ -69,7 +69,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
@@ -97,7 +97,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
@@ -125,7 +125,7 @@
         </representedOrganization>
     </Agent>
 </part>
-            <part partCode="PART">
+            <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
