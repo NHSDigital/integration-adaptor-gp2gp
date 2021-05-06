@@ -27,7 +27,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import lombok.SneakyThrows;
+
 import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -38,7 +40,7 @@ public class RequestStatementMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/referral/";
 
     // INPUT FILES
-    private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
+    private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "example-referral-request-no-optional-fields.json";
     private static final String INPUT_JSON_WITH_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -126,6 +128,42 @@ public class RequestStatementMapperTest {
 
     private RequestStatementMapper requestStatementMapper;
 
+    private static Stream<Arguments> resourceFileParams() {
+        return Stream.of(
+            arguments(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
+            arguments(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_WITH_OPTIONAL_FIELDS),
+            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER),
+            arguments(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
+            arguments(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
+            arguments(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
+            arguments(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
+            arguments(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
+            arguments(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_ONE_PRACTITIONER_RECIPIENT),
+            arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT),
+            arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
+            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
+            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS)
+        );
+    }
+
+    private static Stream<Arguments> resourceFileParamsReasonCodes() {
+        return Stream.of(
+            arguments(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_WITH_ONE_REASON_CODE),
+            arguments(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
+        );
+    }
+
+    private static Stream<Arguments> resourceFileParamsWithUnexpectedReferences() {
+        return Stream.of(
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference")
+        );
+    }
+
     @BeforeEach
     public void setUp() throws IOException {
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
@@ -167,22 +205,15 @@ public class RequestStatementMapperTest {
         assertThatInputMapsToExpectedOutput(inputJson, outputXml);
     }
 
-    private static Stream<Arguments> resourceFileParams() {
-        return Stream.of(
-            arguments(INPUT_JSON_WITH_NO_OPTIONAL_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_FIELDS),
-            arguments(INPUT_JSON_WITH_OPTIONAL_FIELDS, OUTPUT_XML_WITH_OPTIONAL_FIELDS),
-            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER),
-            arguments(INPUT_JSON_WITH_SERVICES_REQUESTED, OUTPUT_XML_WITH_SERVICES_REQUESTED),
-            arguments(INPUT_JSON_WITH_DEVICE_REQUESTER, OUTPUT_XML_WITH_DEVICE_REQUESTER),
-            arguments(INPUT_JSON_WITH_ORG_REQUESTER, OUTPUT_XML_WITH_ORG_REQUESTER),
-            arguments(INPUT_JSON_WITH_PATIENT_REQUESTER, OUTPUT_XML_WITH_PATIENT_REQUESTER),
-            arguments(INPUT_JSON_WITH_RELATION_REQUESTER, OUTPUT_XML_WITH_RELATION_REQUESTER),
-            arguments(INPUT_JSON_WITH_ONE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_ONE_PRACTITIONER_RECIPIENT),
-            arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT), 
-            arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
-            arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
-            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS)
-            );
+    @SneakyThrows
+    private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath) {
+        var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
+        var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
+        var referralRequest = new FhirParseService().parseResource(input, ReferralRequest.class);
+
+        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, false);
+
+        assertThat(outputMessage).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -191,13 +222,6 @@ public class RequestStatementMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         assertThatInputMapsToExpectedOutput(inputJson, outputXml);
-    }
-
-    private static Stream<Arguments> resourceFileParamsReasonCodes() {
-        return Stream.of(
-            arguments(INPUT_JSON_WITH_ONE_REASON_CODE, OUTPUT_XML_WITH_ONE_REASON_CODE),
-            arguments(INPUT_JSON_WITH_REASON_CODES, OUTPUT_XML_WITH_REASON_CODES)
-        );
     }
 
     @Test
@@ -214,7 +238,7 @@ public class RequestStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParamsWithUnexpectedReferences")
     public void When_MappingReferralRequestJsonWithUnexpectedReferences_Expect_Exception(String inputJson, String exceptionMessage)
-            throws IOException {
+        throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
 
@@ -222,27 +246,4 @@ public class RequestStatementMapperTest {
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage(exceptionMessage);
     }
-
-    private static Stream<Arguments> resourceFileParamsWithUnexpectedReferences() {
-        return Stream.of(
-            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
-            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
-            arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference")
-            );
-    }
-
-    @SneakyThrows
-    private void assertThatInputMapsToExpectedOutput(String inputJsonResourcePath, String outputXmlResourcePath) {
-        var expected = ResourceTestFileUtils.getFileContent(outputXmlResourcePath);
-        var input = ResourceTestFileUtils.getFileContent(inputJsonResourcePath);
-        var referralRequest = new FhirParseService().parseResource(input, ReferralRequest.class);
-
-        String outputMessage = requestStatementMapper.mapReferralRequestToRequestStatement(referralRequest, false);
-
-        assertThat(outputMessage).isEqualTo(expected);
-    }
-
 }
