@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
@@ -122,5 +123,28 @@ public class IdMapperTest {
 
         final String actual = idMapper.get(reference);
         assertThat(actual).isNull();
+    }
+
+    @Test
+    public void When_GettingIdForResourceMapping_Expect_HasBeenMappedReturnedTrue() {
+        final String id = randomIdGeneratorService.createNewId();
+        final IdType idType = buildIdType(ResourceType.Person, id);
+        final Reference reference = new Reference(idType);
+
+        idMapper.getOrNew(ResourceType.Person, idType);
+
+        assertThat(idMapper.hasIdBeenMapped(reference)).isTrue();
+        assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, idType)).isTrue();
+    }
+
+    @Test
+    public void When_GettingIdForReferenceMapping_Expect_HasBeenMappedReturnedFalse() {
+        final String id = randomIdGeneratorService.createNewId();
+        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
+
+        idMapper.getOrNew(reference);
+
+        assertThat(idMapper.hasIdBeenMapped(reference)).isFalse();
+        assertThat(idMapper.hasIdBeenMapped(ResourceType.Person, buildIdType(ResourceType.Person, id))).isFalse();
     }
 }

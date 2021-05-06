@@ -59,6 +59,7 @@ public class AllergyStructureMapper {
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         final IdMapper idMapper = messageContext.getIdMapper();
+
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
             .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getIdElement()))
             .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getIdElement()))
