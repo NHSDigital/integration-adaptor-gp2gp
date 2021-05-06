@@ -36,8 +36,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ObservationMapper {
 
-    private static final Mustache OBSERVATION_NARRATIVE_STATEMENT_TEMPLATE =
-        TemplateUtils.loadTemplate("observation_narrative_statement_template.mustache");
+    public static final Mustache NARRATIVE_STATEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("narrative_statement_template.mustache");
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
@@ -114,7 +114,7 @@ public class ObservationMapper {
             narrativeStatementTemplateParameters.participant(participantBlock);
         }
 
-        return TemplateUtils.fillTemplate(OBSERVATION_NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
+        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
     private String mapObservationToObservationStatement(IdMapper idMapper, Observation observation) {

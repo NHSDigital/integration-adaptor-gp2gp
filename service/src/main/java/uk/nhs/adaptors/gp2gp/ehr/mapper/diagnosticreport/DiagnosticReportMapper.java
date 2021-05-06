@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -15,18 +16,25 @@ import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -39,6 +47,7 @@ public class DiagnosticReportMapper {
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
     private final ParticipantMapper participantMapper;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapDiagnosticReportToCompoundStatement(DiagnosticReport diagnosticReport) {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
@@ -62,6 +71,31 @@ public class DiagnosticReportMapper {
             final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
             diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
         }
+
+        StringBuilder reportLevelNarrativeStatements = new StringBuilder();
+
+        if (diagnosticReport.hasConclusion()) {
+            String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, diagnosticReport.getConclusion()
+            );
+
+            reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
+        }
+
+        String codedDiagnosisText = diagnosticReport.getCodedDiagnosis().stream()
+            .map(this::extractTextFromCodedDiagnosisItems)
+            .flatMap(List::stream)
+            .collect(Collectors.joining(", "));
+
+        if (!codedDiagnosisText.isEmpty()) {
+            String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
+                    diagnosticReport, codedDiagnosisText
+            );
+
+            reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+
+        diagnosticReportCompoundStatementTemplateParameters.narrativeStatements(reportLevelNarrativeStatements.toString());
 
         return TemplateUtils.fillTemplate(
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
@@ -115,5 +149,35 @@ public class DiagnosticReportMapper {
             .setSpecimen(new Reference().setReference("Specimen/Default-1"))
             .setIssuedElement(diagnosticReport.getIssuedElement())
             .setComment("EMPTY REPORT");
+    }
+
+    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String comment) {
+        var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
+                .narrativeStatementId(randomIdGeneratorService.createNewId())
+                .commentType(CommentType.LABORATORY_RESULT_COMMENT.getCode())
+                .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
+                .comment(comment)
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
+
+        return TemplateUtils.fillTemplate(
+                NARRATIVE_STATEMENT_TEMPLATE,
+                narrativeStatementTemplateParameters.build()
+        );
+    }
+
+    private List<String> extractTextFromCodedDiagnosisItems(CodeableConcept codeableConcept) {
+        List<String> codedDiagnosisText = new ArrayList<>();
+
+        if (codeableConcept.hasCoding()) {
+            codedDiagnosisText = codeableConcept.getCoding().stream()
+                    .map(Coding::getDisplay)
+                    .collect(Collectors.toList());
+        }
+
+        if (codeableConcept.hasText()) {
+            codedDiagnosisText.add(codeableConcept.getText());
+        }
+
+        return codedDiagnosisText;
     }
 }

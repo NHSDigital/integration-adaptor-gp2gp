@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
@@ -38,6 +39,8 @@ public class DiagnosticReportMapperTest {
 
     private static final String INPUT_JSON_BUNDLE = "fhir_bundle.json";
 
+    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
+
     private static final String INPUT_JSON_REQUIRED_DATA = "diagnostic-report-with-required-data.json";
     private static final String INPUT_JSON_EMPTY_SPECIMENS = "diagnostic-report-with-empty-specimens.json";
     private static final String INPUT_JSON_EMPTY_RESULTS = "diagnostic-report-with-empty-results.json";
@@ -47,11 +50,17 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTI_RESULTS = "diagnostic-report-with-multi-results.json";
     private static final String INPUT_JSON_PERFORMER = "diagnostic-report-with-performer.json";
     private static final String INPUT_JSON_PERFORMER_NO_ACTOR = "diagnostic-report-with-performer-no-actor.json";
+    private static final String INPUT_JSON_CONCLUSION = "diagnostic-report-with-conclusion.json";
+    private static final String INPUT_JSON_CODED_DIAGNOSIS = "diagnostic-report-with-coded-diagnosis.json";
+    private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
     private static final String OUTPUT_XML_PARTICIPANT = "diagnostic-report-with-participant.xml";
+    private static final String OUTPUT_XML_CONCLUSION = "diagnostic-report-with-conclusion.xml";
+    private static final String OUTPUT_XML_CODED_DIAGNOSIS = "diagnostic-report-with-coded-diagnosis.xml";
+    private static final String OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -61,6 +70,8 @@ public class DiagnosticReportMapperTest {
     private MessageContext messageContext;
     @Mock
     private IdMapper idMapper;
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     private DiagnosticReportMapper mapper;
 
@@ -79,7 +90,9 @@ public class DiagnosticReportMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
 
-        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper());
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
+        mapper = new DiagnosticReportMapper(messageContext, specimenMapper, new ParticipantMapper(), randomIdGeneratorService);
     }
 
     @AfterEach
@@ -108,7 +121,10 @@ public class DiagnosticReportMapperTest {
             Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
             Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_PERFORMER, OUTPUT_XML_PARTICIPANT),
-            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA)
+            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_CONCLUSION, OUTPUT_XML_CONCLUSION),
+            Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
+            Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS)
         );
     }
 

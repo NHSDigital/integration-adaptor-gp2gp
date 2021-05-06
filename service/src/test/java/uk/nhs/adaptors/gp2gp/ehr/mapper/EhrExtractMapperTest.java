@@ -123,7 +123,8 @@ public class EhrExtractMapperTest {
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DiagnosticReportMapper(
-                messageContext, specimenMapper, participantMapper)
+                messageContext, specimenMapper, participantMapper, randomIdGeneratorService
+            )
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(

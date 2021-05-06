@@ -99,8 +99,7 @@ public class EncounterComponentsMapperTest {
         RequestStatementMapper requestStatementMapper
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
-            messageContext,
-            specimenMapper, participantMapper
+            messageContext, specimenMapper, participantMapper, randomIdGeneratorService
         );
 
         encounterComponentsMapper = new EncounterComponentsMapper(

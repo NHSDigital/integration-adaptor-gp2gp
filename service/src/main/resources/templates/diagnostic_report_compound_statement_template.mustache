@@ -9,6 +9,9 @@
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="{{diagnosticReportIssuedDate}}"/>
+        {{#narrativeStatements}}
+            {{{.}}}
+        {{/narrativeStatements}}
         {{#specimens}}
             {{{.}}}
         {{/specimens}}

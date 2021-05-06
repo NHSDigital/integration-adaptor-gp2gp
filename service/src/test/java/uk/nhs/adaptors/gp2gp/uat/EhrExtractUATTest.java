@@ -111,7 +111,7 @@ public class EhrExtractUATTest {
                 participantMapper
             ),
             new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper)
+            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
         );
 
         OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);

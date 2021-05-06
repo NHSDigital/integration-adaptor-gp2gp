@@ -12,4 +12,5 @@ public class DiagnosticReportCompoundStatementTemplateParameters {
     private String diagnosticReportIssuedDate;
     private String specimens;
     private String participant;
+    private String narrativeStatements;
 }
