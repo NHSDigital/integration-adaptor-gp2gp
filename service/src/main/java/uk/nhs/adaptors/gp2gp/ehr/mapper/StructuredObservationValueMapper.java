@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.github.mustachejava.Mustache;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -12,30 +13,24 @@ import org.hl7.fhir.instance.model.api.IBaseElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.common.collect.ImmutableMap;
-
 import lombok.RequiredArgsConstructor;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.InterpretationCodeTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ReferenceRangeTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 public class StructuredObservationValueMapper {
-    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> VALUE_MAPPING_FUNCTIONS =
-        ImmutableMap.of(Quantity.class, value -> ObservationValueQuantityMapper.processQuantity((Quantity) value),
-            StringType.class, value -> processStringType((StringType) value));
-    private static final String STRING_VALUE_TEMPLATE = "<value xsi:type=\"ST\">%s</value>";
-    private static final String REFERENCE_RANGE_TEMPLATE = "<referenceRange typeCode=\"REFV\">"
-        + "<referenceInterpretationRange classCode=\"OBS\" moodCode=\"EVN.CRT\">"
-        + "<text>%s</text>"
-        + "<value>%s</value>"
-        + "</referenceInterpretationRange>"
-        + "</referenceRange>";
-    private static final String LOW_RANGE_TEMPLATE = "<low value=\"%s\"/>";
-    private static final String HIGH_RANGE_TEMPLATE = "<high value=\"%s\"/>";
-    private static final String INTERPRETATION_CODE_TEMPLATE = "<interpretationCode code=\"%s\" "
-        + "codeSystem=\"2.16.840.1.113883.2.1.6.5\" "
-        + "displayName=\"%s\">"
-        + "<originalText>%s</originalText>"
-        + "</interpretationCode>";
+    private static final Map<Class<? extends IBaseElement>, Function<IBaseElement, String>> VALUE_MAPPING_FUNCTIONS = Map.of(
+        Quantity.class, value -> ObservationValueQuantityMapper.processQuantity((Quantity) value),
+        StringType.class, value -> processStringType((StringType) value)
+    );
+    private static final Mustache STRING_VALUE_TEMPLATE = TemplateUtils.compileTemplate("<value xsi:type=\"ST\">{{.}}</value>");
+    private static final Mustache REF_RANGE_TEMPLATE = TemplateUtils.loadTemplate("ehr_reference_range_template.mustache");
+
+    private static final Mustache LOW_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<low value=\"{{{.}}}\"/>");
+    private static final Mustache HIGH_RANGE_TEMPLATE = TemplateUtils.compileTemplate("<high value=\"{{{.}}}\"/>");
+    private static final Mustache INTERPRETATION_CODE_TEMPLATE = TemplateUtils.loadTemplate("ehr_interpretation_code_template.mustache");
 
     public String mapObservationValueToStructuredElement(IBaseElement value) {
         if (!isStructuredValueType(value)) {
@@ -53,17 +48,29 @@ public class StructuredObservationValueMapper {
             case "H":
             case "HH":
             case "HU":
-                return String.format(INTERPRETATION_CODE_TEMPLATE, "HI",
-                    "Above high reference limit", coding.getDisplay());
+                return TemplateUtils.fillTemplate(INTERPRETATION_CODE_TEMPLATE,
+                    InterpretationCodeTemplateParameters.builder()
+                        .code("HI")
+                        .displayName("Above high reference limit")
+                        .originalText(coding.getDisplay())
+                        .build());
             case "L":
             case "LL":
             case "LU":
-                return String.format(INTERPRETATION_CODE_TEMPLATE, "LO",
-                    "Below low reference limit", coding.getDisplay());
+                return TemplateUtils.fillTemplate(INTERPRETATION_CODE_TEMPLATE,
+                    InterpretationCodeTemplateParameters.builder()
+                        .code("LO")
+                        .displayName("Below low reference limit")
+                        .originalText(coding.getDisplay())
+                        .build());
             case "A":
             case "AA":
-                return String.format(INTERPRETATION_CODE_TEMPLATE, "PA",
-                    "Potentially abnormal", coding.getDisplay());
+                return TemplateUtils.fillTemplate(INTERPRETATION_CODE_TEMPLATE,
+                    InterpretationCodeTemplateParameters.builder()
+                        .code("PA")
+                        .displayName("Potentially abnormal")
+                        .originalText(coding.getDisplay())
+                        .build());
             default:
                 return StringUtils.EMPTY;
         }
@@ -75,13 +82,15 @@ public class StructuredObservationValueMapper {
             String rangeValue = StringUtils.EMPTY;
 
             if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
-                rangeValue += String.format(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
+                rangeValue += TemplateUtils.fillTemplate(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
 
             }
             if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
-                rangeValue += String.format(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
+                rangeValue += TemplateUtils.fillTemplate(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
             }
-            return String.format(REFERENCE_RANGE_TEMPLATE, referenceRange.getText(), rangeValue);
+            return TemplateUtils.fillTemplate(REF_RANGE_TEMPLATE, ReferenceRangeTemplateParameters.builder()
+                .text(referenceRange.getText())
+                .value(rangeValue).build());
         }
         return StringUtils.EMPTY;
     }
@@ -92,7 +101,7 @@ public class StructuredObservationValueMapper {
 
     private static String processStringType(StringType value) {
         if (value.hasValue()) {
-            return String.format(STRING_VALUE_TEMPLATE, value.getValue());
+            return TemplateUtils.fillTemplate(STRING_VALUE_TEMPLATE, value.getValue());
         }
         return StringUtils.EMPTY;
     }
