@@ -9,19 +9,19 @@
     <acceptAckCode code="NE" />
     <communicationFunctionRcv typeCode="RCV">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionRcv>
     <communicationFunctionSnd typeCode="SND">
         <device classCode="DEV" determinerCode="INSTANCE">
-            <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
         </device>
     </communicationFunctionSnd>
     <ControlActEvent classCode="CACT" moodCode="EVN">
         <author1 typeCode="AUT">
             <AgentSystemSDS classCode="AGNT">
                 <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
-                    <id root="1.2.826.0.1285.0.2.0.107" extension="" />
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
                 </agentSystemSDS>
             </AgentSystemSDS>
         </author1>
@@ -39,14 +39,14 @@
         <time value="20200101010101" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </author>
     <destination typeCode="DST">
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                <id root="1.2.826.0.1285.0.1.10" extension="test-from-ods-code" />
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
             </agentOrganizationSDS>
         </AgentOrgSDS>
     </destination>
@@ -62,7 +62,7 @@
                 <time value="20200101010101" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
-                        <id root="1.2.826.0.1285.0.1.10" extension="test-to-ods-code" />
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
                     </agentOrganizationSDS>
                 </AgentOrgSDS>
             </author>
@@ -348,7 +348,7 @@
                     <center value="20200904"/>
                 </effectiveTime>
                 <availabilityTime value="20200904134806"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -361,7 +361,7 @@
                     <center value="20200904"/>
                 </effectiveTime>
                 <availabilityTime value="20200904134806"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -410,24 +410,25 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843" />
-        <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
-    <originalText>2 week rule referral - colorectal</originalText>
-</code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200901"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
+        <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
+    <originalText>2 week rule referral - colorectal</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -531,14 +532,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80" />
-        <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
-    <originalText>Admission to hospital</originalText>
-</code>
-        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Investigation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon follow up investigation.</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
+        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Investigation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required, Annotation:  @  Priority:Soon follow up investigation.</text>
+        <code code="32485007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital admission">
+    <originalText>Admission to hospital</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -623,7 +625,7 @@
                     <center value="20200907174500"/>
                 </effectiveTime>
                 <availabilityTime value="20201105134936"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -636,7 +638,7 @@
                     <center value="20200907174500"/>
                 </effectiveTime>
                 <availabilityTime value="20201105134936"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -677,23 +679,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC" />
-        <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
-</code>
-        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required, Annotation:  @  Priority:Soon This referral will be rejected</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Performance of a Procedure or Operation, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required, Annotation:  @  Priority:Soon This referral will be rejected</text>
+        <code code="183446009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission to cardiac intensive care unit">
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -731,24 +734,25 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361" />
-        <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
-    <originalText>Admission by A &amp; E doctor</originalText>
-</code>
-        <text>Priority: ASAP Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: ASAP Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
+        <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
+    <originalText>Admission by A &amp; E doctor</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1116,7 +1120,7 @@
                     <center value="20201110115000"/>
                 </effectiveTime>
                 <availabilityTime value="20201110115343"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1129,7 +1133,7 @@
                     <center value="20201110115000"/>
                 </effectiveTime>
                 <availabilityTime value="20201110115343"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -1167,11 +1171,11 @@
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
-        <component typeCode="COMP" contextConductionInd="true">
+        <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="EC9F0EBD-415E-4ED6-BA09-C31A807BB7B1"/>
-        <statusCode code="COMPLETE"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20201110115600"/>
         </effectiveTime>
@@ -1179,6 +1183,8 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
+                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+</code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <center value="20201110115600"/>
@@ -1190,8 +1196,6 @@
                         <text>Status: Active</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
-</code>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
@@ -1236,25 +1240,26 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037" />
-        <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
-    <originalText>Refer to counsellor</originalText>
-</code>
-        <text>Priority: Routine Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
-</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201110"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
+</text>
+        <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
+    <originalText>Refer to counsellor</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1440,24 +1445,25 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
-        <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
-    <originalText>2 week rule referral - lung</originalText>
-</code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201216"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
+    <originalText>2 week rule referral - lung</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -1596,7 +1602,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125756"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1609,7 +1615,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125756"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -1635,7 +1641,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125757"/>
-                <valueQuantity><value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1693,7 +1699,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125757"/>
-                <valueQuantity><value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="90.000" unit="1"><translation value="90.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1753,7 +1759,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1810,7 +1816,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="120.000" unit="1"><translation value="120.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1844,7 +1850,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -1902,7 +1908,7 @@
                     <center value="20201217124900"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125758"/>
-                <valueQuantity><value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="100.000" unit="1"><translation value="100.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -2681,34 +2687,36 @@
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E" />
-        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
-</code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20210113"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component><component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4" />
-        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
-</code>
-        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20210113"/>
+        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3246,39 +3254,37 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD" />
-        <effectiveTime>
-            <low value="20200906"/>
-            <high value="20201004000000"/>
-        </effectiveTime>
-        <availabilityTime value="20200907101202" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="87102979-C329-4194-819B-D057AAEA625B"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="10720133-30C3-4145-9184-8713284C5A90"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-            </statementRef>
-        </component>
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
         </code>
-        <code code="36031001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
-</code>
+        <effectiveTime>
+            <low value="20200906"/>
+            <high value="20201004000000"/>
+        </effectiveTime>
+        <availabilityTime value="20200907101202" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="87102979-C329-4194-819B-D057AAEA625B"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="10720133-30C3-4145-9184-8713284C5A90"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3320,6 +3326,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="E2E18EA0-392E-43AD-8386-A3D94B2A9235" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201102"/>
             
@@ -3330,14 +3342,6 @@
                 <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
@@ -3396,45 +3400,42 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64" />
-        <effectiveTime>
-            <low value="20201105"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20201105131810" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
-    <originalText>[RFC] Chest infection</originalText>
-</code>
+        <effectiveTime>
+            <low value="20201105"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20201105131810" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -3476,44 +3477,42 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
-        <effectiveTime>
-            <low value="20201116"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20201116142203" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-            </statementRef>
-        </component>
-        <component typeCode="COMP">
-            <statementRef classCode="OBS" moodCode="EVN">
-                <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
-            </statementRef>
-        </component>
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
                 <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
             </qualifier>
         </code>
-        <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
-</code>
+        <effectiveTime>
+            <low value="20201116"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20201116142203" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
+                </statementRef>
+            </component>
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
+            </namedStatementRef>
+        </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -3555,6 +3554,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201116"/>
             <high value="20201214000000"/>
@@ -3565,14 +3570,6 @@
                 <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="90176007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -3614,6 +3611,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20201116"/>
             <high value="20201214000000"/>
@@ -3624,14 +3627,6 @@
                 <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code code="162397003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -3673,6 +3668,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20210106"/>
             
@@ -3683,14 +3684,6 @@
                 <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="787381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3732,6 +3725,12 @@
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
         <effectiveTime>
             <low value="20210113"/>
             
@@ -3742,14 +3741,6 @@
                 <id root="730F742C-1164-45BF-9139-8484074E5995"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <code code="103735009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
-</code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4648,7 +4639,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217130131"/>
-                <valueQuantity><value xsi:type="PQ" value="127.000" unit="1"><translation value="127.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="127.000" unit="1"><translation value="127.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4661,7 +4652,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217130131"/>
-                <valueQuantity><value xsi:type="PQ" value="98.000" unit="1"><translation value="98.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="98.000" unit="1"><translation value="98.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -4718,7 +4709,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125908"/>
-                <valueQuantity><value xsi:type="PQ" value="132.000" unit="1"><translation value="132.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="132.000" unit="1"><translation value="132.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4731,7 +4722,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125908"/>
-                <valueQuantity><value xsi:type="PQ" value="95.000" unit="1"><translation value="95.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="95.000" unit="1"><translation value="95.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -4788,7 +4779,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125844"/>
-                <valueQuantity><value xsi:type="PQ" value="121.000" unit="1"><translation value="121.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="121.000" unit="1"><translation value="121.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
@@ -4801,7 +4792,7 @@
                     <center value="20201217"/>
                 </effectiveTime>
                 <availabilityTime value="20201217125844"/>
-                <valueQuantity><value xsi:type="PQ" value="101.000" unit="1"><translation value="101.000"><originalText>mm[Hg]</originalText></translation></value></valueQuantity>
+                <value xsi:type="PQ" value="101.000" unit="1"><translation value="101.000"><originalText>mm[Hg]</originalText></translation></value>
             </ObservationStatement>
         </component>
         <!--<Participant typeCode="PRF" ..../>-->
@@ -5625,14 +5616,15 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863" />
-        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
-    <originalText>2 week rule referral - brain</originalText>
-</code>
-        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required To mark as &apos;Dormant&apos;</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
+        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required To mark as &apos;Dormant&apos;</text>
+        <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
+    <originalText>2 week rule referral - brain</originalText>
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -5673,23 +5665,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="0BA3D29E-065C-4962-9110-036BF07E17C5" />
-        <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
-</code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Patient Reassurance, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referral from a consultation</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200908"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Patient Reassurance, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referral from a consultation</text>
+        <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -5725,23 +5718,24 @@
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
         <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B" />
-        <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
-</code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required adas</text>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201118"/>
-        <responsibleParty typeCode="RESP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </responsibleParty>
+        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required adas</text>
+        <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
+</code>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
     </agentRef>
 </Participant>
+        <responsibleParty typeCode="RESP">
+            <agentRef classCode="AGNT">
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+            </agentRef>
+        </responsibleParty>
     </RequestStatement>
 </component>
     </ehrComposition>
@@ -5750,7 +5744,7 @@
     </component>
     <inFulfillmentOf typeCode="FLFS">
         <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
-            <id root="test-request-id" />
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
         </priorEhrRequest>
     </inFulfillmentOf>
     <limitation typeCode="LIMIT" inversionInd="true">
