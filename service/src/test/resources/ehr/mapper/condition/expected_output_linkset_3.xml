@@ -43,7 +43,7 @@
 <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
-        <code><!--code placeholder--></code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200906"/>
