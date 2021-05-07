@@ -104,7 +104,7 @@ public class DiagnosticReportMapper {
     }
 
     private List<Specimen> fetchSpecimens(DiagnosticReport diagnosticReport) {
-        if (diagnosticReport.getSpecimen().isEmpty()) {
+        if (!diagnosticReport.hasSpecimen()) {
             return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
         }
 
@@ -128,7 +128,7 @@ public class DiagnosticReportMapper {
     }
 
     private List<Observation> fetchObservations(DiagnosticReport diagnosticReport) {
-        if (diagnosticReport.getResult().isEmpty()) {
+        if (!diagnosticReport.hasResult()) {
             return Collections.singletonList(generateDefaultObservation(diagnosticReport));
         }
 
