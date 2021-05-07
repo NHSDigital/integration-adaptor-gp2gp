@@ -3394,7 +3394,8 @@
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
-        <code><!--code placeholder--></code>
+        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
+</code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20201102"/>
