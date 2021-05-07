@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
@@ -132,9 +133,10 @@ public class DiagnosticReportMapper {
             return Collections.singletonList(generateDefaultObservation(diagnosticReport));
         }
 
-        return diagnosticReport.getResult()
-            .stream()
-            .map(observationReference -> messageContext.getInputBundleHolder().getResource(observationReference.getReferenceElement()))
+        var inputBundleHolder = messageContext.getInputBundleHolder();
+        return diagnosticReport.getResult().stream()
+            .map(Reference::getReferenceElement)
+            .map(inputBundleHolder::getResource)
             .flatMap(Optional::stream)
             .map(Observation.class::cast)
             .collect(Collectors.toList());
