@@ -1,13 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-
+import com.github.mustachejava.Mustache;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
@@ -18,17 +13,20 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.stream.Collectors;
+
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -148,21 +146,18 @@ public class NonConsultationResourceMapper {
 
     private EncounterTemplateParametersBuilder buildForDiagnosticReport(String component, Resource resource) {
         DiagnosticReport diagnosticReport = (DiagnosticReport) resource;
-        boolean isAgentPerson = false;
 
-        if (diagnosticReport.hasPerformer()) {
-            isAgentPerson = Optional.of(diagnosticReport.getPerformerFirstRep())
+        var diagnosticReportXml = XpathExtractor.extractValuesForDiagnosticReport(component)
+            .altCode(DIAGNOSTIC_REPORT_CODE);
+
+        boolean isAgentPerson = diagnosticReport.hasPerformer()
+            && Optional.of(diagnosticReport.getPerformerFirstRep())
                 .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
                 .map(Reference::getReferenceElement)
                 .filter(IIdType::hasResourceType)
                 .map(IIdType::getResourceType)
                 .filter(ResourceType.Practitioner.name()::equals)
                 .isPresent();
-        }
-
-        var diagnosticReportXml = XpathExtractor.extractValuesForDiagnosticReport(component)
-            .altCode(DIAGNOSTIC_REPORT_CODE);
-
         if (!isAgentPerson) {
             diagnosticReportXml
                 .author(NULL_FLAVOR)
