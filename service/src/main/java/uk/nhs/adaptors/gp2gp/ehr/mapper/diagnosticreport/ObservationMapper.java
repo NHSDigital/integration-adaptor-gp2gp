@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import com.github.mustachejava.Mustache;
-import com.google.common.collect.ImmutableList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +42,7 @@ public class ObservationMapper {
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
 
-    private static final List<Class<? extends Type>> UNHANDLED_TYPES = ImmutableList.of(SampledData.class, Attachment.class);
+    private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
