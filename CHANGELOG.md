@@ -6,6 +6,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.1.2] - 2021-05-07
+
+### Known Issues and Limitations
+
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+
+
+### Added
+
+- Bump version to 0.1.1 (#206)
+- NIAD-1432: BloodPressure missing agent (#214)
+- NIAD-1397: Invalid related clinical content link (#213)
+- NIAD-1359: Restructure agentDirectory structure (#211)
+- NIAD-1431: MedicationRequest added priorMedicationRef to ehrSupplyDiscontinue (#212)
+- NIAD-1365: Element order requeststatement (#202)
+- NIAD-1429: Condition LinkSet added statusCode (#209)
+- NIAD-1380 Encode the referenceRange text for XML (#199)
+- NIAD-1366: Add statusCode to RequestStatement (#196)
+- NIAD-1428: Allergy Structure removed contextConductionInd (#207)
+- NIAD-1425: Blood pressure removed valueQuantity element (#203)
+- NIAD-1369: linkset re-ordering (#205)
+- NIAD-1412 populate bolierplate values in EHR UAT (#208)
+- NIAD-1367 make AllergyIntolerance mapping output match the schema (#200)
+- NIAD-1398 allergy intolerance participant2
+- NIAD-1410 handle unmapped resources 
+- NIAD-910 map diagnostic report to compound statement 
+
+
+## [0.1.1] - 2021-05-06
+
+### Known Issues and Limitations
+
+- Same as 0.1.0
+
+### Added
+
+- NIAD-1427: Remove @contextConductionInd from MedicationStatement components (#201)
+- NIAD-1368: Correct order of generated NarrativeStatement elements (#198)
+- NIAD-1361: Fix element order of observation statements (#193)
+- NIAD-1312: Testing fixes for RequestStatement (#194)
+- NIAD-1363: Fix order of Immunization ObservationStatement elements (#192)
+- NIAD-1364: Fix order of MedicationStatement elements (#191)
+- NIAD-1362: Fix order of PlanStatement elements (#190)
+- Niad 1339 uppercase UUIDs (#188)
+- NIAD-1360: Allergy Intolerance remove nested ehrComposition (#187)
+- NIAD-1056 Restore e2e tests and mock MHS changes to support recent MHS changes (#184)
+- NIAD-1070 Documentation Updates (#173)
+- NIAD-1268: Update opentest variables (#182)
+- NIAD-1288 EMIS full test extracts (#162)
+- NIAD-979: Change empty effective date mapping in ehr folder with effective time tag to be required (#180)
+- NIAD-1312: Rework RequestStatementMapper tests (#178)
+- NIAD-875 Receive EHR final ACK/NACK (#177)
+- NIAD-911: Added additional tests for non consultation mapper (#179)
+- NIAD-1056: add audio/x-au mime type support (#174)
+- Niad 979 ehr folder to have max effective time from all ehr compositions (#166)
+- Added additional test for multiple recipients (#171)
+- NIAD-1319: Additional Unit Tests for MedicationRequest Mapper (#172)
+- NIAD-1096: Add practitioner/practitionerRole/organization recorder when mapping medication request to medication statement (#159)
+- NIAD-1306: Generic handling of Observation component (#167)
+enable ptl deployment (#170)
+- NIAD-911: translation of non-consultation resources (#158)
+- NIAD-1056: generate file extension (#168)
+- NIAD-1318: Change Participant2 typeCode from RESP to PPRF (#169)
+- NIAD-1096: Add PPRF (or REC) participant to participant2 when mapping encounters to ehr compositions (#160)
+- NIAD-1287: Sending external attachments to MHS (#164)
+- NIAD-1312: Allow request statements without onbehalfof (#165)
+- NIAD-1096: Map Encounter participant to EhrComposition author (#156)
+- Adding transformers to Encounter Components (#163)
+
 ## [0.1.0] - 2021-04-07
 
 ### Known Issues and Limitations
