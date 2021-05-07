@@ -62,13 +62,16 @@ public class ObservationMapper {
 
         final IdMapper idMapper = messageContext.getIdMapper();
 
+        var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
+        var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
+        var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
+        var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
+
         var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
-            .compoundStatementId(
-                idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement())
-            )
-            .codeElement(prepareCodeElement(observationAssociatedWithSpecimen))
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen))
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen));
+            .compoundStatementId(compoundStatementId)
+            .codeElement(codeElement)
+            .effectiveTime(effectiveTime)
+            .availabilityTimeElement(availabilityTimeElement);
 
         StringBuilder narrativeStatementsBlock = new StringBuilder();
 
@@ -83,8 +86,9 @@ public class ObservationMapper {
             .map(observation -> mapObservationToNarrativeStatement(idMapper, observation))
             .forEach(narrativeStatementsBlock::append);
 
+        var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
         observationCompoundStatementTemplateParameters
-            .observationStatement(prepareObservationStatement(idMapper, observationAssociatedWithSpecimen))
+            .observationStatement(observationStatement)
             .narrativeStatements(narrativeStatementsBlock.toString());
 
         return TemplateUtils.fillTemplate(
