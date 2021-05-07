@@ -65,6 +65,8 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_ASSERTER_NOT_PRESENT = CONDITION_FILE_LOCATIONS + "condition_asserter_not_present.json";
     private static final String INPUT_JSON_ASSERTER_NOT_PRACTITIONER = CONDITION_FILE_LOCATIONS
         + "condition_asserter_not_practitioner.json";
+    private static final String INPUT_JSON_MISSING_CONDITION_CODE = CONDITION_FILE_LOCATIONS
+        + "condition_missing_code.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -234,5 +236,15 @@ public class ConditionLinkSetMapperTest {
         assumeThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Could not resolve Condition Related Medical Content reference");
+    }
+
+    @Test
+    public void When_MappingParsedConditionCodeIsMissing_Expect_MapperException() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_MISSING_CONDITION_CODE);
+        Condition parsedObservation = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        assumeThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Condition code not present");
     }
 }
