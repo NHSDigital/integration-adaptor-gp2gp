@@ -185,10 +185,17 @@ public class SpecimenMapper {
             pertinentInformation = StringUtils.EMPTY;
         }
 
+        private void prependPertinentInformation(String... texts) {
+            pertinentInformation = newLine(withSpace((Object[]) texts), pertinentInformation);
+        }
+
+        private void prependPertinentInformation(List<String> texts) {
+            pertinentInformation = newLine(withSpace(texts), pertinentInformation);
+        }
+
         public void fastingStatus(CodeableConcept fastingStatus) {
             CodeableConceptMappingUtils.extractTextOrCoding(fastingStatus)
-                .map(fastingStatusValue -> newLine(withSpace(FASTING_STATUS, fastingStatusValue), pertinentInformation))
-                .ifPresent(text -> pertinentInformation = text);
+                .ifPresent(fastingStatusValue -> prependPertinentInformation(FASTING_STATUS, fastingStatusValue));
         }
 
         public void fastingDuration(Duration fastingDuration) {
@@ -198,7 +205,7 @@ public class SpecimenMapper {
                 fastingDuration.getUnit()
             );
 
-            pertinentInformation = newLine(withSpace(fastingDurationElements), pertinentInformation);
+            prependPertinentInformation(fastingDurationElements);
         }
 
         public void quantity(SimpleQuantity quantity) {
@@ -208,22 +215,22 @@ public class SpecimenMapper {
                 quantity.getUnit()
             );
 
-            pertinentInformation = newLine(withSpace(quantityElements), pertinentInformation);
+            prependPertinentInformation(quantityElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
-                .map(collectionSiteValue -> newLine(withSpace(COLLECTION_SITE, collectionSiteValue), pertinentInformation))
-                .ifPresent(text -> pertinentInformation = text);
+                .ifPresent(collectionSiteValue -> prependPertinentInformation(COLLECTION_SITE, collectionSiteValue));
         }
 
         public void note(String note) {
-            pertinentInformation = newLine(note, pertinentInformation);
+            prependPertinentInformation(note);
         }
 
         public Optional<String> buildWithDateTime(DateTimeType date) {
             if (StringUtils.isNotBlank(pertinentInformation)) {
-                return Optional.of(newLine(withSpace(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date)), pertinentInformation));
+                prependPertinentInformation(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
+                return Optional.of(pertinentInformation);
             }
 
             return Optional.empty();
@@ -231,7 +238,8 @@ public class SpecimenMapper {
 
         public Optional<String> build() {
             if (StringUtils.isNotBlank(pertinentInformation)) {
-                return Optional.of(newLine(COMMENT_PREFIX, pertinentInformation));
+                prependPertinentInformation(COMMENT_PREFIX);
+                return Optional.of(pertinentInformation);
             }
 
             return Optional.empty();
