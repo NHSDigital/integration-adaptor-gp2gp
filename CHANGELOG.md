@@ -6,11 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
 
 ## [0.1.2] - 2021-05-07
 
 ### Known Issues and Limitations
+
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+
 
 ### Added
 
@@ -28,11 +31,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NIAD-1369: linkset re-ordering (#205)
 - NIAD-1412 populate bolierplate values in EHR UAT (#208)
 - NIAD-1367 make AllergyIntolerance mapping output match the schema (#200)
+- NIAD-1398 allergy intolerance participant2
+- NIAD-1410 handle unmapped resources 
+- NIAD-910 map diagnostic report to compound statement 
 
 
 ## [0.1.1] - 2021-05-06
 
 ### Known Issues and Limitations
+
+- Same as 0.1.0
 
 ### Added
 
