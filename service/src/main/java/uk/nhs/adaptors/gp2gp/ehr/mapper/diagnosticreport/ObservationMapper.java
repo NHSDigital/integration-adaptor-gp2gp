@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
@@ -28,6 +29,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
@@ -54,12 +56,8 @@ public class ObservationMapper {
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen, List<Observation> observations) {
         List<Observation> derivedObservations = observations.stream()
-            .filter(observation ->
-                observation.getRelated().stream().anyMatch(
-                    observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM
-                        && observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId())
-                )
-            )
+            .filter(observation -> observation.getRelated().stream()
+                .anyMatch(isDerivedFromObservation(observationAssociatedWithSpecimen)))
             .collect(Collectors.toList());
 
         final IdMapper idMapper = messageContext.getIdMapper();
@@ -96,6 +94,11 @@ public class ObservationMapper {
             OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
             observationCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private Predicate<ObservationRelatedComponent> isDerivedFromObservation(Observation observationAssociatedWithSpecimen) {
+        return observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM
+            && observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId());
     }
 
     private String mapObservationToNarrativeStatement(IdMapper idMapper, Observation observation) {
