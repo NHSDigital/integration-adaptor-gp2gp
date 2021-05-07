@@ -89,15 +89,11 @@ public class RequestStatementMapper {
 
             final IdMapper idMapper = messageContext.getIdMapper();
             templateParameters
-                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
+                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getIdElement()))
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
                 .text(buildTextDescription())
                 .code(buildCode());
-
-            if (!referralRequest.hasReasonCode()) {
-                templateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
-            }
 
             if (referralRequest.hasRecipient()) {
                 referralRequest.getRecipient().stream()
@@ -292,7 +288,7 @@ public class RequestStatementMapper {
             if (referralRequest.hasReasonCode()) {
                 return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
             }
-            return StringUtils.EMPTY;
+            return DEFAULT_REASON_CODE_XML;
         }
     }
 

@@ -61,7 +61,7 @@ public class ConditionLinkSetMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
+            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement()));
 
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);

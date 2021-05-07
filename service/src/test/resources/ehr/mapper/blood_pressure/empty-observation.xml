@@ -7,6 +7,5 @@
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
-        <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
 </component>

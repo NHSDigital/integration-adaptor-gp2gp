@@ -51,7 +51,9 @@
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143316"/>
                 <reversalOf typeCode="REV">
-                    <id root="394559384658936"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="394559384658936"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>
