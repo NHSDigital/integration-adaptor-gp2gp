@@ -69,7 +69,8 @@ public class SpecimenMapper {
 
     private Optional<String> buildEffectiveTimeForSpecimen(Specimen specimen) {
         return getEffectiveTime(specimen)
-            .map(date -> String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, DateFormatUtil.toHl7Format(date)));
+            .map(DateFormatUtil::toHl7Format)
+            .map(date -> String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, date));
     }
 
     private Optional<DateTimeType> getEffectiveTime(Specimen specimen) {
