@@ -247,7 +247,7 @@ public class ConditionLinkSetMapperTest {
         var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_MISSING_CONDITION_CODE);
         Condition parsedObservation = fhirParseService.parseResource(jsonInput, Condition.class);
 
-        assumeThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
+        assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Condition code not present");
     }
