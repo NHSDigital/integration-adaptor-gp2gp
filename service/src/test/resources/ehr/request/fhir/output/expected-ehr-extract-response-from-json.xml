@@ -8560,7 +8560,7 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <code><!--code placeholder--></code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
@@ -8635,7 +8635,7 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <code><!--code placeholder--></code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
@@ -8710,7 +8710,7 @@ The line below contains special characters...
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <code><!--code placeholder--></code>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
