@@ -40,8 +40,7 @@ public class OrganizationToAgentMapper {
     public String mapOrganizationToAgent(Organization organization) {
 
         var builder = AgentMapperTemplateParametersOuter.builder()
-            .agentId(messageContext.getIdMapper().getOrNew(ResourceType.Organization,
-                organization.getIdElement().getIdPart()));
+            .agentId(messageContext.getIdMapper().getOrNew(ResourceType.Organization, organization.getIdElement()));
 
         var inner = Optional.of(mapOrganizationToAgentInner(organization));
         inner.ifPresent(builder::organisationInfo);

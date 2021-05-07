@@ -51,6 +51,7 @@ public class ConditionLinkSetMapper {
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
     public String mapConditionToLinkSet(Condition condition, boolean isNested) {
@@ -61,7 +62,7 @@ public class ConditionLinkSetMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
+            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement()));
 
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
@@ -78,6 +79,9 @@ public class ConditionLinkSetMapper {
                 builder.conditionNamed(newId);
                 buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
             });
+
+        builder.code(buildCode(condition));
+
         var asserterReference = condition.getAsserter();
         var performerReference = idMapper.get(asserterReference);
         var referenceElement = asserterReference.getReferenceElement();
@@ -202,5 +206,12 @@ public class ConditionLinkSetMapper {
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
+    }
+
+    private String buildCode(Condition condition) {
+        if (condition.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
+        }
+        throw new EhrMapperException("Condition code not present");
     }
 }

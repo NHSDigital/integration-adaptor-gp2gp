@@ -7,16 +7,21 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.IdType;
 import org.junit.jupiter.api.Test;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -63,6 +68,8 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_ASSERTER_NOT_PRESENT = CONDITION_FILE_LOCATIONS + "condition_asserter_not_present.json";
     private static final String INPUT_JSON_ASSERTER_NOT_PRACTITIONER = CONDITION_FILE_LOCATIONS
         + "condition_asserter_not_practitioner.json";
+    private static final String INPUT_JSON_MISSING_CONDITION_CODE = CONDITION_FILE_LOCATIONS
+        + "condition_missing_code.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -86,6 +93,8 @@ public class ConditionLinkSetMapperTest {
     private MessageContext messageContext;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private CodeableConceptCdMapper codeableConceptCdMapper;
 
     private InputBundle inputBundle;
     private ConditionLinkSetMapper conditionLinkSetMapper;
@@ -99,13 +108,16 @@ public class ConditionLinkSetMapperTest {
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         inputBundle = new InputBundle(bundle);
 
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
-        lenient().when(idMapper.getOrNew(ResourceType.Condition, CONDITION_ID)).thenReturn(CONDITION_ID);
+        IdType conditionId = buildIdType(ResourceType.Condition, CONDITION_ID);
+        lenient().when(idMapper.getOrNew(ResourceType.Condition, conditionId)).thenReturn(CONDITION_ID);
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId(ResourceType.Condition));
 
-        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService,
+        conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext, randomIdGeneratorService, codeableConceptCdMapper,
             new ParticipantMapper());
     }
 
@@ -228,5 +240,15 @@ public class ConditionLinkSetMapperTest {
         assumeThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Could not resolve Condition Related Medical Content reference");
+    }
+
+    @Test
+    public void When_MappingParsedConditionCodeIsMissing_Expect_MapperException() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_MISSING_CONDITION_CODE);
+        Condition parsedObservation = fhirParseService.parseResource(jsonInput, Condition.class);
+
+        assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Condition code not present");
     }
 }

@@ -28,7 +28,7 @@ public class PractitionerAgentPersonMapper {
     public String mapPractitionerToAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole,
         Optional<Organization> organization) {
         var builder = PractitionerAgentPersonMapperParameters.builder()
-            .practitionerId(messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, practitioner.getIdElement().getIdPart()));
+            .practitionerId(messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, practitioner.getIdElement()));
 
         buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
         var practitionerGiven = buildPractitionerGivenName(practitioner);
