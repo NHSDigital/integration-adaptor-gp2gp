@@ -151,10 +151,8 @@ public class ObservationMapper {
             observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .ifPresent(coding ->
-                    observationStatementTemplateParametersBuilder.interpretation(
-                        structuredObservationValueMapper.mapInterpretation(coding))
-            );
+                .map(structuredObservationValueMapper::mapInterpretation)
+                .ifPresent(observationStatementTemplateParametersBuilder::interpretation);
         }
 
         if (observation.hasPerformer()) {
