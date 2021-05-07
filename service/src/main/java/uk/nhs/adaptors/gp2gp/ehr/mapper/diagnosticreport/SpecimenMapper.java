@@ -167,7 +167,7 @@ public class SpecimenMapper {
             .forEach(pertinentInformationBuilder::note);
 
         return getEffectiveTime(specimen)
-            .map(pertinentInformationBuilder::build)
+            .map(pertinentInformationBuilder::buildWithDateTime)
             .orElseGet(pertinentInformationBuilder::build);
     }
 
@@ -221,7 +221,7 @@ public class SpecimenMapper {
             pertinentInformation = newLine(note, pertinentInformation);
         }
 
-        public Optional<String> build(DateTimeType date) {
+        public Optional<String> buildWithDateTime(DateTimeType date) {
             if (StringUtils.isNotBlank(pertinentInformation)) {
                 return Optional.of(newLine(withSpace(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date)), pertinentInformation));
             }
