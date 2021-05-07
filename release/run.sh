@@ -21,7 +21,7 @@ echo -e "${LIGHT_GREEN}Stopping running containers${NC}"
 docker-compose down
 
 echo -e "${LIGHT_GREEN}Building and starting dependencies${NC}"
-docker-compose up -d activemq mongodb wiremock mock-mhs-adaptor
+docker-compose up -d activemq mongodb wiremock mock-mhs-adaptor gpcc
 
 if [ "$1" == "-n" ];
 then
