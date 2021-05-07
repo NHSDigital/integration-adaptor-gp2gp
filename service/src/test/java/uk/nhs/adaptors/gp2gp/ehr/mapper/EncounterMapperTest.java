@@ -7,6 +7,8 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Date;
@@ -141,7 +143,7 @@ public class EncounterMapperTest {
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, PRACTITIONER_ID);
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, PRACTITIONER_ID));
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);

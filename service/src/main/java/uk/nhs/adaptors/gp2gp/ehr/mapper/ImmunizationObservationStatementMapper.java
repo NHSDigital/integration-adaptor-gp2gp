@@ -64,7 +64,7 @@ public class ImmunizationObservationStatementMapper {
     public String mapImmunizationToObservationStatement(Immunization immunization, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParameters = ImmunizationObservationStatementTemplateParameters.builder()
-            .observationStatementId(idMapper.getOrNew(ResourceType.Immunization, immunization.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Immunization, immunization.getIdElement()))
             .availabilityTime(buildAvailabilityTime(immunization))
             .effectiveTime(buildEffectiveTime(immunization))
             .pertinentInformation(buildPertinentInformation(immunization))
