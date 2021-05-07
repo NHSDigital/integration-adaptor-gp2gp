@@ -57,6 +57,7 @@ public class BloodPressureMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public String mapBloodPressure(Observation observation, boolean isNested) {
         BloodPressureParametersBuilder builder = BloodPressureParameters.builder()
@@ -87,6 +88,13 @@ public class BloodPressureMapper {
             builder.narrativeText(narrativeText);
             builder.narrativeAvailabilityTime(prepareAvailabilityTimeForBloodPressureNote(observation));
         });
+
+        if (observation.hasPerformer()) {
+            final String participantReference = messageContext.getIdMapper().getOrNew(observation.getPerformerFirstRep());
+            final String participantBlock = participantMapper
+                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
+            builder.participant(participantBlock);
+        }
 
         return TemplateUtils.fillTemplate(COMPOUND_STATEMENT_BLOOD_PRESSURE_TEMPLATE, builder.build());
     }

@@ -22,4 +22,5 @@ public class BloodPressureParameters {
     private String compoundStatementCode;
     private String systolicCode;
     private String diastolicCode;
+    private String participant;
 }

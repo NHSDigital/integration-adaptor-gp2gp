@@ -115,7 +115,6 @@
                 <availabilityTime nullFlavor="UNK"/>
             </NarrativeStatement>
         </component>
-        <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -134,7 +133,6 @@
                 <availabilityTime nullFlavor="UNK"/>
             </NarrativeStatement>
         </component>
-        <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -153,7 +151,6 @@
                 <availabilityTime nullFlavor="UNK"/>
             </NarrativeStatement>
         </component>
-        <!--<Participant typeCode="PRF" ..../>-->
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
