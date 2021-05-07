@@ -155,7 +155,8 @@ public class NonConsultationResourceMapper {
                 .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
                 .map(Reference::getReferenceElement)
                 .filter(IIdType::hasResourceType)
-                .filter(idType -> idType.getResourceType().equals(ResourceType.Practitioner.name()))
+                .map(IIdType::getResourceType)
+                .filter(ResourceType.Practitioner.name()::equals)
                 .isPresent();
         }
 
