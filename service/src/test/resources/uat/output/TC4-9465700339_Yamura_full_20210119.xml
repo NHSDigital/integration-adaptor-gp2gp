@@ -2038,6 +2038,17 @@ And more stuff</text>
             <center value="20051123"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2145,6 +2156,17 @@ And more stuff</text>
             <center value="20060521"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component><component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
@@ -2159,6 +2181,17 @@ And more stuff</text>
             <center value="20061021"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2207,6 +2240,17 @@ And more stuff</text>
             <center value="20040211"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -5904,6 +5948,17 @@ and extending onto other lines as well.</text>
             <center value="20330328"/>
         </effectiveTime>
         <availabilityTime value="20210107114034"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210107114034" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>

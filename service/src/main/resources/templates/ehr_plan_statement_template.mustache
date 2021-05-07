@@ -11,6 +11,21 @@
         <effectiveTime>
             <center {{{effectiveTime}}}/>
         </effectiveTime>
-        {{#availabilityTime}}<availabilityTime value="{{availabilityTime}}"/>{{/availabilityTime}}
+        {{#availabilityTime}}<availabilityTime value="{{.}}"/>{{/availabilityTime}}
+        {{#author}}
+        <author typeCode="AUT" contextControlCode="OP">
+            {{#authorTime}}<time value="{{.}}" />{{/authorTime}}
+            <agentRef classCode="AGNT">
+                <id root="{{.}}" />
+            </agentRef>
+        </author>
+        {{/author}}
+        {{#participant2}}
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="{{.}}"/>
+            </agentRef>
+        </Participant2>
+        {{/participant2}}
     </PlanStatement>
 </component>

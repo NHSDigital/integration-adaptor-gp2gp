@@ -8382,6 +8382,17 @@ The line below contains special characters...
             <center value="20300225"/>
         </effectiveTime>
         <availabilityTime value="20201026115836"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201026115836" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
