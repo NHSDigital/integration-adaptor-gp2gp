@@ -3268,17 +3268,17 @@
         <availabilityTime value="20200907101202" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="87102979-C329-4194-819B-D057AAEA625B"/>
+                    <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="10720133-30C3-4145-9184-8713284C5A90"/>
+                    <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
+                    <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -3417,22 +3417,22 @@
         <availabilityTime value="20201105131810" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
+                    <id root="5BB18E92-DABB-4C22-838A-410B4A278060"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
+                    <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26"/>
+                    <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
+                    <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -3495,22 +3495,22 @@
         <availabilityTime value="20201116142203" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D"/>
+                    <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
+                    <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
+                    <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
+                    <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -3901,7 +3901,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
+        <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D" />
         <code code="36031001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Burning feet">
 </code>
         <statusCode code="COMPLETE" />
@@ -4293,7 +4293,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
+        <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
         <code code="907511000006105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="[RFC] Chest infection">
     <originalText>[RFC] Chest infection</originalText>
 </code>
@@ -4406,7 +4406,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
+        <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
         <code code="15033003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Peritonsillar abscess">
 </code>
         <statusCode code="COMPLETE" />
@@ -4462,7 +4462,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
+        <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
         <code code="90176007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tonsillitis">
 </code>
         <statusCode code="COMPLETE" />
@@ -4518,7 +4518,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
+        <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B" />
         <code code="162397003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pain in throat">
 </code>
         <statusCode code="COMPLETE" />
@@ -5008,7 +5008,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB" />
+        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
         <code code="787381000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lack of mental capacity to make decision (Mental Capacity Act 2005)">
 </code>
         <statusCode code="COMPLETE" />
@@ -5120,7 +5120,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="867553AF-2B39-48F7-BE0B-DE854814CED5" />
+        <id root="730F742C-1164-45BF-9139-8484074E5995" />
         <code code="103735009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Palliative care">
 </code>
         <statusCode code="COMPLETE" />

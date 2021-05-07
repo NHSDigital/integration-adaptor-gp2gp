@@ -200,6 +200,6 @@ public class NonConsultationResourceMapper {
     }
 
     private boolean hasIdBeenMapped(Resource resource) {
-        return messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getId());
+        return messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getIdElement());
     }
 }

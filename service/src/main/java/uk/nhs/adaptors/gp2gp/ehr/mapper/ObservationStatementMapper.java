@@ -47,7 +47,7 @@ public class ObservationStatementMapper {
     public String mapObservationToObservationStatement(Observation observation, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
+            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .code(prepareCode(observation))
             .comment(prepareComment(observation))
             .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))

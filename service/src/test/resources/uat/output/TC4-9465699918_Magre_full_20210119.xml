@@ -5888,47 +5888,47 @@
         <availabilityTime value="20201214101259" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
+                    <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
+                    <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
+                    <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C"/>
+                    <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
+                    <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="9D3A6496-5CFB-4337-9F66-47315F1A8F90"/>
+                    <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE"/>
+                    <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A"/>
+                    <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
+                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5986,42 +5986,42 @@
         <availabilityTime value="20201214102506" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
+                    <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
+                    <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
+                    <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA"/>
+                    <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="162AC22E-A36E-4E14-A9FC-9DFDC4B7BCFF"/>
+                    <id root="0AB4B3C4-6F23-45FF-955D-35BB6E6D239B"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
+                    <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="A2D4EEF1-8B00-40EC-8C0F-F6884052927A"/>
+                    <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B"/>
+                <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6079,27 +6079,27 @@
         <availabilityTime value="20201214101913" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
+                    <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45"/>
+                    <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="D89620CF-84A5-4FB9-9399-571685EF6275"/>
+                    <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="155DFA49-019C-47F0-9DDE-EA68774988B2"/>
+                    <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="411235D8-7D97-4319-BE0B-25C0E7D55C55"/>
+                    <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -6571,7 +6571,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF" />
+        <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
