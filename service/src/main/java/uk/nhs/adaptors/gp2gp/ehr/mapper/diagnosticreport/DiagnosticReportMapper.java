@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
@@ -168,12 +167,12 @@ public class DiagnosticReportMapper {
     }
 
     private List<String> extractTextFromCodedDiagnosisItems(CodeableConcept codeableConcept) {
-        List<String> codedDiagnosisText = new ArrayList<>();
+        final List<String> codedDiagnosisText = new ArrayList<>();
 
         if (codeableConcept.hasCoding()) {
-            codedDiagnosisText = codeableConcept.getCoding().stream()
+            codeableConcept.getCoding().stream()
                 .map(Coding::getDisplay)
-                .collect(Collectors.toList());
+                .forEach(codedDiagnosisText::add);
         }
 
         if (codeableConcept.hasText()) {
