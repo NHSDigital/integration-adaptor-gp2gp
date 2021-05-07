@@ -78,13 +78,10 @@ public class ObservationMapper {
             );
         }
 
-        derivedObservations.forEach(derivedObservation -> {
-            if (derivedObservation.hasComment()) {
-                narrativeStatementsBlock.append(
-                    mapObservationToNarrativeStatement(idMapper, derivedObservation)
-                );
-            }
-        });
+        derivedObservations.stream()
+            .filter(Observation::hasComment)
+            .map(observation -> mapObservationToNarrativeStatement(idMapper, observation))
+            .forEach(narrativeStatementsBlock::append);
 
         observationCompoundStatementTemplateParameters
             .observationStatement(prepareObservationStatement(idMapper, observationAssociatedWithSpecimen))
