@@ -5670,7 +5670,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201106095913" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5683,7 +5683,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
