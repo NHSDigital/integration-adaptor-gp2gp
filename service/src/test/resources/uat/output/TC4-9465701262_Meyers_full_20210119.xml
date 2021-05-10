@@ -6493,7 +6493,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201015110531" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6506,7 +6506,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6535,7 +6535,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130146" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6548,7 +6548,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6581,7 +6581,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117125822" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6594,7 +6594,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6623,7 +6623,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201015110532" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6636,7 +6636,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6665,7 +6665,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130055" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6678,7 +6678,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6710,7 +6710,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130356" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6723,7 +6723,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6753,7 +6753,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130722" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6766,7 +6766,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
