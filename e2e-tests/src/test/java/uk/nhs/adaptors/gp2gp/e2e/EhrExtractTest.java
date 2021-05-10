@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assumptions.assumeThatCode;
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
