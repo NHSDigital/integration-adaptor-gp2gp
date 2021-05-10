@@ -27,6 +27,7 @@ import org.hl7.fhir.instance.model.api.IIdType;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
 @Slf4j
@@ -83,13 +84,23 @@ public class AgentDirectoryExtractor {
             .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
             .peek(resource -> LOGGER.debug("{} contains a relevant practitioner reference", resource.getId()))
-            .map(AgentDirectoryExtractor::extractIIdTypes)
-            .peek(reference -> LOGGER.debug("Extracted reference to {}", reference))
-            .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
-            .flatMap(Optional::stream)
-            .map(Practitioner.class::cast)
+            .flatMap(resource -> {
+                var reference = extractIIdTypes(resource);
+                LOGGER.debug("Extracted reference to {}", reference);
+                return ResourceExtractor.extractResourceByReference(bundle, reference)
+                    .map(referencedResource -> castToPractitioner(resource, referencedResource))
+                    .stream();
+            })
             .distinct()
             .collect(Collectors.toList());
+    }
+
+    private static Practitioner castToPractitioner(Resource parent, Resource resource) {
+        if (ResourceType.Practitioner == resource.getResourceType()) {
+            return (Practitioner) resource;
+        }
+        throw new EhrMapperException(String.format("Encountered %s in resource %s where Practitioner is expected",
+            resource.getResourceType(), parent.getId()));
     }
 
     public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
