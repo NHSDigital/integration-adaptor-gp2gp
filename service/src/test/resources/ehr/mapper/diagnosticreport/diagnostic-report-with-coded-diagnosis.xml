@@ -15,7 +15,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
-            Coded Diagnosis display 1</text>
+            Lab Diagnosis: Coded Diagnosis display 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>

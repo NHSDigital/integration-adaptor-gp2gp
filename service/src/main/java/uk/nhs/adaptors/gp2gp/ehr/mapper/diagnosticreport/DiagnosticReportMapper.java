@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -24,11 +23,11 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.DiagnosticReportCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +42,9 @@ public class DiagnosticReportMapper {
 
     private static final Mustache DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("diagnostic_report_compound_statement_template.mustache");
+
+    private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
+    private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
@@ -75,21 +77,26 @@ public class DiagnosticReportMapper {
         StringBuilder reportLevelNarrativeStatements = new StringBuilder();
 
         if (diagnosticReport.hasConclusion()) {
+            String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
+
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, diagnosticReport.getConclusion()
+                diagnosticReport, comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
         }
 
         String codedDiagnosisText = diagnosticReport.getCodedDiagnosis().stream()
-            .map(this::extractTextFromCodedDiagnosisItems)
-            .flatMap(List::stream)
-            .collect(Collectors.joining(", "));
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.joining(", "));
 
         if (!codedDiagnosisText.isEmpty()) {
+            String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
+
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, codedDiagnosisText
+                diagnosticReport, comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
@@ -164,21 +171,5 @@ public class DiagnosticReportMapper {
             NARRATIVE_STATEMENT_TEMPLATE,
             narrativeStatementTemplateParameters.build()
         );
-    }
-
-    private List<String> extractTextFromCodedDiagnosisItems(CodeableConcept codeableConcept) {
-        final List<String> codedDiagnosisText = new ArrayList<>();
-
-        if (codeableConcept.hasCoding()) {
-            codeableConcept.getCoding().stream()
-                .map(Coding::getDisplay)
-                .forEach(codedDiagnosisText::add);
-        }
-
-        if (codeableConcept.hasText()) {
-            codedDiagnosisText.add(codeableConcept.getText());
-        }
-
-        return codedDiagnosisText;
     }
 }

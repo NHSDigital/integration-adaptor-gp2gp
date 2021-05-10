@@ -99,7 +99,7 @@ public class EhrExtractMapperTest {
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper);
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(

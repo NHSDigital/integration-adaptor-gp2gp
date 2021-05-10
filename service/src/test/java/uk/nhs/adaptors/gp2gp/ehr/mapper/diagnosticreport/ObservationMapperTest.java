@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -42,6 +43,8 @@ public class ObservationMapperTest {
         + "observation_associated_with_specimen_2.json";
     private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON = TEST_FILE_DIRECTORY
         + "observation_associated_with_specimen_3.json";
+    private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON =
+        TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -49,6 +52,10 @@ public class ObservationMapperTest {
         + "observation_compound_statement_2.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_3_XML = TEST_FILE_DIRECTORY
         + "observation_compound_statement_3.xml";
+    private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML =
+        TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
+
+    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
     private List<Observation> observations;
 
@@ -57,6 +64,9 @@ public class ObservationMapperTest {
 
     @Mock
     private MessageContext messageContext;
+
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     private ObservationMapper observationMapper;
 
@@ -72,11 +82,14 @@ public class ObservationMapperTest {
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
         observationMapper = new ObservationMapper(
             messageContext,
             new StructuredObservationValueMapper(),
             new CodeableConceptCdMapper(),
-            new ParticipantMapper()
+            new ParticipantMapper(),
+            randomIdGeneratorService
         );
     }
 
@@ -100,7 +113,7 @@ public class ObservationMapperTest {
             observations
         );
 
-        assertThat(compoundStatementXml).isEqualToIgnoringWhitespace(expectedXmlOutput);
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
     @Test
@@ -127,7 +140,11 @@ public class ObservationMapperTest {
         return Stream.of(
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON, OBSERVATION_COMPOUND_STATEMENT_1_XML),
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_2_JSON, OBSERVATION_COMPOUND_STATEMENT_2_XML),
-            Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON, OBSERVATION_COMPOUND_STATEMENT_3_XML)
+            Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON, OBSERVATION_COMPOUND_STATEMENT_3_XML),
+            Arguments.of(
+                OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON,
+                OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML
+            )
         );
     }
 }

@@ -15,7 +15,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
-            ON MEDICATION</text>
+            Interpretation: ON MEDICATION</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>

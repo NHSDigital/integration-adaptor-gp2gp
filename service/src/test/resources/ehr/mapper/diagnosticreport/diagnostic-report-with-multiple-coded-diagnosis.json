@@ -44,8 +44,7 @@
           {
             "display": "Coded Diagnosis display 2"
           }
-        ],
-        "text": "Coded Diagnosis text 1"
+        ]
       },
       {
         "coding": [
@@ -56,7 +55,7 @@
             "display": "Coded Diagnosis display 4"
           }
         ],
-        "text": "Coded Diagnosis text 2"
+        "text": "Coded Diagnosis text 1"
       }
     ]
 }

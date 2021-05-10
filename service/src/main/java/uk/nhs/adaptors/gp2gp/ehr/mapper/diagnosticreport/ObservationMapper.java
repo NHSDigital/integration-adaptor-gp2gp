@@ -13,6 +13,7 @@ import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -23,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -39,6 +41,7 @@ public class ObservationMapper {
 
     public static final Mustache NARRATIVE_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("narrative_statement_template.mustache");
+
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
@@ -53,6 +56,7 @@ public class ObservationMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen, List<Observation> observations) {
         List<Observation> derivedObservations = observations.stream()
@@ -75,18 +79,17 @@ public class ObservationMapper {
 
         StringBuilder narrativeStatementsBlock = new StringBuilder();
 
-        if (observationAssociatedWithSpecimen.hasComment()) {
-            narrativeStatementsBlock.append(
-                mapObservationToNarrativeStatement(idMapper, observationAssociatedWithSpecimen)
-            );
-        }
+        narrativeStatementsBlock.append(
+            mapObservationToNarrativeStatement(idMapper, observationAssociatedWithSpecimen)
+        );
 
         derivedObservations.stream()
-            .filter(Observation::hasComment)
+            .map(Observation.class::cast)
             .map(observation -> mapObservationToNarrativeStatement(idMapper, observation))
             .forEach(narrativeStatementsBlock::append);
 
         var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
+
         observationCompoundStatementTemplateParameters
             .observationStatement(observationStatement)
             .narrativeStatements(narrativeStatementsBlock.toString());
@@ -103,21 +106,41 @@ public class ObservationMapper {
     }
 
     private String mapObservationToNarrativeStatement(IdMapper idMapper, Observation observation) {
-        var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
-            .commentType(prepareCommentType(observation).getCode())
-            .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
-            .comment(observation.getComment())
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+        StringBuilder narrativeStatementsBlock = new StringBuilder();
 
-        if (observation.hasPerformer()) {
-            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
-            final String participantBlock = participantMapper
-                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
-            narrativeStatementTemplateParameters.participant(participantBlock);
+        if (observation.hasComment()) {
+            CommentType commentType = prepareCommentType(observation);
+
+            narrativeStatementsBlock.append(
+                prepareNarrativeStatement(observation, observation.getComment(), commentType.getCode(), idMapper)
+            );
         }
 
-        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason()).ifPresent(dataAbsentReason ->
+            narrativeStatementsBlock.append(
+                prepareNarrativeStatement(observation, dataAbsentReason, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            )
+        );
+
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).ifPresent(interpretation ->
+            narrativeStatementsBlock.append(
+                prepareNarrativeStatement(observation, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            )
+        );
+
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite()).ifPresent(bodySite ->
+            narrativeStatementsBlock.append(
+                prepareNarrativeStatement(observation, bodySite, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            )
+        );
+
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod()).ifPresent(method ->
+            narrativeStatementsBlock.append(
+                prepareNarrativeStatement(observation, method, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            )
+        );
+
+        return narrativeStatementsBlock.toString();
     }
 
     private String mapObservationToObservationStatement(IdMapper idMapper, Observation observation) {
@@ -193,6 +216,25 @@ public class ObservationMapper {
         }
 
         return CommentType.USER_COMMENT;
+    }
+
+    private String prepareNarrativeStatement(Observation observation, String comment, String commentType, IdMapper idMapper) {
+        var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
+            .narrativeStatementId(randomIdGeneratorService.createNewId())
+            .commentType(commentType)
+            .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
+            .comment(comment)
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+
+        if (observation.hasPerformer()) {
+            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+            final String participantBlock = participantMapper
+                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
+
+            narrativeStatementTemplateParameters.participant(participantBlock);
+        }
+
+        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
     private boolean isInterpretationCode(Coding coding) {
