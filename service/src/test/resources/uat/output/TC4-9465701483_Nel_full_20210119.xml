@@ -718,6 +718,17 @@
             <center value="20100618"/>
         </effectiveTime>
         <availabilityTime value="20100118113450"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100118113450" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -2243,6 +2254,17 @@
             <center value="20100118114700"/>
         </effectiveTime>
         <availabilityTime value="20100118114711"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100118114711" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -3320,7 +3342,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201026122505" />
             <agentRef classCode="AGNT">
-                <id root="" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3333,7 +3355,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root=""/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3346,6 +3368,17 @@
             <center value="20031001"/>
         </effectiveTime>
         <availabilityTime value="20201026122505"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201026122505" />
+            <agentRef classCode="AGNT">
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
+            </agentRef>
+        </author>
+        <Participant2 typeCode="PPRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
+            </agentRef>
+        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>

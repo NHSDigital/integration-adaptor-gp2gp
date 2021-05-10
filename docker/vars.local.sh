@@ -10,7 +10,7 @@ export GP2GP_GPC_GET_URL="http://gpcc:8090/GP0001/STU3/1/gpconnect"
 export GPC_CONSUMER_URL="http://gpcc:8090"
 export GPC_CONSUMER_GPC_GET_URL="http://wiremock:8080"
 export GPC_CONSUMER_SDS_URL="http://wiremock:8080/"
-export GPC_ENABLE_SDS="true"
+export GPC_ENABLE_SDS="false"
 
 export GP2GP_LOGGING_LEVEL=DEBUG
 export GPC_CONSUMER_LOGGING_LEVEL=DEBUG
