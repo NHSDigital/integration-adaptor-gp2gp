@@ -2131,17 +2131,6 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20120307000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20110922110028" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -5772,7 +5761,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201106095913" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5785,7 +5774,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -5798,17 +5787,6 @@ Dosage: 0.5 ml</text>
             <center value="20270821"/>
         </effectiveTime>
         <availabilityTime value="20201106095913"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201106095913" />
-            <agentRef classCode="AGNT">
-                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>

@@ -330,17 +330,6 @@
             <center value="20201102"/>
         </effectiveTime>
         <availabilityTime value="20201117132149"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117132149" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -458,17 +447,6 @@
             <center value="20221117"/>
         </effectiveTime>
         <availabilityTime value="20201117133032"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117133032" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -846,17 +824,6 @@
             <center value="20211118"/>
         </effectiveTime>
         <availabilityTime value="20201117133617"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117133617" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6526,7 +6493,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201015110531" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6539,7 +6506,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6552,17 +6519,6 @@
             <center value="19770410"/>
         </effectiveTime>
         <availabilityTime value="20201015110531"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201015110531" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6579,7 +6535,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130146" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6592,7 +6548,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6609,17 +6565,6 @@
             <center value="20181117"/>
         </effectiveTime>
         <availabilityTime value="20201117130146"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117130146" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6636,7 +6581,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117125822" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6649,7 +6594,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6662,17 +6607,6 @@
             <center value="20191117"/>
         </effectiveTime>
         <availabilityTime value="20201117125822"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117125822" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6689,7 +6623,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201015110532" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6702,7 +6636,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6715,17 +6649,6 @@
             <center value="20210410"/>
         </effectiveTime>
         <availabilityTime value="20201015110532"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201015110532" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6742,7 +6665,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130055" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6755,7 +6678,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6771,17 +6694,6 @@
             <center value="20301117"/>
         </effectiveTime>
         <availabilityTime value="20201117130055"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117130055" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6798,7 +6710,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130356" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6811,7 +6723,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6825,17 +6737,6 @@
             <center value="20311117"/>
         </effectiveTime>
         <availabilityTime value="20201117130356"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117130356" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
@@ -6852,7 +6753,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201117130722" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6865,7 +6766,7 @@
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6881,17 +6782,6 @@
             <center value="20450410"/>
         </effectiveTime>
         <availabilityTime value="20201117130722"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117130722" />
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>
