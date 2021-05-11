@@ -184,7 +184,7 @@ public class EncounterComponentsMapper {
         return Optional.of(requestStatementMapper.mapReferralRequestToRequestStatement((ReferralRequest) resource, IS_NESTED));
     }
 
-    private String mapDiagnosticReport(Resource resource) {
-        return diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource);
+    private Optional<String> mapDiagnosticReport(Resource resource) {
+        return Optional.of(diagnosticReportMapper.mapDiagnosticReportToCompoundStatement((DiagnosticReport) resource));
     }
 }

@@ -26,13 +26,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
-
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -53,8 +47,6 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String QUESTIONNAIRE_RESPONSE_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication "
-        + "transaction\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String NULL_FLAVOR = "nullFlavor";
 
     private final MessageContext messageContext;
