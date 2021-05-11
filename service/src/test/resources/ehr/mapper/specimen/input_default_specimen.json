@@ -1,0 +1,19 @@
+{
+    "resourceType": "Specimen",
+    "id": "Default-1",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+        ]
+    },
+    "accessionIdentifier": {
+        "value": "DUMMY"
+    },
+    "type": {
+        "text": "UNKNOWN"
+    },
+    "receivedTime": "2010-02-24T15:41:00+00:00",
+    "collection": {
+        "collectedDateTime": "2010-02-23T00:00:00+00:00"
+    }
+}
