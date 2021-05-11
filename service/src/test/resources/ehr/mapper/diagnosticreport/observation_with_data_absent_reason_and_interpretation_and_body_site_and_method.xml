@@ -48,7 +48,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
-            Data Absent Reason display 1</text>
+            Data Absent: Data Absent Reason display 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -78,7 +78,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
-            Body site text 1</text>
+            Site: Body site text 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -93,7 +93,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
-            Method text 1</text>
+            Method: Method text 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">

@@ -31,6 +31,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +46,8 @@ public class ObservationMapperTest {
         + "observation_associated_with_specimen_3.json";
     private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON =
         TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
+    private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = TEST_FILE_DIRECTORY
+        + "observation_with_value_quantity_and_reference_range.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -54,6 +57,8 @@ public class ObservationMapperTest {
         + "observation_compound_statement_3.xml";
     private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML =
         TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
+    private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML = TEST_FILE_DIRECTORY
+        + "observation_with_value_quantity_and_reference_range.xml";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
@@ -102,7 +107,7 @@ public class ObservationMapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
+        lenient().when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -144,7 +149,8 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON,
                 OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML
-            )
+            ),
+            Arguments.of(OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON, OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML)
         );
     }
 }

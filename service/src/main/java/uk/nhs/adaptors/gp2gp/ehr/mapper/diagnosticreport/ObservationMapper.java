@@ -8,6 +8,7 @@ import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
+import org.hl7.fhir.dstu3.model.Quantity;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
@@ -30,6 +31,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -46,6 +48,11 @@ public class ObservationMapper {
         TemplateUtils.loadTemplate("observation_statement_template.mustache");
     private static final Mustache OBSERVATION_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
+
+    private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
+    private static final String BODY_SITE_PREFIX = "Site: ";
+    private static final String METHOD_PREFIX = "Method: ";
+    private static final String RANGE_UNITS_PREFIX = "Range Units: ";
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -116,11 +123,13 @@ public class ObservationMapper {
             );
         }
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason()).ifPresent(dataAbsentReason ->
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason()).ifPresent(dataAbsentReason -> {
+            String comment = DATA_ABSENT_PREFIX + dataAbsentReason;
+
             narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, dataAbsentReason, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            )
-        );
+                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            );
+        });
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).ifPresent(interpretation ->
             narrativeStatementsBlock.append(
@@ -128,17 +137,37 @@ public class ObservationMapper {
             )
         );
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite()).ifPresent(bodySite ->
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, bodySite, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            )
-        );
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite()).ifPresent(bodySite -> {
+            String comment = BODY_SITE_PREFIX + bodySite;
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod()).ifPresent(method ->
             narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, method, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            )
-        );
+                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            );
+        });
+
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod()).ifPresent(method -> {
+            String comment = METHOD_PREFIX + method;
+
+            narrativeStatementsBlock.append(
+                    prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
+            );
+        });
+
+        if (observation.hasReferenceRange()) {
+            Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
+
+            if (observation.hasValueQuantity()) {
+                Optional<String> referenceRangeUnit = extractUnit(referenceRange);
+
+                if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), observation.getValueQuantity())) {
+                    String comment = RANGE_UNITS_PREFIX + referenceRangeUnit.get();
+
+                    narrativeStatementsBlock.append(
+                        prepareNarrativeStatement(observation, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode(), idMapper)
+                    );
+                }
+            }
+        }
 
         return narrativeStatementsBlock.toString();
     }
@@ -235,6 +264,20 @@ public class ObservationMapper {
         }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
+    }
+
+    private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
+        if (referenceRange.hasHigh() && referenceRange.getHigh().hasUnit()) {
+            return Optional.of(referenceRange.getHigh().getUnit());
+        } else if (referenceRange.hasLow() && referenceRange.getLow().hasUnit()) {
+            return Optional.of(referenceRange.getLow().getUnit());
+        }
+
+        return Optional.empty();
+    }
+
+    private boolean isRangeUnitValid(String unit, Quantity quantity) {
+        return quantity.hasUnit() && !unit.equals(quantity.getUnit());
     }
 
     private boolean isInterpretationCode(Coding coding) {
