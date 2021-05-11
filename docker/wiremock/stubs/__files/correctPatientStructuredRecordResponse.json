@@ -7680,7 +7680,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -7780,7 +7780,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -8500,7 +8500,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -8600,7 +8600,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -8943,7 +8943,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -9043,7 +9043,7 @@
                 },
                 "authoredOn": "2019-03-28",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -10286,7 +10286,7 @@
                 },
                 "authoredOn": "2019-05-01",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -10386,7 +10386,7 @@
                 },
                 "authoredOn": "2019-05-01",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -11517,7 +11517,7 @@
                 },
                 "authoredOn": "2019-06-01",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
@@ -11617,7 +11617,7 @@
                 },
                 "authoredOn": "2019-06-01",
                 "recorder": {
-                    "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                    "reference": "Practitioner/1"
                 },
                 "note": [
                     {
