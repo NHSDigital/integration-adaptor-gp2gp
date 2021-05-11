@@ -84,28 +84,23 @@ public class AgentDirectoryExtractor {
             .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
             .peek(resource -> LOGGER.debug("{} contains a relevant practitioner reference", resource.getId()))
-            .map(AgentDirectoryExtractor::extractIIdTypes)
-            .peek(reference -> LOGGER.debug("Extracted reference to {}", reference))
-            .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
-            .flatMap(Optional::stream)
-            .map(resource -> getPractitionerIfPractitionerRole(resource, bundle))
-            .map(Practitioner.class::cast)
+            .flatMap(resource -> {
+                var reference = extractIIdTypes(resource);
+                LOGGER.debug("Extracted reference to {}", reference);
+                return ResourceExtractor.extractResourceByReference(bundle, reference)
+                    .map(referencedResource -> castToPractitioner(resource, referencedResource))
+                    .stream();
+            })
             .distinct()
             .collect(Collectors.toList());
     }
 
-    // TODO: workaround for NIAD-1300, remove once PractitionerRole references not used in GPC demonstrator
-    private static Resource getPractitionerIfPractitionerRole(Resource resource, Bundle bundle) {
-        if (resource.getResourceType().equals(ResourceType.PractitionerRole)) {
-            var practitionerReference = ((PractitionerRole) resource).getPractitioner();
-            LOGGER.warn("Encountered a PractitionerRole {} where Practitioner was expected."
-                + "Swapping PractitionerRole for its Practitioner {}. The related organisation may "
-                + "be mapped incorrectly", resource.getId(), practitionerReference.getReference());
-            return ResourceExtractor.extractResourceByReference(bundle, practitionerReference.getReferenceElement())
-                .orElseThrow(() -> new EhrMapperException("Unable to locate resource " + practitionerReference.getReference()
-                    + " in the bundle"));
+    private static Practitioner castToPractitioner(Resource parent, Resource resource) {
+        if (ResourceType.Practitioner == resource.getResourceType()) {
+            return (Practitioner) resource;
         }
-        return resource;
+        throw new EhrMapperException(String.format("Encountered %s in resource %s where Practitioner is expected",
+            resource.getResourceType(), parent.getId()));
     }
 
     public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
