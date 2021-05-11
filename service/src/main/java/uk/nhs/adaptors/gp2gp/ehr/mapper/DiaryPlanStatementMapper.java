@@ -26,6 +26,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.DiaryPlanStatementMapper.PlanStatementMapperParameters.PlanStatementMapperParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -50,14 +51,25 @@ public class DiaryPlanStatementMapper {
             return Optional.empty();
         }
 
-        PlanStatementMapperParameters.PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
+        var idMapper = messageContext.getIdMapper();
+        var availabilityTime = buildAvailabilityTime(procedureRequest);
+        PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
-            .availabilityTime(buildAvailabilityTime(procedureRequest));
+            .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
+            .availabilityTime(availabilityTime)
+            .authorTime(availabilityTime);
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
         builder.code(buildCode(procedureRequest));
+
+        if (procedureRequest.hasRequester()) {
+            var requesterReference = procedureRequest.getRequester().getAgent();
+            var participant = idMapper.get(requesterReference);
+            builder
+                .participant2(participant)
+                .author(participant);
+        }
 
         return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
     }
@@ -181,5 +193,8 @@ public class DiaryPlanStatementMapper {
         private String availabilityTime;
         private String effectiveTime;
         private String code;
+        private String author;
+        private String authorTime;
+        private String participant2;
     }
 }
