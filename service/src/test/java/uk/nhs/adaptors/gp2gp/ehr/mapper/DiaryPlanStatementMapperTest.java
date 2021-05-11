@@ -89,8 +89,8 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_WITH_ALL_DATA);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        String mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
-        assertThat(mappedXml).isEqualToIgnoringWhitespace(expectedXml);
+        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
+        assertThat(mappedXml).contains(expectedXml);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_PROCEDURE_REQUEST_IS_NOT_PLAN);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        String mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
+        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
         assertThat(mappedXml).isEmpty();
     }
 
@@ -119,8 +119,8 @@ public class DiaryPlanStatementMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
-        String mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, false);
-        assertThat(mappedXml).isEqualTo(expectedXml);
+        var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, false);
+        assertThat(mappedXml).contains(expectedXml);
     }
 
     private static Stream<Arguments> testData() {
