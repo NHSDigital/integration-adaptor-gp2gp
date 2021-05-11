@@ -46,9 +46,9 @@ public class DiaryPlanStatementMapper {
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
 
-    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+    public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return StringUtils.EMPTY;
+            return Optional.empty();
         }
 
         var idMapper = messageContext.getIdMapper();
@@ -71,7 +71,7 @@ public class DiaryPlanStatementMapper {
                 .author(participant);
         }
 
-        return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
+        return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
     }
 
     private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {

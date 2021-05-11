@@ -3,7 +3,13 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -83,14 +89,15 @@ public class NonConsultationResourceMapper {
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
-        String component = encounterComponentsMapper.mapResourceToComponent(resource);
+        Optional<String> componentHolder = encounterComponentsMapper.mapResourceToComponent(resource);
 
-        // TODO: workaround for NIAD-1410, should the mapper output ever be blank?
-        if (StringUtils.isBlank(component)) {
-            LOGGER.warn("Skipping {}. The mapping output contains blank XML statement content", resource.getResourceType());
+        if (componentHolder.isEmpty()) {
+            LOGGER.warn("Skipping {} with ID '{}'. The mapping output contains blank XML statement content",
+                resource.getResourceType(), resource.getId());
             return Optional.empty();
         }
 
+        String component = componentHolder.get();
         EncounterTemplateParametersBuilder builder = resourceBuilder
             .getOrDefault(resource.getResourceType(), this::notMapped)
             .apply(component, resource);

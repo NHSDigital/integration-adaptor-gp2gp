@@ -16,6 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
@@ -117,7 +118,8 @@ public class NonConsultationResourceMapperTest {
     }
 
     private void setupMock(String stubEhrComponentMapperXml) {
-        when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class))).thenReturn(stubEhrComponentMapperXml);
+        when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class)))
+            .thenReturn(Optional.of(stubEhrComponentMapperXml));
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
             encounterComponentsMapper);
