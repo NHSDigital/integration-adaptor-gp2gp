@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,6 @@ public class NonConsultationResourceMapper {
             ResourceType.DiagnosticReport, this::buildForDiagnosticRequest,
             ResourceType.MedicationRequest, this::buildForMedicationRequest,
             ResourceType.Condition, this::buildForCondition,
-            ResourceType.ProcedureRequest, this::buildForProcedureRequest,
             ResourceType.DocumentReference, this::buildForDocumentReference,
             ResourceType.QuestionnaireResponse, this::buildForQuestionnaireResponse);
 
@@ -90,6 +90,8 @@ public class NonConsultationResourceMapper {
         EncounterTemplateParametersBuilder builder;
         if (resource.getResourceType().equals(ResourceType.Observation)) {
             builder = buildForObservation(component, (Observation) resource);
+        } else if (resource.getResourceType().equals(ResourceType.ProcedureRequest)) {
+            builder = buildForProcedureRequest(component, (ProcedureRequest) resource);
         } else {
             builder = resourceBuilder.getOrDefault(resource.getResourceType(), this::notMapped)
                 .apply(component);
@@ -159,9 +161,19 @@ public class NonConsultationResourceMapper {
             .altCode(CONDITION_CODE);
     }
 
-    private EncounterTemplateParametersBuilder buildForProcedureRequest(String component) {
-        return XpathExtractor.extractValuesForProcedureRequest(component)
+    private EncounterTemplateParametersBuilder buildForProcedureRequest(String component, ProcedureRequest procedureRequest) {
+        EncounterTemplateParametersBuilder encounterTemplateParametersBuilder = XpathExtractor.extractValuesForProcedureRequest(component)
             .altCode(DEFAULT_CODE);
+
+        if (procedureRequest.hasRequester()) {
+            var requesterReference = procedureRequest.getRequester().getAgent();
+            var participant = messageContext.getIdMapper().get(requesterReference);
+            encounterTemplateParametersBuilder
+                .participant2(participant)
+                .author(participant);
+        }
+
+        return encounterTemplateParametersBuilder;
     }
 
     private EncounterTemplateParametersBuilder buildForDocumentReference(String component) {
@@ -196,6 +208,7 @@ public class NonConsultationResourceMapper {
 
     private boolean isMappableNonConsultationResource(Resource resource) {
         return resource.getResourceType().equals(ResourceType.Observation)
+            || resource.getResourceType().equals(ResourceType.ProcedureRequest)
             || resourceBuilder.containsKey(resource.getResourceType());
     }
 

@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,6 +73,7 @@ public class NonConsultationResourceMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
+        setUpParticipantReferenceForProcedureRequest();
         fhirParseService = new FhirParseService();
     }
 
@@ -105,6 +108,10 @@ public class NonConsultationResourceMapperTest {
             Arguments.of(PROCEDURE_REQUEST_XML, PROCEDURE_REQUEST_BUNDLE, EXPECTED_PROCEDURE_REQUEST_OUTPUT),
             Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT)
         );
+    }
+
+    private void setUpParticipantReferenceForProcedureRequest() {
+        messageContext.getIdMapper().getOrNew(new Reference(new IdType("Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B")));
     }
 
     private void setupMock(String stubEhrComponentMapperXml) {
