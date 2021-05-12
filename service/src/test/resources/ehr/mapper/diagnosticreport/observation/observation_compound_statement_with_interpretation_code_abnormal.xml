@@ -42,7 +42,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20190601113000
 
-            Abnormal</text>
+            Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>

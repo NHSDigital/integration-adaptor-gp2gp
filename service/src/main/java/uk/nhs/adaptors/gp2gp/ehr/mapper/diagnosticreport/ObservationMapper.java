@@ -50,6 +50,7 @@ public class ObservationMapper {
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
+    private static final String INTERPRETATION_PREFIX = "Interpretation: ";
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
@@ -201,6 +202,7 @@ public class ObservationMapper {
             .ifPresent(narrativeStatementsBlock::append);
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation())
+            .map(INTERPRETATION_PREFIX::concat)
             .map(interpretation ->
                 prepareNarrativeStatement(observation, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
             )

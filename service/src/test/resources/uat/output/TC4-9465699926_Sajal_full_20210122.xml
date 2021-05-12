@@ -305,7 +305,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20020330000000
 
-            Abnormal</text>
+            Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
