@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.2] - 2021-05-07
 
 - Environment variables updated in corresponding vars files in docker for integration with GPCC 0.0.5 changes. (Update environment variables accordingly)
-- All vunerabile dependencies fixed with exception to one that current has no fxied list below in known issues.
+- All vulnerable dependencies fixed with exception to one that currently has no fix listed below in known issues.
 
 ### Known Issues and Limitations
 
