@@ -17,36 +17,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents
 - https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
 
-
 ### Added
 
 - NIAD-1445: Bump version to 0.1.1 (#206)
-- NIAD-1432: Add agent to BloodPressure (#214)
-- NIAD-1397: Fix content link in related clinical (#213)
-- NIAD-1359: Fix agentDirectory structure (#211)
-- NIAD-1431: Add priorMedicationRef to ehrSupplyDiscontinue to MedicationRequest (#212)
-- NIAD-1365: Fix element order requeststatement (#202)
-- NIAD-1429: Add statusCode to Condition LinkSet (#209)
-- NIAD-1380: Encode referenceRange text for XML (#199)
-- NIAD-1366: Add missing statusCode to RequestStatement (#196)
-- NIAD-1428: Remove contextConductionId from Allergy Structure (#207)
-- NIAD-1425: Remove valueQuantity element from Blood pressure (#203)
-- NIAD-1369: Fix order of linkset output (#205)
 - NIAD-1412: Populate bolierplate values in EHR UAT (#208)
-- NIAD-1367: Correct AllergyIntolerance mapping output to match schema (#200)
-- NIAD-1398: Fix participant2 bug in allergy intolerance
-- NIAD-1410: Handle unmapped resources  with Mapper
+- NIAD-1410: Handle unmapped resources with Mapper
 - NIAD-910: Map diagnostic report to compound statement 
 
+### Fixed
+
+- NIAD-1431: Add priorMedicationRef to ehrSupplyDiscontinue to MedicationRequest (#212)
+- NIAD-1397: Content link in related clinical (#213)
+- NIAD-1359: AgentDirectory structure (#211)
+- NIAD-1398: Participant2 bug in allergy intolerance
+- NIAD-1366: Missing statusCode to RequestStatement (#196)
+- NIAD-1369: Order of linkset output (#205)
+- NIAD-1429: Missing statusCode to Condition LinkSet (#209)
+- NIAD-1432: Missing agent to BloodPressure (#214)
+- NIAD-1428: Remove contextConductionId from Allergy Structure (#207)
+- NIAD-1425: Remove valueQuantity element from Blood pressure (#203)
+- NIAD-1365: Element order requeststatement (#202)
+- NIAD-1367: Correct AllergyIntolerance mapping output to match schema (#200)
+- NIAD-1380: Encode referenceRange text for XML (#199)
 
 ## [0.1.1] - 2021-05-06
 
 ### Known Issues and Limitations
 
-- Known to be a broke version
+- Known to be a broke version due to missing environment variables needed for GPCC inegration.
 - Same as 0.1.0
 
 ### Added
+
+- NIAD-875: Receive EHR final ACK/NACK (#177)
+- NIAD-1096: Map Encounter participant to EhrComposition author (#156)
+- NIAD-1287: Sending external attachments to MHS (#164)
+- NIAD-1288: EMIS full test extracts (#162)
+- NIAD-911: translation of non-consultation resources (#158)
+- NIAD-1070: Documentation Updates (#173)
+- NIAD-1056: generate file extension (#168)
+
+### Fixed
 
 - NIAD-1427: Remove @contextConductionInd from MedicationStatement components (#201)
 - NIAD-1368: Correct order of generated NarrativeStatement elements (#198)
@@ -58,12 +69,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Niad 1339: uppercase UUIDs (#188)
 - NIAD-1360: Allergy Intolerance remove nested ehrComposition (#187)
 - NIAD-1056: Restore e2e tests and mock MHS changes to support recent MHS changes (#184)
-- NIAD-1070: Documentation Updates (#173)
 - NIAD-1268: Update opentest variables (#182)
-- NIAD-1288: EMIS full test extracts (#162)
 - NIAD-979: Change empty effective date mapping in ehr folder with effective time tag to be required (#180)
 - NIAD-1312: Rework RequestStatementMapper tests (#178)
-- NIAD-875: Receive EHR final ACK/NACK (#177)
 - NIAD-911: Added additional tests for non consultation mapper (#179)
 - NIAD-1056: add audio/x-au mime type support (#174)
 - NIAD-979: ehr folder to have max effective time from all ehr compositions (#166)
@@ -72,13 +80,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - NIAD-1096: Add practitioner/practitionerRole/organization recorder when mapping medication request to medication statement (#159)
 - NIAD-1306: Generic handling of Observation component (#167)
 enable ptl deployment (#170)
-- NIAD-911: translation of non-consultation resources (#158)
-- NIAD-1056: generate file extension (#168)
 - NIAD-1318: Change Participant2 typeCode from RESP to PPRF (#169)
 - NIAD-1096: Add PPRF (or REC) participant to participant2 when mapping encounters to ehr compositions (#160)
-- NIAD-1287: Sending external attachments to MHS (#164)
 - NIAD-1312: Allow request statements without onbehalfof (#165)
-- NIAD-1096: Map Encounter participant to EhrComposition author (#156)
 - Adding transformers to Encounter Components (#163)
 
 ## [0.1.0] - 2021-04-07
