@@ -12,7 +12,6 @@ import java.util.UUID;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -67,7 +66,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
-        Mockito.verify(taskDispatcher).createTask(buildGetDocumentTask(taskDefinition));
+        verify(taskDispatcher).createTask(buildGetDocumentTask(taskDefinition));
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
     }
 
