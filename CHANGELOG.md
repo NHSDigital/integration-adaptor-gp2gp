@@ -44,7 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known Issues and Limitations
 
-- Known to be a broke version due to missing environment variables needed for GPCC inegration.
+- Known to be a broken version due to missing environment variables needed for GPCC inegration.
 - Same as 0.1.0
 
 ### Added
