@@ -195,48 +195,37 @@ public class ObservationMapper {
             );
         }
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason()).ifPresent(dataAbsentReason -> {
-            String comment = DATA_ABSENT_PREFIX + dataAbsentReason;
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason())
+            .map(DATA_ABSENT_PREFIX::concat)
+            .map(comment -> prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper))
+            .ifPresent(narrativeStatementsBlock::append);
 
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
-
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).ifPresent(interpretation ->
-            narrativeStatementsBlock.append(
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation())
+            .map(interpretation ->
                 prepareNarrativeStatement(observation, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
             )
-        );
+            .ifPresent(narrativeStatementsBlock::append);
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite()).ifPresent(bodySite -> {
-            String comment = BODY_SITE_PREFIX + bodySite;
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
+            .map(BODY_SITE_PREFIX::concat)
+            .map(comment -> prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper))
+            .ifPresent(narrativeStatementsBlock::append);
 
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod())
+            .map(METHOD_PREFIX::concat)
+            .map(comment -> prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper))
+            .ifPresent(narrativeStatementsBlock::append);
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod()).ifPresent(method -> {
-            String comment = METHOD_PREFIX + method;
-
-            narrativeStatementsBlock.append(
-                    prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
-
-        if (observation.hasReferenceRange()) {
+        if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
             Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
 
-            if (observation.hasValueQuantity()) {
-                extractUnit(referenceRange)
-                    .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
-                    .map(RANGE_UNITS_PREFIX::concat)
-                    .map(comment ->
-                        prepareNarrativeStatement(observation, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode(), idMapper)
-                    )
-                    .ifPresent(narrativeStatementsBlock::append);
-            }
+            extractUnit(referenceRange)
+                .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
+                .map(RANGE_UNITS_PREFIX::concat)
+                .map(comment ->
+                    prepareNarrativeStatement(observation, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode(), idMapper)
+                )
+                .ifPresent(narrativeStatementsBlock::append);
         }
 
         return narrativeStatementsBlock.toString();

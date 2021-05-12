@@ -147,8 +147,7 @@ public class DiagnosticReportMapper {
 
         String codedDiagnosisText = diagnosticReport.getCodedDiagnosis().stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
+            .flatMap(Optional::stream)
             .collect(Collectors.joining(", "));
 
         if (!codedDiagnosisText.isEmpty()) {
