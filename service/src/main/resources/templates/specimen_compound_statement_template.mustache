@@ -6,10 +6,10 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="{{diagnosticReportIssuedDate}}"/>
+        <availabilityTime value="{{availabilityTime}}"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
-                <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
+                <id root="{{specimenRoleId}}"/>
                 {{#accessionIdentifier}}
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="{{{.}}}"/>
                 {{/accessionIdentifier}}
@@ -19,7 +19,7 @@
                 </effectiveTime>
                 {{/effectiveTime}}
                 <specimenSpecimenMaterial determinerCode="INSTANCE" classCode="MAT">
-                    <desc>{{type}}</desc>
+                    <desc>{{specimenMaterialType}}</desc>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>

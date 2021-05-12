@@ -22,6 +22,7 @@ import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.SpecimenCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
@@ -46,20 +47,22 @@ public class SpecimenMapper {
 
     private final MessageContext messageContext;
     private final ObservationMapper observationMapper;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, String diagnosticReportIssuedDate) {
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
-            .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
+            .availabilityTime(diagnosticReportIssuedDate)
+            .specimenRoleId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations);
 
-        buildType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::type);
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
+        buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
+        buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
         buildPertinentInformation(specimen).ifPresent(specimenCompoundStatementTemplateParameters::pertinentInformation);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
-        buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
 
         return TemplateUtils.fillTemplate(
             SPECIMEN_COMPOUND_STATEMENT_TEMPLATE,
@@ -116,7 +119,7 @@ public class SpecimenMapper {
         return Optional.empty();
     }
 
-    private Optional<String> buildType(Specimen specimen) {
+    private Optional<String> buildSpecimenMaterialType(Specimen specimen) {
         if (specimen.hasType()) {
             return CodeableConceptMappingUtils.extractTextOrCoding(specimen.getType());
         }
