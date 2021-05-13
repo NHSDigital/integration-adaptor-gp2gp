@@ -18,6 +18,12 @@
                 },
                 "code": {
                     "text": "test"
+                },
+                "authoredOn": "2010-01-13T15:29:50.00+00:00",
+                "requester": {
+                    "agent": {
+                        "reference": "Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B"
+                    }
                 }
             }
         }

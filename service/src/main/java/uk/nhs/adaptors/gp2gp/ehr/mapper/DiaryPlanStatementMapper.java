@@ -56,20 +56,11 @@ public class DiaryPlanStatementMapper {
         PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
             .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
-            .availabilityTime(availabilityTime)
-            .authorTime(availabilityTime);
+            .availabilityTime(availabilityTime);
 
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
         builder.code(buildCode(procedureRequest));
-
-        if (procedureRequest.hasRequester()) {
-            var requesterReference = procedureRequest.getRequester().getAgent();
-            var participant = idMapper.get(requesterReference);
-            builder
-                .participant2(participant)
-                .author(participant);
-        }
 
         return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
     }
@@ -193,8 +184,5 @@ public class DiaryPlanStatementMapper {
         private String availabilityTime;
         private String effectiveTime;
         private String code;
-        private String author;
-        private String authorTime;
-        private String participant2;
     }
 }

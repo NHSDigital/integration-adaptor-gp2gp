@@ -14,6 +14,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
@@ -177,8 +178,19 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParametersBuilder buildForProcedureRequest(String component, Resource resource) {
-        return XpathExtractor.extractValuesForProcedureRequest(component)
+        EncounterTemplateParametersBuilder encounterTemplateParametersBuilder = XpathExtractor.extractValuesForProcedureRequest(component)
             .altCode(DEFAULT_CODE);
+
+        ProcedureRequest procedureRequest = (ProcedureRequest) resource;
+        if (procedureRequest.hasRequester()) {
+            var requesterReference = procedureRequest.getRequester().getAgent();
+            var participant = messageContext.getIdMapper().get(requesterReference);
+            encounterTemplateParametersBuilder
+                .participant2(participant)
+                .author(participant);
+        }
+
+        return encounterTemplateParametersBuilder;
     }
 
     private EncounterTemplateParametersBuilder buildForDocumentReference(String component, Resource resource) {

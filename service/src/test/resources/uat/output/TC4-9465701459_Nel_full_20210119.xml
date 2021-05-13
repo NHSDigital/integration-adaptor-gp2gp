@@ -8779,7 +8779,7 @@ The line below contains special characters...
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201026115836" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -8792,7 +8792,7 @@ The line below contains special characters...
         </location>
         <Participant2 typeCode="PPRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -8805,17 +8805,6 @@ The line below contains special characters...
             <center value="20300225"/>
         </effectiveTime>
         <availabilityTime value="20201026115836"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201026115836" />
-            <agentRef classCode="AGNT">
-                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>

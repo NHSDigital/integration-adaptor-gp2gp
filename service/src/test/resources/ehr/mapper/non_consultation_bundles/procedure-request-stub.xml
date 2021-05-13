@@ -23,10 +23,5 @@
 
         </text>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <Participant typeCode="AUT" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="394559384658936"/>
-            </agentRef>
-        </Participant>
     </PlanStatement>
 </component>

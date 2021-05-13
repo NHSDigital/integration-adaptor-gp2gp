@@ -23,16 +23,5 @@ The line below contains special characters...
             <center value="20100115"/>
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113152950" />
-            <agentRef classCode="AGNT">
-                <id root="394559384658936" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="394559384658936"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>

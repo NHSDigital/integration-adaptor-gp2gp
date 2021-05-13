@@ -2385,17 +2385,6 @@
             <center value="20210421"/>
         </effectiveTime>
         <availabilityTime value="20210112114001"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210112114001" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
     </PlanStatement>
 </component>
     </ehrComposition>

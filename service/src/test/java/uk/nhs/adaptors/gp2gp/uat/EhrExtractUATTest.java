@@ -89,7 +89,7 @@ public class EhrExtractUATTest {
         ParticipantMapper participantMapper = new ParticipantMapper();
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
