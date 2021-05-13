@@ -10,10 +10,8 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
