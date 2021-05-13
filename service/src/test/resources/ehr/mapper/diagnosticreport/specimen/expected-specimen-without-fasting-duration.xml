@@ -9,7 +9,7 @@
         <availabilityTime value="2020-10-12"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
-                <id root="37252CF4-D7F6-4CBA-89B2-63477F0C8374"/>
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="CH000056DN"/>
                 <effectiveTime>
                     <center value="20100223000000"/>
@@ -27,7 +27,6 @@ text of the note 2
 text of the note 1
 Collection Site: test value of collection site
 Quantity: 28 tablet
-Fasting Status: in progress
 </text>
             </pertinentAnnotation>
         </pertinentInformation>

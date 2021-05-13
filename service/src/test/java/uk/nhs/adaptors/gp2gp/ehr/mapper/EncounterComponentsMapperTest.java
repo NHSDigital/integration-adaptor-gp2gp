@@ -93,7 +93,7 @@ public class EncounterComponentsMapperTest {
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
