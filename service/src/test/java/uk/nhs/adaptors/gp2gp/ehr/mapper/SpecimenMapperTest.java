@@ -26,6 +26,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -33,10 +34,13 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 @ExtendWith(MockitoExtension.class)
 public class SpecimenMapperTest {
 
-    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/specimen/";
+    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/specimen/";
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
+
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
+
+    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
     private static final String MOCK_EMPTY_OBSERVATION =
         "<component typeCode=\"COMP\" contextConductionInd=\"true\">\n"
@@ -52,14 +56,19 @@ public class SpecimenMapperTest {
         + "</component>";
 
     private SpecimenMapper specimenMapper;
+    private List<Observation> observations;
 
     @Mock
     private MessageContext messageContext;
+
     @Mock
     private IdMapper idMapper;
+
     @Mock
     private ObservationMapper observationMapper;
-    private List<Observation> observations;
+
+    @Mock
+    private RandomIdGeneratorService randomIdGeneratorService;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -67,12 +76,14 @@ public class SpecimenMapperTest {
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockId());
         lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockReference());
 
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
         observations = List.of(
             parseObservation(INPUT_OBSERVATION_RELATED_TO_SPECIMEN),
             parseObservation(INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN)
         );
 
-        specimenMapper = new SpecimenMapper(messageContext, observationMapper);
+        specimenMapper = new SpecimenMapper(messageContext, observationMapper, randomIdGeneratorService);
     }
 
     @ParameterizedTest
