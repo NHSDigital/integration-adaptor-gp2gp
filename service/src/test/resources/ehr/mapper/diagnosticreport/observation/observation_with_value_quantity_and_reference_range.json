@@ -1,0 +1,30 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "comment": "Test comment",
+    "valueQuantity":{
+        "value":37.1,
+        "unit":"C",
+        "system":"http://unitsofmeasure.org",
+        "code":"Cel",
+        "comparator":">="
+    },
+    "referenceRange":[
+        {
+            "text":"Test reference range text",
+            "high":{
+                "value":30,
+                "unit": "test-unit"
+            },
+            "low":{
+                "value":20,
+                "unit": "test-unit"
+            }
+        }
+    ],
+    "code": {
+        "text": "test"
+    }
+}

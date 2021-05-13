@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +59,13 @@ public class NonConsultationResourceMapperTest {
     private static final String DOCUMENT_REFERENCE_XML = FILES_DIRECTORY + "document-reference-stub.xml";
     private static final String DOCUMENT_REFERENCE_BUNDLE = FILES_DIRECTORY + "document-reference-bundle.json";
     private static final String EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-document-reference-output.xml";
+    private static final String DIAGNOSTIC_REPORT_XML = FILES_DIRECTORY + "diagnostic-report-stub.xml";
+    private static final String DIAGNOSTIC_REPORT_BUNDLE = FILES_DIRECTORY + "diagnostic-report-bundle.json";
+    private static final String EXPECTED_DIAGNOSTIC_REPORT_OUTPUT = FILES_DIRECTORY + "expected-diagnostic-report-output.xml";
+    private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_XML = FILES_DIRECTORY + "diagnostic-report-agent-person-stub.xml";
+    private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE = FILES_DIRECTORY + "diagnostic-report-agent-person-bundle.json";
+    private static final String EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT = FILES_DIRECTORY
+        + "expected-diagnostic-report-agent-person-output.xml";
     private static final String TEST_ID = "b2175be3-29c2-465f-b2c6-323db03c2c7c";
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
@@ -71,6 +80,7 @@ public class NonConsultationResourceMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
+        setUpParticipantReferenceForProcedureRequest();
         fhirParseService = new FhirParseService();
     }
 
@@ -103,8 +113,15 @@ public class NonConsultationResourceMapperTest {
             Arguments.of(MEDICATION_REQUEST_XML, MEDICATION_REQUEST_BUNDLE, EXPECTED_MEDICATION_REQUEST_OUTPUT),
             Arguments.of(CONDITION_XML, CONDITION_BUNDLE, EXPECTED_CONDITION_OUTPUT),
             Arguments.of(PROCEDURE_REQUEST_XML, PROCEDURE_REQUEST_BUNDLE, EXPECTED_PROCEDURE_REQUEST_OUTPUT),
-            Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT)
+            Arguments.of(DOCUMENT_REFERENCE_XML, DOCUMENT_REFERENCE_BUNDLE, EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT),
+            Arguments.of(DIAGNOSTIC_REPORT_XML, DIAGNOSTIC_REPORT_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_OUTPUT),
+            Arguments.of(
+                DIAGNOSTIC_REPORT_AGENT_PERSON_XML, DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT)
         );
+    }
+
+    private void setUpParticipantReferenceForProcedureRequest() {
+        messageContext.getIdMapper().getOrNew(new Reference(new IdType("Practitioner/744B53BD-299D-4604-AC81-167DEBC49E4B")));
     }
 
     private void setupMock(String stubEhrComponentMapperXml) {

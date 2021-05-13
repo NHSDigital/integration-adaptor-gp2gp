@@ -19,6 +19,9 @@ import org.mockito.quality.Strictness;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -88,6 +91,10 @@ public class EncounterComponentsMapperTest {
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper);
+        ObservationMapper specimenObservationMapper = new ObservationMapper(
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+
         ObservationStatementMapper observationStatementMapper = new ObservationStatementMapper(
             messageContext,
             structuredObservationValueMapper,
@@ -97,6 +104,9 @@ public class EncounterComponentsMapperTest {
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         RequestStatementMapper requestStatementMapper
             = new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
+        DiagnosticReportMapper diagnosticReportMapper = new DiagnosticReportMapper(
+            messageContext, specimenMapper, participantMapper, randomIdGeneratorService
+        );
 
         encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -109,7 +119,8 @@ public class EncounterComponentsMapperTest {
             medicationStatementMapper,
             observationToNarrativeStatementMapper,
             observationStatementMapper,
-            requestStatementMapper
+            requestStatementMapper,
+            diagnosticReportMapper
         );
     }
 

@@ -1,0 +1,22 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="{{compoundStatementId}}"/>
+        <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
+            <originalText>Filed Report</originalText>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="{{availabilityTime}}"/>
+        {{#narrativeStatements}}
+            {{{.}}}
+        {{/narrativeStatements}}
+        {{#specimens}}
+            {{{.}}}
+        {{/specimens}}
+        {{#participant}}
+            {{{.}}}
+        {{/participant}}
+    </CompoundStatement>
+</component>
