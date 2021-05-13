@@ -1,6 +1,5 @@
 {
   "resourceType": "Bundle",
-  "id": "DFF5321C-C6EA-468E-BBC2-B0E48000E071",
   "meta": {
     "profile": [
       "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-Searchset-Bundle-1"
@@ -11,7 +10,7 @@
     {
       "resource": {
         "resourceType": "Patient",
-        "id": "3",
+        "id": "2",
         "meta": {
           "versionId": "1521806400000",
           "profile": [
@@ -97,17 +96,17 @@
               }
             ],
             "system": "https://fhir.nhs.uk/Id/nhs-number",
-            "value": "9690937294"
+            "value": "9690937286"
           }
         ],
         "active": true,
         "name": [
           {
             "use": "official",
-            "text": "Samuel HESLBY",
-            "family": "HESLBY",
+            "text": "Horace SKELLY",
+            "family": "SKELLY",
             "given": [
-              "Samuel"
+              "Horace"
             ],
             "prefix": [
               "MR"
@@ -117,23 +116,69 @@
         "telecom": [
           {
             "system": "phone",
-            "value": "02123636563",
+            "value": "01454587554",
             "use": "home"
+          },
+          {
+            "system": "phone",
+            "value": "+447401254880",
+            "use": "mobile"
           }
         ],
         "gender": "male",
-        "birthDate": "1936-03-17",
+        "birthDate": "1925-04-21",
         "address": [
           {
             "use": "home",
             "type": "physical",
             "line": [
-              "10 MANOR DRIVE",
-              "STILLINGTON"
+              "3 BOWESFIELD CRESCENT"
             ],
             "city": "STOCKTON-ON-TEES",
-            "district": "CLEVELAND",
-            "postalCode": "TS21 1JG"
+            "postalCode": "TS18 3BL"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "Emergency contact"
+              },
+              {
+                "text": "Next of kin"
+              },
+              {
+                "text": "Daughter"
+              }
+            ],
+            "name": {
+              "use": "official",
+              "text": "JACKSON Jane (Miss)",
+              "family": "Jackson",
+              "given": [
+                "Jane"
+              ],
+              "prefix": [
+                "Miss"
+              ]
+            },
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "07777123123",
+                "use": "mobile"
+              }
+            ],
+            "address": {
+              "use": "home",
+              "type": "physical",
+              "line": [
+                "Trevelyan Square",
+                "Boar Ln"
+              ],
+              "postalCode": "LS1 6AE"
+            },
+            "gender": "female"
           }
         ],
         "generalPractitioner": [
@@ -309,6 +354,63 @@
         },
         "managingOrganization": {
           "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+        }
+      }
+    },
+    {
+      "fullUrl": "https://orange.testlab.nhs.uk/B82617/STU3/1/gpconnect/documents/fhir/DocumentReference/27863182736",
+      "resource": {
+        "resourceType": "DocumentReference",
+        "id": "27863182736",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
+          ]
+        },
+        "masterIdentifier": {
+          "system": "LocalSystem/1",
+          "value": "bb2374e2-dde2-11e9-9d36-2a2ae2dbcce4"
+        },
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+            "value": "bb237762-dde2-11e9-9d36-2a2ae2dbcce4"
+          }
+        ],
+        "status": "current",
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "824331000000106",
+              "display": "Inpatient final discharge letter"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/2"
+        },
+        "created": "2019-06-24T09:35:00+11:00",
+        "indexed": "2019-07-02T09:43:41+11:00",
+        "author": [
+          {
+            "reference": "Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7"
+          }
+        ],
+        "description": "Discharge Summary",
+        "content": [
+          {
+            "attachment": {
+              "contentType": "application/msword",
+              "url": "{{request.baseUrl}}/GP0001/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
+              "size": 3654
+            }
+          }
+        ],
+        "context": {
+          "encounter": {
+            "reference": "Encounter/4"
+          }
         }
       }
     }
