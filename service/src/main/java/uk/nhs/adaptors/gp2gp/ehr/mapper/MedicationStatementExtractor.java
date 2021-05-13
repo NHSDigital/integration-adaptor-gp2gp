@@ -138,10 +138,6 @@ public class MedicationStatementExtractor {
         return messageContext.getMedicationRequestIdMapper().getOrNew(reference.getReference());
     }
 
-    private static Reference buildReference(ResourceType resourceType, String idPart) {
-        return new Reference(new IdType(resourceType.name(), idPart));
-    }
-
     public static String buildBasedOnCode(String id) {
         var inFulfilmentOfTemplateParameters = InFulfilmentOfTemplateParameters.builder()
             .ehrSupplyAuthoriseId(id)
