@@ -9,8 +9,8 @@ import lombok.Setter;
 @Builder
 public class DiagnosticReportCompoundStatementTemplateParameters {
     private String compoundStatementId;
-    private String diagnosticReportIssuedDate;
+    private String availabilityTime;
+    private String narrativeStatements;
     private String specimens;
     private String participant;
-    private String narrativeStatements;
 }

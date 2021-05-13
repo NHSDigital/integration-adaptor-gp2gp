@@ -36,29 +36,43 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationMapperTest {
-    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
+    private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
+    private static final String OBSERVATION_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/observation/";
 
-    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_associated_with_specimen_1.json";
-    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_2_JSON = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_2_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_associated_with_specimen_2.json";
-    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_associated_with_specimen_3.json";
+    private static final String OBSERVATION_WITH_MULTIPLE_INTERPRETATIONS_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_multiple_interpretations.json";
+    private static final String OBSERVATION_WITH_INTERPRETATION_CODE_LOW_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_interpretation_code_low.json";
+    private static final String OBSERVATION_WITH_INTERPRETATION_CODE_ABNORMAL_JSON = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_with_interpretation_code_abnormal.json";
     private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON =
-        TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
-    private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = TEST_FILE_DIRECTORY
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
+    private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_value_quantity_and_reference_range.json";
 
-    private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
-    private static final String OBSERVATION_COMPOUND_STATEMENT_2_XML = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_COMPOUND_STATEMENT_2_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_2.xml";
-    private static final String OBSERVATION_COMPOUND_STATEMENT_3_XML = TEST_FILE_DIRECTORY
+    private static final String OBSERVATION_COMPOUND_STATEMENT_3_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_3.xml";
-    private static final String OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML =
-        TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
-    private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML = TEST_FILE_DIRECTORY
-        + "observation_with_value_quantity_and_reference_range.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_MULTIPLE_INTERPRETATIONS_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_multiple_interpretations.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_INTERPRETATION_CODE_LOW_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_interpretation_code_low.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_INTERPRETATION_CODE_ABNORMAL_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_interpretation_code_abnormal.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY
+            + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
+        OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
@@ -77,7 +91,7 @@ public class ObservationMapperTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        String bundleJsonInput = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + "fhir_bundle.json");
+        String bundleJsonInput = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
         observations = bundle.getEntry().stream()
             .map(Bundle.BundleEntryComponent::getResource)
@@ -126,11 +140,11 @@ public class ObservationMapperTest {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(
-            TEST_FILE_DIRECTORY + "input_default_observation.json"
+            OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
         );
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
+            OBSERVATION_TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
         );
 
         String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
@@ -146,11 +160,20 @@ public class ObservationMapperTest {
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON, OBSERVATION_COMPOUND_STATEMENT_1_XML),
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_2_JSON, OBSERVATION_COMPOUND_STATEMENT_2_XML),
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_3_JSON, OBSERVATION_COMPOUND_STATEMENT_3_XML),
+            Arguments.of(OBSERVATION_WITH_MULTIPLE_INTERPRETATIONS_JSON, OBSERVATION_COMPOUND_STATEMENT_WITH_MULTIPLE_INTERPRETATIONS_XML),
+            Arguments.of(OBSERVATION_WITH_INTERPRETATION_CODE_LOW_JSON, OBSERVATION_COMPOUND_STATEMENT_WITH_INTERPRETATION_CODE_LOW_XML),
+            Arguments.of(
+                OBSERVATION_WITH_INTERPRETATION_CODE_ABNORMAL_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_INTERPRETATION_CODE_ABNORMAL_XML
+            ),
             Arguments.of(
                 OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_JSON,
-                OBSERVATION_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML
+                OBSERVATION_COMPOUND_STATEMENT_WITH_DATA_ABSENT_REASON_AND_INTERPRETATION_AND_BODY_SITE_AND_METHOD_XML
             ),
-            Arguments.of(OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON, OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML)
+            Arguments.of(
+                OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON,
+                OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML
+            )
         );
     }
 }
