@@ -10,10 +10,8 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
 
@@ -125,12 +123,6 @@ public class MedicationStatementExtractor {
     public static String extractIdFromPlanMedicationRequestReference(Reference reference, MessageContext messageContext) {
         LOGGER.debug("Ensuring the bundle contains Plan MedicationRequest {}", reference.getReference());
 
-        if (reference.getReferenceElement().getResourceType() == null) {
-            // TODO: workaround for NIAD-1407 the type should never be assumed
-            LOGGER.warn("Reference {} is missing a resource type. Assuming MedicationRequest resource type.", reference.getReference());
-            reference = buildReference(ResourceType.MedicationRequest, reference.getReferenceElement().getIdPart());
-        }
-
         var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
         if (resource.isEmpty()) {
             throw new EhrMapperException("Could not resolve Medication Request reference " + reference.getReference());
@@ -142,10 +134,6 @@ public class MedicationStatementExtractor {
         }
 
         return messageContext.getMedicationRequestIdMapper().getOrNew(reference.getReference());
-    }
-
-    private static Reference buildReference(ResourceType resourceType, String idPart) {
-        return new Reference(new IdType(resourceType.name(), idPart));
     }
 
     public static String buildBasedOnCode(String id) {

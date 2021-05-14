@@ -1,5 +1,6 @@
 {
     "resourceType": "Bundle",
+    "id": "54d0ebb9-2d56-471e-9642-74ee55c38981",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
@@ -157,7 +158,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "58bcceb0-a55f-11eb-aaa0-00505692d4aa"
+                        "value": "15205294-b32a-11eb-aaa0-00505692d4aa"
                     }
                 ],
                 "clinicalStatus": "active",
@@ -243,7 +244,7 @@
                         {
                             "system": "http://snomed.info/sct",
                             "code": "886921000000105",
-                            "display": "Active Allergies"
+                            "display": "Allergies and adverse reactions"
                         }
                     ]
                 },
@@ -304,7 +305,7 @@
                         "identifier": [
                             {
                                 "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                                "value": "58bcce02-a55f-11eb-aaa0-00505692d4aa"
+                                "value": "152051dd-b32a-11eb-aaa0-00505692d4aa"
                             }
                         ],
                         "clinicalStatus": "resolved",
@@ -443,7 +444,7 @@
                         "value": "9690937294"
                     }
                 },
-                "date": "2021-04-28T10:55:23+01:00",
+                "date": "2021-05-13T12:53:03+01:00",
                 "orderedBy": {
                     "coding": [
                         {
@@ -496,7 +497,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "58bd5a9e-a55f-11eb-aaa0-00505692d4aa"
+                        "value": "1520b8a5-b32a-11eb-aaa0-00505692d4aa"
                     }
                 ],
                 "basedOn": [
@@ -579,7 +580,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "58bd019c-a55f-11eb-aaa0-00505692d4aa"
+                        "value": "15206fbe-b32a-11eb-aaa0-00505692d4aa"
                     }
                 ],
                 "status": "completed",
@@ -2063,7 +2064,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "Come for review. Overall doing better. Mood still low but improving. More good days than bad. Energy levels ok. Motivation improving. Support from neighbour visits daily"
@@ -2120,7 +2121,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ]
             }
@@ -2171,7 +2172,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "MSE euthymic. Not anxious. No DSH/hallucinations/abnormal thoughts"
@@ -2223,7 +2224,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ]
             }
@@ -2274,7 +2275,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "valueQuantity": {
@@ -2327,7 +2328,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "Advised re local walking group"
@@ -2554,7 +2555,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "2 months - bilateral swollen lower legs"
@@ -2610,7 +2611,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ]
             }
@@ -2661,7 +2662,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "valueQuantity": {
@@ -2719,7 +2720,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "valueQuantity": {
@@ -2776,7 +2777,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "valueQuantity": {
@@ -2834,7 +2835,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "valueQuantity": {
@@ -2891,7 +2892,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "Swelling lower legs bilaterally. Mild pitting oedema. Heart sounds normal. No distress. Abdomen normal. No cervical lymphadenopathy. Throat normal. Ears normal"
@@ -2943,7 +2944,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "Advice to mobilise more. Review with results."
@@ -2989,7 +2990,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ]
             }
@@ -3040,7 +3041,7 @@
                 "issued": "2019-03-28T10:30:00+00:00",
                 "performer": [
                     {
-                        "reference": "PractitionerRole/e0244de8-07ef-4274-9f7a-d7067bcc8d21"
+                        "reference": "Practitioner/1"
                     }
                 ],
                 "comment": "average 150/90 last six weeks"
@@ -3722,7 +3723,7 @@
                 ],
                 "basedOn": [
                     {
-                        "reference": "Consultation1-Topic4-Category-Plan-Medication-Plan-1"
+                        "reference": "MedicationRequest/Consultation1-Topic4-Category-Plan-Medication-Plan-1"
                     }
                 ],
                 "status": "completed",
