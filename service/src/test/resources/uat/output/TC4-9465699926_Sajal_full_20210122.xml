@@ -213,7 +213,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -348,7 +348,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -407,7 +407,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -466,7 +466,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -525,7 +525,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
@@ -570,7 +570,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -985,7 +985,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
             </agentRef>
@@ -1030,7 +1030,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -1243,7 +1243,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -1412,7 +1412,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -1497,7 +1497,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1556,7 +1556,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1615,7 +1615,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1699,7 +1699,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1859,7 +1859,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1943,7 +1943,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2027,7 +2027,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2112,7 +2112,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2160,7 +2160,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2205,7 +2205,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2305,7 +2305,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2543,7 +2543,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2602,7 +2602,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2677,7 +2677,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2865,7 +2865,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -2930,7 +2930,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3009,7 +3009,7 @@ Sent: 07 Mar 2011 16:58</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3071,7 +3071,7 @@ Administrative notes: blah notes</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3130,7 +3130,7 @@ Administrative notes: blah notes</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3302,7 +3302,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3361,7 +3361,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3652,7 +3652,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3711,7 +3711,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3770,7 +3770,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3829,7 +3829,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3940,7 +3940,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -3997,7 +3997,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -4078,7 +4078,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -4159,7 +4159,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -4240,7 +4240,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4303,7 +4303,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4366,7 +4366,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4449,7 +4449,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4512,7 +4512,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4575,7 +4575,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4683,7 +4683,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4746,7 +4746,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4809,7 +4809,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4872,7 +4872,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -4950,7 +4950,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -5033,7 +5033,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -5146,7 +5146,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
             </agentRef>
@@ -5209,7 +5209,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5312,7 +5312,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5375,7 +5375,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5438,7 +5438,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5501,7 +5501,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5564,7 +5564,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5652,7 +5652,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5715,7 +5715,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
             </agentRef>
@@ -5772,7 +5772,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
             </agentRef>
@@ -5814,7 +5814,7 @@ Dosage: 0.5 ml</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5873,7 +5873,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5930,7 +5930,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -5986,7 +5986,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6043,7 +6043,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6100,7 +6100,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6156,7 +6156,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6212,7 +6212,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6269,7 +6269,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6326,7 +6326,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6383,7 +6383,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6439,7 +6439,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6496,7 +6496,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6553,7 +6553,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -6610,7 +6610,7 @@ red blood cell seen, Note low platelets</text>
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>

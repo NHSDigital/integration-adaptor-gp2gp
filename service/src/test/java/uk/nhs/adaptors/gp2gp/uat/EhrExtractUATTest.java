@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -150,6 +153,11 @@ public class EhrExtractUATTest {
         final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+
+        Files.writeString(
+                Path.of("src", "test", "resources", "uat", "output", "TC4-" + expectedOutputXml),
+                hl7TranslatedResponse,
+                StandardCharsets.UTF_8);
 
         assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
     }

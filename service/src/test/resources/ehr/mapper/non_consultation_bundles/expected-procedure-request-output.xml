@@ -21,7 +21,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="b2175be3-29c2-465f-b2c6-323db03c2c7c"/>
             </agentRef>
