@@ -154,11 +154,6 @@ public class EhrExtractUATTest {
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
 
-        Files.writeString(
-                Path.of("src", "test", "resources", "uat", "output", "TC4-" + expectedOutputXml),
-                hl7TranslatedResponse,
-                StandardCharsets.UTF_8);
-
         assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
     }
 
