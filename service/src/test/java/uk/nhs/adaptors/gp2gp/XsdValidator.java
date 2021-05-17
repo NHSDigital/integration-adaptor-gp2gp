@@ -14,19 +14,6 @@ import lombok.SneakyThrows;
 
 public class XsdValidator {
 
-    public static void main(String[] args) {
-        validateFileAtPathAgainstSchema("/uat/output/TC4-9465698490_Daniels_full_20210119.xml");
-    }
-
-    @SneakyThrows
-    public static void validateFileAtPathAgainstSchema(String xmlPath) {
-        try (var xmlFile = XsdValidator.class.getResourceAsStream(xmlPath)) {
-            Schema schema = getSchemaFromUrl();
-            Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(xmlFile));
-        }
-    }
-
     @SneakyThrows
     public static void validateFileContentAgainstSchema(String fileContent) {
         try (var inputStream = new ByteArrayInputStream(fileContent.getBytes(StandardCharsets.UTF_8))) {

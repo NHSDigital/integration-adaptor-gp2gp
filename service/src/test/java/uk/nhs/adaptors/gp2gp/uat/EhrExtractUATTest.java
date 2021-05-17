@@ -2,11 +2,9 @@ package uk.nhs.adaptors.gp2gp.uat;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.api.Assumptions.assumeThatCode;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileAtPathAgainstSchema;
 import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
 
 import java.io.IOException;
@@ -16,7 +14,6 @@ import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.assertj.core.api.Assumptions;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -169,10 +166,10 @@ public class EhrExtractUATTest {
             fail("Re-run the tests with OVERWRITE_XML=false");
         }
 
+        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
+
         assumeThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();
-        
-        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testValueFilePaths() {
