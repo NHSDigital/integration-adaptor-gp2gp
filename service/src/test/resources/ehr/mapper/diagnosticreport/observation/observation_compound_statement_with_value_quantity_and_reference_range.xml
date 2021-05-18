@@ -9,7 +9,7 @@
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
-        <component typeCode="COMP" contextConductionInd="true">
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="some-id"/>
         <code nullFlavor="UNK">

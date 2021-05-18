@@ -1,5 +1,5 @@
 <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+    <CompoundStatement classCode="{{{classCode}}}" moodCode="EVN">
         <id root="{{compoundStatementId}}"/>
         {{{codeElement}}}
         <statusCode code="COMPLETE"/>
@@ -7,9 +7,14 @@
             {{{effectiveTime}}}
         </effectiveTime>
         {{{availabilityTimeElement}}}
-        {{{observationStatement}}}
-        {{#narrativeStatements}}
+        {{#observationStatement}}
             {{{.}}}
-        {{/narrativeStatements}}
+        {{/observationStatement}}
+        {{#narrativeStatement}}
+            {{{.}}}
+        {{/narrativeStatement}}
+        {{#statementsForDerivedObservations}}
+            {{{.}}}
+        {{/statementsForDerivedObservations}}
     </CompoundStatement>
 </component>

@@ -133,11 +133,8 @@ public class SpecimenMapper {
             .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
             .collect(Collectors.toList());
 
-        return observationsAssociatedWithSpecimen.stream().map(
-            observationAssociatedWithSpecimen -> observationMapper.mapObservationToCompoundStatement(
-                observationAssociatedWithSpecimen,
-                observations
-            ))
+        return observationsAssociatedWithSpecimen.stream()
+            .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
     }
 

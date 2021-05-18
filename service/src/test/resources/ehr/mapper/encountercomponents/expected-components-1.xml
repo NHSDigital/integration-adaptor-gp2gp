@@ -288,7 +288,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -296,7 +296,7 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -329,7 +329,8 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -370,7 +371,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -378,7 +379,7 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -436,7 +437,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+    <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -444,7 +445,7 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
+            <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
@@ -475,7 +476,8 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
