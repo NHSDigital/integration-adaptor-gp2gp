@@ -1,9 +1,15 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.assertj.core.api.Assumptions.assumeThatCode;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
+
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,6 +63,7 @@ public class EhrExtractUATTest {
     private static final String FILES_PREFIX = "TC4-";
     private static final String INPUT_PATH = "/uat/input/";
     private static final String OUTPUT_PATH = "/uat/output/";
+    private static final boolean OVERWRITE_XML = false;
 
     @Mock
     private TimestampService timestampService;
@@ -137,7 +144,8 @@ public class EhrExtractUATTest {
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
     public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
-        final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + FILES_PREFIX + expectedOutputXml);
+        final String expectedXmlResourcePath = OUTPUT_PATH + FILES_PREFIX + expectedOutputXml;
+        final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
         inputJsonFileContent = removeEmptyDescriptions(inputJsonFileContent);
         final Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
@@ -151,14 +159,23 @@ public class EhrExtractUATTest {
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
 
+        if (OVERWRITE_XML) {
+            try (PrintWriter printWriter = new PrintWriter("src/test/resources" + expectedXmlResourcePath, StandardCharsets.UTF_8)) {
+                printWriter.print(hl7TranslatedResponse);
+            }
+            fail("Re-run the tests with OVERWRITE_XML=false");
+        }
+
         assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
+
+        assumeThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
+            .doesNotThrowAnyException();
     }
 
     private static Stream<Arguments> testValueFilePaths() {
         return Stream.of(
             Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
             Arguments.of("9465701483_Nel_full_20210119.json", "9465701483_Nel_full_20210119.xml"),
-            Arguments.of("9465701459_Nel_full_20210119.json", "9465701459_Nel_full_20210119.xml"),
             Arguments.of("9465698679_Gainsford_full_20210119.json", "9465698679_Gainsford_full_20210119.xml"),
             Arguments.of("9465700193_Birdi_full_20210119.json", "9465700193_Birdi_full_20210119.xml"),
             Arguments.of("9465701262_Meyers_full_20210119.json", "9465701262_Meyers_full_20210119.xml"),
@@ -166,7 +183,9 @@ public class EhrExtractUATTest {
             Arguments.of("9465701297_Livermore_full_20210119.json", "9465701297_Livermore_full_20210119.xml"),
             Arguments.of("9465700339_Yamura_full_20210119.json", "9465700339_Yamura_full_20210119.xml"),
             Arguments.of("9465699926_Sajal_full_20210122.json", "9465699926_Sajal_full_20210122.xml"),
-            Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml")
+            Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml"),
+            Arguments.of("9465701718_Guerra_full_20210119.json", "9465701718_Guerra_full_20210119.xml"),
+            Arguments.of("9465700088_Mold_full_20210119.json", "9465700088_Mold_full_20210119.xml")
         );
     }
 
