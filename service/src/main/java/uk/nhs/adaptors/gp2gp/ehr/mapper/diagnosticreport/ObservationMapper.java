@@ -32,7 +32,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -78,20 +77,17 @@ public class ObservationMapper {
         var classCode = prepareClassCode(observationAssociatedWithSpecimen);
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
         var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
+        var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
+        var narrativeStatement = prepareNarrativeStatement(idMapper, observationAssociatedWithSpecimen);
 
-        List<Observation> derivedObservations = new ArrayList<>();
-        observationAssociatedWithSpecimen.getRelated().stream()
+        List<Observation> derivedObservations = observationAssociatedWithSpecimen.getRelated().stream()
             .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
             .map(ObservationRelatedComponent::getTarget)
             .map(Reference::getReferenceElement)
             .map(referenceElement -> messageContext.getInputBundleHolder().getResource(referenceElement))
             .flatMap(Optional::stream)
             .map(Observation.class::cast)
-            .collect(Collectors.toCollection(() -> derivedObservations));
-
-        var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
-        var narrativeStatement = prepareNarrativeStatement(idMapper, observationAssociatedWithSpecimen);
-
+            .collect(Collectors.toList());
         var statementsForDerivedObservations = prepareStatementsForDerivedObservations(idMapper, derivedObservations);
 
         var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
