@@ -7335,11 +7335,6 @@ The line below contains special characters...
                     <id root="test-id-3"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="test-id-3"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
