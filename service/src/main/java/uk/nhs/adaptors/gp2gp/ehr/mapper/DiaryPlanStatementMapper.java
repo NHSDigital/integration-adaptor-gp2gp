@@ -45,6 +45,7 @@ public class DiaryPlanStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
@@ -61,8 +62,26 @@ public class DiaryPlanStatementMapper {
         buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
         buildText(procedureRequest).map(builder::text);
         builder.code(buildCode(procedureRequest));
+        buildParticipant(procedureRequest, builder, idMapper);
 
         return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+    }
+
+    private void buildParticipant(
+            ProcedureRequest procedureRequest,
+            PlanStatementMapperParametersBuilder builder,
+            IdMapper idMapper
+    ) {
+        var requesterAgent = procedureRequest.getRequester().getAgent();
+
+        if (requesterAgent.hasReference()) {
+            var resourceType = requesterAgent.getReference().split("/")[0];
+            if (resourceType.equals(ResourceType.Practitioner.name())) {
+                String participantId = idMapper.getOrNew(procedureRequest.getRequester().getAgent());
+                String participant = participantMapper.mapToParticipant(participantId, ParticipantType.PERFORMER);
+                builder.participant(participant);
+            }
+        }
     }
 
     private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
@@ -184,5 +203,6 @@ public class DiaryPlanStatementMapper {
         private String availabilityTime;
         private String effectiveTime;
         private String code;
+        private String participant;
     }
 }
