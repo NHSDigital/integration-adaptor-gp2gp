@@ -14,7 +14,8 @@ public class SpecimenCompoundStatementTemplateParameters {
     private String accessionIdentifier;
     private String effectiveTime;
     private String specimenMaterialType;
-    private String pertinentInformation;
+    private String narrativeStatement;
+    private String narrativeStatementId;
     private String participant;
     private String observations;
 }
