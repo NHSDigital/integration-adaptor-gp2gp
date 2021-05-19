@@ -37,7 +37,7 @@
     },
     "authoredOn":"2017-11-10T00:00:00+00:00",
     "recorder":{
-        "reference":"PractitionerRole/3"
+        "reference":"Practitioner/3"
     },
     "dosageInstruction":[
         {
