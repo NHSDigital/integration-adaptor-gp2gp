@@ -78,7 +78,7 @@ public class ObservationMapper {
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
         var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
         var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
-        var narrativeStatement = prepareNarrativeStatement(idMapper, observationAssociatedWithSpecimen);
+        var narrativeStatements = prepareNarrativeStatements(idMapper, observationAssociatedWithSpecimen);
 
         List<Observation> derivedObservations = observationAssociatedWithSpecimen.getRelated().stream()
             .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
@@ -97,7 +97,7 @@ public class ObservationMapper {
             .effectiveTime(effectiveTime)
             .availabilityTimeElement(availabilityTimeElement)
             .observationStatement(observationStatement)
-            .narrativeStatement(narrativeStatement)
+            .narrativeStatements(narrativeStatements)
             .statementsForDerivedObservations(statementsForDerivedObservations);
 
         return TemplateUtils.fillTemplate(
@@ -179,7 +179,7 @@ public class ObservationMapper {
         );
     }
 
-    private String prepareNarrativeStatement(IdMapper idMapper, Observation observation) {
+    private String prepareNarrativeStatements(IdMapper idMapper, Observation observation) {
         StringBuilder narrativeStatementsBlock = new StringBuilder();
 
         if (observation.hasComment()) {
@@ -257,9 +257,9 @@ public class ObservationMapper {
 
         derivedObservations.forEach(derivedObservation -> {
             var observationStatement = prepareObservationStatement(idMapper, derivedObservation);
-            var narrativeStatement = prepareNarrativeStatement(idMapper, derivedObservation);
+            var narrativeStatements = prepareNarrativeStatements(idMapper, derivedObservation);
 
-            if (!observationStatement.isEmpty() && !narrativeStatement.isEmpty()) {
+            if (!observationStatement.isEmpty() && !narrativeStatements.isEmpty()) {
                 var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
                 var codeElement = prepareCodeElement(derivedObservation);
                 var classCode = prepareClassCode(derivedObservation);
@@ -273,7 +273,7 @@ public class ObservationMapper {
                     .effectiveTime(effectiveTime)
                     .availabilityTimeElement(availabilityTimeElement)
                     .observationStatement(observationStatement)
-                    .narrativeStatement(narrativeStatement);
+                    .narrativeStatements(narrativeStatements);
 
                 derivedObservationsBlock.append(
                     TemplateUtils.fillTemplate(
@@ -282,7 +282,7 @@ public class ObservationMapper {
                     )
                 );
             } else {
-                derivedObservationsBlock.append(observationStatement).append(narrativeStatement);
+                derivedObservationsBlock.append(observationStatement).append(narrativeStatements);
             }
         });
 

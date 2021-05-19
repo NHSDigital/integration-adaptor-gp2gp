@@ -14,6 +14,6 @@ public class ObservationCompoundStatementTemplateParameters {
     private String effectiveTime;
     private String availabilityTimeElement;
     private String observationStatement;
-    private String narrativeStatement;
+    private String narrativeStatements;
     private String statementsForDerivedObservations;
 }
