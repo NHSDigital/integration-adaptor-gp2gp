@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53" />
+    <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -5845,7 +5845,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE" />
+        <id root="716B2A02-D779-45A0-812C-B2376C8E6F75" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5886,11 +5886,6 @@
             <high value="20201215000000"/>
         </effectiveTime>
         <availabilityTime value="20201214101259" />
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
-                </statementRef>
-            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -5943,7 +5938,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5" />
+        <id root="A2D4EEF1-8B00-40EC-8C0F-F6884052927A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5971,7 +5966,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99" />
+        <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -5984,11 +5979,6 @@
             
         </effectiveTime>
         <availabilityTime value="20201214102506" />
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
-                </statementRef>
-            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0"/>
@@ -6036,7 +6026,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="46218E0A-240A-47A3-9793-2CA43C848EDB" />
+        <id root="155DFA49-019C-47F0-9DDE-EA68774988B2" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6064,7 +6054,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="F4E72E8A-13BD-4C83-A448-32718731EC94" />
+        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -6084,11 +6074,6 @@
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
-                </statementRef>
-            </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
                     <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
                 </statementRef>
             </component>
@@ -6104,7 +6089,7 @@
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342"/>
+                <id root="D89620CF-84A5-4FB9-9399-571685EF6275"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6119,7 +6104,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
+        <id root="46218E0A-240A-47A3-9793-2CA43C848EDB" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6147,7 +6132,7 @@
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
+        <id root="411235D8-7D97-4319-BE0B-25C0E7D55C55" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, major</originalText>
             <qualifier inverted="false">
@@ -6162,7 +6147,7 @@
         <availabilityTime value="20200724133829" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="481EC303-CEC9-48AD-85E1-867936431C48"/>
+                <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6174,7 +6159,7 @@
 </component>
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="481EC303-CEC9-48AD-85E1-867936431C48"/>
+        <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342"/>
         <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
 </code>
         <statusCode code="COMPLETE"/>
@@ -6195,7 +6180,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9" />
+        <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6223,7 +6208,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="A8B2DE9A-C1CA-4534-9B30-7783301F6BAA"/>
+        <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6232,7 +6217,7 @@
         <availabilityTime value="20200724134021" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
+                <id root="481EC303-CEC9-48AD-85E1-867936431C48"/>
                 <code code="294647003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccine allergy">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -6259,7 +6244,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
+        <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6287,7 +6272,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
+        <id root="A8B2DE9A-C1CA-4534-9B30-7783301F6BAA"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -6296,7 +6281,7 @@
         <availabilityTime value="20200724133829" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="E50C922A-91C0-4225-A2FE-5E3A3066357E"/>
+                <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
                 <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -6323,7 +6308,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4B331DB8-AC77-4438-A646-56E500E73885" />
+        <id root="E50C922A-91C0-4225-A2FE-5E3A3066357E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6351,7 +6336,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5" />
+        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B" />
         <code code="170370000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="First hepatitis B vaccination">
 </code>
         <statusCode code="COMPLETE" />
@@ -6377,7 +6362,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
+        <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6405,7 +6390,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
+        <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
         <code code="822851000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Seasonal influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
@@ -6431,7 +6416,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="692FAEB8-5071-400B-B689-689F871F58DE" />
+        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6459,7 +6444,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
+        <id root="4B331DB8-AC77-4438-A646-56E500E73885" />
         <code code="810511000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Episodic dry cough">
 </code>
         <statusCode code="COMPLETE" />
@@ -6487,7 +6472,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
+        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6515,7 +6500,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
+        <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
         <code code="56018004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Wheezing">
 </code>
         <statusCode code="COMPLETE" />
@@ -6543,7 +6528,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
+        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6571,7 +6556,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
+        <id root="D89620CF-84A5-4FB9-9399-571685EF6275" />
         <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
 </code>
         <statusCode code="COMPLETE" />
@@ -6599,7 +6584,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
+        <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6627,7 +6612,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA" />
+        <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -6656,7 +6641,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA" />
+        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6684,7 +6669,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EFD99868-BD82-4213-9586-11755332A60D" />
+        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
@@ -6712,7 +6697,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
+        <id root="EFD99868-BD82-4213-9586-11755332A60D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6740,7 +6725,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="69B9FED1-59E4-4892-BB53-F4FE54715057" />
+        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Assessment Complete - No Care Needed</originalText>
 </code>

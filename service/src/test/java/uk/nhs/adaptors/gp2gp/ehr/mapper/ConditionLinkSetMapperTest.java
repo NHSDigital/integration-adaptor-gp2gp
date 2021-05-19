@@ -54,7 +54,7 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_NO_RELATED_CLINICAL_CONTENT = CONDITION_FILE_LOCATIONS
         + "condition_no_related_clinical_content.json";
     private static final String INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT_IGNORE_ONE = CONDITION_FILE_LOCATIONS
-        + "condition_related_clinical_content_1_resource_1_list_reference.json";
+        + "condition_related_clinical_content_suppressed_linkage_references.json";
     private static final String INPUT_JSON_MAP_TWO_RELATED_CLINICAL_CONTENT = CONDITION_FILE_LOCATIONS
         + "condition_2_related_clinical_content.json";
     private static final String INPUT_JSON_STATUS_ACTIVE = CONDITION_FILE_LOCATIONS + "condition_status_active.json";
