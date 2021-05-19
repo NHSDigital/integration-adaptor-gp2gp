@@ -25,11 +25,12 @@ public class AmqpConfiguration {
         return new MappingJackson2MessageConverter();
     }
 
+    // use the first in the list for sending messages
+    // all members in the list will be listened to via CustomJmsConfigurer
     @Bean
     public JmsConnectionFactory jmsConnectionFactory(AmqpProperties properties) {
         JmsConnectionFactory factory = new JmsConnectionFactory();
-
-        factory.setRemoteURI(properties.getBrokers());
+        factory.setRemoteURI(properties.getBrokers()[0]);
 
         if (isNotBlank(properties.getUsername())) {
             factory.setUsername(properties.getUsername());

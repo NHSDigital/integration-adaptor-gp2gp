@@ -19,7 +19,7 @@ gp2gp:
   amqp:
     inboundQueueName: ${GP2GP_MHS_INBOUND_QUEUE:inbound}
     taskQueueName: ${GP2GP_TASK_QUEUE:gp2gpTaskQueue}
-    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672}
+    brokers: ${GP2GP_AMQP_BROKERS:amqp://localhost:5672,amqp://localhost:5673}
     exchange: amq.direct
     username: ${GP2GP_AMQP_USERNAME:}
     password: ${GP2GP_AMQP_PASSWORD:}

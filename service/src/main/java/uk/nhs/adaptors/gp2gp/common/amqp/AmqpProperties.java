@@ -13,13 +13,14 @@ import lombok.Setter;
 public class AmqpProperties {
 
     private final DeserializationPolicy deserializationPolicy = new DeserializationPolicy();
-    private String brokers;
+    private String[] brokers;
     private String username;
     private String password;
     private String clientId;
     private Boolean receiveLocalOnly;
     private Boolean receiveNoWaitLocalOnly;
     private int maxRedeliveries;
+    private String inboundQueueName;
 
     public DeserializationPolicy getDeserializationPolicy() {
         return deserializationPolicy;

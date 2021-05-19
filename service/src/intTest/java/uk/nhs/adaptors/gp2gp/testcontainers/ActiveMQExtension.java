@@ -27,7 +27,9 @@ public class ActiveMQExtension implements BeforeAllCallback, BeforeEachCallback 
     @Override
     public void beforeAll(ExtensionContext context) {
         if (isTestContainersEnabled()) {
+            ActiveMqContainer.resetBrokers();
             ActiveMqContainer.getInstance().start();
+            ActiveMqContainer.getInstance2().start();
         }
     }
 

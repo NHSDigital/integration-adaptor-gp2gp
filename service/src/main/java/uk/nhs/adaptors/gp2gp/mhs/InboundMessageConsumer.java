@@ -8,6 +8,7 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 
@@ -18,8 +19,9 @@ public class InboundMessageConsumer {
     private final InboundMessageHandler inboundMessageHandler;
     private final MDCService mdcService;
 
-    @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
-    public void receive(Message message) throws JMSException {
+//    @JmsListener(destination = "${gp2gp.amqp.inboundQueueName}")
+    @SneakyThrows
+    public void receive(Message message) {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received inbound MHS message {}", messageID);
         try {

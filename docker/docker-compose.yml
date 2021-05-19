@@ -64,6 +64,13 @@ services:
       - "8161:8161"
       - "5672:5672"
 
+  activemq2:
+    build:
+      context: ./activemq
+    ports:
+      - "8162:8162"
+      - "5673:5673"
+
   wiremock:
     build: ./wiremock
     ports:
