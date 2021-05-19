@@ -7,6 +7,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -126,25 +127,24 @@ public class ObservationMapperTest {
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
     }
 
-    // TODO: Fix as part of NIAD-1469
-//    @Test
-//    public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-//        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-//
-//        String jsonInput = ResourceTestFileUtils.getFileContent(
-//            OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
-//        );
-//        Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
-//        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-//            OBSERVATION_TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
-//        );
-//
-//        String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
-//            observationAssociatedWithSpecimen
-//        );
-//
-//        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
-//    }
+    @Test
+    public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+
+        String jsonInput = ResourceTestFileUtils.getFileContent(
+            OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
+        );
+        Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+            OBSERVATION_TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
+        );
+
+        String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
+            observationAssociatedWithSpecimen
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+    }
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(

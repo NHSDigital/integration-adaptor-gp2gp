@@ -288,16 +288,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -310,8 +301,6 @@
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -371,7 +360,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="BATTERY" moodCode="EVN">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -379,23 +368,11 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-            <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -437,16 +414,7 @@
             </specimenRole>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
-    <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="394559384658936"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
@@ -459,8 +427,6 @@
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>

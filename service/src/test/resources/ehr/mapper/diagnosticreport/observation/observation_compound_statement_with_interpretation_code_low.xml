@@ -9,23 +9,10 @@
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="some-id"/>
-        <code nullFlavor="UNK">
-    <originalText>test</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20190601113000"/>
-        </effectiveTime>
-        <availabilityTime value="20190601113000"/>
             <interpretationCode code="LO" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Below low reference limit">
     <originalText>Low Value</originalText>
 </interpretationCode>
 
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
