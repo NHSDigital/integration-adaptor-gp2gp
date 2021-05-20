@@ -16,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrContinueTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.SendEhrCommonTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
@@ -152,7 +152,7 @@ public class EhrExtractRequestHandler {
     }
 
     private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName) {
-        var sendEhrContinueTaskDefinition = SendEhrContinueTaskDefinition.builder()
+        var sendEhrContinueTaskDefinition = SendEhrCommonTaskDefinition.builder()
             .documentName(documentName)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())

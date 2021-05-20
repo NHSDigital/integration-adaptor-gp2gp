@@ -51,7 +51,7 @@ public class EhrContinueTest {
 
         verify(taskDispatcher).createTask(
             argThat(task -> hasSameContent(
-                (SendEhrContinueTaskDefinition) task, expectedResponse)));
+                (SendEhrCommonTaskDefinition) task, expectedResponse)));
         var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
 
         assertThat(ehrExtract.get().getEhrContinue().getReceived()).isNotNull();
@@ -67,14 +67,14 @@ public class EhrContinueTest {
 
         verify(taskDispatcher).createTask(
             argThat(task -> hasSameContent(
-                (SendEhrContinueTaskDefinition) task, expectedResponse)));
+                (SendEhrCommonTaskDefinition) task, expectedResponse)));
         var first = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
 
         verify(taskDispatcher, times(2)).createTask(
             argThat(task -> hasSameContent(
-                (SendEhrContinueTaskDefinition) task, expectedResponse)));
+                (SendEhrCommonTaskDefinition) task, expectedResponse)));
         var second = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         assertThat(first.getEhrContinue().getReceived()).isBefore(second.getEhrContinue().getReceived());
@@ -105,8 +105,8 @@ public class EhrContinueTest {
         verify(taskDispatcher, never()).createTask(any());
     }
 
-    private SendEhrContinueTaskDefinition createContinueTasks(EhrExtractStatus ehrExtractStatus) {
-        return SendEhrContinueTaskDefinition.builder()
+    private SendEhrCommonTaskDefinition createContinueTasks(EhrExtractStatus ehrExtractStatus) {
+        return SendEhrCommonTaskDefinition.builder()
             .documentName(DOCUMENT_NAME)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
@@ -118,7 +118,7 @@ public class EhrContinueTest {
             .build();
     }
 
-    private boolean hasSameContent(SendEhrContinueTaskDefinition structuredTaskDefinition, SendEhrContinueTaskDefinition expectedResponse) {
+    private boolean hasSameContent(SendEhrCommonTaskDefinition structuredTaskDefinition, SendEhrCommonTaskDefinition expectedResponse) {
         assertThat(structuredTaskDefinition.getConversationId()).isEqualTo(expectedResponse.getConversationId());
         assertThat(structuredTaskDefinition.getFromAsid()).isEqualTo(expectedResponse.getFromAsid());
         assertThat(structuredTaskDefinition.getFromOdsCode()).isEqualTo(expectedResponse.getFromOdsCode());
