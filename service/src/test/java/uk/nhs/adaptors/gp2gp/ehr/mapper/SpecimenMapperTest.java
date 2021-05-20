@@ -132,7 +132,7 @@ public class SpecimenMapperTest {
             Arguments.of("input-specimen-without-type.json", "expected-specimen-without-type.xml"),
             Arguments.of("input-specimen-without-type-text.json", "expected-specimen-without-type-text.xml"),
             Arguments.of("input-specimen-without-agent-person.json", "expected-specimen-without-agent-person.xml"),
-            Arguments.of("input-specimen-without-pertinent-information.json", "expected-specimen-without-pertinent-information.xml"),
+            Arguments.of("input-specimen-without-collection-details.json", "expected-specimen-without-collection-details.xml"),
             Arguments.of("input-specimen-without-fasting-status.json", "expected-specimen-without-fasting-status.xml"),
             Arguments.of("input-specimen-without-fasting-duration.json", "expected-specimen-without-fasting-duration.xml"),
             Arguments.of("input-specimen-without-quantity.json", "expected-specimen-without-quantity.xml"),
