@@ -74,7 +74,8 @@ public class DiaryPlanStatementMapperTest {
         messageContext.initialize(bundle);
         messageContext.getIdMapper().getOrNew(ResourceType.Organization, new IdType("6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"));
 
-        diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
+        diaryPlanStatementMapper =
+            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
     @AfterEach
