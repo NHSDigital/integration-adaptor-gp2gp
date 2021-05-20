@@ -56,12 +56,13 @@ public class SpecimenMapper {
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
             .availabilityTime(diagnosticReportIssuedDate)
             .specimenRoleId(randomIdGeneratorService.createNewId())
+            .narrativeStatementId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations);
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildPertinentInformation(specimen).ifPresent(specimenCompoundStatementTemplateParameters::pertinentInformation);
+        buildNarrativeStatement(specimen).ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
@@ -138,8 +139,8 @@ public class SpecimenMapper {
             .collect(Collectors.joining());
     }
 
-    private Optional<String> buildPertinentInformation(Specimen specimen) {
-        PertinentInformationBuilder pertinentInformationBuilder = new PertinentInformationBuilder();
+    private Optional<String> buildNarrativeStatement(Specimen specimen) {
+        NarrativeStatementBuilder narrativeStatementBuilder = new NarrativeStatementBuilder();
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
@@ -147,31 +148,31 @@ public class SpecimenMapper {
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
                     if (value instanceof CodeableConcept) {
-                        pertinentInformationBuilder.fastingStatus((CodeableConcept) value);
+                        narrativeStatementBuilder.fastingStatus((CodeableConcept) value);
                     } else if (value instanceof Duration) {
-                        pertinentInformationBuilder.fastingDuration((Duration) value);
+                        narrativeStatementBuilder.fastingDuration((Duration) value);
                     }
                 });
 
             if (collection.hasQuantity()) {
-                pertinentInformationBuilder.quantity(collection.getQuantity());
+                narrativeStatementBuilder.quantity(collection.getQuantity());
             }
 
             if (collection.hasBodySite()) {
-                pertinentInformationBuilder.collectionSite(collection.getBodySite());
+                narrativeStatementBuilder.collectionSite(collection.getBodySite());
             }
         }
 
         specimen.getNote().stream()
             .map(Annotation::getText)
-            .forEach(pertinentInformationBuilder::note);
+            .forEach(narrativeStatementBuilder::note);
 
         return getEffectiveTime(specimen)
-            .map(pertinentInformationBuilder::buildWithDateTime)
-            .orElseGet(pertinentInformationBuilder::build);
+            .map(narrativeStatementBuilder::buildWithDateTime)
+            .orElseGet(narrativeStatementBuilder::build);
     }
 
-    private static class PertinentInformationBuilder {
+    private static class NarrativeStatementBuilder {
 
         private static final String FASTING_STATUS = "Fasting Status:";
         private static final String FASTING_DURATION = "Fasting Duration:";
@@ -179,18 +180,18 @@ public class SpecimenMapper {
         private static final String COLLECTION_SITE = "Collection Site:";
         private static final String COMMENT_PREFIX = "comment type - LAB SPECIMEN COMMENT(E271)";
 
-        private String pertinentInformation;
+        private String text;
 
-        PertinentInformationBuilder() {
-            pertinentInformation = StringUtils.EMPTY;
+        NarrativeStatementBuilder() {
+            text = StringUtils.EMPTY;
         }
 
         private void prependPertinentInformation(String... texts) {
-            pertinentInformation = newLine(withSpace((Object[]) texts), pertinentInformation);
+            text = newLine(withSpace((Object[]) texts), text);
         }
 
         private void prependPertinentInformation(List<String> texts) {
-            pertinentInformation = newLine(withSpace(texts), pertinentInformation);
+            text = newLine(withSpace(texts), text);
         }
 
         public void fastingStatus(CodeableConcept fastingStatus) {
@@ -228,18 +229,18 @@ public class SpecimenMapper {
         }
 
         public Optional<String> buildWithDateTime(DateTimeType date) {
-            if (StringUtils.isNotBlank(pertinentInformation)) {
+            if (StringUtils.isNotBlank(text)) {
                 prependPertinentInformation(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
-                return Optional.of(pertinentInformation);
+                return Optional.of(text);
             }
 
             return Optional.empty();
         }
 
         public Optional<String> build() {
-            if (StringUtils.isNotBlank(pertinentInformation)) {
+            if (StringUtils.isNotBlank(text)) {
                 prependPertinentInformation(COMMENT_PREFIX);
-                return Optional.of(pertinentInformation);
+                return Optional.of(text);
             }
 
             return Optional.empty();

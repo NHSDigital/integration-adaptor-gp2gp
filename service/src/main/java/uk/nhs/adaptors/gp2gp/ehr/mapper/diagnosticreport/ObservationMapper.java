@@ -16,7 +16,7 @@ import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.ClassCode;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -248,7 +248,7 @@ public class ObservationMapper {
                     var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
-                        .classCode(ClassCode.CLUSTER.getCode())
+                        .classCode(CompoundStatementClassCode.CLUSTER.getCode())
                         .compoundStatementId(compoundStatementId)
                         .codeElement(codeElement)
                         .effectiveTime(effectiveTime)
@@ -285,12 +285,12 @@ public class ObservationMapper {
             return StringUtils.EMPTY;
         }
 
-        private ClassCode prepareClassCode(List<Observation> derivedObservations) {
+        private CompoundStatementClassCode prepareClassCode(List<Observation> derivedObservations) {
             return derivedObservations.stream()
                 .filter(this::observationHasNonCommentNoteCode)
-                .map($ -> ClassCode.BATTERY)
+                .map($ -> CompoundStatementClassCode.BATTERY)
                 .findFirst()
-                .orElse(ClassCode.CLUSTER);
+                .orElse(CompoundStatementClassCode.CLUSTER);
         }
 
         private CommentType prepareCommentType(Observation observation) {

@@ -19,16 +19,18 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+        <component typeCode="COMP" contextConductionInd="true">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
                 <text>comment type - LAB SPECIMEN COMMENT(E271) 2010-02-23 00:00:00
 Collection Site: test value of collection site
 Quantity: 28 tablet
 Fasting Status: in progress
 </text>
-            </pertinentAnnotation>
-        </pertinentInformation>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="2020-10-12"/>
+            </NarrativeStatement>
+        </component>
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="REFERENCE-to-Practitioner/89890-1985-45D9-993E-C5FF51F36828"/>

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum ClassCode {
+public enum CompoundStatementClassCode {
     BATTERY("BATTERY"),
     CLUSTER("CLUSTER");
 
