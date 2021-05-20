@@ -45,6 +45,7 @@ public class DiaryPlanStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
     public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
@@ -58,11 +59,27 @@ public class DiaryPlanStatementMapper {
             .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
             .availabilityTime(availabilityTime);
 
-        buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
-        buildText(procedureRequest).map(builder::text);
+        buildEffectiveTime(procedureRequest).ifPresent(builder::effectiveTime);
+        buildText(procedureRequest).ifPresent(builder::text);
         builder.code(buildCode(procedureRequest));
+        buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
 
         return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+    }
+
+    private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
+        var requesterAgent = procedureRequest.getRequester().getAgent();
+
+        if (requesterAgent.hasReference()) {
+            var resourceType = requesterAgent.getReference().split("/")[0];
+            if (resourceType.equals(ResourceType.Practitioner.name())) {
+                String participantId = idMapper.getOrNew(requesterAgent);
+                String participant = participantMapper.mapToParticipant(participantId, ParticipantType.PERFORMER);
+                return Optional.of(participant);
+            }
+        }
+
+        return Optional.empty();
     }
 
     private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
@@ -184,5 +201,6 @@ public class DiaryPlanStatementMapper {
         private String availabilityTime;
         private String effectiveTime;
         private String code;
+        private String participant;
     }
 }

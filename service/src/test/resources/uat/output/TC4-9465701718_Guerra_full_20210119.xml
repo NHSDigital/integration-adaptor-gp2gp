@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="EA84B0F8-FDA4-4F76-92E3-AA06A8CE5026" />
+    <id root="0A4B8365-FEE6-4352-B941-5CCC40F3AE63" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -6233,7 +6233,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
+        <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6243,7 +6243,7 @@ rheumatoid factor tests.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201026124518" />
             <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+                <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6256,7 +6256,7 @@ rheumatoid factor tests.</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+                <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -6269,13 +6269,18 @@ rheumatoid factor tests.</text>
             <center value="20290528"/>
         </effectiveTime>
         <availabilityTime value="20201026124518"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50"/>
+    </agentRef>
+</Participant>
     </PlanStatement>
 </component>
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
+        <id root="692FAEB8-5071-400B-B689-689F871F58DE" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6303,7 +6308,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC" />
+        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
         <text>(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100326140443" />
@@ -6318,7 +6323,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
+        <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6346,7 +6351,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="692FAEB8-5071-400B-B689-689F871F58DE" />
+        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
         <text>(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100326134544" />
@@ -6361,7 +6366,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF" />
+        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6389,7 +6394,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
+        <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF" />
         <text>(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100326134545" />
@@ -6404,7 +6409,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA" />
+        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6432,7 +6437,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
+        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA" />
         <text>(EMISTest) - Abnormal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100326134545" />
@@ -6447,78 +6452,35 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EFD99868-BD82-4213-9586-11755332A60D" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134545" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="69B9FED1-59E4-4892-BB53-F4FE54715057" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100326134545"/>
+        </effectiveTime>
+        <availabilityTime value="20100326134545"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100326134545" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="EFD99868-BD82-4213-9586-11755332A60D" />
         <text>(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100326134545" />
@@ -6533,58 +6495,15 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100209122106"/>
-        </effectiveTime>
-        <availabilityTime value="20100209122106"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3D1CF6C4-8BF0-4698-BB02-F0864EBDC8AB" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100209122106"/>
+            <center value="20100326134545"/>
         </effectiveTime>
-        <availabilityTime value="20100209122106"/>
+        <availabilityTime value="20100326134545"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
+            <time value="20100326134545" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -6604,22 +6523,22 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="69B9FED1-59E4-4892-BB53-F4FE54715057" />
+        <text>(EMISTest) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100326134545" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="134493CA-754D-4DDA-A520-20643C17BAF5" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6647,7 +6566,93 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53" />
+        <text>(EMISTest) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100209122106" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100209122106"/>
+        </effectiveTime>
+        <availabilityTime value="20100209122106"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100209122106" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3D1CF6C4-8BF0-4698-BB02-F0864EBDC8AB" />
+        <text>(EMISTest) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100209122106" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="79926A25-009B-4D91-BD45-36A87F772FE3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100209122106"/>
+        </effectiveTime>
+        <availabilityTime value="20100209122106"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100209122106" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124" />
         <text>(EMISTest) - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100209122106" />
@@ -6662,7 +6667,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="DE904918-5B6F-405B-9731-F9C528C98F2C" />
+        <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6690,7 +6695,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="79926A25-009B-4D91-BD45-36A87F772FE3" />
+        <id root="DE904918-5B6F-405B-9731-F9C528C98F2C" />
         <text>(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100209122106" />
@@ -6705,7 +6710,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5" />
+        <id root="EB2F83E0-52B3-424F-9C56-99AAEC53E9D3" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6733,7 +6738,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394" />
+        <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5" />
         <text>(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100201093313" />
@@ -6748,78 +6753,35 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2807E027-911E-4CB5-857B-9196714CF6C4" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100201093313"/>
-        </effectiveTime>
-        <availabilityTime value="20100201093313"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100201093313" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="EB2F83E0-52B3-424F-9C56-99AAEC53E9D3" />
-        <text>(EMISTest) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100201093313" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100201093313"/>
-        </effectiveTime>
-        <availabilityTime value="20100201093313"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100201093313" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100201093313"/>
+        </effectiveTime>
+        <availabilityTime value="20100201093313"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100201093313" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2807E027-911E-4CB5-857B-9196714CF6C4" />
         <text>(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20100201093313" />
@@ -6834,77 +6796,17 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="855869E7-17B8-42BE-84FE-E3EB14492478" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20030221115000" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9546D5D9-6DB6-47F5-93EE-D7B2F9E63936" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FT1</originalText>
-</code>
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20030109"/>
+            <center value="20100201093313"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>           Oral dose: 75g anhydrous glucose given as
-                     113ml Polycal liquid
-          Plasma Glucose           Urine Results
- Time        (mmol/l)         Ketones         Glucose</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20100201093313"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20030221115000" />
+            <time value="20100201093313" />
             <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6917,44 +6819,27 @@ rheumatoid factor tests.</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B" />
+        <text>(EMISTest) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20100201093313" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="2C320962-D06D-4852-92BC-E474887B0434" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FT2</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text> Fasting       4.3            negative        negative
- 2 hours       7.6            negative        negative
- NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
- IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="438199E9-C87F-406F-AEB8-E4E330A4D1AD" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6982,39 +6867,39 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="855869E7-17B8-42BE-84FE-E3EB14492478" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FT1</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>           Oral dose: 75g anhydrous glucose given as
+                     113ml Polycal liquid
+          Plasma Glucose           Urine Results
+ Time        (mmol/l)         Ketones         Glucose</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="C86076C5-C69D-45EB-BEC4-1F1B310E80FC" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FTX3</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>     GLYCAEMIA
- IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
-     TOLERANCE
- *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ECF49E18-DB40-4001-954B-2666006B598B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7042,38 +6927,39 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FT2</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text> Fasting       4.3            negative        negative
+ 2 hours       7.6            negative        negative
+ NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
+ IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="D3041FE6-2820-4938-8024-1FC80F2A694F" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FTX4</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>                                      2 hr 11.1 or above
- *(must also have symptoms - polyuria, polydipsia,
-   unexplained weight loss)</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C0D0904E-CBCF-42E6-A9C8-5ED28DECBD46" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7101,39 +6987,39 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="438199E9-C87F-406F-AEB8-E4E330A4D1AD" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FTX3</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>     GLYCAEMIA
+ IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
+     TOLERANCE
+ *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FT1</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>           Oral dose: 75g anhydrous glucose given as
-                     113ml Polycal liquid
-          Plasma Glucose           Urine Results
- Time        (mmol/l)         Ketones         Glucose</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7161,39 +7047,38 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="ECF49E18-DB40-4001-954B-2666006B598B" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FTX4</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>                                      2 hr 11.1 or above
+ *(must also have symptoms - polyuria, polydipsia,
+   unexplained weight loss)</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FT2</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text> Fasting       4.3            negative        negative
- 2 hours       7.6            negative        negative
- NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
- IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7221,126 +7106,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E24CCAB7-FF1A-4F00-B125-D383D2BA80A1" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FTX3</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>     GLYCAEMIA
- IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
-     TOLERANCE
- *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20030221115000" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>FTX4</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>                                      2 hr 11.1 or above
- *(must also have symptoms - polyuria, polydipsia,
-   unexplained weight loss)</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20030109"/>
-        </effectiveTime>
-        <availabilityTime value="20030221115000"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20030221115000" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
+        <id root="C0D0904E-CBCF-42E6-A9C8-5ED28DECBD46" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -7372,7 +7138,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C" />
+        <id root="E24CCAB7-FF1A-4F00-B125-D383D2BA80A1" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7400,7 +7166,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
+        <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -7432,7 +7198,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
+        <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7460,7 +7226,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
+        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -7492,7 +7258,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8" />
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7520,7 +7286,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -7551,7 +7317,246 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
+        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20030221115000" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FT1</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>           Oral dose: 75g anhydrous glucose given as
+                     113ml Polycal liquid
+          Plasma Glucose           Urine Results
+ Time        (mmol/l)         Ketones         Glucose</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20030221115000" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FT2</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text> Fasting       4.3            negative        negative
+ 2 hours       7.6            negative        negative
+ NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
+ IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20030221115000" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FTX3</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>     GLYCAEMIA
+ IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
+     TOLERANCE
+ *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20030221115000" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>FTX4</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20030109"/>
+        </effectiveTime>
+        <availabilityTime value="20030221115000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>                                      2 hr 11.1 or above
+ *(must also have symptoms - polyuria, polydipsia,
+   unexplained weight loss)</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7579,7 +7584,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D" />
+        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7607,7 +7612,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
+        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7635,7 +7640,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A" />
+        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Serum potassium</originalText>
 </code>
@@ -7664,7 +7669,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
+        <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7692,7 +7697,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
+        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7720,7 +7725,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
+        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7748,7 +7753,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18" />
+        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7776,7 +7781,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14" />
+        <id root="4F02ED83-3153-4786-96C2-200FE456A1E4" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7804,7 +7809,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
+        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Serum triglycerides</originalText>
 </code>
@@ -7833,7 +7838,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3" />
+        <id root="619D08A7-F6DA-449B-8609-FF129D688943" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7861,7 +7866,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4F02ED83-3153-4786-96C2-200FE456A1E4" />
+        <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3" />
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7889,7 +7894,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7917,7 +7922,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="619D08A7-F6DA-449B-8609-FF129D688943" />
+        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
         <code code="1022191000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum low density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7946,7 +7951,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA" />
+        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7974,7 +7979,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD" />
+        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA" />
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE" />
@@ -8002,7 +8007,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="70EACDF9-9F82-4111-BD75-F0263D662431" />
+        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8030,7 +8035,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE" />
+        <id root="70EACDF9-9F82-4111-BD75-F0263D662431" />
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8058,7 +8063,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="136A1423-A6AC-448C-921C-8991ADF93C92" />
+        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8086,7 +8091,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43" />
+        <id root="136A1423-A6AC-448C-921C-8991ADF93C92" />
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8114,7 +8119,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
+        <id root="03245FA5-238F-4857-878F-975411328E56" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8142,7 +8147,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9" />
+        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE" />
@@ -8170,7 +8175,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
+        <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8198,7 +8203,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="03245FA5-238F-4857-878F-975411328E56" />
+        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8226,7 +8231,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
+        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8254,7 +8259,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316" />
+        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
     <originalText>Packed cell volume</originalText>
 </code>
@@ -8283,7 +8288,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
+        <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8311,7 +8316,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5" />
+        <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE" />
@@ -8339,7 +8344,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
+        <id root="6B7B5C05-E36B-45EA-BE2B-C99A9A04FD1E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8367,7 +8372,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
+        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Neutrophil count</originalText>
 </code>
@@ -8396,7 +8401,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
+        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8424,7 +8429,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6B7B5C05-E36B-45EA-BE2B-C99A9A04FD1E" />
+        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8452,7 +8457,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
+        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8480,7 +8485,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
+        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Monocyte count</originalText>
 </code>
@@ -8509,7 +8514,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8537,7 +8542,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
+        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8565,7 +8570,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
+        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8593,7 +8598,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
+        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE" />
@@ -8621,7 +8626,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8649,7 +8654,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
+        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
         <code code="1000811000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
 </code>
         <statusCode code="COMPLETE" />
@@ -8677,7 +8682,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02" />
+        <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8705,7 +8710,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
+        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02" />
         <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE" />
@@ -8733,7 +8738,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A" />
+        <id root="1B1B2854-A658-4764-875B-49CBD3C516EB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8761,7 +8766,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C" />
+        <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A" />
         <code code="1000691000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -8789,7 +8794,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB" />
+        <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8817,7 +8822,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1B1B2854-A658-4764-875B-49CBD3C516EB" />
+        <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB" />
         <code code="935051000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum adjusted calcium concentration">
     <originalText>Corrected serum calcium level</originalText>
 </code>
@@ -8846,7 +8851,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E" />
+        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8874,7 +8879,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
+        <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E" />
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
 </code>
         <statusCode code="COMPLETE" />
@@ -8902,7 +8907,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
+        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8930,7 +8935,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
+        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
         <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE" />
@@ -8958,7 +8963,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052" />
+        <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8986,7 +8991,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0" />
+        <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052" />
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9014,7 +9019,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="86E89638-765F-422C-9B96-A091F617FBB0" />
+        <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9042,7 +9047,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C" />
+        <id root="86E89638-765F-422C-9B96-A091F617FBB0" />
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9070,7 +9075,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51" />
+        <id root="FE739904-2AAB-4B3F-9718-84BE019FD483" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9098,7 +9103,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
+        <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51" />
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9127,7 +9132,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F" />
+        <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9155,7 +9160,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FE739904-2AAB-4B3F-9718-84BE019FD483" />
+        <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F" />
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9183,7 +9188,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB" />
+        <id root="0BB37C2A-AA19-4091-890D-6E0A3D16BDE0" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9211,7 +9216,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E" />
+        <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB" />
         <code code="1013041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9239,7 +9244,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C" />
+        <id root="0D07B623-3926-4245-80AF-97F1098D90C1" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9267,7 +9272,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0BB37C2A-AA19-4091-890D-6E0A3D16BDE0" />
+        <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C" />
         <code code="1013361000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma albumin level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9295,7 +9300,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F" />
+        <id root="F42057DE-87B1-4FB2-97DD-16EE1B61FD58" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9323,7 +9328,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0D07B623-3926-4245-80AF-97F1098D90C1" />
+        <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F" />
         <code code="1005651000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total protein">
 </code>
         <statusCode code="COMPLETE" />
@@ -9351,7 +9356,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317" />
+        <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9379,7 +9384,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F42057DE-87B1-4FB2-97DD-16EE1B61FD58" />
+        <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317" />
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9407,7 +9412,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="42ED63A5-B678-4C66-A6C8-D6A6E88C652B" />
+        <id root="176ECCF6-93C9-426E-9C10-640DC3C1E86A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9435,7 +9440,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1" />
+        <id root="42ED63A5-B678-4C66-A6C8-D6A6E88C652B" />
         <code code="997561000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total bilirubin level">
 </code>
         <statusCode code="COMPLETE" />
@@ -9463,7 +9468,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C09FA44E-2285-4917-8C72-25031091D0F7" />
+        <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9491,7 +9496,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="176ECCF6-93C9-426E-9C10-640DC3C1E86A" />
+        <id root="C09FA44E-2285-4917-8C72-25031091D0F7" />
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE" />
@@ -9519,7 +9524,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="115A833F-1A95-493B-8F00-757773EE9571" />
+        <id root="36856199-326A-443D-A97B-F744C6A09D10" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9547,7 +9552,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE" />
+        <id root="115A833F-1A95-493B-8F00-757773EE9571" />
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE" />
@@ -9575,7 +9580,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C" />
+        <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9603,7 +9608,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="36856199-326A-443D-A97B-F744C6A09D10" />
+        <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C" />
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE" />
@@ -9631,7 +9636,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F" />
+        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9659,7 +9664,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24" />
+        <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F" />
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE" />
@@ -9687,7 +9692,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="28C6781D-98B6-4182-8A5B-907CF616D0AF" />
+        <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9715,7 +9720,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB" />
+        <id root="28C6781D-98B6-4182-8A5B-907CF616D0AF" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Packed cell volume</originalText>
 </code>
@@ -9744,7 +9749,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE" />
+        <id root="E5C085B1-363D-49BB-86E7-8283D4D0DD56" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9772,7 +9777,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681" />
+        <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE" />
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE" />
@@ -9800,7 +9805,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
+        <id root="451B0A75-8B34-4580-81E6-717831D3C236" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9828,7 +9833,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E5C085B1-363D-49BB-86E7-8283D4D0DD56" />
+        <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE" />
@@ -9856,7 +9861,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="06B60CD3-465D-4AEA-A0A8-4A69EA7744CE" />
+        <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9884,7 +9889,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="451B0A75-8B34-4580-81E6-717831D3C236" />
+        <id root="06B60CD3-465D-4AEA-A0A8-4A69EA7744CE" />
         <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE" />
@@ -9912,7 +9917,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7" />
+        <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9940,7 +9945,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC" />
+        <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7" />
         <code code="993501000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell distribution width">
 </code>
         <statusCode code="COMPLETE" />
@@ -9968,7 +9973,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709" />
+        <id root="ED202B1D-FD90-4477-95D1-539374CA06ED" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9996,7 +10001,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7" />
+        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Neutrophil count</originalText>
 </code>
@@ -10025,7 +10030,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605" />
+        <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10053,7 +10058,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="ED202B1D-FD90-4477-95D1-539374CA06ED" />
+        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605" />
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE" />
@@ -10081,7 +10086,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ED51A3DF-3870-4669-9FDB-7FEF5BE77E3B" />
+        <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10109,7 +10114,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
+        <id root="ED51A3DF-3870-4669-9FDB-7FEF5BE77E3B" />
         <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE" />
@@ -10137,7 +10142,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="53847A06-6B81-4A50-BF84-C5588990485A" />
+        <id root="07378FF7-547B-4A4E-9C58-3553095BA37E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10165,7 +10170,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A" />
+        <id root="53847A06-6B81-4A50-BF84-C5588990485A" />
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE" />
@@ -10193,7 +10198,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9A11E815-9320-4952-96BA-CC83BECF62A3" />
+        <id root="92601097-8AE8-45DA-8D17-927B4727866C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10221,7 +10226,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="07378FF7-547B-4A4E-9C58-3553095BA37E" />
+        <id root="9A11E815-9320-4952-96BA-CC83BECF62A3" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Basophil count</originalText>
 </code>
@@ -10256,7 +10261,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E" />
+        <id root="FB313646-3FC3-49D0-8277-D11CEA14641D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10284,7 +10289,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="92601097-8AE8-45DA-8D17-927B4727866C" />
+        <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E" />
         <code code="1022461000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nucleated red blood cell count">
 </code>
         <statusCode code="COMPLETE" />
@@ -10312,7 +10317,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="92726062-D62B-4736-92D1-CF3F1D83832B" />
+        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10340,7 +10345,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FB313646-3FC3-49D0-8277-D11CEA14641D" />
+        <id root="92726062-D62B-4736-92D1-CF3F1D83832B" />
         <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
 </code>
         <statusCode code="COMPLETE" />
@@ -10368,7 +10373,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E0762612-0920-4AB0-9CFC-185F79641C10" />
+        <id root="4264DD9C-01B2-4F68-A222-E3B48540496D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10396,7 +10401,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C" />
+        <id root="E0762612-0920-4AB0-9CFC-185F79641C10" />
         <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE" />
@@ -10424,7 +10429,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FB01369F-2A94-4D0B-AC2F-843879B69915" />
+        <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10452,7 +10457,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4264DD9C-01B2-4F68-A222-E3B48540496D" />
+        <id root="FB01369F-2A94-4D0B-AC2F-843879B69915" />
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10480,7 +10485,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="26E8B010-9ACB-4EB5-BEAC-C34C9D2A51CE" />
+        <id root="BA675192-24E0-4698-8736-00DD928283CB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10508,7 +10513,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B" />
+        <id root="26E8B010-9ACB-4EB5-BEAC-C34C9D2A51CE" />
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10536,7 +10541,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3AC188FA-B46E-465B-9614-37F234BEB494" />
+        <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10564,7 +10569,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BA675192-24E0-4698-8736-00DD928283CB" />
+        <id root="3AC188FA-B46E-465B-9614-37F234BEB494" />
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10592,7 +10597,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9C3E35CC-3181-4873-AC6E-50E7C035112A" />
+        <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10620,7 +10625,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC" />
+        <id root="9C3E35CC-3181-4873-AC6E-50E7C035112A" />
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10648,7 +10653,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967" />
+        <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10676,7 +10681,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16" />
+        <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967" />
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10704,7 +10709,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD" />
+        <id root="B2342509-6683-4342-8BD1-BB759AAC9BB9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10732,7 +10737,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C" />
+        <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD" />
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -10766,7 +10771,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2B4D282E-E237-4290-A6B7-640192183C20" />
+        <id root="EA84B0F8-FDA4-4F76-92E3-AA06A8CE5026" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -10794,7 +10799,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B2342509-6683-4342-8BD1-BB759AAC9BB9" />
+        <id root="2B4D282E-E237-4290-A6B7-640192183C20" />
         <code code="1028551000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total cholesterol:HDL (high density lipoprotein) ratio">
 </code>
         <statusCode code="COMPLETE" />
