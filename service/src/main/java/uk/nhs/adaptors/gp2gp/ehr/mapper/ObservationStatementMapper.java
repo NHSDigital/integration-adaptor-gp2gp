@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
@@ -75,14 +76,38 @@ public class ObservationStatementMapper {
             observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .ifPresent(coding ->
-                    observationStatementTemplateParametersBuilder.interpretation(
-                        structuredObservationValueMapper.mapInterpretation(coding))
-            );
+                .ifPresent(coding -> observationStatementTemplateParametersBuilder.interpretation(
+                    structuredObservationValueMapper.mapInterpretation(coding)
+                ));
         }
 
         if (observation.hasPerformer()) {
-            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+            Optional<Reference> practitionerReference = observation.getPerformer().stream()
+                .filter(Reference::hasReferenceElement)
+                .filter(reference -> ResourceType.Practitioner.name().equals(reference.getReferenceElement().getResourceType()))
+                .findFirst();
+
+            Optional<Reference> organizationReference = observation.getPerformer().stream()
+                .filter(Reference::hasReferenceElement)
+                .filter(reference -> ResourceType.Organization.name().equals(reference.getReferenceElement().getResourceType()))
+                .findFirst();
+
+            String participantReference;
+            if (practitionerReference.isPresent() && organizationReference.isPresent()) {
+                participantReference = messageContext.getAgentDirectory().getAgentRef(
+                    practitionerReference.get(),
+                    organizationReference.get()
+                );
+            } else if (practitionerReference.isPresent()) {
+                participantReference = messageContext.getAgentDirectory().getAgentId(
+                    practitionerReference.get()
+                );
+            } else {
+                throw new EhrMapperException(
+                    "Invalid performer reference in observation resource with id: " + observation.getIdElement().getIdPart()
+                );
+            }
+
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             observationStatementTemplateParametersBuilder.participant(participantBlock);

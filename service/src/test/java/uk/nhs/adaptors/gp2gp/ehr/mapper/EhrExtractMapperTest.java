@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -92,8 +91,6 @@ public class EhrExtractMapperTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -129,11 +126,8 @@ public class EhrExtractMapperTest {
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
-            new PractitionerAgentPersonMapper(
-                messageContext,
-                new OrganizationToAgentMapper(messageContext)
-            ),
-            organizationToAgentMapper
+            messageContext,
+            new AgentPersonMapper(messageContext)
         );
 
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,

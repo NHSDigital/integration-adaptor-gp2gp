@@ -64,7 +64,7 @@ public class EncounterMapper {
             .originalText(buildOriginalText(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(idMapper::get)
+            .map(ref -> messageContext.getAgentDirectory().getAgentId(ref))
             .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
         encounterStatementTemplateParameters.author(recReference);
 
@@ -76,8 +76,7 @@ public class EncounterMapper {
             .ifPresent(encounterStatementTemplateParameters::authorTime);
 
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
-            .filter(idMapper::hasIdBeenMapped)
-            .map(idMapper::get);
+            .map(messageContext.getAgentDirectory()::getAgentId);
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 

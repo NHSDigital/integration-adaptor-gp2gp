@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -135,9 +136,8 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, "1"));
-        messageContext.getIdMapper().getOrNew(ResourceType.Organization, buildIdType(ResourceType.Organization, "2"));
-        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, buildIdType(ResourceType.PractitionerRole, "3"));
+        messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Practitioner, "1")));
+        messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Organization, "2")));
         medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
             new ParticipantMapper(), mockRandomIdGeneratorService);
     }

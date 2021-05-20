@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -98,10 +99,6 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-32.json";
     private static final String INPUT_JSON_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
         + "example-observation-resource-33.json";
-    private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_ID = TEST_FILE_DIRECTORY
-        + "example-observation-resource-34.json";
-    private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-35.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -154,8 +151,6 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-25.xml";
     private static final String OUTPUT_XML_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-26.xml";
-    private static final String OUTPUT_XML_USES_AGENT_WITHOUT_ID = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-27.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -172,6 +167,7 @@ public class ObservationStatementMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(new Bundle());
         observationStatementMapper = new ObservationStatementMapper(messageContext,
             new StructuredObservationValueMapper(),
             new PertinentInformationObservationValueMapper(),
@@ -187,7 +183,7 @@ public class ObservationStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_ObservationStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, "something"));
+        messageContext.getAgentDirectory().getAgentId(buildReference(ResourceType.Practitioner, "something"));
 
         expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
@@ -261,10 +257,7 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION),
             Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
             Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
-            // TODO, following two are workaround scenarios until NIAD-1340 is done
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_ID, OUTPUT_XML_WITH_PARTICIPANT),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE, OUTPUT_XML_USES_AGENT_WITHOUT_ID)
-            );
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT)
+        );
     }
 }

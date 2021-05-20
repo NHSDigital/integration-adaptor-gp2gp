@@ -2,10 +2,10 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,40 +17,57 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
-public class PractitionerAgentPersonMapper {
+public class AgentPersonMapper {
 
     private static final Mustache AGENT_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_agent_person_template.mustache");
     private static final String UNKNOWN = "Unknown";
     private final MessageContext messageContext;
-    private final OrganizationToAgentMapper organizationToAgentMapper;
 
-    public String mapPractitionerToAgentPerson(Practitioner practitioner, Optional<PractitionerRole> practitionerRole,
-        Optional<Organization> organization) {
+    public String mapAgentPerson(AgentDirectory.AgentKey agentKey, String agentDirectoryId) {
         var builder = PractitionerAgentPersonMapperParameters.builder()
-            .practitionerId(messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, practitioner.getIdElement()));
+            .practitionerId(agentDirectoryId);
 
-        buildPractitionerPrefix(practitioner).ifPresent(builder::practitionerPrefix);
-        var practitionerGiven = buildPractitionerGivenName(practitioner);
-        var practitionerFamily = buildPractitionerFamilyName(practitioner);
+        Optional<Practitioner> practitioner = messageContext.getInputBundleHolder()
+            .getResource(new IdType(agentKey.getPractitionerReference()))
+            .map(resource -> (Practitioner) resource);
 
-        practitionerGiven.ifPresent(builder::practitionerGivenName);
-        practitionerFamily.ifPresent(builder::practitionerFamilyName);
+        if (practitioner.isPresent()) {
+            buildPractitionerPrefix(practitioner.get()).ifPresent(builder::practitionerPrefix);
 
-        if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
-            builder.practitionerFamilyName(UNKNOWN);
+            var practitionerGiven = buildPractitionerGivenName(practitioner.get());
+            var practitionerFamily = buildPractitionerFamilyName(practitioner.get());
+
+            practitionerGiven.ifPresent(builder::practitionerGivenName);
+            practitionerFamily.ifPresent(builder::practitionerFamilyName);
+
+            if (practitionerGiven.isEmpty() && practitionerFamily.isEmpty()) {
+                builder.practitionerFamilyName(UNKNOWN);
+            }
         }
 
-        practitionerRole.flatMap(this::buildPractitionerRole).ifPresent(builder::practitionerRole);
-        organization.map(organizationToAgentMapper::mapOrganizationToAgentInner).ifPresent(builder::organization);
+        buildPractitionerRole(agentKey).ifPresent(builder::practitionerRole);
+
+        messageContext.getInputBundleHolder()
+            .getResource(new IdType(agentKey.getOrganizationReference()))
+            .map(resource -> (Organization) resource)
+            .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
+            .ifPresent(builder::organization);
 
         return TemplateUtils.fillTemplate(AGENT_STATEMENT_TEMPLATE, builder.build());
     }
 
-    private Optional<String> buildPractitionerRole(PractitionerRole practitionerRole) {
-        if (hasPractitionerRoleDisplay(practitionerRole)) {
-            return Optional.of(practitionerRole.getCodeFirstRep().getCodingFirstRep().getDisplay());
+    private Optional<String> buildPractitionerRole(AgentDirectory.AgentKey agentKey) {
+        Optional<PractitionerRole> practitionerRole = messageContext.getInputBundleHolder()
+            .getPractitionerRoleFor(
+                agentKey.getPractitionerReference(),
+                agentKey.getOrganizationReference()
+            );
+
+        if (practitionerRole.isPresent() && hasPractitionerRoleDisplay(practitionerRole.get())) {
+            return Optional.of(practitionerRole.get().getCodeFirstRep().getCodingFirstRep().getDisplay());
         }
+
         return Optional.empty();
     }
 

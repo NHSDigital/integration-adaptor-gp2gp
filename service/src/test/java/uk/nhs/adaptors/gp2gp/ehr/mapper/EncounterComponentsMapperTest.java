@@ -6,6 +6,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -64,8 +65,6 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
@@ -136,6 +135,7 @@ public class EncounterComponentsMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
+        setUpMock();
 
         var encounter = extractEncounter(bundle);
 
@@ -149,6 +149,7 @@ public class EncounterComponentsMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
+        setUpMock();
 
         var encounter = extractEncounter(bundle);
 
@@ -162,6 +163,7 @@ public class EncounterComponentsMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
+        setUpMock();
 
         var encounter = extractEncounter(bundle);
 
@@ -175,6 +177,7 @@ public class EncounterComponentsMapperTest {
         String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
         Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
         messageContext.initialize(bundle);
+        setUpMock();
 
         var encounter = extractEncounter(bundle);
 
@@ -200,5 +203,11 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
             Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
         );
+    }
+
+    private void setUpMock() {
+        IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
+        messageContext.getAgentDirectory().getAgentId(new Reference(conditionId));
     }
 }

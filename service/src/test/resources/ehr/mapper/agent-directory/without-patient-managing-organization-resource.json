@@ -1,0 +1,52 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "88F14BF6-CADE-47D6-90E2-B10519BF956F",
+                "meta": {
+                    "versionId": "5852021019724084706",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "9465701459"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Nel",
+                        "given": [
+                            "Morris",
+                            "Chad"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1999-02-25",
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        }
+    ]
+}

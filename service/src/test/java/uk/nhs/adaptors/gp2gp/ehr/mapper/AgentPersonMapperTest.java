@@ -4,12 +4,13 @@ import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
-import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class PractitionerAgentPersonMapperTest {
+public class AgentPersonMapperTest {
 
     private static final String TEST_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
     private static final String PRACTITIONER_FILE_LOCATION = "/ehr/mapper/practitioner/";
@@ -39,7 +40,7 @@ public class PractitionerAgentPersonMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
-    private PractitionerAgentPersonMapper practitionerAgentPersonMapper;
+    private AgentPersonMapper agentPersonMapper;
     private MessageContext messageContext;
     private FhirParseService fhirParseService;
 
@@ -47,8 +48,7 @@ public class PractitionerAgentPersonMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
-        OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);
-        practitionerAgentPersonMapper = new PractitionerAgentPersonMapper(messageContext, organizationToAgentMapper);
+        agentPersonMapper = new AgentPersonMapper(messageContext);
         fhirParseService = new FhirParseService();
     }
 
@@ -60,12 +60,9 @@ public class PractitionerAgentPersonMapperTest {
         var jsonInputPractitionerRole = ResourceTestFileUtils.getFileContent(practitionerRoleJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
 
-        Practitioner practitioner = getPractitionerResource();
-        PractitionerRole practitionerRole = fhirParseService.parseResource(jsonInputPractitionerRole, PractitionerRole.class);
-        Organization organization = getOrganizationResource();
+        AgentDirectory.AgentKey agentKey = setUpDataWithOrganizationAndPractitionerRole(jsonInputPractitionerRole);
 
-        var outputMessage = practitionerAgentPersonMapper
-            .mapPractitionerToAgentPerson(practitioner, Optional.of(practitionerRole), Optional.of(organization));
+        var outputMessage = agentPersonMapper.mapAgentPerson(agentKey, TEST_ID);
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, practitionerRoleJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
@@ -78,9 +75,11 @@ public class PractitionerAgentPersonMapperTest {
         var jsonInputPractitioner = ResourceTestFileUtils.getFileContent(inputJson);
         var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
 
-        Practitioner practitioner = fhirParseService.parseResource(jsonInputPractitioner, Practitioner.class);
-        var outputMessage = practitionerAgentPersonMapper
-            .mapPractitionerToAgentPerson(practitioner, Optional.empty(), Optional.empty());
+        AgentDirectory.AgentKey agentKey = setUpDataWithPractitionerOnly(jsonInputPractitioner);
+
+        var outputMessage = agentPersonMapper
+            .mapAgentPerson(agentKey, TEST_ID);
+
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
@@ -88,6 +87,35 @@ public class PractitionerAgentPersonMapperTest {
 
     private static Stream<Arguments> readPractitionerOnlyTests() {
         return TestArgumentsLoaderUtil.readTestCases(PRACTITIONER_ONLY_FILE_LOCATION);
+    }
+
+    private AgentDirectory.AgentKey setUpDataWithOrganizationAndPractitionerRole(String jsonInputPractitionerRole) throws IOException {
+        Practitioner practitioner = getPractitionerResource();
+        PractitionerRole practitionerRole = fhirParseService.parseResource(jsonInputPractitionerRole, PractitionerRole.class);
+        Organization organization = getOrganizationResource();
+
+        Bundle bundle = new Bundle();
+        bundle.addEntry().setResource(practitioner);
+        bundle.addEntry().setResource(practitionerRole);
+        bundle.addEntry().setResource(organization);
+        messageContext.initialize(bundle);
+
+        return new AgentDirectory.AgentKey.AgentKeyBuilder()
+            .practitionerReference(ResourceType.Practitioner.name() + "/" + practitioner.getIdElement().getIdPart())
+            .organizationReference(ResourceType.Organization.name() + "/" + organization.getIdElement().getIdPart())
+            .build();
+    }
+
+    private AgentDirectory.AgentKey setUpDataWithPractitionerOnly(String jsonInputPractitioner) {
+        Practitioner practitioner = fhirParseService.parseResource(jsonInputPractitioner, Practitioner.class);
+
+        Bundle bundle = new Bundle();
+        bundle.addEntry().setResource(practitioner);
+        messageContext.initialize(bundle);
+
+        return new AgentDirectory.AgentKey.AgentKeyBuilder()
+            .practitionerReference(ResourceType.Practitioner.name() + "/" + practitioner.getIdElement().getIdPart())
+            .build();
     }
 
     private static Stream<Arguments> readPractitionerRoleTests() {

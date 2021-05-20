@@ -10,7 +10,7 @@
         <availabilityTime nullFlavor="UNK"/>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="II-for-Organization/1F90B10F-CF14-4D6F-8C0D-585059DA4EC5"/>
+        <id root="II-for-Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73-Organization/1F90B10F-CF14-4D6F-8C0D-585059DA4EC5"/>
     </agentRef>
 </Participant>
     </RequestStatement>

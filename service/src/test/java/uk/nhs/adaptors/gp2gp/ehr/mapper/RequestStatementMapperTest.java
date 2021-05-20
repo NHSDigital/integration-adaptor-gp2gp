@@ -124,6 +124,9 @@ public class RequestStatementMapperTest {
     private MessageContext messageContext;
     @Mock
     private IdMapper idMapper;
+    @Mock
+    private AgentDirectory agentDirectory;
+
     private InputBundle inputBundle;
 
     private RequestStatementMapper requestStatementMapper;
@@ -171,10 +174,13 @@ public class RequestStatementMapperTest {
         inputBundle = new InputBundle(bundle);
 
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(mockIdForReference());
         lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
+        lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockIdForAgentReference());
 
         requestStatementMapper = new RequestStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
@@ -191,6 +197,14 @@ public class RequestStatementMapperTest {
         return invocation -> {
             Reference reference = invocation.getArgument(0);
             return String.format("II-for-%s", reference.getReference());
+        };
+    }
+
+    private Answer<String> mockIdForAgentReference() {
+        return invocation -> {
+            Reference practitionerReference = invocation.getArgument(0);
+            Reference organizationReference = invocation.getArgument(1);
+            return String.format("II-for-%s-%s", practitionerReference.getReference(), organizationReference.getReference());
         };
     }
 
