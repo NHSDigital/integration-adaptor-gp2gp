@@ -1,0 +1,34 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="some-id"/>
+        <code nullFlavor="UNK">
+    <originalText>test</originalText>
+</code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20190601113000"/>
+        </effectiveTime>
+        <availabilityTime value="20190601113000"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+            CommentDate:20190601113000
+
+            Test comment</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20190601113000"/>
+    </NarrativeStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:COMPLEX REFERENCE RANGE(E330)
+            CommentDate:20190601113000
+
+            Range Units: test-unit</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20190601113000"/>
+    </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>

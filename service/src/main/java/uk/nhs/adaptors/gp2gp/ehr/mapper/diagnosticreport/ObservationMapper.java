@@ -9,12 +9,14 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Quantity;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -33,7 +35,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
@@ -50,9 +51,12 @@ public class ObservationMapper {
         TemplateUtils.loadTemplate("observation_compound_statement_template.mustache");
 
     private static final String DATA_ABSENT_PREFIX = "Data Absent: ";
+    private static final String INTERPRETATION_PREFIX = "Interpretation: ";
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
+
+    private static final String COMMENT_NOTE_CODE = "37331000000100";
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -65,226 +69,285 @@ public class ObservationMapper {
     private final ParticipantMapper participantMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen, List<Observation> observations) {
-        List<Observation> derivedObservations = observations.stream()
-            .filter(observation -> observation.getRelated().stream()
-                .anyMatch(isDerivedFromObservation(observationAssociatedWithSpecimen)))
-            .collect(Collectors.toList());
-
-        final IdMapper idMapper = messageContext.getIdMapper();
-
-        var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
-        var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
-        var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
-        var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
-
-        var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
-            .compoundStatementId(compoundStatementId)
-            .codeElement(codeElement)
-            .effectiveTime(effectiveTime)
-            .availabilityTimeElement(availabilityTimeElement);
-
-        StringBuilder narrativeStatementsBlock = new StringBuilder();
-
-        narrativeStatementsBlock.append(
-            mapObservationToNarrativeStatement(idMapper, observationAssociatedWithSpecimen)
-        );
-
-        derivedObservations.stream()
-            .map(Observation.class::cast)
-            .map(observation -> mapObservationToNarrativeStatement(idMapper, observation))
-            .forEach(narrativeStatementsBlock::append);
-
-        var observationStatement = prepareObservationStatement(idMapper, observationAssociatedWithSpecimen);
-
-        observationCompoundStatementTemplateParameters
-            .observationStatement(observationStatement)
-            .narrativeStatements(narrativeStatementsBlock.toString());
-
-        return TemplateUtils.fillTemplate(
-            OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
-            observationCompoundStatementTemplateParameters.build()
-        );
+    public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
+        return new ObservationMapper.InnerMapper(observationAssociatedWithSpecimen).map();
     }
 
-    private Predicate<ObservationRelatedComponent> isDerivedFromObservation(Observation observationAssociatedWithSpecimen) {
-        return observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.DERIVEDFROM
-            && observationRelation.getTarget().getReference().equals(observationAssociatedWithSpecimen.getId());
-    }
+    @RequiredArgsConstructor
+    private class InnerMapper {
+        private final Observation observationAssociatedWithSpecimen;
 
-    private String mapObservationToNarrativeStatement(IdMapper idMapper, Observation observation) {
-        StringBuilder narrativeStatementsBlock = new StringBuilder();
+        private IdMapper idMapper;
 
-        if (observation.hasComment()) {
-            CommentType commentType = prepareCommentType(observation);
+        public String map() {
+            idMapper = messageContext.getIdMapper();
 
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, observation.getComment(), commentType.getCode(), idMapper)
+            var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
+            var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
+
+            List<Observation> derivedObservations = observationAssociatedWithSpecimen.getRelated().stream()
+                .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
+                .map(ObservationRelatedComponent::getTarget)
+                .map(Reference::getReferenceElement)
+                .map(referenceElement -> messageContext.getInputBundleHolder().getResource(referenceElement))
+                .flatMap(Optional::stream)
+                .map(Observation.class::cast)
+                .collect(Collectors.toList());
+
+            var classCode = prepareClassCode(derivedObservations);
+            var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
+            var availabilityTimeElement =
+                StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
+            var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
+            var statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
+
+            var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
+                .classCode(classCode.getCode())
+                .compoundStatementId(compoundStatementId)
+                .codeElement(codeElement)
+                .effectiveTime(effectiveTime)
+                .availabilityTimeElement(availabilityTimeElement)
+                .narrativeStatements(narrativeStatements)
+                .statementsForDerivedObservations(statementsForDerivedObservations);
+
+            prepareInterpretation(observationAssociatedWithSpecimen)
+                .ifPresent(observationCompoundStatementTemplateParameters::interpretation);
+            prepareParticipant(observationAssociatedWithSpecimen)
+                .ifPresent(observationCompoundStatementTemplateParameters::participant);
+
+            return TemplateUtils.fillTemplate(
+                OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
+                observationCompoundStatementTemplateParameters.build()
             );
         }
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason()).ifPresent(dataAbsentReason -> {
-            String comment = DATA_ABSENT_PREFIX + dataAbsentReason;
+        private String prepareObservationStatement(Observation observation) {
+            if (observationHasNonCommentNoteCode(observation)) {
+                return mapObservationToObservationStatement(observation);
+            }
 
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
+            return StringUtils.EMPTY;
+        }
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).ifPresent(interpretation ->
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            )
-        );
+        private String mapObservationToObservationStatement(Observation observation) {
+            var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
+                .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
+                .codeElement(prepareCodeElement(observation))
+                .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite()).ifPresent(bodySite -> {
-            String comment = BODY_SITE_PREFIX + bodySite;
+            if (observation.hasValue()) {
+                Type value = observation.getValue();
 
-            narrativeStatementsBlock.append(
-                prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
-
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod()).ifPresent(method -> {
-            String comment = METHOD_PREFIX + method;
-
-            narrativeStatementsBlock.append(
-                    prepareNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode(), idMapper)
-            );
-        });
-
-        if (observation.hasReferenceRange()) {
-            Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
-
-            if (observation.hasValueQuantity()) {
-                Optional<String> referenceRangeUnit = extractUnit(referenceRange);
-
-                if (referenceRangeUnit.isPresent() && isRangeUnitValid(referenceRangeUnit.get(), observation.getValueQuantity())) {
-                    String comment = RANGE_UNITS_PREFIX + referenceRangeUnit.get();
-
-                    narrativeStatementsBlock.append(
-                        prepareNarrativeStatement(observation, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode(), idMapper)
+                if (UNHANDLED_TYPES.contains(value.getClass())) {
+                    LOGGER.info(
+                        "Observation value type {} not supported. Mapping for this field is skipped",
+                        observation.getValue().getClass()
+                    );
+                } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
+                    observationStatementTemplateParametersBuilder.value(
+                        structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
                     );
                 }
             }
+
+            if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
+                observationStatementTemplateParametersBuilder.referenceRange(
+                    structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
+            }
+
+            prepareInterpretation(observation).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
+            prepareParticipant(observation).ifPresent(observationStatementTemplateParametersBuilder::participant);
+
+            return TemplateUtils.fillTemplate(
+                OBSERVATION_STATEMENT_TEMPLATE,
+                observationStatementTemplateParametersBuilder.build()
+            );
         }
 
-        return narrativeStatementsBlock.toString();
-    }
+        private String prepareNarrativeStatements(Observation observation) {
+            StringBuilder narrativeStatementsBlock = new StringBuilder();
 
-    private String mapObservationToObservationStatement(IdMapper idMapper, Observation observation) {
-        var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-            .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
-            .codeElement(prepareCodeElement(observation))
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+            if (observation.hasComment()) {
+                CommentType commentType = prepareCommentType(observation);
 
-        if (observation.hasValue()) {
-            Type value = observation.getValue();
-
-            if (UNHANDLED_TYPES.contains(value.getClass())) {
-                LOGGER.info(
-                    "Observation value type {} not supported. Mapping for this field is skipped",
-                    observation.getValue().getClass()
-                );
-            } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
-                observationStatementTemplateParametersBuilder.value(
-                    structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
+                narrativeStatementsBlock.append(
+                    mapObservationToNarrativeStatement(observation, observation.getComment(), commentType.getCode())
                 );
             }
+
+            CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason())
+                .map(DATA_ABSENT_PREFIX::concat)
+                .map(comment ->
+                    mapObservationToNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                )
+                .ifPresent(narrativeStatementsBlock::append);
+
+            CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation())
+                .map(INTERPRETATION_PREFIX::concat)
+                .map(interpretation ->
+                    mapObservationToNarrativeStatement(
+                        observation, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode()
+                    )
+                )
+                .ifPresent(narrativeStatementsBlock::append);
+
+            CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
+                .map(BODY_SITE_PREFIX::concat)
+                .map(comment ->
+                    mapObservationToNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                )
+                .ifPresent(narrativeStatementsBlock::append);
+
+            CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod())
+                .map(METHOD_PREFIX::concat)
+                .map(comment ->
+                    mapObservationToNarrativeStatement(observation, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                )
+                .ifPresent(narrativeStatementsBlock::append);
+
+            if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
+                Observation.ObservationReferenceRangeComponent referenceRange = observation.getReferenceRangeFirstRep();
+
+                extractUnit(referenceRange)
+                    .filter(referenceRangeUnit -> isRangeUnitValid(referenceRangeUnit, observation.getValueQuantity()))
+                    .map(RANGE_UNITS_PREFIX::concat)
+                    .map(comment ->
+                        mapObservationToNarrativeStatement(observation, comment, CommentType.COMPLEX_REFERENCE_RANGE.getCode())
+                    )
+                    .ifPresent(narrativeStatementsBlock::append);
+            }
+
+            return narrativeStatementsBlock.toString();
         }
 
-        if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
-            observationStatementTemplateParametersBuilder.referenceRange(
-                structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
+        private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
+            var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
+                .narrativeStatementId(randomIdGeneratorService.createNewId())
+                .commentType(commentType)
+                .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
+                .comment(comment)
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+
+            prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
+
+            return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
         }
 
-        if (observation.hasInterpretation()) {
-            observation.getInterpretation().getCoding().stream()
-                .filter(this::isInterpretationCode)
+        private String prepareStatementsForDerivedObservations(List<Observation> derivedObservations) {
+            StringBuilder derivedObservationsBlock = new StringBuilder();
+
+            derivedObservations.forEach(derivedObservation -> {
+                var observationStatement = prepareObservationStatement(derivedObservation);
+                var narrativeStatements = prepareNarrativeStatements(derivedObservation);
+
+                if (!observationStatement.isBlank() && !narrativeStatements.isBlank()) {
+                    var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
+                    var codeElement = prepareCodeElement(derivedObservation);
+                    var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
+                    var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
+
+                    var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
+                        .classCode(CompoundStatementClassCode.CLUSTER.getCode())
+                        .compoundStatementId(compoundStatementId)
+                        .codeElement(codeElement)
+                        .effectiveTime(effectiveTime)
+                        .availabilityTimeElement(availabilityTimeElement)
+                        .observationStatement(observationStatement)
+                        .narrativeStatements(narrativeStatements);
+
+                    prepareInterpretation(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::interpretation);
+                    prepareParticipant(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::participant);
+
+                    derivedObservationsBlock.append(
+                        TemplateUtils.fillTemplate(
+                            OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
+                            observationCompoundStatementTemplateParameters.build()
+                        )
+                    );
+                } else {
+                    derivedObservationsBlock.append(observationStatement).append(narrativeStatements);
+                }
+            });
+
+            return derivedObservationsBlock.toString();
+        }
+
+        private boolean observationHasNonCommentNoteCode(Observation observation) {
+            return observation.hasCode() && !CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+        }
+
+        private String prepareCodeElement(Observation observation) {
+            if (observation.hasCode()) {
+                return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+            }
+
+            return StringUtils.EMPTY;
+        }
+
+        private CompoundStatementClassCode prepareClassCode(List<Observation> derivedObservations) {
+            return derivedObservations.stream()
+                .filter(this::observationHasNonCommentNoteCode)
+                .map($ -> CompoundStatementClassCode.BATTERY)
                 .findFirst()
-                .map(structuredObservationValueMapper::mapInterpretation)
-                .ifPresent(observationStatementTemplateParametersBuilder::interpretation);
+                .orElse(CompoundStatementClassCode.CLUSTER);
         }
 
-        if (observation.hasPerformer()) {
-            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
-            final String participantBlock = participantMapper
-                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
+        private CommentType prepareCommentType(Observation observation) {
+            if (observation.getComment().equals("EMPTY REPORT")) {
+                return CommentType.AGGREGATE_COMMENT_SET;
+            }
 
-            observationStatementTemplateParametersBuilder.participant(participantBlock);
+            if (observation.hasSpecimen()) {
+                return CommentType.LABORATORY_RESULT_COMMENT;
+            }
+
+            return CommentType.USER_COMMENT;
         }
 
-        return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_TEMPLATE,
-            observationStatementTemplateParametersBuilder.build());
-    }
+        private Optional<String> prepareInterpretation(Observation observation) {
+            if (observation.hasInterpretation()) {
+                return observation.getInterpretation().getCoding().stream()
+                    .filter(this::isInterpretationCode)
+                    .findFirst()
+                    .map(structuredObservationValueMapper::mapInterpretation);
+            }
 
-    private String prepareObservationStatement(IdMapper idMapper, Observation observation) {
-        if (observation.hasCode()) {
-            return mapObservationToObservationStatement(idMapper, observation);
+            return Optional.empty();
         }
 
-        return StringUtils.EMPTY;
-    }
+        private Optional<String> prepareParticipant(Observation observation) {
+            if (observation.hasPerformer()) {
+                final String participantReference = idMapper.get(observation.getPerformerFirstRep());
 
-    private String prepareCodeElement(Observation observation) {
-        if (observation.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(observation.getCode());
+                return Optional.ofNullable(
+                    participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER)
+                );
+            }
+
+            return Optional.empty();
         }
 
-        return StringUtils.EMPTY;
-    }
+        private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
+            if (referenceRange.hasHigh() && referenceRange.getHigh().hasUnit()) {
+                return Optional.of(referenceRange.getHigh().getUnit());
+            } else if (referenceRange.hasLow() && referenceRange.getLow().hasUnit()) {
+                return Optional.of(referenceRange.getLow().getUnit());
+            }
 
-    private CommentType prepareCommentType(Observation observation) {
-        if (observation.getComment().equals("EMPTY REPORT")) {
-            return CommentType.AGGREGATE_COMMENT_SET;
+            return Optional.empty();
         }
 
-        if (observation.hasSpecimen()) {
-            return CommentType.LABORATORY_RESULT_COMMENT;
+        private boolean isRangeUnitValid(String unit, Quantity quantity) {
+            return quantity.hasUnit() && !unit.equals(quantity.getUnit());
         }
 
-        return CommentType.USER_COMMENT;
-    }
+        private boolean isInterpretationCode(Coding coding) {
+            String codingSystem = coding.getSystem();
+            String code = coding.getCode();
 
-    private String prepareNarrativeStatement(Observation observation, String comment, String commentType, IdMapper idMapper) {
-        var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .commentType(commentType)
-            .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
-            .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
-
-        if (observation.hasPerformer()) {
-            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
-            final String participantBlock = participantMapper
-                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
-
-            narrativeStatementTemplateParameters.participant(participantBlock);
+            return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
+                && INTERPRETATION_CODES.contains(code);
         }
-
-        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
-    }
-
-    private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {
-        if (referenceRange.hasHigh() && referenceRange.getHigh().hasUnit()) {
-            return Optional.of(referenceRange.getHigh().getUnit());
-        } else if (referenceRange.hasLow() && referenceRange.getLow().hasUnit()) {
-            return Optional.of(referenceRange.getLow().getUnit());
-        }
-
-        return Optional.empty();
-    }
-
-    private boolean isRangeUnitValid(String unit, Quantity quantity) {
-        return quantity.hasUnit() && !unit.equals(quantity.getUnit());
-    }
-
-    private boolean isInterpretationCode(Coding coding) {
-        String codingSystem = coding.getSystem();
-        String code = coding.getCode();
-
-        return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
-            && INTERPRETATION_CODES.contains(code);
     }
 }

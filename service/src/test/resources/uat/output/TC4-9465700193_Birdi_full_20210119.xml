@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
+    <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
+        <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
@@ -169,7 +169,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -218,7 +218,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -267,7 +267,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -316,7 +316,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -365,7 +365,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -414,7 +414,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -463,7 +463,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -512,7 +512,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -561,7 +561,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -610,7 +610,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -659,7 +659,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -708,7 +708,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -757,7 +757,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -806,7 +806,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -855,7 +855,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -904,7 +904,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -953,7 +953,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1002,7 +1002,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1051,7 +1051,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1100,7 +1100,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1149,7 +1149,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1198,7 +1198,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1247,7 +1247,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1296,7 +1296,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1345,7 +1345,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1394,7 +1394,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1443,7 +1443,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1492,7 +1492,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1541,7 +1541,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1590,7 +1590,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1639,7 +1639,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1688,7 +1688,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1737,7 +1737,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
             </agentRef>
@@ -1784,7 +1784,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id nullFlavor="UNK"/>
             </agentRef>
@@ -1848,7 +1848,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
             </agentRef>
@@ -1884,7 +1884,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33" />
+        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1894,7 +1894,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201222131511" />
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK" />
+                <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1905,9 +1905,9 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id nullFlavor="UNK"/>
+                <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1920,6 +1920,11 @@
             <center value="20311220"/>
         </effectiveTime>
         <availabilityTime value="20201222131511"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
+    </agentRef>
+</Participant>
     </PlanStatement>
 </component>
     </ehrComposition>

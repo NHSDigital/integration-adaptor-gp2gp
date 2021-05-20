@@ -97,7 +97,7 @@ public class EhrExtractMapperTest {
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationMapper specimenObservationMapper = new ObservationMapper(
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper);
+        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -107,7 +107,7 @@ public class EhrExtractMapperTest {
                 codeableConceptCdMapper, new ParticipantMapper()),
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
+            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new DocumentReferenceToNarrativeStatementMapper(messageContext),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),

@@ -63,9 +63,12 @@ public class DiagnosticReportMapper {
 
         final IdMapper idMapper = messageContext.getIdMapper();
 
+        String reportLevelNarrativeStatements = prepareReportLevelNarrativeStatements(diagnosticReport);
+
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
-            .diagnosticReportIssuedDate(diagnosticReportIssuedDate)
+            .availabilityTime(diagnosticReportIssuedDate)
+            .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
 
         if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
@@ -73,36 +76,6 @@ public class DiagnosticReportMapper {
             final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
             diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
         }
-
-        StringBuilder reportLevelNarrativeStatements = new StringBuilder();
-
-        if (diagnosticReport.hasConclusion()) {
-            String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
-
-            String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
-            );
-
-            reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
-        }
-
-        String codedDiagnosisText = diagnosticReport.getCodedDiagnosis().stream()
-            .map(CodeableConceptMappingUtils::extractTextOrCoding)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.joining(", "));
-
-        if (!codedDiagnosisText.isEmpty()) {
-            String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
-
-            String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
-            );
-
-            reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
-        }
-
-        diagnosticReportCompoundStatementTemplateParameters.narrativeStatements(reportLevelNarrativeStatements.toString());
 
         return TemplateUtils.fillTemplate(
             DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE,
@@ -115,9 +88,10 @@ public class DiagnosticReportMapper {
             return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
         }
 
+        var inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getSpecimen()
             .stream()
-            .map(specimenReference -> messageContext.getInputBundleHolder().getResource(specimenReference.getReferenceElement()))
+            .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
             .collect(Collectors.toList());
@@ -157,6 +131,37 @@ public class DiagnosticReportMapper {
             .setSpecimen(new Reference().setReference("Specimen/Default-1"))
             .setIssuedElement(diagnosticReport.getIssuedElement())
             .setComment("EMPTY REPORT");
+    }
+
+    private String prepareReportLevelNarrativeStatements(DiagnosticReport diagnosticReport) {
+        StringBuilder reportLevelNarrativeStatements = new StringBuilder();
+
+        if (diagnosticReport.hasConclusion()) {
+            String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
+
+            String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, comment
+            );
+
+            reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
+        }
+
+        String codedDiagnosisText = diagnosticReport.getCodedDiagnosis().stream()
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .flatMap(Optional::stream)
+            .collect(Collectors.joining(", "));
+
+        if (!codedDiagnosisText.isEmpty()) {
+            String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
+
+            String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, comment
+            );
+
+            reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+
+        return reportLevelNarrativeStatements.toString();
     }
 
     private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String comment) {

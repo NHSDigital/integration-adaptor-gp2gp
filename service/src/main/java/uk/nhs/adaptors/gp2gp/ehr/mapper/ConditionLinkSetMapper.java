@@ -4,9 +4,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.Extension;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -14,17 +24,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParamet
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -47,7 +46,7 @@ public class ConditionLinkSetMapper {
     private static final String MINOR = "Minor";
     private static final String MINOR_CODE = "394847000";
     private static final String UNSPECIFIED_SIGNIFICANCE = "Unspecified significance";
-    private static final String LIST = "List";
+    private static final List<String> SUPPRESSED_LINKAGE_RESOURCES = List.of("List", "Encounter");
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -173,7 +172,7 @@ public class ConditionLinkSetMapper {
            .map(Extension::getValue)
            .map(value -> (Reference) value)
            .filter(this::filterOutNonExistentResource)
-           .filter(this::filterOutListResourceType)
+           .filter(this::filterOutSuppressedLinkageResources)
            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
            .collect(Collectors.toList());
     }
@@ -202,8 +201,8 @@ public class ConditionLinkSetMapper {
         return false;
     }
 
-    private boolean filterOutListResourceType(Reference reference) {
-        return !reference.getReferenceElement().getResourceType().equals(LIST);
+    private boolean filterOutSuppressedLinkageResources(Reference reference) {
+        return !SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {

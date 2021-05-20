@@ -84,6 +84,7 @@ public class MockMhsService {
     }
 
     private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException, MockMHSException {
+        LOGGER.debug("Received outbound MHS request payload:\n{}", requestBody);
         var payloadObject = objectMapper.readValue(requestBody, OutboundMessage.class);
         if (payloadObject.getPayload() == null) {
             throw new MockMHSException("Error content of request body does not match expected JSON");

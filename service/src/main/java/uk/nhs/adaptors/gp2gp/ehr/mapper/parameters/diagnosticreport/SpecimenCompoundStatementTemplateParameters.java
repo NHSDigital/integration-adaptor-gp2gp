@@ -9,11 +9,13 @@ import lombok.Setter;
 @Builder
 public class SpecimenCompoundStatementTemplateParameters {
     private String compoundStatementId;
-    private String diagnosticReportIssuedDate;
+    private String availabilityTime;
+    private String specimenRoleId;
     private String accessionIdentifier;
     private String effectiveTime;
-    private String type;
-    private String observations;
+    private String specimenMaterialType;
+    private String narrativeStatement;
+    private String narrativeStatementId;
     private String participant;
-    private String pertinentInformation;
+    private String observations;
 }
