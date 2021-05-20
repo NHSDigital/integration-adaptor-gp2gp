@@ -7335,11 +7335,6 @@ The line below contains special characters...
                     <id root="test-id-3"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="test-id-3"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="test-id-3"/>
@@ -8382,6 +8377,11 @@ The line below contains special characters...
             <center value="20300225"/>
         </effectiveTime>
         <availabilityTime value="20201026115836"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
     </PlanStatement>
 </component>
     </ehrComposition>

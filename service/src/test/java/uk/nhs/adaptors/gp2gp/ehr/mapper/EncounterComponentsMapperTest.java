@@ -84,7 +84,8 @@ public class EncounterComponentsMapperTest {
             codeableConceptCdMapper,
             participantMapper
         );
-        DiaryPlanStatementMapper diaryPlanStatementMapper = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper);
+        DiaryPlanStatementMapper diaryPlanStatementMapper
+            = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
             = new DocumentReferenceToNarrativeStatementMapper(messageContext);
         MedicationStatementMapper medicationStatementMapper
