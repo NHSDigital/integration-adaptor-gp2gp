@@ -14,10 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.ENCOUNTER_LIST_CODE;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Component
 public final class EncounterExtractor {
-    private static final String ENCOUNTER_LIST_CODE = "1149501000000101";
 
     public static List<Encounter> extractEncounterReferencesFromEncounterList(Bundle bundle) {
         var encounterReferences = extractEncounterReferencesFromConsultationList(bundle);

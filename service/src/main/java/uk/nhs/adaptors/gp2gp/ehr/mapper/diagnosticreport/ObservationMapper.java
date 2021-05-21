@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.COMMENT_NOTE_CODE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -57,8 +58,6 @@ public class ObservationMapper {
     private static final String BODY_SITE_PREFIX = "Site: ";
     private static final String METHOD_PREFIX = "Method: ";
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
-
-    private static final String COMMENT_NOTE_CODE = "37331000000100";
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 

@@ -26,12 +26,13 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.CONSULTATION_LIST_CODE;
+
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 @Slf4j
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
-    private static final String CONSULTATION_LIST_CODE = "325851000000107";
 
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;

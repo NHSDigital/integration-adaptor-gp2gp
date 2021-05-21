@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.CONSULTATION_LIST_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.OTHER_REPORT_CODE;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -40,8 +42,6 @@ public class EncounterMapper {
         TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
     private static final String COMPLETE_CODE = "COMPLETE";
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
-    private static final String CONSULTATION_LIST_CODE = "325851000000107";
-    private static final String OTHER_REPORT_CODE = "24591000000103";
     private static final String OTHER_REPORT_DISPLAY = "Other report";
     private static final Set<String> EHR_COMPOSITION_NAME_VOCABULARY_CODES = getEhrCompositionNameVocabularyCodes();
 

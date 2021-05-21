@@ -3,6 +3,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.NARRATIVE_STATEMENT_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 import java.util.List;
@@ -205,7 +207,7 @@ public class NonConsultationResourceMapper {
 
     private EncounterTemplateParametersBuilder buildForObservation(String component, Resource resource) {
         Observation observation = (Observation) resource;
-        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(EncounterComponentsMapper.NARRATIVE_STATEMENT_CODE))) {
+        if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE))) {
             return buildForCommentObservation(component);
         }
         if (CodeableConceptMappingUtils.hasCode(observation.getCode(), EncounterComponentsMapper.BLOOD_CODES)) {

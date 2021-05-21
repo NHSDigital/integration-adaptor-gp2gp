@@ -30,22 +30,23 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.ARTERIAL_BLOOD_PRESSURE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.BLOOD_PRESSURE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.BLOOD_PRESSURE_READING_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.CATEGORY_LIST_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.CONSULTATION_LIST_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.LAYING_BLOOD_PRESSURE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.NARRATIVE_STATEMENT_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.SITTING_BLOOD_PRESSURE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.STANDING_BLOOD_PRESSURE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.TOPIC_LIST_CODE;
+
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class EncounterComponentsMapper {
 
-    private static final String CONSULTATION_LIST_CODE = "325851000000107";
-    private static final String TOPIC_LIST_CODE = "25851000000105";
-    private static final String CATEGORY_LIST_CODE = "24781000000107";
     private static final List<String> COMPONENTS_LISTS = Arrays.asList(TOPIC_LIST_CODE, CATEGORY_LIST_CODE);
-
-    private static final String BLOOD_PRESSURE_READING_CODE = "163020007";
-    private static final String ARTERIAL_BLOOD_PRESSURE_CODE = "386534000";
-    private static final String BLOOD_PRESSURE_CODE = "75367002";
-    private static final String STANDING_BLOOD_PRESSURE_CODE = "163034007";
-    private static final String SITTING_BLOOD_PRESSURE_CODE = "163035008";
-    private static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
 
@@ -77,7 +78,6 @@ public class EncounterComponentsMapper {
 
     public static final List<String> BLOOD_CODES = List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
         BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
-    public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
 
     private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
 
