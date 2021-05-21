@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.github.mustachejava.Mustache;
@@ -8,8 +9,10 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.lang3.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
+import org.hl7.fhir.dstu3.model.ListResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,8 +28,10 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
+@Slf4j
 public class EhrExtractMapper {
     private static final Mustache EHR_EXTRACT_TEMPLATE = TemplateUtils.loadTemplate("ehr_extract_template.mustache");
+    private static final String CONSULTATION_LIST_CODE = "325851000000107";
 
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final TimestampService timestampService;
@@ -79,7 +84,26 @@ public class EhrExtractMapper {
 
     private List<String> mapEncounterToEhrComponents(List<Encounter> encounters) {
         return encounters.stream()
+            .filter(this::encounterHasComponents)
             .map(encounterMapper::mapEncounterToEhrComposition)
             .collect(Collectors.toList());
+    }
+
+    private boolean encounterHasComponents(Encounter encounter) {
+        Optional<ListResource> listReferencedToEncounter = messageContext
+            .getInputBundleHolder()
+            .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
+
+        if (listReferencedToEncounter.isEmpty()) {
+            LOGGER.warn(
+                "{} does not contain any clinical content. "
+                    + "The GP Connect providers MUST suppress empty consultations. The adaptor treats these "
+                    + "defensively: no ehrComposition is output for this Encounter.",
+                encounter.getId()
+            );
+            return false;
+        }
+
+        return true;
     }
 }
