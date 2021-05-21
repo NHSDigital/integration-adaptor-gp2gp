@@ -7,9 +7,11 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -33,6 +35,9 @@ public class EhrExtractMapper {
     private final AgentDirectoryMapper agentDirectoryMapper;
     private final MessageContext messageContext;
 
+    @Value("${gp2gp.gpc.overrideNhsNumber}")
+    private String overrideNhsNumber;
+
     public String mapEhrExtractToXml(EhrExtractTemplateParameters ehrExtractTemplateParameters) {
         return TemplateUtils.fillTemplate(EHR_EXTRACT_TEMPLATE, ehrExtractTemplateParameters);
     }
@@ -40,6 +45,7 @@ public class EhrExtractMapper {
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
         Bundle bundle) {
+        var patientNhsNumber = getPatientNhsNumber(getGpcStructuredTaskDefinition);
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
@@ -49,7 +55,7 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
         ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(
-            bundle, getGpcStructuredTaskDefinition.getNhsNumber()));
+            bundle, patientNhsNumber));
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
         var mappedComponents = mapEncounterToEhrComponents(encounters);
@@ -61,6 +67,14 @@ public class EhrExtractMapper {
         );
 
         return ehrExtractTemplateParameters;
+    }
+
+    private String getPatientNhsNumber(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition) {
+        if (StringUtils.isNotBlank(overrideNhsNumber)) {
+            return overrideNhsNumber;
+        } else {
+            return getGpcStructuredTaskDefinition.getNhsNumber();
+        }
     }
 
     private List<String> mapEncounterToEhrComponents(List<Encounter> encounters) {
