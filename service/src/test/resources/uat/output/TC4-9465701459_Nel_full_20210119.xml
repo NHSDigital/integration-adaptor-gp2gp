@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C" />
+    <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -7254,7 +7254,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E24CCAB7-FF1A-4F00-B125-D383D2BA80A1" />
+        <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7295,11 +7295,6 @@ The line below contains special characters...
             
         </effectiveTime>
         <availabilityTime value="20100123140354" />
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
-                </statementRef>
-            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
@@ -7347,7 +7342,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
+        <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7375,7 +7370,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
+        <id root="E24CCAB7-FF1A-4F00-B125-D383D2BA80A1" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -7390,7 +7385,7 @@ The line below contains special characters...
         <availabilityTime value="20100113145739" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D"/>
+                <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7405,7 +7400,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
+        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7433,7 +7428,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
+        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -7448,7 +7443,7 @@ The line below contains special characters...
         <availabilityTime value="20100113145725" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="0814FE49-058E-4B3C-9F74-040922A26099"/>
+                <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7463,7 +7458,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
+        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7491,7 +7486,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C" />
+        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -7506,7 +7501,7 @@ The line below contains special characters...
         <availabilityTime value="20100113145710" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E"/>
+                <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7518,7 +7513,7 @@ The line below contains special characters...
 </component>
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E"/>
+        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
         <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7539,7 +7534,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D" />
+        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7567,7 +7562,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <id root="9EC5CD05-9875-4F82-AC04-19B706D79BC0" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, major</originalText>
             <qualifier inverted="false">
@@ -7582,7 +7577,7 @@ The line below contains special characters...
         <availabilityTime value="20100113140445" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
+                <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7594,7 +7589,7 @@ The line below contains special characters...
 </component>
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
+        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
         <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7615,7 +7610,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
+        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7643,7 +7638,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
+        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -7658,7 +7653,7 @@ The line below contains special characters...
         <availabilityTime value="20100113114126" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+                <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7670,7 +7665,7 @@ The line below contains special characters...
 </component>
 <component typeCode="COMP">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
+        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48"/>
         <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7691,7 +7686,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18" />
+        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7719,7 +7714,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
+        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -7734,7 +7729,7 @@ The line below contains special characters...
         <availabilityTime value="20100113114111" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
+                <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7749,7 +7744,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14" />
+        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7777,7 +7772,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
+        <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, major</originalText>
             <qualifier inverted="false">
@@ -7792,7 +7787,7 @@ The line below contains special characters...
         <availabilityTime value="20100714163251" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
+                <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -7807,7 +7802,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="619D08A7-F6DA-449B-8609-FF129D688943" />
+        <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7835,7 +7830,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
+        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7844,7 +7839,7 @@ The line below contains special characters...
         <availabilityTime value="20100113145710" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3"/>
+                <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
                 <code code="294881007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Warfarin allergy">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7871,7 +7866,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA" />
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7899,7 +7894,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
+        <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7908,7 +7903,7 @@ The line below contains special characters...
         <availabilityTime value="20100113140445" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
+                <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
                 <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7935,7 +7930,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43" />
+        <id root="70EACDF9-9F82-4111-BD75-F0263D662431" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7963,7 +7958,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
+        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -7972,7 +7967,7 @@ The line below contains special characters...
         <availabilityTime value="20100113114126" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+                <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
                 <code code="293586001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Aspirin allergy">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -7999,7 +7994,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
+        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8027,7 +8022,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
+        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8036,7 +8031,7 @@ The line below contains special characters...
         <availabilityTime value="20100113113756" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
+                <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
                 <code code="91935009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to peanuts">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -8063,7 +8058,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
+        <id root="03245FA5-238F-4857-878F-975411328E56" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8091,7 +8086,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="03245FA5-238F-4857-878F-975411328E56" />
+        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
         <code code="265943003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Etcher/engraver">
 </code>
         <statusCode code="COMPLETE" />
@@ -8119,7 +8114,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
+        <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8147,7 +8142,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316" />
+        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
         <code code="266894000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FH: Cardiovascular disease">
 </code>
         <statusCode code="COMPLETE" />
@@ -8175,7 +8170,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
+        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8203,7 +8198,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5" />
+        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
         <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
     <originalText>Systolic blood pressure</originalText>
 </code>
@@ -8232,7 +8227,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7" />
+        <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8260,7 +8255,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
+        <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
         <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
     <originalText>Diastolic blood pressure</originalText>
 </code>
@@ -8289,7 +8284,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57" />
+        <id root="6B7B5C05-E36B-45EA-BE2B-C99A9A04FD1E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8317,7 +8312,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D" />
+        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
         <code code="22298006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Myocardial infarction">
     <originalText>Heart attack</originalText>
 </code>
@@ -8346,7 +8341,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
+        <id root="7217C8E7-F51A-46B4-8590-6FF88478C7A8" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8374,7 +8369,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0814FE49-058E-4B3C-9F74-040922A26099" />
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="76880004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Angelman syndrome">
     <originalText>Happy puppet syndrome</originalText>
 </code>
@@ -8403,7 +8398,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8431,7 +8426,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
+        <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA" />
         <code code="21719001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic rhinitis due to pollen">
     <originalText>Allergic rhinitis due to pollens</originalText>
 </code>
@@ -8460,7 +8455,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
+        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8488,7 +8483,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
+        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
@@ -8516,7 +8511,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8544,7 +8539,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03" />
+        <id root="8E16CA1E-BB99-4FAE-916F-784291C49B05" />
         <code code="359814004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monkeypox">
 </code>
         <statusCode code="COMPLETE" />
@@ -8572,7 +8567,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02" />
+        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8600,7 +8595,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
+        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
         <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
     <originalText>Tired all the time</originalText>
 </code>
@@ -8629,7 +8624,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E" />
+        <id root="1048A69B-71E7-4D03-9E2E-2DD27F172295" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8657,7 +8652,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C"/>
+        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8667,7 +8662,7 @@ The line below contains special characters...
         <availabilityTime value="20100714162749"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A"/>
+                <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
     <originalText>Systolic blood pressure</originalText>
 </code>
@@ -8681,7 +8676,7 @@ The line below contains special characters...
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="1B1B2854-A658-4764-875B-49CBD3C516EB"/>
+                <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
     <originalText>Diastolic blood pressure</originalText>
 </code>
@@ -8695,7 +8690,7 @@ The line below contains special characters...
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB"/>
+                <id root="1B1B2854-A658-4764-875B-49CBD3C516EB"/>
                 <text>This is the standalone BP Interpretation(s): Abnormal</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100714"/>
@@ -8712,7 +8707,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
+        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8740,7 +8735,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A" />
+        <id root="CD0DE06B-A109-4037-AC72-9E83D2327E6E" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -8769,7 +8764,7 @@ The line below contains special characters...
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8F3B744A-93D9-433C-8D46-6EF68AC95052" />
+        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8797,7 +8792,7 @@ The line below contains special characters...
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0" />
+        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />

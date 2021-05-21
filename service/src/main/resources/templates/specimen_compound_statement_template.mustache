@@ -23,14 +23,16 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        {{#pertinentInformation}}
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+        {{#narrativeStatement}}
+        <component typeCode="COMP" contextConductionInd="true">
+            <NarrativeStatement classCode="OBS" moodCode="EVN">
+                <id root="{{narrativeStatementId}}"/>
                 <text>{{{.}}}</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        {{/pertinentInformation}}
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="{{availabilityTime}}"/>
+            </NarrativeStatement>
+        </component>
+        {{/narrativeStatement}}
         {{#participant}}
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
