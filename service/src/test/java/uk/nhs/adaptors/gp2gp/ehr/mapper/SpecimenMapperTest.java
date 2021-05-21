@@ -93,7 +93,7 @@ public class SpecimenMapperTest {
         var expected = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
 
-        when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenAnswer(mockObservationMapping());
+        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
         String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT_DATE);
 
@@ -114,7 +114,7 @@ public class SpecimenMapperTest {
         Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/Default-1"));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        when(observationMapper.mapObservationToCompoundStatement(any(), any())).thenReturn(MOCK_EMPTY_OBSERVATION);
+        when(observationMapper.mapObservationToCompoundStatement(any())).thenReturn(MOCK_EMPTY_OBSERVATION);
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT_DATE

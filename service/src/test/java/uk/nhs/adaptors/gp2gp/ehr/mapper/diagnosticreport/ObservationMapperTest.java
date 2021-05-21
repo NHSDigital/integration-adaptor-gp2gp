@@ -18,15 +18,13 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,8 +74,6 @@ public class ObservationMapperTest {
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
-    private List<Observation> observations;
-
     @Mock
     private IdMapper idMapper;
 
@@ -93,11 +89,8 @@ public class ObservationMapperTest {
     public void setUp() throws IOException {
         String bundleJsonInput = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "fhir_bundle.json");
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
-        observations = bundle.getEntry().stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> resource.getResourceType().equals(ResourceType.Observation))
-            .map(Observation.class::cast)
-            .collect(Collectors.toList());
+        InputBundle inputBundle = new InputBundle(bundle);
+        lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
@@ -128,8 +121,7 @@ public class ObservationMapperTest {
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(outputXml);
 
         String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
-            observationAssociatedWithSpecimen,
-            observations
+            observationAssociatedWithSpecimen
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
@@ -148,8 +140,7 @@ public class ObservationMapperTest {
         );
 
         String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
-            observationAssociatedWithSpecimen,
-            Collections.emptyList()
+            observationAssociatedWithSpecimen
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);

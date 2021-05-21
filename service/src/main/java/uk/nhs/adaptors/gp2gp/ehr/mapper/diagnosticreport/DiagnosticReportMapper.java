@@ -90,9 +90,10 @@ public class DiagnosticReportMapper {
             return Collections.singletonList(generateDefaultSpecimen(diagnosticReport));
         }
 
+        var inputBundleHolder = messageContext.getInputBundleHolder();
         return diagnosticReport.getSpecimen()
             .stream()
-            .map(specimenReference -> messageContext.getInputBundleHolder().getResource(specimenReference.getReferenceElement()))
+            .map(specimenReference -> inputBundleHolder.getResource(specimenReference.getReferenceElement()))
             .flatMap(Optional::stream)
             .map(Specimen.class::cast)
             .collect(Collectors.toList());

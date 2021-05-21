@@ -296,22 +296,11 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -329,7 +318,8 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
@@ -378,23 +368,11 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
-            <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -444,22 +422,11 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-        <component typeCode="COMP" contextConductionInd="true">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="394559384658936"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <center value="20100223"/>
-        </effectiveTime>
-        <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -475,7 +442,8 @@
     </agentRef>
 </Participant>
     </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
