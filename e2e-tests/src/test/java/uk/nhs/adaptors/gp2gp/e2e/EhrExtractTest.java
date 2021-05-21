@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
@@ -65,6 +66,9 @@ public class EhrExtractTest {
 
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
+
+        var ehrDocument = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT));
+        assertThatExtractCommonMessageWasSent(ehrDocument);
     }
 
     @Test
@@ -115,6 +119,15 @@ public class EhrExtractTest {
         softly.assertThat(ehrContinue).isNotEmpty().isNotEmpty();
         softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
+    private void assertThatExtractCommonMessageWasSent(Document ehrDocument) {
+        var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
+        var ehrCommon = (Document) document.get("sentToMhs");
+        softly.assertThat(ehrCommon).isNotEmpty().isNotEmpty();
+        softly.assertThat(ehrCommon.get("messageId")).isNotNull();
+        softly.assertThat(ehrCommon.get("sentAt")).isNotNull();
+        softly.assertThat(ehrCommon.get("taskId")).isNotNull();
+    }
+
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
         var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);

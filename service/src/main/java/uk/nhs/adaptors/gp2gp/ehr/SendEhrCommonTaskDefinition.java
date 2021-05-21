@@ -15,6 +15,7 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @EqualsAndHashCode(callSuper = true)
 public class SendEhrCommonTaskDefinition extends TaskDefinition {
     private final String documentName;
+    private final int documentPosition;
     @Override
     public TaskType getTaskType() {
         return SEND_EHR_CONTINUE;

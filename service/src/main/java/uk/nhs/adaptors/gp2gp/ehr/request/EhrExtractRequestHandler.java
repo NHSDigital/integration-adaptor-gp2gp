@@ -141,19 +141,20 @@ public class EhrExtractRequestHandler {
     public void handleContinue(String conversationId, String payload) {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
             var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
-            ehrExtractStatus
-                .getGpcAccessDocument()
-                .getDocuments()
-                .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName()));
+            var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+            for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
+                createContinueTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
+            }
         } else {
             throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
                 + conversationId);
         }
     }
 
-    private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName) {
+    private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation) {
         var sendEhrContinueTaskDefinition = SendEhrCommonTaskDefinition.builder()
             .documentName(documentName)
+            .documentPosition(documentLocation)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
