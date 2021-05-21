@@ -45,7 +45,6 @@ public class EhrExtractMapper {
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
         Bundle bundle) {
-        var patientNhsNumber = getPatientNhsNumber(getGpcStructuredTaskDefinition);
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
@@ -55,7 +54,8 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
         ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(
-            bundle, patientNhsNumber));
+            bundle,
+            getPatientNhsNumber(getGpcStructuredTaskDefinition)));
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
         var mappedComponents = mapEncounterToEhrComponents(encounters);
