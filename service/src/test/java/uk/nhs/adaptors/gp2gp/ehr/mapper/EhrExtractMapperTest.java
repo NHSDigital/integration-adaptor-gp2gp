@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -22,10 +23,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
@@ -62,6 +65,7 @@ public class EhrExtractMapperTest {
     private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
     private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
     private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
+    private static final String OVERRIDE_NHS_NUMBER = "overrideNhsNumber";
 
     private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -198,5 +202,18 @@ public class EhrExtractMapperTest {
         messageContext.initialize(parsedBundle);
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
         assertThat(translatedOutput.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void When_NhsOverrideNumberProvided_Expect_OverrideToBeUsed() throws IOException {
+        ReflectionTestUtils.setField(ehrExtractMapper, OVERRIDE_NHS_NUMBER, "123");
+        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(ONE_CONSULTATION_RESOURCE_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
+        messageContext.initialize(bundle);
+
+        assertThrows(EhrMapperException.class, () -> ehrExtractMapper.mapBundleToEhrFhirExtractParams(
+            getGpcStructuredTaskDefinition,
+            bundle)
+        );
     }
 }
