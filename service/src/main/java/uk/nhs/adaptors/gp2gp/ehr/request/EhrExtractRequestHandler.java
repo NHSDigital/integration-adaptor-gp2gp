@@ -121,8 +121,6 @@ public class EhrExtractRequestHandler {
     }
 
     private EhrExtractStatus.EhrRequest prepareEhrRequest(Document header, Document payload) {
-
-        overrideToAsid
         return new EhrExtractStatus.EhrRequest(
             getRequiredValue(payload, REQUEST_ID_PATH),
             getRequiredValue(payload, NHS_NUMBER_PATH),
