@@ -82,43 +82,38 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasPerformer()) {
-            Optional<Reference> practitionerReference = observation.getPerformer().stream()
-                .filter(Reference::hasReferenceElement)
-                .filter(reference -> ResourceType.Practitioner.name().equals(reference.getReferenceElement().getResourceType()))
-                .findFirst();
-
-            Optional<Reference> organizationReference = observation.getPerformer().stream()
-                .filter(Reference::hasReferenceElement)
-                .filter(reference -> ResourceType.Organization.name().equals(reference.getReferenceElement().getResourceType()))
-                .findFirst();
-
-            String participantReference;
-            if (practitionerReference.isPresent() && organizationReference.isPresent()) {
-                participantReference = messageContext.getAgentDirectory().getAgentRef(
-                    practitionerReference.get(),
-                    organizationReference.get()
-                );
-            } else if (practitionerReference.isPresent()) {
-                participantReference = messageContext.getAgentDirectory().getAgentId(
-                    practitionerReference.get()
-                );
-            } else if (organizationReference.isPresent()) {
-                participantReference = messageContext.getAgentDirectory().getAgentId(
-                    organizationReference.get()
-                );
-            } else {
-                throw new EhrMapperException(
-                    "Invalid performer reference in observation resource with id: " + observation.getIdElement().getIdPart()
-                );
-            }
-
-            final String participantBlock = participantMapper
-                .mapToParticipant(participantReference, ParticipantType.PERFORMER);
-            observationStatementTemplateParametersBuilder.participant(participantBlock);
+            observationStatementTemplateParametersBuilder.participant(buildParticipant(observation));
         }
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
+    }
+
+    private String buildParticipant(Observation observation) {
+        Optional<Reference> practitionerReference = getReferenceTo(observation, ResourceType.Practitioner);
+        Optional<Reference> organizationReference = getReferenceTo(observation, ResourceType.Organization);
+
+        String participantReference;
+        if (practitionerReference.isPresent() && organizationReference.isPresent()) {
+            participantReference = messageContext.getAgentDirectory().getAgentRef(practitionerReference.get(), organizationReference.get());
+        } else if (practitionerReference.isPresent()) {
+            participantReference = messageContext.getAgentDirectory().getAgentId(practitionerReference.get());
+        } else if (organizationReference.isPresent()) {
+            participantReference = messageContext.getAgentDirectory().getAgentId(organizationReference.get());
+        } else {
+            throw new EhrMapperException(
+                "Invalid performer reference in observation resource with id: " + observation.getIdElement().getIdPart()
+            );
+        }
+
+        return participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER);
+    }
+
+    private Optional<Reference> getReferenceTo(Observation observation, ResourceType organization) {
+        return observation.getPerformer().stream()
+            .filter(Reference::hasReferenceElement)
+            .filter(reference -> organization.name().equals(reference.getReferenceElement().getResourceType()))
+            .findFirst();
     }
 
     private String prepareComment(Observation observation) {

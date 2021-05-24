@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assumptions.assumeThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 
 import java.io.IOException;
@@ -71,7 +70,6 @@ public class ObservationToNarrativeStatementMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_NarrativeStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, buildIdType(ResourceType.Practitioner, "something"));
         messageContext.getAgentDirectory().getAgentId(buildReference(ResourceType.Practitioner, "something"));
         messageContext.getAgentDirectory().getAgentId(buildReference(ResourceType.Organization, "something"));
 

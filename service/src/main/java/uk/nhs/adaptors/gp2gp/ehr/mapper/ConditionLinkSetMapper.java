@@ -90,7 +90,6 @@ public class ConditionLinkSetMapper {
             .filter(ResourceType.Practitioner::equals)
             .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
 
-
         var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
         builder.performer(performerParameter);
 

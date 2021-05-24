@@ -64,7 +64,7 @@ public class EncounterMapper {
             .originalText(buildOriginalText(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(ref -> messageContext.getAgentDirectory().getAgentId(ref))
+            .map(messageContext.getAgentDirectory()::getAgentId)
             .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
         encounterStatementTemplateParameters.author(recReference);
 
