@@ -17,6 +17,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -25,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class TransformJsonToXml {
 
@@ -130,7 +130,7 @@ public class TransformJsonToXml {
                         codeableConceptCdMapper, new ParticipantMapper()),
                 new ConditionLinkSetMapper(
                         messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-                new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
+                new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
                 new DocumentReferenceToNarrativeStatementMapper(messageContext),
                 new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
                 new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
