@@ -68,7 +68,7 @@ public class EhrExtractTest {
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
         TimeUnit.SECONDS.sleep(10);
-        var ehrDocument = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT));
+        var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         assertThatExtractCommonMessageWasSent(ehrDocument);
     }
 
@@ -124,7 +124,7 @@ public class EhrExtractTest {
     private void assertThatExtractCommonMessageWasSent(Document ehrDocument) {
         var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
         var ehrCommon = (Document) document.get("sentToMhs");
-        softly.assertThat(ehrCommon).isNotEmpty().isNotEmpty();
+        softly.assertThat(ehrCommon).isNotEmpty();
         softly.assertThat(ehrCommon.get("messageId")).isNotNull();
         softly.assertThat(ehrCommon.get("sentAt")).isNotNull();
         softly.assertThat(ehrCommon.get("taskId")).isNotNull();
