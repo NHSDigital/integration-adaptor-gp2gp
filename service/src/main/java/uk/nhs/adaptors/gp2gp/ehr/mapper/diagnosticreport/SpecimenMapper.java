@@ -106,7 +106,7 @@ public class SpecimenMapper {
         if (specimen.hasCollection() && specimen.getCollection().hasCollector()) {
             Reference collector = specimen.getCollection().getCollector();
 
-            return Optional.of(messageContext.getIdMapper().get(collector));
+            return Optional.of(messageContext.getAgentDirectory().getAgentId(collector));
         }
 
         return Optional.empty();

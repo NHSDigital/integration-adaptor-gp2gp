@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import com.github.mustachejava.Mustache;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,7 +73,8 @@ public class DiagnosticReportMapper {
             .specimens(mappedSpecimens);
 
         if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
-            final String participantReference = idMapper.get(diagnosticReport.getPerformerFirstRep().getActor());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(
+                diagnosticReport.getPerformerFirstRep().getActor());
             final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
             diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
         }

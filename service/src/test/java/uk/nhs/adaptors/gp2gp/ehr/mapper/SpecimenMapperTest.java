@@ -65,6 +65,9 @@ public class SpecimenMapperTest {
     private IdMapper idMapper;
 
     @Mock
+    private AgentDirectory agentDirectory;
+
+    @Mock
     private ObservationMapper observationMapper;
 
     @Mock
@@ -73,8 +76,9 @@ public class SpecimenMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockId());
-        lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockReference());
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 

@@ -178,7 +178,6 @@ public class RequestStatementMapperTest {
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(mockIdForReference());
-        lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
         lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockIdForAgentReference());
 

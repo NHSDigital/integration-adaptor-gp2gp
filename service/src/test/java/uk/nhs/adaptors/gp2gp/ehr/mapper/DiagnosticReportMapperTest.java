@@ -72,6 +72,8 @@ public class DiagnosticReportMapperTest {
     @Mock
     private IdMapper idMapper;
     @Mock
+    private AgentDirectory agentDirectory;
+    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private DiagnosticReportMapper mapper;
@@ -83,8 +85,9 @@ public class DiagnosticReportMapperTest {
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
-        when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+        when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
 
         when(specimenMapper.mapSpecimenToCompoundStatement(any(), any(), anyString())).thenAnswer(mockSpecimenMapping());
 

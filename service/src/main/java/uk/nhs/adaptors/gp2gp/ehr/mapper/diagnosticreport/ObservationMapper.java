@@ -318,7 +318,7 @@ public class ObservationMapper {
 
         private Optional<String> prepareParticipant(Observation observation) {
             if (observation.hasPerformer()) {
-                final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+                final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
 
                 return Optional.ofNullable(
                     participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER)

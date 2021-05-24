@@ -52,33 +52,15 @@ public class IdMapper {
         return mappedId != null && mappedId.isResourceMapped();
     }
 
-    public String get(Reference reference) {
+
+    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
+        Reference reference = buildReference(resourceType, id);
         final String referenceValue = reference.getReference();
         if (hasIdBeenMapped(reference)) {
             return ids.get(referenceValue).getId();
         }
 
-        // TODO, workaround until NIAD-1340 is done
-        LOGGER.warn("No existing mapping was found for {}. Attempting to substitute a "
-            + "different resource as a workaround", referenceValue);
-        var replacement = ids.entrySet()
-            .stream()
-            .filter(map -> map.getKey().startsWith(reference.getReferenceElement().getResourceType()))
-            .findFirst();
-
-        if (replacement.isPresent()) {
-            var entry = replacement.get();
-            LOGGER.warn("Replacing unmapped resource {} with {} => {}", referenceValue,
-                entry.getKey(), entry.getValue());
-            return entry.getValue().getId();
-        }
-
-        LOGGER.warn("Unable to find a replacement resource for {}", referenceValue);
-        return null;
-    }
-
-    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
-        return get(buildReference(resourceType, id));
+        throw new EhrMapperException("Resource referenced was not mapped" + referenceValue);
     }
 
     private static Reference buildReference(ResourceType resourceType, IdType id) {
