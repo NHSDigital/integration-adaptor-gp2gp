@@ -1,6 +1,6 @@
 {
     "resourceType": "Specimen",
-    "id": "Default-1",
+    "id": "DUMMY-SPECIMEN",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"

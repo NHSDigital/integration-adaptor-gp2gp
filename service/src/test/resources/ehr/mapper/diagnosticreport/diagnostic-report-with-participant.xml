@@ -9,7 +9,7 @@
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <!-- Mapped Specimen with id: Specimen/Default-1 -->
+            <!-- Mapped Specimen with id: Specimen/DUMMY-SPECIMEN -->
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="II-for-Organization/something"/>

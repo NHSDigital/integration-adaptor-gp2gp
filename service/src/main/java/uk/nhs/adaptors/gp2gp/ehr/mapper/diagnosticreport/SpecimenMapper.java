@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
@@ -129,10 +130,16 @@ public class SpecimenMapper {
     }
 
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
-        List<Observation> observationsAssociatedWithSpecimen = observations.stream()
-            .filter(Observation::hasSpecimen)
-            .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-            .collect(Collectors.toList());
+        List<Observation> observationsAssociatedWithSpecimen;
+
+        if (specimen.getId().equals(DUMMY_SPECIMEN_ID)) {
+            observationsAssociatedWithSpecimen = observations;
+        } else {
+            observationsAssociatedWithSpecimen = observations.stream()
+                .filter(Observation::hasSpecimen)
+                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                .collect(Collectors.toList());
+        }
 
         return observationsAssociatedWithSpecimen.stream()
             .map(observationMapper::mapObservationToCompoundStatement)

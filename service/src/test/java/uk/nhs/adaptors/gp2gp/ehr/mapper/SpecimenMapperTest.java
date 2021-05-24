@@ -111,7 +111,7 @@ public class SpecimenMapperTest {
             TEST_FILE_DIRECTORY + "expected_output_default_specimen.xml"
         );
 
-        Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/Default-1"));
+        Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/DUMMY-SPECIMEN"));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(any())).thenReturn(MOCK_EMPTY_OBSERVATION);
