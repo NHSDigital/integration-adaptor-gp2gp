@@ -73,4 +73,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
+
+
 }

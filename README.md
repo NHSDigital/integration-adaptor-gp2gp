@@ -285,6 +285,28 @@ We provide a mock MHS adaptor for local development and testing.
 | MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
 | MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
+## How to transform arbitrary json ASR payload files
+
+This is a document on 
+how to run tests on json files to convert them into the Xml Files for analysis
+
+####Step 1.
+
+Please locate the file Input folder \
+("src/test/resources/JsonToXml/Input/") \
+Place all Json files you want need to convert in here
+
+####Step 2.
+
+Please locate the TransformJsonToXml.java class\
+("src/test/java/uk.nhs.adaptors.gp2gp/")\
+Run the TransformJsonToXml.java main method
+
+####Step 3.
+
+The Converted .Xml files will be located in
+("src/test/resources/JsonToXml/Output/")
+
 ## Troubleshooting
 
 ### gradle-wrapper.jar doesn't exist
