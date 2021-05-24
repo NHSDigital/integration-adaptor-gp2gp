@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TransformJsonToXml {
 
@@ -50,7 +51,7 @@ public class TransformJsonToXml {
         List<String> fileNames = new ArrayList<>();
 
         for (File JsonFile : files) {
-            if (FilenameUtils.getExtension(JsonFile.getName()).equals("Json")) {
+            if (FilenameUtils.getExtension(JsonFile.getName()).equalsIgnoreCase("json")) {
                 try {
                     String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + JsonFile.getName());
                     jsonStringInputs.add(jsonAsString);
