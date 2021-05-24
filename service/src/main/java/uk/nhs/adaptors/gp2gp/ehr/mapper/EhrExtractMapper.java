@@ -76,6 +76,7 @@ public class EhrExtractMapper {
 
     private String getPatientNhsNumber(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition) {
         if (StringUtils.isNotBlank(overrideNhsNumber)) {
+            LOGGER.warn("GP2GP_GPC_OVERRIDE_NHS_NUMBER is being used, no longer using provided NHS Number");
             return overrideNhsNumber;
         } else {
             return getGpcStructuredTaskDefinition.getNhsNumber();
