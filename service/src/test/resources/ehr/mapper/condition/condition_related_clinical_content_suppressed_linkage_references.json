@@ -26,6 +26,12 @@
             }
         },
         {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "Encounter/BB333AC0-B7C1-11EB-BA2F-0800200C9A66"
+            }
+        },
+        {
             "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
             "valueCode": "minor"
         }
