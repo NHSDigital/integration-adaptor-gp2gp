@@ -1,10 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-public final class ResourceTypeCodes {
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-    private ResourceTypeCodes() {
-        // hiding the constructor
-    }
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ResourceTypeCodes {
 
     public static final String CONSULTATION_LIST_CODE = "325851000000107";
     public static final String OTHER_REPORT_CODE = "24591000000103";
