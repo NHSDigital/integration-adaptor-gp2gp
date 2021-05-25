@@ -1,7 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import static org.apache.logging.log4j.util.Strings.EMPTY;
-
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
@@ -26,6 +24,7 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
@@ -163,14 +162,18 @@ public class DiagnosticReportMapper {
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
 
+        buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+
+        return reportLevelNarrativeStatements.toString();
+    }
+
+    private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
         if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, "DUMMY", EMPTY
+                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
             );
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
-
-        return reportLevelNarrativeStatements.toString();
     }
 
     private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String commentType, String comment) {

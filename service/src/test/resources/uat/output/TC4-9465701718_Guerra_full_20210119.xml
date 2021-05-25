@@ -694,10 +694,10 @@ Mechanical Prosthetic Heart Valves )</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:DUMMY
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330162100
 
-            </text>
+            EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330162100"/>
     </NarrativeStatement>
@@ -5777,10 +5777,10 @@ rheumatoid factor tests.</text>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D651DDAA-03BA-4723-960A-FD13C13CE367"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:DUMMY
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20030221115000
 
-            </text>
+            EMPTY REPORT</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
