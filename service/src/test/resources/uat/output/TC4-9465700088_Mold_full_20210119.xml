@@ -214,17 +214,6 @@
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: ON WARFARIN</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -284,6 +273,17 @@ Mechanical Prosthetic Heart Valves )</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: ON WARFARIN</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -329,17 +329,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: ON AZATHIOPRINE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
@@ -754,6 +743,17 @@ Mechanical Prosthetic Heart Valves )</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: ON AZATHIOPRINE</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -799,17 +799,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="CF670325-7982-46BA-9A52-85C3C78FE40A"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: COELIAC</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E"/>
@@ -900,6 +889,17 @@ Low plasma Folate</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="CF670325-7982-46BA-9A52-85C3C78FE40A"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: COELIAC</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -945,17 +945,6 @@ Low plasma Folate</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: PAINS HANDS AND FEET.</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
@@ -1011,6 +1000,17 @@ Low plasma Folate</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5F44FD1C-BC5B-4B5F-8861-79F254D0D969"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: PAINS HANDS AND FEET.</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -1057,17 +1057,6 @@ Low plasma Folate</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: TIRED ALL THE TIME, LOW Hb</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -1106,6 +1095,17 @@ Low plasma Folate</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: TIRED ALL THE TIME, LOW Hb</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -1255,17 +1255,6 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: ON WARFARIN</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -1324,6 +1313,17 @@ Mechanical Prosthetic Heart Valves )</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: ON WARFARIN</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -1774,17 +1774,6 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: ON MEDICATION</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -2015,6 +2004,17 @@ Triglyceride reference range
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: ON MEDICATION</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -2060,17 +2060,6 @@ Triglyceride reference range
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: ANTE NATAL</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
@@ -2429,6 +2418,17 @@ Triglyceride reference range
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: ANTE NATAL</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -2474,17 +2474,6 @@ Triglyceride reference range
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="46218E0A-240A-47A3-9793-2CA43C848EDB"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: GASTRIC ULCER DECLINE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="155DFA49-019C-47F0-9DDE-EA68774988B2"/>
@@ -2944,6 +2933,17 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="46218E0A-240A-47A3-9793-2CA43C848EDB"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: GASTRIC ULCER DECLINE</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -3703,17 +3703,6 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="0BB37C2A-AA19-4091-890D-6E0A3D16BDE0"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: FLU LIKE ILLNESS</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -4039,6 +4028,17 @@ Time since last dose : 9.5 hours</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="0BB37C2A-AA19-4091-890D-6E0A3D16BDE0"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: FLU LIKE ILLNESS</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -4084,17 +4084,6 @@ Time since last dose : 9.5 hours</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="37227623-F695-4DEE-BE05-0C651428BEAA"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: JAUNDICE  ?OBSTRUCTIVE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="1E177544-82E7-4D6A-8473-69BC8FC74AB1"/>
@@ -4599,6 +4588,17 @@ Time since last dose : 9.5 hours</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="37227623-F695-4DEE-BE05-0C651428BEAA"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: JAUNDICE  ?OBSTRUCTIVE</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -5945,17 +5945,6 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DBB2BEBF-D286-48DA-9793-AE7BC666EC8D"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: High Blood Sugar.</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="CFD0D666-8226-45CD-8339-8EC0F995CED0"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -6011,6 +6000,17 @@ IgE abs to horse, negative</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="DBB2BEBF-D286-48DA-9793-AE7BC666EC8D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: High Blood Sugar.</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -6056,17 +6056,6 @@ IgE abs to horse, negative</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="23E5A882-07DA-4B48-90CE-E94E7EDEC78C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: HIGH BLOOD SUGAR</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="705F8AB2-B57E-4F03-AC9C-F4A4F73E3F73"/>
@@ -6117,6 +6106,17 @@ Fasting Status: F
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="23E5A882-07DA-4B48-90CE-E94E7EDEC78C"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: HIGH BLOOD SUGAR</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -6162,17 +6162,6 @@ Fasting Status: F
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E7DD048C-D4FE-4CCF-8CFE-CEC4D87645A7"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: Otitis media</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0739C9F9-C296-49CD-846B-99680445F3E4"/>
@@ -6258,6 +6247,17 @@ Other bacteria of doubtful significance</text>
 </component>
     </CompoundStatement>
 </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="E7DD048C-D4FE-4CCF-8CFE-CEC4D87645A7"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: Otitis media</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
     </ehrComposition>
@@ -6303,17 +6303,6 @@ Other bacteria of doubtful significance</text>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="13B6561A-F0BC-4781-BDAF-3DB003A69157"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
-
-            Interpretation: DIABETIC</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20100225154100"/>
-    </NarrativeStatement>
-</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="8D247369-629C-4CED-9736-DCF121897A41"/>
@@ -6377,6 +6366,17 @@ Other bacteria of doubtful significance</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="13B6561A-F0BC-4781-BDAF-3DB003A69157"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Interpretation: DIABETIC</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>
@@ -7649,17 +7649,6 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="AD9FD66E-9805-4AEB-BE0F-E5432D26A49F"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20030618080000
-
-            Interpretation: Clinical Details:, NOTE: Specimen date</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20030618080000"/>
-    </NarrativeStatement>
-</component>
-            <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="D095459D-7BBD-4636-9FA7-AD3EF86A39D5"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
@@ -8163,6 +8152,17 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component>
     </CompoundStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="AD9FD66E-9805-4AEB-BE0F-E5432D26A49F"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20030618080000
+
+            Interpretation: Clinical Details:, NOTE: Specimen date</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030618080000"/>
+    </NarrativeStatement>
 </component>
     </CompoundStatement>
 </component>

@@ -21,10 +21,5 @@
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
 </component>
-            <Participant typeCode="AUT" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="II-for-Organization/something"/>
-    </agentRef>
-</Participant>
     </CompoundStatement>
 </component>

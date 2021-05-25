@@ -56,6 +56,7 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
+    private static final String OUTPUT_XML_DUMMY_NARRATIVE = "diagnostic-report-with-dummy-narrative.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
     private static final String OUTPUT_XML_PARTICIPANT = "diagnostic-report-with-participant.xml";
@@ -117,15 +118,15 @@ public class DiagnosticReportMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_DUMMY_NARRATIVE),
+            Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_DUMMY_NARRATIVE),
+            Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_DUMMY_NARRATIVE),
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
             Arguments.of(INPUT_JSON_ONE_RESULT, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
             Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_PERFORMER, OUTPUT_XML_PARTICIPANT),
-            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_DUMMY_NARRATIVE),
             Arguments.of(INPUT_JSON_CONCLUSION, OUTPUT_XML_CONCLUSION),
             Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS)
