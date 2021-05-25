@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
+
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
@@ -21,6 +23,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
+    private static final long SENT_TO_MHS_POLLING_DELAY = 2000;
+    private static final long SENT_TO_MHS_POLLING_TIMEOUT = 10000;
     @InjectSoftAssertions
     private SoftAssertions softly;
 
@@ -67,9 +71,9 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        TimeUnit.SECONDS.sleep(10);
-        var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        assertThatExtractCommonMessageWasSent(ehrDocument);
+        await().pollDelay(SENT_TO_MHS_POLLING_DELAY, TimeUnit.MILLISECONDS)
+            .atMost(SENT_TO_MHS_POLLING_TIMEOUT, TimeUnit.MILLISECONDS)
+            .untilAsserted(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
     }
 
     @Test
@@ -121,13 +125,18 @@ public class EhrExtractTest {
         softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
 
-    private void assertThatExtractCommonMessageWasSent(Document ehrDocument) {
+    private boolean assertThatExtractCommonMessageWasSent(String conversationId) {
+        var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
-        var ehrCommon = (Document) document.get("sentToMhs");
-        softly.assertThat(ehrCommon).isNotEmpty();
-        softly.assertThat(ehrCommon.get("messageId")).isNotNull();
-        softly.assertThat(ehrCommon.get("sentAt")).isNotNull();
-        softly.assertThat(ehrCommon.get("taskId")).isNotNull();
+        if (document != null) {
+            var ehrCommon = (Document) document.get("sentToMhs");
+            if (ehrCommon != null){
+                return ehrCommon.get("messageId") != null
+                    && ehrCommon.get("sentAt") != null
+                    && ehrCommon.get("taskId") != null;
+            }
+        }
+        return false;
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
