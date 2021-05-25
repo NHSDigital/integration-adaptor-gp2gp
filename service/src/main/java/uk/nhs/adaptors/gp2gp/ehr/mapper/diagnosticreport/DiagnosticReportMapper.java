@@ -1,8 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
@@ -15,6 +19,10 @@ import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -27,13 +35,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
@@ -143,7 +144,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
 
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
+                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
@@ -158,19 +159,30 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
 
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
+                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
 
+        buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+
         return reportLevelNarrativeStatements.toString();
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String comment) {
+    private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
+        if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
+            String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
+            );
+            reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+    }
+
+    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String commentType, String comment) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .commentType(CommentType.LABORATORY_RESULT_COMMENT.getCode())
+            .commentType(commentType)
             .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
             .comment(comment)
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));

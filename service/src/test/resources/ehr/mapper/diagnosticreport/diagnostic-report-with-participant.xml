@@ -10,6 +10,17 @@
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <!-- Mapped Specimen with id: Specimen/DUMMY-SPECIMEN -->
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:20100225154100
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
             <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="II-for-Organization/something"/>
