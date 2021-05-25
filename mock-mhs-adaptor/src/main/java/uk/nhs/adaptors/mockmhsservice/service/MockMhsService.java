@@ -74,10 +74,14 @@ public class MockMhsService {
                 LOGGER.error("Error could not produce inbound reply", e);
                 return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
             }
-        } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID) || interactionId.equals(COMMON_INTERACTION_ID)) {
+        } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID)) {
             LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+        } else if (interactionId.equals(COMMON_INTERACTION_ID)) {
+            LOGGER.info("Message Common accepted.");
+            headers.setContentType(MediaType.TEXT_XML);
+            return new ResponseEntity<>(headers, ACCEPTED);
         }
 
         LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);

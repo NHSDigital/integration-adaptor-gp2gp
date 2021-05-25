@@ -16,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrCommonTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
@@ -143,7 +143,7 @@ public class EhrExtractRequestHandler {
             var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
             var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
             for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
-                createContinueTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
+                createSendDocumentTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
             }
         } else {
             throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
@@ -151,8 +151,8 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation) {
-        var sendEhrContinueTaskDefinition = SendEhrCommonTaskDefinition.builder()
+    private void createSendDocumentTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation) {
+        var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
             .documentPosition(documentLocation)
             .taskId(randomIdGeneratorService.createNewId())
@@ -163,8 +163,8 @@ public class EhrExtractRequestHandler {
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
-        taskDispatcher.createTask(sendEhrContinueTaskDefinition);
-        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
+        taskDispatcher.createTask(sendDocumentTaskDefinition);
+        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendDocumentTaskDefinition.getTaskId());
     }
 
     public void handleAcknowledgement(String conversationId, Document payload) {

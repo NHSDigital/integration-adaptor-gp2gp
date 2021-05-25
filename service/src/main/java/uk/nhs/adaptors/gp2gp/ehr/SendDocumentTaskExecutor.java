@@ -18,7 +18,7 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
-public class SendEhrCommonTaskExecutor implements TaskExecutor<SendEhrCommonTaskDefinition> {
+public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDefinition> {
     private final StorageConnectorService storageConnectorService;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final MhsClient mhsClient;
@@ -27,14 +27,14 @@ public class SendEhrCommonTaskExecutor implements TaskExecutor<SendEhrCommonTask
     private final ObjectMapper objectMapper;
 
     @Override
-    public Class<SendEhrCommonTaskDefinition> getTaskType() {
-        return SendEhrCommonTaskDefinition.class;
+    public Class<SendDocumentTaskDefinition> getTaskType() {
+        return SendDocumentTaskDefinition.class;
     }
 
     @SneakyThrows
     @Override
-    public void execute(SendEhrCommonTaskDefinition taskDefinition) {
-        LOGGER.info("SendEhrCommon task was created, Sending EHR Common to GP");
+    public void execute(SendDocumentTaskDefinition taskDefinition) {
+        LOGGER.info("SendDocument task was created, Sending EHR Document to GP");
 
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
         var messageId = randomIdGeneratorService.createNewId();

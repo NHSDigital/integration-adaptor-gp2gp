@@ -281,7 +281,7 @@ public class EhrExtractStatusService {
         LOGGER.info("Database updated for sending application acknowledgement");
     }
 
-    public void updateEhrExtractStatusCommon(SendEhrCommonTaskDefinition taskDefinition, String messageId) {
+    public void updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
         var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + "sentToMhs" + DOT + SENT_AT;
