@@ -296,7 +296,7 @@ public class ObservationMapper {
         }
 
         private CommentType prepareCommentType(Observation observation) {
-            if (observation.getId().equals(DUMMY_OBSERVATION_ID)) {
+            if (observation.getIdElement().getIdPart().equals(DUMMY_OBSERVATION_ID)) {
                 return CommentType.AGGREGATE_COMMENT_SET;
             }
 

@@ -41,8 +41,8 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Slf4j
 public class DiagnosticReportMapper {
 
-    public static final String DUMMY_SPECIMEN_ID = "Specimen/DUMMY-SPECIMEN";
-    public static final String DUMMY_OBSERVATION_ID = "Observation/DUMMY-OBSERVATION";
+    public static final String DUMMY_SPECIMEN_ID = "DUMMY-SPECIMEN";
+    public static final String DUMMY_OBSERVATION_ID = "DUMMY-OBSERVATION";
 
     private static final Mustache DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("diagnostic_report_compound_statement_template.mustache");

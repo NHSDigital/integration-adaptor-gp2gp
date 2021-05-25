@@ -132,7 +132,7 @@ public class SpecimenMapper {
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
         List<Observation> observationsAssociatedWithSpecimen;
 
-        if (specimen.getId().equals(DUMMY_SPECIMEN_ID)) {
+        if (specimen.getIdElement().getIdPart().equals(DUMMY_SPECIMEN_ID)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
             observationsAssociatedWithSpecimen = observations.stream()
