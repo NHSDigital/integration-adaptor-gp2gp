@@ -57,6 +57,8 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-order-no-based-on.json";
     private static final String INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-status-reason-stopped-no-date.json";
+    private static final String INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-recorder-resource-type.json";
     private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -256,7 +258,8 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
             INPUT_JSON_WITH_ORDER_NO_BASED_ON,
             INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
-            INPUT_JSON_WITH_NO_RECORDER_REFERENCE
+            INPUT_JSON_WITH_NO_RECORDER_REFERENCE,
+            INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE
             );
     }
 }

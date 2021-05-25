@@ -208,7 +208,6 @@ public class EncounterComponentsMapperTest {
 
     private void setUpMock() {
         IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
         messageContext.getAgentDirectory().getAgentId(new Reference(conditionId));
     }
 }

@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assumptions.assumeThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -99,6 +99,8 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-32.json";
     private static final String INPUT_JSON_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
         + "example-observation-resource-33.json";
+    private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
+        + "example-observation-resource-34.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
@@ -214,14 +216,14 @@ public class ObservationStatementMapperTest {
     }
 
     @Test
-    public void When_MappingParsedObservationJsonWithUnmappedPerformer_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PARTICIPANT);
+    public void When_MappingObservationWithInvalidParticipantResourceType_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE);
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
-        // TODO: workaround for NIAD-1340 a placeholder is used instead of an error until agentDirectory is fixed
-        assumeThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false))
+        assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true))
             .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("No ID mapping for reference Practitioner/something");
+            .hasMessage("Invalid performer reference in observation resource with id: "
+                + "Consultation3-Topic2-Category-Examination-Observation-1");
     }
 
     private static Stream<Arguments> resourceFileParams() {

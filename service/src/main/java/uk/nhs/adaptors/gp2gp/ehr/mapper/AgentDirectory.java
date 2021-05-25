@@ -39,7 +39,6 @@ public class AgentDirectory {
             }
         }
 
-        LOGGER.error("Invalid agent reference to not supported resource: " + reference.getReference());
         throw new EhrMapperException("Not supported agent reference: " + reference.getReference());
     }
 
@@ -51,9 +50,6 @@ public class AgentDirectory {
             );
         }
 
-        LOGGER.error("Invalid agent references to not supported resources: {}, {}",
-            practitionerReference.getReference(),
-            organizationReference.getReference());
         throw new EhrMapperException("Not supported agent reference to practitioner: " + practitionerReference.getReference()
             + " and organization: " + organizationReference.getReference());
     }

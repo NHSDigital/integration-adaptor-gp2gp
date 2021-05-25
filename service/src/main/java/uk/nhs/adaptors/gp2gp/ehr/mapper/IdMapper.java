@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 public class IdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final Map<String, MappedId> ids = new HashMap<>();
+    private static final Set<String> NOT_ALLOWED = Set.of(
+        ResourceType.Organization.name(),
+        ResourceType.Practitioner.name(),
+        ResourceType.PractitionerRole.name());
 
     public String getOrNew(ResourceType resourceType, IdType id) {
         return getOrNew(buildReference(resourceType, id), true);
@@ -31,6 +36,10 @@ public class IdMapper {
     }
 
     public String getOrNew(Reference reference, Boolean isResourceMapped) {
+        if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
+            throw new RuntimeException("Not allowed to use agent-related resource with IdMapper");
+        }
+
         MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
         MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
         if (isResourceMapped) {
@@ -51,7 +60,6 @@ public class IdMapper {
         MappedId mappedId = ids.get(reference.getReference());
         return mappedId != null && mappedId.isResourceMapped();
     }
-
 
     public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
         Reference reference = buildReference(resourceType, id);
