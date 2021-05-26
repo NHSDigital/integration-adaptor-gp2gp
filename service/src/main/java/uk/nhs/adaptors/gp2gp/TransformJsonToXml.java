@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.io.FilenameUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -23,16 +23,15 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterComponentsMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EncounterMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ImmunizationObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.
-        PertinentInformationObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.
-        PractitionerAgentPersonMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
@@ -40,7 +39,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -49,13 +47,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TransformJsonToXml {
 
     private static final String JSON_FILE_INPUT_PATH =
-            Paths.get("src", "test", "resources", "JsonToXml", "Input").toFile().getAbsoluteFile().getAbsolutePath() + "/";
+            Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
     private static final String XML_OUTPUT_PATH =
-            Paths.get("src", "test", "resources", "JsonToXml", "Output").toFile().getAbsoluteFile().getAbsolutePath() + "/";
+            Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
+    private static final Logger LOGGER = Logger.getLogger(TransformJsonToXml.class.getName());
+
+    private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
     public static void main(String[] args) throws Exception {
 
@@ -76,6 +78,7 @@ public class TransformJsonToXml {
         List<String> fileNames = new ArrayList<>();
 
         for (File jsonFile : files) {
+            LOGGER.info("Parsing File: " + jsonFile.getName());
             if (FilenameUtils.getExtension(jsonFile.getName()).equalsIgnoreCase("json")) {
                 try {
                     String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + jsonFile.getName());
@@ -84,37 +87,47 @@ public class TransformJsonToXml {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else {
+                LOGGER.info("No .json Files Found");
             }
         }
-        return InputWrapper.builder()
-                .jsonFileInputs(jsonStringInputs)
-                .jsonFileNames(fileNames)
-                .build();
+        return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String stringToJson(String json) throws JSONException {
-        JSONObject jsonObject = new JSONObject(json);
-        var entryArray = (JSONArray) jsonObject.get("entry");
-        var firstEntry = (JSONObject) entryArray.get(0);
-        var resource = (JSONObject) firstEntry.get("resource");
-        var identifierArray = (JSONArray) resource.get("identifier");
-        var identifier = (JSONObject) identifierArray.get(0);
-        var nhsNumber = (String) identifier.get("value");
+    private static String extractNhsNumber(String json){
+        var nhsnumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
+        var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
+        var nhsNumber = bundle.getEntry().stream()
+                .map(Bundle.BundleEntryComponent::getResource)
+                .filter(resource -> ResourceType.Patient.equals(resource.getResourceType()))
+                .map(resource -> (Patient) resource)
+                .map(resource -> (Identifier) getNhsNumberIdentifier(nhsnumberSystem, resource))
+                .findFirst().get().getValue();
         return nhsNumber;
+    }
+
+    private static Object getNhsNumberIdentifier(String nhsnumberSystem, Patient resource) {
+        return resource.getIdentifier()
+                .stream().filter(identifier -> identifier.getSystem().equals(nhsnumberSystem)).findFirst().get();
     }
 
     private static String readJsonFileAsString(String file) throws Exception {
         return new String(Files.readAllBytes(Paths.get(file)));
     }
 
-    private static void writeToFile(String xml, String fileName) throws IOException {
+    private static void writeToFile(String xml, String fileName) {
         String fileOutputName = FilenameUtils.removeExtension(fileName);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + fileOutputName + ".xml"));
-        writer.write(xml);
-        writer.close();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + fileOutputName + ".xml"));
+            writer.write(xml);
+            writer.close();
+            LOGGER.info("Contents of file: " + fileName + ". Saved to: " + fileName.substring(0, fileName.lastIndexOf(".")) + ".xml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static String mapJsonToXml(String jsonAsStringInput) throws JSONException {
+    private static String mapJsonToXml(String jsonAsStringInput) {
 
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
 
@@ -127,7 +140,7 @@ public class TransformJsonToXml {
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-                .nhsNumber(stringToJson(jsonAsStringInput))
+                .nhsNumber(extractNhsNumber(jsonAsStringInput))
                 .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
                 .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
                 .fromOdsCode("GP2GPTEST")
@@ -194,6 +207,8 @@ public class TransformJsonToXml {
         final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
         final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+
+        messageContext.resetMessageContext();
 
         return hl7TranslatedResponse;
     }

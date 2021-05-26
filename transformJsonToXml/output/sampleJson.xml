@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
     <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06" />
-    <creationTime value="20210524132206" />
+    <creationTime value="20210525150026" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
     <processingCode code="P" />
@@ -29,14 +29,14 @@
             <EhrExtract classCode="EXTRACT" moodCode="EVN">
     <id root="F5C1FDBB-A948-43BB-AB30-CEAA51FC0CC0" />
     <statusCode code="COMPLETE" />
-    <availabilityTime value="20210524132206" />
+    <availabilityTime value="20210525150025" />
     <recordTarget typeCode="RCT">
         <patient classCode="PAT">
             <id root="2.16.840.1.113883.2.1.4.1" extension="9690938622" />
         </patient>
     </recordTarget>
     <author typeCode="AUT">
-        <time value="20210524132206" />
+        <time value="20210525150025" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
                 <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
@@ -57,9 +57,9 @@
             <effectiveTime>
                 <low value="20160501120000"/>
             </effectiveTime>
-            <availabilityTime value="20210524132206" />
+            <availabilityTime value="20210525150025" />
             <author typeCode="AUT">
-                <time value="20210524132206" />
+                <time value="20210525150025" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
                         <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
