@@ -41,8 +41,8 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Slf4j
 public class DiagnosticReportMapper {
 
-    public static final String DUMMY_SPECIMEN_ID = "DUMMY-SPECIMEN";
-    public static final String DUMMY_OBSERVATION_ID = "DUMMY-OBSERVATION";
+    public static final String DUMMY_SPECIMEN_ID_PREFIX = "DUMMY-SPECIMEN-";
+    public static final String DUMMY_OBSERVATION_ID_PREFIX = "DUMMY-OBSERVATION-";
 
     private static final Mustache DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("diagnostic_report_compound_statement_template.mustache");
@@ -104,7 +104,7 @@ public class DiagnosticReportMapper {
     private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {
         Specimen specimen = new Specimen();
 
-        specimen.setId(DUMMY_SPECIMEN_ID);
+        specimen.setId(DUMMY_SPECIMEN_ID_PREFIX + randomIdGeneratorService.createNewId());
 
         return specimen
             .setAccessionIdentifier(new Identifier().setValue("DUMMY"))
@@ -129,10 +129,9 @@ public class DiagnosticReportMapper {
     private Observation generateDefaultObservation(DiagnosticReport diagnosticReport) {
         Observation observation = new Observation();
 
-        observation.setId(DUMMY_OBSERVATION_ID);
+        observation.setId(DUMMY_OBSERVATION_ID_PREFIX + randomIdGeneratorService.createNewId());
 
         return observation
-            .setSpecimen(new Reference().setReference(DUMMY_SPECIMEN_ID))
             .setIssuedElement(diagnosticReport.getIssuedElement())
             .setComment("EMPTY REPORT");
     }

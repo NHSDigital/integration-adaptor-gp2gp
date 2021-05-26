@@ -1,6 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
@@ -133,7 +133,7 @@ public class SpecimenMapper {
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
         List<Observation> observationsAssociatedWithSpecimen;
 
-        if (specimen.getIdElement().getIdPart().equals(DUMMY_SPECIMEN_ID)) {
+        if (specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
             observationsAssociatedWithSpecimen = observations.stream()

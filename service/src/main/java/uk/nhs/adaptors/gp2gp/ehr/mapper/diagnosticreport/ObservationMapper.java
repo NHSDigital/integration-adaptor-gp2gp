@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -292,7 +292,7 @@ public class ObservationMapper {
         }
 
         private CommentType prepareCommentType(Observation observation) {
-            if (observation.getIdElement().getIdPart().equals(DUMMY_OBSERVATION_ID)) {
+            if (observation.getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX)) {
                 return CommentType.AGGREGATE_COMMENT_SET;
             }
 
