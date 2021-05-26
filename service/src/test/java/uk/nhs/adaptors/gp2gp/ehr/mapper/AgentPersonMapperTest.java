@@ -13,6 +13,7 @@ import org.hl7.fhir.dstu3.model.PractitionerRole;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -37,6 +38,8 @@ public class AgentPersonMapperTest {
     private static final String PRACTITIONER_ROLE_FILE_LOCATION = PRACTITIONER_FILE_LOCATION + "practitioner-role/";
     private static final String ORGANIZATION = PRACTITIONER_FILE_LOCATION + "organization.json";
     private static final String PRACTITIONER = PRACTITIONER_FILE_LOCATION + "practitioner.json";
+    private static final String EXPECTED_AGENT_PERSON_WITH_ORGANIZATION = PRACTITIONER_FILE_LOCATION
+        + "expected-agent-person-with-organization-only.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -83,6 +86,28 @@ public class AgentPersonMapperTest {
         assertThat(outputMessage)
             .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
             .isEqualToIgnoringWhitespace(expectedOutput);
+    }
+
+    @Test
+    public void When_MappingOrganizationOnlyToAgent_Expect_NoPractitionerData() throws IOException {
+        var expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_AGENT_PERSON_WITH_ORGANIZATION);
+        AgentDirectory.AgentKey agentKey = setUpDataWithOrganization();
+
+        var outputMessage = agentPersonMapper.mapAgentPerson(agentKey, TEST_ID);
+
+        assertThat(outputMessage).isEqualTo(expectedOutput);
+    }
+
+    private AgentDirectory.AgentKey setUpDataWithOrganization() throws IOException {
+        Organization organization = getOrganizationResource();
+
+        Bundle bundle = new Bundle();
+        bundle.addEntry().setResource(organization);
+        messageContext.initialize(bundle);
+
+        return new AgentDirectory.AgentKey.AgentKeyBuilder()
+            .organizationReference(ResourceType.Organization.name() + "/" + organization.getIdElement().getIdPart())
+            .build();
     }
 
     private static Stream<Arguments> readPractitionerOnlyTests() {

@@ -26,13 +26,14 @@ public class AgentPersonMapper {
 
     public String mapAgentPerson(AgentDirectory.AgentKey agentKey, String agentDirectoryId) {
         var builder = PractitionerAgentPersonMapperParameters.builder()
-            .practitionerId(agentDirectoryId);
+            .agentId(agentDirectoryId);
 
         Optional<Practitioner> practitioner = messageContext.getInputBundleHolder()
             .getResource(new IdType(agentKey.getPractitionerReference()))
             .map(resource -> (Practitioner) resource);
 
         if (practitioner.isPresent()) {
+            builder.practitioner(true);
             buildPractitionerPrefix(practitioner.get()).ifPresent(builder::practitionerPrefix);
 
             var practitionerGiven = buildPractitionerGivenName(practitioner.get());
