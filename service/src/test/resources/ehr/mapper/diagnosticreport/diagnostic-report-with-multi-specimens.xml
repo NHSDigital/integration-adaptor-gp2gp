@@ -10,5 +10,16 @@
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <!-- Mapped Specimen with id: Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-0 --><!-- Mapped Specimen with id: Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-1 --><!-- Mapped Specimen with id: Specimen/96B93E28-293D-46E7-B4C2-D477EEBF7098-SPEC-2 -->
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:20100225154100
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
