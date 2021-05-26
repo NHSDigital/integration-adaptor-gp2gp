@@ -42,6 +42,7 @@ public class SpecimenMapper {
 
     private static final Mustache SPECIMEN_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("specimen_compound_statement_template.mustache");
+
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";

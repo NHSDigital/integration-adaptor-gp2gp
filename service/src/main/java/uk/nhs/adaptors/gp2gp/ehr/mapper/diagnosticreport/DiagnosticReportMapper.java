@@ -183,7 +183,7 @@ public class DiagnosticReportMapper {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .commentType(commentType)
-            .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
+            .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
             .comment(comment)
             .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
 
