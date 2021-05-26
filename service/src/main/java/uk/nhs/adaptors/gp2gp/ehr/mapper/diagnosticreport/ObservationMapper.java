@@ -180,7 +180,7 @@ public class ObservationMapper {
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
                 .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(commentType)
-                .commentDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
+                .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)
                 .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
 
