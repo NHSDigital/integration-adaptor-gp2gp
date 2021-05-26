@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
@@ -41,6 +42,7 @@ public class SpecimenMapper {
 
     private static final Mustache SPECIMEN_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("specimen_compound_statement_template.mustache");
+
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
@@ -129,10 +131,16 @@ public class SpecimenMapper {
     }
 
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
-        List<Observation> observationsAssociatedWithSpecimen = observations.stream()
-            .filter(Observation::hasSpecimen)
-            .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
-            .collect(Collectors.toList());
+        List<Observation> observationsAssociatedWithSpecimen;
+
+        if (specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)) {
+            observationsAssociatedWithSpecimen = observations;
+        } else {
+            observationsAssociatedWithSpecimen = observations.stream()
+                .filter(Observation::hasSpecimen)
+                .filter(observation -> observation.getSpecimen().getReference().equals(specimen.getId()))
+                .collect(Collectors.toList());
+        }
 
         return observationsAssociatedWithSpecimen.stream()
             .map(observationMapper::mapObservationToCompoundStatement)
