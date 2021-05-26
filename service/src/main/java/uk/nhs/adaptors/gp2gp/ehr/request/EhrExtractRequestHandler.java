@@ -4,7 +4,6 @@ import java.time.Instant;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -29,12 +28,6 @@ import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractRequestHandler {
-    @Value("${gp2gp.gpc.overrideFromAsid}")
-    private String overrideFromAsid;
-
-    @Value("${gp2gp.gpc.overrideToAsid}")
-    private String overrideToAsid;
-
     private static final String INTERACTION_ID_PATH = "/RCMR_IN010000UK05";
     private static final String SUBJECT_PATH = INTERACTION_ID_PATH + "/ControlActEvent/subject";
     private static final String MESSAGE_HEADER_PATH = "/Envelope/Header/MessageHeader";
@@ -126,30 +119,12 @@ public class EhrExtractRequestHandler {
             getRequiredValue(payload, NHS_NUMBER_PATH),
             getRequiredValue(header, FROM_PARTY_ID_PATH),
             getRequiredValue(header, TO_PARTY_ID_PATH),
-            getFromAsid(getRequiredValue(payload, FROM_ASID_PATH)),
-            getToAsid(getRequiredValue(payload, TO_ASID_PATH)),
+            getRequiredValue(payload, FROM_ASID_PATH),
+            getRequiredValue(payload, TO_ASID_PATH),
             getRequiredValue(payload, FROM_ODS_CODE_PATH),
             getRequiredValue(payload, TO_ODS_CODE_PATH),
             getRequiredValue(header, MESSAGE_ID_PATH)
         );
-    }
-
-    private String getFromAsid(String fromAsid) {
-        if (StringUtils.isNotBlank(overrideFromAsid)) {
-            LOGGER.warn("GP2GP_GPC_OVERRIDE_FROM_ASID is being used, no longer using provided from asid");
-            return overrideFromAsid;
-        } else {
-            return fromAsid;
-        }
-    }
-
-    private String getToAsid(String toAsid) {
-        if (StringUtils.isNotBlank(overrideToAsid)) {
-            LOGGER.warn("GP2GP_GPC_OVERRIDE_TO_ASID is being used, no longer using provided to asid");
-            return overrideToAsid;
-        } else {
-            return toAsid;
-        }
     }
 
     private String getRequiredValue(Document xml, String xpath) {
