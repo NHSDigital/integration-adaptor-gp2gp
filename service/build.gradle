@@ -26,11 +26,11 @@ repositories {
 }
 
 ext {
-	javaTestClass = "uk.nhs.adaptors.gp2gp.TransformJsonToXml"
+	javaMainClass = "uk.nhs.adaptors.gp2gp.TransformJsonToXml"
 }
 
 application {
-	testClassName = javaTestClass
+	mainClassName = javaMainClass
 }
 
 dependencies {

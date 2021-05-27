@@ -131,7 +131,7 @@ public class TransformJsonToXml {
 
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
 
-        final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorServiceStub();
+        final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
         MessageContext messageContext = new MessageContext(randomIdGeneratorService);
 

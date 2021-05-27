@@ -287,25 +287,24 @@ We provide a mock MHS adaptor for local development and testing.
 
 ## How to transform arbitrary json ASR payload files
 
-This is a document on 
-how to run tests on json files to convert them into the Xml Files for analysis
+This is a document on how to run tests on json files to convert them into the Xml Files for analysis
 
 ####Step 1.
 
 Please locate the file Input folder \
-("src/test/resources/JsonToXml/Input/") \
-Place all Json files you want need to convert in here
+("integration-adaptor-gp2gp/transformJsonToXml/input/") \
+Place all Json files to convert here
 
 ####Step 2.
 
-Please locate the TransformJsonToXml.java class\
-("src/test/java/uk.nhs.adaptors.gp2gp/")\
-Run the TransformJsonToXml.java main method
+Please locate the TransformJsonToXml.sh file\
+("integration-adaptor-gp2gp/transformJsonToXml/")\
+Run that file
 
 ####Step 3.
 
-The Converted .Xml files will be located in
-("src/test/resources/JsonToXml/Output/")
+The Converted .Xml files will be located in \
+("sintegration-adaptor-gp2gp/transformJsonToXml/output/")
 
 ## Troubleshooting
 
