@@ -39,6 +39,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -94,7 +95,7 @@ public class TransformJsonToXml {
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String extractNhsNumber(String json){
+    private static String extractNhsNumber(String json) {
         var nhsnumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
         var nhsNumber = bundle.getEntry().stream()
