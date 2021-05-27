@@ -93,13 +93,18 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .collect(Collectors.toList());
 
+            var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
+
+            if (narrativeStatements.isBlank() && derivedObservations.isEmpty()) {
+                return mapObservationToObservationStatement(observationAssociatedWithSpecimen);
+            }
+
             var classCode = prepareClassCode(derivedObservations);
             var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
             var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
             var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
             var availabilityTimeElement =
                 StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
-            var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
             var statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
 
             var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
@@ -117,6 +122,50 @@ public class ObservationMapper {
             return TemplateUtils.fillTemplate(
                 OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
                 observationCompoundStatementTemplateParameters.build()
+            );
+        }
+
+        private String prepareObservationStatement(Observation observation) {
+            if (observationHasNonCommentNoteCode(observation)) {
+                return mapObservationToObservationStatement(observation);
+            }
+
+            return StringUtils.EMPTY;
+        }
+
+        private String mapObservationToObservationStatement(Observation observation) {
+            var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
+                .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
+                .codeElement(prepareCodeElement(observation))
+                .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+
+            if (observation.hasValue()) {
+                Type value = observation.getValue();
+
+                if (UNHANDLED_TYPES.contains(value.getClass())) {
+                    LOGGER.info(
+                        "Observation value type {} not supported. Mapping for this field is skipped",
+                        observation.getValue().getClass()
+                    );
+                } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
+                    observationStatementTemplateParametersBuilder.value(
+                        structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
+                    );
+                }
+            }
+
+            if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
+                observationStatementTemplateParametersBuilder.referenceRange(
+                    structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
+            }
+
+            prepareInterpretation(observation).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
+            prepareParticipant(observation).ifPresent(observationStatementTemplateParametersBuilder::participant);
+
+            return TemplateUtils.fillTemplate(
+                OBSERVATION_STATEMENT_TEMPLATE,
+                observationStatementTemplateParametersBuilder.build()
             );
         }
 
@@ -225,50 +274,6 @@ public class ObservationMapper {
             });
 
             return derivedObservationsBlock.toString();
-        }
-
-        private String prepareObservationStatement(Observation observation) {
-            if (observationHasNonCommentNoteCode(observation)) {
-                return mapObservationToObservationStatement(observation);
-            }
-
-            return StringUtils.EMPTY;
-        }
-
-        private String mapObservationToObservationStatement(Observation observation) {
-            var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
-                .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
-                .codeElement(prepareCodeElement(observation))
-                .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
-
-            if (observation.hasValue()) {
-                Type value = observation.getValue();
-
-                if (UNHANDLED_TYPES.contains(value.getClass())) {
-                    LOGGER.info(
-                        "Observation value type {} not supported. Mapping for this field is skipped",
-                        observation.getValue().getClass()
-                    );
-                } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
-                    observationStatementTemplateParametersBuilder.value(
-                        structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
-                    );
-                }
-            }
-
-            if (observation.hasReferenceRange() && observation.hasValueQuantity()) {
-                observationStatementTemplateParametersBuilder.referenceRange(
-                    structuredObservationValueMapper.mapReferenceRangeType(observation.getReferenceRangeFirstRep()));
-            }
-
-            prepareInterpretation(observation).ifPresent(observationStatementTemplateParametersBuilder::interpretation);
-            prepareParticipant(observation).ifPresent(observationStatementTemplateParametersBuilder::participant);
-
-            return TemplateUtils.fillTemplate(
-                OBSERVATION_STATEMENT_TEMPLATE,
-                observationStatementTemplateParametersBuilder.build()
-            );
         }
 
         private boolean observationHasNonCommentNoteCode(Observation observation) {
