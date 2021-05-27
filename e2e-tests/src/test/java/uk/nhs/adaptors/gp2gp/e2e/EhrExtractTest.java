@@ -71,9 +71,7 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        await().pollDelay(SENT_TO_MHS_POLLING_DELAY, TimeUnit.MILLISECONDS)
-            .atMost(SENT_TO_MHS_POLLING_TIMEOUT, TimeUnit.MILLISECONDS)
-            .untilAsserted(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
+        waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
     }
 
     @Test
