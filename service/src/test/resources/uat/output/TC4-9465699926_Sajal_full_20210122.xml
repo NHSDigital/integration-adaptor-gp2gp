@@ -308,15 +308,6 @@
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -360,11 +351,6 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
@@ -401,6 +387,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -571,11 +562,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
@@ -610,6 +596,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -622,11 +613,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
@@ -662,6 +648,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -692,11 +683,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
@@ -732,6 +718,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -743,11 +734,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20020330092100"/>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
@@ -782,8 +768,18 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>

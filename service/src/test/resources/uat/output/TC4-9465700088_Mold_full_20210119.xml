@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="B6A13EFA-8D08-459E-8C42-01E11869064B" />
+    <id root="227790B7-116A-4A89-9B5F-43FD08BABF39" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -55,7 +55,7 @@
             <id root="287B3A3C-5E88-427B-A2EF-A14A20353B0C" />
             <statusCode code="COMPLETE" />
             <effectiveTime>
-                <low value="20120726"/>
+                <low value="20201215"/>
             </effectiveTime>
             <availabilityTime value="20200101010101" />
             <author typeCode="AUT">
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="4C6D4C1A-1EDF-40AD-93B8-0E59B3C44121" />
+        <id root="F5E308C6-C6C7-42A5-B0C0-E5FDC5F8AB1F" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
@@ -144,7 +144,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="26F8F260-4BEF-4C64-9024-C6AF5DE6A631"/>
+        <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E"/>
         <code nullFlavor="UNK">
             <originalText>System Administrator</originalText>
         </code>
@@ -244,11 +244,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -269,6 +264,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -360,15 +360,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
@@ -412,11 +403,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -451,6 +437,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -479,11 +470,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4"/>
@@ -518,6 +504,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -529,11 +520,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
@@ -568,6 +554,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -579,11 +570,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
@@ -618,6 +604,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -739,6 +730,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -828,11 +824,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
@@ -885,6 +876,11 @@ Low plasma Folate</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -975,11 +971,6 @@ Low plasma Folate</text>
             <center value="20100224"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="90AB2301-DC3C-4A37-8EAB-AA171DB2B88E"/>
@@ -996,6 +987,11 @@ Low plasma Folate</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -1183,11 +1179,6 @@ Low plasma Folate</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
@@ -1205,6 +1196,11 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -1285,11 +1281,6 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
@@ -1310,6 +1301,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -1398,11 +1394,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
@@ -1724,6 +1715,11 @@ Mechanical Prosthetic Heart Valves )</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -1804,11 +1800,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
@@ -1839,11 +1830,6 @@ Triglyceride reference range
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
@@ -1878,6 +1864,11 @@ Triglyceride reference range
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -1914,6 +1905,11 @@ Triglyceride reference range
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -1925,11 +1921,6 @@ Triglyceride reference range
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
@@ -2000,6 +1991,11 @@ Triglyceride reference range
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -2088,11 +2084,6 @@ Triglyceride reference range
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="58826586-95CF-4F70-AF27-43BBAE229C7C"/>
@@ -2414,6 +2405,11 @@ Triglyceride reference range
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -2504,15 +2500,6 @@ Triglyceride reference range
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9"/>
@@ -2709,11 +2696,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
@@ -2748,6 +2730,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -2759,11 +2746,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
@@ -2798,6 +2780,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -2826,11 +2813,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE"/>
@@ -2865,6 +2847,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -2882,6 +2869,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -2893,11 +2885,6 @@ red blood cell seen, Note low platelets</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9689E7D7-DD8B-4981-89D4-A2CA6C26DBE5"/>
@@ -2930,6 +2917,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -3021,11 +3013,6 @@ red blood cell seen, Note low platelets</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9"/>
@@ -3264,6 +3251,11 @@ red blood cell seen, Note low platelets</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -3452,11 +3444,6 @@ Quantity: 1750.000 mL
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
@@ -3473,6 +3460,11 @@ Quantity: 1750.000 mL
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -3549,11 +3541,6 @@ Quantity: 1750.000 mL
             <center value="20100225"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
@@ -3572,6 +3559,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -3733,11 +3725,6 @@ Time since last dose : 9.5 hours</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="03245FA5-238F-4857-878F-975411328E56"/>
@@ -3976,6 +3963,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4003,11 +3995,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4"/>
@@ -4024,6 +4011,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -4125,11 +4117,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1"/>
@@ -4146,6 +4133,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4157,11 +4149,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
@@ -4178,6 +4165,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -4189,15 +4181,6 @@ Time since last dose : 9.5 hours</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
@@ -4241,11 +4224,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681"/>
@@ -4280,6 +4258,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -4331,6 +4314,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -4342,15 +4330,6 @@ Time since last dose : 9.5 hours</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A"/>
@@ -4377,11 +4356,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="07378FF7-547B-4A4E-9C58-3553095BA37E"/>
@@ -4416,6 +4390,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4427,11 +4406,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
@@ -4466,6 +4440,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4478,11 +4457,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BA675192-24E0-4698-8736-00DD928283CB"/>
@@ -4518,6 +4492,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4529,11 +4508,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C"/>
@@ -4568,6 +4542,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -4585,6 +4564,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -4676,11 +4660,6 @@ Time since last dose : 9.5 hours</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6F3E8A7A-7C40-4ACF-AD97-43A2E5DA6B29"/>
@@ -4709,11 +4688,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100224"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="302EDB55-A65C-4216-BB8A-E54C7E5EC39E"/>
@@ -4752,8 +4726,18 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -4834,11 +4818,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C3A07431-50A0-445F-B216-6103EEF1F040"/>
@@ -4855,6 +4834,11 @@ Time since last dose : 9.5 hours</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -4866,11 +4850,6 @@ Time since last dose : 9.5 hours</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9DCC6C3F-6425-4D0E-9431-80E5E0647531"/>
@@ -4904,6 +4883,11 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5000,11 +4984,6 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
@@ -5024,6 +5003,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5104,11 +5088,6 @@ IgE abs to horse, negative</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="599D6A2F-B001-4E52-A09D-1113D43FA4A0"/>
@@ -5143,6 +5122,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5177,11 +5161,6 @@ IgE abs to horse, negative</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E0F5AEA5-2007-4A16-B62A-CB9007EED0AF"/>
@@ -5198,6 +5177,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5232,11 +5216,6 @@ IgE abs to horse, negative</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C4200E9F-5355-4EFA-A908-602A25619730"/>
@@ -5269,6 +5248,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5349,11 +5333,6 @@ IgE abs to horse, negative</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BE070786-1F10-4752-87AD-85C2AA01D9FD"/>
@@ -5591,6 +5570,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5668,11 +5652,6 @@ IgE abs to horse, negative</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D6AE1E27-00D5-47DF-83D8-CB949ED1B535"/>
@@ -5895,6 +5874,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </ObservationStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -5975,11 +5959,6 @@ IgE abs to horse, negative</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E02AE1B2-DAF9-4A69-830A-01E7C5DD9AE2"/>
@@ -5996,6 +5975,11 @@ IgE abs to horse, negative</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -6194,11 +6178,6 @@ Fasting Status: F
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E3B4B58D-DCE9-40D4-8D37-C0719D5CBD76"/>
@@ -6243,6 +6222,11 @@ Other bacteria of doubtful significance</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -6334,11 +6318,6 @@ Other bacteria of doubtful significance</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BE4FCB6F-91D6-4F7B-94F1-9D8DAF5E2044"/>
@@ -6363,6 +6342,11 @@ Other bacteria of doubtful significance</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -6455,11 +6439,6 @@ Other bacteria of doubtful significance</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C0C093CD-E806-48FC-92FD-5E62FA330F3A"/>
@@ -6484,6 +6463,11 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -6564,15 +6548,6 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4DCC7F96-D134-40CD-86DE-870F7C9CEBCB"/>
@@ -6616,11 +6591,6 @@ Dr. N.O&apos;Connell</text>
             <center value="20030109"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="CA7D9248-479A-4D87-9F41-D73B9E3BA7E2"/>
@@ -6673,6 +6643,11 @@ Dr. N.O&apos;Connell</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -6685,11 +6660,6 @@ Dr. N.O&apos;Connell</text>
             <center value="20030109"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="113A27BB-3C07-43CF-941D-13EE95988909"/>
@@ -6742,6 +6712,11 @@ Dr. N.O&apos;Connell</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -6754,11 +6729,6 @@ Dr. N.O&apos;Connell</text>
             <center value="20030109"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="27048C44-2E4F-4D39-95A7-5BE2170CC41C"/>
@@ -6811,6 +6781,11 @@ Dr. N.O&apos;Connell</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -6823,11 +6798,6 @@ Dr. N.O&apos;Connell</text>
             <center value="20030109"/>
         </effectiveTime>
         <availabilityTime value="20030221115000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="26F80FC0-039E-4E2F-B26A-207E83723D47"/>
@@ -6879,6 +6849,11 @@ Dr. N.O&apos;Connell</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -6896,6 +6871,11 @@ Dr. N.O&apos;Connell</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -6976,11 +6956,6 @@ Dr. N.O&apos;Connell</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="95126292-4EE9-4BAE-8EF2-A58773635AB2"/>
@@ -7008,11 +6983,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9D31DF08-2D93-461C-B3EB-171CBC8DE317"/>
@@ -7046,6 +7016,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7057,11 +7032,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7BD053C7-97F9-4E1D-BCE6-723ECC6EF7CC"/>
@@ -7095,6 +7065,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
@@ -7112,6 +7087,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7124,11 +7104,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D23ABB4B-29A8-419F-83D1-E6B716BBFAB7"/>
@@ -7161,6 +7136,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7173,11 +7153,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4FA2722F-9881-44F1-A0FB-7D47594C1966"/>
@@ -7210,6 +7185,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7221,11 +7201,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F30D840E-82DF-4FE0-82C2-126DA8D023A3"/>
@@ -7258,6 +7233,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7270,11 +7250,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1B1ABB7C-C161-4D1C-9388-C022FB894B4E"/>
@@ -7307,6 +7282,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7318,11 +7298,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="604BD88B-17A9-4562-A226-685C6908BBCE"/>
@@ -7355,6 +7330,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7367,11 +7347,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B057BEAA-4AB2-46B2-800F-C3643875EAEC"/>
@@ -7404,6 +7379,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7416,11 +7396,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A676708C-B208-40C9-B759-CB0641A6A7ED"/>
@@ -7453,6 +7428,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7464,11 +7444,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4126BA6C-47FD-468C-873D-ADFB7B855F89"/>
@@ -7501,6 +7476,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7513,11 +7493,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="60836694-2D31-4AF4-8B09-E781B0FFA98C"/>
@@ -7550,6 +7525,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -7562,11 +7542,6 @@ rheumatoid factor tests.</text>
             <center value="20110219"/>
         </effectiveTime>
         <availabilityTime value="20110220155300"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DAD446F8-0884-4835-8287-7AF94E297076"/>
@@ -7599,6 +7574,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -7680,15 +7660,6 @@ rheumatoid factor tests.</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <interpretationCode code="PA" codeSystem="2.16.840.1.113883.2.1.6.5" displayName="Potentially abnormal">
-    <originalText>Abnormal</originalText>
-</interpretationCode>
-
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5321E409-CB3A-42A1-B420-912A28D8D4A0"/>
@@ -7784,11 +7755,6 @@ rheumatoid factor tests.</text>
             <center value="20030616"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="557AF2D9-B795-4A66-921B-175BDC0D0D9D"/>
@@ -7837,6 +7803,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -7871,6 +7842,11 @@ rheumatoid factor tests.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
@@ -7882,11 +7858,6 @@ rheumatoid factor tests.</text>
             <center nullFlavor="UNK"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2B44737A-1BFA-4F1C-ACDC-B05F4A7BDF6B"/>
@@ -7932,11 +7903,6 @@ rheumatoid factor tests.</text>
             <center value="20030616"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9464C92B-7F65-47C6-BAF6-05085E13AEE8"/>
@@ -7971,6 +7937,11 @@ U=Unsuitable,due to delay in delivery.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
@@ -8005,6 +7976,11 @@ U=Unsuitable,due to delay in delivery.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -8016,11 +7992,6 @@ U=Unsuitable,due to delay in delivery.</text>
             <center value="20030616"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="AA6FA4B6-D845-481E-975C-5FD99EF1B616"/>
@@ -8053,6 +8024,11 @@ U=Unsuitable,due to delay in delivery.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -8064,11 +8040,6 @@ U=Unsuitable,due to delay in delivery.</text>
             <center value="20030616"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DF0391DC-A8DD-4751-A30D-E962CADD476E"/>
@@ -8101,6 +8072,11 @@ U=Unsuitable,due to delay in delivery.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
@@ -8112,11 +8088,6 @@ U=Unsuitable,due to delay in delivery.</text>
             <center value="20030616"/>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CCADD5ED-907D-4D63-AD09-EE22CF3CDCB3"/>
@@ -8149,6 +8120,11 @@ U=Unsuitable,due to delay in delivery.</text>
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -8170,7 +8146,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FD329D72-8D90-4303-8608-C5CFCD521867" />
+        <id root="47B6FF4C-17CC-44F8-B103-DDD4E5066A38" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Externally Entered</originalText>
         </code>
@@ -8200,7 +8176,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="79703F8D-058D-4D90-B6A3-524ACCAFC487"/>
+        <id root="570E2085-9EF2-4663-8DB1-0B6DD2CF79F6"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -8211,7 +8187,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20120726134600"/>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="883A6426-B1BC-4BAC-911C-B49F90571768"/>
+        <id root="26F8F260-4BEF-4C64-9024-C6AF5DE6A631"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -8220,7 +8196,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20120726134600"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
-                <id root="E390DFC8-DB06-4BD2-A706-FA02E360626E"/>
+                <id root="9D6298F6-A947-40CA-92C2-1A947B7BDE6F"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="DUMMY"/>
                 <effectiveTime>
                     <center value="20120726134600"/>
@@ -8230,6 +8206,100 @@ U=Unsuitable,due to delay in delivery.</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
+            <component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="E390DFC8-DB06-4BD2-A706-FA02E360626E"/>
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>XR Pelvis</originalText>
+</code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20120726"/>
+        </effectiveTime>
+        <availabilityTime value="20120726134600"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="A28ADA07-2DAE-43D5-BEC2-D2B5F8BB6214"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+            CommentDate:20120726134600
+
+            Clinical History : Intermittent, recurring pain L hip 5
+years. Footling breach at birth. Main site of discomfort L
+anterior superior iliac spine.
+.
+XR Pelvis :
+.
+Findings: AP pelvis.
+Both hips are within normal limits with no current evidence
+of degenerative change or focal abnormality. The left
+anterior superior iliac spine shows no obvious abnormality.
+No other bony abnormality seen. The IUCD is noted in situ.
+.</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20120726134600"/>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="FD329D72-8D90-4303-8608-C5CFCD521867"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+            CommentDate:20210108155909
+
+            (q) - Normal - No Action</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20210108155909"/>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </CompoundStatement>
+</component><component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF"/>
+        <code code="37331000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Comment note">
+    <originalText>Comment note</originalText>
+</code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20210108155909"/>
+        </effectiveTime>
+        <availabilityTime value="20210108155909"/>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="D0F312D0-18E9-4245-A4D0-8F8EBB18042D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+            CommentDate:20210108155909
+
+            (q) - Normal - No Action</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20210108155909"/>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </CompoundStatement>
+</component>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -8238,7 +8308,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FD07BE11-108A-4EC5-834A-347D8DBA2A5D" />
+        <id root="09E0D1D1-7C23-4B16-846F-ABE126D311DA" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8266,7 +8336,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="58E1A9E7-8274-4994-A607-46FEC1765ACF" />
+        <id root="7F820DEC-98A6-4F5F-AE26-1BFA3FB30F0B" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -8295,7 +8365,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9D6298F6-A947-40CA-92C2-1A947B7BDE6F" />
+        <id root="7032A9C8-2F51-4E71-82B5-88B1CAD52C8C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8305,7 +8375,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201215145918" />
             <agentRef classCode="AGNT">
-                <id root="26F8F260-4BEF-4C64-9024-C6AF5DE6A631" />
+                <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -8318,12 +8388,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="26F8F260-4BEF-4C64-9024-C6AF5DE6A631"/>
+                <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="5896D8A5-E6A2-4F03-8A26-F783BDF9184C" />
+        <id root="549F49F2-A088-4339-8D3F-70C5029E9F16" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
@@ -8333,7 +8403,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20201215145918"/>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="26F8F260-4BEF-4C64-9024-C6AF5DE6A631"/>
+        <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E"/>
     </agentRef>
 </Participant>
     </PlanStatement>
@@ -8342,7 +8412,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="47B6FF4C-17CC-44F8-B103-DDD4E5066A38" />
+        <id root="5D9BE528-E840-4FC4-A370-4E063EB5CE8F" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8370,7 +8440,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="02F6B35F-E127-42A5-9876-6D57687B9768" />
+        <id root="8B5D9098-08A5-4658-9122-C1508D4DEA5F" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152510" />
@@ -8385,7 +8455,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7F820DEC-98A6-4F5F-AE26-1BFA3FB30F0B" />
+        <id root="A7CFAA26-80CA-4EA0-9F7C-1328593C3633" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8413,7 +8483,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="823DF5B4-6FCE-4022-B954-74DF663CAC16" />
+        <id root="11FA3A03-5A24-43E6-93F1-3EC98591C452" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152445" />
@@ -8428,7 +8498,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="549F49F2-A088-4339-8D3F-70C5029E9F16" />
+        <id root="0D21461D-A05E-48BB-9036-CA4B0EE2CDF1" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8456,7 +8526,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="372785EB-86C0-4E9C-A247-A5B2F261F1D8" />
+        <id root="8844A2D8-77FF-4E8C-966B-2737FB3BA1E0" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152449" />
@@ -8471,7 +8541,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8B5D9098-08A5-4658-9122-C1508D4DEA5F" />
+        <id root="B9B33A83-925C-44FB-BDD7-8D5A8D47E5AB" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8499,116 +8569,30 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E" />
-        <text>(q) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152450" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="11FA3A03-5A24-43E6-93F1-3EC98591C452" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210108152450"/>
-        </effectiveTime>
-        <availabilityTime value="20210108152450"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152450" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C9E244C2-5966-49B1-8968-B786EB42A551" />
-        <text>(q) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152450" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8844A2D8-77FF-4E8C-966B-2737FB3BA1E0" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210108152450"/>
-        </effectiveTime>
-        <availabilityTime value="20210108152450"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152450" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9B08C7F2-9FBC-4996-B8DC-566BEFF2EBD0" />
-        <text>(q) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152450" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="CCBC0278-CF64-42B4-86F6-1558A9CD1C26" />
+        <text>(q) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152450" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="E207BF0E-7F80-4E1C-9BC7-15736EDA421C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20201215151742"/>
+            <center value="20210108152450"/>
         </effectiveTime>
-        <availabilityTime value="20201215151742"/>
+        <availabilityTime value="20210108152450"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201215151742" />
+            <time value="20210108152450" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -8628,22 +8612,65 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="655343B5-8DBC-485C-B1F8-6E900F8ACE12" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20201215151742" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="2BE4D02A-AD58-4932-AC39-0A9D66E5CBFD" />
+        <text>(q) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152450" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="10FFCE51-E8B9-4422-8629-8F21DD6E64D6" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210108152450"/>
+        </effectiveTime>
+        <availabilityTime value="20210108152450"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210108152450" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3E409A8A-26D0-48AB-A487-F110CD5143AC" />
+        <text>(q) - Abnormal - Contact Patient</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152450" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="DE74F6E5-A897-47F7-9D24-5233A5EAA448" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8671,7 +8698,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7C18D682-9E2C-4D77-80FD-6CBA87526662" />
+        <id root="61EFA456-F22F-4D0E-BAEC-6A264B5BED6D" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151742" />
@@ -8686,7 +8713,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3E409A8A-26D0-48AB-A487-F110CD5143AC" />
+        <id root="43A9EB5A-A697-43BE-9444-B308EBAA091C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8714,7 +8741,50 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="03416D2D-8A6E-4419-92C5-5ECCF2F7C13A" />
+        <id root="8ED56254-7EA1-40E4-BFFE-8FBDB0437BEE" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20201215151742" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="060B46D7-4A87-4EEB-9577-A614378BC174" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201215151742"/>
+        </effectiveTime>
+        <availabilityTime value="20201215151742"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201215151742" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="74121E72-389F-4B12-91BE-D3F49A597F8B" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151742" />
@@ -8729,7 +8799,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="61EFA456-F22F-4D0E-BAEC-6A264B5BED6D" />
+        <id root="CF33B5B6-0D1A-45A5-A07A-57B75DA2B34E" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8757,7 +8827,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A0E15FF1-C9F0-42DF-8967-D90EE6BA043B" />
+        <id root="6616AE9F-AE45-4F77-A69E-3E38B3E5A925" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151743" />
@@ -8772,7 +8842,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8ED56254-7EA1-40E4-BFFE-8FBDB0437BEE" />
+        <id root="EE9398FB-13BB-4447-97A0-1E363459FE23" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8800,7 +8870,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F4A34286-C179-41DA-8904-417512C62331" />
+        <id root="C78FD3AB-71EF-4F2D-BE8C-930469DC2729" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151733" />
@@ -8815,7 +8885,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="74121E72-389F-4B12-91BE-D3F49A597F8B" />
+        <id root="5610B061-32B9-4F7F-AEBC-28DF68720F0B" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8843,7 +8913,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69" />
+        <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151733" />
@@ -8858,7 +8928,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6616AE9F-AE45-4F77-A69E-3E38B3E5A925" />
+        <id root="2810EE1B-93EE-4417-B70B-C692AD0B2A17" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8886,7 +8956,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="32620463-A64F-496A-8603-E0C5664FFD03" />
+        <id root="49C6FE99-45EE-4735-8371-525D41936752" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151704" />
@@ -8901,7 +8971,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C78FD3AB-71EF-4F2D-BE8C-930469DC2729" />
+        <id root="E2F67CFE-3707-48CF-9ADE-7B6B92672FE4" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8929,7 +8999,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A6322C88-BBEA-48CB-9B83-029C2FFC5649" />
+        <id root="F4E6F6C1-1E46-4913-94FA-B55A60681950" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151713" />
@@ -8944,7 +9014,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412" />
+        <id root="0572BE86-0BF3-4BFB-BA04-3E1DE76CF7C0" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8972,7 +9042,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E8461286-29C1-4FB4-A131-6C671F4CADB8" />
+        <id root="49271890-37EC-4C17-839E-CB8DBAC51B09" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151713" />
@@ -8987,7 +9057,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="49C6FE99-45EE-4735-8371-525D41936752" />
+        <id root="23137F83-2549-496B-8AE9-120FDFE6E932" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9015,7 +9085,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="FACD1857-0DD4-49B6-8132-3A377DCCDE77" />
+        <id root="9DE0D13E-64C3-4BFF-A100-D0C1C7F3C251" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151650" />
@@ -9030,7 +9100,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F4E6F6C1-1E46-4913-94FA-B55A60681950" />
+        <id root="6CD6ED21-22AD-4EDE-BD16-7A6AB07AB073" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9058,7 +9128,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="894422AC-12A3-426F-AC3E-145DA62CAB56" />
+        <id root="8E5B1C8C-F1DD-4D61-A75D-DE6D9DC182A1" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151612" />
@@ -9073,7 +9143,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="49271890-37EC-4C17-839E-CB8DBAC51B09" />
+        <id root="79D1E4D8-5F2D-48AC-AF16-AD6CD5A8521A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9101,7 +9171,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5385DE2A-D791-4C1D-B874-F349685150AD" />
+        <id root="FF3AEF96-AF1E-4C56-8CDE-839E62D1E095" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151830" />
@@ -9116,7 +9186,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9DE0D13E-64C3-4BFF-A100-D0C1C7F3C251" />
+        <id root="68CFE821-A4CC-4316-BC05-E309F7AF2D33" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9144,7 +9214,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="151BB11F-6751-48CC-A647-C6F3169F38D1" />
+        <id root="DDDD42B3-E3FC-442F-B195-78F204A844EA" />
         <text>(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151830" />
@@ -9159,7 +9229,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="8E5B1C8C-F1DD-4D61-A75D-DE6D9DC182A1" />
+        <id root="5FB6FBC6-3677-4672-A356-346CBA4107F0" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9187,7 +9257,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="78252A19-1D51-4C94-B7EF-978CA58CB08C" />
+        <id root="5D48CB27-F7F3-4572-B368-AA1A98E24178" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151809" />
@@ -9202,7 +9272,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FF3AEF96-AF1E-4C56-8CDE-839E62D1E095" />
+        <id root="5F9C871A-9927-4F9F-ACF1-ABB290B70D29" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9230,7 +9300,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F66A263F-8FF4-4610-835E-7AC4E4BA209F" />
+        <id root="24AD19A5-0C6D-47BD-BE4B-ADFA99F835DC" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20201215151633" />
@@ -9245,7 +9315,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="DDDD42B3-E3FC-442F-B195-78F204A844EA" />
+        <id root="EEBCA2A1-AEC6-482F-9A31-DDA997D4F5A5" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9273,7 +9343,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="D12DFD0F-8A39-4ACC-905E-ED6170409DC4" />
+        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152501" />
@@ -9288,7 +9358,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5D48CB27-F7F3-4572-B368-AA1A98E24178" />
+        <id root="53496E99-B5D4-4BE2-AC16-CB03F65E1A24" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9316,116 +9386,30 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="64FC6993-B6D7-48B4-B17B-019DE85BD598" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152502" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="24AD19A5-0C6D-47BD-BE4B-ADFA99F835DC" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210108152502"/>
-        </effectiveTime>
-        <availabilityTime value="20210108152502"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152502" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="AF67830C-4710-4730-8ECE-F7C754931108" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152502" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1AADDB92-890D-4851-92AE-D7BAACD5684D" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210108152502"/>
-        </effectiveTime>
-        <availabilityTime value="20210108152502"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152502" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="257B12B4-BBDD-4EFE-9E87-13C62C361F40" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152502" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="079F51B9-E66F-43CA-9395-B639EE5387FB" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152502" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="D74C8FF6-E979-47F8-82F0-81E5A57B1995" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20210108152503"/>
+            <center value="20210108152502"/>
         </effectiveTime>
-        <availabilityTime value="20210108152503"/>
+        <availabilityTime value="20210108152502"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152503" />
+            <time value="20210108152502" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -9445,30 +9429,30 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="86729BDB-1166-420A-9461-69459E1B2842" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152503" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="3AAF8F09-330D-492F-B3A5-647ABAB97A75" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152502" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="72C09079-6436-41D5-BF95-9A13878602C0" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20210108152503"/>
+            <center value="20210108152502"/>
         </effectiveTime>
-        <availabilityTime value="20210108152503"/>
+        <availabilityTime value="20210108152502"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108152503" />
+            <time value="20210108152502" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -9488,22 +9472,22 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="63421EC1-8827-4B19-98F4-9CDCBDC9AF40" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152503" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="7D5029E4-A349-40B4-819A-DDA5A79FB05F" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152502" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="272C88E9-21FC-41D6-91A0-F8465D14FE91" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9531,22 +9515,22 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="0825B833-5B34-4C74-8BFD-141C1136744B" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152503" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="4ED63B0E-0A78-441B-BEC2-A9B87895AE8E" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152503" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="C9B9F762-DDEB-49CD-A474-69983D3B9FFA" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9574,22 +9558,22 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7BB5C774-A5A0-40BC-B209-F2D01571A712" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152503" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="EF997D50-9155-41F4-8BF9-40CF7480C5DE" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152503" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="83708092-4C27-4724-8D37-F6B8487422F7" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9617,22 +9601,22 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5C6CB7A4-6A01-465A-B9E8-3BEF4C063B64" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108152503" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="3E5813A7-FBD4-4E31-84AD-AF5249DB055B" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152503" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="A499D681-DCC4-4AC2-9606-7D54A0602AD9" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9660,7 +9644,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="78925659-DC04-4101-93E9-A4EE91829C3A" />
+        <id root="885B48E7-9BF2-4FB1-9E7B-ECDA1D853527" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152503" />
@@ -9675,7 +9659,93 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="885B48E7-9BF2-4FB1-9E7B-ECDA1D853527" />
+        <id root="5E5B7EC9-B69D-414B-959D-5FE7ED1ECBF1" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210108152503"/>
+        </effectiveTime>
+        <availabilityTime value="20210108152503"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210108152503" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="ADA9D18C-BF7D-4EAE-BA46-A02D1793BC64" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152503" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="B6A13EFA-8D08-459E-8C42-01E11869064B" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210108152503"/>
+        </effectiveTime>
+        <availabilityTime value="20210108152503"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210108152503" />
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="FF019A6D-2DB0-4296-B46E-A1134CE3639A" />
+        <text>(q) - Normal - No Action</text>
+        <statusCode code="COMPLETE" />
+        <availabilityTime value="20210108152503" />
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
+    </agentRef>
+</Participant>
+    </NarrativeStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="0F9548B6-667D-4DFC-B523-347683586950" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -9703,121 +9773,10 @@ U=Unsuitable,due to delay in delivery.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DE233834-A2B1-4805-BE0C-A2FBEBF33DB9" />
+        <id root="7A021DA1-614C-4318-9DE3-5E707758D47A" />
         <text>(q) - Normal - No Action</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20210108152504" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ADA9D18C-BF7D-4EAE-BA46-A02D1793BC64" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20120726"/>
-        </effectiveTime>
-        <availabilityTime value="20120726134600"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20120726134600" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F01DCC02-CF66-452D-8823-6E3F0068900B" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>XR Pelvis</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20120726"/>
-        </effectiveTime>
-        <availabilityTime value="20120726134600"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Clinical History : Intermittent, recurring pain L hip 5
-years. Footling breach at birth. Main site of discomfort L
-anterior superior iliac spine.
-.
-XR Pelvis :
-.
-Findings: AP pelvis.
-Both hips are within normal limits with no current evidence
-of degenerative change or focal abnormality. The left
-anterior superior iliac spine shows no obvious abnormality.
-No other bony abnormality seen. The IUCD is noted in situ.
-.</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FF019A6D-2DB0-4296-B46E-A1134CE3639A" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210108155909"/>
-        </effectiveTime>
-        <availabilityTime value="20210108155909"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210108155909" />
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4D6679E6-C8D2-4275-AA32-ABF6CA7D11E2" />
-        <text>(q) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20210108155909" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>

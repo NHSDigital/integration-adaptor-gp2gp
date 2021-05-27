@@ -7,12 +7,6 @@
             {{{effectiveTime}}}
         </effectiveTime>
         {{{availabilityTimeElement}}}
-        {{#interpretation}}
-            {{{.}}}
-        {{/interpretation}}
-        {{#participant}}
-            {{{.}}}
-        {{/participant}}
         {{#observationStatement}}
             {{{.}}}
         {{/observationStatement}}
@@ -22,5 +16,8 @@
         {{#statementsForDerivedObservations}}
             {{{.}}}
         {{/statementsForDerivedObservations}}
+        {{#participant}}
+            {{{.}}}
+        {{/participant}}
     </CompoundStatement>
 </component>

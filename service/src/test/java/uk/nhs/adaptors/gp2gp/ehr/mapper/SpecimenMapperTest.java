@@ -34,26 +34,13 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 @ExtendWith(MockitoExtension.class)
 public class SpecimenMapperTest {
 
-    private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/specimen/";
+    private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
     private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
-
-    private static final String MOCK_EMPTY_OBSERVATION =
-        "<component typeCode=\"COMP\" contextConductionInd=\"true\">\n"
-            + "<NarrativeStatement classCode=\"OBS\" moodCode=\"EVN\">\n"
-                + "<id root=\"generated id\"/>\n"
-                + "<text mediaType=\"text/x-h7uk-pmip\">CommentType:AGGREGATE COMMENT SET\n"
-                + "CommentDate: 20100225154100\n"
-                + "\n"
-                + "EMPTY REPORT</text>\n"
-                + "<statusCode code=\"COMPLETE\"/>\n"
-                + "<availabilityTime value=\"20100225154100\"/>\n"
-            + "</NarrativeStatement>\n"
-        + "</component>";
 
     private SpecimenMapper specimenMapper;
     private List<Observation> observations;
@@ -92,9 +79,9 @@ public class SpecimenMapperTest {
 
     @ParameterizedTest
     @MethodSource("testData")
-    public void When_MappingSpecimen_Expect_XmlMapped(String inputPath, String expectedPath) throws IOException {
-        var input = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + inputPath);
-        var expected = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + expectedPath);
+    public void When_MappingSpecimen_Expect_XmlOutput(String inputPath, String expectedPath) throws IOException {
+        var input = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + inputPath);
+        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
 
         when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
@@ -105,23 +92,47 @@ public class SpecimenMapperTest {
     }
 
     @Test
-    public void When_MappingDefaultSpecimenJson_Expect_DefaultSpecimenStatementXmlOutput() throws IOException {
-        String jsonInput = ResourceTestFileUtils.getFileContent(
-            TEST_FILE_DIRECTORY + "input_default_specimen.json"
+    public void When_MappingDefaultSpecimenWithDefaultObservation_Expect_DefaultXmlOutput() throws IOException {
+        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
+            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
         );
-        Specimen specimen = new FhirParseService().parseResource(jsonInput, Specimen.class);
+        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
+
+        String defaultObservationJson = ResourceTestFileUtils.getFileContent(
+            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "observation/" + "input_default_observation.json"
+        );
+        Observation observation = new FhirParseService().parseResource(defaultObservationJson, Observation.class);
 
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
-            TEST_FILE_DIRECTORY + "expected_output_default_specimen.xml"
+            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_and_default_observation.xml"
         );
 
-        Observation observation = new Observation().setSpecimen(new Reference().setReference("Specimen/Default-1"));
-
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        when(observationMapper.mapObservationToCompoundStatement(any())).thenReturn(MOCK_EMPTY_OBSERVATION);
+        when(observationMapper.mapObservationToCompoundStatement(observation)).thenAnswer(mockObservationMapping());
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
             specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT_DATE
+        );
+
+        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+    }
+
+    @Test
+    public void When_MappingDefaultSpecimenWithObservations_Expect_DefaultSpecimenAndObservationsXmlOutput() throws IOException {
+        String defaultSpecimenJson = ResourceTestFileUtils.getFileContent(
+            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "input_default_specimen.json"
+        );
+        Specimen specimen = new FhirParseService().parseResource(defaultSpecimenJson, Specimen.class);
+
+        String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
+            DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_with_observations.xml"
+        );
+
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
+
+        String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
+            specimen, observations, DIAGNOSTIC_REPORT_DATE
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
@@ -171,7 +182,7 @@ public class SpecimenMapperTest {
     }
 
     private Observation parseObservation(String path) throws IOException {
-        String fileContent = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + path);
+        String fileContent = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "observation/" + path);
 
         return new FhirParseService().parseResource(fileContent, Observation.class);
     }
