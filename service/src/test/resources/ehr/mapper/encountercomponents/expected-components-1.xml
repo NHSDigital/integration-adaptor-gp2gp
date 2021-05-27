@@ -296,11 +296,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -335,6 +330,11 @@
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -368,11 +368,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -389,6 +384,11 @@
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
@@ -422,11 +422,6 @@
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="394559384658936"/>
-    </agentRef>
-</Participant>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -459,6 +454,11 @@
 </Participant>
     </NarrativeStatement>
 </component>
+            <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </CompoundStatement>
 </component>
     </CompoundStatement>
