@@ -78,15 +78,15 @@ public class TransformJsonToXml {
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
 
-        for (File jsonFile : files) {
-            LOGGER.info("Parsing File: " + jsonFile.getName());
-            if (FilenameUtils.getExtension(jsonFile.getName()).equalsIgnoreCase("json")) {
+        for (File inputJsonFile : files) {
+            LOGGER.info("Parsing File: " + inputJsonFile.getName());
+            if (FilenameUtils.getExtension(inputJsonFile.getName()).equalsIgnoreCase("json")) {
                 try {
-                    String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + jsonFile.getName());
+                    String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + inputJsonFile.getName());
                     jsonStringInputs.add(jsonAsString);
-                    fileNames.add(jsonFile.getName());
+                    fileNames.add(inputJsonFile.getName());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.info("Could Not Read Json Files.");
                 }
             } else {
                 LOGGER.info("No .json Files Found");
@@ -116,15 +116,15 @@ public class TransformJsonToXml {
         return new String(Files.readAllBytes(Paths.get(file)));
     }
 
-    private static void writeToFile(String xml, String fileName) {
-        String fileOutputName = FilenameUtils.removeExtension(fileName);
+    private static void writeToFile(String xml, String sourceFileName) {
+        String outputFileName = FilenameUtils.removeExtension(sourceFileName);
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + fileOutputName + ".xml"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml"));
             writer.write(xml);
             writer.close();
-            LOGGER.info("Contents of file: " + fileName + ". Saved to: " + fileName.substring(0, fileName.lastIndexOf(".")) + ".xml");
+            LOGGER.info("Contents of file: " + sourceFileName + ". Saved to: " + outputFileName + ".xml");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.info("Could not send Xml result to the file");
         }
     }
 
