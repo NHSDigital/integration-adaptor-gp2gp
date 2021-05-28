@@ -23,8 +23,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
-    private static final long SENT_TO_MHS_POLLING_DELAY = 2000;
-    private static final long SENT_TO_MHS_POLLING_TIMEOUT = 10000;
     @InjectSoftAssertions
     private SoftAssertions softly;
 
@@ -72,6 +70,9 @@ public class EhrExtractTest {
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
         waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
     }
 
     @Test

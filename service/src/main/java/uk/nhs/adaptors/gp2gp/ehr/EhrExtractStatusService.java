@@ -281,7 +281,7 @@ public class EhrExtractStatusService {
         LOGGER.info("Database updated for sending application acknowledgement");
     }
 
-    public void updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
+    public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
         var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + "sentToMhs" + DOT + SENT_AT;
@@ -293,12 +293,18 @@ public class EhrExtractStatusService {
         update.set(commonTaskId, taskDefinition.getTaskId());
         update.set(commonMessageId, messageId);
 
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status document was not updated with sentToMhs.");
         }
         LOGGER.info("Database updated for sending EHR Common document to mhs");
+
+        return ehrExtractStatus;
     }
 
     private FindAndModifyOptions getReturningUpdatedRecordOption() {
