@@ -35,6 +35,7 @@ public class MhsRequestBuilder {
     private static final String FALSE = "false";
     private static final String CONTENT_TYPE = "Content-type";
     private static final String MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
+    private static final String MHS_OUTBOUND_COMMON_INTERACTION_ID = "COPC_IN000001UK01";
     private static final String MESSAGE_ID = "Message-Id";
 
     private final MhsConfiguration mhsConfiguration;
@@ -93,6 +94,29 @@ public class MhsRequestBuilder {
             .header(WAIT_FOR_RESPONSE, FALSE)
             .header(CORRELATION_ID, conversationId)
             .header(MESSAGE_ID, positiveAckMessageId)
+            .body(bodyInserter);
+    }
+
+    public RequestHeadersSpec<?> buildSendEhrExtractCommonRequest(String requestBody, String conversationId, String fromOdsCode,
+        String messageId) {
+        SslContext sslContext = requestBuilderService.buildSSLContext();
+        HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
+        WebClient client = buildWebClient(httpClient);
+
+        WebClient.RequestBodySpec uri = client
+            .method(HttpMethod.POST)
+            .uri(mhsConfiguration.getUrl());
+
+        BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter = BodyInserters.fromValue(requestBody);
+
+        return uri
+            .accept(APPLICATION_JSON)
+            .header(ODS_CODE, fromOdsCode)
+            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+            .header(INTERACTION_ID, MHS_OUTBOUND_COMMON_INTERACTION_ID)
+            .header(WAIT_FOR_RESPONSE, FALSE)
+            .header(CORRELATION_ID, conversationId)
+            .header(MESSAGE_ID, messageId)
             .body(bodyInserter);
     }
 }
