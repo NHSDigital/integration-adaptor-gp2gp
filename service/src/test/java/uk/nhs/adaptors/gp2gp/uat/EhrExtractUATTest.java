@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,11 +25,14 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.w3c.dom.NodeList;
 
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
@@ -167,6 +172,49 @@ public class EhrExtractUATTest {
 
         assumeThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();
+
+        assertThatAgentReferencesAreValid(hl7TranslatedResponse);
+    }
+
+    @SneakyThrows
+    private void assertThatAgentReferencesAreValid(String hl7) {
+        var xPathService = new XPathService();
+        var document = xPathService.parseDocumentFromXml(hl7);
+        var agentRefIdNodes = xPathService.getNodes(document, "//agentRef/id");
+        Set<String> referencedAgentIds = extractIdsFromNodeList(agentRefIdNodes, true);
+        var agentIdNodes = xPathService.getNodes(document, "//Agent/id");
+        Set<String> agentIds = extractIdsFromNodeList(agentIdNodes, false);
+
+        assertThat(referencedAgentIds).isNotEmpty();
+        assertThat(agentIds).isNotEmpty();
+        for (var referencedAgentId : referencedAgentIds) {
+            assertThat(agentIds)
+                .withFailMessage("Expected referenced agent id %s to match the id "
+                    + "of an agent in the agent directory", referencedAgentId)
+                .contains(referencedAgentId);
+        }
+    }
+
+    private Set<String> extractIdsFromNodeList(NodeList nodeList, boolean allowSkipNullFlavour) {
+        Set<String> ids = new HashSet<>();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            var agentIdNode = nodeList.item(i);
+            if (allowSkipNullFlavour) {
+                if (agentIdNode.getAttributes().getNamedItem("nullFlavor") != null) {
+                    continue;
+                }
+            }
+
+            assertThat(agentIdNode.hasAttributes())
+                .withFailMessage("Node %s does not contain attributes", agentIdNode)
+                .isTrue();
+            assertThat(agentIdNode.getAttributes().getNamedItem("root"))
+                .withFailMessage("Node %s does not contain attribute 'root'", agentIdNode)
+                .isNotNull();
+            var id = agentIdNode.getAttributes().getNamedItem("root").getNodeValue();
+            ids.add(id);
+        }
+        return ids;
     }
 
     private static Stream<Arguments> testValueFilePaths() {
