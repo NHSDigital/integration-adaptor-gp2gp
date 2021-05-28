@@ -73,7 +73,7 @@ public final class StatementTimeMappingUtils {
 
     public static String prepareAvailabilityTimeForObservation(Observation observation) {
         if (observation.hasIssued()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(observation.getIssued().toInstant()));
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(observation.getIssuedElement()));
         }
 
         return DEFAULT_AVAILABILITY_TIME_VALUE;
@@ -81,7 +81,7 @@ public final class StatementTimeMappingUtils {
 
     public static String prepareAvailabilityTimeForDiagnosticReport(DiagnosticReport diagnosticReport) {
         if (diagnosticReport.hasIssued()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()));
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()));
         }
 
         return DEFAULT_AVAILABILITY_TIME_VALUE;
