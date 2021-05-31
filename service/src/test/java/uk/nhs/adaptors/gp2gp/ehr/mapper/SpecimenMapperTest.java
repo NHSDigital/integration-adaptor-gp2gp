@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -35,7 +36,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class SpecimenMapperTest {
 
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
-    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
+    private static final InstantType DIAGNOSTIC_REPORT_DATE = new InstantType("2020-10-12T13:33:44");
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";

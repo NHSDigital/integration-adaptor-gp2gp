@@ -3429,16 +3429,18 @@ red blood cell seen, Note low platelets</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2010-02-23 15:41:00
-Quantity: 1750.000 mL
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2010-02-23 15:41:00
+
+            Quantity: 1750.000 mL
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20100225154100"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="40FD3445-A957-48D7-B7B5-3C839211C185"/>
@@ -4124,16 +4126,18 @@ Time since last dose : 9.5 hours</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2010-02-23 00:00:00
-*** specimen received separated
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="36F92684-EA5E-4D89-A4E3-537EABB5B59A"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2010-02-23 00:00:00
+
+            *** specimen received separated
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20100225154100"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
@@ -6099,16 +6103,18 @@ IgE abs to horse, negative</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2010-02-23 15:41:00
-Fasting Status: F
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2010-02-23 15:41:00
+
+            Fasting Status: F
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20100225154100"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>

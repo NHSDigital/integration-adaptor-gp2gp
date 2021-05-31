@@ -24,14 +24,7 @@
             </specimenRole>
         </specimen>
         {{#narrativeStatement}}
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="{{narrativeStatementId}}"/>
-                <text>{{{.}}}</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="{{availabilityTime}}"/>
-            </NarrativeStatement>
-        </component>
+            {{{.}}}
         {{/narrativeStatement}}
         {{#observations}}
             {{{.}}}

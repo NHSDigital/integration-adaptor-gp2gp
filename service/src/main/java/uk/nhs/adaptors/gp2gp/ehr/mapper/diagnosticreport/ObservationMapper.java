@@ -102,7 +102,7 @@ public class ObservationMapper {
             var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
             var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
             var availabilityTimeElement =
-                StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
+                StatementTimeMappingUtils.prepareAvailabilityTime(observationAssociatedWithSpecimen.getIssuedElement());
             var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
             var statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
 
@@ -196,7 +196,7 @@ public class ObservationMapper {
                 .commentType(commentType)
                 .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             if (mapParticipants) {
                 prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
@@ -216,7 +216,7 @@ public class ObservationMapper {
                     var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
                     var codeElement = prepareCodeElement(derivedObservation);
                     var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
-                    var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
+                    var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                         .classCode(CompoundStatementClassCode.CLUSTER.getCode())
@@ -256,7 +256,7 @@ public class ObservationMapper {
                 .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
                 .codeElement(prepareCodeElement(observation))
                 .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             if (observation.hasValue()) {
                 Type value = observation.getValue();

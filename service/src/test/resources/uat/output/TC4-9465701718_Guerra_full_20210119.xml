@@ -234,15 +234,17 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
-                <text>CommentType:AGGREGATE COMMENT SET CommentDate: 2001-03-30 00:00:00 EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20010330161100"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:2001-03-30 00:00:00
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330161100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -345,15 +347,17 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
-                <text>CommentType:AGGREGATE COMMENT SET EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20010330162700"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20010330162700"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -433,15 +437,17 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
-                <text>CommentType:AGGREGATE COMMENT SET CommentDate: 2002-03-22 00:00:00 EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20020330162100"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:2002-03-22 00:00:00
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -521,15 +527,17 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
-                <text>CommentType:AGGREGATE COMMENT SET CommentDate: 2002-03-30 00:00:00 EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20020330162100"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:2002-03-30 00:00:00
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -725,15 +733,17 @@ Mechanical Prosthetic Heart Valves )</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
-                <text>CommentType:AGGREGATE COMMENT SET CommentDate: 2002-03-30 00:00:00 EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20020330162100"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:2002-03-30 00:00:00
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
@@ -813,16 +823,18 @@ Mechanical Prosthetic Heart Valves )</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2002-03-30 09:21:00
-Quantity: 1750.000 mL
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2002-03-30 09:21:00
+
+            Quantity: 1750.000 mL
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20020330162100"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20020330162100"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
@@ -2325,16 +2337,18 @@ Dr. N.O&apos;Connell</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2003-06-02 00:00:00
-Some Test Specimen Comment
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="77EE1EA7-135F-4541-99A5-F8D63433AE7D"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2003-06-02 00:00:00
+
+            Some Test Specimen Comment
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20030602175200"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030602175200"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
         <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
@@ -2611,18 +2625,20 @@ Some Test Specimen Comment
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271) 2003-06-02 00:00:00
-Another
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            CommentDate:2003-06-02 00:00:00
+
+            Another
 Specimen
 Comment
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20030602175200"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030602175200"/>
+    </NarrativeStatement>
+</component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
         <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
@@ -5866,15 +5882,17 @@ rheumatoid factor tests.</text>
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
-                <text>CommentType:AGGREGATE COMMENT SET CommentDate: 2003-01-09 00:00:00 EMPTY REPORT
-</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="20030221115000"/>
-            </NarrativeStatement>
-        </component>
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
+            CommentDate:2003-01-09 00:00:00
+
+            EMPTY REPORT</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20030221115000"/>
+    </NarrativeStatement>
+</component>
     </CompoundStatement>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
