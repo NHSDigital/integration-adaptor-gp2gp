@@ -80,7 +80,7 @@ public class SpecimenMapperTest {
         var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
 
-        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
+        lenient().when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
         String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT_DATE);
 
@@ -151,7 +151,7 @@ public class SpecimenMapperTest {
             Arguments.of("input-specimen-without-notes.json", "expected-specimen-without-notes.xml"),
             Arguments.of("input-specimen-without-effective-time.json", "expected-specimen-without-effective-time.xml"),
             Arguments.of("input-specimen-with-empty-duration-value.json", "expected-specimen-with-empty-duration-value.xml"),
-            Arguments.of("input-specimen-with-empty-quantity-value.json", "expected-specimen-with-empty-quantity-value.xml")
+            Arguments.of("input-specimen-no-narrative-statement.json", "expected-specimen-with-dummy-narrative-statement.xml")
         );
     }
 

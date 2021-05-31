@@ -1,13 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
@@ -23,17 +25,17 @@ import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.SpecimenCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -64,7 +66,8 @@ public class SpecimenMapper {
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildNarrativeStatement(specimen).ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
+        buildNarrativeStatement(specimen, isEmpty(mappedObservations))
+            .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
@@ -147,8 +150,8 @@ public class SpecimenMapper {
             .collect(Collectors.joining());
     }
 
-    private Optional<String> buildNarrativeStatement(Specimen specimen) {
-        NarrativeStatementBuilder narrativeStatementBuilder = new NarrativeStatementBuilder();
+    private Optional<String> buildNarrativeStatement(Specimen specimen, boolean generateDummyStatement) {
+        NarrativeStatementBuilder narrativeStatementBuilder = new NarrativeStatementBuilder(generateDummyStatement);
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
@@ -189,22 +192,24 @@ public class SpecimenMapper {
         private static final String COMMENT_PREFIX = "comment type - LAB SPECIMEN COMMENT(E271)";
 
         private String text;
+        private boolean generateDummyStatement;
 
-        NarrativeStatementBuilder() {
+        NarrativeStatementBuilder(boolean generateDummyStatement) {
+            this.generateDummyStatement = generateDummyStatement;
             text = StringUtils.EMPTY;
         }
 
-        private void prependPertinentInformation(String... texts) {
+        private void prependComment(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
         }
 
-        private void prependPertinentInformation(List<String> texts) {
+        private void prependComment(List<String> texts) {
             text = newLine(withSpace(texts), text);
         }
 
         public void fastingStatus(CodeableConcept fastingStatus) {
             CodeableConceptMappingUtils.extractTextOrCoding(fastingStatus)
-                .ifPresent(fastingStatusValue -> prependPertinentInformation(FASTING_STATUS, fastingStatusValue));
+                .ifPresent(fastingStatusValue -> prependComment(FASTING_STATUS, fastingStatusValue));
         }
 
         public void fastingDuration(Duration fastingDuration) {
@@ -214,7 +219,7 @@ public class SpecimenMapper {
                 fastingDuration.getUnit()
             );
 
-            prependPertinentInformation(fastingDurationElements);
+            prependComment(fastingDurationElements);
         }
 
         public void quantity(SimpleQuantity quantity) {
@@ -224,34 +229,42 @@ public class SpecimenMapper {
                 quantity.getUnit()
             );
 
-            prependPertinentInformation(quantityElements);
+            prependComment(quantityElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
-                .ifPresent(collectionSiteValue -> prependPertinentInformation(COLLECTION_SITE, collectionSiteValue));
+                .ifPresent(collectionSiteValue -> prependComment(COLLECTION_SITE, collectionSiteValue));
         }
 
         public void note(String note) {
-            prependPertinentInformation(note);
+            prependComment(note);
         }
 
         public Optional<String> buildWithDateTime(DateTimeType date) {
             if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
+                prependComment(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
                 return Optional.of(text);
+            } else if (generateDummyStatement) {
+                prependComment("CommentType:" + CommentType.AGGREGATE_COMMENT_SET.getCode(),
+                    "CommentDate: " + DateFormatUtil.toTextFormat(date),
+                    "EMPTY REPORT");
+                return Optional.of(text);
+            } else {
+                return Optional.empty();
             }
-
-            return Optional.empty();
         }
 
         public Optional<String> build() {
             if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX);
+                prependComment(COMMENT_PREFIX);
                 return Optional.of(text);
+            } else if (generateDummyStatement) {
+                prependComment("CommentType:" + CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT");
+                return Optional.of(text);
+            } else {
+                return Optional.empty();
             }
-
-            return Optional.empty();
         }
     }
 }
