@@ -4063,91 +4063,138 @@ with special characters
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20010325"/>
-        </effectiveTime>
-        <availabilityTime value="20131118094149"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14" />
-        <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20010325"/>
-        </effectiveTime>
-        <availabilityTime value="20131118094149"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20010425"/>
-        </effectiveTime>
-        <availabilityTime value="20131118094149"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20210107114034"/>
+        </effectiveTime>
+        <availabilityTime value="20210107114034"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20210107114034" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20330328"/>
+        </effectiveTime>
+        <availabilityTime value="20210107114034"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
+    </agentRef>
+</Participant>
+    </PlanStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20010325"/>
+        </effectiveTime>
+        <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61" />
+        <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20010325"/>
+        </effectiveTime>
+        <availabilityTime value="20131118094149"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20010425"/>
+        </effectiveTime>
+        <availabilityTime value="20131118094149"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20131118094149" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD" />
         <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
 </code>
         <statusCode code="COMPLETE" />
@@ -4175,7 +4222,7 @@ with special characters
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD" />
+        <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4203,7 +4250,7 @@ with special characters
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
+        <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
         <code code="266929003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Smoking started">
 </code>
         <statusCode code="COMPLETE" />
@@ -4231,7 +4278,7 @@ with special characters
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
+        <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4259,7 +4306,7 @@ with special characters
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6" />
+        <id root="46A43153-7A96-44D4-A14A-A63284061767" />
         <code code="160579004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped drinking alcohol">
 </code>
         <statusCode code="COMPLETE" />
@@ -4287,7 +4334,7 @@ with special characters
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="46A43153-7A96-44D4-A14A-A63284061767" />
+        <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4315,7 +4362,7 @@ with special characters
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
+        <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
         <text>Smoking status on date of event: Smoker NOTES: No start date.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4330,7 +4377,7 @@ with special characters
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
+        <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4358,7 +4405,7 @@ with special characters
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
+        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
         <text>These are the target BP notes
 With some
 Line breaks in the notes</text>
@@ -4375,7 +4422,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
+        <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4403,7 +4450,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="938365F3-8C68-4189-A550-FAB37F4F59C8" />
+        <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2" />
         <text>Started drinking: 27/10/2001</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4418,7 +4465,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2" />
+        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4446,7 +4493,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91" />
+        <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B" />
         <text>Drinking status on eventdate: Current drinker</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4461,7 +4508,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B" />
+        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4489,7 +4536,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
+        <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E" />
         <text>Placed on register: 01/02/2005</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4504,7 +4551,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E" />
+        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4532,7 +4579,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
+        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357" />
         <text>Removed from register: 08/08/2005</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4547,7 +4594,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357" />
+        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4575,7 +4622,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
+        <id root="730F742C-1164-45BF-9139-8484074E5995" />
         <text>Edited By Dave from original</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20050201" />
@@ -4590,7 +4637,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="730F742C-1164-45BF-9139-8484074E5995" />
+        <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4618,7 +4665,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
+        <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
         <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -4646,7 +4693,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
+        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4674,7 +4721,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
+        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
         <code code="315612005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target systolic blood pressure">
 </code>
         <statusCode code="COMPLETE" />
@@ -4702,7 +4749,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
+        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4730,7 +4777,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
+        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
         <code code="315613000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Target diastolic blood pressure">
 </code>
         <statusCode code="COMPLETE" />
@@ -4758,7 +4805,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56" />
+        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4786,7 +4833,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
+        <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8" />
         <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
     <originalText>Alcohol consumption</originalText>
 </code>
@@ -4815,7 +4862,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8" />
+        <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4843,7 +4890,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
+        <id root="7374E13A-D408-460C-A021-3441347C5027" />
         <code code="160617001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Stopped smoking">
 </code>
         <statusCode code="COMPLETE" />
@@ -4871,7 +4918,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7374E13A-D408-460C-A021-3441347C5027" />
+        <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4899,7 +4946,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
+        <id root="7314452F-9848-403F-8684-D7E0B2163F88" />
         <text>Smoking status on date of event: Smoker</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
@@ -4914,7 +4961,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7314452F-9848-403F-8684-D7E0B2163F88" />
+        <id root="58826586-95CF-4F70-AF27-43BBAE229C7C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4942,7 +4989,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B" />
+        <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
         <text>Smoking status on date of event: Ex-smoker NOTES: No end date.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
@@ -4957,7 +5004,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE" />
+        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4985,7 +5032,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267" />
+        <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
         <text>Smoking status on date of event: Ex-smoker NOTES: Some notes.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
@@ -5000,7 +5047,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
+        <id root="40FD3445-A957-48D7-B7B5-3C839211C185" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5028,7 +5075,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="58826586-95CF-4F70-AF27-43BBAE229C7C" />
+        <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
         <text>Posture for BP recording: Sitting, Cuff size used: Standard NOTES: Second BP notes.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20060425" />
@@ -5043,7 +5090,7 @@ Line breaks in the notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
+        <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5071,7 +5118,7 @@ Line breaks in the notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752" />
+        <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
         <text>Korotkoff level: 2, Posture for BP recording: Sitting, Cuff size used: Standard NOTES: First BP Notes
 
 and extending onto other lines as well.</text>
@@ -5088,7 +5135,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF" />
+        <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5116,7 +5163,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="40FD3445-A957-48D7-B7B5-3C839211C185" />
+        <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
         <code code="230057008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -5144,7 +5191,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518" />
+        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5172,7 +5219,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F" />
+        <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
         <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -5200,7 +5247,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824" />
+        <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5228,7 +5275,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0" />
+        <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
         <code code="266918002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tobacco smoking consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -5256,7 +5303,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
+        <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5284,7 +5331,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB" />
+        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
         <code code="230057008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigar consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -5312,7 +5359,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
+        <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5340,7 +5387,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3F170377-2DE6-45D3-90EE-9EC23EDB4F59" />
+        <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27" />
         <code code="230056004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cigarette consumption">
 </code>
         <statusCode code="COMPLETE" />
@@ -5368,7 +5415,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="49259291-5B92-4C0B-BE40-C299A8B02677" />
+        <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5396,7 +5443,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="3B5DAE5E-D0BC-45E6-A08C-2C01F1A85571"/>
+        <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5406,7 +5453,7 @@ and extending onto other lines as well.</text>
         <availabilityTime value="20131118094149"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27"/>
+                <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5419,7 +5466,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B"/>
+                <id root="49259291-5B92-4C0B-BE40-C299A8B02677"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5431,7 +5478,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF"/>
+                <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
                 <text>Diastolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20060425122200"/>
@@ -5448,7 +5495,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4" />
+        <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5476,7 +5523,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049"/>
+        <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5486,7 +5533,7 @@ and extending onto other lines as well.</text>
         <availabilityTime value="20131118094149"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
+                <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5498,7 +5545,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
+                <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5511,7 +5558,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
+                <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
                 <text>Systolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20060425122200"/>
@@ -5528,7 +5575,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42" />
+        <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5556,7 +5603,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
+        <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5566,7 +5613,7 @@ and extending onto other lines as well.</text>
         <availabilityTime value="20131118094149"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
+                <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5579,7 +5626,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
+                <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5591,7 +5638,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
+                <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
                 <text>Diastolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20060425163000"/>
@@ -5608,7 +5655,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145" />
+        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5636,7 +5683,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+        <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5646,7 +5693,7 @@ and extending onto other lines as well.</text>
         <availabilityTime value="20131118094149"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="EA3042F8-1287-46F6-B676-1B07B6AE0E36"/>
+                <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5658,7 +5705,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
+                <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -5671,7 +5718,7 @@ and extending onto other lines as well.</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
+                <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7"/>
                 <text>Systolic Measurement Absent: Unknown</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20060425163000"/>
@@ -5688,7 +5735,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="867553AF-2B39-48F7-BE0B-DE854814CED5" />
+        <id root="6D62CF66-D522-4412-A2CB-3134819B46A0" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5716,7 +5763,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7" />
+        <id root="452AFD1A-B615-4E2C-A733-544A3426DA24" />
         <text>Started drinking: 27/10/2000</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20061027" />
@@ -5731,7 +5778,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="452AFD1A-B615-4E2C-A733-544A3426DA24" />
+        <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5759,7 +5806,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781" />
+        <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF" />
         <text>Drinking status on eventdate: Ex-drinker NOTES: The stopper.</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20061027" />
@@ -5774,7 +5821,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF" />
+        <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5802,7 +5849,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6D62CF66-D522-4412-A2CB-3134819B46A0" />
+        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62" />
         <code code="160573003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Alcohol intake">
     <originalText>Alcohol consumption</originalText>
 </code>
@@ -5831,7 +5878,7 @@ and extending onto other lines as well.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62" />
+        <id root="D27E4A12-8EA6-44D7-AB94-821503546B45" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5859,7 +5906,7 @@ and extending onto other lines as well.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A" />
+        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -5883,53 +5930,6 @@ and extending onto other lines as well.</text>
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D27E4A12-8EA6-44D7-AB94-821503546B45" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20210107114034"/>
-        </effectiveTime>
-        <availabilityTime value="20210107114034"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210107114034" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="B0CD5DB4-C15D-45E9-B592-C33F55ABDAA9" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20330328"/>
-        </effectiveTime>
-        <availabilityTime value="20210107114034"/>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
-    </agentRef>
-</Participant>
-    </PlanStatement>
 </component>
     </ehrComposition>
 </component>
