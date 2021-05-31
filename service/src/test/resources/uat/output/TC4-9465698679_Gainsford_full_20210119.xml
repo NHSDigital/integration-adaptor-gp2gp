@@ -2883,11 +2883,11 @@
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100114094200"/>
+            <center value="20101012145058"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20101012145058"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094202" />
+            <time value="20101012145058" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2906,30 +2906,25 @@
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
+    <PlanStatement classCode="OBS" moodCode="INT">
         <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17" />
-        <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
+        <code code="1662531000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dental recall - high caries in mother and siblings">
+    <originalText>Dental recall - high caries in mother and siblings</originalText>
 </code>
+        <text>
+            More blah blah
+        </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100114094200"/>
+            <center value="20151012141200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
+        <availabilityTime value="20101012145058"/>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
+    </PlanStatement>
 </component>
     </ehrComposition>
 </component>
@@ -2964,8 +2959,7 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8F84A00-B52E-466B-BF66-05C1A49B3F3D" />
-        <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
-    <originalText>Roman Catholic</originalText>
+        <code code="408522002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Main spoken language Gaelic">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3021,7 +3015,8 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
-        <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
+        <code code="160540005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Roman Catholic, follower of religion">
+    <originalText>Roman Catholic</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3052,7 +3047,7 @@
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20100114"/>
+            <center value="20100114094200"/>
         </effectiveTime>
         <availabilityTime value="20100114094202"/>
         <author typeCode="AUT" contextControlCode="OP">
@@ -3077,6 +3072,62 @@
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
+        <code code="494161000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="White Irish - ethnic category 2001 census">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114094200"/>
+        </effectiveTime>
+        <availabilityTime value="20100114094202"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100114"/>
+        </effectiveTime>
+        <availabilityTime value="20100114094202"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100114094202" />
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F" />
         <code code="38070000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cohabiting">
 </code>
         <statusCode code="COMPLETE" />
@@ -3104,7 +3155,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
+        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3160,7 +3211,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357" />
+        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3217,7 +3268,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
+        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3274,7 +3325,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="896104C7-9DC7-4E44-B77D-DB771691C344" />
+        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -3302,7 +3353,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="54AC4831-6E33-4BB9-BC17-33D47E3C8251" />
+        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -3326,57 +3377,6 @@
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20101012145058"/>
-        </effectiveTime>
-        <availabilityTime value="20101012145058"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20101012145058" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920" />
-        <code code="1662531000006102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dental recall - high caries in mother and siblings">
-    <originalText>Dental recall - high caries in mother and siblings</originalText>
-</code>
-        <text>
-            More blah blah
-        </text>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20151012141200"/>
-        </effectiveTime>
-        <availabilityTime value="20101012145058"/>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </PlanStatement>
 </component>
     </ehrComposition>
 </component>

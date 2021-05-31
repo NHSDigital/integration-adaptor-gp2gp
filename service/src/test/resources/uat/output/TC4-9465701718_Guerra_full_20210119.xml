@@ -88,7 +88,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="3F23187B-707F-4BC9-B707-B97F1A077685"/>
+        <id root="26F80FC0-039E-4E2F-B26A-207E83723D47"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -172,7 +172,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="26F80FC0-039E-4E2F-B26A-207E83723D47"/>
+        <id root="7F42E5DE-955D-442B-BC9A-EFEAAC42F098"/>
         <code nullFlavor="UNK">
             <originalText>System Administrator</originalText>
         </code>
@@ -5795,13 +5795,13 @@ rheumatoid factor tests.</text>
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20010330"/>
+            <center value="20201026124518"/>
         </effectiveTime>
-        <availabilityTime value="20100209123152"/>
+        <availabilityTime value="20201026124518"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209123152" />
+            <time value="20201026124518" />
             <agentRef classCode="AGNT">
-                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+                <id root="7F42E5DE-955D-442B-BC9A-EFEAAC42F098" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5814,34 +5814,25 @@ rheumatoid factor tests.</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+                <id root="7F42E5DE-955D-442B-BC9A-EFEAAC42F098"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
+    <PlanStatement classCode="OBS" moodCode="INT">
         <id root="2C266175-D484-4554-B5D2-46664E36BBF3" />
-        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20010330"/>
+            <center value="20290528"/>
         </effectiveTime>
-        <availabilityTime value="20100209123152"/>
-        <value xsi:type="PQ" value="41.000" unit="1"><translation value="41.000"><originalText>g/L</originalText></translation></value>
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
+        <availabilityTime value="20201026124518"/>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+        <id root="7F42E5DE-955D-442B-BC9A-EFEAAC42F098"/>
     </agentRef>
 </Participant>
-    </ObservationStatement>
+    </PlanStatement>
 </component>
     </ehrComposition>
 </component>
@@ -5876,15 +5867,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D32A62E9-5F11-4042-9249-9E4CEEC04333" />
-        <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
-    <originalText>ALT/SGPT serum level</originalText>
+        <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123152"/>
-        <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>iu/L</originalText></translation></value>
+        <value xsi:type="PQ" value="41.000" unit="1"><translation value="41.000"><originalText>g/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -5933,14 +5923,15 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399" />
-        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
+        <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
+    <originalText>ALT/SGPT serum level</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123152"/>
-        <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>iu/L</originalText></translation></value>
+        <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>iu/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -5966,9 +5957,9 @@ rheumatoid factor tests.</text>
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
-        <availabilityTime value="20100209123151"/>
+        <availabilityTime value="20100209123152"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209123151" />
+            <time value="20100209123152" />
             <agentRef classCode="AGNT">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
             </agentRef>
@@ -5989,14 +5980,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C61DF18D-5DD7-4934-8248-CCF80E0514E8" />
-        <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
+        <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
-        <availabilityTime value="20100209123151"/>
-        <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>umol/L</originalText></translation></value>
+        <availabilityTime value="20100209123152"/>
+        <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>iu/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6045,19 +6036,19 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EF07CCC4-EB35-4993-92E9-4C1C1934C7F2" />
-        <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
+        <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123151"/>
-        
+        <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>umol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(EMISTest) - Abnormal - Contact Patient</text>
+                <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6101,19 +6092,19 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="39BE1501-1231-48AB-AE68-CFDA027D5790" />
-        <code code="1005691000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum triglycerides level">
+        <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123151"/>
-        <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>mmol/L</originalText></translation></value>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
+                <text>(EMISTest) - Abnormal - Contact Patient</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6157,14 +6148,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64E58B3C-733C-4F69-84F3-2D96B34498F6" />
-        <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
+        <code code="1005691000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum triglycerides level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123151"/>
-        <value xsi:type="PQ" value="6.100" unit="1"><translation value="6.100"><originalText>mmol/L</originalText></translation></value>
+        <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6213,20 +6204,19 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="64CA0480-0446-4C36-8B63-AACCA437787F" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>APPEARANCE</originalText>
+        <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209123151"/>
-        
+        <value xsi:type="PQ" value="6.100" unit="1"><translation value="6.100"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>TURBID</text>
+                <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6270,7 +6260,8 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="986950DF-9245-40D9-BE24-B0A9132EA679" />
-        <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>APPEARANCE</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6282,7 +6273,7 @@ rheumatoid factor tests.</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(EMISTest) - No Action, Interpretation      Desirable  Borderline  Increased Risk, Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l, Triglyceride reference range,  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
+                <text>TURBID</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6303,9 +6294,9 @@ rheumatoid factor tests.</text>
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
-        <availabilityTime value="20100209120516"/>
+        <availabilityTime value="20100209123151"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209120516" />
+            <time value="20100209123151" />
             <agentRef classCode="AGNT">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
             </agentRef>
@@ -6326,19 +6317,19 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="9978A1BE-97BC-4E0E-A4E1-5285B524FB00" />
-        <code code="993421000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma folate level">
+        <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
-        <availabilityTime value="20100209120516"/>
-        <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>ng/mL</originalText></translation></value>
+        <availabilityTime value="20100209123151"/>
+        
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
+                <text>(EMISTest) - No Action, Interpretation      Desirable  Borderline  Increased Risk, Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l, Triglyceride reference range,  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6382,14 +6373,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E5FDD72-0063-4082-A3F8-3DF354A0D14A" />
-        <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
+        <code code="993421000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma folate level">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20010330"/>
         </effectiveTime>
         <availabilityTime value="20100209120516"/>
-        <value xsi:type="PQ" value="301.000" unit="1"><translation value="301.000"><originalText>ng/L</originalText></translation></value>
+        <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>ng/mL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6438,6 +6429,62 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F36DC49B-E56C-49F1-A121-26D01772A4F5" />
+        <code code="993391000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum vitamin B12 level">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20010330"/>
+        </effectiveTime>
+        <availabilityTime value="20100209120516"/>
+        <value xsi:type="PQ" value="301.000" unit="1"><translation value="301.000"><originalText>ng/L</originalText></translation></value>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="705F8AB2-B57E-4F03-AC9C-F4A4F73E3F73" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20010330"/>
+        </effectiveTime>
+        <availabilityTime value="20100209120516"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100209120516" />
+            <agentRef classCode="AGNT">
+                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="9E6FD81D-184B-485E-A4BC-559DC0769472" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>B12/FOLATE</originalText>
 </code>
@@ -6466,7 +6513,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="705F8AB2-B57E-4F03-AC9C-F4A4F73E3F73" />
+        <id root="23E5A882-07DA-4B48-90CE-E94E7EDEC78C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6494,7 +6541,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9E6FD81D-184B-485E-A4BC-559DC0769472" />
+        <id root="22E2F211-DE10-4DEE-920B-FC9A8163DD66" />
         <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
 </code>
         <statusCode code="COMPLETE" />
@@ -6508,62 +6555,6 @@ rheumatoid factor tests.</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Microscopy, Moderate pus cells, Gram negative bacilli +, Culture, 1.Haemophilus  influenzae +++, 2.Staphylococcus aureus +, Sensitivities,                     1 2 3 4 5, Amoxycillin         S R, Trimethoprim        S R, Flucloxacillin      R S, Erythromicin        R S, Other bacteria of doubtful significance</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="23E5A882-07DA-4B48-90CE-E94E7EDEC78C" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20020330"/>
-        </effectiveTime>
-        <availabilityTime value="20100624125202"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100624125202" />
-            <agentRef classCode="AGNT">
-                <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="22E2F211-DE10-4DEE-920B-FC9A8163DD66" />
-        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20020330"/>
-        </effectiveTime>
-        <availabilityTime value="20100624125202"/>
-        <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6607,14 +6598,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BE04E276-DCB5-4057-96F5-DFF51B288BD5" />
-        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
+        <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125202"/>
-        <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
+        <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6663,14 +6654,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8EE34ED1-EDAD-412E-89D5-467AE9B7982A" />
-        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
+        <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125202"/>
-        <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+        <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6719,7 +6710,7 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E15AC1AD-D621-4E3B-80C1-5804273014C3" />
-        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
+        <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6775,14 +6766,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7CA41716-4846-4F94-A9D9-D5E0BD0A82F9" />
-        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
+        <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125202"/>
-        <value xsi:type="PQ" value="7.400" unit="1"><translation value="7.400"><originalText>10*9/L</originalText></translation></value>
+        <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6831,14 +6822,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="45F39D0E-6266-4155-9E73-9C7B1D808DF9" />
-        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
+        <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125202"/>
-        <value xsi:type="PQ" value="220.000" unit="1"><translation value="220.000"><originalText>10*9/L</originalText></translation></value>
+        <value xsi:type="PQ" value="7.400" unit="1"><translation value="7.400"><originalText>10*9/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6864,9 +6855,9 @@ rheumatoid factor tests.</text>
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
-        <availabilityTime value="20100624125201"/>
+        <availabilityTime value="20100624125202"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100624125201" />
+            <time value="20100624125202" />
             <agentRef classCode="AGNT">
                 <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
             </agentRef>
@@ -6887,14 +6878,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="60BF5F6B-B456-458F-AE20-E0644F03B843" />
-        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
+        <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
-        <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="34.800" unit="1"><translation value="34.800"><originalText>g/dL</originalText></translation></value>
+        <availabilityTime value="20100624125202"/>
+        <value xsi:type="PQ" value="220.000" unit="1"><translation value="220.000"><originalText>10*9/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6943,14 +6934,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0C2FAF03-F66A-4831-B9BA-733C008DC8D6" />
-        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
+        <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="38.700" unit="1"><translation value="38.700"><originalText>pg</originalText></translation></value>
+        <value xsi:type="PQ" value="34.800" unit="1"><translation value="34.800"><originalText>g/dL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -6999,14 +6990,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C097A760-A532-4898-BE7E-F457AF74A96B" />
-        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
+        <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="111.100" unit="1"><translation value="111.100"><originalText>fL</originalText></translation></value>
+        <value xsi:type="PQ" value="38.700" unit="1"><translation value="38.700"><originalText>pg</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -7055,14 +7046,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C88C2637-682A-44EA-A467-A9F0A2C3E92E" />
-        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
+        <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="0.315" unit="1"><translation value="0.315"><originalText>%</originalText></translation></value>
+        <value xsi:type="PQ" value="111.100" unit="1"><translation value="111.100"><originalText>fL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -7111,14 +7102,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7A7C0152-536F-4958-B243-7EA93032ABBA" />
-        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
+        <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>g/dL</originalText></translation></value>
+        <value xsi:type="PQ" value="0.315" unit="1"><translation value="0.315"><originalText>%</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -7167,14 +7158,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4DE72620-E452-4CC3-95C8-59337F3B890C" />
-        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
+        <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="2.840" unit="1"><translation value="2.840"><originalText>10*12/L</originalText></translation></value>
+        <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>g/dL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -7223,14 +7214,14 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="523D0C41-89F2-41DB-BE1A-56F6165D8DF1" />
-        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
+        <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20020330"/>
         </effectiveTime>
         <availabilityTime value="20100624125201"/>
-        <value xsi:type="PQ" value="7.600" unit="1"><translation value="7.600"><originalText>10*9/L</originalText></translation></value>
+        <value xsi:type="PQ" value="2.840" unit="1"><translation value="2.840"><originalText>10*12/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -7279,6 +7270,62 @@ rheumatoid factor tests.</text>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6D81CDFD-0A0B-49CE-9C8B-1C438E4B80CA" />
+        <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20020330"/>
+        </effectiveTime>
+        <availabilityTime value="20100624125201"/>
+        <value xsi:type="PQ" value="7.600" unit="1"><translation value="7.600"><originalText>10*9/L</originalText></translation></value>
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="72EDBD1D-7797-45F2-ACCF-63C616624FB0" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20020330"/>
+        </effectiveTime>
+        <availabilityTime value="20100624125201"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100624125201" />
+            <agentRef classCode="AGNT">
+                <id root="3316531F-5705-424C-9E1A-EE694FB411B4" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="BC52FA50-4D96-4A4F-A321-21EFE52644F0" />
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE" />
@@ -7309,7 +7356,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="72EDBD1D-7797-45F2-ACCF-63C616624FB0" />
+        <id root="398D3F4E-8CA2-41AB-80A2-0D27EF4C8873" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7337,7 +7384,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BC52FA50-4D96-4A4F-A321-21EFE52644F0" />
+        <id root="4DCC7F96-D134-40CD-86DE-870F7C9CEBCB" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Down&apos;s risk screen</originalText>
 </code>
@@ -7366,7 +7413,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="398D3F4E-8CA2-41AB-80A2-0D27EF4C8873" />
+        <id root="489774D7-1062-42AA-A12A-7D9A8B53CCEC" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7394,7 +7441,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4DCC7F96-D134-40CD-86DE-870F7C9CEBCB" />
+        <id root="A4FF5CDB-FD31-4C11-AB90-2205935377EF" />
         <code code="1010601000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma triglyceride level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7431,7 +7478,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="489774D7-1062-42AA-A12A-7D9A8B53CCEC" />
+        <id root="9FCA8ABC-CCBF-48BF-A704-B8DAB85AA7A3" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7459,7 +7506,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A4FF5CDB-FD31-4C11-AB90-2205935377EF" />
+        <id root="6C19325E-0B3B-45F1-8ECE-6AAF87ED5EE0" />
         <code code="1010581000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma HDL (high density lipoprotein) cholesterol level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7487,7 +7534,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9FCA8ABC-CCBF-48BF-A704-B8DAB85AA7A3" />
+        <id root="F8732698-CF32-4373-B32E-B53FC2B975BF" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7515,7 +7562,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6C19325E-0B3B-45F1-8ECE-6AAF87ED5EE0" />
+        <id root="513D7148-C947-44E5-8CAB-E197E1F6F310" />
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7543,7 +7590,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F8732698-CF32-4373-B32E-B53FC2B975BF" />
+        <id root="1988036A-5CD1-4822-9043-5E8BE566717D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7571,7 +7618,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="513D7148-C947-44E5-8CAB-E197E1F6F310" />
+        <id root="113A27BB-3C07-43CF-941D-13EE95988909" />
         <code code="1018251000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alanine aminotransferase level">
     <originalText>ALT/SGPT serum level</originalText>
 </code>
@@ -7606,7 +7653,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1988036A-5CD1-4822-9043-5E8BE566717D" />
+        <id root="D37ED068-62F9-4872-95B0-4B8B219C1DE7" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7634,7 +7681,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="113A27BB-3C07-43CF-941D-13EE95988909" />
+        <id root="03D1310D-7E07-4EF8-8C1E-274064340A1A" />
         <code code="997681000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Fasting blood glucose level">
     <originalText>Fasting blood sugar</originalText>
 </code>
@@ -7666,7 +7713,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D37ED068-62F9-4872-95B0-4B8B219C1DE7" />
+        <id root="27048C44-2E4F-4D39-95A7-5BE2170CC41C" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7694,7 +7741,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="03D1310D-7E07-4EF8-8C1E-274064340A1A" />
+        <id root="F8E056AD-A4C5-415F-977B-DB51B5B99413" />
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE" />
@@ -7722,7 +7769,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="27048C44-2E4F-4D39-95A7-5BE2170CC41C" />
+        <id root="4C3A9569-6A95-4FA4-9FA2-0ED692FE39F7" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7750,7 +7797,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F8E056AD-A4C5-415F-977B-DB51B5B99413" />
+        <id root="315D1A05-2BC4-4A9F-A007-852105C7D9E2" />
         <code code="1017401000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma potassium level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7778,7 +7825,7 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4C3A9569-6A95-4FA4-9FA2-0ED692FE39F7" />
+        <id root="6752B8A1-4F8A-4DA5-92CA-8F6D5071EF17" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -7806,7 +7853,7 @@ rheumatoid factor tests.</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="315D1A05-2BC4-4A9F-A007-852105C7D9E2" />
+        <id root="45E992D4-2314-412D-BF27-38C9165CB556" />
         <code code="999691000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum bilirubin level">
 </code>
         <statusCode code="COMPLETE" />
@@ -7837,68 +7884,11 @@ rheumatoid factor tests.</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6752B8A1-4F8A-4DA5-92CA-8F6D5071EF17" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20201026"/>
-        </effectiveTime>
-        <availabilityTime value="20201026124518"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201026124518" />
-            <agentRef classCode="AGNT">
-                <id root="3F23187B-707F-4BC9-B707-B97F1A077685" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="3F23187B-707F-4BC9-B707-B97F1A077685"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="45E992D4-2314-412D-BF27-38C9165CB556" />
-        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
-    <originalText>Preferred method of contact: unknown</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20201026"/>
-        </effectiveTime>
-        <availabilityTime value="20201026124518"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="3F23187B-707F-4BC9-B707-B97F1A077685"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
         <id root="19EA17EA-F1E6-4528-A853-7E00207FCF41" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20201026124518"/>
+            <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026124518"/>
         <author typeCode="AUT" contextControlCode="OP">
@@ -7921,21 +7911,31 @@ rheumatoid factor tests.</text>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
-    <PlanStatement classCode="OBS" moodCode="INT">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2AC823BC-2E8D-4183-BA0D-B71E2EAAB113" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+        <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
+    <originalText>Preferred method of contact: unknown</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20290528"/>
+            <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026124518"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="26F80FC0-039E-4E2F-B26A-207E83723D47"/>
     </agentRef>
 </Participant>
-    </PlanStatement>
+    </ObservationStatement>
 </component>
     </ehrComposition>
 </component>

@@ -2,17 +2,23 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -59,6 +65,8 @@ public class NonConsultationResourceMapperTest {
     private static final String EXPECTED_DOCUMENT_REFERENCE_REQUEST_OUTPUT = FILES_DIRECTORY + "expected-document-reference-output.xml";
     private static final String DIAGNOSTIC_REPORT_XML = FILES_DIRECTORY + "diagnostic-report-stub.xml";
     private static final String DIAGNOSTIC_REPORT_BUNDLE = FILES_DIRECTORY + "diagnostic-report-bundle.json";
+    private static final String DIAGNOSTIC_REPORT_AFTER_OBSERVATION_BUNDLE =
+        FILES_DIRECTORY + "diagnostic-report-after-observation-bundle.json";
     private static final String EXPECTED_DIAGNOSTIC_REPORT_OUTPUT = FILES_DIRECTORY + "expected-diagnostic-report-output.xml";
     private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_XML = FILES_DIRECTORY + "diagnostic-report-agent-person-stub.xml";
     private static final String DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE = FILES_DIRECTORY + "diagnostic-report-agent-person-bundle.json";
@@ -97,6 +105,26 @@ public class NonConsultationResourceMapperTest {
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
         assertThat(translatedOutput).isEqualTo(expectedOutput);
+    }
+
+    @Test
+    public void When_TransformingResourcesToEhrComp_Expect_ObservationToBeProcessedLast() throws IOException {
+        // ARRANGE
+        setupMock("<MappedResourceStub/>");
+        String bundle = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_AFTER_OBSERVATION_BUNDLE);
+        Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
+
+        // ACT
+        nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+
+        // ASSERT
+        var resourceArgumentCaptor = ArgumentCaptor.forClass(Resource.class);
+        verify(encounterComponentsMapper, times(2))
+            .mapResourceToComponent(resourceArgumentCaptor.capture());
+
+        var mappedResources = resourceArgumentCaptor.getAllValues();
+        var mappedResourceTypesInOrder = mappedResources.stream().map(Resource::getResourceType);
+        assertThat(mappedResourceTypesInOrder).isEqualTo(asList(ResourceType.DiagnosticReport, ResourceType.Observation));
     }
 
     private static Stream<Arguments> testArgs() {

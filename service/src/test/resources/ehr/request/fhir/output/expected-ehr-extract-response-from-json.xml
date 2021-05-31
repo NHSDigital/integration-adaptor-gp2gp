@@ -137,13 +137,13 @@
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
-            <originalText>General Medical Practitioner</originalText>
+            <originalText>System Administrator</originalText>
         </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
                 <prefix>Dr</prefix>
-                <given>Peter</given>
-                <family>Whitcombe</family>
+                <given>EMIS Web</given>
+                <family>Recall Schedule</family>
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -165,13 +165,13 @@
     <Agent classCode="AGNT">
         <id root="test-id-3"/>
         <code nullFlavor="UNK">
-            <originalText>System Administrator</originalText>
+            <originalText>General Medical Practitioner</originalText>
         </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
                 <prefix>Dr</prefix>
-                <given>EMIS Web</given>
-                <family>Recall Schedule</family>
+                <given>Peter</given>
+                <family>Whitcombe</family>
             </name>
         </agentPerson>
         <representedOrganization classCode="ORG" determinerCode="INSTANCE">
@@ -7653,6 +7653,509 @@ The line below contains special characters...
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
+            <center value="20201026115836"/>
+        </effectiveTime>
+        <availabilityTime value="20201026115836"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201026115836" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="test-id-3" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20300225"/>
+        </effectiveTime>
+        <availabilityTime value="20201026115836"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </PlanStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113145739"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113145739" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113145739" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113145725"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113145725" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113145725" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113145710"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113145710" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113145710" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+<component typeCode="COMP">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113145710" />
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>This is text for a warfarin allergy</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+  </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113140445"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113140445" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            <high value="20100323000000"/>
+        </effectiveTime>
+        <availabilityTime value="20100113140445" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+<component typeCode="COMP">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            <high value="20100323000000"/>
+        </effectiveTime>
+        <availabilityTime value="20100113140445" />
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+  </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113114126"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113114126" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113114126" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+<component typeCode="COMP">
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="test-id-3"/>
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113114126" />
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Drug Allergy - Apsrin</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+  </ObservationStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100113"/>
+        </effectiveTime>
+        <availabilityTime value="20100113114111"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100113114111" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100113"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100113114111" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20100714"/>
+        </effectiveTime>
+        <availabilityTime value="20100714163251"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20100714163251" />
+            <agentRef classCode="AGNT">
+                <id root="test-id-3" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="test-id-3"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, major</originalText>
+            <qualifier inverted="false">
+                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20100714"/>
+            
+        </effectiveTime>
+        <availabilityTime value="20100714163251" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="test-id-3"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="test-id-3"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="test-id-3" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
             <center value="19880101"/>
         </effectiveTime>
         <availabilityTime value="20100113154141"/>
@@ -8383,509 +8886,6 @@ The line below contains special characters...
 </Participant>
     </ObservationStatement>
 </component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20201026115836"/>
-        </effectiveTime>
-        <availabilityTime value="20201026115836"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201026115836" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="test-id-3" />
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20300225"/>
-        </effectiveTime>
-        <availabilityTime value="20201026115836"/>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </PlanStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145739"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145739" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113145739" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145725"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145725" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113145725" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113145710"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145710" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113145710" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113145710" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is text for a warfarin allergy</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113140445"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113140445" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            <high value="20100323000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100113140445" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            <high value="20100323000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100113140445" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113114126"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113114126" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113114126" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113114126" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Drug Allergy - Apsrin</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100113"/>
-        </effectiveTime>
-        <availabilityTime value="20100113114111"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113114111" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113114111" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100714"/>
-        </effectiveTime>
-        <availabilityTime value="20100714163251"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714163251" />
-            <agentRef classCode="AGNT">
-                <id root="test-id-3" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="test-id-3"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="test-id-3" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, major</originalText>
-            <qualifier inverted="false">
-                <name code="386134007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Significant"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100714"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100714163251" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="test-id-3"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="test-id-3"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-
     </ehrComposition>
 </component>
         </ehrFolder>
