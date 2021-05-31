@@ -93,19 +93,19 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .collect(Collectors.toList());
 
-            var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
+            Optional<String> narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
 
-            if (narrativeStatements.isBlank() && derivedObservations.isEmpty()) {
+            if (narrativeStatements.isPresent() && derivedObservations.isEmpty()) {
                 return mapObservationToObservationStatement(observationAssociatedWithSpecimen);
             }
 
-            var classCode = prepareClassCode(derivedObservations);
-            var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
-            var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
-            var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
-            var availabilityTimeElement =
+            CompoundStatementClassCode classCode = prepareClassCode(derivedObservations);
+            String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
+            String codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
+            String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
+            String availabilityTimeElement =
                 StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
-            var statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
+            String statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
 
             var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                 .classCode(classCode.getCode())
@@ -113,9 +113,11 @@ public class ObservationMapper {
                 .codeElement(codeElement)
                 .effectiveTime(effectiveTime)
                 .availabilityTimeElement(availabilityTimeElement)
-                .narrativeStatements(narrativeStatements)
+                .narrativeStatements(narrativeStatements.toString())
                 .statementsForDerivedObservations(statementsForDerivedObservations);
 
+            prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
+                .ifPresent(observationCompoundStatementTemplateParameters::observationStatement);
             prepareParticipant(observationAssociatedWithSpecimen)
                 .ifPresent(observationCompoundStatementTemplateParameters::participant);
 
@@ -125,12 +127,12 @@ public class ObservationMapper {
             );
         }
 
-        private String prepareObservationStatement(Observation observation) {
-            if (observationHasNonCommentNoteCode(observation)) {
-                return mapObservationToObservationStatement(observation);
+        private Optional<String> prepareObservationStatement(Observation observation, CompoundStatementClassCode classCode) {
+            if (observationHasNonCommentNoteCode(observation) && classCode.equals(CompoundStatementClassCode.CLUSTER)) {
+                return Optional.ofNullable(mapObservationToObservationStatement(observation));
             }
 
-            return StringUtils.EMPTY;
+            return Optional.empty();
         }
 
         private String mapObservationToObservationStatement(Observation observation) {
@@ -169,7 +171,7 @@ public class ObservationMapper {
             );
         }
 
-        private String prepareNarrativeStatements(Observation observation) {
+        private Optional<String> prepareNarrativeStatements(Observation observation) {
             StringBuilder narrativeStatementsBlock = new StringBuilder();
 
             if (observation.hasComment()) {
@@ -222,7 +224,7 @@ public class ObservationMapper {
                     .ifPresent(narrativeStatementsBlock::append);
             }
 
-            return narrativeStatementsBlock.toString();
+            return Optional.of(narrativeStatementsBlock.toString());
         }
 
         private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
@@ -242,14 +244,14 @@ public class ObservationMapper {
             StringBuilder derivedObservationsBlock = new StringBuilder();
 
             derivedObservations.forEach(derivedObservation -> {
-                var observationStatement = prepareObservationStatement(derivedObservation);
-                var narrativeStatements = prepareNarrativeStatements(derivedObservation);
+                Optional<String> observationStatement = prepareObservationStatement(derivedObservation, CompoundStatementClassCode.CLUSTER);
+                Optional<String> narrativeStatements = prepareNarrativeStatements(derivedObservation);
 
-                if (!observationStatement.isBlank() && !narrativeStatements.isBlank()) {
-                    var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
-                    var codeElement = prepareCodeElement(derivedObservation);
-                    var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
-                    var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
+                if (observationStatement.isPresent() && narrativeStatements.isPresent()) {
+                    String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
+                    String codeElement = prepareCodeElement(derivedObservation);
+                    String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
+                    String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                         .classCode(CompoundStatementClassCode.CLUSTER.getCode())
@@ -257,8 +259,8 @@ public class ObservationMapper {
                         .codeElement(codeElement)
                         .effectiveTime(effectiveTime)
                         .availabilityTimeElement(availabilityTimeElement)
-                        .observationStatement(observationStatement)
-                        .narrativeStatements(narrativeStatements);
+                        .observationStatement(observationStatement.toString())
+                        .narrativeStatements(narrativeStatements.toString());
 
                     prepareParticipant(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::participant);
 
