@@ -58,7 +58,7 @@ public class AgentDirectory {
         return inputBundle.getEntry().stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> ResourceType.PractitionerRole.equals(resource.getResourceType()))
-            .map(resource -> (PractitionerRole) resource)
+            .map(PractitionerRole.class::cast)
             .filter(resource -> resource.getPractitioner().hasReference())
             .filter(resource -> StringUtils.equals(resource.getPractitioner().getReference(), practitionerReference.getReference()))
             .filter(resource -> resource.getOrganization().hasReference())
