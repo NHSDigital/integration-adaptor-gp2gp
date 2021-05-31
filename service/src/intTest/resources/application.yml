@@ -48,3 +48,4 @@ gp2gp:
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
+    unsupportedContentTypes: ${GP2GP_MHS_UNSUPPORTED_CONTENT_TYPES:a,b,c}

@@ -1,7 +1,10 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import com.github.mustachejava.Mustache;
+
 import lombok.RequiredArgsConstructor;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.BaseReference;
@@ -10,7 +13,9 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
@@ -27,6 +32,11 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
+    private static final char SEPARATOR = ',';
+
+    @Value("${gp2gp.mhs.unsupportedContentTypes}")
+    private String unsupportedContentTypes;
+
     private final MessageContext messageContext;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
@@ -37,26 +47,34 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final String narrativeStatementId = messageContext.getIdMapper()
             .getOrNew(ResourceType.DocumentReference, documentReference.getIdElement());
 
-        final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
-        final String fileName = DocumentReferenceUtils.buildAttachmentFileName(narrativeStatementId, attachment);
-
         final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(narrativeStatementId)
             .availabilityTime(getAvailabilityTime(documentReference))
-            .hasReference(true)
-            .referenceTitle(fileName);
+            .hasReference(true);
 
-        Optional.ofNullable(attachment.getTitle())
-            .ifPresentOrElse(
-                title -> builder
-                    .comment(getComment(documentReference, title))
-                    .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE),
-                () -> builder
-                    .comment(getComment(documentReference, null))
-                    .referenceContentType(attachmentContentType));
+        final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
+        final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
+
+        if (isContentTypeNotSupported(attachmentContentType) || isFileAbsent(attachment)) {
+            builder.referenceTitle(DocumentReferenceUtils.buildMissingAttachmentFileName(narrativeStatementId))
+                .comment(getComment(documentReference, attachment.getTitle()))
+                .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE);
+        } else {
+            builder.referenceTitle(DocumentReferenceUtils.buildPresentAttachmentFileName(narrativeStatementId, attachmentContentType))
+                .comment(getComment(documentReference, null))
+                .referenceContentType(attachmentContentType);
+        }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private boolean isContentTypeNotSupported(String attachmentContentType) {
+        String[] unsupportedTypes = StringUtils.split(unsupportedContentTypes, SEPARATOR);
+        return ArrayUtils.isNotEmpty(unsupportedTypes) && ArrayUtils.contains(unsupportedTypes, attachmentContentType);
+    }
+
+    private boolean isFileAbsent(Attachment attachment) {
+        return StringUtils.isNotBlank(attachment.getTitle());
     }
 
     private String getComment(final DocumentReference documentReference, final String attachmentTitle) {

@@ -5,6 +5,7 @@ import org.apache.tika.mime.MimeTypeException;
 import org.apache.tika.mime.MimeTypes;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.DocumentReference;
+
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 import java.util.Optional;
@@ -37,11 +38,21 @@ public final class DocumentReferenceUtils {
     }
 
     public static String buildAttachmentFileName(String narrativeStatementId, Attachment attachment) {
-        var fileExtension = mapContentTypeToFileExtension(extractContentType(attachment));
+        String contentType = extractContentType(attachment);
 
         return Optional.ofNullable(attachment.getTitle())
-            .map(__ -> "AbsentAttachment" + narrativeStatementId + fileExtension)
-            .orElse(narrativeStatementId + "_" + narrativeStatementId + fileExtension);
+            .map(__ -> buildMissingAttachmentFileName(narrativeStatementId))
+            .orElse(buildPresentAttachmentFileName(narrativeStatementId, contentType));
+    }
+
+    public static String buildPresentAttachmentFileName(String narrativeStatementId, String contentType) {
+        var fileExtension = mapContentTypeToFileExtension(contentType);
+
+        return narrativeStatementId + "_" + narrativeStatementId + fileExtension;
+    }
+
+    public static String buildMissingAttachmentFileName(String narrativeStatementId) {
+        return "AbsentAttachment" + narrativeStatementId + ".txt";
     }
 
     private static String mapContentTypeToFileExtension(String contentType) {

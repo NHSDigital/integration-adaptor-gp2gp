@@ -1704,7 +1704,7 @@
                 <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachment0933F2FD-F15D-47FB-9B74-8B48C1A491A4.docx"/>
+                    <reference value="file://localhost/AbsentAttachment0933F2FD-F15D-47FB-9B74-8B48C1A491A4.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1753,7 +1753,7 @@
                 <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachmentF4BF142B-6D5C-4E01-933F-A817FD992E9B.docx"/>
+                    <reference value="file://localhost/AbsentAttachmentF4BF142B-6D5C-4E01-933F-A817FD992E9B.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
