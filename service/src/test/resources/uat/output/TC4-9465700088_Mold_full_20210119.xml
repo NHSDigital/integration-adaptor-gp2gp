@@ -8363,7 +8363,54 @@ No other bony abnormality seen. The IUCD is noted in situ.
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="303AECB7-7143-4B09-9894-7789463EB059" />
+        <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20201215145918"/>
+        </effectiveTime>
+        <availabilityTime value="20201215145918"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20201215145918" />
+            <agentRef classCode="AGNT">
+                <id root="303AECB7-7143-4B09-9894-7789463EB059" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="303AECB7-7143-4B09-9894-7789463EB059"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP" >
+    <PlanStatement classCode="OBS" moodCode="INT">
+        <id root="DFEA995B-2BF0-4CBB-AF6C-FDC482EE5B7A" />
+        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="19830907"/>
+        </effectiveTime>
+        <availabilityTime value="20201215145918"/>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="303AECB7-7143-4B09-9894-7789463EB059"/>
+    </agentRef>
+</Participant>
+    </PlanStatement>
+</component>
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="DDC66ED1-E97F-4705-A551-F07A513C2A60" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -8391,7 +8438,7 @@ No other bony abnormality seen. The IUCD is noted in situ.
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DFEA995B-2BF0-4CBB-AF6C-FDC482EE5B7A" />
+        <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -8415,53 +8462,6 @@ No other bony abnormality seen. The IUCD is noted in situ.
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="DDC66ED1-E97F-4705-A551-F07A513C2A60" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20201215145918"/>
-        </effectiveTime>
-        <availabilityTime value="20201215145918"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201215145918" />
-            <agentRef classCode="AGNT">
-                <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B" />
-        <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="19830907"/>
-        </effectiveTime>
-        <availabilityTime value="20201215145918"/>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
-    </agentRef>
-</Participant>
-    </PlanStatement>
 </component>
     </ehrComposition>
 </component>
