@@ -32,11 +32,11 @@ Fasting Status: in progress
                 <availabilityTime value="2020-10-12"/>
             </NarrativeStatement>
         </component>
+            <!-- Mapped Observation with id: Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 -->
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="REFERENCE-to-Practitioner/89890-1985-45D9-993E-C5FF51F36828"/>
             </agentRef>
         </Participant>
-            <!-- Mapped Observation with id: Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 -->
     </CompoundStatement>
 </component>

@@ -33,6 +33,9 @@
             </NarrativeStatement>
         </component>
         {{/narrativeStatement}}
+        {{#observations}}
+            {{{.}}}
+        {{/observations}}
         {{#participant}}
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
@@ -40,8 +43,5 @@
             </agentRef>
         </Participant>
         {{/participant}}
-        {{#observations}}
-            {{{.}}}
-        {{/observations}}
     </CompoundStatement>
 </component>
