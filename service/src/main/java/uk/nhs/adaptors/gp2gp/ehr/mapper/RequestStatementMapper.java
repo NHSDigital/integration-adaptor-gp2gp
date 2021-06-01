@@ -91,7 +91,7 @@ public class RequestStatementMapper {
             templateParameters
                 .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getIdElement()))
                 .isNested(isNested)
-                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
+                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(referralRequest.getAuthoredOnElement()))
                 .text(buildTextDescription())
                 .code(buildCode());
 

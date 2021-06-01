@@ -1,39 +1,46 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Duration;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.SimpleQuantity;
 import org.hl7.fhir.dstu3.model.Specimen;
+import org.hl7.fhir.dstu3.model.Specimen.SpecimenCollectionComponent;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.SpecimenCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -42,6 +49,8 @@ public class SpecimenMapper {
 
     private static final Mustache SPECIMEN_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("specimen_compound_statement_template.mustache");
+    private static final Mustache NARRATIVE_STATEMENT_TEMPLATE =
+        TemplateUtils.loadTemplate("narrative_statement_template.mustache");
 
     private static final String FASTING_STATUS_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
         + "-FastingStatus-1";
@@ -51,20 +60,21 @@ public class SpecimenMapper {
     private final ObservationMapper observationMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, String diagnosticReportIssuedDate) {
+    public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations,
+        InstantType diagnosticReportIssuedDate) {
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
-            .availabilityTime(diagnosticReportIssuedDate)
+            .availabilityTime(DateFormatUtil.toHl7Format(diagnosticReportIssuedDate))
             .specimenRoleId(randomIdGeneratorService.createNewId())
-            .narrativeStatementId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations);
 
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildNarrativeStatement(specimen).ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
+        buildNarrativeStatement(specimen, diagnosticReportIssuedDate, isEmpty(mappedObservations))
+            .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
@@ -93,7 +103,7 @@ public class SpecimenMapper {
 
     private Optional<DateTimeType> getCollectionDate(Specimen specimen) {
         if (specimen.hasCollection()) {
-            Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
+            SpecimenCollectionComponent collection = specimen.getCollection();
             if (collection.hasCollectedDateTimeType()) {
                 return Optional.of(collection.getCollectedDateTimeType());
             } else if (collection.hasCollectedPeriod() && collection.getCollectedPeriod().hasStartElement()) {
@@ -147,111 +157,124 @@ public class SpecimenMapper {
             .collect(Collectors.joining());
     }
 
-    private Optional<String> buildNarrativeStatement(Specimen specimen) {
-        NarrativeStatementBuilder narrativeStatementBuilder = new NarrativeStatementBuilder();
+    private Optional<String> buildNarrativeStatement(Specimen specimen, InstantType availabilityTime, boolean generateDummyStatement) {
+        NarrativeStatementBuilder builder = new NarrativeStatementBuilder(randomIdGeneratorService.createNewId(),
+            getEffectiveTime(specimen), availabilityTime, generateDummyStatement);
         if (specimen.hasCollection()) {
-            Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
+            SpecimenCollectionComponent collection = specimen.getCollection();
 
             collection.getExtensionsByUrl(FASTING_STATUS_URL).stream().findFirst()
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
                     if (value instanceof CodeableConcept) {
-                        narrativeStatementBuilder.fastingStatus((CodeableConcept) value);
+                        builder.fastingStatus((CodeableConcept) value);
                     } else if (value instanceof Duration) {
-                        narrativeStatementBuilder.fastingDuration((Duration) value);
+                        builder.fastingDuration((Duration) value);
                     }
                 });
 
             if (collection.hasQuantity()) {
-                narrativeStatementBuilder.quantity(collection.getQuantity());
+                builder.quantity(collection.getQuantity());
             }
 
             if (collection.hasBodySite()) {
-                narrativeStatementBuilder.collectionSite(collection.getBodySite());
+                builder.collectionSite(collection.getBodySite());
             }
         }
 
         specimen.getNote().stream()
             .map(Annotation::getText)
-            .forEach(narrativeStatementBuilder::note);
+            .forEach(builder::note);
 
-        return getEffectiveTime(specimen)
-            .map(narrativeStatementBuilder::buildWithDateTime)
-            .orElseGet(narrativeStatementBuilder::build);
+        return builder.build();
     }
 
     private static class NarrativeStatementBuilder {
-
         private static final String FASTING_STATUS = "Fasting Status:";
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
-        private static final String COMMENT_PREFIX = "comment type - LAB SPECIMEN COMMENT(E271)";
 
+        private String id;
         private String text;
+        private Optional<DateTimeType> commentDate;
+        private CommentType commentType;
+        private InstantType availabilityTime;
+        private boolean generateDummyStatement;
 
-        NarrativeStatementBuilder() {
-            text = StringUtils.EMPTY;
+        NarrativeStatementBuilder(String id, Optional<DateTimeType> commentDate, InstantType availabilityTime,
+            boolean generateDummyStatement) {
+            this.id = id;
+            this.commentDate = commentDate;
+            this.availabilityTime = availabilityTime;
+            this.generateDummyStatement = generateDummyStatement;
+            text = EMPTY;
         }
 
-        private void prependPertinentInformation(String... texts) {
+        private void prependComment(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
         }
 
-        private void prependPertinentInformation(List<String> texts) {
+        private void prependComment(List<String> texts) {
             text = newLine(withSpace(texts), text);
         }
 
         public void fastingStatus(CodeableConcept fastingStatus) {
             CodeableConceptMappingUtils.extractTextOrCoding(fastingStatus)
-                .ifPresent(fastingStatusValue -> prependPertinentInformation(FASTING_STATUS, fastingStatusValue));
+                .ifPresent(fastingStatusValue -> prependComment(FASTING_STATUS, fastingStatusValue));
         }
 
         public void fastingDuration(Duration fastingDuration) {
             List<String> fastingDurationElements = List.of(
                 FASTING_DURATION,
-                Objects.toString(fastingDuration.getValue(), StringUtils.EMPTY),
+                Objects.toString(fastingDuration.getValue(), EMPTY),
                 fastingDuration.getUnit()
             );
 
-            prependPertinentInformation(fastingDurationElements);
+            prependComment(fastingDurationElements);
         }
 
         public void quantity(SimpleQuantity quantity) {
             List<String> quantityElements = List.of(
                 QUANTITY,
-                Objects.toString(quantity.getValue(), StringUtils.EMPTY),
+                Objects.toString(quantity.getValue(), EMPTY),
                 quantity.getUnit()
             );
 
-            prependPertinentInformation(quantityElements);
+            prependComment(quantityElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
-                .ifPresent(collectionSiteValue -> prependPertinentInformation(COLLECTION_SITE, collectionSiteValue));
+                .ifPresent(collectionSiteValue -> prependComment(COLLECTION_SITE, collectionSiteValue));
         }
 
         public void note(String note) {
-            prependPertinentInformation(note);
-        }
-
-        public Optional<String> buildWithDateTime(DateTimeType date) {
-            if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
-                return Optional.of(text);
-            }
-
-            return Optional.empty();
+            prependComment(note);
         }
 
         public Optional<String> build() {
             if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX);
-                return Optional.of(text);
+                commentType = CommentType.LABORATORY_SPECIMENT_COMMENT;
+                return Optional.of(prepareTemplate());
+            } else if (generateDummyStatement) {
+                text = "EMPTY REPORT";
+                commentType = CommentType.AGGREGATE_COMMENT_SET;
+                return Optional.of(prepareTemplate());
+            } else {
+                return Optional.empty();
             }
+        }
 
-            return Optional.empty();
+        private String prepareTemplate() {
+            var parameters = NarrativeStatementTemplateParameters.builder()
+                .narrativeStatementId(id)
+                .commentType(commentType.getCode())
+                .commentDate(commentDate.map(DateFormatUtil::toTextFormat).orElse(null))
+                .comment(text)
+                .availabilityTimeElement(prepareAvailabilityTime(availabilityTime));
+
+            return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, parameters.build());
         }
     }
 }
