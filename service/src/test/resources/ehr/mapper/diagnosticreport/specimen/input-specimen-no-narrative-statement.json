@@ -1,0 +1,28 @@
+{
+    "resourceType": "Specimen",
+    "id": "8C35F9A5-E481-419F-9D18-0B2E2118C55D-SPEC-0",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "8C35F9A5-E481-419F-9D18-0B2E2118C55D-SPEC-0"
+        }
+    ],
+    "accessionIdentifier": {
+        "value": "G,03.0999008.K"
+    },
+    "type": {
+        "text": "Blood"
+    },
+    "subject": {
+        "reference": "Patient/E42C3D8C-3617-4C8B-88CC-65AA70E09C62"
+    },
+    "receivedTime": "2003-01-09T13:54:00+00:00",
+    "collection": {
+        "collectedDateTime": "2003-01-09T00:00:00+00:00"
+    }
+}
