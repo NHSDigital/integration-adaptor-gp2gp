@@ -6,7 +6,7 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="2020-10-12"/>
+        <availabilityTime value="20201012143344"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
                 <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
@@ -16,20 +16,22 @@
                 </specimenSpecimenMaterial>
             </specimenRole>
         </specimen>
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-                <text>comment type - LAB SPECIMEN COMMENT(E271)
-text of the note 2
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
+            
+
+            text of the note 2
 text of the note 1
 Collection Site: test value of collection site
 Quantity: 28 tablet
 Fasting Status: in progress
 </text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="2020-10-12"/>
-            </NarrativeStatement>
-        </component>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20201012143344"/>
+    </NarrativeStatement>
+</component>
             <!-- Mapped Observation with id: Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2 -->
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">

@@ -56,7 +56,7 @@ public class EncounterMapper {
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
             .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getIdElement()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
-            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(encounter.getPeriod().getStartElement()))
             .status(COMPLETE_CODE)
             .components(components)
             .code(buildCode(encounter))
