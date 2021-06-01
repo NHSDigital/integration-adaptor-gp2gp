@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class AwaitHelper {
 
-    protected static final int WAIT_FOR_IN_SECONDS = 20;
+    protected static final int WAIT_FOR_IN_SECONDS = 30;
     protected static final int POLL_INTERVAL_MS = 100;
     protected static final int POLL_DELAY_MS = 10;
 
