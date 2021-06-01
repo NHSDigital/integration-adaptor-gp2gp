@@ -93,9 +93,10 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .collect(Collectors.toList());
 
-            Optional<String> narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
+            String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+                .orElse(StringUtils.EMPTY);
 
-            if (narrativeStatements.isPresent() && derivedObservations.isEmpty()) {
+            if (narrativeStatements.isEmpty() && derivedObservations.isEmpty()) {
                 return mapObservationToObservationStatement(observationAssociatedWithSpecimen);
             }
 
@@ -113,7 +114,7 @@ public class ObservationMapper {
                 .codeElement(codeElement)
                 .effectiveTime(effectiveTime)
                 .availabilityTimeElement(availabilityTimeElement)
-                .narrativeStatements(narrativeStatements.toString())
+                .narrativeStatements(narrativeStatements)
                 .statementsForDerivedObservations(statementsForDerivedObservations);
 
             prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
@@ -129,7 +130,7 @@ public class ObservationMapper {
 
         private Optional<String> prepareObservationStatement(Observation observation, CompoundStatementClassCode classCode) {
             if (observationHasNonCommentNoteCode(observation) && classCode.equals(CompoundStatementClassCode.CLUSTER)) {
-                return Optional.ofNullable(mapObservationToObservationStatement(observation));
+                return Optional.of(mapObservationToObservationStatement(observation));
             }
 
             return Optional.empty();
@@ -224,7 +225,11 @@ public class ObservationMapper {
                     .ifPresent(narrativeStatementsBlock::append);
             }
 
-            return Optional.of(narrativeStatementsBlock.toString());
+            if (!narrativeStatementsBlock.toString().isBlank()) {
+                return Optional.of(narrativeStatementsBlock.toString());
+            }
+
+            return Optional.empty();
         }
 
         private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
@@ -259,8 +264,8 @@ public class ObservationMapper {
                         .codeElement(codeElement)
                         .effectiveTime(effectiveTime)
                         .availabilityTimeElement(availabilityTimeElement)
-                        .observationStatement(observationStatement.toString())
-                        .narrativeStatements(narrativeStatements.toString());
+                        .observationStatement(observationStatement.get())
+                        .narrativeStatements(narrativeStatements.get());
 
                     prepareParticipant(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::participant);
 
@@ -271,7 +276,8 @@ public class ObservationMapper {
                         )
                     );
                 } else {
-                    derivedObservationsBlock.append(observationStatement).append(narrativeStatements);
+                    observationStatement.ifPresent(derivedObservationsBlock::append);
+                    narrativeStatements.ifPresent(derivedObservationsBlock::append);
                 }
             });
 
