@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.fail;
-import static org.assertj.core.api.Assumptions.assumeThatCode;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
@@ -168,7 +168,7 @@ public class EhrExtractUATTest {
 
         assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
 
-        assumeThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
+        assertThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();
     }
 
