@@ -25,6 +25,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final ObjectMapper objectMapper;
+    private final DetectDocumentsSentService detectDocumentsSentService;
 
     @Override
     public Class<SendDocumentTaskDefinition> getTaskType() {
@@ -54,6 +55,8 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 
         mhsClient.sendMessageToMHS(requestData);
 
-        ehrExtractStatusService.updateEhrExtractStatusCommon(taskDefinition, messageId);
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommon(taskDefinition, messageId);
+
+        detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);
     }
 }
