@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
@@ -86,10 +87,9 @@ public class AgentDirectoryMapperTest {
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         initializeMessageContextWithAgentKeys(bundle);
 
-        assertThrows(
-            EhrMapperException.class,
-            () -> agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER)
-        );
+        assertThatThrownBy(() -> agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("The ASR bundle does not contain a Patient resource with the correct identifier and managingOrganization");
     }
 
     @Test
@@ -98,10 +98,9 @@ public class AgentDirectoryMapperTest {
         Bundle bundle = fhirParseService.parseResource(jsonInput, Bundle.class);
         initializeMessageContextWithAgentKeys(bundle);
 
-        assertThrows(
-            EhrMapperException.class,
-            () -> agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER)
-        );
+        assertThatThrownBy(() -> agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, NHS_NUMBER))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("The ASR bundle does not contain a Patient resource with the correct identifier and managingOrganization");
     }
 
     @Test

@@ -2,6 +2,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Practitioner;
@@ -30,7 +32,7 @@ public class AgentPersonMapper {
 
         Optional<Practitioner> practitioner = messageContext.getInputBundleHolder()
             .getResource(new IdType(agentKey.getPractitionerReference()))
-            .map(resource -> (Practitioner) resource);
+            .map(Practitioner.class::cast);
 
         if (practitioner.isPresent()) {
             builder.practitioner(true);
@@ -51,7 +53,7 @@ public class AgentPersonMapper {
 
         messageContext.getInputBundleHolder()
             .getResource(new IdType(agentKey.getOrganizationReference()))
-            .map(resource -> (Organization) resource)
+            .map(Organization.class::cast)
             .map(OrganizationToAgentMapper::mapOrganizationToAgentInner)
             .ifPresent(builder::organization);
 
@@ -65,11 +67,11 @@ public class AgentPersonMapper {
                 agentKey.getOrganizationReference()
             );
 
-        if (practitionerRole.isPresent() && hasPractitionerRoleDisplay(practitionerRole.get())) {
-            return Optional.of(practitionerRole.get().getCodeFirstRep().getCodingFirstRep().getDisplay());
-        }
-
-        return Optional.empty();
+        return practitionerRole
+            .filter(AgentPersonMapper::hasPractitionerRoleDisplay)
+            .map(PractitionerRole::getCodeFirstRep)
+            .map(CodeableConcept::getCodingFirstRep)
+            .map(Coding::getDisplay);
     }
 
     private Optional<String> buildPractitionerPrefix(Practitioner practitioner) {

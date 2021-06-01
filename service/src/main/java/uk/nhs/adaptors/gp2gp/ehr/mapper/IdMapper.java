@@ -37,7 +37,7 @@ public class IdMapper {
 
     public String getOrNew(Reference reference, Boolean isResourceMapped) {
         if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
-            throw new RuntimeException("Not allowed to use agent-related resource with IdMapper");
+            throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
         }
 
         MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
@@ -68,7 +68,7 @@ public class IdMapper {
             return ids.get(referenceValue).getId();
         }
 
-        throw new EhrMapperException("Resource referenced was not mapped" + referenceValue);
+        throw new EhrMapperException("Resource referenced was not mapped " + referenceValue);
     }
 
     private static Reference buildReference(ResourceType resourceType, IdType id) {

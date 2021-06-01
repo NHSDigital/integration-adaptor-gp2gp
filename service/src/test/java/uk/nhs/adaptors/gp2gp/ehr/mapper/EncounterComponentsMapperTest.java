@@ -38,6 +38,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
     private static final String TEST_ID = "394559384658936";
+    private static final String PRACTITIONER_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     private static final String TEST_DIRECTORY = "/ehr/mapper/encountercomponents/";
     private static final String INPUT_BUNDLE_WITH_ALL_MAPPERS_USED = TEST_DIRECTORY + "input-bundle-1.json";
@@ -133,11 +134,7 @@ public class EncounterComponentsMapperTest {
     public void When_MappingEncounterComponents_Expect_ResourceMapped() throws IOException {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-        setUpMock();
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
@@ -147,25 +144,16 @@ public class EncounterComponentsMapperTest {
     @ParameterizedTest
     @MethodSource("emptyResult")
     public void When_MappingEncounterComponents_Expect_NoResourceMapped(String inputJsonPath) throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-        setUpMock();
-
+        var bundle = initializeMessageContext(inputJsonPath);
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
         assertThat(mappedXml).isEmpty();
     }
 
-
     @Test
     public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-        setUpMock();
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
         var encounter = extractEncounter(bundle);
 
         assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
@@ -175,11 +163,7 @@ public class EncounterComponentsMapperTest {
 
     @Test
     public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-        setUpMock();
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
         var encounter = extractEncounter(bundle);
 
         assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
@@ -206,8 +190,14 @@ public class EncounterComponentsMapperTest {
         );
     }
 
-    private void setUpMock() {
-        IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
+    private Bundle initializeMessageContext(String inputJsonPath) throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        IdType conditionId = buildIdType(ResourceType.Practitioner, PRACTITIONER_ID);
         messageContext.getAgentDirectory().getAgentId(new Reference(conditionId));
+
+        return bundle;
     }
 }
