@@ -44,6 +44,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ public class TransformJsonToXml {
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
+        assert fileNames != null;
 
         for (File inputJsonFile : files) {
             LOGGER.info("Parsing File: " + inputJsonFile.getName());
@@ -113,13 +115,13 @@ public class TransformJsonToXml {
     }
 
     private static String readJsonFileAsString(String file) throws Exception {
-        return new String(Files.readAllBytes(Paths.get(file)));
+        return new String(Files.readAllBytes(Paths.get(file)), StandardCharsets.UTF_8);
     }
 
     private static void writeToFile(String xml, String sourceFileName) {
         String outputFileName = FilenameUtils.removeExtension(sourceFileName);
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8));
             writer.write(xml);
             writer.close();
             LOGGER.info("Contents of file: " + sourceFileName + ". Saved to: " + outputFileName + ".xml");
