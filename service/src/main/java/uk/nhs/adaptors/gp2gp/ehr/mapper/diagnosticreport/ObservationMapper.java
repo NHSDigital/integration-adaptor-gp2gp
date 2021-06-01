@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.NARRATIVE_STATEMENT_CODE;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
 
 import java.util.List;
@@ -43,7 +44,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.ResourceTypeCodes.COMMENT_NOTE_CODE;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
@@ -287,7 +287,8 @@ public class ObservationMapper {
         }
 
         private boolean observationHasNonCommentNoteCode(Observation observation) {
-            return observation.hasCode() && !CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(COMMENT_NOTE_CODE));
+            return observation.hasCode()
+                && !CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(NARRATIVE_STATEMENT_CODE));
         }
 
         private String prepareCodeElement(Observation observation) {

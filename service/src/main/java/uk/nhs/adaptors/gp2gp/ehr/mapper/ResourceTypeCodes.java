@@ -18,5 +18,4 @@ public final class ResourceTypeCodes {
     public static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
     public static final String ENCOUNTER_LIST_CODE = "1149501000000101";
     public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
-    public static final String COMMENT_NOTE_CODE = "37331000000100";
 }
