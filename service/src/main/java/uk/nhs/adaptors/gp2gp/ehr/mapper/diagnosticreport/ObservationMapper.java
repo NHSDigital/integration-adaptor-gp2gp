@@ -93,14 +93,16 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .collect(Collectors.toList());
 
+            CompoundStatementClassCode classCode = prepareClassCode(derivedObservations);
+            String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
+                .orElse(StringUtils.EMPTY);
             String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
                 .orElse(StringUtils.EMPTY);
 
-            if (narrativeStatements.isEmpty() && derivedObservations.isEmpty()) {
-                return mapObservationToObservationStatement(observationAssociatedWithSpecimen);
+            if (derivedObservations.isEmpty()) {
+                return observationStatement + narrativeStatements;
             }
 
-            CompoundStatementClassCode classCode = prepareClassCode(derivedObservations);
             String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
             String codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
             String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
@@ -114,11 +116,10 @@ public class ObservationMapper {
                 .codeElement(codeElement)
                 .effectiveTime(effectiveTime)
                 .availabilityTimeElement(availabilityTimeElement)
+                .observationStatement(observationStatement)
                 .narrativeStatements(narrativeStatements)
                 .statementsForDerivedObservations(statementsForDerivedObservations);
 
-            prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
-                .ifPresent(observationCompoundStatementTemplateParameters::observationStatement);
             prepareParticipant(observationAssociatedWithSpecimen)
                 .ifPresent(observationCompoundStatementTemplateParameters::participant);
 

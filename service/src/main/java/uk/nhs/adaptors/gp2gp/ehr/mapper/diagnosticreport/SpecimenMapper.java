@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
@@ -139,7 +140,7 @@ public class SpecimenMapper {
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
         List<Observation> observationsAssociatedWithSpecimen;
 
-        if (specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)) {
+        if (dummySpecimenOrObservationExists(specimen, observations)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
             observationsAssociatedWithSpecimen = observations.stream()
@@ -151,6 +152,11 @@ public class SpecimenMapper {
         return observationsAssociatedWithSpecimen.stream()
             .map(observationMapper::mapObservationToCompoundStatement)
             .collect(Collectors.joining());
+    }
+
+    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
+        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX) ||
+            (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
