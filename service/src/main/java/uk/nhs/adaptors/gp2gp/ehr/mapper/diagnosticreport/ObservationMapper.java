@@ -259,7 +259,8 @@ public class ObservationMapper {
                     String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
                     String codeElement = prepareCodeElement(derivedObservation);
                     String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
-                    String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
+                    String availabilityTimeElement =
+                        StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                         .classCode(CompoundStatementClassCode.CLUSTER.getCode())

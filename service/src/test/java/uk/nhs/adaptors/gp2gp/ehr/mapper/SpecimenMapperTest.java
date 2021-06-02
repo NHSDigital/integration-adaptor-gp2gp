@@ -37,7 +37,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class SpecimenMapperTest {
 
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
-    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T00:00:00.000Z";
+    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";

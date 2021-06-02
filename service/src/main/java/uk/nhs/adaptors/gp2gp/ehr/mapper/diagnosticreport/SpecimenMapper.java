@@ -71,7 +71,8 @@ public class SpecimenMapper {
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement).ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
+        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement)
+            .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
@@ -155,8 +156,8 @@ public class SpecimenMapper {
     }
 
     private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
-        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX) ||
-            (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
+        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
+            || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
     }
 
     private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
