@@ -289,19 +289,19 @@ We provide a mock MHS adaptor for local development and testing.
 
 This is a document on how to run tests on json files to convert them into the Xml Files for analysis
 
-####Step 1.
+#### Step 1.
 
 Please locate the file Input folder \
 ("integration-adaptor-gp2gp/transformJsonToXml/input/") \
 Place all Json files to convert here
 
-####Step 2.
+#### Step 2.
 
 Please locate the TransformJsonToXml.sh file\
 ("integration-adaptor-gp2gp/transformJsonToXml/")\
 Run that file
 
-####Step 3.
+#### Step 3.
 
 The Converted .Xml files will be located in \
 ("sintegration-adaptor-gp2gp/transformJsonToXml/output/")
