@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 import java.util.List;
@@ -70,14 +71,31 @@ public class NonConsultationResourceMapper {
         var mappedResources = bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> !hasIdBeenMapped(resource))
             .filter(this::isMappableNonConsultationResource)
+            .sorted(this::compareProcessingOrder)
+            .filter(resource -> !hasIdBeenMapped(resource))
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
+    }
+
+    private int compareProcessingOrder(Resource resource1, Resource resource2) {
+        return Integer.compare(
+            getProcessingOrder(resource1.getResourceType()),
+            getProcessingOrder(resource2.getResourceType())
+        );
+    }
+
+    private int getProcessingOrder(ResourceType resourceType) {
+        // Observations need to be processed after DiagnosticReports, to prevent their possible duplication (NIAD-1464)
+        if (resourceType == ResourceType.Observation) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
@@ -151,12 +169,12 @@ public class NonConsultationResourceMapper {
 
         boolean isAgentPerson = diagnosticReport.hasPerformer()
             && Optional.of(diagnosticReport.getPerformerFirstRep())
-                .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
-                .map(Reference::getReferenceElement)
-                .filter(IIdType::hasResourceType)
-                .map(IIdType::getResourceType)
-                .filter(ResourceType.Practitioner.name()::equals)
-                .isPresent();
+            .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+            .map(Reference::getReferenceElement)
+            .filter(IIdType::hasResourceType)
+            .map(IIdType::getResourceType)
+            .filter(ResourceType.Practitioner.name()::equals)
+            .isPresent();
         if (!isAgentPerson) {
             diagnosticReportXml
                 .author(NULL_FLAVOR)

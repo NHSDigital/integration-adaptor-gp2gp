@@ -96,14 +96,13 @@ public class ObservationStatementMapper {
         String participantReference;
         if (practitionerReference.isPresent() && organizationReference.isPresent()) {
             participantReference = messageContext.getAgentDirectory().getAgentRef(practitionerReference.get(), organizationReference.get());
-        } else if (practitionerReference.isPresent()) {
-            participantReference = messageContext.getAgentDirectory().getAgentId(practitionerReference.get());
-        } else if (organizationReference.isPresent()) {
-            participantReference = messageContext.getAgentDirectory().getAgentId(organizationReference.get());
         } else {
-            throw new EhrMapperException(
-                "Invalid performer reference in observation resource with id: " + observation.getIdElement().getIdPart()
-            );
+            var reference = practitionerReference.orElseGet(() -> organizationReference.orElseThrow(
+                () -> new EhrMapperException(
+                    "Invalid performer reference in observation resource with id: " + observation.getIdElement().getIdPart()
+                )));
+
+            participantReference = messageContext.getAgentDirectory().getAgentId(reference);
         }
 
         return participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER);

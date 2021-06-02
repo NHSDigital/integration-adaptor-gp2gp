@@ -53,10 +53,12 @@ public class EncounterMapper {
         String components = encounterComponentsMapper.mapComponents(encounter);
 
         final IdMapper idMapper = messageContext.getIdMapper();
+        AgentDirectory agentDirectory = messageContext.getAgentDirectory();
+
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
             .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getIdElement()))
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
-            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForEncounter(encounter))
+            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(encounter.getPeriod().getStartElement()))
             .status(COMPLETE_CODE)
             .components(components)
             .code(buildCode(encounter))
@@ -64,7 +66,7 @@ public class EncounterMapper {
             .originalText(buildOriginalText(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(messageContext.getAgentDirectory()::getAgentId)
+            .map(agentDirectory::getAgentId)
             .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
         encounterStatementTemplateParameters.author(recReference);
 
@@ -76,7 +78,7 @@ public class EncounterMapper {
             .ifPresent(encounterStatementTemplateParameters::authorTime);
 
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
-            .map(messageContext.getAgentDirectory()::getAgentId);
+            .map(agentDirectory::getAgentId);
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 

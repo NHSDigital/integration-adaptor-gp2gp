@@ -34,17 +34,15 @@ public class AgentDirectoryMapper {
 
         Set<Map.Entry<AgentDirectory.AgentKey, String>> agentDirectories = messageContext.getAgentDirectory().getEntries();
 
-        Optional<Organization> patientManagingOrganization = extractPatientManagingOrganization(bundle, nhsNumber);
+        Organization organization = extractPatientManagingOrganization(bundle, nhsNumber)
+            .orElseThrow(() -> new EhrMapperException("The ASR bundle does not contain a Patient resource"
+                + " with the correct identifier and managingOrganization"));
 
-        patientManagingOrganization
-            .map(organization -> OrganizationToAgentMapper.mapOrganizationToAgent(organization, getAgentId(organization)))
-            .map(builder::patientManagingOrganization)
-            .orElseThrow(() -> new EhrMapperException("The ASR bundle does not contain a Patient resource with the correct identifier "
-                + "and a managingOrganization"));
+        builder.patientManagingOrganization(OrganizationToAgentMapper.mapOrganizationToAgent(organization, getAgentId(organization)));
 
         builder.agentPersons(
             agentDirectories.stream()
-                .filter(agentDirectory -> !isPatientManagingOrganization(patientManagingOrganization.get(), agentDirectory))
+                .filter(agentDirectory -> !isPatientManagingOrganization(organization, agentDirectory))
                 .map(this::mapAgentDirectory)
                 .collect(Collectors.toList())
         );
@@ -73,10 +71,8 @@ public class AgentDirectoryMapper {
     private Optional<Organization> extractPatientManagingOrganization(Bundle bundle, String nhsNumber) {
         return AgentDirectoryExtractor.extractPatientByNhsNumber(bundle, nhsNumber)
             .filter(Patient::hasManagingOrganization)
-            .map(patient -> ResourceExtractor.extractResourceByReference(bundle,
+            .flatMap(patient -> ResourceExtractor.extractResourceByReference(bundle,
                 patient.getManagingOrganization().getReferenceElement()))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
             .map(Organization.class::cast);
     }
 }

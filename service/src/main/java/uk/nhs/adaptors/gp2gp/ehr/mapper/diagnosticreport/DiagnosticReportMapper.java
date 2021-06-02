@@ -59,10 +59,9 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
 
-        String diagnosticReportIssuedDate = DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement());
 
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReportIssuedDate))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport.getIssuedElement()))
             .collect(Collectors.joining());
 
         final IdMapper idMapper = messageContext.getIdMapper();
@@ -71,7 +70,7 @@ public class DiagnosticReportMapper {
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
-            .availabilityTime(diagnosticReportIssuedDate)
+            .availabilityTime(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
 
@@ -185,7 +184,7 @@ public class DiagnosticReportMapper {
             .commentType(commentType)
             .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,

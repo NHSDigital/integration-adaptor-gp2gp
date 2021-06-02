@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -13,6 +12,7 @@ import org.hl7.fhir.dstu3.model.ResourceType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -58,7 +58,7 @@ public class AgentDirectory {
         return inputBundle.getEntry().stream()
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> ResourceType.PractitionerRole.equals(resource.getResourceType()))
-            .map(resource -> (PractitionerRole) resource)
+            .map(PractitionerRole.class::cast)
             .filter(resource -> resource.getPractitioner().hasReference())
             .filter(resource -> StringUtils.equals(resource.getPractitioner().getReference(), practitionerReference.getReference()))
             .filter(resource -> resource.getOrganization().hasReference())
@@ -79,24 +79,9 @@ public class AgentDirectory {
 
     @Builder
     @Getter
+    @EqualsAndHashCode
     public static class AgentKey {
-
         private String practitionerReference;
         private String organizationReference;
-
-        @Override
-        public int hashCode() {
-            return new HashCodeBuilder()
-                .append(practitionerReference)
-                .append(organizationReference)
-                .toHashCode();
-        }
-
-        @Override
-        public boolean equals(Object agentKey) {
-            return agentKey instanceof AgentKey
-                && StringUtils.equals(((AgentKey) agentKey).practitionerReference, practitionerReference)
-                && StringUtils.equals(((AgentKey) agentKey).organizationReference, organizationReference);
-        }
     }
 }
