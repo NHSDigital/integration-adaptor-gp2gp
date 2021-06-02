@@ -1,5 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
@@ -18,6 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
@@ -25,13 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -73,6 +75,8 @@ public class DiagnosticReportMapperTest {
     @Mock
     private IdMapper idMapper;
     @Mock
+    private AgentDirectory agentDirectory;
+    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private DiagnosticReportMapper mapper;
@@ -84,8 +88,9 @@ public class DiagnosticReportMapperTest {
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
-        when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+        when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
 
         when(specimenMapper.mapSpecimenToCompoundStatement(any(Specimen.class), anyList(), any(DiagnosticReport.class))).thenAnswer(mockSpecimenMapping());
 

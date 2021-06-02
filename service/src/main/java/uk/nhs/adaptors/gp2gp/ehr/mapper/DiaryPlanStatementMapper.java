@@ -73,7 +73,7 @@ public class DiaryPlanStatementMapper {
         if (requesterAgent.hasReference()) {
             var resourceType = requesterAgent.getReference().split("/")[0];
             if (resourceType.equals(ResourceType.Practitioner.name())) {
-                String participantId = idMapper.getOrNew(requesterAgent);
+                String participantId = messageContext.getAgentDirectory().getAgentId(requesterAgent);
                 String participant = participantMapper.mapToParticipant(participantId, ParticipantType.PERFORMER);
                 return Optional.of(participant);
             }

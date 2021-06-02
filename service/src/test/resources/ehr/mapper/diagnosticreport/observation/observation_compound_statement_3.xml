@@ -19,7 +19,7 @@
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="some-reference"/>
+        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -35,14 +35,14 @@
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="some-reference"/>
+        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="some-reference"/>
+        <id root="REFERENCE-to-Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"/>
     </agentRef>
 </Participant>
     </CompoundStatement>

@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForBloodPressureNote;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForObservation;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForObservation;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils.loadTemplate;
 
@@ -64,7 +64,7 @@ public class BloodPressureMapper {
             .isNested(isNested)
             .id(messageContext.getIdMapper().getOrNew(ResourceType.Observation, observation.getIdElement()))
             .effectiveTime(prepareEffectiveTimeForObservation(observation))
-            .availabilityTime(prepareAvailabilityTimeForObservation(observation))
+            .availabilityTime(prepareAvailabilityTime(observation.getIssuedElement()))
             .compoundStatementCode(buildBloodPressureCode(observation));
 
         extractBloodPressureComponent(observation, SYSTOLIC_CODE).ifPresent(observationComponent -> {
@@ -90,7 +90,7 @@ public class BloodPressureMapper {
         });
 
         if (observation.hasPerformer()) {
-            final String participantReference = messageContext.getIdMapper().getOrNew(observation.getPerformerFirstRep());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             builder.participant(participantBlock);

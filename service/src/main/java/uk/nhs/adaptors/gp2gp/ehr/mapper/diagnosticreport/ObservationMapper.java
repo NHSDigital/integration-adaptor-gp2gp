@@ -1,8 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -15,29 +19,27 @@ import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -107,7 +109,7 @@ public class ObservationMapper {
             String codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
             String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
             String availabilityTimeElement =
-                StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
+                StatementTimeMappingUtils.prepareAvailabilityTime(observationAssociatedWithSpecimen.getIssuedElement());
             String statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
 
             var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
@@ -142,7 +144,7 @@ public class ObservationMapper {
                 .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
                 .codeElement(prepareCodeElement(observation))
                 .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             if (observation.hasValue()) {
                 Type value = observation.getValue();
@@ -239,7 +241,7 @@ public class ObservationMapper {
                 .commentType(commentType)
                 .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
 
@@ -257,7 +259,7 @@ public class ObservationMapper {
                     String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
                     String codeElement = prepareCodeElement(derivedObservation);
                     String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
-                    String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
+                    String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                         .classCode(CompoundStatementClassCode.CLUSTER.getCode())
@@ -333,12 +335,12 @@ public class ObservationMapper {
             String code = coding.getCode();
 
             return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
-                    && INTERPRETATION_CODES.contains(code);
+                && INTERPRETATION_CODES.contains(code);
         }
 
         private Optional<String> prepareParticipant(Observation observation) {
             if (observation.hasPerformer()) {
-                final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+                final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
 
                 return Optional.ofNullable(
                     participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER)

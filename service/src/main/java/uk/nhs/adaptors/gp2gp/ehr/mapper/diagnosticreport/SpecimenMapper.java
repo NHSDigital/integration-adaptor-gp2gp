@@ -58,7 +58,7 @@ public class SpecimenMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
-        String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport);
+        String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
@@ -115,7 +115,7 @@ public class SpecimenMapper {
         if (specimen.hasCollection() && specimen.getCollection().hasCollector()) {
             Reference collector = specimen.getCollection().getCollector();
 
-            return Optional.of(messageContext.getIdMapper().get(collector));
+            return Optional.of(messageContext.getAgentDirectory().getAgentId(collector));
         }
 
         return Optional.empty();
@@ -220,17 +220,17 @@ public class SpecimenMapper {
             text = StringUtils.EMPTY;
         }
 
-        private void prependPertinentInformation(String... texts) {
+        private void prependText(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
         }
 
-        private void prependPertinentInformation(List<String> texts) {
+        private void prependText(List<String> texts) {
             text = newLine(withSpace(texts), text);
         }
 
         public void fastingStatus(CodeableConcept fastingStatus) {
             CodeableConceptMappingUtils.extractTextOrCoding(fastingStatus)
-                .ifPresent(fastingStatusValue -> prependPertinentInformation(FASTING_STATUS, fastingStatusValue));
+                .ifPresent(fastingStatusValue -> prependText(FASTING_STATUS, fastingStatusValue));
         }
 
         public void fastingDuration(Duration fastingDuration) {
@@ -240,7 +240,7 @@ public class SpecimenMapper {
                 fastingDuration.getUnit()
             );
 
-            prependPertinentInformation(fastingDurationElements);
+            prependText(fastingDurationElements);
         }
 
         public void quantity(SimpleQuantity quantity) {
@@ -250,16 +250,16 @@ public class SpecimenMapper {
                 quantity.getUnit()
             );
 
-            prependPertinentInformation(quantityElements);
+            prependText(quantityElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
-                .ifPresent(collectionSiteValue -> prependPertinentInformation(COLLECTION_SITE, collectionSiteValue));
+                .ifPresent(collectionSiteValue -> prependText(COLLECTION_SITE, collectionSiteValue));
         }
 
         public void note(String note) {
-            prependPertinentInformation(note);
+            prependText(note);
         }
     }
 }
