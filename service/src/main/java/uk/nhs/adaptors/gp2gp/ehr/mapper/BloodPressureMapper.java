@@ -90,7 +90,7 @@ public class BloodPressureMapper {
         });
 
         if (observation.hasPerformer()) {
-            final String participantReference = messageContext.getIdMapper().getOrNew(observation.getPerformerFirstRep());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             builder.participant(participantBlock);

@@ -82,13 +82,14 @@ public class ConditionLinkSetMapper {
         builder.code(buildCode(condition));
 
         var asserterReference = condition.getAsserter();
-        var performerReference = idMapper.get(asserterReference);
-        var referenceElement = asserterReference.getReferenceElement();
+        var performerReference = messageContext.getAgentDirectory().getAgentId(asserterReference);
 
+        var referenceElement = asserterReference.getReferenceElement();
         messageContext.getInputBundleHolder().getResource(referenceElement)
             .map(Resource::getResourceType)
             .filter(ResourceType.Practitioner::equals)
             .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
+
         var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
         builder.performer(performerParameter);
 

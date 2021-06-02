@@ -85,8 +85,8 @@ public class AllergyStructureMapper {
 
     private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
         if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
-            var authorReference = messageContext.getIdMapper().get(reference);
-            return Optional.of(participantMapper.mapToParticipant(authorReference, participantType));
+            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
+            return Optional.of(participantMapper.mapToParticipant(authorReferenceId, participantType));
         }
 
         return Optional.empty();

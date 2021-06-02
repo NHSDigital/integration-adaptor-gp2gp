@@ -18,29 +18,7 @@
         </agentOrganization>
     </Agent>
 </part>
-            <part typeCode="PART">
-    <Agent classCode="AGNT">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <name>
-                <prefix>Dr</prefix>
-                <given>David</given>
-                <family>McAvenue</family>
-            </name>
-        </agentPerson>
-    </Agent>
-</part>
-            <part typeCode="PART">
-    <Agent classCode="AGNT">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <agentPerson classCode="PSN" determinerCode="INSTANCE">
-            <name>
-                <prefix>Dr</prefix>
-                <given>Peter</given>
-                <family>Whitcombe</family>
-            </name>
-        </agentPerson>
-    </Agent>
-</part>
+            <!--Mocked agentPerson for: Practitioner/55556666 Organization/77778888 -->
+            <!--Mocked agentPerson for: Practitioner/11112222 Organization/33334444 -->
     </agentDirectory>
 </responsibleParty>

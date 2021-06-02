@@ -23,8 +23,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
@@ -83,6 +86,9 @@ public class ObservationMapperTest {
     private IdMapper idMapper;
 
     @Mock
+    private AgentDirectory agentDirectory;
+
+    @Mock
     private MessageContext messageContext;
 
     @Mock
@@ -96,6 +102,9 @@ public class ObservationMapperTest {
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
         InputBundle inputBundle = new InputBundle(bundle);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
+        lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
@@ -119,7 +128,6 @@ public class ObservationMapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        lenient().when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -174,5 +182,20 @@ public class ObservationMapperTest {
                 OBSERVATION_WITHOUT_NARRATIVE_AND_RELATED,
                 OBSERVATION_COMPOUND_STATEMENT_DUMMY_NARRATIVE_STMT)
         );
+    }
+
+    private Answer<String> mockReference() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return String.format("REFERENCE-to-%s", reference.getReference());
+        };
+    }
+
+    private Answer<String> mockReferences() {
+        return invocation -> {
+            Reference practitionerReference = invocation.getArgument(0);
+            Reference organizationReference = invocation.getArgument(1);
+            return String.format("REFERENCE-to-%s-%s", practitionerReference.getReference(), organizationReference.getReference());
+        };
     }
 }

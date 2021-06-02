@@ -268,7 +268,7 @@ public class MedicationStatementMapper {
             final var reference = medicationRequest.getRecorder();
             if (isRelevant.test(reference)) {
                 return participantMapper.mapToParticipant(
-                    messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
+                    messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.AUTHOR);
             }
         }
         throw new EhrMapperException("MedicationRequest " + medicationRequest.getId()
