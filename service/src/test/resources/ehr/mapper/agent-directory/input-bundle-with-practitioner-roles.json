@@ -1,0 +1,69 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "29429387829758475837689437684397683476897689347689768374867349874",
+                "meta": {
+                    "versionId": "8380942905747068072",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/1111-2222-3333-4444"
+                },
+                "organization": {
+                    "reference": "Organization/id-of-the-same-organization"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "6D340A1BBC154D4E93CFBBCB5B74DF735E496953065B41F29577BE8F2FBD0757",
+                "meta": {
+                    "versionId": "8380942905747068072",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/5555-6666-7777-8888"
+                },
+                "organization": {
+                    "reference": "Organization/id-of-the-same-organization"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -44,11 +44,10 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
@@ -123,11 +122,9 @@ public class EhrExtractUATTest {
             new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
         );
 
-        OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);
-        PractitionerAgentPersonMapper practitionerAgentPersonMapper
-            = new PractitionerAgentPersonMapper(messageContext, organizationToAgentMapper);
-        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(practitionerAgentPersonMapper,
-            organizationToAgentMapper);
+        AgentPersonMapper agentPersonMapper
+            = new AgentPersonMapper(messageContext);
+        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext, agentPersonMapper);
 
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 

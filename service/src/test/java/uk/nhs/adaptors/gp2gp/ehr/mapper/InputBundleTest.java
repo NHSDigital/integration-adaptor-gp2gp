@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.PractitionerRole;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeEach;
@@ -89,5 +90,47 @@ public class InputBundleTest {
     @Test
     public void When_GettingListWithNullReference_Expect_NoneListResourceReturned() {
         assertThat(new InputBundle(bundle).getListReferencedToEncounter(null, VALID_CODE)).isNotPresent();
+    }
+
+    @Test
+    public void When_GettingPractitionerRoleForPractitionerAndOrganization_Expect_PractitionerRoleReturned() {
+        InputBundle inputBundle = new InputBundle(bundle);
+        Optional<PractitionerRole> practitionerRoleFor = inputBundle.getPractitionerRoleFor(
+            "Practitioner/1", "Organization/2");
+        assertThat(practitionerRoleFor).isPresent();
+    }
+
+    @Test
+    public void When_GettingPractitionerRoleForPractitionerAndOrganizationThatDoesNotMatch_Expect_EmptyReturned() {
+        InputBundle inputBundle = new InputBundle(bundle);
+        Optional<PractitionerRole> practitionerRoleFor = inputBundle.getPractitionerRoleFor(
+            "Practitioner/not-match", "Organization/not-match");
+        assertThat(practitionerRoleFor).isEmpty();
+    }
+
+    @Test
+    public void When_GettingPractitionerRoleWithoutPractitionerAndOrganization_Expect_EmptyReturned() {
+        Bundle bundle = new Bundle();
+        bundle.addEntry().setResource(new PractitionerRole());
+        InputBundle inputBundle = new InputBundle(bundle);
+        Optional<PractitionerRole> practitionerRoleFor = inputBundle.getPractitionerRoleFor(
+            "Practitioner/1", "Organization/2");
+        assertThat(practitionerRoleFor).isEmpty();
+    }
+
+    @Test
+    public void When_GettingPractitionerRoleWhereOnlyOrganizationMatch_Expect_EmptyReturned() {
+        InputBundle inputBundle = new InputBundle(bundle);
+        Optional<PractitionerRole> practitionerRoleFor = inputBundle.getPractitionerRoleFor(
+            "Practitioner/not-match", "Organization/2");
+        assertThat(practitionerRoleFor).isEmpty();
+    }
+
+    @Test
+    public void When_GettingPractitionerRoleWhereOnlyPractitionerMatch_Expect_EmptyReturned() {
+        InputBundle inputBundle = new InputBundle(bundle);
+        Optional<PractitionerRole> practitionerRoleFor = inputBundle.getPractitionerRoleFor(
+            "Practitioner/1", "Organization/not-match");
+        assertThat(practitionerRoleFor).isEmpty();
     }
 }

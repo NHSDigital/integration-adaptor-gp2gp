@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.AfterEach;
@@ -69,6 +70,7 @@ public class BloodPressureMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(new Bundle());
         bloodPressureMapper = new BloodPressureMapper(
             messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
             mockCodeableConceptCdMapper, new ParticipantMapper());

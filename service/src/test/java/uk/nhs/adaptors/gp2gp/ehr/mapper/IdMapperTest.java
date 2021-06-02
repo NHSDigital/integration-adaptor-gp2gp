@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @ExtendWith(MockitoExtension.class)
 public class IdMapperTest {
@@ -94,35 +96,20 @@ public class IdMapperTest {
     @Test
     public void When_GettingExtantId_Expect_ExtantIdReturned() {
         final String id = randomIdGeneratorService.createNewId();
-        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
-        final String expected = idMapper.getOrNew(reference);
+        IdType idType = buildIdType(ResourceType.Person, id);
+        final String expected = idMapper.getOrNew(ResourceType.Person, idType);
 
-        final String actual = idMapper.get(reference);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void When_GettingExtantResourceType_Expect_ExtantIdReturned() {
-        final String firstFhirId = randomIdGeneratorService.createNewId();
-        final String secondFhirId = randomIdGeneratorService.createNewId();
-
-        final Reference reference = new Reference(buildIdType(ResourceType.Appointment, firstFhirId));
-        final String expected = idMapper.getOrNew(reference);
-
-        final Reference newReference = new Reference(buildIdType(ResourceType.Appointment, secondFhirId));
-        final String actual = idMapper.get(newReference);
+        final String actual = idMapper.get(ResourceType.Person, idType);
 
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
-    public void When_GettingMissingResourceType_Expect_NullIdReturned() {
+    public void When_GettingMissingResourceType_Expect_Exception() {
         final String id = randomIdGeneratorService.createNewId();
-        final Reference reference = new Reference(buildIdType(ResourceType.Person, id));
+        IdType idType = buildIdType(ResourceType.Person, id);
 
-        final String actual = idMapper.get(reference);
-        assertThat(actual).isNull();
+        assertThrows(EhrMapperException.class, () -> idMapper.get(ResourceType.Person, idType));
     }
 
     @Test
