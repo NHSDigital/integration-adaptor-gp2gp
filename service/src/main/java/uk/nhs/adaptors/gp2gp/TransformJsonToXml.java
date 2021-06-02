@@ -8,6 +8,8 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -44,12 +46,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class TransformJsonToXml {
 
@@ -57,8 +59,7 @@ public class TransformJsonToXml {
             Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
     private static final String XML_OUTPUT_PATH =
             Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
-    private static final Logger LOGGER = Logger.getLogger(TransformJsonToXml.class.getName());
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
     public static void main(String[] args) throws Exception {
@@ -81,7 +82,7 @@ public class TransformJsonToXml {
         assert fileNames != null;
 
         for (File inputJsonFile : files) {
-            LOGGER.info("Parsing File: " + inputJsonFile.getName());
+            LOGGER.info("Parsing File: {}", inputJsonFile.getName());
             if (FilenameUtils.getExtension(inputJsonFile.getName()).equalsIgnoreCase("json")) {
                 try {
                     String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + inputJsonFile.getName());
@@ -98,20 +99,21 @@ public class TransformJsonToXml {
     }
 
     private static String extractNhsNumber(String json) {
-        var nhsnumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
+        var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
         var nhsNumber = bundle.getEntry().stream()
                 .map(Bundle.BundleEntryComponent::getResource)
                 .filter(resource -> ResourceType.Patient.equals(resource.getResourceType()))
-                .map(resource -> (Patient) resource)
-                .map(resource -> (Identifier) getNhsNumberIdentifier(nhsnumberSystem, resource))
+                .map(Patient.class::cast)
+                .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
+                .map(Identifier.class::cast)
                 .findFirst().get().getValue();
         return nhsNumber;
     }
 
-    private static Object getNhsNumberIdentifier(String nhsnumberSystem, Patient resource) {
+    private static Object getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
         return resource.getIdentifier()
-                .stream().filter(identifier -> identifier.getSystem().equals(nhsnumberSystem)).findFirst().get();
+                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
 
     private static String readJsonFileAsString(String file) throws Exception {
@@ -124,7 +126,7 @@ public class TransformJsonToXml {
             BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8));
             writer.write(xml);
             writer.close();
-            LOGGER.info("Contents of file: " + sourceFileName + ". Saved to: " + outputFileName + ".xml");
+            LOGGER.info("Contents of file: {}. Saved to: {}.xml", sourceFileName, outputFileName);
         } catch (IOException e) {
             LOGGER.info("Could not send Xml result to the file");
         }
