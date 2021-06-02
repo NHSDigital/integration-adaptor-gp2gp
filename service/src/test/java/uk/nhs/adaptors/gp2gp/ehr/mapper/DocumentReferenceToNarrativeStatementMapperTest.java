@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
@@ -24,6 +23,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,6 +71,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private SupportedContentTypes supportedContentTypes;
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
@@ -82,9 +84,11 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext);
 
-        ReflectionTestUtils.setField(mapper, "unsupportedContentTypes", "a/not-supported,b/to-be-ignored,application/octet-stream");
+        lenient().when(supportedContentTypes.isContentTypeSupported(eq("text/richtext"))).thenReturn(true);
+        lenient().when(supportedContentTypes.isContentTypeSupported(eq("application/octet-stream"))).thenReturn(false);
+
+        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes);
     }
 
     @AfterEach

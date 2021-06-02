@@ -4,7 +4,6 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.BaseReference;
@@ -13,7 +12,6 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -32,12 +30,9 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
     private static final String DEFAULT_ATTACHMENT_CONTENT_TYPE = "text/plain";
-    private static final char SEPARATOR = ',';
-
-    @Value("${gp2gp.mhs.unsupportedContentTypes}")
-    private String unsupportedContentTypes;
 
     private final MessageContext messageContext;
+    private final SupportedContentTypes supportedContentTypes;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
         if (documentReference.getContent().isEmpty()) {
@@ -55,7 +50,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
         final Attachment attachment = DocumentReferenceUtils.extractAttachment(documentReference);
         final String attachmentContentType = DocumentReferenceUtils.extractContentType(attachment);
 
-        if (isContentTypeNotSupported(attachmentContentType) || isFileAbsent(attachment)) {
+        if (!supportedContentTypes.isContentTypeSupported(attachmentContentType) || isFileAbsent(attachment)) {
             builder.referenceTitle(DocumentReferenceUtils.buildMissingAttachmentFileName(narrativeStatementId))
                 .comment(getComment(documentReference, attachment.getTitle()))
                 .referenceContentType(DEFAULT_ATTACHMENT_CONTENT_TYPE);
@@ -66,11 +61,6 @@ public class DocumentReferenceToNarrativeStatementMapper {
         }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
-    }
-
-    private boolean isContentTypeNotSupported(String attachmentContentType) {
-        String[] unsupportedTypes = StringUtils.split(unsupportedContentTypes, SEPARATOR);
-        return ArrayUtils.isNotEmpty(unsupportedTypes) && ArrayUtils.contains(unsupportedTypes, attachmentContentType);
     }
 
     private boolean isFileAbsent(Attachment attachment) {

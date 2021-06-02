@@ -123,7 +123,6 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
-| GP2GP_MHS_UNSUPPORTED_CONTENT_TYPES  |                                               | List of content-types of attachments that should not be supported and treated as missing attachments. The list should be comma separated without spaces, example: application/xml,text/plain
 
 ## How to operate the adaptor
 

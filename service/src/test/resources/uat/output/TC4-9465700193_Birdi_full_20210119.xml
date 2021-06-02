@@ -331,8 +331,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="audio/x-au">
-                    <reference value="file://localhost/3316531F-5705-424C-9E1A-EE694FB411B4_3316531F-5705-424C-9E1A-EE694FB411B4.au"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment3316531F-5705-424C-9E1A-EE694FB411B4.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -380,8 +380,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039_3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -429,8 +429,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="573A6887-7BBE-4C03-B2A9-8F71D61F7345"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/573A6887-7BBE-4C03-B2A9-8F71D61F7345_573A6887-7BBE-4C03-B2A9-8F71D61F7345.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment573A6887-7BBE-4C03-B2A9-8F71D61F7345.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -478,8 +478,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="18BAC9BD-7B26-4065-9416-7ECEC8592843"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/18BAC9BD-7B26-4065-9416-7ECEC8592843_18BAC9BD-7B26-4065-9416-7ECEC8592843.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment18BAC9BD-7B26-4065-9416-7ECEC8592843.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -527,8 +527,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/A4678E5E-4C76-4C27-91B8-AD7B5B0480AE_A4678E5E-4C76-4C27-91B8-AD7B5B0480AE.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentA4678E5E-4C76-4C27-91B8-AD7B5B0480AE.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1458,8 +1458,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/99792B9D-0715-4F2A-9934-1D5D4E975284_99792B9D-0715-4F2A-9934-1D5D4E975284.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment99792B9D-0715-4F2A-9934-1D5D4E975284.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1605,8 +1605,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/884E7627-796C-4C70-870A-D61B88AD2E57_884E7627-796C-4C70-870A-D61B88AD2E57.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment884E7627-796C-4C70-870A-D61B88AD2E57.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
