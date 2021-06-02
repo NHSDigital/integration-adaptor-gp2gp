@@ -73,7 +73,7 @@ public class ImmunizationObservationStatementMapper {
 
         if (immunization.hasPractitioner() && immunization.getPractitionerFirstRep().hasActor()) {
             var practitionerRef = immunization.getPractitionerFirstRep().getActor();
-            var participantRef = idMapper.get(practitionerRef);
+            var participantRef = messageContext.getAgentDirectory().getAgentId(practitionerRef);
             var participantContent = participantMapper.mapToParticipant(participantRef, ParticipantType.PERFORMER);
             observationStatementTemplateParameters.participant(participantContent);
         }

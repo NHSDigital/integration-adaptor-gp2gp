@@ -2,8 +2,10 @@ package uk.nhs.adaptors.gp2gp.ehr.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +28,26 @@ public class EhrExtractStatusValidatorTest {
         ehrExtractStatus.setGpcAccessStructured(getFinishedGpcAccessStructured());
 
         assertThat(EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)).isTrue();
+    }
+
+    private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocument() {
+        return getGpcDocument(OBJECT_NAME);
+    }
+
+    private EhrExtractStatus.GpcAccessStructured getFinishedGpcAccessStructured() {
+        return getGpcAccessStructured(OBJECT_NAME);
+    }
+
+    private EhrExtractStatus.GpcAccessDocument.GpcDocument getGpcDocument(String objectName) {
+        return EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .objectName(objectName)
+            .build();
+    }
+
+    private EhrExtractStatus.GpcAccessStructured getGpcAccessStructured(String objectName) {
+        return EhrExtractStatus.GpcAccessStructured.builder()
+            .objectName(objectName)
+            .build();
     }
 
     @Test
@@ -52,6 +74,14 @@ public class EhrExtractStatusValidatorTest {
         ehrExtractStatus.setGpcAccessStructured(getUnfinishedGpcAccessStructured());
 
         assertThat(EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)).isFalse();
+    }
+
+    private EhrExtractStatus.GpcAccessDocument.GpcDocument getUnfinishedGpcDocument() {
+        return getGpcDocument(null);
+    }
+
+    private EhrExtractStatus.GpcAccessStructured getUnfinishedGpcAccessStructured() {
+        return getGpcAccessStructured(null);
     }
 
     @Test
@@ -120,31 +150,37 @@ public class EhrExtractStatusValidatorTest {
         assertThat(EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)).isFalse();
     }
 
-    private EhrExtractStatus.GpcAccessStructured getFinishedGpcAccessStructured() {
-        return getGpcAccessStructured(OBJECT_NAME);
+    @Test
+    public void When_AllDocumentsInEhrExtractStatusAreSent_Expect_True() {
+        EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
+        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        documentList.add(getFinishedGpcDocumentSent());
+        ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
+        assertThat(EhrExtractStatusValidator.areAllDocumentsSent(ehrExtractStatus)).isTrue();
     }
 
-    private EhrExtractStatus.GpcAccessStructured getUnfinishedGpcAccessStructured() {
-        return getGpcAccessStructured(null);
+    private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocumentSent() {
+        var doc = getFinishedGpcDocument();
+        doc.setSentToMhs(new EhrExtractStatus.GpcAccessDocument.SentToMhs("123", "123", "123"));
+        return doc;
     }
 
-    private EhrExtractStatus.GpcAccessStructured getGpcAccessStructured(String objectName) {
-        return EhrExtractStatus.GpcAccessStructured.builder()
-            .objectName(objectName)
-            .build();
+    @Test
+    public void When_OneDocumentIsSentAndOneDocumentNotSent_Expect_False() {
+        EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
+        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        documentList.add(getFinishedGpcDocumentSent());
+        documentList.add(getFinishedGpcDocument());
+        ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
+        assertThat(EhrExtractStatusValidator.areAllDocumentsSent(ehrExtractStatus)).isFalse();
     }
 
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getUnfinishedGpcDocument() {
-        return getGpcDocument(null);
-    }
-
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocument() {
-        return getGpcDocument(OBJECT_NAME);
-    }
-
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getGpcDocument(String objectName) {
-        return EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
-            .objectName(objectName)
-            .build();
+    @Test
+    public void When_NoDocumentsInEhrExtractStatus_Expect_False() {
+        EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
+        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        documentList.add(getFinishedGpcDocument());
+        ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
+        assertThat(EhrExtractStatusValidator.areAllDocumentsSent(ehrExtractStatus)).isFalse();
     }
 }

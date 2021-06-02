@@ -8,10 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PractitionerAgentPersonMapperParameters {
-    private String practitionerId;
+    private String agentId;
     private String practitionerRole;
     private String practitionerPrefix;
     private String practitionerGivenName;
     private String practitionerFamilyName;
     private String organization;
+    private boolean practitioner;
 }

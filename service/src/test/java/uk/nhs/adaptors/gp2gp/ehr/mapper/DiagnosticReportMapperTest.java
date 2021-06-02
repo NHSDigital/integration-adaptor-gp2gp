@@ -1,9 +1,17 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.Specimen;
@@ -18,20 +26,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -56,6 +57,7 @@ public class DiagnosticReportMapperTest {
     private static final String INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS = "diagnostic-report-with-multiple-coded-diagnosis.json";
 
     private static final String OUTPUT_XML_REQUIRED_DATA = "diagnostic-report-with-required-data.xml";
+    private static final String OUTPUT_XML_DUMMY_NARRATIVE = "diagnostic-report-with-dummy-narrative.xml";
     private static final String OUTPUT_XML_ONE_SPECIMEN = "diagnostic-report-with-one-specimen.xml";
     private static final String OUTPUT_XML_MULTI_SPECIMENS = "diagnostic-report-with-multi-specimens.xml";
     private static final String OUTPUT_XML_PARTICIPANT = "diagnostic-report-with-participant.xml";
@@ -72,6 +74,8 @@ public class DiagnosticReportMapperTest {
     @Mock
     private IdMapper idMapper;
     @Mock
+    private AgentDirectory agentDirectory;
+    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private DiagnosticReportMapper mapper;
@@ -83,10 +87,11 @@ public class DiagnosticReportMapperTest {
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(messageContext.getInputBundleHolder()).thenReturn(new InputBundle(bundle));
+        when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockIdForResourceAndId());
-        when(idMapper.get(any(Reference.class))).thenAnswer(mockIdForReference());
+        when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockIdForReference());
 
-        when(specimenMapper.mapSpecimenToCompoundStatement(any(), any(), anyString())).thenAnswer(mockSpecimenMapping());
+        when(specimenMapper.mapSpecimenToCompoundStatement(any(), any(), any(InstantType.class))).thenAnswer(mockSpecimenMapping());
 
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
@@ -114,15 +119,15 @@ public class DiagnosticReportMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_DUMMY_NARRATIVE),
+            Arguments.of(INPUT_JSON_EMPTY_SPECIMENS, OUTPUT_XML_DUMMY_NARRATIVE),
+            Arguments.of(INPUT_JSON_EMPTY_RESULTS, OUTPUT_XML_DUMMY_NARRATIVE),
             Arguments.of(INPUT_JSON_ONE_SPECIMEN, OUTPUT_XML_ONE_SPECIMEN),
             Arguments.of(INPUT_JSON_ONE_RESULT, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_MULTI_SPECIMENS, OUTPUT_XML_MULTI_SPECIMENS),
             Arguments.of(INPUT_JSON_MULTI_RESULTS, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_PERFORMER, OUTPUT_XML_PARTICIPANT),
-            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_PERFORMER_NO_ACTOR, OUTPUT_XML_DUMMY_NARRATIVE),
             Arguments.of(INPUT_JSON_CONCLUSION, OUTPUT_XML_CONCLUSION),
             Arguments.of(INPUT_JSON_CODED_DIAGNOSIS, OUTPUT_XML_CODED_DIAGNOSIS),
             Arguments.of(INPUT_JSON_MULTIPLE_CODED_DIAGNOSIS, OUTPUT_XML_MULTIPLE_CODED_DIAGNOSIS)

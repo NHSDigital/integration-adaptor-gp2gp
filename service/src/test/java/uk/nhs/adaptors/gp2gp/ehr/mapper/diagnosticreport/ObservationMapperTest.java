@@ -1,5 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -14,8 +22,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
@@ -23,14 +35,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationMapperTest {
@@ -53,6 +57,8 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
     private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_value_quantity_and_reference_range.json";
+    private static final String OBSERVATION_WITHOUT_NARRATIVE_AND_RELATED = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_associated_without_narrative_and_related.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -71,11 +77,16 @@ public class ObservationMapperTest {
             + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
+    private static final String OBSERVATION_COMPOUND_STATEMENT_DUMMY_NARRATIVE_STMT = OBSERVATION_TEST_FILE_DIRECTORY
+        + "observation_compound_dummy_narrative_stmt.xml";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
     @Mock
     private IdMapper idMapper;
+
+    @Mock
+    private AgentDirectory agentDirectory;
 
     @Mock
     private MessageContext messageContext;
@@ -91,6 +102,9 @@ public class ObservationMapperTest {
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
         InputBundle inputBundle = new InputBundle(bundle);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
+        lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
@@ -114,7 +128,6 @@ public class ObservationMapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        lenient().when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -164,7 +177,25 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML
-            )
+            ),
+            Arguments.of(
+                OBSERVATION_WITHOUT_NARRATIVE_AND_RELATED,
+                OBSERVATION_COMPOUND_STATEMENT_DUMMY_NARRATIVE_STMT)
         );
+    }
+
+    private Answer<String> mockReference() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return String.format("REFERENCE-to-%s", reference.getReference());
+        };
+    }
+
+    private Answer<String> mockReferences() {
+        return invocation -> {
+            Reference practitionerReference = invocation.getArgument(0);
+            Reference organizationReference = invocation.getArgument(1);
+            return String.format("REFERENCE-to-%s-%s", practitionerReference.getReference(), organizationReference.getReference());
+        };
     }
 }

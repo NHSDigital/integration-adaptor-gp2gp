@@ -58,6 +58,17 @@
                     "reference": "Encounter/43536547"
                 }
             }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "practitioner": {
+                    "reference": "Practitioner/1"
+                },
+                "organization": {
+                    "reference": "Organization/2"
+                }
+            }
         }
     ]
 }
