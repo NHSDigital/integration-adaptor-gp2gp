@@ -34,6 +34,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
@@ -52,7 +53,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
@@ -187,22 +187,20 @@ public class EhrExtractUATTest {
 
         assertThat(referencedAgentIds).isNotEmpty();
         assertThat(agentIds).isNotEmpty();
-        for (var referencedAgentId : referencedAgentIds) {
-            assertThat(agentIds)
+        referencedAgentIds.stream()
+            .filter(id -> !"nullFlavor".equals(id))
+            .forEach(id -> assertThat(agentIds)
                 .withFailMessage("Expected referenced agent id %s to match the id "
-                    + "of an agent in the agent directory", referencedAgentId)
-                .contains(referencedAgentId);
-        }
+                    + "of an agent in the agent directory", id)
+                .contains(id));
     }
 
     private Set<String> extractIdsFromNodeList(NodeList nodeList, boolean allowSkipNullFlavour) {
         Set<String> ids = new HashSet<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
             var agentIdNode = nodeList.item(i);
-            if (allowSkipNullFlavour) {
-                if (agentIdNode.getAttributes().getNamedItem("nullFlavor") != null) {
-                    continue;
-                }
+            if (allowSkipNullFlavour && agentIdNode.getAttributes().getNamedItem("nullFlavor") != null) {
+                continue;
             }
 
             assertThat(agentIdNode.hasAttributes())
