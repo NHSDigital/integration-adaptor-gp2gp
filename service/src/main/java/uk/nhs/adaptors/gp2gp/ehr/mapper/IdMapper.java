@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 public class IdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final Map<String, MappedId> ids = new HashMap<>();
+    private static final Set<String> NOT_ALLOWED = Set.of(
+        ResourceType.Organization.name(),
+        ResourceType.Practitioner.name(),
+        ResourceType.PractitionerRole.name());
 
     public String getOrNew(ResourceType resourceType, IdType id) {
         return getOrNew(buildReference(resourceType, id), true);
@@ -31,6 +36,10 @@ public class IdMapper {
     }
 
     public String getOrNew(Reference reference, Boolean isResourceMapped) {
+        if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
+            throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
+        }
+
         MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
         MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
         if (isResourceMapped) {
@@ -52,33 +61,14 @@ public class IdMapper {
         return mappedId != null && mappedId.isResourceMapped();
     }
 
-    public String get(Reference reference) {
+    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
+        Reference reference = buildReference(resourceType, id);
         final String referenceValue = reference.getReference();
         if (hasIdBeenMapped(reference)) {
             return ids.get(referenceValue).getId();
         }
 
-        // TODO, workaround until NIAD-1340 is done
-        LOGGER.warn("No existing mapping was found for {}. Attempting to substitute a "
-            + "different resource as a workaround", referenceValue);
-        var replacement = ids.entrySet()
-            .stream()
-            .filter(map -> map.getKey().startsWith(reference.getReferenceElement().getResourceType()))
-            .findFirst();
-
-        if (replacement.isPresent()) {
-            var entry = replacement.get();
-            LOGGER.warn("Replacing unmapped resource {} with {} => {}", referenceValue,
-                entry.getKey(), entry.getValue());
-            return entry.getValue().getId();
-        }
-
-        LOGGER.warn("Unable to find a replacement resource for {}", referenceValue);
-        return null;
-    }
-
-    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
-        return get(buildReference(resourceType, id));
+        throw new EhrMapperException("Resource referenced was not mapped " + referenceValue);
     }
 
     private static Reference buildReference(ResourceType resourceType, IdType id) {
