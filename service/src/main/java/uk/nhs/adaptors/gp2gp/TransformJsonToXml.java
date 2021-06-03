@@ -14,6 +14,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
@@ -29,11 +30,9 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
@@ -194,17 +193,13 @@ public class TransformJsonToXml {
         final NonConsultationResourceMapper nonConsultationResourceMapper =
                 new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
 
-        OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);
-        PractitionerAgentPersonMapper practitionerAgentPersonMapper
-                = new PractitionerAgentPersonMapper(messageContext, organizationToAgentMapper);
+        final AgentPersonMapper agentPersonMapper = new AgentPersonMapper(messageContext);
 
-        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(practitionerAgentPersonMapper,
-                organizationToAgentMapper);
-
+        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext,
+                agentPersonMapper);
 
         EhrExtractMapper ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
                 nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
-
 
         final EhrExtractTemplateParameters ehrExtractTemplateParameters =
                 ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
