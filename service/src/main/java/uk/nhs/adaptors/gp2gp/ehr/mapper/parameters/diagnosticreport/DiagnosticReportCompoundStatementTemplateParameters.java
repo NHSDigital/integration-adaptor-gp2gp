@@ -9,7 +9,7 @@ import lombok.Setter;
 @Builder
 public class DiagnosticReportCompoundStatementTemplateParameters {
     private String compoundStatementId;
-    private String availabilityTime;
+    private String availabilityTimeElement;
     private String narrativeStatements;
     private String specimens;
     private String participant;
