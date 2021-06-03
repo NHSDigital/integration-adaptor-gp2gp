@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp;
+package uk.nhs.adaptors.gp2gp.transformJsonToXmlTool;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,9 +56,9 @@ import java.util.List;
 public class TransformJsonToXml {
 
     private static final String JSON_FILE_INPUT_PATH =
-            Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
+            Paths.get("transformJsonToXml/").toFile().getAbsoluteFile().getAbsolutePath() + "/input/";
     private static final String XML_OUTPUT_PATH =
-            Paths.get("src").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
+            Paths.get("transformJsonToXml/").toFile().getAbsoluteFile().getAbsolutePath() + "/output/";
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
@@ -76,11 +76,12 @@ public class TransformJsonToXml {
 
     private static InputWrapper getFiles() throws Exception {
 
+
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
-        assert fileNames != null;
 
+        assert files != null;
         if (files.length == 0) {
             throw new Exception("No json files found");
         }
@@ -104,7 +105,7 @@ public class TransformJsonToXml {
     private static String extractNhsNumber(String json) throws Exception {
         var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
-        var nhsNumber = bundle.getEntry().stream()
+        return bundle.getEntry().stream()
                 .map(Bundle.BundleEntryComponent::getResource)
                 .filter(resource -> ResourceType.Patient.equals(resource.getResourceType()))
                 .map(Patient.class::cast)
@@ -113,7 +114,6 @@ public class TransformJsonToXml {
                 .findFirst()
                 .orElseThrow(() -> new Exception("No Optional<Identifier> was found"))
                 .getValue();
-        return nhsNumber;
     }
 
     private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
@@ -122,7 +122,7 @@ public class TransformJsonToXml {
     }
 
     private static String readJsonFileAsString(String file) throws Exception {
-        return new String(Files.readAllBytes(Paths.get(file)), StandardCharsets.UTF_8);
+        return Files.readString(Paths.get(file));
     }
 
     private static void writeToFile(String xml, String sourceFileName) {
