@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -36,7 +37,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class SpecimenMapperTest {
 
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
-    private static final InstantType DIAGNOSTIC_REPORT_DATE = new InstantType("2020-10-12T13:33:44Z");
+    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
@@ -82,12 +83,15 @@ public class SpecimenMapperTest {
     @MethodSource("testData")
     public void When_MappingSpecimen_Expect_XmlOutput(String inputPath, String expectedPath) throws IOException {
         var input = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + inputPath);
-        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
 
-        lenient().when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
 
-        String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT_DATE);
+        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
+
+        when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
+
+        String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport);
 
         assertThat(outputMessage).isEqualTo(expected);
     }
@@ -107,12 +111,13 @@ public class SpecimenMapperTest {
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
             DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_and_default_observation.xml"
         );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(observation)).thenAnswer(mockObservationMapping());
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT_DATE
+            specimen, Collections.singletonList(observation), diagnosticReport
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
@@ -128,12 +133,13 @@ public class SpecimenMapperTest {
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
             DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_with_observations.xml"
         );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, observations, DIAGNOSTIC_REPORT_DATE
+            specimen, observations, diagnosticReport
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
@@ -156,7 +162,7 @@ public class SpecimenMapperTest {
             Arguments.of("input-specimen-without-notes.json", "expected-specimen-without-notes.xml"),
             Arguments.of("input-specimen-without-effective-time.json", "expected-specimen-without-effective-time.xml"),
             Arguments.of("input-specimen-with-empty-duration-value.json", "expected-specimen-with-empty-duration-value.xml"),
-            Arguments.of("input-specimen-no-narrative-statement.json", "expected-specimen-with-dummy-narrative-statement.xml")
+            Arguments.of("input-specimen-with-empty-quantity-value.json", "expected-specimen-with-empty-quantity-value.xml")
         );
     }
 

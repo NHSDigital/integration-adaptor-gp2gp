@@ -9,7 +9,7 @@ import lombok.Setter;
 @Builder
 public class SpecimenCompoundStatementTemplateParameters {
     private String compoundStatementId;
-    private String availabilityTime;
+    private String availabilityTimeElement;
     private String specimenRoleId;
     private String accessionIdentifier;
     private String effectiveTime;
