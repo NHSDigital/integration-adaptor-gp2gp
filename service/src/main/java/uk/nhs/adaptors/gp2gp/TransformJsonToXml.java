@@ -50,7 +50,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class TransformJsonToXml {
 
@@ -73,31 +75,34 @@ public class TransformJsonToXml {
         }
     }
 
-    private static InputWrapper getFiles() {
+    private static InputWrapper getFiles() throws Exception {
 
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
         assert fileNames != null;
 
-        for (File inputJsonFile : files) {
-            LOGGER.info("Parsing File: {}", inputJsonFile.getName());
-            if (FilenameUtils.getExtension(inputJsonFile.getName()).equalsIgnoreCase("json")) {
-                try {
-                    String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + inputJsonFile.getName());
-                    jsonStringInputs.add(jsonAsString);
-                    fileNames.add(inputJsonFile.getName());
-                } catch (Exception e) {
-                    LOGGER.info("Could Not Read Json Files.");
-                }
-            } else {
-                LOGGER.info("No .json Files Found");
-            }
+        if (files.length == 0) {
+            throw new Exception("No json files found");
         }
+
+        Arrays.stream(files)
+                .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
+                .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
+                .forEach(file -> {
+                    String jsonAsString = null;
+                    try {
+                        jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
+                    } catch (Exception e) {
+                        LOGGER.info("Could not read {}", file.getName());
+                    }
+                    jsonStringInputs.add(jsonAsString);
+                    fileNames.add(file.getName());
+                });
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String extractNhsNumber(String json) {
+    private static String extractNhsNumber(String json) throws Exception {
         var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
         var nhsNumber = bundle.getEntry().stream()
@@ -106,11 +111,13 @@ public class TransformJsonToXml {
                 .map(Patient.class::cast)
                 .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
                 .map(Identifier.class::cast)
-                .findFirst().get().getValue();
+                .findFirst()
+                .orElseThrow(() -> new Exception("No Optional<Identifier> was found"))
+                .getValue();
         return nhsNumber;
     }
 
-    private static Object getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
+    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
         return resource.getIdentifier()
                 .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
@@ -131,7 +138,7 @@ public class TransformJsonToXml {
         }
     }
 
-    private static String mapJsonToXml(String jsonAsStringInput) {
+    private static String mapJsonToXml(String jsonAsStringInput) throws Exception {
 
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
 
