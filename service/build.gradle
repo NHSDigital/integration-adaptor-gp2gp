@@ -26,7 +26,7 @@ repositories {
 }
 
 ext {
-	javaMainClass = "uk.nhs.adaptors.gp2gp.TransformJsonToXml"
+	javaMainClass = "uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml"
 }
 
 application {

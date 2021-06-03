@@ -56,14 +56,13 @@ import java.util.List;
 public class TransformJsonToXml {
 
     private static final String JSON_FILE_INPUT_PATH =
-            Paths.get("transformJsonToXml/").toFile().getAbsoluteFile().getAbsolutePath() + "/input/";
+            Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
     private static final String XML_OUTPUT_PATH =
-            Paths.get("transformJsonToXml/").toFile().getAbsoluteFile().getAbsolutePath() + "/output/";
+            Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
     public static void main(String[] args) throws Exception {
-
         var inputWrapper = getFiles();
 
         for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
@@ -75,8 +74,6 @@ public class TransformJsonToXml {
     }
 
     private static InputWrapper getFiles() throws Exception {
-
-
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
@@ -138,9 +135,7 @@ public class TransformJsonToXml {
     }
 
     private static String mapJsonToXml(String jsonAsStringInput) throws Exception {
-
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
-
         final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
         MessageContext messageContext = new MessageContext(randomIdGeneratorService);
@@ -227,4 +222,3 @@ public class TransformJsonToXml {
         private List<String> jsonFileInputs;
     }
 }
-
