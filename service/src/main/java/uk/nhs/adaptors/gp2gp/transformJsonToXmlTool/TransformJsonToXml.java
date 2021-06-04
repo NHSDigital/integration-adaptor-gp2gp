@@ -63,13 +63,17 @@ public class TransformJsonToXml {
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
     public static void main(String[] args) throws Exception {
-        var inputWrapper = getFiles();
+        String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL","False"));
+        LOGGER.info(startTest);
+        if (startTest.equals("True")){
+            var inputWrapper = getFiles();
 
-        for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
-            var jsonString = inputWrapper.getJsonFileInputs().get(i);
-            String xmlResult = mapJsonToXml(jsonString);
-            var fileName = inputWrapper.getJsonFileNames().get(i);
-            writeToFile(xmlResult, fileName);
+            for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
+                var jsonString = inputWrapper.getJsonFileInputs().get(i);
+                String xmlResult = mapJsonToXml(jsonString);
+                var fileName = inputWrapper.getJsonFileNames().get(i);
+                writeToFile(xmlResult, fileName);
+            }
         }
     }
 
