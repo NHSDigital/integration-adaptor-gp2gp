@@ -13,11 +13,11 @@ Copy `vars.example.sh` to `vars.sh` and populate with values for your endpoint.
 
 For messages from inbound - you can use `inbound_to_xml.sh` to decode the base64 from rabbitmq and extract the XML message.
 
-## 1 - MHS Inbound - RCMR_IN01000UK05 - EHR Request
+## 01_ehr_request_RCMR_IN010000UK13 - MHS Outbound - EHR Request
 
 The adaptor receives the EHR Request message on the MHS inbound queue.
 
-## 2 - GP Connect API - Access Structured
+## 02_gpc_get_access_structured - GP Connect API - Access Structured
 
 The adaptor requests the patient's structured records.
 
@@ -30,21 +30,21 @@ Create the certificate and key files using values provided by OpenTest before ru
 Generate a new Authorization token. The easiest way is to run a Postman request against
 the public demonstrator and copy the header value it generates.
 
-## 3- GP Connect API - Documents - Find patient
+## 3 - GP Connect API - Documents - Find patient
 
-Lookup logical id of patient on Document FHIR server. Refer to official GPC Postman collection.
+TODO
 
-## 4 - GGP Connect API - Documents - Find patient's documents
+## 4 - GP Connect API - Documents - Find patient's documents
 
-Find all the patient's documents given their logical identifier. Refer to official GPC Postman collection.
+TODO
 
-## 5 - GP Connect API - Access Document
+## 05_gpc_get_access_document - GP Connect API - Access Document
 
 The adaptor downloads all documents for the patient.
 
 Same instructions as for "2 - GPC Access Structured"
 
-## 6 - MHS Outbound - RCMR_IN030000UK06 - EHR Extract
+## 06_ehr_extract_RCMR_IN030000UK06 - MHS Outbound - RCMR_IN030000UK06 - EHR Extract
 
 The adaptor sends the translated EhrExtract to requesting practice via the MHS adaptor.
 
@@ -59,25 +59,22 @@ We expect the
 
 ## 7 - MHS Inbound - COPC_IN000001UK01 - Continue
 
-The adaptor receives this message on the inbound queue. It is a receipt that the receiving practice
-has received and processed the EHR Extract. The adaptor may now begin sending large message fragments.
+TODO
 
-The adaptor sends this outbound message to the mhs
-
-Same instructions as for "5 - RCMR_IN030000UK06"
-
-## 8 - MHS Outbound - COPC_IN000001UK01 - Large Message Fragments
+## 08_ehr_large_message_COPC_IN000001UK01 - MHS Outbound - COPC_IN000001UK01 - Large Message Fragments
 
 The adaptor sends none (small EHR, no documents) to many (large EHR, many documents) large
 messaging fragments to complete the Ehr Extract.
 
-## 9 - MHS Outbound - MCCI_IN10000UK13 - Adaptor Application Acknowledgement
+## 09_ehr_ack_MCCI_IN010000UK13 - MHS Outbound - MCCI_IN10000UK13 - Adaptor Application Acknowledgement
 
 **Positive** The adaptor sends the requesting system a positive acknowledgement that is has sent all messages.
 
 **Negative** The adaptor sends the requesting system a negative acknowledgement to indicate that the extract was not successful.
 
 ## 10 - MHS Inbound - MCCI_IN010000UK13 - Requester Application Acknowledgement
+
+TODO
 
 **Positive** The requesting system sends the adaptor a positive acknowledgement to confirm that the extract was successful.
 
