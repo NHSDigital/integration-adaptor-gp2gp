@@ -64,7 +64,6 @@ public class TransformJsonToXml {
 
     public static void main(String[] args) throws Exception {
         String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL", "False"));
-        LOGGER.info(startTest);
         if (startTest.equals("True")) {
             var inputWrapper = getFiles();
 
