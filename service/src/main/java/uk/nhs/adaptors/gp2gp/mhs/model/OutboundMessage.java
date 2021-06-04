@@ -23,6 +23,7 @@ public class OutboundMessage {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Attachment> attachments;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("external_attachments")
     private List<ExternalAttachment> externalAttachments;
 
     @Getter

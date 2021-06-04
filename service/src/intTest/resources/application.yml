@@ -46,5 +46,7 @@ gp2gp:
     patientEndpoint: ${GP2GP_GPC_DOCUMENTS_FHIR_BASE:/documents/fhir}/Patient
     patientDocumentReferenceEndpoint: ${GP2GP_GPC_DOCUMENTS_FHIR_BASE:/documents/fhir}/Patient
     overrideNhsNumber: ${GP2GP_GPC_OVERRIDE_NHS_NUMBER:}
+    overrideFromAsid: ${GP2GP_GPC_OVERRIDE_FROM_ASID:}
+    overrideToAsid: ${GP2GP_GPC_OVERRIDE_TO_ASID:}
   mhs:
     url: ${GP2GP_MHS_OUTBOUND_URL:http://localhost:8081/mock-mhs-endpoint}
