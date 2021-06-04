@@ -79,6 +79,7 @@ public class TransformJsonToXml {
         List<String> fileNames = new ArrayList<>();
 
         assert files != null;
+        LOGGER.error(JSON_FILE_INPUT_PATH);
         if (files.length == 0) {
             throw new Exception("No json files found");
         }
