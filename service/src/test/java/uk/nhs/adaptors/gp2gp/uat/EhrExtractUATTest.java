@@ -193,7 +193,6 @@ public class EhrExtractUATTest {
             .containsAll(referencedAgentIds);
     }
 
-    @SuppressWarnings("ignored")
     private boolean isUuid(String id) {
         try {
             UUID.fromString(id);
