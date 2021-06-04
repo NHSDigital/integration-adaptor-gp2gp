@@ -1,6 +1,25 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import lombok.SneakyThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.OperationOutcome;
@@ -12,7 +31,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.w3c.dom.Document;
+
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
@@ -21,27 +43,9 @@ import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusTestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assumptions.assumeThatCode;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -54,7 +58,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String EXPECTED_NHS_NUMBER = "9876543210";
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
-    private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\" >";
+    private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\">";
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
@@ -66,6 +70,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private MessageContext messageContext;
     @MockBean
     private DetectTranslationCompleteService detectTranslationCompleteService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     public void When_NewStructuredTask_Expect_DatabaseUpdatedAndAddedToObjectStore() throws IOException {
@@ -73,9 +78,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
@@ -93,14 +96,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition1 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition1);
 
         GetGpcStructuredTaskDefinition structuredTaskDefinition2 = buildValidStructuredTask(ehrExtractStatus);
-        // temporarily ignore the test while GPC data is invalid: NIAD-1300
-        assumeThatCode(() -> getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2))
-            .doesNotThrowAnyException();
+        getGpcStructuredTaskExecutor.execute(structuredTaskDefinition2);
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
@@ -158,17 +157,20 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
 
+    @SneakyThrows
     private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper, EhrExtractStatus ehrExtractStatus,
             GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(ehrExtractStatus.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
 
-        String hl7Response = storageDataWrapper.getData();
-        assertThat(hl7Response).contains(EXPECTED_PAYLOAD_TYPE);
-        assertThat(hl7Response).contains(EHR_COMPOSITION_ELEMENT);
-        assertThat(hl7Response).contains(COMPONENT_ELEMENT);
-        assertThatXmlCanBeParsed(hl7Response);
+        String mhsMessageJson = storageDataWrapper.getData();
+        OutboundMessage outboundMessage = objectMapper.readValue(mhsMessageJson, OutboundMessage.class);
+        String hl7Message = outboundMessage.getPayload();
+        assertThat(hl7Message).contains(EXPECTED_PAYLOAD_TYPE);
+        assertThat(hl7Message).contains(EHR_COMPOSITION_ELEMENT);
+        assertThat(hl7Message).contains(COMPONENT_ELEMENT);
+        assertThatXmlCanBeParsed(hl7Message);
     }
 
     @SneakyThrows

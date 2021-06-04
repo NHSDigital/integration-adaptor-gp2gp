@@ -2,14 +2,20 @@ package uk.nhs.adaptors.gp2gp.ehr.utils;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Period;
-import org.hl7.fhir.dstu3.model.ReferralRequest;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrFolderEffectiveTime;
 
 public final class StatementTimeMappingUtils {
     private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
@@ -18,8 +24,17 @@ public final class StatementTimeMappingUtils {
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String EFFECTIVE_TIME_LOW_TEMPLATE = "<low value=\"%s\"/>";
+    private static final String EFFECTIVE_TIME_HIGH_TEMPLATE = "<high value=\"%s\"/>";
 
     private StatementTimeMappingUtils() {
+    }
+
+    public static String prepareEffectiveTimeForNonConsultation(String effectiveTime) {
+        if (StringUtils.isNotBlank(effectiveTime)) {
+            return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, effectiveTime);
+        }
+
+        return DEFAULT_TIME_VALUE;
     }
 
     public static String prepareEffectiveTimeForEncounter(Encounter encounter) {
@@ -35,28 +50,13 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, toHl7Format(
                 encounter.getPeriod().getStartElement()));
         }
+
         return DEFAULT_TIME_VALUE;
     }
 
-    public static String prepareAvailabilityTimeForEncounter(Encounter encounter) {
-        if (encounter.hasPeriod() && encounter.getPeriod().hasStart()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
-                encounter.getPeriod().getStartElement()));
-        }
-        return DEFAULT_AVAILABILITY_TIME_VALUE;
-    }
-
-    public static String prepareAvailabilityTimeForReferralRequest(ReferralRequest referralRequest) {
-        if (referralRequest.hasAuthoredOn()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, toHl7Format(
-                referralRequest.getAuthoredOnElement()));
-        }
-        return DEFAULT_AVAILABILITY_TIME_VALUE;
-    }
-
-    public static String prepareAvailabilityTimeForObservation(Observation observation) {
-        if (observation.hasIssued()) {
-            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(observation.getIssued().toInstant()));
+    public static String prepareAvailabilityTime(BaseDateTimeType dateTime) {
+        if (!dateTime.isEmpty()) {
+            return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, DateFormatUtil.toHl7Format(dateTime));
         }
 
         return DEFAULT_AVAILABILITY_TIME_VALUE;
@@ -121,5 +121,22 @@ public final class StatementTimeMappingUtils {
                 medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
         }
         throw new EhrMapperException("Could not map Availability Time for Medication Request");
+    }
+
+    public static String prepareEffectiveTimeForEhrFolder(EhrFolderEffectiveTime effectiveTime) {
+        Optional<String> effectiveTimeLow = effectiveTime.getEffectiveTimeLow();
+        Optional<String> effectiveTimeHigh = effectiveTime.getEffectiveTimeHigh();
+
+        if (effectiveTimeLow.isEmpty() && effectiveTimeHigh.isEmpty()) {
+            return DEFAULT_TIME_VALUE;
+        }
+
+        return Stream.of(
+            effectiveTimeLow.map(low -> String.format(EFFECTIVE_TIME_LOW_TEMPLATE, low)),
+            effectiveTimeHigh.map(high -> String.format(EFFECTIVE_TIME_HIGH_TEMPLATE, high))
+        )
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.joining());
     }
 }

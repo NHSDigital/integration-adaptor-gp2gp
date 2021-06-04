@@ -1,52 +1,85 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import lombok.AllArgsConstructor;
-import org.hl7.fhir.dstu3.model.IdType;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-@AllArgsConstructor()
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ResourceType;
+
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+
+@Slf4j
+@AllArgsConstructor
 public class IdMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
-    private final Map<String, String> ids = new HashMap<>();
+    private final Map<String, MappedId> ids = new HashMap<>();
+    private static final Set<String> NOT_ALLOWED = Set.of(
+        ResourceType.Organization.name(),
+        ResourceType.Practitioner.name(),
+        ResourceType.PractitionerRole.name());
 
-    public String getOrNew(ResourceType resourceType, String id) {
-        return getOrNew(buildReference(resourceType, id));
+    public String getOrNew(ResourceType resourceType, IdType id) {
+        return getOrNew(buildReference(resourceType, id), true);
     }
 
     public String getOrNew(Reference reference) {
-        String mappedId = ids.getOrDefault(reference.getReference(), randomIdGeneratorService.createNewId());
-        ids.put(reference.getReference(), mappedId);
-
-        return mappedId;
+        return getOrNew(reference, false);
     }
 
-    public boolean hasIdBeenMapped(ResourceType resourceType, String id) {
-        return hasIdBeenMapped(buildReference(resourceType, id));
+    public String getOrNew(Reference reference, Boolean isResourceMapped) {
+        if (NOT_ALLOWED.contains(reference.getReferenceElement().getResourceType())) {
+            throw new EhrMapperException("Not allowed to use agent-related resource with IdMapper");
+        }
+
+        MappedId defaultResourceId = new MappedId(randomIdGeneratorService.createNewId(), isResourceMapped);
+        MappedId mappedId = ids.getOrDefault(reference.getReference(), defaultResourceId);
+        if (isResourceMapped) {
+            mappedId.setResourceMapped(true);
+        }
+
+        ids.put(reference.getReference(), mappedId);
+
+        return mappedId.getId();
+    }
+
+    public boolean hasIdBeenMapped(ResourceType resourceType, IdType id) {
+        Reference reference = buildReference(resourceType, id);
+        return hasIdBeenMapped(reference);
     }
 
     public boolean hasIdBeenMapped(Reference reference) {
-        return ids.containsKey(reference.getReference());
+        MappedId mappedId = ids.get(reference.getReference());
+        return mappedId != null && mappedId.isResourceMapped();
     }
 
-    public String get(Reference reference) throws EhrMapperException {
-        String mappedId = ids.get(reference.getReference());
-        if (mappedId == null) {
-            throw new EhrMapperException("No ID mapping for reference " + reference.getReference());
+    public String get(ResourceType resourceType, IdType id) throws EhrMapperException {
+        Reference reference = buildReference(resourceType, id);
+        final String referenceValue = reference.getReference();
+        if (hasIdBeenMapped(reference)) {
+            return ids.get(referenceValue).getId();
         }
-        return mappedId;
+
+        throw new EhrMapperException("Resource referenced was not mapped " + referenceValue);
     }
 
-    public String get(ResourceType resourceType, String id) throws EhrMapperException {
-        return get(buildReference(resourceType, id));
+    private static Reference buildReference(ResourceType resourceType, IdType id) {
+        return new Reference(new IdType(resourceType.name(), id.getIdPart()));
     }
 
-    private Reference buildReference(ResourceType resourceType, String id) {
-        return new Reference(new IdType(resourceType.name(), id));
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    private static class MappedId {
+        private String id;
+        private boolean isResourceMapped;
     }
 }

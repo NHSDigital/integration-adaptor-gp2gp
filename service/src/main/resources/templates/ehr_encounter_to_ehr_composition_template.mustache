@@ -17,7 +17,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="{{authorTime}}" />
             <agentRef classCode="AGNT">
-                <id root="{{author}}" />
+                {{#author}}<id root="{{author}}" />{{/author}}{{^author}}<id nullFlavor="UNK" />{{/author}}
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -28,9 +28,9 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="{{participant2}}"/>
+                {{#participant2}}<id root="{{participant2}}"/>{{/participant2}}{{^participant2}}<id nullFlavor="UNK"/>{{/participant2}}
             </agentRef>
         </Participant2>
         {{{components}}}

@@ -28,6 +28,7 @@ import uk.nhs.adaptors.mockmhsservice.producer.InboundProducer;
 public class MockMhsService {
     private static final String EXTRACT_CORE_INTERACTION_ID = "RCMR_IN030000UK06";
     private static final String ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
+    private static final String COMMON_INTERACTION_ID = "COPC_IN000001UK01";
     private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = ResourceReader.readAsString("COPC_IN000001UK01.json");
     private static final String STUB_ACCEPTED_RESPONSE = ResourceReader.readAsString("StubEbXmlResponse.xml");
     private static final String INTERNAL_SERVER_ERROR_RESPONSE = ResourceReader.readAsString("InternalServerError.html");
@@ -77,6 +78,10 @@ public class MockMhsService {
             LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+        } else if (interactionId.equals(COMMON_INTERACTION_ID)) {
+            LOGGER.info("Message Common accepted.");
+            headers.setContentType(MediaType.TEXT_XML);
+            return new ResponseEntity<>(headers, ACCEPTED);
         }
 
         LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);
@@ -84,6 +89,7 @@ public class MockMhsService {
     }
 
     private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException, MockMHSException {
+        LOGGER.debug("Received outbound MHS request payload:\n{}", requestBody);
         var payloadObject = objectMapper.readValue(requestBody, OutboundMessage.class);
         if (payloadObject.getPayload() == null) {
             throw new MockMHSException("Error content of request body does not match expected JSON");

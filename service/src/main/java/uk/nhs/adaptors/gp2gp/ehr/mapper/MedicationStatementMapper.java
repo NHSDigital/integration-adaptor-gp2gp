@@ -73,7 +73,7 @@ public class MedicationStatementMapper {
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapMedicationRequestToMedicationStatement(MedicationRequest medicationRequest) {
-        var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getId());
+        var medicationStatementId = messageContext.getIdMapper().getOrNew(ResourceType.MedicationRequest, medicationRequest.getIdElement());
         var statusCode = buildStatusCode(medicationRequest);
         var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForMedicationRequest(medicationRequest);
         var availabilityTime = StatementTimeMappingUtils.prepareAvailabilityTimeForMedicationRequest(medicationRequest);
@@ -268,10 +268,11 @@ public class MedicationStatementMapper {
             final var reference = medicationRequest.getRecorder();
             if (isRelevant.test(reference)) {
                 return participantMapper.mapToParticipant(
-                    messageContext.getIdMapper().get(reference), ParticipantType.AUTHOR);
+                    messageContext.getAgentDirectory().getAgentId(reference), ParticipantType.AUTHOR);
             }
         }
-        throw new EhrMapperException("Missing recorder of type Practitioner, PractitionerRole or Organization");
+        throw new EhrMapperException("MedicationRequest " + medicationRequest.getId()
+            + " missing recorder of type Practitioner, PractitionerRole or Organization");
     }
 
     private static Predicate<Reference> buildPredicateReferenceIsA(@NonNull ResourceType type) {

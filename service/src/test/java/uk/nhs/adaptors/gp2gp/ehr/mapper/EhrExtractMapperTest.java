@@ -1,53 +1,31 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Organization;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
-import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
-import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 public class EhrExtractMapperTest {
-    private static final String TEST_FILE_DIRECTORY = "/ehr/request/fhir/";
-    private static final String INPUT_DIRECTORY = "input/";
-    private static final String OUTPUT_DIRECTORY = "output/";
-    private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
-    private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
-    private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
-    private static final String EXPECTED_XML_TO_JSON_FILE = "ExpectedEhrExtractResponseFromJson.xml";
-    private static final String TEST_ID_1 = "test-id-1";
-    private static final String TEST_ID_2 = "test-id-2";
-    private static final String TEST_ID_3 = "test-id-3";
-    private static final String TEST_CONVERSATION_ID = "test-conversation-id";
-    private static final String TEST_REQUEST_ID = "test-request-id";
-    private static final String TEST_NHS_NUMBER = "1234567890";
-    private static final String TEST_FROM_ODS_CODE = "test-from-ods-code";
-    private static final String TEST_TO_ODS_CODE = "test-to-ods-code";
-    private static final String TEST_DATE_TIME = "2020-01-01T01:01:01.01Z";
-
-    private static GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
+    private static final String NHS_NUMBER = "1234567890";
+    private static final String OVERRIDE_NHS_NUMBER = "overrideNhsNumber";
+    private static final String OVERRIDE_NHS_NUMBER_VALUE = "123123123";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -57,82 +35,47 @@ public class EhrExtractMapperTest {
     private CodeableConceptCdMapper codeableConceptCdMapper;
     @Mock
     private OrganizationToAgentMapper organizationToAgentMapper;
-
-    private EhrExtractMapper ehrExtractMapper;
+    @Mock
+    private NonConsultationResourceMapper nonConsultationResourceMapper;
+    @Mock
     private MessageContext messageContext;
+    @Mock
+    private AgentDirectoryMapper agentDirectoryMapper;
+    @Mock
+    private EncounterMapper encounterMapper;
+    @Mock
+    private EhrFolderEffectiveTime ehrFolderEffectiveTime;
+    @InjectMocks
+    private EhrExtractMapper ehrExtractMapper;
 
-    @BeforeEach
-    public void setUp() {
-        getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-            .nhsNumber(TEST_NHS_NUMBER)
-            .conversationId(TEST_CONVERSATION_ID)
-            .requestId(TEST_REQUEST_ID)
-            .fromOdsCode(TEST_FROM_ODS_CODE)
-            .toOdsCode(TEST_TO_ODS_CODE)
+    @Test
+    public void When_NhsOverrideNumberProvided_Expect_OverrideToBeUsed()  {
+        ReflectionTestUtils.setField(ehrExtractMapper, OVERRIDE_NHS_NUMBER, OVERRIDE_NHS_NUMBER_VALUE);
+        when(agentDirectoryMapper.mapEHRFolderToAgentDirectory(any(Bundle.class), eq(OVERRIDE_NHS_NUMBER_VALUE)))
+            .thenReturn(OVERRIDE_NHS_NUMBER_VALUE);
+        when(timestampService.now()).thenReturn(Instant.now().truncatedTo(ChronoUnit.MILLIS));
+        when(messageContext.getEffectiveTime()).thenReturn(ehrFolderEffectiveTime);
+
+        var taskDef = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(NHS_NUMBER)
             .build();
-
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID_1, TEST_ID_2, TEST_ID_3);
-        when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        messageContext = new MessageContext(randomIdGeneratorService);
-
-        ParticipantMapper participantMapper = new ParticipantMapper();
-        EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
-            messageContext,
-            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper),
-            new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
-            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
-            new ObservationStatementMapper(
-                messageContext,
-                new StructuredObservationValueMapper(),
-                new PertinentInformationObservationValueMapper(),
-                codeableConceptCdMapper,
-                participantMapper
-            ),
-            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper)
-        );
-
-        AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
-            new PractitionerAgentPersonMapper(
-                messageContext,
-                new OrganizationToAgentMapper(messageContext)
-            ),
-            organizationToAgentMapper
-        );
-
-        ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
-            timestampService,
-            new EncounterMapper(messageContext, encounterComponentsMapper),
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper),
-            agentDirectoryMapper);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        messageContext.resetMessageContext();
+        var bundle = mock(Bundle.class);
+        var parameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(taskDef, bundle);
+        assertThat(parameters.getAgentDirectory()).isEqualTo(OVERRIDE_NHS_NUMBER_VALUE);
     }
 
     @Test
-    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() throws IOException {
-        String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(OUTPUT_PATH + EXPECTED_XML_TO_JSON_FILE);
-        String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + JSON_INPUT_FILE);
-        Bundle bundle = new FhirParseService().parseResource(inputJsonFileContent, Bundle.class);
-        messageContext.initialize(bundle);
+    public void When_NhsOverrideNumberIsBlank_Expect_ActualNhsNumberIsUsed()  {
+        when(agentDirectoryMapper.mapEHRFolderToAgentDirectory(any(Bundle.class), eq(NHS_NUMBER)))
+            .thenReturn(NHS_NUMBER);
+        when(timestampService.now()).thenReturn(Instant.now().truncatedTo(ChronoUnit.MILLIS));
+        when(messageContext.getEffectiveTime()).thenReturn(ehrFolderEffectiveTime);
 
-        EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
-            getGpcStructuredTaskDefinition,
-            bundle);
-        String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+        var taskDef = GetGpcStructuredTaskDefinition.builder()
+            .nhsNumber(NHS_NUMBER)
+            .build();
+        var bundle = mock(Bundle.class);
+        var parameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(taskDef, bundle);
+        assertThat(parameters.getAgentDirectory()).isEqualTo(NHS_NUMBER);
     }
 }

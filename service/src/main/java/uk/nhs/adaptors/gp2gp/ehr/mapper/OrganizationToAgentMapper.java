@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.ContactPoint;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,13 +34,9 @@ public class OrganizationToAgentMapper {
         "temporary", "TMP"
     );
 
-    private final MessageContext messageContext;
-
-    public String mapOrganizationToAgent(Organization organization) {
-
+    public static String mapOrganizationToAgent(Organization organization, String newId) {
         var builder = AgentMapperTemplateParametersOuter.builder()
-            .agentId(messageContext.getIdMapper().getOrNew(ResourceType.Organization,
-                organization.getIdElement().getIdPart()));
+            .agentId(newId);
 
         var inner = Optional.of(mapOrganizationToAgentInner(organization));
         inner.ifPresent(builder::organisationInfo);
@@ -49,7 +44,7 @@ public class OrganizationToAgentMapper {
         return TemplateUtils.fillTemplate(AGENT_TEMPLATE_OUTER, builder.build());
     }
 
-    public String mapOrganizationToAgentInner(Organization organization) {
+    public static String mapOrganizationToAgentInner(Organization organization) {
         var builder = AgentMapperTemplateParametersInner.builder();
 
         buildAgentExtensionId(organization).ifPresent(builder::agentExtensionId);
@@ -68,7 +63,7 @@ public class OrganizationToAgentMapper {
         return TemplateUtils.fillTemplate(AGENT_TEMPLATE_INNER, builder.build());
     }
 
-    private Optional<String> buildAgentExtensionId(Organization organization) {
+    private static Optional<String> buildAgentExtensionId(Organization organization) {
         if (organization.hasIdentifier()) {
             return organization.getIdentifier()
                 .stream()
@@ -79,25 +74,25 @@ public class OrganizationToAgentMapper {
         return Optional.empty();
     }
 
-    private Optional<String> buildName(Organization organization) {
+    private static Optional<String> buildName(Organization organization) {
         if (organization.hasName()) {
             return Optional.of(organization.getName());
         }
         return Optional.empty();
     }
 
-    private Optional<String> buildTelecom(Organization organization) {
+    private static Optional<String> buildTelecom(Organization organization) {
         if (organization.hasTelecom()) {
             return organization.getTelecom()
                 .stream()
-                .filter(this::checkIfWorkPhone)
+                .filter(OrganizationToAgentMapper::checkIfWorkPhone)
                 .map(ContactPoint::getValue)
                 .findFirst();
         }
         return Optional.empty();
     }
 
-    private Optional<String> buildAddressUse(Organization organization) {
+    private static Optional<String> buildAddressUse(Organization organization) {
         if (organization.hasAddress() && organization.getAddressFirstRep().hasUse()) {
             var addressUse = organization.getAddressFirstRep().getUse().getDisplay();
             return Optional.of(ADDRESS_USES.getOrDefault(addressUse.toLowerCase(), StringUtils.EMPTY));
@@ -105,7 +100,7 @@ public class OrganizationToAgentMapper {
         return Optional.empty();
     }
 
-    private List<String> buildAddressLine(Organization organization) {
+    private static List<String> buildAddressLine(Organization organization) {
         if (organization.hasAddress()) {
             var addressLines = organization.getAddressFirstRep()
                 .getLine()
@@ -122,7 +117,7 @@ public class OrganizationToAgentMapper {
         return Collections.emptyList();
     }
 
-    private Optional<String> buildPostalCode(Organization organization) {
+    private static Optional<String> buildPostalCode(Organization organization) {
         if (organization.hasAddress() && organization.getAddressFirstRep().hasPostalCode()) {
             return Optional.of(organization.getAddressFirstRep()
                 .getPostalCode());
@@ -130,9 +125,8 @@ public class OrganizationToAgentMapper {
         return Optional.empty();
     }
 
-    private boolean checkIfWorkPhone(ContactPoint contactPoint) {
+    private static boolean checkIfWorkPhone(ContactPoint contactPoint) {
         return  (contactPoint.getSystem().getDisplay().equalsIgnoreCase("phone")
             && contactPoint.getUse().getDisplay().equalsIgnoreCase("work"));
     }
-
 }

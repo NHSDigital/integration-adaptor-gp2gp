@@ -1,20 +1,26 @@
 <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20190601113000"/>
         </effectiveTime>
         <availabilityTime value="20190601113000"/>
         <value xsi:type="IVL_PQ"><low value="37.1" unit="Cel" inclusive="true"/></value>
+        
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Range Units: test-unit Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        <referenceRange typeCode="REFV"><referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT"><text>Test reference range text</text><value><low value="20"/><high value="30"/></value></referenceInterpretationRange></referenceRange>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>Test reference range text</text>
+        <value><low value="20"/><high value="30"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
     </ObservationStatement>
 </component>

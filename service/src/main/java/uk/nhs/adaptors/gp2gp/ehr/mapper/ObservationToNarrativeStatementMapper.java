@@ -27,13 +27,13 @@ public class ObservationToNarrativeStatementMapper {
     public String mapObservationToNarrativeStatement(Observation observation, boolean isNested) {
         final IdMapper idMapper = messageContext.getIdMapper();
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getId()))
+            .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .availabilityTime(getAvailabilityTime(observation))
             .comment(observation.getComment())
             .isNested(isNested);
 
         if (observation.hasPerformer()) {
-            final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             narrativeStatementTemplateParameters.participant(participantBlock);

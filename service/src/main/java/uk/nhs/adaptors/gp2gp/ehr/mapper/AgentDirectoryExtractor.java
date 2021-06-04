@@ -1,6 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import lombok.Data;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -18,15 +24,13 @@ import org.hl7.fhir.dstu3.model.ReferralRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+@Slf4j
 public class AgentDirectoryExtractor {
 
     private static final String NHS_NUMBER_SYSTEM = "https://fhir.nhs.uk/Id/nhs-number";
@@ -41,7 +45,7 @@ public class AgentDirectoryExtractor {
         ResourceType.Immunization, resource -> ((Immunization) resource).hasPractitioner(),
         ResourceType.Encounter, resource -> ((Encounter) resource).hasParticipant()
             && ((Encounter) resource).getParticipantFirstRep().hasIndividual(),
-        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).hasRecipient(),
+        ResourceType.ReferralRequest, AgentDirectoryExtractor::referralRequestHasPractitionerRequesterAgent,
         ResourceType.AllergyIntolerance, resource -> ((AllergyIntolerance) resource).hasAsserter()
             || ((AllergyIntolerance) resource).hasRecorder(),
         ResourceType.MedicationRequest, resource -> ((MedicationRequest) resource).hasRecorder(),
@@ -50,7 +54,7 @@ public class AgentDirectoryExtractor {
     private static final Map<ResourceType, Function<Resource, IIdType>> RESOURCE_EXTRACT_IIDTYPE = Map.of(
         ResourceType.Immunization, resource -> ((Immunization) resource).getPractitionerFirstRep().getActor().getReferenceElement(),
         ResourceType.Encounter, resource -> ((Encounter) resource).getParticipantFirstRep().getIndividual().getReferenceElement(),
-        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRecipientFirstRep().getReferenceElement(),
+        ResourceType.ReferralRequest, resource -> ((ReferralRequest) resource).getRequester().getAgent().getReferenceElement(),
         ResourceType.AllergyIntolerance, AgentDirectoryExtractor::extractIIdTypeFromAllergyIntolerance,
         ResourceType.MedicationRequest, resource -> ((MedicationRequest) resource).getRecorder().getReferenceElement(),
         ResourceType.Condition, resource -> ((Condition) resource).getAsserter().getReferenceElement()
@@ -79,12 +83,24 @@ public class AgentDirectoryExtractor {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
             .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
-            .map(AgentDirectoryExtractor::extractIIdTypes)
-            .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
-            .flatMap(Optional::stream)
-            .map(Practitioner.class::cast)
+            .peek(resource -> LOGGER.debug("{} contains a relevant practitioner reference", resource.getId()))
+            .flatMap(resource -> {
+                var reference = extractIIdTypes(resource);
+                LOGGER.debug("Extracted reference to {}", reference);
+                return ResourceExtractor.extractResourceByReference(bundle, reference)
+                    .map(referencedResource -> castToPractitioner(resource, referencedResource))
+                    .stream();
+            })
             .distinct()
             .collect(Collectors.toList());
+    }
+
+    private static Practitioner castToPractitioner(Resource parent, Resource resource) {
+        if (ResourceType.Practitioner == resource.getResourceType()) {
+            return (Practitioner) resource;
+        }
+        throw new EhrMapperException(String.format("Encountered %s in resource %s where Practitioner is expected",
+            resource.getResourceType(), parent.getId()));
     }
 
     public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
@@ -182,6 +198,13 @@ public class AgentDirectoryExtractor {
             .orElseGet(() -> allergyIntolerance
                 .map(AllergyIntolerance::getRecorder)
                 .map(BaseReference::getReferenceElement).get());
+    }
+
+    private static boolean referralRequestHasPractitionerRequesterAgent(Resource resource) {
+        ReferralRequest referralRequest = (ReferralRequest) resource;
+        return referralRequest.hasRequester()
+            && referralRequest.getRequester().getAgent().getReferenceElement()
+            .getResourceType().equals(ResourceType.Practitioner.name());
     }
 
     @Data

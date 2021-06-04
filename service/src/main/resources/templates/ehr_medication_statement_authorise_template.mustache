@@ -1,13 +1,13 @@
-<component typeCode="COMP" contextConductionInd="true">
+<component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
         <id root="{{medicationStatementId}}"/>
         <statusCode code="{{statusCode}}"/>
-        {{{availabilityTime}}}
         {{#effectiveTime}}
         <effectiveTime>
             {{{effectiveTime}}}
         </effectiveTime>
         {{/effectiveTime}}
+        {{{availabilityTime}}}
         <consumable typeCode="CSM">
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
@@ -18,43 +18,45 @@
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
                 <id root="{{ehrSupplyId}}"/>
-                <statusCode code="{{statusCode}}"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-                {{{availabilityTime}}}
+                <statusCode code="{{statusCode}}"/>
                 {{#effectiveTime}}
-                <effectiveTime>
-                    {{{effectiveTime}}}
-                </effectiveTime>
+                    <effectiveTime>
+                        {{{effectiveTime}}}
+                    </effectiveTime>
                 {{/effectiveTime}}
+                {{{availabilityTime}}}
+                {{#repeatNumber}}<repeatNumber value="{{repeatNumber}}"/>{{/repeatNumber}}
                 <quantity value="{{quantityValue}}" unit="1">
                     <translation value="{{quantityValue}}">
                         <originalText>{{quantityText}}</originalText>
                     </translation>
                 </quantity>
+                {{#priorPrescriptionId}}
+                    <predecessor typeCode="SUCC">
+                        <priorMedicationRef classCode="SBADM" moodCode="INT">
+                            <id root="{{priorPrescriptionId}}"/>
+                        </priorMedicationRef>
+                    </predecessor>
+                {{/priorPrescriptionId}}
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>{{ehrSupplyPertinentInformation}}</text>
                     </pertinentSupplyAnnotation>
                 </pertinentInformation>
-                {{#repeatNumber}}<repeatNumber value="{{repeatNumber}}"/>{{/repeatNumber}}
-                {{#priorPrescriptionId}}
-                <predecessor typeCode="SUCC">
-                    <priorMedicationRef classCode="SBADM" moodCode="INT">
-                        <id root="{{priorPrescriptionId}}"/>
-                    </priorMedicationRef>
-                </predecessor>
-                {{/priorPrescriptionId}}
             </ehrSupplyAuthorise>
         </component>
         {{#hasEhrSupplyDiscontinue}}
         <component typeCode="COMP">
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="{{ehrSupplyDiscontinueId}}"/>
-                <statusCode code="COMPLETE"/>
                 {{#ehrSupplyDiscontinueCode}}{{{ehrSupplyDiscontinueCode}}}{{/ehrSupplyDiscontinueCode}}{{^ehrSupplyDiscontinueCode}}<code nullFlavor="UNK"><originalText>Stopped</originalText></code>{{/ehrSupplyDiscontinueCode}}
+                <statusCode code="COMPLETE"/>
                 {{{ehrSupplyDiscontinueAvailabilityTime}}}
                 <reversalOf typeCode="REV">
-                    <id root="{{ehrSupplyId}}"/>
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="{{ehrSupplyId}}"/>
+                    </priorMedicationRef>
                 </reversalOf>
             </ehrSupplyDiscontinue>
         </component>

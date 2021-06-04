@@ -89,20 +89,18 @@ public class RequestStatementMapper {
 
             final IdMapper idMapper = messageContext.getIdMapper();
             templateParameters
-                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getId()))
+                .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getIdElement()))
                 .isNested(isNested)
-                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
+                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(referralRequest.getAuthoredOnElement()))
                 .text(buildTextDescription())
                 .code(buildCode());
 
-            if (!referralRequest.hasReasonCode()) {
-                templateParameters.defaultReasonCode(DEFAULT_REASON_CODE_XML);
-            }
-
             if (referralRequest.hasRecipient()) {
-                final Reference recipient = referralRequest.getRecipientFirstRep();
-                final var responsibleParty = idMapper.get(recipient);
-                templateParameters.responsibleParty(responsibleParty);
+                referralRequest.getRecipient().stream()
+                    .filter(RequestStatementMapper::isReferenceToPractitioner)
+                    .findAny()
+                    .map(messageContext.getAgentDirectory()::getAgentId)
+                    .ifPresent(templateParameters::responsibleParty);
             }
 
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());
@@ -115,16 +113,16 @@ public class RequestStatementMapper {
         }
 
         private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
-            final IdMapper idMapper = messageContext.getIdMapper();
+            AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
-            if (isReferenceToType(agent, ResourceType.Practitioner)
+            if (isReferenceToPractitioner(agent)
                     && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
-                final String participantRef = idMapper.get(onBehalfOf);
+                final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
-            } else if (isReferenceToType(agent, ResourceType.Practitioner) || isReferenceToType(agent, ResourceType.Organization)) {
-                final String participantRef = idMapper.getOrNew(agent);
+            } else if (isReferenceToPractitioner(agent)) {
+                final String participantRef =  agentDirectory.getAgentId(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
             }
@@ -290,7 +288,7 @@ public class RequestStatementMapper {
             if (referralRequest.hasReasonCode()) {
                 return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
             }
-            return StringUtils.EMPTY;
+            return DEFAULT_REASON_CODE_XML;
         }
     }
 

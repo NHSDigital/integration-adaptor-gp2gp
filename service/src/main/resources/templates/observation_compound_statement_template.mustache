@@ -1,0 +1,23 @@
+<component typeCode="COMP" contextConductionInd="true">
+    <CompoundStatement classCode="{{{classCode}}}" moodCode="EVN">
+        <id root="{{compoundStatementId}}"/>
+        {{{codeElement}}}
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            {{{effectiveTime}}}
+        </effectiveTime>
+        {{{availabilityTimeElement}}}
+        {{#observationStatement}}
+            {{{.}}}
+        {{/observationStatement}}
+        {{#narrativeStatements}}
+            {{{.}}}
+        {{/narrativeStatements}}
+        {{#statementsForDerivedObservations}}
+            {{{.}}}
+        {{/statementsForDerivedObservations}}
+        {{#participant}}
+            {{{.}}}
+        {{/participant}}
+    </CompoundStatement>
+</component>

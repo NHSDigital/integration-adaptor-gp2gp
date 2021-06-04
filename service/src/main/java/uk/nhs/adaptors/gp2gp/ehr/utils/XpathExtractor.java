@@ -35,8 +35,8 @@ public class XpathExtractor {
     private static final String ID = "/id";
     private static final String VALUE_SELECTOR = "/@value";
     private static final String ROOT_SELECTOR = "/@root";
-    private static final String TYPE_CODE_AUT_QUERY = "[@typeCode=\"aut\"]";
-    private static final String TYPE_CODE_PRF_QUERY = "[@typeCode=\"prf\"]";
+    private static final String TYPE_CODE_AUT_QUERY = "[@typeCode=\"AUT\"]";
+    private static final String TYPE_CODE_PRF_QUERY = "[@typeCode=\"PRF\"]";
     private static final String AVAILABILITY_SELECTOR = AVAILABILITY_TIME + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_CENTER_SELECTOR = EFFECTIVE_TIME + CENTER + VALUE_SELECTOR;
     private static final String EFFECTIVE_TIME_LOW_SELECTOR = EFFECTIVE_TIME + LOW + VALUE_SELECTOR;
@@ -66,7 +66,7 @@ public class XpathExtractor {
     private static final String IMMUNIZATION_AUTHOR_REF = IMMUNIZATION + PARTICIPANT_SELECTOR;
     private static final String IMMUNIZATION_SECOND_PARTICIPANT = IMMUNIZATION_AUTHOR_REF;
 
-    private static final String ALLERGY_INTOLERANCE = EHR_COMPOSITION + COMPONENT + COMPOUND_STATEMENT + COMPONENT + OBSERVATION_STATEMENT;
+    private static final String ALLERGY_INTOLERANCE = COMPONENT + COMPOUND_STATEMENT + COMPONENT + OBSERVATION_STATEMENT;
     private static final String ALLERGY_INTOLERANCE_AVAILABILITY_TIME = ALLERGY_INTOLERANCE + AVAILABILITY_SELECTOR;
     private static final String ALLERGY_INTOLERANCE_AUTHOR_TIME = ALLERGY_INTOLERANCE_AVAILABILITY_TIME;
     private static final String ALLERGY_INTOLERANCE_TIME_LOW = ALLERGY_INTOLERANCE + EFFECTIVE_TIME_LOW_SELECTOR;
@@ -121,9 +121,14 @@ public class XpathExtractor {
     private static final String DOCUMENT_REFERENCE_AUTHOR_REF = DOCUMENT_REFERENCE + PARTICIPANT_SELECTOR;
     private static final String DOCUMENT_REFERENCE_SECOND_PARTICIPANT = DOCUMENT_REFERENCE_AUTHOR_REF;
 
+    private static final String DIAGNOSTIC_REPORT = COMPONENT + COMPOUND_STATEMENT;
+    private static final String DIAGNOSTIC_REPORT_AVAILABILITY_TIME = DIAGNOSTIC_REPORT + AVAILABILITY_SELECTOR;
+    private static final String DIAGNOSTIC_REPORT_EFFECTIVE_TIME = DIAGNOSTIC_REPORT_AVAILABILITY_TIME;
+    private static final String DIAGNOSTIC_REPORT_AUTHOR_TIME = DIAGNOSTIC_REPORT_AVAILABILITY_TIME;
+    private static final String DIAGNOSTIC_REPORT_AUTHOR_REF = DIAGNOSTIC_REPORT + PARTICIPANT_SELECTOR;
+    private static final String DIAGNOSTIC_REPORT_PARTICIPANT = DIAGNOSTIC_REPORT_AUTHOR_REF;
+
     private static final String AVAILABILITY_TIME_VALUE_TEMPLATE = "<availabilityTime value=\"%s\"/>";
-    private static final String EFFECTIVE_TIME_CENTER_TEMPLATE = "<center value=\"%s\"/>";
-    private static final String DEFAULT_TIME_VALUE = "<center nullFlavor=\"UNK\"/>";
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String END_OF_LINKSET_COMPONENT = "</LinkSet>\n</component>";
 
@@ -270,6 +275,19 @@ public class XpathExtractor {
         return extractValues(component, ehrTemplateArgs);
     }
 
+    public static EncounterTemplateParametersBuilder extractValuesForDiagnosticReport(String component) {
+
+        var ehrTemplateArgs = EhrTemplateArgs.builder()
+            .availabilityTime(DIAGNOSTIC_REPORT_AVAILABILITY_TIME)
+            .authorTime(DIAGNOSTIC_REPORT_AUTHOR_TIME)
+            .effectiveTime(DIAGNOSTIC_REPORT_EFFECTIVE_TIME)
+            .effectiveTimeBackup(DIAGNOSTIC_REPORT_EFFECTIVE_TIME)
+            .authorAgentRef(DIAGNOSTIC_REPORT_AUTHOR_REF)
+            .participant2(DIAGNOSTIC_REPORT_PARTICIPANT);
+
+        return extractValues(component, ehrTemplateArgs.build());
+    }
+
     @SneakyThrows
     private static EncounterTemplateParametersBuilder extractValues(String component, EhrTemplateArgs ehrTemplateArgs) {
         Document xmlDocument = X_PATH_SERVICE.parseDocumentFromXml(component);
@@ -285,9 +303,7 @@ public class XpathExtractor {
                 () -> builder.availabilityTime(DEFAULT_AVAILABILITY_TIME_VALUE));
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getEffectiveTime(), ehrTemplateArgs.getEffectiveTimeBackup())
-            .map(XpathExtractor::buildEffectiveTimeTemplate)
-            .ifPresentOrElse(builder::effectiveTime,
-                () -> builder.effectiveTime(DEFAULT_TIME_VALUE));
+            .ifPresent(builder::effectiveTime);
 
         getNodeValueOptional(xmlDocument, ehrTemplateArgs.getAuthorAgentRef())
             .ifPresent(builder::author);
@@ -314,10 +330,6 @@ public class XpathExtractor {
 
     private static String buildAvailabilityTimeTemplate(String time) {
         return String.format(AVAILABILITY_TIME_VALUE_TEMPLATE, time);
-    }
-
-    private static String buildEffectiveTimeTemplate(String time) {
-        return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE, time);
     }
 
     @Data

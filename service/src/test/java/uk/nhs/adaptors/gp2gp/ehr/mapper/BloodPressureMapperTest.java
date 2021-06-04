@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.junit.jupiter.api.AfterEach;
@@ -69,8 +70,10 @@ public class BloodPressureMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(new Bundle());
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), mockCodeableConceptCdMapper);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            mockCodeableConceptCdMapper, new ParticipantMapper());
     }
 
     @AfterEach
@@ -145,7 +148,8 @@ public class BloodPressureMapperTest {
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            codeableConceptCdMapper, new ParticipantMapper());
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
         var outputMessage = bloodPressureMapper.mapBloodPressure(observation, true);
@@ -159,7 +163,8 @@ public class BloodPressureMapperTest {
 
         CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
         bloodPressureMapper = new BloodPressureMapper(
-            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(), codeableConceptCdMapper);
+            messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+            codeableConceptCdMapper, new ParticipantMapper());
 
         Observation observation = new FhirParseService().parseResource(jsonInput, Observation.class);
 

@@ -1,6 +1,13 @@
 <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20200906"/>
             <high value="20201004000000"/>
@@ -11,13 +18,6 @@
                 <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-Condition-new-ID"/>
             </namedStatementRef>
         </conditionNamed>
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B-Practitioner-new-ID"/>

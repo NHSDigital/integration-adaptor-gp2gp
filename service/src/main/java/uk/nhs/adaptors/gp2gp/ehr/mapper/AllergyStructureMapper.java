@@ -59,10 +59,10 @@ public class AllergyStructureMapper {
 
     public String mapAllergyIntoleranceToAllergyStructure(AllergyIntolerance allergyIntolerance) {
         final IdMapper idMapper = messageContext.getIdMapper();
+
         var allergyStructureTemplateParameters = AllergyStructureTemplateParameters.builder()
-            .ehrCompositionId(idMapper.getOrNew(ResourceType.Composition, allergyIntolerance.getId()))
-            .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getId()))
-            .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getId()))
+            .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getIdElement()))
+            .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getIdElement()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
@@ -85,8 +85,8 @@ public class AllergyStructureMapper {
 
     private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
         if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
-            var authorReference = messageContext.getIdMapper().get(reference);
-            return Optional.of(participantMapper.mapToParticipant(authorReference, participantType));
+            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
+            return Optional.of(participantMapper.mapToParticipant(authorReferenceId, participantType));
         }
 
         return Optional.empty();

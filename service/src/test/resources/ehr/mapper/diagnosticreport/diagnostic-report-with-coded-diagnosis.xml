@@ -1,0 +1,25 @@
+<component typeCode="COMP">
+    <CompoundStatement classCode="CLUSTER" moodCode="EVN">
+        <id root="II-for-DiagnosticReport-DiagnosticReport/96B93E28-293D-46E7-B4C2-D477EEBF7098"/>
+        <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
+            <originalText>Filed Report</originalText>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime value="20100225154100"/>
+            <!-- Mapped Specimen with id: DUMMY-SPECIMEN-5E496953-065B-41F2-9577-BE8F2FBD0757 -->
+            <component typeCode="COMP" contextConductionInd="true">
+    <NarrativeStatement classCode="OBS" moodCode="EVN">
+        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+            CommentDate:20100225154100
+
+            Lab Diagnosis: Coded Diagnosis display 1</text>
+        <statusCode code="COMPLETE"/>
+        <availabilityTime value="20100225154100"/>
+    </NarrativeStatement>
+</component>
+    </CompoundStatement>
+</component>

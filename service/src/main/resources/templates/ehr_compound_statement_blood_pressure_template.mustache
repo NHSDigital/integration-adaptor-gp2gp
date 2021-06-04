@@ -18,7 +18,7 @@
                 </effectiveTime>
                 {{{availabilityTime}}}
                 {{#systolicQuantity}}
-                <valueQuantity>{{{systolicQuantity}}}</valueQuantity>
+                {{{systolicQuantity}}}
                 {{/systolicQuantity}}
                 {{#systolicReferenceRange}}
                 {{{systolicReferenceRange}}}
@@ -37,7 +37,7 @@
                 </effectiveTime>
                 {{{availabilityTime}}}
                 {{#diastolicQuantity}}
-                <valueQuantity>{{{diastolicQuantity}}}</valueQuantity>
+                {{{diastolicQuantity}}}
                 {{/diastolicQuantity}}
                 {{#diastolicReferenceRange}}
                 {{{diastolicReferenceRange}}}
@@ -55,6 +55,8 @@
             </NarrativeStatement>
         </component>
         {{/narrativeId}}
-        <!--<Participant typeCode="PRF" ..../>-->
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </CompoundStatement>
 </component>

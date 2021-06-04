@@ -4,8 +4,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.Extension;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
@@ -13,19 +25,9 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
-import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.Extension;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.github.mustachejava.Mustache;
-
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class ConditionLinkSetMapper {
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
@@ -44,7 +46,7 @@ public class ConditionLinkSetMapper {
     private static final String MINOR = "Minor";
     private static final String MINOR_CODE = "394847000";
     private static final String UNSPECIFIED_SIGNIFICANCE = "Unspecified significance";
-    private static final String LIST = "List";
+    private static final List<String> SUPPRESSED_LINKAGE_RESOURCES = List.of("List", "Encounter");
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -59,7 +61,7 @@ public class ConditionLinkSetMapper {
         final IdMapper idMapper = messageContext.getIdMapper();
         var builder = ConditionLinkSetMapperParameters.builder()
             .isNested(isNested)
-            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement().getIdPart()));
+            .linkSetId(idMapper.getOrNew(ResourceType.Condition, condition.getIdElement()));
 
         buildEffectiveTimeLow(condition).ifPresent(builder::effectiveTimeLow);
         buildEffectiveTimeHigh(condition).ifPresent(builder::effectiveTimeHigh);
@@ -80,13 +82,14 @@ public class ConditionLinkSetMapper {
         builder.code(buildCode(condition));
 
         var asserterReference = condition.getAsserter();
-        var performerReference = idMapper.get(asserterReference);
-        var referenceElement = asserterReference.getReferenceElement();
+        var performerReference = messageContext.getAgentDirectory().getAgentId(asserterReference);
 
+        var referenceElement = asserterReference.getReferenceElement();
         messageContext.getInputBundleHolder().getResource(referenceElement)
             .map(Resource::getResourceType)
             .filter(ResourceType.Practitioner::equals)
             .orElseThrow(() -> new EhrMapperException("Condition.asserter must be a Practitioner"));
+
         var performerParameter = participantMapper.mapToParticipant(performerReference, ParticipantType.PERFORMER);
         builder.performer(performerParameter);
 
@@ -168,7 +171,7 @@ public class ConditionLinkSetMapper {
            .map(Extension::getValue)
            .map(value -> (Reference) value)
            .filter(this::filterOutNonExistentResource)
-           .filter(this::filterOutListResourceType)
+           .filter(this::filterOutSuppressedLinkageResources)
            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
            .collect(Collectors.toList());
     }
@@ -184,17 +187,21 @@ public class ConditionLinkSetMapper {
     }
 
     private boolean filterOutNonExistentResource(Reference reference) {
+
         var referencePresent = messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
             .isPresent();
         if (referencePresent) {
             return true;
         }
-        throw new EhrMapperException("Could not resolve Condition Related Medical Content reference");
+
+        // TODO: workaround for NIAD-1409 should throw an exception but public demonstrator includes invalid references
+        LOGGER.warn("Condition related clinical context extension uses invalid reference: {}", reference.getReference());
+        return false;
     }
 
-    private boolean filterOutListResourceType(Reference reference) {
-        return !reference.getReferenceElement().getResourceType().equals(LIST);
+    private boolean filterOutSuppressedLinkageResources(Reference reference) {
+        return !SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {

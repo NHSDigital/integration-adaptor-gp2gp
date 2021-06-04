@@ -72,10 +72,11 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:0.0.4
+    image: nhsdev/nia-gpc-consumer-adaptor:0.0.5
     ports:
       - "8090:8090"
     environment:
+      - GPC_CONSUMER_LOGGING_LEVEL
       - GPC_CONSUMER_SERVER_PORT
       - GPC_CONSUMER_SPINE_CLIENT_CERT
       - GPC_CONSUMER_SPINE_CLIENT_KEY
@@ -89,3 +90,4 @@ services:
       - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
       - GPC_CONSUMER_SDS_URL
       - GPC_CONSUMER_SDS_APIKEY
+      - GPC_ENABLE_SDS

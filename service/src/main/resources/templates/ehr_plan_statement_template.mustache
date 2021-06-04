@@ -1,16 +1,27 @@
 <component typeCode="COMP" {{#isNested}}contextConductionInd="true"{{/isNested}}>
     <PlanStatement classCode="OBS" moodCode="INT">
         <id root="{{id}}" />
+        {{{code}}}
+        {{#text}}
+        <text>
+            {{.}}
+        </text>
+        {{/text}}
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center {{{effectiveTime}}}/>
         </effectiveTime>
-        {{#availabilityTime}}<availabilityTime value="{{availabilityTime}}"/>{{/availabilityTime}}
-        {{#text}}
-            <text>
-            {{text}}
-            </text>
-        {{/text}}
-        {{{code}}}
+        {{#availabilityTime}}<availabilityTime value="{{.}}"/>{{/availabilityTime}}
+        {{#author}}
+        <author typeCode="AUT" contextControlCode="OP">
+            {{#authorTime}}<time value="{{.}}" />{{/authorTime}}
+            <agentRef classCode="AGNT">
+                <id root="{{.}}" />
+            </agentRef>
+        </author>
+        {{/author}}
+        {{#participant}}
+        {{{.}}}
+        {{/participant}}
     </PlanStatement>
 </component>

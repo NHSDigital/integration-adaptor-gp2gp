@@ -18,7 +18,6 @@ import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,7 +37,6 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class EncounterMapperTest {
     private static final String TEST_FILES_DIRECTORY = "/ehr/mapper/encounter/";
     private static final String TEST_ID = "test-id";
-    private static final String PRACTITIONER_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
     private static final String CONSULTATION_REFERENCE = "F550CC56-EF65-4934-A7B1-3DC2E02243C3";
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
     private static final Date CONSULTATION_DATE = Date.from(Instant.parse("2010-01-13T15:13:32Z"));
@@ -105,6 +103,8 @@ public class EncounterMapperTest {
         + "example-encounter-resource-14.json";
     private static final String INPUT_JSON_WITHOUT_PERFORMER_PARTICIPANT = TEST_FILES_DIRECTORY
         + "example-encounter-resource-15.json";
+    private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILES_DIRECTORY
+        + "example-encounter-resource-16.json";
     private static final String OUTPUT_XML_WITH_RECORDER_AS_PARTICIPANT2  = TEST_FILES_DIRECTORY
         + "expected-output-encounter-13.xml";
 
@@ -136,7 +136,6 @@ public class EncounterMapperTest {
     @MethodSource("testFilePaths")
     public void When_MappingParsedEncounterJson_Expect_EhrCompositionXmlOutput(String input, String output) throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, PRACTITIONER_ID);
         String expectedOutputMessage = ResourceTestFileUtils.getFileContent(output);
 
         var jsonInput = ResourceTestFileUtils.getFileContent(input);
@@ -178,14 +177,14 @@ public class EncounterMapperTest {
     }
 
     @Test
-    public void When_MappingEncounterWithUnmappedParticipant_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_EFFECTIVE_TIME);
+    public void When_MappingEncounterWithInvalidParticipantReferenceResourceType_Expect_Exception() throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE);
 
         Encounter parsedEncounter = new FhirParseService().parseResource(jsonInput, Encounter.class);
 
         assertThatThrownBy(() -> encounterMapper.mapEncounterToEhrComposition(parsedEncounter))
             .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("No ID mapping for reference Practitioner/%s", PRACTITIONER_ID);
+            .hasMessage("Not supported agent reference: Patient/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
     }
 
     @Test

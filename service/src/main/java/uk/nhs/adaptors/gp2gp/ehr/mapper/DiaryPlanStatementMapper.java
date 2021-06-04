@@ -26,6 +26,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.DiaryPlanStatementMapper.PlanStatementMapperParameters.PlanStatementMapperParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -44,22 +45,41 @@ public class DiaryPlanStatementMapper {
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
+    private final ParticipantMapper participantMapper;
 
-    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+    public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return StringUtils.EMPTY;
+            return Optional.empty();
         }
 
-        PlanStatementMapperParameters.PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
+        var idMapper = messageContext.getIdMapper();
+        var availabilityTime = buildAvailabilityTime(procedureRequest);
+        PlanStatementMapperParametersBuilder builder = PlanStatementMapperParameters.builder()
             .isNested(isNested)
-            .id(messageContext.getIdMapper().getOrNew(ResourceType.ProcedureRequest, procedureRequest.getId()))
-            .availabilityTime(buildAvailabilityTime(procedureRequest));
+            .id(idMapper.getOrNew(ResourceType.ProcedureRequest, procedureRequest.getIdElement()))
+            .availabilityTime(availabilityTime);
 
-        buildEffectiveTime(procedureRequest).map(builder::effectiveTime);
-        buildText(procedureRequest).map(builder::text);
+        buildEffectiveTime(procedureRequest).ifPresent(builder::effectiveTime);
+        buildText(procedureRequest).ifPresent(builder::text);
         builder.code(buildCode(procedureRequest));
+        buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
 
-        return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
+        return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+    }
+
+    private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
+        var requesterAgent = procedureRequest.getRequester().getAgent();
+
+        if (requesterAgent.hasReference()) {
+            var resourceType = requesterAgent.getReference().split("/")[0];
+            if (resourceType.equals(ResourceType.Practitioner.name())) {
+                String participantId = messageContext.getAgentDirectory().getAgentId(requesterAgent);
+                String participant = participantMapper.mapToParticipant(participantId, ParticipantType.PERFORMER);
+                return Optional.of(participant);
+            }
+        }
+
+        return Optional.empty();
     }
 
     private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
@@ -181,5 +201,6 @@ public class DiaryPlanStatementMapper {
         private String availabilityTime;
         private String effectiveTime;
         private String code;
+        private String participant;
     }
 }

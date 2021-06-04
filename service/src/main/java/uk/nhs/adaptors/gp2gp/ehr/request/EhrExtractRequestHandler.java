@@ -16,7 +16,7 @@ import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendEhrContinueTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.exception.MissingValueException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction;
@@ -49,6 +49,7 @@ public class EhrExtractRequestHandler {
     private final TimestampService timestampService;
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final EhrExtractAckHandler ackHandler;
 
     public void handleStart(Document header, Document payload) {
         var ehrExtractStatus = prepareEhrExtractStatus(header, payload);
@@ -140,19 +141,20 @@ public class EhrExtractRequestHandler {
     public void handleContinue(String conversationId, String payload) {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
             var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
-            ehrExtractStatus
-                .getGpcAccessDocument()
-                .getDocuments()
-                .forEach(gpcDocument -> createContinueTasks(ehrExtractStatus, gpcDocument.getObjectName()));
+            var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+            for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
+                createSendDocumentTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
+            }
         } else {
             throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
                 + conversationId);
         }
     }
 
-    private void createContinueTasks(EhrExtractStatus ehrExtractStatus, String documentName) {
-        var sendEhrContinueTaskDefinition = SendEhrContinueTaskDefinition.builder()
+    private void createSendDocumentTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation) {
+        var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
+            .documentPosition(documentLocation)
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
@@ -161,7 +163,11 @@ public class EhrExtractRequestHandler {
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .build();
-        taskDispatcher.createTask(sendEhrContinueTaskDefinition);
-        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendEhrContinueTaskDefinition.getTaskId());
+        taskDispatcher.createTask(sendDocumentTaskDefinition);
+        LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendDocumentTaskDefinition.getTaskId());
+    }
+
+    public void handleAcknowledgement(String conversationId, Document payload) {
+        ackHandler.handle(conversationId, payload);
     }
 }

@@ -4,12 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +57,8 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-order-no-based-on.json";
     private static final String INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-status-reason-stopped-no-date.json";
+    private static final String INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE = TEST_FILE_DIRECTORY
+        + "medication-request-with-invalid-recorder-resource-type.json";
     private static final String INPUT_JSON_WITH_ORDER_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
         + "medication-request-with-order-no-optional-fields.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -133,9 +138,8 @@ public class MedicationStatementMapperTest {
 
         messageContext = new MessageContext(mockRandomIdGeneratorService);
         messageContext.initialize(bundle);
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, "1");
-        messageContext.getIdMapper().getOrNew(ResourceType.Organization, "2");
-        messageContext.getIdMapper().getOrNew(ResourceType.PractitionerRole, "3");
+        messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Practitioner, "1")));
+        messageContext.getAgentDirectory().getAgentId(new Reference(buildIdType(ResourceType.Organization, "2")));
         medicationStatementMapper = new MedicationStatementMapper(messageContext, codeableConceptCdMapper,
             new ParticipantMapper(), mockRandomIdGeneratorService);
     }
@@ -254,7 +258,8 @@ public class MedicationStatementMapperTest {
             INPUT_JSON_WITH_NO_DISPENSE_REQUEST,
             INPUT_JSON_WITH_ORDER_NO_BASED_ON,
             INPUT_JSON_WITH_PLAN_STATUS_REASON_STOPPED_NO_DATE,
-            INPUT_JSON_WITH_NO_RECORDER_REFERENCE
+            INPUT_JSON_WITH_NO_RECORDER_REFERENCE,
+            INPUT_JSON_WITH_INVALID_RECORDER_REFERENCE_TYPE
             );
     }
 }

@@ -15,6 +15,9 @@ public class MessageContext {
     private static ThreadLocal<IdMapper> idMapperHolder = new NamedThreadLocal<>("IdMapper");
     private static ThreadLocal<InputBundle> inputBundleHolder = new NamedThreadLocal<>("InputBundle");
     private static ThreadLocal<MedicationRequestIdMapper> medicationRequestIdHolder = new NamedThreadLocal<>("MedicationRequestIdMapper");
+    private static ThreadLocal<EhrFolderEffectiveTime> ehrFolderEffectiveTimeHolder = new NamedThreadLocal<>("EhrFolderEffectiveTime");
+    private static ThreadLocal<AgentDirectory> agentDirectoryHolder = new NamedThreadLocal<>("AgentDirectory");
+
 
     @Autowired
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -23,10 +26,13 @@ public class MessageContext {
         idMapperHolder.remove();
         inputBundleHolder.remove();
         medicationRequestIdHolder.remove();
+        ehrFolderEffectiveTimeHolder.remove();
+        agentDirectoryHolder.remove();
     }
 
     public void initialize(Bundle bundle) {
         inputBundleHolder.set(new InputBundle(bundle));
+        agentDirectoryHolder.set(new AgentDirectory(randomIdGeneratorService, bundle));
     }
 
     public IdMapper getIdMapper() {
@@ -35,6 +41,19 @@ public class MessageContext {
         }
 
         return idMapperHolder.get();
+    }
+
+
+    public AgentDirectory getAgentDirectory() {
+        return agentDirectoryHolder.get();
+    }
+
+    public EhrFolderEffectiveTime getEffectiveTime() {
+        if (ehrFolderEffectiveTimeHolder.get() == null) {
+            ehrFolderEffectiveTimeHolder.set(new EhrFolderEffectiveTime());
+        }
+
+        return ehrFolderEffectiveTimeHolder.get();
     }
 
     public InputBundle getInputBundleHolder() {

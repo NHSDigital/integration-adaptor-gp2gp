@@ -21,7 +21,7 @@
                 </locatedPlace>
             </locatedEntity>
         </location>
-        <Participant2 typeCode="PPRF" contextControlCode="OP">
+        <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="394559384658936"/>
             </agentRef>
@@ -55,7 +55,7 @@
         </pertinentInformation>
 
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <Participant typeCode="aut" contextControlCode="OP">
+        <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
                 <id root="394559384658936"/>
             </agentRef>

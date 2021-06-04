@@ -38,7 +38,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
 
     @Override
     public void execute(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
-        LOGGER.info("Execute called from GpcFindDocumentsTaskExecutor");
+        LOGGER.info("Execute called from GetGpcDocumentReferencesTaskExecutor");
 
         Optional<String> patientId = retrievePatientId(taskDefinition);
         EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(taskDefinition,

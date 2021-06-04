@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
+import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
@@ -97,8 +100,10 @@ public class AllergyStructureMapperTest {
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        List.of(ResourceType.Patient, ResourceType.Practitioner, ResourceType.Device)
-            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, COMMON_ID));
+        List.of(ResourceType.Patient, ResourceType.Device)
+            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
+        List.of(ResourceType.Practitioner, ResourceType.Organization)
+            .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
         allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
