@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -185,14 +186,21 @@ public class EhrExtractUATTest {
         var agentIdNodes = xPathService.getNodes(document, "//Agent/id");
         Set<String> agentIds = extractIdsFromNodeList(agentIdNodes, false);
 
-        assertThat(referencedAgentIds).isNotEmpty();
-        assertThat(agentIds).isNotEmpty();
-        referencedAgentIds.stream()
-            .filter(id -> !"nullFlavor".equals(id))
-            .forEach(id -> assertThat(agentIds)
-                .withFailMessage("Expected referenced agent id %s to match the id "
-                    + "of an agent in the agent directory", id)
-                .contains(id));
+        assertThat(referencedAgentIds).isNotEmpty()
+            .allMatch(this::isUuid, "All referenced ids must be UUIDs");
+        assertThat(agentIds)
+            .isNotEmpty()
+            .containsAll(referencedAgentIds);
+    }
+
+    @SuppressWarnings("ignored")
+    private boolean isUuid(String id) {
+        try {
+            UUID.fromString(id);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     private Set<String> extractIdsFromNodeList(NodeList nodeList, boolean allowSkipNullFlavour) {
@@ -204,17 +212,19 @@ public class EhrExtractUATTest {
             }
 
             assertThat(agentIdNode.hasAttributes())
-                .withFailMessage("Node %s does not contain attributes", agentIdNode)
+                .withFailMessage("Node %s has no attributes", agentIdNode)
                 .isTrue();
             assertThat(agentIdNode.getAttributes().getNamedItem("root"))
-                .withFailMessage("Node %s does not contain attribute 'root'", agentIdNode)
+                .withFailMessage("Node %s is missing attribute 'root'", agentIdNode)
                 .isNotNull();
+
             var id = agentIdNode.getAttributes().getNamedItem("root").getNodeValue();
             ids.add(id);
         }
         return ids;
     }
 
+    @SuppressWarnings("unused")
     private static Stream<Arguments> testValueFilePaths() {
         return Stream.of(
             Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
