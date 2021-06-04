@@ -57,8 +57,6 @@ public class ObservationMapperTest {
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_with_data_absent_reason_and_interpretation_and_body_site_and_method.json";
     private static final String OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_with_value_quantity_and_reference_range.json";
-    private static final String OBSERVATION_WITHOUT_NARRATIVE_AND_RELATED = OBSERVATION_TEST_FILE_DIRECTORY
-        + "observation_associated_without_narrative_and_related.json";
 
     private static final String OBSERVATION_COMPOUND_STATEMENT_1_XML = OBSERVATION_TEST_FILE_DIRECTORY
         + "observation_compound_statement_1.xml";
@@ -77,8 +75,6 @@ public class ObservationMapperTest {
             + "observation_compound_statement_with_data_absent_reason_and_interpretation_and_body_site_and_method.xml";
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
-    private static final String OBSERVATION_COMPOUND_STATEMENT_DUMMY_NARRATIVE_STMT = OBSERVATION_TEST_FILE_DIRECTORY
-        + "observation_compound_dummy_narrative_stmt.xml";
 
     private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
 
@@ -142,8 +138,6 @@ public class ObservationMapperTest {
 
     @Test
     public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(
             OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
         );
@@ -152,11 +146,11 @@ public class ObservationMapperTest {
             OBSERVATION_TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
         );
 
-        String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
+        String actualXml = observationMapper.mapObservationToCompoundStatement(
             observationAssociatedWithSpecimen
         );
 
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+        assertThat(actualXml).isEqualTo(expectedXmlOutput);
     }
 
     private static Stream<Arguments> resourceFileParams() {
@@ -177,10 +171,7 @@ public class ObservationMapperTest {
             Arguments.of(
                 OBSERVATION_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_JSON,
                 OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML
-            ),
-            Arguments.of(
-                OBSERVATION_WITHOUT_NARRATIVE_AND_RELATED,
-                OBSERVATION_COMPOUND_STATEMENT_DUMMY_NARRATIVE_STMT)
+            )
         );
     }
 
