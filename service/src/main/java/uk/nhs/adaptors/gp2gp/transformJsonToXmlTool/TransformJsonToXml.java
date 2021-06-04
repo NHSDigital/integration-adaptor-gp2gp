@@ -63,9 +63,9 @@ public class TransformJsonToXml {
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
 
     public static void main(String[] args) throws Exception {
-        String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL","False"));
+        String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL", "False"));
         LOGGER.info(startTest);
-        if (startTest.equals("True")){
+        if (startTest.equals("True")) {
             var inputWrapper = getFiles();
 
             for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
