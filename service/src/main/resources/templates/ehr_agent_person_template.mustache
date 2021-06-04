@@ -1,11 +1,9 @@
 <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="{{agentId}}"/>
-        {{#practitionerRole}}
         <code nullFlavor="UNK">
-            <originalText>{{practitionerRole}}</originalText>
+            <originalText>{{#practitionerRole}}{{.}}{{/practitionerRole}}{{^practitionerRole}}Unknown{{/practitionerRole}}</originalText>
         </code>
-        {{/practitionerRole}}
         {{#practitioner}}
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>

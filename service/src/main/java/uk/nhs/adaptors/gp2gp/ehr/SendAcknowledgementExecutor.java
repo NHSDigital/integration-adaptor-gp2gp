@@ -11,6 +11,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.SendAckTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
@@ -40,7 +41,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         LOGGER.info("Sending application acknowledgement from the adaptor to the requesting system");
 
         var sendAckTemplateParams = SendAckTemplateParameters.builder()
-            .creationTime(timestampService.now().toString())
+            .creationTime(DateFormatUtil.toHl7Format(timestampService.now()))
             .uuid(randomIdGeneratorService.createNewId())
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())
             .toAsid(sendAcknowledgementTaskDefinition.getToAsid())
