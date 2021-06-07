@@ -24,6 +24,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
@@ -70,6 +71,7 @@ public class ObservationMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
         return new ObservationMapper.InnerMapper(observationAssociatedWithSpecimen).map();
@@ -234,8 +236,10 @@ public class ObservationMapper {
         }
 
         private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
+            markObservationAsMapped(observation);
+
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-                .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
+                .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(commentType)
                 .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)
@@ -244,6 +248,10 @@ public class ObservationMapper {
             prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
 
             return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
+        }
+
+        private void markObservationAsMapped(Observation observation) {
+            idMapper.getOrNew(ResourceType.Observation, observation.getIdElement());
         }
 
         private String prepareStatementsForDerivedObservations(List<Observation> derivedObservations) {
