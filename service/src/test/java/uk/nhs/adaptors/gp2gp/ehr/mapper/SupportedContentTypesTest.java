@@ -15,8 +15,13 @@ public class SupportedContentTypesTest {
     }
 
     @Test
+    public void When_CheckingIfExecutableContentTypeIsSupported_Expect_False() {
+        assertThat(supportedContentTypes.isContentTypeSupported("application/x-dosexec")).isFalse();
+    }
+
+    @Test
     public void When_CheckingIfNotSupportedContentTypeIsSupported_Expect_False() {
-        assertThat(supportedContentTypes.isContentTypeSupported("app/not-supported")).isFalse();
+        assertThat(supportedContentTypes.isContentTypeSupported("application/octet-stream")).isFalse();
     }
 
     @Test
