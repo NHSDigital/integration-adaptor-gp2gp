@@ -35,6 +35,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
@@ -62,6 +63,7 @@ public class TransformJsonToXml {
             Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
+
 
     public static void main(String[] args) throws Exception {
         String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL", "False"));
@@ -149,6 +151,7 @@ public class TransformJsonToXml {
         final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
         MessageContext messageContext = new MessageContext(randomIdGeneratorService);
+        SupportedContentTypes supportedContentTypes = new SupportedContentTypes();
 
         messageContext.initialize(bundle);
 
@@ -184,7 +187,7 @@ public class TransformJsonToXml {
                 new ConditionLinkSetMapper(
                         messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
                 new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-                new DocumentReferenceToNarrativeStatementMapper(messageContext),
+                new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes),
                 new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
                 new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
                 new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
