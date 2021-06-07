@@ -1,4 +1,4 @@
-cd "../"
-cd "service"
+cd "../service/src/main/java/uk/nhs/adaptors/gp2gp/transformjsontoxmltool/"
 export JSON_TO_XML_START_TOOL="True"
-./gradlew run
+cd "../../../../../../../../"
+./gradlew runSimple

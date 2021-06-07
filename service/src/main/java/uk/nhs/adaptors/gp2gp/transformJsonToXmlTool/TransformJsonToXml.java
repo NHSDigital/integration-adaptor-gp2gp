@@ -52,6 +52,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class TransformJsonToXml {
 
@@ -64,16 +65,21 @@ public class TransformJsonToXml {
 
     public static void main(String[] args) throws Exception {
         String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL", "False"));
-        if (startTest.equals("True")) {
-            var inputWrapper = getFiles();
-
-            for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
-                var jsonString = inputWrapper.getJsonFileInputs().get(i);
-                String xmlResult = mapJsonToXml(jsonString);
-                var fileName = inputWrapper.getJsonFileNames().get(i);
-                writeToFile(xmlResult, fileName);
+        LOGGER.error("variable: " + startTest);
+        try {
+            if (startTest.equals("True")) {
+                var inputWrapper = getFiles();
+                for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
+                    var jsonString = inputWrapper.getJsonFileInputs().get(i);
+                    String xmlResult = mapJsonToXml(jsonString);
+                    var fileName = inputWrapper.getJsonFileNames().get(i);
+                    writeToFile(xmlResult, fileName);
+                }
             }
+        } catch (Exception e) {
+            LOGGER.error("error: " + e.getMessage());
         }
+        LOGGER.error("end");
     }
 
     private static InputWrapper getFiles() throws Exception {
@@ -113,13 +119,13 @@ public class TransformJsonToXml {
                 .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
                 .map(Identifier.class::cast)
                 .findFirst()
-                .orElseThrow(() -> new Exception("No Optional<Identifier> was found"))
+                .orElseThrow(() -> new Exception("No Patient identifier was found"))
                 .getValue();
     }
 
-    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
+    private static Optional<Identifier> getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
         return resource.getIdentifier()
-                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
+                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst();
     }
 
     private static String readJsonFileAsString(String file) throws Exception {
