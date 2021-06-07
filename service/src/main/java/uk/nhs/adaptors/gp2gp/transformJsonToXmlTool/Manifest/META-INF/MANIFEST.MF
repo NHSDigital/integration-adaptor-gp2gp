@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: uk.nhs.adaptors.gp2gp.transformjsontoxmltool.source.Transfor
+ mJsonToXml
+
