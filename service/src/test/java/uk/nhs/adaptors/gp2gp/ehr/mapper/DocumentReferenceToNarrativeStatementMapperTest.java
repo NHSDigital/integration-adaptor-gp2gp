@@ -23,7 +23,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
@@ -85,8 +84,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
 
-        lenient().when(supportedContentTypes.isContentTypeSupported(eq("text/richtext"))).thenReturn(true);
-        lenient().when(supportedContentTypes.isContentTypeSupported(eq("application/octet-stream"))).thenReturn(false);
+        lenient().when(supportedContentTypes.isContentTypeSupported("text/richtext")).thenReturn(true);
+        lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
 
         mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes);
     }
