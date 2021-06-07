@@ -5931,7 +5931,7 @@ rheumatoid factor tests.</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20030221115000" />
             <agentRef classCode="AGNT">
-                <id root="nullFlavor" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5944,7 +5944,7 @@ rheumatoid factor tests.</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="nullFlavor"/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
