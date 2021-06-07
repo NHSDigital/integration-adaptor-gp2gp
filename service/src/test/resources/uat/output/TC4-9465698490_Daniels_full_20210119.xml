@@ -183,6 +183,9 @@
             <part typeCode="PART">
     <Agent classCode="AGNT">
         <id root="884E7627-796C-4C70-870A-D61B88AD2E57"/>
+        <code nullFlavor="UNK">
+            <originalText>Unknown</originalText>
+        </code>
         <agentPerson classCode="PSN" determinerCode="INSTANCE">
             <name>
                 <family>External User</family>
