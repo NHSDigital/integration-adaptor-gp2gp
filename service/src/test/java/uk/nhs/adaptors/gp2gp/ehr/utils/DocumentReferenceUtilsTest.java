@@ -16,6 +16,8 @@ class DocumentReferenceUtilsTest {
     private static final String FILE_MISSING_ATTACHMENT_TITLE = "Reason why file is missing";
     private static final String UNSUPPORTED_CONTENT_TYPE = "unknown/unknown";
     private static final String INVALID_CONTENT_TYPE = "invalid content type";
+    private static final String TEXT_HTML = "text/html";
+    private static final String APPLICATION_XML = "application/xml";
 
     @ParameterizedTest
     @CsvSource({
@@ -78,11 +80,23 @@ class DocumentReferenceUtilsTest {
     @Test
     void When_BuildingFileNameIfTitleIsPresent_Expect_MissingAttachmentFileNameIsGenerated() {
         var attachment = new Attachment()
-            .setContentType(TEXT_PLAIN_CONTENT_TYPE)
+            .setContentType(TEXT_HTML)
             .setTitle(FILE_MISSING_ATTACHMENT_TITLE);
 
         assertThat(DocumentReferenceUtils.buildAttachmentFileName(NARRATIVE_STATEMENT_ID, attachment))
             .isEqualTo("AbsentAttachment3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
+    }
+
+    @Test
+    void When_BuildingFileNameForMissingAttachment_Expect_MissingAttachmentFileNameWithTxtExtensionGenerated() {
+        assertThat(DocumentReferenceUtils.buildMissingAttachmentFileName(NARRATIVE_STATEMENT_ID))
+            .isEqualTo("AbsentAttachment3b24b89b-fd14-49f9-ba12-3b4212b60080.txt");
+    }
+
+    @Test
+    void When_BuildingFileNameForPresentAttachment_Expect_MissingAttachmentFileNameWithTxtExtensionGenerated() {
+        assertThat(DocumentReferenceUtils.buildPresentAttachmentFileName(NARRATIVE_STATEMENT_ID, APPLICATION_XML))
+            .isEqualTo("3b24b89b-fd14-49f9-ba12-3b4212b60080_3b24b89b-fd14-49f9-ba12-3b4212b60080.xml");
     }
 
     @Test
