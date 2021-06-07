@@ -10,7 +10,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100225154100" />
             <agentRef classCode="AGNT">
-                <id root="nullFlavor" />
+                <id nullFlavor="UNK" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -23,7 +23,7 @@
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="nullFlavor"/>
+                <id nullFlavor="UNK"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
