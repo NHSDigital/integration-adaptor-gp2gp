@@ -47,7 +47,7 @@ public class SendDocumentComponentTest {
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
     @Test
-    public void When_AcknowledgementTaskRunsTwice_Expect_DatabaseOverwritesEhrExtarctStatus() {
+    public void When_SendDocumentTaskRunsTwice_Expect_DatabaseOverwritesEhrExtractStatus() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
