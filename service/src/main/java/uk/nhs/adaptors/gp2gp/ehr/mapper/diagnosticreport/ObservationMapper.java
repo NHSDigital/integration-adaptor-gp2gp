@@ -24,7 +24,6 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
@@ -71,7 +70,6 @@ public class ObservationMapper {
     private final StructuredObservationValueMapper structuredObservationValueMapper;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
-    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
         return new ObservationMapper.InnerMapper(observationAssociatedWithSpecimen).map();
@@ -237,7 +235,7 @@ public class ObservationMapper {
 
         private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
-                .narrativeStatementId(randomIdGeneratorService.createNewId())
+                .narrativeStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
                 .commentType(commentType)
                 .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)

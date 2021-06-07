@@ -26,7 +26,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -87,9 +86,6 @@ public class ObservationMapperTest {
     @Mock
     private MessageContext messageContext;
 
-    @Mock
-    private RandomIdGeneratorService randomIdGeneratorService;
-
     private ObservationMapper observationMapper;
 
     @BeforeEach
@@ -103,15 +99,13 @@ public class ObservationMapperTest {
         lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
-
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn(TEST_ID);
 
         observationMapper = new ObservationMapper(
             messageContext,
             new StructuredObservationValueMapper(),
             new CodeableConceptCdMapper(),
-            new ParticipantMapper(),
-            randomIdGeneratorService
+            new ParticipantMapper()
         );
     }
 
@@ -123,8 +117,6 @@ public class ObservationMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(outputXml);
