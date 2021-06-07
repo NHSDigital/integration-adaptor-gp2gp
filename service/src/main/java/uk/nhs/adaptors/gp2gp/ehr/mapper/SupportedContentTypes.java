@@ -3,7 +3,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Set;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -38,8 +36,6 @@ public class SupportedContentTypes {
                 .filter(StringUtils::isNotBlank)
                 .map(StringUtils::trim)
                 .collect(Collectors.toSet());
-        } catch (IOException e) {
-            throw new EhrMapperException("Unable to load supported content-types from location: " + SUPPORTED_CONTENT_TYPES_PATH, e);
         }
     }
 }
