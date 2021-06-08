@@ -6,7 +6,7 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}"/>
+        {{{availabilityTimeElement}}}
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
                 <id root="{{specimenRoleId}}"/>
@@ -24,15 +24,11 @@
             </specimenRole>
         </specimen>
         {{#narrativeStatement}}
-        <component typeCode="COMP" contextConductionInd="true">
-            <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="{{narrativeStatementId}}"/>
-                <text>{{{.}}}</text>
-                <statusCode code="COMPLETE"/>
-                <availabilityTime value="{{availabilityTime}}"/>
-            </NarrativeStatement>
-        </component>
+            {{{.}}}
         {{/narrativeStatement}}
+        {{#observations}}
+            {{{.}}}
+        {{/observations}}
         {{#participant}}
         <Participant typeCode="AUT" contextControlCode="OP">
             <agentRef classCode="AGNT">
@@ -40,8 +36,5 @@
             </agentRef>
         </Participant>
         {{/participant}}
-        {{#observations}}
-            {{{.}}}
-        {{/observations}}
     </CompoundStatement>
 </component>

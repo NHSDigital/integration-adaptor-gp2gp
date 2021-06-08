@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
@@ -65,6 +66,11 @@ public class EhrExtractTest {
 
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
+
+        waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
     }
 
     @Test
@@ -114,6 +120,20 @@ public class EhrExtractTest {
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
         softly.assertThat(ehrContinue).isNotEmpty().isNotEmpty();
         softly.assertThat(ehrContinue.get("received")).isNotNull();
+    }
+
+    private boolean assertThatExtractCommonMessageWasSent(String conversationId) {
+        var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
+        if (document != null) {
+            var ehrCommon = (Document) document.get("sentToMhs");
+            if (ehrCommon != null){
+                return ehrCommon.get("messageId") != null
+                    && ehrCommon.get("sentAt") != null
+                    && ehrCommon.get("taskId") != null;
+            }
+        }
+        return false;
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {

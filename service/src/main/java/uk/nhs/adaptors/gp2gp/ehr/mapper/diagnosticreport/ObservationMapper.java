@@ -1,8 +1,12 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import com.github.mustachejava.Mustache;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -15,27 +19,27 @@ import org.hl7.fhir.dstu3.model.SampledData;
 import org.hl7.fhir.dstu3.model.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.ObservationStatementTemplateParameters;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -82,9 +86,6 @@ public class ObservationMapper {
         public String map() {
             idMapper = messageContext.getIdMapper();
 
-            var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
-            var codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
-
             List<Observation> derivedObservations = observationAssociatedWithSpecimen.getRelated().stream()
                 .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
                 .map(ObservationRelatedComponent::getTarget)
@@ -94,12 +95,22 @@ public class ObservationMapper {
                 .map(Observation.class::cast)
                 .collect(Collectors.toList());
 
-            var classCode = prepareClassCode(derivedObservations);
-            var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
-            var availabilityTimeElement =
-                StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observationAssociatedWithSpecimen);
-            var narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen);
-            var statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
+            CompoundStatementClassCode classCode = prepareClassCode(derivedObservations);
+            String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
+                .orElse(StringUtils.EMPTY);
+            String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+                .orElse(StringUtils.EMPTY);
+
+            if (derivedObservations.isEmpty()) {
+                return observationStatement + narrativeStatements;
+            }
+
+            String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, observationAssociatedWithSpecimen.getIdElement());
+            String codeElement = prepareCodeElement(observationAssociatedWithSpecimen);
+            String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observationAssociatedWithSpecimen);
+            String availabilityTimeElement =
+                StatementTimeMappingUtils.prepareAvailabilityTime(observationAssociatedWithSpecimen.getIssuedElement());
+            String statementsForDerivedObservations = prepareStatementsForDerivedObservations(derivedObservations);
 
             var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                 .classCode(classCode.getCode())
@@ -107,11 +118,10 @@ public class ObservationMapper {
                 .codeElement(codeElement)
                 .effectiveTime(effectiveTime)
                 .availabilityTimeElement(availabilityTimeElement)
+                .observationStatement(observationStatement)
                 .narrativeStatements(narrativeStatements)
                 .statementsForDerivedObservations(statementsForDerivedObservations);
 
-            prepareInterpretation(observationAssociatedWithSpecimen)
-                .ifPresent(observationCompoundStatementTemplateParameters::interpretation);
             prepareParticipant(observationAssociatedWithSpecimen)
                 .ifPresent(observationCompoundStatementTemplateParameters::participant);
 
@@ -121,12 +131,12 @@ public class ObservationMapper {
             );
         }
 
-        private String prepareObservationStatement(Observation observation) {
-            if (observationHasNonCommentNoteCode(observation)) {
-                return mapObservationToObservationStatement(observation);
+        private Optional<String> prepareObservationStatement(Observation observation, CompoundStatementClassCode classCode) {
+            if (observationHasNonCommentNoteCode(observation) && classCode.equals(CompoundStatementClassCode.CLUSTER)) {
+                return Optional.of(mapObservationToObservationStatement(observation));
             }
 
-            return StringUtils.EMPTY;
+            return Optional.empty();
         }
 
         private String mapObservationToObservationStatement(Observation observation) {
@@ -134,7 +144,7 @@ public class ObservationMapper {
                 .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
                 .codeElement(prepareCodeElement(observation))
                 .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation))
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             if (observation.hasValue()) {
                 Type value = observation.getValue();
@@ -165,7 +175,7 @@ public class ObservationMapper {
             );
         }
 
-        private String prepareNarrativeStatements(Observation observation) {
+        private Optional<String> prepareNarrativeStatements(Observation observation) {
             StringBuilder narrativeStatementsBlock = new StringBuilder();
 
             if (observation.hasComment()) {
@@ -218,16 +228,20 @@ public class ObservationMapper {
                     .ifPresent(narrativeStatementsBlock::append);
             }
 
-            return narrativeStatementsBlock.toString();
+            if (!narrativeStatementsBlock.toString().isBlank()) {
+                return Optional.of(narrativeStatementsBlock.toString());
+            }
+
+            return Optional.empty();
         }
 
         private String mapObservationToNarrativeStatement(Observation observation, String comment, String commentType) {
             var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
                 .narrativeStatementId(randomIdGeneratorService.createNewId())
                 .commentType(commentType)
-                .issuedDate(DateFormatUtil.toHl7Format(observation.getIssued().toInstant()))
+                .commentDate(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
                 .comment(comment)
-                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(observation));
+                .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement()));
 
             prepareParticipant(observation).ifPresent(narrativeStatementTemplateParameters::participant);
 
@@ -238,14 +252,15 @@ public class ObservationMapper {
             StringBuilder derivedObservationsBlock = new StringBuilder();
 
             derivedObservations.forEach(derivedObservation -> {
-                var observationStatement = prepareObservationStatement(derivedObservation);
-                var narrativeStatements = prepareNarrativeStatements(derivedObservation);
+                Optional<String> observationStatement = prepareObservationStatement(derivedObservation, CompoundStatementClassCode.CLUSTER);
+                Optional<String> narrativeStatements = prepareNarrativeStatements(derivedObservation);
 
-                if (!observationStatement.isBlank() && !narrativeStatements.isBlank()) {
-                    var compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
-                    var codeElement = prepareCodeElement(derivedObservation);
-                    var effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
-                    var availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTimeForObservation(derivedObservation);
+                if (observationStatement.isPresent() && narrativeStatements.isPresent()) {
+                    String compoundStatementId = idMapper.getOrNew(ResourceType.Observation, derivedObservation.getIdElement());
+                    String codeElement = prepareCodeElement(derivedObservation);
+                    String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(derivedObservation);
+                    String availabilityTimeElement =
+                        StatementTimeMappingUtils.prepareAvailabilityTime(derivedObservation.getIssuedElement());
 
                     var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
                         .classCode(CompoundStatementClassCode.CLUSTER.getCode())
@@ -253,10 +268,9 @@ public class ObservationMapper {
                         .codeElement(codeElement)
                         .effectiveTime(effectiveTime)
                         .availabilityTimeElement(availabilityTimeElement)
-                        .observationStatement(observationStatement)
-                        .narrativeStatements(narrativeStatements);
+                        .observationStatement(observationStatement.get())
+                        .narrativeStatements(narrativeStatements.get());
 
-                    prepareInterpretation(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::interpretation);
                     prepareParticipant(derivedObservation).ifPresent(observationCompoundStatementTemplateParameters::participant);
 
                     derivedObservationsBlock.append(
@@ -266,7 +280,8 @@ public class ObservationMapper {
                         )
                     );
                 } else {
-                    derivedObservationsBlock.append(observationStatement).append(narrativeStatements);
+                    observationStatement.ifPresent(derivedObservationsBlock::append);
+                    narrativeStatements.ifPresent(derivedObservationsBlock::append);
                 }
             });
 
@@ -294,7 +309,7 @@ public class ObservationMapper {
         }
 
         private CommentType prepareCommentType(Observation observation) {
-            if (observation.getComment().equals("EMPTY REPORT")) {
+            if (observation.getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX)) {
                 return CommentType.AGGREGATE_COMMENT_SET;
             }
 
@@ -316,9 +331,17 @@ public class ObservationMapper {
             return Optional.empty();
         }
 
+        private boolean isInterpretationCode(Coding coding) {
+            String codingSystem = coding.getSystem();
+            String code = coding.getCode();
+
+            return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
+                && INTERPRETATION_CODES.contains(code);
+        }
+
         private Optional<String> prepareParticipant(Observation observation) {
             if (observation.hasPerformer()) {
-                final String participantReference = idMapper.get(observation.getPerformerFirstRep());
+                final String participantReference = messageContext.getAgentDirectory().getAgentId(observation.getPerformerFirstRep());
 
                 return Optional.ofNullable(
                     participantMapper.mapToParticipant(participantReference, ParticipantType.PERFORMER)
@@ -340,14 +363,6 @@ public class ObservationMapper {
 
         private boolean isRangeUnitValid(String unit, Quantity quantity) {
             return quantity.hasUnit() && !unit.equals(quantity.getUnit());
-        }
-
-        private boolean isInterpretationCode(Coding coding) {
-            String codingSystem = coding.getSystem();
-            String code = coding.getCode();
-
-            return (coding.hasSystem() && codingSystem.equals(INTERPRETATION_CODE_SYSTEM))
-                && INTERPRETATION_CODES.contains(code);
         }
     }
 }

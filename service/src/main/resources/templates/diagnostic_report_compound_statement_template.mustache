@@ -8,13 +8,13 @@
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}"/>
-        {{#narrativeStatements}}
-            {{{.}}}
-        {{/narrativeStatements}}
+        {{{availabilityTimeElement}}}
         {{#specimens}}
             {{{.}}}
         {{/specimens}}
+        {{#narrativeStatements}}
+            {{{.}}}
+        {{/narrativeStatements}}
         {{#participant}}
             {{{.}}}
         {{/participant}}

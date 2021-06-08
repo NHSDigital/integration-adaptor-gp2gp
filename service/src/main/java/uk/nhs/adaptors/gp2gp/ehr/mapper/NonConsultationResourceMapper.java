@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForNonConsultation;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
@@ -48,7 +48,6 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String NULL_FLAVOR = "nullFlavor";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -71,14 +70,31 @@ public class NonConsultationResourceMapper {
         var mappedResources = bundle.getEntry()
             .stream()
             .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> !hasIdBeenMapped(resource))
             .filter(this::isMappableNonConsultationResource)
+            .sorted(this::compareProcessingOrder)
+            .filter(resource -> !hasIdBeenMapped(resource))
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
+    }
+
+    private int compareProcessingOrder(Resource resource1, Resource resource2) {
+        return Integer.compare(
+            getProcessingOrder(resource1.getResourceType()),
+            getProcessingOrder(resource2.getResourceType())
+        );
+    }
+
+    private int getProcessingOrder(ResourceType resourceType) {
+        // Observations need to be processed after DiagnosticReports, to prevent their possible duplication (NIAD-1464)
+        if (resourceType == ResourceType.Observation) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
@@ -152,16 +168,16 @@ public class NonConsultationResourceMapper {
 
         boolean isAgentPerson = diagnosticReport.hasPerformer()
             && Optional.of(diagnosticReport.getPerformerFirstRep())
-                .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
-                .map(Reference::getReferenceElement)
-                .filter(IIdType::hasResourceType)
-                .map(IIdType::getResourceType)
-                .filter(ResourceType.Practitioner.name()::equals)
-                .isPresent();
+            .map(DiagnosticReport.DiagnosticReportPerformerComponent::getActor)
+            .map(Reference::getReferenceElement)
+            .filter(IIdType::hasResourceType)
+            .map(IIdType::getResourceType)
+            .filter(ResourceType.Practitioner.name()::equals)
+            .isPresent();
         if (!isAgentPerson) {
             diagnosticReportXml
-                .author(NULL_FLAVOR)
-                .participant2(NULL_FLAVOR);
+                .author(null)
+                .participant2(null);
         }
 
         return diagnosticReportXml;
@@ -178,19 +194,8 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParametersBuilder buildForProcedureRequest(String component, Resource resource) {
-        EncounterTemplateParametersBuilder encounterTemplateParametersBuilder = XpathExtractor.extractValuesForProcedureRequest(component)
+        return XpathExtractor.extractValuesForProcedureRequest(component)
             .altCode(DEFAULT_CODE);
-
-        ProcedureRequest procedureRequest = (ProcedureRequest) resource;
-        if (procedureRequest.hasRequester()) {
-            var requesterReference = procedureRequest.getRequester().getAgent();
-            var participant = messageContext.getIdMapper().get(requesterReference);
-            encounterTemplateParametersBuilder
-                .participant2(participant)
-                .author(participant);
-        }
-
-        return encounterTemplateParametersBuilder;
     }
 
     private EncounterTemplateParametersBuilder buildForDocumentReference(String component, Resource resource) {

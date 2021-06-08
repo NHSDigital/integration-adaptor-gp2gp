@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,8 +70,6 @@ public class EhrExtractMapperComponentTest {
     private TimestampService timestampService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
-    @Mock
-    private OrganizationToAgentMapper organizationToAgentMapper;
 
     private NonConsultationResourceMapper nonConsultationResourceMapper;
     private EhrExtractMapper ehrExtractMapper;
@@ -92,8 +89,6 @@ public class EhrExtractMapperComponentTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        when(organizationToAgentMapper.mapOrganizationToAgent(any(Organization.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -111,7 +106,7 @@ public class EhrExtractMapperComponentTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -129,11 +124,8 @@ public class EhrExtractMapperComponentTest {
         );
 
         AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(
-            new PractitionerAgentPersonMapper(
-                messageContext,
-                new OrganizationToAgentMapper(messageContext)
-            ),
-            organizationToAgentMapper
+            messageContext,
+            new AgentPersonMapper(messageContext)
         );
 
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
@@ -199,5 +191,4 @@ public class EhrExtractMapperComponentTest {
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
         assertThat(translatedOutput.size()).isEqualTo(1);
     }
-
 }

@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.uat;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.fail;
-import static org.assertj.core.api.Assumptions.assumeThatCode;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.XsdValidator.validateFileContentAgainstSchema;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,12 +26,16 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.w3c.dom.NodeList;
 
+import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
+import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectoryMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.BloodPressureMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
@@ -44,13 +51,12 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.NonConsultationResourceMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ObservationToNarrativeStatementMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.OrganizationToAgentMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.PertinentInformationObservationValueMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.PractitionerAgentPersonMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.SupportedContentTypes;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
@@ -107,7 +113,7 @@ public class EhrExtractUATTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -122,11 +128,9 @@ public class EhrExtractUATTest {
             new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
         );
 
-        OrganizationToAgentMapper organizationToAgentMapper = new OrganizationToAgentMapper(messageContext);
-        PractitionerAgentPersonMapper practitionerAgentPersonMapper
-            = new PractitionerAgentPersonMapper(messageContext, organizationToAgentMapper);
-        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(practitionerAgentPersonMapper,
-            organizationToAgentMapper);
+        AgentPersonMapper agentPersonMapper
+            = new AgentPersonMapper(messageContext);
+        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext, agentPersonMapper);
 
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 
@@ -168,10 +172,59 @@ public class EhrExtractUATTest {
 
         assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
 
-        assumeThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
+        assertThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();
+
+        assertThatAgentReferencesAreValid(hl7TranslatedResponse);
     }
 
+    @SneakyThrows
+    private void assertThatAgentReferencesAreValid(String hl7) {
+        var xPathService = new XPathService();
+        var document = xPathService.parseDocumentFromXml(hl7);
+        var agentRefIdNodes = xPathService.getNodes(document, "//agentRef/id");
+        Set<String> referencedAgentIds = extractIdsFromNodeList(agentRefIdNodes, true);
+        var agentIdNodes = xPathService.getNodes(document, "//Agent/id");
+        Set<String> agentIds = extractIdsFromNodeList(agentIdNodes, false);
+
+        assertThat(referencedAgentIds).isNotEmpty()
+            .allMatch(this::isUuid, "All referenced ids must be UUIDs");
+        assertThat(agentIds)
+            .isNotEmpty()
+            .containsAll(referencedAgentIds);
+    }
+
+    private boolean isUuid(String id) {
+        try {
+            UUID.fromString(id);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private Set<String> extractIdsFromNodeList(NodeList nodeList, boolean allowSkipNullFlavour) {
+        Set<String> ids = new HashSet<>();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            var agentIdNode = nodeList.item(i);
+            if (allowSkipNullFlavour && agentIdNode.getAttributes().getNamedItem("nullFlavor") != null) {
+                continue;
+            }
+
+            assertThat(agentIdNode.hasAttributes())
+                .withFailMessage("Node %s has no attributes", agentIdNode)
+                .isTrue();
+            assertThat(agentIdNode.getAttributes().getNamedItem("root"))
+                .withFailMessage("Node %s is missing attribute 'root'", agentIdNode)
+                .isNotNull();
+
+            var id = agentIdNode.getAttributes().getNamedItem("root").getNodeValue();
+            ids.add(id);
+        }
+        return ids;
+    }
+
+    @SuppressWarnings("unused")
     private static Stream<Arguments> testValueFilePaths() {
         return Stream.of(
             Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),

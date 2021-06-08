@@ -91,7 +91,7 @@ public class RequestStatementMapper {
             templateParameters
                 .requestStatementId(idMapper.getOrNew(ResourceType.ReferralRequest, referralRequest.getIdElement()))
                 .isNested(isNested)
-                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTimeForReferralRequest(referralRequest))
+                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(referralRequest.getAuthoredOnElement()))
                 .text(buildTextDescription())
                 .code(buildCode());
 
@@ -99,7 +99,7 @@ public class RequestStatementMapper {
                 referralRequest.getRecipient().stream()
                     .filter(RequestStatementMapper::isReferenceToPractitioner)
                     .findAny()
-                    .map(idMapper::get)
+                    .map(messageContext.getAgentDirectory()::getAgentId)
                     .ifPresent(templateParameters::responsibleParty);
             }
 
@@ -113,16 +113,16 @@ public class RequestStatementMapper {
         }
 
         private void processAgent(@NonNull Reference agent, Reference onBehalfOf) {
-            final IdMapper idMapper = messageContext.getIdMapper();
+            AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
             if (isReferenceToPractitioner(agent)
                     && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
-                final String participantRef = idMapper.get(onBehalfOf);
+                final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
             } else if (isReferenceToPractitioner(agent)) {
-                final String participantRef = idMapper.getOrNew(agent);
+                final String participantRef =  agentDirectory.getAgentId(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
             }

@@ -1,8 +1,16 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import com.github.mustachejava.Mustache;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
@@ -28,17 +36,13 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
-
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Component
 @Slf4j
 public class DiagnosticReportMapper {
+
+    public static final String DUMMY_SPECIMEN_ID_PREFIX = "DUMMY-SPECIMEN-";
+    public static final String DUMMY_OBSERVATION_ID_PREFIX = "DUMMY-OBSERVATION-";
 
     private static final Mustache DIAGNOSTIC_REPORT_COMPOUND_STATEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("diagnostic_report_compound_statement_template.mustache");
@@ -55,10 +59,8 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
 
-        String diagnosticReportIssuedDate = DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement());
-
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReportIssuedDate))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
             .collect(Collectors.joining());
 
         final IdMapper idMapper = messageContext.getIdMapper();
@@ -67,12 +69,13 @@ public class DiagnosticReportMapper {
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
-            .availabilityTime(diagnosticReportIssuedDate)
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
 
         if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
-            final String participantReference = idMapper.get(diagnosticReport.getPerformerFirstRep().getActor());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(
+                diagnosticReport.getPerformerFirstRep().getActor());
             final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
             diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
         }
@@ -100,7 +103,7 @@ public class DiagnosticReportMapper {
     private Specimen generateDefaultSpecimen(DiagnosticReport diagnosticReport) {
         Specimen specimen = new Specimen();
 
-        specimen.setId("Specimen/Default-1");
+        specimen.setId(DUMMY_SPECIMEN_ID_PREFIX + randomIdGeneratorService.createNewId());
 
         return specimen
             .setAccessionIdentifier(new Identifier().setValue("DUMMY"))
@@ -125,10 +128,9 @@ public class DiagnosticReportMapper {
     private Observation generateDefaultObservation(DiagnosticReport diagnosticReport) {
         Observation observation = new Observation();
 
-        observation.setId("Observation/Default-1");
+        observation.setId(DUMMY_OBSERVATION_ID_PREFIX + randomIdGeneratorService.createNewId());
 
         return observation
-            .setSpecimen(new Reference().setReference("Specimen/Default-1"))
             .setIssuedElement(diagnosticReport.getIssuedElement())
             .setComment("EMPTY REPORT");
     }
@@ -140,7 +142,7 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CONCLUSION_COMMENT + diagnosticReport.getConclusion();
 
             String narrativeStatementFromConclusion = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
+                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromConclusion);
@@ -155,22 +157,33 @@ public class DiagnosticReportMapper {
             String comment = PREPENDED_TEXT_FOR_CODED_DIAGNOSIS + codedDiagnosisText;
 
             String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
-                diagnosticReport, comment
+                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), comment
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
         }
 
+        buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
+
         return reportLevelNarrativeStatements.toString();
     }
 
-    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String comment) {
+    private void buildNarrativeStatementForMissingResults(DiagnosticReport diagnosticReport, StringBuilder reportLevelNarrativeStatements) {
+        if (reportLevelNarrativeStatements.length() == 0 && !diagnosticReport.hasResult()) {
+            String narrativeStatementFromCodedDiagnosis = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, CommentType.AGGREGATE_COMMENT_SET.getCode(), "EMPTY REPORT"
+            );
+            reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+    }
+
+    private String buildNarrativeStatementForDiagnosticReport(DiagnosticReport diagnosticReport, String commentType, String comment) {
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(randomIdGeneratorService.createNewId())
-            .commentType(CommentType.LABORATORY_RESULT_COMMENT.getCode())
-            .issuedDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssued().toInstant()))
+            .commentType(commentType)
+            .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,
