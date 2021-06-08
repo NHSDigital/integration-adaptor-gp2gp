@@ -359,8 +359,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="audio/x-au">
-                    <reference value="file://localhost/6DFFAEC4-7527-4D80-A2BD-81BDEBA04400_6DFFAEC4-7527-4D80-A2BD-81BDEBA04400.au"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment6DFFAEC4-7527-4D80-A2BD-81BDEBA04400.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -408,8 +408,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/1AB77AC2-0026-4C4B-A168-DAA15D108BA8_1AB77AC2-0026-4C4B-A168-DAA15D108BA8.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment1AB77AC2-0026-4C4B-A168-DAA15D108BA8.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -457,8 +457,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="D03E2E72-BE97-411D-9AB1-C6BB53D2BC80"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/D03E2E72-BE97-411D-9AB1-C6BB53D2BC80_D03E2E72-BE97-411D-9AB1-C6BB53D2BC80.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentD03E2E72-BE97-411D-9AB1-C6BB53D2BC80.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -506,8 +506,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="FE85DB22-274E-4B1D-9698-5C4809E9CD42"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/FE85DB22-274E-4B1D-9698-5C4809E9CD42_FE85DB22-274E-4B1D-9698-5C4809E9CD42.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentFE85DB22-274E-4B1D-9698-5C4809E9CD42.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -555,8 +555,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="2F6B04C6-297A-4270-9B4E-C213B8B175AC"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/2F6B04C6-297A-4270-9B4E-C213B8B175AC_2F6B04C6-297A-4270-9B4E-C213B8B175AC.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment2F6B04C6-297A-4270-9B4E-C213B8B175AC.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1486,8 +1486,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/BC8F0E5D-53ED-45CC-A45C-DE4933E064EF_BC8F0E5D-53ED-45CC-A45C-DE4933E064EF.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachmentBC8F0E5D-53ED-45CC-A45C-DE4933E064EF.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1633,8 +1633,8 @@
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
                 <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
-                <text mediaType="application/octet-stream">
-                    <reference value="file://localhost/409C8344-FFB9-40C9-A802-D71602F56263_409C8344-FFB9-40C9-A802-D71602F56263.bin"/>
+                <text mediaType="text/plain">
+                    <reference value="file://localhost/AbsentAttachment409C8344-FFB9-40C9-A802-D71602F56263.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1732,7 +1732,7 @@
                 <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachment5654E733-A9E5-4086-AD63-3A3C72A8E1B3.docx"/>
+                    <reference value="file://localhost/AbsentAttachment5654E733-A9E5-4086-AD63-3A3C72A8E1B3.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -1781,7 +1781,7 @@
                 <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/plain">
-                    <reference value="file://localhost/AbsentAttachmentF599E6DD-92AA-4CC7-BAF0-20530EE1108B.docx"/>
+                    <reference value="file://localhost/AbsentAttachmentF599E6DD-92AA-4CC7-BAF0-20530EE1108B.txt"/>
                 </text>
             </referredToExternalDocument>
         </reference>

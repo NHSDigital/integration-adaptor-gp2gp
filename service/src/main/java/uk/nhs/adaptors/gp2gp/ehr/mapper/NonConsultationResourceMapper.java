@@ -48,7 +48,6 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String NULL_FLAVOR = "nullFlavor";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -177,8 +176,8 @@ public class NonConsultationResourceMapper {
             .isPresent();
         if (!isAgentPerson) {
             diagnosticReportXml
-                .author(NULL_FLAVOR)
-                .participant2(NULL_FLAVOR);
+                .author(null)
+                .participant2(null);
         }
 
         return diagnosticReportXml;

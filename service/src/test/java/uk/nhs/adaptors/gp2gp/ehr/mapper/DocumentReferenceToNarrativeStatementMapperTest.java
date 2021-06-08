@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -47,6 +48,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME = TEST_FILE_DIRECTORY
         + "example-document-reference-resource-12.json";
     private static final String INPUT_JSON_WITH_AUTHOR_PRACTITIONER = TEST_FILE_DIRECTORY + "example-document-reference-resource-13.json";
+    private static final String INPUT_JSON_WITH_NOT_SUPPORTED_CONTENT_TYPE = TEST_FILE_DIRECTORY
+        + "example-document-reference-resource-14.json";
 
     private static final String OUTPUT_XML_OPTIONAL_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_WITH_TYPE_TEXT_ONLY = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
@@ -63,9 +66,12 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private static final String OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE = TEST_FILE_DIRECTORY
         + "expected-output-narrative-statement-10.xml";
     private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-11.xml";
+    private static final String OUTPUT_XML_NOT_SUPPORTED_CONTENT_TYPE = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-12.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private SupportedContentTypes supportedContentTypes;
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
@@ -77,7 +83,11 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         final Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+
+        lenient().when(supportedContentTypes.isContentTypeSupported("text/richtext")).thenReturn(true);
+        lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
+
+        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes);
     }
 
     @AfterEach
@@ -114,7 +124,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_ATTACHMENT_TITLE, OUTPUT_XML_WITH_ABSENT_ATTACHMENT_TITLE),
             Arguments.of(INPUT_JSON_REQUIRED_DATA, OUTPUT_XML_REQUIRED_DATA),
             Arguments.of(INPUT_JSON_WITH_CUSTODIAN_AND_NO_ORG_NAME, OUTPUT_XML_REQUIRED_DATA),
-            Arguments.of(INPUT_JSON_WITH_AUTHOR_PRACTITIONER, OUTPUT_XML_REQUIRED_DATA)
+            Arguments.of(INPUT_JSON_WITH_AUTHOR_PRACTITIONER, OUTPUT_XML_REQUIRED_DATA),
+            Arguments.of(INPUT_JSON_WITH_NOT_SUPPORTED_CONTENT_TYPE, OUTPUT_XML_NOT_SUPPORTED_CONTENT_TYPE)
         );
     }
 
