@@ -135,7 +135,8 @@ public class TransformJsonToXml {
 
     private static void writeToFile(String xml, String sourceFileName) {
         String outputFileName = FilenameUtils.removeExtension(sourceFileName);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
+        try (BufferedWriter writer =
+                     new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
             writer.write(xml);
             LOGGER.info("Contents of file: {}. Saved to: {}.xml", sourceFileName, outputFileName);
         } catch (IOException e) {
