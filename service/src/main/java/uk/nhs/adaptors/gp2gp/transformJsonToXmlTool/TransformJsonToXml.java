@@ -65,13 +65,17 @@ public class TransformJsonToXml {
 
 
     public static void main(String[] args) throws Exception {
+        String startTest = (System.getenv().getOrDefault("JSON_TO_XML_START_TOOL", "False"));
+        LOGGER.error("variable: " + startTest);
         try {
-            var inputWrapper = getFiles();
-            for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
-                var jsonString = inputWrapper.getJsonFileInputs().get(i);
-                String xmlResult = mapJsonToXml(jsonString);
-                var fileName = inputWrapper.getJsonFileNames().get(i);
-                writeToFile(xmlResult, fileName);
+            if (startTest.equals("True")) {
+                var inputWrapper = getFiles();
+                for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
+                    var jsonString = inputWrapper.getJsonFileInputs().get(i);
+                    String xmlResult = mapJsonToXml(jsonString);
+                    var fileName = inputWrapper.getJsonFileNames().get(i);
+                    writeToFile(xmlResult, fileName);
+                }
             }
         } catch (Exception e) {
             LOGGER.error("error: " + e.getMessage());
