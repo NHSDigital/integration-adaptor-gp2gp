@@ -95,7 +95,7 @@ test {
 	useJUnitPlatform()
 }
 
-task(runSimple, dependsOn: 'classes', type: JavaExec) {
+task transformJsonToXml(type: JavaExec) {
 	main = 'uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml'
 	classpath = sourceSets.main.runtimeClasspath
 }
