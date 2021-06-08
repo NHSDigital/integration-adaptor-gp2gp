@@ -53,7 +53,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class TransformJsonToXml {
 
@@ -89,11 +88,11 @@ public class TransformJsonToXml {
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
 
-        assert files != null;
-        LOGGER.error(JSON_FILE_INPUT_PATH);
-        if (files.length == 0) {
+        if (files == null || files.length == 0) {
             throw new Exception("No json files found");
         }
+
+        LOGGER.info("Processing " + files.length + " files from location: " + JSON_FILE_INPUT_PATH);
 
         Arrays.stream(files)
                 .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
@@ -103,7 +102,7 @@ public class TransformJsonToXml {
                     try {
                         jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
                     } catch (Exception e) {
-                        LOGGER.info("Could not read {}", file.getName());
+                        LOGGER.error("Could not read {}", file.getName());
                     }
                     jsonStringInputs.add(jsonAsString);
                     fileNames.add(file.getName());
@@ -125,24 +124,22 @@ public class TransformJsonToXml {
                 .getValue();
     }
 
-    private static Optional<Identifier> getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
+    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
         return resource.getIdentifier()
-                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst();
+                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
 
-    private static String readJsonFileAsString(String file) throws Exception {
+    private static String readJsonFileAsString(String file) throws IOException {
         return Files.readString(Paths.get(file));
     }
 
     private static void writeToFile(String xml, String sourceFileName) {
         String outputFileName = FilenameUtils.removeExtension(sourceFileName);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
             writer.write(xml);
-            writer.close();
             LOGGER.info("Contents of file: {}. Saved to: {}.xml", sourceFileName, outputFileName);
         } catch (IOException e) {
-            LOGGER.info("Could not send Xml result to the file");
+            LOGGER.error("Could not send Xml result to the file", e);
         }
     }
 
