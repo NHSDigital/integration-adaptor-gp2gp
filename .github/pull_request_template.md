@@ -16,5 +16,5 @@ These are items (excluding GitHub Checks) which should be confirmed before a bra
 - [ ] Self-reviewed your code
 - [ ] Code reviewed from two other developers
 - [ ] If your pull request depends on any other, please link them in the description
-- [ ] main branch is passing/green on CI
+- [ ] Check main branch is passing/green on CI, to prevent creating new builds if the latest build is broken
 - [ ] Add/update any relevant documentation
