@@ -63,6 +63,57 @@ public class TransformJsonToXml {
         Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
+    private static final RandomIdGeneratorService RANDOM_ID_GENERATOR_SERVICE = new RandomIdGeneratorService();
+    private static final MessageContext MESSAGE_CONTEXT = new MessageContext(RANDOM_ID_GENERATOR_SERVICE);
+    private static final SupportedContentTypes SUPPORTED_CONTENT_TYPES = new SupportedContentTypes();
+    private static final TimestampService TIMESTAMP_SERVICE = new TimestampService();
+    private static final OutputMessageWrapperMapper OUTPUT_MESSAGE_WRAPPER_MAPPER =
+        new OutputMessageWrapperMapper(RANDOM_ID_GENERATOR_SERVICE, TIMESTAMP_SERVICE);
+    private static final CodeableConceptCdMapper CODEABLE_CONCEPT_CD_MAPPER = new CodeableConceptCdMapper();
+    private static final ParticipantMapper PARTICIPANT_MAPPER = new ParticipantMapper();
+    private static final StructuredObservationValueMapper STRUCTURED_OBSERVATION_VALUE_MAPPER = new StructuredObservationValueMapper();
+    private static final ObservationMapper SPECIMEN_OBSERVATION_MAPPER = new ObservationMapper(
+        MESSAGE_CONTEXT, STRUCTURED_OBSERVATION_VALUE_MAPPER, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE);
+    private static final SpecimenMapper SPECIMEN_MAPPER = new SpecimenMapper(MESSAGE_CONTEXT, SPECIMEN_OBSERVATION_MAPPER,
+        RANDOM_ID_GENERATOR_SERVICE);
+
+    private static final EncounterComponentsMapper ENCOUNTER_COMPONENTS_MAPPER = new EncounterComponentsMapper(
+        MESSAGE_CONTEXT,
+        new AllergyStructureMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
+        new BloodPressureMapper(
+            MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, new StructuredObservationValueMapper(),
+            CODEABLE_CONCEPT_CD_MAPPER, new ParticipantMapper()),
+        new ConditionLinkSetMapper(
+            MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
+        new DiaryPlanStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
+        new DocumentReferenceToNarrativeStatementMapper(MESSAGE_CONTEXT, SUPPORTED_CONTENT_TYPES),
+        new ImmunizationObservationStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
+        new MedicationStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE),
+        new ObservationToNarrativeStatementMapper(MESSAGE_CONTEXT, PARTICIPANT_MAPPER),
+        new ObservationStatementMapper(
+            MESSAGE_CONTEXT,
+            new StructuredObservationValueMapper(),
+            new PertinentInformationObservationValueMapper(),
+            CODEABLE_CONCEPT_CD_MAPPER,
+            PARTICIPANT_MAPPER
+        ),
+        new RequestStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
+        new DiagnosticReportMapper(MESSAGE_CONTEXT, SPECIMEN_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE)
+    );
+
+    private static final EncounterMapper ENCOUNTER_MAPPER = new EncounterMapper(MESSAGE_CONTEXT, ENCOUNTER_COMPONENTS_MAPPER);
+
+    private static final NonConsultationResourceMapper NON_CONSULTATION_RESOURCE_MAPPER =
+        new NonConsultationResourceMapper(MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, ENCOUNTER_COMPONENTS_MAPPER);
+
+    private static final AgentPersonMapper AGENT_PERSON_MAPPER = new AgentPersonMapper(MESSAGE_CONTEXT);
+
+    private static final AgentDirectoryMapper AGENT_DIRECTORY_MAPPER = new AgentDirectoryMapper(MESSAGE_CONTEXT,
+        AGENT_PERSON_MAPPER);
+
+    private static final EhrExtractMapper EHR_EXTRACT_MAPPER = new EhrExtractMapper(RANDOM_ID_GENERATOR_SERVICE, TIMESTAMP_SERVICE,
+        ENCOUNTER_MAPPER,
+        NON_CONSULTATION_RESOURCE_MAPPER, AGENT_DIRECTORY_MAPPER, MESSAGE_CONTEXT);
 
     public static void main(String[] args) throws Exception {
 
@@ -88,7 +139,7 @@ public class TransformJsonToXml {
         List<String> fileNames = new ArrayList<>();
 
         if (files == null || files.length == 0) {
-            throw new Exception("No json files found");
+            throw new NoJsonFileFound("No json files found");
         }
 
         LOGGER.info("Processing " + files.length + " files from location: " + JSON_FILE_INPUT_PATH);
@@ -115,12 +166,8 @@ public class TransformJsonToXml {
 
     private static String mapJsonToXml(String jsonAsStringInput) throws Exception {
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
-        final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
-        MessageContext messageContext = new MessageContext(randomIdGeneratorService);
-        SupportedContentTypes supportedContentTypes = new SupportedContentTypes();
-
-        messageContext.initialize(bundle);
+        MESSAGE_CONTEXT.initialize(bundle);
 
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
@@ -134,62 +181,14 @@ public class TransformJsonToXml {
             .fromAsid("GP2GPTEST")
             .build();
 
-        TimestampService timestampService = new TimestampService();
-
-        OutputMessageWrapperMapper outputMessageWrapperMapper = new OutputMessageWrapperMapper(randomIdGeneratorService, timestampService);
-
-        CodeableConceptCdMapper codeableConceptCdMapper = new CodeableConceptCdMapper();
-        ParticipantMapper participantMapper = new ParticipantMapper();
-        StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
-        ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
-        SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
-
-        final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
-            messageContext,
-            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new BloodPressureMapper(
-                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
-                codeableConceptCdMapper, new ParticipantMapper()),
-            new ConditionLinkSetMapper(
-                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes),
-            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
-            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
-            new ObservationStatementMapper(
-                messageContext,
-                new StructuredObservationValueMapper(),
-                new PertinentInformationObservationValueMapper(),
-                codeableConceptCdMapper,
-                participantMapper
-            ),
-            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
-        );
-
-        final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
-
-        final NonConsultationResourceMapper nonConsultationResourceMapper =
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
-
-        final AgentPersonMapper agentPersonMapper = new AgentPersonMapper(messageContext);
-
-        final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext,
-            agentPersonMapper);
-
-        EhrExtractMapper ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
-            nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
-
         final EhrExtractTemplateParameters ehrExtractTemplateParameters =
-            ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
+            EHR_EXTRACT_MAPPER.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
 
-        final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+        final String ehrExtractContent = EHR_EXTRACT_MAPPER.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        final String hl7TranslatedResponse = outputMessageWrapperMapper.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+        final String hl7TranslatedResponse = OUTPUT_MESSAGE_WRAPPER_MAPPER.map(getGpcStructuredTaskDefinition, ehrExtractContent);
 
-        messageContext.resetMessageContext();
+        MESSAGE_CONTEXT.resetMessageContext();
 
         return hl7TranslatedResponse;
     }
