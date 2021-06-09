@@ -1,2 +1,2 @@
 cd "../service/"
-./gradlew runSimple
+./gradlew interoperabilityTestingToolJsonToXml

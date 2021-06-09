@@ -68,10 +68,12 @@ public class TransformJsonToXml {
 
         try {
             var inputWrapper = getFiles();
-            for (int i = 0; i < inputWrapper.getJsonFileInputs().size(); i++) {
-                var jsonString = inputWrapper.getJsonFileInputs().get(i);
+            var jsonFileInputs = inputWrapper.getJsonFileInputs();
+            var jsonFileNames = inputWrapper.getJsonFileNames();
+            for (int i = 0; i < jsonFileInputs.size(); i++) {
+                String jsonString = jsonFileInputs.get(i);
                 String xmlResult = mapJsonToXml(jsonString);
-                var fileName = inputWrapper.getJsonFileNames().get(i);
+                String fileName = jsonFileNames.get(i);
                 writeToFile(xmlResult, fileName);
             }
         } catch (Exception e) {
@@ -99,7 +101,11 @@ public class TransformJsonToXml {
                 try {
                     jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
                 } catch (Exception e) {
-                    LOGGER.error("Could not read {}", file.getName());
+                    try {
+                        throw new UnreadableJsonFileException("unable to to read file: " + file.getName());
+                    } catch (UnreadableJsonFileException unreadableJsonFileException) {
+                        unreadableJsonFileException.printStackTrace();
+                    }
                 }
                 jsonStringInputs.add(jsonAsString);
                 fileNames.add(file.getName());
@@ -228,5 +234,17 @@ public class TransformJsonToXml {
     public static class InputWrapper {
         private List<String> jsonFileNames;
         private List<String> jsonFileInputs;
+    }
+
+    public static class UnreadableJsonFileException extends Exception {
+        public UnreadableJsonFileException(String errorMessage) {
+            super(errorMessage);
+        }
+    }
+
+    public static class NoJsonFileFound extends Exception {
+        public NoJsonFileFound(String errorMessage) {
+            super(errorMessage);
+        }
     }
 }

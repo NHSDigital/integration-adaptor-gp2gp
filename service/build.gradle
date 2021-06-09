@@ -95,7 +95,7 @@ test {
 	useJUnitPlatform()
 }
 
-task(runSimple, dependsOn: 'classes', type: JavaExec) {
+task(interoperabilityTestingToolJsonToXml, dependsOn: 'classes', type: JavaExec) {
 	main = 'uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml'
 	classpath = sourceSets.main.runtimeClasspath
 }
