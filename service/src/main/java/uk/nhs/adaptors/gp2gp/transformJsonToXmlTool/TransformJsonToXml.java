@@ -1,8 +1,17 @@
 package uk.nhs.adaptors.gp2gp.transformjsontoxmltool;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.io.FilenameUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -10,6 +19,10 @@ import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
@@ -42,27 +55,14 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.invoke.MethodHandles;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class TransformJsonToXml {
 
     private static final String JSON_FILE_INPUT_PATH =
-            Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
+        Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
     private static final String XML_OUTPUT_PATH =
-            Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
+        Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
-
 
     public static void main(String[] args) throws Exception {
 
@@ -92,53 +92,19 @@ public class TransformJsonToXml {
         LOGGER.info("Processing " + files.length + " files from location: " + JSON_FILE_INPUT_PATH);
 
         Arrays.stream(files)
-                .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
-                .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
-                .forEach(file -> {
-                    String jsonAsString = null;
-                    try {
-                        jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
-                    } catch (Exception e) {
-                        LOGGER.error("Could not read {}", file.getName());
-                    }
-                    jsonStringInputs.add(jsonAsString);
-                    fileNames.add(file.getName());
-                });
+            .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
+            .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
+            .forEach(file -> {
+                String jsonAsString = null;
+                try {
+                    jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
+                } catch (Exception e) {
+                    LOGGER.error("Could not read {}", file.getName());
+                }
+                jsonStringInputs.add(jsonAsString);
+                fileNames.add(file.getName());
+            });
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
-    }
-
-    private static String extractNhsNumber(String json) throws Exception {
-        var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
-        var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
-        return bundle.getEntry().stream()
-                .map(Bundle.BundleEntryComponent::getResource)
-                .filter(resource -> ResourceType.Patient.equals(resource.getResourceType()))
-                .map(Patient.class::cast)
-                .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
-                .map(Identifier.class::cast)
-                .findFirst()
-                .orElseThrow(() -> new Exception("No Patient identifier was found"))
-                .getValue();
-    }
-
-    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
-        return resource.getIdentifier()
-                .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
-    }
-
-    private static String readJsonFileAsString(String file) throws IOException {
-        return Files.readString(Paths.get(file));
-    }
-
-    private static void writeToFile(String xml, String sourceFileName) {
-        String outputFileName = FilenameUtils.removeExtension(sourceFileName);
-        try (BufferedWriter writer =
-                     new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
-            writer.write(xml);
-            LOGGER.info("Contents of file: {}. Saved to: {}.xml", sourceFileName, outputFileName);
-        } catch (IOException e) {
-            LOGGER.error("Could not send Xml result to the file", e);
-        }
     }
 
     private static String mapJsonToXml(String jsonAsStringInput) throws Exception {
@@ -153,14 +119,14 @@ public class TransformJsonToXml {
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
         getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-                .nhsNumber(extractNhsNumber(jsonAsStringInput))
-                .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
-                .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
-                .fromOdsCode("GP2GPTEST")
-                .toOdsCode("GP2GPTEST")
-                .toAsid("GP2GPTEST")
-                .fromAsid("GP2GPTEST")
-                .build();
+            .nhsNumber(extractNhsNumber(jsonAsStringInput))
+            .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
+            .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
+            .fromOdsCode("GP2GPTEST")
+            .toOdsCode("GP2GPTEST")
+            .toAsid("GP2GPTEST")
+            .fromAsid("GP2GPTEST")
+            .build();
 
         TimestampService timestampService = new TimestampService();
 
@@ -170,48 +136,48 @@ public class TransformJsonToXml {
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
         ObservationMapper specimenObservationMapper = new ObservationMapper(
-                messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
+            messageContext,
+            new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new BloodPressureMapper(
+                messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
+                codeableConceptCdMapper, new ParticipantMapper()),
+            new ConditionLinkSetMapper(
+                messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
+            new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes),
+            new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
+            new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
+            new ObservationStatementMapper(
                 messageContext,
-                new AllergyStructureMapper(messageContext, codeableConceptCdMapper, participantMapper),
-                new BloodPressureMapper(
-                        messageContext, randomIdGeneratorService, new StructuredObservationValueMapper(),
-                        codeableConceptCdMapper, new ParticipantMapper()),
-                new ConditionLinkSetMapper(
-                        messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
-                new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-                new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes),
-                new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-                new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
-                new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
-                new ObservationStatementMapper(
-                        messageContext,
-                        new StructuredObservationValueMapper(),
-                        new PertinentInformationObservationValueMapper(),
-                        codeableConceptCdMapper,
-                        participantMapper
-                ),
-                new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-                new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
+                new StructuredObservationValueMapper(),
+                new PertinentInformationObservationValueMapper(),
+                codeableConceptCdMapper,
+                participantMapper
+            ),
+            new RequestStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
+            new DiagnosticReportMapper(messageContext, specimenMapper, participantMapper, randomIdGeneratorService)
         );
 
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 
         final NonConsultationResourceMapper nonConsultationResourceMapper =
-                new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
 
         final AgentPersonMapper agentPersonMapper = new AgentPersonMapper(messageContext);
 
         final AgentDirectoryMapper agentDirectoryMapper = new AgentDirectoryMapper(messageContext,
-                agentPersonMapper);
+            agentPersonMapper);
 
         EhrExtractMapper ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
-                nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
+            nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
 
         final EhrExtractTemplateParameters ehrExtractTemplateParameters =
-                ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
+            ehrExtractMapper.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
 
         final String ehrExtractContent = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
@@ -220,6 +186,40 @@ public class TransformJsonToXml {
         messageContext.resetMessageContext();
 
         return hl7TranslatedResponse;
+    }
+
+    private static void writeToFile(String xml, String sourceFileName) {
+        String outputFileName = FilenameUtils.removeExtension(sourceFileName);
+        try (BufferedWriter writer =
+                 new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
+            writer.write(xml);
+            LOGGER.info("Contents of file: {}. Saved to: {}.xml", sourceFileName, outputFileName);
+        } catch (IOException e) {
+            LOGGER.error("Could not send Xml result to the file", e);
+        }
+    }
+
+    private static String readJsonFileAsString(String file) throws IOException {
+        return Files.readString(Paths.get(file));
+    }
+
+    private static String extractNhsNumber(String json) throws Exception {
+        var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
+        var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
+        return bundle.getEntry().stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(resource -> ResourceType.Patient.equals(resource.getResourceType()))
+            .map(Patient.class::cast)
+            .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
+            .map(Identifier.class::cast)
+            .findFirst()
+            .orElseThrow(() -> new Exception("No Patient identifier was found"))
+            .getValue();
+    }
+
+    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
+        return resource.getIdentifier()
+            .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
 
     @Data
