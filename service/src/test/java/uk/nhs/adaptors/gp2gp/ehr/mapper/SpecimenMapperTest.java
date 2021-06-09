@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.InstantType;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -35,7 +37,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class SpecimenMapperTest {
 
     private static final String DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY = "/ehr/mapper/diagnosticreport/";
-    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12";
+    private static final String DIAGNOSTIC_REPORT_DATE = "2020-10-12T13:33:44Z";
 
     private static final String INPUT_OBSERVATION_RELATED_TO_SPECIMEN = "input-observation-related-to-specimen.json";
     private static final String INPUT_OBSERVATION_NOT_RELATED_TO_SPECIMEN = "input-observation-not-related-to-specimen.json";
@@ -52,6 +54,9 @@ public class SpecimenMapperTest {
     private IdMapper idMapper;
 
     @Mock
+    private AgentDirectory agentDirectory;
+
+    @Mock
     private ObservationMapper observationMapper;
 
     @Mock
@@ -60,8 +65,9 @@ public class SpecimenMapperTest {
     @BeforeEach
     public void setUp() throws IOException {
         lenient().when(messageContext.getIdMapper()).thenReturn(idMapper);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
         lenient().when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenAnswer(mockId());
-        lenient().when(idMapper.get(any(Reference.class))).thenAnswer(mockReference());
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
@@ -77,12 +83,15 @@ public class SpecimenMapperTest {
     @MethodSource("testData")
     public void When_MappingSpecimen_Expect_XmlOutput(String inputPath, String expectedPath) throws IOException {
         var input = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + inputPath);
-        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
         var specimen = new FhirParseService().parseResource(input, Specimen.class);
+
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
+
+        var expected = ResourceTestFileUtils.getFileContent(DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + expectedPath);
 
         when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
-        String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, DIAGNOSTIC_REPORT_DATE);
+        String outputMessage = specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport);
 
         assertThat(outputMessage).isEqualTo(expected);
     }
@@ -102,12 +111,13 @@ public class SpecimenMapperTest {
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
             DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_and_default_observation.xml"
         );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(observation)).thenAnswer(mockObservationMapping());
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, Collections.singletonList(observation), DIAGNOSTIC_REPORT_DATE
+            specimen, Collections.singletonList(observation), diagnosticReport
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
@@ -123,12 +133,13 @@ public class SpecimenMapperTest {
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(
             DIAGNOSTIC_REPORT_TEST_FILE_DIRECTORY + "specimen/" + "expected_output_default_specimen_with_observations.xml"
         );
+        var diagnosticReport = new DiagnosticReport().setIssuedElement(new InstantType(DIAGNOSTIC_REPORT_DATE));
 
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
         when(observationMapper.mapObservationToCompoundStatement(any())).thenAnswer(mockObservationMapping());
 
         String compoundStatementXml = specimenMapper.mapSpecimenToCompoundStatement(
-            specimen, observations, DIAGNOSTIC_REPORT_DATE
+            specimen, observations, diagnosticReport
         );
 
         assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);

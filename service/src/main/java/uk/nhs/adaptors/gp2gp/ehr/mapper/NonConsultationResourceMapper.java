@@ -15,7 +15,6 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.ProcedureRequest;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
@@ -49,7 +48,6 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
-    private static final String NULL_FLAVOR = "nullFlavor";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -178,8 +176,8 @@ public class NonConsultationResourceMapper {
             .isPresent();
         if (!isAgentPerson) {
             diagnosticReportXml
-                .author(NULL_FLAVOR)
-                .participant2(NULL_FLAVOR);
+                .author(null)
+                .participant2(null);
         }
 
         return diagnosticReportXml;
@@ -196,19 +194,8 @@ public class NonConsultationResourceMapper {
     }
 
     private EncounterTemplateParametersBuilder buildForProcedureRequest(String component, Resource resource) {
-        EncounterTemplateParametersBuilder encounterTemplateParametersBuilder = XpathExtractor.extractValuesForProcedureRequest(component)
+        return XpathExtractor.extractValuesForProcedureRequest(component)
             .altCode(DEFAULT_CODE);
-
-        ProcedureRequest procedureRequest = (ProcedureRequest) resource;
-        if (procedureRequest.hasRequester()) {
-            var requesterReference = procedureRequest.getRequester().getAgent();
-            var participant = messageContext.getIdMapper().get(requesterReference);
-            encounterTemplateParametersBuilder
-                .participant2(participant)
-                .author(participant);
-        }
-
-        return encounterTemplateParametersBuilder;
     }
 
     private EncounterTemplateParametersBuilder buildForDocumentReference(String component, Resource resource) {

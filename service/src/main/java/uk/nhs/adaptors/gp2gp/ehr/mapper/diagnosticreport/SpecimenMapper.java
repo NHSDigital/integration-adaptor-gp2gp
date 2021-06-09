@@ -1,6 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_OBSERVATION_ID_PREFIX;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper.DUMMY_SPECIMEN_ID_PREFIX;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.newLine;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TextUtils.withSpace;
 
@@ -13,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.DateTimeType;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
 import org.hl7.fhir.dstu3.model.Duration;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -24,10 +27,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.diagnosticreport.SpecimenCompoundStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 import java.util.List;
@@ -51,12 +57,13 @@ public class SpecimenMapper {
     private final ObservationMapper observationMapper;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
-    public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, String diagnosticReportIssuedDate) {
+    public String mapSpecimenToCompoundStatement(Specimen specimen, List<Observation> observations, DiagnosticReport diagnosticReport) {
+        String availabilityTimeElement = StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement());
         String mappedObservations = mapObservationsAssociatedWithSpecimen(specimen, observations);
 
         var specimenCompoundStatementTemplateParameters = SpecimenCompoundStatementTemplateParameters.builder()
             .compoundStatementId(messageContext.getIdMapper().getOrNew(ResourceType.Specimen, specimen.getIdElement()))
-            .availabilityTime(diagnosticReportIssuedDate)
+            .availabilityTimeElement(availabilityTimeElement)
             .specimenRoleId(randomIdGeneratorService.createNewId())
             .narrativeStatementId(randomIdGeneratorService.createNewId())
             .observations(mappedObservations);
@@ -64,7 +71,8 @@ public class SpecimenMapper {
         buildAccessionIdentifier(specimen).ifPresent(specimenCompoundStatementTemplateParameters::accessionIdentifier);
         buildEffectiveTimeForSpecimen(specimen).ifPresent(specimenCompoundStatementTemplateParameters::effectiveTime);
         buildSpecimenMaterialType(specimen).ifPresent(specimenCompoundStatementTemplateParameters::specimenMaterialType);
-        buildNarrativeStatement(specimen).ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
+        buildSpecimenNarrativeStatement(specimen, availabilityTimeElement)
+            .ifPresent(specimenCompoundStatementTemplateParameters::narrativeStatement);
         buildParticipant(specimen).ifPresent(specimenCompoundStatementTemplateParameters::participant);
 
         return TemplateUtils.fillTemplate(
@@ -108,7 +116,7 @@ public class SpecimenMapper {
         if (specimen.hasCollection() && specimen.getCollection().hasCollector()) {
             Reference collector = specimen.getCollection().getCollector();
 
-            return Optional.of(messageContext.getIdMapper().get(collector));
+            return Optional.of(messageContext.getAgentDirectory().getAgentId(collector));
         }
 
         return Optional.empty();
@@ -133,7 +141,7 @@ public class SpecimenMapper {
     private String mapObservationsAssociatedWithSpecimen(Specimen specimen, List<Observation> observations) {
         List<Observation> observationsAssociatedWithSpecimen;
 
-        if (specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)) {
+        if (dummySpecimenOrObservationExists(specimen, observations)) {
             observationsAssociatedWithSpecimen = observations;
         } else {
             observationsAssociatedWithSpecimen = observations.stream()
@@ -147,8 +155,14 @@ public class SpecimenMapper {
             .collect(Collectors.joining());
     }
 
-    private Optional<String> buildNarrativeStatement(Specimen specimen) {
-        NarrativeStatementBuilder narrativeStatementBuilder = new NarrativeStatementBuilder();
+    private boolean dummySpecimenOrObservationExists(Specimen specimen, List<Observation> observations) {
+        return specimen.getIdElement().getIdPart().contains(DUMMY_SPECIMEN_ID_PREFIX)
+            || (!observations.isEmpty() && observations.get(0).getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX));
+    }
+
+    private Optional<String> buildSpecimenNarrativeStatement(Specimen specimen, String availabilityTimeElement) {
+        SpecimenNarrativeStatementCommentBuilder specimenNarrativeStatementCommentBuilder = new SpecimenNarrativeStatementCommentBuilder();
+
         if (specimen.hasCollection()) {
             Specimen.SpecimenCollectionComponent collection = specimen.getCollection();
 
@@ -156,55 +170,68 @@ public class SpecimenMapper {
                 .ifPresent(extension -> {
                     Type value = extension.getValue();
                     if (value instanceof CodeableConcept) {
-                        narrativeStatementBuilder.fastingStatus((CodeableConcept) value);
+                        specimenNarrativeStatementCommentBuilder.fastingStatus((CodeableConcept) value);
                     } else if (value instanceof Duration) {
-                        narrativeStatementBuilder.fastingDuration((Duration) value);
+                        specimenNarrativeStatementCommentBuilder.fastingDuration((Duration) value);
                     }
                 });
 
             if (collection.hasQuantity()) {
-                narrativeStatementBuilder.quantity(collection.getQuantity());
+                specimenNarrativeStatementCommentBuilder.quantity(collection.getQuantity());
             }
 
             if (collection.hasBodySite()) {
-                narrativeStatementBuilder.collectionSite(collection.getBodySite());
+                specimenNarrativeStatementCommentBuilder.collectionSite(collection.getBodySite());
             }
         }
 
         specimen.getNote().stream()
             .map(Annotation::getText)
-            .forEach(narrativeStatementBuilder::note);
+            .forEach(specimenNarrativeStatementCommentBuilder::note);
 
-        return getEffectiveTime(specimen)
-            .map(narrativeStatementBuilder::buildWithDateTime)
-            .orElseGet(narrativeStatementBuilder::build);
+        if (StringUtils.isNotBlank(specimenNarrativeStatementCommentBuilder.text)) {
+            var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
+                .narrativeStatementId(randomIdGeneratorService.createNewId())
+                .commentType(CommentType.LAB_SPECIMEN_COMMENT.getCode())
+                .comment(specimenNarrativeStatementCommentBuilder.text)
+                .availabilityTimeElement(availabilityTimeElement);
+
+            getEffectiveTime(specimen)
+                .map(DateFormatUtil::toHl7Format)
+                .ifPresent(narrativeStatementTemplateParameters::commentDate);
+
+            return Optional.ofNullable(
+                TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build())
+            );
+        }
+
+        return Optional.empty();
     }
 
-    private static class NarrativeStatementBuilder {
+    private static class SpecimenNarrativeStatementCommentBuilder {
 
         private static final String FASTING_STATUS = "Fasting Status:";
         private static final String FASTING_DURATION = "Fasting Duration:";
         private static final String QUANTITY = "Quantity:";
         private static final String COLLECTION_SITE = "Collection Site:";
-        private static final String COMMENT_PREFIX = "comment type - LAB SPECIMEN COMMENT(E271)";
 
         private String text;
 
-        NarrativeStatementBuilder() {
+        SpecimenNarrativeStatementCommentBuilder() {
             text = StringUtils.EMPTY;
         }
 
-        private void prependPertinentInformation(String... texts) {
+        private void prependText(String... texts) {
             text = newLine(withSpace((Object[]) texts), text);
         }
 
-        private void prependPertinentInformation(List<String> texts) {
+        private void prependText(List<String> texts) {
             text = newLine(withSpace(texts), text);
         }
 
         public void fastingStatus(CodeableConcept fastingStatus) {
             CodeableConceptMappingUtils.extractTextOrCoding(fastingStatus)
-                .ifPresent(fastingStatusValue -> prependPertinentInformation(FASTING_STATUS, fastingStatusValue));
+                .ifPresent(fastingStatusValue -> prependText(FASTING_STATUS, fastingStatusValue));
         }
 
         public void fastingDuration(Duration fastingDuration) {
@@ -214,7 +241,7 @@ public class SpecimenMapper {
                 fastingDuration.getUnit()
             );
 
-            prependPertinentInformation(fastingDurationElements);
+            prependText(fastingDurationElements);
         }
 
         public void quantity(SimpleQuantity quantity) {
@@ -224,34 +251,16 @@ public class SpecimenMapper {
                 quantity.getUnit()
             );
 
-            prependPertinentInformation(quantityElements);
+            prependText(quantityElements);
         }
 
         public void collectionSite(CodeableConcept collectionSite) {
             CodeableConceptMappingUtils.extractTextOrCoding(collectionSite)
-                .ifPresent(collectionSiteValue -> prependPertinentInformation(COLLECTION_SITE, collectionSiteValue));
+                .ifPresent(collectionSiteValue -> prependText(COLLECTION_SITE, collectionSiteValue));
         }
 
         public void note(String note) {
-            prependPertinentInformation(note);
-        }
-
-        public Optional<String> buildWithDateTime(DateTimeType date) {
-            if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX, DateFormatUtil.toTextFormat(date));
-                return Optional.of(text);
-            }
-
-            return Optional.empty();
-        }
-
-        public Optional<String> build() {
-            if (StringUtils.isNotBlank(text)) {
-                prependPertinentInformation(COMMENT_PREFIX);
-                return Optional.of(text);
-            }
-
-            return Optional.empty();
+            prependText(note);
         }
     }
 }

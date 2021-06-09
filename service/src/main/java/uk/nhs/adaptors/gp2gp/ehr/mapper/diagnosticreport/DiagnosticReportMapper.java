@@ -1,5 +1,9 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import com.github.mustachejava.Mustache;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType.LABORATORY_RESULT_COMMENT;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper.NARRATIVE_STATEMENT_TEMPLATE;
 
@@ -19,10 +23,6 @@ import org.hl7.fhir.dstu3.model.Specimen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.github.mustachejava.Mustache;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -59,10 +59,8 @@ public class DiagnosticReportMapper {
         List<Specimen> specimens = fetchSpecimens(diagnosticReport);
         List<Observation> observations = fetchObservations(diagnosticReport);
 
-        String diagnosticReportIssuedDate = DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement());
-
         String mappedSpecimens = specimens.stream()
-            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReportIssuedDate))
+            .map(specimen -> specimenMapper.mapSpecimenToCompoundStatement(specimen, observations, diagnosticReport))
             .collect(Collectors.joining());
 
         final IdMapper idMapper = messageContext.getIdMapper();
@@ -71,12 +69,13 @@ public class DiagnosticReportMapper {
 
         var diagnosticReportCompoundStatementTemplateParameters = DiagnosticReportCompoundStatementTemplateParameters.builder()
             .compoundStatementId(idMapper.getOrNew(ResourceType.DiagnosticReport, diagnosticReport.getIdElement()))
-            .availabilityTime(diagnosticReportIssuedDate)
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()))
             .narrativeStatements(reportLevelNarrativeStatements)
             .specimens(mappedSpecimens);
 
         if (diagnosticReport.hasPerformer() && diagnosticReport.getPerformerFirstRep().hasActor()) {
-            final String participantReference = idMapper.get(diagnosticReport.getPerformerFirstRep().getActor());
+            final String participantReference = messageContext.getAgentDirectory().getAgentId(
+                diagnosticReport.getPerformerFirstRep().getActor());
             final String participantBlock = participantMapper.mapToParticipant(participantReference, ParticipantType.AUTHOR);
             diagnosticReportCompoundStatementTemplateParameters.participant(participantBlock);
         }
@@ -184,7 +183,7 @@ public class DiagnosticReportMapper {
             .commentType(commentType)
             .commentDate(DateFormatUtil.toHl7Format(diagnosticReport.getIssuedElement()))
             .comment(comment)
-            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTimeForDiagnosticReport(diagnosticReport));
+            .availabilityTimeElement(StatementTimeMappingUtils.prepareAvailabilityTime(diagnosticReport.getIssuedElement()));
 
         return TemplateUtils.fillTemplate(
             NARRATIVE_STATEMENT_TEMPLATE,

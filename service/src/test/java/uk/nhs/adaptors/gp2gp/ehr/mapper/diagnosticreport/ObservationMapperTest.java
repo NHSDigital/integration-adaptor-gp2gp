@@ -1,5 +1,13 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -14,8 +22,12 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.mockito.stubbing.Answer;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
@@ -23,14 +35,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationMapperTest {
@@ -78,6 +82,9 @@ public class ObservationMapperTest {
     private IdMapper idMapper;
 
     @Mock
+    private AgentDirectory agentDirectory;
+
+    @Mock
     private MessageContext messageContext;
 
     @Mock
@@ -91,6 +98,9 @@ public class ObservationMapperTest {
         Bundle bundle = new FhirParseService().parseResource(bundleJsonInput, Bundle.class);
         InputBundle inputBundle = new InputBundle(bundle);
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
+        lenient().when(messageContext.getAgentDirectory()).thenReturn(agentDirectory);
+        lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
+        lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
 
@@ -114,7 +124,6 @@ public class ObservationMapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-        lenient().when(idMapper.get(any(Reference.class))).thenReturn("some-reference");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -129,8 +138,6 @@ public class ObservationMapperTest {
 
     @Test
     public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(
             OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
         );
@@ -139,11 +146,11 @@ public class ObservationMapperTest {
             OBSERVATION_TEST_FILE_DIRECTORY + "expected_output_default_observation.xml"
         );
 
-        String compoundStatementXml = observationMapper.mapObservationToCompoundStatement(
+        String actualXml = observationMapper.mapObservationToCompoundStatement(
             observationAssociatedWithSpecimen
         );
 
-        assertThat(compoundStatementXml).isEqualTo(expectedXmlOutput);
+        assertThat(actualXml).isEqualTo(expectedXmlOutput);
     }
 
     private static Stream<Arguments> resourceFileParams() {
@@ -166,5 +173,20 @@ public class ObservationMapperTest {
                 OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML
             )
         );
+    }
+
+    private Answer<String> mockReference() {
+        return invocation -> {
+            Reference reference = invocation.getArgument(0);
+            return String.format("REFERENCE-to-%s", reference.getReference());
+        };
+    }
+
+    private Answer<String> mockReferences() {
+        return invocation -> {
+            Reference practitionerReference = invocation.getArgument(0);
+            Reference organizationReference = invocation.getArgument(1);
+            return String.format("REFERENCE-to-%s-%s", practitionerReference.getReference(), organizationReference.getReference());
+        };
     }
 }

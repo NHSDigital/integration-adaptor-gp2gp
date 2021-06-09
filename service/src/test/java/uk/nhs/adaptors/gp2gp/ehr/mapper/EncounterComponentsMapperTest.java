@@ -6,6 +6,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +38,7 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public class EncounterComponentsMapperTest {
     private static final String TEST_ID = "394559384658936";
+    private static final String PRACTITIONER_ID = "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73";
 
     private static final String TEST_DIRECTORY = "/ehr/mapper/encountercomponents/";
     private static final String INPUT_BUNDLE_WITH_ALL_MAPPERS_USED = TEST_DIRECTORY + "input-bundle-1.json";
@@ -64,8 +66,6 @@ public class EncounterComponentsMapperTest {
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
-        IdType conditionId = buildIdType(ResourceType.Practitioner, "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73");
-        messageContext.getIdMapper().getOrNew(ResourceType.Practitioner, conditionId);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
@@ -87,7 +87,7 @@ public class EncounterComponentsMapperTest {
         DiaryPlanStatementMapper diaryPlanStatementMapper
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext);
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes());
         MedicationStatementMapper medicationStatementMapper
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
@@ -134,10 +134,7 @@ public class EncounterComponentsMapperTest {
     public void When_MappingEncounterComponents_Expect_ResourceMapped() throws IOException {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
@@ -147,23 +144,16 @@ public class EncounterComponentsMapperTest {
     @ParameterizedTest
     @MethodSource("emptyResult")
     public void When_MappingEncounterComponents_Expect_NoResourceMapped(String inputJsonPath) throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-
+        var bundle = initializeMessageContext(inputJsonPath);
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
         assertThat(mappedXml).isEmpty();
     }
 
-
     @Test
     public void When_MappingEncounterMissingComponents_Expect_ExceptionThrown() throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE);
         var encounter = extractEncounter(bundle);
 
         assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
@@ -173,10 +163,7 @@ public class EncounterComponentsMapperTest {
 
     @Test
     public void When_MappingEncounterUnsupportedResource_Expect_ExceptionThrown() throws IOException {
-        String inputJson = ResourceTestFileUtils.getFileContent(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
-        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
-        messageContext.initialize(bundle);
-
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES);
         var encounter = extractEncounter(bundle);
 
         assertThatThrownBy(() -> encounterComponentsMapper.mapComponents(encounter))
@@ -201,5 +188,16 @@ public class EncounterComponentsMapperTest {
             Arguments.of(INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_MAPPERS_CRITERIA),
             Arguments.of(INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY)
         );
+    }
+
+    private Bundle initializeMessageContext(String inputJsonPath) throws IOException {
+        String inputJson = ResourceTestFileUtils.getFileContent(inputJsonPath);
+        Bundle bundle = new FhirParseService().parseResource(inputJson, Bundle.class);
+        messageContext.initialize(bundle);
+
+        IdType conditionId = buildIdType(ResourceType.Practitioner, PRACTITIONER_ID);
+        messageContext.getAgentDirectory().getAgentId(new Reference(conditionId));
+
+        return bundle;
     }
 }

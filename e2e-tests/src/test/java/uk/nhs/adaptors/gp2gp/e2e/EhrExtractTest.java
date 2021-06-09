@@ -1,14 +1,12 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
@@ -23,8 +21,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
-    private static final long SENT_TO_MHS_POLLING_DELAY = 2000;
-    private static final long SENT_TO_MHS_POLLING_TIMEOUT = 10000;
     @InjectSoftAssertions
     private SoftAssertions softly;
 
@@ -72,6 +68,9 @@ public class EhrExtractTest {
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
         waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
     }
 
     @Test

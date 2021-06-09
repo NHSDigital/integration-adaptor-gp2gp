@@ -9,7 +9,9 @@ import com.github.mustachejava.Mustache;
 import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.lang3.StringUtils;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Encounter;
 import org.hl7.fhir.dstu3.model.ListResource;
@@ -58,9 +60,6 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
-        ehrExtractTemplateParameters.setAgentDirectory(agentDirectoryMapper.mapEHRFolderToAgentDirectory(
-            bundle,
-            getPatientNhsNumber(getGpcStructuredTaskDefinition)));
 
         var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
         var mappedComponents = mapEncounterToEhrComponents(encounters);
@@ -69,6 +68,10 @@ public class EhrExtractMapper {
 
         ehrExtractTemplateParameters.setEffectiveTime(
             StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
+        );
+
+        ehrExtractTemplateParameters.setAgentDirectory(
+            agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, getPatientNhsNumber(getGpcStructuredTaskDefinition))
         );
 
         return ehrExtractTemplateParameters;

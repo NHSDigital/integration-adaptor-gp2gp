@@ -10,9 +10,7 @@ import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +70,6 @@ public class DiaryPlanStatementMapperTest {
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        messageContext.getIdMapper().getOrNew(ResourceType.Organization, new IdType("6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"));
 
         diaryPlanStatementMapper =
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());

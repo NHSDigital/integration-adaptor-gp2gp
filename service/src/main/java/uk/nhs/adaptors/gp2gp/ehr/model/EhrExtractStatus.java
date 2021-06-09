@@ -92,6 +92,17 @@ public class EhrExtractStatus implements TimeToLive {
             private Instant accessedAt;
             private String taskId;
             private String messageId;
+            private SentToMhs sentToMhs;
+        }
+
+        @Data
+        @AllArgsConstructor
+        @Document
+        @Builder
+        public static class SentToMhs {
+            private String messageId;
+            private String sentAt;
+            private String taskId;
         }
     }
 

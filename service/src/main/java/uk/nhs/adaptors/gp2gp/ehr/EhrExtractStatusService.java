@@ -59,6 +59,7 @@ public class EhrExtractStatusService {
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
     private static final String ERRORS = "errors";
+    private static final String SENT_TO_MHS = "sentToMhs";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -281,24 +282,30 @@ public class EhrExtractStatusService {
         LOGGER.info("Database updated for sending application acknowledgement");
     }
 
-    public void updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
+    public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
-        var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + "sentToMhs" + DOT + SENT_AT;
-        var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + "sentToMhs" + DOT + TASK_ID;
-        var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + "sentToMhs" + DOT + MESSAGE_ID;
+        var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
+        var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
+        var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
 
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
         update.set(commonTaskId, taskDefinition.getTaskId());
         update.set(commonMessageId, messageId);
 
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
 
-        if (updateResult.getModifiedCount() != 1) {
+        if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status document was not updated with sentToMhs.");
         }
         LOGGER.info("Database updated for sending EHR Common document to mhs");
+
+        return ehrExtractStatus;
     }
 
     private FindAndModifyOptions getReturningUpdatedRecordOption() {
