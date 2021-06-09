@@ -75,7 +75,7 @@ public class MhsRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildSendAcknowledgement(String requestBody, String fromOdsCode, String conversationId,
-        String positiveAckMessageId) {
+        String messageId) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -93,7 +93,7 @@ public class MhsRequestBuilder {
             .header(INTERACTION_ID, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID)
             .header(WAIT_FOR_RESPONSE, FALSE)
             .header(CORRELATION_ID, conversationId)
-            .header(MESSAGE_ID, positiveAckMessageId)
+            .header(MESSAGE_ID, messageId)
             .body(bodyInserter);
     }
 
