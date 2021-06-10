@@ -13,7 +13,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
  * additional statements have random / unmapped ids.
  */
 @Slf4j
-public class MultiStatementObservationHolder {
+class MultiStatementObservationHolder {
     private final Observation observation;
     private String singleUseIdentifier;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -26,11 +26,11 @@ public class MultiStatementObservationHolder {
         this.randomIdGeneratorService = randomIdGeneratorService;
     }
 
-    public Observation getObservation() {
+    Observation getObservation() {
         return this.observation;
     }
 
-    public String nextHl7InstanceIdentifier() {
+    String nextHl7InstanceIdentifier() {
         if (singleUseIdentifier != null) {
             LOGGER.debug("HL7 II {} used for the primary statement mapping of {}",
                 singleUseIdentifier, observation.getId());
