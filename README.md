@@ -287,25 +287,23 @@ We provide a mock MHS adaptor for local development and testing.
 | MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
 | MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
 
-## How to transform arbitrary json ASR payload files
+### How to transform arbitrary json ASR payload files
 
-This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR payloads and access the outputs
+This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR payloads and access the outputs.
 
-#### Step 1.
+1. Navigate to the input folder and place all Json files to convert here.
+`integration-adaptor-gp2gp/transformJsonToXml/input/` 
+   
 
-Please locate the file Input folder \
-`integration-adaptor-gp2gp/transformJsonToXml/input/` \
-Place all Json files to convert here
+2. Navigate to the TransformJsonToXml.sh file and run that script to execute the testing tool. 
+   `integration-adaptor-gp2gp/transformJsonToXml/`
+   ```shell script
+   cd ../transformJsonToXml
+   ./TransformJsonToXml.sh
+    ```  
+   
 
-#### Step 2.
-
-Please locate the TransformJsonToXml.sh file\
-`integration-adaptor-gp2gp/transformJsonToXml/`\
-Run that file
-
-#### Step 3.
-
-The Converted .Xml files will be located in \
+3. The Converted .Xml files will be located in the output folder.
 `integration-adaptor-gp2gp/transformJsonToXml/output/`
 
 ## Troubleshooting
