@@ -55,67 +55,27 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-public class TransformJsonToXml {
+@SpringBootApplication
+@Slf4j
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class TransformJsonToXml implements CommandLineRunner {
 
     private static final String JSON_FILE_INPUT_PATH =
         Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/input/";
     private static final String XML_OUTPUT_PATH =
         Paths.get("src/").toFile().getAbsoluteFile().getAbsolutePath() + "/../../transformJsonToXml/output/";
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    private static final FhirParseService FHIR_PARSE_SERVICE = new FhirParseService();
-    private static final RandomIdGeneratorService RANDOM_ID_GENERATOR_SERVICE = new RandomIdGeneratorService();
-    private static final MessageContext MESSAGE_CONTEXT = new MessageContext(RANDOM_ID_GENERATOR_SERVICE);
-    private static final SupportedContentTypes SUPPORTED_CONTENT_TYPES = new SupportedContentTypes();
-    private static final TimestampService TIMESTAMP_SERVICE = new TimestampService();
-    private static final OutputMessageWrapperMapper OUTPUT_MESSAGE_WRAPPER_MAPPER =
-        new OutputMessageWrapperMapper(RANDOM_ID_GENERATOR_SERVICE, TIMESTAMP_SERVICE);
-    private static final CodeableConceptCdMapper CODEABLE_CONCEPT_CD_MAPPER = new CodeableConceptCdMapper();
-    private static final ParticipantMapper PARTICIPANT_MAPPER = new ParticipantMapper();
-    private static final StructuredObservationValueMapper STRUCTURED_OBSERVATION_VALUE_MAPPER = new StructuredObservationValueMapper();
-    private static final ObservationMapper SPECIMEN_OBSERVATION_MAPPER = new ObservationMapper(
-        MESSAGE_CONTEXT, STRUCTURED_OBSERVATION_VALUE_MAPPER, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE);
-    private static final SpecimenMapper SPECIMEN_MAPPER = new SpecimenMapper(MESSAGE_CONTEXT, SPECIMEN_OBSERVATION_MAPPER,
-        RANDOM_ID_GENERATOR_SERVICE);
 
-    private static final EncounterComponentsMapper ENCOUNTER_COMPONENTS_MAPPER = new EncounterComponentsMapper(
-        MESSAGE_CONTEXT,
-        new AllergyStructureMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
-        new BloodPressureMapper(
-            MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, new StructuredObservationValueMapper(),
-            CODEABLE_CONCEPT_CD_MAPPER, new ParticipantMapper()),
-        new ConditionLinkSetMapper(
-            MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
-        new DiaryPlanStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
-        new DocumentReferenceToNarrativeStatementMapper(MESSAGE_CONTEXT, SUPPORTED_CONTENT_TYPES),
-        new ImmunizationObservationStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
-        new MedicationStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE),
-        new ObservationToNarrativeStatementMapper(MESSAGE_CONTEXT, PARTICIPANT_MAPPER),
-        new ObservationStatementMapper(
-            MESSAGE_CONTEXT,
-            new StructuredObservationValueMapper(),
-            new PertinentInformationObservationValueMapper(),
-            CODEABLE_CONCEPT_CD_MAPPER,
-            PARTICIPANT_MAPPER
-        ),
-        new RequestStatementMapper(MESSAGE_CONTEXT, CODEABLE_CONCEPT_CD_MAPPER, PARTICIPANT_MAPPER),
-        new DiagnosticReportMapper(MESSAGE_CONTEXT, SPECIMEN_MAPPER, PARTICIPANT_MAPPER, RANDOM_ID_GENERATOR_SERVICE)
-    );
-
-    private static final EncounterMapper ENCOUNTER_MAPPER = new EncounterMapper(MESSAGE_CONTEXT, ENCOUNTER_COMPONENTS_MAPPER);
-
-    private static final NonConsultationResourceMapper NON_CONSULTATION_RESOURCE_MAPPER =
-        new NonConsultationResourceMapper(MESSAGE_CONTEXT, RANDOM_ID_GENERATOR_SERVICE, ENCOUNTER_COMPONENTS_MAPPER);
-
-    private static final AgentPersonMapper AGENT_PERSON_MAPPER = new AgentPersonMapper(MESSAGE_CONTEXT);
-
-    private static final AgentDirectoryMapper AGENT_DIRECTORY_MAPPER = new AgentDirectoryMapper(MESSAGE_CONTEXT,
-        AGENT_PERSON_MAPPER);
-
-    private static final EhrExtractMapper EHR_EXTRACT_MAPPER = new EhrExtractMapper(RANDOM_ID_GENERATOR_SERVICE, TIMESTAMP_SERVICE,
-        ENCOUNTER_MAPPER,
-        NON_CONSULTATION_RESOURCE_MAPPER, AGENT_DIRECTORY_MAPPER, MESSAGE_CONTEXT);
+    private final FhirParseService FHIR_PARSE_SERVICE;
+    private final MessageContext MESSAGE_CONTEXT;
+    private final OutputMessageWrapperMapper OUTPUT_MESSAGE_WRAPPER_MAPPER;
+    private final EhrExtractMapper EHR_EXTRACT_MAPPER;
 
     public static void main(String[] args) {
+        SpringApplication.run(SpringBootConsoleApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
         try {
             var inputWrapper = getFiles();
             var jsonFileInputs = inputWrapper.getJsonFileInputs();
@@ -132,7 +92,7 @@ public class TransformJsonToXml {
         LOGGER.info("end");
     }
 
-    private static InputWrapper getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
+    private InputWrapper getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
@@ -159,7 +119,7 @@ public class TransformJsonToXml {
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String mapJsonToXml(String jsonAsStringInput) {
+    private String mapJsonToXml(String jsonAsStringInput) {
         String hl7TranslatedResponse;
         try {
             final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
@@ -192,7 +152,7 @@ public class TransformJsonToXml {
         return hl7TranslatedResponse;
     }
 
-    private static void writeToFile(String xml, String sourceFileName) {
+    private void writeToFile(String xml, String sourceFileName) {
         String outputFileName = FilenameUtils.removeExtension(sourceFileName);
         try (BufferedWriter writer =
                  new BufferedWriter(new FileWriter(XML_OUTPUT_PATH + outputFileName + ".xml", StandardCharsets.UTF_8))) {
@@ -203,11 +163,11 @@ public class TransformJsonToXml {
         }
     }
 
-    private static String readJsonFileAsString(String file) throws IOException {
+    private String readJsonFileAsString(String file) throws IOException {
         return Files.readString(Paths.get(file));
     }
 
-    private static String extractNhsNumber(String json) throws NHSNumberNotFound {
+    private String extractNhsNumber(String json) throws NHSNumberNotFound {
         var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
         return bundle.getEntry().stream()
@@ -221,7 +181,7 @@ public class TransformJsonToXml {
             .getValue();
     }
 
-    private static Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
+    private Identifier getNhsNumberIdentifier(String nhsNumberSystem, Patient resource) {
         return resource.getIdentifier()
             .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
