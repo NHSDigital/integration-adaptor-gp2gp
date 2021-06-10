@@ -126,7 +126,7 @@ public class TransformJsonToXml {
                 String fileName = jsonFileNames.get(i);
                 writeToFile(xmlResult, fileName);
             }
-        } catch (NHSNumberNotFound | UnreadableJsonFileException | NoJsonFileFound e) {
+        } catch (NHSNumberNotFound | UnreadableJsonFileException | NoJsonFileFound | Hl7TranslatedResponseError e) {
             LOGGER.error("error: " + e.getMessage());
         }
         LOGGER.info("end");
@@ -147,7 +147,7 @@ public class TransformJsonToXml {
             .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
             .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
             .forEach(file -> {
-                String jsonAsString = null;
+                String jsonAsString;
                 try {
                     jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
                 } catch (Exception e) {
@@ -159,32 +159,36 @@ public class TransformJsonToXml {
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String mapJsonToXml(String jsonAsStringInput) throws NHSNumberNotFound {
-        final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
+    private static String mapJsonToXml(String jsonAsStringInput) {
+        String hl7TranslatedResponse;
+        try {
+            final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
 
-        MESSAGE_CONTEXT.initialize(bundle);
+            MESSAGE_CONTEXT.initialize(bundle);
 
-        GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
+            GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
 
-        getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
-            .nhsNumber(extractNhsNumber(jsonAsStringInput))
-            .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
-            .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
-            .fromOdsCode("GP2GPTEST")
-            .toOdsCode("GP2GPTEST")
-            .toAsid("GP2GPTEST")
-            .fromAsid("GP2GPTEST")
-            .build();
+            getGpcStructuredTaskDefinition = GetGpcStructuredTaskDefinition.builder()
+                .nhsNumber(extractNhsNumber(jsonAsStringInput))
+                .conversationId("6910A49D-1F97-4AA0-9C69-197EE9464C76")
+                .requestId("17A3A644-A4EB-4C0A-A870-152D310FD1F8")
+                .fromOdsCode("GP2GPTEST")
+                .toOdsCode("GP2GPTEST")
+                .toAsid("GP2GPTEST")
+                .fromAsid("GP2GPTEST")
+                .build();
 
-        final EhrExtractTemplateParameters ehrExtractTemplateParameters =
-            EHR_EXTRACT_MAPPER.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
+            final EhrExtractTemplateParameters ehrExtractTemplateParameters =
+                EHR_EXTRACT_MAPPER.mapBundleToEhrFhirExtractParams(getGpcStructuredTaskDefinition, bundle);
 
-        final String ehrExtractContent = EHR_EXTRACT_MAPPER.mapEhrExtractToXml(ehrExtractTemplateParameters);
+            final String ehrExtractContent = EHR_EXTRACT_MAPPER.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        final String hl7TranslatedResponse = OUTPUT_MESSAGE_WRAPPER_MAPPER.map(getGpcStructuredTaskDefinition, ehrExtractContent);
-
-        MESSAGE_CONTEXT.resetMessageContext();
-
+            hl7TranslatedResponse = OUTPUT_MESSAGE_WRAPPER_MAPPER.map(getGpcStructuredTaskDefinition, ehrExtractContent);
+        } catch (Hl7TranslatedResponseError e) {
+            throw new Hl7TranslatedResponseError("Could not get hl7TranslatedResponse");
+        } finally {
+            MESSAGE_CONTEXT.resetMessageContext();
+        }
         return hl7TranslatedResponse;
     }
 
@@ -244,6 +248,12 @@ public class TransformJsonToXml {
 
     public static class NHSNumberNotFound extends RuntimeException {
         public NHSNumberNotFound(String errorMessage) {
+            super(errorMessage);
+        }
+    }
+
+    public static class Hl7TranslatedResponseError extends RuntimeException {
+        public Hl7TranslatedResponseError(String errorMessage) {
             super(errorMessage);
         }
     }
