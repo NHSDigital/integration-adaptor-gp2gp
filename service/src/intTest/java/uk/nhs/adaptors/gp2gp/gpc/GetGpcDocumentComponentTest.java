@@ -40,6 +40,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String INVALID_DOCUMENT_ID = "non-existing-id";
     private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
+    private static final String ODS_CODE_TOKEN = "{ODS_CODE}";
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
@@ -141,7 +142,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .documentId(documentId)
-            .accessDocumentUrl(buildDocumentUrl(documentId))
+            .accessDocumentUrl(buildDocumentUrl(documentId, ehrExtractStatus.getEhrRequest().getFromOdsCode()))
             .build();
     }
 
@@ -173,7 +174,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
     }
 
-    private String buildDocumentUrl(String documentId) {
-        return configuration.getUrl() + configuration.getDocumentEndpoint() + documentId;
+    private String buildDocumentUrl(String documentId, String fromOdsCode) {
+        return configuration.getUrl().replace(ODS_CODE_TOKEN, fromOdsCode) + configuration.getDocumentEndpoint() + documentId;
     }
 }

@@ -13,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class GpcClient {
+    private static final String ODS_CODE_TOKEN = "{ODS_CODE}";
     private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Access Structured Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String DOCUMENT_LOG_TEMPLATE = "Gpc Access Document Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String PATIENT_LOG_TEMPLATE = "Gpc Access Patient Request, toASID: {}, fromASID: {}, Gpc Url: {}";
@@ -23,35 +24,37 @@ public class GpcClient {
 
     public String getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
-        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition);
+        String gpcBaseUrl = buildGpcBaseUrl(structuredTaskDefinition);
+        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition, gpcBaseUrl);
 
-        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
+        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcBaseUrl + gpcConfiguration.getStructuredEndpoint());
 
         return performRequest(request);
     }
 
     public String getDocumentRecord(GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentTaskDefinition);
+        String gpcBaseUrl = buildGpcBaseUrl(documentTaskDefinition);
+        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentTaskDefinition, gpcBaseUrl);
 
-        logRequest(DOCUMENT_LOG_TEMPLATE, documentTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(DOCUMENT_LOG_TEMPLATE, documentTaskDefinition, gpcBaseUrl + gpcConfiguration.getDocumentEndpoint());
 
         return performRequest(request);
     }
 
     public String getPatientRecord(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
-        var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(patientIdentifierTaskDefinition);
+        String gpcBaseUrl = buildGpcBaseUrl(patientIdentifierTaskDefinition);
+        var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(patientIdentifierTaskDefinition, gpcBaseUrl);
 
-        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl()
-            + gpcConfiguration.getDocumentEndpoint());
+        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcBaseUrl + gpcConfiguration.getDocumentEndpoint());
 
         return performRequest(request);
     }
 
     public String getDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition, String patientId) {
-        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(documentReferencesTaskDefinition, patientId);
+        String gpcBaseUrl = buildGpcBaseUrl(documentReferencesTaskDefinition);
+        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(documentReferencesTaskDefinition, patientId, gpcBaseUrl);
 
-        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl()
-            + gpcConfiguration.getPatientEndpoint());
+        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcBaseUrl + gpcConfiguration.getPatientEndpoint());
 
         return performRequest(request);
     }
@@ -67,6 +70,10 @@ public class GpcClient {
         return request.retrieve()
             .bodyToMono(String.class)
             .block();
+    }
+
+    private String buildGpcBaseUrl(TaskDefinition taskDefinition) {
+        return gpcConfiguration.getUrl().replace(ODS_CODE_TOKEN, taskDefinition.getFromOdsCode());
     }
 }
 

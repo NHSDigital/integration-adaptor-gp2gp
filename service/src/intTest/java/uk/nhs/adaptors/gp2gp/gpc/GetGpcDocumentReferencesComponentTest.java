@@ -32,6 +32,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
+    private static final String ODS_CODE_TOKEN = "{ODS_CODE}";
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
     private static final String NHS_NUMBER_INVALID = "ASDF";
@@ -124,7 +125,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     }
 
     private GetGpcDocumentTaskDefinition buildGetDocumentTask(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
-        var documentUrl = buildDocumentUrl();
+        var documentUrl = buildDocumentUrl(taskDefinition.getFromOdsCode());
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(VALID_DOCUMENT_ID)
             .taskId(taskDefinition.getTaskId())
@@ -144,7 +145,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
 
         assertThat(ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments()).hasSize(1);
         var gpcDocument = ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
-        var documentUrl = buildDocumentUrl();
+        var documentUrl = buildDocumentUrl(taskDefinition.getFromOdsCode());
 
         assertThat(gpcDocument).isNotNull();
         assertThat(gpcDocument.getAccessDocumentUrl()).isEqualTo(documentUrl);
@@ -173,7 +174,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
         assertThat(coding.getDisplay()).isEqualTo(INVALID_NHS_NUMBER);
     }
 
-    private String buildDocumentUrl() {
-        return configuration.getUrl() + configuration.getDocumentEndpoint() + VALID_DOCUMENT_ID;
+    private String buildDocumentUrl(String fromOdsCode) {
+        return configuration.getUrl().replace(ODS_CODE_TOKEN, fromOdsCode) + configuration.getDocumentEndpoint() + VALID_DOCUMENT_ID;
     }
 }
