@@ -1,0 +1,16 @@
+name: PR Format Check
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+jobs:
+  check-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check pull request title is in the correct format
+        run: 'echo ${{ github.event.pull_request.title }} | grep -i -E -q "^niad-[0-9]+: [a-z]+"'
+
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name is in the correct format
+        run: 'echo ${{ github.event.pull_request.head.ref }} | grep -i -E -q "^(feature|task|bug|hotfix)\/niad-[0-9]+(-[a-z]+)+"'
