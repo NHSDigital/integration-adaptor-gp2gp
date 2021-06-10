@@ -129,7 +129,7 @@ public class TransformJsonToXml {
         } catch (NHSNumberNotFound | UnreadableJsonFileException | NoJsonFileFound e) {
             LOGGER.error("error: " + e.getMessage());
         }
-        LOGGER.error("end");
+        LOGGER.info("end");
     }
 
     private static InputWrapper getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
