@@ -77,7 +77,7 @@ public class ObservationMapper {
         return mappedValue;
     }
 
-    public String map(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+    private String map(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
 
         List<MultiStatementObservationHolder> relatedObservations = observationAssociatedWithSpecimen.getObservation().getRelated().stream()
             .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
