@@ -77,9 +77,9 @@ public class ObservationMapper {
         return mappedValue;
     }
 
-    public String map(MultiStatementObservationHolderFactory.MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+    public String map(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
 
-        List<MultiStatementObservationHolderFactory.MultiStatementObservationHolder> relatedObservations = observationAssociatedWithSpecimen.getObservation().getRelated().stream()
+        List<MultiStatementObservationHolder> relatedObservations = observationAssociatedWithSpecimen.getObservation().getRelated().stream()
             .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
             .map(ObservationRelatedComponent::getTarget)
             .map(Reference::getReferenceElement)
@@ -120,7 +120,7 @@ public class ObservationMapper {
         prepareParticipant(observation)
             .ifPresent(observationCompoundStatementTemplateParameters::participant);
 
-        relatedObservations.forEach(MultiStatementObservationHolderFactory.MultiStatementObservationHolder::verifyObservationWasMapped);
+        relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
 
         return TemplateUtils.fillTemplate(
             OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
@@ -128,7 +128,7 @@ public class ObservationMapper {
         );
     }
 
-    private Optional<String> prepareObservationStatement(MultiStatementObservationHolderFactory.MultiStatementObservationHolder observation, CompoundStatementClassCode classCode) {
+    private Optional<String> prepareObservationStatement(MultiStatementObservationHolder observation, CompoundStatementClassCode classCode) {
         if (observationHasNonCommentNoteCode(observation.getObservation()) && classCode.equals(CompoundStatementClassCode.CLUSTER)) {
             return Optional.of(mapObservationToObservationStatement(observation));
         }
@@ -136,7 +136,7 @@ public class ObservationMapper {
         return Optional.empty();
     }
 
-    private String mapObservationToObservationStatement(MultiStatementObservationHolderFactory.MultiStatementObservationHolder holder) {
+    private String mapObservationToObservationStatement(MultiStatementObservationHolder holder) {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(holder.nextHl7InstanceIdentifier())
             .codeElement(prepareCodeElement(holder.getObservation()))
@@ -172,7 +172,7 @@ public class ObservationMapper {
         );
     }
 
-    private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolderFactory.MultiStatementObservationHolder holder) {
+    private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolder holder) {
         StringBuilder narrativeStatementsBlock = new StringBuilder();
         Observation observation = holder.getObservation();
 
@@ -233,7 +233,7 @@ public class ObservationMapper {
         return Optional.empty();
     }
 
-    private String mapObservationToNarrativeStatement(MultiStatementObservationHolderFactory.MultiStatementObservationHolder holder, String comment, String commentType) {
+    private String mapObservationToNarrativeStatement(MultiStatementObservationHolder holder, String comment, String commentType) {
         var observation = holder.getObservation();
         var narrativeStatementTemplateParameters = NarrativeStatementTemplateParameters.builder()
             .narrativeStatementId(holder.nextHl7InstanceIdentifier())
@@ -247,7 +247,7 @@ public class ObservationMapper {
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
     }
 
-    private String prepareStatementsForDerivedObservations(List<MultiStatementObservationHolderFactory.MultiStatementObservationHolder> derivedObservations) {
+    private String prepareStatementsForDerivedObservations(List<MultiStatementObservationHolder> derivedObservations) {
         StringBuilder derivedObservationsBlock = new StringBuilder();
 
         derivedObservations.forEach(derivedObservationHolder -> {
@@ -300,9 +300,9 @@ public class ObservationMapper {
         return StringUtils.EMPTY;
     }
 
-    private CompoundStatementClassCode prepareClassCode(List<MultiStatementObservationHolderFactory.MultiStatementObservationHolder> derivedObservations) {
+    private CompoundStatementClassCode prepareClassCode(List<MultiStatementObservationHolder> derivedObservations) {
         return derivedObservations.stream()
-            .map(MultiStatementObservationHolderFactory.MultiStatementObservationHolder::getObservation)
+            .map(MultiStatementObservationHolder::getObservation)
             .filter(this::observationHasNonCommentNoteCode)
             .map($ -> CompoundStatementClassCode.BATTERY)
             .findFirst()
