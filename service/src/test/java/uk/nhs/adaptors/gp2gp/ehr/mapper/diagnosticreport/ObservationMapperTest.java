@@ -106,12 +106,15 @@ public class ObservationMapperTest {
 
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
+        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
+            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
+
         observationMapper = new ObservationMapper(
             messageContext,
             new StructuredObservationValueMapper(),
             new CodeableConceptCdMapper(),
             new ParticipantMapper(),
-            randomIdGeneratorService
+            multiStatementObservationHolderFactory
         );
     }
 
