@@ -115,8 +115,7 @@ public class TransformJsonToXml {
         ENCOUNTER_MAPPER,
         NON_CONSULTATION_RESOURCE_MAPPER, AGENT_DIRECTORY_MAPPER, MESSAGE_CONTEXT);
 
-    public static void main(String[] args) throws Exception {
-
+    public static void main(String[] args) {
         try {
             var inputWrapper = getFiles();
             var jsonFileInputs = inputWrapper.getJsonFileInputs();
@@ -127,13 +126,13 @@ public class TransformJsonToXml {
                 String fileName = jsonFileNames.get(i);
                 writeToFile(xmlResult, fileName);
             }
-        } catch (Exception e) {
+        } catch (NHSNumberNotFound | UnreadableJsonFileException | NoJsonFileFound e) {
             LOGGER.error("error: " + e.getMessage());
         }
         LOGGER.error("end");
     }
 
-    private static InputWrapper getFiles() throws Exception {
+    private static InputWrapper getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
@@ -152,11 +151,7 @@ public class TransformJsonToXml {
                 try {
                     jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
                 } catch (Exception e) {
-                    try {
-                        throw new UnreadableJsonFileException("unable to to read file: " + file.getName());
-                    } catch (UnreadableJsonFileException unreadableJsonFileException) {
-                        unreadableJsonFileException.printStackTrace();
-                    }
+                    throw new UnreadableJsonFileException("Cant read file " + file.getName());
                 }
                 jsonStringInputs.add(jsonAsString);
                 fileNames.add(file.getName());
@@ -164,7 +159,7 @@ public class TransformJsonToXml {
         return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
     }
 
-    private static String mapJsonToXml(String jsonAsStringInput) throws Exception {
+    private static String mapJsonToXml(String jsonAsStringInput) throws NHSNumberNotFound {
         final Bundle bundle = new FhirParseService().parseResource(jsonAsStringInput, Bundle.class);
 
         MESSAGE_CONTEXT.initialize(bundle);
@@ -208,7 +203,7 @@ public class TransformJsonToXml {
         return Files.readString(Paths.get(file));
     }
 
-    private static String extractNhsNumber(String json) throws Exception {
+    private static String extractNhsNumber(String json) throws NHSNumberNotFound {
         var nhsNumberSystem = "https://fhir.nhs.uk/Id/nhs-number";
         var bundle = FHIR_PARSE_SERVICE.parseResource(json, Bundle.class);
         return bundle.getEntry().stream()
@@ -218,7 +213,7 @@ public class TransformJsonToXml {
             .map(resource -> getNhsNumberIdentifier(nhsNumberSystem, resource))
             .map(Identifier.class::cast)
             .findFirst()
-            .orElseThrow(() -> new Exception("No Patient identifier was found"))
+            .orElseThrow(() -> new NHSNumberNotFound("No Patient identifier was found"))
             .getValue();
     }
 
@@ -235,14 +230,20 @@ public class TransformJsonToXml {
         private List<String> jsonFileInputs;
     }
 
-    public static class UnreadableJsonFileException extends Exception {
+    public static class UnreadableJsonFileException extends RuntimeException {
         public UnreadableJsonFileException(String errorMessage) {
             super(errorMessage);
         }
     }
 
-    public static class NoJsonFileFound extends Exception {
+    public static class NoJsonFileFound extends RuntimeException {
         public NoJsonFileFound(String errorMessage) {
+            super(errorMessage);
+        }
+    }
+
+    public static class NHSNumberNotFound extends RuntimeException {
+        public NHSNumberNotFound(String errorMessage) {
             super(errorMessage);
         }
     }
