@@ -9,7 +9,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 
 /**
  * Some Observation map into more than one XStatement in the EHR. The first
- * XStatement must have and id mapped (via IdMapper) to the Observation and
+ * XStatement has an id mapped (via IdMapper) to the Observation and
  * additional statements have random / unmapped ids.
  */
 @Slf4j
