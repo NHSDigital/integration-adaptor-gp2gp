@@ -298,7 +298,7 @@ This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR 
 2. Navigate to the TransformJsonToXml.sh file and run that script to execute the testing tool. 
    `integration-adaptor-gp2gp/transformJsonToXml/`
    ```shell script
-   cd ../transformJsonToXml
+   cd transformJsonToXml
    ./TransformJsonToXml.sh
     ```  
    
