@@ -1,6 +1,6 @@
 <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="some-id"/>
+        <id root="F5C1FDBB-A948-43BB-AB30-CEAA51FC0CC0"/>
         <code nullFlavor="UNK">
     <originalText>test</originalText>
 </code>
@@ -20,7 +20,7 @@
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="287B3A3C-5E88-427B-A2EF-A14A20353B0C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20190601113000
 
@@ -30,7 +30,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:COMPLEX REFERENCE RANGE(E330)
             CommentDate:20190601113000
 

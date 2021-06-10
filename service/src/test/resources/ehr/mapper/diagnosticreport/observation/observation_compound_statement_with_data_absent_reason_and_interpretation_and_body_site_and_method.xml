@@ -1,6 +1,6 @@
 <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="some-id"/>
+        <id root="6F7AE308-AD99-48B4-AE9E-72855A6BAA06"/>
         <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -10,7 +10,7 @@
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="some-id"/>
+        <id root="F5C1FDBB-A948-43BB-AB30-CEAA51FC0CC0"/>
         <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -27,7 +27,7 @@
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -44,7 +44,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -59,7 +59,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -74,7 +74,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -89,7 +89,7 @@
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="CDFC5DF7-2D1B-4EBB-BE5C-6BD2E19405FF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -105,7 +105,7 @@
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
+        <id root="287B3A3C-5E88-427B-A2EF-A14A20353B0C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20201215151704
 

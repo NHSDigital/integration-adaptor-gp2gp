@@ -104,7 +104,8 @@ public class EhrExtractUATTest {
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
         ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, multiStatementObservationHolderFactory);
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
+            multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(

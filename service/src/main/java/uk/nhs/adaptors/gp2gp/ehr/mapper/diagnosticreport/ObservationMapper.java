@@ -128,7 +128,8 @@ public class ObservationMapper {
         );
     }
 
-    private Optional<String> prepareObservationStatement(MultiStatementObservationHolder observation, CompoundStatementClassCode classCode) {
+    private Optional<String> prepareObservationStatement(
+        MultiStatementObservationHolder observation, CompoundStatementClassCode classCode) {
         if (observationHasNonCommentNoteCode(observation.getObservation()) && classCode.equals(CompoundStatementClassCode.CLUSTER)) {
             return Optional.of(mapObservationToObservationStatement(observation));
         }
@@ -252,7 +253,8 @@ public class ObservationMapper {
 
         derivedObservations.forEach(derivedObservationHolder -> {
             var derivedObservation = derivedObservationHolder.getObservation();
-            Optional<String> observationStatement = prepareObservationStatement(derivedObservationHolder, CompoundStatementClassCode.CLUSTER);
+            Optional<String> observationStatement =
+                prepareObservationStatement(derivedObservationHolder, CompoundStatementClassCode.CLUSTER);
             Optional<String> narrativeStatements = prepareNarrativeStatements(derivedObservationHolder);
 
             if (observationStatement.isPresent() && narrativeStatements.isPresent()) {

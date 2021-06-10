@@ -22,9 +22,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.mockito.stubbing.Answer;
 
+import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -76,8 +76,6 @@ public class ObservationMapperTest {
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
 
-    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
-
     @Mock
     private IdMapper idMapper;
 
@@ -87,7 +85,6 @@ public class ObservationMapperTest {
     @Mock
     private MessageContext messageContext;
 
-    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private ObservationMapper observationMapper;
@@ -102,9 +99,11 @@ public class ObservationMapperTest {
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
         lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
-        when(messageContext.getIdMapper()).thenReturn(idMapper);
+        randomIdGeneratorService = new RandomIdGeneratorServiceStub();
 
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        when(messageContext.getIdMapper()).thenReturn(idMapper);
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenAnswer($ -> randomIdGeneratorService.createNewId());
 
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
@@ -126,8 +125,6 @@ public class ObservationMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(outputXml);
@@ -141,8 +138,6 @@ public class ObservationMapperTest {
 
     @Test
     public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(
             OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
         );
@@ -158,6 +153,7 @@ public class ObservationMapperTest {
         assertThat(actualXml).isEqualTo(expectedXmlOutput);
     }
 
+    @SuppressWarnings("unused")
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON, OBSERVATION_COMPOUND_STATEMENT_1_XML),
