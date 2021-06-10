@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT;
@@ -13,12 +12,9 @@ import static uk.nhs.adaptors.gp2gp.common.task.TaskType.SEND_NEGATIVE_ACKNOWLED
 @SuperBuilder
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class SendNegativeAcknowledgementTaskDefinition extends TaskDefinition {
-
+public class SendNegativeAcknowledgementTaskDefinition extends SendAcknowledgementTaskDefinition {
     private final String reasonCode;
-    private final String reasonMessage;
-    private final String ehrRequestMessageId;
-
+    private final String detail;
     @Override
     public TaskType getTaskType() {
         return SEND_NEGATIVE_ACKNOWLEDGEMENT;

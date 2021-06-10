@@ -107,9 +107,9 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId) {
+        String documentName,
+        String taskId,
+        String messageId) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -210,7 +210,7 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
         GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-            Optional<String> patientId) {
+        Optional<String> patientId) {
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -234,8 +234,8 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
-            GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-            List<String> urls) {
+        GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
+        List<String> urls) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -262,18 +262,33 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
-        String positiveAckMessageId) {
-        Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
+    public void updateEhrExtractStatusPositiveAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+        String ackMessageId) {
+        Update update = createUpdateWithUpdatedAt();
+        updateEhrExtractStatusAcknowledgement2(sendAcknowledgementTaskDefinition, ackMessageId, update);
+    }
+
+    public void updateEhrExtractStatusNegativeAcknowledgement(
+        SendNegativeAcknowledgementTaskDefinition sendNegativeAcknowledgementTaskDefinition,
+        String ackMessageId) {
 
         Update update = createUpdateWithUpdatedAt();
+        update.set(ACK_REASON_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getReasonCode());
+        update.set(ACK_DETAIL_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getDetail());
+
+        updateEhrExtractStatusAcknowledgement2(sendNegativeAcknowledgementTaskDefinition, ackMessageId, update);
+    }
+
+    private void updateEhrExtractStatusAcknowledgement2(
+        SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+        String ackMessageId,
+        Update update) {
+
         update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
-        update.set(ACK_MESSAGE_ID_PATH, positiveAckMessageId);
+        update.set(ACK_MESSAGE_ID_PATH, ackMessageId);
         update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
 
-        sendAcknowledgementTaskDefinition.getReasonCode().ifPresent(reason -> update.set(ACK_REASON_CODE_PATH, reason));
-        sendAcknowledgementTaskDefinition.getDetail().ifPresent(detail -> update.set(ACK_DETAIL_CODE_PATH, detail));
-
+        Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
         if (updateResult.getModifiedCount() != 1) {

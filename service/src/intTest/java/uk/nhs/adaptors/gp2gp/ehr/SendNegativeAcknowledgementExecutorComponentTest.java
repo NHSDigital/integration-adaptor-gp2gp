@@ -38,6 +38,8 @@ public class SendNegativeAcknowledgementExecutorComponentTest {
     private static final String REASON_CODE = "06";
     private static final String REASON_MESSAGE = "Patient not at surgery.";
     private static final String CONVERSATION_ID = "888-000-conversation-id";
+    private static final String TASK_ID = "999-000-task-id";
+    private static final String TYPE_CODE = "AE";
 
     @MockBean
     private MhsRequestBuilder mhsRequestBuilder;
@@ -47,6 +49,8 @@ public class SendNegativeAcknowledgementExecutorComponentTest {
     private TimestampService timestampService;
     @MockBean
     private RandomIdGeneratorService randomIdGeneratorService;
+    @MockBean
+    private EhrExtractStatusService ehrExtractStatusService;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
@@ -69,12 +73,16 @@ public class SendNegativeAcknowledgementExecutorComponentTest {
                 .toAsid(TO_ASID)
                 .ehrRequestMessageId(EHR_REQUEST_MESSAGE_ID)
                 .reasonCode(REASON_CODE)
-                .reasonCode(REASON_MESSAGE)
+                .detail(REASON_MESSAGE)
                 .conversationId(CONVERSATION_ID)
+                .taskId(TASK_ID)
+                .typeCode(TYPE_CODE)
                 .build();
 
         executor.execute(taskDefinition);
 
         verify(mhsRequestBuilder).buildSendAcknowledgement(asString(expectedMessage), FROM_ASID, CONVERSATION_ID, GENERATED_RANDOM_ID);
+
+        verify(ehrExtractStatusService).updateEhrExtractStatusNegativeAcknowledgement(taskDefinition, GENERATED_RANDOM_ID);
     }
 }

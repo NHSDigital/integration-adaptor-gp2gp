@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
+import uk.nhs.adaptors.gp2gp.ehr.SendNegativeAcknowledgementTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
@@ -30,6 +31,8 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     private TaskDispatcher taskDispatcher;
     @Autowired
     private DetectTranslationCompleteService detectTranslationCompleteService;
+    @Autowired
+    private SendNegativeAcknowledgementTaskDispatcher sendNegativeAcknowledgementTaskDispatcher;
 
     @Override
     public Class<GetGpcDocumentReferencesTaskDefinition> getTaskType() {
@@ -49,6 +52,10 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
             ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
             urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
+        } else {
+            // TODO for test only
+            LOGGER.error("Patient not found");
+            sendNegativeAcknowledgementTaskDispatcher.sendNegativeAcknowledgement(ehrExtractStatus, "06", "Patient not found");
         }
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);

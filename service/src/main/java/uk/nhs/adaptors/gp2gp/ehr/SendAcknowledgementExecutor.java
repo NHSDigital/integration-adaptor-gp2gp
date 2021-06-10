@@ -58,6 +58,6 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
 
         mhsClient.sendMessageToMHS(request);
 
-        ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(sendAcknowledgementTaskDefinition, positiveAckMessageId);
+        ehrExtractStatusService.updateEhrExtractStatusPositiveAcknowledgement(sendAcknowledgementTaskDefinition, positiveAckMessageId);
     }
 }

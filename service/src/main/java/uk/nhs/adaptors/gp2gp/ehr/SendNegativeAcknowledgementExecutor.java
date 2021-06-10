@@ -34,6 +34,7 @@ public class SendNegativeAcknowledgementExecutor implements TaskExecutor<SendNeg
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final RandomIdGeneratorService randomIdGeneratorService;
+    private final EhrExtractStatusService ehrExtractStatusService;
 
     @Override
     public Class<SendNegativeAcknowledgementTaskDefinition> getTaskType() {
@@ -42,22 +43,31 @@ public class SendNegativeAcknowledgementExecutor implements TaskExecutor<SendNeg
 
     @Override
     public void execute(SendNegativeAcknowledgementTaskDefinition taskDefinition) {
+        String nackMessageId = randomIdGeneratorService.createNewId();
         SendNackTemplateParameters sendNackTemplateParameters = SendNackTemplateParameters.builder()
-            .requestId(randomIdGeneratorService.createNewId())
+            .requestId(nackMessageId)
             .creationTime(DateFormatUtil.toHl7Format(timestampService.now()))
             .messageId(taskDefinition.getEhrRequestMessageId())
             .fromAsid(taskDefinition.getFromAsid())
             .toAsid(taskDefinition.getToAsid())
             .reasonCode(taskDefinition.getReasonCode())
-            .reasonMessage(taskDefinition.getReasonMessage())
+            .reasonMessage(taskDefinition.getDetail())
+            .typeCode(taskDefinition.getTypeCode())
             .build();
 
         String messageBody = buildNackMessage(sendNackTemplateParameters);
-        sendNackToMHS(
-            messageBody,
-            sendNackTemplateParameters.getFromAsid(),
-            taskDefinition.getConversationId(),
-            sendNackTemplateParameters.getRequestId()
+        sendNackToMHS(taskDefinition, messageBody, nackMessageId);
+
+        updateEhrExtractStatus(taskDefinition, nackMessageId);
+    }
+
+    private void updateEhrExtractStatus(SendNegativeAcknowledgementTaskDefinition taskDefinition, String nackMessageId) {
+        LOGGER.info("Updating EhrExtractStatus with NACK message Id: {} Conversation id: {}", nackMessageId,
+            taskDefinition.getConversationId());
+
+        ehrExtractStatusService.updateEhrExtractStatusNegativeAcknowledgement(
+            taskDefinition,
+            nackMessageId
         );
     }
 
@@ -71,13 +81,14 @@ public class SendNegativeAcknowledgementExecutor implements TaskExecutor<SendNeg
         }
     }
 
-    private void sendNackToMHS(String stringRequestBody, String fromAsid, String conversationId, String nackResponseId) {
+    private void sendNackToMHS(SendNegativeAcknowledgementTaskDefinition taskDefinition, String stringRequestBody, String nackResponseId) {
+        LOGGER.info("Sending NACK message to MHS. NACK message Id: {} Conversation id: {} EhrRequest id {} ", nackResponseId,
+            taskDefinition.getConversationId(), taskDefinition.getEhrRequestMessageId());
 
-        LOGGER.info("Sending NACK message to MHS. NACK message Id: {} Conversation id: {}", nackResponseId, conversationId);
         var request = mhsRequestBuilder.buildSendAcknowledgement(
             stringRequestBody,
-            fromAsid,
-            conversationId,
+            taskDefinition.getFromAsid(),
+            taskDefinition.getConversationId(),
             nackResponseId
         );
 
@@ -95,5 +106,6 @@ public class SendNegativeAcknowledgementExecutor implements TaskExecutor<SendNeg
         private final String toAsid;
         private final String reasonCode;
         private final String reasonMessage;
+        private final String typeCode;
     }
 }

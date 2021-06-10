@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
+
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -24,6 +26,8 @@ public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
 
+    private static final String EXISTING_PATIENT_NHS_NUMBER = "9690937286";
+    private static final String NOT_EXISTING_PATIENT_NHS_NUMBER = "9876543210";
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
@@ -43,13 +47,12 @@ public class EhrExtractTest {
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
+    private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
-        ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
@@ -70,7 +73,7 @@ public class EhrExtractTest {
         waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
     @Test
@@ -88,7 +91,30 @@ public class EhrExtractTest {
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester);
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER);
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+    }
+
+    private String buildEhrExtractRequest(String conversationId, CharSequence notExistingPatientNhsNumber) throws IOException {
+        String ehrExtractRequest = IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
+        ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
+        ehrExtractRequest = ehrExtractRequest.replace("%%NHSNumber%%", notExistingPatientNhsNumber);
+
+        return ehrExtractRequest;
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
@@ -102,7 +128,7 @@ public class EhrExtractTest {
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        if(!documentList.isEmpty()) {
+        if (!documentList.isEmpty()) {
             Document document = (Document) documentList.get(0);
             if (document.get("objectName") != null) {
                 return document;
@@ -111,10 +137,16 @@ public class EhrExtractTest {
         return null;
     }
 
-    private void assertThatAcknowledgementToRequesterWasSent(Document ackToRequester) {
+    private void assertThatAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
         softly.assertThat(ackToRequester.get("messageId")).isNotNull();
         softly.assertThat(ackToRequester.get("taskId")).isNotNull();
-        softly.assertThat(ackToRequester.get("typeCode")).isEqualTo(ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        softly.assertThat(ackToRequester.get("typeCode")).isEqualTo(typeCode);
+    }
+
+    private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester, typeCode);
+        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("06");
+        softly.assertThat(ackToRequester.get("detail")).isEqualTo("Patient not found");
     }
 
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
@@ -127,7 +159,7 @@ public class EhrExtractTest {
         var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
         if (document != null) {
             var ehrCommon = (Document) document.get("sentToMhs");
-            if (ehrCommon != null){
+            if (ehrCommon != null) {
                 return ehrCommon.get("messageId") != null
                     && ehrCommon.get("sentAt") != null
                     && ehrCommon.get("taskId") != null;
@@ -150,7 +182,6 @@ public class EhrExtractTest {
         softly.assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
         softly.assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
         softly.assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
-
     }
 
     private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {

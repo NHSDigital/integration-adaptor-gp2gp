@@ -6,7 +6,7 @@
     <processingCode code="P" />
     <processingModeCode code="T" />
     <acceptAckCode code="NE" />
-    <acknowledgement type="Acknowledgement" typeCode="AR">
+    <acknowledgement type="Acknowledgement" typeCode="{{typeCode}}">
         <acknowledgementDetail type="AcknowledgementDetail" typeCode="ER">
             <code code="{{reasonCode}}" displayName="{{reasonMessage}}" />
         </acknowledgementDetail>
@@ -34,7 +34,7 @@
         </author1>
         <reason type="ActRelationship" typeCode="RSON">
             <justifyingDetectedIssueEvent type="Observation" classCode="ALRT" moodCode="EVN">
-                <code code="{{reasonCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.101" displayName="{{reasonMessage}}.">
+                <code code="{{reasonCode}}" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.101" displayName="{{reasonMessage}}">
                     <qualifier inverted="false">
                         <value code="ER" codeSystem="2.16.840.1.113883.2.1.3.2.4.17.104" />
                     </qualifier>
