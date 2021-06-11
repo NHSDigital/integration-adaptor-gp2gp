@@ -12,6 +12,9 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
+apply plugin: 'application'
+
+mainClassName = ' uk.nhs.adaptors.gp2gp'
 
 group = 'uk.nhs.adaptors'
 sourceCompatibility = '11'
