@@ -72,39 +72,38 @@ public class ObservationMapper {
 
     public String mapObservationToCompoundStatement(Observation observationAssociatedWithSpecimen) {
         var holder = multiStatementObservationHolderFactory.newInstance(observationAssociatedWithSpecimen);
-        var mappedValue = map(holder);
-        holder.verifyObservationWasMapped();
-        return mappedValue;
+        return mapAndVerify(holder);
     }
 
-    private String map(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+    private String mapAndVerify(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+        var relatedObservations = getRelatedObservations(observationAssociatedWithSpecimen);
 
-        List<MultiStatementObservationHolder> relatedObservations = observationAssociatedWithSpecimen.getObservation().getRelated().stream()
-            .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
-            .map(ObservationRelatedComponent::getTarget)
-            .map(Reference::getReferenceElement)
-            .map(referenceElement -> messageContext.getInputBundleHolder().getResource(referenceElement))
-            .flatMap(Optional::stream)
-            .map(Observation.class::cast)
-            .map(multiStatementObservationHolderFactory::newInstance)
-            .collect(Collectors.toList());
-
-        CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
-        String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
-            .orElse(StringUtils.EMPTY);
-        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
-            .orElse(StringUtils.EMPTY);
-
+        final String output;
         if (relatedObservations.isEmpty()) {
-            return observationStatement + narrativeStatements;
+            output = outputWithoutCompoundStatement(observationAssociatedWithSpecimen);
+        } else {
+            output = outputWithCompoundStatement(observationAssociatedWithSpecimen, relatedObservations);
         }
 
+        observationAssociatedWithSpecimen.verifyObservationWasMapped();
+        relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
+        return output;
+    }
+
+    private String outputWithCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen,
+        List<MultiStatementObservationHolder> relatedObservations) {
         String compoundStatementId = observationAssociatedWithSpecimen.nextHl7InstanceIdentifier();
         var observation = observationAssociatedWithSpecimen.getObservation();
         String codeElement = prepareCodeElement(observation);
         String effectiveTime = StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation);
         String availabilityTimeElement =
             StatementTimeMappingUtils.prepareAvailabilityTime(observation.getIssuedElement());
+        CompoundStatementClassCode classCode = prepareClassCode(relatedObservations);
+
+        String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
+            .orElse(StringUtils.EMPTY);
+        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+            .orElse(StringUtils.EMPTY);
         String statementsForDerivedObservations = prepareStatementsForDerivedObservations(relatedObservations);
 
         var observationCompoundStatementTemplateParameters = ObservationCompoundStatementTemplateParameters.builder()
@@ -120,12 +119,33 @@ public class ObservationMapper {
         prepareParticipant(observation)
             .ifPresent(observationCompoundStatementTemplateParameters::participant);
 
-        relatedObservations.forEach(MultiStatementObservationHolder::verifyObservationWasMapped);
 
         return TemplateUtils.fillTemplate(
             OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
             observationCompoundStatementTemplateParameters.build()
         );
+    }
+
+    private List<MultiStatementObservationHolder> getRelatedObservations(
+        MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+        return observationAssociatedWithSpecimen.getObservation().getRelated().stream()
+            .filter(observationRelation -> observationRelation.getType() == Observation.ObservationRelationshipType.HASMEMBER)
+            .map(ObservationRelatedComponent::getTarget)
+            .map(Reference::getReferenceElement)
+            .map(referenceElement -> messageContext.getInputBundleHolder().getResource(referenceElement))
+            .flatMap(Optional::stream)
+            .map(Observation.class::cast)
+            .map(multiStatementObservationHolderFactory::newInstance)
+            .collect(Collectors.toList());
+    }
+
+    private String outputWithoutCompoundStatement(MultiStatementObservationHolder observationAssociatedWithSpecimen) {
+        CompoundStatementClassCode classCode = CompoundStatementClassCode.CLUSTER;
+        String observationStatement = prepareObservationStatement(observationAssociatedWithSpecimen, classCode)
+            .orElse(StringUtils.EMPTY);
+        String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
+            .orElse(StringUtils.EMPTY);
+        return observationStatement + narrativeStatements;
     }
 
     private Optional<String> prepareObservationStatement(

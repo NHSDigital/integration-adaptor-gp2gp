@@ -6,6 +6,7 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.stream.Stream;
 
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -85,6 +86,7 @@ public class ObservationMapperTest {
     @Mock
     private MessageContext messageContext;
 
+    @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
 
     private ObservationMapper observationMapper;
@@ -99,11 +101,9 @@ public class ObservationMapperTest {
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(mockReference());
         lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
-        randomIdGeneratorService = new RandomIdGeneratorServiceStub();
-
         when(messageContext.getIdMapper()).thenReturn(idMapper);
         when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
-            .thenAnswer($ -> randomIdGeneratorService.createNewId());
+            .thenAnswer(params -> "Mapped-From-" + ((IdType) params.getArgument(1)).getValue());
 
         MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
             new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
@@ -125,6 +125,8 @@ public class ObservationMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
+        when(randomIdGeneratorService.createNewId()).thenReturn("random-unmapped-id");
+
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
         String expectedXmlOutput = ResourceTestFileUtils.getFileContent(outputXml);
