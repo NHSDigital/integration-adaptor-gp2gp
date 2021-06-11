@@ -352,7 +352,7 @@ Mechanical Prosthetic Heart Valves )</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
+        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -362,7 +362,7 @@ Mechanical Prosthetic Heart Valves )</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="6DFFAEC4-7527-4D80-A2BD-81BDEBA04400"/>
+        <id root="D81D22B7-5216-44E8-B306-DD542F214792"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -815,7 +815,7 @@ Mechanical Prosthetic Heart Valves )</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="04AAA10E-3D26-4C86-8932-4BB384C94253"/>
+        <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>B12/FOLATE</originalText>
 </code>
@@ -826,7 +826,7 @@ Mechanical Prosthetic Heart Valves )</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA"/>
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -1791,7 +1791,7 @@ Mechanical Prosthetic Heart Valves )</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="7359502E-8EE3-416C-BD59-A298285418E6"/>
+        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
         <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1801,7 +1801,7 @@ Mechanical Prosthetic Heart Valves )</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
+        <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -2491,7 +2491,7 @@ Triglyceride reference range
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="1611C14F-3D34-4821-A240-AB09C254DEEA"/>
+        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2501,7 +2501,7 @@ Triglyceride reference range
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
+        <id root="3368F5B6-5CC7-456B-95AE-EC498D49245A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -2518,7 +2518,7 @@ red blood cell seen, Note low platelets</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
+        <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -2876,7 +2876,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="D89620CF-84A5-4FB9-9399-571685EF6275"/>
+        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2886,7 +2886,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B"/>
+        <id root="F4E72E8A-13BD-4C83-A448-32718731EC94"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2904,7 +2904,7 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="AB036B53-E42B-4397-B888-320370EAB440"/>
+        <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -3022,7 +3022,7 @@ red blood cell seen, Note low platelets</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="EFD99868-BD82-4213-9586-11755332A60D"/>
+        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3032,7 +3032,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
+        <id root="A555DD62-B352-45A2-A601-C21F28340B1D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -3457,7 +3457,7 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
         <code code="1016051000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3467,7 +3467,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
+        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
         <code code="1016051000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="24 hour urine protein output">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3764,7 +3764,7 @@ Time since last dose : 9.5 hours</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02"/>
+        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3774,7 +3774,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5"/>
+        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -4158,7 +4158,7 @@ Time since last dose : 9.5 hours</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C"/>
+        <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
         <code code="1010671000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4168,7 +4168,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B6C6FCA4-DC3D-474E-8E20-117460144AFE"/>
+        <id root="36856199-326A-443D-A97B-F744C6A09D10"/>
         <code code="1010671000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma glucose level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4208,7 +4208,7 @@ Time since last dose : 9.5 hours</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
+        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB"/>
         <code code="997491000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4218,7 +4218,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB"/>
+        <id root="3CE584C8-D749-4FE4-9FC4-B5B050B82681"/>
         <code code="997491000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum amylase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4258,7 +4258,7 @@ Time since last dose : 9.5 hours</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605"/>
+        <id root="451B0A75-8B34-4580-81E6-717831D3C236"/>
         <code code="1000641000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum electrolytes level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4268,7 +4268,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="451B0A75-8B34-4580-81E6-717831D3C236"/>
+        <id root="ED202B1D-FD90-4477-95D1-539374CA06ED"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -4407,7 +4407,7 @@ Time since last dose : 9.5 hours</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
+        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
         <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4417,7 +4417,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
+        <id root="BA675192-24E0-4698-8736-00DD928283CB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20100225154100
 
@@ -4895,7 +4895,7 @@ Time since last dose : 9.5 hours</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="74FFD762-0391-492E-94FC-9B825E906898"/>
+        <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889"/>
         <code code="997041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4905,7 +4905,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889"/>
+        <id root="BD90553B-7040-4358-ADEB-1725EC9B5A59"/>
         <code code="997041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="IgE">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4945,7 +4945,7 @@ Time since last dose : 9.5 hours</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="DDC66ED1-E97F-4705-A551-F07A513C2A60"/>
+        <id root="4BC88DA3-3D71-4F3F-ADF5-04B43191AEA6"/>
         <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4955,7 +4955,7 @@ Time since last dose : 9.5 hours</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4BC88DA3-3D71-4F3F-ADF5-04B43191AEA6"/>
+        <id root="303AECB7-7143-4B09-9894-7789463EB059"/>
         <code code="997071000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="RAST test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4972,7 +4972,7 @@ Time since last dose : 9.5 hours</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B"/>
+        <id root="39FA9EE7-9D5D-411A-8AB7-C329BE10192F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -5200,7 +5200,7 @@ IgE abs to horse, negative</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="6C572C7C-264C-4C0B-A1DC-AFED20507F5B"/>
+        <id root="6F64F0E7-34FD-429D-9C04-7E1C2E02B307"/>
         <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5210,7 +5210,7 @@ IgE abs to horse, negative</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6F64F0E7-34FD-429D-9C04-7E1C2E02B307"/>
+        <id root="BA1C874F-AD0E-4738-BC9B-7885A20EC89A"/>
         <code code="1003161000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Urine pregnancy test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5227,7 +5227,7 @@ IgE abs to horse, negative</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C4200E9F-5355-4EFA-A908-602A25619730"/>
+        <id root="2897DE2C-4F80-423B-A871-F60824B65DD2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -5290,7 +5290,7 @@ IgE abs to horse, negative</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="420089C5-B410-4600-B769-1605C1BD2F18"/>
+        <id root="7A0397D7-3EAC-4407-92E2-5535EC027F73"/>
         <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5300,7 +5300,7 @@ IgE abs to horse, negative</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7A0397D7-3EAC-4407-92E2-5535EC027F73"/>
+        <id root="12A053A5-6886-4DF5-9352-0440B9802D3A"/>
         <code code="1010521000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum oestradiol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5363,7 +5363,7 @@ IgE abs to horse, negative</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="35EB1155-CDA6-42A2-BE78-A3295CED4C2A"/>
+        <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258"/>
         <code code="997201000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5373,7 +5373,7 @@ IgE abs to horse, negative</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258"/>
+        <id root="ED30F999-14CA-41B9-93EE-334F60049174"/>
         <code code="997201000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum ACTH (adrenocorticotrophic hormone) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5390,7 +5390,7 @@ IgE abs to horse, negative</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F7600EB7-9A46-4AC3-A726-96DEB40E096A"/>
+        <id root="BDDA9543-E6C5-4083-A8EA-115B9AAE5FE1"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -6123,7 +6123,7 @@ IgE abs to horse, negative</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E3B4B58D-DCE9-40D4-8D37-C0719D5CBD76"/>
+        <id root="8A17A20F-2FA2-4971-946B-04FD349EBB3F"/>
         <code code="1003141000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -6133,7 +6133,7 @@ IgE abs to horse, negative</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8A17A20F-2FA2-4971-946B-04FD349EBB3F"/>
+        <id root="A867A0CA-D8A4-4B08-B05B-6C3C59A27788"/>
         <code code="1003141000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma fasting glucose level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -6362,7 +6362,7 @@ IgE abs to horse, negative</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="9B9C3FB5-711D-4D71-9539-DBC4E4B721A8"/>
+        <id root="7A7C0152-536F-4958-B243-7EA93032ABBA"/>
         <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
     <originalText>Micro, culture &amp; sensitivities</originalText>
 </code>
@@ -6373,7 +6373,7 @@ IgE abs to horse, negative</text>
         <availabilityTime value="20100225154100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7A7C0152-536F-4958-B243-7EA93032ABBA"/>
+        <id root="F5F629EF-EBC8-4412-84BD-066F1ED71E8C"/>
         <code code="1015411000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Microscopy, culture and sensitivities">
     <originalText>Micro, culture &amp; sensitivities</originalText>
 </code>
@@ -6391,7 +6391,7 @@ IgE abs to horse, negative</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4DE72620-E452-4CC3-95C8-59337F3B890C"/>
+        <id root="C0C093CD-E806-48FC-92FD-5E62FA330F3A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20100225154100
 
@@ -6749,7 +6749,7 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="5DFFF6AB-68EB-4229-8444-1C85C35E44C4"/>
+        <id root="45E992D4-2314-412D-BF27-38C9165CB556"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -6759,7 +6759,7 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="45E992D4-2314-412D-BF27-38C9165CB556"/>
+        <id root="1D83B94F-F1EE-4C36-BC53-82BC6DDE4009"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -6775,7 +6775,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="05AD20D2-5D59-4E3A-8DAE-F3B10C50FA84"/>
+        <id root="363ED140-1281-4D16-8B67-D7BD3FDD857E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -7157,7 +7157,7 @@ Dr. N.O&apos;Connell</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="C9435A8B-BEF8-46DC-9C69-B690D8EA7CC5"/>
+        <id root="4FA2722F-9881-44F1-A0FB-7D47594C1966"/>
         <code code="996911000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Autoimmune profile">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7167,7 +7167,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4FA2722F-9881-44F1-A0FB-7D47594C1966"/>
+        <id root="78E90EFA-8191-4CB9-8757-F4139FC247FE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7304,7 +7304,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CACD8306-7218-4BA6-A71A-089207D27D51"/>
+        <id root="604BD88B-17A9-4562-A226-685C6908BBCE"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
     <originalText>dsDNA binding autoantibody lev</originalText>
 </code>
@@ -7315,7 +7315,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="604BD88B-17A9-4562-A226-685C6908BBCE"/>
+        <id root="7CEA6A66-4F2F-4B11-A6F5-85BC734C8499"/>
         <code code="995851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Double stranded deoxyribonucleic acid binding autoantibody level">
     <originalText>dsDNA binding autoantibody lev</originalText>
 </code>
@@ -7333,7 +7333,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3AB98D31-BC1C-40C9-B476-3E4012FBD72E"/>
+        <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7371,7 +7371,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="0BB61339-5C21-4AB0-881A-DA1D6D99087D"/>
+        <id root="898A1291-291E-4CF1-8A1B-B803150E0F53"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
     <originalText>Mitochondrial antibody level</originalText>
 </code>
@@ -7382,7 +7382,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="898A1291-291E-4CF1-8A1B-B803150E0F53"/>
+        <id root="6BAF558F-E93E-49A5-9BD9-2B17A0BFF1CE"/>
         <code code="1016761000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Mitochondrial antibody screening test">
     <originalText>Mitochondrial antibody level</originalText>
 </code>
@@ -7400,7 +7400,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3BBA250A-E619-47D1-8A60-1DD79C0EA87E"/>
+        <id root="A676708C-B208-40C9-B759-CB0641A6A7ED"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7438,7 +7438,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="58BE367B-4C16-4C20-BAC7-DE6AC9228E86"/>
+        <id root="DDE20FB7-E042-42ED-A38B-CE1CF63BCEA5"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7448,7 +7448,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DDE20FB7-E042-42ED-A38B-CE1CF63BCEA5"/>
+        <id root="4126BA6C-47FD-468C-873D-ADFB7B855F89"/>
         <code code="1005501000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver autoantibody level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7465,7 +7465,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="037C249B-6739-441B-A054-7E0C0D77E864"/>
+        <id root="FF8676A8-0CEF-4D8C-8ED1-7F652ADDD58C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7503,7 +7503,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CFF58B84-8C21-4B34-A43A-ADA1DB647A3A"/>
+        <id root="60836694-2D31-4AF4-8B09-E781B0FFA98C"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
     <originalText>Anti smooth muscle autoantibod</originalText>
 </code>
@@ -7514,7 +7514,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="60836694-2D31-4AF4-8B09-E781B0FFA98C"/>
+        <id root="19803CD7-B822-409C-B63E-B232670A0FCA"/>
         <code code="994601000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti smooth muscle antibody titre">
     <originalText>Anti smooth muscle autoantibod</originalText>
 </code>
@@ -7532,7 +7532,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4C654B41-5A11-48A9-A916-67B0342B9C86"/>
+        <id root="D3B97C2F-5B0A-483C-8E8C-D16590B249D0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7570,7 +7570,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="6590B628-EB64-49AE-815B-389AE96424CF"/>
+        <id root="E04D6D76-E30D-4F3F-B2D8-E44004D94710"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7580,7 +7580,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E04D6D76-E30D-4F3F-B2D8-E44004D94710"/>
+        <id root="EB075CF7-57FC-4363-A517-3AA97414B36E"/>
         <code code="992101000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adrenal autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7597,7 +7597,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DBD0E0F1-7A49-4222-84F6-FFD204488AB1"/>
+        <id root="D623A941-D069-4164-B911-3D36F4E10583"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7635,7 +7635,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E1816F11-3E92-418E-A67E-BF9F8E2A6A2D"/>
+        <id root="9070B8A5-E2EA-4C89-BB3F-AFB80E0F1058"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>IgA Reticulin Abs</originalText>
 </code>
@@ -7646,7 +7646,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9070B8A5-E2EA-4C89-BB3F-AFB80E0F1058"/>
+        <id root="265AA46A-59DC-4527-9532-78B74FCD2E43"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>IgA Reticulin Abs</originalText>
 </code>
@@ -7664,7 +7664,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5321E409-CB3A-42A1-B420-912A28D8D4A0"/>
+        <id root="C381F016-415D-4C05-B5A3-5C257BDF209D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7702,7 +7702,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="557AF2D9-B795-4A66-921B-175BDC0D0D9D"/>
+        <id root="E082BED0-4477-4B99-9C9A-9EDB38A341F3"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>IgG Reticulin Abs</originalText>
 </code>
@@ -7713,7 +7713,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E082BED0-4477-4B99-9C9A-9EDB38A341F3"/>
+        <id root="914D112D-3940-46AA-9C94-47BB6DC366AC"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>IgG Reticulin Abs</originalText>
 </code>
@@ -7731,7 +7731,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E8292FF4-0C6C-4880-AF51-092D14DF2ABD"/>
+        <id root="BD99E14B-4B48-4BE7-9BB2-1CD3BCB9281A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7769,7 +7769,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="08C73908-0FF2-47D2-855B-E2EB8BF782C8"/>
+        <id root="1E0F4743-153E-42B7-8F83-9968804B8963"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7779,7 +7779,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1E0F4743-153E-42B7-8F83-9968804B8963"/>
+        <id root="79403BFE-2F14-4DF5-AE20-60372E2BE1D7"/>
         <code code="994661000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Parietal cell autoantibodies">
 </code>
         <statusCode code="COMPLETE"/>
@@ -7796,7 +7796,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="88FD4D53-503C-44F3-B6AF-B04DC69DFD1D"/>
+        <id root="6B98D8A9-E1F3-4059-A2E6-62814CEC72A6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7834,7 +7834,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="84D1A171-9651-4D3C-9D02-BB717F2F25A4"/>
+        <id root="FBAF5FD6-EF06-4D18-9D95-05355B04A199"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Ovarian Antibodies</originalText>
 </code>
@@ -7845,7 +7845,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FBAF5FD6-EF06-4D18-9D95-05355B04A199"/>
+        <id root="97612D31-359D-419D-AE25-A60018C52EDC"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Ovarian Antibodies</originalText>
 </code>
@@ -7863,7 +7863,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2B44737A-1BFA-4F1C-ACDC-B05F4A7BDF6B"/>
+        <id root="A9ACF4E9-006D-45D2-90E4-2CD1BCE6ABEF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -7901,7 +7901,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="293B8A3D-96FA-4690-A86E-D3843E1B42C3"/>
+        <id root="73B01FDF-F236-4AB8-BD11-CFA7162CF1D9"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Skeletal Muscle Abs</originalText>
 </code>
@@ -7912,7 +7912,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20110220155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="73B01FDF-F236-4AB8-BD11-CFA7162CF1D9"/>
+        <id root="7AF79766-2E96-4788-BF5B-20320F3C40CC"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Skeletal Muscle Abs</originalText>
 </code>
@@ -7930,7 +7930,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="13E22FCC-DCA1-4A43-992A-26D70BC95B92"/>
+        <id root="17814417-92EC-4543-9E1B-F71C2A2ABAE8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20110220155300
 
@@ -8037,7 +8037,7 @@ rheumatoid factor tests.</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="FE4186A5-0AD8-4698-ADB7-11B1237E901F"/>
+        <id root="E50B273D-4499-40ED-AFC2-D007A3B09AA3"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>dodgy header1</originalText>
 </code>
@@ -8048,7 +8048,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E50B273D-4499-40ED-AFC2-D007A3B09AA3"/>
+        <id root="CCADD5ED-907D-4D63-AD09-EE22CF3CDCB3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -8370,7 +8370,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="8B5D9098-08A5-4658-9122-C1508D4DEA5F"/>
+        <id root="372785EB-86C0-4E9C-A247-A5B2F261F1D8"/>
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8380,7 +8380,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="372785EB-86C0-4E9C-A247-A5B2F261F1D8"/>
+        <id root="549F49F2-A088-4339-8D3F-70C5029E9F16"/>
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8398,7 +8398,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="09201FE7-F33A-4243-B7B3-0AB634CE076E"/>
+        <id root="7032A9C8-2F51-4E71-82B5-88B1CAD52C8C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -8436,7 +8436,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="0D21461D-A05E-48BB-9036-CA4B0EE2CDF1"/>
+        <id root="11FA3A03-5A24-43E6-93F1-3EC98591C452"/>
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8446,7 +8446,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="11FA3A03-5A24-43E6-93F1-3EC98591C452"/>
+        <id root="A7CFAA26-80CA-4EA0-9F7C-1328593C3633"/>
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8464,7 +8464,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8844A2D8-77FF-4E8C-966B-2737FB3BA1E0"/>
+        <id root="655343B5-8DBC-485C-B1F8-6E900F8ACE12"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -8502,7 +8502,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="A0E15FF1-C9F0-42DF-8967-D90EE6BA043B"/>
+        <id root="B9B33A83-925C-44FB-BDD7-8D5A8D47E5AB"/>
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8512,7 +8512,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B9B33A83-925C-44FB-BDD7-8D5A8D47E5AB"/>
+        <id root="03416D2D-8A6E-4419-92C5-5ECCF2F7C13A"/>
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8530,7 +8530,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E207BF0E-7F80-4E1C-9BC7-15736EDA421C"/>
+        <id root="3E409A8A-26D0-48AB-A487-F110CD5143AC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -8648,7 +8648,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="C30E5BF3-1DB8-4B93-B9E9-539499D98412"/>
+        <id root="A6322C88-BBEA-48CB-9B83-029C2FFC5649"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>XR Pelvis</originalText>
 </code>
@@ -8659,7 +8659,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20120726134600"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A6322C88-BBEA-48CB-9B83-029C2FFC5649"/>
+        <id root="C78FD3AB-71EF-4F2D-BE8C-930469DC2729"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>XR Pelvis</originalText>
 </code>
@@ -8677,7 +8677,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E8461286-29C1-4FB4-A131-6C671F4CADB8"/>
+        <id root="EE9398FB-13BB-4447-97A0-1E363459FE23"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20120726134600
 

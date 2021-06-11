@@ -189,7 +189,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
         <code nullFlavor="UNK">
             <originalText>Clerical Worker</originalText>
         </code>
@@ -262,7 +262,7 @@
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -299,7 +299,7 @@
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
+        <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
         <code code="364712009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Laboratory test observable">
     <originalText>Full blood count; Plasma viscosity</originalText>
 </code>
@@ -310,7 +310,7 @@
         <availabilityTime value="20020330000000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="263B2A9F-0B1D-4697-943A-328F70E068DE"/>
+        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20020330000000
 
@@ -320,13 +320,13 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
+        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20020330000000
 
@@ -335,7 +335,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -364,7 +364,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -382,14 +382,14 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -406,7 +406,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -424,7 +424,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -442,7 +442,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -459,7 +459,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>Unknown UoM</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -476,7 +476,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -494,7 +494,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -512,7 +512,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -530,7 +530,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -548,7 +548,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -575,7 +575,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -591,14 +591,14 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -627,7 +627,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -643,14 +643,14 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -668,7 +668,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -697,7 +697,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -713,14 +713,14 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -747,7 +747,7 @@ red blood cell seen, Note low platelets</text>
             <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>mPas</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -763,21 +763,21 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
 </component>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -1964,7 +1964,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -1989,7 +1989,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2023,7 +2023,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2048,7 +2048,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2082,7 +2082,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -2132,7 +2132,7 @@ red blood cell seen, Note low platelets</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -2166,7 +2166,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2177,7 +2177,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110307154400" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -2228,7 +2228,7 @@ red blood cell seen, Note low platelets</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -2240,7 +2240,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20140303000000" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -2266,7 +2266,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2292,7 +2292,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2326,7 +2326,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -2376,7 +2376,7 @@ red blood cell seen, Note low platelets</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -2410,7 +2410,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -2460,7 +2460,7 @@ red blood cell seen, Note low platelets</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -2494,7 +2494,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2519,7 +2519,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2545,7 +2545,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2579,7 +2579,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2632,7 +2632,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2643,7 +2643,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110307161800" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -2677,7 +2677,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -2708,7 +2708,7 @@ red blood cell seen, Note low platelets</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2741,7 +2741,7 @@ red blood cell seen, Note low platelets</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -2777,7 +2777,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -2802,7 +2802,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2828,7 +2828,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2854,7 +2854,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2879,7 +2879,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2905,7 +2905,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -2955,7 +2955,7 @@ red blood cell seen, Note low platelets</text>
         </component>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -2981,7 +2981,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3015,7 +3015,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3040,7 +3040,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3074,7 +3074,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -3115,7 +3115,7 @@ red blood cell seen, Note low platelets</text>
         </component>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </CompoundStatement>
@@ -3149,7 +3149,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3174,7 +3174,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3200,7 +3200,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3225,7 +3225,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3251,7 +3251,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3277,7 +3277,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3303,7 +3303,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3337,7 +3337,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3368,7 +3368,7 @@ red blood cell seen, Note low platelets</text>
 
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3402,7 +3402,7 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3430,7 +3430,7 @@ Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:U
         </responsibleParty>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </RequestStatement>
@@ -3481,7 +3481,7 @@ Sent: 07 Mar 2011 16:58</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3509,7 +3509,7 @@ Administrative notes: blah notes</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3543,7 +3543,7 @@ Administrative notes: blah notes</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3568,7 +3568,7 @@ Administrative notes: blah notes</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3602,7 +3602,7 @@ Administrative notes: blah notes</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3627,7 +3627,7 @@ Administrative notes: blah notes</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3653,7 +3653,7 @@ Administrative notes: blah notes</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3681,7 +3681,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3712,7 +3712,7 @@ Notes: hhhhh</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3740,7 +3740,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3774,7 +3774,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3799,7 +3799,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3833,7 +3833,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -3858,7 +3858,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3884,7 +3884,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3910,7 +3910,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3936,7 +3936,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3961,7 +3961,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -3987,7 +3987,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4013,7 +4013,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4039,7 +4039,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4065,7 +4065,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4090,7 +4090,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4124,7 +4124,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -4149,7 +4149,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4183,7 +4183,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -4208,7 +4208,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4242,7 +4242,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -4267,7 +4267,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4301,7 +4301,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -4326,7 +4326,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4352,7 +4352,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4378,7 +4378,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4412,7 +4412,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
@@ -4437,7 +4437,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -4456,7 +4456,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4469,7 +4469,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -4518,7 +4518,7 @@ Dosage: 0.5 ml</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -4537,7 +4537,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4550,7 +4550,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -4599,7 +4599,7 @@ Dosage: 0.5 ml</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -4618,7 +4618,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110307" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4631,7 +4631,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -4680,7 +4680,7 @@ Dosage: 0.5 ml</text>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </MedicationStatement>
@@ -5603,7 +5603,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5616,7 +5616,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5681,7 +5681,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5701,7 +5701,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5714,7 +5714,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5739,7 +5739,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5759,7 +5759,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5772,7 +5772,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5797,7 +5797,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5817,7 +5817,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5830,7 +5830,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5855,7 +5855,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5875,7 +5875,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5888,7 +5888,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5913,7 +5913,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5933,7 +5933,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5946,7 +5946,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -5996,7 +5996,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -6016,7 +6016,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6029,7 +6029,7 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
@@ -6054,7 +6054,7 @@ Dosage: 0.5 ml</text>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
     </agentRef>
 </Participant>
     </LinkSet>
