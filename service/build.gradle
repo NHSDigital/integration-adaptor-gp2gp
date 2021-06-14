@@ -12,9 +12,9 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
-apply plugin: 'application'
+// apply plugin: 'application'
 
-mainClassName = ' uk.nhs.adaptors.gp2gp'
+// mainClassName = ' uk.nhs.adaptors.gp2gp'
 
 group = 'uk.nhs.adaptors'
 sourceCompatibility = '11'
@@ -159,8 +159,4 @@ spotbugsMain {
 			enabled = true
 		}
 	}
-}
-
-bootJar {
-    exclude("**/transformJsonToXmlTool/*")
 }
