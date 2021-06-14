@@ -264,31 +264,33 @@ public class EhrExtractStatusService {
 
     public void updateEhrExtractStatusPositiveAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
         String ackMessageId) {
-        Update update = createUpdateWithUpdatedAt();
-        updateEhrExtractStatusAcknowledgement2(sendAcknowledgementTaskDefinition, ackMessageId, update);
+        Update update = buildBaseAcknowledgementEhrExtractStatusUpdateRecord(sendAcknowledgementTaskDefinition, ackMessageId);
+        updateEhrStatus(update, sendAcknowledgementTaskDefinition.getConversationId());
     }
 
     public void updateEhrExtractStatusNegativeAcknowledgement(
         SendNegativeAcknowledgementTaskDefinition sendNegativeAcknowledgementTaskDefinition,
         String ackMessageId) {
+        Update updateRecord = buildBaseAcknowledgementEhrExtractStatusUpdateRecord(sendNegativeAcknowledgementTaskDefinition, ackMessageId);
+        updateRecord.set(ACK_REASON_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getReasonCode());
+        updateRecord.set(ACK_DETAIL_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getDetail());
 
-        Update update = createUpdateWithUpdatedAt();
-        update.set(ACK_REASON_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getReasonCode());
-        update.set(ACK_DETAIL_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getDetail());
-
-        updateEhrExtractStatusAcknowledgement2(sendNegativeAcknowledgementTaskDefinition, ackMessageId, update);
+        updateEhrStatus(updateRecord, sendNegativeAcknowledgementTaskDefinition.getConversationId());
     }
 
-    private void updateEhrExtractStatusAcknowledgement2(
-        SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
-        String ackMessageId,
-        Update update) {
-
+    private Update buildBaseAcknowledgementEhrExtractStatusUpdateRecord(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+        String ackMessageId) {
+        Update update = createUpdateWithUpdatedAt();
         update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
         update.set(ACK_MESSAGE_ID_PATH, ackMessageId);
         update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
 
-        Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
+        return update;
+    }
+
+    private void updateEhrStatus(Update update, String conversationId) {
+        Query query = createQueryForConversationId(conversationId);
+
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
         if (updateResult.getModifiedCount() != 1) {

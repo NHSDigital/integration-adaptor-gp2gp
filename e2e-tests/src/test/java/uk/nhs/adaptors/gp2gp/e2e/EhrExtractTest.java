@@ -48,6 +48,8 @@ public class EhrExtractTest {
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
+    private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
+    private static final String NHS_NUMBER_PLACEHOLDER = "%%NHSNumber%%";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
@@ -80,8 +82,8 @@ public class EhrExtractTest {
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), Charset.defaultCharset());
-        ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), Charset.defaultCharset())
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
@@ -108,13 +110,11 @@ public class EhrExtractTest {
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
-    private String buildEhrExtractRequest(String conversationId, CharSequence notExistingPatientNhsNumber) throws IOException {
-        String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset());
-        ehrExtractRequest = ehrExtractRequest.replace("%%ConversationId%%", conversationId);
-        ehrExtractRequest = ehrExtractRequest.replace("%%NHSNumber%%", notExistingPatientNhsNumber);
-
-        return ehrExtractRequest;
+    private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber) throws IOException {
+        return IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset())
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
+            .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {

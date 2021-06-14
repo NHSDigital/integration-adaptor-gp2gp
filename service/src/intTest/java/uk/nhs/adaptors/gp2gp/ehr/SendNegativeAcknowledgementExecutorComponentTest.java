@@ -29,7 +29,6 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SendNegativeAcknowledgementExecutorComponentTest {
-
     private static final String GENERATED_RANDOM_ID = "GENERATED-RANDOM-ID";
     private static final String FROM_ASID = "0000222-from-asid";
     private static final String TO_ASID = "0000333-to-asid";
