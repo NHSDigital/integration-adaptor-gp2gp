@@ -25,9 +25,13 @@ public class TaskConsumer {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received message from taskQueue {}", messageID);
         try {
-            taskHandler.handle(message);
-            message.acknowledge();
-            LOGGER.info("Acknowledged message {}", messageID);
+            if (taskHandler.handle(message)) {
+                message.acknowledge();
+                LOGGER.info("Acknowledged message {}", messageID);
+            } else {
+                LOGGER.info("Left message {} on the queue", messageID);
+            }
+
         } catch (Exception e) {
             LOGGER.error("Error while processing task queue message {}", messageID, e);
         } finally {
