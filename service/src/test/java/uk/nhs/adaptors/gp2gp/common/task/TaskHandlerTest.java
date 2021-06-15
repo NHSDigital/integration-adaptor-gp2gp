@@ -143,7 +143,7 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_ProcessHasAlreadyFailed_Expect_TaskNotToBeExecuted() {
+    public void When_ProcessHasAlreadyFailed_Expect_NonNackTaskNotToBeExecuted() {
         String conversationId = "conversationId1";
         setupValidMessage(conversationId, TaskType.SEND_EHR_CONTINUE);
         when(processFailureHandlingService.hasProcessFailed(any())).thenReturn(true);
@@ -153,6 +153,21 @@ public class TaskHandlerTest {
         assertThat(result).isTrue();
         verify(processFailureHandlingService).hasProcessFailed(conversationId);
         verifyNoInteractions(taskExecutor);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_ProcessHasAlreadyFailed_Expect_NackTaskToStillBeExecuted() {
+        String conversationId = "conversationId1";
+        setupValidMessage(conversationId, TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT);
+        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        when(processFailureHandlingService.hasProcessFailed(any())).thenReturn(true);
+
+        var result = taskHandler.handle(message);
+
+        assertThat(result).isTrue();
+        verify(processFailureHandlingService).hasProcessFailed(conversationId);
+        verify(taskExecutor).execute(taskDefinition);
     }
 
     private String setupValidMessage(String conversationId, TaskType taskType) throws JMSException {

@@ -34,7 +34,8 @@ public class TaskHandler {
         try {
             taskDefinition = readTaskDefinition(message);
 
-            if (!processFailureHandlingService.hasProcessFailed(taskDefinition.getConversationId())) {
+            if (!processFailureHandlingService.hasProcessFailed(taskDefinition.getConversationId())
+                || isSendNackTask(taskDefinition)) {
                 executeTask(taskDefinition);
             } else {
                 LOGGER.warn(
@@ -75,7 +76,7 @@ public class TaskHandler {
     }
 
     private boolean handleProcessingError(TaskDefinition taskDefinition) {
-        if (taskDefinition != null && !TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType())) {
+        if (taskDefinition != null && !isSendNackTask(taskDefinition)) {
             return processFailureHandlingService.failProcess(
                 taskDefinition.getConversationId(),
                 // TODO: error code and message to be prepared as part of NIAD-1524
@@ -86,5 +87,9 @@ public class TaskHandler {
         } else {
             return false;
         }
+    }
+
+    private boolean isSendNackTask(TaskDefinition taskDefinition) {
+        return TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType());
     }
 }
