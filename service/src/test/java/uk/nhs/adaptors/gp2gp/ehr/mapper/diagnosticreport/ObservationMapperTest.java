@@ -1,13 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.util.stream.Stream;
-
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Observation;
@@ -22,9 +14,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.mockito.stubbing.Answer;
-
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
@@ -35,6 +25,14 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.StructuredObservationValueMapper;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+
+import java.io.IOException;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ObservationMapperTest {
@@ -76,8 +74,6 @@ public class ObservationMapperTest {
     private static final String OBSERVATION_COMPOUND_STATEMENT_WITH_VALUE_QUANTITY_AND_REFERENCE_RANGE_XML =
         OBSERVATION_TEST_FILE_DIRECTORY + "observation_compound_statement_with_value_quantity_and_reference_range.xml";
 
-    private static final String TEST_ID = "5E496953-065B-41F2-9577-BE8F2FBD0757";
-
     @Mock
     private IdMapper idMapper;
 
@@ -103,15 +99,18 @@ public class ObservationMapperTest {
         lenient().when(agentDirectory.getAgentRef(any(Reference.class), any(Reference.class))).thenAnswer(mockReferences());
 
         when(messageContext.getIdMapper()).thenReturn(idMapper);
+        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class)))
+            .thenAnswer(params -> "Mapped-From-" + ((IdType) params.getArgument(1)).getValue());
 
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
+            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
 
         observationMapper = new ObservationMapper(
             messageContext,
             new StructuredObservationValueMapper(),
             new CodeableConceptCdMapper(),
             new ParticipantMapper(),
-            randomIdGeneratorService
+            multiStatementObservationHolderFactory
         );
     }
 
@@ -123,7 +122,7 @@ public class ObservationMapperTest {
     @ParameterizedTest
     @MethodSource("resourceFileParams")
     public void When_MappingObservationJson_Expect_CompoundStatementXmlOutput(String inputJson, String outputXml) throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
+        when(randomIdGeneratorService.createNewId()).thenReturn("random-unmapped-id");
 
         String jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         Observation observationAssociatedWithSpecimen = new FhirParseService().parseResource(jsonInput, Observation.class);
@@ -138,8 +137,6 @@ public class ObservationMapperTest {
 
     @Test
     public void When_MappingDefaultObservationJson_Expect_DefaultObservationStatementXmlOutput() throws IOException {
-        when(idMapper.getOrNew(any(ResourceType.class), any(IdType.class))).thenReturn("some-id");
-
         String jsonInput = ResourceTestFileUtils.getFileContent(
             OBSERVATION_TEST_FILE_DIRECTORY + "input_default_observation.json"
         );
@@ -155,6 +152,7 @@ public class ObservationMapperTest {
         assertThat(actualXml).isEqualTo(expectedXmlOutput);
     }
 
+    @SuppressWarnings("unused")
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(OBSERVATION_ASSOCIATED_WITH_SPECIMEN_1_JSON, OBSERVATION_COMPOUND_STATEMENT_1_XML),
