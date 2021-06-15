@@ -8,4 +8,4 @@ RUN gradle testClasses
 
 # USER 65534
 
-ENTRYPOINT ["gradle", "check"]
+ENTRYPOINT ["java", "-cp", "/app/gp2gp.jar"]
