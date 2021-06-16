@@ -38,6 +38,7 @@ public class EhrExtractStatus implements TimeToLive {
     private GpcAccessDocument gpcAccessDocument;
     private EhrExtractCore ehrExtractCore;
     private EhrContinue ehrContinue;
+    private AckToRequester ackToRequester;
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
@@ -121,6 +122,16 @@ public class EhrExtractStatus implements TimeToLive {
     @Builder
     public static class EhrContinue {
         private Instant received;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class AckToRequester {
+        private String messageId;
+        private String taskId;
+        private String typeCode;
     }
 
     @Data

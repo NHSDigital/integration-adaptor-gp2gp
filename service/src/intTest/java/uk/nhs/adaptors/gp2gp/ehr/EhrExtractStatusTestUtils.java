@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
@@ -18,6 +19,20 @@ public class EhrExtractStatusTestUtils {
             .created(now)
             .updatedAt(now)
             .conversationId(EhrStatusConstants.CONVERSATION_ID)
+            .ehrRequest(prepareEhrRequest())
+            .gpcAccessDocument(prepareGpcAccessDocument())
+            .build();
+    }
+
+    public static EhrExtractStatus prepareEhrExtractStatusCustomConversationID() {
+        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
+
+        RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
+
+        return EhrExtractStatus.builder()
+            .created(now)
+            .updatedAt(now)
+            .conversationId(randomIdGeneratorService.createNewId())
             .ehrRequest(prepareEhrRequest())
             .gpcAccessDocument(prepareGpcAccessDocument())
             .build();
