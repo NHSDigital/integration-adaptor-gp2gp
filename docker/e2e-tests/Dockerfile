@@ -8,4 +8,4 @@ RUN gradle testClasses
 
 # USER 65534
 
-ENTRYPOINT ["java", "-cp", "/app/gp2gp.jar"]
+ENTRYPOINT ["java", "-cp", "/app/gp2gp.jar", "-Dloader.main=uk.nhs.adaptors.gp2gp.Gp2gpApplication", "org.springframework.boot.loader.PropertiesLauncher"]
