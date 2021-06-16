@@ -32,7 +32,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
-    private static final String ODS_CODE_TOKEN = "{ODS_CODE}";
+    private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String NHS_NUMBER_WITH_DOCUMENT = "9690937286";
     private static final String NHS_NUMBER_WITHOUT_DOCUMENT = "9690937294";
     private static final String NHS_NUMBER_INVALID = "ASDF";
@@ -117,6 +117,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
@@ -125,7 +126,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
     }
 
     private GetGpcDocumentTaskDefinition buildGetDocumentTask(GetGpcDocumentReferencesTaskDefinition taskDefinition) {
-        var documentUrl = buildDocumentUrl(taskDefinition.getFromOdsCode());
+        var documentUrl = buildDocumentUrl(taskDefinition.getToOdsCode());
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(VALID_DOCUMENT_ID)
             .taskId(taskDefinition.getTaskId())
@@ -134,6 +135,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
             .fromOdsCode(taskDefinition.getFromOdsCode())
+            .toOdsCode(taskDefinition.getToOdsCode())
             .accessDocumentUrl(documentUrl)
             .build();
     }
@@ -145,7 +147,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
 
         assertThat(ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments()).hasSize(1);
         var gpcDocument = ehrExtractStatusUpdated.getGpcAccessDocument().getDocuments().get(0);
-        var documentUrl = buildDocumentUrl(taskDefinition.getFromOdsCode());
+        var documentUrl = buildDocumentUrl(taskDefinition.getToOdsCode());
 
         assertThat(gpcDocument).isNotNull();
         assertThat(gpcDocument.getAccessDocumentUrl()).isEqualTo(documentUrl);
@@ -174,7 +176,7 @@ public class GetGpcDocumentReferencesComponentTest extends BaseTaskTest {
         assertThat(coding.getDisplay()).isEqualTo(INVALID_NHS_NUMBER);
     }
 
-    private String buildDocumentUrl(String fromOdsCode) {
-        return configuration.getUrl().replace(ODS_CODE_TOKEN, fromOdsCode) + configuration.getDocumentEndpoint() + VALID_DOCUMENT_ID;
+    private String buildDocumentUrl(String odsCode) {
+        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + configuration.getDocumentEndpoint() + VALID_DOCUMENT_ID;
     }
 }

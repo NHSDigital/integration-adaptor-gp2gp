@@ -13,7 +13,7 @@ import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class GpcClient {
-    private static final String ODS_CODE_TOKEN = "{ODS_CODE}";
+    private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String STRUCTURED_LOG_TEMPLATE = "Gpc Access Structured Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String DOCUMENT_LOG_TEMPLATE = "Gpc Access Document Request, toASID: {}, fromASID: {}, Gpc Url: {}";
     private static final String PATIENT_LOG_TEMPLATE = "Gpc Access Patient Request, toASID: {}, fromASID: {}, Gpc Url: {}";
@@ -73,7 +73,7 @@ public class GpcClient {
     }
 
     private String buildGpcBaseUrl(TaskDefinition taskDefinition) {
-        return gpcConfiguration.getUrl().replace(ODS_CODE_TOKEN, taskDefinition.getFromOdsCode());
+        return gpcConfiguration.getUrl().replace(ODS_CODE_PLACEHOLDER, taskDefinition.getToOdsCode());
     }
 }
 
