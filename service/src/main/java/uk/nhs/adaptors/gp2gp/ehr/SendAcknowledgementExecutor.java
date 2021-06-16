@@ -1,16 +1,23 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.Mustache;
+
+import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.model.SendAckTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
@@ -23,6 +30,8 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledgementTaskDefinition> {
     private static final Mustache ACKNOWLEDGEMENT_TEMPLATE =
         TemplateUtils.loadTemplate("outbound_message_positive_acknowledgement.mustache");
+    private static final Mustache NEGATIVE_ACK_TEMPLATE = TemplateUtils.loadTemplate("outbound_message_negative_acknowledgement.mustache");
+
     private final MhsClient mhsClient;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -39,25 +48,66 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
     @SneakyThrows
     public void execute(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition) {
         LOGGER.info("Sending application acknowledgement from the adaptor to the requesting system");
+        var ackMessageId = randomIdGeneratorService.createNewId();
 
         var sendAckTemplateParams = SendAckTemplateParameters.builder()
+            .requestId(ackMessageId)
             .creationTime(DateFormatUtil.toHl7Format(timestampService.now()))
-            .uuid(randomIdGeneratorService.createNewId())
+            .messageId(sendAcknowledgementTaskDefinition.getEhrRequestMessageId())
             .fromAsid(sendAcknowledgementTaskDefinition.getFromAsid())
             .toAsid(sendAcknowledgementTaskDefinition.getToAsid())
             .typeCode(sendAcknowledgementTaskDefinition.getTypeCode())
-            .messageId(sendAcknowledgementTaskDefinition.getEhrRequestMessageId())
+            .reasonCode(sendAcknowledgementTaskDefinition.getReasonCode())
+            .reasonMessage(sendAcknowledgementTaskDefinition.getDetail())
             .build();
-        var acknowledgementRequestBody = TemplateUtils.fillTemplate(ACKNOWLEDGEMENT_TEMPLATE, sendAckTemplateParams);
-        var outboundMessage = OutboundMessage.builder().payload(acknowledgementRequestBody).build();
-        var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
-        var positiveAckMessageId = randomIdGeneratorService.createNewId();
 
-        var request = mhsRequestBuilder.buildSendAcknowledgement(stringRequestBody, sendAcknowledgementTaskDefinition.getFromOdsCode(),
-            sendAcknowledgementTaskDefinition.getConversationId(), positiveAckMessageId);
+        String requestBody = buildRequestBody(sendAckTemplateParams);
+
+        sendToMHS(sendAcknowledgementTaskDefinition, ackMessageId, requestBody);
+
+        updateEhrExtractStatus(sendAcknowledgementTaskDefinition, ackMessageId);
+    }
+
+    private void sendToMHS(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId, String requestBody) {
+        LOGGER.info("Sending ACK message to MHS. ACK message Id: {} Conversation id: {} EhrRequest id {} ", ackMessageId,
+            taskDefinition.getConversationId(), taskDefinition.getEhrRequestMessageId());
+
+        var request = mhsRequestBuilder.buildSendAcknowledgement(
+            requestBody, taskDefinition.getFromOdsCode(), taskDefinition.getConversationId(), ackMessageId);
 
         mhsClient.sendMessageToMHS(request);
+    }
 
-        ehrExtractStatusService.updateEhrExtractStatusPositiveAcknowledgement(sendAcknowledgementTaskDefinition, positiveAckMessageId);
+    private String buildRequestBody(SendAckTemplateParameters templateParams) throws JsonProcessingException {
+        var template = StringUtils.isNoneBlank(templateParams.getReasonCode()) ? NEGATIVE_ACK_TEMPLATE : ACKNOWLEDGEMENT_TEMPLATE;
+
+        var acknowledgementRequestBody = TemplateUtils.fillTemplate(template, templateParams);
+        var outboundMessage = OutboundMessage.builder().payload(acknowledgementRequestBody).build();
+
+        return objectMapper.writeValueAsString(outboundMessage);
+    }
+
+    private void updateEhrExtractStatus(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId) {
+        LOGGER.info("Updating EhrExtractStatus with ACK message Id: {} Conversation id: {}", ackMessageId,
+            taskDefinition.getConversationId());
+
+        ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(
+            taskDefinition,
+            ackMessageId
+        );
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class SendAckTemplateParameters {
+        private final String fromAsid;
+        private final String toAsid;
+        private final String creationTime;
+        private final String requestId;
+        private final String typeCode;
+        private final String messageId;
+        private final String reasonCode;
+        private final String reasonMessage;
     }
 }

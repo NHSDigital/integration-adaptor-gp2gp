@@ -262,30 +262,16 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusPositiveAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
-        String ackMessageId) {
-        Update update = buildBaseAcknowledgementEhrExtractStatusUpdateRecord(sendAcknowledgementTaskDefinition, ackMessageId);
-        updateEhrStatus(update, sendAcknowledgementTaskDefinition.getConversationId());
-    }
-
-    public void updateEhrExtractStatusNegativeAcknowledgement(
-        SendNegativeAcknowledgementTaskDefinition sendNegativeAcknowledgementTaskDefinition,
-        String ackMessageId) {
-        Update updateRecord = buildBaseAcknowledgementEhrExtractStatusUpdateRecord(sendNegativeAcknowledgementTaskDefinition, ackMessageId);
-        updateRecord.set(ACK_REASON_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getReasonCode());
-        updateRecord.set(ACK_DETAIL_CODE_PATH, sendNegativeAcknowledgementTaskDefinition.getDetail());
-
-        updateEhrStatus(updateRecord, sendNegativeAcknowledgementTaskDefinition.getConversationId());
-    }
-
-    private Update buildBaseAcknowledgementEhrExtractStatusUpdateRecord(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
+    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition,
         String ackMessageId) {
         Update update = createUpdateWithUpdatedAt();
-        update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
+        update.set(ACK_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_MESSAGE_ID_PATH, ackMessageId);
-        update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
+        update.set(ACK_TYPE_CODE_PATH, taskDefinition.getTypeCode());
+        update.set(ACK_REASON_CODE_PATH, taskDefinition.getReasonCode());
+        update.set(ACK_DETAIL_CODE_PATH, taskDefinition.getDetail());
 
-        return update;
+        updateEhrStatus(update, taskDefinition.getConversationId());
     }
 
     private void updateEhrStatus(Update update, String conversationId) {

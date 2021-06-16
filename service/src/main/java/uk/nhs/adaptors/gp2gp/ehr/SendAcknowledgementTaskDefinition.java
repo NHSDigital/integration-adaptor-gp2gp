@@ -17,6 +17,9 @@ public class SendAcknowledgementTaskDefinition extends TaskDefinition {
     private final String nhsNumber;
     private final String typeCode;
     private final String ehrRequestMessageId;
+    private final String reasonCode;
+    private final String detail;
+
     @Override
     public TaskType getTaskType() {
         return SEND_ACKNOWLEDGEMENT;

@@ -13,13 +13,35 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SendAcknowledgementTaskDispatcher {
-    private static final String POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
+    private static final String ACK_TYPE_CODE = "AA";
+    private static final String NACK_TYPE_CODE = "AE";
+
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 
     public void sendPositiveAcknowledgement(EhrExtractStatus ehrExtractStatus) {
+        SendAcknowledgementTaskDefinition.SendAcknowledgementTaskDefinitionBuilder<?, ?> taskDefinitionBuilder =
+            getAcknowledgementTaskDefinitionBuilder(ehrExtractStatus, ACK_TYPE_CODE);
+
+        taskDispatcher.createTask(taskDefinitionBuilder.build());
+        LOGGER.info("SendAcknowledgementTaskDefinition for ACK added to task queue");
+    }
+
+    public void sendNegativeAcknowledgement(EhrExtractStatus ehrExtractStatus, String reasonCode, String reasonMessage) {
+        SendAcknowledgementTaskDefinition.SendAcknowledgementTaskDefinitionBuilder<?, ?> taskDefinitionBuilder =
+            getAcknowledgementTaskDefinitionBuilder(ehrExtractStatus, NACK_TYPE_CODE);
+        taskDefinitionBuilder.reasonCode(reasonCode);
+        taskDefinitionBuilder.detail(reasonMessage);
+
+        taskDispatcher.createTask(taskDefinitionBuilder.build());
+        LOGGER.info("SendAcknowledgementTaskDefinition for NACK added to task queue");
+    }
+
+    private SendAcknowledgementTaskDefinition.SendAcknowledgementTaskDefinitionBuilder<?, ?> getAcknowledgementTaskDefinitionBuilder(
+        EhrExtractStatus ehrExtractStatus, String typeCode) {
+
         var ehrRequest = ehrExtractStatus.getEhrRequest();
-        var sendAcknowledgementTaskDefinition = SendAcknowledgementTaskDefinition.builder()
+        return SendAcknowledgementTaskDefinition.builder()
             .taskId(randomIdGeneratorService.createNewId())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrRequest.getRequestId())
@@ -28,11 +50,7 @@ public class SendAcknowledgementTaskDispatcher {
             .fromOdsCode(ehrRequest.getFromOdsCode())
             .toOdsCode(ehrRequest.getToOdsCode())
             .nhsNumber(ehrRequest.getNhsNumber())
-            .typeCode(POSITIVE_ACKNOWLEDGEMENT_TYPE_CODE)
-            .ehrRequestMessageId(ehrRequest.getMessageId())
-            .build();
-
-        taskDispatcher.createTask(sendAcknowledgementTaskDefinition);
-        LOGGER.info("SendAcknowledgementTaskDefinition added to task queue");
+            .typeCode(typeCode)
+            .ehrRequestMessageId(ehrRequest.getMessageId());
     }
 }
