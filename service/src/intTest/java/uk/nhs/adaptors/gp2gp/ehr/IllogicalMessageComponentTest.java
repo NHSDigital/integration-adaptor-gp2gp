@@ -240,6 +240,7 @@ public class IllogicalMessageComponentTest {
     public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
         ehrExtractStatus.setEhrExtractCore(EhrExtractStatus.EhrExtractCore.builder().build());
+        ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String continuePayload = asString(continueResponsePayload);
@@ -259,6 +260,7 @@ public class IllogicalMessageComponentTest {
     public void When_DuplicateAcknowledgementSentTwice_Expect_SkippedNoDatabaseUpdatedn() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
         ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String acknowledgementPayload = asString(acknowledgementResponsePayload);

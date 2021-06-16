@@ -349,7 +349,7 @@ public class EhrExtractStatusService {
                     + "' that is out of order in message process");
             }
 
-            if (ehrExtractStatus.getEhrReceivedAcknowledgement() == null) {
+            if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
                 LOGGER.warn("Received an ACK message with a Conversation-Id '" + conversationId
                     + "' that is duplicate");
                 return true;
@@ -371,7 +371,7 @@ public class EhrExtractStatusService {
                     + "' that is out of order in message process");
             }
 
-            if (ehrExtractStatus.getEhrContinue() == null) {
+            if (ehrExtractStatus.getEhrContinue() != null) {
                 LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
                     + "' that is duplicate");
                 return true;
