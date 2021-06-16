@@ -92,7 +92,6 @@ public class TransformJsonToXml implements CommandLineRunner {
                 fileNames.add(file.getName());
             });
         return Arrays.stream(files)
-            .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
             .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
             .map(file -> {
                 try {

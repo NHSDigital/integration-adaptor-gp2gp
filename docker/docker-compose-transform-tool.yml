@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  activemq:
+    build:
+      context: ./activemq
+    ports:
+      - "8161:8161"
+      - "5672:5672"
