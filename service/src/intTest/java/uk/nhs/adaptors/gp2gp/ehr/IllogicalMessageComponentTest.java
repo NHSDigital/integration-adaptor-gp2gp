@@ -5,7 +5,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -113,6 +112,27 @@ public class IllogicalMessageComponentTest {
             .isEqualTo("Received a Continue message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
     }
 
+    private static String asString(Resource resource) {
+        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
+            return FileCopyUtils.copyToString(reader);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    @SneakyThrows
+    private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
+        String incomingMessage = null;
+        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        when(inboundMessage.getEbXML()).thenReturn(ebxml);
+        when(inboundMessage.getPayload()).thenReturn(payload);
+
+        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
+        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
+        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
+        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
+    }
+
     @Test
     public void When_AcknowledgementRecievedtToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
         String acknowledgementPayload = asString(acknowledgementResponsePayload);
@@ -125,6 +145,12 @@ public class IllogicalMessageComponentTest {
 
         assertThat(exception.getMessage())
             .isEqualTo("Received an ACK message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
+    }
+
+    @SneakyThrows
+    private void mockAcknowledgementMessage(String ebxml, String payload, String interactionId, String conversationId) {
+        when(xPathService.getNodeValue(any(), any())).thenReturn(ACK_OK_CODE);
+        mockIncomingMessage(ebxml, payload, interactionId, conversationId);
     }
 
     //outoforder
@@ -142,8 +168,8 @@ public class IllogicalMessageComponentTest {
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received a Continue message with a Conversation-Id '"+ehrExtractStatus.getConversationId()+"' that " +
-                "is out of order in message process");
+            .isEqualTo("Received a Continue message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that "
+                + "is out of order in message process");
     }
 
     @Test
@@ -154,13 +180,15 @@ public class IllogicalMessageComponentTest {
         String acknowledgementPayload = asString(acknowledgementResponsePayload);
         String acknowledgementEbxml = asString(acknowledgementResponseEbxml);
 
-        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST, ehrExtractStatus.getConversationId());
+        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
+            ehrExtractStatus.getConversationId());
 
         Exception exception = assertThrows(EhrExtractException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received an ACK message with a Conversation-Id '"+ehrExtractStatus.getConversationId()+"' that is out of order in message process");
+            .isEqualTo("Received an ACK message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that is out of "
+                + "order in message process");
     }
 
     //Duplicates
@@ -180,6 +208,32 @@ public class IllogicalMessageComponentTest {
         var secondtEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondtEhrStatus.getUpdatedAt());
+    }
+
+    @SneakyThrows
+    private void mockEhrRequest(String ebxml, String payload, String interactionId, String conversationId) {
+        String incomingMessage = null;
+        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        when(inboundMessage.getEbXML()).thenReturn(ebxml);
+        when(inboundMessage.getPayload()).thenReturn(payload);
+
+        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
+        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
+        var payloadDocument = SERVICE.parseDocumentFromXml(payload);
+        when(xPathService.parseDocumentFromXml(inboundMessage.getPayload())).thenReturn(payloadDocument);
+
+        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
+        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
+
+        when(xPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(ebxmlDocument, FROM_PARTY_ID_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(ebxmlDocument, TO_PARTY_ID_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(payloadDocument, FROM_ASID_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(payloadDocument, TO_ASID_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)).thenReturn("123");
+        when(xPathService.getNodeValue(ebxmlDocument, MESSAGE_ID_PATH)).thenReturn("123");
     }
 
     @Test
@@ -210,7 +264,8 @@ public class IllogicalMessageComponentTest {
         String acknowledgementPayload = asString(acknowledgementResponsePayload);
         String acknowledgementEbxml = asString(acknowledgementResponseEbxml);
 
-        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST, ehrExtractStatus.getConversationId());
+        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
+            ehrExtractStatus.getConversationId());
 
         inboundMessageHandler.handle(message);
         var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
@@ -231,58 +286,5 @@ public class IllogicalMessageComponentTest {
 
         assertThat(exception.getMessage())
             .isEqualTo("Unsupported interaction id null");
-    }
-
-    private static String asString(Resource resource) {
-        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
-            return FileCopyUtils.copyToString(reader);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    @SneakyThrows
-    private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
-        String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-        when(inboundMessage.getEbXML()).thenReturn(ebxml);
-        when(inboundMessage.getPayload()).thenReturn(payload);
-
-        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
-        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
-        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
-    }
-
-    @SneakyThrows
-    private void mockEhrRequest(String ebxml, String payload, String interactionId, String conversationId) {
-        String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-        when(inboundMessage.getEbXML()).thenReturn(ebxml);
-        when(inboundMessage.getPayload()).thenReturn(payload);
-
-        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
-        var payloadDocument = SERVICE.parseDocumentFromXml(payload);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getPayload())).thenReturn(payloadDocument);
-
-        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
-        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
-
-        when(xPathService.getNodeValue(payloadDocument, REQUEST_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, NHS_NUMBER_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, FROM_PARTY_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, TO_PARTY_ID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, FROM_ASID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, TO_ASID_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, FROM_ODS_CODE_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(payloadDocument, TO_ODS_CODE_PATH)).thenReturn("123");
-        when(xPathService.getNodeValue(ebxmlDocument, MESSAGE_ID_PATH)).thenReturn("123");
-    }
-
-    @SneakyThrows
-    private void mockAcknowledgementMessage(String ebxml, String payload, String interactionId, String conversationId) {
-        when(xPathService.getNodeValue(any(), any())).thenReturn(ACK_OK_CODE);
-        mockIncomingMessage(ebxml, payload, interactionId, conversationId);
     }
 }
