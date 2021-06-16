@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -56,22 +57,17 @@ public class TransformJsonToXml implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            var inputWrapper = getFiles();
-            var jsonFileInputs = inputWrapper.getJsonFileInputs();
-            var jsonFileNames = inputWrapper.getJsonFileNames();
-            for (int i = 0; i < jsonFileInputs.size(); i++) {
-                String jsonString = jsonFileInputs.get(i);
-                String xmlResult = mapJsonToXml(jsonString);
-                String fileName = jsonFileNames.get(i);
-                writeToFile(xmlResult, fileName);
-            }
+            getFiles().forEach(file -> {
+                String xmlResult = mapJsonToXml(file.getJsonFileInput());
+                writeToFile(xmlResult, file.getJsonFileName());
+            });
         } catch (NHSNumberNotFound | UnreadableJsonFileException | NoJsonFileFound | Hl7TranslatedResponseError e) {
             LOGGER.error("error: " + e.getMessage());
         }
         LOGGER.info("end");
     }
 
-    private InputWrapper getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
+    private List<InputFile> getFiles() throws UnreadableJsonFileException, NoJsonFileFound {
         File[] files = new File(JSON_FILE_INPUT_PATH).listFiles();
         List<String> jsonStringInputs = new ArrayList<>();
         List<String> fileNames = new ArrayList<>();
@@ -95,7 +91,19 @@ public class TransformJsonToXml implements CommandLineRunner {
                 jsonStringInputs.add(jsonAsString);
                 fileNames.add(file.getName());
             });
-        return InputWrapper.builder().jsonFileInputs(jsonStringInputs).jsonFileNames(fileNames).build();
+        return Arrays.stream(files)
+            .peek(file -> LOGGER.info("Parsing file: {}", file.getName()))
+            .filter(file -> FilenameUtils.getExtension(file.getName()).equalsIgnoreCase("json"))
+            .map(file -> {
+                try {
+                    String jsonAsString = readJsonFileAsString(JSON_FILE_INPUT_PATH + file.getName());
+                    return new InputFile(file.getName(), jsonAsString);
+                } catch (IOException e) {
+                    throw new UnreadableJsonFileException("Cannot read Json File as String: " + file.getName());
+                }
+
+            }).collect(Collectors.toList());
+
     }
 
     final String mapJsonToXml(String jsonAsStringInput) {
@@ -168,9 +176,9 @@ public class TransformJsonToXml implements CommandLineRunner {
     @Data
     @Builder
     @AllArgsConstructor
-    public static class InputWrapper {
-        private List<String> jsonFileNames;
-        private List<String> jsonFileInputs;
+    public static class InputFile {
+        private String jsonFileName;
+        private String jsonFileInput;
     }
 
     public static class UnreadableJsonFileException extends RuntimeException {
