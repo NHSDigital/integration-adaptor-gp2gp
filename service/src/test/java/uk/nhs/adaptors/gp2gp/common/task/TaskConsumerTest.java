@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import javax.jms.Message;
 
@@ -32,7 +34,9 @@ public class TaskConsumerTest {
 
     @Test
     @SneakyThrows
-    public void When_TaskHandled_Expect_MessageAcknowledged() {
+    public void When_TaskHandlerReturnsTrue_Expect_MessageAcknowledged() {
+        when(taskHandler.handle(any())).thenReturn(true);
+
         taskConsumer.receive(message);
 
         verify(taskHandler).handle(message);
@@ -41,8 +45,8 @@ public class TaskConsumerTest {
 
     @Test
     @SneakyThrows
-    public void When_TaskHandlerError_Expect_MessageNotAcknowledged() {
-        doThrow(RuntimeException.class).when(taskHandler).handle(message);
+    public void When_TaskHandlerReturnsFalse_Expect_MessageNotAcknowledged() {
+        when(taskHandler.handle(any())).thenReturn(false);
 
         taskConsumer.receive(message);
 
@@ -50,4 +54,14 @@ public class TaskConsumerTest {
         verify(message, times(0)).acknowledge();
     }
 
+    @Test
+    @SneakyThrows
+    public void When_TaskHandlerThrowsException_Expect_MessageNotAcknowledged() {
+        doThrow(RuntimeException.class).when(taskHandler).handle(message);
+
+        taskConsumer.receive(message);
+
+        verify(taskHandler).handle(message);
+        verify(message, times(0)).acknowledge();
+    }
 }

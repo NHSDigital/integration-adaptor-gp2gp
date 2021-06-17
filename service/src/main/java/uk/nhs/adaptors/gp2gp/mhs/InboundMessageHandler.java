@@ -7,6 +7,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.model.SpineInteraction.EHR_EXTRACT_REQUE
 import javax.jms.JMSException;
 import javax.jms.Message;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
+import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 
@@ -33,11 +35,32 @@ public class InboundMessageHandler {
     private final EhrExtractRequestHandler ehrExtractRequestHandler;
     private final XPathService xPathService;
     private final MDCService mdcService;
+    private final ProcessFailureHandlingService processFailureHandlingService;
 
-    public void handle(Message message) {
-        var inboundMessage = unmarshallMessage(message);
-        LOGGER.info("Decoded in inbound MHS message");
-        handleInboundMessage(inboundMessage);
+    /**
+     * @return True if the message has been processed. Otherwise false.
+     */
+    @SneakyThrows
+    public boolean handle(Message message) {
+        ParsedInboundMessage parsedMessage = null;
+        String messageID = message.getJMSMessageID();
+
+        try {
+            parsedMessage = parseMessage(message);
+            LOGGER.info("Decoded inbound MHS message");
+            if (!processFailureHandlingService.hasProcessFailed(parsedMessage.getConversationId())) {
+                handleInboundMessage(parsedMessage);
+            } else {
+                LOGGER.warn(
+                    "Aborting message handling - the process has already failed for Conversation-Id: {}.",
+                    parsedMessage.getConversationId()
+                );
+            }
+            return true;
+        } catch (Exception e) {
+            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            return handleMessageProcessingError(parsedMessage);
+        }
     }
 
     private InboundMessage unmarshallMessage(Message message) {
@@ -51,24 +74,55 @@ public class InboundMessageHandler {
         }
     }
 
-    private void handleInboundMessage(InboundMessage inboundMessage) {
-        final Document ebXmlDocument = getMessageEnvelope(inboundMessage);
-        final Document payloadDocument = getMessagePayload(inboundMessage);
-
-        var conversationId = getConversationId(ebXmlDocument);
+    private void handleInboundMessage(ParsedInboundMessage inboundMessage) {
+        String conversationId = inboundMessage.getConversationId();
         mdcService.applyConversationId(conversationId);
-
-        var interactionId = getInteractionId(ebXmlDocument);
+        String interactionId = inboundMessage.getInteractionId();
         LOGGER.info("The inbound MHS message uses interaction id {}", interactionId);
 
         if (EHR_EXTRACT_REQUEST.getInteractionId().equals(interactionId)) {
-            ehrExtractRequestHandler.handleStart(ebXmlDocument, payloadDocument);
+            ehrExtractRequestHandler.handleStart(
+                inboundMessage.getEbXMLDocument(),
+                inboundMessage.getPayloadDocument()
+            );
         } else if (CONTINUE_REQUEST.getInteractionId().equals(interactionId)) {
-            ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getPayload());
+            ehrExtractRequestHandler.handleContinue(conversationId, inboundMessage.getRawPayload());
         } else if (ACKNOWLEDGMENT_REQUEST.getInteractionId().equals(interactionId)) {
-            ehrExtractRequestHandler.handleAcknowledgement(conversationId, payloadDocument);
+            ehrExtractRequestHandler.handleAcknowledgement(conversationId, inboundMessage.getPayloadDocument());
         } else {
             throw new UnsupportedInteractionException(interactionId);
+        }
+    }
+
+    private ParsedInboundMessage parseMessage(Message message) {
+        InboundMessage inboundMessage = unmarshallMessage(message);
+
+        var ebXmlDocument = getMessageEnvelope(inboundMessage);
+        var payloadDocument = getMessagePayload(inboundMessage);
+        var conversationId = getConversationId(ebXmlDocument);
+        var interactionId = getInteractionId(ebXmlDocument);
+
+        return new ParsedInboundMessage(
+            ebXmlDocument,
+            payloadDocument,
+            inboundMessage.getPayload(),
+            conversationId,
+            interactionId
+        );
+    }
+
+    @SneakyThrows
+    private boolean handleMessageProcessingError(ParsedInboundMessage parsedMessage) {
+        if (parsedMessage != null) {
+            return processFailureHandlingService.failProcess(
+                parsedMessage.getConversationId(),
+                // TODO: error code and message to be prepared as part of NIAD-1524
+                "18",
+                "There has been an error when processing the message",
+                this.getClass().getSimpleName()
+            );
+        } else {
+            return false;
         }
     }
 
