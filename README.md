@@ -117,7 +117,7 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 
 (*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
-### MHS Adaptor Configuration Options
+### MHS Adaptor Configuration Options.
 
 The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adaptor-mhs) to send/receive messages to/from Spine.
 
