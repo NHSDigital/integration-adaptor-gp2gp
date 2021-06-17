@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.ACK_TYPE_CODE;
+import static uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition.NACK_TYPE_CODE;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,6 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SendAcknowledgementTaskDispatcher {
-    private static final String ACK_TYPE_CODE = "AA";
-    private static final String NACK_TYPE_CODE = "AE";
-
     private final TaskDispatcher taskDispatcher;
     private final RandomIdGeneratorService randomIdGeneratorService;
 

@@ -144,9 +144,10 @@ public class EhrExtractTest {
     }
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
+        // TODO: error code and message to be prepared as part of NIAD-1524
         assertThatAcknowledgementToRequesterWasSent(ackToRequester, typeCode);
-        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("06");
-        softly.assertThat(ackToRequester.get("detail")).isEqualTo("Patient not found");
+        softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("18");
+        softly.assertThat(ackToRequester.get("detail")).isEqualTo("An error occurred when executing a task");
     }
 
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {

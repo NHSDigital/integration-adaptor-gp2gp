@@ -14,6 +14,9 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskType;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 public class SendAcknowledgementTaskDefinition extends TaskDefinition {
+    public static final String ACK_TYPE_CODE = "AA";
+    public static final String NACK_TYPE_CODE = "AE";
+
     private final String nhsNumber;
     private final String typeCode;
     private final String ehrRequestMessageId;
@@ -23,5 +26,9 @@ public class SendAcknowledgementTaskDefinition extends TaskDefinition {
     @Override
     public TaskType getTaskType() {
         return SEND_ACKNOWLEDGEMENT;
+    }
+
+    public boolean isNack() {
+        return NACK_TYPE_CODE.equals(typeCode);
     }
 }

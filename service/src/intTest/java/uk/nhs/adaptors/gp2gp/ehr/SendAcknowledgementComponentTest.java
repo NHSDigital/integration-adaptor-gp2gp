@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +23,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
@@ -33,8 +33,9 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
-@SpringBootTest
 @DirtiesContext
+@SpringBootTest(properties = {
+    "command.line.runner.enabled=false"})
 public class SendAcknowledgementComponentTest {
     private static final String GENERATED_RANDOM_ID = "GENERATED-RANDOM-ID";
     private static final String FROM_ASID = "0000222-from-asid";
@@ -77,7 +78,7 @@ public class SendAcknowledgementComponentTest {
     @BeforeEach
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_RANDOM_ID);
-        when(timestampService.now()).thenReturn(Instant.parse(DATE));
+        lenient().when(timestampService.now()).thenReturn(Instant.parse(DATE));
 
         ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);

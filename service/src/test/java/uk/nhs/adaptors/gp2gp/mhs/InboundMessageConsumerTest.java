@@ -1,8 +1,10 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import javax.jms.Message;
 
@@ -28,11 +30,23 @@ public class InboundMessageConsumerTest {
 
     @Test
     @SneakyThrows
-    public void When_ReceivedMessageIsHandled_Expect_MessageIsAcknowledged() {
+    public void When_MessageHandlerReturnsTrue_Expect_MessageIsAcknowledged() {
+        when(inboundMessageHandler.handle(any())).thenReturn(true);
         inboundMessageConsumer.receive(mockMessage);
 
         verify(inboundMessageHandler).handle(mockMessage);
         verify(mockMessage).acknowledge();
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_MessageHandlerReturnsFalse_Expect_MessageIsNotAcknowledged() {
+        when(inboundMessageHandler.handle(any())).thenReturn(false);
+
+        inboundMessageConsumer.receive(mockMessage);
+
+        verify(inboundMessageHandler).handle(mockMessage);
+        verify(mockMessage, times(0)).acknowledge();
     }
 
     @Test
@@ -45,5 +59,4 @@ public class InboundMessageConsumerTest {
         verify(inboundMessageHandler).handle(mockMessage);
         verify(mockMessage, times(0)).acknowledge();
     }
-
 }

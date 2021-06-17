@@ -3,12 +3,14 @@ package uk.nhs.adaptors.gp2gp.gpc;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import lombok.extern.slf4j.Slf4j;
+
 import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
@@ -52,10 +54,6 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
             ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocumentDocumentReferences(taskDefinition, urls);
 
             urls.forEach(url -> queueGetDocumentsTask(taskDefinition, url));
-        } else {
-            // TODO for test only
-            LOGGER.error("Patient not found");
-            sendAcknowledgementTaskDispatcher.sendNegativeAcknowledgement(ehrExtractStatus, "06", "Patient not found");
         }
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
@@ -118,5 +116,4 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     private static boolean isUrlPresent(Attachment attachment) {
         return attachment != null && !attachment.getUrl().isBlank();
     }
-
 }
