@@ -12,6 +12,9 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
+apply plugin: 'application'
+
+mainClassName = ' uk.nhs.adaptors.gp2gp.Gp2gpApplication'
 
 group = 'uk.nhs.adaptors'
 sourceCompatibility = '11'
@@ -95,6 +98,11 @@ test {
 	useJUnitPlatform()
 }
 
+task(interoperabilityTestingToolJsonToXml, dependsOn: 'classes', type: JavaExec) {
+	main = 'uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml'
+	classpath = sourceSets.main.runtimeClasspath
+}
+
 jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
 }
@@ -151,4 +159,8 @@ spotbugsMain {
 			enabled = true
 		}
 	}
+}
+
+bootJar {
+	exclude("**/TransformJsonToXml*")
 }
