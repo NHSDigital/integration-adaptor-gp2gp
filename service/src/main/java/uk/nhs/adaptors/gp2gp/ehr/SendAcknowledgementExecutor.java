@@ -11,7 +11,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +60,7 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
             .reasonMessage(sendAcknowledgementTaskDefinition.getDetail())
             .build();
 
-        String requestBody = buildRequestBody(sendAckTemplateParams);
+        String requestBody = buildRequestBody(sendAckTemplateParams, sendAcknowledgementTaskDefinition.isNack());
 
         sendToMHS(sendAcknowledgementTaskDefinition, ackMessageId, requestBody);
 
@@ -78,8 +77,8 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         mhsClient.sendMessageToMHS(request);
     }
 
-    private String buildRequestBody(SendAckTemplateParameters templateParams) throws JsonProcessingException {
-        var template = StringUtils.isNoneBlank(templateParams.getReasonCode()) ? NEGATIVE_ACK_TEMPLATE : ACKNOWLEDGEMENT_TEMPLATE;
+    private String buildRequestBody(SendAckTemplateParameters templateParams, boolean isNack) throws JsonProcessingException {
+        var template = isNack ? NEGATIVE_ACK_TEMPLATE : ACKNOWLEDGEMENT_TEMPLATE;
 
         var acknowledgementRequestBody = TemplateUtils.fillTemplate(template, templateParams);
         var outboundMessage = OutboundMessage.builder().payload(acknowledgementRequestBody).build();
