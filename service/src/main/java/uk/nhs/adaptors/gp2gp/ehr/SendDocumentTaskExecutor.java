@@ -15,6 +15,8 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
+
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
@@ -34,11 +36,13 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 
     @SneakyThrows
     @Override
-    public void execute(SendDocumentTaskDefinition taskDefinition) {
+    public void execute(SendDocumentTaskDefinition sendDocumentTaskDefinition) {
         LOGGER.info("SendDocument task was created, Sending EHR Document to GP");
 
-        var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
-        var messageId = randomIdGeneratorService.createNewId();
+        String filename = sendDocumentTaskDefinition.getConversationId()
+            .concat(PATH_SEPARATOR)
+            .concat(sendDocumentTaskDefinition.getDocumentName());
+        var storageDataWrapper = storageConnectorService.downloadFile(filename);
 
         var outboundMessage = OutboundMessage.builder()
             .payload(storageDataWrapper.getData())
@@ -46,16 +50,18 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
 
+        var messageId = randomIdGeneratorService.createNewId();
+
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCommonRequest(
                 stringRequestBody,
-                taskDefinition.getConversationId(),
-                taskDefinition.getFromOdsCode(),
+                sendDocumentTaskDefinition.getConversationId(),
+                sendDocumentTaskDefinition.getFromOdsCode(),
                 messageId);
 
         mhsClient.sendMessageToMHS(requestData);
 
-        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommon(taskDefinition, messageId);
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusCommon(sendDocumentTaskDefinition, messageId);
 
         detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);
     }

@@ -2,8 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,14 +83,16 @@ public class EhrExtractStatusService {
 
     private final MongoTemplate mongoTemplate;
 
-    public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+    public EhrExtractStatus updateEhrExtractStatusAccessStructured(
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename
+    ) {
         Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
 
         Update update = createUpdateWithUpdatedAt();
         update.set(STRUCTURE_ACCESSED_AT_PATH, now);
         update.set(STRUCTURE_TASK_ID_PATH, structuredTaskDefinition.getTaskId());
-        update.set(STRUCTURE_OBJECT_NAME_PATH, structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        update.set(STRUCTURE_OBJECT_NAME_PATH, structuredRecordJsonFilename);
 
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
@@ -106,10 +106,12 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId) {
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(
+        GetGpcDocumentTaskDefinition documentTaskDefinition,
+        String documentJsonFilename,
+        String taskId,
+        String messageId
+    ) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -119,7 +121,7 @@ public class EhrExtractStatusService {
         Instant now = Instant.now();
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
-        update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
+        update.set(DOCUMENT_OBJECT_NAME_PATH, documentJsonFilename);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 

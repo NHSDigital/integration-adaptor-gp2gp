@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
@@ -17,7 +18,8 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.List;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -62,14 +64,23 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .build();
 
         var stringRequestBody = objectMapper.writeValueAsString(outboundMessage);
-
-        String fileName = structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION;
-        storageConnectorService.uploadFile(StorageDataWrapperProvider.buildStorageDataWrapper(structuredTaskDefinition,
+        StorageDataWrapper storageDataWrapper = StorageDataWrapperProvider.buildStorageDataWrapper(
+            structuredTaskDefinition,
             stringRequestBody,
-            structuredTaskDefinition.getTaskId()),
-            fileName);
+            structuredTaskDefinition.getTaskId()
+        );
 
-        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(structuredTaskDefinition);
+        String structuredRecordJsonFilename = structuredTaskDefinition.getConversationId()
+            .concat(PATH_SEPARATOR)
+            .concat(structuredTaskDefinition.getConversationId())
+            .concat(GPC_STRUCTURED_FILE_EXTENSION);
+
+        storageConnectorService.uploadFile(storageDataWrapper, structuredRecordJsonFilename);
+
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessStructured(
+            structuredTaskDefinition,
+            structuredRecordJsonFilename
+        );
 
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }

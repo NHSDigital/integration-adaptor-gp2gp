@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,8 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 
 import java.time.Instant;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,7 +23,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final StorageConnectorService storageConnectorService;
-    private final ObjectMapper objectMapper;
     private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Override
@@ -36,14 +35,18 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
 
-        var storageDataWrapper = storageConnectorService.downloadFile(
-            sendEhrExtractCoreTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        String structuredRecordJsonFilename = sendEhrExtractCoreTaskDefinition.getConversationId()
+            .concat(PATH_SEPARATOR)
+            .concat(sendEhrExtractCoreTaskDefinition.getConversationId())
+            .concat(GPC_STRUCTURED_FILE_EXTENSION);
+        var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordJsonFilename);
 
-        var requestData = mhsRequestBuilder
-            .buildSendEhrExtractCoreRequest(
+        var requestData =
+            mhsRequestBuilder.buildSendEhrExtractCoreRequest(
                 storageDataWrapper.getData(),
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
-                sendEhrExtractCoreTaskDefinition.getFromOdsCode());
+                sendEhrExtractCoreTaskDefinition.getFromOdsCode()
+            );
 
         mhsClient.sendMessageToMHS(requestData);
 
