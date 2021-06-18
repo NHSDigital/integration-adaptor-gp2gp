@@ -180,10 +180,6 @@ public class TransformJsonToXml implements CommandLineRunner {
             .stream().filter(identifier -> identifier.getSystem().equals(nhsNumberSystem)).findFirst().get();
     }
 
-    public MessageContext getMessageContext() {
-        return messageContext;
-    }
-
     @Data
     @Builder
     @AllArgsConstructor

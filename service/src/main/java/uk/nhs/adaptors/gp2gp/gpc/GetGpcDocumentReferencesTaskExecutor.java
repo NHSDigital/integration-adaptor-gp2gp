@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
@@ -33,8 +32,6 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
     private TaskDispatcher taskDispatcher;
     @Autowired
     private DetectTranslationCompleteService detectTranslationCompleteService;
-    @Autowired
-    private SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Override
     public Class<GetGpcDocumentReferencesTaskDefinition> getTaskType() {
