@@ -116,10 +116,12 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(
+        GetGpcDocumentTaskDefinition documentTaskDefinition,
         String documentName,
         String taskId,
-        String messageId) {
+        String messageId
+    ) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -144,8 +146,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt
+    ) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -220,7 +224,8 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
         GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-        Optional<String> patientId) {
+        Optional<String> patientId
+    ) {
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -245,7 +250,8 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
         GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-        List<String> urls) {
+        List<String> urls
+    ) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -272,8 +278,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition,
-        String ackMessageId) {
+    public void updateEhrExtractStatusAcknowledgement(
+        SendAcknowledgementTaskDefinition taskDefinition,
+        String ackMessageId
+    ) {
         Update update = createUpdateWithUpdatedAt();
         update.set(ACK_TASK_ID_PATH, taskDefinition.getTaskId());
         update.set(ACK_MESSAGE_ID_PATH, ackMessageId);
