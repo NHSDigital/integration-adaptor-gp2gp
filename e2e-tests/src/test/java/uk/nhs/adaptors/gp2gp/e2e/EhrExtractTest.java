@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -50,6 +51,7 @@ public class EhrExtractTest {
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
     private static final String NHS_NUMBER_PLACEHOLDER = "%%NHSNumber%%";
+    private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
@@ -94,6 +96,7 @@ public class EhrExtractTest {
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatNoErrorInfoIsStored(conversationId);
     }
 
     @Test
@@ -108,6 +111,7 @@ public class EhrExtractTest {
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber) throws IOException {
@@ -148,6 +152,20 @@ public class EhrExtractTest {
         assertThatAcknowledgementToRequesterWasSent(ackToRequester, typeCode);
         softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("18");
         softly.assertThat(ackToRequester.get("detail")).isEqualTo("An error occurred when executing a task");
+    }
+
+    private void assertThatNoErrorInfoIsStored(String conversationId) {
+        var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
+        assertThat(error).isNull();
+    }
+
+    private void assertThatErrorInfoIsStored(String conversationId, String expectedTaskType) {
+        var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
+
+        softly.assertThat(error.get("occurredAt")).isNotNull();
+        softly.assertThat(error.get("code")).isEqualTo("18");
+        softly.assertThat(error.get("message")).isEqualTo("An error occurred when executing a task");
+        softly.assertThat(error.get("taskType")).isEqualTo(expectedTaskType);
     }
 
     private void assertThatExtractContinueMessageWasSent(Document ehrContinue) {
