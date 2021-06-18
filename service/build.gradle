@@ -60,6 +60,7 @@ dependencies {
 	implementation 'javax.xml.soap:javax.xml.soap-api:1.4.0'
 	implementation 'com.github.spullara.mustache.java:compiler:0.9.5'
 	implementation 'org.apache.tika:tika-core:1.26'
+	implementation 'org.awaitility:awaitility:4.0.3'
 
 	// Fhir
 	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.2.1'

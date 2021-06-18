@@ -1,6 +1,11 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static java.lang.String.format;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+import static org.awaitility.Awaitility.await;
+
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
@@ -9,6 +14,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -34,6 +41,9 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractStatusService {
+    protected static final int WAIT_FOR_IN_SECONDS = 10;
+    protected static final int POLL_INTERVAL_MS = 100;
+    protected static final int POLL_DELAY_MS = 10;
     private static final String DOT = ".";
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String CONVERSATION_ID = "conversationId";
@@ -43,6 +53,7 @@ public class EhrExtractStatusService {
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String RECEIVED_ACK = "ehrReceivedAcknowledgement";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
+    private static final String EHR_EXTRACT_CORE_PENDING = "ehrExtractCorePending";
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
@@ -78,6 +89,8 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_MESSAGE_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + MESSAGE_ID;
     private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
+    private static final String EXTRACT_CORE_PENDING_TASK_ID_PATH = EHR_EXTRACT_CORE_PENDING + DOT + TASK_ID;
+    private static final String EXTRACT_CORE_PENDING_SENT_AT_PATH = EHR_EXTRACT_CORE_PENDING + DOT + SENT_AT;
     private static final String ACK_TASK_ID_PATH = ACK_TO_REQUESTER + DOT + TASK_ID;
     private static final String ACK_MESSAGE_ID_PATH = ACK_TO_REQUESTER + DOT + MESSAGE_ID;
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
@@ -163,6 +176,22 @@ public class EhrExtractStatusService {
 
         LOGGER.info("Database successfully updated after sending EhrExtract");
         return ehrExtractStatus;
+    }
+
+    public void updateEhrExtractStatusCorePending(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt) {
+        Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
+
+        Update update = createUpdateWithUpdatedAt();
+        update.set(EXTRACT_CORE_PENDING_SENT_AT_PATH, requestSentAt);
+        update.set(EXTRACT_CORE_PENDING_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Pending.");
+        }
+        LOGGER.info("Database updated for sending Extract Core Pending");
     }
 
     public Optional<EhrExtractStatus> updateEhrExtractStatusContinue(String conversationId) {
@@ -410,9 +439,15 @@ public class EhrExtractStatusService {
         if (ehrExtractStatusOptional.isPresent()) {
             EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
 
-            if (ehrExtractStatus.getEhrExtractCore() == null) {
-                throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
-                    + "' that is out of order in message process");
+            if (ehrExtractStatus.getEhrExtractCorePending() != null && ehrExtractStatus.getEhrExtractCore() == null) {
+                Query query = createQueryForConversationId(conversationId);
+                query.addCriteria(Criteria.where("ehrExtractCorePending").exists(true));
+
+                var ehrExtractStatusPending = waitFor(() -> mongoTemplate.find(query, EhrExtractStatus.class).get(0));
+                if (ehrExtractStatusPending.getEhrExtractCore() == null) {
+                    throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
+                        + "' that is out of order in message process");
+                }
             }
 
             if (ehrExtractStatus.getEhrContinue() != null) {
@@ -425,5 +460,23 @@ public class EhrExtractStatusService {
                 + "' that is not recognised");
         }
         return false;
+    }
+
+    public static <T> T waitFor(Supplier<T> supplier) {
+        var dataToReturn = new AtomicReference<T>();
+        await()
+            .atMost(WAIT_FOR_IN_SECONDS, SECONDS)
+            .pollInterval(POLL_INTERVAL_MS, MILLISECONDS)
+            .pollDelay(POLL_DELAY_MS, MILLISECONDS)
+            .until(() -> {
+                var data = supplier.get();
+                if (data != null) {
+                    dataToReturn.set(data);
+                    return true;
+                }
+                return false;
+            });
+
+        return dataToReturn.get();
     }
 }
