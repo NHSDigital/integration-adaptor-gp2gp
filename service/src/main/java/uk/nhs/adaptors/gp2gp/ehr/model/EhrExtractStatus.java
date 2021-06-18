@@ -40,6 +40,7 @@ public class EhrExtractStatus implements TimeToLive {
     private EhrContinue ehrContinue;
     private AckToRequester ackToRequester;
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
+    private Error error;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -153,5 +154,16 @@ public class EhrExtractStatus implements TimeToLive {
             private String code;
             private String display;
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class Error {
+        private Instant occurredAt;
+        private String code;
+        private String message;
+        private String taskType;
     }
 }

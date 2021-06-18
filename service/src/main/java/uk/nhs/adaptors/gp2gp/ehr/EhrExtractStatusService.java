@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static java.lang.String.format;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
@@ -59,7 +60,12 @@ public class EhrExtractStatusService {
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
     private static final String ERRORS = "errors";
+    private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
+    private static final String OCCURRED_AT = "occurredAt";
+    private static final String CODE = "code";
+    private static final String MESSAGE = "message";
+    private static final String TASK_TYPE = "taskType";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -82,6 +88,10 @@ public class EhrExtractStatusService {
     private static final String RECEIVED_ACK_MESSAGE_REF = RECEIVED_ACK + DOT + MESSAGE_REF;
     private static final String RECEIVED_ACK_CONVERSATION_CLOSED = RECEIVED_ACK + DOT + CONVERSATION_CLOSED;
     private static final String RECEIVED_ACK_ERRORS = RECEIVED_ACK + DOT + ERRORS;
+    private static final String ERROR_OCCURRED_AT_PATH = ERROR + DOT + OCCURRED_AT;
+    private static final String ERROR_CODE_PATH = ERROR + DOT + CODE;
+    private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
+    private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
 
     private final MongoTemplate mongoTemplate;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
@@ -288,6 +298,40 @@ public class EhrExtractStatusService {
             throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
         }
         LOGGER.info("Database updated for sending application acknowledgement");
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusError(
+        String conversationId,
+        String errorCode,
+        String errorMessage,
+        String taskType
+    ) {
+        Update update = createUpdateWithUpdatedAt();
+        Instant now = Instant.now();
+        update.set(ERROR_OCCURRED_AT_PATH, now);
+        update.set(ERROR_CODE_PATH, errorCode);
+        update.set(ERROR_MESSAGE_PATH, errorMessage);
+        update.set(ERROR_TASK_TYPE_PATH, taskType);
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(
+            createQueryForConversationId(conversationId),
+            update,
+            getReturningUpdatedRecordOption(),
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException(format(
+                "Couldn't update EHR status with error information because it doesn't exist. Conversation-Id: %s",
+                conversationId
+            ));
+        }
+
+        LOGGER.info(
+            "EHR status record successfully updated in the database with error information. Conversation-Id: {}",
+            conversationId
+        );
+
+        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {

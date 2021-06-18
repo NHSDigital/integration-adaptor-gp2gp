@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
+    <id root="D6B7A2AE-7883-4B3A-9023-420E4C8FE71E" />
+    <creationTime value="20210616171028" />
+    <versionCode code="V3NPfIT3.1.10" />
+    <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
+    <processingCode code="P" />
+    <processingModeCode code="T" />
+    <acceptAckCode code="NE" />
+    <communicationFunctionRcv typeCode="RCV">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+        </device>
+    </communicationFunctionRcv>
+    <communicationFunctionSnd typeCode="SND">
+        <device classCode="DEV" determinerCode="INSTANCE">
+            <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+        </device>
+    </communicationFunctionSnd>
+    <ControlActEvent classCode="CACT" moodCode="EVN">
+        <author1 typeCode="AUT">
+            <AgentSystemSDS classCode="AGNT">
+                <agentSystemSDS classCode="DEV" determinerCode="INSTANCE">
+                    <id root="1.2.826.0.1285.0.2.0.107" extension="GP2GPTEST" />
+                </agentSystemSDS>
+            </AgentSystemSDS>
+        </author1>
+        <subject typeCode="SUBJ" contextConductionInd="false">
+            <EhrExtract classCode="EXTRACT" moodCode="EVN">
+    <id root="5E6C6EA4-C98A-49C9-A251-F2FCBF51D9B8" />
+    <statusCode code="COMPLETE" />
+    <availabilityTime value="20210616171028" />
+    <recordTarget typeCode="RCT">
+        <patient classCode="PAT">
+            <id root="2.16.840.1.113883.2.1.4.1" extension="9690938622" />
+        </patient>
+    </recordTarget>
+    <author typeCode="AUT">
+        <time value="20210616171028" />
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </author>
+    <destination typeCode="DST">
+        <AgentOrgSDS classCode="AGNT">
+            <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+            </agentOrganizationSDS>
+        </AgentOrgSDS>
+    </destination>
+    <component typeCode="COMP">
+        <ehrFolder classCode="FOLDER" moodCode="EVN">
+            <id root="2E6BE1D1-C36C-4F6E-B0CC-295C6E2F37A4" />
+            <statusCode code="COMPLETE" />
+            <effectiveTime>
+                <low value="20160501120000"/>
+            </effectiveTime>
+            <availabilityTime value="20210616171028" />
+            <author typeCode="AUT">
+                <time value="20210616171028" />
+                <AgentOrgSDS classCode="AGNT">
+                    <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
+                        <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
+                    </agentOrganizationSDS>
+                </AgentOrgSDS>
+            </author>
+            <responsibleParty typeCode="RESP">
+    <agentDirectory classCode="AGNT">
+        <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="7D0D35D0-B9F2-4F3B-A126-772A91C75937" />
+        <agentOrganization determinerCode="INSTANCE" classCode="ORG">
+                        <id extension="B82617" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>COXWOLD SURGERY</name>
+            <telecom value="12345678" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>NHS NPFIT Test Data Manager</streetAddressLine>
+                <streetAddressLine>Princes Exchange</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>LS1 4HY</postalCode>
+            </addr>
+        </agentOrganization>
+    </Agent>
+</part>
+            <part typeCode="PART">
+    <Agent classCode="AGNT">
+        <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2"/>
+        <code nullFlavor="UNK">
+            <originalText>paediatrician</originalText>
+        </code>
+        <agentPerson classCode="PSN" determinerCode="INSTANCE">
+            <name>
+                <prefix>Mrs</prefix>
+                <given>Melissa</given>
+                <family>Parsons</family>
+            </name>
+        </agentPerson>
+        <representedOrganization classCode="ORG" determinerCode="INSTANCE">
+            <id extension="R1A14" root="2.16.840.1.113883.2.1.4.3"/>
+            <name>Test GP Care Trust</name>
+            <telecom value="12345678" use="WP"/>
+            <addr use="WP">
+                <streetAddressLine>24 Back Lane</streetAddressLine>
+                <streetAddressLine>Farsley</streetAddressLine>
+                <streetAddressLine>Leeds</streetAddressLine>
+                <postalCode>GPC 113</postalCode>
+            </addr>
+        </representedOrganization>
+    </Agent>
+</part>
+    </agentDirectory>
+</responsibleParty>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="9FE7CC3C-DDA8-4691-8BF3-41A7E8FC9BA2" />
+        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20160501120000"/>
+        </effectiveTime>
+        <availabilityTime value="20160601120000"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20160601120000" />
+            <agentRef classCode="AGNT">
+                <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id nullFlavor="UNK"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <CompoundStatement classCode="CATEGORY" moodCode="EVN">
+        <id root="B3B3AE86-82A9-444F-958D-FDBB3337F8DC"/>
+        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center value="20160501120000"/>
+        </effectiveTime>
+        <availabilityTime value="20160601120000" />
+        <component typeCode="COMP" contextConductionInd="true">
+            <ObservationStatement classCode="OBS" moodCode="ENV">
+                <id root="C0485C35-1C44-4A6E-A60E-4CB4C76A4954"/>
+                <code code="293585002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salicylate allergy (disorder)">
+    <originalText>Salicylate allergy (disorder)</originalText>
+</code>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <center value="20160501120000"/>
+                </effectiveTime>
+                <availabilityTime value="20160601120000" />
+                <pertinentInformation typeCode="PERT">
+                    <sequenceNumber value="+1"/>
+                    <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Status: Active Reaction 1 Description: Wheezing, chest tightness, shortness of breath Manifestation(s): Tight chest (finding) Wheezing, chest tightness, shortness of breath</text>
+                    </pertinentAnnotation>
+                </pertinentInformation>
+                <Participant typeCode="AUT" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2"/>
+    </agentRef>
+</Participant>
+            </ObservationStatement>
+        </component>
+    </CompoundStatement>
+</component>
+    </ehrComposition>
+</component>
+        </ehrFolder>
+    </component>
+    <inFulfillmentOf typeCode="FLFS">
+        <priorEhrRequest classCode="EXTRACT" moodCode="RQO">
+            <id root="17A3A644-A4EB-4C0A-A870-152D310FD1F8" />
+        </priorEhrRequest>
+    </inFulfillmentOf>
+    <limitation typeCode="LIMIT" inversionInd="true">
+        <limitingEhrExtractSpecification classCode="OBS" moodCode="DEF">
+            <id root="76C49C11-5271-11EA-9384-E83935108FD5" />
+            <code code="37241000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Entire record available to originator (administrative concept)" />
+        </limitingEhrExtractSpecification>
+    </limitation>
+</EhrExtract>
+
+        </subject>
+    </ControlActEvent>
+</RCMR_IN030000UK06>
