@@ -93,6 +93,7 @@ public class GetGpcDocumentReferencesTaskExecutor implements TaskExecutor<GetGpc
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
             .fromOdsCode(taskDefinition.getFromOdsCode())
+            .toOdsCode(taskDefinition.getToOdsCode())
             .accessDocumentUrl(url)
             .build();
 

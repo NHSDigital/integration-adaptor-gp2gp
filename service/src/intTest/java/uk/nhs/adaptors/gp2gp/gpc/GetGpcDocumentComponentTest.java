@@ -40,6 +40,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String INVALID_DOCUMENT_ID = "non-existing-id";
     private static final String NO_RECORD_FOUND = "NO_RECORD_FOUND";
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
+    private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
@@ -137,11 +138,12 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .conversationId(ehrExtractStatus.getConversationId())
             .requestId(ehrExtractStatus.getEhrRequest().getRequestId())
             .taskId(UUID.randomUUID().toString())
             .documentId(documentId)
-            .accessDocumentUrl(buildDocumentUrl(documentId))
+            .accessDocumentUrl(buildDocumentUrl(documentId, ehrExtractStatus.getEhrRequest().getToOdsCode()))
             .build();
     }
 
@@ -173,7 +175,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(coding.getDisplay()).isEqualTo(NO_RECORD_FOUND_STRING);
     }
 
-    private String buildDocumentUrl(String documentId) {
-        return configuration.getUrl() + configuration.getDocumentEndpoint() + documentId;
+    private String buildDocumentUrl(String documentId, String odsCode) {
+        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + configuration.getDocumentEndpoint() + documentId;
     }
 }
