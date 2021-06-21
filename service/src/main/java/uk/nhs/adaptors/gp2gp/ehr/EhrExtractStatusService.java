@@ -43,9 +43,9 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractStatusService {
-    protected static final int WAIT_FOR_IN_SECONDS = 10;
-    protected static final int POLL_INTERVAL_MS = 100;
-    protected static final int POLL_DELAY_MS = 10;
+    protected static final int WAIT_FOR_IN_SECONDS = 30;
+    protected static final int POLL_INTERVAL_MS = 300;
+    protected static final int POLL_DELAY_MS = 30;
     private static final String DOT = ".";
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String CONVERSATION_ID = "conversationId";

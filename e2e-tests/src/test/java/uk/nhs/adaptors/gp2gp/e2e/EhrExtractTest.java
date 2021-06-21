@@ -6,7 +6,6 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.time.Instant;
 import java.util.Collections;
 import java.util.UUID;
 
