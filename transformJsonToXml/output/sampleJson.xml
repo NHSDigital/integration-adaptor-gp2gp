@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="D6B7A2AE-7883-4B3A-9023-420E4C8FE71E" />
-    <creationTime value="20210616171028" />
+    <id root="5A22A566-BC77-412B-8EB9-B9BEBF3138DD" />
+    <creationTime value="20210617160056" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
     <processingCode code="P" />
@@ -27,16 +27,16 @@
         </author1>
         <subject typeCode="SUBJ" contextConductionInd="false">
             <EhrExtract classCode="EXTRACT" moodCode="EVN">
-    <id root="5E6C6EA4-C98A-49C9-A251-F2FCBF51D9B8" />
+    <id root="FF9740E5-583F-4501-BAA8-D6A930FE1F2C" />
     <statusCode code="COMPLETE" />
-    <availabilityTime value="20210616171028" />
+    <availabilityTime value="20210617160056" />
     <recordTarget typeCode="RCT">
         <patient classCode="PAT">
             <id root="2.16.840.1.113883.2.1.4.1" extension="9690938622" />
         </patient>
     </recordTarget>
     <author typeCode="AUT">
-        <time value="20210616171028" />
+        <time value="20210617160056" />
         <AgentOrgSDS classCode="AGNT">
             <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
                 <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
@@ -52,14 +52,14 @@
     </destination>
     <component typeCode="COMP">
         <ehrFolder classCode="FOLDER" moodCode="EVN">
-            <id root="2E6BE1D1-C36C-4F6E-B0CC-295C6E2F37A4" />
+            <id root="DA77294F-1A95-4765-ACF5-0D572D1F71EF" />
             <statusCode code="COMPLETE" />
             <effectiveTime>
                 <low value="20160501120000"/>
             </effectiveTime>
-            <availabilityTime value="20210616171028" />
+            <availabilityTime value="20210617160056" />
             <author typeCode="AUT">
-                <time value="20210616171028" />
+                <time value="20210617160056" />
                 <AgentOrgSDS classCode="AGNT">
                     <agentOrganizationSDS classCode="ORG" determinerCode="INSTANCE">
                         <id root="1.2.826.0.1285.0.1.10" extension="GP2GPTEST" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="7D0D35D0-B9F2-4F3B-A126-772A91C75937" />
+        <id root="6A874432-7796-437B-8E2B-51174CA12818" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="B82617" root="2.16.840.1.113883.2.1.4.3"/>
             <name>COXWOLD SURGERY</name>
@@ -86,7 +86,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2"/>
+        <id root="DDEE1688-9EDB-4052-A45E-79A43A255D52"/>
         <code nullFlavor="UNK">
             <originalText>paediatrician</originalText>
         </code>
@@ -114,7 +114,7 @@
 </responsibleParty>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9FE7CC3C-DDA8-4691-8BF3-41A7E8FC9BA2" />
+        <id root="F964514A-C989-4A01-89B2-09AEAAC8B77A" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -124,7 +124,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20160601120000" />
             <agentRef classCode="AGNT">
-                <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2" />
+                <id root="DDEE1688-9EDB-4052-A45E-79A43A255D52" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -142,7 +142,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="B3B3AE86-82A9-444F-958D-FDBB3337F8DC"/>
+        <id root="292FA2A9-DADA-4F9D-A4C6-CE3481DFD20C"/>
         <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -151,7 +151,7 @@
         <availabilityTime value="20160601120000" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="C0485C35-1C44-4A6E-A60E-4CB4C76A4954"/>
+                <id root="7A2CA396-90A3-410A-93BD-E9E20DBE46B9"/>
                 <code code="293585002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Salicylate allergy (disorder)">
     <originalText>Salicylate allergy (disorder)</originalText>
 </code>
@@ -168,7 +168,7 @@
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="C79540DA-7836-4626-B5BA-BBB6C5E67BD2"/>
+        <id root="DDEE1688-9EDB-4052-A45E-79A43A255D52"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
