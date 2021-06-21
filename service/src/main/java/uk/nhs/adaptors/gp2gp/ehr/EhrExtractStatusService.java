@@ -1,10 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static java.lang.String.format;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
-
-import static org.awaitility.Awaitility.await;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -14,8 +10,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -43,9 +37,6 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EhrExtractStatusService {
-    protected static final int WAIT_FOR_IN_SECONDS = 30;
-    protected static final int POLL_INTERVAL_MS = 300;
-    protected static final int POLL_DELAY_MS = 30;
     private static final String DOT = ".";
     private static final String ARRAY_REFERENCE = ".$.";
     private static final String CONVERSATION_ID = "conversationId";
@@ -450,14 +441,8 @@ public class EhrExtractStatusService {
         if (ehrExtractStatusOptional.isPresent()) {
             EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
 
-            if (ehrExtractStatus.getEhrExtractCorePending() != null && ehrExtractStatus.getEhrExtractCore() == null) {
-                Query query = createQueryForConversationId(conversationId);
-                query.addCriteria(Criteria.where("ehrExtractCorePending").exists(true));
-
-                var ehrExtractStatusPending = waitFor(() -> mongoTemplate.find(query, EhrExtractStatus.class).get(0));
-                if (ehrExtractStatusPending.getEhrExtractCore() == null) {
-                    throw new EhrExtractMessageOutOfOrderException("Continue", conversationId);
-                }
+            if (ehrExtractStatus.getEhrExtractCorePending() == null) {
+                throw new EhrExtractMessageOutOfOrderException("Continue", conversationId);
             }
 
             if (ehrExtractStatus.getEhrContinue() != null) {
@@ -469,23 +454,5 @@ public class EhrExtractStatusService {
             throw new EhrExtractNonExistingException("Continue", conversationId);
         }
         return false;
-    }
-
-    public static <T> T waitFor(Supplier<T> supplier) {
-        var dataToReturn = new AtomicReference<T>();
-        await()
-            .atMost(WAIT_FOR_IN_SECONDS, SECONDS)
-            .pollInterval(POLL_INTERVAL_MS, MILLISECONDS)
-            .pollDelay(POLL_DELAY_MS, MILLISECONDS)
-            .until(() -> {
-                var data = supplier.get();
-                if (data != null) {
-                    dataToReturn.set(data);
-                    return true;
-                }
-                return false;
-            });
-
-        return dataToReturn.get();
     }
 }
