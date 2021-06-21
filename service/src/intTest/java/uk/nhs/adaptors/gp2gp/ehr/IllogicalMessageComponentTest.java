@@ -5,6 +5,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -23,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -74,6 +75,8 @@ public class IllogicalMessageComponentTest {
     private XPathService xPathService;
     @MockBean
     private ObjectMapper objectMapper;
+    @MockBean
+    private TaskDispatcher taskDispatcher;
     @Autowired
     private InboundMessageHandler inboundMessageHandler;
     @Autowired
@@ -82,8 +85,6 @@ public class IllogicalMessageComponentTest {
     private Message message;
     @Mock
     private InboundMessage inboundMessage;
-    @SpyBean
-    private TaskDispatcher taskDispatcher;
 
     @Value("classpath:illogicalmessage/RCMR_IN010000UK05_ebxml.txt")
     private Resource requestResponseEbxml;
@@ -110,6 +111,7 @@ public class IllogicalMessageComponentTest {
 
         assertThat(exception.getMessage())
             .isEqualTo("Received a Continue message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -124,12 +126,7 @@ public class IllogicalMessageComponentTest {
 
         assertThat(exception.getMessage())
             .isEqualTo("Received a ACK message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
-    }
-
-    @SneakyThrows
-    private void mockAcknowledgementMessage(String ebxml, String payload, String interactionId, String conversationId) {
-        when(xPathService.getNodeValue(any(), any())).thenReturn(ACK_OK_CODE);
-        mockIncomingMessage(ebxml, payload, interactionId, conversationId);
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -149,6 +146,7 @@ public class IllogicalMessageComponentTest {
         assertThat(exception.getMessage())
             .isEqualTo("Received a Continue message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that "
                 + "is out of order in message process");
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -168,6 +166,7 @@ public class IllogicalMessageComponentTest {
         assertThat(exception.getMessage())
             .isEqualTo("Received a ACK message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that is out of "
                 + "order in message process");
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -186,6 +185,7 @@ public class IllogicalMessageComponentTest {
         var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -206,6 +206,7 @@ public class IllogicalMessageComponentTest {
         var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @Test
@@ -227,6 +228,21 @@ public class IllogicalMessageComponentTest {
         var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
         assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
+        verify(taskDispatcher, never()).createTask(any());
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_UnsupportedMessageSent_Expect_ErrorThrown() {
+        String incomingMessage = null;
+        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+
+        Exception exception = assertThrows(UnsupportedInteractionException.class,
+            () -> inboundMessageHandler.handle(message));
+
+        assertThat(exception.getMessage())
+            .isEqualTo("Unsupported interaction id null");
+        verify(taskDispatcher, never()).createTask(any());
     }
 
     @SneakyThrows
@@ -255,19 +271,6 @@ public class IllogicalMessageComponentTest {
         when(xPathService.getNodeValue(ebxmlDocument, MESSAGE_ID_PATH)).thenReturn("123");
     }
 
-    @Test
-    @SneakyThrows
-    public void When_UnsupportedMessageSent_Expect_ErrorThrown() {
-        String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-
-        Exception exception = assertThrows(UnsupportedInteractionException.class,
-            () -> inboundMessageHandler.handle(message));
-
-        assertThat(exception.getMessage())
-            .isEqualTo("Unsupported interaction id null");
-    }
-
     private static String asString(Resource resource) {
         try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
             return FileCopyUtils.copyToString(reader);
@@ -287,5 +290,11 @@ public class IllogicalMessageComponentTest {
         when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
         when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
         when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
+    }
+
+    @SneakyThrows
+    private void mockAcknowledgementMessage(String ebxml, String payload, String interactionId, String conversationId) {
+        when(xPathService.getNodeValue(any(), any())).thenReturn(ACK_OK_CODE);
+        mockIncomingMessage(ebxml, payload, interactionId, conversationId);
     }
 }
