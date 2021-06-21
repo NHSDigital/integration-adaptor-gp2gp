@@ -12,9 +12,6 @@ import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.JSON_EXTENSION;
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
-
 @Slf4j
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -50,10 +47,9 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
             documentTaskDefinition, mhsOutboundRequestData, taskId
         );
 
-        String documentJsonFilename = documentTaskDefinition.getConversationId()
-            .concat(PATH_SEPARATOR)
-            .concat(documentTaskDefinition.getDocumentId())
-            .concat(JSON_EXTENSION);
+        String documentJsonFilename = GpcFilenameUtils.generateDocumentFilename(
+            documentTaskDefinition.getConversationId(), documentTaskDefinition.getDocumentId()
+        );
 
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentJsonFilename);
 

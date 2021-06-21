@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 
 import java.time.Instant;
-
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -35,10 +33,9 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
 
-        String structuredRecordJsonFilename = sendEhrExtractCoreTaskDefinition.getConversationId()
-            .concat(PATH_SEPARATOR)
-            .concat(sendEhrExtractCoreTaskDefinition.getConversationId())
-            .concat(GPC_STRUCTURED_FILE_EXTENSION);
+        String structuredRecordJsonFilename = GpcFilenameUtils.generateStructuredRecordFilename(
+            sendEhrExtractCoreTaskDefinition.getConversationId()
+        );
         var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordJsonFilename);
 
         var requestData =

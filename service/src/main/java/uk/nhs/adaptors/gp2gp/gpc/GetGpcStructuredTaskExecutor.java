@@ -18,9 +18,6 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.List;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
-
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
@@ -70,10 +67,9 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             structuredTaskDefinition.getTaskId()
         );
 
-        String structuredRecordJsonFilename = structuredTaskDefinition.getConversationId()
-            .concat(PATH_SEPARATOR)
-            .concat(structuredTaskDefinition.getConversationId())
-            .concat(GPC_STRUCTURED_FILE_EXTENSION);
+        String structuredRecordJsonFilename = GpcFilenameUtils.generateStructuredRecordFilename(
+            structuredTaskDefinition.getConversationId()
+        );
 
         storageConnectorService.uploadFile(storageDataWrapper, structuredRecordJsonFilename);
 
