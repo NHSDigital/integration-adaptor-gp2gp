@@ -23,8 +23,6 @@ import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.SendNegativeAcknowledgementExecutor;
-import uk.nhs.adaptors.gp2gp.ehr.SendNegativeAcknowledgementTaskDefinition;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskExecutorFactoryTest {
@@ -39,9 +37,6 @@ public class TaskExecutorFactoryTest {
     private SendAcknowledgementExecutor sendAcknowledgementExecutor;
     @Spy
     @InjectMocks
-    private SendNegativeAcknowledgementExecutor sendNegativeAcknowledgementExecutor;
-    @Spy
-    @InjectMocks
     private SendEhrExtractCoreTaskExecutor sendEhrExtractCoreTaskExecutor;
     @Spy
     @InjectMocks
@@ -53,7 +48,6 @@ public class TaskExecutorFactoryTest {
             getGpcDocumentTaskExecutor,
             getGpcStructuredTaskExecutor,
             sendAcknowledgementExecutor,
-            sendNegativeAcknowledgementExecutor,
             sendEhrExtractCoreTaskExecutor,
             sendDocumentTaskExecutor
         );
@@ -63,9 +57,6 @@ public class TaskExecutorFactoryTest {
         assertThat(taskExecutorFactory.getTaskExecutor(GetGpcStructuredTaskDefinition.class)).isEqualTo(getGpcStructuredTaskExecutor);
         assertThat(taskExecutorFactory.getTaskExecutor(GetGpcDocumentTaskDefinition.class)).isEqualTo(getGpcDocumentTaskExecutor);
         assertThat(taskExecutorFactory.getTaskExecutor(SendAcknowledgementTaskDefinition.class)).isEqualTo(sendAcknowledgementExecutor);
-        assertThat(taskExecutorFactory.getTaskExecutor(SendNegativeAcknowledgementTaskDefinition.class))
-            .isEqualTo(sendNegativeAcknowledgementExecutor);
-
         assertThat(taskExecutorFactory.getTaskExecutor(SendEhrExtractCoreTaskDefinition.class)).isEqualTo(sendEhrExtractCoreTaskExecutor);
         assertThat(taskExecutorFactory.getTaskExecutor(SendDocumentTaskDefinition.class)).isEqualTo(sendDocumentTaskExecutor);
 

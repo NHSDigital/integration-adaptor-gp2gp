@@ -140,9 +140,11 @@ public class EhrExtractStatus implements TimeToLive {
     @Document
     @Builder
     public static class AckToRequester {
-        private String messageId;
         private String taskId;
+        private String messageId;
         private String typeCode;
+        private String reasonCode;
+        private String detail;
     }
 
     @Data

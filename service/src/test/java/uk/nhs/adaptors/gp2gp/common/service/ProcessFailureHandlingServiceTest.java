@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendNegativeAcknowledgementTaskDispatcher;
+import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDispatcher;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class ProcessFailureHandlingServiceTest {
     private EhrExtractStatusService ehrExtractStatusService;
 
     @Mock
-    private SendNegativeAcknowledgementTaskDispatcher sendNackTaskDispatcher;
+    private SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Mock
     private EhrExtractStatus ehrExtractStatus;
@@ -55,7 +55,7 @@ public class ProcessFailureHandlingServiceTest {
         assertThat(result).isTrue();
         verify(ehrExtractStatusRepository).findByConversationId(conversationId);
         verify(ehrExtractStatusService).updateEhrExtractStatusError(conversationId, errorCode, errorMessage, taskType);
-        verify(sendNackTaskDispatcher).sendNegativeAcknowledgement(ehrExtractStatus, errorCode, errorMessage);
+        verify(sendAcknowledgementTaskDispatcher).sendNegativeAcknowledgement(ehrExtractStatus, errorCode, errorMessage);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ProcessFailureHandlingServiceTest {
         var result = processFailureHandlingService.failProcess("convId1", "errorCode1", "errorMsg1", "taskType1");
 
         assertThat(result).isFalse();
-        verifyNoInteractions(ehrExtractStatusService, sendNackTaskDispatcher);
+        verifyNoInteractions(ehrExtractStatusService, sendAcknowledgementTaskDispatcher);
     }
 
     @Test

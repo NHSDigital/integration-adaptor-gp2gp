@@ -99,11 +99,6 @@ test {
 	useJUnitPlatform()
 }
 
-task(interoperabilityTestingToolJsonToXml, dependsOn: 'classes', type: JavaExec) {
-	main = 'uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml'
-	classpath = sourceSets.main.runtimeClasspath
-}
-
 jacocoTestReport {
 	dependsOn test // tests are required to run before generating the report
 }
@@ -120,6 +115,11 @@ sourceSets {
 			srcDir file('src/intTest/resources')
 		}
 	}
+}
+
+task(interoperabilityTestingToolJsonToXml, dependsOn: 'classes', type: JavaExec) {
+	main = 'uk.nhs.adaptors.gp2gp.transformjsontoxmltool.TransformJsonToXml'
+	classpath = sourceSets.main.runtimeClasspath
 }
 
 configurations {
