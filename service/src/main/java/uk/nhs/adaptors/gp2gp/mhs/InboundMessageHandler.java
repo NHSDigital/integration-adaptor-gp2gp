@@ -60,6 +60,7 @@ public class InboundMessageHandler {
             }
             return true;
         }  catch (EhrExtractMessageOutOfOrderException | EhrExtractNonExistingException | UnsupportedInteractionException e) {
+            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
             throw e;
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
