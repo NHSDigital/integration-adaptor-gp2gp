@@ -3,8 +3,6 @@ package uk.nhs.adaptors.gp2gp.mhs;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -108,22 +106,6 @@ public class InboundMessageHandlerTest {
         inboundMessageHandler.handle(message);
 
         verify(ehrExtractRequestHandler).handleAcknowledgement("75049C80-5271-11EA-9384-E83935108FD5", payload);
-    }
-
-    @Test
-    @SneakyThrows
-    public void When_MessageIsForUnknownInteraction_Expect_ExceptionIsThrown() {
-        setUpEhrExtract(EBXML_CONTENT);
-        Document header = mock(Document.class);
-        Document payload = mock(Document.class);
-        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
-        doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
-        doReturn(UNKNOWN_INTERACTION_ID).when(xPathService).getNodeValue(eq(header), anyString());
-
-        var result = inboundMessageHandler.handle(message);
-
-        assertThat(result).isFalse();
-        verifyNoInteractions(ehrExtractRequestHandler);
     }
 
     @Test

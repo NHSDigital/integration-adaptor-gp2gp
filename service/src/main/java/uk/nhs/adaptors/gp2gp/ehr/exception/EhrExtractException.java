@@ -4,5 +4,4 @@ public class EhrExtractException extends RuntimeException {
     public EhrExtractException(String message) {
         super(message);
     }
-
 }

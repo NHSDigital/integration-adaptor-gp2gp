@@ -30,6 +30,8 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractMessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
@@ -418,8 +420,7 @@ public class EhrExtractStatusService {
             EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
 
             if (ehrExtractStatus.getAckToRequester() == null) {
-                throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
-                    + "' that is out of order in message process");
+                throw new EhrExtractMessageOutOfOrderException("ACK", conversationId);
             }
 
             if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
@@ -428,8 +429,7 @@ public class EhrExtractStatusService {
                 return true;
             }
         } else {
-            throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
-                + "' that is not recognised");
+            throw new EhrExtractNonExistingException("ACK", conversationId);
         }
         return false;
     }
@@ -445,8 +445,7 @@ public class EhrExtractStatusService {
 
                 var ehrExtractStatusPending = waitFor(() -> mongoTemplate.find(query, EhrExtractStatus.class).get(0));
                 if (ehrExtractStatusPending.getEhrExtractCore() == null) {
-                    throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
-                        + "' that is out of order in message process");
+                    throw new EhrExtractMessageOutOfOrderException("Continue", conversationId);
                 }
             }
 
@@ -456,8 +455,7 @@ public class EhrExtractStatusService {
                 return true;
             }
         } else {
-            throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
-                + "' that is not recognised");
+            throw new EhrExtractNonExistingException("Continue", conversationId);
         }
         return false;
     }

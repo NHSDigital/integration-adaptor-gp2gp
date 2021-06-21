@@ -35,7 +35,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractMessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
@@ -97,7 +98,6 @@ public class IllogicalMessageComponentTest {
     @Value("classpath:illogicalmessage/MCCI_IN010000UK13_payload.txt")
     private Resource acknowledgementResponsePayload;
 
-    //Message not in flight
     @Test
     public void When_ContinueRecievedToNonExistingEhrExtractStatus_Expect_ErrorThrown() {
         String continuePayload = asString(continueResponsePayload);
@@ -105,32 +105,11 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(EhrExtractException.class,
+        Exception exception = assertThrows(EhrExtractNonExistingException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
             .isEqualTo("Received a Continue message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
-    }
-
-    private static String asString(Resource resource) {
-        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
-            return FileCopyUtils.copyToString(reader);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    @SneakyThrows
-    private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
-        String incomingMessage = null;
-        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
-        when(inboundMessage.getEbXML()).thenReturn(ebxml);
-        when(inboundMessage.getPayload()).thenReturn(payload);
-
-        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
-        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
-        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
-        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
     }
 
     @Test
@@ -140,11 +119,11 @@ public class IllogicalMessageComponentTest {
 
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(EhrExtractException.class,
+        Exception exception = assertThrows(EhrExtractNonExistingException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received an ACK message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
+            .isEqualTo("Received a ACK message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
     }
 
     @SneakyThrows
@@ -153,10 +132,10 @@ public class IllogicalMessageComponentTest {
         mockIncomingMessage(ebxml, payload, interactionId, conversationId);
     }
 
-    //outoforder
     @Test
     public void When_ContinueReceivedOutOfOrderExtractCoreNotSent_Expect_ErrorThrown() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String continuePayload = asString(continueResponsePayload);
@@ -164,7 +143,7 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(EhrExtractException.class,
+        Exception exception = assertThrows(EhrExtractMessageOutOfOrderException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
@@ -183,15 +162,14 @@ public class IllogicalMessageComponentTest {
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
             ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(EhrExtractException.class,
+        Exception exception = assertThrows(EhrExtractMessageOutOfOrderException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received an ACK message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that is out of "
+            .isEqualTo("Received a ACK message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that is out of "
                 + "order in message process");
     }
 
-    //Duplicates
     @Test
     public void When_DuplicateEhrRequestRecieved_Expect_SkippedNoDatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
@@ -205,9 +183,50 @@ public class IllogicalMessageComponentTest {
         inboundMessageHandler.handle(message);
         var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         inboundMessageHandler.handle(message);
-        var secondtEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
 
-        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondtEhrStatus.getUpdatedAt());
+        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
+    }
+
+    @Test
+    public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        ehrExtractStatus.setEhrExtractCore(EhrExtractStatus.EhrExtractCore.builder().build());
+        ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        String continuePayload = asString(continueResponsePayload);
+        String continueEbxml = asString(continueResponseEbxml);
+
+        mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, ehrExtractStatus.getConversationId());
+
+        inboundMessageHandler.handle(message);
+        var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        inboundMessageHandler.handle(message);
+        var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+
+        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
+    }
+
+    @Test
+    public void When_DuplicateAcknowledgementSentTwice_Expect_SkippedNoDatabaseUpdatedn() {
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
+        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
+        ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        String acknowledgementPayload = asString(acknowledgementResponsePayload);
+        String acknowledgementEbxml = asString(acknowledgementResponseEbxml);
+
+        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
+            ehrExtractStatus.getConversationId());
+
+        inboundMessageHandler.handle(message);
+        var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+        inboundMessageHandler.handle(message);
+        var secondEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
+
+        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondEhrStatus.getUpdatedAt());
     }
 
     @SneakyThrows
@@ -237,47 +256,6 @@ public class IllogicalMessageComponentTest {
     }
 
     @Test
-    public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
-        ehrExtractStatus.setEhrExtractCore(EhrExtractStatus.EhrExtractCore.builder().build());
-        ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-
-        String continuePayload = asString(continueResponsePayload);
-        String continueEbxml = asString(continueResponseEbxml);
-
-        mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, ehrExtractStatus.getConversationId());
-
-        inboundMessageHandler.handle(message);
-        var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        inboundMessageHandler.handle(message);
-        var secondtEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-
-        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondtEhrStatus.getUpdatedAt());
-    }
-
-    @Test
-    public void When_DuplicateAcknowledgementSentTwice_Expect_SkippedNoDatabaseUpdatedn() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
-        ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
-        ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-
-        String acknowledgementPayload = asString(acknowledgementResponsePayload);
-        String acknowledgementEbxml = asString(acknowledgementResponseEbxml);
-
-        mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
-            ehrExtractStatus.getConversationId());
-
-        inboundMessageHandler.handle(message);
-        var firstEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-        inboundMessageHandler.handle(message);
-        var secondtEhrStatus = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-
-        assertThat(firstEhrStatus.getUpdatedAt()).isEqualTo(secondtEhrStatus.getUpdatedAt());
-    }
-
-    @Test
     @SneakyThrows
     public void When_UnsupportedMessageSent_Expect_ErrorThrown() {
         String incomingMessage = null;
@@ -288,5 +266,26 @@ public class IllogicalMessageComponentTest {
 
         assertThat(exception.getMessage())
             .isEqualTo("Unsupported interaction id null");
+    }
+
+    private static String asString(Resource resource) {
+        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
+            return FileCopyUtils.copyToString(reader);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    @SneakyThrows
+    private void mockIncomingMessage(String ebxml, String payload, String interactionId, String conversationId) {
+        String incomingMessage = null;
+        when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
+        when(inboundMessage.getEbXML()).thenReturn(ebxml);
+        when(inboundMessage.getPayload()).thenReturn(payload);
+
+        var ebxmlDocument = SERVICE.parseDocumentFromXml(ebxml);
+        when(xPathService.parseDocumentFromXml(inboundMessage.getEbXML())).thenReturn(ebxmlDocument);
+        when(xPathService.getNodeValue(ebxmlDocument, ACTION_PATH)).thenReturn(interactionId);
+        when(xPathService.getNodeValue(ebxmlDocument, CONVERSATION_ID_PATH)).thenReturn(conversationId);
     }
 }
