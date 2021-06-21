@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.SendNegativeAcknowledgementTaskDispatcher;
+import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDispatcher;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProcessFailureHandlingService {
 
-    private final SendNegativeAcknowledgementTaskDispatcher sendNackTaskDispatcher;
+    private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final EhrExtractStatusRepository ehrExtractStatusRepository;
 
@@ -30,7 +30,7 @@ public class ProcessFailureHandlingService {
             return this.ehrExtractStatusRepository.findByConversationId(conversationId)
                 .map(ehrExtractStatus -> {
                     ehrExtractStatusService.updateEhrExtractStatusError(conversationId, errorCode, errorMessage, taskType);
-                    sendNackTaskDispatcher.sendNegativeAcknowledgement(ehrExtractStatus, errorCode, errorMessage);
+                    sendAcknowledgementTaskDispatcher.sendNegativeAcknowledgement(ehrExtractStatus, errorCode, errorMessage);
                     return true;
                 })
                 .orElseGet(() -> {

@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -23,12 +24,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
+import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
+import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ExtendWith(MockitoExtension.class)
 public class TaskHandlerTest {
 
     private static final String NACK_ERROR_CODE = "18";
+    private static final String CONVERSATION_ID = "conversationId1";
 
     @Mock
     private TaskDefinitionFactory taskDefinitionFactory;
@@ -39,6 +43,9 @@ public class TaskHandlerTest {
     @Mock
     private MDCService mdcService;
 
+    @Mock
+    private TaskExecutor taskExecutor;
+
     @InjectMocks
     private TaskHandler taskHandler;
 
@@ -46,21 +53,15 @@ public class TaskHandlerTest {
     private Message message;
 
     @Mock
-    private TaskDefinition taskDefinition;
-
-    @Mock
-    private TaskExecutor taskExecutor;
-
-    @Mock
     private ProcessFailureHandlingService processFailureHandlingService;
+
+    private TaskDefinition taskDefinition;
+    private SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition;
 
     @Test
     @SneakyThrows
     public void When_TaskHandled_Expect_TaskExecuted() {
-        when(message.getStringProperty(TASK_TYPE_HEADER_NAME)).thenReturn("taskType");
-        when(message.getBody(String.class)).thenReturn("body");
-        when(taskDefinitionFactory.getTaskDefinition("taskType", "body")).thenReturn(taskDefinition);
-        when(taskExecutorFactory.getTaskExecutor(taskDefinition.getClass())).thenReturn(taskExecutor);
+        setUpContinueMessage();
 
         var result = taskHandler.handle(message);
 
@@ -81,42 +82,37 @@ public class TaskHandlerTest {
     @Test
     @SneakyThrows
     public void When_NackTaskFails_Expect_ProcessNotToBeFailed() {
-        setupValidMessage("conversationId1", TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT);
-        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        setupAckMessage(SendAcknowledgementTaskDefinition.NACK_TYPE_CODE);
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
 
         var result = taskHandler.handle(message);
 
         assertThat(result).isFalse();
-        verify(taskExecutor).execute(taskDefinition);
+        verify(taskExecutor).execute(sendAcknowledgementTaskDefinition);
         verify(processFailureHandlingService, never()).failProcess(any(), any(), any(), any());
     }
 
     @Test
     @SneakyThrows
     public void When_NonNackTaskFails_Expect_ProcessToBeFailed() {
-        String conversationId = "conversationId1";
-        TaskType taskType = TaskType.SEND_EHR_CONTINUE;
-        setupValidMessage(conversationId, taskType);
-        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        setUpContinueMessage();
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
 
         taskHandler.handle(message);
 
         verify(taskExecutor).execute(taskDefinition);
         verify(processFailureHandlingService).failProcess(
-            conversationId,
+            CONVERSATION_ID,
             NACK_ERROR_CODE,
             "An error occurred when executing a task",
-            taskType.name()
+            TaskType.SEND_EHR_CONTINUE.name()
         );
     }
 
     @Test
     @SneakyThrows
-    public void When_NonNackTaskFails_Expect_ResultFromFailureHandlerToBeReturned() {
-        setupValidMessage("conversationId1", TaskType.SEND_EHR_CONTINUE);
-        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+    public void When_OtherTaskFails_Expect_ResultFromFailureHandlerToBeReturned() {
+        setUpContinueMessage();
         doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
 
         when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
@@ -128,9 +124,22 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
+    public void When_NonAckTaskFails_Expect_ResultFromFailureHandlerToBeReturned() {
+        setupAckMessage(SendAcknowledgementTaskDefinition.ACK_TYPE_CODE);
+        doThrow(new RuntimeException("test exception")).when(taskExecutor).execute(any());
+
+        when(processFailureHandlingService.failProcess(any(), any(), any(), any()))
+            .thenReturn(true, false);
+
+        assertThat(taskHandler.handle(message)).isTrue();
+        assertThat(taskHandler.handle(message)).isFalse();
+    }
+
+
+    @Test
+    @SneakyThrows
     public void When_FailureHandlerThrowsException_Expect_ExceptionToBeRethrown() {
-        setupValidMessage("conversationId1", TaskType.SEND_EHR_CONTINUE);
-        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        setUpContinueMessage();
         doThrow(new RuntimeException("task executor exception")).when(taskExecutor).execute(any());
 
         var failureHandlingException = new RuntimeException("failure handler exception");
@@ -144,38 +153,45 @@ public class TaskHandlerTest {
     @Test
     @SneakyThrows
     public void When_ProcessHasAlreadyFailed_Expect_NonNackTaskNotToBeExecuted() {
-        String conversationId = "conversationId1";
-        setupValidMessage(conversationId, TaskType.SEND_EHR_CONTINUE);
+        setUpContinueMessage();
         when(processFailureHandlingService.hasProcessFailed(any())).thenReturn(true);
 
         var result = taskHandler.handle(message);
 
         assertThat(result).isTrue();
-        verify(processFailureHandlingService).hasProcessFailed(conversationId);
+        verify(processFailureHandlingService).hasProcessFailed(CONVERSATION_ID);
         verifyNoInteractions(taskExecutor);
     }
 
     @Test
     @SneakyThrows
     public void When_ProcessHasAlreadyFailed_Expect_NackTaskToStillBeExecuted() {
-        String conversationId = "conversationId1";
-        setupValidMessage(conversationId, TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT);
-        when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        setupAckMessage(SendAcknowledgementTaskDefinition.NACK_TYPE_CODE);
         when(processFailureHandlingService.hasProcessFailed(any())).thenReturn(true);
 
         var result = taskHandler.handle(message);
 
         assertThat(result).isTrue();
-        verify(processFailureHandlingService).hasProcessFailed(conversationId);
-        verify(taskExecutor).execute(taskDefinition);
+        verify(processFailureHandlingService).hasProcessFailed(CONVERSATION_ID);
+        verify(taskExecutor).execute(sendAcknowledgementTaskDefinition);
     }
 
-    private String setupValidMessage(String conversationId, TaskType taskType) throws JMSException {
+    private void setupAckMessage(String typeCode) throws JMSException {
+        lenient().when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
         when(message.getStringProperty(TASK_TYPE_HEADER_NAME)).thenReturn("taskType");
         when(message.getBody(String.class)).thenReturn("body");
+        sendAcknowledgementTaskDefinition = SendAcknowledgementTaskDefinition.builder()
+            .typeCode(typeCode)
+            .conversationId(TaskHandlerTest.CONVERSATION_ID)
+            .build();
+        when(taskDefinitionFactory.getTaskDefinition("taskType", "body")).thenReturn(sendAcknowledgementTaskDefinition);
+    }
+
+    private void setUpContinueMessage() throws JMSException {
+        lenient().when(taskExecutorFactory.getTaskExecutor(any())).thenReturn(taskExecutor);
+        when(message.getStringProperty(TASK_TYPE_HEADER_NAME)).thenReturn("taskType");
+        when(message.getBody(String.class)).thenReturn("body");
+        taskDefinition = SendDocumentTaskDefinition.builder().conversationId(CONVERSATION_ID).build();
         when(taskDefinitionFactory.getTaskDefinition("taskType", "body")).thenReturn(taskDefinition);
-        when(taskDefinition.getTaskType()).thenReturn(taskType);
-        when(taskDefinition.getConversationId()).thenReturn(conversationId);
-        return conversationId;
     }
 }

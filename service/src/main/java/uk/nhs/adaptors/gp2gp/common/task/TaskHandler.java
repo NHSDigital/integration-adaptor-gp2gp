@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
+import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 
 @Component
 @AllArgsConstructor
@@ -90,6 +91,7 @@ public class TaskHandler {
     }
 
     private boolean isSendNackTask(TaskDefinition taskDefinition) {
-        return TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType());
+        return TaskType.SEND_ACKNOWLEDGEMENT.equals(taskDefinition.getTaskType())
+            && ((SendAcknowledgementTaskDefinition) taskDefinition).isNack();
     }
 }
