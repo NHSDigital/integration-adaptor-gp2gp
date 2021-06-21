@@ -65,7 +65,7 @@ public class SendDocumentComponentTest {
         when(sendDocumentTaskDefinition.getFromOdsCode()).thenReturn(ehrRequest.getFromOdsCode());
         when(sendDocumentTaskDefinition.getTaskId()).thenReturn(ehrRequest.getFromOdsCode());
 
-        when(storageConnectorService.downloadFile("DFF5321C-C6EA-468E-BBC2-B0E48000E071/some-conversation-id/document-name.json"))
+        when(storageConnectorService.downloadFile("some-conversation-id/document-name.json"))
             .thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn("payload");
 

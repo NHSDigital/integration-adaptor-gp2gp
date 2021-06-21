@@ -15,8 +15,6 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameConstants.PATH_SEPARATOR;
-
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
@@ -39,10 +37,9 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     public void execute(SendDocumentTaskDefinition sendDocumentTaskDefinition) {
         LOGGER.info("SendDocument task was created, Sending EHR Document to GP");
 
-        String filename = sendDocumentTaskDefinition.getConversationId()
-            .concat(PATH_SEPARATOR)
-            .concat(sendDocumentTaskDefinition.getDocumentName());
-        var storageDataWrapper = storageConnectorService.downloadFile(filename);
+        var storageDataWrapper = storageConnectorService.downloadFile(
+            sendDocumentTaskDefinition.getDocumentName()
+        );
 
         var outboundMessage = OutboundMessage.builder()
             .payload(storageDataWrapper.getData())
@@ -52,12 +49,13 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
 
         var messageId = randomIdGeneratorService.createNewId();
 
-        var requestData = mhsRequestBuilder
-            .buildSendEhrExtractCommonRequest(
+        var requestData =
+            mhsRequestBuilder.buildSendEhrExtractCommonRequest(
                 stringRequestBody,
                 sendDocumentTaskDefinition.getConversationId(),
                 sendDocumentTaskDefinition.getFromOdsCode(),
-                messageId);
+                messageId
+            );
 
         mhsClient.sendMessageToMHS(requestData);
 
