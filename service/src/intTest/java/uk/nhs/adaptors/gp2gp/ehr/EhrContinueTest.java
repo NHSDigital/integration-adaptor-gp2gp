@@ -43,7 +43,7 @@ public class EhrContinueTest {
     @Test
     public void When_EhrContinueIsValid_Expect_TaskDispatcherCalledWithSameValues() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        ehrExtractStatus.setEhrExtractCore(EhrExtractStatus.EhrExtractCore.builder().build());
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         var expectedResponse = createContinueTasks(ehrExtractStatus);
 
         ehrExtractStatusRepository.save(ehrExtractStatus);

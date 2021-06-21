@@ -132,7 +132,6 @@ public class IllogicalMessageComponentTest {
     @Test
     public void When_ContinueReceivedOutOfOrderExtractCoreNotSent_Expect_ErrorThrown() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
-        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String continuePayload = asString(continueResponsePayload);
@@ -191,7 +190,7 @@ public class IllogicalMessageComponentTest {
     @Test
     public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
-        ehrExtractStatus.setEhrExtractCore(EhrExtractStatus.EhrExtractCore.builder().build());
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
