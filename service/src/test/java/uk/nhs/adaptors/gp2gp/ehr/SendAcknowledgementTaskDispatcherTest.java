@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SendNegativeAcknowledgementTaskDispatcherTest {
+public class SendAcknowledgementTaskDispatcherTest {
 
     private static final String CONVERSATION_ID = "bc96655f-1b24-4772-ace6-c31f4d80ff58";
     private static final String REQUEST_ID = "0c812331-fb6e-4c67-b6d5-9d99022e559f";
@@ -34,13 +34,13 @@ public class SendNegativeAcknowledgementTaskDispatcherTest {
     private RandomIdGeneratorService randomIdGeneratorService;
 
     @Captor
-    private ArgumentCaptor<SendNegativeAcknowledgementTaskDefinition> taskDefinitionArgumentCaptor;
+    private ArgumentCaptor<SendAcknowledgementTaskDefinition> taskDefinitionArgumentCaptor;
 
-    private SendNegativeAcknowledgementTaskDispatcher sendNackTaskDispatcher;
+    private SendAcknowledgementTaskDispatcher sendNackTaskDispatcher;
 
     @BeforeEach
     public void setUp() {
-        this.sendNackTaskDispatcher = new SendNegativeAcknowledgementTaskDispatcher(
+        this.sendNackTaskDispatcher = new SendAcknowledgementTaskDispatcher(
             taskDispatcher,
             randomIdGeneratorService
         );
@@ -61,7 +61,7 @@ public class SendNegativeAcknowledgementTaskDispatcherTest {
         // ASSERT
         verify(taskDispatcher).createTask(taskDefinitionArgumentCaptor.capture());
 
-        SendNegativeAcknowledgementTaskDefinition definition = taskDefinitionArgumentCaptor.getValue();
+        SendAcknowledgementTaskDefinition definition = taskDefinitionArgumentCaptor.getValue();
 
         assertThat(definition.getConversationId()).isEqualTo(CONVERSATION_ID);
         assertThat(definition.getRequestId()).isEqualTo(REQUEST_ID);
@@ -69,13 +69,14 @@ public class SendNegativeAcknowledgementTaskDispatcherTest {
         assertThat(definition.getFromAsid()).isEqualTo(FROM_ASID);
         assertThat(definition.getToOdsCode()).isEqualTo(TO_ODS_CODE);
         assertThat(definition.getFromOdsCode()).isEqualTo(FROM_ODS_CODE);
-        assertThat(definition.getTaskType()).isEqualTo(TaskType.SEND_NEGATIVE_ACKNOWLEDGEMENT);
+        assertThat(definition.getTaskType()).isEqualTo(TaskType.SEND_ACKNOWLEDGEMENT);
         assertThat(definition.getEhrRequestMessageId()).isEqualTo(MESSAGE_ID);
         assertThat(definition.getTypeCode()).isEqualTo(NACK_TYPE_CODE);
 
         assertThat(definition.getReasonCode()).isEqualTo(reasonCode);
         assertThat(definition.getDetail()).isEqualTo(reasonMessage);
         assertThat(definition.getTaskId()).isEqualTo(taskId);
+        assertThat(definition.isNack()).isTrue();
     }
 
     private EhrExtractStatus sampleEhrExtractStatus() {
