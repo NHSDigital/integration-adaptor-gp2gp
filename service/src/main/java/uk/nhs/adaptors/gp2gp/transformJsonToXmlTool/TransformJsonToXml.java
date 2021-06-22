@@ -45,7 +45,7 @@ import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
     prefix = "command.line.runner",
     value = "enabled",
     havingValue = "true",
-    matchIfMissing = true)
+    matchIfMissing = false)
 @Component
 public class TransformJsonToXml implements CommandLineRunner {
 
