@@ -63,21 +63,37 @@ public class InboundMessageHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_MessageIsUnreadable_Expect_FalseToBeReturned() {
+    public void When_MessageIsUnreadable_Expect_MessageProcessingToBeAborted() {
         doThrow(mock(JMSException.class)).when(message).getBody(String.class);
 
         var result = inboundMessageHandler.handle(message);
         assertThat(result).isFalse();
+
+        verifyNoInteractions(ehrExtractRequestHandler, mdcService, processFailureHandlingService);
     }
 
     @Test
     @SneakyThrows
-    public void When_MessageIsNotJson_Expect_FalseToBeReturned() {
+    public void When_MessageIsNotJson_Expect_MessageProcessingToBeAborted() {
         when(message.getBody(String.class)).thenReturn(BODY_NOT_JSON);
         doThrow(mock(JsonProcessingException.class)).when(objectMapper).readValue(BODY_NOT_JSON, InboundMessage.class);
 
         var result = inboundMessageHandler.handle(message);
         assertThat(result).isFalse();
+
+        verifyNoInteractions(ehrExtractRequestHandler, mdcService, processFailureHandlingService);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_ExceptionIsThrownWhenParsingTheMessage_Expect_MessageProcessingToBeAborted() {
+        setUpEhrExtract(EBXML_CONTENT);
+        doThrow(RuntimeException.class).when(xPathService).parseDocumentFromXml(any());
+
+        var result = inboundMessageHandler.handle(message);
+
+        assertThat(result).isFalse();
+        verifyNoInteractions(ehrExtractRequestHandler, mdcService, processFailureHandlingService);
     }
 
     @Test
@@ -89,8 +105,9 @@ public class InboundMessageHandlerTest {
         doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
         doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
 
-        inboundMessageHandler.handle(message);
+        var result = inboundMessageHandler.handle(message);
 
+        assertThat(result).isTrue();
         verify(ehrExtractRequestHandler).handleStart(header, payload);
     }
 
@@ -103,8 +120,9 @@ public class InboundMessageHandlerTest {
         doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
         doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
 
-        inboundMessageHandler.handle(message);
+        var result = inboundMessageHandler.handle(message);
 
+        assertThat(result).isTrue();
         verify(ehrExtractRequestHandler).handleAcknowledgement("75049C80-5271-11EA-9384-E83935108FD5", payload);
     }
 
