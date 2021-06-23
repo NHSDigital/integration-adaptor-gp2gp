@@ -1,0 +1,362 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+
+    "entry":[
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "549EA74D-C2C1-498E-8E67-DF660977A6A1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "549EA74D-C2C1-498E-8E67-DF660977A6A1"
+                    }
+                ],
+                "status": "final",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "37331000000100",
+                            "display": "Comment note"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "specimen": {
+                    "reference": "Specimen/7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
+                },
+                "effectivePeriod": {
+                    "start": "2010-01-13",
+                    "end": "2010-01-15"
+                },
+                "issued": "2010-01-23T14:03:54.41+00:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "comment": "This is some random free text"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "8FAD257D-4276-42AE-A8C6-66F785E5CEBB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "8FAD257D-4276-42AE-A8C6-66F785E5CEBB"
+                    }
+                ],
+                "status": "unknown",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "44JB.00",
+                            "display": "Urea and electrolytes",
+                            "userSelected": true
+                        },
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "2571841000000110"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "1000971000000107",
+                            "display": "Urea and electrolytes level"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "specimen": {
+                    "reference": "Specimen/7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
+                },
+                "issued": "2003-06-18T08:00:00+01:00",
+                "performer": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "related": []
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "88F14BF6-CADE-47D6-90E2-B10519BF956F",
+                "meta": {
+                    "versionId": "5852021019724084706",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "preferredBranchSurgery",
+                                "valueReference": {
+                                    "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ],
+                                    "text": "Number present and verified"
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "1234567890"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "Nel",
+                        "given": [
+                            "Morris",
+                            "Chad"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    },
+                    {
+                        "use": "old",
+                        "family": "Pwtestpatient"
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1999-02-25",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "Field Farm Cottage",
+                            "Chapelfield Road",
+                            "Goxhill"
+                        ],
+                        "city": "Barrow-Upon-Humber",
+                        "district": "S Humberside",
+                        "postalCode": "DN19 7NF"
+                    }
+                ],
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "5E496953-065B-41F2-9577-BE8F2FBD0757",
+                "meta": {
+                    "versionId": "1112974926854455048",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MainLocation-1",
+                        "valueReference": {
+                            "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "A82038"
+                    }
+                ],
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    }
+                ],
+                "name": "TEMPLE SOWERBY MEDICAL PRACTICE",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01133800000",
+                        "use": "work",
+                        "rank": 1
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "type": "physical",
+                        "line": [
+                            "Fulford Grange",
+                            "Micklefield Lane",
+                            "Rawdon",
+                            "Rawdon"
+                        ],
+                        "city": "Leeds",
+                        "district": "Yorkshire",
+                        "postalCode": "LS19 6BA"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "meta": {
+                    "versionId": "4749697187075864793",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "name": [
+                    {
+                        "use": "official",
+                        "family": "McAvenue",
+                        "given": [
+                            "David"
+                        ],
+                        "prefix": [
+                            "Dr"
+                        ]
+                    }
+                ],
+                "gender": "male"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "7E5D5E50-D1CE-41FE-B30D-45D287174031",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "7E5D5E50-D1CE-41FE-B30D-45D287174031"
+                    }
+                ],
+                "status": "unknown",
+                "category": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/v2/0074",
+                            "code": "PAT",
+                            "display": "Pathology (gross & histopath, not surgical)"
+                        }
+                    ]
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "721981007",
+                            "display": "Diagnostic studies report"
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "issued": "2003-02-21T11:50:00+00:00",
+                "specimen": [
+                    {
+                        "reference": "Specimen/7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
+                    }
+                ],
+                "result": []
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Specimen",
+                "id": "7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Specimen-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
+                    }
+                ],
+                "accessionIdentifier": {
+                    "value": "G,03.0999008.K"
+                },
+                "type": {
+                    "text": "Blood"
+                },
+                "subject": {
+                    "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+                },
+                "receivedTime": "2003-01-09T13:54:00+00:00",
+                "collection": {
+                    "collectedDateTime": "2003-01-09T00:00:00+00:00"
+                }
+            }
+        }
+    ]
+}
