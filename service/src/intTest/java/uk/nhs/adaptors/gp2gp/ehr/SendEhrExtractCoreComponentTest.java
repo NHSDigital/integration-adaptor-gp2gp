@@ -28,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
@@ -35,23 +36,32 @@ import static org.mockito.Mockito.when;
 @DirtiesContext
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     private static final String PAYLOAD = "payload";
+    private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
+        CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
 
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
     @Mock
     private StorageDataWrapper storageDataWrapper;
+
     @MockBean
     private WebClient.RequestHeadersSpec<?> request;
+
     @MockBean
     private MhsRequestBuilder mhsRequestBuilder;
+
     @MockBean
     private MhsClient mhsClient;
+
     @MockBean
     private SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition;
+
     @MockBean
     private StorageConnectorService storageConnectorService;
+
     @Autowired
     private SendEhrExtractCoreTaskExecutor sendEhrExtractCoreTaskExecutor;
+
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
 
@@ -60,7 +70,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        when(storageConnectorService.downloadFile(any())).thenReturn(storageDataWrapper);
+        when(storageConnectorService.downloadFile(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)).thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
@@ -72,20 +82,13 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         assertThatInitialRecordWasUpdated(ehrExtractUpdated, ehrExtractStatus);
     }
 
-    private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {
-        assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
-        var ehrExtractCore = ehrExtractStatusUpdated.getEhrExtractCore();
-        assertThat(ehrExtractCore.getSentAt()).isNotNull();
-        assertThat(ehrExtractCore.getTaskId()).isNotNull();
-    }
-
     @Test
     public void When_ExtractCoreThrowsException_Expect_EhrExtractStatusNotUpdated() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(storageConnectorService.downloadFile(any())).thenReturn(storageDataWrapper);
+        when(storageConnectorService.downloadFile(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)).thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         doThrow(InvalidOutboundMessageException.class)
@@ -95,5 +98,12 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
 
         var ehrExtractUpdated = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
         assertThat(ehrExtractUpdated.getEhrExtractCore()).isNull();
+    }
+
+    private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {
+        assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
+        var ehrExtractCore = ehrExtractStatusUpdated.getEhrExtractCore();
+        assertThat(ehrExtractCore.getSentAt()).isNotNull();
+        assertThat(ehrExtractCore.getTaskId()).isNotNull();
     }
 }
