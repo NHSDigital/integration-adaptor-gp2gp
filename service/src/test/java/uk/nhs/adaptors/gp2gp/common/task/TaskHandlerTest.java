@@ -71,12 +71,51 @@ public class TaskHandlerTest {
 
     @Test
     @SneakyThrows
-    public void When_JmsError_Expect_ExceptionThrown() {
+    public void When_MessageIsUnreadable_Expect_MessageProcessingToBeAborted() {
         doThrow(JMSException.class).when(message).getStringProperty(TASK_TYPE_HEADER_NAME);
 
         var result = taskHandler.handle(message);
 
         assertThat(result).isFalse();
+        verifyNoInteractions(
+            taskDefinitionFactory,
+            taskExecutorFactory,
+            taskExecutor,
+            processFailureHandlingService
+        );
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_AnyExceptionIsThrownWhenReadingMessage_Expect_MessageProcessingToBeAborted() {
+        doThrow(RuntimeException.class).when(message).getStringProperty(TASK_TYPE_HEADER_NAME);
+
+        var result = taskHandler.handle(message);
+
+        assertThat(result).isFalse();
+        verifyNoInteractions(
+            taskDefinitionFactory,
+            taskExecutorFactory,
+            taskExecutor,
+            processFailureHandlingService
+        );
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_CannotRetrieveTaskDefinition_Expect_MessageProcessingToBeAborted() {
+        var taskType = "taskType1";
+        var messageBody = "body1";
+        when(message.getStringProperty(any())).thenReturn(taskType);
+        when(message.getBody(String.class)).thenReturn(messageBody);
+        doThrow(TaskHandlerException.class).when(taskDefinitionFactory).getTaskDefinition(any(), any());
+
+        var result = taskHandler.handle(message);
+
+        assertThat(result).isFalse();
+
+        verify(taskDefinitionFactory).getTaskDefinition(taskType, messageBody);
+        verifyNoInteractions(taskExecutorFactory, taskExecutor, processFailureHandlingService);
     }
 
     @Test
