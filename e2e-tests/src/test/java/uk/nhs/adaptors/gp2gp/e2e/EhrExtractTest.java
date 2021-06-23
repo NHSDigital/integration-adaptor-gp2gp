@@ -37,8 +37,8 @@ public class EhrExtractTest {
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
     private static final String TO_ASID = "918999198738";
-    private static final String FROM_ODS_CODE = "GPC001";
-    private static final String FROM_ODS_CODE2 = "GP0001";
+    private static final String FROM_ODS_CODE_1 = "GPC001";
+    private static final String FROM_ODS_CODE_2 = "B2617";
     private static final String TO_ODS_CODE = "B86041";
     private static final String EHR_REQUEST = "ehrRequest";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
@@ -56,10 +56,10 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
@@ -84,12 +84,12 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -99,10 +99,10 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceivedDifferentGPCProvider_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE2);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_2);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE2);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_2);
     }
 
     private void assertHappyPathWithDocs(String conversationId, String fromODSCode) {
