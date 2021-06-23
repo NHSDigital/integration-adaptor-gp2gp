@@ -4,11 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -37,6 +38,7 @@ import org.w3c.dom.Document;
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnector;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorException;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.BaseTaskTest;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusRepository;
@@ -59,17 +61,27 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private static final String EHR_COMPOSITION_ELEMENT = "<ehrComposition classCode=\"COMPOSITION\" moodCode=\"EVN\">";
     private static final List<String> VALID_ERRORS = Arrays.asList(INVALID_NHS_NUMBER, PATIENT_NOT_FOUND);
     private static final String COMPONENT_ELEMENT = "<component typeCode=\"COMP\">";
+    private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
+        CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
 
     @Autowired
     private GetGpcStructuredTaskExecutor getGpcStructuredTaskExecutor;
+
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+
     @Autowired
     private StorageConnector storageConnector;
+
     @SpyBean
     private MessageContext messageContext;
+
+    @SpyBean
+    private StorageConnectorService storageConnectorService;
+
     @MockBean
     private DetectTranslationCompleteService detectTranslationCompleteService;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
@@ -88,6 +100,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(ehrExtractUpdated);
         verify(messageContext).resetMessageContext();
+        verify(storageConnectorService).uploadFile(
+            any(),
+            eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)
+        );
     }
 
     @Test
@@ -110,6 +126,10 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
 
         verify(detectTranslationCompleteService).beginSendingCompleteExtract(ehrExtractUpdated);
         verify(messageContext, times(2)).resetMessageContext();
+        verify(storageConnectorService, times(2)).uploadFile(
+            any(),
+            eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)
+        );
     }
 
     @Test
@@ -126,7 +146,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         assertThat(ehrExtractUpdated.getGpcAccessStructured()).isNull();
 
         assertThrows(StorageConnectorException.class,
-            () -> storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION));
+            () -> storageConnector.downloadFromStorage(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME));
 
         verify(detectTranslationCompleteService, never()).beginSendingCompleteExtract(any());
     }
@@ -147,20 +167,27 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     private void assertThatInitialRecordWasUpdated(EhrExtractStatus ehrExtractStatusUpdated, EhrExtractStatus ehrExtractStatus) {
         assertThat(ehrExtractStatusUpdated.getUpdatedAt()).isNotEqualTo(ehrExtractStatus.getUpdatedAt());
         var gpcAccessStructured = ehrExtractStatusUpdated.getGpcAccessStructured();
-        assertThat(gpcAccessStructured.getObjectName()).isEqualTo(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        assertThat(gpcAccessStructured.getObjectName()).isEqualTo(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME);
         assertThat(gpcAccessStructured.getAccessedAt()).isNotNull();
         assertThat(gpcAccessStructured.getTaskId()).isNotNull();
     }
 
     private StorageDataWrapper getStorageDataWrapper(EhrExtractStatus ehrExtractStatus) throws IOException {
-        var inputStream = storageConnector.downloadFromStorage(ehrExtractStatus.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        String filename = ehrExtractStatus.getConversationId()
+            .concat("/")
+            .concat(ehrExtractStatus.getConversationId())
+            .concat("_gpc_structured.json");
+        var inputStream = storageConnector.downloadFromStorage(filename);
+
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
         return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
 
     @SneakyThrows
-    private void assertThatObjectCreated(StorageDataWrapper storageDataWrapper, EhrExtractStatus ehrExtractStatus,
-            GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+    private void assertThatObjectCreated(
+        StorageDataWrapper storageDataWrapper, EhrExtractStatus ehrExtractStatus, GetGpcStructuredTaskDefinition structuredTaskDefinition
+    ) {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(ehrExtractStatus.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
         assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());

@@ -6,7 +6,6 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.time.Instant;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -45,7 +44,6 @@ public class EhrExtractTest {
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
-    private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
@@ -66,7 +64,7 @@ public class EhrExtractTest {
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessDocumentWasFetched(singleDocument);
+        assertThatAccessDocumentWasFetched(conversationId, singleDocument);
 
         var ehrExtractCore = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_EXTRACT_CORE));
         assertThatExtractCoreMessageWasSent(ehrExtractCore);
@@ -204,13 +202,15 @@ public class EhrExtractTest {
     }
 
     private void assertThatAccessStructuredWasFetched(String conversationId, Document accessStructured) {
-        softly.assertThat(accessStructured.get("objectName")).isEqualTo(conversationId + GPC_STRUCTURED_FILENAME_EXTENSION);
+        softly.assertThat(accessStructured.get("objectName")).isEqualTo(
+            conversationId.concat("/").concat(conversationId).concat("_gpc_structured.json")
+        );
         softly.assertThat(accessStructured.get("accessedAt")).isNotNull();
         softly.assertThat(accessStructured.get("taskId")).isNotNull();
     }
 
-    private void assertThatAccessDocumentWasFetched(Document document) {
-        softly.assertThat(document.get("objectName")).isEqualTo(EhrExtractTest.DOCUMENT_ID + ".json");
+    private void assertThatAccessDocumentWasFetched(String conversationId, Document document) {
+        softly.assertThat(document.get("objectName")).isEqualTo(conversationId.concat("/").concat(DOCUMENT_ID).concat(".json"));
         softly.assertThat(document.get("accessedAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
     }
