@@ -46,7 +46,6 @@ public class InboundMessageHandler {
     @SneakyThrows
     public boolean handle(Message message) {
         ParsedInboundMessage parsedMessage = null;
-        String messageID = message.getJMSMessageID();
 
         try {
             parsedMessage = parseMessage(message);
@@ -63,7 +62,7 @@ public class InboundMessageHandler {
         } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
             throw e;
         } catch (Exception e) {
-            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            LOGGER.error("An error occurred while handing MHS inbound message {}", message.getJMSMessageID(), e);
             return handleMessageProcessingError(parsedMessage);
         }
     }
