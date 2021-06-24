@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.mhs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
@@ -10,6 +11,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -32,6 +35,7 @@ import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
 @ExtendWith(MockitoExtension.class)
 public class InboundMessageHandlerTest {
@@ -124,6 +128,25 @@ public class InboundMessageHandlerTest {
 
         assertThat(result).isTrue();
         verify(ehrExtractRequestHandler).handleAcknowledgement("75049C80-5271-11EA-9384-E83935108FD5", payload);
+    }
+
+    @Test
+    @SneakyThrows
+    public void When_MessageIsForUnknownInteraction_Expect_ExceptionIsThrown() {
+        setUpEhrExtract(EBXML_CONTENT);
+        Document header = mock(Document.class);
+        Document payload = mock(Document.class);
+        doReturn(header).when(xPathService).parseDocumentFromXml(EBXML_CONTENT);
+        doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
+        doReturn(UNKNOWN_INTERACTION_ID).when(xPathService).getNodeValue(eq(header), anyString());
+
+        Exception exception = assertThrows(UnsupportedInteractionException.class,
+            () -> inboundMessageHandler.handle(message));
+
+        assertThat(exception.getMessage())
+            .isEqualTo("Unsupported interaction id RCMR_UNKNOWN");
+
+        verifyNoInteractions(ehrExtractRequestHandler);
     }
 
     @Test

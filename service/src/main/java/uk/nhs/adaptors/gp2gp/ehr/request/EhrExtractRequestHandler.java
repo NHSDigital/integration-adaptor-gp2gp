@@ -140,14 +140,13 @@ public class EhrExtractRequestHandler {
 
     public void handleContinue(String conversationId, String payload) {
         if (payload.contains(CONTINUE_ACKNOWLEDGEMENT)) {
-            var ehrExtractStatusOptional = ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId);
-            if (ehrExtractStatusOptional.isPresent()) {
-                var ehrExtractStatus = ehrExtractStatusOptional.get();
-                var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
-                for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
-                    createSendDocumentTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
-                }
-            }
+            ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId)
+                .ifPresent(ehrExtractStatus -> {
+                    var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+                    for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
+                        createSendDocumentTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
+                    }
+                });
         } else {
             throw new InvalidInboundMessageException("Continue Message did not have Continue Acknowledgment, conversationId: "
                 + conversationId);

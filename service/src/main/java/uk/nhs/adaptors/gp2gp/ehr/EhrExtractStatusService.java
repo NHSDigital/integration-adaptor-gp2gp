@@ -22,8 +22,8 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractMessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
@@ -422,7 +422,7 @@ public class EhrExtractStatusService {
             EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
 
             if (ehrExtractStatus.getAckToRequester() == null) {
-                throw new EhrExtractMessageOutOfOrderException("ACK", conversationId);
+                throw new MessageOutOfOrderException("ACK", conversationId);
             }
 
             if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
@@ -431,7 +431,7 @@ public class EhrExtractStatusService {
                 return true;
             }
         } else {
-            throw new EhrExtractNonExistingException("ACK", conversationId);
+            throw new NonExistingInteractionIdException("ACK", conversationId);
         }
         return false;
     }
@@ -442,7 +442,7 @@ public class EhrExtractStatusService {
             EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
 
             if (ehrExtractStatus.getEhrExtractCorePending() == null) {
-                throw new EhrExtractMessageOutOfOrderException("Continue", conversationId);
+                throw new MessageOutOfOrderException("Continue", conversationId);
             }
 
             if (ehrExtractStatus.getEhrContinue() != null) {
@@ -451,7 +451,7 @@ public class EhrExtractStatusService {
                 return true;
             }
         } else {
-            throw new EhrExtractNonExistingException("Continue", conversationId);
+            throw new NonExistingInteractionIdException("Continue", conversationId);
         }
         return false;
     }

@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
@@ -74,7 +74,7 @@ public class EhrContinueTest {
     public void When_EhrContinueThrowsException_Expect_EhrExtractStatusNotUpdated() {
         String conversationId = randomIdGeneratorService.createNewId();
 
-        Exception exception = assertThrows(EhrExtractNonExistingException.class,
+        Exception exception = assertThrows(NonExistingInteractionIdException.class,
             () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
         assertThat(exception.getMessage()).isEqualTo("Received a Continue message with a Conversation-Id '" + conversationId

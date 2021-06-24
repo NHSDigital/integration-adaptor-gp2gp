@@ -8,31 +8,20 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
-        Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
-
-        return EhrExtractStatus.builder()
-            .created(now)
-            .updatedAt(now)
-            .conversationId(EhrStatusConstants.CONVERSATION_ID)
-            .ehrRequest(prepareEhrRequest())
-            .gpcAccessDocument(prepareGpcAccessDocument())
-            .build();
+        return prepareEhrExtractStatus(EhrStatusConstants.CONVERSATION_ID);
     }
 
-    public static EhrExtractStatus prepareEhrExtractStatusCustomConversationID() {
+    public static EhrExtractStatus prepareEhrExtractStatus(String conversationId) {
         Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
-
-        RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
         return EhrExtractStatus.builder()
             .created(now)
             .updatedAt(now)
-            .conversationId(randomIdGeneratorService.createNewId())
+            .conversationId(conversationId)
             .ehrRequest(prepareEhrRequest())
             .gpcAccessDocument(prepareGpcAccessDocument())
             .build();

@@ -22,9 +22,10 @@ import uk.nhs.adaptors.gp2gp.common.amqp.JmsReader;
 import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractMessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
 @Component
 @Slf4j
@@ -59,8 +60,7 @@ public class InboundMessageHandler {
                 );
             }
             return true;
-        } catch (EhrExtractMessageOutOfOrderException | EhrExtractNonExistingException | UnsupportedInteractionException e) {
-            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+        } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
             throw e;
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);

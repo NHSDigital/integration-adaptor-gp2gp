@@ -34,14 +34,15 @@ import org.springframework.util.FileCopyUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractMessageOutOfOrderException;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractNonExistingException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessage;
 import uk.nhs.adaptors.gp2gp.mhs.InboundMessageHandler;
-import uk.nhs.adaptors.gp2gp.mhs.UnsupportedInteractionException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 import uk.nhs.adaptors.gp2gp.testcontainers.ActiveMQExtension;
 import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 
@@ -81,6 +82,8 @@ public class IllogicalMessageComponentTest {
     private InboundMessageHandler inboundMessageHandler;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+    @Autowired
+    private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private Message message;
     @Mock
@@ -106,7 +109,7 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(EhrExtractNonExistingException.class,
+        Exception exception = assertThrows(NonExistingInteractionIdException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
@@ -121,7 +124,7 @@ public class IllogicalMessageComponentTest {
 
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(EhrExtractNonExistingException.class,
+        Exception exception = assertThrows(NonExistingInteractionIdException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
@@ -131,7 +134,7 @@ public class IllogicalMessageComponentTest {
 
     @Test
     public void When_ContinueReceivedOutOfOrderExtractCoreNotSent_Expect_ErrorThrown() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String continuePayload = asString(continueResponsePayload);
@@ -139,7 +142,7 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(EhrExtractMessageOutOfOrderException.class,
+        Exception exception = assertThrows(MessageOutOfOrderException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
@@ -150,7 +153,7 @@ public class IllogicalMessageComponentTest {
 
     @Test
     public void When_AcknowledgementReceivedOutOfOrderAcknowledgmentNotSent_Expect_ErrorThrown() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         String acknowledgementPayload = asString(acknowledgementResponsePayload);
@@ -159,7 +162,7 @@ public class IllogicalMessageComponentTest {
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
             ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(EhrExtractMessageOutOfOrderException.class,
+        Exception exception = assertThrows(MessageOutOfOrderException.class,
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
@@ -189,7 +192,7 @@ public class IllogicalMessageComponentTest {
 
     @Test
     public void When_DuplicateContinueRecieved_Expect_SkippedNoDatabaseUpdated() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatus.setEhrContinue(EhrExtractStatus.EhrContinue.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
@@ -210,7 +213,7 @@ public class IllogicalMessageComponentTest {
 
     @Test
     public void When_DuplicateAcknowledgementSentTwice_Expect_SkippedNoDatabaseUpdatedn() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatusCustomConversationID();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
         ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
         ehrExtractStatus.setEhrReceivedAcknowledgement(EhrExtractStatus.EhrReceivedAcknowledgement.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
