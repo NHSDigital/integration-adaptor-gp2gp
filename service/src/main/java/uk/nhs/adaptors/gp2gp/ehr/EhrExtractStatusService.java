@@ -438,8 +438,8 @@ public class EhrExtractStatusService {
             .orElseThrow(() -> new NonExistingInteractionIdException("Continue", conversationId));
 
         if (ehrExtractStatus.getEhrExtractCorePending() == null) {
-                throw new MessageOutOfOrderException("Continue", conversationId);
-            }
+            throw new MessageOutOfOrderException("Continue", conversationId);
+        }
 
         if (ehrExtractStatus.getEhrContinue() != null) {
             LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
