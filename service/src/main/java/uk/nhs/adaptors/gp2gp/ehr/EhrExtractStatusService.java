@@ -417,42 +417,36 @@ public class EhrExtractStatusService {
     }
 
     private boolean checkForAckOutOfOrderAndDuplicate(String conversationId) {
-        var ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (ehrExtractStatusOptional.isPresent()) {
-            EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-            if (ehrExtractStatus.getAckToRequester() == null) {
-                throw new MessageOutOfOrderException("ACK", conversationId);
-            }
-
-            if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
-                LOGGER.warn("Received an ACK message with a Conversation-Id '" + conversationId
-                    + "' that is duplicate");
-                return true;
-            }
-        } else {
-            throw new NonExistingInteractionIdException("ACK", conversationId);
+        if (ehrExtractStatus.getAckToRequester() == null) {
+            throw new MessageOutOfOrderException("ACK", conversationId);
         }
+
+        if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
+            LOGGER.warn("Received an ACK message with a Conversation-Id '" + conversationId
+                + "' that is duplicate");
+            return true;
+        }
+
         return false;
     }
 
     private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
-        var ehrExtractStatusOptional = ehrExtractStatusRepository.findByConversationId(conversationId);
-        if (ehrExtractStatusOptional.isPresent()) {
-            EhrExtractStatus ehrExtractStatus = ehrExtractStatusOptional.get();
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("Continue", conversationId));
 
-            if (ehrExtractStatus.getEhrExtractCorePending() == null) {
+        if (ehrExtractStatus.getEhrExtractCorePending() == null) {
                 throw new MessageOutOfOrderException("Continue", conversationId);
             }
 
-            if (ehrExtractStatus.getEhrContinue() != null) {
-                LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
-                    + "' that is duplicate");
-                return true;
-            }
-        } else {
-            throw new NonExistingInteractionIdException("Continue", conversationId);
+        if (ehrExtractStatus.getEhrContinue() != null) {
+            LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
+                + "' that is duplicate");
+            return true;
         }
+
         return false;
     }
 }
