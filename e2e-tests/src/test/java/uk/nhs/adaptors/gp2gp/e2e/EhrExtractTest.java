@@ -60,6 +60,12 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1);
+
+        String conversationId2 = UUID.randomUUID().toString();
+        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_2);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
+
+        assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2);
     }
 
     @Test
@@ -94,15 +100,6 @@ public class EhrExtractTest {
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
-    }
-
-    @Test
-    public void When_ExtractRequestReceivedDifferentGPCProvider_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_2);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_2);
     }
 
     private void assertHappyPathWithDocs(String conversationId, String fromODSCode) {
