@@ -37,7 +37,8 @@ public class EhrExtractTest {
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
     private static final String TO_ASID = "918999198738";
-    private static final String FROM_ODS_CODE = "GPC001";
+    private static final String FROM_ODS_CODE_1 = "GPC001";
+    private static final String FROM_ODS_CODE_2 = "B2617";
     private static final String TO_ODS_CODE = "B86041";
     private static final String EHR_REQUEST = "ehrRequest";
     private static final String GPC_ACCESS_STRUCTURED = "gpcAccessStructured";
@@ -48,17 +49,62 @@ public class EhrExtractTest {
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
+    private static final String FROM_ODS_CODE_PLACEHOLDER = "%%From_ODS_Code%%";
     private static final String NHS_NUMBER_PLACEHOLDER = "%%NHSNumber%%";
     private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1);
+
+        String conversationId2 = UUID.randomUUID().toString();
+        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_2);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
+
+        assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), Charset.defaultCharset())
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
+
+        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
+        assertThatNotDocumentsWereAdded(gpcAccessDocument);
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatNoErrorInfoIsStored(conversationId);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
+    }
+
+    private void assertHappyPathWithDocs(String conversationId, String fromODSCode) {
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER, fromODSCode);
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
@@ -78,45 +124,12 @@ public class EhrExtractTest {
         assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
-    @Test
-    public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), Charset.defaultCharset())
-            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS);
-
-        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
-        assertThatNotDocumentsWereAdded(gpcAccessDocument);
-
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-        assertThatNoErrorInfoIsStored(conversationId);
-    }
-
-    @Test
-    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_ErrorUpdatedInDatabase() throws Exception {
-        String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NOT_EXISTING_PATIENT_NHS_NUMBER);
-
-        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-
-        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER);
-
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
-        assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
-    }
-
-    private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber) throws IOException {
+    private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
         return IOUtils.toString(getClass()
             .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset())
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
-            .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber);
+            .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
+            .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);
     }
 
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
@@ -185,7 +198,7 @@ public class EhrExtractTest {
         return false;
     }
 
-    private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber) {
+    private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {
         var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);
         softly.assertThat(ehrExtractStatus).isNotNull();
         softly.assertThat(ehrExtractStatus.get("conversationId")).isEqualTo(conversationId);
@@ -197,7 +210,7 @@ public class EhrExtractTest {
         softly.assertThat(ehrRequest.get("toPartyId")).isEqualTo(TO_PARTY_ID);
         softly.assertThat(ehrRequest.get("fromAsid")).isEqualTo(FROM_ASID);
         softly.assertThat(ehrRequest.get("toAsid")).isEqualTo(TO_ASID);
-        softly.assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(FROM_ODS_CODE);
+        softly.assertThat(ehrRequest.get("fromOdsCode")).isEqualTo(fromODSCode);
         softly.assertThat(ehrRequest.get("toOdsCode")).isEqualTo(TO_ODS_CODE);
     }
 
