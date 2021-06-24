@@ -113,7 +113,7 @@ public class IllogicalMessageComponentTest {
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received a Continue message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
+            .isEqualTo("Received a Continue message that is not recognised with Conversation-Id: 'd3746650-096e-414b-92a4-146ceaf74f0e'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -128,7 +128,7 @@ public class IllogicalMessageComponentTest {
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received a ACK message with a Conversation-Id 'd3746650-096e-414b-92a4-146ceaf74f0e' that is not recognised");
+            .isEqualTo("Received a ACK message that is not recognised with Conversation-Id: 'd3746650-096e-414b-92a4-146ceaf74f0e'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -146,8 +146,8 @@ public class IllogicalMessageComponentTest {
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received a Continue message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that "
-                + "is out of order in message process");
+            .isEqualTo("Received a Continue message that is out of order in message process with a Conversation-Id: '"
+                + ehrExtractStatus.getConversationId() + "'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -166,8 +166,8 @@ public class IllogicalMessageComponentTest {
             () -> inboundMessageHandler.handle(message));
 
         assertThat(exception.getMessage())
-            .isEqualTo("Received a ACK message with a Conversation-Id '" + ehrExtractStatus.getConversationId() + "' that is out of "
-                + "order in message process");
+            .isEqualTo("Received a ACK message that is out of order in message process with a Conversation-Id: '"
+                + ehrExtractStatus.getConversationId() + "'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
