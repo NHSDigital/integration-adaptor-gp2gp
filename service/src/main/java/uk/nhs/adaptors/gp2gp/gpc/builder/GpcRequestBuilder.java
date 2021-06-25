@@ -1,13 +1,9 @@
 package uk.nhs.adaptors.gp2gp.gpc.builder;
 
-import static java.lang.String.valueOf;
-
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-
-import java.util.Collections;
-import java.util.List;
-
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -29,19 +25,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+
+import java.util.Collections;
+import java.util.List;
+
+import static java.lang.String.valueOf;
+import static org.apache.http.protocol.HTTP.CONTENT_LEN;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -83,24 +80,24 @@ public class GpcRequestBuilder {
 
     public Parameters buildGetStructuredRecordRequestBody(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         return new Parameters()
-            .addParameter(buildParamterComponent("patientNHSNumber")
+            .addParameter(buildParameterComponent("patientNHSNumber")
                 .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(
                     ((overrideNhsNumber.isBlank()) ? structuredTaskDefinition.getNhsNumber() : overrideNhsNumber))))
-            .addParameter(buildParamterComponent("includeAllergies")
-                .addPart(buildParamterComponent("includeResolvedAllergies")
+            .addParameter(buildParameterComponent("includeAllergies")
+                .addPart(buildParameterComponent("includeResolvedAllergies")
                     .setValue(new BooleanType(true))))
-            .addParameter(buildParamterComponent("includeMedication"))
-            .addParameter(buildParamterComponent("includeConsultations")
-                .addPart(buildParamterComponent("includeNumberOfMostRecent")
+            .addParameter(buildParameterComponent("includeMedication"))
+            .addParameter(buildParameterComponent("includeConsultations")
+                .addPart(buildParameterComponent("includeNumberOfMostRecent")
                     .setValue(new IntegerType(NUMBER_OF_RECENT_CONSULTANTS))))
-            .addParameter(buildParamterComponent("includeProblems"))
-            .addParameter(buildParamterComponent("includeImmunisations"))
-            .addParameter(buildParamterComponent("includeUncategorisedData"))
-            .addParameter(buildParamterComponent("includeInvestigations"))
-            .addParameter(buildParamterComponent("includeReferrals"));
+            .addParameter(buildParameterComponent("includeProblems"))
+            .addParameter(buildParameterComponent("includeImmunisations"))
+            .addParameter(buildParameterComponent("includeUncategorisedData"))
+            .addParameter(buildParameterComponent("includeInvestigations"))
+            .addParameter(buildParameterComponent("includeReferrals"));
     }
 
-    private ParametersParameterComponent buildParamterComponent(String parameterName) {
+    private ParametersParameterComponent buildParameterComponent(String parameterName) {
         return new ParametersParameterComponent()
             .setName(parameterName);
     }
@@ -134,7 +131,7 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);
@@ -144,8 +141,9 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-            String patientId) {
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(
+            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId) {
+
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient);

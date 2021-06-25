@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -23,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @ExtendWith(MockitoExtension.class)
@@ -86,8 +84,8 @@ class StructuredRecordMappingServiceTest {
         var actualExternalAttachments = structuredRecordMappingService.getExternalAttachments(bundle);
 
         var expectedAttachment1 = OutboundMessage.ExternalAttachment.builder()
-            .referenceId(NEW_DOC_REF_ID_1)
-            .hrefId(NEW_DOC_MANIFEST_ID_1)
+            .documentId(NEW_DOC_REF_ID_1)
+            .messageId(NEW_DOC_MANIFEST_ID_1)
             .filename("AbsentAttachment111_new_doc_ref_id.txt")
             .contentType("text/plain")
             .compressed(false)
@@ -96,8 +94,8 @@ class StructuredRecordMappingServiceTest {
             .length(ATTACHMENT_1_SIZE)
             .build();
         var expectedAttachment2 = OutboundMessage.ExternalAttachment.builder()
-            .referenceId(NEW_DOC_REF_ID_2)
-            .hrefId(NEW_DOC_MANIFEST_ID_2)
+            .documentId(NEW_DOC_REF_ID_2)
+            .messageId(NEW_DOC_MANIFEST_ID_2)
             .filename("222_new_doc_ref_id_222_new_doc_ref_id.html")
             .contentType("text/html")
             .compressed(false)

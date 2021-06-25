@@ -38,7 +38,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
 
         var storageDataWrapper = storageConnectorService.downloadFile(
             sendEhrExtractCoreTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
-
         var requestData = mhsRequestBuilder
             .buildSendEhrExtractCoreRequest(
                 storageDataWrapper.getData(),
