@@ -2,12 +2,12 @@ package uk.nhs.adaptors.gp2gp.ehr;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
@@ -78,9 +78,11 @@ public class InboundMessageHandlingTest {
     @Test
     @SneakyThrows
     public void When_MessageProcessingFails_Expect_WholeProcessToBeFailed() {
-        mockInboundMessage("unsupportedInteractionId", CONTINUE_MESSAGE_PAYLOAD);
+        mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
+
+        doThrow(RuntimeException.class).when(taskDispatcher).createTask(any(SendDocumentTaskDefinition.class));
 
         inboundMessageConsumer.receive(message);
 
@@ -134,11 +136,12 @@ public class InboundMessageHandlingTest {
     }
 
     private void assertThatSendNackTaskHasBeenTriggered() {
-        var ackDefinitionCaptor = ArgumentCaptor.forClass(SendAcknowledgementTaskDefinition.class);
-        verify(taskDispatcher).createTask(ackDefinitionCaptor.capture());
-        verifyNoMoreInteractions(taskDispatcher);
-
-        assertThat(ackDefinitionCaptor.getValue().isNack()).isTrue();
+        verify(taskDispatcher).createTask(
+            argThat(taskDefinition ->
+                taskDefinition instanceof SendAcknowledgementTaskDefinition
+                    && ((SendAcknowledgementTaskDefinition) taskDefinition).isNack()
+            )
+        );
     }
 
     private void assertSendDocumentTaskHasBeenTriggered() {
