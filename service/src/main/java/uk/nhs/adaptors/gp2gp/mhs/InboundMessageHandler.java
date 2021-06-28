@@ -79,7 +79,7 @@ public class InboundMessageHandler {
         }
     }
 
-    public void handleInboundMessage(ParsedInboundMessage inboundMessage) {
+    private void handleInboundMessage(ParsedInboundMessage inboundMessage) {
         String conversationId = inboundMessage.getConversationId();
         mdcService.applyConversationId(conversationId);
         String interactionId = inboundMessage.getInteractionId();
