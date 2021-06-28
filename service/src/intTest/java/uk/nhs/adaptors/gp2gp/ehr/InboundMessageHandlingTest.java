@@ -78,16 +78,12 @@ public class InboundMessageHandlingTest {
     @Test
     @SneakyThrows
     public void When_MessageProcessingFails_Expect_WholeProcessToBeFailed() {
-        // ARRANGE
         mockInboundMessage("unsupportedInteractionId", CONTINUE_MESSAGE_PAYLOAD);
-
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        // ACT
         inboundMessageConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         assertThatSendNackTaskHasBeenTriggered();
         assertConversationIsFailed(ehrExtractStatus);
@@ -96,7 +92,6 @@ public class InboundMessageHandlingTest {
     @Test
     @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_MessageProcessingToBeAborted() {
-        // ARRANGE
         mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
 
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
@@ -105,10 +100,8 @@ public class InboundMessageHandlingTest {
 
         var initialDbExtract = readEhrExtractStatusFromDb();
 
-        // ACT
         inboundMessageConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         verifyNoInteractions(taskDispatcher);
 
@@ -119,17 +112,14 @@ public class InboundMessageHandlingTest {
     @Test
     @SneakyThrows
     public void When_ProcessIsNotFailed_Expect_MessageToBeProcessed() {
-        // ARRANGE
         mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
         ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
 
         var initialDbExtract = readEhrExtractStatusFromDb();
         assertThat(initialDbExtract.getEhrContinue()).isNull();
 
-        // ACT
         inboundMessageConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         assertSendDocumentTaskHasBeenTriggered();
 
