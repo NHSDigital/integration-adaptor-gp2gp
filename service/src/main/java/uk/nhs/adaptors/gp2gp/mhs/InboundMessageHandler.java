@@ -46,7 +46,7 @@ public class InboundMessageHandler {
     @SneakyThrows
     public boolean handle(Message message) {
         ParsedInboundMessage parsedMessage = null;
-
+        var messageID = message.getJMSMessageID();
         try {
             parsedMessage = parseMessage(message);
             LOGGER.info("Decoded inbound MHS message");
@@ -60,9 +60,10 @@ public class InboundMessageHandler {
             }
             return true;
         } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
-            throw e;
+            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            return false;
         } catch (Exception e) {
-            LOGGER.error("An error occurred while handing MHS inbound message {}", message.getJMSMessageID(), e);
+            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
             return handleMessageProcessingError(parsedMessage);
         }
     }
@@ -78,7 +79,7 @@ public class InboundMessageHandler {
         }
     }
 
-    private void handleInboundMessage(ParsedInboundMessage inboundMessage) {
+    public void handleInboundMessage(ParsedInboundMessage inboundMessage) {
         String conversationId = inboundMessage.getConversationId();
         mdcService.applyConversationId(conversationId);
         String interactionId = inboundMessage.getInteractionId();
