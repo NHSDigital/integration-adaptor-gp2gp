@@ -88,15 +88,12 @@ public class TaskHandlingTest {
     @Test
     @SneakyThrows
     public void When_NonNackTaskProcessingFails_Expect_WholeProcessToBeFailed() {
-        // ARRANGE
         mockSendEhExtractCoreTaskMessage();
         doThrow(RuntimeException.class).when(taskExecutor).execute(any());
         var ehrExtractStatus = createEhrExtractStatusInDb(false);
 
-        // ACT
         taskConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
 
         assertThatSendNackTaskHasBeenTriggered();
@@ -106,16 +103,13 @@ public class TaskHandlingTest {
     @Test
     @SneakyThrows
     public void When_NackTaskProcessingFails_Expect_MessageNotToBeAcknowledged() {
-        // ARRANGE
         mockSendNackTaskMessage();
         EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
         doThrow(RuntimeException.class).when(taskExecutor).execute(any());
         var initialDbStatus = readEhrExtractStatusFromDb();
 
-        // ACT
         taskConsumer.receive(message);
 
-        // ASSERT
         verify(message, never()).acknowledge();
 
         verifyNoInteractions(taskDispatcher);
@@ -128,17 +122,14 @@ public class TaskHandlingTest {
     @Test
     @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_NonNackTaskToBeAborted() {
-        // ARRANGE
         mockSendEhExtractCoreTaskMessage();
         EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
         var initialDbExtract = readEhrExtractStatusFromDb();
 
         assertThat(initialDbExtract.getError()).isNotNull();
 
-        // ACT
         taskConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         verifyNoInteractions(taskExecutor);
 
@@ -149,15 +140,12 @@ public class TaskHandlingTest {
     @Test
     @SneakyThrows
     public void When_ProcessIsAlreadyFailed_Expect_NackTaskToStillBeExecuted() {
-        // ARRANGE
         var taskDefinition = mockSendNackTaskMessage();
         EhrExtractStatus ehrExtractStatus = createEhrExtractStatusInDb(true);
         var initialDbStatus = readEhrExtractStatusFromDb();
 
-        // ACT
         taskConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         verify(taskExecutor).execute(taskDefinition);
         assertConversationIsFailed(ehrExtractStatus);
@@ -169,14 +157,11 @@ public class TaskHandlingTest {
     @Test
     @SneakyThrows
     public void When_ProcessIsNotFailed_Expect_TaskToBeExecuted() {
-        // ARRANGE
         var taskDefinition = mockSendEhExtractCoreTaskMessage();
-        var ehrExtractStatus = createEhrExtractStatusInDb(false);
+        createEhrExtractStatusInDb(false);
 
-        // ACT
         taskConsumer.receive(message);
 
-        // ASSERT
         verify(message).acknowledge();
         verify(taskExecutor).execute(taskDefinition);
 
