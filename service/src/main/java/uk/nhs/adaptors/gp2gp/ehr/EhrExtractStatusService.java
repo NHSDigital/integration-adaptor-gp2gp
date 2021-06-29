@@ -1,8 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
+import static java.lang.String.format;
 import static org.springframework.util.CollectionUtils.isEmpty;
-
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -59,7 +58,12 @@ public class EhrExtractStatusService {
     private static final String CONVERSATION_CLOSED = "conversationClosed";
     private static final String MESSAGE_REF = "messageRef";
     private static final String ERRORS = "errors";
+    private static final String ERROR = "error";
     private static final String SENT_TO_MHS = "sentToMhs";
+    private static final String OCCURRED_AT = "occurredAt";
+    private static final String CODE = "code";
+    private static final String MESSAGE = "message";
+    private static final String TASK_TYPE = "taskType";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
@@ -82,17 +86,23 @@ public class EhrExtractStatusService {
     private static final String RECEIVED_ACK_MESSAGE_REF = RECEIVED_ACK + DOT + MESSAGE_REF;
     private static final String RECEIVED_ACK_CONVERSATION_CLOSED = RECEIVED_ACK + DOT + CONVERSATION_CLOSED;
     private static final String RECEIVED_ACK_ERRORS = RECEIVED_ACK + DOT + ERRORS;
+    private static final String ERROR_OCCURRED_AT_PATH = ERROR + DOT + OCCURRED_AT;
+    private static final String ERROR_CODE_PATH = ERROR + DOT + CODE;
+    private static final String ERROR_MESSAGE_PATH = ERROR + DOT + MESSAGE;
+    private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
 
     private final MongoTemplate mongoTemplate;
 
-    public EhrExtractStatus updateEhrExtractStatusAccessStructured(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+    public EhrExtractStatus updateEhrExtractStatusAccessStructured(
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename
+    ) {
         Query query = createQueryForConversationId(structuredTaskDefinition.getConversationId());
         Instant now = Instant.now();
 
         Update update = createUpdateWithUpdatedAt();
         update.set(STRUCTURE_ACCESSED_AT_PATH, now);
         update.set(STRUCTURE_TASK_ID_PATH, structuredTaskDefinition.getTaskId());
-        update.set(STRUCTURE_OBJECT_NAME_PATH, structuredTaskDefinition.getConversationId() + GPC_STRUCTURED_FILE_EXTENSION);
+        update.set(STRUCTURE_OBJECT_NAME_PATH, structuredRecordJsonFilename);
 
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
@@ -106,10 +116,12 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocument(GetGpcDocumentTaskDefinition documentTaskDefinition,
-            String documentName,
-            String taskId,
-            String messageId) {
+    public EhrExtractStatus updateEhrExtractStatusAccessDocument(
+        GetGpcDocumentTaskDefinition documentTaskDefinition,
+        String documentJsonFilename,
+        String taskId,
+        String messageId
+    ) {
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -119,7 +131,7 @@ public class EhrExtractStatusService {
         Instant now = Instant.now();
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
-        update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
+        update.set(DOCUMENT_OBJECT_NAME_PATH, documentJsonFilename);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
@@ -134,8 +146,10 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCore(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
-        Instant requestSentAt) {
+    public EhrExtractStatus updateEhrExtractStatusCore(
+        SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt
+    ) {
         Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -210,7 +224,8 @@ public class EhrExtractStatusService {
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
         GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-            Optional<String> patientId) {
+        Optional<String> patientId
+    ) {
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -234,8 +249,9 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
-            GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-            List<String> urls) {
+        GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
+        List<String> urls
+    ) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
@@ -262,17 +278,22 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition sendAcknowledgementTaskDefinition,
-        String positiveAckMessageId) {
-        Query query = createQueryForConversationId(sendAcknowledgementTaskDefinition.getConversationId());
-
+    public void updateEhrExtractStatusAcknowledgement(
+        SendAcknowledgementTaskDefinition taskDefinition,
+        String ackMessageId
+    ) {
         Update update = createUpdateWithUpdatedAt();
-        update.set(ACK_TASK_ID_PATH, sendAcknowledgementTaskDefinition.getTaskId());
-        update.set(ACK_MESSAGE_ID_PATH, positiveAckMessageId);
-        update.set(ACK_TYPE_CODE_PATH, sendAcknowledgementTaskDefinition.getTypeCode());
+        update.set(ACK_TASK_ID_PATH, taskDefinition.getTaskId());
+        update.set(ACK_MESSAGE_ID_PATH, ackMessageId);
+        update.set(ACK_TYPE_CODE_PATH, taskDefinition.getTypeCode());
+        update.set(ACK_REASON_CODE_PATH, taskDefinition.getReasonCode());
+        update.set(ACK_DETAIL_CODE_PATH, taskDefinition.getDetail());
 
-        sendAcknowledgementTaskDefinition.getReasonCode().ifPresent(reason -> update.set(ACK_REASON_CODE_PATH, reason));
-        sendAcknowledgementTaskDefinition.getDetail().ifPresent(detail -> update.set(ACK_DETAIL_CODE_PATH, detail));
+        updateEhrStatus(update, taskDefinition.getConversationId());
+    }
+
+    private void updateEhrStatus(Update update, String conversationId) {
+        Query query = createQueryForConversationId(conversationId);
 
         UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
@@ -280,6 +301,40 @@ public class EhrExtractStatusService {
             throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
         }
         LOGGER.info("Database updated for sending application acknowledgement");
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusError(
+        String conversationId,
+        String errorCode,
+        String errorMessage,
+        String taskType
+    ) {
+        Update update = createUpdateWithUpdatedAt();
+        Instant now = Instant.now();
+        update.set(ERROR_OCCURRED_AT_PATH, now);
+        update.set(ERROR_CODE_PATH, errorCode);
+        update.set(ERROR_MESSAGE_PATH, errorMessage);
+        update.set(ERROR_TASK_TYPE_PATH, taskType);
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(
+            createQueryForConversationId(conversationId),
+            update,
+            getReturningUpdatedRecordOption(),
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException(format(
+                "Couldn't update EHR status with error information because it doesn't exist. Conversation-Id: %s",
+                conversationId
+            ));
+        }
+
+        LOGGER.info(
+            "EHR status record successfully updated in the database with error information. Conversation-Id: {}",
+            conversationId
+        );
+
+        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {

@@ -7,8 +7,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
-
 import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +23,7 @@ import lombok.SneakyThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class StorageConnectorServiceTest {
-    private static final String UUID = "UUID";
+    private static final String TEST_ID = "SOME_ID";
     private static final long EXPECTED_STREAM_LENGTH = 8;
 
     @Mock
@@ -42,16 +40,19 @@ public class StorageConnectorServiceTest {
 
     @Test
     @SneakyThrows
-    public void When_ValidStorageDataWrapperIsPass_Expect_UploadStoragePramsHaveCorrectValues() {
+    public void When_ValidStorageDataWrapperIsPass_Expect_UploadStorageParamsHaveCorrectValues() {
         when(objectMapper.writeValueAsString(anyStorageDataWrapper)).thenReturn("response");
 
-        String fileName = UUID + GPC_STRUCTURED_FILE_EXTENSION;
-        storageConnectorService.uploadFile(anyStorageDataWrapper, fileName);
+        String filename = TEST_ID.concat("/").concat(TEST_ID).concat("_gpc_structured.json");
+
+        storageConnectorService.uploadFile(anyStorageDataWrapper, filename);
 
         verify(storageConnector).uploadToStorage(
             inputStreamArgumentCaptor.capture(),
             eq(EXPECTED_STREAM_LENGTH),
-            eq(fileName));
+            eq(filename)
+        );
+
         var actualContent = new String(inputStreamArgumentCaptor.getValue().readAllBytes(), UTF_8);
         assertThat(actualContent).isEqualTo("response");
     }

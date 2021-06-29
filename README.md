@@ -108,7 +108,7 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
-| GP2GP_GPC_GET_URL                    | http://localhost:8090/GP0001/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor
+| GP2GP_GPC_GET_URL                    | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice.
 | GP2GP_GPC_STRUCTURED_FHIR_BASE       | /structured/fhir                              | The path segment for Get Access Structured FHIR server
 | GP2GP_GPC_DOCUMENTS_FHIR_BASE        | /documents/fhir                               | The path segment for Get Access Documents FHIR server
 | GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
@@ -286,6 +286,23 @@ We provide a mock MHS adaptor for local development and testing.
 | -------------------------------------|---------------------------|-------------
 | MOCK_MHS_SERVER_PORT                 | 8081                      | The port on which the mock MHS Adapter will run.
 | MOCK_MHS_LOGGING_LEVEL               | INFO                      | Mock MHS logging level. One of: DEBUG, INFO, WARN, ERROR. The level DEBUG **MUST NOT** be used when handling live patient data.
+
+### How to transform arbitrary json ASR payload files
+
+This is an interoperability testing tool to transform arbitrary/ad-hoc json ASR payloads and access the outputs.
+
+1. Navigate to the input folder and place all Json files to convert here.
+`integration-adaptor-gp2gp/transformJsonToXml/input/` 
+   
+2. Navigate to the TransformJsonToXml.sh file and run that script to execute the testing tool. 
+   `integration-adaptor-gp2gp/transformJsonToXml/`
+   ```shell script
+   cd transformJsonToXml
+   ./TransformJsonToXml.sh
+    ```
+   
+3. The Converted .Xml files will be located in the output folder.
+`integration-adaptor-gp2gp/transformJsonToXml/output/`
 
 ## Troubleshooting
 

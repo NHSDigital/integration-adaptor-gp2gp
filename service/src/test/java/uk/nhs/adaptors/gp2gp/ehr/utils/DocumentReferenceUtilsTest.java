@@ -39,10 +39,10 @@ class DocumentReferenceUtilsTest {
         "audio/x-au,.au",
     })
     void When_SupportedMimeTypeIsProvided_Expect_CorrectFileExtensionIsGenerated(String contentType, String fileExtension) {
-        var fileName = DocumentReferenceUtils.buildAttachmentFileName(
+        var filename = DocumentReferenceUtils.buildAttachmentFileName(
             NARRATIVE_STATEMENT_ID, new Attachment().setContentType(contentType));
 
-        assertThat(fileName).endsWith(fileExtension);
+        assertThat(filename).endsWith(fileExtension);
     }
 
     @Test

@@ -23,9 +23,12 @@ public class InboundMessageConsumer {
         var messageID = message.getJMSMessageID();
         LOGGER.info("Received inbound MHS message {}", messageID);
         try {
-            inboundMessageHandler.handle(message);
-            message.acknowledge();
-            LOGGER.info("Acknowledged inbound MHS message {}", messageID);
+            if (inboundMessageHandler.handle(message)) {
+                message.acknowledge();
+                LOGGER.info("Acknowledged inbound MHS message {}", messageID);
+            } else {
+                LOGGER.info("Left inbound MHS message {} on the queue", messageID);
+            }
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
         } finally {

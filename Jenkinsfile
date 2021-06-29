@@ -280,11 +280,11 @@ Map<String,Object> getAllSecretsForEnvironment(String environment, String secret
   return secretsMerged
 }
 
-void writeVariablesToFile(String fileName, Map<String,Object> variablesMap) {
+void writeVariablesToFile(String filename, Map<String,Object> variablesMap) {
   List<String> variablesList=variablesMap.collect { key, value -> "${key} = ${value}" }
-  sh (script: "touch ${fileName} && echo '\n' > ${fileName}")
+  sh (script: "touch ${filename} && echo '\n' > ${filename}")
   variablesList.each {
-    sh (script: "echo '${it}' >> ${fileName}")
+    sh (script: "echo '${it}' >> ${filename}")
   }
 }
 
