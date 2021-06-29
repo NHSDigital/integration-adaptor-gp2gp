@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
 import uk.nhs.adaptors.gp2gp.mhs.InvalidInboundMessageException;
@@ -44,6 +43,7 @@ public class EhrContinueTest {
     @Test
     public void When_EhrContinueIsValid_Expect_TaskDispatcherCalledWithSameValues() {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         var expectedResponse = createContinueTasks(ehrExtractStatus);
 
         ehrExtractStatusRepository.save(ehrExtractStatus);
@@ -55,29 +55,6 @@ public class EhrContinueTest {
         var ehrExtract = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId());
 
         assertThat(ehrExtract.get().getEhrContinue().getReceived()).isNotNull();
-    }
-
-    @Test
-    public void When_EhrContinueIsRunTwice_Expect_DataIsOverwritten() {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
-        var expectedResponse = createContinueTasks(ehrExtractStatus);
-
-        ehrExtractStatusRepository.save(ehrExtractStatus);
-        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
-
-        verify(taskDispatcher).createTask(
-            argThat(task -> hasSameContent(
-                (SendDocumentTaskDefinition) task, expectedResponse)));
-        var first = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-
-        ehrExtractRequestHandler.handleContinue(ehrExtractStatus.getConversationId(), CONTINUE_ACKNOWLEDGEMENT);
-
-        verify(taskDispatcher, times(2)).createTask(
-            argThat(task -> hasSameContent(
-                (SendDocumentTaskDefinition) task, expectedResponse)));
-        var second = ehrExtractStatusRepository.findByConversationId(ehrExtractStatus.getConversationId()).get();
-
-        assertThat(first.getEhrContinue().getReceived()).isBefore(second.getEhrContinue().getReceived());
     }
 
     @Test
@@ -97,11 +74,11 @@ public class EhrContinueTest {
     public void When_EhrContinueThrowsException_Expect_EhrExtractStatusNotUpdated() {
         String conversationId = randomIdGeneratorService.createNewId();
 
-        Exception exception = assertThrows(EhrExtractException.class,
+        Exception exception = assertThrows(NonExistingInteractionIdException.class,
             () -> ehrExtractRequestHandler.handleContinue(conversationId, CONTINUE_ACKNOWLEDGEMENT));
 
-        assertThat(exception.getMessage()).isEqualTo("Received a Continue message with a Conversation-Id '" + conversationId
-            + "' that is not recognised");
+        assertThat(exception.getMessage()).isEqualTo("Received a Continue message that is not recognised with Conversation-Id: '"
+            + conversationId + "'");
         verify(taskDispatcher, never()).createTask(any());
     }
 

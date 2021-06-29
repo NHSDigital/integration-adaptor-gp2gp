@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.xml.sax.SAXException;
 
 import lombok.SneakyThrows;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
@@ -39,6 +40,8 @@ public class EhrAcknowledgementTest {
     private EhrExtractRequestHandler ehrExtractRequestHandler;
     @Autowired
     private EhrExtractStatusRepository ehrExtractStatusRepository;
+    @Autowired
+    private RandomIdGeneratorService randomIdGeneratorService;
     @Autowired
     private XPathService xPathService;
     @Value("classpath:inbound/acknowledgement/MCCI_IN010000UK13_body_AA.xml")
@@ -102,7 +105,8 @@ public class EhrAcknowledgementTest {
     }
 
     private Optional<EhrExtractStatus> setUpAndHandleAck(Resource businessErrorAck) throws SAXException {
-        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
+        ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         ehrExtractRequestHandler.handleAcknowledgement(ehrExtractStatus.getConversationId(),
