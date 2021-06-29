@@ -2,7 +2,7 @@ package uk.nhs.adaptors.gp2gp.mhs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
@@ -35,7 +35,6 @@ import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
-import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
 @ExtendWith(MockitoExtension.class)
 public class InboundMessageHandlerTest {
@@ -140,11 +139,7 @@ public class InboundMessageHandlerTest {
         doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
         doReturn(UNKNOWN_INTERACTION_ID).when(xPathService).getNodeValue(eq(header), anyString());
 
-        Exception exception = assertThrows(UnsupportedInteractionException.class,
-            () -> inboundMessageHandler.handle(message));
-
-        assertThat(exception.getMessage())
-            .isEqualTo("Unsupported interaction id RCMR_UNKNOWN");
+        assertFalse(inboundMessageHandler.handle(message));
 
         verifyNoInteractions(ehrExtractRequestHandler);
     }
