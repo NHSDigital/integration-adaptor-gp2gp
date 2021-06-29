@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -109,11 +110,8 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(NonExistingInteractionIdException.class,
-            () -> inboundMessageHandler.handle(message));
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(exception.getMessage())
-            .isEqualTo("Received a Continue message that is not recognised with Conversation-Id: 'd3746650-096e-414b-92a4-146ceaf74f0e'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -124,11 +122,8 @@ public class IllogicalMessageComponentTest {
 
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST, NON_EXISTING_CONVERSATION_ID);
 
-        Exception exception = assertThrows(NonExistingInteractionIdException.class,
-            () -> inboundMessageHandler.handle(message));
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(exception.getMessage())
-            .isEqualTo("Received a ACK message that is not recognised with Conversation-Id: 'd3746650-096e-414b-92a4-146ceaf74f0e'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -142,12 +137,8 @@ public class IllogicalMessageComponentTest {
 
         mockIncomingMessage(continueEbxml, continuePayload, CONTINUE_REQUEST, ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(MessageOutOfOrderException.class,
-            () -> inboundMessageHandler.handle(message));
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(exception.getMessage())
-            .isEqualTo("Received a Continue message that is out of order in message process with a Conversation-Id: '"
-                + ehrExtractStatus.getConversationId() + "'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -162,12 +153,8 @@ public class IllogicalMessageComponentTest {
         mockAcknowledgementMessage(acknowledgementEbxml, acknowledgementPayload, ACKNOWLEDGMENT_REQUEST,
             ehrExtractStatus.getConversationId());
 
-        Exception exception = assertThrows(MessageOutOfOrderException.class,
-            () -> inboundMessageHandler.handle(message));
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(exception.getMessage())
-            .isEqualTo("Received a ACK message that is out of order in message process with a Conversation-Id: '"
-                + ehrExtractStatus.getConversationId() + "'");
         verify(taskDispatcher, never()).createTask(any());
     }
 
@@ -239,11 +226,8 @@ public class IllogicalMessageComponentTest {
         String incomingMessage = null;
         when(objectMapper.readValue(incomingMessage, InboundMessage.class)).thenReturn(inboundMessage);
 
-        Exception exception = assertThrows(UnsupportedInteractionException.class,
-            () -> inboundMessageHandler.handle(message));
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(exception.getMessage())
-            .isEqualTo("Unsupported interaction id null");
         verify(taskDispatcher, never()).createTask(any());
     }
 

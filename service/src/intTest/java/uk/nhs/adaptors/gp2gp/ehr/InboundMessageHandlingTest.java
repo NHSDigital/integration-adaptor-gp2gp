@@ -80,6 +80,7 @@ public class InboundMessageHandlingTest {
     public void When_MessageProcessingFails_Expect_WholeProcessToBeFailed() {
         mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
         doThrow(RuntimeException.class).when(taskDispatcher).createTask(any(SendDocumentTaskDefinition.class));
@@ -115,7 +116,9 @@ public class InboundMessageHandlingTest {
     @SneakyThrows
     public void When_ProcessIsNotFailed_Expect_MessageToBeProcessed() {
         mockInboundMessage(CONTINUE_INTERACTION_ID, CONTINUE_MESSAGE_PAYLOAD);
-        ehrExtractStatusRepository.save(EhrExtractStatusTestUtils.prepareEhrExtractStatus());
+        var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
+        ehrExtractStatus.setEhrExtractCorePending(EhrExtractStatus.EhrExtractCorePending.builder().build());
+        ehrExtractStatusRepository.save(ehrExtractStatus);
 
         var initialDbExtract = readEhrExtractStatusFromDb();
         assertThat(initialDbExtract.getEhrContinue()).isNull();
