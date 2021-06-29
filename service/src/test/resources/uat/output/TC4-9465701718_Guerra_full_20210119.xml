@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="B057BEAA-4AB2-46B2-800F-C3643875EAEC" />
+    <id root="8A11A952-650A-4C2B-9F66-E9A0BD7B72A8" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="CACD8306-7218-4BA6-A71A-089207D27D51" />
+        <id root="7BD053C7-97F9-4E1D-BCE6-723ECC6EF7CC" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
@@ -1140,7 +1140,7 @@ Mechanical Prosthetic Heart Valves )</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
+        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1150,7 +1150,7 @@ Mechanical Prosthetic Heart Valves )</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
+        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1166,7 +1166,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
+        <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1182,7 +1182,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
+        <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -1193,7 +1193,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
+        <id root="356F257A-A7D7-45DD-8B76-09C1DB97B40B"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -1211,7 +1211,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4CF7DECB-3AE2-42C3-97F0-BB440F28D385"/>
+        <id root="B88A5FEC-A207-4E2A-93C4-04402D84C1BE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1229,7 +1229,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA"/>
+        <id root="71F21980-0BAB-4831-944C-365717037140"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1251,7 +1251,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="71F21980-0BAB-4831-944C-365717037140"/>
+        <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -1262,7 +1262,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="71F21980-0BAB-4831-944C-365717037140"/>
+        <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -1280,7 +1280,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C8334D51-35CA-445E-AE5F-08FAB08CA230"/>
+        <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1298,7 +1298,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E"/>
+        <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1320,7 +1320,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
+        <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -1331,7 +1331,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CA4A0D10-4C71-4E4F-98BF-9023C5F41D21"/>
+        <id root="F972CFDF-B4D7-4392-A96A-4D1BD8D14F14"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -1349,7 +1349,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3"/>
+        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1367,7 +1367,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252"/>
+        <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1389,7 +1389,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
+        <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -1400,7 +1400,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
+        <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -1418,7 +1418,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4067DD8E-2B9B-4270-A382-CE035D7D352D"/>
+        <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1435,7 +1435,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F696636A-F010-4BF6-8AFC-7A0F151E5A5A"/>
+        <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1457,7 +1457,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
+        <id root="E9E90D5A-6E92-4EF0-BB5F-16DE962C93BC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326140443
 
@@ -1548,7 +1548,7 @@ Dr. N.O&apos;Connell</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
+        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1558,7 +1558,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
+        <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1574,7 +1574,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
+        <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1590,7 +1590,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
+        <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -1601,7 +1601,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E3ABD9D7-736E-47DB-A9A6-97D9898983D8"/>
+        <id root="784D9AB4-B75E-43CE-8370-56DF0D34082C"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -1619,7 +1619,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
+        <id root="DECAA29B-D65A-45B0-805D-EC0BDE3DA971"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1637,7 +1637,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
+        <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1659,7 +1659,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
+        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -1670,7 +1670,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DC14952F-F66E-40D2-B400-0E370E6EDB63"/>
+        <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -1688,7 +1688,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
+        <id root="87102979-C329-4194-819B-D057AAEA625B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1706,7 +1706,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="87102979-C329-4194-819B-D057AAEA625B"/>
+        <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1728,7 +1728,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
+        <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -1739,7 +1739,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF"/>
+        <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -1757,7 +1757,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
+        <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1775,7 +1775,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="EE5EF8FB-5B0F-4D22-93E4-6E79489FEF64"/>
+        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1797,7 +1797,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
+        <id root="46A43153-7A96-44D4-A14A-A63284061767"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -1808,7 +1808,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
+        <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -1941,7 +1941,7 @@ Dr. N.O&apos;Connell</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="730F742C-1164-45BF-9139-8484074E5995"/>
+        <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
         <code code="1005711000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Glucose tolerance test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -1951,7 +1951,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="142334CE-1D8E-49FF-8A01-D11D5FF8076E"/>
+        <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -1967,7 +1967,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
+        <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -1983,7 +1983,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
+        <id root="7374E13A-D408-460C-A021-3441347C5027"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -1994,7 +1994,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B"/>
+        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT1</originalText>
 </code>
@@ -2012,7 +2012,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B"/>
+        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -2030,7 +2030,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
+        <id root="AD55A73E-0A15-48EC-A982-94E8830A90F8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -2052,7 +2052,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -2063,7 +2063,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+        <id root="A826995B-AB7B-4A63-9B89-FDA16209D357"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FT2</originalText>
 </code>
@@ -2081,7 +2081,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B"/>
+        <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -2099,7 +2099,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
+        <id root="58826586-95CF-4F70-AF27-43BBAE229C7C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -2121,7 +2121,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
+        <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -2132,7 +2132,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
+        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX3</originalText>
 </code>
@@ -2150,7 +2150,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="40FD3445-A957-48D7-B7B5-3C839211C185"/>
+        <id root="52D4BB7D-411D-40E5-8C8E-B92088260AFF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030221115000
 
@@ -2168,7 +2168,7 @@ Dr. N.O&apos;Connell</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
+        <id root="7D422F3F-94AE-4D33-8034-E5F4B83ED518"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030221115000
 
@@ -2190,7 +2190,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
+        <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -2201,7 +2201,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030221115000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB"/>
+        <id root="730F742C-1164-45BF-9139-8484074E5995"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FTX4</originalText>
 </code>
@@ -2373,7 +2373,7 @@ Dr. N.O&apos;Connell</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
+        <id root="A7E9FEF8-71BC-4A6E-B3D7-94638E59E6B7"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Serum potassium</originalText>
 </code>
@@ -2391,7 +2391,7 @@ Dr. N.O&apos;Connell</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0F6BFE76-8AEC-4FCE-B3FE-8312F7358F42"/>
+        <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2415,7 +2415,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
+        <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
         <code code="1005661000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum lipids level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2425,7 +2425,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030602175200"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
+        <id root="867553AF-2B39-48F7-BE0B-DE854814CED5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030602175200
 
@@ -2441,7 +2441,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
+        <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2451,7 +2451,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030602175200"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
+        <id root="96167EAF-AC8E-4C48-8A80-AE4DEC414EEB"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2469,7 +2469,7 @@ Dr. N.O&apos;Connell</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="867553AF-2B39-48F7-BE0B-DE854814CED5"/>
+        <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030602175200
 
@@ -2491,7 +2491,7 @@ Dr. N.O&apos;Connell</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
+        <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Serum triglycerides</originalText>
 </code>
@@ -2509,7 +2509,7 @@ Dr. N.O&apos;Connell</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
+        <id root="B32B888D-13A5-4AA9-AA57-66ACD475E145"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2526,7 +2526,7 @@ Dr. N.O&apos;Connell</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
+        <id root="2DAE1ADC-4B4F-4081-84C4-E93E78346185"/>
         <code code="1022191000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum low density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2536,7 +2536,7 @@ Dr. N.O&apos;Connell</text>
         <availabilityTime value="20030602175200"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
+        <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7"/>
         <code code="1022191000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum low density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2676,7 +2676,7 @@ Comment
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
+        <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
         <code code="1022441000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="FBC - full blood count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2686,7 +2686,7 @@ Comment
         <availabilityTime value="20030602175200"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
+        <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030602175200
 
@@ -2702,7 +2702,7 @@ Comment
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
+        <id root="49C185EE-784C-497C-A7E0-C63A25C057B7"/>
         <code code="1022431000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haemoglobin estimation">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2719,7 +2719,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F586B623-14FE-4F2B-80D9-953DC28B9828"/>
+        <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2736,7 +2736,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
+        <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2746,7 +2746,7 @@ Comment
         <availabilityTime value="20030602175200"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
+        <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2764,7 +2764,7 @@ Comment
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
+        <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030602175200
 
@@ -2786,7 +2786,7 @@ Comment
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE"/>
+        <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2803,7 +2803,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="716B2A02-D779-45A0-812C-B2376C8E6F75"/>
+        <id root="F586B623-14FE-4F2B-80D9-953DC28B9828"/>
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2820,7 +2820,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99"/>
+        <id root="4617268B-1554-4618-8D2D-69A808C0A48D"/>
         <code code="1022291000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Haematocrit">
     <originalText>Packed cell volume</originalText>
 </code>
@@ -2838,7 +2838,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
+        <id root="155122E0-3D9B-4784-8E29-622A941D8FFC"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2855,7 +2855,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA"/>
+        <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Neutrophil count</originalText>
 </code>
@@ -2873,7 +2873,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D"/>
+        <id root="E74F00A1-5189-4806-979F-5A57701BFF13"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2890,7 +2890,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B"/>
+        <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Monocyte count</originalText>
 </code>
@@ -2908,7 +2908,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F4E72E8A-13BD-4C83-A448-32718731EC94"/>
+        <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2925,7 +2925,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0748F11B-5E47-4F16-A71A-A692EEEA9F45"/>
+        <id root="9D3A6496-5CFB-4337-9F66-47315F1A8F90"/>
         <code code="1022571000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Basophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3018,7 +3018,7 @@ Comment
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
+        <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
         <code code="1006761000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bone profile">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3028,7 +3028,7 @@ Comment
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="B1310011-B620-48D7-A381-2BF0335C5B3D"/>
+        <id root="5C8D8F25-DFEB-43B9-A61C-54C86FF0C8CC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -3044,7 +3044,7 @@ Comment
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E50C922A-91C0-4225-A2FE-5E3A3066357E"/>
+        <id root="AEF25847-B67A-408C-8D62-316C63ABC6B9"/>
         <code code="1000811000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total protein">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3061,7 +3061,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5"/>
+        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B"/>
         <code code="1000821000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum albumin level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3078,7 +3078,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50"/>
+        <id root="E50C922A-91C0-4225-A2FE-5E3A3066357E"/>
         <code code="1000691000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum calcium level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3095,7 +3095,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72585281-F548-4159-8AAE-A372CFC2567E"/>
+        <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA"/>
         <code code="935051000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum adjusted calcium concentration">
     <originalText>Corrected serum calcium level</originalText>
 </code>
@@ -3113,7 +3113,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B"/>
+        <id root="69B9FED1-59E4-4892-BB53-F4FE54715057"/>
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3123,7 +3123,7 @@ Comment
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B"/>
+        <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5"/>
         <code code="1000701000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum inorganic phosphate level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3140,7 +3140,7 @@ Comment
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F62CFE59-5303-4C90-AF30-2437D4ED20AF"/>
+        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030618080000
 
@@ -3155,7 +3155,7 @@ Comment
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="934E832B-C556-4B87-AE10-0ABE1295FFAA"/>
+        <id root="EFD99868-BD82-4213-9586-11755332A60D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -3177,7 +3177,7 @@ Comment
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="69B9FED1-59E4-4892-BB53-F4FE54715057"/>
+        <id root="4B331DB8-AC77-4438-A646-56E500E73885"/>
         <code code="1000621000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3194,7 +3194,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="EFEDF8E9-7834-4B32-A29C-64AB597DFC53"/>
+        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326134544
 
@@ -3243,7 +3243,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DE904918-5B6F-405B-9731-F9C528C98F2C"/>
+        <id root="79926A25-009B-4D91-BD45-36A87F772FE3"/>
         <code code="1000661000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum sodium level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3260,7 +3260,7 @@ Comment
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
+        <id root="855869E7-17B8-42BE-84FE-E3EB14492478"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3270,7 +3270,7 @@ Comment
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
+        <id root="DE904918-5B6F-405B-9731-F9C528C98F2C"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3287,7 +3287,7 @@ Comment
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2807E027-911E-4CB5-857B-9196714CF6C4"/>
+        <id root="CC9ACAD0-C9F0-46ED-9B85-DEB7D5CB885B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030618080000
 
@@ -3310,7 +3310,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="855869E7-17B8-42BE-84FE-E3EB14492478"/>
+        <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3327,7 +3327,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="D651DDAA-03BA-4723-960A-FD13C13CE367"/>
+        <id root="7673B115-7151-4F48-AC9C-5E89AD6C04D5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326134545
 
@@ -3359,7 +3359,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D3041FE6-2820-4938-8024-1FC80F2A694F"/>
+        <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7"/>
         <code code="1001371000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum CRP (C reactive protein) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3377,7 +3377,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7"/>
+        <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -3393,7 +3393,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5"/>
+        <id root="ECF49E18-DB40-4001-954B-2666006B598B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326134545
 
@@ -3425,7 +3425,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="200FC1C9-6A9F-47CE-A4F7-50199281322D"/>
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
         <code code="1019351000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum iron level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3443,7 +3443,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
+        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -3459,7 +3459,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7DDEDA9F-3CFD-4A7D-8504-5026617B408C"/>
+        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326134545
 
@@ -3491,7 +3491,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030618080000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
+        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
         <code code="1015451000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum total iron binding capacity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3509,7 +3509,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D"/>
+        <id root="8F9F872C-5B05-4561-8CF6-22EF17DCFB7A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030618080000
 
@@ -3525,7 +3525,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195"/>
+        <id root="04EE715B-E2D6-423C-9EBE-74E9426D12A8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100326134545
 
@@ -3627,7 +3627,7 @@ U=Unsuitable,due to delay in delivery.</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
         <code code="997531000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Liver function test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3637,7 +3637,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030628112300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
+        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030628112300
 
@@ -3653,7 +3653,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
+        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA"/>
         <code code="1013041000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alkaline phosphatase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3670,7 +3670,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
+        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
         <code code="1013361000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma albumin level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3687,7 +3687,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3"/>
+        <id root="70EACDF9-9F82-4111-BD75-F0263D662431"/>
         <code code="1005651000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total protein">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3704,7 +3704,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0"/>
+        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7"/>
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3714,7 +3714,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030628112300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0"/>
+        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43"/>
         <code code="1013211000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma alanine aminotransferase level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3732,7 +3732,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6"/>
+        <id root="19B160E4-9406-4642-B202-4BDCF073BE76"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030628112300
 
@@ -3754,7 +3754,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="931E1B2E-31E6-4BDA-B834-CAD729D903D7"/>
+        <id root="136A1423-A6AC-448C-921C-8991ADF93C92"/>
         <code code="997561000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma total bilirubin level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3771,7 +3771,7 @@ U=Unsuitable,due to delay in delivery.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="056D4B02-9B83-45CE-A2A2-1501B97A8E57"/>
+        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100209122106
 
@@ -3803,7 +3803,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030628112300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907"/>
+        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5"/>
         <code code="1000851000000108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma GGT (gamma-glutamyl transferase) level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3821,7 +3821,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5"/>
+        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030628112300
 
@@ -3837,7 +3837,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB"/>
+        <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100209122106
 
@@ -3869,7 +3869,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030628112300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C"/>
+        <id root="1B1B2854-A658-4764-875B-49CBD3C516EB"/>
         <code code="999651000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma C reactive protein">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3887,7 +3887,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2A78ED10-1E12-4703-B370-54FBFC4483FB"/>
+        <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100209122106
 
@@ -3920,7 +3920,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030628112300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="74AF9EB7-3E01-46AA-B832-91D29C40C59A"/>
+        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Comment</originalText>
 </code>
@@ -3938,7 +3938,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C0C05462-41D0-4754-93DC-5A8F94DD6CD0"/>
+        <id root="17DC8229-FB0E-4811-A8D0-FAB7D7A05A8C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030628112300
 
@@ -3954,7 +3954,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="86E89638-765F-422C-9B96-A091F617FBB0"/>
+        <id root="E6D3941E-4BB5-415A-8177-DAB155EB5FF6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100209122106
 
@@ -4169,7 +4169,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <availabilityTime value="20030704111300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F"/>
+        <id root="28C6781D-98B6-4182-8A5B-907CF616D0AF"/>
         <code code="993571000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Infectious mononucleosis test">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4186,7 +4186,7 @@ U=Unsuitable,due to delay in delivery.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="28C6781D-98B6-4182-8A5B-907CF616D0AF"/>
+        <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030704111300
 
@@ -4202,7 +4202,7 @@ I.M.Screen</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
+        <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
             CommentDate:20030704111300
 
@@ -4218,7 +4218,7 @@ I.M.Screen</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="451B0A75-8B34-4580-81E6-717831D3C236"/>
+        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100201093313
 
@@ -4250,7 +4250,7 @@ I.M.Screen</text>
         <availabilityTime value="20030704111300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="64CA6C9B-7BBE-474A-824C-43A7BD5B90F7"/>
+        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709"/>
         <code code="1015421000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Differential white cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4267,7 +4267,7 @@ I.M.Screen</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709"/>
+        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20030704111300
 
@@ -4284,7 +4284,7 @@ RBC MORPHOLOGY NORMAL</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="3390559A-D17E-4D30-9A51-B4459E1515EF"/>
+        <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100201093313
 
@@ -4334,7 +4334,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
+        <id root="9A11E815-9320-4952-96BA-CC83BECF62A3"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4351,7 +4351,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FB313646-3FC3-49D0-8277-D11CEA14641D"/>
+        <id root="92601097-8AE8-45DA-8D17-927B4727866C"/>
         <code code="1022651000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Platelet count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4368,7 +4368,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
+        <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E"/>
         <code code="1022491000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCV - Mean corpuscular volume">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4385,7 +4385,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
+        <id root="FB313646-3FC3-49D0-8277-D11CEA14641D"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Packed cell volume</originalText>
 </code>
@@ -4403,7 +4403,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B"/>
+        <id root="92726062-D62B-4736-92D1-CF3F1D83832B"/>
         <code code="1022451000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4420,7 +4420,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BA675192-24E0-4698-8736-00DD928283CB"/>
+        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C"/>
         <code code="1022471000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCH - Mean corpuscular haemoglobin">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4437,7 +4437,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC"/>
+        <id root="E0762612-0920-4AB0-9CFC-185F79641C10"/>
         <code code="1022481000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="MCHC - Mean corpuscular haemoglobin concentration">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4454,7 +4454,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16"/>
+        <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
         <code code="993501000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Red blood cell distribution width">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4471,7 +4471,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C"/>
+        <id root="FB01369F-2A94-4D0B-AC2F-843879B69915"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Neutrophil count</originalText>
 </code>
@@ -4489,7 +4489,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B2342509-6683-4342-8BD1-BB759AAC9BB9"/>
+        <id root="B06F16C9-95BA-41C5-99DA-902FC5B0B72B"/>
         <code code="1022581000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Lymphocyte count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4506,7 +4506,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EA84B0F8-FDA4-4F76-92E3-AA06A8CE5026"/>
+        <id root="26E8B010-9ACB-4EB5-BEAC-C34C9D2A51CE"/>
         <code code="1022591000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Monocyte count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4523,7 +4523,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A039C513-4426-49A9-B9AE-8624A64D6397"/>
+        <id root="BA675192-24E0-4698-8736-00DD928283CB"/>
         <code code="1022561000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Eosinophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4540,7 +4540,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2BCEAA81-6CD9-4DD6-ABD2-0FADBD472DA4"/>
+        <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Basophil count</originalText>
 </code>
@@ -4565,7 +4565,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7E6793DD-AE28-4A2A-B123-74A13AB45323"/>
+        <id root="75DD574F-0CE6-4B2F-88FE-1CF7606B50AC"/>
         <code code="1022461000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Nucleated red blood cell count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4582,7 +4582,7 @@ RBC MORPHOLOGY NORMAL</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="37227623-F695-4DEE-BE05-0C651428BEAA"/>
+        <id root="9C3E35CC-3181-4873-AC6E-50E7C035112A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
             CommentDate:20100201093313
 
@@ -4684,7 +4684,7 @@ RBC MORPHOLOGY NORMAL</text>
         </specimen>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="B6B35921-F45E-4397-8732-A37433A523B5"/>
+        <id root="531EED3E-6C41-46B6-8B0B-570E421D52F6"/>
         <code code="996911000000106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Autoimmune profile">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4694,7 +4694,7 @@ RBC MORPHOLOGY NORMAL</text>
         <availabilityTime value="20050225155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="531EED3E-6C41-46B6-8B0B-570E421D52F6"/>
+        <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20050225155300
 
@@ -4711,7 +4711,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB"/>
+        <id root="21C8ABA5-6215-4623-A84C-F735B2A26CA6"/>
         <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4721,7 +4721,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20050225155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB"/>
+        <id root="43ABFFF0-4748-455C-9506-286B71D48A78"/>
         <code code="993591000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Anti-nuclear factor">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4738,7 +4738,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="07369860-6F7A-4205-BAAE-CAF21DDE24E1"/>
+        <id root="C2CFB5B2-D6CF-4532-AB4F-3C980DD488DC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20050225155300
 
@@ -4760,7 +4760,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098"/>
+        <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55"/>
         <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE"/>
@@ -4770,7 +4770,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20050225155300"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098"/>
+        <id root="B6B35921-F45E-4397-8732-A37433A523B5"/>
         <code code="992081000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Rheumatoid factor">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5228,7 +5228,7 @@ rheumatoid factor tests.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7A0397D7-3EAC-4407-92E2-5535EC027F73"/>
+        <id root="EB8754C6-ECF4-48D4-BA9B-E70F72149DB7"/>
         <code code="1000651000000109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum potassium level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5245,7 +5245,7 @@ rheumatoid factor tests.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="12A053A5-6886-4DF5-9352-0440B9802D3A"/>
+        <id root="7A0397D7-3EAC-4407-92E2-5535EC027F73"/>
         <code code="1000951000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum urea level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5262,7 +5262,7 @@ rheumatoid factor tests.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="15DD9E32-0B6E-4539-93F0-CD7B34B15759"/>
+        <id root="CC739FC8-B370-4E05-A33F-338BFAD0B5C4"/>
         <code code="1000731000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum creatinine level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5286,7 +5286,7 @@ rheumatoid factor tests.</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258"/>
+        <id root="23D422EC-8C25-4303-99FD-E39DFEF209B2"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>CHOL/HDL RATIO</originalText>
 </code>
@@ -5297,7 +5297,7 @@ rheumatoid factor tests.</text>
         <availabilityTime value="20050316060100"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="23D422EC-8C25-4303-99FD-E39DFEF209B2"/>
+        <id root="ED30F999-14CA-41B9-93EE-334F60049174"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20050316060100
 
@@ -5313,7 +5313,7 @@ rheumatoid factor tests.</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="61DA7AC7-3174-4474-95C5-8D2C070AB61A"/>
+        <id root="34380A93-1234-41C2-8944-3EDDD2BB9F34"/>
         <code code="1005671000000105" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5330,7 +5330,7 @@ rheumatoid factor tests.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F7600EB7-9A46-4AC3-A726-96DEB40E096A"/>
+        <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258"/>
         <code code="1005681000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Serum high density lipoprotein cholesterol level">
 </code>
         <statusCode code="COMPLETE"/>
@@ -5354,7 +5354,7 @@ rheumatoid factor tests.</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="35EB1155-CDA6-42A2-BE78-A3295CED4C2A"/>
+        <id root="61DA7AC7-3174-4474-95C5-8D2C070AB61A"/>
         <code code="1028551000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total cholesterol:HDL (high density lipoprotein) ratio">
 </code>
         <statusCode code="COMPLETE"/>
@@ -8154,565 +8154,6 @@ rheumatoid factor tests.</text>
     </agentRef>
 </Participant>
     </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="64EE9F15-9718-4738-8187-455BE2A44C29" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326140443"/>
-        </effectiveTime>
-        <availabilityTime value="20100326140443"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326140443" />
-            <agentRef classCode="AGNT">
-                <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7BD053C7-97F9-4E1D-BCE6-723ECC6EF7CC" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326140443" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="88A7D6CB-A511-4668-AE09-E321B5660F90" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134544"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134544"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134544" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="A5371E90-1A5E-47CA-8E4E-D46137750B9F" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134544" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="042B2C37-28A6-4DC3-B3ED-4E8F440A9E77" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C007E0F8-CE63-4D83-BE18-4B438B9D8D35" />
-        <text>(EMISTest) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134545" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="130929E5-878B-4D9E-A283-C7F968E6697D" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="B71F3669-565D-4B7A-BB5C-E29E6498B269" />
-        <text>(EMISTest) - Abnormal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134545" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="615E5632-4928-4B5B-9797-5CE35EEA651D" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="29841BD8-74E2-442E-88A5-DD1EBF76A10D" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134545" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="ECED2795-6E5C-4BEC-B576-4BE3591B60D7" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100326134545"/>
-        </effectiveTime>
-        <availabilityTime value="20100326134545"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100326134545" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F7EEC0CC-79F0-40F6-96A9-993DBFBBC651" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100326134545" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="78E90EFA-8191-4CB9-8757-F4139FC247FE" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100209122106"/>
-        </effectiveTime>
-        <availabilityTime value="20100209122106"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5195DE81-364A-43DD-AF69-D5B735D981F4" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6A869220-837A-4436-BD25-EEAFC29B7849" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100209122106"/>
-        </effectiveTime>
-        <availabilityTime value="20100209122106"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C9435A8B-BEF8-46DC-9C69-B690D8EA7CC5" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="909A29FF-CB65-44AC-8E84-50259A52C892" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100209122106"/>
-        </effectiveTime>
-        <availabilityTime value="20100209122106"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="EB9FA6BE-6233-46AA-999E-678029090A31" />
-        <text>(EMISTest) - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100209122106"/>
-        </effectiveTime>
-        <availabilityTime value="20100209122106"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100209122106" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="742A289C-4B8A-4BD1-98AD-11A15084E74C" />
-        <text>(EMISTest) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100209122106" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3FA6C543-2AE9-4AE7-A2DA-4E2A85FBD9F3" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100201093313"/>
-        </effectiveTime>
-        <availabilityTime value="20100201093313"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100201093313" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5ED73758-0204-4C1C-A660-C50AD23EE0A3" />
-        <text>(EMISTest) - Abnormal - Contact Patient</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100201093313" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CB2E1628-E70E-4159-879B-8E0DE218AE78" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100201093313"/>
-        </effectiveTime>
-        <availabilityTime value="20100201093313"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100201093313" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="08C5C565-863E-4FDA-B216-7C1F8DC9E507" />
-        <text>(EMISTest) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100201093313" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20100201093313"/>
-        </effectiveTime>
-        <availabilityTime value="20100201093313"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100201093313" />
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="7CEA6A66-4F2F-4B11-A6F5-85BC734C8499" />
-        <text>(EMISTest) - Normal - No Action</text>
-        <statusCode code="COMPLETE" />
-        <availabilityTime value="20100201093313" />
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
 </component>
     </ehrComposition>
 </component>

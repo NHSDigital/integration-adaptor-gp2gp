@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,7 @@ import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 
 import java.time.Instant;
 
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.GPC_STRUCTURED_FILE_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils.GPC_STRUCTURED_FILE_EXTENSION;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,7 +22,6 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     private final MhsRequestBuilder mhsRequestBuilder;
     private final EhrExtractStatusService ehrExtractStatusService;
     private final StorageConnectorService storageConnectorService;
-    private final ObjectMapper objectMapper;
     private final SendAcknowledgementTaskDispatcher sendAcknowledgementTaskDispatcher;
 
     @Override
@@ -42,7 +40,8 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
             .buildSendEhrExtractCoreRequest(
                 storageDataWrapper.getData(),
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
-                sendEhrExtractCoreTaskDefinition.getFromOdsCode());
+                sendEhrExtractCoreTaskDefinition.getFromOdsCode()
+            );
 
         mhsClient.sendMessageToMHS(requestData);
 

@@ -8,8 +8,7 @@ import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
+import static uk.nhs.adaptors.gp2gp.gpc.GpcFilenameUtils.JSON_EXTENSION;
 
 @Slf4j
 @Component
@@ -38,7 +37,6 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
         var messageId = taskDefinition.getMessageId();
 
         var mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, response);
-
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 

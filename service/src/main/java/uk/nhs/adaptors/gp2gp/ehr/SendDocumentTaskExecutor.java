@@ -13,6 +13,7 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
+import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -46,9 +47,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     @Override
     public void execute(SendDocumentTaskDefinition taskDefinition) {
         LOGGER.info("SendDocument task was created, Sending EHR Document to GP");
-
         var storageDataWrapper = storageConnectorService.downloadFile(taskDefinition.getDocumentName());
-
         var mainMessageId = taskDefinition.getMessageId();
         var mainDocumentId = taskDefinition.getDocumentId();
         var requestDataToSend = new HashMap<String, String>();
