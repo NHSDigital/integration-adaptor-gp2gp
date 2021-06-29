@@ -12,12 +12,16 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 public class EhrExtractStatusTestUtils {
     public static EhrExtractStatus prepareEhrExtractStatus() {
+        return prepareEhrExtractStatus(EhrStatusConstants.CONVERSATION_ID);
+    }
+
+    public static EhrExtractStatus prepareEhrExtractStatus(String conversationId) {
         Instant now = Instant.now().atZone(ZoneId.systemDefault()).toInstant().truncatedTo(ChronoUnit.MILLIS);
 
         return EhrExtractStatus.builder()
             .created(now)
             .updatedAt(now)
-            .conversationId(EhrStatusConstants.CONVERSATION_ID)
+            .conversationId(conversationId)
             .ehrRequest(prepareEhrRequest())
             .gpcAccessDocument(prepareGpcAccessDocument())
             .build();

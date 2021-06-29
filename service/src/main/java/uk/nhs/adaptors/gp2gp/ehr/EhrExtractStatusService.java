@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
 import static java.lang.String.format;
+
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.time.Instant;
@@ -21,6 +22,8 @@ import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
@@ -41,6 +44,7 @@ public class EhrExtractStatusService {
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String RECEIVED_ACK = "ehrReceivedAcknowledgement";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
+    private static final String EHR_EXTRACT_CORE_PENDING = "ehrExtractCorePending";
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
@@ -76,6 +80,8 @@ public class EhrExtractStatusService {
     private static final String DOCUMENT_MESSAGE_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + MESSAGE_ID;
     private static final String EXTRACT_CORE_TASK_ID_PATH = EHR_EXTRACT_CORE + DOT + TASK_ID;
     private static final String EXTRACT_CORE_SENT_AT_PATH = EHR_EXTRACT_CORE + DOT + SENT_AT;
+    private static final String EXTRACT_CORE_PENDING_TASK_ID_PATH = EHR_EXTRACT_CORE_PENDING + DOT + TASK_ID;
+    private static final String EXTRACT_CORE_PENDING_SENT_AT_PATH = EHR_EXTRACT_CORE_PENDING + DOT + SENT_AT;
     private static final String ACK_TASK_ID_PATH = ACK_TO_REQUESTER + DOT + TASK_ID;
     private static final String ACK_MESSAGE_ID_PATH = ACK_TO_REQUESTER + DOT + MESSAGE_ID;
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
@@ -92,6 +98,7 @@ public class EhrExtractStatusService {
     private static final String ERROR_TASK_TYPE_PATH = ERROR + DOT + TASK_TYPE;
 
     private final MongoTemplate mongoTemplate;
+    private final EhrExtractStatusRepository ehrExtractStatusRepository;
 
     public EhrExtractStatus updateEhrExtractStatusAccessStructured(
         GetGpcStructuredTaskDefinition structuredTaskDefinition, String structuredRecordJsonFilename
@@ -168,58 +175,81 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusContinue(String conversationId) {
-        Query query = createQueryForConversationId(conversationId);
+    public void updateEhrExtractStatusCorePending(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition,
+        Instant requestSentAt) {
+        Query query = createQueryForConversationId(sendEhrExtractCoreTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
-        Instant now = Instant.now();
-        update.set(CONTINUE_RECEIVED_PATH, now);
+        update.set(EXTRACT_CORE_PENDING_SENT_AT_PATH, requestSentAt);
+        update.set(EXTRACT_CORE_PENDING_TASK_ID_PATH, sendEhrExtractCoreTaskDefinition.getTaskId());
 
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-            update,
-            returningUpdatedRecordOption,
-            EhrExtractStatus.class);
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
 
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
-                + "' that is not recognised");
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with Extract Core Pending.");
         }
-
-        LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
-        return ehrExtractStatus;
+        LOGGER.info("Database updated for sending Extract Core Pending");
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
-        Query query = createQueryForConversationId(conversationId);
+    public Optional<EhrExtractStatus> updateEhrExtractStatusContinue(String conversationId) {
+        var isDuplicate = checkForContinueOutOfOrderAndDuplicate(conversationId);
+        if (!isDuplicate) {
+            Query query = createQueryForConversationId(conversationId);
 
-        Update update = createUpdateWithUpdatedAt();
-        update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
-        update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
-        update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
-        update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
+            Update update = createUpdateWithUpdatedAt();
+            Instant now = Instant.now();
+            update.set(CONTINUE_RECEIVED_PATH, now);
 
-        if (!isEmpty(ack.getErrors())) {
-            ack.getErrors()
-                .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
-                    .code(error.getCode())
-                    .display(error.getDisplay())
-                    .build()));
+            FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+            EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+                update,
+                returningUpdatedRecordOption,
+                EhrExtractStatus.class);
+
+            if (ehrExtractStatus == null) {
+                throw new EhrExtractException("Received a Continue message with a Conversation-Id '" + conversationId
+                    + "' that is not recognised");
+            }
+
+            LOGGER.info("Database successfully updated with EHRContinue, Conversation-Id: " + conversationId);
+            return Optional.of(ehrExtractStatus);
+        } else {
+            return Optional.empty();
         }
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+    }
 
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-            update,
-            returningUpdatedRecordOption,
-            EhrExtractStatus.class);
+    public void updateEhrExtractStatusAck(String conversationId, EhrReceivedAcknowledgement ack) {
+        var isDuplicate = checkForAckOutOfOrderAndDuplicate(conversationId);
+        if (!isDuplicate) {
+            Query query = createQueryForConversationId(conversationId);
 
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
-                + "' that is not recognised");
+            Update update = createUpdateWithUpdatedAt();
+            update.set(RECEIVED_ACK_TIMESTAMP, ack.getReceived());
+            update.set(RECEIVED_ACK_CONVERSATION_CLOSED, ack.getConversationClosed());
+            update.set(RECEIVED_ACK_ROOT_ID, ack.getRootId());
+            update.set(RECEIVED_ACK_MESSAGE_REF, ack.getMessageRef());
+
+            if (!isEmpty(ack.getErrors())) {
+                ack.getErrors()
+                    .forEach(error -> update.addToSet(RECEIVED_ACK_ERRORS, ErrorDetails.builder()
+                        .code(error.getCode())
+                        .display(error.getDisplay())
+                        .build()));
+            }
+            FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+            EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+                update,
+                returningUpdatedRecordOption,
+                EhrExtractStatus.class);
+
+            if (ehrExtractStatus == null) {
+                throw new EhrExtractException("Received an ACK message with a Conversation-Id '" + conversationId
+                    + "' that is not recognised");
+            }
+
+            LOGGER.info("Database successfully updated with EHRAcknowledgement, Conversation-Id: " + conversationId);
         }
-
-        LOGGER.info("Database successfully updated with EHRAcknowledgement, Conversation-Id: " + conversationId);
-        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
@@ -384,5 +414,39 @@ public class EhrExtractStatusService {
         update.set(UPDATED_AT, now);
 
         return update;
+    }
+
+    private boolean checkForAckOutOfOrderAndDuplicate(String conversationId) {
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
+
+        if (ehrExtractStatus.getAckToRequester() == null) {
+            throw new MessageOutOfOrderException("ACK", conversationId);
+        }
+
+        if (ehrExtractStatus.getEhrReceivedAcknowledgement() != null) {
+            LOGGER.warn("Received an ACK message with a Conversation-Id '" + conversationId
+                + "' that is duplicate");
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkForContinueOutOfOrderAndDuplicate(String conversationId) {
+        var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
+            .orElseThrow(() -> new NonExistingInteractionIdException("Continue", conversationId));
+
+        if (ehrExtractStatus.getEhrExtractCorePending() == null) {
+            throw new MessageOutOfOrderException("Continue", conversationId);
+        }
+
+        if (ehrExtractStatus.getEhrContinue() != null) {
+            LOGGER.warn("Received a Continue message with a Conversation-Id '" + conversationId
+                + "' that is duplicate");
+            return true;
+        }
+
+        return false;
     }
 }

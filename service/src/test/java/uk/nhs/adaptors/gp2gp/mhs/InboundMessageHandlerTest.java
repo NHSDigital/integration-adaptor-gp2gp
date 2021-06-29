@@ -2,9 +2,8 @@ package uk.nhs.adaptors.gp2gp.mhs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -12,6 +11,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -138,9 +139,8 @@ public class InboundMessageHandlerTest {
         doReturn(payload).when(xPathService).parseDocumentFromXml(PAYLOAD_CONTENT);
         doReturn(UNKNOWN_INTERACTION_ID).when(xPathService).getNodeValue(eq(header), anyString());
 
-        var result = inboundMessageHandler.handle(message);
+        assertFalse(inboundMessageHandler.handle(message));
 
-        assertThat(result).isFalse();
         verifyNoInteractions(ehrExtractRequestHandler);
     }
 

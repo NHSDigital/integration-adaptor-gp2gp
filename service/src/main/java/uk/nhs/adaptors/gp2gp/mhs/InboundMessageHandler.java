@@ -23,6 +23,9 @@ import uk.nhs.adaptors.gp2gp.common.service.MDCService;
 import uk.nhs.adaptors.gp2gp.common.service.ProcessFailureHandlingService;
 import uk.nhs.adaptors.gp2gp.common.service.XPathService;
 import uk.nhs.adaptors.gp2gp.ehr.request.EhrExtractRequestHandler;
+import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
+import uk.nhs.adaptors.gp2gp.mhs.exception.UnsupportedInteractionException;
 
 @Component
 @Slf4j
@@ -43,8 +46,7 @@ public class InboundMessageHandler {
     @SneakyThrows
     public boolean handle(Message message) {
         ParsedInboundMessage parsedMessage = null;
-        String messageID = message.getJMSMessageID();
-
+        var messageID = message.getJMSMessageID();
         try {
             parsedMessage = parseMessage(message);
             LOGGER.info("Decoded inbound MHS message");
@@ -57,6 +59,9 @@ public class InboundMessageHandler {
                 );
             }
             return true;
+        } catch (MessageOutOfOrderException | NonExistingInteractionIdException | UnsupportedInteractionException e) {
+            LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
+            return false;
         } catch (Exception e) {
             LOGGER.error("An error occurred while handing MHS inbound message {}", messageID, e);
             return handleMessageProcessingError(parsedMessage);
