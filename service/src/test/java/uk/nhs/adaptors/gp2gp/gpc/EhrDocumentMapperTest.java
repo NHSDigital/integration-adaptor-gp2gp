@@ -71,7 +71,8 @@
 //    @Test
 //    public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() {
 //        EhrDocumentTemplateParameters ehrDocumentTemplateParameters =
-//            ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getGpcDocumentTaskDefinition, TEST_MESSAGE_ID, getGpcDocumentTaskDefinition.getDocumentId());
+//            ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getGpcDocumentTaskDefinition,
+//            TEST_MESSAGE_ID, getGpcDocumentTaskDefinition.getDocumentId());
 //        String output = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 //
 //        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);

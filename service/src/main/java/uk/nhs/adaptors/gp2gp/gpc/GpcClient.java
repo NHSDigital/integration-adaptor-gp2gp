@@ -34,14 +34,16 @@ public class GpcClient {
     public String getDocumentRecord(GetGpcDocumentTaskDefinition documentReferencesTaskDefinition) {
         var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentReferencesTaskDefinition);
 
-        logRequest(DOCUMENT_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(DOCUMENT_LOG_TEMPLATE, documentReferencesTaskDefinition,
+            gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
 
         return performRequest(request);
     }
 
     public String getPatientRecord(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition) {
         var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(patientIdentifierTaskDefinition);
-        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
+        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition,
+            gpcConfiguration.getUrl() + gpcConfiguration.getDocumentEndpoint());
 
         return performRequest(request);
     }
@@ -49,7 +51,8 @@ public class GpcClient {
     public String getDocumentReferences(GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId) {
         var request = gpcRequestBuilder.buildGetPatientDocumentReferences(documentReferencesTaskDefinition, patientId);
 
-        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getPatientEndpoint());
+        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition,
+            gpcConfiguration.getUrl() + gpcConfiguration.getPatientEndpoint());
 
         return performRequest(request);
     }

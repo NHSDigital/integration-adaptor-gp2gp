@@ -13,7 +13,6 @@ import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
-import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
@@ -27,6 +26,8 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDefinition> {
+    private static final int THRESHOLD_MINIMUM = 4;
+
     private final StorageConnectorService storageConnectorService;
     private final MhsRequestBuilder mhsRequestBuilder;
     private final MhsClient mhsClient;
@@ -134,7 +135,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     }
 
     public static List<String> chunkBinary(String binary, int sizeThreshold) {
-        if (sizeThreshold <= 4) {
+        if (sizeThreshold <= THRESHOLD_MINIMUM) {
             throw new IllegalArgumentException("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
         }
 

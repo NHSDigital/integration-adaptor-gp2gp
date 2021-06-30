@@ -142,7 +142,9 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return ResourceExtractor.extractResourcesByType(fhirBundle, Patient.class)
             .map(Resource::getIdElement)
             .map(IdType::getIdPart)
-            .reduce((a, b) -> { throw new IllegalStateException("There is more than 1 Patient resource in Structured Record Bundle"); });
+            .reduce((a, b) -> {
+                throw new IllegalStateException("There is more than 1 Patient resource in Structured Record Bundle");
+            });
     }
 
     private Bundle getDocumentReferencesBundle(GetGpcStructuredTaskDefinition taskDefinition, String patientId) {
@@ -154,7 +156,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return parser.parseResource(Bundle.class, response);
     }
 
-    private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition, OutboundMessage.ExternalAttachment externalAttachment) {
+    private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition,
+        OutboundMessage.ExternalAttachment externalAttachment) {
         return GetGpcDocumentTaskDefinition.builder()
             .documentId(externalAttachment.getDocumentId())
             .taskId(taskDefinition.getTaskId())

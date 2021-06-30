@@ -279,7 +279,8 @@ public class EhrExtractStatusService {
 
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
-        documentIdUrlMap.forEach((documentId, url) -> update.addToSet(GPC_DOCUMENTS, EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+        documentIdUrlMap.forEach((documentId, url) -> update.addToSet(GPC_DOCUMENTS,
+            EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
             .documentId(documentId)
             .accessDocumentUrl(url)
             .objectName(null)
