@@ -26,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.testcontainers.MongoDBExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
@@ -37,7 +38,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     private static final String PAYLOAD = "payload";
     private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
-        CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
+        CONVERSATION_ID.concat("_gpc_structured.json");
 
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
@@ -70,10 +71,11 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
-        when(storageConnectorService.downloadFile(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)).thenReturn(storageDataWrapper);
+        when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
+        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn("12345");
         when(mhsClient.sendMessageToMHS(request)).thenReturn("Successful Mhs Outbound Request");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);
@@ -87,8 +89,9 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus();
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
+        when(storageConnectorService.downloadFile(eq(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME))).thenReturn(storageDataWrapper);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
-        when(storageConnectorService.downloadFile(EXPECTED_STRUCTURED_RECORD_JSON_FILENAME)).thenReturn(storageDataWrapper);
+        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn("12345");
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
         doThrow(InvalidOutboundMessageException.class)

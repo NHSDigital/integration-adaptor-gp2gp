@@ -35,7 +35,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
@@ -46,7 +45,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
     private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String EXPECTED_DOCUMENT_JSON_FILENAME =
-        CONVERSATION_ID.concat("/").concat(DOCUMENT_ID).concat(".json");
+        DOCUMENT_ID.concat(".json");
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
@@ -158,6 +157,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
     private GetGpcDocumentTaskDefinition buildValidAccessTask(EhrExtractStatus ehrExtractStatus, String documentId) {
         return GetGpcDocumentTaskDefinition.builder()
+            .messageId(documentId)
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toAsid(ehrExtractStatus.getEhrRequest().getToAsid())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
