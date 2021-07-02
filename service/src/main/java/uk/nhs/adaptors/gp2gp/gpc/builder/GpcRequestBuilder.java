@@ -103,10 +103,10 @@ public class GpcRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildGetStructuredRecordRequest(Parameters requestBodyParameters,
-        GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+        GetGpcStructuredTaskDefinition structuredTaskDefinition, String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.POST)
@@ -119,10 +119,10 @@ public class GpcRequestBuilder {
         return buildRequestWithHeadersAndBody(uri, requestBody, bodyInserter, structuredTaskDefinition, GPC_STRUCTURED_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition) {
+    public RequestHeadersSpec<?> buildGetDocumentRecordRequest(GetGpcDocumentTaskDefinition documentTaskDefinition, String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.GET)
@@ -131,10 +131,11 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition) {
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition,
+        String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
 
         WebClient.RequestBodySpec uri = preparePatientUri(client, patientIdentifierTaskDefinition.getNhsNumber());
 
@@ -142,13 +143,13 @@ public class GpcRequestBuilder {
     }
 
     public RequestHeadersSpec<?> buildGetPatientDocumentReferences(
-            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId) {
+            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId, String gpcBaseUrl) {
 
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient);
+        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
 
-        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcConfiguration.getUrl());
+        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcBaseUrl);
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
 
         WebClient.RequestBodySpec uri = client
@@ -164,14 +165,14 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
     }
 
-    private WebClient buildWebClient(HttpClient httpClient) {
+    private WebClient buildWebClient(HttpClient httpClient, String baseUrl) {
         return WebClient
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(this::addWebClientFilters)
-            .baseUrl(gpcConfiguration.getUrl())
-            .defaultUriVariables(Collections.singletonMap("url", gpcConfiguration.getUrl()))
+            .baseUrl(baseUrl)
+            .defaultUriVariables(Collections.singletonMap("url", baseUrl))
             .build();
     }
 

@@ -109,7 +109,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 
-    private Bundle getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
+    private Bundle  getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         var structuredRecord = fhirParseService.parseResource(gpcClient.getStructuredRecord(structuredTaskDefinition), Bundle.class);
         //TODO whole block below might not be needed in GPC 1.5.1
         getPatientId(structuredTaskDefinition).ifPresent(patientId -> {
