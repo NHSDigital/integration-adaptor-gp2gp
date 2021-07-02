@@ -160,6 +160,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
     }
 
     private boolean isLargeAttachment(String binary) {
-        return binary.getBytes().length > gp2gpConfiguration.getLargeAttachmentThreshold();
+        var bytes = binary.getBytes(StandardCharsets.UTF_8);
+        return bytes.length > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 }
