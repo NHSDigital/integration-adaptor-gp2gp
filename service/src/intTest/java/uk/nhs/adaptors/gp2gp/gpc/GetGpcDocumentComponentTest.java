@@ -36,6 +36,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.DOCUMENT_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class})
 @SpringBootTest
@@ -45,7 +46,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String NO_RECORD_FOUND_STRING = "No Record Found";
     private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String EXPECTED_DOCUMENT_JSON_FILENAME =
-        DOCUMENT_ID.concat(".json");
+        CONVERSATION_ID.concat("/").concat(DOCUMENT_ID).concat(".json");
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;

@@ -38,7 +38,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
 public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
     private static final String PAYLOAD = "payload";
     private static final String EXPECTED_STRUCTURED_RECORD_JSON_FILENAME =
-        CONVERSATION_ID.concat("_gpc_structured.json");
+        CONVERSATION_ID.concat("/").concat(CONVERSATION_ID).concat("_gpc_structured.json");
 
     private final RandomIdGeneratorService randomIdGeneratorService = new RandomIdGeneratorService();
 
