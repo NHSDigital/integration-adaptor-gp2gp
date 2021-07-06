@@ -4124,7 +4124,7 @@ RBC MORPHOLOGY NORMAL</text>
             <center value="20030703"/>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
-            <value xsi:type="PQ" value="0.410" unit="1"><translation value="0.410"><originalText>null</originalText></translation></value>
+            <value xsi:type="PQ" value="0.410" unit="1"><translation value="0.410"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
@@ -4192,7 +4192,7 @@ RBC MORPHOLOGY NORMAL</text>
             <center value="20030703"/>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
-            <value xsi:type="PQ" value="12.700" unit="1"><translation value="12.700"><originalText>null</originalText></translation></value>
+            <value xsi:type="PQ" value="12.700" unit="1"><translation value="12.700"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
@@ -5092,7 +5092,7 @@ rheumatoid factor tests.</text>
             <center value="20050315"/>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
-            <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>null</originalText></translation></value>
+            <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="1141EEE6-EDE3-4358-8554-FFED0EE59284"/>
