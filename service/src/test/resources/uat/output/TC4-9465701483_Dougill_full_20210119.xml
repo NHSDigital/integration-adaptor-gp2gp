@@ -314,7 +314,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>That&apos;s some pretty heavy smoking</text>
+                <text>Interpretation: That&apos;s some pretty heavy smoking</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -490,7 +490,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>29th Aug 2009 (Hand entered date)</text>
+                <text>Interpretation: 29th Aug 2009 (Hand entered date)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1214,7 +1214,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is right foot colour text note</text>
+                <text>Interpretation: This is right foot colour text note</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1239,7 +1239,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is left foot colour text note</text>
+                <text>Interpretation: This is left foot colour text note</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1264,7 +1264,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Foot</text>
+                <text>Interpretation: Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1289,7 +1289,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Foot</text>
+                <text>Interpretation: Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1367,7 +1367,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Foot</text>
+                <text>Interpretation: Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1393,7 +1393,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Foot</text>
+                <text>Interpretation: Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1470,7 +1470,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Foot</text>
+                <text>Interpretation: Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1495,7 +1495,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Foot</text>
+                <text>Interpretation: Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1520,7 +1520,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Foot</text>
+                <text>Interpretation: Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1545,7 +1545,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Foot</text>
+                <text>Interpretation: Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1570,7 +1570,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Foot</text>
+                <text>Interpretation: Right Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1595,7 +1595,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Foot</text>
+                <text>Interpretation: Left Foot</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1621,7 +1621,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 1</text>
+                <text>Interpretation: This is some text 1</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1647,7 +1647,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 2</text>
+                <text>Interpretation: This is some text 2</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1723,7 +1723,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 12</text>
+                <text>Interpretation: This is some text 12</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1748,7 +1748,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 13</text>
+                <text>Interpretation: This is some text 13</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1823,7 +1823,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 3</text>
+                <text>Interpretation: This is some text 3</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1849,7 +1849,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 10</text>
+                <text>Interpretation: This is some text 10</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1874,7 +1874,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 11</text>
+                <text>Interpretation: This is some text 11</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1899,7 +1899,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 4</text>
+                <text>Interpretation: This is some text 4</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1924,7 +1924,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 5</text>
+                <text>Interpretation: This is some text 5</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1949,7 +1949,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 6</text>
+                <text>Interpretation: This is some text 6</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1975,7 +1975,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 7</text>
+                <text>Interpretation: This is some text 7</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2001,7 +2001,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 8</text>
+                <text>Interpretation: This is some text 8</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2027,7 +2027,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 9</text>
+                <text>Interpretation: This is some text 9</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2202,7 +2202,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Right Leg</text>
+                <text>Interpretation: Right Leg</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2228,7 +2228,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Left Leg</text>
+                <text>Interpretation: Left Leg</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2253,7 +2253,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text 20</text>
+                <text>Interpretation: This is some text 20</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2330,7 +2330,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is some text following the selection of Trivial Drinker</text>
+                <text>Interpretation: This is some text following the selection of Trivial Drinker</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2481,7 +2481,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>These are some notes on &quot;Beer Drinker&quot;</text>
+                <text>Interpretation: These are some notes on &quot;Beer Drinker&quot;</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2870,7 +2870,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is total freetext madness</text>
+                <text>Interpretation: This is total freetext madness</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3153,7 +3153,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>cementing the agreement</text>
+                <text>Interpretation: cementing the agreement</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3210,7 +3210,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Aaaargh</text>
+                <text>Interpretation: Aaaargh</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3267,7 +3267,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Notes on the tired all the time entry</text>
+                <text>Interpretation: Notes on the tired all the time entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

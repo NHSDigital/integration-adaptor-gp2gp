@@ -418,7 +418,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - This is problem</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - This is problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -527,7 +527,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : Review</text>
+                <text>Interpretation: Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -912,7 +912,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a note</text>
+                <text>Interpretation: This is a note</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
