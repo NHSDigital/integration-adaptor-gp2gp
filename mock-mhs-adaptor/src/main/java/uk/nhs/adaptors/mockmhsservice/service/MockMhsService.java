@@ -75,7 +75,6 @@ public class MockMhsService {
                 return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
             }
         } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID)) {
-            LOGGER.info("Remove this line");
             LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             try{
