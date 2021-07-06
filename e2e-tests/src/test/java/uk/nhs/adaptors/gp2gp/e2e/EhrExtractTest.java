@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.registerFormatterForType;
 
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
@@ -40,6 +41,7 @@ public class EhrExtractTest {
     private static final String GPC_ACCESS_DOCUMENT = "gpcAccessDocument";
     private static final String EHR_EXTRACT_CORE = "ehrExtractCore";
     private static final String EHR_CONTINUE = "ehrContinue";
+    private static final String ACKNOWLEDGEMENT_INTERACTION_ID = "MCCI_IN010000UK13";
     private static final String GPC_STRUCTURED_FILENAME_EXTENSION = "_gpc_structured.json";
     private static final String DOCUMENT_ID = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
@@ -71,6 +73,9 @@ public class EhrExtractTest {
 
         var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
         assertThatAcknowledgementToRequesterWasSent(ackToRequester);
+
+        var ackToDB = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACKNOWLEDGEMENT_INTERACTION_ID));
+        assertThatAcknowledgmentWasSent(ackToDB);
     }
 
     @Test
@@ -173,5 +178,12 @@ public class EhrExtractTest {
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
         assertThat(documentList).isEmpty();
+    }
+
+    private void assertThatAcknowledgmentWasSent(Document document){
+        softly.assertThat(document).isNotNull();
+        softly.assertThat(document.get("sentAt")).isNotNull();
+        softly.assertThat(document.get("taskId")).isNotNull();
+
     }
 }
