@@ -178,11 +178,8 @@ public class ObservationStatementMapper {
             }
         }
 
-        Optional<String> interpretationText = StringUtils.isNotBlank(observation.getInterpretation().getText())
-            ? Optional.of(observation.getInterpretation().getText())
-            : Optional.empty();
         String interpretationTextAndComment = Stream.concat(
-            interpretationText.stream(),
+            Optional.ofNullable(observation.getInterpretation().getText()).stream(),
             Optional.ofNullable(observation.getComment()).stream()
         ).collect(Collectors.joining(StringUtils.SPACE));
 

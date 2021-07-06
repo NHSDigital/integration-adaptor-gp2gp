@@ -212,17 +212,17 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        String interpretationText = Stream.concat(
+        String interpretationTextAndComment = Stream.concat(
             CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).stream(),
             Optional.ofNullable(observation.getComment()).stream()
         ).collect(Collectors.joining(StringUtils.SPACE));
 
-        if (!interpretationText.isBlank()) {
-            String comment = INTERPRETATION_PREFIX.concat(interpretationText);
+        if (!interpretationTextAndComment.isBlank()) {
+            interpretationTextAndComment = INTERPRETATION_PREFIX.concat(interpretationTextAndComment);
 
             narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(
-                    holder, comment, CommentType.AGGREGATE_COMMENT_SET.getCode()
+                    holder, interpretationTextAndComment, CommentType.AGGREGATE_COMMENT_SET.getCode()
                 )
             );
         }
