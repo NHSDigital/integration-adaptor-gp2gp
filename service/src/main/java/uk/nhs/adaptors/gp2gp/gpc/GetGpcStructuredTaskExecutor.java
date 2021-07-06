@@ -165,6 +165,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .requestId(taskDefinition.getRequestId())
             .toAsid(taskDefinition.getToAsid())
             .fromAsid(taskDefinition.getFromAsid())
+            .toOdsCode(taskDefinition.getToOdsCode())
             .fromOdsCode(taskDefinition.getFromOdsCode())
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
