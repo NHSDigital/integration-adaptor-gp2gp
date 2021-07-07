@@ -1280,7 +1280,7 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
             <center value="20100223"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <value xsi:type="PQ" value="2.500" unit="1"><translation value="2.500"><originalText>null</originalText></translation></value>
+            <value xsi:type="PQ" value="2.500" unit="1"><translation value="2.500"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4784,7 +4784,7 @@ Time since last dose : 9.5 hours</text>
             <center value="20100224"/>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
-            <value xsi:type="PQ" value="1.700" unit="1"><translation value="1.700"><originalText>null</originalText></translation></value>
+            <value xsi:type="PQ" value="1.700" unit="1"><translation value="1.700"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
