@@ -117,8 +117,16 @@ public class EhrExtractTest {
     }
 
     private void assertMultipleDocsSent(String conversationId) {
-        var document = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        var sentToMhs = (Document) document.get(SENT_TO_MHS);
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_LARGE_DOCUMENTS, FROM_ODS_CODE_1);
+
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
+
+        var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
+        assertThatAccessDocumentWasFetched(conversationId, singleDocument, DOCUMENT_ID_LARGE);
+
+        var sentToMhs = (Document) singleDocument.get(SENT_TO_MHS);
         var messageIds = sentToMhs.get(MESSAGE_ID, Collections.emptyList());
         softly.assertThat(messageIds.size()).isEqualTo(3);
     }
