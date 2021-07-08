@@ -184,6 +184,5 @@ public class EhrExtractTest {
         softly.assertThat(document).isNotNull();
         softly.assertThat(document.get("sentAt")).isNotNull();
         softly.assertThat(document.get("taskId")).isNotNull();
-
     }
 }
