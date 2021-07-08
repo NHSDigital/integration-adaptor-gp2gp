@@ -356,7 +356,7 @@
 </component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20050201"/>
@@ -1900,7 +1900,7 @@ And more stuff</text>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="3A3B1B6F-7DC5-4BE3-A496-0BC243583EBA"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20050723"/>
@@ -3131,7 +3131,7 @@ with special characters
             <center value="20060818"/>
         </effectiveTime>
         <availabilityTime value="20131118094149"/>
-        <value xsi:type="PQ" value="3.000" unit="1"><translation value="3.000"><originalText>null</originalText></translation></value>
+        <value xsi:type="PQ" value="3.000" unit="1"><translation value="3.000"></translation></value>
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
@@ -3475,7 +3475,7 @@ with special characters
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20080307"/>

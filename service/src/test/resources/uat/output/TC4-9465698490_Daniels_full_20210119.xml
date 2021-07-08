@@ -20585,7 +20585,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="C61B48F5-E766-473C-88B4-C09F0E894002"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100118"/>
@@ -20650,7 +20650,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="BEDB565E-1920-44C7-A6F9-2147B3F4CF08"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100323"/>
@@ -20715,7 +20715,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="C5384B4F-3577-4C92-B32E-A975E8C21CEF"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100323"/>
@@ -20780,7 +20780,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="BC4C64C4-3D2B-4B61-B10C-04DAB0772AD7"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20100809"/>
@@ -20845,7 +20845,7 @@
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
         <id root="93737085-36E8-44E1-B715-6E384C664165"/>
-        <code code="14L...00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
+        <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center value="20110928"/>

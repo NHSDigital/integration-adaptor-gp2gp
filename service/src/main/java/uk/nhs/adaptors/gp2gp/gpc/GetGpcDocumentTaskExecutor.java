@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
+import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.gpc.builder.GpcRequestBuilder;
-
-import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
 
 @Slf4j
 @Component
@@ -20,7 +18,6 @@ import static uk.nhs.adaptors.gp2gp.gpc.GpcFileNameConstants.JSON_EXTENSION;
 public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTaskDefinition> {
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
-    private final GpcRequestBuilder gpcRequestBuilder;
     private final GpcClient gpcClient;
     private final GpcDocumentTranslator gpcDocumentTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
@@ -33,24 +30,32 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     @Override
     @SneakyThrows
-    public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
+    public void execute(GetGpcDocumentTaskDefinition documentTaskDefinition) {
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
-        var response = gpcClient.getDocumentRecord(taskDefinition);
+        var response = gpcClient.getDocumentRecord(documentTaskDefinition);
 
-        String documentName = taskDefinition.getDocumentId() + JSON_EXTENSION;
-        String taskId = taskDefinition.getTaskId();
         String messageId = randomIdGeneratorService.createNewId();
 
-        String mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, response, messageId);
+        String mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(
+            documentTaskDefinition, response, messageId
+        );
 
-        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
-            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
+        String taskId = documentTaskDefinition.getTaskId();
 
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
+        StorageDataWrapper storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider.buildStorageDataWrapper(
+            documentTaskDefinition, mhsOutboundRequestData, taskId
+        );
 
-        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(taskDefinition, documentName,
-            taskId, messageId);
+        String documentJsonFilename = GpcFilenameUtils.generateDocumentFilename(
+            documentTaskDefinition.getConversationId(), documentTaskDefinition.getDocumentId()
+        );
+
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentJsonFilename);
+
+        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            documentTaskDefinition, documentJsonFilename, taskId, messageId
+        );
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }
