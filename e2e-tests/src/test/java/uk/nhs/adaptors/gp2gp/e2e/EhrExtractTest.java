@@ -84,8 +84,8 @@ public class EhrExtractTest {
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
-        assertThatAcknowledgementPending(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
     }
 
