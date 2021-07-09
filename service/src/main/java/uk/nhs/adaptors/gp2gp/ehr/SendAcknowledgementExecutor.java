@@ -62,6 +62,8 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
 
         String requestBody = buildRequestBody(sendAckTemplateParams, sendAcknowledgementTaskDefinition.isNack());
 
+        updateEhrExtractStatus(sendAcknowledgementTaskDefinition, ackMessageId, timestampService.now().toString());
+
         sendToMHS(sendAcknowledgementTaskDefinition, ackMessageId, requestBody);
 
         updateEhrExtractStatus(sendAcknowledgementTaskDefinition, ackMessageId);
@@ -93,6 +95,17 @@ public class SendAcknowledgementExecutor implements TaskExecutor<SendAcknowledge
         ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(
             taskDefinition,
             ackMessageId
+        );
+    }
+
+    private void updateEhrExtractStatus(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId, String updatedAt) {
+        LOGGER.info("Updating EhrExtractStatus with pending ACK message Id: {} Conversation id: {}", ackMessageId,
+            taskDefinition.getConversationId());
+
+        ehrExtractStatusService.updateEhrExtractStatusAcknowledgement(
+            taskDefinition,
+            ackMessageId,
+            updatedAt
         );
     }
 

@@ -53,6 +53,7 @@ public class EhrExtractTest {
     private static final String NHS_NUMBER_PLACEHOLDER = "%%NHSNumber%%";
     private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
     private static final String ACK_TO_REQUESTER = "ackToRequester";
+    private static final String ACK_TO_PENDING = "ackPending";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
@@ -83,8 +84,8 @@ public class EhrExtractTest {
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
     }
 
@@ -121,11 +122,8 @@ public class EhrExtractTest {
 
         waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
-
-        var ackToDB = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
-        assertThatAcknowledgmentWasSent(ackToDB);
+        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
@@ -156,7 +154,7 @@ public class EhrExtractTest {
         return null;
     }
 
-    private void assertThatAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
+    private void assertThatAcknowledgementPending(Document ackToRequester, String typeCode) {
         softly.assertThat(ackToRequester.get("messageId")).isNotNull();
         softly.assertThat(ackToRequester.get("taskId")).isNotNull();
         softly.assertThat(ackToRequester.get("typeCode")).isEqualTo(typeCode);
@@ -164,7 +162,7 @@ public class EhrExtractTest {
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
         // TODO: error code and message to be prepared as part of NIAD-1524
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, typeCode);
+        assertThatAcknowledgementPending(ackToRequester, typeCode);
         softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("18");
         softly.assertThat(ackToRequester.get("detail")).isEqualTo("An error occurred when executing a task");
     }
@@ -240,11 +238,5 @@ public class EhrExtractTest {
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
         assertThat(documentList).isEmpty();
-    }
-
-    private void assertThatAcknowledgmentWasSent(Document document){
-        softly.assertThat(document).isNotNull();
-        softly.assertThat(document.get("taskId")).isNotNull();
-        softly.assertThat(document.get("typeCode")).isNotNull();
     }
 }
