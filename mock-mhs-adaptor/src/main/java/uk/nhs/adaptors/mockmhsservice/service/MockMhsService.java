@@ -78,25 +78,27 @@ public class MockMhsService {
         } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID)) {
             LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
-            try{
+            try {
                 var inboundMessage = STUB_ACKNOWLEDGEMENT_INBOUND_MESSAGE.replace("%%ConversationId%%", correlationId);
                 inboundProducer.sendToMhsInboundQueue(inboundMessage);
-                LOGGER.info("Message acknowledgement sent to Inbound Queue, acknowledgementInteractionId: " + ACKNOWLEDGEMENT_INTERACTION_ID);
-            }catch (JmsException e) {
+                LOGGER.info("Message acknowledgement sent to Inbound Queue, conversationId: " + correlationId);
+                headers.setContentType(MediaType.TEXT_XML);
+                return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+            } catch (JmsException e) {
                 LOGGER.error("Error could not send acknowledgement to Inbound Queue", e);
+                return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
             }
-            return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
-        }else if (interactionId.equals(COMMON_INTERACTION_ID)) {
+        } else if (interactionId.equals(COMMON_INTERACTION_ID)) {
             LOGGER.info("Message Common accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(headers, ACCEPTED);
         }
-
         LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);
         return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
     }
 
     private void verifyOutboundMessagePayload(String requestBody) throws JsonProcessingException, MockMHSException {
+        LOGGER.debug("Received outbound MHS request payload:\n{}", requestBody);
         var payloadObject = objectMapper.readValue(requestBody, OutboundMessage.class);
         if (payloadObject.getPayload() == null) {
             throw new MockMHSException("Error content of request body does not match expected JSON");
