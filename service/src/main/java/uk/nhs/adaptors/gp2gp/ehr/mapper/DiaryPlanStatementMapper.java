@@ -145,7 +145,7 @@ public class DiaryPlanStatementMapper {
     }
 
     private Optional<String> getReasonCode(ProcedureRequest procedureRequest) {
-        var reasons= procedureRequest.getReasonCode()
+        var reasons = procedureRequest.getReasonCode()
             .stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
