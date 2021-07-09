@@ -30,6 +30,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.CONVERSATION_ID;
+import static uk.nhs.adaptors.gp2gp.ehr.EhrStatusConstants.FROM_ODS_CODE;
 
 @RunWith(SpringRunner.class)
 @ExtendWith({SpringExtension.class, MongoDBExtension.class, ActiveMQExtension.class, MockitoExtension.class})
@@ -75,7 +76,7 @@ public class SendEhrExtractCoreComponentTest extends BaseTaskTest {
         when(storageDataWrapper.getData()).thenReturn(PAYLOAD);
         when(sendEhrExtractCoreTaskDefinition.getConversationId()).thenReturn(ehrExtractStatus.getConversationId());
         when(sendEhrExtractCoreTaskDefinition.getTaskId()).thenReturn(randomIdGeneratorService.createNewId());
-        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn("12345");
+        when(sendEhrExtractCoreTaskDefinition.getFromOdsCode()).thenReturn(FROM_ODS_CODE);
         when(mhsClient.sendMessageToMHS(request)).thenReturn("Successful Mhs Outbound Request");
 
         sendEhrExtractCoreTaskExecutor.execute(sendEhrExtractCoreTaskDefinition);

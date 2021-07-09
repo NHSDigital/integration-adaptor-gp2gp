@@ -7,6 +7,7 @@ import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
@@ -26,13 +27,14 @@ public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
 
-    private static final String EXISTING_PATIENT_NHS_NUMBER = "9690937286";
+    private static final String NHS_NUMBER = "9690937286";
     private static final String NOT_EXISTING_PATIENT_NHS_NUMBER = "9876543210";
     private static final String EHR_EXTRACT_REQUEST_TEST_FILE = "/ehrExtractRequest.json";
     private static final String EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE = "/ehrExtractRequestWithNoDocuments.json";
     private static final String REQUEST_ID = "041CA2AE-3EC6-4AC9-942F-0F6621CC0BFC";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
-    private static final String NHS_NUMBER_LARGE_DOCUMENTS = "9690937819";
+    private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
+    private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
     private static final String FROM_PARTY_ID = "N82668-820670";
     private static final String TO_PARTY_ID = "B86041-822103";
     private static final String FROM_ASID = "200000000359";
@@ -49,6 +51,7 @@ public class EhrExtractTest {
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
     private static final String DOCUMENT_ID_LARGE = "11737b22-8cff-47e2-b741-e7f27c8c61a8";
+    private static final String DOCUMENT_ID_LARGE_2 = "29c434d6-ad47-415f-b5f5-fd1dc2941d8d";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
     private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
     private static final String CONVERSATION_ID_PLACEHOLDER = "%%ConversationId%%";
@@ -59,16 +62,16 @@ public class EhrExtractTest {
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, EXISTING_PATIENT_NHS_NUMBER, DOCUMENT_ID_NORMAL);
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
 
         String conversationId2 = UUID.randomUUID().toString();
-        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_2);
+        String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER, FROM_ODS_CODE_2);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
-        assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2, EXISTING_PATIENT_NHS_NUMBER, DOCUMENT_ID_NORMAL);
+        assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER, DOCUMENT_ID_NORMAL);
     }
 
     @Test
@@ -106,29 +109,37 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataAddedToDatabase() throws Exception {
+    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInTwoParts() throws Exception {
         String conversationId = UUID.randomUUID().toString();
-        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS, FROM_ODS_CODE_1);
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER_LARGE_DOCUMENTS, DOCUMENT_ID_LARGE);
-        assertMultipleDocsSent(conversationId);
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 3);
     }
 
-    private void assertMultipleDocsSent(String conversationId) {
+    @Test
+    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInFourParts() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 5);
+    }
+
+    private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
-        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_LARGE_DOCUMENTS, FROM_ODS_CODE_1);
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
 
         var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
         assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
 
         var singleDocument = (Document) waitFor(() -> theDocumentTaskUpdatesTheRecord(conversationId));
-        assertThatAccessDocumentWasFetched(conversationId, singleDocument, DOCUMENT_ID_LARGE);
+        assertThatAccessDocumentWasFetched(conversationId, singleDocument, documentId);
 
-        var sentToMhs = (Document) singleDocument.get(SENT_TO_MHS);
-        var messageIds = sentToMhs.get(MESSAGE_ID, Collections.emptyList());
-        softly.assertThat(messageIds.size()).isEqualTo(3);
+        var messageIds = waitFor(() -> getTheSplitDocumentIds(conversationId));
+        softly.assertThat(messageIds.size()).isEqualTo(arraySize);
     }
 
     private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
@@ -177,6 +188,16 @@ public class EhrExtractTest {
             if (document.get("objectName") != null) {
                 return document;
             }
+        }
+        return null;
+    }
+
+    private List<Object> getTheSplitDocumentIds(String conversationId) {
+        var document = (Document) theDocumentTaskUpdatesTheRecord(conversationId);
+        var sentToMhs = (Document) document.get(SENT_TO_MHS);
+
+        if (sentToMhs != null) {
+            return sentToMhs.get(MESSAGE_ID, Collections.emptyList());
         }
         return null;
     }
