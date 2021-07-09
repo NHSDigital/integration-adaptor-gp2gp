@@ -83,6 +83,12 @@ public class RequestStatementMapperTest {
         + "example-referral-request-no-onbehalfof.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
         + "example-referral-request-with-multiple-recipients.json";
+    private static final String INPUT_JSON_WITH_ASAP_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-asap-priority.json";
+    private static final String INPUT_JSON_WITH_ROUTINE_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-routine-priority.json";
+    private static final String INPUT_JSON_WITH_URGENT_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-urgent-priority.json";
 
     // OUTPUT FILES
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -117,6 +123,12 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-no-onbehalfof.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-with-multiple-recipients.xml";
+    private static final String OUTPUT_XML_WITH_NORMAL_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-normal-priority.xml";
+    private static final String OUTPUT_XML_WITH_HIGH_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-high-priority.xml";
+    private static final String OUTPUT_XML_WITH_IMMEDIATE_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-immediate-priority.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -145,7 +157,10 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT),
             arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
             arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
-            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS)
+            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS),
+            arguments(INPUT_JSON_WITH_ASAP_PRIORITY, OUTPUT_XML_WITH_IMMEDIATE_PRIORITY),
+            arguments(INPUT_JSON_WITH_ROUTINE_PRIORITY, OUTPUT_XML_WITH_NORMAL_PRIORITY),
+            arguments(INPUT_JSON_WITH_URGENT_PRIORITY, OUTPUT_XML_WITH_HIGH_PRIORITY)
         );
     }
 

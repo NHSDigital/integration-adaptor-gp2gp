@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static java.lang.String.format;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractAuthor;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractNoteTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
@@ -49,7 +50,6 @@ public class RequestStatementMapper {
     private static final String REQUESTER_ORG = "Requester Org: ";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String UBRN = "UBRN: ";
-    private static final String PRIORITY = "Priority: ";
     private static final String SERVICES_REQUESTED = "Service(s) Requested: ";
     private static final String SPECIALTY = "Specialty: ";
     private static final String REASON_CODES = "Reason Codes: ";
@@ -61,6 +61,21 @@ public class RequestStatementMapper {
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String COMMA = ", ";
+
+    private static final String PRIORITY_CODE_IMMEDIATE =
+        "<priorityCode code=\"88694003\" displayName=\"Immediate\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Asap</originalText>"
+            + "</priorityCode>";
+
+    private static final String PRIORITY_CODE_NORMAL =
+        "<priorityCode code=\"394848005\" displayName=\"Normal\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Routine</originalText>"
+            + "</priorityCode>";
+
+    private static final String PRIORITY_CODE_HIGH =
+        "<priorityCode code=\"394849002\" displayName=\"High\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Urgent</originalText>"
+            + "</priorityCode>";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
@@ -93,6 +108,7 @@ public class RequestStatementMapper {
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(referralRequest.getAuthoredOnElement()))
                 .text(buildTextDescription())
+                .priorityCode(buildPriorityCode())
                 .code(buildCode());
 
             if (referralRequest.hasRecipient()) {
@@ -106,6 +122,25 @@ public class RequestStatementMapper {
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());
         }
 
+        private String buildPriorityCode() {
+            if (!referralRequest.hasPriority()) {
+                return null;
+            }
+
+            switch (referralRequest.getPriority()) {
+                case ASAP:
+                    return PRIORITY_CODE_IMMEDIATE;
+                case ROUTINE:
+                    return PRIORITY_CODE_NORMAL;
+                case URGENT:
+                    return PRIORITY_CODE_HIGH;
+                default:
+                    throw new EhrMapperException(
+                        format("Unsupported priority in ReferralRequest: %s", referralRequest.getPriority().toCode())
+                    );
+            }
+        }
+
         private boolean hasReferencingAgent() {
             return referralRequest.hasRequester()
                 && referralRequest.getRequester().hasAgent()
@@ -116,13 +151,13 @@ public class RequestStatementMapper {
             AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
             if (isReferenceToPractitioner(agent)
-                    && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
+                && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
                 final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
             } else if (isReferenceToPractitioner(agent)) {
-                final String participantRef =  agentDirectory.getAgentId(agent);
+                final String participantRef = agentDirectory.getAgentId(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
             }
@@ -140,13 +175,6 @@ public class RequestStatementMapper {
                 .map(UBRN::concat)
                 .filter(StringUtils::isNotBlank)
                 .orElse(StringUtils.EMPTY);
-        }
-
-        private String buildPriorityDescription() {
-            if (referralRequest.hasPriority()) {
-                return PRIORITY + referralRequest.getPriority().getDisplay();
-            }
-            return StringUtils.EMPTY;
         }
 
         private String buildServiceRequestedDescription() {
@@ -198,7 +226,7 @@ public class RequestStatementMapper {
         private String buildNoteDescription() {
             if (referralRequest.hasNote()) {
                 return referralRequest.getNote().stream()
-                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
+                    .map(value -> format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
                     .collect(Collectors.joining(COMMA));
             }
             return StringUtils.EMPTY;
@@ -262,7 +290,6 @@ public class RequestStatementMapper {
                 buildRecipientDescription(),
                 buildSpecialtyDescription(),
                 buildServiceRequestedDescription(),
-                buildPriorityDescription(),
                 buildIdentifierDescription()
             );
 
