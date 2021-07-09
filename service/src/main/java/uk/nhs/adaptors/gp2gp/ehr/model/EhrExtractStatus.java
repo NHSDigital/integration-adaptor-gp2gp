@@ -40,6 +40,7 @@ public class EhrExtractStatus implements TimeToLive {
     private EhrExtractCorePending ehrExtractCorePending;
     private EhrContinue ehrContinue;
     private AckToRequester ackToRequester;
+    private AckPending ackPending;
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
     private Error error;
 
@@ -145,6 +146,17 @@ public class EhrExtractStatus implements TimeToLive {
         private String typeCode;
         private String reasonCode;
         private String detail;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class AckPending {
+        private String taskId;
+        private String messageId;
+        private String typeCode;
+        private String updatedAt;
     }
 
     @Data

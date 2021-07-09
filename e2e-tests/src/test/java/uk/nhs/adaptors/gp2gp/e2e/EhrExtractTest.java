@@ -58,6 +58,8 @@ public class EhrExtractTest {
     private static final String FROM_ODS_CODE_PLACEHOLDER = "%%From_ODS_Code%%";
     private static final String NHS_NUMBER_PLACEHOLDER = "%%NHSNumber%%";
     private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
+    private static final String ACK_TO_REQUESTER = "ackToRequester";
+    private static final String ACK_TO_PENDING = "ackPending";
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
@@ -88,8 +90,8 @@ public class EhrExtractTest {
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
         assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatNoErrorInfoIsStored(conversationId);
     }
 
@@ -103,7 +105,7 @@ public class EhrExtractTest {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NOT_EXISTING_PATIENT_NHS_NUMBER, FROM_ODS_CODE_1);
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
+        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_REQUESTER));
         assertThatNegativeAcknowledgementToRequesterWasSent(ackToRequester, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
         assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
     }
@@ -160,8 +162,8 @@ public class EhrExtractTest {
 
         waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
 
-        var ackToRequester = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get("ackToRequester"));
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+        var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
+        assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
@@ -202,7 +204,7 @@ public class EhrExtractTest {
         return null;
     }
 
-    private void assertThatAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
+    private void assertThatAcknowledgementPending(Document ackToRequester, String typeCode) {
         softly.assertThat(ackToRequester.get("messageId")).isNotNull();
         softly.assertThat(ackToRequester.get("taskId")).isNotNull();
         softly.assertThat(ackToRequester.get("typeCode")).isEqualTo(typeCode);
@@ -210,7 +212,7 @@ public class EhrExtractTest {
 
     private void assertThatNegativeAcknowledgementToRequesterWasSent(Document ackToRequester, String typeCode) {
         // TODO: error code and message to be prepared as part of NIAD-1524
-        assertThatAcknowledgementToRequesterWasSent(ackToRequester, typeCode);
+        assertThatAcknowledgementPending(ackToRequester, typeCode);
         softly.assertThat(ackToRequester.get("reasonCode")).isEqualTo("18");
         softly.assertThat(ackToRequester.get("detail")).isEqualTo("An error occurred when executing a task");
     }
