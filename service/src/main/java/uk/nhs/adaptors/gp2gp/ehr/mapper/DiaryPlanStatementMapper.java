@@ -38,7 +38,8 @@ public class DiaryPlanStatementMapper {
     private static final Mustache PLAN_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_plan_statement_template.mustache");
     private static final String EMPTY_DATE = "nullFlavor=\"UNK\"";
     private static final String FULL_DATE = "value=\"%s\"";
-    public static final String REASON_CODE_TEXT_FORMAT = "Reason Code: %s";
+    private static final String COMMA_SPACE = ", ";
+    public static final String REASON_CODE_TEXT_FORMAT = "Reason Codes: %s";
     public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
     public static final String RECALL_DEVICE = "Recall Device: %s %s";
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
@@ -135,20 +136,23 @@ public class DiaryPlanStatementMapper {
     }
 
     private Optional<String> getNotes(ProcedureRequest procedureRequest) {
-        return Optional.of(procedureRequest.getNote()
+        var notes = procedureRequest.getNote()
             .stream()
             .map(Annotation::getText)
-            .collect(Collectors.joining(StringUtils.SPACE)));
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        return notes.isEmpty() ? Optional.empty() : Optional.of(notes);
     }
 
     private Optional<String> getReasonCode(ProcedureRequest procedureRequest) {
-        return procedureRequest.getReasonCode()
+        var reasons= procedureRequest.getReasonCode()
             .stream()
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .map(this::formatReason)
-            .findFirst();
+            .collect(Collectors.joining(COMMA_SPACE));
+
+        return reasons.isBlank() ? Optional.empty() : Optional.of(formatReason(reasons));
     }
 
     private String formatReason(String value) {

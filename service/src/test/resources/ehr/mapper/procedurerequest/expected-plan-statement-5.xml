@@ -3,7 +3,7 @@
         <id root="394559384658936" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <text>
-            Reason Code: Reason code value display 1 
+            Reason Codes: Reason code value display 1, Reason code value display 2, Reason code value text 3
         </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>

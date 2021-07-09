@@ -50,6 +50,8 @@ public class DiaryPlanStatementMapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END = TEST_DIRECTORY + "expected-plan-statement-7.xml";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_IS_NESTED = TEST_DIRECTORY + "expected-plan-statement-8.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITHOUT_REQUIRED_AUTHORED_ON = TEST_DIRECTORY + "procedure-request-resource-8.json";
+    private static final String INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE = TEST_DIRECTORY + "procedure-request-resource-9.json";
+    private static final String EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE = TEST_DIRECTORY + "expected-plan-statement-9.xml";
     private static final String INPUT_BUNDLE = TEST_DIRECTORY + "input-bundle.json";
 
     @Mock
@@ -129,7 +131,8 @@ public class DiaryPlanStatementMapperTest {
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER, EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_REASON_DISPLAY, EXPECTED_PLAN_STATEMENT_WITH_REASON_DISPLAY),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITH_PERIOD_END),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END)
+            Arguments.of(INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END),
+            Arguments.of(INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE, EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE)
         );
     }
 }
