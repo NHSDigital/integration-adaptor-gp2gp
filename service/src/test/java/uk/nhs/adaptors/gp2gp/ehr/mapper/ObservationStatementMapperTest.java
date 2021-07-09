@@ -209,7 +209,7 @@ public class ObservationStatementMapperTest {
             observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false));
 
         assertThat(exception.getMessage()).isEqualTo(String.format(
-            "Observation value type %s not supported. Mapping for transaction is terminated", expectedClass));
+            "Observation value type %s not supported.", expectedClass));
     }
 
     @Test

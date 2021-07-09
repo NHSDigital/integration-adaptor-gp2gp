@@ -169,14 +169,8 @@ public class ObservationMapper {
             Type value = holder.getObservation().getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
-                LOGGER.info(
-                    "Observation value type {} not supported. Mapping for transaction is terminated",
-                    holder.getObservation().getValue().getClass()
-                );
                 throw new EhrMapperException(
-                    String.format("Observation value type %s not supported. Mapping for transaction is terminated",
-                        holder.getObservation().getValue().getClass())
-                );
+                    String.format("Observation value type %s not supported.", holder.getObservation().getValue().getClass()));
             } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
                 observationStatementTemplateParametersBuilder.value(
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
