@@ -49,6 +49,7 @@ public class DiagnosticReportMapper {
 
     private static final String PREPENDED_TEXT_FOR_CONCLUSION_COMMENT = "Interpretation: ";
     private static final String PREPENDED_TEXT_FOR_CODED_DIAGNOSIS = "Lab Diagnosis: ";
+    private static final String PREPENDED_TEXT_FOR_STATUS = "Status: ";
 
     private final MessageContext messageContext;
     private final SpecimenMapper specimenMapper;
@@ -161,6 +162,14 @@ public class DiagnosticReportMapper {
             );
 
             reportLevelNarrativeStatements.append(narrativeStatementFromCodedDiagnosis);
+        }
+
+        if (diagnosticReport.hasStatus()) {
+            String status = PREPENDED_TEXT_FOR_STATUS + diagnosticReport.getStatus().toCode();
+            String statusNarrativeStatement = buildNarrativeStatementForDiagnosticReport(
+                diagnosticReport, LABORATORY_RESULT_COMMENT.getCode(), status);
+
+            reportLevelNarrativeStatements.append(statusNarrativeStatement);
         }
 
         buildNarrativeStatementForMissingResults(diagnosticReport, reportLevelNarrativeStatements);
