@@ -108,25 +108,25 @@ public class EhrExtractTest {
         assertThatErrorInfoIsStored(conversationId, GET_GPC_STRUCTURED_TASK_NAME);
     }
 
-//    @Test
-//    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInTwoParts() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 3);
-//    }
-//
-//    @Test
-//    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInFourParts() throws Exception {
-//        String conversationId = UUID.randomUUID().toString();
-//        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
-//
-//        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
-//
-//        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 5);
-//    }
+    @Test
+    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInTwoParts() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 3);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInFourParts() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
+
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 5);
+    }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
