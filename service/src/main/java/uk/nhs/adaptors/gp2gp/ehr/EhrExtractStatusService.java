@@ -55,6 +55,7 @@ public class EhrExtractStatusService {
     private static final String ACCESSED_AT = "accessedAt";
     private static final String RECEIVED = "received";
     private static final String ACK_TO_REQUESTER = "ackToRequester";
+    private static final String ACK_PENDING = "ackPending";
     private static final String TYPE_CODE = "typeCode";
     private static final String REASON_CODE = "reasonCode";
     private static final String DETAIL_CODE = "detail";
@@ -87,6 +88,10 @@ public class EhrExtractStatusService {
     private static final String ACK_TYPE_CODE_PATH = ACK_TO_REQUESTER + DOT + TYPE_CODE;
     private static final String ACK_REASON_CODE_PATH = ACK_TO_REQUESTER + DOT + REASON_CODE;
     private static final String ACK_DETAIL_CODE_PATH = ACK_TO_REQUESTER + DOT + DETAIL_CODE;
+    private static final String ACK_PENDING_TASK_ID_PATH = ACK_PENDING + DOT + TASK_ID;
+    private static final String ACK_PENDING_MESSAGE_ID_PATH = ACK_PENDING + DOT + MESSAGE_ID;
+    private static final String ACK_PENDING_TYPE_CODE_PATH = ACK_PENDING + DOT + TYPE_CODE;
+    private static final String ACK_PENDING_UPDATED_AT = ACK_PENDING + DOT + UPDATED_AT;
     private static final String RECEIVED_ACK_TIMESTAMP = RECEIVED_ACK + DOT + RECEIVED;
     private static final String RECEIVED_ACK_ROOT_ID = RECEIVED_ACK + DOT + ROOT_ID;
     private static final String RECEIVED_ACK_MESSAGE_REF = RECEIVED_ACK + DOT + MESSAGE_REF;
@@ -322,6 +327,17 @@ public class EhrExtractStatusService {
         updateEhrStatus(update, taskDefinition.getConversationId());
     }
 
+    public void updateEhrExtractStatusAcknowledgement(SendAcknowledgementTaskDefinition taskDefinition, String ackMessageId,
+        String updatedAt) {
+        Update update = createUpdateWithUpdatedAt();
+        update.set(ACK_PENDING_TASK_ID_PATH, taskDefinition.getTaskId());
+        update.set(ACK_PENDING_MESSAGE_ID_PATH, ackMessageId);
+        update.set(ACK_PENDING_TYPE_CODE_PATH, taskDefinition.getTypeCode());
+        update.set(ACK_PENDING_UPDATED_AT, updatedAt);
+
+        updateEhrStatus(update, taskDefinition.getConversationId());
+    }
+
     private void updateEhrStatus(Update update, String conversationId) {
         Query query = createQueryForConversationId(conversationId);
 
@@ -420,7 +436,7 @@ public class EhrExtractStatusService {
         var ehrExtractStatus = ehrExtractStatusRepository.findByConversationId(conversationId)
             .orElseThrow(() -> new NonExistingInteractionIdException("ACK", conversationId));
 
-        if (ehrExtractStatus.getAckToRequester() == null) {
+        if (ehrExtractStatus.getAckPending() == null) {
             throw new MessageOutOfOrderException("ACK", conversationId);
         }
 
