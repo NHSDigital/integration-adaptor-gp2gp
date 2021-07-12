@@ -106,6 +106,7 @@ public class EhrAcknowledgementTest {
 
     private Optional<EhrExtractStatus> setUpAndHandleAck(Resource businessErrorAck) throws SAXException {
         var ehrExtractStatus = EhrExtractStatusTestUtils.prepareEhrExtractStatus(randomIdGeneratorService.createNewId());
+        ehrExtractStatus.setAckPending(EhrExtractStatus.AckPending.builder().build());
         ehrExtractStatus.setAckToRequester(EhrExtractStatus.AckToRequester.builder().build());
         ehrExtractStatusRepository.save(ehrExtractStatus);
 
