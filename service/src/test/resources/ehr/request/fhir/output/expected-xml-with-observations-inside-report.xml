@@ -138,10 +138,10 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="test-id-3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20100123140354
 
-            This is some random free text</text>
+            Interpretation: This is some random free text</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100123140354"/>
             <Participant typeCode="PRF" contextControlCode="OP">
