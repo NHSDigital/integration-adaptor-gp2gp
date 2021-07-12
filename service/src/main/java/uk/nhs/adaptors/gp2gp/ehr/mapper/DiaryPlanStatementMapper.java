@@ -38,7 +38,7 @@ public class DiaryPlanStatementMapper {
     private static final Mustache PLAN_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_plan_statement_template.mustache");
     private static final String EMPTY_DATE = "nullFlavor=\"UNK\"";
     private static final String FULL_DATE = "value=\"%s\"";
-    private static final String COMMA_SPACE = ", ";
+    private static final String REASON_CODE_SEPARATOR = ", ";
     public static final String REASON_CODE_TEXT_FORMAT = "Reason Codes: %s";
     public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
     public static final String RECALL_DEVICE = "Recall Device: %s %s";
@@ -150,7 +150,7 @@ public class DiaryPlanStatementMapper {
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
             .filter(Optional::isPresent)
             .map(Optional::get)
-            .collect(Collectors.joining(COMMA_SPACE));
+            .collect(Collectors.joining(REASON_CODE_SEPARATOR));
 
         return reasons.isBlank() ? Optional.empty() : Optional.of(formatReason(reasons));
     }

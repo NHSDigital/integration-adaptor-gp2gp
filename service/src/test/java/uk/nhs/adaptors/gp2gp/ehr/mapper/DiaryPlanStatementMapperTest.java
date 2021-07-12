@@ -42,8 +42,8 @@ public class DiaryPlanStatementMapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITH_DEVICE = TEST_DIRECTORY + "expected-plan-statement-3.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER = TEST_DIRECTORY + "procedure-request-resource-4.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER = TEST_DIRECTORY + "expected-plan-statement-4.xml";
-    private static final String INPUT_PROCEDURE_REQUEST_WITH_REASON_DISPLAY = TEST_DIRECTORY + "procedure-request-resource-5.json";
-    private static final String EXPECTED_PLAN_STATEMENT_WITH_REASON_DISPLAY = TEST_DIRECTORY + "expected-plan-statement-5.xml";
+    private static final String INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "procedure-request-resource-5.json";
+    private static final String EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "expected-plan-statement-5.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PERIOD_END = TEST_DIRECTORY + "procedure-request-resource-6.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PERIOD_END = TEST_DIRECTORY + "expected-plan-statement-6.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END = TEST_DIRECTORY + "procedure-request-resource-7.json";
@@ -129,7 +129,7 @@ public class DiaryPlanStatementMapperTest {
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA, EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_DEVICE, EXPECTED_PLAN_STATEMENT_WITH_DEVICE),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER, EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_REASON_DISPLAY, EXPECTED_PLAN_STATEMENT_WITH_REASON_DISPLAY),
+            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES, EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITH_PERIOD_END),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END),
             Arguments.of(INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE, EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE)
