@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="F1EAA625-0C39-466C-9B01-FF902C5BD8C4" />
+    <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="57AC6A03-EBEE-4C3C-8901-DED3E0BFFF31" />
+        <id root="C3A07431-50A0-445F-B216-6103EEF1F040" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
@@ -88,7 +88,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+        <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
         <code nullFlavor="UNK">
             <originalText>Clerical Worker</originalText>
         </code>
@@ -105,7 +105,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
         <code nullFlavor="UNK">
             <originalText>Clerical Worker</originalText>
         </code>
@@ -123,7 +123,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
+        <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
         <code nullFlavor="UNK">
             <originalText>Consultant</originalText>
         </code>
@@ -142,7 +142,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
+        <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
         <code nullFlavor="UNK">
             <originalText>Clerical Worker</originalText>
         </code>
@@ -161,7 +161,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098"/>
+        <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111"/>
         <code nullFlavor="UNK">
             <originalText>System Administrator</originalText>
         </code>
@@ -207,7 +207,7 @@
 </part>
             <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
+        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
         <code nullFlavor="UNK">
             <originalText>General Medical Practitioner</originalText>
         </code>
@@ -237,7 +237,7 @@
 </responsibleParty>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="884E7627-796C-4C70-870A-D61B88AD2E57" />
+        <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -249,7 +249,7 @@
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -267,7 +267,7 @@
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
+        <id root="F9E24109-04D1-4578-9AAD-2C80EA0D17ED"/>
         <code code="16488004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="laboratory reporting">
             <originalText>Filed Report</originalText>
         </code>
@@ -278,7 +278,7 @@
         <availabilityTime value="20020330000000"/>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
+        <id root="C0F4E057-C4A5-481C-BF13-D871D37BD037"/>
         <code code="123038009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="specimen (specimen)"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -287,7 +287,7 @@
         <availabilityTime value="20020330000000"/>
         <specimen typeCode="SPC">
             <specimenRole classCode="SPEC">
-                <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
+                <id root="99792B9D-0715-4F2A-9934-1D5D4E975284"/>
                 <id root="2.16.840.1.113883.2.1.4.5.2" extension="Unknown"/>
                 <effectiveTime>
                     <center value="20020330092100"/>
@@ -311,26 +311,11 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
-            Abnormality indicator: Abnormal, but expected
+            Interpretation: Abnormal Abnormality indicator: Abnormal, but expected
 Clinical Information: GASTRIC ULCER DECLINE</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20020330000000"/>
-            <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
-    </agentRef>
-</Participant>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
-            CommentDate:20020330000000
-
-            Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -342,7 +327,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="9A5D5A78-1F63-434C-9637-1D7E7843341B"/>
+        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Full blood count</originalText>
 </code>
@@ -371,11 +356,11 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8F2D066F-E3DB-4D1A-A39F-E19F55A5D6D3"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+        <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
-            Anisocytosis +, Polychromasia - slight, Occasional target
+            Interpretation: Anisocytosis +, Polychromasia - slight, Occasional target
 cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
         <statusCode code="COMPLETE"/>
@@ -554,7 +539,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
+        <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
         <code code="1022551000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Neutrophil count">
 </code>
         <statusCode code="COMPLETE"/>
@@ -582,8 +567,8 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DE743503-08D0-4381-903F-8C5691360B54"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
+        <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
             Interpretation: HI - Above high reference limit</text>
@@ -604,7 +589,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
+        <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Platelet count - observation</originalText>
 </code>
@@ -634,8 +619,8 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5F8BBC0E-0FB7-4828-84AA-817F5243A12E"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
+        <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
             Interpretation: LO - Below low reference limit</text>
@@ -674,7 +659,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
+        <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
         <code code="1022541000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Total white cell count">
     <originalText>Total white blood count</originalText>
 </code>
@@ -704,8 +689,8 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="038FC731-8526-4253-8843-9CC9A1EDBD8F"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
+        <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
             Interpretation: HI - Above high reference limit</text>
@@ -726,7 +711,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <CompoundStatement classCode="CLUSTER" moodCode="EVN">
-        <id root="ED098B6C-D654-4010-8F61-9DEEB86E5E4B"/>
+        <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
         <code code="1022501000000100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Plasma viscosity">
 </code>
         <statusCode code="COMPLETE"/>
@@ -754,8 +739,8 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
+        <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20020330000000
 
             Interpretation: HI - Above high reference limit</text>
@@ -786,7 +771,7 @@ red blood cell seen, Note low platelets</text>
 </component>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="BDED2793-F5B5-43AC-B8DB-7EA04620CA86"/>
+        <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
             CommentDate:20020330000000
 
@@ -801,7 +786,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1AB108CA-E906-4055-8F54-7DAED6EE3EBA" />
+        <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -813,7 +798,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -826,12 +811,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9" />
+        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Mucor mycetomatis</originalText>
 </code>
@@ -851,7 +836,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -860,7 +845,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4209A033-4F0C-490E-8753-607E2799C3D8" />
+        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -872,7 +857,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -885,12 +870,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="797F53B7-4D96-4BBE-84CC-3110DB040D90" />
+        <id root="F4BF142B-6D5C-4E01-933F-A817FD992E9B" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Perineal incision</originalText>
 </code>
@@ -910,7 +895,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -919,7 +904,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="919AE1B8-6BBB-49EF-9FA0-0C04D35BE310" />
+        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -931,7 +916,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -944,12 +929,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BA6EA7CB-3E2F-46FA-918C-C0B5178C1D4E" />
+        <id root="82A39454-299F-432E-993E-5A6232B4E099" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Nuchal pain</originalText>
 </code>
@@ -969,7 +954,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -978,7 +963,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="BD418AAA-36ED-476E-967C-7CCBA1D0AAED" />
+        <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -990,7 +975,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1003,18 +988,18 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+                <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="F80F3DA3-0728-4880-BE71-C71251A49D08" />
+        <id root="CF670325-7982-46BA-9A52-85C3C78FE40A" />
         <text>Current Home Address: The House, 1 Aire Street, Leeds LS1 4HT</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209084800" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+        <id root="C59316B2-2578-412C-8D00-5040C86BF306"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -1023,7 +1008,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="409C8344-FFB9-40C9-A802-D71602F56263" />
+        <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1035,7 +1020,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1048,12 +1033,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
+        <id root="7CB9F236-03CB-4AAD-BB0D-534201961315" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Salmonella shamba</originalText>
 </code>
@@ -1067,19 +1052,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Short duration minor problem</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Short duration minor problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
+        <id root="09A882DA-C219-4146-97EF-3FD9A57135B0" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Sympathotonic orthostatic hypotension</originalText>
 </code>
@@ -1093,19 +1078,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4" />
+        <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Breath smells unpleasant</originalText>
 </code>
@@ -1119,31 +1104,31 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088" />
+        <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4" />
         <text>This is another problem linked entry - this time an autoconsult</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209114800" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
+        <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088" />
         <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
 </code>
         <statusCode code="COMPLETE" />
@@ -1156,19 +1141,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
+        <id root="432103E4-651E-417C-97ED-37E4E8649C89" />
         <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
 </code>
         <statusCode code="COMPLETE" />
@@ -1181,19 +1166,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Ended on 16/06/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/06/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
+        <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Mucor mycetomatis</originalText>
 </code>
@@ -1207,31 +1192,31 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Chronic Problem with no end date</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Chronic Problem with no end date</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD" />
+        <id root="DF996C91-D888-4D2D-9D3A-5523480337B1" />
         <text>This problem is going to be relegated (Comments From Relegated Demoted at work (Ua0Uz) Problem)</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209114800" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
+        <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Breath smells unpleasant</originalText>
 </code>
@@ -1251,13 +1236,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
+        <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F" />
         <code code="162950006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - breath sounds normal">
 </code>
         <statusCode code="COMPLETE" />
@@ -1276,13 +1261,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
+        <id root="7884ECD7-033D-433C-BFDE-9D459DA8BC6F" />
         <code code="32398004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Bronchitis">
 </code>
         <statusCode code="COMPLETE" />
@@ -1301,13 +1286,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA" />
+        <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Demoted at work</originalText>
 </code>
@@ -1327,13 +1312,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
+        <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Salmonella shamba</originalText>
 </code>
@@ -1353,13 +1338,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0" />
+        <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46" />
         <code code="407645004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Dizziness on standing up">
 </code>
         <statusCode code="COMPLETE" />
@@ -1378,13 +1363,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD" />
+        <id root="73CE838C-AB98-4BB2-8C69-4F6508BE99A0" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Sympathotonic orthostatic hypotension</originalText>
 </code>
@@ -1404,13 +1389,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D" />
+        <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD" />
         <code code="704502000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Partner pregnant">
 </code>
         <statusCode code="COMPLETE" />
@@ -1429,7 +1414,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -1438,7 +1423,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="237F6F45-B73C-4BC2-BDA2-19C54287B540" />
+        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -1450,7 +1435,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1463,18 +1448,18 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
+                <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="C3A25ECF-E2B2-4861-A649-DC429738F252" />
+        <id root="268EFBF2-65A8-4B1C-8490-85A0528F86E3" />
         <text>** Care started at Testvale Surgery (GMS) **</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20101209" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
+        <id root="DADBE0C4-2702-4CDC-9BCC-6E3E7C2918B7"/>
     </agentRef>
 </Participant>
     </NarrativeStatement>
@@ -1483,7 +1468,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7AC9EB04-E71D-4E6A-BCCD-3A4A445D91F7" />
+        <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -1495,7 +1480,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1508,12 +1493,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3" />
+        <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C" />
         <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
 </code>
         <statusCode code="COMPLETE" />
@@ -1526,19 +1511,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D" />
+        <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Perineal incision</originalText>
 </code>
@@ -1552,13 +1537,39 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Toxic plant</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20101216"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/12/2010</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -1566,7 +1577,7 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Toxic plant</originalText>
+    <originalText>Angettes 75mg tablet</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -1578,13 +1589,13 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Ended on 16/12/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a problem based on a medication - no end</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -1592,32 +1603,6 @@ red blood cell seen, Note low platelets</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="47D7EE76-9938-4063-9007-E74B6E92581E" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Angettes 75mg tablet</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20101216"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is a problem based on a medication - no end</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component><component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Toxic plant</originalText>
 </code>
         <statusCode code="COMPLETE" />
@@ -1636,13 +1621,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
+        <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Angettes 75mg tablet</originalText>
 </code>
@@ -1662,13 +1647,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450" />
+        <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
         <code code="169828005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Twins - both live born">
 </code>
         <statusCode code="COMPLETE" />
@@ -1687,7 +1672,7 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -1696,7 +1681,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308" />
+        <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -1708,7 +1693,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1721,12 +1706,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
+        <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
 </code>
@@ -1740,19 +1725,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This problem was created within a consultation</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This problem was created within a consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
+        <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
         <code code="367391008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Malaise">
     <originalText>Feels unwell</originalText>
 </code>
@@ -1772,13 +1757,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8" />
+        <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C" />
         <code code="164045002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - eye movements normal">
 </code>
         <statusCode code="COMPLETE" />
@@ -1797,13 +1782,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3" />
+        <id root="7AAC20C0-654A-446A-903F-2DFC0AA8B3F8" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>AZARGA 1%/0.5% eye drops 5mL</originalText>
 </code>
@@ -1823,13 +1808,13 @@ red blood cell seen, Note low platelets</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="86B82A72-9739-4517-8485-F15FF97CE21A"/>
+        <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -1838,7 +1823,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="116E5A8D-A008-4C23-A8DB-7FD1B8CF24C2"/>
+                <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
                 <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1854,7 +1839,7 @@ red blood cell seen, Note low platelets</text>
                 </pertinentInformation>
                 <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
             </ObservationStatement>
@@ -1865,7 +1850,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="10720133-30C3-4145-9184-8713284C5A90" />
+        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -1877,7 +1862,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1890,12 +1875,12 @@ red blood cell seen, Note low platelets</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D" />
+        <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Nuchal pain</originalText>
 </code>
@@ -1909,19 +1894,19 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD.</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD" />
+        <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Nuchal pain</originalText>
 </code>
@@ -1935,13 +1920,13 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Ended on 27/05/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 27/05/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </ObservationStatement>
@@ -1950,7 +1935,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C" />
+        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -1962,7 +1947,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -1980,7 +1965,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EC6FF2C4-625C-4382-8ED1-B3CD5C512DBF" />
+        <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Demoted at work</originalText>
 </code>
@@ -1994,7 +1979,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is the same code as an existing code linked to a problem</text>
+                <text>Interpretation: This is the same code as an existing code linked to a problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2009,7 +1994,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="EC6C913D-2276-43DF-B3C9-B13094B1EC26" />
+        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2021,7 +2006,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2039,7 +2024,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C9FC5F18-F4DD-4B14-B771-1F5E7739CE14" />
+        <id root="A01A1FB8-39F5-45D9-AF56-B8C480115AF2" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Breath smells unpleasant</originalText>
 </code>
@@ -2053,7 +2038,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is the note to the problem linked &apos;Breath smells unpleasant&apos;</text>
+                <text>Interpretation: This is the note to the problem linked &apos;Breath smells unpleasant&apos;</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2068,7 +2053,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7359502E-8EE3-416C-BD59-A298285418E6" />
+        <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2080,7 +2065,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2098,7 +2083,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="98747E87-CAEF-4F64-8CAA-CFC2C61C19BD"/>
+        <id root="A53FFA99-F0D7-4395-A4A0-A6A1C5D56D61"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -2115,7 +2100,7 @@ red blood cell seen, Note low platelets</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
+                <id root="66D4FA62-D07F-4431-B74B-3523D0DCEC17"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
@@ -2126,7 +2111,7 @@ red blood cell seen, Note low platelets</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
+        <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -2152,7 +2137,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4FF675AE-FB5C-4626-AA74-D98748D31A3B" />
+        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2164,7 +2149,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2182,7 +2167,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998" />
+        <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4" />
         <text>This is the auto consultation note</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110307154400" />
@@ -2194,7 +2179,7 @@ red blood cell seen, Note low platelets</text>
     </NarrativeStatement>
 </component><component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="4CF9262A-2676-4973-A45C-2538E5CC93E2"/>
+        <id root="766D7ECB-0B0B-4593-AFFF-06141F48A998"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -2211,7 +2196,7 @@ red blood cell seen, Note low platelets</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
+                <id root="268C1FCC-4835-40F9-955F-E096E9B5DE91"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
@@ -2222,7 +2207,7 @@ red blood cell seen, Note low platelets</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="886A145B-1825-4E79-B1DB-596666AE208A"/>
+        <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -2245,7 +2230,7 @@ red blood cell seen, Note low platelets</text>
     </MedicationStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
+        <id root="886A145B-1825-4E79-B1DB-596666AE208A" />
         <text>Inactive Diary Entry - Asthma - Status: Awaiting Result, In 3 years time</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20140303000000" />
@@ -2257,7 +2242,7 @@ red blood cell seen, Note low platelets</text>
     </NarrativeStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
+        <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Keeps pets</originalText>
 </code>
@@ -2271,7 +2256,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is the auto consultation note</text>
+                <text>Interpretation: This is the auto consultation note</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2283,7 +2268,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A9F79684-3214-41E9-A642-A4542875E62B" />
+        <id root="DF8E090F-919A-46A5-95A9-D640E55A6C17" />
         <code code="509341000000107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Petit-mal epilepsy">
     <originalText>Petit mal (minor) epilepsy</originalText>
 </code>
@@ -2312,7 +2297,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="09DAA58F-63BB-4B07-AD44-40F8C3E0109B" />
+        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2324,7 +2309,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2342,7 +2327,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="A57C161D-E219-4B7F-95AB-D2CDBACECB56"/>
+        <id root="896104C7-9DC7-4E44-B77D-DB771691C344"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -2359,7 +2344,7 @@ red blood cell seen, Note low platelets</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
+                <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
@@ -2370,7 +2355,7 @@ red blood cell seen, Note low platelets</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -2396,7 +2381,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="162EF189-0270-449D-8FE0-BB82E6FF051F" />
+        <id root="BB8DEB7C-BE1B-4639-8213-D94E8FEFA0F6" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2408,7 +2393,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2426,7 +2411,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="ORD">
-        <id root="CFF3DAA6-AEE1-44C5-AAA0-BFA72E76B0CE"/>
+        <id root="7314452F-9848-403F-8684-D7E0B2163F88"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -2443,7 +2428,7 @@ red blood cell seen, Note low platelets</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyPrescribe>
-                <id root="58826586-95CF-4F70-AF27-43BBAE229C7C"/>
+                <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307"/>
@@ -2454,7 +2439,7 @@ red blood cell seen, Note low platelets</text>
                 </quantity>
                 <inFulfillmentOf typeCode="FLFS">
     <priorMedicationRef moodCode="INT">
-        <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+        <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
     </priorMedicationRef>
 </inFulfillmentOf>
                 <pertinentInformation typeCode="PERT">
@@ -2480,7 +2465,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CC922DEF-747F-4162-B790-B3BFF6C258CB" />
+        <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2492,7 +2477,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2510,7 +2495,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F" />
+        <id root="40FD3445-A957-48D7-B7B5-3C839211C185" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Oesophageal brushings sample</originalText>
 </code>
@@ -2536,7 +2521,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0" />
+        <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Result comments</originalText>
 </code>
@@ -2550,7 +2535,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is the microbiology result</text>
+                <text>Interpretation: This is the microbiology result</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2565,7 +2550,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="B6D2EE2E-D4EA-43C1-9EBB-185802823C27" />
+        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2577,7 +2562,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2595,7 +2580,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="F91DF279-38D3-47D2-90A9-4C38AECC6DBF" />
+        <id root="F692F966-B4AF-47E7-9F8F-D6ABF7741FA9" />
         <code code="196451000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded plan">
     <originalText>Cardiac NSF - Rehabilitation</originalText>
 </code>
@@ -2609,7 +2594,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028"/>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
+        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
     </agentRef>
 </Participant>
     </PlanStatement>
@@ -2618,7 +2603,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049" />
+        <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2630,7 +2615,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2648,7 +2633,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB" />
+        <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B" />
         <text>This quick notes is going to be problem linked</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110307161800" />
@@ -2663,7 +2648,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="6D3811E2-7FCD-49C2-B5D2-84AB325DA798" />
+        <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -2675,7 +2660,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2693,7 +2678,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="C41BF66B-5B2D-4493-A2F0-85C0BEABBCA3"/>
+        <id root="C9C40708-BAC0-4B3C-8B96-EB2C4F0B9800"/>
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2702,7 +2687,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537"/>
+                <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
                 <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
     <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
 </code>
@@ -2727,7 +2712,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="CATEGORY" moodCode="EVN">
-        <id root="2DCB9D56-5929-467F-A5DF-AA87FF457720"/>
+        <id root="21F23DE7-D702-4DB4-AD0D-F8A0D56D7537"/>
         <code code="SN53.00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="Allergy, unspecified"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
@@ -2736,7 +2721,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="D32F7C6C-D220-42A1-8028-610E3DEBD991"/>
+                <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
                 <code code="300916003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Latex allergy">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2763,7 +2748,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE" />
+        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -2775,7 +2760,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -2793,7 +2778,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="180F8AD2-31F1-4399-B481-F527F556AB8E" />
+        <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Restlessness and agitation</originalText>
 </code>
@@ -2807,7 +2792,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2819,7 +2804,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49" />
+        <id root="180F8AD2-31F1-4399-B481-F527F556AB8E" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Restlessness and agitation</originalText>
 </code>
@@ -2845,7 +2830,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD" />
+        <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Heart rate</originalText>
 </code>
@@ -2859,7 +2844,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>and</text>
+                <text>Interpretation: and</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2871,7 +2856,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7" />
+        <id root="DFC8A57D-1B0C-4EC8-8453-CB7A42A019BD" />
         <code code="163074001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - heart sounds normal">
 </code>
         <statusCode code="COMPLETE" />
@@ -2896,7 +2881,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781" />
+        <id root="0E8C35F9-90D8-44B1-ACF8-3588310F29E7" />
         <code code="267032009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Tired all the time">
     <originalText>Tired all the time</originalText>
 </code>
@@ -2922,7 +2907,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
+        <id root="7F80410A-6158-43C4-9E5E-0CFB1F25E781"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -2932,7 +2917,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
+                <id root="452AFD1A-B615-4E2C-A733-544A3426DA24"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2945,7 +2930,7 @@ red blood cell seen, Note low platelets</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="B118583D-C4B6-40DE-A3CE-E0C73F55406A"/>
+                <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2958,7 +2943,7 @@ red blood cell seen, Note low platelets</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <NarrativeStatement classCode="OBS" moodCode="EVN">
-                <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
+                <id root="4255C920-68D4-46F4-B261-8F2C8D80D3AF"/>
                 <text>This is the BP linked to the problem</text>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20110307162500"/>
@@ -2972,7 +2957,7 @@ red blood cell seen, Note low platelets</text>
     </CompoundStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60" />
+        <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62" />
         <code code="14304000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Disorder of thyroid gland">
     <originalText>Disorder of thyroid gland</originalText>
 </code>
@@ -3001,7 +2986,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="300330A9-5389-444B-A23E-6402355AB06C" />
+        <id root="6567C77F-08E8-4994-B30D-D06B63A6E184" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3013,7 +2998,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3031,7 +3016,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="6567C77F-08E8-4994-B30D-D06B63A6E184" />
+        <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>FH: Atrial Septum Defect</originalText>
 </code>
@@ -3045,7 +3030,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is the FH as a problem member</text>
+                <text>Interpretation: This is the FH as a problem member</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3060,7 +3045,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0BA3D29E-065C-4962-9110-036BF07E17C5" />
+        <id root="6CD96448-3DD9-4E6D-857A-798F79824F26" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3072,7 +3057,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3090,7 +3075,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP">
     <CompoundStatement classCode="BATTERY" moodCode="EVN">
-        <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
+        <id root="266E2D5E-321B-46B9-8CCD-376E335379AB"/>
         <code code="163020007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - blood pressure reading">
 </code>
         <statusCode code="COMPLETE"/>
@@ -3100,7 +3085,7 @@ red blood cell seen, Note low platelets</text>
         <availabilityTime value="20110922110028"/>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="B184ACE9-DC5C-45B1-B65A-A8B38DF27863"/>
+                <id root="67DE330E-EDFA-462F-8732-1E91E6DAED9C"/>
                 <code code="72313002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Systolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3113,7 +3098,7 @@ red blood cell seen, Note low platelets</text>
         </component>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="EVN">
-                <id root="6CD96448-3DD9-4E6D-857A-798F79824F26"/>
+                <id root="89D5E9D7-C45A-4977-A1C9-4B2AB4EC1047"/>
                 <code code="1091811000000102" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Diastolic arterial pressure">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3135,7 +3120,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="37BE01D1-CF5B-470A-8D40-C5212AD6A78C" />
+        <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3147,7 +3132,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3165,7 +3150,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B" />
+        <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Examination of eye</originalText>
 </code>
@@ -3179,7 +3164,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Blah opthalmology comment</text>
+                <text>Interpretation: Blah opthalmology comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3191,7 +3176,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0" />
+        <id root="9A36A504-E9A3-4FC0-AE0A-B58CD444731B" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Cataract extractions</originalText>
 </code>
@@ -3205,7 +3190,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Side: Left</text>
+                <text>Interpretation: Side: Left</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3217,7 +3202,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D" />
+        <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0" />
         <code code="162811006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="O/E - cataract present">
 </code>
         <statusCode code="COMPLETE" />
@@ -3230,7 +3215,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Side: Right</text>
+                <text>Interpretation: Side: Right</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3242,7 +3227,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898" />
+        <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Screened By Hospital Clinic</originalText>
 </code>
@@ -3268,7 +3253,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="4617268B-1554-4618-8D2D-69A808C0A48D" />
+        <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Digital Fundus Camera</originalText>
 </code>
@@ -3294,7 +3279,7 @@ red blood cell seen, Note low platelets</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="84A89C2F-8A0F-4588-88CD-A0EA0301E8BC" />
+        <id root="4617268B-1554-4618-8D2D-69A808C0A48D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Photography (Dilated)</originalText>
 </code>
@@ -3323,7 +3308,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="716B2A02-D779-45A0-812C-B2376C8E6F75" />
+        <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3335,7 +3320,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3353,7 +3338,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE" />
+        <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Alcohol units</originalText>
 </code>
@@ -3388,7 +3373,7 @@ red blood cell seen, Note low platelets</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="162AC22E-A36E-4E14-A9FC-9DFDC4B7BCFF" />
+        <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3400,7 +3385,7 @@ red blood cell seen, Note low platelets</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3418,7 +3403,7 @@ red blood cell seen, Note low platelets</text>
         </Participant2>
         <component typeCode="COMP" >
     <RequestStatement classCode="OBS" moodCode="RQO">
-        <id root="503999C4-17C3-4B14-8085-A995DBC80286" />
+        <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
         <text>Recipient Org: Fictional Hospital Annotation:  @  Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
@@ -3437,7 +3422,7 @@ Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:U
         <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
-                <id root="83F7D466-2592-4E13-AEB7-8FA25AC88D64"/>
+                <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
             </agentRef>
         </responsibleParty>
         <Participant typeCode="AUT" contextControlCode="OP">
@@ -3448,17 +3433,17 @@ Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:U
     </RequestStatement>
 </component><component typeCode="COMP" >
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA" />
+        <id root="503999C4-17C3-4B14-8085-A995DBC80286" />
         <text>Type: Other digital signal Custodian Org: TEMPLE SOWERBY MEDICAL PRACTICE Description: Recipient: Mr Quentin Quigley (Fictional Hospital)
 Sent: 07 Mar 2011 16:58</text>
         <statusCode code="COMPLETE" />
         <availabilityTime value="20110307165500" />
         <reference typeCode="REFR">
             <referredToExternalDocument classCode="DOC" moodCode="EVN">
-                <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA"/>
+                <id root="503999C4-17C3-4B14-8085-A995DBC80286"/>
                 <code code="37251000000104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Other digital signal"/>
                 <text mediaType="text/html">
-                    <reference value="file://localhost/8169ED1C-68A3-410D-B538-BC5AC42C77DA_8169ED1C-68A3-410D-B538-BC5AC42C77DA.html"/>
+                    <reference value="file://localhost/503999C4-17C3-4B14-8085-A995DBC80286_503999C4-17C3-4B14-8085-A995DBC80286.html"/>
                 </text>
             </referredToExternalDocument>
         </reference>
@@ -3468,7 +3453,7 @@ Sent: 07 Mar 2011 16:58</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F4E72E8A-13BD-4C83-A448-32718731EC94" />
+        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3480,7 +3465,7 @@ Sent: 07 Mar 2011 16:58</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3498,7 +3483,7 @@ Sent: 07 Mar 2011 16:58</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="58B0C2CE-B927-49B5-AB27-B84F278E363B" />
+        <id root="DA602250-41DB-4A8D-B5CB-70863AAF0F2D" />
         <code code="394995008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Hospital prescription">
 </code>
         <statusCode code="COMPLETE" />
@@ -3511,7 +3496,7 @@ Sent: 07 Mar 2011 16:58</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Haloperidol 5mg/1ml solution for injection ampoules
+                <text>Interpretation: Haloperidol 5mg/1ml solution for injection ampoules
 Dose: hhhh
 Quantity: 28 jjjj
 Script notes: script notes
@@ -3530,7 +3515,7 @@ Administrative notes: blah notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="411235D8-7D97-4319-BE0B-25C0E7D55C55" />
+        <id root="D89620CF-84A5-4FB9-9399-571685EF6275" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3542,7 +3527,7 @@ Administrative notes: blah notes</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3560,7 +3545,7 @@ Administrative notes: blah notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D89620CF-84A5-4FB9-9399-571685EF6275" />
+        <id root="AB036B53-E42B-4397-B888-320370EAB440" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Harmful substance use</originalText>
 </code>
@@ -3574,7 +3559,7 @@ Administrative notes: blah notes</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Alcohol - Spirits. Used 2-6 days per week. (Primary) Route=Smoke, Age first use=12 years</text>
+                <text>Interpretation: Alcohol - Spirits. Used 2-6 days per week. (Primary) Route=Smoke, Age first use=12 years</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3589,7 +3574,7 @@ Administrative notes: blah notes</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4B331DB8-AC77-4438-A646-56E500E73885" />
+        <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3601,7 +3586,7 @@ Administrative notes: blah notes</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3619,7 +3604,7 @@ Administrative notes: blah notes</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
+        <id root="E84D1CA5-D9F2-4189-9509-F6C96A8E1342" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Immunisation consent given</originalText>
 </code>
@@ -3633,7 +3618,7 @@ Administrative notes: blah notes</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Consent: ACT-HIB DTP</text>
+                <text>Interpretation: Consent: ACT-HIB DTP</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3645,7 +3630,7 @@ Administrative notes: blah notes</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
+        <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Immunisation consent not given</originalText>
 </code>
@@ -3659,7 +3644,7 @@ Administrative notes: blah notes</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Refusal: BCG. Immunisation: Tuberculosis (BCG) vaccination</text>
+                <text>Interpretation: Refusal: BCG. Immunisation: Tuberculosis (BCG) vaccination</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3671,7 +3656,7 @@ Administrative notes: blah notes</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
+        <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Agrippal S1 1. Agrippal S1 1</originalText>
 </code>
@@ -3685,7 +3670,7 @@ Administrative notes: blah notes</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Reason: Routine Measure
+                <text>Interpretation: Reason: Routine Measure
 Batch No: hhh
 Dosage: 0.5 ml</text>
             </pertinentAnnotation>
@@ -3699,7 +3684,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B" />
+        <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>HNIG 1</originalText>
 </code>
@@ -3713,7 +3698,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Reason: Routine Measure
+                <text>Interpretation: Reason: Routine Measure
 Method: Intramuscularly
 Site: Left deltoid
 Batch No: hh
@@ -3730,7 +3715,7 @@ Notes: hhhhh</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA" />
+        <id root="3096EF63-AFC4-4788-9B3A-BEB47E3F4E6B" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Almevax 1. Almevax 1</originalText>
 </code>
@@ -3744,7 +3729,7 @@ Notes: hhhhh</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Reason: Routine Measure
+                <text>Interpretation: Reason: Routine Measure
 Batch No: hh
 Dosage: 0.5 ml</text>
             </pertinentAnnotation>
@@ -3761,7 +3746,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="37FC8CBD-D503-4725-8325-D454F24BF48B" />
+        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3773,7 +3758,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3791,7 +3776,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72585281-F548-4159-8AAE-A372CFC2567E" />
+        <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Restlessness and agitation</originalText>
 </code>
@@ -3805,7 +3790,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(Ongoing Episode). This is also linked</text>
+                <text>Interpretation: (Ongoing Episode). This is also linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3820,7 +3805,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9546D5D9-6DB6-47F5-93EE-D7B2F9E63936" />
+        <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -3832,7 +3817,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -3850,7 +3835,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
+        <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Hairy ear</originalText>
 </code>
@@ -3864,7 +3849,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is exacerbation level two</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level two</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3876,7 +3861,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
+        <id root="FEA86ABB-8413-4535-ACF8-3EA476B39B53" />
         <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
     <originalText>Cognitive - behaviour therapy</originalText>
 </code>
@@ -3890,7 +3875,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - Ended on 08/03/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 08/03/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3902,7 +3887,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA" />
+        <id root="A555DD62-B352-45A2-A601-C21F28340B1D" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Habitual pulling own hair</originalText>
 </code>
@@ -3916,7 +3901,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3928,7 +3913,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
+        <id root="2CC07C55-8D38-43D0-B3BE-40BCFEC015AA" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Corneal specular microscopy</originalText>
 </code>
@@ -3942,7 +3927,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3954,7 +3939,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="134493CA-754D-4DDA-A520-20643C17BAF5" />
+        <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9" />
         <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
 </code>
         <statusCode code="COMPLETE" />
@@ -3967,7 +3952,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is exacerbation level one</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level one</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3979,7 +3964,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8" />
+        <id root="134493CA-754D-4DDA-A520-20643C17BAF5" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Habitual pulling own hair</originalText>
 </code>
@@ -4005,9 +3990,35 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="79926A25-009B-4D91-BD45-36A87F772FE3" />
+        <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8" />
         <code code="304891004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Cognitive - behaviour therapy">
     <originalText>Cognitive - behaviour therapy</originalText>
+</code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20110308121800"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text></text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
+    </agentRef>
+</Participant>
+    </ObservationStatement>
+</component><component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="79926A25-009B-4D91-BD45-36A87F772FE3" />
+        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
+    <originalText>Hairy ear</originalText>
 </code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4033,32 +4044,6 @@ Dosage: 0.5 ml</text>
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4CDE4CDA-36BE-47A3-B6E8-D6BE8C87F394" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
-    <originalText>Hairy ear</originalText>
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20110308121800"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text></text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component><component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="EB2F83E0-52B3-424F-9C56-99AAEC53E9D3" />
-        <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Corneal specular microscopy</originalText>
 </code>
         <statusCode code="COMPLETE" />
@@ -4083,7 +4068,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C" />
+        <id root="EB2F83E0-52B3-424F-9C56-99AAEC53E9D3" />
         <code code="81934005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Black hairy tongue">
 </code>
         <statusCode code="COMPLETE" />
@@ -4111,7 +4096,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="438199E9-C87F-406F-AEB8-E4E330A4D1AD" />
+        <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -4123,7 +4108,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4141,7 +4126,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D651DDAA-03BA-4723-960A-FD13C13CE367" />
+        <id root="855869E7-17B8-42BE-84FE-E3EB14492478" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Restlessness and agitation</originalText>
 </code>
@@ -4155,7 +4140,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(Ongoing Episode)</text>
+                <text>Interpretation: (Ongoing Episode)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4170,7 +4155,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9" />
+        <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -4182,7 +4167,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4200,7 +4185,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7" />
+        <id root="D3041FE6-2820-4938-8024-1FC80F2A694F" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Restlessness and agitation</originalText>
 </code>
@@ -4214,7 +4199,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(Ongoing Episode). This is another entry</text>
+                <text>Interpretation: (Ongoing Episode). This is another entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4229,7 +4214,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2288EA74-CABD-4E1A-A80B-B1302B09C8EE" />
+        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -4241,7 +4226,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4259,7 +4244,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D888F20F-2B36-469C-BAEC-E710A0D46FAA" />
+        <id root="BD93D264-B651-4FE9-98D1-D3E3E96648B5" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Nuchal pain</originalText>
 </code>
@@ -4273,7 +4258,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(Severity: Minor). This is another one but noty explicitly linked</text>
+                <text>Interpretation: (Severity: Minor). This is another one but noty explicitly linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4288,7 +4273,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="2317993E-315F-4AED-B9A7-65D00D23C35D" />
+        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>GP Surgery</originalText>
         </code>
@@ -4300,7 +4285,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4318,7 +4303,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
+        <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Bite of ferret</originalText>
 </code>
@@ -4332,7 +4317,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - This is exacerbation</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4344,7 +4329,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
+        <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Flexible sigmoidoscope</originalText>
 </code>
@@ -4358,7 +4343,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is problem linked</text>
+                <text>Interpretation: This is problem linked</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4370,7 +4355,7 @@ Dosage: 0.5 ml</text>
     </ObservationStatement>
 </component><component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A" />
+        <id root="43F68F4A-CF96-49AF-8BFD-2B89AAD86E4E" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Bite of ferret</originalText>
 </code>
@@ -4384,7 +4369,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is exacerbation</text>
+                <text>Interpretation: This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4399,7 +4384,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C" />
+        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
         <code code="24591000000103" displayName="Other report" codeSystem="2.16.840.1.113883.2.1.3.2.4.15">
             <originalText>Administration note</originalText>
         </code>
@@ -4411,7 +4396,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4429,7 +4414,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3E9C68B8-AB3F-4114-B67B-1174CB327195" />
+        <id root="8D8D39D8-8811-4E71-AC89-EB9C843E2A48" />
         <code code="75053002" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Kawasaki disease">
     <originalText>Kawasaki&apos;s disease</originalText>
 </code>
@@ -4458,7 +4443,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="5EA65C4A-D999-4E1D-BB3B-19F9606EF1E3" />
+        <id root="16FD6A2C-2CD5-4403-BC21-C013F2EC3F14" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4486,7 +4471,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
+        <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/>
@@ -4503,7 +4488,7 @@ Dosage: 0.5 ml</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="BDD9AD57-8FDA-4DDE-8F88-17BB15BF5ED0"/>
+                <id root="0DBC4E2E-3B95-4DD9-A090-055BCFE9371E"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -4539,7 +4524,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="894AE0E2-F846-4688-8F66-499CA715E7DA" />
+        <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4567,7 +4552,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
+        <id root="4F02ED83-3153-4786-96C2-200FE456A1E4"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -4584,7 +4569,7 @@ Dosage: 0.5 ml</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="886A145B-1825-4E79-B1DB-596666AE208A"/>
+                <id root="018077F0-DA68-4E7D-B3CE-216EFCEFDF8F"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -4620,7 +4605,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="136A1423-A6AC-448C-921C-8991ADF93C92" />
+        <id root="70EACDF9-9F82-4111-BD75-F0263D662431" />
         <code code="196391000000103" displayName="Non-consultation medication data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4648,7 +4633,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <MedicationStatement classCode="SBADM" moodCode="INT">
-        <id root="4C1B05B8-953E-46A1-8A05-0747DA2C7EDE"/>
+        <id root="FADF9447-2BCB-48A9-8C22-E591421810BD"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110307"/><high value="20110404"/>
@@ -4665,7 +4650,7 @@ Dosage: 0.5 ml</text>
         </consumable>
         <component typeCode="COMP">
             <ehrSupplyAuthorise>
-                <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
+                <id root="4F05B94B-999F-4699-AB93-EB90C79886B6"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
                     <effectiveTime>
@@ -4701,7 +4686,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="513CD61B-67B1-4E57-A2E5-AD928C7890B0" />
+        <id root="75D9231C-7C58-42D7-AD6E-34402DF2DAD3" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4711,7 +4696,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4724,12 +4709,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9" />
+        <id root="7F07A8D5-1951-4E0F-B505-0ED39100FE43" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -4744,12 +4729,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
+                <id root="7CB9F236-03CB-4AAD-BB0D-534201961315"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -4759,7 +4744,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="19B160E4-9406-4642-B202-4BDCF073BE76" />
+        <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4769,7 +4754,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4782,12 +4767,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="20C2F7CC-5CF2-4966-8981-80C0E670C316" />
+        <id root="03245FA5-238F-4857-878F-975411328E56" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -4802,12 +4787,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
+                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -4817,7 +4802,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="56B35114-6813-469B-AD36-F9E4944E7866" />
+        <id root="6A7FDEC9-F729-49A4-96B0-BFC861C77FC4" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4827,7 +4812,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4840,12 +4825,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="C5676D58-9600-424A-BE35-3DDAE0CAC622" />
+        <id root="862C50B8-6E37-40A1-BB4B-97CBC6E6B4B5" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -4860,17 +4845,17 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
+                    <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="FBF50073-BA9C-4F3F-922A-C3EBF5E1BB03"/>
+                    <id root="D7B28194-89DC-452E-ACE8-74CC752A2F18"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
+                    <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
@@ -4880,12 +4865,12 @@ Dosage: 0.5 ml</text>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
+                <id root="7B1930D5-A8E5-4843-B8AB-49CD39F484DD"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -4895,7 +4880,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F1C8F42B-F130-4A8D-9D62-E45AE0C21DBB" />
+        <id root="2EC20A11-7A24-4442-B0D8-051C30A02BD2" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4905,7 +4890,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4918,12 +4903,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="5667A85C-4AEF-4431-987D-B29A9A267DD5" />
+        <id root="62ED3F01-2041-4DAC-B4ED-22EA5DA36907" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -4938,12 +4923,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
+                <id root="9BA8797D-09D2-43AA-9E81-654B8B15C088"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -4953,7 +4938,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="4F668B1E-10E7-4771-8395-F1BA8D1A745A" />
+        <id root="A7C55C1F-89CB-4D88-BD1C-F7E520B44A02" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -4963,7 +4948,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -4976,12 +4961,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="4CC234FE-0036-4F39-9E89-AB93FF46DA38" />
+        <id root="33982E06-1791-45BA-9531-2F6FBE2246CE" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -4996,12 +4981,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
+                <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5011,7 +4996,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="FE739904-2AAB-4B3F-9718-84BE019FD483" />
+        <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5021,7 +5006,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5034,12 +5019,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="1B1B2854-A658-4764-875B-49CBD3C516EB" />
+        <id root="8EA77BE5-9F13-455B-B835-5B9825187E0C" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5052,6 +5037,11 @@ Dosage: 0.5 ml</text>
             
         </effectiveTime>
         <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
+                </statementRef>
+            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="B99E92D0-1D69-4CF9-A960-3C0B26CAF1AD"/>
@@ -5092,19 +5082,14 @@ Dosage: 0.5 ml</text>
                     <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="82376D4D-0A24-4B25-9A8A-CC84BEFFDE0D"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
+                <id root="D2B6D4B5-CA07-4CE2-8A0A-40F4FD8CDEF9"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5114,7 +5099,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0BB37C2A-AA19-4091-890D-6E0A3D16BDE0" />
+        <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5124,7 +5109,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5137,12 +5122,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="38324DDE-7ABE-4039-BF78-8E9D334FCA8F" />
+        <id root="0DE0EAF6-6AA2-4421-9509-145674A6EC51" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5157,12 +5142,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
+                <id root="3794F0FE-ECA1-4F8C-A321-598FBD1B568C"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5172,7 +5157,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="F42057DE-87B1-4FB2-97DD-16EE1B61FD58" />
+        <id root="0D07B623-3926-4245-80AF-97F1098D90C1" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5182,7 +5167,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5195,12 +5180,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="3FEF7BAD-BDFE-4AFB-818C-74FBD2A6206C" />
+        <id root="EC913E83-7610-4FBD-9A60-1769D42E9DEB" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5215,12 +5200,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
+                <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5230,7 +5215,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="176ECCF6-93C9-426E-9C10-640DC3C1E86A" />
+        <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5240,7 +5225,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5253,12 +5238,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="9B331CF2-F4AD-45CE-86B8-5B4EEE7D1317" />
+        <id root="187FE111-F030-41DC-AC81-4BF13E79AA2F" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5273,12 +5258,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
+                <id root="681FEBF5-6290-4AA0-927C-B1047AE8D21D"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5288,7 +5273,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E422F336-58B7-40DB-B42D-4F6566EBF69F" />
+        <id root="3FE921FD-5A7C-49A7-BF85-591FC6C8933C" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5298,7 +5283,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5311,12 +5296,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="C09FA44E-2285-4917-8C72-25031091D0F7" />
+        <id root="42ED63A5-B678-4C66-A6C8-D6A6E88C652B" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5329,6 +5314,11 @@ Dosage: 0.5 ml</text>
             
         </effectiveTime>
         <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
+                </statementRef>
+            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
@@ -5339,19 +5329,14 @@ Dosage: 0.5 ml</text>
                     <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="47D7EE76-9938-4063-9007-E74B6E92581E"/>
+                <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5361,7 +5346,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="06B60CD3-465D-4AEA-A0A8-4A69EA7744CE" />
+        <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5371,7 +5356,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5384,12 +5369,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="69C88E7E-45C4-4D52-9BB9-AAB4E62F13FB" />
+        <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5402,6 +5387,11 @@ Dosage: 0.5 ml</text>
             
         </effectiveTime>
         <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
+                </statementRef>
+            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="C34945D5-A784-4742-85EC-7E98AC6AA19C"/>
@@ -5417,19 +5407,14 @@ Dosage: 0.5 ml</text>
                     <id root="9276C255-1641-4B9B-AD42-1A0FAD9189D3"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="86B82A72-9739-4517-8485-F15FF97CE21A"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C"/>
+                <id root="BA32A3FF-452C-44A0-9163-3D3AC4F5DD92"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5439,7 +5424,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="82A8CF35-46BA-4386-BDDD-2EEDD7DFF02E" />
+        <id root="9A11E815-9320-4952-96BA-CC83BECF62A3" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5449,7 +5434,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5462,12 +5447,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC" />
+        <id root="451B0A75-8B34-4580-81E6-717831D3C236" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5482,32 +5467,27 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="72C029E9-FF73-4303-AEF6-0574F0FB26C0"/>
-                </statementRef>
-            </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
                     <id root="AEA7B3B2-06A6-46A6-83B1-188AC5C85E4F"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
+                    <id root="40FD3445-A957-48D7-B7B5-3C839211C185"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="6567C77F-08E8-4994-B30D-D06B63A6E184"/>
+                    <id root="43B37138-F5A0-4F6F-8CEE-5B9A5632878B"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="4A573C94-BE6C-45F3-A616-4F91A7D18C7D"/>
+                    <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="14E1EA4E-65C5-423B-A893-BAB8C63551EA"/>
+                    <id root="1C844462-40B7-403D-A8EB-F1344DCEB6A0"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
@@ -5522,22 +5502,27 @@ Dosage: 0.5 ml</text>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C"/>
+                </statementRef>
+            </component>
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
                     <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="22E43D5F-BFFE-4336-A9E1-FE9B094996FE"/>
+                    <id root="EC34765C-88BF-42B1-9958-6AF09499FE8C"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
+                <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5547,7 +5532,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="E0762612-0920-4AB0-9CFC-185F79641C10" />
+        <id root="92726062-D62B-4736-92D1-CF3F1D83832B" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5557,7 +5542,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20110922110028" />
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4" />
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -5570,12 +5555,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+                <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="FB313646-3FC3-49D0-8277-D11CEA14641D" />
+        <id root="92601097-8AE8-45DA-8D17-927B4727866C" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
             <originalText>Inactive Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5590,12 +5575,12 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="EE347F9F-27BB-47C0-BB99-8C613BA277CD"/>
+                <id root="F71A6E3B-58E2-4E35-BF01-4B40022E658D"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="0933F2FD-F15D-47FB-9B74-8B48C1A491A4"/>
+        <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
     </agentRef>
 </Participant>
     </LinkSet>
@@ -5605,7 +5590,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="CE6D306C-F337-43B9-AB9E-B96457A36CBD" />
+        <id root="BEC3C3E8-54C8-45EA-9DD4-11BB4C2F3967" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5633,7 +5618,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="4264DD9C-01B2-4F68-A222-E3B48540496D" />
+        <id root="9131C78A-EFF1-455E-8969-62D984B5F29C" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5646,6 +5631,11 @@ Dosage: 0.5 ml</text>
             
         </effectiveTime>
         <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+                </statementRef>
+            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="8D064EF5-D3BA-4283-B105-EC37DA0F6A49"/>
@@ -5668,27 +5658,22 @@ Dosage: 0.5 ml</text>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="6D62CF66-D522-4412-A2CB-3134819B46A0"/>
+                    <id root="7ED2B987-7AA8-47E1-AAB0-791F65B7AC62"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="17F48DFB-2DA1-4807-990A-A1CFB6D78C60"/>
+                    <id root="F5CD548F-D87B-47BC-8E09-CBEB6BAFAF50"/>
                 </statementRef>
             </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="72585281-F548-4159-8AAE-A372CFC2567E"/>
-                </statementRef>
-            </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="E62732A2-87EB-4B91-B61D-BCA1BDC66AB7"/>
+                    <id root="D3041FE6-2820-4938-8024-1FC80F2A694F"/>
                 </statementRef>
             </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="180F8AD2-31F1-4399-B481-F527F556AB8E"/>
+                <id root="70156AAB-BFEE-4F7D-AC8D-E496D0F20B6D"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5703,7 +5688,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="0A4B8365-FEE6-4352-B941-5CCC40F3AE63" />
+        <id root="2B4D282E-E237-4290-A6B7-640192183C20" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5731,7 +5716,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="B2342509-6683-4342-8BD1-BB759AAC9BB9" />
+        <id root="981B6B2F-EAA2-4454-8BA6-C5B2FDAE946C" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5742,6 +5727,64 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <low value="20110308"/>
             
+        </effectiveTime>
+        <availabilityTime value="20110922110028" />
+        <conditionNamed typeCode="NAME" inversionInd="true">
+            <namedStatementRef classCode="OBS" moodCode="EVN">
+                <id root="CB704DB5-C03E-4AFB-BCE4-C3E8C6BB27E7"/>
+            </namedStatementRef>
+        </conditionNamed>
+        <Participant typeCode="PRF" contextControlCode="OP">
+    <agentRef classCode="AGNT">
+        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
+    </agentRef>
+</Participant>
+    </LinkSet>
+</component>
+
+    </ehrComposition>
+</component>
+                <component typeCode="COMP">
+    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
+        <id root="DAFE1D63-316B-4368-8D72-D9FA8D893D19" />
+        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <center value="20110308"/>
+        </effectiveTime>
+        <availabilityTime value="20110922110028"/>
+        <author typeCode="AUT" contextControlCode="OP">
+            <time value="20110922110028" />
+            <agentRef classCode="AGNT">
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
+            </agentRef>
+        </author>
+        <location typeCode="LOC">
+            <locatedEntity classCode="LOCE">
+                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
+                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
+                    <name>Branch Surgery Rhing</name>
+                </locatedPlace>
+            </locatedEntity>
+        </location>
+        <Participant2 typeCode="PRF" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
+            </agentRef>
+        </Participant2>
+        <component typeCode="COMP">
+    <LinkSet classCode="OBS" moodCode="EVN">
+        <id root="EA84B0F8-FDA4-4F76-92E3-AA06A8CE5026" />
+        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
+            <originalText>Inactive Problem, minor</originalText>
+            <qualifier inverted="false">
+                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
+            </qualifier>
+        </code>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20110308"/>
+            <high value="20110308000000"/>
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5761,7 +5804,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="1E177544-82E7-4D6A-8473-69BC8FC74AB1" />
+        <id root="9413AD16-1088-40A3-B531-5D2B053C9897" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5789,9 +5832,9 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="A039C513-4426-49A9-B9AE-8624A64D6397" />
-        <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
-            <originalText>Inactive Problem, minor</originalText>
+        <id root="2BCEAA81-6CD9-4DD6-ABD2-0FADBD472DA4" />
+        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
+            <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
                 <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
             </qualifier>
@@ -5799,7 +5842,7 @@ Dosage: 0.5 ml</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20110308"/>
-            <high value="20110308000000"/>
+            
         </effectiveTime>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -5819,7 +5862,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="D804545A-F8B2-4EDB-9AFE-FD9C2439AE4B" />
+        <id root="6CE3445E-66A2-4128-A87E-7E02E3C06878" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5847,7 +5890,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="7E6793DD-AE28-4A2A-B123-74A13AB45323" />
+        <id root="37227623-F695-4DEE-BE05-0C651428BEAA" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5877,7 +5920,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="54E82598-8074-4432-AA97-83698B0F3396" />
+        <id root="43ABFFF0-4748-455C-9506-286B71D48A78" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -5905,7 +5948,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="1AB8BBF1-062C-4670-9BD9-54A1DA386EEE" />
+        <id root="DBF633AC-A255-4E0D-B1AA-B601AFE3E516" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -5918,64 +5961,11 @@ Dosage: 0.5 ml</text>
             
         </effectiveTime>
         <availabilityTime value="20110922110028" />
-        <conditionNamed typeCode="NAME" inversionInd="true">
-            <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9"/>
-            </namedStatementRef>
-        </conditionNamed>
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
-    </agentRef>
-</Participant>
-    </LinkSet>
-</component>
-
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="381D7D39-7FB8-49C2-B042-F15A48B019EB" />
-        <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20110308"/>
-        </effectiveTime>
-        <availabilityTime value="20110922110028"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20110922110028" />
-            <agentRef classCode="AGNT">
-                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP">
-    <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="6F3E8A7A-7C40-4ACF-AD97-43A2E5DA6B29" />
-        <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
-            <originalText>Active Problem, minor</originalText>
-            <qualifier inverted="false">
-                <name code="394847000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Unspecified significance"/>
-            </qualifier>
-        </code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20110308"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20110922110028" />
+            <component typeCode="COMP">
+                <statementRef classCode="OBS" moodCode="EVN">
+                    <id root="134493CA-754D-4DDA-A520-20643C17BAF5"/>
+                </statementRef>
+            </component>
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="BDAD8BDB-770E-4B44-8EEE-79CF187B91A8"/>
@@ -5996,14 +5986,9 @@ Dosage: 0.5 ml</text>
                     <id root="EB2F83E0-52B3-424F-9C56-99AAEC53E9D3"/>
                 </statementRef>
             </component>
-            <component typeCode="COMP">
-                <statementRef classCode="OBS" moodCode="EVN">
-                    <id root="85522AAC-80B6-4F73-BD34-50825EF0E45C"/>
-                </statementRef>
-            </component>
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="134493CA-754D-4DDA-A520-20643C17BAF5"/>
+                <id root="C3FE7EB4-3F56-4C41-A04C-46DA81F4E3A9"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6018,7 +6003,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111" />
+        <id root="07369860-6F7A-4205-BAAE-CAF21DDE24E1" />
         <code code="109341000000100" displayName="GP to GP communication transaction" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6046,7 +6031,7 @@ Dosage: 0.5 ml</text>
         </Participant2>
         <component typeCode="COMP">
     <LinkSet classCode="OBS" moodCode="EVN">
-        <id root="F8A06A4B-92E4-4242-A989-D30C4C2081F6" />
+        <id root="B6B35921-F45E-4397-8732-A37433A523B5" />
         <code code="394774009" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Active Problem">
             <originalText>Active Problem, minor</originalText>
             <qualifier inverted="false">
@@ -6061,7 +6046,7 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20110922110028" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="681549F4-7D9F-4A96-A8E2-807BA89A7D36"/>
+                <id root="BCADD30D-ED5D-45A0-8D12-7B9C607FDAD8"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6076,7 +6061,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="9C549A51-4365-42A1-871A-F8A76F69B0B9" />
+        <id root="21C8ABA5-6215-4623-A84C-F735B2A26CA6" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6086,7 +6071,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201106095913" />
             <agentRef classCode="AGNT">
-                <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098" />
+                <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6099,12 +6084,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098"/>
+                <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <PlanStatement classCode="OBS" moodCode="INT">
-        <id root="21C8ABA5-6215-4623-A84C-F735B2A26CA6" />
+        <id root="C2CFB5B2-D6CF-4532-AB4F-3C980DD488DC" />
         <code code="86198006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Influenza vaccination">
 </code>
         <statusCode code="COMPLETE" />
@@ -6114,7 +6099,7 @@ Dosage: 0.5 ml</text>
         <availabilityTime value="20201106095913"/>
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098"/>
+        <id root="9CB8DF0D-85DF-401E-9BF1-7A25555DB111"/>
     </agentRef>
 </Participant>
     </PlanStatement>
@@ -6123,7 +6108,7 @@ Dosage: 0.5 ml</text>
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55" />
+        <id root="7EDB9B26-B61A-4EA7-A383-2A6C4CAEC66D" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6133,7 +6118,7 @@ Dosage: 0.5 ml</text>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20201106095918" />
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
         </author>
         <location typeCode="LOC">
@@ -6146,12 +6131,12 @@ Dosage: 0.5 ml</text>
         </location>
         <Participant2 typeCode="PRF" contextControlCode="OP">
             <agentRef classCode="AGNT">
-                <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
             </agentRef>
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="7EDB9B26-B61A-4EA7-A383-2A6C4CAEC66D" />
+        <id root="1D9ACACA-A3EB-43B5-8844-F0E305E67098" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -6171,7 +6156,7 @@ Dosage: 0.5 ml</text>
         
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
-        <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
+        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
     </agentRef>
 </Participant>
     </ObservationStatement>

@@ -301,7 +301,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>code then freetext</text>
+                <text>Interpretation: code then freetext</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -457,7 +457,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First</text>
+                <text>Interpretation: Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -501,7 +501,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Family member : Maternal grandmother - manually added text within consultation</text>
+                <text>Interpretation: Family member : Maternal grandmother - manually added text within consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -636,7 +636,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Some descriptive text for Bmi</text>
+                <text>Interpretation: Some descriptive text for Bmi</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6166,7 +6166,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Past dated entry</text>
+                <text>Interpretation: Past dated entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6335,7 +6335,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - First entry</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - First entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6391,7 +6391,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Interpretation: Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6447,7 +6447,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6504,7 +6504,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6560,7 +6560,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6616,7 +6616,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : Review - second entry</text>
+                <text>Interpretation: Significance : Major - Episodicity : Review - second entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6672,7 +6672,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved</text>
+                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6728,7 +6728,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : New</text>
+                <text>Interpretation: Significance : Major - Episodicity : New</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6784,7 +6784,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

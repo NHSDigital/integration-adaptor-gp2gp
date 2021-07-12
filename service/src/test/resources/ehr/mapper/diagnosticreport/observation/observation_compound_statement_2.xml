@@ -29,10 +29,10 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/6E30A9E3-FF9A-4868-8FCD-7DAC26A16E78-COMM"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20201215151713
 
-            (q) - Normal - No Action</text>
+            Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">

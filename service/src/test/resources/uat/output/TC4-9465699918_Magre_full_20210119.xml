@@ -300,7 +300,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Minor - Episodicity : First</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -325,7 +325,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Intermittent, ongoing periods of nausea</text>
+                <text>Interpretation: Intermittent, ongoing periods of nausea</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1757,7 +1757,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Referral Direction:Inbound, Referral Target:Mr   Ferro at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Self Referral, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T12:30:32.737+01:00, UBRN:123244113132</text>
+                <text>Interpretation: Referral Direction:Inbound, Referral Target:Mr   Ferro at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Self Referral, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T12:30:32.737+01:00, UBRN:123244113132</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1884,7 +1884,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Referral Direction:Inbound, Referral Source:TEMPLE SOWERBY MEDICAL PRACTICE, Referral Target:Referral Service at TEMPLE SOWERBY MEDICAL PRACTICE, ReferralMode:Written, Purpose:Investigation, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T14:11:41.24+01:00, UBRN:215152651654</text>
+                <text>Interpretation: Referral Direction:Inbound, Referral Source:TEMPLE SOWERBY MEDICAL PRACTICE, Referral Target:Referral Service at TEMPLE SOWERBY MEDICAL PRACTICE, ReferralMode:Written, Purpose:Investigation, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2020-09-21T14:11:41.24+01:00, UBRN:215152651654</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2061,7 +2061,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First</text>
+                <text>Interpretation: Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2086,7 +2086,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>especially in the afternoon / evening</text>
+                <text>Interpretation: especially in the afternoon / evening</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2136,7 +2136,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>gone now</text>
+                <text>Interpretation: gone now</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2161,7 +2161,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>stomach and arms</text>
+                <text>Interpretation: stomach and arms</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2186,7 +2186,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>smells bread when no one else does</text>
+                <text>Interpretation: smells bread when no one else does</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2270,7 +2270,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Referral Direction:Inbound, Referral Source:Consultant Surgeon at EMIS LV Test Practice 1, Referral Target:Dr David McAvenue at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Treatment, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2021-01-11T12:01:05.07+00:00, Reason for Referral:Referred for priority vaccination, UBRN:123456778901</text>
+                <text>Interpretation: Referral Direction:Inbound, Referral Source:Consultant Surgeon at EMIS LV Test Practice 1, Referral Target:Dr David McAvenue at EMIS LV Test Practice 1, ReferralMode:Written, Purpose:Treatment, NHS / Private:NHS, Transport:None Required, Urgency:Routine, Referral Date:2021-01-11T12:01:05.07+00:00, Reason for Referral:Referred for priority vaccination, UBRN:123456778901</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2328,7 +2328,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : Flare Up</text>
+                <text>Interpretation: Significance : Major - Episodicity : Flare Up</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2353,7 +2353,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>within limits</text>
+                <text>Interpretation: within limits</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6465,7 +6465,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>seems ok when not coughing</text>
+                <text>Interpretation: seems ok when not coughing</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6521,7 +6521,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Severity : Moderate, Frequencies : Infrequent - Only happens, when has a cold but not with exercise could be asthmatic</text>
+                <text>Interpretation: Severity : Moderate, Frequencies : Infrequent - Only happens, when has a cold but not with exercise could be asthmatic</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6577,7 +6577,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Significance : Major - Episodicity : First</text>
+                <text>Interpretation: Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
