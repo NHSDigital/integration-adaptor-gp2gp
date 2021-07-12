@@ -10,9 +10,9 @@ import java.util.function.Supplier;
 
 public class AwaitHelper {
 
-    protected static final int WAIT_FOR_IN_SECONDS = 50;
-    protected static final int POLL_INTERVAL_MS = 500;
-    protected static final int POLL_DELAY_MS = 50;
+    protected static final int WAIT_FOR_IN_SECONDS = 30;
+    protected static final int POLL_INTERVAL_MS = 300;
+    protected static final int POLL_DELAY_MS = 30;
 
     public static <T> T waitFor(Supplier<T> supplier) {
         var dataToReturn = new AtomicReference<T>();
