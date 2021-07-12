@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
-import static java.lang.String.format;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractAuthor;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractNoteTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
@@ -136,7 +135,7 @@ public class RequestStatementMapper {
                     return PRIORITY_CODE_HIGH;
                 default:
                     throw new EhrMapperException(
-                        format("Unsupported priority in ReferralRequest: %s", referralRequest.getPriority().toCode())
+                        String.format("Unsupported priority in ReferralRequest: %s", referralRequest.getPriority().toCode())
                     );
             }
         }
@@ -226,7 +225,7 @@ public class RequestStatementMapper {
         private String buildNoteDescription() {
             if (referralRequest.hasNote()) {
                 return referralRequest.getNote().stream()
-                    .map(value -> format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
+                    .map(value -> String.format(NOTE, extractAuthor(messageContext, value), extractNoteTime(value), value.getText()))
                     .collect(Collectors.joining(COMMA));
             }
             return StringUtils.EMPTY;
