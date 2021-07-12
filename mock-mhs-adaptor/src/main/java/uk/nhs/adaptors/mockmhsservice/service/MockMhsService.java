@@ -32,6 +32,7 @@ public class MockMhsService {
     private static final String STUB_CONTINUE_REPLY_INBOUND_MESSAGE = ResourceReader.readAsString("COPC_IN000001UK01.json");
     private static final String STUB_ACCEPTED_RESPONSE = ResourceReader.readAsString("StubEbXmlResponse.xml");
     private static final String INTERNAL_SERVER_ERROR_RESPONSE = ResourceReader.readAsString("InternalServerError.html");
+    private static final String STUB_ACKNOWLEDGEMENT_INBOUND_MESSAGE = ResourceReader.readAsString("MCCI_IN010000UK13.json");
 
     private final InboundProducer inboundProducer;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -77,13 +78,21 @@ public class MockMhsService {
         } else if (interactionId.equals(ACKNOWLEDGEMENT_INTERACTION_ID)) {
             LOGGER.info("Message acknowledgement accepted.");
             headers.setContentType(MediaType.TEXT_XML);
-            return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+            try {
+                var inboundMessage = STUB_ACKNOWLEDGEMENT_INBOUND_MESSAGE.replace("%%ConversationId%%", correlationId);
+                inboundProducer.sendToMhsInboundQueue(inboundMessage);
+                LOGGER.info("Message acknowledgement sent to Inbound Queue, conversationId: " + correlationId);
+                headers.setContentType(MediaType.TEXT_XML);
+                return new ResponseEntity<>(STUB_ACCEPTED_RESPONSE, headers, ACCEPTED);
+            } catch (JmsException e) {
+                LOGGER.error("Error could not send acknowledgement to Inbound Queue", e);
+                return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
+            }
         } else if (interactionId.equals(COMMON_INTERACTION_ID)) {
             LOGGER.info("Message Common accepted.");
             headers.setContentType(MediaType.TEXT_XML);
             return new ResponseEntity<>(headers, ACCEPTED);
         }
-
         LOGGER.error("Error could not handle request header Interaction-Id {}", interactionId);
         return new ResponseEntity<>(INTERNAL_SERVER_ERROR_RESPONSE, headers, INTERNAL_SERVER_ERROR);
     }
