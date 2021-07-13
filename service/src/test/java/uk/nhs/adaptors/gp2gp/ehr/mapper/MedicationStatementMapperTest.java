@@ -141,6 +141,10 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-plan-on-behalf-of-org.json";
     private static final String OUTPUT_XML_WITH_PRESCRIBE_ORG_INFO = TEST_FILE_DIRECTORY
         + "medication-statement-with-prescribe-org-info.xml";
+    private static final String INPUT_JSON_ON_BEHALF_OF_ORG_WITH_MULTIPLE_TYPES = TEST_FILE_DIRECTORY
+        + "medication-request-on-behalf-of-org-with-multiple-types.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_ORG_INFO_MULTIPLE_TYPES = TEST_FILE_DIRECTORY
+        + "medication-statement-with-org-info-multiple-types.xml";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -197,7 +201,8 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_ORDER_ON_BEHALF_OF_ORG, OUTPUT_XML_WITH_AUTHORISE_ORG_INFO),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_REQUESTER, OUTPUT_XML_WITH_PRESCRIBE_NO_ORG_INFO),
             Arguments.of(INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_NOTHING, OUTPUT_XML_WITH_PRESCRIBE_NO_ORG_INFO),
-            Arguments.of(INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_ORG, OUTPUT_XML_WITH_PRESCRIBE_ORG_INFO)
+            Arguments.of(INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_ORG, OUTPUT_XML_WITH_PRESCRIBE_ORG_INFO),
+            Arguments.of(INPUT_JSON_ON_BEHALF_OF_ORG_WITH_MULTIPLE_TYPES, OUTPUT_XML_WITH_AUTHORISE_ORG_INFO_MULTIPLE_TYPES)
         );
     }
 
