@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -23,6 +24,7 @@ import com.github.mustachejava.Mustache;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CommentType;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CompoundStatementClassCode;
@@ -119,7 +121,6 @@ public class ObservationMapper {
         prepareParticipant(observation)
             .ifPresent(observationCompoundStatementTemplateParameters::participant);
 
-
         return TemplateUtils.fillTemplate(
             OBSERVATION_COMPOUND_STATEMENT_TEMPLATE,
             observationCompoundStatementTemplateParameters.build()
@@ -145,6 +146,7 @@ public class ObservationMapper {
             .orElse(StringUtils.EMPTY);
         String narrativeStatements = prepareNarrativeStatements(observationAssociatedWithSpecimen)
             .orElse(StringUtils.EMPTY);
+
         return observationStatement + narrativeStatements;
     }
 
@@ -168,10 +170,8 @@ public class ObservationMapper {
             Type value = holder.getObservation().getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
-                LOGGER.info(
-                    "Observation value type {} not supported. Mapping for this field is skipped",
-                    holder.getObservation().getValue().getClass()
-                );
+                throw new EhrMapperException(
+                    String.format("Observation value type %s not supported.", holder.getObservation().getValue().getClass()));
             } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
                 observationStatementTemplateParametersBuilder.value(
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value)
@@ -194,16 +194,15 @@ public class ObservationMapper {
     }
 
     private Optional<String> prepareNarrativeStatements(MultiStatementObservationHolder holder) {
-        StringBuilder narrativeStatementsBlock = new StringBuilder();
         Observation observation = holder.getObservation();
 
-        if (observation.hasComment()) {
-            CommentType commentType = prepareCommentType(observation);
-
-            narrativeStatementsBlock.append(
-                mapObservationToNarrativeStatement(holder, observation.getComment(), commentType.getCode())
+        if (observation.getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX)) {
+            return Optional.of(
+                mapObservationToNarrativeStatement(holder, observation.getComment(), CommentType.AGGREGATE_COMMENT_SET.getCode())
             );
         }
+
+        StringBuilder narrativeStatementsBlock = new StringBuilder();
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason())
             .map(DATA_ABSENT_PREFIX::concat)
@@ -212,14 +211,20 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation())
-            .map(INTERPRETATION_PREFIX::concat)
-            .map(interpretation ->
+        String interpretationTextAndComment = Stream.concat(
+            CodeableConceptMappingUtils.extractTextOrCoding(observation.getInterpretation()).stream(),
+            Optional.ofNullable(observation.getComment()).stream()
+        ).collect(Collectors.joining(StringUtils.SPACE));
+
+        if (!interpretationTextAndComment.isBlank()) {
+            interpretationTextAndComment = INTERPRETATION_PREFIX.concat(interpretationTextAndComment);
+
+            narrativeStatementsBlock.append(
                 mapObservationToNarrativeStatement(
-                    holder, interpretation, CommentType.LABORATORY_RESULT_DETAIL.getCode()
+                    holder, interpretationTextAndComment, CommentType.AGGREGATE_COMMENT_SET.getCode()
                 )
-            )
-            .ifPresent(narrativeStatementsBlock::append);
+            );
+        }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
             .map(BODY_SITE_PREFIX::concat)
@@ -329,18 +334,6 @@ public class ObservationMapper {
             .map($ -> CompoundStatementClassCode.BATTERY)
             .findFirst()
             .orElse(CompoundStatementClassCode.CLUSTER);
-    }
-
-    private CommentType prepareCommentType(Observation observation) {
-        if (observation.getIdElement().getIdPart().contains(DUMMY_OBSERVATION_ID_PREFIX)) {
-            return CommentType.AGGREGATE_COMMENT_SET;
-        }
-
-        if (observation.hasSpecimen()) {
-            return CommentType.LABORATORY_RESULT_COMMENT;
-        }
-
-        return CommentType.USER_COMMENT;
     }
 
     private Optional<String> prepareInterpretation(Observation observation) {
