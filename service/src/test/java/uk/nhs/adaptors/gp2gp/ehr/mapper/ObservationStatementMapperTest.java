@@ -36,7 +36,9 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 @ExtendWith(MockitoExtension.class)
 public class ObservationStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
+
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
+
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "example-observation-resource-1.json";
     private static final String INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
@@ -105,6 +107,7 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-34.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_VALUE = TEST_FILE_DIRECTORY
         + "example-observation-resource-35.json";
+
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY

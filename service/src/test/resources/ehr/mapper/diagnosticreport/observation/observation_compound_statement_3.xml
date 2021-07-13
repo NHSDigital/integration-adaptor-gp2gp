@@ -28,10 +28,10 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20100225154100
 
-            Test not available</text>
+            Interpretation: Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -44,10 +44,10 @@
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/D0A358C9-4833-4827-B14B-E8515C25CB12-COMM"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20201215151713
 
-            (q) - Normal - No Action</text>
+            Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
