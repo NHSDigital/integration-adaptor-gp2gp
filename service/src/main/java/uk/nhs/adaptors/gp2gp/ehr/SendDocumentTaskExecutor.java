@@ -27,6 +27,7 @@ import java.util.List;
 @Service
 public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDefinition> {
     private static final int THRESHOLD_MINIMUM = 4;
+    private static final String MESSAGE_ATTACHMENT_EXTENSION = ".messageattachment";
 
     private final StorageConnectorService storageConnectorService;
     private final MhsRequestBuilder mhsRequestBuilder;
@@ -68,7 +69,7 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
             for (int i = 0; i < chunks.size(); i++) {
                 var chunk = chunks.get(i);
                 var messageId = randomIdGeneratorService.createNewId();
-                var filename = mainDocumentId + "_" + i + ".messageattachment";
+                var filename = mainDocumentId + "_" + i + MESSAGE_ATTACHMENT_EXTENSION;
                 var chunkPayload = generateChunkPayload(taskDefinition, messageId, filename);
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
                 requestDataToSend.put(randomIdGeneratorService.createNewId(), chunkedOutboundMessage);
@@ -79,8 +80,6 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                     .filename(filename)
                     .contentType(contentType)
                     .messageId(messageId)
-                    //TODO make this optional in MHS - https://github.com/nhsconnect/integration-adaptor-mhs/pull/73/files#diff-fd72712c8c38be29103d9c0d3a576f9227d7449c50333ab4d6cecb3d9e8f6a8aR45
-                    .documentId("NOT USED - MAKE OPTIONAL IN MHS")
                     .build();
                 outboundMessage.getExternalAttachments().add(externalAttachment);
             }
