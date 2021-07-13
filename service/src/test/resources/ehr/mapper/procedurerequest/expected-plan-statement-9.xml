@@ -3,11 +3,11 @@
         <id root="394559384658936" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <text>
-            Recall Device: Device type text Device name
+            Reason Codes: Reason code value display 1
         </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center nullFlavor="UNK"/>
+            <center value="20100714163251"/>
         </effectiveTime>
         <availabilityTime value="20100113152950"/>
     </PlanStatement>
