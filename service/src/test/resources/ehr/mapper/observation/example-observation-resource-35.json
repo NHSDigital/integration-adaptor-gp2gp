@@ -1,0 +1,16 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "comment": "Test comment",
+    "valueAttachment": {
+        "contentType": "text/plain",
+        "data": "VGhlIGZvbGxvd2luZyBmaWxlIGNvdWxkIG5vdCBiZSBpbmNsdWRlZCB3aXRoIHRoZSBFbGVj dHJvbmljIFJlY29yZDoNCmhoLnhwcw0KDQpSZWFzb246MDE6RmlsZSB0eXBlIHVuc3VwcG9ydGVkDQo=",
+        "title": "Some attachment",
+        "creation": "2010-01-18T11:47:00+00:00"
+    },
+    "code": {
+        "text": "test"
+    }
+}

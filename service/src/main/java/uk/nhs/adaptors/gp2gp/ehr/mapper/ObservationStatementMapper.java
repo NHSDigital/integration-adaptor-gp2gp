@@ -63,8 +63,8 @@ public class ObservationStatementMapper {
             Type value = observation.getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
-                LOGGER.info("Observation value type {} not supported. Mapping for this field is skipped",
-                    observation.getValue().getClass());
+                throw new EhrMapperException(
+                    String.format("Observation value type %s not supported.", observation.getValue().getClass()));
             } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
                 observationStatementTemplateParametersBuilder.value(
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value));
