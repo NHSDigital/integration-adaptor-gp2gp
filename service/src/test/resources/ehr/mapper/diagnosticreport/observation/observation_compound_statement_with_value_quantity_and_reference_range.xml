@@ -21,10 +21,10 @@
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20190601113000
 
-            Test comment</text>
+            Interpretation: Test comment</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>

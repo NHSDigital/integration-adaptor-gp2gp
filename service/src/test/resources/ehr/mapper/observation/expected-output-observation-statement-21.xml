@@ -12,7 +12,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Component(s): [String Value: Example of a valueString] Example comment</text>
+                <text>Component(s): [String Value: Example of a valueString] Interpretation: Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

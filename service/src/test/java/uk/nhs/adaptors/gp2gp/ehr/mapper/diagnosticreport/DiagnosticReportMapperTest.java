@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.mapper;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,8 +28,12 @@ import org.mockito.stubbing.Answer;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.AgentDirectory;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.ParticipantMapper;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
