@@ -491,12 +491,13 @@
         <code code="831271000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - colorectal">
     <originalText>2 week rule referral - colorectal</originalText>
 </code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Alliance Surgical, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referring patient for investigation</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200901"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
@@ -753,12 +754,13 @@
         <code code="305226003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Admission by Accident and Emergency doctor">
     <originalText>Admission by A &amp; E doctor</originalText>
 </code>
-        <text>Priority: ASAP Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment &amp; Education, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Special characters !@£$%^&amp;*()_+-={}[]:&quot;;&apos;&lt;&gt;?,./~`...</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
+        <priorityCode code="88694003" displayName="Immediate" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Asap</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
@@ -1263,13 +1265,14 @@
         <code code="308448008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to counsellor">
     <originalText>Refer to counsellor</originalText>
 </code>
-        <text>Priority: Routine Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
+        <text>Recipient Org: Armitage Bridge Hospital Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:Required Too close to fire
 </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201110"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="B4C0FCD1-D4B2-40F8-9B18-7B4C0AF946DB"/>
@@ -1468,12 +1471,13 @@
         <code code="831311000006106" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - lung">
     <originalText>2 week rule referral - lung</originalText>
 </code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201216"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
@@ -2742,12 +2746,13 @@
         <id root="64B21186-BC94-4C6D-A25E-1347666D8DAF" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20210113"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
@@ -2764,12 +2769,13 @@
         <id root="4B96C02F-9167-4CCB-AB78-5FFEE087A049" />
         <code code="306238000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to Social Services">
 </code>
-        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
+        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20210113"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
@@ -3891,12 +3897,13 @@
         <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
     <originalText>2 week rule referral - brain</originalText>
 </code>
-        <text>Priority: Routine Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required To mark as &apos;Dormant&apos;</text>
+        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required To mark as &apos;Dormant&apos;</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200907"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
@@ -3939,12 +3946,13 @@
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651" />
         <code code="306312003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral to hand surgeon">
 </code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Patient Reassurance, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referral from a consultation</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Patient Reassurance, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required Referral from a consultation</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20200908"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="CF58E8F8-CDD0-4345-8D7B-864EC96E9F9C"/>
@@ -3992,12 +4000,13 @@
         <id root="B1310011-B620-48D7-A381-2BF0335C5B3D" />
         <code code="281098006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Refer to appliance officer">
 </code>
-        <text>Priority: Routine Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required adas</text>
+        <text>Recipient Org: TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required adas</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20201118"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>

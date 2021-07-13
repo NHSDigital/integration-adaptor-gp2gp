@@ -83,6 +83,14 @@ public class RequestStatementMapperTest {
         + "example-referral-request-no-onbehalfof.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
         + "example-referral-request-with-multiple-recipients.json";
+    private static final String INPUT_JSON_WITH_ASAP_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-asap-priority.json";
+    private static final String INPUT_JSON_WITH_ROUTINE_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-routine-priority.json";
+    private static final String INPUT_JSON_WITH_URGENT_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-urgent-priority.json";
+    private static final String INPUT_JSON_WITH_UNSUPPORTED_PRIORITY = TEST_FILE_DIRECTORY
+        + "example-referral-request-with-unsupported-priority.json";
 
     // OUTPUT FILES
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -117,6 +125,12 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-no-onbehalfof.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-with-multiple-recipients.xml";
+    private static final String OUTPUT_XML_WITH_NORMAL_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-normal-priority.xml";
+    private static final String OUTPUT_XML_WITH_HIGH_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-high-priority.xml";
+    private static final String OUTPUT_XML_WITH_IMMEDIATE_PRIORITY = TEST_FILE_DIRECTORY
+        + "expected-output-request-statement-with-immediate-priority.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -145,7 +159,10 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_MULTIPLE_PRACTITIONER_RECIPIENT, OUTPUT_XML_WITH_MULTIPLE_PRACTITIONER_RECIPIENT),
             arguments(INPUT_JSON_WITH_NOTES, OUTPUT_XML_WITH_NOTES),
             arguments(INPUT_JSON_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF, OUTPUT_XML_WITH_PRACTITIONER_REQUESTER_NO_ONBEHALFOF),
-            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS)
+            arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS),
+            arguments(INPUT_JSON_WITH_ASAP_PRIORITY, OUTPUT_XML_WITH_IMMEDIATE_PRIORITY),
+            arguments(INPUT_JSON_WITH_ROUTINE_PRIORITY, OUTPUT_XML_WITH_NORMAL_PRIORITY),
+            arguments(INPUT_JSON_WITH_URGENT_PRIORITY, OUTPUT_XML_WITH_HIGH_PRIORITY)
         );
     }
 
@@ -156,14 +173,15 @@ public class RequestStatementMapperTest {
         );
     }
 
-    private static Stream<Arguments> resourceFileParamsWithUnexpectedReferences() {
+    private static Stream<Arguments> resourceFileParamsWithInvalidData() {
         return Stream.of(
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
             arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
             arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference")
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference"),
+            arguments(INPUT_JSON_WITH_UNSUPPORTED_PRIORITY, "Unsupported priority in ReferralRequest: stat")
         );
     }
 
@@ -249,8 +267,8 @@ public class RequestStatementMapperTest {
     }
 
     @ParameterizedTest
-    @MethodSource("resourceFileParamsWithUnexpectedReferences")
-    public void When_MappingReferralRequestJsonWithUnexpectedReferences_Expect_Exception(String inputJson, String exceptionMessage)
+    @MethodSource("resourceFileParamsWithInvalidData")
+    public void When_MappingReferralRequestJsonWithInvalidData_Expect_Exception(String inputJson, String exceptionMessage)
         throws IOException {
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         ReferralRequest parsedReferralRequest = new FhirParseService().parseResource(jsonInput, ReferralRequest.class);
