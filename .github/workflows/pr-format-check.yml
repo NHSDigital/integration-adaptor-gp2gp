@@ -13,4 +13,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch name is in the correct format
-        run: 'echo ${{ github.event.pull_request.head.ref }} | grep -i -E -q "^(feature|task|bug|hotfix)\/niad-[0-9]+(-[a-z]+)+"'
+        run: 'echo ${{ github.event.pull_request.head.ref }} | grep -i -E -q "^(feature|task|bug|hotfix|release)\/niad-[0-9]+(-[a-z]+)+"'

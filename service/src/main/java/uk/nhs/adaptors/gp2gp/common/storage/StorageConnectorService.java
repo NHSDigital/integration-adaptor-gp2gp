@@ -20,12 +20,12 @@ public class StorageConnectorService {
     private final ObjectMapper objectMapper;
 
     @SneakyThrows(JsonProcessingException.class)
-    public void uploadFile(StorageDataWrapper response, String fileName) {
+    public void uploadFile(StorageDataWrapper response, String filename) {
         String jsonStringResponse = objectMapper.writeValueAsString(response);
         var responseBytes = jsonStringResponse.getBytes(UTF_8);
         var responseInputStream = new ByteArrayInputStream(responseBytes);
 
-        storageConnector.uploadToStorage(responseInputStream, responseBytes.length, fileName);
+        storageConnector.uploadToStorage(responseInputStream, responseBytes.length, filename);
     }
 
     @SneakyThrows

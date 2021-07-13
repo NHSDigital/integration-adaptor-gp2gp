@@ -26,6 +26,7 @@ import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservationHolderFactory;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.ObservationMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
@@ -41,17 +42,30 @@ public class EhrExtractMapperComponentTest {
     private static final String OUTPUT_DIRECTORY = "output/";
     private static final String INPUT_PATH = TEST_FILE_DIRECTORY + INPUT_DIRECTORY;
     private static final String OUTPUT_PATH = TEST_FILE_DIRECTORY + OUTPUT_DIRECTORY;
+
     private static final String JSON_INPUT_FILE = "gpc-access-structured.json";
     private static final String DUPLICATE_RESOURCE_BUNDLE = INPUT_PATH + "duplicated-resource-bundle.json";
     private static final String ONE_CONSULTATION_RESOURCE_BUNDLE = INPUT_PATH + "1-consultation-resource.json";
-    private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
     private static final String FHIR_BUNDLE_WITHOUT_EFFECTIVE_TIME = "fhir-bundle-without-effective-time.json";
     private static final String FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME = "fhir-bundle-without-high-effective-time.json";
     private static final String FHIR_BUNDLE_WITH_EFFECTIVE_TIME = "fhir-bundle-with-effective-time.json";
+
+    private static final String FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_BEFORE_DIAGNOSTIC_REPORT =
+        "fhir-bundle-observations-before-diagnostic-report.json";
+    private static final String FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_AFTER_DIAGNOSTIC_REPORT =
+        "fhir-bundle-observations-after-diagnostic-report.json";
+    private static final String FHIR_BUNDLE_WITH_OBSERVATIONS_UNRELATED_TO_DIAGNOSTIC_REPORT =
+        "fhir-bundle-observations-unrelated-to-diagnostic-report.json";
+
+    private static final String EXPECTED_XML_FOR_ONE_CONSULTATION_RESOURCE = "ExpectedResponseFrom1ConsultationResponse.xml";
+
     private static final String EXPECTED_XML_TO_JSON_FILE = "expected-ehr-extract-response-from-json.xml";
     private static final String EXPECTED_XML_WITHOUT_EFFECTIVE_TIME = "expected-xml-without-effective-time.xml";
     private static final String EXPECTED_XML_WITHOUT_HIGH_EFFECTIVE_TIME = "expected-xml-without-high-effective-time.xml";
     private static final String EXPECTED_XML_WITH_EFFECTIVE_TIME = "expected-xml-with-effective-time.xml";
+    private static final String EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT = "expected-xml-with-observations-inside-report.xml";
+    private static final String EXPECTED_XML_WITH_STANDALONE_OBSERVATIONS = "expected-xml-with-standalone-observations.xml";
+
     private static final String TEST_ID_1 = "test-id-1";
     private static final String TEST_ID_2 = "test-id-2";
     private static final String TEST_ID_3 = "test-id-3";
@@ -93,8 +107,11 @@ public class EhrExtractMapperComponentTest {
 
         ParticipantMapper participantMapper = new ParticipantMapper();
         StructuredObservationValueMapper structuredObservationValueMapper = new StructuredObservationValueMapper();
+        MultiStatementObservationHolderFactory multiStatementObservationHolderFactory =
+            new MultiStatementObservationHolderFactory(messageContext, randomIdGeneratorService);
         ObservationMapper specimenObservationMapper = new ObservationMapper(
-            messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
+            messageContext, structuredObservationValueMapper, codeableConceptCdMapper,
+            participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
@@ -155,7 +172,8 @@ public class EhrExtractMapperComponentTest {
 
         EhrExtractTemplateParameters ehrExtractTemplateParameters = ehrExtractMapper.mapBundleToEhrFhirExtractParams(
             getGpcStructuredTaskDefinition,
-            bundle);
+            bundle
+        );
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
@@ -165,7 +183,10 @@ public class EhrExtractMapperComponentTest {
             Arguments.of(JSON_INPUT_FILE, EXPECTED_XML_TO_JSON_FILE),
             Arguments.of(FHIR_BUNDLE_WITHOUT_EFFECTIVE_TIME, EXPECTED_XML_WITHOUT_EFFECTIVE_TIME),
             Arguments.of(FHIR_BUNDLE_WITHOUT_HIGH_EFFECTIVE_TIME, EXPECTED_XML_WITHOUT_HIGH_EFFECTIVE_TIME),
-            Arguments.of(FHIR_BUNDLE_WITH_EFFECTIVE_TIME, EXPECTED_XML_WITH_EFFECTIVE_TIME)
+            Arguments.of(FHIR_BUNDLE_WITH_EFFECTIVE_TIME, EXPECTED_XML_WITH_EFFECTIVE_TIME),
+            Arguments.of(FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_BEFORE_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT),
+            Arguments.of(FHIR_BUNDLE_WITH_WITH_OBSERVATIONS_AFTER_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_OBSERVATIONS_INSIDE_REPORT),
+            Arguments.of(FHIR_BUNDLE_WITH_OBSERVATIONS_UNRELATED_TO_DIAGNOSTIC_REPORT, EXPECTED_XML_WITH_STANDALONE_OBSERVATIONS)
         );
     }
 

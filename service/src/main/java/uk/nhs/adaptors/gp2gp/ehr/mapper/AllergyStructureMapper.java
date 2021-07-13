@@ -49,7 +49,7 @@ public class AllergyStructureMapper {
     private static final String MEDICATION_CATEGORY = "medication";
     private static final String UNSPECIFIED_ALLERGY_CODE = "<code code=\"SN53.00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" "
         + "displayName=\"Allergy, unspecified\"/>";
-    private static final String DRUG_ALLERGY_CODE = "<code code=\"14L...00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" displayName=\"H/O: "
+    private static final String DRUG_ALLERGY_CODE = "<code code=\"14L..00\" codeSystem=\"2.16.840.1.113883.2.1.6.2\" displayName=\"H/O: "
         + "drug allergy\"/>";
     private static final String COMMA = ", ";
 

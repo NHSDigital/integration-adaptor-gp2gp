@@ -1,6 +1,6 @@
 <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="some-id"/>
+        <id root="Mapped-From-Observation/Consultation3-Topic2-Category-Examination-Observation-1"/>
         <code nullFlavor="UNK">
     <originalText>test</originalText>
 </code>
@@ -16,21 +16,11 @@
     </ObservationStatement>
 </component><component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:USER COMMENT
+        <id root="random-unmapped-id"/>
+        <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
             CommentDate:20190601113000
 
-            Test comment</text>
-        <statusCode code="COMPLETE"/>
-        <availabilityTime value="20190601113000"/>
-    </NarrativeStatement>
-</component><component typeCode="COMP" contextConductionInd="true">
-    <NarrativeStatement classCode="OBS" moodCode="EVN">
-        <id root="5E496953-065B-41F2-9577-BE8F2FBD0757"/>
-        <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT DETAIL(E136)
-            CommentDate:20190601113000
-
-            Interpretation: Example without userSelected</text>
+            Interpretation: Example without userSelected Test comment</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>

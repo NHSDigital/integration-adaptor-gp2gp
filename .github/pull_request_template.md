@@ -8,7 +8,7 @@ Please add a link to the related Jira ticket (if applicable).
 
 ## Checklist
 
-These are items (excluding GitHub Checks) which should be confirmed before a branch is ready to merge.
+These items (including GitHub Checks) should be confirmed before a branch is ready to merge.
 
 - [ ] Acceptance Criteria met
 - [ ] Commit messages are meaningful

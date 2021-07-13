@@ -30,6 +30,7 @@ public class OutboundMessage {
     @Setter
     @Jacksonized
     @AllArgsConstructor
+    @Builder
     public static class Attachment {
         @JsonProperty("content_type")
         private String contentType;

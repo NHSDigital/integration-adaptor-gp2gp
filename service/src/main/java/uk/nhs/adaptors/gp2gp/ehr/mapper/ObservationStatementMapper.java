@@ -3,6 +3,8 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -36,6 +38,8 @@ public class ObservationStatementMapper {
     private static final Mustache OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE =
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
+    private static final String INTERPRETATION_PREFIX = "Interpretation: ";
+    private static final String INTERPRETATION_CODE_PREFIX = "Interpretation Code: ";
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
 
@@ -59,8 +63,8 @@ public class ObservationStatementMapper {
             Type value = observation.getValue();
 
             if (UNHANDLED_TYPES.contains(value.getClass())) {
-                LOGGER.info("Observation value type {} not supported. Mapping for this field is skipped",
-                    observation.getValue().getClass());
+                throw new EhrMapperException(
+                    String.format("Observation value type %s not supported.", observation.getValue().getClass()));
             } else if (structuredObservationValueMapper.isStructuredValueType(value)) {
                 observationStatementTemplateParametersBuilder.value(
                     structuredObservationValueMapper.mapObservationValueToStructuredElement(value));
@@ -124,7 +128,8 @@ public class ObservationStatementMapper {
 
         if (observation.hasValue() && pertinentInformationObservationValueMapper.isPertinentInformation(observation.getValue())) {
             commentBuilder.append(
-                pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue()));
+                pertinentInformationObservationValueMapper.mapObservationValueToPertinentInformation(observation.getValue())
+            );
         }
 
         if (observation.hasReferenceRange()) {
@@ -161,7 +166,7 @@ public class ObservationStatementMapper {
 
                 Optional.ofNullable(coding).ifPresent(code -> {
                     if (code.hasCode() || code.hasDisplay()) {
-                        commentBuilder.append("Interpretation Code: ");
+                        commentBuilder.append(INTERPRETATION_CODE_PREFIX);
                     }
                     if (code.hasCode()) {
                         commentBuilder.append(coding.getCode()).append(StringUtils.SPACE);
@@ -169,15 +174,18 @@ public class ObservationStatementMapper {
                     if (code.hasDisplay()) {
                         commentBuilder.append(code.getDisplay()).append(StringUtils.SPACE);
                     }
-
-                    if (interpretation.hasText()) {
-                        commentBuilder.append("Interpretation Text: ").append(interpretation.getText()).append(StringUtils.SPACE);
-                    }
                 });
             }
         }
 
-        commentBuilder.append(observation.hasComment() ? observation.getComment() : StringUtils.EMPTY);
+        String interpretationTextAndComment = Stream.concat(
+            Optional.ofNullable(observation.getInterpretation().getText()).stream(),
+            Optional.ofNullable(observation.getComment()).stream()
+        ).collect(Collectors.joining(StringUtils.SPACE));
+
+        if (!interpretationTextAndComment.isBlank()) {
+            commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationTextAndComment);
+        }
 
         return commentBuilder.toString();
     }

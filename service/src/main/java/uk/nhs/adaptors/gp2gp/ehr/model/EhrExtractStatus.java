@@ -37,8 +37,12 @@ public class EhrExtractStatus implements TimeToLive {
     private GpcAccessStructured gpcAccessStructured;
     private GpcAccessDocument gpcAccessDocument;
     private EhrExtractCore ehrExtractCore;
+    private EhrExtractCorePending ehrExtractCorePending;
     private EhrContinue ehrContinue;
+    private AckToRequester ackToRequester;
+    private AckPending ackPending;
     private EhrReceivedAcknowledgement ehrReceivedAcknowledgement;
+    private Error error;
 
     public EhrExtractStatus(Instant created, Instant updatedAt, String conversationId, EhrRequest ehrRequest) {
         this.created = created;
@@ -119,8 +123,40 @@ public class EhrExtractStatus implements TimeToLive {
     @AllArgsConstructor
     @Document
     @Builder
+    public static class EhrExtractCorePending {
+        private Instant sentAt;
+        private String taskId;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
     public static class EhrContinue {
         private Instant received;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class AckToRequester {
+        private String taskId;
+        private String messageId;
+        private String typeCode;
+        private String reasonCode;
+        private String detail;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class AckPending {
+        private String taskId;
+        private String messageId;
+        private String typeCode;
+        private String updatedAt;
     }
 
     @Data
@@ -142,5 +178,16 @@ public class EhrExtractStatus implements TimeToLive {
             private String code;
             private String display;
         }
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
+    public static class Error {
+        private Instant occurredAt;
+        private String code;
+        private String message;
+        private String taskType;
     }
 }
