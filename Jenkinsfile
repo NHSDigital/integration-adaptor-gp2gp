@@ -164,7 +164,7 @@ pipeline {
     post {
         always {
             sh label: 'Remove images created by docker-compose', script: 'docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down --rmi local'
-            sh label: 'Remove exited containers', script: 'docker rm $(docker ps -a -f status=exited -q)'
+            sh label: 'Remove exited containers', script: 'docker rm $(docker ps -a -f status=exited -q) || true'
             sh label: 'Remove images tagged with current BUILD_TAG', script: 'docker image rm -f $(docker images "*/*:*${BUILD_TAG}" -q) $(docker images "*/*/*:*${BUILD_TAG}" -q) || true'
         }
     }
