@@ -413,6 +413,77 @@
                     {
                         "reference": "Endpoint/example"
                     }
+                ],
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "2-multiple-types",
+                "name": "Health Level Seven International - multiple types",
+                "alias": [
+                    "HL7 International - multiple types"
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "(+1) 734-677-7777"
+                    },
+                    {
+                        "system": "fax",
+                        "value": "(+1) 734-677-6622"
+                    },
+                    {
+                        "system": "email",
+                        "value": "hq@HL7.org"
+                    }
+                ],
+                "address": [
+                    {
+                        "line": [
+                            "3300 Washtenaw Avenue, Suite 227"
+                        ],
+                        "city": "Ann Arbor",
+                        "state": "MI",
+                        "postalCode": "48104",
+                        "country": "USA"
+                    }
+                ],
+                "endpoint": [
+                    {
+                        "reference": "Endpoint/example"
+                    }
+                ],
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    },
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "urgent-care"
+                            }
+                        ],
+                        "text": "Urgent Care"
+                    }
                 ]
             }
         },
