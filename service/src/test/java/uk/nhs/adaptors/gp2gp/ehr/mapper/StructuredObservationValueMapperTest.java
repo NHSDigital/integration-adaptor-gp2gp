@@ -35,13 +35,13 @@ public class StructuredObservationValueMapperTest {
         + "example-output-observation-value-1.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION = TEST_FILES_DIRECTORY
         + "example-output-observation-with-interpretation-3.xml";
-    private static final String OUTPUT_XML_WITH_REF_RANGE_FULL_DATA = TEST_FILES_DIRECTORY
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_FULL_DATA = TEST_FILES_DIRECTORY
         + "example-output-observation-with-reference-range-full-data.xml";
-    private static final String OUTPUT_XML_WITH_REF_RANGE_TEXT_ONLY = TEST_FILES_DIRECTORY
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_TEXT_ONLY = TEST_FILES_DIRECTORY
         + "example-output-observation-with-reference-range-text-only.xml";
-    private static final String OUTPUT_XML_WITH_REF_RANGE_HIGH_ONLY = TEST_FILES_DIRECTORY
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_HIGH_ONLY = TEST_FILES_DIRECTORY
         + "example-output-observation-with-reference-range-high-only.xml";
-    private static final String OUTPUT_XML_WITH_REF_RANGE_LOW_ONLY = TEST_FILES_DIRECTORY
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_LOW_ONLY = TEST_FILES_DIRECTORY
         + "example-output-observation-with-reference-range-low-only.xml";
 
     private static final StructuredObservationValueMapper XML_OBSERVATION_VALUE_MAPPER = new StructuredObservationValueMapper();
@@ -102,10 +102,10 @@ public class StructuredObservationValueMapperTest {
 
     private static Stream<Arguments> referenceRangeTestParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_REF_RANGE_FULL_DATA, OUTPUT_XML_WITH_REF_RANGE_FULL_DATA),
-            Arguments.of(INPUT_JSON_WITH_REF_RANGE_HIGH_ONLY, OUTPUT_XML_WITH_REF_RANGE_HIGH_ONLY),
-            Arguments.of(INPUT_JSON_WITH_REF_RANGE_LOW_ONLY, OUTPUT_XML_WITH_REF_RANGE_LOW_ONLY),
-            Arguments.of(INPUT_JSON_WITH_REF_RANGE_TEXT_ONLY, OUTPUT_XML_WITH_REF_RANGE_TEXT_ONLY)
+            Arguments.of(INPUT_JSON_WITH_REF_RANGE_FULL_DATA, OUTPUT_XML_WITH_REFERENCE_RANGE_FULL_DATA),
+            Arguments.of(INPUT_JSON_WITH_REF_RANGE_HIGH_ONLY, OUTPUT_XML_WITH_REFERENCE_RANGE_HIGH_ONLY),
+            Arguments.of(INPUT_JSON_WITH_REF_RANGE_LOW_ONLY, OUTPUT_XML_WITH_REFERENCE_RANGE_LOW_ONLY),
+            Arguments.of(INPUT_JSON_WITH_REF_RANGE_TEXT_ONLY, OUTPUT_XML_WITH_REFERENCE_RANGE_TEXT_ONLY)
         );
     }
 }
