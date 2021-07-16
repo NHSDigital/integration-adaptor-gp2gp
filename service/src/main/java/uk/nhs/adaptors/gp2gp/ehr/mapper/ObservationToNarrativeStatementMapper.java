@@ -18,7 +18,6 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ObservationToNarrativeStatementMapper {
-
     private static final Mustache NARRATIVE_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_narrative_statement_template.mustache");
 
     private final MessageContext messageContext;
@@ -37,6 +36,11 @@ public class ObservationToNarrativeStatementMapper {
             final String participantBlock = participantMapper
                 .mapToParticipant(participantReference, ParticipantType.PERFORMER);
             narrativeStatementTemplateParameters.participant(participantBlock);
+        }
+
+        if (observation.hasValueSampledData() || observation.hasValueAttachment()) {
+            throw new EhrMapperException(
+                String.format("Observation value type %s not supported.", observation.getValue().getClass()));
         }
 
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, narrativeStatementTemplateParameters.build());
