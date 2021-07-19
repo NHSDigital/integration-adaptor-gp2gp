@@ -418,7 +418,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - This is problem</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - This is problem Problem Info: Problem Notes: This is problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

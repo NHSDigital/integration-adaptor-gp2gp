@@ -7877,7 +7877,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is text for a warfarin allergy</text>
+                <text>Problem Info: Problem Notes: This is text for a warfarin allergy</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -7952,7 +7952,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
+                <text>Problem Info: Related Problem: Child of Unknown Condition Problem Notes: This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -8027,7 +8027,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Drug Allergy - Apsrin</text>
+                <text>Problem Info: Related Problem: Parent of Unknown Condition Problem Notes: Drug Allergy - Apsrin</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -8412,7 +8412,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected Problem Info: Problem Notes: Synonym &quot;Heart Attack&quot; selected</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -8467,7 +8467,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - Happy Puppet</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - Happy Puppet Problem Info: Problem Notes: Happy Puppet</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -8687,7 +8687,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes: This is a standalone note with extended chars Ñ§¬</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

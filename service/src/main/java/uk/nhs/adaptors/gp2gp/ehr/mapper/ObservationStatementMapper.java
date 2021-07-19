@@ -26,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.model.ConditionWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -187,7 +188,23 @@ public class ObservationStatementMapper {
             commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationTextAndComment);
         }
 
+        buildActualProblemTextIfExists(observation)
+            .map(t -> StringUtils.SPACE + t)
+            .ifPresent(commentBuilder::append);
+
         return commentBuilder.toString();
+    }
+
+    private Optional<String> buildActualProblemTextIfExists(Observation observation) {
+        var problems = messageContext.getInputBundleHolder().getRelatedConditions(observation.getId());
+
+        var text = problems.stream()
+            .map(problem -> new ConditionWrapper(problem, messageContext, codeableConceptCdMapper)
+                .buildProblemInfo().orElse(StringUtils.EMPTY))
+            .filter(s -> !s.isEmpty())
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        return text.isEmpty() ? Optional.empty() : Optional.of(text);
     }
 
     private Optional<String> extractUnit(Observation.ObservationReferenceRangeComponent referenceRange) {

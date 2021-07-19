@@ -175,6 +175,7 @@ public class EhrExtractMapperComponentTest {
             bundle
         );
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
 

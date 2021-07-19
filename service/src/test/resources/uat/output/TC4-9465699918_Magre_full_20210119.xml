@@ -6179,7 +6179,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>test, test</text>
+                <text>Problem Info: Problem Notes: test, test</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>

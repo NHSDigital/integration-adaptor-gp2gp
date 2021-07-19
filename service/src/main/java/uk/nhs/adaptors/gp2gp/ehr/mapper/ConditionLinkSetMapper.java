@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
 import org.hl7.fhir.dstu3.model.Reference;
@@ -21,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
+import uk.nhs.adaptors.gp2gp.ehr.model.ConditionWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -76,7 +75,8 @@ public class ConditionLinkSetMapper {
                 String newId = randomIdGeneratorService.createNewId();
                 builder.generateObservationStatement(true);
                 builder.conditionNamed(newId);
-                buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
+                new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
+                    .buildProblemInfo().ifPresent(builder::pertinentInfo);
             });
 
         builder.code(buildCode(condition));
@@ -167,23 +167,13 @@ public class ConditionLinkSetMapper {
 
     private List<String> buildRelatedClinicalContent(Condition condition) {
         return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
-           .stream()
-           .map(Extension::getValue)
-           .map(value -> (Reference) value)
-           .filter(this::filterOutNonExistentResource)
-           .filter(this::filterOutSuppressedLinkageResources)
-           .map(reference -> messageContext.getIdMapper().getOrNew(reference))
-           .collect(Collectors.toList());
-    }
-
-    private Optional<String> buildPertinentInfo(Condition condition) {
-        if (condition.hasNote()) {
-            return Optional.of(condition.getNote()
-                .stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE)));
-        }
-        return Optional.empty();
+            .stream()
+            .map(Extension::getValue)
+            .map(value -> (Reference) value)
+            .filter(this::filterOutNonExistentResource)
+            .filter(this::filterOutSuppressedLinkageResources)
+            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
+            .collect(Collectors.toList());
     }
 
     private boolean filterOutNonExistentResource(Reference reference) {
