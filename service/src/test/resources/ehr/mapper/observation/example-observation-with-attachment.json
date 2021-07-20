@@ -1,0 +1,48 @@
+{
+    "resourceType": "Observation",
+    "valueAttachment": {
+        "contentType": "text/plain",
+        "data": "VGhlIGZvbGxvd2luZyBmaWxlIGNvdWxkIG5vdCBiZSBpbmNsdWRlZCB3aXRoIHRoZSBFbGVj dHJvbmljIFJlY29yZDoNCmhoLnhwcw0KDQpSZWFzb246MDE6RmlsZSB0eXBlIHVuc3VwcG9ydGVkDQo=",
+        "title": "Some attachment",
+        "creation": "2010-01-18T11:47:00+00:00"
+    },
+    "id": "549EA74D-C2C1-498E-8E67-DF660977A6A1",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Observation-1"
+        ]
+    },
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "549EA74D-C2C1-498E-8E67-DF660977A6A1"
+        }
+    ],
+    "status": "final",
+    "code": {
+        "coding": [
+            {
+                "system": "http://snomed.info/sct",
+                "code": "37331000000100",
+                "display": "Comment note"
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/88F14BF6-CADE-47D6-90E2-B10519BF956F"
+    },
+    "specimen": {
+        "reference": "Specimen/7E5D5E50-D1CE-41FE-B30D-45D287174031-SPEC-0"
+    },
+    "effectivePeriod": {
+        "start": "2010-01-13",
+        "end": "2010-01-15"
+    },
+    "issued": "2010-01-23T14:03:54.41+00:00",
+    "performer": [
+        {
+            "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+        }
+    ],
+    "comment": "This is some random free text"
+}
