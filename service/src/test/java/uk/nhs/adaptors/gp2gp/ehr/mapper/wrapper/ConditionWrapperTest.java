@@ -35,7 +35,7 @@ public class ConditionWrapperTest extends ConditionWrapperTestBase {
     public void prepareMessageContext() {
         codeableConceptCdMapper = new CodeableConceptCdMapper();
         messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
+        messageContext.initialize(getBundle());
     }
 
     @Test

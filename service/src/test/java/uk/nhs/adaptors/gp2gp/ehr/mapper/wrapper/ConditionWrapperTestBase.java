@@ -10,6 +10,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.BeforeAll;
 
+import lombok.Getter;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.InputBundle;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
@@ -25,8 +26,9 @@ public abstract class ConditionWrapperTestBase {
     protected static final String SIBLING_CONDITION_FHIR_ID = "5EA6E5BC-96BF-403D-B4B2-3771F3791B7B-PROB";
     protected static final String SIBLING_CONDITION_REFERENCE = "Condition/" + SIBLING_CONDITION_FHIR_ID;
 
-    protected static Bundle bundle;
-    protected static InputBundle inputBundle;
+    @Getter
+    private static Bundle bundle;
+    private static InputBundle inputBundle;
 
     @BeforeAll
     public static void setUp() throws IOException {
