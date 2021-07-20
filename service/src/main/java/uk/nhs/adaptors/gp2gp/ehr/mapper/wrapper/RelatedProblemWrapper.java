@@ -1,4 +1,4 @@
-package uk.nhs.adaptors.gp2gp.ehr.model;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper;
 
 import java.util.Optional;
 

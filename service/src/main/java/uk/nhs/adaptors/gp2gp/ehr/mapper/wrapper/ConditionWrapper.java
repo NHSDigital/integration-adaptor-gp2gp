@@ -1,6 +1,6 @@
-package uk.nhs.adaptors.gp2gp.ehr.model;
+package uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper;
 
-import static uk.nhs.adaptors.gp2gp.ehr.model.RelatedProblemWrapper.RELATED_PROBLEM_HEADER;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.RelatedProblemWrapper.RELATED_PROBLEM_HEADER;
 
 import java.util.LinkedList;
 import java.util.List;

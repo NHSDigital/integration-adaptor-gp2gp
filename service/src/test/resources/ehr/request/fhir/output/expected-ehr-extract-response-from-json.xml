@@ -7952,7 +7952,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Related Problem: Child of Unknown Condition Problem Notes: This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
+                <text>Problem Info: Related Problem: Child of Aspirin allergy Problem Notes: This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -8027,7 +8027,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Related Problem: Parent of Unknown Condition Problem Notes: Drug Allergy - Apsrin</text>
+                <text>Problem Info: Related Problem: Parent of Allergy to peanuts Problem Notes: Drug Allergy - Apsrin</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
