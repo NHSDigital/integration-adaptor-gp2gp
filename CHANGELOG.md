@@ -6,6 +6,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2021-07-21
+
+- Work on Clincial Mapping changes
+- Work for GPC 1.6.0 uplift begun
+
+### Known Issues and Limitations
+
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316638
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316639
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316640
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316641
+
+### Added
+
+- NIAD-1169: Throw error on missing observation (#284)
+- NIAD-1176: Include requesting org type info in MedicationStatement's text (#282)
+- NIAD-1174: map ReferralRequest.priority to RequestStatement.priorityCode (#279)
+- Niad 1170: mapping change handle multiple instances of procedurerequest reason code (#281)
+- NIAD-1169: Mapping change Observation .valueSampleData .valueAttachment (#280)
+- NIAD-1476: Observation interpretation.text not being processed. (#276)
+- NIAD-1548: mock mhs send ack update e2e tests (#277)
+- NIAD-1172: DiagnosticReport.status mapped to NarrativeStatement (#278)
+- NIAD-1473: Change missing unit in quantity in observations to not be mapped to null but to empty (#275)
+- NIAD-1054: Handle out of order and illogical messages (#262)
+- NIAD-1166: create integration tests for the handling of inbound messages (#273)
+- NIAD-1474: Fix drug allergy code. (#270)
+- NIAD-1285: Update url to take configurable ODS code (#274)
+- NIAD-1166: create integration tests for the handling of task messages (#272)
+- NIAD-1285: Add additional test for another gpconnect provider (#268)
+- NIAD-1166: Verify that message processing is aborted when message can't be read (#267)
+- NIAD-1464: Use IdMapper when creating NarrativeStatement elements (#253)
+- NIAD-1031: Make the names of files uploaded to storage (Local HashMap, AWS, Azure) unique, to prevent accidental collisions/overwriting (#265)
+- NIAD-1449: Prevent the execution of JSON to XML transform tool during tests (#266)
+- NIAD-846: Send NACK on error (#257)
+- NIAD-1285: support multiple gp connect providers (#258)
+- NIAD-1166: Fail the whole conversation when the processing of inbound message or task fails (#260)
+- NIAD-1449: Dynamic test fixture to transform arbitrary json ASR payload files (#241)
+- NIAD-845: Rename test, increase wait time in e2e test for execution stability (#254)
+- NIAD-1189: Handle document attachment with unsupported content-type(#249)
+- NIAD-1373: Modify UAT test to check that all agentRef/id refer to actual Agent/id (#247)
+- NIAD-845: Additional send acknowledgement automated tests (#251)
+- NIAD-1337: Add fromAsid override variable (#242)
+- NIAD-845: Include "Unknown" originalText for practitioners (#250)
+- NIAD-910: Fixes to NIAD-910 after testing. (#245)
+- NIAD-1340: Agent directory based on actual agent references (#233)
+- NIAD-1205: Send positive acknowledgement after all docs sent (#246)
+- NIAD-1472: make patient outputs match schema (#248)
+- NIAD-1464 Ensure standalone Observations are mapped after DiagnosticReports (#244)
+- NIAD-845: Send EHR Extract Common Fragments (#238)
+- NIAD-1470: If Diagnostic Report has no specimens, create a dummy/default specimen, and associate observations with that specimen. (#239)
+- NIAD-1469: diagnostic report with no results (#236)
+- NIAD-1337: Added nhs number override to agent directory mapper (#235)
+- NIAD-1378: Ignore empty Encounter elements when mapping EHR extract (#234)
+- NIAD-910: Fix issue where some derived observations were not being mapped properly (#229)
+- Niad 1467: specimen narrative statement (#232)
+- NIAD-1383: Add missing Participant element to PlanStatement in HL7 payload (#231)
+- NIAD-1455: Suppress Condition related clinical content linkages to Encounter (#230)
+- NIAD-1405: Add Mold and Guerra test patients + schema validation (#226)
+- NIAD-1300: Minor change to remove PractionerRole reference from a unit test (#228)
+- NIAD-1424: Remove assumption and add Mock MHS debug log messages (#197)
+- NIAD-1454: Update participant2 typecode (#227)
+- NIAD-1300: Update wiremock responses to match opentest (#220)
+- NIAD-1445: Bumped version number within DOCKERHUB.md file we copy to Docker hub page (#225)
+- NIAD-1407: Removed assumption of resource type (#224)
+
+### Fixed
+
 
 ## [0.1.2] - 2021-05-07
 
