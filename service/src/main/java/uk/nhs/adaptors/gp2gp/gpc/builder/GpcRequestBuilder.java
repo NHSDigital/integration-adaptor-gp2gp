@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Parameters.ParametersParameterComponent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +59,11 @@ public class GpcRequestBuilder {
     private static final String SSP_TRACE_ID = "Ssp-TraceID";
     private static final String AUTHORIZATION = "Authorization";
     private static final String AUTHORIZATION_BEARER = "Bearer ";
-    private static final int NUMBER_OF_RECENT_CONSULTANTS = 3;
-    private static final String GPC_STRUCTURED_INTERACTION_ID = "urn:nhs:names:services:gpconnect:fhir:operation:gpc"
-        + ".getstructuredrecord-1";
-    private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:read:binary-1";
+    private static final String GPC_STRUCTURED_INTERACTION_ID =
+        "urn:nhs:names:services:gpconnect:fhir:operation:gpc.migratestructuredrecord-1";
+    private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:migrate:binary-1";
+
+    //too remove
     private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
     private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
     private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
@@ -86,18 +86,9 @@ public class GpcRequestBuilder {
             .addParameter(buildParamterComponent("patientNHSNumber")
                 .setValue(new Identifier().setSystem(NHS_NUMBER_SYSTEM).setValue(
                     ((overrideNhsNumber.isBlank()) ? structuredTaskDefinition.getNhsNumber() : overrideNhsNumber))))
-            .addParameter(buildParamterComponent("includeAllergies")
-                .addPart(buildParamterComponent("includeResolvedAllergies")
-                    .setValue(new BooleanType(true))))
-            .addParameter(buildParamterComponent("includeMedication"))
-            .addParameter(buildParamterComponent("includeConsultations")
-                .addPart(buildParamterComponent("includeNumberOfMostRecent")
-                    .setValue(new IntegerType(NUMBER_OF_RECENT_CONSULTANTS))))
-            .addParameter(buildParamterComponent("includeProblems"))
-            .addParameter(buildParamterComponent("includeImmunisations"))
-            .addParameter(buildParamterComponent("includeUncategorisedData"))
-            .addParameter(buildParamterComponent("includeInvestigations"))
-            .addParameter(buildParamterComponent("includeReferrals"));
+            .addParameter(buildParamterComponent("includeFullRecord")
+                .addPart(buildParamterComponent("includeSensitiveInformation")
+                    .setValue(new BooleanType(true))));
     }
 
     private ParametersParameterComponent buildParamterComponent(String parameterName) {
