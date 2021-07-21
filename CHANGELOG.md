@@ -9,7 +9,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.2] - 2021-07-21
 
 - Work on Clincial Mapping changes
-- Work for GPC 1.6.0 uplift begun
 
 ### Known Issues and Limitations
 
