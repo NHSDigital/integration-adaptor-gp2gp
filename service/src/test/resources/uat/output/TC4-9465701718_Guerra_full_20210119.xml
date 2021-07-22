@@ -1020,7 +1020,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 200.000 mg/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -1118,6 +1117,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <value xsi:type="IVL_PQ"><low value="1000.000" unit="1" inclusive="true"><translation value="1000.000"><originalText>ng/L</originalText></translation></low></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="160.000"/><high value="200.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -1135,6 +1140,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20020330162100"/>
             <value xsi:type="PQ" value="421.000" unit="1"><translation value="421.000"><originalText>ug/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="120.000"/><high value="650.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2256,6 +2267,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="136.000" unit="1"><translation value="136.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="135.000"/><high value="145.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2274,6 +2291,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="4.300" unit="1"><translation value="4.300"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.600"/><high value="5.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2291,6 +2314,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="77.000" unit="1"><translation value="77.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="50.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2351,6 +2380,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="7.800" unit="1"><translation value="7.800"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.500"/><high value="5.200"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2392,6 +2427,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.300"/><high value="2.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2409,6 +2450,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="1.400" unit="1"><translation value="1.400"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.900"/><high value="2.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2436,6 +2483,12 @@ Dr. N.O&apos;Connell</text>
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="5.500" unit="1"><translation value="5.500"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2521,6 +2574,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="6.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2587,6 +2646,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="13.100" unit="1"><translation value="13.100"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.500"/><high value="16.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2604,6 +2669,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="9.500" unit="1"><translation value="9.500"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2631,6 +2702,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="497.000" unit="1"><translation value="497.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="450.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2671,6 +2748,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="93.000" unit="1"><translation value="93.000"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="96.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2688,6 +2771,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="4.360" unit="1"><translation value="4.360"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2706,6 +2795,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="0.405" unit="1"><translation value="0.405"><originalText>/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2723,6 +2818,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="30.100" unit="1"><translation value="30.100"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="27.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2741,6 +2842,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="6.200" unit="1"><translation value="6.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="8.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2758,6 +2865,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="2.200" unit="1"><translation value="2.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.800"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2776,6 +2889,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="0.700" unit="1"><translation value="0.700"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="0.800"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2793,6 +2912,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="0.200" unit="1"><translation value="0.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2810,6 +2935,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030602175200"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.200"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2940,6 +3071,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="79.000" unit="1"><translation value="79.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="60.000"/><high value="80.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2957,6 +3094,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="35.000"/><high value="50.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2974,6 +3117,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="2.230" unit="1"><translation value="2.230"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.100"/><high value="2.550"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -2992,6 +3141,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="2.380" unit="1"><translation value="2.380"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.100"/><high value="2.550"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3058,6 +3213,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="20.000"/><high value="450.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3107,6 +3268,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.500"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3124,6 +3291,12 @@ Comment
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="141.000" unit="1"><translation value="141.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="134.000"/><high value="146.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3191,6 +3364,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="85.000" unit="1"><translation value="85.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="50.000"/><high value="120.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3240,6 +3419,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>mg/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3306,6 +3491,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.000"/><high value="29.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3372,6 +3563,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="49.000"/><high value="70.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3544,6 +3741,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="166.000" unit="1"><translation value="166.000"><originalText>IU/L 37C</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="120.000"/><high value="460.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3561,6 +3764,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="42.000" unit="1"><translation value="42.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="32.000"/><high value="47.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3578,6 +3787,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="72.000" unit="1"><translation value="72.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="63.000"/><high value="80.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3605,6 +3820,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="118.000" unit="1"><translation value="118.000"><originalText>IU/L 37C</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="5.000"/><high value="42.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3645,6 +3866,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="17.000" unit="1"><translation value="17.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="17.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3694,6 +3921,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="56.000" unit="1"><translation value="56.000"><originalText>IU/L 37C</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="46.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3760,6 +3993,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030628112300"/>
             <value xsi:type="PQ" value="3.090" unit="1"><translation value="3.090"><originalText>mg/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="6.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3947,6 +4186,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030701124000"/>
             <value xsi:type="PQ" value="15.600" unit="1"><translation value="15.600"><originalText>pmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="8.000"/><high value="22.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -3964,6 +4209,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030701124000"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>mU/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.350"/><high value="5.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4214,6 +4465,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="13.700" unit="1"><translation value="13.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.500"/><high value="16.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4231,6 +4488,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="5.700" unit="1"><translation value="5.700"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4248,6 +4511,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="293.000" unit="1"><translation value="293.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="140.000"/><high value="450.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4265,6 +4534,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="88.300" unit="1"><translation value="88.300"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="78.000"/><high value="98.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4283,6 +4558,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="0.410" unit="1"><translation value="0.410"></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.340"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4300,6 +4581,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="4.660" unit="1"><translation value="4.660"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.900"/><high value="5.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4317,6 +4604,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="27.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4334,6 +4627,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="33.300" unit="1"><translation value="33.300"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="32.000"/><high value="36.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4351,6 +4650,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="12.700" unit="1"><translation value="12.700"></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4369,6 +4674,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="3.110" unit="1"><translation value="3.110"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="8.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4386,6 +4697,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="1.940" unit="1"><translation value="1.940"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4403,6 +4720,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="0.560" unit="1"><translation value="0.560"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="0.800"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4420,6 +4743,12 @@ RBC MORPHOLOGY NORMAL</text>
         </effectiveTime>
         <availabilityTime value="20030704111300"/>
             <value xsi:type="PQ" value="0.060" unit="1"><translation value="0.060"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.700"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -4441,7 +4770,6 @@ RBC MORPHOLOGY NORMAL</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 0.100 10*9/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -5129,6 +5457,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
             <value xsi:type="PQ" value="136.000" unit="1"><translation value="136.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="134.000"/><high value="147.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -5146,6 +5480,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
             <value xsi:type="PQ" value="4.500" unit="1"><translation value="4.500"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.500"/><high value="5.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -5163,6 +5503,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
             <value xsi:type="PQ" value="4.200" unit="1"><translation value="4.200"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.100"/><high value="7.900"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -5180,6 +5526,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
             <value xsi:type="PQ" value="93.000" unit="1"><translation value="93.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="75.000"/><high value="140.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -5251,7 +5603,6 @@ rheumatoid factor tests.</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&gt; 1.000 mmol/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -5296,6 +5647,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20050316060100"/>
             <value xsi:type="PQ" value="1.400" unit="1"><translation value="1.400"><originalText>mu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.300"/><high value="4.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -6019,7 +6376,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="35.000"/><high value="50.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6076,7 +6438,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="40.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6132,7 +6499,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="110.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6188,7 +6560,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="20.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6525,7 +6902,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="20.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6581,7 +6963,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="170.000"/><high value="700.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3316531F-5705-424C-9E1A-EE694FB411B4"/>
@@ -6750,7 +7137,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -6806,7 +7198,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -6862,7 +7259,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -6918,7 +7320,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -6974,7 +7381,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7030,7 +7442,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7086,7 +7503,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7142,7 +7564,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: HI - Above high reference limit</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7198,7 +7625,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: HI - Above high reference limit</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7254,7 +7686,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: LO - Below low reference limit</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7310,7 +7747,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7366,7 +7808,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: LO - Below low reference limit</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7422,7 +7869,12 @@ rheumatoid factor tests.</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7600,7 +8052,6 @@ rheumatoid factor tests.</text>
         <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&gt; 5.000 mmol/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -7659,7 +8110,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: less than 22</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="22.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7715,7 +8171,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: greater than or equal to five</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><high value="5.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7775,7 +8236,6 @@ rheumatoid factor tests.</text>
         <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 2.000 U/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -7838,7 +8298,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: This is marked as abnormal but in range</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="12.000"/><high value="30.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7894,7 +8359,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: This is outside the range but not abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="5.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>
@@ -7950,7 +8420,12 @@ rheumatoid factor tests.</text>
                 <text>Interpretation: This has a hand entered range</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="23.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039"/>

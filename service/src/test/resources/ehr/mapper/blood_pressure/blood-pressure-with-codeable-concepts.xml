@@ -44,7 +44,6 @@
                 <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>Diastolic reference range text</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
