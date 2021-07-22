@@ -103,6 +103,9 @@ public class EhrExtractMapperComponentTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getDisplayFromCodeableConcept(any(CodeableConcept.class)))
+            .thenCallRealMethod();
+
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -175,6 +178,7 @@ public class EhrExtractMapperComponentTest {
             bundle
         );
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
+
         assertThat(output).isEqualTo(expectedJsonToXmlContent);
     }
 

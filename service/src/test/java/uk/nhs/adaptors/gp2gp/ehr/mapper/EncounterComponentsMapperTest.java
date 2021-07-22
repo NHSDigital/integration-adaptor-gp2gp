@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -78,7 +79,7 @@ public class EncounterComponentsMapperTest {
             randomIdGeneratorService,
             structuredObservationValueMapper,
             codeableConceptCdMapper,
-            new ParticipantMapper()
+            participantMapper
         );
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
@@ -104,7 +105,8 @@ public class EncounterComponentsMapperTest {
             messageContext,
             structuredObservationValueMapper,
             new PertinentInformationObservationValueMapper(), codeableConceptCdMapper,
-            participantMapper);
+            participantMapper
+        );
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         RequestStatementMapper requestStatementMapper
