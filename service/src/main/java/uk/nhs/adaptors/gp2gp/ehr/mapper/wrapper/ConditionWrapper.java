@@ -4,7 +4,6 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.RelatedProblemWrapper.REL
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -12,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Reference;
+
+import com.google.common.collect.ImmutableMap;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.CodeableConceptCdMapper;
@@ -23,8 +24,8 @@ public class ConditionWrapper {
     private static final String PROBLEM_INFO_PREFIX = "Problem Info: ";
     private static final String PROBLEM_NOTES_PREFIX = "Problem Notes: ";
     private static final String NOTES_DELIMITER = "; ";
-    private static Map<String, String> reversedRelMapping =
-        Map.of(
+    private static ImmutableMap<String, String> reversedRelMapping =
+        ImmutableMap.of(
             "parent", "Child of ",
             "child", "Parent of ",
             "sibling", "Sibling of "
