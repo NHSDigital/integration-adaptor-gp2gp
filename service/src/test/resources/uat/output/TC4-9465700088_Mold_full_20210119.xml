@@ -397,6 +397,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="7.600" unit="1"><translation value="7.600"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -424,6 +430,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="2.840" unit="1"><translation value="2.840"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -464,6 +476,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -491,6 +509,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.315" unit="1"><translation value="0.315"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -541,6 +565,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="111.100" unit="1"><translation value="111.100"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -591,6 +621,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="38.700" unit="1"><translation value="38.700"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -631,6 +667,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="34.800" unit="1"><translation value="34.800"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -648,6 +690,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="220.000" unit="1"><translation value="220.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -665,6 +713,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="7.400" unit="1"><translation value="7.400"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -682,6 +736,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -699,6 +759,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -716,6 +782,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -733,6 +805,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -872,6 +950,12 @@ Low plasma Folate</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1001.000" unit="1"><translation value="1001.000"><originalText>ng/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="170.000"/><high value="1100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -889,6 +973,12 @@ Low plasma Folate</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>ng/mL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="20.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1123,6 +1213,12 @@ Low plasma Folate</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>ng/mL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="200.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1475,6 +1571,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="17.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1492,6 +1594,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1509,6 +1617,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1526,6 +1640,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1543,6 +1663,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1560,6 +1686,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1577,6 +1709,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1594,6 +1732,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="125.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1611,6 +1755,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="8.700" unit="1"><translation value="8.700"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1645,6 +1795,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.600" unit="1"><translation value="1.600"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1679,6 +1835,12 @@ Mechanical Prosthetic Heart Valves )</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1716,7 +1878,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 0.600 10*9/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -1757,7 +1918,6 @@ Mechanical Prosthetic Heart Valves )</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 0.300 10*9/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -2013,6 +2173,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="20.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2030,6 +2196,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="110.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2048,6 +2220,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="40.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2065,6 +2243,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="41.000" unit="1"><translation value="41.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="35.000"/><high value="50.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2186,6 +2370,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="17.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2203,6 +2393,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2220,6 +2416,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2237,6 +2439,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2254,6 +2462,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2271,6 +2485,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2288,6 +2508,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2305,6 +2531,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="125.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2322,6 +2554,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="8.700" unit="1"><translation value="8.700"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2356,6 +2594,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.600" unit="1"><translation value="1.600"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2390,6 +2634,12 @@ Triglyceride reference range
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2427,7 +2677,6 @@ Triglyceride reference range
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 0.600 10*9/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -2468,7 +2717,6 @@ Triglyceride reference range
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 0.300 10*9/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -2630,6 +2878,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2647,6 +2901,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2664,6 +2924,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2681,6 +2947,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2698,6 +2970,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2715,6 +2993,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2732,6 +3016,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2749,6 +3039,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2766,6 +3062,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2793,6 +3095,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2843,6 +3151,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2883,6 +3197,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2910,6 +3230,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2982,6 +3308,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>cP</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.450"/><high value="1.720"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3459,6 +3791,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="IVL_PQ"><low value="1000.000" unit="1" inclusive="true"><translation value="1000.000"><originalText>ng/L</originalText></translation></low></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="160.000"/><high value="200.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3476,6 +3814,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="421.000" unit="1"><translation value="421.000"><originalText>ug/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="120.000"/><high value="650.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3711,6 +4055,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>ug/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.800"/><high value="2.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3824,7 +4174,6 @@ Time since last dose : 9.5 hours</text>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 200.000 mg/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -3951,6 +4300,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.700" unit="1"><translation value="4.700"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3968,6 +4323,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.710" unit="1"><translation value="4.710"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.700"/><high value="6.100"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -3985,6 +4346,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="14.600" unit="1"><translation value="14.600"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="12.500"/><high value="16.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4002,6 +4369,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.422" unit="1"><translation value="0.422"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.420"/><high value="0.540"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4019,6 +4392,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4036,6 +4415,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="31.900" unit="1"><translation value="31.900"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4053,6 +4438,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4070,6 +4461,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="232.000" unit="1"><translation value="232.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4087,6 +4484,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.900" unit="1"><translation value="1.900"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4104,6 +4507,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4121,6 +4530,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.500" unit="1"><translation value="0.500"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4138,6 +4553,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.300" unit="1"><translation value="0.300"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4155,6 +4576,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4179,6 +4606,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.530" unit="1"><translation value="1.530"><originalText>cP</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.450"/><high value="1.720"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4339,6 +4772,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.100" unit="1"><translation value="4.100"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="9.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4389,6 +4828,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="89.000" unit="1"><translation value="89.000"><originalText>u/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="90.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4455,6 +4900,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="138.000" unit="1"><translation value="138.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="133.000"/><high value="145.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4482,6 +4933,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="3.100" unit="1"><translation value="3.100"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.300"/><high value="4.800"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4522,6 +4979,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="102.000" unit="1"><translation value="102.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="50.000"/><high value="120.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4539,6 +5002,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="6.100" unit="1"><translation value="6.100"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.100"/><high value="7.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4614,6 +5083,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="135.000" unit="1"><translation value="135.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="20.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4664,6 +5139,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="262.000" unit="1"><translation value="262.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="110.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4716,6 +5197,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="87.000" unit="1"><translation value="87.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="40.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4766,6 +5253,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="33.000" unit="1"><translation value="33.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="35.000"/><high value="50.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4928,6 +5421,12 @@ Time since last dose : 9.5 hours</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="20.700" unit="1"><translation value="20.700"><originalText>s</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5514,6 +6013,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="90.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5732,6 +6237,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="8.500" unit="1"><translation value="8.500"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.600"/><high value="12.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5749,6 +6260,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.730" unit="1"><translation value="4.730"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.200"/><high value="6.700"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5766,6 +6283,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="12.500" unit="1"><translation value="12.500"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.500"/><high value="16.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5783,6 +6306,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.395" unit="1"><translation value="0.395"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.360"/><high value="0.480"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5800,6 +6329,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="88.900" unit="1"><translation value="88.900"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="72.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5817,6 +6352,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="27.000"/><high value="33.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5834,6 +6375,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="34.600" unit="1"><translation value="34.600"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5851,6 +6398,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="304.000" unit="1"><translation value="304.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="180.000"/><high value="630.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5868,6 +6421,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5885,6 +6444,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="1.100" unit="1"><translation value="1.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5902,6 +6467,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.400" unit="1"><translation value="0.400"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5919,6 +6490,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5936,6 +6513,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6062,6 +6645,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="17.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6079,6 +6668,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6096,6 +6691,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6113,6 +6714,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6130,6 +6737,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6147,6 +6760,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6164,6 +6783,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6181,6 +6806,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="125.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6380,6 +7011,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="5.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6522,6 +7159,12 @@ IgE abs to horse, negative</text>
         </effectiveTime>
         <availabilityTime value="20100225154100"/>
             <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="5.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8309,6 +8952,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="79.000" unit="1"><translation value="79.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="60.000"/><high value="80.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8326,6 +8975,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="35.000"/><high value="50.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8343,6 +8998,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="2.230" unit="1"><translation value="2.230"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.100"/><high value="2.550"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8361,6 +9022,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="2.380" unit="1"><translation value="2.380"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.100"/><high value="2.550"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8427,6 +9094,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>iu/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="20.000"/><high value="450.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8477,6 +9150,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.500"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8494,6 +9173,12 @@ rheumatoid factor tests.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="141.000" unit="1"><translation value="141.000"><originalText>mmol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="134.000"/><high value="146.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8561,6 +9246,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="85.000" unit="1"><translation value="85.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="50.000"/><high value="120.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8610,6 +9301,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>mg/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8676,6 +9373,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="11.000"/><high value="29.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8742,6 +9445,12 @@ U=Unsuitable,due to delay in delivery.</text>
         </effectiveTime>
         <availabilityTime value="20030618080000"/>
             <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>umol/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="49.000"/><high value="70.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>

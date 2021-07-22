@@ -1,0 +1,12 @@
+{
+    "resourceType":"Observation",
+    "id":"Consultation3-Topic2-Category-Examination-Observation-1",
+    "effectiveDateTime":"2019-06-01T10:30:00+00:00",
+    "issued":"2019-06-01T10:30:00+00:00",
+    "valueString":"test-string",
+    "referenceRange":[
+        {
+            "text":"10 <= x <= 20"
+        }
+    ]
+}
