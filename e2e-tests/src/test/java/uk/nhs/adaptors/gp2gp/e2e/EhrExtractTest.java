@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -80,7 +80,7 @@ public class EhrExtractTest {
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), Charset.defaultCharset())
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
@@ -168,7 +168,7 @@ public class EhrExtractTest {
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
         return IOUtils.toString(getClass()
-            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), Charset.defaultCharset())
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_TEST_FILE), StandardCharsets.UTF_8)
             .replace(CONVERSATION_ID_PLACEHOLDER, conversationId)
             .replace(NHS_NUMBER_PLACEHOLDER, notExistingPatientNhsNumber)
             .replace(FROM_ODS_CODE_PLACEHOLDER, fromODSCode);

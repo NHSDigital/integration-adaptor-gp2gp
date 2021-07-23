@@ -1,6 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import ca.uhn.fhir.context.FhirContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -134,10 +133,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private Optional<String> getPatientId(GetGpcStructuredTaskDefinition taskDefinition) {
         var response = gpcClient.getPatientRecord(taskDefinition);
 
-        var ctx = FhirContext.forDstu3();
-        var parser = ctx.newJsonParser();
-
-        var fhirBundle = parser.parseResource(Bundle.class, response);
+        var fhirBundle = fhirParseService.parseResource(response, Bundle.class);
 
         return ResourceExtractor.extractResourcesByType(fhirBundle, Patient.class)
             .map(Resource::getIdElement)
@@ -150,10 +146,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private Bundle getDocumentReferencesBundle(GetGpcStructuredTaskDefinition taskDefinition, String patientId) {
         var response = gpcClient.getDocumentReferences(taskDefinition, patientId);
 
-        var ctx = FhirContext.forDstu3();
-        var parser = ctx.newJsonParser();
-
-        return parser.parseResource(Bundle.class, response);
+        return fhirParseService.parseResource(response, Bundle.class);
     }
 
     private GetGpcDocumentTaskDefinition buildGetDocumentTask(TaskDefinition taskDefinition,
