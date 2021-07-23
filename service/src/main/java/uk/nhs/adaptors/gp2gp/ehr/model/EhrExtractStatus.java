@@ -104,7 +104,7 @@ public class EhrExtractStatus implements TimeToLive {
         @Document
         @Builder
         public static class SentToMhs {
-            private String messageId;
+            private List<String> messageId;
             private String sentAt;
             private String taskId;
         }
