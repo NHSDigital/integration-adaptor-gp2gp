@@ -23,38 +23,37 @@ public class GpcClient {
     private final GpcRequestBuilder gpcRequestBuilder;
 
     public String getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
-        var requestBodyParameters = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
-        String gpcBaseUrl = buildGpcBaseUrl(structuredTaskDefinition);
-        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBodyParameters, structuredTaskDefinition, gpcBaseUrl);
+        String gpcBaseUrlWithOds = buildGpcBaseUrl(structuredTaskDefinition);
+        var requestBody = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
+        var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBody, structuredTaskDefinition, gpcBaseUrlWithOds);
 
-        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcBaseUrl + gpcConfiguration.getStructuredEndpoint());
-
-        return performRequest(request);
-    }
-
-    public String getDocumentRecord(GetGpcDocumentTaskDefinition documentTaskDefinition) {
-        String gpcBaseUrl = buildGpcBaseUrl(documentTaskDefinition);
-        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentTaskDefinition, gpcBaseUrl);
-
-        logRequest(DOCUMENT_LOG_TEMPLATE, documentTaskDefinition, gpcBaseUrl + gpcConfiguration.getDocumentEndpoint());
+        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
 
         return performRequest(request);
     }
 
-    public String getPatientRecord(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition) {
-        String gpcBaseUrl = buildGpcBaseUrl(patientIdentifierTaskDefinition);
-        var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(patientIdentifierTaskDefinition, gpcBaseUrl);
+    public String getDocumentRecord(GetGpcDocumentTaskDefinition documentReferencesTaskDefinition) {
+        String gpcBaseUrlWithOds = buildGpcBaseUrl(documentReferencesTaskDefinition);
+        var request = gpcRequestBuilder.buildGetDocumentRecordRequest(documentReferencesTaskDefinition, gpcBaseUrlWithOds);
 
-        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcBaseUrl + gpcConfiguration.getDocumentEndpoint());
+        logRequest(DOCUMENT_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcBaseUrlWithOds);
 
         return performRequest(request);
     }
 
-    public String getDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition, String patientId) {
-        String gpcBaseUrl = buildGpcBaseUrl(documentReferencesTaskDefinition);
-        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(documentReferencesTaskDefinition, patientId, gpcBaseUrl);
+    public String getPatientRecord(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition) {
+        String gpcBaseUrlWithOds = buildGpcBaseUrl(patientIdentifierTaskDefinition);
+        var request = gpcRequestBuilder.buildGetPatientIdentifierRequest(patientIdentifierTaskDefinition, gpcBaseUrlWithOds);
+        logRequest(PATIENT_LOG_TEMPLATE, patientIdentifierTaskDefinition, gpcBaseUrlWithOds);
 
-        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcBaseUrl + gpcConfiguration.getPatientEndpoint());
+        return performRequest(request);
+    }
+
+    public String getDocumentReferences(GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId) {
+        String gpcBaseUrlWithOds = buildGpcBaseUrl(documentReferencesTaskDefinition);
+        var request = gpcRequestBuilder.buildGetPatientDocumentReferences(documentReferencesTaskDefinition, patientId, gpcBaseUrlWithOds);
+
+        logRequest(PATIENT_DOCUMENTS_LOG_TEMPLATE, documentReferencesTaskDefinition, gpcBaseUrlWithOds);
 
         return performRequest(request);
     }

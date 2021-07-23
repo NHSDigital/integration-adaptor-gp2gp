@@ -7,12 +7,11 @@ import org.hl7.fhir.dstu3.model.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.Collections;
-import java.util.List;
 
 @Component
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -22,12 +21,14 @@ public class GpcDocumentTranslator {
     private final FhirParseService fhirParseService;
     private final EhrDocumentMapper ehrDocumentMapper;
 
-    public String translateToMhsOutboundRequestData(GetGpcDocumentTaskDefinition taskDefinition, String response, String messageId) {
-        Binary binary = fhirParseService.parseResource(response, Binary.class);
+    public String translateToMhsOutboundRequestData(
+        DocumentTaskDefinition taskDefinition, String response) {
 
-        EhrDocumentTemplateParameters ehrDocumentTemplateParameters =
-            ehrDocumentMapper.mapToMhsPayloadTemplateParameters(taskDefinition, messageId);
-        String xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
+        var binary = fhirParseService.parseResource(response, Binary.class);
+
+        var ehrDocumentTemplateParameters = ehrDocumentMapper
+            .mapToMhsPayloadTemplateParameters(taskDefinition);
+        var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {
             return prepareOutboundMessage(taskDefinition, binary, xmlContent);
@@ -36,13 +37,15 @@ public class GpcDocumentTranslator {
         }
     }
 
-    private String prepareOutboundMessage(GetGpcDocumentTaskDefinition taskDefinition, Binary binary, String xmlContent)
+    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, Binary binary, String xmlContent)
             throws JsonProcessingException {
-        List<OutboundMessage.Attachment> attachments = Collections.singletonList(
-            new OutboundMessage.Attachment(binary.getContentType(),
-                Boolean.TRUE.toString(),
-                taskDefinition.getDocumentId(),
-                binary.getContentAsBase64()));
+        var attachments = Collections.singletonList(
+            OutboundMessage.Attachment.builder()
+                .contentType(binary.getContentType())
+                .isBase64(Boolean.TRUE.toString())
+                .description(taskDefinition.getDocumentId())
+                .payload(binary.getContentAsBase64())
+                .build());
         var outboundMessage = OutboundMessage.builder()
             .payload(xmlContent)
             .attachments(attachments)

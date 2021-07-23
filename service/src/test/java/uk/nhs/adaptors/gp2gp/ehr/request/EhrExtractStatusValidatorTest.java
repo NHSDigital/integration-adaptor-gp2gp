@@ -161,7 +161,7 @@ public class EhrExtractStatusValidatorTest {
 
     private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocumentSent() {
         var doc = getFinishedGpcDocument();
-        doc.setSentToMhs(new EhrExtractStatus.GpcAccessDocument.SentToMhs("123", "123", "123"));
+        doc.setSentToMhs(new EhrExtractStatus.GpcAccessDocument.SentToMhs(List.of("123"), "123", "123"));
         return doc;
     }
 
