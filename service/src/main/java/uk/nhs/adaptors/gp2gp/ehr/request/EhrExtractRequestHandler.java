@@ -128,7 +128,12 @@ public class EhrExtractRequestHandler {
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
                     for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
                         var document = documents.get(documentPosition);
-                        createSendDocumentTasks(ehrExtractStatus, document.getObjectName(), documentPosition, document.getMessageId(), document.getDocumentId());
+                        createSendDocumentTasks(
+                            ehrExtractStatus,
+                            document.getObjectName(),
+                            documentPosition,
+                            document.getMessageId(),
+                            document.getDocumentId());
                     }
                 });
         } else {
@@ -137,7 +142,9 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private void createSendDocumentTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId) {
+    private void createSendDocumentTasks(
+            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId) {
+
         var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
             .documentPosition(documentLocation)
