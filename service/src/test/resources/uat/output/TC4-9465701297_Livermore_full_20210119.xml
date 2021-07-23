@@ -3424,7 +3424,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>(Combined with Cough)</text>
+                <text>Problem Info: Problem Notes: (Combined with Cough)</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -4121,7 +4121,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Burning feet description</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Burning feet description Problem Info: Problem Notes: Burning feet description</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4626,7 +4626,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First</text>
+                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4682,7 +4682,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess)</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess) Problem Info: Related Problem: Child of Peritonsillar abscess Related Problem: Parent of Pain in throat Problem Notes: (Combined with Peritonsillar abscess)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4738,7 +4738,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Tonsillitis)</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Tonsillitis) Problem Info: Related Problem: Child of Tonsillitis Problem Notes: (Grouped with Tonsillitis)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

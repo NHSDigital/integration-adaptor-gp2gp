@@ -27,6 +27,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
@@ -64,6 +65,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractUATTest {
@@ -151,7 +153,8 @@ public class EhrExtractUATTest {
 
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
-    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
+    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml)
+        throws IOException, SAXException {
         final String expectedXmlResourcePath = OUTPUT_PATH + FILES_PREFIX + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
@@ -174,7 +177,7 @@ public class EhrExtractUATTest {
             fail("Re-run the tests with OVERWRITE_XML=false");
         }
 
-        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
+        XMLAssert.assertXMLEqual(hl7TranslatedResponse, expectedJsonToXmlContent);
 
         assertThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();

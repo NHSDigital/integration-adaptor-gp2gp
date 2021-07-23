@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.5'
+	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 	id "checkstyle"
@@ -42,7 +42,7 @@ dependencies {
 	implementation('com.jayway.jsonpath:json-path:2.5.0') {
 		exclude group: 'net.minidev', module: 'json-smart'
 	}
-	implementation('net.minidev:json-smart:2.4.1')
+	implementation('net.minidev:json-smart:2.4.7')
 
 	//Keystore
 	implementation 'com.heroku.sdk:env-keystore:1.1.6'
@@ -62,7 +62,7 @@ dependencies {
 	implementation 'org.apache.tika:tika-core:1.26'
 
 	// Fhir
-	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.2.1'
+	implementation 'ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:5.4.0'
 
 	// Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

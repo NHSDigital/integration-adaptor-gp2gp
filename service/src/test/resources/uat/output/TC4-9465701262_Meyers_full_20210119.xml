@@ -6335,7 +6335,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - First entry</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - First entry Problem Info: Problem Notes: First entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6391,7 +6391,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Interpretation: Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Lower respiratory tract infection Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6447,7 +6447,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Myocardial infarction Problem Notes: (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6504,7 +6504,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease)</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Chest pain Problem Notes: (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6560,7 +6560,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Cough Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6672,7 +6672,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved</text>
+                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved Problem Info: Related Problem: Parent of Lower respiratory tract infection Related Problem: Parent of Cough Problem Notes: To be evolved; Second text of the problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6728,7 +6728,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : New</text>
+                <text>Interpretation: Significance : Major - Episodicity : New Problem Info: Related Problem: Parent of Myocardial infarction Related Problem: Parent of Chest pain</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
