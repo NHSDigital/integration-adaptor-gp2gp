@@ -127,7 +127,8 @@ public class EhrExtractRequestHandler {
                 .ifPresent(ehrExtractStatus -> {
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
                     for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
-                        createSendDocumentTasks(ehrExtractStatus, documents.get(documentPosition).getObjectName(), documentPosition);
+                        var document = documents.get(documentPosition);
+                        createSendDocumentTasks(ehrExtractStatus, document.getObjectName(), documentPosition, document.getMessageId(), document.getDocumentId());
                     }
                 });
         } else {
@@ -136,7 +137,7 @@ public class EhrExtractRequestHandler {
         }
     }
 
-    private void createSendDocumentTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation) {
+    private void createSendDocumentTasks(EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId) {
         var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
             .documentPosition(documentLocation)
@@ -147,6 +148,8 @@ public class EhrExtractRequestHandler {
             .fromAsid(ehrExtractStatus.getEhrRequest().getFromAsid())
             .toOdsCode(ehrExtractStatus.getEhrRequest().getToOdsCode())
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
+            .messageId(messageId)
+            .documentId(documentId)
             .build();
         taskDispatcher.createTask(sendDocumentTaskDefinition);
         LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendDocumentTaskDefinition.getTaskId());
