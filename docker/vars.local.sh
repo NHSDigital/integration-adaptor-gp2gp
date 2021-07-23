@@ -7,10 +7,12 @@ export GP2GP_MONGO_DATABASE_NAME="gp2gp"
 export GP2GP_MHS_OUTBOUND_URL="http://mock-mhs-adaptor:8081/mock-mhs-endpoint"
 export GP2GP_GPC_GET_URL="http://gpcc:8090/@ODS_CODE@/STU3/1/gpconnect"
 
-export GPC_CONSUMER_URL="http://gpcc:8090"
-export GPC_CONSUMER_GPC_GET_URL="http://wiremock:8080"
-export GPC_CONSUMER_SDS_URL="http://wiremock:8080/"
-export GPC_ENABLE_SDS="false"
+export GPC_CONSUMER_SERVER_PORT="8090"
+export GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL="http://gpcc-mocks:8080"
+export GPC_CONSUMER_SDS_URL="http://gpcc-mocks:8080/spine-directory/"
+export GPC_ENABLE_SDS="true"
+export GPC_CONSUMER_SDS_APIKEY="anykey"
+export GPC_CONSUMER_LOGGING_LEVEL="DEBUG"
 
 export GP2GP_LOGGING_LEVEL=DEBUG
 export GPC_CONSUMER_LOGGING_LEVEL=DEBUG

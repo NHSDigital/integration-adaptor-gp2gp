@@ -3,6 +3,8 @@ version: '3.4'
 services:
   gp2gp:
     image: ${GP2GP_IMAGE:-local/gp2gp:latest}
+    networks: 
+      - commonforgp2gp
     build:
       context: ../
       dockerfile: docker/service/Dockerfile
@@ -40,6 +42,8 @@ services:
       - GP2GP_GPC_GET_TEST_URL
 
   mock-mhs-adaptor:
+    networks: 
+      - commonforgp2gp
     build:
       context: ../
       dockerfile: docker/mock-mhs-adaptor/Dockerfile
@@ -55,11 +59,15 @@ services:
       - GP2GP_AMQP_MAX_REDELIVERIES
 
   mongodb:
+    networks: 
+      - commonforgp2gp
     image: mongo
     ports:
       - "27017:27017"
 
   activemq:
+    networks: 
+      - commonforgp2gp
     build:
       context: ./activemq
     ports:
@@ -67,6 +75,8 @@ services:
       - "5672:5672"
 
   wiremock:
+    networks: 
+      - commonforgp2gp
     build: ./wiremock
     ports:
       - "8110:8080"
@@ -74,7 +84,9 @@ services:
       - -global-response-templating
 
   gpcc:
-    image: nhsdev/nia-gpc-consumer-adaptor:0.0.5
+    image: nhsdev/nia-gpc-consumer-adaptor:0.1.5
+    networks: 
+      - commonforgp2gp
     ports:
       - "8090:8090"
     environment:
@@ -84,8 +96,7 @@ services:
       - GPC_CONSUMER_SPINE_CLIENT_KEY
       - GPC_CONSUMER_SPINE_ROOT_CA_CERT
       - GPC_CONSUMER_SPINE_SUB_CA_CERT
-      - GPC_CONSUMER_URL
-      - GPC_CONSUMER_GPC_GET_URL
+      - GPC_CONSUMER_OVERRIDE_GPC_PROVIDER_URL
       - GPC_CONSUMER_SEARCH_DOCUMENTS_PATH
       - GPC_CONSUMER_GPC_STRUCTURED_PATH
       - GPC_CONSUMER_GPC_GET_PATIENT_PATH
@@ -93,3 +104,53 @@ services:
       - GPC_CONSUMER_SDS_URL
       - GPC_CONSUMER_SDS_APIKEY
       - GPC_ENABLE_SDS
+
+  gpconnect-db:
+    image: mariadb
+    networks: 
+      - commonforgp2gp
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=gpconnectdbuser
+      - MYSQL_PASSWORD=gpc0nn3ct
+      - MYSQL_DATABASE=gpconnect1_5
+    command: [
+        '--wait_timeout=28800',
+    ]
+
+  gpconnect-api:
+    image: nhsdigitalmait/gpconnect:1.5.1
+    restart : always
+    ports:
+        - 5000:19191
+    networks: 
+      - commonforgp2gp
+    environment:
+      - TZ=Europe/London
+      - DATABASE_ADDRESS=gpconnect-db
+      - DATABASE_USERNAME=gpconnectdbuser
+      - DATABASE_PASSWORD=gpc0nn3ct
+      - DATABASE_SCHEMA=gpconnect1_5
+      - SERVER_BASE_URL=https://data.developer.nhs.uk/B82617/STU3/1/gpconnect/fhir
+      - CONTEXT_PATH=/B82617/STU3/1/gpconnect/
+    links:
+      - gpconnect-db
+    depends_on:
+      - gpconnect-db
+
+  tkw:
+    image: nhsdigitalmait/tkw_gpconnect_simulator:1.5.1
+    restart : always
+    ports:
+        - 4854:4854
+    networks: 
+      - commonforgp2gp
+    environment:
+      - TZ=Europe/London
+    links:
+      - gpconnect-api
+    depends_on:
+      - gpconnect-api
+networks:
+  commonforgp2gp:
+    external: true
