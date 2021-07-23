@@ -53,7 +53,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Burning feet description</text>
+                <text>Problem Info: Problem Notes: Burning feet description</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>

@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Extension;
@@ -46,6 +47,12 @@ public class CodeableConceptCdMapper {
         }
 
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
+    }
+
+    public String getDisplayFromCodeableConcept(CodeableConcept codeableConcept) {
+        return findMainCode(codeableConcept)
+            .map(cc -> findDisplayText(cc).orElse(StringUtils.EMPTY))
+            .orElse(StringUtils.EMPTY);
     }
 
     private Optional<Coding> findMainCode(CodeableConcept codeableConcept) {
