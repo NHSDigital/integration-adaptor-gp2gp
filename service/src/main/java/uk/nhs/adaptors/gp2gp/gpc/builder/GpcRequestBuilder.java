@@ -1,13 +1,9 @@
 package uk.nhs.adaptors.gp2gp.gpc.builder;
 
-import static java.lang.String.valueOf;
-
-import static org.apache.http.protocol.HTTP.CONTENT_LEN;
-import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
-
-import java.util.Collections;
-import java.util.List;
-
+import ca.uhn.fhir.parser.IParser;
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -28,19 +24,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-
-import ca.uhn.fhir.parser.IParser;
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.configuration.GpcConfiguration;
+
+import java.util.Collections;
+import java.util.List;
+
+import static java.lang.String.valueOf;
+import static org.apache.http.protocol.HTTP.CONTENT_LEN;
+import static org.apache.http.protocol.HTTP.CONTENT_TYPE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -125,8 +122,8 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-            String gpcBaseUrl) {
+    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition,
+        String gpcBaseUrl) {
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient, gpcBaseUrl);
@@ -136,8 +133,9 @@ public class GpcRequestBuilder {
         return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
     }
 
-    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-            String patientId, String gpcBaseUrl) {
+    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(
+            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId, String gpcBaseUrl) {
+
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = buildHttpClient(sslContext);
         WebClient client = buildWebClient(httpClient, gpcBaseUrl);
@@ -158,14 +156,14 @@ public class GpcRequestBuilder {
             .secure(t -> t.sslContext(sslContext));
     }
 
-    private WebClient buildWebClient(HttpClient httpClient, String url) {
+    private WebClient buildWebClient(HttpClient httpClient, String baseUrl) {
         return WebClient
             .builder()
             .exchangeStrategies(requestBuilderService.buildExchangeStrategies())
             .clientConnector(new ReactorClientHttpConnector(httpClient))
             .filters(this::addWebClientFilters)
-            .baseUrl(url)
-            .defaultUriVariables(Collections.singletonMap("url", url))
+            .baseUrl(baseUrl)
+            .defaultUriVariables(Collections.singletonMap("url", baseUrl))
             .build();
     }
 

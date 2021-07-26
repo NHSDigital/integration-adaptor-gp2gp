@@ -1,8 +1,8 @@
 package uk.nhs.adaptors.gp2gp.ehr;
 
-import static java.lang.String.format;
-
-import static org.springframework.util.CollectionUtils.isEmpty;
+import com.mongodb.client.result.UpdateResult;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,20 +16,19 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-
-import com.mongodb.client.result.UpdateResult;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrExtractException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.MessageOutOfOrderException;
 import uk.nhs.adaptors.gp2gp.mhs.exception.NonExistingInteractionIdException;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
-import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentReferencesTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+
+import java.util.Map;
+
+import static java.lang.String.format;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Slf4j
@@ -129,11 +128,11 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocument(
-        GetGpcDocumentTaskDefinition documentTaskDefinition,
-        String documentJsonFilename,
-        String taskId,
-        String messageId
-    ) {
+            GetGpcDocumentTaskDefinition documentTaskDefinition,
+            String documentName,
+            String taskId,
+            String messageId) {
+
         Query query = new Query();
         query.addCriteria(Criteria
             .where(CONVERSATION_ID).is(documentTaskDefinition.getConversationId())
@@ -143,7 +142,7 @@ public class EhrExtractStatusService {
         Instant now = Instant.now();
         update.set(DOCUMENT_ACCESS_AT_PATH, now);
         update.set(DOCUMENT_TASK_ID_PATH, taskId);
-        update.set(DOCUMENT_OBJECT_NAME_PATH, documentJsonFilename);
+        update.set(DOCUMENT_OBJECT_NAME_PATH, documentName);
         update.set(DOCUMENT_MESSAGE_ID_PATH, messageId);
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
@@ -258,17 +257,12 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
-        GetGpcDocumentReferencesTaskDefinition patientIdentifierTaskDefinition,
-        Optional<String> patientId
-    ) {
+            GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition, String patientId) {
+
         Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
-        if (patientId.isPresent()) {
-            update.set(DOCUMENT_PATIENT_ID, patientId.get());
-        } else {
-            update.set(DOCUMENT_PATIENT_ID, null);
-        }
+        update.set(DOCUMENT_PATIENT_ID, patientId);
         update.set(GPC_DOCUMENTS, new ArrayList<>());
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
@@ -284,22 +278,20 @@ public class EhrExtractStatusService {
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
-        GetGpcDocumentReferencesTaskDefinition documentReferencesTaskDefinition,
-        List<String> urls
-    ) {
+            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
+            Map<String, String> documentIdUrlMap) {
         Query query = createQueryForConversationId(documentReferencesTaskDefinition.getConversationId());
 
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
-        urls.forEach(url -> {
-            update.addToSet(GPC_DOCUMENTS, EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
-                .documentId(GetGpcDocumentTaskDefinition.extractIdFromUrl(url))
-                .accessDocumentUrl(url)
-                .objectName(null)
-                .accessedAt(now)
-                .taskId(documentReferencesTaskDefinition.getTaskId())
-                .messageId(documentReferencesTaskDefinition.getConversationId()).build());
-        });
+        documentIdUrlMap.forEach((documentId, url) -> update.addToSet(GPC_DOCUMENTS,
+            EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            .documentId(documentId)
+            .accessDocumentUrl(url)
+            .objectName(null)
+            .accessedAt(now)
+            .taskId(documentReferencesTaskDefinition.getTaskId())
+            .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
             update,
@@ -338,17 +330,6 @@ public class EhrExtractStatusService {
         updateEhrStatus(update, taskDefinition.getConversationId());
     }
 
-    private void updateEhrStatus(Update update, String conversationId) {
-        Query query = createQueryForConversationId(conversationId);
-
-        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
-
-        if (updateResult.getModifiedCount() != 1) {
-            throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
-        }
-        LOGGER.info("Database updated for sending application acknowledgement");
-    }
-
     public EhrExtractStatus updateEhrExtractStatusError(
         String conversationId,
         String errorCode,
@@ -383,7 +364,18 @@ public class EhrExtractStatusService {
         return ehrExtractStatus;
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, String messageId) {
+    private void updateEhrStatus(Update update, String conversationId) {
+        Query query = createQueryForConversationId(conversationId);
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, EhrExtractStatus.class);
+
+        if (updateResult.getModifiedCount() != 1) {
+            throw new EhrExtractException("EHR Extract Status was not updated with Acknowledgement Message.");
+        }
+        LOGGER.info("Database updated for sending application acknowledgement");
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
         var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
@@ -393,7 +385,7 @@ public class EhrExtractStatusService {
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
         update.set(commonTaskId, taskDefinition.getTaskId());
-        update.set(commonMessageId, messageId);
+        update.set(commonMessageId, messageIds);
 
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,

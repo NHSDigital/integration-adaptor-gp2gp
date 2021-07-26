@@ -1,5 +1,6 @@
 package uk.nhs.adaptors.gp2gp.mhs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class OutboundMessage {
     private String payload;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -28,7 +30,11 @@ public class OutboundMessage {
 
     @Getter
     @Setter
+    @Jacksonized
     @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    @EqualsAndHashCode
     public static class Attachment {
         @JsonProperty("content_type")
         private String contentType;
@@ -40,14 +46,16 @@ public class OutboundMessage {
 
     @Getter
     @Setter
+    @Jacksonized
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     @EqualsAndHashCode
     public static class ExternalAttachment {
-        @JsonProperty("reference_id")
-        private String referenceId;
-        @JsonProperty("href_id")
-        private String hrefId;
+        @JsonProperty("document_id")
+        private String documentId;
+        @JsonProperty("message_id")
+        private String messageId;
         private String filename;
         @JsonProperty("content_type")
         private String contentType;
@@ -59,5 +67,7 @@ public class OutboundMessage {
         private int length;
         @JsonProperty("domain_data")
         private String domainData;
+        @JsonIgnore
+        private String url;
     }
 }

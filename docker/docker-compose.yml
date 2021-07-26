@@ -40,6 +40,7 @@ services:
       - GP2GP_GPC_OVERRIDE_FROM_ASID
       - GP2GP_GPC_OVERRIDE_TO_ASID
       - GP2GP_GPC_GET_TEST_URL
+      - GP2GP_LARGE_ATTACHMENT_THRESHOLD
 
   mock-mhs-adaptor:
     networks: 

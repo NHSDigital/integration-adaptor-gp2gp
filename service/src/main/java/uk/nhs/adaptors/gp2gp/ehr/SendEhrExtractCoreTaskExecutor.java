@@ -33,13 +33,11 @@ public class SendEhrExtractCoreTaskExecutor implements TaskExecutor<SendEhrExtra
     public void execute(SendEhrExtractCoreTaskDefinition sendEhrExtractCoreTaskDefinition) {
         LOGGER.info("SendEhrExtractCore task was created, Sending EHR extract to Spine");
 
-        String structuredRecordJsonFilename = GpcFilenameUtils.generateStructuredRecordFilename(
-            sendEhrExtractCoreTaskDefinition.getConversationId()
-        );
-        var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordJsonFilename);
-
-        var requestData =
-            mhsRequestBuilder.buildSendEhrExtractCoreRequest(
+        String structuredRecordFilename = GpcFilenameUtils.generateStructuredRecordFilename(
+            sendEhrExtractCoreTaskDefinition.getConversationId());
+        var storageDataWrapper = storageConnectorService.downloadFile(structuredRecordFilename);
+        var requestData = mhsRequestBuilder
+            .buildSendEhrExtractCoreRequest(
                 storageDataWrapper.getData(),
                 sendEhrExtractCoreTaskDefinition.getConversationId(),
                 sendEhrExtractCoreTaskDefinition.getFromOdsCode()

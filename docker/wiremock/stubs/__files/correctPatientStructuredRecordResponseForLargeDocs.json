@@ -1,0 +1,235 @@
+{
+    "resourceType": "Bundle",
+    "id": "b5be425e-f19e-4a42-8622-1c134c8154a3",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Patient",
+                "id": "2",
+                "meta": {
+                    "versionId": "1521806400000",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Patient-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-RegistrationDetails-1",
+                        "extension": [
+                            {
+                                "url": "registrationPeriod",
+                                "valuePeriod": {
+                                    "start": "1962-07-13T00:00:00+01:00"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "preferred",
+                                "valueBoolean": false
+                            },
+                            {
+                                "url": "modeOfCommunication",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityMode-1",
+                                            "code": "RWR",
+                                            "display": "Received written"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "communicationProficiency",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-LanguageAbilityProficiency-1",
+                                            "code": "E",
+                                            "display": "Excellent"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "url": "interpreterRequired",
+                                "valueBoolean": false
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "extension": [
+                            {
+                                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSNumberVerificationStatus-1",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-NHSNumberVerificationStatus-1",
+                                            "code": "01",
+                                            "display": "Number present and verified"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "system": "https://fhir.nhs.uk/Id/nhs-number",
+                        "value": "9690937819"
+                    }
+                ],
+                "active": true,
+                "name": [
+                    {
+                        "use": "official",
+                        "text": "Horace SKELLY",
+                        "family": "SKELLY",
+                        "given": [
+                            "Horace"
+                        ],
+                        "prefix": [
+                            "MR"
+                        ]
+                    }
+                ],
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "01454587554",
+                        "use": "home"
+                    },
+                    {
+                        "system": "phone",
+                        "value": "+447401254880",
+                        "use": "mobile"
+                    }
+                ],
+                "gender": "male",
+                "birthDate": "1925-04-21",
+                "address": [
+                    {
+                        "use": "home",
+                        "type": "physical",
+                        "line": [
+                            "3 BOWESFIELD CRESCENT"
+                        ],
+                        "city": "STOCKTON-ON-TEES",
+                        "postalCode": "TS18 3BL"
+                    }
+                ],
+                "contact": [
+                    {
+                        "relationship": [
+                            {
+                                "text": "Emergency contact"
+                            },
+                            {
+                                "text": "Next of kin"
+                            },
+                            {
+                                "text": "Daughter"
+                            }
+                        ],
+                        "name": {
+                            "use": "official",
+                            "text": "JACKSON Jane (Miss)",
+                            "family": "Jackson",
+                            "given": [
+                                "Jane"
+                            ],
+                            "prefix": [
+                                "Miss"
+                            ]
+                        },
+                        "telecom": [
+                            {
+                                "system": "phone",
+                                "value": "07777123123",
+                                "use": "mobile"
+                            }
+                        ],
+                        "address": {
+                            "use": "home",
+                            "type": "physical",
+                            "line": [
+                                "Trevelyan Square",
+                                "Boar Ln"
+                            ],
+                            "postalCode": "LS1 6AE"
+                        },
+                        "gender": "female"
+                    }
+                ],
+                "generalPractitioner": [
+                    {
+                        "reference": "Practitioner/1"
+                    }
+                ],
+                "managingOrganization": {
+                    "reference": "Organization/7"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "7",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "B82617"
+                    }
+                ],
+                "name": "COXWOLD SURGERY",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "NHS NPFIT Test Data Manager",
+                            "Princes Exchange"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "LS1 4HY"
+                    }
+                ]
+            }
+        }
+    ]
+}
