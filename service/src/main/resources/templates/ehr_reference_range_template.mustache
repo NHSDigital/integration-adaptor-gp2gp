@@ -1,6 +1,10 @@
 <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
-        <text>{{text}}</text>
-        <value>{{{value}}}</value>
+        {{#text}}
+        <text>{{.}}</text>
+        {{/text}}
+        {{#value}}
+        <value>{{{.}}}</value>
+        {{/value}}
     </referenceInterpretationRange>
 </referenceRange>

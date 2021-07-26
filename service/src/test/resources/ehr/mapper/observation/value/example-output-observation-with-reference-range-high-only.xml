@@ -1,0 +1,5 @@
+<referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><high value="20"/></value>
+    </referenceInterpretationRange>
+</referenceRange>

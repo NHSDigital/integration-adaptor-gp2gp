@@ -63,9 +63,10 @@ public class GpcDocumentTranslatorTest {
     @Test
     public void When_TranslatingDocumentData_Expect_ProperMhsOutboundRequestPayload() {
         GetGpcDocumentTaskDefinition taskDefinition = GetGpcDocumentTaskDefinition.builder()
+            .messageId(MESSAGE_ID)
             .documentId(TEST_DOCUMENT_ID)
             .build();
-        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, jsonBinaryContent, MESSAGE_ID);
+        String payload = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, jsonBinaryContent);
 
         assertThat(payload).isEqualToIgnoringWhitespace(expectedMhsOutboundRequest);
     }

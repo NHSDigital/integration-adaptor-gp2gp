@@ -5,12 +5,9 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
-import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
-import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 
 @Slf4j
 @Component
@@ -21,7 +18,6 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
     private final GpcClient gpcClient;
     private final GpcDocumentTranslator gpcDocumentTranslator;
     private final DetectTranslationCompleteService detectTranslationCompleteService;
-    private final RandomIdGeneratorService randomIdGeneratorService;
 
     @Override
     public Class<GetGpcDocumentTaskDefinition> getTaskType() {
@@ -30,32 +26,25 @@ public class GetGpcDocumentTaskExecutor implements TaskExecutor<GetGpcDocumentTa
 
     @Override
     @SneakyThrows
-    public void execute(GetGpcDocumentTaskDefinition documentTaskDefinition) {
+    public void execute(GetGpcDocumentTaskDefinition taskDefinition) {
         LOGGER.info("Execute called from GetGpcDocumentTaskExecutor");
 
-        var response = gpcClient.getDocumentRecord(documentTaskDefinition);
+        var response = gpcClient.getDocumentRecord(taskDefinition);
 
-        String messageId = randomIdGeneratorService.createNewId();
-
-        String mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(
-            documentTaskDefinition, response, messageId
+        var taskId = taskDefinition.getTaskId();
+        var messageId = taskDefinition.getMessageId();
+        var documentName = GpcFilenameUtils.generateDocumentFilename(
+            taskDefinition.getConversationId(), taskDefinition.getDocumentId()
         );
 
-        String taskId = documentTaskDefinition.getTaskId();
+        var mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, response);
+        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
+            .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
 
-        StorageDataWrapper storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider.buildStorageDataWrapper(
-            documentTaskDefinition, mhsOutboundRequestData, taskId
-        );
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
 
-        String documentJsonFilename = GpcFilenameUtils.generateDocumentFilename(
-            documentTaskDefinition.getConversationId(), documentTaskDefinition.getDocumentId()
-        );
-
-        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentJsonFilename);
-
-        EhrExtractStatus ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
-            documentTaskDefinition, documentJsonFilename, taskId, messageId
-        );
+        var ehrExtractStatus = ehrExtractStatusService.updateEhrExtractStatusAccessDocument(
+            taskDefinition, documentName, taskId, messageId);
         detectTranslationCompleteService.beginSendingCompleteExtract(ehrExtractStatus);
     }
 }

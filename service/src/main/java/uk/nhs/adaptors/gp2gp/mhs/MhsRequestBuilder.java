@@ -1,10 +1,8 @@
 package uk.nhs.adaptors.gp2gp.mhs;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-import java.util.Collections;
-
+import io.netty.handler.ssl.SslContext;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -15,13 +13,14 @@ import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-
-import io.netty.handler.ssl.SslContext;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
+
+import java.util.Collections;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -74,8 +73,9 @@ public class MhsRequestBuilder {
             .build();
     }
 
-    public RequestHeadersSpec<?> buildSendAcknowledgement(String requestBody, String fromOdsCode, String conversationId,
-        String messageId) {
+    public RequestHeadersSpec<?> buildSendAcknowledgement(
+            String requestBody, String fromOdsCode, String conversationId, String positiveAckMessageId) {
+
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);
@@ -93,12 +93,13 @@ public class MhsRequestBuilder {
             .header(INTERACTION_ID, MHS_OUTBOUND_ACKNOWLEDGEMENT_INTERACTION_ID)
             .header(WAIT_FOR_RESPONSE, FALSE)
             .header(CORRELATION_ID, conversationId)
-            .header(MESSAGE_ID, messageId)
+            .header(MESSAGE_ID, positiveAckMessageId)
             .body(bodyInserter);
     }
 
-    public RequestHeadersSpec<?> buildSendEhrExtractCommonRequest(String requestBody, String conversationId, String fromOdsCode,
-        String messageId) {
+    public RequestHeadersSpec<?> buildSendEhrExtractCommonRequest(
+            String requestBody, String conversationId, String fromOdsCode, String messageId) {
+
         SslContext sslContext = requestBuilderService.buildSSLContext();
         HttpClient httpClient = HttpClient.create().secure(t -> t.sslContext(sslContext));
         WebClient client = buildWebClient(httpClient);

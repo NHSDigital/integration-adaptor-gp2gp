@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.IdMapper;
@@ -23,7 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,6 +31,7 @@ class StructuredRecordMappingServiceTest {
 
     public static final int ATTACHMENT_1_SIZE = 123;
     public static final int ATTACHMENT_2_SIZE = 234;
+    private static final int LARGE_MESSAGE_THRESHOLD = 4500000;
     private static final String ID_1 = "111";
     private static final String NEW_DOC_REF_ID_1 = "111_new_doc_ref_id";
     private static final String NEW_DOC_MANIFEST_ID_1 = "111_new_doc_manifest_id";
@@ -46,6 +47,8 @@ class StructuredRecordMappingServiceTest {
     private MessageContext messageContext;
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
+    @Mock
+    private Gp2gpConfiguration gp2gpConfiguration;
 
     private IdMapper idMapper;
 
@@ -54,20 +57,13 @@ class StructuredRecordMappingServiceTest {
 
     @Test
     void When_GettingExternalAttachments_Expect_AllDocumentReferenceResourcesAreMapped() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_REF_ID_1, NEW_DOC_MANIFEST_ID_1, NEW_DOC_REF_ID_2,
-            NEW_DOC_MANIFEST_ID_2);
-
-        idMapper = new IdMapper(randomIdGeneratorService);
-        idMapper.getOrNew(ResourceType.DocumentReference, buildIdType(ResourceType.DocumentReference, ID_1));
-        idMapper.getOrNew(ResourceType.DocumentManifest, buildIdType(ResourceType.DocumentManifest, ID_1));
-        idMapper.getOrNew(ResourceType.DocumentReference, buildIdType(ResourceType.DocumentReference, ID_2));
-        idMapper.getOrNew(ResourceType.DocumentManifest, buildIdType(ResourceType.DocumentManifest, ID_2));
-
-        when(messageContext.getIdMapper()).thenReturn(idMapper);
+        when(randomIdGeneratorService.createNewId()).thenReturn(NEW_DOC_MANIFEST_ID_1, NEW_DOC_MANIFEST_ID_2);
+        when(gp2gpConfiguration.getLargeAttachmentThreshold()).thenReturn(LARGE_MESSAGE_THRESHOLD);
 
         DocumentReference documentReference1 = new DocumentReference();
         documentReference1.setId(buildIdType(ResourceType.DocumentReference, ID_1));
         documentReference1.getContentFirstRep().setAttachment(new Attachment()
+            .setUrl("/" + NEW_DOC_REF_ID_1)
             .setTitle("some title")
             .setSize(ATTACHMENT_1_SIZE)
             .setContentType("text/plain"));
@@ -75,6 +71,7 @@ class StructuredRecordMappingServiceTest {
         DocumentReference documentReference2 = new DocumentReference();
         documentReference2.setId(buildIdType(ResourceType.DocumentReference, ID_2));
         documentReference2.getContentFirstRep().setAttachment(new Attachment()
+            .setUrl("/" + NEW_DOC_REF_ID_2)
             .setSize(ATTACHMENT_2_SIZE)
             .setContentType("text/html"));
 
@@ -86,24 +83,26 @@ class StructuredRecordMappingServiceTest {
         var actualExternalAttachments = structuredRecordMappingService.getExternalAttachments(bundle);
 
         var expectedAttachment1 = OutboundMessage.ExternalAttachment.builder()
-            .referenceId(NEW_DOC_REF_ID_1)
-            .hrefId(NEW_DOC_MANIFEST_ID_1)
+            .documentId(NEW_DOC_REF_ID_1)
+            .messageId(NEW_DOC_MANIFEST_ID_1)
             .filename("AbsentAttachment111_new_doc_ref_id.txt")
             .contentType("text/plain")
             .compressed(false)
             .largeAttachment(false)
             .originalBase64(true)
             .length(ATTACHMENT_1_SIZE)
+            .url("/" + NEW_DOC_REF_ID_1)
             .build();
         var expectedAttachment2 = OutboundMessage.ExternalAttachment.builder()
-            .referenceId(NEW_DOC_REF_ID_2)
-            .hrefId(NEW_DOC_MANIFEST_ID_2)
+            .documentId(NEW_DOC_REF_ID_2)
+            .messageId(NEW_DOC_MANIFEST_ID_2)
             .filename("222_new_doc_ref_id_222_new_doc_ref_id.html")
             .contentType("text/html")
             .compressed(false)
             .largeAttachment(false)
             .originalBase64(true)
             .length(ATTACHMENT_2_SIZE)
+            .url("/" + NEW_DOC_REF_ID_2)
             .build();
 
         assertThat(actualExternalAttachments.get(0)).usingRecursiveComparison().isEqualTo(expectedAttachment1);

@@ -670,7 +670,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Health Admin Problem</text>
+                <text>Problem Info: Problem Notes: Health Admin Problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -968,7 +968,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a Wasp Sting allergy note</text>
+                <text>Problem Info: Problem Notes: This is a Wasp Sting allergy note</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -1045,7 +1045,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>asprin allergy</text>
+                <text>Problem Info: Problem Notes: asprin allergy</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -1191,7 +1191,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a note for anitbiotic allergy NOS</text>
+                <text>Problem Info: Problem Notes: This is a note for anitbiotic allergy NOS</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -1441,7 +1441,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Allergy added as SNOMED code and as a problem</text>
+                <text>Problem Info: Problem Notes: Allergy added as SNOMED code and as a problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
   </ObservationStatement>
@@ -3196,7 +3196,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhhh</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - hhhh Problem Info: Problem Notes: hhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3253,7 +3253,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - What does this really mean?</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - What does this really mean? Problem Info: Problem Notes: What does this really mean?,Health Admin Problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3310,7 +3310,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhh €</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - hhh € Problem Info: Problem Notes: hhh €</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
