@@ -65,7 +65,9 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             var documentReferencesWithoutUrl = externalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isBlank(documentMetadata.getUrl()))
                 .collect(Collectors.toList());
-            LOGGER.warn("Following DocumentReference resources does not have any Attachments with URL: {}", documentReferencesWithoutUrl);
+            if (!documentReferencesWithoutUrl.isEmpty()) {
+                LOGGER.warn("Following DocumentReference resources does not have any Attachments with URL: {}", documentReferencesWithoutUrl);
+            }
 
             externalAttachments = externalAttachments.stream()
                 .filter(documentMetadata -> StringUtils.isNotBlank(documentMetadata.getUrl()))
@@ -110,17 +112,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     private Bundle  getStructuredRecord(GetGpcStructuredTaskDefinition structuredTaskDefinition) {
         var structuredRecord = fhirParseService.parseResource(gpcClient.getStructuredRecord(structuredTaskDefinition), Bundle.class);
-        //TODO whole block below might not be needed in GPC 1.5.1
-        getPatientId(structuredTaskDefinition).ifPresent(patientId -> {
-            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(structuredTaskDefinition, patientId);
-            // calling getDocumentReferencesBundle because currently getStructuredRecord doesn't have document references
-            var documentReferences = getDocumentReferencesBundle(structuredTaskDefinition, patientId);
 
-            ResourceExtractor.extractResourcesByType(documentReferences, DocumentReference.class)
-                .map(resource -> new Bundle.BundleEntryComponent().setResource(resource))
-                .forEach(bundleEntry -> structuredRecord.getEntry().add(bundleEntry));
-            structuredRecord.setTotal(structuredRecord.getEntry().size());
-        });
+
+        //TODO whole block below might not be needed in GPC 1.5.1
+//        getPatientId(structuredTaskDefinition).ifPresent(patientId -> {
+//            ehrExtractStatusService.updateEhrExtractStatusAccessDocumentPatientId(structuredTaskDefinition, patientId);
+//            // calling getDocumentReferencesBundle because currently getStructuredRecord doesn't have document references
+//            var documentReferences = getDocumentReferencesBundle(structuredTaskDefinition, patientId);
+//
+//            ResourceExtractor.extractResourcesByType(documentReferences, DocumentReference.class)
+//                .map(resource -> new Bundle.BundleEntryComponent().setResource(resource))
+//                .forEach(bundleEntry -> structuredRecord.getEntry().add(bundleEntry));
+//            structuredRecord.setTotal(structuredRecord.getEntry().size());
+//        });
         return structuredRecord;
     }
 
