@@ -23,7 +23,6 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.RequestBodySpec;
 import org.springframework.web.reactive.function.client.WebClient.RequestHeadersSpec;
-import org.springframework.web.util.DefaultUriBuilderFactory;
 import reactor.netty.http.client.HttpClient;
 import uk.nhs.adaptors.gp2gp.common.service.RequestBuilderService;
 import uk.nhs.adaptors.gp2gp.common.service.WebClientFilterService;
@@ -59,15 +58,6 @@ public class GpcRequestBuilder {
     private static final String GPC_STRUCTURED_INTERACTION_ID =
         "urn:nhs:names:services:gpconnect:fhir:operation:gpc.migratestructuredrecord-1";
     private static final String GPC_DOCUMENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:migrate:binary-1";
-
-    //too remove
-    private static final String GPC_PATIENT_INTERACTION_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:patient-1";
-    private static final String GPC_DOCUMENT_SEARCH_ID = "urn:nhs:names:services:gpconnect:documents:fhir:rest:search:documentreference-1";
-    private static final String GPC_DOCUMENT_REFERENCE_INCLUDES = "/DocumentReference?_include=DocumentReference%3Asubject%3APatient"
-        + "&_include=DocumentReference%3Acustodian%3AOrganization&_include=DocumentReference%3Aauthor%3AOrganization"
-        + "&_include=DocumentReference%3Aauthor%3APractitioner&_revinclude%3Arecurse=PractitionerRole%3Apractitioner";
-    private static final String IDENTIFIER_PARAMETER = "identifier";
-    private static final String GPC_FIND_PATIENT_IDENTIFIER = NHS_NUMBER_SYSTEM + "|";
 
     private final IParser fhirParser;
     private final GpcTokenBuilder gpcTokenBuilder;
@@ -120,35 +110,6 @@ public class GpcRequestBuilder {
             .uri(documentTaskDefinition.getAccessDocumentUrl());
 
         return buildRequestWithHeaders(uri, documentTaskDefinition, GPC_DOCUMENT_INTERACTION_ID);
-    }
-
-    public RequestHeadersSpec<?> buildGetPatientIdentifierRequest(GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition,
-        String gpcBaseUrl) {
-        SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
-
-        WebClient.RequestBodySpec uri = preparePatientUri(client, patientIdentifierTaskDefinition.getNhsNumber());
-
-        return buildRequestWithHeaders(uri, patientIdentifierTaskDefinition, GPC_PATIENT_INTERACTION_ID);
-    }
-
-    public RequestHeadersSpec<?> buildGetPatientDocumentReferences(
-            GetGpcStructuredTaskDefinition documentReferencesTaskDefinition, String patientId, String gpcBaseUrl) {
-
-        SslContext sslContext = requestBuilderService.buildSSLContext();
-        HttpClient httpClient = buildHttpClient(sslContext);
-        WebClient client = buildWebClient(httpClient, gpcBaseUrl);
-
-        DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(gpcBaseUrl);
-        factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
-
-        WebClient.RequestBodySpec uri = client
-            .method(HttpMethod.GET)
-            .uri(factory.expand(gpcConfiguration.getPatientEndpoint() + "/"
-                + patientId + GPC_DOCUMENT_REFERENCE_INCLUDES));
-
-        return buildRequestWithHeaders(uri, documentReferencesTaskDefinition, GPC_DOCUMENT_SEARCH_ID);
     }
 
     private HttpClient buildHttpClient(SslContext sslContext) {
@@ -205,15 +166,5 @@ public class GpcRequestBuilder {
     private void addWebClientFilters(List<ExchangeFilterFunction> filters) {
         filters.add(webClientFilterService.errorHandlingFilter(WebClientFilterService.RequestType.GPC, HttpStatus.OK));
         filters.add(webClientFilterService.logRequest());
-    }
-
-    private WebClient.RequestBodySpec preparePatientUri(WebClient client, String nhsNumber) {
-        return client
-            .method(HttpMethod.GET)
-            .uri(uriBuilder -> uriBuilder
-                .path(gpcConfiguration.getPatientEndpoint())
-                .queryParam(IDENTIFIER_PARAMETER, GPC_FIND_PATIENT_IDENTIFIER
-                    + ((overrideNhsNumber.isBlank()) ? nhsNumber : overrideNhsNumber))
-                .build(false));
     }
 }
