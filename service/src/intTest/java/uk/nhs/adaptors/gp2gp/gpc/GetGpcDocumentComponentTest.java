@@ -200,6 +200,6 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private String buildDocumentUrl(String documentId, String odsCode) {
-        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + configuration.getDocumentEndpoint() + documentId;
+        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + "/documents/fhir/Binary/" + documentId;
     }
 }
