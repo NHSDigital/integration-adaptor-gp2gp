@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.suppressMedicationRequest;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +163,13 @@ public class EncounterComponentsMapper {
     }
 
     private Optional<String> mapMedicationRequest(Resource resource) {
-        return Optional.of(medicationStatementMapper.mapMedicationRequestToMedicationStatement((MedicationRequest) resource));
+        var medicationRequest = (MedicationRequest) resource;
+
+        if (suppressMedicationRequest(medicationRequest)) {
+            return Optional.empty();
+        }
+
+        return Optional.of(medicationStatementMapper.mapMedicationRequestToMedicationStatement(medicationRequest));
     }
 
     private Optional<String> mapObservation(Resource resource) {
