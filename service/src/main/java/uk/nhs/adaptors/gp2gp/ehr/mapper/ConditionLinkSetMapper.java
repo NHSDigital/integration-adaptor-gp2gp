@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestType;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.suppressMedicationRequest;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestSuppressed;
 
 import java.util.List;
 import java.util.Optional;
@@ -220,10 +220,10 @@ public class ConditionLinkSetMapper {
     private boolean isSuppressedMedicationRequest(Reference reference) {
         if (isMedicationRequestType(reference)) {
             var medicationRequest = messageContext.getInputBundleHolder()
-                .getResource(reference.getResource().getIdElement())
+                .getResource(reference.getReferenceElement())
                 .map(MedicationRequest.class::cast);
 
-            return medicationRequest.isPresent() && suppressMedicationRequest(medicationRequest.get());
+            return medicationRequest.isPresent() && isMedicationRequestSuppressed(medicationRequest.get());
         }
 
         // for all other types do not suppress with this function
