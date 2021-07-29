@@ -91,7 +91,7 @@ public class GpcRequestBuilder {
 
         WebClient.RequestBodySpec uri = client
             .method(HttpMethod.POST)
-            .uri(gpcConfiguration.getStructuredEndpoint());
+            .uri(gpcConfiguration.getMigrateStructuredEndpoint());
 
         var requestBody = fhirParser.encodeResourceToString(requestBodyParameters);
         BodyInserter<Object, ReactiveHttpOutputMessage> bodyInserter

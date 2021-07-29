@@ -25,7 +25,8 @@ public class GpcClient {
         var requestBody = gpcRequestBuilder.buildGetStructuredRecordRequestBody(structuredTaskDefinition);
         var request = gpcRequestBuilder.buildGetStructuredRecordRequest(requestBody, structuredTaskDefinition, gpcBaseUrlWithOds);
 
-        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition, gpcConfiguration.getUrl() + gpcConfiguration.getStructuredEndpoint());
+        logRequest(STRUCTURED_LOG_TEMPLATE, structuredTaskDefinition,
+            gpcConfiguration.getUrl() + gpcConfiguration.getMigrateStructuredEndpoint());
 
         return performRequest(request);
     }
