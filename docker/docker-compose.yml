@@ -93,7 +93,7 @@ services:
     environment:
       - GPC_CONSUMER_LOGGING_LEVEL
       - GPC_CONSUMER_SERVER_PORT
-      - GPC_CONSUMER_SPINE_CLIENT_CERT
+      - GPC_ CONSUMER_SPINE_CLIENT_CERT
       - GPC_CONSUMER_SPINE_CLIENT_KEY
       - GPC_CONSUMER_SPINE_ROOT_CA_CERT
       - GPC_CONSUMER_SPINE_SUB_CA_CERT
@@ -152,6 +152,13 @@ services:
       - gpconnect-api
     depends_on:
       - gpconnect-api
+
+  gpcc-mocks:
+    networks:
+      - commonforgp2gp
+    image: sgryziokainos/gpcc-mocks:latest
+    ports:
+      - "8082:8080"
 networks:
   commonforgp2gp:
     external: true

@@ -12,5 +12,5 @@ docker network create commonforgp2gp
 docker-compose down --rmi=local --remove-orphans
 docker-compose rm
 docker-compose build
-docker-compose up mock-mhs-adaptor mongodb activemq wiremock gpcc gp2gp
+docker-compose up mock-mhs-adaptor mongodb activemq wiremock gpcc gp2gp gpcc-mocks
 docker network rm commonforgp2gp

@@ -13,6 +13,7 @@ services:
       - gp2gp
       - mock-mhs-adaptor
       - gpcc
+      - gpcc-mocks
     environment:
       - GP2GP_AMQP_BROKERS
       - GP2GP_MONGO_URI
@@ -28,3 +29,8 @@ services:
       - GPC_CONSUMER_GPC_GET_PATIENT_PATH
       - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
       - GP2GP_LARGE_ATTACHMENT_THRESHOLD
+    networks: 
+      - commonforgp2gp
+networks:
+  commonforgp2gp:
+    external: true
