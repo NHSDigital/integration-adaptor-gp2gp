@@ -75,14 +75,14 @@ services:
       - "8161:8161"
       - "5672:5672"
 
-  # wiremock:
-  #   networks: 
-  #     - commonforgp2gp
-  #   build: ./wiremock
-  #   ports:
-  #     - "8110:8080"
-  #   command:
-  #     - -global-response-templating
+  wiremock:
+    networks: 
+      - commonforgp2gp
+    build: ./wiremock
+    ports:
+      - "8110:8080"
+    command:
+      - -global-response-templating
 
   gpcc:
     image: nhsdev/nia-gpc-consumer-adaptor:0.1.5
