@@ -38,7 +38,7 @@ pipeline {
                         script {
                             sh '''
                                 source docker/vars.local.sh
-                                docker network create commonforgp2gp
+                                docker network create commonforgp2gp || true
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                             '''
