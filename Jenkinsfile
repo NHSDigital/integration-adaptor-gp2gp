@@ -144,7 +144,7 @@ pipeline {
                                     source docker/vars.local.sh
                                     docker network create commonforgp2gp
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
-                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
+                                    docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp gpcc-mocks gpcc gp2gp-e2e-tests
                                 '''
 
                             }

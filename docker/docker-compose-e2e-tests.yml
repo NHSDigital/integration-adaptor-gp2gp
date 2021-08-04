@@ -13,7 +13,7 @@ services:
       - gp2gp
       - mock-mhs-adaptor
       - gpcc
-      - wiremock
+      - gpcc-mocks
     environment:
       - GP2GP_AMQP_BROKERS
       - GP2GP_MONGO_URI
