@@ -62,9 +62,11 @@ services:
   mongodb:
     networks: 
       - commonforgp2gp
-    image: mongo
+    image: bitnami/mongodb
     ports:
       - "27017:27017"
+    environment: 
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=2
 
   activemq:
     networks: 
