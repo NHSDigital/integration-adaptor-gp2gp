@@ -16442,7 +16442,7 @@
                     {
                         "attachment": {
                             "contentType": "application/octet-stream",
-                            "url": "http://127.0.0.1:8110/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
                             "size": 13
                         }
                     }
