@@ -111,23 +111,25 @@ public class EhrExtractTest {
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInTwoParts() throws Exception {
+    public void When_ExtractRequestReceivedWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
+        // file size: 31216
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 3);
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, DOCUMENT_ID_LARGE, 1);
     }
 
     @Test
-    public void When_ExtractRequestReceivedWithLargeDocuments_Expect_LargeDocumentDataToBeSentInFourParts() throws Exception {
+    public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+        // file size: 62428
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
 
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 5);
+        assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 3);
     }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {

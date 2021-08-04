@@ -14,7 +14,7 @@ management:
         include: info, health, metrics
 
 gp2gp:
-  largeAttachmentThreshold: ${GP2GP_LARGE_ATTACHMENT_THRESHOLD:4500000} # 4.5MB
+  largeAttachmentThreshold: ${GP2GP_LARGE_ATTACHMENT_THRESHOLD:4500000} # value in bytes. Default value for Spine is ~4.5MB
   storage:
     type: ${GP2GP_STORAGE_TYPE:LocalMock}
     containerName: ${GP2GP_STORAGE_CONTAINER_NAME:}
