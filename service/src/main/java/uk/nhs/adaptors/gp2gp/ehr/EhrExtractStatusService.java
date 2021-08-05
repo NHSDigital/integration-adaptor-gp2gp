@@ -271,7 +271,6 @@ public class EhrExtractStatusService {
             .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
 
-        // TODO: 28/07/2021 Possibly remove, confirm structure with Bart
         if (documentIdUrlMap.size() == 0) {
             update.set(GPC_DOCUMENTS, new ArrayList<>());
         }
