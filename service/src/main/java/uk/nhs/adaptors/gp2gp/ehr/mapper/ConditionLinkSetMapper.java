@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestType;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestSuppressed;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParamet
 import uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
@@ -194,10 +194,6 @@ public class ConditionLinkSetMapper {
         return false;
     }
 
-    /**
-     * @param reference Resource to be filtered
-     * @return false if resource is to be suppressed, otherwise true
-     */
     private boolean suppressedLinkageResourcesFilter(Reference reference) {
         return !(isSuppressedResource(reference) || isSuppressedMedicationRequest(reference));
     }
@@ -219,11 +215,11 @@ public class ConditionLinkSetMapper {
 
     private boolean isSuppressedMedicationRequest(Reference reference) {
         if (isMedicationRequestType(reference)) {
-            var medicationRequest = messageContext.getInputBundleHolder()
+            return messageContext.getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
-                .map(MedicationRequest.class::cast);
-
-            return medicationRequest.isPresent() && isMedicationRequestSuppressed(medicationRequest.get());
+                .map(MedicationRequest.class::cast)
+                .map(MedicationRequestUtils::isMedicationRequestSuppressed)
+                .orElse(false);
         }
 
         // for all other types do not suppress with this function
