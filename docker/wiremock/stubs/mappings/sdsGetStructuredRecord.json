@@ -8,7 +8,7 @@
 				"matches": "https:\/\/fhir[.]nhs[.]uk\/Id\/ods-organization-code[|].*"
 			},
 			"identifier": {
-				"equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:fhir:operation:gpc.getstructuredrecord-1"
+				"equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:fhir:operation:gpc.migratestructuredrecord-1"
 			}
 		},
 		"headers": {

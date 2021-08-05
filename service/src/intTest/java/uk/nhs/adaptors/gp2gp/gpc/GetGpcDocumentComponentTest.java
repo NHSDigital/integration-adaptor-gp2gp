@@ -47,6 +47,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     private static final String ODS_CODE_PLACEHOLDER = "@ODS_CODE@";
     private static final String EXPECTED_DOCUMENT_JSON_FILENAME =
         CONVERSATION_ID.concat("/").concat(DOCUMENT_ID).concat(".json");
+    private static final String DOCUMENT_BINARY_ENDPOINT = "/documents/fhir/Binary/";
 
     @Autowired
     private GetGpcDocumentTaskExecutor getGpcDocumentTaskExecutor;
@@ -200,6 +201,6 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
     }
 
     private String buildDocumentUrl(String documentId, String odsCode) {
-        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + configuration.getDocumentEndpoint() + documentId;
+        return configuration.getUrl().replace(ODS_CODE_PLACEHOLDER, odsCode) + DOCUMENT_BINARY_ENDPOINT + documentId;
     }
 }

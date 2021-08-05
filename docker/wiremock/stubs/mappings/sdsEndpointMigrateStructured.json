@@ -1,0 +1,31 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "GET",
+    "urlPath": "/spine-directory/Endpoint",
+    "queryParameters": {
+      "organization": {
+        "matches": "https:\/\/fhir[.]nhs[.]uk\/Id\/ods-organization-code[|].*"
+      },
+      "identifier": {
+        "equalTo": "https://fhir.nhs.uk/Id/nhsServiceInteractionId|urn:nhs:names:services:gpconnect:fhir:operation:gpc.migratestructuredrecord-1"
+      }
+    },
+    "headers": {
+      "X-Correlation-Id": {
+        "matches": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      },
+      "apikey": {
+        "matches": ".*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "SDSEndpointMigrateStructured.json",
+    "headers": {
+      "Content-Type": "application/fhir+json;",
+      "X-Correlation-Id": "{{request.headers.X-Correlation-Id}}"
+    }
+  }
+}
