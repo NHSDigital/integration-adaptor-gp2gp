@@ -126,6 +126,12 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
 
+### GP2GP Configuration Options
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_LARGE_ATTACHMENT_THRESHOLD     | 4500000                                       | Value in bytes. Defines the max size of a single attachment sent to MHS. If a document is larger than this value, it's content will be split and sent in chunks.
+
 ## How to operate the adaptor
 
 The following sections describe how to run the adaptor for development and testing.
