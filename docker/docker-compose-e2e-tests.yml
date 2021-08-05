@@ -13,12 +13,13 @@ services:
       - gp2gp
       - mock-mhs-adaptor
       - gpcc
+      - wiremock
     environment:
       - GP2GP_AMQP_BROKERS
       - GP2GP_MONGO_URI
       - GP2GP_MONGO_DATABASE_NAME
       - GP2GP_GPC_GET_URL
-      - GP2GP_GPC_GET_STRUCTURED_ENDPOINT
+      - GP2GP_GPC_STRUCTURED_FHIR_BASE
       - GP2GP_GPC_GET_DOCUMENT_ENDPOINT
       - GPC_CONSUMER_URL
       - GPC_CONSUMER_GPC_GET_URL
@@ -28,3 +29,8 @@ services:
       - GPC_CONSUMER_GPC_GET_PATIENT_PATH
       - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
       - GP2GP_LARGE_ATTACHMENT_THRESHOLD
+    networks: 
+      - commonforgp2gp
+networks:
+  commonforgp2gp:
+    external: true
