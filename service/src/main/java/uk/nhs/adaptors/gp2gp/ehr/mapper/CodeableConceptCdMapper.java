@@ -28,6 +28,7 @@ public class CodeableConceptCdMapper {
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
+    private static final String NULL_FLAVOR_CODE = "nullFlavor=\"UNK\"";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();
@@ -49,21 +50,11 @@ public class CodeableConceptCdMapper {
         return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 
-    public String getDisplayFromCodeableConcept(CodeableConcept codeableConcept) {
-        return findMainCode(codeableConcept)
-            .map(cc -> findDisplayText(cc).orElse(StringUtils.EMPTY))
-            .orElse(StringUtils.EMPTY);
-    }
-
     private Optional<Coding> findMainCode(CodeableConcept codeableConcept) {
         return codeableConcept.getCoding()
             .stream()
             .filter(this::isSnomed)
             .findFirst();
-    }
-
-    private Optional<String> extractCode(Coding coding) {
-        return Optional.of(coding.getCode());
     }
 
     private Optional<String> findOriginalText(CodeableConcept codeableConcept, Optional<Coding> coding) {
@@ -84,8 +75,16 @@ public class CodeableConceptCdMapper {
         }
     }
 
+    private Optional<String> extractCode(Coding coding) {
+        return Optional.of(coding.getCode());
+    }
+
     private Optional<String> findDisplayText(Coding coding) {
         return Optional.of(coding.getDisplay());
+    }
+
+    private boolean isSnomed(Coding coding) {
+        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
     }
 
     private Optional<Extension> retrieveDisplayExtension(Coding coding) {
@@ -96,7 +95,19 @@ public class CodeableConceptCdMapper {
             .findFirst();
     }
 
-    private boolean isSnomed(Coding coding) {
-        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
+    public String getDisplayFromCodeableConcept(CodeableConcept codeableConcept) {
+        return findMainCode(codeableConcept)
+            .map(cc -> findDisplayText(cc).orElse(StringUtils.EMPTY))
+            .orElse(StringUtils.EMPTY);
+    }
+
+    public String mapToNullFlavorCodeableConcept(CodeableConcept codeableConcept) {
+
+        var builder = CodeableConceptCdTemplateParameters.builder().nullFlavor(true);
+        var mainCode = findMainCode(codeableConcept);
+
+        var originalText = findOriginalText(codeableConcept, mainCode);
+        originalText.ifPresent(builder::mainOriginalText);
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 }

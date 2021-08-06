@@ -10,7 +10,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="394559384658936"/>
-                <code code="292954005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Mocked code</originalText></code>
+                <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
                     <low value="19781231"/><high value="20180301"/>

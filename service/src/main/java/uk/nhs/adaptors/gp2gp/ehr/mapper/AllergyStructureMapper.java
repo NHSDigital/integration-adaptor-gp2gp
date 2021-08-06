@@ -64,7 +64,7 @@ public class AllergyStructureMapper {
             .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getIdElement()))
             .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getIdElement()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
-            .code(buildCode(allergyIntolerance))
+            .code(buildCode(allergyIntolerance, codeableConceptCdMapper))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
 
@@ -83,13 +83,42 @@ public class AllergyStructureMapper {
         return TemplateUtils.fillTemplate(ALLERGY_STRUCTURE_TEMPLATE, allergyStructureTemplateParameters.build());
     }
 
-    private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
-        if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
-            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
-            return Optional.of(participantMapper.mapToParticipant(authorReferenceId, participantType));
-        }
+    private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
+        List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
 
-        return Optional.empty();
+        return descriptionList
+            .stream()
+            .filter(StringUtils::isNotEmpty)
+            .collect(Collectors.joining(StringUtils.SPACE));
+    }
+
+    private String buildCode(AllergyIntolerance allergyIntolerance, CodeableConceptCdMapper codeableConceptCdMapper) {
+        if (allergyIntolerance.hasCode()) {
+            var category = allergyIntolerance.getCategory()
+                .stream()
+                .map(PrimitiveType::getValueAsString)
+                .filter(value -> value.equals(ENVIRONMENT_CATEGORY) || value.equals(MEDICATION_CATEGORY))
+                .findFirst()
+                .orElse(StringUtils.EMPTY);
+
+            if (category.equals(ENVIRONMENT_CATEGORY)) {
+                return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
+            } else if (category.equals(MEDICATION_CATEGORY)) {
+                return codeableConceptCdMapper.mapToNullFlavorCodeableConcept(allergyIntolerance.getCode());
+            } else {
+                throw new EhrMapperException("Category could not be mapped");
+            }
+        }
+        throw new EhrMapperException("Allergy code not present");
+    }
+
+    private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
+        var onsetDate = extractOnsetDate(allergyIntolerance);
+        var endDate = filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
+            .map(AllergyStructureExtractor::extractEndDate)
+            .orElse(StringUtils.EMPTY);
+
+        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
     }
 
     private void buildCategory(AllergyIntolerance allergyIntolerance, AllergyStructureTemplateParametersBuilder templateParameters) {
@@ -109,13 +138,13 @@ public class AllergyStructureMapper {
         }
     }
 
-    private String buildPertinentInformation(AllergyIntolerance allergyIntolerance) {
-        List<String> descriptionList = retrievePertinentInformation(allergyIntolerance);
+    private Optional<String> buildParticipant(Reference reference, ParticipantType participantType) {
+        if (reference.getReferenceElement().getResourceType().startsWith(ResourceType.Practitioner.name())) {
+            var authorReferenceId = messageContext.getAgentDirectory().getAgentId(reference);
+            return Optional.of(participantMapper.mapToParticipant(authorReferenceId, participantType));
+        }
 
-        return descriptionList
-            .stream()
-            .filter(StringUtils::isNotEmpty)
-            .collect(Collectors.joining(StringUtils.SPACE));
+        return Optional.empty();
     }
 
     private List<String> retrievePertinentInformation(AllergyIntolerance allergyIntolerance) {
@@ -157,15 +186,6 @@ public class AllergyStructureMapper {
             return CRITICALITY + allergyIntolerance.getCriticality().getDisplay();
         }
         return StringUtils.EMPTY;
-    }
-
-    private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
-        var onsetDate = extractOnsetDate(allergyIntolerance);
-        var endDate = filterExtensionByUrl(allergyIntolerance, ALLERGY_INTOLERANCE_END_URL)
-            .map(AllergyStructureExtractor::extractEndDate)
-            .orElse(StringUtils.EMPTY);
-
-        return StatementTimeMappingUtils.prepareEffectiveTimeForAllergyIntolerance(onsetDate, endDate);
     }
 
     private String buildAsserterPertinentInformation(AllergyIntolerance allergyIntolerance) {
@@ -216,12 +236,5 @@ public class AllergyStructureMapper {
         )
             .map(Annotation::getText)
             .collect(Collectors.joining(StringUtils.SPACE));
-    }
-
-    private String buildCode(AllergyIntolerance allergyIntolerance) {
-        if (allergyIntolerance.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(allergyIntolerance.getCode());
-        }
-        throw new EhrMapperException("Allergy code not present");
     }
 }
