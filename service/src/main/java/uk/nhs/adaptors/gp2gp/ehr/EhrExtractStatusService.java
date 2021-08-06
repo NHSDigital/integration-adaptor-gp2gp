@@ -47,7 +47,6 @@ public class EhrExtractStatusService {
     private static final String EHR_CONTINUE = "ehrContinue";
     private static final String GPC_DOCUMENTS = GPC_ACCESS_DOCUMENT + DOT + "documents";
     private static final String TASK_ID = "taskId";
-    private static final String PATIENT_ID = "patientId";
     private static final String DOCUMENT_ID = "documentId";
     private static final String OBJECT_NAME = "objectName";
     private static final String MESSAGE_ID = "messageId";
@@ -73,7 +72,6 @@ public class EhrExtractStatusService {
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
     private static final String CONTINUE_RECEIVED_PATH = EHR_CONTINUE + DOT + RECEIVED;
     private static final String DOCUMENT_ID_PATH = GPC_DOCUMENTS + DOT + DOCUMENT_ID;
-    private static final String DOCUMENT_PATIENT_ID = GPC_ACCESS_DOCUMENT + DOT + PATIENT_ID;
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
     private static final String DOCUMENT_TASK_ID_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + TASK_ID;
     private static final String DOCUMENT_OBJECT_NAME_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + OBJECT_NAME;
@@ -256,27 +254,6 @@ public class EhrExtractStatusService {
         }
     }
 
-    public EhrExtractStatus updateEhrExtractStatusAccessDocumentPatientId(
-            GetGpcStructuredTaskDefinition patientIdentifierTaskDefinition, String patientId) {
-
-        Query query = createQueryForConversationId(patientIdentifierTaskDefinition.getConversationId());
-
-        Update update = createUpdateWithUpdatedAt();
-        update.set(DOCUMENT_PATIENT_ID, patientId);
-        update.set(GPC_DOCUMENTS, new ArrayList<>());
-        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
-        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
-            update,
-            returningUpdatedRecordOption,
-            EhrExtractStatus.class);
-
-        if (ehrExtractStatus == null) {
-            throw new EhrExtractException("EHR Extract Status was not updated with patientId");
-        }
-
-        return ehrExtractStatus;
-    }
-
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
             GetGpcStructuredTaskDefinition documentReferencesTaskDefinition,
             Map<String, String> documentIdUrlMap) {
@@ -293,6 +270,11 @@ public class EhrExtractStatusService {
             .taskId(documentReferencesTaskDefinition.getTaskId())
             .messageId(documentReferencesTaskDefinition.getConversationId()).build()));
         FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        if (documentIdUrlMap.size() == 0) {
+            update.set(GPC_DOCUMENTS, new ArrayList<>());
+        }
+
         EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
             update,
             returningUpdatedRecordOption,

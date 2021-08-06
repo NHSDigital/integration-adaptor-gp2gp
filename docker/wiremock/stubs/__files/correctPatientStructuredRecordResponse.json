@@ -1,6 +1,6 @@
 {
     "resourceType": "Bundle",
-    "id": "b5be425e-f19e-4a42-8622-1c134c8154a3",
+    "id": "6a92c467-ff0c-4089-a5d1-285d20cb9f92",
     "meta": {
         "profile": [
             "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
@@ -194,6 +194,172 @@
         },
         {
             "resource": {
+                "resourceType": "Practitioner",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "de",
+                                            "display": "German"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-NHSCommunication-1",
+                        "extension": [
+                            {
+                                "url": "language",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-HumanLanguage-1",
+                                            "code": "en",
+                                            "display": "English"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G13579135"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Gilbert",
+                        "given": [
+                            "Nichole"
+                        ],
+                        "prefix": [
+                            "Miss"
+                        ]
+                    }
+                ],
+                "gender": "female"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "7",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
+                        "value": "B82617"
+                    }
+                ],
+                "name": "COXWOLD SURGERY",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "12345678",
+                        "use": "work"
+                    }
+                ],
+                "address": [
+                    {
+                        "use": "work",
+                        "line": [
+                            "NHS NPFIT Test Data Manager",
+                            "Princes Exchange"
+                        ],
+                        "city": "Leeds",
+                        "district": "West Yorkshire",
+                        "postalCode": "LS1 4HY"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "PractitionerRole",
+                "id": "e0244de8-07ef-4274-9f7a-d7067bcc8d21",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-PractitionerRole-1"
+                    ]
+                },
+                "practitioner": {
+                    "reference": "Practitioner/6c41ebfd-57c3-4162-9d7b-208c171a2fd7"
+                },
+                "organization": {
+                    "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+                },
+                "code": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-SDSJobRoleName-1",
+                                "code": "R0260",
+                                "display": "General Medical Practitioner"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Location",
+                "id": "17",
+                "meta": {
+                    "versionId": "636064088100870233",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Location-1"
+                    ]
+                },
+                "name": "The Trevelyan Practice",
+                "telecom": [
+                    {
+                        "system": "phone",
+                        "value": "03003035678",
+                        "use": "work"
+                    }
+                ],
+                "address": {
+                    "line": [
+                        "Trevelyan Square",
+                        "Boar Ln",
+                        "Leeds"
+                    ],
+                    "postalCode": "LS1 6AE"
+                },
+                "managingOrganization": {
+                    "reference": "Organization/db67f447-b30d-442a-8e31-6918d1367eeb"
+                }
+            }
+        },
+        {
+            "resource": {
                 "resourceType": "AllergyIntolerance",
                 "id": "29",
                 "meta": {
@@ -204,7 +370,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15205c74-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb496f15-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "clinicalStatus": "active",
@@ -295,20 +461,13 @@
                         "value": "9690937286"
                     }
                 },
-                "note": [
+                "entry": [
                     {
-                        "text": "Information not available"
-                    }
-                ],
-                "emptyReason": {
-                    "coding": [
-                        {
-                            "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-ListEmptyReasonCode-1",
-                            "code": "no-content-recorded",
-                            "display": "No Content Recorded"
+                        "item": {
+                            "reference": "AllergyIntolerance/29"
                         }
-                    ]
-                }
+                    }
+                ]
             }
         },
         {
@@ -346,7 +505,7 @@
                         "identifier": [
                             {
                                 "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                                "value": "15205bbe-b32a-11eb-aaa0-00505692d4aa"
+                                "value": "bb496e52-bca8-11eb-b888-1002b58598b4"
                             }
                         ],
                         "clinicalStatus": "resolved",
@@ -482,6 +641,31 @@
                         "item": {
                             "reference": "Condition/AllergiesProblem"
                         }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/MedicationProblem"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/ImmunisationsProblem"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/ReferralsProblem"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/UncategorisedDataProblem"
+                        }
+                    },
+                    {
+                        "item": {
+                            "reference": "Condition/InvestigationsProblem"
+                        }
                     }
                 ]
             }
@@ -589,7 +773,7 @@
                         "value": "9690937286"
                     }
                 },
-                "date": "2021-05-13T12:49:53+01:00",
+                "date": "2021-05-24T16:57:55+01:00",
                 "orderedBy": {
                     "coding": [
                         {
@@ -667,7 +851,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520b746-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49b9f4-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -761,7 +945,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15207df3-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498c2a-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "groupIdentifier": {
@@ -836,7 +1020,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15207f57-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498cbf-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -916,7 +1100,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520805e-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498d4e-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -996,7 +1180,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520814f-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498dd9-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1076,7 +1260,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208236-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498e7f-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1156,7 +1340,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520831e-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498f0a-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1236,7 +1420,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208401-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498f93-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1316,7 +1500,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208494-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb498ff0-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1396,7 +1580,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208515-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499047-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1476,7 +1660,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208596-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49909b-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1556,7 +1740,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208617-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49910f-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1636,7 +1820,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208698-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499162-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1724,7 +1908,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520bb3d-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49bd0d-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1818,7 +2002,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520871e-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4991b9-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "groupIdentifier": {
@@ -1893,7 +2077,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152087ac-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499212-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -1973,7 +2157,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208832-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499269-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2053,7 +2237,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152088b7-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4992be-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2133,7 +2317,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208941-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499314-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2213,7 +2397,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152089d9-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4993a5-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2293,7 +2477,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208a63-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499400-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2373,7 +2557,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208ae8-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499456-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2453,7 +2637,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208b6e-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4994ac-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2533,7 +2717,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208bef-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499505-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2613,7 +2797,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208c74-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49955b-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2693,7 +2877,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208cf5-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4995b0-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2773,7 +2957,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a298-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a2ee-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2861,7 +3045,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520bbe1-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -2955,7 +3139,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208d7b-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499607-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "groupIdentifier": {
@@ -3030,7 +3214,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208e01-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49965c-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3110,7 +3294,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208e94-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4996b1-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3190,7 +3374,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208f15-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499705-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3270,7 +3454,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15208f91-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49975a-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3350,7 +3534,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209012-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4997ae-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3430,7 +3614,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209094-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499801-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3510,7 +3694,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152092a1-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499855-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3590,7 +3774,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209334-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4998a8-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3670,7 +3854,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152094e8-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb4999c4-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3750,7 +3934,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520956e-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499a1f-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3830,7 +4014,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152095ef-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499a74-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -3918,7 +4102,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520bc86-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49bdce-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4012,7 +4196,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209670-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499ac7-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "groupIdentifier": {
@@ -4087,7 +4271,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152096fa-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499b1d-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4167,7 +4351,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520977b-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499b72-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4247,7 +4431,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152097fc-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499bc6-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4327,7 +4511,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520987d-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499c1a-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4407,7 +4591,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152098fa-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499c6f-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4487,7 +4671,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209977-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499cc1-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4567,7 +4751,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "152099f3-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499d14-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4647,7 +4831,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209a70-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499d67-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4727,7 +4911,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209aed-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499db9-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4807,7 +4991,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209b69-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499e0b-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4887,7 +5071,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209be6-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499e5d-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -4975,7 +5159,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520bd22-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49be29-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5069,7 +5253,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209d88-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499f77-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "groupIdentifier": {
@@ -5144,7 +5328,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209e12-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb499fd5-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5224,7 +5408,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209e94-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a044-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5304,7 +5488,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209f10-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a09b-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5384,7 +5568,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "15209f96-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a0f1-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5464,7 +5648,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a017-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a144-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5544,7 +5728,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a094-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a199-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5624,7 +5808,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a119-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a1ee-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5704,7 +5888,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a196-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a243-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5784,7 +5968,7 @@
                 "identifier": [
                     {
                         "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
-                        "value": "1520a217-b32a-11eb-aaa0-00505692d4aa"
+                        "value": "bb49a298-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -5840,47 +6024,6 @@
         },
         {
             "resource": {
-                "resourceType": "List",
-                "meta": {
-                    "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
-                    ]
-                },
-                "status": "current",
-                "mode": "snapshot",
-                "title": "Problems - linked problems not relating to the primary query",
-                "code": {
-                    "coding": [
-                        {
-                            "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/GPConnect-SecondaryListValues-1",
-                            "code": "problems-linked-problems-not-relating-to-the-primary-query",
-                            "display": "Problems - linked problems not relating to the primary query"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/2"
-                },
-                "date": "2020-12-01T00:00:00+00:00",
-                "orderedBy": {
-                    "coding": [
-                        {
-                            "system": "http://hl7.org/fhir/list-order",
-                            "code": "event-date"
-                        }
-                    ]
-                },
-                "entry": [
-                    {
-                        "item": {
-                            "reference": "Condition/MedicationProblem"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "resource": {
                 "resourceType": "Condition",
                 "id": "MedicationProblem",
                 "meta": {
@@ -5892,12 +6035,6 @@
                     {
                         "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
                         "valueCode": "major"
-                    },
-                    {
-                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
-                        "valueReference": {
-                            "reference": "MedicationStatement/1"
-                        }
                     },
                     {
                         "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
@@ -12825,6 +12962,12 @@
                         }
                     }
                 ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
+                    }
+                ],
                 "basedOn": [
                     {
                         "reference": "MedicationRequest/Consultation1-Topic1-Category-Plan-Medication-Plan"
@@ -12881,6 +13024,12 @@
                                 }
                             ]
                         }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -12941,6 +13090,12 @@
                         }
                     }
                 ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
+                    }
+                ],
                 "basedOn": [
                     {
                         "reference": "MedicationRequest/Consultation1-Topic4-Category-Plan-Medication-Plan-1"
@@ -12999,6 +13154,12 @@
                         }
                     }
                 ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
+                    }
+                ],
                 "basedOn": [
                     {
                         "reference": "MedicationRequest/Consultation2-Topic1-Category-Plan-Medication-Plan"
@@ -13055,6 +13216,12 @@
                                 }
                             ]
                         }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/cross-care-setting-identifier",
+                        "value": "bb49bd70-bca8-11eb-b888-1002b58598b4"
                     }
                 ],
                 "basedOn": [
@@ -13415,82 +13582,6 @@
                     {
                         "item": {
                             "reference": "Observation/Consultation1-Topic2-Category-History-Observation-2"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "resource": {
-                "resourceType": "List",
-                "meta": {
-                    "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-List-1"
-                    ]
-                },
-                "status": "current",
-                "mode": "snapshot",
-                "title": "Problems - linked problems not relating to the primary query",
-                "code": {
-                    "coding": [
-                        {
-                            "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/GPConnect-SecondaryListValues-1",
-                            "code": "problems-linked-problems-not-relating-to-the-primary-query",
-                            "display": "Problems - linked problems not relating to the primary query"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/2"
-                },
-                "date": "2019-03-01T10:57:34+00:00",
-                "orderedBy": {
-                    "coding": [
-                        {
-                            "system": "http://hl7.org/fhir/list-order",
-                            "code": "event-date"
-                        }
-                    ]
-                },
-                "entry": [
-                    {
-                        "item": {
-                            "reference": "Condition/Problem-A-Anxiety-With-Depression"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/Problem-B-Swollen-Legs"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/Problem-D-URTI"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/Problem-E-Post-viral-cough"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/ImmunisationsProblem"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/ReferralsProblem"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/UncategorisedDataProblem"
-                        }
-                    },
-                    {
-                        "item": {
-                            "reference": "Condition/InvestigationsProblem"
                         }
                     }
                 ]
@@ -14663,11 +14754,6 @@
                         "item": {
                             "reference": "DiagnosticReport/efae5859-28df-4e7d-be91-6df56d8215e4"
                         }
-                    },
-                    {
-                        "item": {
-                            "reference": "DiagnosticReport/efae5859-28df-4e7d-be91-6df56d8215e5"
-                        }
                     }
                 ]
             }
@@ -14892,91 +14978,109 @@
                 },
                 "related": [
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/dacb177a-9501-4dcc-8b22-b941791ae0dc"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/32685afe-1d46-4d98-8279-39b9e96ee914"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/770b982d-be09-4744-a5d7-54e757947ffe"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/0a8aba3d-6b29-4dba-9c64-3a47516cc5eb"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/ddc43c3a-2863-4d6f-a926-162f5a4174b1"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/9825b7cf-de29-4c07-9b84-4af04dbf8233"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/e732e681-3a89-4433-a37b-3767dd19d809"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/2a604bea-1ef4-4cb1-97a0-f2a160f12679"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/704b6bb2-a1c0-429b-b901-c641e70345ec"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/53f4132c-0168-4327-8d69-560b13f5bb4e"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/c9e03e92-78b8-4e8e-9785-cbd9424e9380"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/9c61ad77-8c17-41aa-b795-f0fcb9f983d5"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/f67cb109-0890-4e47-9126-86da677c7008"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/1f2e71db-b9aa-4e4f-9a78-87f99fefc8bf"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/a23b563d-765a-4032-8dd3-c03178224f35"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/fedb7c2d-337c-435c-9169-612349783b5a"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/f9070943-7460-413a-a608-e15334b6e1d9"
                         }
                     },
                     {
+                        "type": "has-member",
                         "target": {
                             "reference": "Observation/66acb40a-e241-474a-92b5-c74f9aa6a854"
                         }
@@ -16107,108 +16211,6 @@
                 " part 2 "
             ],
             "resource": {
-                "resourceType": "ProcedureRequest",
-                "id": "d9df1431-22ac-462a-946a-f195f6c639b0",
-                "meta": {
-                    "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProcedureRequest-1"
-                    ]
-                },
-                "identifier": [
-                    {
-                        "system": "https://tools.ietf.org/html/rfc4122",
-                        "value": "7e9bbd01-4e52-420d-b05b-48bc671d6709"
-                    }
-                ],
-                "status": "active",
-                "intent": "order",
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "26604007",
-                            "display": "FBC - Full blood count"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/2",
-                    "display": "SKELLY, Horace"
-                },
-                "requester": {
-                    "agent": {
-                        "reference": "Practitioner/1",
-                        "display": "GILBERT"
-                    }
-                },
-                "performer": {
-                    "reference": "Organization/7",
-                    "display": "COXWOLD Surgery"
-                },
-                "note": [
-                    {
-                        "text": "FBC"
-                    }
-                ]
-            }
-        },
-        {
-            "resource": {
-                "resourceType": "DiagnosticReport",
-                "id": "efae5859-28df-4e7d-be91-6df56d8215e5",
-                "meta": {
-                    "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DiagnosticReport-1"
-                    ]
-                },
-                "identifier": [
-                    {
-                        "system": "https://tools.ietf.org/html/rfc4122",
-                        "value": "1b663fc5-9dec-49c0-90ed-18a7cfa5a6b3"
-                    }
-                ],
-                "basedOn": [
-                    {
-                        "reference": "ProcedureRequest/d9df1431-22ac-462a-946a-f195f6c639b0"
-                    }
-                ],
-                "status": "final",
-                "code": {
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "721981007",
-                            "display": "Diagnostic studies report"
-                        }
-                    ]
-                },
-                "subject": {
-                    "reference": "Patient/2",
-                    "display": "SKELLY, Horace"
-                },
-                "issued": "2019-04-03T12:00:00+00:00",
-                "performer": [
-                    {
-                        "actor": {
-                            "reference": "Organization/7",
-                            "display": "COXWOLD Surgery"
-                        }
-                    }
-                ],
-                "specimen": [
-                    {
-                        "reference": "Specimen/756a8361-79ce-4561-afcb-a91fe19df124"
-                    }
-                ],
-                "result": [
-                    {
-                        "reference": "Observation/dacb177a-9501-4dcc-8b22-b941791ae0db"
-                    }
-                ]
-            }
-        },
-        {
-            "resource": {
                 "resourceType": "Specimen",
                 "id": "756a8361-79ce-4561-afcb-a91fe19df124",
                 "meta": {
@@ -16409,41 +16411,47 @@
         },
         {
             "resource": {
-                "resourceType": "Organization",
-                "id": "7",
+                "resourceType": "DocumentReference",
+                "id": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC",
                 "meta": {
-                    "versionId": "1469444400000",
-                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "versionId": "8017752596891037527",
                     "profile": [
-                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-DocumentReference-1"
                     ]
                 },
                 "identifier": [
                     {
-                        "system": "https://fhir.nhs.uk/Id/ods-organization-code",
-                        "value": "B82617"
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D7AF52BA-79BA-4AF8-9010-F0C2DF916CEC"
                     }
                 ],
-                "name": "COXWOLD SURGERY",
-                "telecom": [
+                "status": "current",
+                "type": {
+                    "text": "Referral for further care"
+                },
+                "subject": {
+                    "reference": "Patient/C71B9A8D-26CD-43D9-9030-F6C650879B37"
+                },
+                "created": "2020-12-22T14:53:00+00:00",
+                "indexed": "2020-12-22T14:55:58.567+00:00",
+                "custodian": {
+                    "reference": "Organization/5E496953-065B-41F2-9577-BE8F2FBD0757"
+                },
+                "description": "Referral for further care (22-Dec-2020)",
+                "content": [
                     {
-                        "system": "phone",
-                        "value": "12345678",
-                        "use": "work"
+                        "attachment": {
+                            "contentType": "application/octet-stream",
+                            "url": "{{request.baseUrl}}/B82617/STU3/1/gpconnect/documents/fhir/Binary/07a6483f-732b-461e-86b6-edb665c45510",
+                            "size": 13
+                        }
                     }
                 ],
-                "address": [
-                    {
-                        "use": "work",
-                        "line": [
-                            "NHS NPFIT Test Data Manager",
-                            "Princes Exchange"
-                        ],
-                        "city": "Leeds",
-                        "district": "West Yorkshire",
-                        "postalCode": "LS1 4HY"
+                "context": {
+                    "encounter": {
+                        "reference": "Encounter/A44B64EA-172B-4EF5-8809-3FF24F5613C1"
                     }
-                ]
+                }
             }
         }
     ]

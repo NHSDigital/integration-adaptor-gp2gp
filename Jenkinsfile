@@ -38,6 +38,7 @@ pipeline {
                         script {
                             sh '''
                                 source docker/vars.local.sh
+                                docker network create commonforgp2gp || true
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
                             '''
@@ -64,6 +65,7 @@ pipeline {
                             ])
                             sh "rm -rf build"
                             sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml down"
+                            sh "docker network rm commonforgp2gp"
                         }
                     }
                 }
@@ -140,6 +142,7 @@ pipeline {
                             steps {
                                 sh '''
                                     source docker/vars.local.sh
+                                    docker network create commonforgp2gp
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
                                 '''
@@ -153,6 +156,7 @@ pipeline {
                                     junit '**/e2e-build/test-results/**/*.xml'
                                     sh "rm -rf e2e-build"
                                     sh "docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml down"
+                                    sh "docker network rm commonforgp2gp"
                                 }
                             }
                         } //stage E2E Test
