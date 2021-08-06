@@ -5,6 +5,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extract
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractRecipient;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractServiceRequested;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractSupportingInfo;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class RequestStatementMapper {
     private static final String SERVICES_REQUESTED = "Service(s) Requested: ";
     private static final String SPECIALTY = "Specialty: ";
     private static final String REASON_CODES = "Reason Codes: ";
+    private static final String SUPPORTING_INFO = "Supporting Information: ";
     private static final Set<String> SUPPORTED_AGENT_TYPES = Stream.of(ResourceType.Practitioner, ResourceType.RelatedPerson,
         ResourceType.Device, ResourceType.Patient, ResourceType.Organization)
         .map(ResourceType::name)
@@ -284,6 +286,7 @@ public class RequestStatementMapper {
                 text.append(referralRequest.getDescription());
             }
             Stream<String> descriptions = Stream.of(
+                buildSupportingInfoDescription(),
                 buildNoteDescription(),
                 buildReasonCodeDescription(),
                 buildRecipientDescription(),
@@ -315,6 +318,15 @@ public class RequestStatementMapper {
                 return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
             }
             return DEFAULT_REASON_CODE_XML;
+        }
+
+        private String buildSupportingInfoDescription(){
+            if (referralRequest.hasSupportingInfo()) {
+                return SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
+                        .map(value -> extractSupportingInfo(messageContext, value))
+                        .collect(Collectors.joining(COMMA));
+            }
+            return StringUtils.EMPTY;
         }
     }
 
