@@ -18,6 +18,7 @@ import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -93,22 +94,22 @@ public class AllergyStructureMapperTest {
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS, true),
-            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS, true),
-            Arguments.of(INPUT_JSON_WITH_PATIENT_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_PATIENT_RECORDER_AND_ASSERTER, true),
-            Arguments.of(INPUT_JSON_WITH_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_RECORDER_AND_ASSERTER, true),
-            Arguments.of(INPUT_JSON_WITH_DATES, OUTPUT_XML_USES_DATES, true),
-            Arguments.of(INPUT_JSON_WITH_ONSET_DATE_ONLY, OUTPUT_XML_USES_ONSET_DATE, true),
-            Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_NULL_FLAVOR_DATE, true),
-            Arguments.of(INPUT_JSON_WITH_NO_DATES, OUTPUT_XML_USES_NULL_FLAVOR_DATE, true),
-            Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY, false),
-            Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY, true),
-            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION, true),
-            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION, true),
-            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE, true),
-            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES, false),
-            Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION, true),
-            Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER, true)
+            Arguments.of(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_NO_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS),
+            Arguments.of(INPUT_JSON_WITH_PATIENT_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_PATIENT_RECORDER_AND_ASSERTER),
+            Arguments.of(INPUT_JSON_WITH_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_RECORDER_AND_ASSERTER),
+            Arguments.of(INPUT_JSON_WITH_DATES, OUTPUT_XML_USES_DATES),
+            Arguments.of(INPUT_JSON_WITH_ONSET_DATE_ONLY, OUTPUT_XML_USES_ONSET_DATE),
+            Arguments.of(INPUT_JSON_WITH_REASON_END_DATE_ONLY, OUTPUT_XML_USES_NULL_FLAVOR_DATE),
+            Arguments.of(INPUT_JSON_WITH_NO_DATES, OUTPUT_XML_USES_NULL_FLAVOR_DATE),
+            Arguments.of(INPUT_JSON_WITH_ENVIRONMENT_CATEGORY, OUTPUT_XML_USES_ENVIRONMENT_CATEGORY),
+            Arguments.of(INPUT_JSON_WITH_MEDICATION_CATEGORY, OUTPUT_XML_USES_MEDICATION_CATEGORY),
+            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
+            Arguments.of(INPUT_JSON_WITH_REACTION, OUTPUT_XML_USES_REACTION),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_ONE_NOTE),
+            Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES),
+            Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION),
+            Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER)
         );
     }
 
@@ -129,7 +130,6 @@ public class AllergyStructureMapperTest {
     @MethodSource("resourceFileParams")
     public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml)
         throws IOException {
-        setUp();
         CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
@@ -138,6 +138,7 @@ public class AllergyStructureMapperTest {
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
+    @BeforeAll
     public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
 
@@ -157,10 +158,10 @@ public class AllergyStructureMapperTest {
         allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 
+
     @ParameterizedTest
     @MethodSource("resourceInvalidFileParams")
     public void When_MappingInvalidAllergyIntoleranceJson_Expect_Exception(String inputJson) throws IOException {
-        setUp();
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
 
