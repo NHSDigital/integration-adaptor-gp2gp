@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.2.3] - 2021-08-06
+## [1.2.0] - 2021-08-06
 
 - Work on GPC 1.6 uplift
 
