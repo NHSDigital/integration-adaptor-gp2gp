@@ -28,7 +28,6 @@ public class CodeableConceptCdMapper {
     private static final String SNOMED_SYSTEM_CODE = "2.16.840.1.113883.2.1.3.2.4.15";
     private static final String DESCRIPTION_DISPLAY = "descriptionDisplay";
     private static final String DESCRIPTION_URL = "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid";
-    private static final String NULL_FLAVOR_CODE = "nullFlavor=\"UNK\"";
 
     public String mapCodeableConceptToCd(CodeableConcept codeableConcept) {
         var builder = CodeableConceptCdTemplateParameters.builder();

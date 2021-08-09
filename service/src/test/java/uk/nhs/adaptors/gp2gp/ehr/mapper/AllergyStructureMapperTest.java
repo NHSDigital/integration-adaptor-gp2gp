@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
@@ -126,9 +127,9 @@ public class AllergyStructureMapperTest {
 
     @ParameterizedTest
     @MethodSource("resourceFileParams")
-    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml,
-        boolean isNullFlavorCode) throws IOException {
-        setUp(isNullFlavorCode);
+    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml)
+        throws IOException {
+        setUp();
         CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
@@ -137,15 +138,14 @@ public class AllergyStructureMapperTest {
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
     }
 
-    public void setUp(boolean isNullFlavorCode) throws IOException {
+    public void setUp() throws IOException {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        if (isNullFlavorCode) {
-            when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
-                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        } else {
-            when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        }
+
+        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
         var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
         Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
         messageContext = new MessageContext(randomIdGeneratorService);
@@ -160,24 +160,11 @@ public class AllergyStructureMapperTest {
     @ParameterizedTest
     @MethodSource("resourceInvalidFileParams")
     public void When_MappingInvalidAllergyIntoleranceJson_Expect_Exception(String inputJson) throws IOException {
-        setUpForInvalid();
+        setUp();
         var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
         AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
 
         assertThrows(EhrMapperException.class, ()
             -> allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance));
-    }
-
-    public void setUpForInvalid() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
-        messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
-        List.of(ResourceType.Patient, ResourceType.Device)
-            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
-        List.of(ResourceType.Practitioner, ResourceType.Organization)
-            .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
-        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
     }
 }

@@ -64,7 +64,7 @@ public class AllergyStructureMapper {
             .allergyStructureId(idMapper.getOrNew(ResourceType.AllergyIntolerance, allergyIntolerance.getIdElement()))
             .observationId(idMapper.getOrNew(ResourceType.Observation, allergyIntolerance.getIdElement()))
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
-            .code(buildCode(allergyIntolerance, codeableConceptCdMapper))
+            .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
             .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
 
@@ -92,7 +92,7 @@ public class AllergyStructureMapper {
             .collect(Collectors.joining(StringUtils.SPACE));
     }
 
-    private String buildCode(AllergyIntolerance allergyIntolerance, CodeableConceptCdMapper codeableConceptCdMapper) {
+    private String buildCode(AllergyIntolerance allergyIntolerance) {
         if (allergyIntolerance.hasCode()) {
             var category = allergyIntolerance.getCategory()
                 .stream()
