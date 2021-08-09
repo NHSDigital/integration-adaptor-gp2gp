@@ -17,9 +17,18 @@ import uk.nhs.adaptors.gp2gp.utils.TestArgumentsLoaderUtil;
 
 public class CodeableConceptCdMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/codeableconcept/";
+    private static final String TEST_FILE_DIRECTORY_NULL_FLAVOR = "/ehr/mapper/codeableconcept/nullFlavor/";
 
     private FhirParseService fhirParseService;
     private CodeableConceptCdMapper codeableConceptCdMapper;
+
+    private static Stream<Arguments> getTestArguments() {
+        return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY);
+    }
+
+    private static Stream<Arguments> getTestArgumentsNullFlavor() {
+        return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY_NULL_FLAVOR);
+    }
 
     @BeforeEach
     public void setUp() {
@@ -40,8 +49,17 @@ public class CodeableConceptCdMapperTest {
             .isEqualToIgnoringWhitespace(expectedOutput);
     }
 
-    private static Stream<Arguments> getTestArguments() {
-        return TestArgumentsLoaderUtil.readTestCases(TEST_FILE_DIRECTORY);
-    }
+    @ParameterizedTest
+    @MethodSource("getTestArgumentsNullFlavor")
+    public void When_MappingStubbedCodeableConceptAsNullFlavor_Expect_HL7CdObjectXml(String inputJson, String outputXml)
+        throws IOException {
+        var observationCodeableConcept = ResourceTestFileUtils.getFileContent(inputJson);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(outputXml);
+        var codeableConcept = fhirParseService.parseResource(observationCodeableConcept, Observation.class).getCode();
 
+        var outputMessage = codeableConceptCdMapper.mapToNullFlavorCodeableConcept(codeableConcept);
+        assertThat(outputMessage)
+            .describedAs(TestArgumentsLoaderUtil.FAIL_MESSAGE, inputJson, outputXml)
+            .isEqualToIgnoringWhitespace(expectedOutput);
+    }
 }
