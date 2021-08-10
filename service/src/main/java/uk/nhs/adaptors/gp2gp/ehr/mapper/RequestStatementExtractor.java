@@ -152,18 +152,27 @@ public class RequestStatementExtractor {
                 .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{ Document: ");
+        stringBuilder.append("{ Document:");
+
         if (documentReference.hasCreated()) {
-            stringBuilder.append(" " + DateFormatUtil
-                    .toTextFormat(documentReference.getCreatedElement()));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(documentReference.getCreatedElement()));
         } else {
-            stringBuilder.append(" " + DateFormatUtil
-                    .toTextFormat(documentReference.getIndexedElement()));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(documentReference.getIndexedElement()));
         }
 
-        stringBuilder.append(" " + CodeableConceptMappingUtils.extractTextOrCoding(documentReference.getType()));
+        if(documentReference.hasType()) {
+            if (documentReference.getType().hasText()) {
+                stringBuilder.append(" " + documentReference.getType().getText());
+            } else if (documentReference.getType().hasCoding()) {
+                CodeableConceptMappingUtils.extractTextOrCoding(documentReference.getType()).ifPresent(docType -> {
+                    stringBuilder.append(" " + docType);
+                });
+            }
+        }
+
         stringBuilder.append(" " + documentReference.getDescription());
         stringBuilder.append(" }");
+
         return stringBuilder.toString();
     }
 
@@ -175,17 +184,20 @@ public class RequestStatementExtractor {
                 .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{ Observation: ");
+        stringBuilder.append("{ Observation:");
+
         if (observation.hasEffectiveDateTimeType()) {
-            stringBuilder.append(" " + DateFormatUtil
-                    .toTextFormat(observation.getEffectiveDateTimeType()));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
-            stringBuilder.append(" " + DateFormatUtil
-                    .toTextFormat(observation.getEffectivePeriod().getStartElement()));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(observation.getEffectivePeriod().getStartElement()));
         }
-        stringBuilder.append(" " + CodeableConceptMappingUtils.extractTextOrCoding(observation.getCode()));
+
+        CodeableConceptMappingUtils.extractTextOrCoding(observation.getCode()).ifPresent(code -> {
+            stringBuilder.append(" " + code);
+        });
 
         stringBuilder.append(" }");
+
         return stringBuilder.toString();
     }
 
@@ -197,17 +209,20 @@ public class RequestStatementExtractor {
                 .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{ Referral: ");
+        stringBuilder.append("{ Referral:");
+
         if (referralRequest.hasAuthoredOn()) {
-            stringBuilder.append(" " + stringBuilder.append(DateFormatUtil
-                    .toTextFormat(referralRequest.getAuthoredOnElement())));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(referralRequest.getAuthoredOnElement()));
         }
 
         if (referralRequest.hasReasonCode()) {
-            stringBuilder.append(" " + CodeableConceptMappingUtils.extractTextOrCoding(referralRequest.getReasonCode().get(0)));
+            CodeableConceptMappingUtils.extractTextOrCoding(referralRequest.getReasonCode().get(0)).ifPresent(reasonCode -> {
+                stringBuilder.append(" " + reasonCode);
+            });
         }
 
         stringBuilder.append(" }");
+
         return stringBuilder.toString();
     }
 
@@ -219,23 +234,24 @@ public class RequestStatementExtractor {
                 .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{ Pathology Report: ");
+        stringBuilder.append("{ Pathology Report:");
+
         if (diagnosticReport.hasIssued()) {
-            stringBuilder.append(" " + stringBuilder.append(DateFormatUtil
-                    .toTextFormat(diagnosticReport.getIssuedElement())));
+            stringBuilder.append(" " + formatDateUsingDayPrecision(diagnosticReport.getIssuedElement()));
         }
 
-        Optional<String> identifierStream = diagnosticReport
+        Optional<Identifier> identifier = diagnosticReport
                 .getIdentifier()
                 .stream()
-                .map(Identifier::getSystem)
-                .filter(CODE_SYSTEM::equals)
+                .filter(d -> d.getSystem().equals(CODE_SYSTEM))
                 .findFirst();
-        if (identifierStream.isPresent()) {
-            stringBuilder.append(" " + identifierStream.get());
+
+        if (identifier.isPresent()) {
+            stringBuilder.append(" " + identifier.get().getValue());
         }
 
         stringBuilder.append(" }");
+
         return stringBuilder.toString();
     }
 
@@ -247,11 +263,12 @@ public class RequestStatementExtractor {
                 .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("{ Medication: ");
+        stringBuilder.append("{ Medication:");
 
-        if (medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
-            stringBuilder.append(" " + stringBuilder.append(DateFormatUtil
-                    .toTextFormat(medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement())));
+        if (medicationRequest.hasDispenseRequest()) {
+            if (medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
+                stringBuilder.append(" " + formatDateUsingDayPrecision(medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+            }
         }
 
         if (medicationRequest.hasMedicationReference()) {
@@ -261,10 +278,18 @@ public class RequestStatementExtractor {
                     .map(Medication.class::cast)
                     .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
 
-            stringBuilder.append(" " + medication.getCode().getText());
+            CodeableConceptMappingUtils.extractTextOrCoding(medication.getCode()).ifPresent(code -> {
+                stringBuilder.append(" " + code);
+            });
         }
 
         stringBuilder.append(" }");
+
         return stringBuilder.toString();
+    }
+
+    public static String formatDateUsingDayPrecision(BaseDateTimeType baseDateTimeType) {
+        baseDateTimeType.setPrecision(TemporalPrecisionEnum.DAY);
+        return DateFormatUtil.toTextFormat(baseDateTimeType);
     }
 }
