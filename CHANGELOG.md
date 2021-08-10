@@ -6,6 +6,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-08-06
+
+- Work on GPC 1.6 uplift
+
+### Known Issues and Limitations
+
+- Same as version 1.1.2
+
+### Added
+
+- NIAD-1416: implement gpc 1.6.0 (#288)
+- NIAD-925: Documentation update. Tests updated for better coverage (#291)
+- NIAD-924: Splitting large documents into chunks (#271)
+
+
+### Known Issues and Limitations
+
+- Incomplete GP2GP workflow. The adaptor only sends the EhrExtract message. It cannot yet send documents
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+- https://snyk.io/vuln/SNYK-JAVA-IONETTY-1042268
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316638
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316639
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316640
+- https://snyk.io/vuln/SNYK-JAVA-ORGAPACHECOMMONS-1316641
+
+### Fixed
+
+- NIAD-1577 related problem and notes added to observation stmt text (#285)
+- NIAD-1481: generate ReferenceRange even when source text is missing (#283)
+
 ## [1.1.2] - 2021-07-21
 
 - Work on Clincial Mapping changes
