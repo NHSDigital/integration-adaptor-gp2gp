@@ -286,13 +286,13 @@ public class RequestStatementMapper {
                 text.append(referralRequest.getDescription());
             }
             Stream<String> descriptions = Stream.of(
-                buildSupportingInfoDescription(),
                 buildNoteDescription(),
                 buildReasonCodeDescription(),
                 buildRecipientDescription(),
                 buildSpecialtyDescription(),
                 buildServiceRequestedDescription(),
-                buildIdentifierDescription()
+                buildIdentifierDescription(),
+                buildSupportingInfoDescription()
             );
 
             if (hasReferencingAgent()) {
