@@ -19282,7 +19282,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="AD632056-105E-4AFF-9FE6-CE0046808311"/>
-                <code code="1058571000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Cetirizine Hydrochloride">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Cetirizine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -19347,7 +19347,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F9768902-2D68-45F5-8B42-D01373CF8BD7"/>
-                <code code="1020821000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Mebeverine Hydrochloride">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Mebeverine Hydrochloride</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -19412,7 +19412,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="BC25FB11-C00D-4EAA-BF47-4F032920DC10"/>
-                <code code="1062001000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Lustral">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Lustral</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -19477,7 +19477,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="00B078C1-F64C-476E-AA99-5D4BE0247863"/>
-                <code code="1030121000006109" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Prednisolone">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Prednisolone</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -19542,7 +19542,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3585D2B6-0AC7-4252-B616-9F15D93326EA"/>
-                <code code="1012851000006104" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Central Nervous System Drugs">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Central Nervous System Drugs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>

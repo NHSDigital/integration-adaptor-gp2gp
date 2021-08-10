@@ -1205,7 +1205,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
-                <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
