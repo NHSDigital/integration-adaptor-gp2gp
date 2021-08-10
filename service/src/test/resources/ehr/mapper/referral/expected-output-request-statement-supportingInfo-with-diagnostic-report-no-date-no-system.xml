@@ -1,0 +1,12 @@
+<component typeCode="COMP" >
+    <RequestStatement classCode="OBS" moodCode="RQO">
+        <id root="II-for-ReferralRequest-2FB2C828-F8EC-11EB-9A03-0242AC130003" />
+        <code code="3457005" displayName="Patient referral" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+        <text>Supporting Information: { Pathology Report: } </text>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <center nullFlavor="NI"/>
+        </effectiveTime>
+        <availabilityTime nullFlavor="UNK"/>
+    </RequestStatement>
+</component>
