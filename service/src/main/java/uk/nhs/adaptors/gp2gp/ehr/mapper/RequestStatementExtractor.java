@@ -5,7 +5,22 @@ import java.util.stream.Collectors;
 
 import ca.uhn.fhir.model.api.TemporalPrecisionEnum;
 import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.*;
+import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.BaseDateTimeType;
+import org.hl7.fhir.dstu3.model.DocumentReference;
+import org.hl7.fhir.dstu3.model.DiagnosticReport;
+import org.hl7.fhir.dstu3.model.HealthcareService;
+import org.hl7.fhir.dstu3.model.HumanName;
+import org.hl7.fhir.dstu3.model.Identifier;
+import org.hl7.fhir.dstu3.model.Practitioner;
+import org.hl7.fhir.dstu3.model.Medication;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Organization;
+import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.ReferralRequest;
+import org.hl7.fhir.dstu3.model.RelatedPerson;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
@@ -149,7 +164,10 @@ public class RequestStatementExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(DocumentReference.class::cast)
-                .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                .orElseThrow(() -> new EhrMapperException(
+                        String.format(
+                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Document:");
@@ -160,7 +178,7 @@ public class RequestStatementExtractor {
             stringBuilder.append(" " + formatDateUsingDayPrecision(documentReference.getIndexedElement()));
         }
 
-        if(documentReference.hasType()) {
+        if (documentReference.hasType()) {
             if (documentReference.getType().hasText()) {
                 stringBuilder.append(" " + documentReference.getType().getText());
             } else if (documentReference.getType().hasCoding()) {
@@ -181,7 +199,10 @@ public class RequestStatementExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(Observation.class::cast)
-                .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                .orElseThrow(() -> new EhrMapperException(
+                        String.format(
+                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Observation:");
@@ -206,7 +227,10 @@ public class RequestStatementExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(ReferralRequest.class::cast)
-                .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                .orElseThrow(() -> new EhrMapperException(
+                        String.format(
+                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Referral:");
@@ -231,7 +255,10 @@ public class RequestStatementExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(DiagnosticReport.class::cast)
-                .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                .orElseThrow(() -> new EhrMapperException(
+                        String.format(
+                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Pathology Report:");
@@ -260,14 +287,22 @@ public class RequestStatementExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(MedicationRequest.class::cast)
-                .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                .orElseThrow(() -> new EhrMapperException(
+                        String.format(
+                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                reference.getReferenceElement().getResourceType())));
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Medication:");
 
         if (medicationRequest.hasDispenseRequest()) {
             if (medicationRequest.getDispenseRequest().getValidityPeriod().hasStart()) {
-                stringBuilder.append(" " + formatDateUsingDayPrecision(medicationRequest.getDispenseRequest().getValidityPeriod().getStartElement()));
+                stringBuilder.append(" "
+                        + formatDateUsingDayPrecision(
+                                medicationRequest
+                                        .getDispenseRequest()
+                                        .getValidityPeriod()
+                                        .getStartElement()));
             }
         }
 
@@ -276,7 +311,10 @@ public class RequestStatementExtractor {
                     .getInputBundleHolder()
                     .getResource(medicationRequest.getMedicationReference().getReferenceElement())
                     .map(Medication.class::cast)
-                    .orElseThrow(() -> new EhrMapperException(String.format(EXCEPTION_COULD_NOT_RESOLVE_REFERENCE, reference.getReferenceElement().getResourceType())));
+                    .orElseThrow(() -> new EhrMapperException(
+                            String.format(
+                                    EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
+                                    reference.getReferenceElement().getResourceType())));
 
             CodeableConceptMappingUtils.extractTextOrCoding(medication.getCode()).ifPresent(code -> {
                 stringBuilder.append(" " + code);

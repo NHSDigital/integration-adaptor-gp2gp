@@ -320,7 +320,7 @@ public class RequestStatementMapper {
             return DEFAULT_REASON_CODE_XML;
         }
 
-        private String buildSupportingInfoDescription(){
+        private String buildSupportingInfoDescription() {
             if (referralRequest.hasSupportingInfo()) {
                 return SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
                         .map(value -> extractSupportingInfo(messageContext, value))
