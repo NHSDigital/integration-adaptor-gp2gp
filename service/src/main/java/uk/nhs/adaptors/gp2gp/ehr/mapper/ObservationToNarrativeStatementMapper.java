@@ -55,6 +55,9 @@ public class ObservationToNarrativeStatementMapper {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
         } else if (observation.hasEffectivePeriod()) {
+            if (!observation.getEffectivePeriod().hasStart()){
+                return null;
+            }
             return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
             return toHl7Format(observation.getIssuedElement());
