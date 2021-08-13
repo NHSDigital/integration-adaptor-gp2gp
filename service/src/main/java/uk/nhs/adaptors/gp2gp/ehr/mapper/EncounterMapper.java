@@ -37,7 +37,7 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @Slf4j
 public class EncounterMapper {
     private static final Mustache ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE =
-        TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
+            TemplateUtils.loadTemplate("ehr_encounter_to_ehr_composition_template.mustache");
     private static final String COMPLETE_CODE = "COMPLETE";
     private static final String SNOMED_SYSTEM = "http://snomed.info/sct";
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
@@ -56,36 +56,36 @@ public class EncounterMapper {
         AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
         var encounterStatementTemplateParameters = EncounterTemplateParameters.builder()
-            .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getIdElement()))
-            .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
-            .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(encounter.getPeriod().getStartElement()))
-            .status(COMPLETE_CODE)
-            .components(components)
-            .code(buildCode(encounter))
-            .displayName(buildDisplayName(encounter))
-            .originalText(buildOriginalText(encounter));
+                .encounterStatementId(idMapper.getOrNew(ResourceType.Encounter, encounter.getIdElement()))
+                .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForEncounter(encounter))
+                .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(encounter.getPeriod().getStartElement()))
+                .status(COMPLETE_CODE)
+                .components(components)
+                .code(buildCode(encounter))
+                .displayName(buildDisplayName(encounter))
+                .originalText(buildOriginalText(encounter));
 
         final String recReference = findParticipantWithCoding(encounter, ParticipantCoding.RECORDER)
-            .map(agentDirectory::getAgentId)
-            .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
+                .map(agentDirectory::getAgentId)
+                .orElseThrow(() -> new EhrMapperException("Encounter.participant recorder is required"));
         encounterStatementTemplateParameters.author(recReference);
 
         messageContext.getInputBundleHolder()
-            .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
-            .filter(ListResource::hasDate)
-            .map(ListResource::getDateElement)
-            .map(DateFormatUtil::toHl7Format)
-            .ifPresent(encounterStatementTemplateParameters::authorTime);
+                .getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE)
+                .filter(ListResource::hasDate)
+                .map(ListResource::getDateElement)
+                .map(DateFormatUtil::toHl7Format)
+                .ifPresent(encounterStatementTemplateParameters::authorTime);
 
         final Optional<String> pprfReference = findParticipantWithCoding(encounter, ParticipantCoding.PERFORMER)
-            .map(agentDirectory::getAgentId);
+                .map(agentDirectory::getAgentId);
 
         encounterStatementTemplateParameters.participant2(pprfReference.orElse(recReference));
 
         updateEhrFolderEffectiveTime(encounter);
 
         return TemplateUtils.fillTemplate(ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
-            encounterStatementTemplateParameters.build());
+                encounterStatementTemplateParameters.build());
     }
 
     private void updateEhrFolderEffectiveTime(Encounter encounter) {
@@ -96,54 +96,51 @@ public class EncounterMapper {
 
     private Optional<Reference> findParticipantWithCoding(Encounter encounter, ParticipantCoding coding) {
         return encounter.getParticipant().stream()
-            .filter(EncounterParticipantComponent::hasType)
-            .filter(participant -> participant.getType().stream()
-                .filter(CodeableConcept::hasCoding)
-                .anyMatch(codeableConcept -> codeableConcept.getCoding().stream()
-                    .filter(Coding::hasCode)
-                    .map(Coding::getCode)
-                    .anyMatch(coding.getCoding()::equals)))
-            .filter(EncounterParticipantComponent::hasIndividual)
-            .map(EncounterParticipantComponent::getIndividual)
-            .filter(Reference::hasReference)
-            .findAny();
+                .filter(EncounterParticipantComponent::hasType)
+                .filter(participant -> participant.getType().stream()
+                        .filter(CodeableConcept::hasCoding)
+                        .anyMatch(codeableConcept -> codeableConcept.getCoding().stream()
+                                .filter(Coding::hasCode)
+                                .map(Coding::getCode)
+                                .anyMatch(coding.getCoding()::equals)))
+                .filter(EncounterParticipantComponent::hasIndividual)
+                .map(EncounterParticipantComponent::getIndividual)
+                .filter(Reference::hasReference)
+                .findAny();
     }
 
     private boolean isSnomedAndWithinEhrCompositionVocabularyCodes(Coding coding) {
         return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM)
-            && EHR_COMPOSITION_NAME_VOCABULARY_CODES.contains(coding.getCode());
+                && EHR_COMPOSITION_NAME_VOCABULARY_CODES.contains(coding.getCode());
     }
 
     private CodeableConcept extractType(Encounter encounter) {
         return encounter.getType()
-            .stream()
-            .findFirst()
-            .orElseThrow(() -> new EhrMapperException("Could not map Encounter type"));
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new EhrMapperException("Could not map Encounter type"));
     }
 
     private String buildCode(Encounter encounter) {
         var type = extractType(encounter);
         return type.getCoding()
-            .stream()
-            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
-            .findFirst()
-            .map(Coding::getCode)
-            .orElse(OTHER_REPORT_CODE);
+                .stream()
+                .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
+                .findFirst()
+                .map(Coding::getCode)
+                .orElse(OTHER_REPORT_CODE);
     }
 
     private String buildDisplayName(Encounter encounter) {
         var type = extractType(encounter);
-        return type.getCoding()
-            .stream()
-            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
-            .findFirst()
-            .map(Coding::getDisplay)
-            .orElse(OTHER_REPORT_DISPLAY);
+        return getDisplayName(type);
     }
 
     private String buildOriginalText(Encounter encounter) {
         var type = extractType(encounter);
-        if (type.hasText()) {
+        if (getDisplayName(type).equals(OTHER_REPORT_DISPLAY)) {
+            return type.hasText() ? type.getText() : type.getCodingFirstRep().getDisplay();
+        } else if (type.hasText()) {
             return type.getText();
         }
         return StringUtils.EMPTY;
@@ -151,13 +148,22 @@ public class EncounterMapper {
 
     @SneakyThrows
     @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE",
-        justification = "https://github.com/spotbugs/spotbugs/issues/1338")
+            justification = "https://github.com/spotbugs/spotbugs/issues/1338")
     private static Set<String> getEhrCompositionNameVocabularyCodes() {
         try (InputStream is = EncounterMapper.class.getClassLoader().getResourceAsStream("ehr_composition_name_vocabulary_codes.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(is, UTF_8))) {
             return reader.lines()
-                .filter(StringUtils::isNotBlank)
-                .collect(Collectors.toUnmodifiableSet());
+                    .filter(StringUtils::isNotBlank)
+                    .collect(Collectors.toUnmodifiableSet());
         }
+    }
+
+    private String getDisplayName(CodeableConcept type) {
+        return type.getCoding()
+                .stream()
+                .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
+                .findFirst()
+                .map(Coding::getDisplay)
+                .orElse(OTHER_REPORT_DISPLAY);
     }
 }
