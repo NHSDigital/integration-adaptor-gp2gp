@@ -84,15 +84,15 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE,
                 toHl7Format(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
-            if (!observation.getEffectivePeriod().hasStart() && !observation.getEffectivePeriod().hasEnd()){
+            if (!observation.getEffectivePeriod().hasStart() && !observation.getEffectivePeriod().hasEnd()) {
                 return DEFAULT_TIME_VALUE;
             }
 
-            if (!observation.getEffectivePeriod().hasStart()){
-                    return String.format(
-                            EFFECTIVE_TIME_NO_START_TEMPLATE,
-                            toHl7Format(observation.getEffectivePeriod().getEndElement())
-                    );
+            if (!observation.getEffectivePeriod().hasStart()) {
+                return String.format(
+                        EFFECTIVE_TIME_NO_START_TEMPLATE,
+                        toHl7Format(observation.getEffectivePeriod().getEndElement())
+                );
             }
 
             return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, toHl7Format(
