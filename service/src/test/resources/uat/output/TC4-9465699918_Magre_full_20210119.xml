@@ -1806,7 +1806,7 @@
         <code code="831251000006101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - brain">
     <originalText>2 week rule referral - brain</originalText>
 </code>
-        <text>Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required 12</text>
+        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - brain } Recipient Org: NHS e-Referral Service Annotation:  @  Mode:Written, Annotation:  @  Purpose:Assessment, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required 12</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
@@ -1933,7 +1933,7 @@
         <code code="831331000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="2 week rule referral - skin">
     <originalText>2 week rule referral - skin</originalText>
 </code>
-        <text>Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required skin</text>
+        <text>Supporting Information: { Document: 2020-09-21 Referral Letter (21-Sep-2020) for 2 week rule referral - skin } Recipient Org: OLD TEMPLE SOWERBY MEDICAL PRACTICE Annotation:  @  Mode:Written, Annotation:  @  Purpose:Management Advice, Annotation:  @  NHS / Private:NHS, Annotation:  @  Transport:None Required skin</text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>

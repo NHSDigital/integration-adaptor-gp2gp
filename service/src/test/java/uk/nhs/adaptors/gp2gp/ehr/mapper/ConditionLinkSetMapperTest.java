@@ -20,6 +20,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.CodeableConceptMapperMockUtil;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -35,6 +36,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.xml.sax.SAXException;
 
 @ExtendWith(MockitoExtension.class)
 public class ConditionLinkSetMapperTest {
@@ -71,6 +73,8 @@ public class ConditionLinkSetMapperTest {
         + "condition_asserter_not_practitioner.json";
     private static final String INPUT_JSON_MISSING_CONDITION_CODE = CONDITION_FILE_LOCATIONS
         + "condition_missing_code.json";
+    private static final String INPUT_JSON_SUPPRESSED_RELATED_MEDICATION_REQUEST = CONDITION_FILE_LOCATIONS
+        + "condition_suppressed_related_medication_request.json";
 
     private static final String EXPECTED_OUTPUT_LINKSET = CONDITION_FILE_LOCATIONS + "expected_output_linkset_";
     private static final String OUTPUT_XML_WITH_IS_NESTED = EXPECTED_OUTPUT_LINKSET + "1.xml";
@@ -87,6 +91,7 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_STATUS_INACTIVE = EXPECTED_OUTPUT_LINKSET + "12.xml";
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
+    private static final String OUTPUT_XML_SUPPRESSED_RELATED_MEDICATION_REQUEST = EXPECTED_OUTPUT_LINKSET + "15.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -258,5 +263,16 @@ public class ConditionLinkSetMapperTest {
         assertThatThrownBy(() -> conditionLinkSetMapper.mapConditionToLinkSet(parsedObservation, false))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Condition code not present");
+    }
+
+    @Test
+    public void When_MappingConditionWith_SuppressedMedReqAsRelatedClinicalContent_Expect_NoEntry() throws IOException, SAXException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_SUPPRESSED_RELATED_MEDICATION_REQUEST);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_XML_SUPPRESSED_RELATED_MEDICATION_REQUEST);
+
+        Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
+        var mappedConditionOutput = conditionLinkSetMapper.mapConditionToLinkSet(condition, false);
+
+        XMLAssert.assertXMLEqual(expectedOutput, mappedConditionOutput);
     }
 }
