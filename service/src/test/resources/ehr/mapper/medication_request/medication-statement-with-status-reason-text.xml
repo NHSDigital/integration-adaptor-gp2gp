@@ -10,8 +10,8 @@
             <manufacturedProduct classCode="MANU">
                 <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
                     <code code="430127000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Oral Form Oxycodone (product)">
-                        <originalText>Oral Form Oxycodone (product)</originalText>
-                    </code>
+    <originalText>Oral Form Oxycodone (product)</originalText>
+</code>
                 </manufacturedMaterial>
             </manufacturedProduct>
         </consumable>
@@ -20,9 +20,9 @@
                 <id root="394559384658936"/>
                 <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
                 <statusCode code="COMPLETE"/>
-                <effectiveTime>
-                    <low value="20210101000000"/><high value="20210201000000"/>
-                </effectiveTime>
+                    <effectiveTime>
+                        <low value="20210101000000"/><high value="20210201000000"/>
+                    </effectiveTime>
                 <availabilityTime value="20210101000000"/>
                 <repeatNumber value="0"/>
                 <quantity value="1" unit="1">
@@ -41,8 +41,8 @@
             <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
                 <id root="394559384658936"/>
                 <code nullFlavor="UNK">
-                    <originalText>Clinical Contra-indication</originalText>
-                </code>
+    <originalText>Clinical Contra-indication</originalText>
+</code>
                 <statusCode code="COMPLETE"/>
                 <availabilityTime value="20100118143316"/>
                 <reversalOf typeCode="REV">
@@ -63,9 +63,9 @@
             </pertinentMedicationDosage>
         </pertinentInformation>
         <Participant typeCode="AUT" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="394559384658936"/>
-            </agentRef>
-        </Participant>
+    <agentRef classCode="AGNT">
+        <id root="394559384658936"/>
+    </agentRef>
+</Participant>
     </MedicationStatement>
 </component>
