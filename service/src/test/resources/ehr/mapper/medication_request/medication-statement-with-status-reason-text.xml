@@ -1,0 +1,71 @@
+<component typeCode="COMP">
+    <MedicationStatement classCode="SBADM" moodCode="INT">
+        <id root="394559384658936"/>
+        <statusCode code="COMPLETE"/>
+        <effectiveTime>
+            <low value="20210101000000"/><high value="20210201000000"/>
+        </effectiveTime>
+        <availabilityTime value="20210101000000"/>
+        <consumable typeCode="CSM">
+            <manufacturedProduct classCode="MANU">
+                <manufacturedMaterial determinerCode="KIND" classCode="MMAT">
+                    <code code="430127000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Oral Form Oxycodone (product)">
+                        <originalText>Oral Form Oxycodone (product)</originalText>
+                    </code>
+                </manufacturedMaterial>
+            </manufacturedProduct>
+        </consumable>
+        <component typeCode="COMP">
+            <ehrSupplyAuthorise>
+                <id root="394559384658936"/>
+                <code code="394823007" displayName="NHS Prescription" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
+                <statusCode code="COMPLETE"/>
+                <effectiveTime>
+                    <low value="20210101000000"/><high value="20210201000000"/>
+                </effectiveTime>
+                <availabilityTime value="20210101000000"/>
+                <repeatNumber value="0"/>
+                <quantity value="1" unit="1">
+                    <translation value="1">
+                        <originalText>Unk UoM</originalText>
+                    </translation>
+                </quantity>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation>
+                        <text>Patient Instruction: Test Patient Instruction</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+            </ehrSupplyAuthorise>
+        </component>
+        <component typeCode="COMP">
+            <ehrSupplyDiscontinue classCode="SPLY" moodCode="RQO">
+                <id root="394559384658936"/>
+                <code nullFlavor="UNK">
+                    <originalText>Clinical Contra-indication</originalText>
+                </code>
+                <statusCode code="COMPLETE"/>
+                <availabilityTime value="20100118143316"/>
+                <reversalOf typeCode="REV">
+                    <priorMedicationRef moodCode="ORD" classCode="SBADM">
+                        <id root="394559384658936"/>
+                    </priorMedicationRef>
+                </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Clinical Contra-indication</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
+            </ehrSupplyDiscontinue>
+        </component>
+        <pertinentInformation typeCode="PERT">
+            <pertinentMedicationDosage classCode="SBADM" moodCode="RMD">
+                <text>Test Dosage Text</text>
+            </pertinentMedicationDosage>
+        </pertinentInformation>
+        <Participant typeCode="AUT" contextControlCode="OP">
+            <agentRef classCode="AGNT">
+                <id root="394559384658936"/>
+            </agentRef>
+        </Participant>
+    </MedicationStatement>
+</component>
