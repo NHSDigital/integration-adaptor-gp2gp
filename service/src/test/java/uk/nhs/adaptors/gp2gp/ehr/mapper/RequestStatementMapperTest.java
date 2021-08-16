@@ -90,7 +90,29 @@ public class RequestStatementMapperTest {
     private static final String INPUT_JSON_WITH_URGENT_PRIORITY = TEST_FILE_DIRECTORY
         + "example-referral-request-with-urgent-priority.json";
     private static final String INPUT_JSON_WITH_UNSUPPORTED_PRIORITY = TEST_FILE_DIRECTORY
-        + "example-referral-request-with-unsupported-priority.json";
+            + "example-referral-request-with-unsupported-priority.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-document-reference.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_CREATED_NO_TEXT = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-document-reference-no-created-no-text.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-observation.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_EFFECTIVEPERIOD = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-observation.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_NO_DATE = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-observation-no-date.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_REFERRALREQUEST = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-referral-request.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_REFERRALREQUEST_NO_DATE_NO_REASON = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-referral-request-no-date-no-reason.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-diagnostic-report.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT_NO_DATE_NO_SYSTEM = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-diagnostic-report-no-date-no-system.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_MEDICATIONREQUEST = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-medication-request.json";
+    private static final String INPUT_JSON_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE = TEST_FILE_DIRECTORY
+            + "example-referral-request-supportingInfo-with-medication-request-no-date.json";
 
     // OUTPUT FILES
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
@@ -131,6 +153,26 @@ public class RequestStatementMapperTest {
         + "expected-output-request-statement-with-high-priority.xml";
     private static final String OUTPUT_XML_WITH_IMMEDIATE_PRIORITY = TEST_FILE_DIRECTORY
         + "expected-output-request-statement-with-immediate-priority.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-document-reference.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_CREATED_NO_TEXT = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-document-reference-no-created-no-text.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_OBSERVATION = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-observation.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_OBSERVATION_NO_DATE = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-observation-no-date.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_REFERRALREQUEST = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-referral-request.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_REFERRALREQUEST_NO_DATE_NO_REASON = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-referral-request-no-date-no-reason.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-diagnostic-report.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT_NO_DATE_NO_SYSTEM = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-diagnostic-report-no-date-no-system.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_MEDICATIONREQUEST = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-medication-request.xml";
+    private static final String OUTPUT_XML_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE = TEST_FILE_DIRECTORY
+            + "expected-output-request-statement-supportingInfo-with-medication-request-no-date.xml";
 
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
@@ -162,7 +204,30 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_MULTIPLE_RECIPIENTS, OUTPUT_XML_WITH_MULTIPLE_RECIPIENTS),
             arguments(INPUT_JSON_WITH_ASAP_PRIORITY, OUTPUT_XML_WITH_IMMEDIATE_PRIORITY),
             arguments(INPUT_JSON_WITH_ROUTINE_PRIORITY, OUTPUT_XML_WITH_NORMAL_PRIORITY),
-            arguments(INPUT_JSON_WITH_URGENT_PRIORITY, OUTPUT_XML_WITH_HIGH_PRIORITY)
+            arguments(INPUT_JSON_WITH_URGENT_PRIORITY, OUTPUT_XML_WITH_HIGH_PRIORITY),
+            // ReferralRequest.supportingInfo resources for test
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_CREATED_NO_TEXT,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_DOCUMENTREFERENCE_NO_CREATED_NO_TEXT),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_OBSERVATION),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_EFFECTIVEPERIOD,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_OBSERVATION),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_NO_DATE,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_OBSERVATION_NO_DATE),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_REFERRALREQUEST,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_REFERRALREQUEST),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_REFERRALREQUEST_NO_DATE_NO_REASON,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_REFERRALREQUEST_NO_DATE_NO_REASON),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT_NO_DATE_NO_SYSTEM,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_DIAGNOSTICREPORT_NO_DATE_NO_SYSTEM),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_MEDICATIONREQUEST,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_MEDICATIONREQUEST),
+            arguments(INPUT_JSON_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE,
+                    OUTPUT_XML_WITH_SUPPORTINGINFO_MEDICATIONREQUEST_NO_DATE)
         );
     }
 
