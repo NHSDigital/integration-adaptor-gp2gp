@@ -12,10 +12,8 @@ import org.hl7.fhir.dstu3.model.BaseReference;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Encounter;
-import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
-import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Practitioner;
@@ -27,7 +25,6 @@ import org.hl7.fhir.instance.model.api.IIdType;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
 @Slf4j
@@ -66,118 +63,10 @@ public class AgentDirectoryExtractor {
             .collect(Collectors.toList());
     }
 
-    public static List<Observation> extractObservationsWithPerformers(Bundle bundle) {
-        return ResourceExtractor.extractResourcesByType(bundle, Observation.class)
-            .filter(Observation::hasPerformer)
-            .collect(Collectors.toList());
-    }
-
     public static Optional<Patient> extractPatientByNhsNumber(Bundle bundle, String nhsNumber) {
         return ResourceExtractor.extractResourcesByType(bundle, Patient.class)
             .filter(patient -> isNhsNumberMatching(patient, nhsNumber))
             .findFirst();
-    }
-
-    public static List<Practitioner> extractRemainingPractitioners(Bundle bundle) {
-        return bundle.getEntry().stream()
-            .map(Bundle.BundleEntryComponent::getResource)
-            .filter(resource -> REMAINING_RESOURCE_TYPES.contains(resource.getResourceType()))
-            .filter(AgentDirectoryExtractor::containsRelevantPractitioner)
-            .peek(resource -> LOGGER.debug("{} contains a relevant practitioner reference", resource.getId()))
-            .flatMap(resource -> {
-                var reference = extractIIdTypes(resource);
-                LOGGER.debug("Extracted reference to {}", reference);
-                return ResourceExtractor.extractResourceByReference(bundle, reference)
-                    .map(referencedResource -> castToPractitioner(resource, referencedResource))
-                    .stream();
-            })
-            .distinct()
-            .collect(Collectors.toList());
-    }
-
-    private static Practitioner castToPractitioner(Resource parent, Resource resource) {
-        if (ResourceType.Practitioner == resource.getResourceType()) {
-            return (Practitioner) resource;
-        }
-        throw new EhrMapperException(String.format("Encountered %s in resource %s where Practitioner is expected",
-            resource.getResourceType(), parent.getId()));
-    }
-
-    public static List<AgentData> extractAgentData(Bundle bundle, List<Practitioner> practitioners) {
-
-        List<PractitionerRole> practitionerRoles = ResourceExtractor.extractResourcesByType(bundle, PractitionerRole.class)
-            .filter(practitionerRole -> referencesPractitioner(practitionerRole, practitioners))
-            .collect(Collectors.toList());
-
-        List<Organization> organizations = practitionerRoles.stream()
-            .map(PractitionerRole::getOrganization)
-            .map(BaseReference::getReferenceElement)
-            .map(reference -> ResourceExtractor.extractResourceByReference(bundle, reference))
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .map(Organization.class::cast)
-            .collect(Collectors.toList());
-
-        return practitioners.stream()
-            .map(practitioner -> createAgentData(practitioner, practitionerRoles, organizations))
-            .collect(Collectors.toList());
-    }
-
-    private static AgentData createAgentData(Practitioner practitioner,
-        List<PractitionerRole> practitionerRoles, List<Organization> organizations) {
-
-        var practitionerRole = extractRelevantPractitionerRole(practitioner, practitionerRoles);
-        if (practitionerRole.isPresent()) {
-            var organization = extractRelevantOrganization(practitionerRole.get(), organizations);
-            if (organization.isPresent()) {
-                return new AgentData(practitioner, practitionerRole.get(), organization.get());
-            }
-        }
-        return new AgentData(practitioner, null, null);
-    }
-
-    public static Optional<Resource> extractObservationResource(Observation observation, Bundle bundle, ResourceType resourceType) {
-        var reference = observation.getPerformer()
-            .stream()
-            .map(BaseReference::getReferenceElement)
-            .filter(reference1 -> reference1.getResourceType().equals(resourceType.name()))
-            .findFirst();
-        return reference.flatMap(value -> ResourceExtractor.extractResourceByReference(bundle, value));
-    }
-
-    private static boolean referencesPractitioner(PractitionerRole practitionerRole, List<Practitioner> practitioners) {
-        var practitionerRolePractitionerId = practitionerRole.getPractitioner().getReferenceElement().getIdPart();
-        return practitioners.stream()
-            .map(Practitioner::getIdElement)
-            .map(IdType::getIdPart)
-            .anyMatch(practitionerRolePractitionerId::equals);
-    }
-
-    private static Optional<PractitionerRole> extractRelevantPractitionerRole(Practitioner practitioner,
-        List<PractitionerRole> practitionerRoles) {
-        var practitionerId = practitioner.getIdElement().getIdPart();
-        return practitionerRoles
-            .stream()
-            .filter(practitionerRole -> practitionerRole.getPractitioner().getReferenceElement().getIdPart().equals(practitionerId))
-            .findFirst();
-    }
-
-    private static Optional<Organization> extractRelevantOrganization(PractitionerRole practitionerRole, List<Organization> organizations) {
-        var organizationId = practitionerRole.getOrganization().getReferenceElement().getIdPart();
-        return organizations
-            .stream()
-            .filter(organization -> organization.getIdElement().getIdPart().equals(organizationId))
-            .findFirst();
-    }
-
-    private static boolean containsRelevantPractitioner(Resource resource) {
-        Predicate<Resource> containsPractitioner = RESOURCE_HAS_PRACTITIONER.getOrDefault(resource.getResourceType(), (resource1) -> false);
-        return containsPractitioner.test(resource);
-    }
-
-    private static IIdType extractIIdTypes(Resource resource) {
-        Function<Resource, IIdType> extractor = RESOURCE_EXTRACT_IIDTYPE.get(resource.getResourceType());
-        return extractor.apply(resource);
     }
 
     private static boolean isNhsNumberMatching(Patient patient, String nhsNumber) {
