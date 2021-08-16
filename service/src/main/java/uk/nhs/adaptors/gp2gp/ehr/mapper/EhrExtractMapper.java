@@ -52,7 +52,32 @@ public class EhrExtractMapper {
     public EhrExtractTemplateParameters mapBundleToEhrFhirExtractParams(
         GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition,
         Bundle bundle) {
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
+
+        var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
+        var mappedComponents = mapEncounterToEhrComponents(encounters);
+        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
+        ehrExtractTemplateParameters.setComponents(mappedComponents);
+
+        ehrExtractTemplateParameters.setAgentDirectory(
+            agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, getPatientNhsNumber(getGpcStructuredTaskDefinition))
+        );
+
+        return ehrExtractTemplateParameters;
+    }
+
+    public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, String bindingDocumentId) {
+        var ehrCompositionWithNarrativeStatement
+            = nonConsultationResourceMapper.buildEhrCompositionForSkeletonEhrExtract(bindingDocumentId);
+        EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
+
+        ehrExtractTemplateParameters.setComponents(ehrCompositionWithNarrativeStatement);
+        return mapEhrExtractToXml(ehrExtractTemplateParameters);
+    }
+
+    private EhrExtractTemplateParameters setSharedExtractParams(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition) {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = new EhrExtractTemplateParameters();
+
         ehrExtractTemplateParameters.setEhrExtractId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setEhrFolderId(randomIdGeneratorService.createNewId());
         ehrExtractTemplateParameters.setPatientId(getGpcStructuredTaskDefinition.getNhsNumber());
@@ -61,17 +86,8 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
 
-        var encounters = EncounterExtractor.extractEncounterReferencesFromEncounterList(bundle);
-        var mappedComponents = mapEncounterToEhrComponents(encounters);
-        mappedComponents.addAll(nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(bundle));
-        ehrExtractTemplateParameters.setComponents(mappedComponents);
-
         ehrExtractTemplateParameters.setEffectiveTime(
             StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
-        );
-
-        ehrExtractTemplateParameters.setAgentDirectory(
-            agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, getPatientNhsNumber(getGpcStructuredTaskDefinition))
         );
 
         return ehrExtractTemplateParameters;

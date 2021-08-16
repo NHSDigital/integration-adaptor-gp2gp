@@ -84,4 +84,8 @@ public class StructuredRecordMappingService {
             structuredTaskDefinition,
             ehrExtractContent);
     }
+
+    public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
+        return ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
+    }
 }

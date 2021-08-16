@@ -118,6 +118,8 @@ public class EhrExtractMapperComponentTest {
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper,
             participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes());
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -128,7 +130,7 @@ public class EhrExtractMapperComponentTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
+            documentReferenceToNarrativeStatementMapper,
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -152,7 +154,8 @@ public class EhrExtractMapperComponentTest {
 
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
-            encounterComponentsMapper);
+            encounterComponentsMapper,
+            documentReferenceToNarrativeStatementMapper);
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
         timestampService,

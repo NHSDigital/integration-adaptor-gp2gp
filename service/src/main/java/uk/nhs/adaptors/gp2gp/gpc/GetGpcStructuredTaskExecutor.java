@@ -1,5 +1,8 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
+import static uk.nhs.adaptors.gp2gp.common.utils.StringChunking.chunkEhrExtract;
+import static uk.nhs.adaptors.gp2gp.common.utils.StringChunking.getBytesLengthOfString;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -21,10 +24,8 @@ import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
-import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +34,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
-
-    private static final int THRESHOLD_MINIMUM = 4;
 
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
@@ -100,18 +99,25 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 hl7TranslatedResponse = compressedHL7;
             } else {
                 // generate chunks and binding doc
-                var chunkedHL7 = chunkEhrExtract(compressedHL7, gp2gpConfiguration.getLargeEhrExtractThreshold());
+                List<OutboundMessage.ExternalAttachment> chunkedEhrExtractAttachments = new ArrayList<>();
+                var chunkedHL7 = chunkEhrExtract(compressedHL7, gp2gpConfiguration.getLargeEhrExtractThreshold() - 2700);
                 for (int i = 0; i < chunkedHL7.size(); i++) {
                     var chunk = chunkedHL7.get(i);
-                    var externalAttachment = buildExternalAttachment(chunk);
-                    externalAttachments.add(externalAttachment);
-                    uploadToStorage(chunk, buildGetDocumentTask(structuredTaskDefinition, externalAttachment));
+                    var externalAttachment = buildExternalAttachment(chunk, structuredTaskDefinition);
+                    chunkedEhrExtractAttachments.add(externalAttachment);
+
+                    var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+                    uploadToStorage(chunk, externalAttachment.getFilename(), taskDefinition);
+                    ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
                 }
 
                 // generate binding doc and reference from skeleton message to be sent in place of HL7
-
+                var bindingDoc = buildBindingDocument(chunkedEhrExtractAttachments);
                 // generate special EhrComposition with Narrative statement referencing binding doc
-                hl7TranslatedResponse = generateSkeletonPayload(hl7TranslatedResponse);
+
+                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, bindingDoc);
+
+                externalAttachments.addAll(chunkedEhrExtractAttachments);
 
             }
         }
@@ -172,58 +178,28 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
-    private int getBytesLengthOfString(String input) {
-        return input.getBytes(StandardCharsets.UTF_8).length;
-    }
-
-    private OutboundMessage.ExternalAttachment buildExternalAttachment(String chunk) {
-        var documentId = randomIdGeneratorService.createNewId();
+    private OutboundMessage.ExternalAttachment buildExternalAttachment(String chunk, TaskDefinition taskDefinition) {
         var messageId = randomIdGeneratorService.createNewId();
+        var documentId = randomIdGeneratorService.createNewId();
+        var documentName = GpcFilenameUtils.generateDocumentFilename(
+            taskDefinition.getConversationId(), documentId
+        );
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
             .contentType("application/xml") // confirm this is correct
-            .filename("")//generate filename
+            .filename(documentName)
             .length(getBytesLengthOfString(chunk))
             .compressed(true)
             .largeAttachment(false)
             .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
-            .url(StringUtils.EMPTY) // need to workout a way around attachment retrieval
+            .url(StringUtils.EMPTY)
             .build();
     }
 
-    private List<String> chunkEhrExtract(String ehrExtract, int sizeThreshold) {
-        if (sizeThreshold <= THRESHOLD_MINIMUM) {
-            throw new IllegalArgumentException("SizeThreshold must be larger 4 to hold at least 1 UTF-16 character");
-        }
-
-        List<String> chunks = new ArrayList<>();
-
-        StringBuilder chunk = new StringBuilder();
-        for (int i = 0; i < ehrExtract.length(); i++) {
-            var c = ehrExtract.charAt(i);
-            var chunkBytesSize = chunk.toString().getBytes(StandardCharsets.UTF_8).length;
-            var charBytesSize = Character.toString(c).getBytes(StandardCharsets.UTF_8).length;
-            if (chunkBytesSize + charBytesSize > sizeThreshold) {
-                chunks.add(chunk.toString());
-                chunk = new StringBuilder();
-            }
-            chunk.append(c);
-        }
-        if (chunk.length() != 0) {
-            chunks.add(chunk.toString());
-        }
-
-        return chunks;
-    }
-
-    private void uploadToStorage(String chunk, DocumentTaskDefinition taskDefinition) {
+    private void uploadToStorage(String chunk, String documentName, DocumentTaskDefinition taskDefinition) {
         var taskId = taskDefinition.getTaskId();
-        var documentName = GpcFilenameUtils.generateDocumentFilename(
-            taskDefinition.getConversationId(), taskDefinition.getDocumentId()
-        );
-
         var mhsOutboundRequestData = gpcDocumentTranslator.translateToMhsOutboundRequestData(taskDefinition, chunk);
         var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
             .buildStorageDataWrapper(taskDefinition, mhsOutboundRequestData, taskId);
@@ -231,8 +207,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
     }
 
-    // place holder
-    private String generateSkeletonPayload(String id) {
-        return id;
+    // placeholder
+    private String buildBindingDocument(List<OutboundMessage.ExternalAttachment> attachments) {
+        return randomIdGeneratorService.createNewId();
     }
 }

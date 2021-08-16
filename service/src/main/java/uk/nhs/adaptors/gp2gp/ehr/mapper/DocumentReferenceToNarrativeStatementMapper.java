@@ -63,6 +63,16 @@ public class DocumentReferenceToNarrativeStatementMapper {
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
 
+    public String buildBindingDocumentNarrativeStatement(String bindingDocumentId) {
+        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
+            .narrativeStatementId(bindingDocumentId)
+            //.availabilityTime(getAvailabilityTime(documentReference))
+            .hasReference(true)
+            .referenceTitle(bindingDocumentId)
+            .referenceContentType("application/xml");
+        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
+    }
+
     private boolean isFileAbsent(Attachment attachment) {
         return StringUtils.isNotBlank(attachment.getTitle());
     }
