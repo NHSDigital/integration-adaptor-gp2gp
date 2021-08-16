@@ -20,6 +20,7 @@ import com.github.mustachejava.Mustache;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.InFulfilmentOfTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -98,6 +99,21 @@ public class MedicationStatementExtractor {
             .map(Extension::getValue)
             .map(CodeableConcept.class::cast)
             .map(codeableConceptCdMapper::mapCodeableConceptToCd)
+            .orElse(StringUtils.EMPTY);
+    }
+
+    public static String extractStatusReasonStoppedText(MedicationRequest medicationRequest) {
+        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL);
+        return statusReason
+            .map(Extension::getExtension)
+            .stream()
+            .flatMap(List::stream)
+            .filter(value -> STATUS_REASON_URL.equals(value.getUrl()))
+            .findFirst()
+            .map(Extension::getValue)
+            .map(CodeableConcept.class::cast)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .map(value -> value.get())
             .orElse(StringUtils.EMPTY);
     }
 
