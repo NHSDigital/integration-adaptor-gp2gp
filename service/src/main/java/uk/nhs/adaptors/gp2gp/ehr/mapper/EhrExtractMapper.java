@@ -63,6 +63,10 @@ public class EhrExtractMapper {
             agentDirectoryMapper.mapEHRFolderToAgentDirectory(bundle, getPatientNhsNumber(getGpcStructuredTaskDefinition))
         );
 
+        ehrExtractTemplateParameters.setEffectiveTime(
+            StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
+        );
+
         return ehrExtractTemplateParameters;
     }
 
@@ -72,6 +76,9 @@ public class EhrExtractMapper {
         EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
 
         ehrExtractTemplateParameters.setComponents(ehrCompositionWithNarrativeStatement);
+        ehrExtractTemplateParameters.setEffectiveTime(
+            StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
+        );
         return mapEhrExtractToXml(ehrExtractTemplateParameters);
     }
 
@@ -85,10 +92,6 @@ public class EhrExtractMapper {
         ehrExtractTemplateParameters.setToOdsCode(getGpcStructuredTaskDefinition.getToOdsCode());
         ehrExtractTemplateParameters.setFromOdsCode(getGpcStructuredTaskDefinition.getFromOdsCode());
         ehrExtractTemplateParameters.setAvailabilityTime(DateFormatUtil.toHl7Format(timestampService.now()));
-
-        ehrExtractTemplateParameters.setEffectiveTime(
-            StatementTimeMappingUtils.prepareEffectiveTimeForEhrFolder(messageContext.getEffectiveTime())
-        );
 
         return ehrExtractTemplateParameters;
     }
