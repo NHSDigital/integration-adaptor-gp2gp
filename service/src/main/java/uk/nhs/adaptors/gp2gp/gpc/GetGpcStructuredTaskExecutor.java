@@ -1,8 +1,5 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
-import static uk.nhs.adaptors.gp2gp.common.utils.StringChunking.chunkEhrExtract;
-import static uk.nhs.adaptors.gp2gp.common.utils.StringChunking.getBytesLengthOfString;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -26,7 +23,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +31,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
+
+    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
 
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
@@ -91,39 +90,26 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             messageContext.resetMessageContext();
         }
 
-        // check size
+        var payload = hl7TranslatedResponse;
         if (isLargeEhrExtract(hl7TranslatedResponse)) {
-            // TODO: 11/08/2021 compression  story NIAD-1059
-            String compressedHL7 = hl7TranslatedResponse;
-            if (!isLargeEhrExtract(compressedHL7)) {
-                hl7TranslatedResponse = compressedHL7;
+            // TODO: 16/08/2021
+            String compressedHl7 = hl7TranslatedResponse;
+            if (!isLargeEhrExtract(compressedHl7)) {
+                payload = compressedHl7;
             } else {
-                // generate chunks and binding doc
-                List<OutboundMessage.ExternalAttachment> chunkedEhrExtractAttachments = new ArrayList<>();
-                var chunkedHL7 = chunkEhrExtract(compressedHL7, gp2gpConfiguration.getLargeEhrExtractThreshold() - 2700);
-                for (int i = 0; i < chunkedHL7.size(); i++) {
-                    var chunk = chunkedHL7.get(i);
-                    var externalAttachment = buildExternalAttachment(chunk, structuredTaskDefinition);
-                    chunkedEhrExtractAttachments.add(externalAttachment);
+                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition);
+                externalAttachments.add(externalAttachment);
 
-                    var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                    uploadToStorage(chunk, externalAttachment.getFilename(), taskDefinition);
-                    ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
-                }
-
-                // generate binding doc and reference from skeleton message to be sent in place of HL7
-                var bindingDoc = buildBindingDocument(chunkedEhrExtractAttachments);
-                // generate special EhrComposition with Narrative statement referencing binding doc
-
-                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, bindingDoc);
-
-                externalAttachments.addAll(chunkedEhrExtractAttachments);
-
+                var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+                uploadToStorage(compressedHl7, externalAttachment.getFilename(), taskDefinition);
+                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
+                payload = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
+                    externalAttachment.getFilename());
             }
         }
 
         var outboundMessage = OutboundMessage.builder()
-            .payload(hl7TranslatedResponse)
+            .payload(payload)
             .externalAttachments(externalAttachments)
             .build();
 
@@ -192,9 +178,10 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .filename(documentName)
             .length(getBytesLengthOfString(chunk))
             .compressed(true)
-            .largeAttachment(false)
+            .largeAttachment(true)
             .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
             .url(StringUtils.EMPTY)
+            .domainData(SKELETON_ATTACHMENT)
             .build();
     }
 
@@ -207,8 +194,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
     }
 
-    // placeholder
-    private String buildBindingDocument(List<OutboundMessage.ExternalAttachment> attachments) {
-        return randomIdGeneratorService.createNewId();
+    private int getBytesLengthOfString(String input) {
+        return input.getBytes(StandardCharsets.UTF_8).length;
     }
 }

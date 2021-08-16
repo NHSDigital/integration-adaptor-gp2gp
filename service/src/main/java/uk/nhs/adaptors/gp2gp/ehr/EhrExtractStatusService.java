@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -256,8 +255,8 @@ public class EhrExtractStatusService {
         }
     }
 
-    // TODO: 13/08/2021 revisit, should pass in array of externalAttachments for minimizing db updates. Had issues of it only creating one doc
-    public EhrExtractStatus updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition, OutboundMessage.ExternalAttachment externalAttachment) {
+    public EhrExtractStatus updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
+        OutboundMessage.ExternalAttachment externalAttachment) {
 
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
