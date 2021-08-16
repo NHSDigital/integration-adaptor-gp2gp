@@ -1,0 +1,23 @@
+{
+    "resourceType": "Condition",
+    "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "MedicationRequest/test-id"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "ReferralRequest/D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+            }
+        }
+    ]
+}

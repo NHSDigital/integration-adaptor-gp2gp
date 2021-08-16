@@ -1,0 +1,20 @@
+<component typeCode="COMP" >
+    <ObservationStatement classCode="OBS" moodCode="EVN">
+        <id root="394559384658936" />
+        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
+        <statusCode code="COMPLETE" />
+        <effectiveTime>
+            <low nullFlavour="UNK"/><high value="20190701113000"/>
+        </effectiveTime>
+        <availabilityTime value="20190601113000"/>
+        
+        
+        <pertinentInformation typeCode="PERT">
+            <sequenceNumber value="+1" />
+            <pertinentAnnotation classCode="OBS" moodCode="EVN">
+                <text>Interpretation: Test comment</text>
+            </pertinentAnnotation>
+        </pertinentInformation>
+        
+    </ObservationStatement>
+</component>
