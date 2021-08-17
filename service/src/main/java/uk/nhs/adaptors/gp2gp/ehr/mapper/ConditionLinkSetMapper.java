@@ -158,9 +158,8 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildAvailabilityTime(Condition condition) {
-        if (condition.hasAssertedDate()) {
-            return Optional.of(DateFormatUtil
-                .toHl7Format(condition.getAssertedDateElement()));
+        if (condition.hasOnsetDateTimeType()) {
+            return Optional.of(DateFormatUtil.toHl7Format((condition.getOnsetDateTimeType())));
         }
         return Optional.empty();
     }
