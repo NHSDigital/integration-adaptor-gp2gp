@@ -45,6 +45,9 @@ public class ObservationToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_PERFORMER = TEST_FILE_DIRECTORY + "example-observation-resource-25.json";
     private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
         + "example-observation-with-performer-invalid-ref-resource-type.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START = TEST_FILE_DIRECTORY + "example-observation-resource-38.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END = TEST_FILE_DIRECTORY + "example-observation-resource-39.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK = TEST_FILE_DIRECTORY + "example-observation-resource-40.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
@@ -94,7 +97,10 @@ public class ObservationToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
             Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
-            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT)
+            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_USES_ISSUED)
         );
     }
 

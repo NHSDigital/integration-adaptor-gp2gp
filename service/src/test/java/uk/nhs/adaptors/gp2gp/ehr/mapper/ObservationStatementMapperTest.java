@@ -106,7 +106,11 @@ public class ObservationStatementMapperTest {
     private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
         + "example-observation-resource-34.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_VALUE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-35.json";
+            + "example-observation-resource-35.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START = TEST_FILE_DIRECTORY
+            + "example-observation-resource-36.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK = TEST_FILE_DIRECTORY
+            + "example-observation-resource-37.json";
 
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
@@ -158,6 +162,10 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-25.xml";
     private static final String OUTPUT_XML_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-26.xml";
+    private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW = TEST_FILE_DIRECTORY
+            + "expected-output-observation-statement-27.xml";
+    private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK = TEST_FILE_DIRECTORY
+            + "expected-output-observation-statement-28.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -285,7 +293,9 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION),
             Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
             Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT)
+            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK)
         );
     }
 }

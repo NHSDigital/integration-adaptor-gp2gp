@@ -1,11 +1,14 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestType;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -22,6 +25,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParamet
 import uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
@@ -169,13 +173,13 @@ public class ConditionLinkSetMapper {
             .stream()
             .map(Extension::getValue)
             .map(value -> (Reference) value)
-            .filter(this::filterOutNonExistentResource)
-            .filter(this::filterOutSuppressedLinkageResources)
+            .filter(this::nonExistentResourceFilter)
+            .filter(this::suppressedLinkageResourcesFilter)
             .map(reference -> messageContext.getIdMapper().getOrNew(reference))
             .collect(Collectors.toList());
     }
 
-    private boolean filterOutNonExistentResource(Reference reference) {
+    private boolean nonExistentResourceFilter(Reference reference) {
 
         var referencePresent = messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
@@ -189,8 +193,12 @@ public class ConditionLinkSetMapper {
         return false;
     }
 
-    private boolean filterOutSuppressedLinkageResources(Reference reference) {
-        return !SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
+    private boolean suppressedLinkageResourcesFilter(Reference reference) {
+        return !(isSuppressedResource(reference) || isSuppressedMedicationRequest(reference));
+    }
+
+    private boolean isSuppressedResource(Reference reference) {
+        return SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
@@ -202,5 +210,18 @@ public class ConditionLinkSetMapper {
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
         }
         throw new EhrMapperException("Condition code not present");
+    }
+
+    private boolean isSuppressedMedicationRequest(Reference reference) {
+        if (isMedicationRequestType(reference)) {
+            return messageContext.getInputBundleHolder()
+                .getResource(reference.getReferenceElement())
+                .map(MedicationRequest.class::cast)
+                .map(MedicationRequestUtils::isMedicationRequestSuppressed)
+                .orElse(false);
+        }
+
+        // for all other types do not suppress with this function
+        return false;
     }
 }
