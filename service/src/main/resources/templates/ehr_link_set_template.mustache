@@ -12,7 +12,7 @@
             {{#effectiveTimeLow}}<low value="{{effectiveTimeLow}}"/>{{/effectiveTimeLow}}{{^effectiveTimeLow}}<low nullFlavor="UNK"/>{{/effectiveTimeLow}}
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}" />
+        <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}"{{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
         {{#relatedClinicalContent}}
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
@@ -41,7 +41,7 @@
             {{#effectiveTimeLow}}<low value="{{effectiveTimeLow}}"/>{{/effectiveTimeLow}}{{^effectiveTimeLow}}<low nullFlavor="UNK"/>{{/effectiveTimeLow}}
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}" />
+        <availabilityTime {{#availabilityTime}}value="{{availabilityTime}}"{{/availabilityTime}}{{^availabilityTime}}nullFlavor="UNK"{{/availabilityTime}} />
         {{#pertinentInfo}}
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
