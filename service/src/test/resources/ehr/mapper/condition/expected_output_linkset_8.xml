@@ -12,7 +12,7 @@
             <low value="20200906"/>
             <high value="20201004000000"/>
         </effectiveTime>
-        <availabilityTime value="20200907101202" />
+        <availabilityTime value="20200906" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
                 <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-Condition-new-ID"/>

@@ -12,7 +12,7 @@
             <low value="20200906"/>
             <high value="20201004000000"/>
         </effectiveTime>
-        <availabilityTime value="20200907101202" />
+        <availabilityTime value="20200906" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="D2EA00FC-7B85-46C5-A0B7-E49C53C054D0-Condition-new-ID"/>
