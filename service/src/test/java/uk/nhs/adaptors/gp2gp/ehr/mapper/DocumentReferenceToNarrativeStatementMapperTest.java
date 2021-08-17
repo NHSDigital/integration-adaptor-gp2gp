@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
@@ -72,6 +73,8 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private SupportedContentTypes supportedContentTypes;
+    @Mock
+    private TimestampService timestampService;
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
@@ -87,7 +90,7 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         lenient().when(supportedContentTypes.isContentTypeSupported("text/richtext")).thenReturn(true);
         lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
 
-        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes);
+        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes, timestampService);
     }
 
     @AfterEach

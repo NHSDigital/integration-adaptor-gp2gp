@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import org.hl7.fhir.dstu3.model.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import uk.nhs.adaptors.gp2gp.common.exception.FhirValidationException;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrDocumentMapper;
@@ -26,40 +24,28 @@ public class GpcDocumentTranslator {
     public String translateToMhsOutboundRequestData(
         DocumentTaskDefinition taskDefinition, String response) {
 
+        var binary = fhirParseService.parseResource(response, Binary.class);
+
         var ehrDocumentTemplateParameters = ehrDocumentMapper
             .mapToMhsPayloadTemplateParameters(taskDefinition);
         var xmlContent = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         try {
-            return prepareOutboundMessage(taskDefinition, response, xmlContent);
+            return prepareOutboundMessage(taskDefinition, binary, xmlContent);
         } catch (JsonProcessingException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, String response, String xmlContent)
+    private String prepareOutboundMessage(DocumentTaskDefinition taskDefinition, Binary binary, String xmlContent)
             throws JsonProcessingException {
-
-        var isResponseBinary = true;
-        var attachmentBuilder = OutboundMessage.Attachment.builder()
-            .isBase64(Boolean.TRUE.toString())
-            .description(taskDefinition.getDocumentId());
-        try {
-            var binary = fhirParseService.parseResource(response, Binary.class);
-            attachmentBuilder
+        var attachments = Collections.singletonList(
+            OutboundMessage.Attachment.builder()
                 .contentType(binary.getContentType())
-                .payload(binary.getContentAsBase64());
-        } catch (FhirValidationException exception) {
-            isResponseBinary = false;
-        }
-
-        if (!isResponseBinary) {
-            attachmentBuilder
-                .contentType("application/xml")
-                .payload(response);
-        }
-
-        var attachments = Collections.singletonList(attachmentBuilder.build());
+                .isBase64(Boolean.TRUE.toString())
+                .description(taskDefinition.getDocumentId())
+                .payload(binary.getContentAsBase64())
+                .build());
         var outboundMessage = OutboundMessage.builder()
             .payload(xmlContent)
             .attachments(attachments)

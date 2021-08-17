@@ -83,11 +83,13 @@ public class NonConsultationResourceMapper {
     }
 
     public List<String> buildEhrCompositionForSkeletonEhrExtract(String bindingDocumentId) {
-        var narrativeStatement = narrativeStatementMapper.buildBindingDocumentNarrativeStatement(bindingDocumentId);
-        EncounterTemplateParameters build = EncounterTemplateParameters.builder().components(narrativeStatement).build();
+        var narrativeStatement = narrativeStatementMapper.buildFragmentIndexNarrativeStatement(bindingDocumentId);
+        EncounterTemplateParameters encounterTemplateParameters = EncounterTemplateParameters.builder()
+            .components(narrativeStatement)
+            .build();
         return List.of(TemplateUtils.fillTemplate(
             ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
-            build)
+            encounterTemplateParameters)
         );
     }
 
