@@ -8,10 +8,15 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 @Setter
@@ -56,18 +61,43 @@ public class OutboundMessage {
         private String documentId;
         @JsonProperty("message_id")
         private String messageId;
-        private String filename;
-        @JsonProperty("content_type")
-        private String contentType;
-        private boolean compressed;
-        @JsonProperty("large_attachment")
-        private boolean largeAttachment;
-        @JsonProperty("original_base64")
-        private boolean originalBase64;
-        private int length;
-        @JsonProperty("domain_data")
-        private String domainData;
+        private String description;
         @JsonIgnore
         private String url;
+    }
+
+    private static String booleanToYesNo(boolean value) {
+        if (value) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public static String generateAttachmentDescription(
+            @NonNull String fileName,
+            @NonNull String contentType,
+            boolean compressed,
+            boolean largeAttachment,
+            boolean originalBase64,
+            Integer length,
+            String domainData) {
+
+        var descriptionElements = Stream.of(
+            "Filename=" + fileName,
+            "ContentType=" + contentType,
+            "Compressed=" + booleanToYesNo(compressed),
+            "LargeAttachment=" + booleanToYesNo(largeAttachment),
+            "OriginalBase64=" + booleanToYesNo(originalBase64),
+            Optional.ofNullable(length).map(value -> "Length=" + value).orElse(StringUtils.EMPTY),
+            Optional.ofNullable(domainData).map(value -> "DomainData=" + value).orElse(StringUtils.EMPTY));
+        // all this below to pretty indent on MHS side
+        var descriptionWithIndentation = descriptionElements
+            .filter(StringUtils::isNotBlank)
+            .map(value -> " ".repeat(16) + value)
+            .collect(Collectors.joining("\n"));
+
+        return String.format("\n%s\n%s", descriptionWithIndentation, " ".repeat(12));
+
     }
 }
