@@ -3,12 +3,12 @@
         <id root="394559384658936" />
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <text>
-            Supporting Information: { Procedure: 2010-01-13 }
+            Earliest Recall Date: 2010-01-13 { Observation: Procedure Request Code }
         </text>
         <statusCode code="COMPLETE" />
         <effectiveTime>
             <center value="20100115"/>
         </effectiveTime>
-        <availabilityTime value="20100113152950"/>
+        <availabilityTime value="20100113"/>
     </PlanStatement>
 </component>

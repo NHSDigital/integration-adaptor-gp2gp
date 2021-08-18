@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Device;
-import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
@@ -127,10 +126,10 @@ public class DiaryPlanStatementMapper {
 
     private Optional<String> getSupportingInformation(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasSupportingInfo()) {
-            procedureRequest.getSupportingInfo().stream()
+            return Optional.of(procedureRequest.getSupportingInfo().stream()
                 .filter(this::checkIfReferenceIsObservation)
                 .map((observationReference) -> extractObservation(messageContext, observationReference))
-                .collect(Collectors.joining(COMMA));
+                .collect(Collectors.joining(COMMA)));
         }
         return Optional.empty();
     }
