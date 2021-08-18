@@ -29,6 +29,36 @@
                 },
                 "manufacturer": "Device name"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "3e331a80-fe80-11eb-9a03-0242ac130003",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "Procedure type code",
+                            "display": "Procedure Request Code"
+                        }
+                    ],
+                    "text": "Procedure Request Code"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "1141a0b6-fe92-11eb-9a03-0242ac130003",
+                "type": {
+                    "coding": [
+                        {
+                            "code": "Procedure type code",
+                            "display": "Procedure Request Code"
+                        }
+                    ],
+                    "text": "Procedure Request Code"
+                }
+            }
         }
     ]
 }

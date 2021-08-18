@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.Device;
+import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Period;
 import org.hl7.fhir.dstu3.model.ProcedureRequest;
@@ -43,6 +44,7 @@ public class DiaryPlanStatementMapper {
     public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
     public static final String RECALL_DEVICE = "Recall Device: %s %s";
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
+    private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
@@ -114,11 +116,39 @@ public class DiaryPlanStatementMapper {
             getEarliestRecallDate(procedureRequest),
             getRequester(procedureRequest),
             getReasonCode(procedureRequest),
-            getNotes(procedureRequest)
+            getNotes(procedureRequest),
+            getSupportingInformation(procedureRequest)
         )
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.joining(StringUtils.SPACE)));
+    }
+
+    private Optional<String> getSupportingInformation(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasSupportingInfo()) {
+            procedureRequest.getSupportingInfo().stream()
+                .filter(this::checkIfReferenceIsObservation)
+                .map(this::mapObservationToText)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.joining(COMMA));
+        }
+        return Optional.empty();
+    }
+
+    private Optional<String> mapObservationToText(Reference observationReference) {
+        var observation = messageContext.getInputBundleHolder().getResource(observationReference.getReferenceElement());
+        if (observation.isPresent()) {
+            var observationRealised = (Observation) observation.get();
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("{ Observation:");
+
+        }
+        return Optional.empty();
+    }
+
+    private boolean checkIfReferenceIsObservation(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {
