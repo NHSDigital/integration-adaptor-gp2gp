@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.SupportingInfoResourceExtractor.extractObservation;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -128,21 +129,8 @@ public class DiaryPlanStatementMapper {
         if (procedureRequest.hasSupportingInfo()) {
             procedureRequest.getSupportingInfo().stream()
                 .filter(this::checkIfReferenceIsObservation)
-                .map(this::mapObservationToText)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .map((observationReference) -> extractObservation(messageContext, observationReference))
                 .collect(Collectors.joining(COMMA));
-        }
-        return Optional.empty();
-    }
-
-    private Optional<String> mapObservationToText(Reference observationReference) {
-        var observation = messageContext.getInputBundleHolder().getResource(observationReference.getReferenceElement());
-        if (observation.isPresent()) {
-            var observationRealised = (Observation) observation.get();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("{ Observation:");
-
         }
         return Optional.empty();
     }

@@ -34,7 +34,7 @@
             "resource": {
                 "resourceType": "Observation",
                 "id": "3e331a80-fe80-11eb-9a03-0242ac130003",
-                "type": {
+                "code": {
                     "coding": [
                         {
                             "code": "Procedure type code",
@@ -49,7 +49,7 @@
             "resource": {
                 "resourceType": "Observation",
                 "id": "1141a0b6-fe92-11eb-9a03-0242ac130003",
-                "type": {
+                "code": {
                     "coding": [
                         {
                             "code": "Procedure type code",
