@@ -52,7 +52,7 @@ public class DiaryPlanStatementMapper {
 
     public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return StringUtils.EMPTY;
+            return null;
         }
 
         var idMapper = messageContext.getIdMapper();

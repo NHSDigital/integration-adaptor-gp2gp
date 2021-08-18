@@ -183,7 +183,10 @@ public class EncounterComponentsMapper {
     }
 
     private Optional<String> mapProcedureRequest(Resource resource) {
-        return Optional.of(diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED));
+        return Optional.ofNullable(
+            diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource,
+            IS_NESTED)
+        );
     }
 
     private Optional<String> mapReferralRequest(Resource resource) {

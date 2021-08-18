@@ -107,7 +107,7 @@ public class DiaryPlanStatementMapperTest {
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
         var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
-        assertThat(mappedXml).isEmpty();
+        assertThat(mappedXml).isNull();
     }
 
     @Test
