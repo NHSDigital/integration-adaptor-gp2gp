@@ -180,7 +180,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .length(getBytesLengthOfString(chunk))
             .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
             .largeAttachment(true)
-            .originalBase64(true)
+            .originalBase64(false)
             .url(StringUtils.EMPTY)
             .domainData(SKELETON_ATTACHMENT)
             .build();
