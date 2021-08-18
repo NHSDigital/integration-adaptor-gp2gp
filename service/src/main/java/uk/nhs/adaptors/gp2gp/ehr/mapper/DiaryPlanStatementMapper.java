@@ -51,9 +51,9 @@ public class DiaryPlanStatementMapper {
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return Optional.empty();
+            return StringUtils.EMPTY;
         }
 
         var idMapper = messageContext.getIdMapper();
@@ -68,7 +68,7 @@ public class DiaryPlanStatementMapper {
         builder.code(buildCode(procedureRequest));
         buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
 
-        return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+        return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
 
     private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
