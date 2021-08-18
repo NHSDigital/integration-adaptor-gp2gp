@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static java.util.function.Predicate.not;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
-import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -161,7 +164,10 @@ public class EncounterComponentsMapper {
     }
 
     private Optional<String> mapMedicationRequest(Resource resource) {
-        return Optional.of(medicationStatementMapper.mapMedicationRequestToMedicationStatement((MedicationRequest) resource));
+        return Optional.of(resource)
+            .map(MedicationRequest.class::cast)
+            .filter(not(MedicationRequestUtils::isMedicationRequestSuppressed))
+            .map(medicationStatementMapper::mapMedicationRequestToMedicationStatement);
     }
 
     private Optional<String> mapObservation(Resource resource) {

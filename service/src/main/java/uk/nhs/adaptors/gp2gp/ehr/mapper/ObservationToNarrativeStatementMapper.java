@@ -54,7 +54,7 @@ public class ObservationToNarrativeStatementMapper {
     private String getAvailabilityTime(Observation observation) {
         if (observation.hasEffectiveDateTimeType() && observation.getEffectiveDateTimeType().hasValue()) {
             return DateFormatUtil.toHl7Format(observation.getEffectiveDateTimeType());
-        } else if (observation.hasEffectivePeriod()) {
+        } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) {
             return DateFormatUtil.toHl7Format(observation.getEffectivePeriod().getStartElement());
         } else if (observation.hasIssuedElement()) {
             return toHl7Format(observation.getIssuedElement());

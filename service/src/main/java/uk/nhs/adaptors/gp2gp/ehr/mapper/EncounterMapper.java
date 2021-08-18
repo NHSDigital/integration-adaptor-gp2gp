@@ -133,17 +133,14 @@ public class EncounterMapper {
 
     private String buildDisplayName(Encounter encounter) {
         var type = extractType(encounter);
-        return type.getCoding()
-            .stream()
-            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
-            .findFirst()
-            .map(Coding::getDisplay)
-            .orElse(OTHER_REPORT_DISPLAY);
+        return getDisplayName(type);
     }
 
     private String buildOriginalText(Encounter encounter) {
         var type = extractType(encounter);
-        if (type.hasText()) {
+        if (getDisplayName(type).equals(OTHER_REPORT_DISPLAY)) {
+            return type.hasText() ? type.getText() : type.getCodingFirstRep().getDisplay();
+        } else if (type.hasText()) {
             return type.getText();
         }
         return StringUtils.EMPTY;
@@ -159,5 +156,14 @@ public class EncounterMapper {
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toUnmodifiableSet());
         }
+    }
+
+    private String getDisplayName(CodeableConcept type) {
+        return type.getCoding()
+            .stream()
+            .filter(this::isSnomedAndWithinEhrCompositionVocabularyCodes)
+            .findFirst()
+            .map(Coding::getDisplay)
+            .orElse(OTHER_REPORT_DISPLAY);
     }
 }

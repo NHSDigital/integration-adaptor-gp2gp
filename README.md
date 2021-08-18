@@ -109,11 +109,7 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_GPC_GET_URL                    | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice.
-| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /structured/fhir                              | The path segment for Get Access Structured FHIR server
-| GP2GP_GPC_DOCUMENTS_FHIR_BASE        | /documents/fhir                               | The path segment for Get Access Documents FHIR server
-| GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
-| GP2GP_GPC_OVERRIDE_FROM_ASID         |                                               | The variable to overwrite fromAsid used for gpc requests.
-| GP2GP_GPC_OVERRIDE_TO_ASID           |                                               | The variable to overwrite toAsid used for gpc requests.
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                         | The path segment for Get Access Structured FHIR server
 
 (*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
