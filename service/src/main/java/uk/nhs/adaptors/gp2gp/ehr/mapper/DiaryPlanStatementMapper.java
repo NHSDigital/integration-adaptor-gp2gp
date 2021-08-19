@@ -135,7 +135,7 @@ public class DiaryPlanStatementMapper {
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
-        return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
+        return ResourceType.Observation.name().equals(reference.getReferenceElement().getResourceType());
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {

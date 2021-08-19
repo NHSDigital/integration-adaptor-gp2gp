@@ -38,20 +38,34 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 @Slf4j
 public class EncounterComponentsMapper {
 
+    public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
     private static final String CONSULTATION_LIST_CODE = "325851000000107";
     private static final String TOPIC_LIST_CODE = "25851000000105";
     private static final String CATEGORY_LIST_CODE = "24781000000107";
     private static final List<String> COMPONENTS_LISTS = Arrays.asList(TOPIC_LIST_CODE, CATEGORY_LIST_CODE);
-
     private static final String BLOOD_PRESSURE_READING_CODE = "163020007";
     private static final String ARTERIAL_BLOOD_PRESSURE_CODE = "386534000";
     private static final String BLOOD_PRESSURE_CODE = "75367002";
     private static final String STANDING_BLOOD_PRESSURE_CODE = "163034007";
     private static final String SITTING_BLOOD_PRESSURE_CODE = "163035008";
     private static final String LAYING_BLOOD_PRESSURE_CODE = "163033001";
+    public static final List<String> BLOOD_CODES = List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
+        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
     private static final String NOT_IMPLEMENTED_MAPPER_PLACE_HOLDER = "<!-- %s/%s -->";
     private static final boolean IS_NESTED = false;
-
+    private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
+    private final MessageContext messageContext;
+    private final AllergyStructureMapper allergyStructureMapper;
+    private final BloodPressureMapper bloodPressureMapper;
+    private final ConditionLinkSetMapper conditionLinkSetMapper;
+    private final DiaryPlanStatementMapper diaryPlanStatementMapper;
+    private final DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper;
+    private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
+    private final MedicationStatementMapper medicationStatementMapper;
+    private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
+    private final ObservationStatementMapper observationStatementMapper;
+    private final RequestStatementMapper requestStatementMapper;
+    private final DiagnosticReportMapper diagnosticReportMapper;
     private final Map<ResourceType, Function<Resource, Optional<String>>> encounterComponents = Map.of(
         ResourceType.AllergyIntolerance, this::mapAllergyIntolerance,
         ResourceType.Condition, this::mapCondition,
@@ -64,26 +78,6 @@ public class EncounterComponentsMapper {
         ResourceType.ReferralRequest, this::mapReferralRequest,
         ResourceType.DiagnosticReport, this::mapDiagnosticReport);
 
-    private final MessageContext messageContext;
-
-    private final AllergyStructureMapper allergyStructureMapper;
-    private final BloodPressureMapper bloodPressureMapper;
-    private final ConditionLinkSetMapper conditionLinkSetMapper;
-    private final DiaryPlanStatementMapper diaryPlanStatementMapper;
-    private final DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper;
-    private final ImmunizationObservationStatementMapper immunizationObservationStatementMapper;
-    private final MedicationStatementMapper medicationStatementMapper;
-    private final ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper;
-    private final ObservationStatementMapper observationStatementMapper;
-    private final RequestStatementMapper requestStatementMapper;
-    private final DiagnosticReportMapper diagnosticReportMapper;
-
-    public static final List<String> BLOOD_CODES = List.of(BLOOD_PRESSURE_READING_CODE, ARTERIAL_BLOOD_PRESSURE_CODE,
-        BLOOD_PRESSURE_CODE, STANDING_BLOOD_PRESSURE_CODE, SITTING_BLOOD_PRESSURE_CODE, LAYING_BLOOD_PRESSURE_CODE);
-    public static final String NARRATIVE_STATEMENT_CODE = "37331000000100";
-
-    private static final String NIAD_1409_INVALID_REFERENCE = "Referral items are not supported by the provider system";
-
     public String mapComponents(Encounter encounter) {
         Optional<ListResource> listReferencedToEncounter =
             messageContext.getInputBundleHolder().getListReferencedToEncounter(encounter.getIdElement(), CONSULTATION_LIST_CODE);
@@ -91,11 +85,6 @@ public class EncounterComponentsMapper {
         return listReferencedToEncounter
             .map(this::mapListResourceToComponents)
             .orElse(StringUtils.EMPTY);
-    }
-
-    public Optional<String> mapResourceToComponent(Resource resource) {
-        return encounterComponents.getOrDefault(resource.getResourceType(), this::mapDefaultNotImplemented)
-            .apply(resource);
     }
 
     private String mapListResourceToComponents(ListResource listReferencedToEncounter) {
@@ -115,7 +104,7 @@ public class EncounterComponentsMapper {
         // TODO: workaround for NIAD-1409 where text appears instead of a resource reference
         if (referenceValue == null || NIAD_1409_INVALID_REFERENCE.equals(referenceValue)) {
             LOGGER.warn("Detected an invalid reference in the GP Connect Demonstrator dataset. "
-                + "Skipping resource with reference=\"{}\" display=\"{}\"", referenceValue,
+                    + "Skipping resource with reference=\"{}\" display=\"{}\"", referenceValue,
                 item.getItem().getDisplay());
             return Optional.empty();
         }
@@ -127,6 +116,11 @@ public class EncounterComponentsMapper {
         } else {
             throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
         }
+    }
+
+    public Optional<String> mapResourceToComponent(Resource resource) {
+        return encounterComponents.getOrDefault(resource.getResourceType(), this::mapDefaultNotImplemented)
+            .apply(resource);
     }
 
     private Optional<String> mapDefaultNotImplemented(Resource resource) {
@@ -184,8 +178,7 @@ public class EncounterComponentsMapper {
 
     private Optional<String> mapProcedureRequest(Resource resource) {
         return Optional.ofNullable(
-            diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource,
-            IS_NESTED)
+            diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement((ProcedureRequest) resource, IS_NESTED)
         );
     }
 
