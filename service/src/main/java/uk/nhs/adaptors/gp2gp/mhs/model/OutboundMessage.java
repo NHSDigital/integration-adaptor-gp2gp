@@ -100,7 +100,7 @@ public class OutboundMessage {
             .map(value -> " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_16) + value)
             .collect(Collectors.joining("\n"));
 
-        return String.format("\n%s\n%s", descriptionWithIndentation, " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_12));
+        return String.format("%n%s%n%s", descriptionWithIndentation, " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_12));
 
     }
 }
