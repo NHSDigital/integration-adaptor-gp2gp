@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class OutboundMessageTest {
 
+    private static final int LENGTH = 123;
+
     @Test
     void When_BuildingAttachmentDescriptionUsingMandatoryParameters_Expect_ProperDescriptionIsCreated() {
         var result = OutboundMessage.buildAttachmentDescription(
@@ -17,13 +19,13 @@ class OutboundMessageTest {
             null,
             null);
 
-        assertThat(result).isEqualTo("\n" +
-            "                Filename=some_file_name\n" +
-            "                ContentType=some_content_type\n" +
-            "                Compressed=No\n" +
-            "                LargeAttachment=No\n" +
-            "                OriginalBase64=No\n" +
-            "            ");
+        assertThat(result).isEqualTo("\n"
+            + "                Filename=some_file_name\n"
+            + "                ContentType=some_content_type\n"
+            + "                Compressed=No\n"
+            + "                LargeAttachment=No\n"
+            + "                OriginalBase64=No\n"
+            + "            ");
     }
 
     @Test
@@ -34,17 +36,17 @@ class OutboundMessageTest {
             true,
             true,
             true,
-            123,
+            LENGTH,
             "some_other_domain_data");
 
-        assertThat(result).isEqualTo("\n" +
-            "                Filename=some_other_file_name\n" +
-            "                ContentType=some_other_content_type\n" +
-            "                Compressed=Yes\n" +
-            "                LargeAttachment=Yes\n" +
-            "                OriginalBase64=Yes\n" +
-            "                Length=123\n" +
-            "                DomainData=some_other_domain_data\n" +
-            "            ");
+        assertThat(result).isEqualTo("\n"
+            + "                Filename=some_other_file_name\n"
+            + "                ContentType=some_other_content_type\n"
+            + "                Compressed=Yes\n"
+            + "                LargeAttachment=Yes\n"
+            + "                OriginalBase64=Yes\n"
+            + "                Length=123\n"
+            + "                DomainData=some_other_domain_data\n"
+            + "            ");
     }
 }
