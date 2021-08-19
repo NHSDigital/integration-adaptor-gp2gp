@@ -3420,7 +3420,7 @@
             <low value="20201102"/>
             
         </effectiveTime>
-        <availabilityTime value="20201102111241" />
+        <availabilityTime value="20201102" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">

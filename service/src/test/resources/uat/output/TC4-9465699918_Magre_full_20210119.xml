@@ -6175,7 +6175,7 @@
             <low value="20200724"/>
             <high value="20200724000000"/>
         </effectiveTime>
-        <availabilityTime value="20200724133829" />
+        <availabilityTime value="20200724" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">

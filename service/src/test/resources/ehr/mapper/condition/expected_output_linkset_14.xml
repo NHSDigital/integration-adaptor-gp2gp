@@ -12,7 +12,7 @@
             <low nullFlavor="UNK"/>
             
         </effectiveTime>
-        <availabilityTime nullFlavor="UNK" />
+        <availabilityTime value="20200907101202" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="D2EA00FC-7B85-46C5-A0B7-E49C53C054D0-Condition-new-ID"/>

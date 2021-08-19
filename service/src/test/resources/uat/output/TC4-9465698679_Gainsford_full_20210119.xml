@@ -637,7 +637,7 @@
             <low value="19781231"/>
             
         </effectiveTime>
-        <availabilityTime value="19781231" />
+        <availabilityTime value="20100114095333" />
             <component typeCode="COMP">
                 <statementRef classCode="OBS" moodCode="EVN">
                     <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
@@ -748,7 +748,7 @@
             <low value="20090112"/>
             <high value="20120517000000"/>
         </effectiveTime>
-        <availabilityTime value="20100114095356" />
+        <availabilityTime value="20090112" />
   </ObservationStatement>
 </component>
     </ehrComposition>
@@ -818,7 +818,7 @@
             <low value="20100114"/>
             <high value="20120517000000"/>
         </effectiveTime>
-        <availabilityTime value="20100114100555" />
+        <availabilityTime value="20100114" />
   </ObservationStatement>
 </component>
     </ehrComposition>
@@ -894,7 +894,7 @@
             <low value="20100114"/>
             <high value="20100114000000"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757" />
+        <availabilityTime value="20100114" />
   </ObservationStatement>
 </component>
     </ehrComposition>
@@ -964,7 +964,7 @@
             <low value="20100114"/>
             <high value="20170130000000"/>
         </effectiveTime>
-        <availabilityTime value="20100114095728" />
+        <availabilityTime value="20100114" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1041,7 +1041,7 @@
             <low value="20100114"/>
             
         </effectiveTime>
-        <availabilityTime value="20100114095412" />
+        <availabilityTime value="20100114" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1117,7 +1117,7 @@
             <low value="20100114"/>
             
         </effectiveTime>
-        <availabilityTime value="20100114095342" />
+        <availabilityTime value="20100114" />
   </ObservationStatement>
 </component>
     </ehrComposition>
@@ -1187,7 +1187,7 @@
             <low value="20100114"/>
             <high value="20100524000000"/>
         </effectiveTime>
-        <availabilityTime value="20100114094956" />
+        <availabilityTime value="20100114" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1437,7 +1437,7 @@
             <low value="20190128"/>
             <high value="20190225000000"/>
         </effectiveTime>
-        <availabilityTime value="20190128134522" />
+        <availabilityTime value="20190128" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1514,7 +1514,7 @@
             <low value="20190321"/>
             
         </effectiveTime>
-        <availabilityTime value="20190321162524" />
+        <availabilityTime value="20190321" />
   </ObservationStatement>
 </component>
     </ehrComposition>

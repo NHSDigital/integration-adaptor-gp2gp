@@ -79,6 +79,7 @@ public class ConditionLinkSetMapper {
                 String newId = randomIdGeneratorService.createNewId();
                 builder.generateObservationStatement(true);
                 builder.conditionNamed(newId);
+                buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
                 new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
                     .buildProblemInfo().ifPresent(builder::pertinentInfo);
             });
@@ -162,8 +163,9 @@ public class ConditionLinkSetMapper {
     }
 
     private Optional<String> buildAvailabilityTime(Condition condition) {
-        if (condition.hasOnsetDateTimeType()) {
-            return Optional.of(DateFormatUtil.toHl7Format((condition.getOnsetDateTimeType())));
+        if (condition.hasAssertedDate()) {
+            return Optional.of(DateFormatUtil
+                .toHl7Format(condition.getAssertedDateElement()));
         }
         return Optional.empty();
     }
@@ -223,5 +225,12 @@ public class ConditionLinkSetMapper {
 
         // for all other types do not suppress with this function
         return false;
+    }
+
+    private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
+        if (condition.hasOnsetDateTimeType()) {
+            return Optional.of(DateFormatUtil.toHl7Format((condition.getOnsetDateTimeType())));
+        }
+        return Optional.empty();
     }
 }
