@@ -49,8 +49,8 @@ public class ConditionLinkSetMapperTest {
 
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_OBSERVATION = CONDITION_FILE_LOCATIONS + "condition_all_included.json";
     private static final String INPUT_JSON_NO_ACTUAL_PROBLEM = CONDITION_FILE_LOCATIONS + "condition_no_problem.json";
-    private static final String INPUT_JSON_NO_ACTUAL_PROBLEM_NO_ONSETDATE = CONDITION_FILE_LOCATIONS + "condition_no_problem_no_onsetdate" +
-        ".json";
+    private static final String INPUT_JSON_NO_ACTUAL_PROBLEM_NO_ONSETDATE = CONDITION_FILE_LOCATIONS + "condition_no_problem_no_onsetdate"
+        + ".json";
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION = CONDITION_FILE_LOCATIONS
         + "condition_actual_problem_condition.json";
     private static final String INPUT_JSON_WITH_MAJOR_SIGNIFICANCE = CONDITION_FILE_LOCATIONS
