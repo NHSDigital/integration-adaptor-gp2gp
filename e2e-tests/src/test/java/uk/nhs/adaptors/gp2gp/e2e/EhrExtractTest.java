@@ -87,10 +87,8 @@ public class EhrExtractTest {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
-        var documentList = waitFor(() -> ((Document) Mongo.findEhrExtractStatus(conversationId)
-            .get(GPC_ACCESS_DOCUMENT)).get("documents", Collections.emptyList()));
-
-        assertThat(documentList.size()).isEqualTo(1);
+        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
+        assertThatNotDocumentsWereAdded(gpcAccessDocument);
 
         var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -181,6 +179,10 @@ public class EhrExtractTest {
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
+    }
+
+    private Document emptyDocumentTaskIsCreated(String conversationId) {
+        return (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
@@ -285,8 +287,8 @@ public class EhrExtractTest {
         softly.assertThat(extractCore.get("taskId")).isNotNull();
     }
 
-    private void assertThatNotDocumentsWereAddedAndEhrExtractWasAttached(Document gpcAccessDocument) {
+    private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        assertThat(documentList.size()).isEqualTo(1);
+        assertThat(documentList).isNotEmpty();
     }
 }
