@@ -288,7 +288,15 @@ public class EhrExtractTest {
     }
 
     private void assertThatNotDocumentsWereAddedAndEhrExtractWasAttached(Document gpcAccessDocument) {
-        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+        var documentList = waitFor(() -> getTheDocumentList(gpcAccessDocument));
         assertThat(documentList.size()).isEqualTo(1);
+    }
+
+    private List<Object> getTheDocumentList(Document gpcAccessDocument) {
+        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+        if (!documentList.isEmpty()) {
+            return documentList;
+        }
+        return null;
     }
 }
