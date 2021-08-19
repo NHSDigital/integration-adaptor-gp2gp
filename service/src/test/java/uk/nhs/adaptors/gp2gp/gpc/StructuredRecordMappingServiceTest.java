@@ -85,23 +85,29 @@ class StructuredRecordMappingServiceTest {
         var expectedAttachment1 = OutboundMessage.ExternalAttachment.builder()
             .documentId(NEW_DOC_REF_ID_1)
             .messageId(NEW_DOC_MANIFEST_ID_1)
-            .filename("AbsentAttachment111_new_doc_ref_id.txt")
-            .contentType("text/plain")
-            .compressed(false)
-            .largeAttachment(false)
-            .originalBase64(true)
-            .length(ATTACHMENT_1_SIZE)
+            .description(OutboundMessage.buildAttachmentDescription(
+                "AbsentAttachment111_new_doc_ref_id.txt",
+                "text/plain",
+                false,
+                false,
+                true,
+                ATTACHMENT_1_SIZE,
+                null
+            ))
             .url("/" + NEW_DOC_REF_ID_1)
             .build();
         var expectedAttachment2 = OutboundMessage.ExternalAttachment.builder()
             .documentId(NEW_DOC_REF_ID_2)
             .messageId(NEW_DOC_MANIFEST_ID_2)
-            .filename("222_new_doc_ref_id_222_new_doc_ref_id.html")
-            .contentType("text/html")
-            .compressed(false)
-            .largeAttachment(false)
-            .originalBase64(true)
-            .length(ATTACHMENT_2_SIZE)
+            .description(OutboundMessage.buildAttachmentDescription(
+                "222_new_doc_ref_id_222_new_doc_ref_id.html",
+                "text/html",
+                false,
+                false,
+                true,
+                ATTACHMENT_2_SIZE,
+                null
+            ))
             .url("/" + NEW_DOC_REF_ID_2)
             .build();
 
