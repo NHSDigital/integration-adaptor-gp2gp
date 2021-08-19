@@ -7873,7 +7873,7 @@ The line below contains special characters...
             <low value="20100113"/>
             
         </effectiveTime>
-        <availabilityTime value="20100113145710" />
+        <availabilityTime value="20100113" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -7948,7 +7948,7 @@ The line below contains special characters...
             <low value="20100113"/>
             <high value="20100323000000"/>
         </effectiveTime>
-        <availabilityTime value="20100113140445" />
+        <availabilityTime value="20100113" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
