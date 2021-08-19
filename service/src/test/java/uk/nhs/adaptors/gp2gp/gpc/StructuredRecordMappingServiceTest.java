@@ -85,7 +85,7 @@ class StructuredRecordMappingServiceTest {
         var expectedAttachment1 = OutboundMessage.ExternalAttachment.builder()
             .documentId(NEW_DOC_REF_ID_1)
             .messageId(NEW_DOC_MANIFEST_ID_1)
-            .description(OutboundMessage.generateAttachmentDescription(
+            .description(OutboundMessage.buildAttachmentDescription(
                 "AbsentAttachment111_new_doc_ref_id.txt",
                 "text/plain",
                 false,
@@ -99,7 +99,7 @@ class StructuredRecordMappingServiceTest {
         var expectedAttachment2 = OutboundMessage.ExternalAttachment.builder()
             .documentId(NEW_DOC_REF_ID_2)
             .messageId(NEW_DOC_MANIFEST_ID_2)
-            .description(OutboundMessage.generateAttachmentDescription(
+            .description(OutboundMessage.buildAttachmentDescription(
                 "222_new_doc_ref_id_222_new_doc_ref_id.html",
                 "text/html",
                 false,

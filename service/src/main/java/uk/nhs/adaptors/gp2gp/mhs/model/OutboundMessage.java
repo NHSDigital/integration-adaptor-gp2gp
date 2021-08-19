@@ -26,6 +26,9 @@ import java.util.stream.Stream;
 @Builder
 @EqualsAndHashCode
 public class OutboundMessage {
+    private static final int ATTACHMENT_DESCRIPTION_INDENTATION_12 = 12;
+    private static final int ATTACHMENT_DESCRIPTION_INDENTATION_16 = 16;
+
     private String payload;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Attachment> attachments;
@@ -74,7 +77,7 @@ public class OutboundMessage {
         }
     }
 
-    public static String generateAttachmentDescription(
+    public static String buildAttachmentDescription(
             @NonNull String fileName,
             @NonNull String contentType,
             boolean compressed,
@@ -94,10 +97,10 @@ public class OutboundMessage {
         // all this below to pretty indent on MHS side
         var descriptionWithIndentation = descriptionElements
             .filter(StringUtils::isNotBlank)
-            .map(value -> " ".repeat(16) + value)
+            .map(value -> " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_16) + value)
             .collect(Collectors.joining("\n"));
 
-        return String.format("\n%s\n%s", descriptionWithIndentation, " ".repeat(12));
+        return String.format("\n%s\n%s", descriptionWithIndentation, " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_12));
 
     }
 }

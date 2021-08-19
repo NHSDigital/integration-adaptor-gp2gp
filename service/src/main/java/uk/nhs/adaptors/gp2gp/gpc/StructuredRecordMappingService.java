@@ -43,7 +43,7 @@ public class StructuredRecordMappingService {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .description(OutboundMessage.generateAttachmentDescription(
+            .description(OutboundMessage.buildAttachmentDescription(
                 DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment),
                 DocumentReferenceUtils.extractContentType(attachment),
                 false, // always false for GPC documents
