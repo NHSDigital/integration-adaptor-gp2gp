@@ -176,14 +176,17 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .contentType("application/xml") // confirm this is correct
-            .filename(documentName)
-            .length(getBytesLengthOfString(ehrExtract))
-            .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
-            .largeAttachment(true)
-            .originalBase64(false)
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(documentName)
+                .contentType("application/xml") // confirm this is correct
+                .length(getBytesLengthOfString(ehrExtract))
+                .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
+                .largeAttachment(true)
+                .originalBase64(false)
+                .domainData(SKELETON_ATTACHMENT)
+                .build()
+                .toString())
             .url(StringUtils.EMPTY)
-            .domainData(SKELETON_ATTACHMENT)
             .build();
     }
 
