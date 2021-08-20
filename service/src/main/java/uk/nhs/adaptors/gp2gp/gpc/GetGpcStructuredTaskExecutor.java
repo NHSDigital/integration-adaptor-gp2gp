@@ -8,17 +8,23 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDefinition;
 import uk.nhs.adaptors.gp2gp.common.task.TaskDispatcher;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageDataWrapper;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
+import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.EhrExtractStatusService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +32,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructuredTaskDefinition> {
+
+    public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
     private final EhrExtractStatusService ehrExtractStatusService;
@@ -35,6 +45,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private final ObjectMapper objectMapper;
     private final StructuredRecordMappingService structuredRecordMappingService;
     private final TaskDispatcher taskDispatcher;
+    private final Gp2gpConfiguration gp2gpConfiguration;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     @Override
     public Class<GetGpcStructuredTaskDefinition> getTaskType() {
@@ -77,6 +89,25 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             queueGetDocumentsTask(structuredTaskDefinition, externalAttachments);
         } finally {
             messageContext.resetMessageContext();
+        }
+
+        if (isLargeEhrExtract(hl7TranslatedResponse)) {
+            // TODO: 16/08/2021 NIAD-1059
+            String compressedHl7 = hl7TranslatedResponse;
+            if (!isLargeEhrExtract(compressedHl7)) {
+                hl7TranslatedResponse = compressedHl7;
+
+            } else {
+                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition);
+                externalAttachments.add(externalAttachment);
+
+                var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+                uploadToStorage(compressedHl7, externalAttachment.getFilename(), taskDefinition);
+                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
+
+                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
+                    externalAttachment.getFilename());
+            }
         }
 
         var outboundMessage = OutboundMessage.builder()
@@ -129,5 +160,59 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .accessDocumentUrl(externalAttachment.getUrl())
             .messageId(externalAttachment.getMessageId())
             .build();
+    }
+
+    private boolean isLargeEhrExtract(String ehrExtract) {
+        return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
+    }
+
+    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition) {
+        var messageId = randomIdGeneratorService.createNewId();
+        var documentId = randomIdGeneratorService.createNewId();
+        var documentName = GpcFilenameUtils.generateDocumentFilename(
+            taskDefinition.getConversationId(), documentId
+        );
+
+        return OutboundMessage.ExternalAttachment.builder()
+            .documentId(documentId)
+            .messageId(messageId)
+            .contentType("application/xml") // confirm this is correct
+            .filename(documentName)
+            .length(getBytesLengthOfString(ehrExtract))
+            .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
+            .largeAttachment(true)
+            .originalBase64(false)
+            .url(StringUtils.EMPTY)
+            .domainData(SKELETON_ATTACHMENT)
+            .build();
+    }
+
+    @SneakyThrows
+    private void uploadToStorage(String ehrExtract, String documentName, DocumentTaskDefinition taskDefinition) {
+        var taskId = taskDefinition.getTaskId();
+
+        // Building outbound message for upload to storage as that is how DocumentSender downloads and parses from storage
+        var attachments = Collections.singletonList(
+            OutboundMessage.Attachment.builder()
+                .contentType("application/xml")
+                .isBase64(Boolean.FALSE.toString())
+                .description(taskDefinition.getDocumentId())
+                .payload(ehrExtract)
+                .build());
+        var outboundMessage = OutboundMessage.builder()
+            .payload(StringUtils.EMPTY)
+            .attachments(attachments)
+            .build();
+
+        var outboundMessageString = OBJECT_MAPPER.writeValueAsString(outboundMessage);
+
+        var storageDataWrapperWithMhsOutboundRequest = StorageDataWrapperProvider
+            .buildStorageDataWrapper(taskDefinition, outboundMessageString, taskId);
+
+        storageConnectorService.uploadFile(storageDataWrapperWithMhsOutboundRequest, documentName);
+    }
+
+    private int getBytesLengthOfString(String input) {
+        return input.getBytes(StandardCharsets.UTF_8).length;
     }
 }

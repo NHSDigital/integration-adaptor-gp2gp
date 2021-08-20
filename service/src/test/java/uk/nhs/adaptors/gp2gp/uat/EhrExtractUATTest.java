@@ -127,6 +127,8 @@ public class EhrExtractUATTest {
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
             multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -137,7 +139,7 @@ public class EhrExtractUATTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
+            documentReferenceToNarrativeStatementMapper,
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -159,7 +161,8 @@ public class EhrExtractUATTest {
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 
         final NonConsultationResourceMapper nonConsultationResourceMapper =
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
+                documentReferenceToNarrativeStatementMapper);
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
             nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
     }
