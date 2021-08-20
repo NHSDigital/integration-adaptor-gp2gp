@@ -6,7 +6,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100630054806" />
+        <availabilityTime nullFlavor="UNK" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
