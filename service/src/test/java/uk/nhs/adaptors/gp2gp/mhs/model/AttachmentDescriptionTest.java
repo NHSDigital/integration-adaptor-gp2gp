@@ -4,20 +4,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class OutboundMessageTest {
+class AttachmentDescriptionTest {
 
     private static final int LENGTH = 123;
 
     @Test
     void When_BuildingAttachmentDescriptionUsingMandatoryParameters_Expect_ProperDescriptionIsCreated() {
-        var result = OutboundMessage.buildAttachmentDescription(
-            "some_file_name",
-            "some_content_type",
-            false,
-            false,
-            false,
-            null,
-            null);
+        var result = OutboundMessage.AttachmentDescription.builder()
+            .fileName("some_file_name")
+            .contentType("some_content_type")
+            .compressed(false)
+            .largeAttachment(false)
+            .originalBase64(false)
+            .build()
+            .toString();
 
         assertThat(result).isEqualTo("\n"
             + "                Filename=some_file_name\n"
@@ -30,14 +30,16 @@ class OutboundMessageTest {
 
     @Test
     void When_BuildingAttachmentDescriptionUsingAllParameters_Expect_ProperDescriptionIsCreated() {
-        var result = OutboundMessage.buildAttachmentDescription(
-            "some_other_file_name",
-            "some_other_content_type",
-            true,
-            true,
-            true,
-            LENGTH,
-            "some_other_domain_data");
+        var result = OutboundMessage.AttachmentDescription.builder()
+            .fileName("some_other_file_name")
+            .contentType("some_other_content_type")
+            .compressed(true)
+            .largeAttachment(true)
+            .originalBase64(true)
+            .length(LENGTH)
+            .domainData("some_other_domain_data")
+            .build()
+            .toString();
 
         assertThat(result).isEqualTo("\n"
             + "                Filename=some_other_file_name\n"
