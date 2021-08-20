@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.SupportingInfoResourceExtractor.extractObservation;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,14 +44,15 @@ public class DiaryPlanStatementMapper {
     public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
     public static final String RECALL_DEVICE = "Recall Device: %s %s";
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
+    private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return Optional.empty();
+            return null;
         }
 
         var idMapper = messageContext.getIdMapper();
@@ -65,7 +67,7 @@ public class DiaryPlanStatementMapper {
         builder.code(buildCode(procedureRequest));
         buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
 
-        return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+        return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
     }
 
     private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
@@ -114,11 +116,26 @@ public class DiaryPlanStatementMapper {
             getEarliestRecallDate(procedureRequest),
             getRequester(procedureRequest),
             getReasonCode(procedureRequest),
-            getNotes(procedureRequest)
+            getNotes(procedureRequest),
+            getSupportingInformation(procedureRequest)
         )
             .filter(Optional::isPresent)
             .map(Optional::get)
             .collect(Collectors.joining(StringUtils.SPACE)));
+    }
+
+    private Optional<String> getSupportingInformation(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasSupportingInfo()) {
+            return Optional.of(procedureRequest.getSupportingInfo().stream()
+                .filter(this::checkIfReferenceIsObservation)
+                .map((observationReference) -> extractObservation(messageContext, observationReference))
+                .collect(Collectors.joining(COMMA)));
+        }
+        return Optional.empty();
+    }
+
+    private boolean checkIfReferenceIsObservation(Reference reference) {
+        return ResourceType.Observation.name().equals(reference.getReferenceElement().getResourceType());
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {

@@ -72,7 +72,9 @@ public class SupportingInfoResourceExtractor {
         if (observation.hasEffectiveDateTimeType()) {
             stringBuilder.append(" " + formatDateUsingDayPrecision(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
-            stringBuilder.append(" " + formatDateUsingDayPrecision(observation.getEffectivePeriod().getStartElement()));
+            if (observation.getEffectivePeriod().hasStart()) {
+                stringBuilder.append(" " + formatDateUsingDayPrecision(observation.getEffectivePeriod().getStartElement()));
+            }
         }
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getCode()).ifPresent(code -> {
