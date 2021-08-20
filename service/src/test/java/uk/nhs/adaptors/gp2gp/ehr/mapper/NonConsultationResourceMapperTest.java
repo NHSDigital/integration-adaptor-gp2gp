@@ -81,6 +81,8 @@ public class NonConsultationResourceMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private EncounterComponentsMapper encounterComponentsMapper;
+    @Mock
+    private DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper;
 
     @BeforeEach
     public void setUp() {
@@ -150,7 +152,8 @@ public class NonConsultationResourceMapperTest {
             .thenReturn(Optional.of(stubEhrComponentMapperXml));
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
-            encounterComponentsMapper);
+            encounterComponentsMapper,
+            documentReferenceToNarrativeStatementMapper);
     }
 
 }
