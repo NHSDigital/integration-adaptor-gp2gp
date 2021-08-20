@@ -82,18 +82,11 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildAvailabilityTime(Immunization immunization) {
-        var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
-        return dateRecordedExtension
-            .map(value -> DateFormatUtil.toHl7Format((DateTimeType) value.getValue()))
-            .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
+        return retrieveImmunizationDate(immunization);
     }
 
     private String buildEffectiveTime(Immunization immunization) {
-        Optional<String> effectiveTime = Optional.empty();
-        if (immunization.hasDateElement()) {
-            effectiveTime = Optional.of(DateFormatUtil.toHl7Format(immunization.getDateElement()));
-        }
-        return effectiveTime.orElse(StringUtils.EMPTY);
+        return retrieveImmunizationDate(immunization);
     }
 
     private String buildPertinentInformation(Immunization immunization) {
@@ -264,5 +257,13 @@ public class ImmunizationObservationStatementMapper {
 
     private boolean vaccineCodeUNK(CodeableConcept codeableConcept) {
         return  (codeableConcept.getCodingFirstRep().hasCode() && codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
+    }
+
+    private String retrieveImmunizationDate(Immunization immunization) {
+        return Optional.of(immunization)
+            .filter(Immunization:: hasDateElement)
+            .map(Immunization:: getDateElement)
+            .map(DateFormatUtil:: toHl7Format)
+            .orElse(StringUtils.EMPTY);
     }
 }

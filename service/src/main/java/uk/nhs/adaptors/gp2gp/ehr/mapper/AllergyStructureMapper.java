@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters.AllergyStructureTemplateParametersBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -66,7 +68,7 @@ public class AllergyStructureMapper {
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
+            .availabilityTime(buildAvailabilityTime(allergyIntolerance));
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
@@ -110,6 +112,14 @@ public class AllergyStructureMapper {
             }
         }
         throw new EhrMapperException("Allergy code not present");
+    }
+
+    private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
+        return Optional.of(allergyIntolerance)
+            .filter(AllergyIntolerance:: hasOnsetDateTimeType)
+            .map(AllergyIntolerance:: getOnsetDateTimeType)
+            .map(DateFormatUtil:: toHl7Format)
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {
