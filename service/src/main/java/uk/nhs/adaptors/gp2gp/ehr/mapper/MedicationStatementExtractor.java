@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BaseExtension;
@@ -103,8 +104,7 @@ public class MedicationStatementExtractor {
     }
 
     public static String extractStatusReasonStoppedText(MedicationRequest medicationRequest) {
-        var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL);
-        return statusReason
+        return filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL)
             .map(Extension::getExtension)
             .stream()
             .flatMap(List::stream)
@@ -113,7 +113,7 @@ public class MedicationStatementExtractor {
             .map(Extension::getValue)
             .map(CodeableConcept.class::cast)
             .map(CodeableConceptMappingUtils::extractTextOrCoding)
-            .map(value -> value.get())
+            .map(Optional::get)
             .orElse(StringUtils.EMPTY);
     }
 
