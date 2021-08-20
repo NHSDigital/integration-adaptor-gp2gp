@@ -43,15 +43,16 @@ public class StructuredRecordMappingService {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .description(OutboundMessage.buildAttachmentDescription(
-                DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment),
-                DocumentReferenceUtils.extractContentType(attachment),
-                false, // always false for GPC documents
-                isLargeAttachment(attachment),
-                true, // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
-                attachment.getSize(),
-                null
-            ))
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment))
+                .contentType(DocumentReferenceUtils.extractContentType(attachment))
+                .compressed(false) // always false for GPC documents
+                .largeAttachment(isLargeAttachment(attachment))
+                .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+                .length(attachment.getSize())
+                .build()
+                .toString()
+            )
             .url(extractUrl(documentReference).orElse(null))
             .build();
     }

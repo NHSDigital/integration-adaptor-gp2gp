@@ -64,6 +64,8 @@ public class OutboundMessage {
         private String documentId;
         @JsonProperty("message_id")
         private String messageId;
+        @JsonProperty("file_name")
+        private String filename;
         private String description;
         @JsonIgnore
         private String url;
@@ -77,30 +79,33 @@ public class OutboundMessage {
         }
     }
 
-    public static String buildAttachmentDescription(
-            @NonNull String fileName,
-            @NonNull String contentType,
-            boolean compressed,
-            boolean largeAttachment,
-            boolean originalBase64,
-            Integer length,
-            String domainData) {
+    @Builder
+    public static class AttachmentDescription {
+        private final @NonNull String fileName;
+        private final @NonNull String contentType;
+        private final boolean compressed;
+        private final boolean largeAttachment;
+        private final boolean originalBase64;
+        private final Integer length;
+        private final String domainData;
 
-        var descriptionElements = Stream.of(
-            "Filename=" + fileName,
-            "ContentType=" + contentType,
-            "Compressed=" + booleanToYesNo(compressed),
-            "LargeAttachment=" + booleanToYesNo(largeAttachment),
-            "OriginalBase64=" + booleanToYesNo(originalBase64),
-            Optional.ofNullable(length).map(value -> "Length=" + value).orElse(StringUtils.EMPTY),
-            Optional.ofNullable(domainData).map(value -> "DomainData=" + value).orElse(StringUtils.EMPTY));
-        // all this below to pretty indent on MHS side
-        var descriptionWithIndentation = descriptionElements
-            .filter(StringUtils::isNotBlank)
-            .map(value -> " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_16) + value)
-            .collect(Collectors.joining("\n"));
+        @Override
+        public String toString() {
+            var descriptionElements = Stream.of(
+                "Filename=" + fileName,
+                "ContentType=" + contentType,
+                "Compressed=" + booleanToYesNo(compressed),
+                "LargeAttachment=" + booleanToYesNo(largeAttachment),
+                "OriginalBase64=" + booleanToYesNo(originalBase64),
+                Optional.ofNullable(length).map(value -> "Length=" + value).orElse(StringUtils.EMPTY),
+                Optional.ofNullable(domainData).map(value -> "DomainData=" + value).orElse(StringUtils.EMPTY));
+            // all this below to pretty indent on MHS side
+            var descriptionWithIndentation = descriptionElements
+                .filter(StringUtils::isNotBlank)
+                .map(value -> " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_16) + value)
+                .collect(Collectors.joining("\n"));
 
-        return String.format("%n%s%n%s", descriptionWithIndentation, " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_12));
-
+            return String.format("%n%s%n%s", descriptionWithIndentation, " ".repeat(ATTACHMENT_DESCRIPTION_INDENTATION_12));
+        }
     }
 }
