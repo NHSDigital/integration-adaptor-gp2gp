@@ -52,6 +52,7 @@ public class NonConsultationResourceMapper {
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
     private final EncounterComponentsMapper encounterComponentsMapper;
+    private final DocumentReferenceToNarrativeStatementMapper narrativeStatementMapper;
     private final Map<ResourceType, BiFunction<String, Resource, EncounterTemplateParametersBuilder>> resourceBuilder =
         Map.of(
             ResourceType.Observation, this::buildForObservation,
@@ -79,6 +80,17 @@ public class NonConsultationResourceMapper {
 
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
+    }
+
+    public List<String> buildEhrCompositionForSkeletonEhrExtract(String bindingDocumentId) {
+        var narrativeStatement = narrativeStatementMapper.buildFragmentIndexNarrativeStatement(bindingDocumentId);
+        EncounterTemplateParameters encounterTemplateParameters = EncounterTemplateParameters.builder()
+            .components(narrativeStatement)
+            .build();
+        return List.of(TemplateUtils.fillTemplate(
+            ENCOUNTER_STATEMENT_TO_EHR_COMPOSITION_TEMPLATE,
+            encounterTemplateParameters)
+        );
     }
 
     private int compareProcessingOrder(Resource resource1, Resource resource2) {
