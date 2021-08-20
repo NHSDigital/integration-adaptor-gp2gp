@@ -24,9 +24,13 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
 
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -35,6 +39,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    public static final String XML_APPLICATION_CONTENT_TYPE = "application/xml";
 
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
@@ -59,6 +64,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         LOGGER.info("Execute called from GetGpcStructuredTaskExecutor");
 
         String hl7TranslatedResponse;
+        List<OutboundMessage.Attachment> attachments = new ArrayList<>();
         List<OutboundMessage.ExternalAttachment> externalAttachments;
 
         var structuredRecord = getStructuredRecord(structuredTaskDefinition);
@@ -92,17 +98,24 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         }
 
         if (isLargeEhrExtract(hl7TranslatedResponse)) {
-            // TODO: 16/08/2021 NIAD-1059
-            String compressedHl7 = hl7TranslatedResponse;
-            if (!isLargeEhrExtract(compressedHl7)) {
-                hl7TranslatedResponse = compressedHl7;
-
+            var compressedBytes = compress(hl7TranslatedResponse);
+            if (compressedBytes == null) {
+                throw new RuntimeException();
+            }
+            hl7TranslatedResponse = new String(compressedBytes, UTF_8);
+            if (!isLargeEhrExtract(hl7TranslatedResponse)) {
+                var filename = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
+                );
+                var attachment = buildAttachment(hl7TranslatedResponse, filename);
+                attachments.add(attachment);
+                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
             } else {
-                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition);
+                var externalAttachment = buildExternalAttachment(hl7TranslatedResponse, structuredTaskDefinition);
                 externalAttachments.add(externalAttachment);
 
                 var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(compressedHl7, externalAttachment.getFilename(), taskDefinition);
+                uploadToStorage(hl7TranslatedResponse, externalAttachment.getFilename(), taskDefinition);
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
                 hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
@@ -112,6 +125,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
         var outboundMessage = OutboundMessage.builder()
             .payload(hl7TranslatedResponse)
+            .attachments(attachments)
             .externalAttachments(externalAttachments)
             .build();
 
@@ -166,6 +180,25 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
+    private OutboundMessage.Attachment buildAttachment(String content, String filename) {
+        return OutboundMessage.Attachment.builder()
+            .payload(content)
+            .contentType(XML_APPLICATION_CONTENT_TYPE)
+            .isBase64(Boolean.FALSE.toString())
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(filename)
+                .contentType(XML_APPLICATION_CONTENT_TYPE)
+                .compressed(true) // always compressed at this stage
+                .largeAttachment(true)
+                .originalBase64(false)
+                .length(getBytesLengthOfString(content))
+                .domainData(SKELETON_ATTACHMENT)
+                .build()
+                .toString()
+            )
+            .build();
+    }
+
     private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition) {
         var messageId = randomIdGeneratorService.createNewId();
         var documentId = randomIdGeneratorService.createNewId();
@@ -176,14 +209,19 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .contentType("application/xml") // confirm this is correct
             .filename(documentName)
-            .length(getBytesLengthOfString(ehrExtract))
-            .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
-            .largeAttachment(true)
-            .originalBase64(false)
             .url(StringUtils.EMPTY)
-            .domainData(SKELETON_ATTACHMENT)
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(documentName)
+                .contentType(XML_APPLICATION_CONTENT_TYPE)
+                .compressed(true) // always compressed at this stage
+                .largeAttachment(true)
+                .originalBase64(false)
+                .length(getBytesLengthOfString(ehrExtract))
+                .domainData(SKELETON_ATTACHMENT)
+                .build()
+                .toString()
+            )
             .build();
     }
 
@@ -194,7 +232,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         // Building outbound message for upload to storage as that is how DocumentSender downloads and parses from storage
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
-                .contentType("application/xml")
+                .contentType(XML_APPLICATION_CONTENT_TYPE)
                 .isBase64(Boolean.FALSE.toString())
                 .description(taskDefinition.getDocumentId())
                 .payload(ehrExtract)
