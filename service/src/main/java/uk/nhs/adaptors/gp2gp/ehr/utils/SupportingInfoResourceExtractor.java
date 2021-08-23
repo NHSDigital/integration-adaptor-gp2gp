@@ -50,10 +50,10 @@ public class SupportingInfoResourceExtractor {
             }
         }
 
-        if(documentReference.hasDescription()){
+        if (documentReference.hasDescription()) {
             stringBuilder.append(" " + documentReference.getDescription());
         }
-        
+
         stringBuilder.append(" }");
 
         return stringBuilder.toString();

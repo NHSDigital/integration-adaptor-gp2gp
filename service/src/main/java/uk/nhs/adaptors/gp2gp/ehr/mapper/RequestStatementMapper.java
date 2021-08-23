@@ -326,7 +326,7 @@ public class RequestStatementMapper {
                     .map(value -> extractSupportingInfo(messageContext, value))
                     .filter(value -> !value.equals(StringUtils.EMPTY))
                     .collect(Collectors.joining(COMMA));
-                
+
                 return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
             }
             return StringUtils.EMPTY;
