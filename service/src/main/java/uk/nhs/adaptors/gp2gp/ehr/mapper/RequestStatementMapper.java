@@ -322,9 +322,12 @@ public class RequestStatementMapper {
 
         private String buildSupportingInfoDescription() {
             if (referralRequest.hasSupportingInfo()) {
-                return SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
-                        .map(value -> extractSupportingInfo(messageContext, value))
-                        .collect(Collectors.joining(COMMA));
+                String supportingInfo = SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
+                    .map(value -> extractSupportingInfo(messageContext, value))
+                    .filter(value -> !value.equals(StringUtils.EMPTY))
+                    .collect(Collectors.joining(COMMA));
+
+                return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
             }
             return StringUtils.EMPTY;
         }
