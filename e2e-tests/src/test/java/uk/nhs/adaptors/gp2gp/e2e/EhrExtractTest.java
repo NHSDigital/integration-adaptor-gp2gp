@@ -182,7 +182,15 @@ public class EhrExtractTest {
     }
 
     private Document emptyDocumentTaskIsCreated(String conversationId) {
-        return (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        if (gpcAccessDocument == null) {
+            return null;
+        }
+        var documentList = waitFor(() -> gpcAccessDocument.get("documents", Collections.emptyList()));
+        if (!documentList.isEmpty()) {
+            return gpcAccessDocument;
+        }
+        return null;
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
@@ -289,6 +297,6 @@ public class EhrExtractTest {
 
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        assertThat(documentList).isEmpty();
+        assertThat(documentList).isNotEmpty();
     }
 }

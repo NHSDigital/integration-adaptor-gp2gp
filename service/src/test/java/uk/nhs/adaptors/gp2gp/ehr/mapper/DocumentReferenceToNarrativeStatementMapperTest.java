@@ -15,10 +15,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,11 +69,15 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         + "expected-output-narrative-statement-10.xml";
     private static final String OUTPUT_XML_REQUIRED_DATA = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-11.xml";
     private static final String OUTPUT_XML_NOT_SUPPORTED_CONTENT_TYPE = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-12.xml";
+    public static final String UUID_FOR_FRAGMENT_INDEX = "326aa82c-4725-4c04-bcb8-a3c9a3474c7c";
+    public static final String OUTPUT_FOR_FRAGMENT_INDEX_BUILDING = TEST_FILE_DIRECTORY +  "expected-output-for-fragment-index.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private SupportedContentTypes supportedContentTypes;
+    @Mock
+    private TimestampService timestampService;
 
     private DocumentReferenceToNarrativeStatementMapper mapper;
     private MessageContext messageContext;
@@ -86,8 +92,9 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
 
         lenient().when(supportedContentTypes.isContentTypeSupported("text/richtext")).thenReturn(true);
         lenient().when(supportedContentTypes.isContentTypeSupported("application/octet-stream")).thenReturn(false);
+        lenient().when(timestampService.now()).thenReturn(Instant.parse("2021-08-18T12:00:00.00Z"));
 
-        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes);
+        mapper = new DocumentReferenceToNarrativeStatementMapper(messageContext, supportedContentTypes, timestampService);
     }
 
     @AfterEach
@@ -177,6 +184,15 @@ public class DocumentReferenceToNarrativeStatementMapperTest {
         assertThatThrownBy(() -> mapper.mapDocumentReferenceToNarrativeStatement(parsedDocumentReference))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("documentReference.content[0].attachment is missing contentType");
+    }
+
+    @Test
+    public void When_BuildingFragmentIndex_Expect_CorrectUUIDReturned() throws IOException {
+        var fragmentIndex = mapper.buildFragmentIndexNarrativeStatement(UUID_FOR_FRAGMENT_INDEX);
+        var expectedOutput = ResourceTestFileUtils.getFileContent(OUTPUT_FOR_FRAGMENT_INDEX_BUILDING);
+
+        assertThat(fragmentIndex).isEqualTo(expectedOutput);
+
     }
 
 }
