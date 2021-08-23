@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
+import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
@@ -35,9 +36,12 @@ public class ConditionLinkSetMapper {
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_link_set_template.mustache");
-    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
-    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1";
-    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1";
+    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-ActualProblem-1";
+    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-ProblemSignificance-1";
+    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-RelatedClinicalContent-1";
     private static final String ACTIVE = "Active";
     private static final String ACTIVE_CODE = "394774009";
     private static final String INACTIVE = "Inactive";
@@ -127,8 +131,12 @@ public class ConditionLinkSetMapper {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
-            .filter(this::checkIfReferenceIsObservation)
-            .map(reference -> messageContext.getIdMapper().getOrNew(reference));
+            .filter(reference ->
+                checkIfReferenceIsObservation(reference)
+                    || checkIfReferenceIsAllergyIntolerance(reference)
+                    || checkIfReferenceIsImmunization(reference)
+            )
+            .map(this::mapLinkedId);
     }
 
     private Optional<String> buildQualifier(Condition condition) {
@@ -206,6 +214,14 @@ public class ConditionLinkSetMapper {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
     }
 
+    private boolean checkIfReferenceIsAllergyIntolerance(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.AllergyIntolerance.name());
+    }
+
+    private boolean checkIfReferenceIsImmunization(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.Immunization.name());
+    }
+
     private String buildCode(Condition condition) {
         if (condition.hasCode()) {
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
@@ -224,5 +240,18 @@ public class ConditionLinkSetMapper {
 
         // for all other types do not suppress with this function
         return false;
+    }
+
+    private String mapLinkedId(Reference reference) {
+        if (checkIfReferenceIsAllergyIntolerance(reference) && reference.getResource() != null) {
+            var idType = IdType.of(reference.getResource());
+            return messageContext.getIdMapper().getOrNew(ResourceType.Observation, idType);
+        } else {
+            var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
+            if (resource.isPresent()) {
+                return messageContext.getIdMapper().getOrNew(ResourceType.Observation, resource.get().getIdElement());
+            }
+        }
+        return messageContext.getIdMapper().getOrNew(reference);
     }
 }

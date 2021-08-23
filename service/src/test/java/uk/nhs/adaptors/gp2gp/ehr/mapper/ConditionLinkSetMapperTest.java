@@ -43,7 +43,8 @@ public class ConditionLinkSetMapperTest {
 
     private static final String CONDITION_ID = "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB";
     private static final String GENERATED_ID = "50233a2f-128f-4b96-bdae-6207ed11a8ea";
-
+    private static final String ALLERGY_ID = "230D3D37-99E3-450A-AE88-B5AB802B7137";
+    private static final String IMMUNIZATION_ID = "C93659E1-1107-441C-BE25-C5EF4B7831D1";
     private static final String CONDITION_FILE_LOCATIONS = "/ehr/mapper/condition/";
     private static final String INPUT_JSON_BUNDLE = CONDITION_FILE_LOCATIONS + "fhir-bundle.json";
 
@@ -51,6 +52,10 @@ public class ConditionLinkSetMapperTest {
     private static final String INPUT_JSON_NO_ACTUAL_PROBLEM = CONDITION_FILE_LOCATIONS + "condition_no_problem.json";
     private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_CONDITION = CONDITION_FILE_LOCATIONS
         + "condition_actual_problem_condition.json";
+    private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_ALLERGY_INTOLERANCE = CONDITION_FILE_LOCATIONS
+        + "condition_actual_problem_allergy_intolerance.json";
+    private static final String INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION = CONDITION_FILE_LOCATIONS
+        + "condition_actual_problem_immunization.json";
     private static final String INPUT_JSON_WITH_MAJOR_SIGNIFICANCE = CONDITION_FILE_LOCATIONS
         + "condition_major_significance.json";
     private static final String INPUT_JSON_WITH_MINOR_SIGNIFICANCE = CONDITION_FILE_LOCATIONS + "condition_all_included.json";
@@ -92,6 +97,8 @@ public class ConditionLinkSetMapperTest {
     private static final String OUTPUT_XML_WITH_DATES_PRESENT = EXPECTED_OUTPUT_LINKSET + "13.xml";
     private static final String OUTPUT_XML_WITH_DATES_NOT_PRESENT = EXPECTED_OUTPUT_LINKSET + "14.xml";
     private static final String OUTPUT_XML_SUPPRESSED_RELATED_MEDICATION_REQUEST = EXPECTED_OUTPUT_LINKSET + "15.xml";
+    private static final String OUTPUT_XML_ALLERGY_INTOLERANCE_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "16.xml";
+    private static final String OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM = EXPECTED_OUTPUT_LINKSET + "17.xml";
 
     @Mock
     private IdMapper idMapper;
@@ -123,7 +130,11 @@ public class ConditionLinkSetMapperTest {
         lenient().when(messageContext.getInputBundleHolder()).thenReturn(inputBundle);
         lenient().when(randomIdGeneratorService.createNewId()).thenReturn(GENERATED_ID);
         IdType conditionId = buildIdType(ResourceType.Condition, CONDITION_ID);
+        IdType allergyId = buildIdType(ResourceType.AllergyIntolerance, ALLERGY_ID);
+        IdType immunizationId = buildIdType(ResourceType.Immunization, IMMUNIZATION_ID);
         lenient().when(idMapper.getOrNew(ResourceType.Condition, conditionId)).thenReturn(CONDITION_ID);
+        lenient().when(idMapper.getOrNew(ResourceType.Observation, allergyId)).thenReturn(ALLERGY_ID);
+        lenient().when(idMapper.getOrNew(ResourceType.Observation, immunizationId)).thenReturn(IMMUNIZATION_ID);
         lenient().when(idMapper.getOrNew(any(Reference.class))).thenAnswer(answerWithObjectId(ResourceType.Condition));
         lenient().when(agentDirectory.getAgentId(any(Reference.class))).thenAnswer(answerWithObjectId());
 
@@ -192,7 +203,9 @@ public class ConditionLinkSetMapperTest {
             Arguments.of(INPUT_JSON_STATUS_INACTIVE, OUTPUT_XML_WITH_STATUS_INACTIVE, false),
             Arguments.of(INPUT_JSON_DATES_PRESENT, OUTPUT_XML_WITH_DATES_PRESENT, false),
             Arguments.of(INPUT_JSON_DATES_NOT_PRESENT, OUTPUT_XML_WITH_DATES_NOT_PRESENT, false),
-            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false)
+            Arguments.of(INPUT_JSON_RELATED_CLINICAL_CONTENT_LIST_REFERENCE, OUTPUT_XML_WITH_NO_RELATED_CLINICAL_CONTENT, false),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_ALLERGY_INTOLERANCE, OUTPUT_XML_ALLERGY_INTOLERANCE_ACTUAL_PROBLEM, false),
+            Arguments.of(INPUT_JSON_WITH_ACTUAL_PROBLEM_IMMUNIZATION, OUTPUT_XML_IMMUNIZATION_ACTUAL_PROBLEM, false)
         );
     }
 
