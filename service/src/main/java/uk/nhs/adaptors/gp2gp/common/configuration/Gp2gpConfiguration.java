@@ -12,4 +12,5 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "gp2gp")
 public class Gp2gpConfiguration {
     private int largeAttachmentThreshold;
+    private int largeEhrExtractThreshold;
 }

@@ -24,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgeme
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus.EhrReceivedAcknowledgement.ErrorDetails;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
+import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.Map;
 
@@ -252,6 +253,35 @@ public class EhrExtractStatusService {
 
             LOGGER.info("Database successfully updated with EHRAcknowledgement, Conversation-Id: " + conversationId);
         }
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
+        OutboundMessage.ExternalAttachment externalAttachment) {
+
+        Query query = createQueryForConversationId(taskDefinition.getConversationId());
+
+        Update update = createUpdateWithUpdatedAt();
+        Instant now = Instant.now();
+
+        update.addToSet(GPC_DOCUMENTS,
+            EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+                .documentId(externalAttachment.getDocumentId())
+                .objectName(externalAttachment.getFilename())
+                .accessedAt(now)
+                .taskId(taskDefinition.getTaskId())
+                .messageId(taskDefinition.getConversationId()).build());
+        FindAndModifyOptions returningUpdatedRecordOption = getReturningUpdatedRecordOption();
+
+        EhrExtractStatus ehrExtractStatus = mongoTemplate.findAndModify(query,
+            update,
+            returningUpdatedRecordOption,
+            EhrExtractStatus.class);
+
+        if (ehrExtractStatus == null) {
+            throw new EhrExtractException("EHR Extract Status was not updated with ehrExtractChunks");
+        }
+
+        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
