@@ -98,7 +98,7 @@ public class RequestStatementMapperTest {
     private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION = TEST_FILE_DIRECTORY
             + "example-referral-request-supportingInfo-with-observation.json";
     private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_EFFECTIVEPERIOD = TEST_FILE_DIRECTORY
-            + "example-referral-request-supportingInfo-with-observation.json";
+            + "example-referral-request-supportingInfo-with-observation-effectivePeriod.json";
     private static final String INPUT_JSON_WITH_SUPPORTINGINFO_OBSERVATION_NO_DATE = TEST_FILE_DIRECTORY
             + "example-referral-request-supportingInfo-with-observation-no-date.json";
     private static final String INPUT_JSON_WITH_SUPPORTINGINFO_REFERRALREQUEST = TEST_FILE_DIRECTORY
