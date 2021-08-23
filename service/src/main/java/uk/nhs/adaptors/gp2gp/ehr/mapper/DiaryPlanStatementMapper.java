@@ -133,7 +133,7 @@ public class DiaryPlanStatementMapper {
 
     private Optional<String> getSupportingInformation(ProcedureRequest procedureRequest) {
         if (procedureRequest.hasSupportingInfo()) {
-            return Optional.of("Support information: " + procedureRequest.getSupportingInfo().stream()
+            return Optional.of("Supporting Information: " + procedureRequest.getSupportingInfo().stream()
                 .filter(this::checkIfReferenceIsObservation)
                 .map((observationReference) -> extractObservation(messageContext, observationReference))
                 .collect(Collectors.joining(COMMA)));
