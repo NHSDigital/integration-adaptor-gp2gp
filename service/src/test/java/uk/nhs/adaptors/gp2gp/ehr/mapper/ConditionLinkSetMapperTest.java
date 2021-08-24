@@ -189,7 +189,7 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage).isEqualTo(expectedOutput);
     }
 
     private static Stream<Arguments> testArguments() {
@@ -220,7 +220,7 @@ public class ConditionLinkSetMapperTest {
         Condition condition = fhirParseService.parseResource(jsonInput, Condition.class);
 
         String outputMessage = conditionLinkSetMapper.mapConditionToLinkSet(condition, isNested);
-        assertThat(outputMessage).isEqualToIgnoringWhitespace(expectedOutput);
+        assertThat(outputMessage).isEqualTo(expectedOutput);
     }
 
     private static Stream<Arguments> testObservationArguments() {

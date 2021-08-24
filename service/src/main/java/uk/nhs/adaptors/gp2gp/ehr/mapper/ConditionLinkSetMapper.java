@@ -245,8 +245,8 @@ public class ConditionLinkSetMapper {
 
     private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
         return Optional.of(condition)
-            .filter(Condition:: hasOnsetDateTimeType)
-            .map(Condition:: getOnsetDateTimeType)
+            .filter(Condition::hasOnsetDateTimeType)
+            .map(Condition::getOnsetDateTimeType)
             .map(DateFormatUtil::toHl7Format);
     }
 
