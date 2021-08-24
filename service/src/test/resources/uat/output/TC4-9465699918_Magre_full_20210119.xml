@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RCMR_IN030000UK06 xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ..\Schemas\RCMR_IN030000UK06.xsd">
-    <id root="07378FF7-547B-4A4E-9C58-3553095BA37E" />
+    <id root="ED51A3DF-3870-4669-9FDB-7FEF5BE77E3B" />
     <creationTime value="20200101010101" />
     <versionCode code="V3NPfIT3.1.10" />
     <interactionId root="2.16.840.1.113883.2.1.3.2.4.12" extension="RCMR_IN030000UK06" />
@@ -70,7 +70,7 @@
     <agentDirectory classCode="AGNT">
         <part typeCode="PART">
     <Agent classCode="AGNT">
-        <id root="53847A06-6B81-4A50-BF84-C5588990485A" />
+        <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
         <agentOrganization determinerCode="INSTANCE" classCode="ORG">
                         <id extension="A82038" root="2.16.840.1.113883.2.1.4.3"/>
             <name>TEMPLE SOWERBY MEDICAL PRACTICE</name>
@@ -6165,25 +6165,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E"/>
-        <code code="91936005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to penicillin">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20200724"/>
-            <high value="20200724000000"/>
-        </effectiveTime>
-        <availabilityTime value="20200724" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Problem Notes: test, test</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -6289,7 +6271,7 @@
         <availabilityTime value="20200724133829" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="BD1680CF-1EE2-4844-87AE-61364D3B48A1"/>
+                <id root="041E16C5-CB96-4A2C-A8D8-BF6CD904671E"/>
                 <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -6540,62 +6522,6 @@
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <center value="20190902"/>
-        </effectiveTime>
-        <availabilityTime value="20201214101913"/>
-        <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201214101913" />
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
-            </agentRef>
-        </author>
-        <location typeCode="LOC">
-            <locatedEntity classCode="LOCE">
-                <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
-                <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
-                </locatedPlace>
-            </locatedEntity>
-        </location>
-        <Participant2 typeCode="PRF" contextControlCode="OP">
-            <agentRef classCode="AGNT">
-                <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-            </agentRef>
-        </Participant2>
-        <component typeCode="COMP" >
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4" />
-        <code code="195967001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Asthma">
-</code>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
-            <center value="20190902"/>
-        </effectiveTime>
-        <availabilityTime value="20201214101913"/>
-        
-        
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-        
-        <Participant typeCode="PRF" contextControlCode="OP">
-    <agentRef classCode="AGNT">
-        <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
-    </agentRef>
-</Participant>
-    </ObservationStatement>
-</component>
-    </ehrComposition>
-</component>
-                <component typeCode="COMP">
-    <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7" />
-        <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
-        <statusCode code="COMPLETE" />
-        <effectiveTime>
             <center value="20200302"/>
         </effectiveTime>
         <availabilityTime value="20200302120055"/>
@@ -6620,7 +6546,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC" />
+        <id root="9096D5A1-7370-4C51-AE78-52A89E2F6B63" />
         <code code="1990681000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Preferred method of contact: unknown">
     <originalText>Preferred method of contact: unknown</originalText>
 </code>
@@ -6649,7 +6575,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605" />
+        <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6677,7 +6603,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709" />
+        <id root="B58EFB01-1CFF-49D4-9658-9547F40A24CC" />
         <code code="417528008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Consent given for upload to local shared electronic record">
 </code>
         <statusCode code="COMPLETE" />
@@ -6705,7 +6631,7 @@
 </component>
                 <component typeCode="COMP">
     <ehrComposition classCode="COMPOSITION" moodCode="EVN">
-        <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A" />
+        <id root="337FF7FD-DA23-4EA4-9ED5-D44E1B06E605" />
         <code code="196401000000100" displayName="Non-consultation data" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"/>
         <statusCode code="COMPLETE" />
         <effectiveTime>
@@ -6733,7 +6659,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3390559A-D17E-4D30-9A51-B4459E1515EF" />
+        <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709" />
         <code code="196411000000103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded record entry">
     <originalText>Assessment Complete - No Care Needed</originalText>
 </code>
