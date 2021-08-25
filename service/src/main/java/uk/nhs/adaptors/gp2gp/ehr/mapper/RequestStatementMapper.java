@@ -241,7 +241,7 @@ public class RequestStatementMapper {
                     .map(Device::getType)
                     .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
                     .map(REQUESTER_DEVICE::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Device Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }
@@ -253,7 +253,7 @@ public class RequestStatementMapper {
                     .filter(Organization::hasName)
                     .map(Organization::getName)
                     .map(REQUESTER_ORG::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }
@@ -275,7 +275,7 @@ public class RequestStatementMapper {
                     .map(RelatedPerson::getNameFirstRep)
                     .map(RequestStatementExtractor::extractHumanName)
                     .map(REQUESTER_RELATION::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }

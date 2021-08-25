@@ -18,7 +18,6 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 
 public class SupportingInfoResourceExtractor {
-    private static final String EXCEPTION_COULD_NOT_RESOLVE_REFERENCE = "Could not resolve %s Reference";
     private static final String CODE_SYSTEM = "2.16.840.1.113883.2.1.4.5.5";
 
     public static String extractDocumentReference(MessageContext messageContext, Reference reference) {
@@ -26,10 +25,7 @@ public class SupportingInfoResourceExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(DocumentReference.class::cast)
-                .orElseThrow(() -> new EhrMapperException(
-                        String.format(
-                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                reference.getReferenceElement().getResourceType())));
+                .get();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Document:");
@@ -64,10 +60,7 @@ public class SupportingInfoResourceExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(Observation.class::cast)
-                .orElseThrow(() -> new EhrMapperException(
-                        String.format(
-                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                reference.getReferenceElement().getResourceType())));
+                .get();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Observation:");
@@ -94,10 +87,7 @@ public class SupportingInfoResourceExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(ReferralRequest.class::cast)
-                .orElseThrow(() -> new EhrMapperException(
-                        String.format(
-                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                reference.getReferenceElement().getResourceType())));
+                .get();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Referral:");
@@ -122,10 +112,7 @@ public class SupportingInfoResourceExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(DiagnosticReport.class::cast)
-                .orElseThrow(() -> new EhrMapperException(
-                        String.format(
-                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                reference.getReferenceElement().getResourceType())));
+                .get();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Pathology Report:");
@@ -154,10 +141,7 @@ public class SupportingInfoResourceExtractor {
                 .getInputBundleHolder()
                 .getResource(reference.getReferenceElement())
                 .map(MedicationRequest.class::cast)
-                .orElseThrow(() -> new EhrMapperException(
-                        String.format(
-                                EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                reference.getReferenceElement().getResourceType())));
+                .get();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ Medication:");
@@ -178,10 +162,7 @@ public class SupportingInfoResourceExtractor {
                     .getInputBundleHolder()
                     .getResource(medicationRequest.getMedicationReference().getReferenceElement())
                     .map(Medication.class::cast)
-                    .orElseThrow(() -> new EhrMapperException(
-                            String.format(
-                                    EXCEPTION_COULD_NOT_RESOLVE_REFERENCE,
-                                    reference.getReferenceElement().getResourceType())));
+                    .get();
 
             CodeableConceptMappingUtils.extractTextOrCoding(medication.getCode()).ifPresent(code -> {
                 stringBuilder.append(" " + code);

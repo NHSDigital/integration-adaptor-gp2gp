@@ -124,9 +124,6 @@ public class MedicationStatementExtractor {
         LOGGER.debug("Ensuring the bundle contains Plan MedicationRequest {}", reference.getReference());
 
         var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
-        if (resource.isEmpty()) {
-            throw new EhrMapperException("Could not resolve Medication Request reference " + reference.getReference());
-        }
 
         var medicationRequest = (MedicationRequest) resource.get();
         if (!MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
