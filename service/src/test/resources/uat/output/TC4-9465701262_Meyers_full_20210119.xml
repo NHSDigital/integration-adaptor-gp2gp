@@ -1460,6 +1460,11 @@
                         <id root="8DD1BB6C-F391-4E1F-B68F-A427448828CA"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>just need to end it</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">

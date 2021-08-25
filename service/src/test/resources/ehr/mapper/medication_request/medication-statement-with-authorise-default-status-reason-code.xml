@@ -53,6 +53,11 @@
                         <id root="394559384658936"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <code nullFlavor="UNK"><text>Stopped</text></code>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
