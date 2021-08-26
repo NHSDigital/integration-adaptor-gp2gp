@@ -3051,6 +3051,11 @@
                         <id root="DF71EC06-9453-4AE7-9C3C-E42871252772"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Patient Preference - Switch back to Atorvastatin</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
