@@ -1,9 +1,11 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +98,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             String compressedHl7 = hl7TranslatedResponse;
             if (!isLargeEhrExtract(compressedHl7)) {
                 hl7TranslatedResponse = compressedHl7;
-
             } else {
                 var documentId = randomIdGeneratorService.createNewId();
                 var documentName = GpcFilenameUtils.generateDocumentFilename(
@@ -104,7 +105,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 );
                 var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition, documentId, documentName);
                 externalAttachments.add(externalAttachment);
-
 
                 var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
                 uploadToStorage(compressedHl7, documentName, taskDefinition);
@@ -171,7 +171,8 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
-    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition, String documentId, String documentName) {
+    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition,
+        String documentId, String documentName) {
         var messageId = randomIdGeneratorService.createNewId();
 
         return OutboundMessage.ExternalAttachment.builder()
