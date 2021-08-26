@@ -254,12 +254,8 @@ public class ConditionLinkSetMapper {
         if (checkIfReferenceIsAllergyIntolerance(reference) && reference.getResource() != null) {
             var idType = IdType.of(reference.getResource());
             return messageContext.getIdMapper().getOrNew(ResourceType.Observation, idType);
-        } else {
-            var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
-            if (resource.isPresent()) {
-                return messageContext.getIdMapper().getOrNew(ResourceType.Observation, resource.get().getIdElement());
-            }
         }
+
         return messageContext.getIdMapper().getOrNew(reference);
     }
 }
