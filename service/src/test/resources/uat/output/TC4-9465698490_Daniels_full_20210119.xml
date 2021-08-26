@@ -2439,6 +2439,11 @@
                         <id root="87102979-C329-4194-819B-D057AAEA625B"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>zzzzzss</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -2781,6 +2786,11 @@
                         <id root="EA0D236C-2CD7-49EB-80D2-9AD58C3969F4"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Prescribing Error</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3204,6 +3214,11 @@
                         <id root="E2E527ED-E7FB-4161-9D3C-04FF121BF267"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Patient no longer requires these</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -3545,6 +3560,11 @@
                         <id root="5B72BB13-10A8-4AB3-8E13-B2C8428677BB"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Clinical Contra-indication</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -7489,6 +7509,11 @@
                         <id root="9A11E815-9320-4952-96BA-CC83BECF62A3"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Allergy</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -7753,6 +7778,11 @@
                         <id root="EF7BFB69-2694-46AE-8845-A49B83A88F16"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Adverse reaction to Central Nervous System Drugs (allergy)</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -8094,6 +8124,11 @@
                         <id root="6F3E8A7A-7C40-4ACF-AD97-43A2E5DA6B29"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Alergy</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -8678,6 +8713,11 @@
                         <id root="BCF39DFD-A6ED-43F7-A9BE-5A25EB970C8B"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>kjhkjkjhjkjkj</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -9101,6 +9141,11 @@
                         <id root="64D224E0-DE90-49BB-AF2D-ECA90BA2CE0D"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Adverse reaction to Prednisolone (Fat, John said)</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -14132,6 +14177,11 @@
                         <id root="E96B55C1-7C8E-40CA-A6C0-A2951CFEE860"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Clinical Grounds</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -15867,6 +15917,11 @@
                         <id root="2810EE1B-93EE-4417-B70B-C692AD0B2A17"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Prescribing Error</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -17278,6 +17333,11 @@
                         <id root="447AE7B0-FA1A-4BEA-A90F-68C35240C5F9"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Change to Medication Treatment Regime</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -17624,6 +17684,11 @@
                         <id root="77730A08-B78F-448A-8810-D6CBBF86420E"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>some reason</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -18461,6 +18526,11 @@
                         <id root="047E10B7-9A38-46A4-B34C-CEBD35C8A4B7"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>Recreate 22047</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
@@ -18725,6 +18795,11 @@
                         <id root="1751F68E-56EA-4DAE-904B-A1028952B01F"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        <text>End course for acute post G -> T switch for 22047</text>
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         <pertinentInformation typeCode="PERT">
