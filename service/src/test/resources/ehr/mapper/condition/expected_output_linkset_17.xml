@@ -15,7 +15,7 @@
         <availabilityTime value="20200907101202" />
         <conditionNamed typeCode="NAME" inversionInd="true">
             <namedStatementRef classCode="OBS" moodCode="EVN">
-                <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1"/>
+                <id root="C93659E1-1107-441C-BE25-C5EF4B7831D1-Condition-new-ID"/>
             </namedStatementRef>
         </conditionNamed>
         <Participant typeCode="PRF" contextControlCode="OP">
