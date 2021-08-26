@@ -30,15 +30,15 @@ public class InputBundle {
     }
 
     public Optional<Resource> getResource(IIdType reference) {
-        if (reference.getResourceType() == null){
+        if (reference.getResourceType() == null) {
             return Optional.empty();
         }
-        
+
         Optional<Resource> resource = extractResourceByReference(this.bundle, reference);
         if (resource.isPresent()) {
             return resource;
-        } 
-        
+        }
+
         throw new EhrMapperException("Resource not found: " + reference);
     }
 
