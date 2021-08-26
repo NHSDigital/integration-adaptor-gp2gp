@@ -8,7 +8,9 @@ import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
 import java.util.List;
@@ -30,7 +32,17 @@ public class InputBundle {
     }
 
     public Optional<Resource> getResource(IIdType reference) {
-        return extractResourceByReference(this.bundle, reference);
+        if (reference == null || reference.getResourceType() == null) {
+            return Optional.empty();
+        }
+
+        var resourceType = ResourceType.fromCode(reference.getResourceType());
+
+        if (reference.getResourceType().equals(resourceType.toString())) {
+            return extractResourceByReference(this.bundle, reference);
+        } else {
+            throw new EhrMapperException("Resource not found: " + reference);
+        }
     }
 
     public Resource getRequiredResource(IIdType reference) {
