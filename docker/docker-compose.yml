@@ -13,6 +13,7 @@ services:
       - activemq
     ports:
       - "8080:8080"
+      - "5005:5005"
     environment:
       - GP2GP_SERVER_PORT
       - GP2GP_LOGGING_LEVEL

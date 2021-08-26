@@ -98,11 +98,16 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 hl7TranslatedResponse = compressedHl7;
 
             } else {
-                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition);
+                var documentId = randomIdGeneratorService.createNewId();
+                var documentName = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), documentId
+                );
+                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition, documentId, documentName);
                 externalAttachments.add(externalAttachment);
 
+
                 var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(compressedHl7, externalAttachment.getFilename(), taskDefinition);
+                uploadToStorage(compressedHl7, documentName, taskDefinition);
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
                 hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
@@ -166,16 +171,13 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
-    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition) {
+    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition, String documentId, String documentName) {
         var messageId = randomIdGeneratorService.createNewId();
-        var documentId = randomIdGeneratorService.createNewId();
-        var documentName = GpcFilenameUtils.generateDocumentFilename(
-            taskDefinition.getConversationId(), documentId
-        );
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
+            .filename(documentName)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(documentName)
                 .contentType("application/xml") // confirm this is correct
