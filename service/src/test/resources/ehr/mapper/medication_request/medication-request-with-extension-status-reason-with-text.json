@@ -1,0 +1,64 @@
+{
+    "resourceType":"MedicationRequest",
+    "id":"3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "meta":{
+        "profile":[
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+        ]
+    },
+    "extension":[
+        {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-MedicationStatusReason-1",
+            "extension": [
+                {
+                    "url": "statusReason",
+                    "valueCodeableConcept": {
+                        "text": "Clinical Contra-indication"
+                    }
+                },
+                {
+                    "url": "statusChangeDate",
+                    "valueDateTime": "2010-01-18T14:33:16.397+00:00"
+                }
+            ]
+        },
+        {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+            "valueCodeableConcept": {
+                "coding": [
+                    {
+                        "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                        "code": "acute",
+                        "display": "Acute"
+                    }
+                ]
+            }
+        }
+    ],
+    "authoredOn": "2021-01-01T00:00:00+00:00",
+    "status": "stopped",
+    "intent": "plan",
+    "dispenseRequest":{
+        "validityPeriod":{
+            "start": "2021-01-01T00:00:00+00:00",
+            "end": "2021-02-01T00:00:00+00:00"
+        }
+    },
+    "medicationReference":{
+        "reference": "Medication/20"
+    },
+    "dosageInstruction":[
+        {
+            "text": "Test Dosage Text",
+            "patientInstruction": "Test Patient Instruction"
+        }
+    ],
+    "recorder":{
+        "reference": "Organization/2"
+    },
+    "basedOn": [
+        {
+            "reference": "MedicationRequest/D66D84C9-C073-4EDF-8C2C-F309A83C3DC7"
+        }
+    ]
+}

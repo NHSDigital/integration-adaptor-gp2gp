@@ -230,15 +230,15 @@
             <center value="20100714180700"/>
         </effectiveTime>
         <availabilityTime value="20100714163232"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: @ÑÑ§Ñ¬ This has extended unicode characters</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -344,15 +344,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -368,15 +368,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: These are some notes !&quot;£$%^&amp;*()</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -404,15 +404,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -428,15 +428,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Family member : Mother</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -452,15 +452,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Family member : Father - note - this is obviously wrong?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -7347,7 +7347,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100123134800"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100123140354" />
             <component typeCode="COMP">
@@ -7733,7 +7733,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100113145739" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -7791,7 +7791,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100113145725" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -7849,7 +7849,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100113145710" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -7864,24 +7864,7 @@ The line below contains special characters...
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113145710" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Problem Notes: This is text for a warfarin allergy</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -7939,24 +7922,7 @@ The line below contains special characters...
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            <high value="20100323000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100113140445" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Related Problem: Child of Aspirin allergy Problem Notes: This is a peanut allergy, (Evolved into H/O: aspirin allergy 13-Jan-2010)</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -7999,7 +7965,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100113114126" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -8014,24 +7980,7 @@ The line below contains special characters...
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="test-id-3"/>
-        <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100113"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100113114126" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Related Problem: Parent of Allergy to peanuts Problem Notes: Drug Allergy - Apsrin</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -8074,7 +8023,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100113"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100113114111" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -8132,7 +8081,7 @@ The line below contains special characters...
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <low value="20100714"/>
-            
+
         </effectiveTime>
         <availabilityTime value="20100714163251" />
         <conditionNamed typeCode="NAME" inversionInd="true">
@@ -8187,15 +8136,15 @@ The line below contains special characters...
             <center value="19880101"/>
         </effectiveTime>
         <availabilityTime value="20100113154141"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Engraver (entry added 13/1/2010, but marked as 01/1/1988 as date of entry)</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8242,15 +8191,15 @@ The line below contains special characters...
             <center value="20091102"/>
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Family member : Uncle</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8298,14 +8247,14 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value>
-        
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8353,14 +8302,14 @@ The line below contains special characters...
         </effectiveTime>
         <availabilityTime value="20100113151332"/>
         <value xsi:type="PQ" value="90" unit="1"><translation value="90"><originalText>mmHg</originalText></translation></value>
-        
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8407,15 +8356,15 @@ The line below contains special characters...
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145739"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected Problem Info: Problem Notes: Synonym &quot;Heart Attack&quot; selected</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8462,15 +8411,15 @@ The line below contains special characters...
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113145725"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Significance : Major - Episodicity : First - Happy Puppet Problem Info: Problem Notes: Happy Puppet</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8517,15 +8466,15 @@ The line below contains special characters...
             <center value="20100113"/>
         </effectiveTime>
         <availabilityTime value="20100113114111"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8572,15 +8521,15 @@ The line below contains special characters...
             <center value="20100123134800"/>
         </effectiveTime>
         <availabilityTime value="20100123140354"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8627,15 +8576,15 @@ The line below contains special characters...
             <center value="20100609160800"/>
         </effectiveTime>
         <availabilityTime value="20100609160409"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8682,15 +8631,15 @@ The line below contains special characters...
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163251"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes: This is a standalone note with extended chars Ñ§¬</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8737,15 +8686,15 @@ The line below contains special characters...
             <center value="20100714"/>
         </effectiveTime>
         <availabilityTime value="20100714163124"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: This is descriptive text `¬¦!&quot;£$%^&amp;*()-_+={}[]~#@&apos;:;&lt;,|\&gt;./?</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
@@ -8870,15 +8819,15 @@ The line below contains special characters...
             <center value="20201026"/>
         </effectiveTime>
         <availabilityTime value="20201026115854"/>
-        
-        
+
+
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>
