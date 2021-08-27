@@ -18,8 +18,8 @@ public class Gzip {
         if (StringUtils.isBlank(content)) {
             return null;
         }
-        try (final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-             final GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+             GZIPOutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream)) {
             gzipOutputStream.write(content.getBytes(UTF_8));
             gzipOutputStream.finish();
             return byteArrayOutputStream.toByteArray();
@@ -32,8 +32,8 @@ public class Gzip {
         if (compressedContent == null || compressedContent.length == 0) {
             return null;
         }
-        try (final GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(compressedContent));
-             final StringWriter stringWriter = new StringWriter()) {
+        try (GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(compressedContent));
+             StringWriter stringWriter = new StringWriter()) {
             IOUtils.copy(gzipInputStream, stringWriter, UTF_8);
             return stringWriter.toString();
         } catch (IOException e) {

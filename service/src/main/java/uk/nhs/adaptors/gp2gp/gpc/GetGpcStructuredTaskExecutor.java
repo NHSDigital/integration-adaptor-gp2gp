@@ -26,8 +26,6 @@ import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
