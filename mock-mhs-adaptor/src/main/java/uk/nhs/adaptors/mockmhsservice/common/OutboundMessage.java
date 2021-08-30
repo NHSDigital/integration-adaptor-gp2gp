@@ -55,16 +55,6 @@ public class OutboundMessage {
         private String documentId;
         @JsonProperty("message_id")
         private String messageId;
-        private String filename;
-        @JsonProperty("content_type")
-        private String contentType;
-        private boolean compressed;
-        @JsonProperty("large_attachment")
-        private boolean largeAttachment;
-        @JsonProperty("original_base64")
-        private boolean originalBase64;
-        private int length;
-        @JsonProperty("domain_data")
-        private String domainData;
+        private String description;
     }
 }
