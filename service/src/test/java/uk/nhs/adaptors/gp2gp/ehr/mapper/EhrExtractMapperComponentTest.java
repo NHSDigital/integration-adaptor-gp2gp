@@ -184,7 +184,7 @@ public class EhrExtractMapperComponentTest {
         );
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
 
-        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testData() {
