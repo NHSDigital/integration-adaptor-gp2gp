@@ -74,11 +74,14 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                 var chunkedOutboundMessage = createChunkOutboundMessage(chunkPayload, chunk, contentType);
                 requestDataToSend.put(randomIdGeneratorService.createNewId(), chunkedOutboundMessage);
                 var externalAttachment = OutboundMessage.ExternalAttachment.builder()
-                    .largeAttachment(false) // const - chunks are not large attachments themself
-                    .compressed(false) // const
-                    .originalBase64(true) // const
-                    .filename(filename)
-                    .contentType(contentType)
+                    .description(OutboundMessage.AttachmentDescription.builder()
+                        .fileName(filename)
+                        .contentType(contentType)
+                        .compressed(false) //const
+                        .largeAttachment(false) // const - chunks are not large attachments themself
+                        .originalBase64(true) //const
+                        .build()
+                        .toString())
                     .messageId(messageId)
                     .build();
                 outboundMessage.getExternalAttachments().add(externalAttachment);
