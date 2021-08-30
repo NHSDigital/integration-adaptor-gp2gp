@@ -64,7 +64,7 @@ public class OutboundMessage {
         private String documentId;
         @JsonProperty("message_id")
         private String messageId;
-        @JsonProperty("file_name")
+        @JsonIgnore
         private String filename;
         private String description;
         @JsonIgnore
