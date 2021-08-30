@@ -25,6 +25,31 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class InputBundle {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
+    private static final  List<ResourceType> MAPPABLE_RESOURCES = List.of(
+        ResourceType.AllergyIntolerance,
+        ResourceType.Condition,
+        ResourceType.DocumentReference,
+        ResourceType.Immunization,
+        ResourceType.List,
+        ResourceType.MedicationRequest,
+        ResourceType.Observation,
+        ResourceType.ProcedureRequest,
+        ResourceType.ReferralRequest,
+        ResourceType.DiagnosticReport,
+        ResourceType.Specimen,
+        ResourceType.Location,
+        ResourceType.Practitioner,
+        ResourceType.Medication,
+        ResourceType.Organization,
+        ResourceType.PractitionerRole,
+        ResourceType.Encounter,
+        ResourceType.Device,
+        ResourceType.Patient,
+        ResourceType.RelatedPerson,
+        ResourceType.Appointment,
+        ResourceType.HealthcareService
+    );
+
     private final Bundle bundle;
 
     public InputBundle(Bundle bundle) {
@@ -32,16 +57,16 @@ public class InputBundle {
     }
 
     public Optional<Resource> getResource(IIdType reference) {
-        if (reference == null || reference.getResourceType() == null) {
+        if (reference.getResourceType() == null) {
             return Optional.empty();
         }
 
         var resourceType = ResourceType.fromCode(reference.getResourceType());
 
-        if (reference.getResourceType().equals(resourceType.toString())) {
+        if (MAPPABLE_RESOURCES.contains(resourceType)) {
             return extractResourceByReference(this.bundle, reference);
         } else {
-            throw new EhrMapperException("Resource not found: " + reference);
+            throw new EhrMapperException("Reference not supported resource type: " + reference);
         }
     }
 
