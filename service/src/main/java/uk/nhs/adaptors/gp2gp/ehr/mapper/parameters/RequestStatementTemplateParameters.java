@@ -13,6 +13,7 @@ public class RequestStatementTemplateParameters {
     private String availabilityTime;
     private String defaultReasonCode;
     private String code;
+    private String priorityCode;
     private String participant;
     private String responsibleParty;
     private String text;

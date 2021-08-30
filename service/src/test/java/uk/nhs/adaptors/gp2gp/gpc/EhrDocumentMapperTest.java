@@ -52,6 +52,7 @@ public class EhrDocumentMapperTest {
         expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(TEST_FILE_DIRECTORY + EXPECTED_XML_TO_JSON_FILE);
         getGpcDocumentTaskDefinition = GetGpcDocumentTaskDefinition.builder()
             .conversationId(TEST_CONVERSATION_ID)
+            .messageId(TEST_MESSAGE_ID)
             .requestId(TEST_REQUEST_ID)
             .fromAsid(TEST_FROM_ASID_CODE)
             .toAsid(TEST_TO_ASID_CODE)
@@ -71,7 +72,7 @@ public class EhrDocumentMapperTest {
     @Test
     public void When_MappingProperJsonRequestBody_Expect_ProperXmlOutput() {
         EhrDocumentTemplateParameters ehrDocumentTemplateParameters =
-            ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getGpcDocumentTaskDefinition, TEST_MESSAGE_ID);
+            ehrDocumentMapper.mapToMhsPayloadTemplateParameters(getGpcDocumentTaskDefinition);
         String output = ehrDocumentMapper.mapMhsPayloadTemplateToXml(ehrDocumentTemplateParameters);
 
         assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);

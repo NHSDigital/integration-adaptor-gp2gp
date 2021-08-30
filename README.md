@@ -109,11 +109,7 @@ The adaptor fetches patient records and documents with the GP Connect Consumer A
 | Environment Variable                 | Default                                       | Description
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_GPC_GET_URL                    | http://localhost:8090/@ODS_CODE@/STU3/1/gpconnect | (*) The base URL of the GP Connect Consumer Adaptor. @ODS_CODE@ is a placeholder replaced in runtime with the actual ODS code of the loosing practice.
-| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /structured/fhir                              | The path segment for Get Access Structured FHIR server
-| GP2GP_GPC_DOCUMENTS_FHIR_BASE        | /documents/fhir                               | The path segment for Get Access Documents FHIR server
-| GP2GP_GPC_OVERRIDE_NHS_NUMBER        |                                               | The variable to overwrite nhs number used for gpc requests.
-| GP2GP_GPC_OVERRIDE_FROM_ASID         |                                               | The variable to overwrite fromAsid used for gpc requests.
-| GP2GP_GPC_OVERRIDE_TO_ASID           |                                               | The variable to overwrite toAsid used for gpc requests.
+| GP2GP_GPC_STRUCTURED_FHIR_BASE       | /fhir                                         | The path segment for Get Access Structured FHIR server
 
 (*) `GP2GP_GPC_GET_URL` could be set to the base URL of a GP Connect Producer for limited testing purposes 
 
@@ -125,6 +121,12 @@ The GP2GP uses the [MHS Adaptor](https://github.com/nhsconnect/integration-adapt
 | -------------------------------------|-----------------------------------------------|-------------
 | GP2GP_MHS_OUTBOUND_URL               | http://localhost:8081/mock-mhs-endpoint       | URL to the MHS adaptor's outbound endpoint
 | GP2GP_MHS_INBOUND_QUEUE              | inbound                   | Name of the queue for MHS inbound
+
+### GP2GP Configuration Options
+
+| Environment Variable                 | Default                                       | Description
+| -------------------------------------|-----------------------------------------------|-------------
+| GP2GP_LARGE_ATTACHMENT_THRESHOLD     | 4500000                                       | Value in bytes. Defines the max size of a single attachment sent to MHS. If a document is larger than this value, it's content will be split and sent in chunks.
 
 ## How to operate the adaptor
 
@@ -144,7 +146,7 @@ We publish releases of the GP2GP adaptor container image to [Docker Hub](https:/
 
 We provide several example configurations:
 * `vars.local.sh` to run the adaptor with mock services
-* `vars.public.sh` to run the adaptor with the GP Connect public demonstrator
+* `vars.public.sh` to run the adaptor with the GP Connect public demonstrator docker image
 * `vars.opentest.sh` to run the adaptor with providers and responders in OpenTest
 
 ```bash
@@ -154,7 +156,15 @@ cp vars.local.sh vars.sh
 
 ### Using the helper script for Docker Compose
 
-Run `./start-local-environment.sh`
+For local environment to run against mocks:
+```bash
+./start-local-environment-mocks.sh
+```
+
+For local environment to run against gp demonstrator 1.6.0
+```bash
+./start-local-environment-public.sh
+```
 
 You can also run the docker-compose commands directly.
 

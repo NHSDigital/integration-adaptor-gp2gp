@@ -365,7 +365,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+                <code nullFlavor="UNK">
     <originalText>H/O: drug allergy Paracetamol 500mg capsules</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -949,7 +949,12 @@
                 <text>Interpretation: LO - Below low reference limit Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="7.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -974,7 +979,12 @@
                 <text>Interpretation: LO - Below low reference limit Weeks: 4. Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="20.000"/><high value="22.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -999,7 +1009,12 @@
                 <text>Interpretation: PA - Potentially abnormal Abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="7.000"/><high value="9.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1024,7 +1039,12 @@
                 <text>Interpretation: HI - Above high reference limit High</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1049,7 +1069,12 @@
                 <text>Interpretation: This should be abnormal according to the range</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="20.000"/><high value="30.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1061,12 +1086,13 @@
         <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
-        <text>Priority: Routine Annotation:  @  Back pain without radiation NOS Source: GP Referral, Referral Type: Out Patient, Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:None Required </text>
+        <text>Annotation:  @  Back pain without radiation NOS Source: GP Referral, Referral Type: Out Patient, Annotation:  @  Mode:Written, Annotation:  @  Purpose:Unknown, Annotation:  @  NHS / Private:Private, Annotation:  @  Transport:None Required </text>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20050208"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <Participant typeCode="AUT" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1124,7 +1150,12 @@
                 <text>Interpretation: PA - Potentially abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="18.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1655,7 +1686,12 @@
                 <text>Interpretation: Dated Unknown test resuly</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="10.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1682,7 +1718,12 @@ Spanning multiple Lines
 And more stuff</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="10.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1707,7 +1748,12 @@ And more stuff</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="9.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1732,7 +1778,12 @@ And more stuff</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="9.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1757,7 +1808,12 @@ And more stuff</text>
                 <text>Interpretation: LO - Below low reference limit Year only test result Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.000"/><high value="12.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1782,7 +1838,12 @@ And more stuff</text>
                 <text></text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="6.000"/><high value="9.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1807,7 +1868,12 @@ And more stuff</text>
                 <text>Interpretation: HI - Above high reference limit Very High</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1857,7 +1923,12 @@ And more stuff</text>
                 <text>Interpretation: HI - Above high reference limit This should be normal according to the range High</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="6.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1909,7 +1980,7 @@ And more stuff</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+                <code nullFlavor="UNK">
     <originalText>[X] Adverse reaction to barbiturate NOS Amobarbital 50mg tablets</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2618,7 +2689,12 @@ And more stuff</text>
                 <text>Interpretation: PA - Potentially abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1000.000"/><high value="2000.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
@@ -3139,7 +3215,12 @@ with special characters
                 <text>Interpretation: No units</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="5.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
@@ -3218,7 +3299,6 @@ with special characters
         <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 2.000 mm/h</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -3250,7 +3330,6 @@ with special characters
         <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&gt; 3.000 nmol/L</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -3311,7 +3390,12 @@ with special characters
                 <text>Interpretation: This is the consultation to test edits</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="5.000"/><high value="13.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>
@@ -3484,7 +3568,7 @@ with special characters
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+                <code nullFlavor="UNK">
     <originalText>Beta blocker contraindicated Atenolol 50mg tablets</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3943,7 +4027,12 @@ with special characters
                 <text>Interpretation: PA - Potentially abnormal This is an empty one Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
-        
+        <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="6.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34"/>

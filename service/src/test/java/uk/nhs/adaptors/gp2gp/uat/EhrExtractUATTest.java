@@ -27,6 +27,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import lombok.SneakyThrows;
 import uk.nhs.adaptors.gp2gp.RandomIdGeneratorServiceStub;
@@ -64,6 +65,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.SpecimenMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EhrExtractTemplateParameters;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
+import wiremock.org.custommonkey.xmlunit.XMLAssert;
 
 @ExtendWith(MockitoExtension.class)
 public class EhrExtractUATTest {
@@ -79,6 +81,24 @@ public class EhrExtractUATTest {
     private MessageContext messageContext;
     private OutputMessageWrapperMapper outputMessageWrapperMapper;
     private GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition;
+
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> testValueFilePaths() {
+        return Stream.of(
+            Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
+            Arguments.of("9465701483_Nel_full_20210119.json", "9465701483_Nel_full_20210119.xml"),
+            Arguments.of("9465698679_Gainsford_full_20210119.json", "9465698679_Gainsford_full_20210119.xml"),
+            Arguments.of("9465700193_Birdi_full_20210119.json", "9465700193_Birdi_full_20210119.xml"),
+            Arguments.of("9465701262_Meyers_full_20210119.json", "9465701262_Meyers_full_20210119.xml"),
+            Arguments.of("9465699918_Magre_full_20210119.json", "9465699918_Magre_full_20210119.xml"),
+            Arguments.of("9465701297_Livermore_full_20210119.json", "9465701297_Livermore_full_20210119.xml"),
+            Arguments.of("9465700339_Yamura_full_20210119.json", "9465700339_Yamura_full_20210119.xml"),
+            Arguments.of("9465699926_Sajal_full_20210122.json", "9465699926_Sajal_full_20210122.xml"),
+            Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml"),
+            Arguments.of("9465701718_Guerra_full_20210119.json", "9465701718_Guerra_full_20210119.xml"),
+            Arguments.of("9465700088_Mold_full_20210119.json", "9465700088_Mold_full_20210119.xml")
+        );
+    }
 
     @BeforeEach
     public void setUp() {
@@ -107,6 +127,8 @@ public class EhrExtractUATTest {
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper, participantMapper,
             multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
 
         final EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -117,7 +139,7 @@ public class EhrExtractUATTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
+            documentReferenceToNarrativeStatementMapper,
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -139,7 +161,8 @@ public class EhrExtractUATTest {
         final EncounterMapper encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
 
         final NonConsultationResourceMapper nonConsultationResourceMapper =
-            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper);
+            new NonConsultationResourceMapper(messageContext, randomIdGeneratorService, encounterComponentsMapper,
+                documentReferenceToNarrativeStatementMapper);
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService, timestampService, encounterMapper,
             nonConsultationResourceMapper, agentDirectoryMapper, messageContext);
     }
@@ -151,7 +174,8 @@ public class EhrExtractUATTest {
 
     @ParameterizedTest
     @MethodSource("testValueFilePaths")
-    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml) throws IOException {
+    public void When_MappingValidJsonRequestBody_Expect_ValidXmlOutput(String inputJson, String expectedOutputXml)
+        throws IOException, SAXException {
         final String expectedXmlResourcePath = OUTPUT_PATH + FILES_PREFIX + expectedOutputXml;
         final String expectedJsonToXmlContent = ResourceTestFileUtils.getFileContent(expectedXmlResourcePath);
         String inputJsonFileContent = ResourceTestFileUtils.getFileContent(INPUT_PATH + FILES_PREFIX + inputJson);
@@ -174,12 +198,18 @@ public class EhrExtractUATTest {
             fail("Re-run the tests with OVERWRITE_XML=false");
         }
 
-        assertThat(hl7TranslatedResponse).isEqualTo(expectedJsonToXmlContent);
+        XMLAssert.assertXMLEqual(hl7TranslatedResponse, expectedJsonToXmlContent);
 
         assertThatCode(() -> validateFileContentAgainstSchema(hl7TranslatedResponse))
             .doesNotThrowAnyException();
 
         assertThatAgentReferencesAreValid(hl7TranslatedResponse);
+    }
+
+    // TODO, workaround until NIAD-1342 is fixed
+    private String removeEmptyDescriptions(String json) {
+        String emptyDescriptionElement = "\"description\": \"\"";
+        return json.lines().filter(l -> !l.contains(emptyDescriptionElement)).collect(Collectors.joining());
     }
 
     @SneakyThrows
@@ -196,15 +226,6 @@ public class EhrExtractUATTest {
         assertThat(agentIds)
             .isNotEmpty()
             .containsAll(referencedAgentIds);
-    }
-
-    private boolean isUuid(String id) {
-        try {
-            UUID.fromString(id);
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-        return true;
     }
 
     private Set<String> extractIdsFromNodeList(NodeList nodeList, boolean allowSkipNullFlavour) {
@@ -228,27 +249,12 @@ public class EhrExtractUATTest {
         return ids;
     }
 
-    @SuppressWarnings("unused")
-    private static Stream<Arguments> testValueFilePaths() {
-        return Stream.of(
-            Arguments.of("9465701483_Dougill_full_20210119.json", "9465701483_Dougill_full_20210119.xml"),
-            Arguments.of("9465701483_Nel_full_20210119.json", "9465701483_Nel_full_20210119.xml"),
-            Arguments.of("9465698679_Gainsford_full_20210119.json", "9465698679_Gainsford_full_20210119.xml"),
-            Arguments.of("9465700193_Birdi_full_20210119.json", "9465700193_Birdi_full_20210119.xml"),
-            Arguments.of("9465701262_Meyers_full_20210119.json", "9465701262_Meyers_full_20210119.xml"),
-            Arguments.of("9465699918_Magre_full_20210119.json", "9465699918_Magre_full_20210119.xml"),
-            Arguments.of("9465701297_Livermore_full_20210119.json", "9465701297_Livermore_full_20210119.xml"),
-            Arguments.of("9465700339_Yamura_full_20210119.json", "9465700339_Yamura_full_20210119.xml"),
-            Arguments.of("9465699926_Sajal_full_20210122.json", "9465699926_Sajal_full_20210122.xml"),
-            Arguments.of("9465698490_Daniels_full_20210119.json", "9465698490_Daniels_full_20210119.xml"),
-            Arguments.of("9465701718_Guerra_full_20210119.json", "9465701718_Guerra_full_20210119.xml"),
-            Arguments.of("9465700088_Mold_full_20210119.json", "9465700088_Mold_full_20210119.xml")
-        );
-    }
-
-    // TODO, workaround until NIAD-1342 is fixed
-    private String removeEmptyDescriptions(String json) {
-        String emptyDescriptionElement = "\"description\": \"\"";
-        return json.lines().filter(l -> !l.contains(emptyDescriptionElement)).collect(Collectors.joining());
+    private boolean isUuid(String id) {
+        try {
+            UUID.fromString(id);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 }

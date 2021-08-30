@@ -301,6 +301,216 @@
               "reference": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
             }
           }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "985AD546-F90A-11EB-9A03-0242AC130003",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25611000000107",
+                            "display": "Document display text",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "Document text"
+                },
+                "created": "2021-01-01",
+                "indexed": "2021-01-01",
+                "description": "Test Document Description"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "A817A954-F915-11EB-9A03-0242AC130003",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25611000000107",
+                            "display": "Document display text",
+                            "userSelected": true
+                        }
+                    ]
+                },
+                "indexed": "2021-01-01",
+                "description": "Test Document Description"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DocumentReference",
+                "id": "78210542-03FB-11EC-9A03-0242AC130003",
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "25611000000107",
+                            "display": "Document display text",
+                            "userSelected": true
+                        }
+                    ],
+                    "text": "Document text"
+                },
+                "indexed": "2021-01-01"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "B1C71E38-F8E5-11EB-9A03-0242AC130003",
+                "effectiveDateTime": "2021-01-01T10:30:00+00:00",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "9999.00",
+                            "display": "Test Observation",
+                            "userSelected": true
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "9EF75524-F8EB-11EB-9A03-0242AC130003",
+                "effectivePeriod": {
+                    "start": "2021-01-01T10:30:00+00:00",
+                    "end": "2021-02-01T10:30:00+00:00"
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "9999.00",
+                            "display": "Test Observation",
+                            "userSelected": true
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "63D54CE2-03FB-11EC-9A03-0242AC130003",
+                "effectivePeriod": {
+                    "end": "2021-02-01T10:30:00+00:00"
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "9999.00",
+                            "display": "Test Observation",
+                            "userSelected": true
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "AA637B84-F8E8-11EB-9A03-0242AC130003",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "9999.00",
+                            "display": "Test Observation",
+                            "userSelected": true
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "2FB2C828-F8EC-11EB-9A03-0242AC130003",
+                "authoredOn": "2021-01-01",
+                "reasonCode": [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://read.info/readv2",
+                                "code": "9999.00",
+                                "display": "Referral Request Code",
+                                "userSelected": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "ReferralRequest",
+                "id": "7F089BE2-F90E-11EB-9A03-0242AC130003"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "DBB1223C-F90F-11EB-9A03-0242AC130003",
+                "issued": "2021-01-01",
+                "identifier": [
+                    {
+                        "system": "2.16.840.1.113883.2.1.4.5.5",
+                        "value": "15/CH000039M/200010191704"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "DiagnosticReport",
+                "id": "E57D3DD2-F90F-11EB-9A03-0242AC130003"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "2F40AD96-F910-11EB-9A03-0242AC130003",
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2021-01-01T00:00:00+00:00",
+                        "end": "2021-02-01T00:00:00+01:00"
+                    }
+                },
+                "medicationReference": {
+                    "reference": "Medication/9999"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Medication",
+                "id": "9999",
+                "code": {
+                    "coding": [
+                        {
+                            "code": "322623000",
+                            "display": "Test Medication"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "0234D9A4-F9AF-11EB-9A03-0242AC130003",
+                "medicationReference": {
+                    "reference": "Medication/9999"
+                }
+            }
         }
     ]
 }

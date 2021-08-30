@@ -1,0 +1,45 @@
+{
+    "resourceType": "Condition",
+    "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+            "valueReference": {
+                "reference": "Immunization/C93659E1-1107-441C-BE25-C5EF4B7831D1"
+            }
+        }
+    ],
+    "clinicalStatus": "inactive",
+    "onsetDateTime": "2020-09-06",
+    "abatementDateTime": "2020-10-04T00:00:00+01:00",
+    "assertedDate": "2020-09-07T10:12:02.093+01:00",
+    "asserter": {
+        "reference": "Practitioner/1"
+    },
+    "code": {
+        "coding": [
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "60126016"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "36031001",
+                "display": "Test Condition",
+                "userSelected": true
+            }
+        ]
+    }
+}

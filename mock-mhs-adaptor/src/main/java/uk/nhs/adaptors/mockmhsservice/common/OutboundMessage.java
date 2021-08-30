@@ -18,19 +18,22 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class OutboundMessage {
     private String payload;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Attachment> attachments;
-    @JsonProperty("external_attachments")
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("external_attachments")
     private List<ExternalAttachment> externalAttachments;
 
     @Getter
     @Setter
     @Jacksonized
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
+    @EqualsAndHashCode
     public static class Attachment {
         @JsonProperty("content_type")
         private String contentType;
@@ -42,25 +45,16 @@ public class OutboundMessage {
 
     @Getter
     @Setter
-    @AllArgsConstructor
-    @Builder
     @Jacksonized
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
     @EqualsAndHashCode
     public static class ExternalAttachment {
-        @JsonProperty("reference_id")
-        private String referenceId;
-        @JsonProperty("href_id")
-        private String hrefId;
-        private String filename;
-        @JsonProperty("content_type")
-        private String contentType;
-        private boolean compressed;
-        @JsonProperty("large_attachment")
-        private boolean largeAttachment;
-        @JsonProperty("original_base64")
-        private boolean originalBase64;
-        private int length;
-        @JsonProperty("domain_data")
-        private String domainData;
+        @JsonProperty("document_id")
+        private String documentId;
+        @JsonProperty("message_id")
+        private String messageId;
+        private String description;
     }
 }

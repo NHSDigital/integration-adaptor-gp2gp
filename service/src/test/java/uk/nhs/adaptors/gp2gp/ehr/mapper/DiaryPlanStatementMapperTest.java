@@ -42,14 +42,24 @@ public class DiaryPlanStatementMapperTest {
     private static final String EXPECTED_PLAN_STATEMENT_WITH_DEVICE = TEST_DIRECTORY + "expected-plan-statement-3.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER = TEST_DIRECTORY + "procedure-request-resource-4.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER = TEST_DIRECTORY + "expected-plan-statement-4.xml";
-    private static final String INPUT_PROCEDURE_REQUEST_WITH_REASON_DISPLAY = TEST_DIRECTORY + "procedure-request-resource-5.json";
-    private static final String EXPECTED_PLAN_STATEMENT_WITH_REASON_DISPLAY = TEST_DIRECTORY + "expected-plan-statement-5.xml";
+    private static final String INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "procedure-request-resource-5.json";
+    private static final String EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES = TEST_DIRECTORY + "expected-plan-statement-5.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITH_PERIOD_END = TEST_DIRECTORY + "procedure-request-resource-6.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_PERIOD_END = TEST_DIRECTORY + "expected-plan-statement-6.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END = TEST_DIRECTORY + "procedure-request-resource-7.json";
     private static final String EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END = TEST_DIRECTORY + "expected-plan-statement-7.xml";
     private static final String EXPECTED_PLAN_STATEMENT_WITH_IS_NESTED = TEST_DIRECTORY + "expected-plan-statement-8.xml";
     private static final String INPUT_PROCEDURE_REQUEST_WITHOUT_REQUIRED_AUTHORED_ON = TEST_DIRECTORY + "procedure-request-resource-8.json";
+    private static final String INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE = TEST_DIRECTORY + "procedure-request-resource-9.json";
+    private static final String EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE = TEST_DIRECTORY + "expected-plan-statement-9.xml";
+    private static final String INPUT_JSON_WITH_SINGLE_SUPPORTING_INFO = TEST_DIRECTORY
+        + "procedure-request-resource-with-single-supportInfo.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_SUPPORTING_INFO = TEST_DIRECTORY
+        + "procedure-request-resource-with-multiple-supportInfo.json";
+    private static final String OUTPUT_JSON_WITH_SINGLE_SUPPORTING_INFO = TEST_DIRECTORY
+        + "expected-output-procedure-request-resource-with-single-supportInfo.xml";
+    private static final String OUTPUT_JSON_WITH_MULTIPLE_SUPPORTING_INFO = TEST_DIRECTORY
+        + "expected-output-procedure-request-resource-with-multiple-supportInfo.xml";
     private static final String INPUT_BUNDLE = TEST_DIRECTORY + "input-bundle.json";
 
     @Mock
@@ -97,7 +107,7 @@ public class DiaryPlanStatementMapperTest {
         ProcedureRequest inputProcedureRequest = new FhirParseService().parseResource(inputJson, ProcedureRequest.class);
 
         var mappedXml = diaryPlanStatementMapper.mapDiaryProcedureRequestToPlanStatement(inputProcedureRequest, true);
-        assertThat(mappedXml).isEmpty();
+        assertThat(mappedXml).isNull();
     }
 
     @Test
@@ -127,9 +137,12 @@ public class DiaryPlanStatementMapperTest {
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_NO_OPTIONAL_DATA, EXPECTED_PLAN_STATEMENT_WITH_EMPTY_DATA),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_DEVICE, EXPECTED_PLAN_STATEMENT_WITH_DEVICE),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PRACTITIONER, EXPECTED_PLAN_STATEMENT_WITH_PRACTITIONER),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_REASON_DISPLAY, EXPECTED_PLAN_STATEMENT_WITH_REASON_DISPLAY),
+            Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_MULTIPLE_REASON_CODES, EXPECTED_PLAN_STATEMENT_WITH_MULTIPLE_REASON_CODES),
             Arguments.of(INPUT_PROCEDURE_REQUEST_WITH_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITH_PERIOD_END),
-            Arguments.of(INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END)
+            Arguments.of(INPUT_PROCEDURE_REQUEST_WITHOUT_PERIOD_END, EXPECTED_PLAN_STATEMENT_WITHOUT_PERIOD_END),
+            Arguments.of(INPUT_PROCEDURE_REQUEST_SINGLE_REASON_CODE, EXPECTED_PROCEDURE_REQUEST_SINGLE_REASON_CODE),
+            Arguments.of(INPUT_JSON_WITH_SINGLE_SUPPORTING_INFO, OUTPUT_JSON_WITH_SINGLE_SUPPORTING_INFO),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_SUPPORTING_INFO, OUTPUT_JSON_WITH_MULTIPLE_SUPPORTING_INFO)
         );
     }
 }

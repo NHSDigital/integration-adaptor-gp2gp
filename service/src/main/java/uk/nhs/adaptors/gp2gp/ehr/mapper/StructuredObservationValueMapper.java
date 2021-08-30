@@ -78,21 +78,33 @@ public class StructuredObservationValueMapper {
     }
 
     public String mapReferenceRangeType(Observation.ObservationReferenceRangeComponent referenceRange) {
-        if (referenceRange.hasText()) {
-            String rangeValue = StringUtils.EMPTY;
-
-            if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
-                rangeValue += TemplateUtils.fillTemplate(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
-
-            }
-            if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
-                rangeValue += TemplateUtils.fillTemplate(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
-            }
-            return TemplateUtils.fillTemplate(REF_RANGE_TEMPLATE, ReferenceRangeTemplateParameters.builder()
+        if (referenceRange.hasText()
+            || referenceRange.hasHigh() && referenceRange.getHigh().hasValue()
+            || referenceRange.hasLow() && referenceRange.getLow().hasValue()
+        ) {
+            var templateParameters = ReferenceRangeTemplateParameters.builder()
                 .text(referenceRange.getText())
-                .value(rangeValue).build());
+                .value(buildReferenceRangeValue(referenceRange))
+                .build();
+
+            return TemplateUtils.fillTemplate(REF_RANGE_TEMPLATE, templateParameters);
         }
+
         return StringUtils.EMPTY;
+    }
+
+    private String buildReferenceRangeValue(Observation.ObservationReferenceRangeComponent referenceRange) {
+        String rangeValue = StringUtils.EMPTY;
+
+        if (referenceRange.hasLow() && referenceRange.getLow().hasValue()) {
+            rangeValue += TemplateUtils.fillTemplate(LOW_RANGE_TEMPLATE, referenceRange.getLow().getValue());
+        }
+
+        if (referenceRange.hasHigh() && referenceRange.getHigh().hasValue()) {
+            rangeValue += TemplateUtils.fillTemplate(HIGH_RANGE_TEMPLATE, referenceRange.getHigh().getValue());
+        }
+
+        return rangeValue;
     }
 
     public boolean isStructuredValueType(IBaseElement value) {

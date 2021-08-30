@@ -42,6 +42,200 @@
                 "resourceType": "Encounter",
                 "id": "BB333AC0-B7C1-11EB-BA2F-0800200C9A66"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "MedicationRequest",
+                "id": "44AF36F0-12A9-4119-9DCA-399532CA28BE",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-MedicationRequest-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-PrescriptionType-1",
+                        "valueCodeableConcept": {
+                            "coding": [
+                                {
+                                    "system": "https://fhir.nhs.uk/STU3/CodeSystem/CareConnect-PrescriptionType-1",
+                                    "code": "repeat-dispensing",
+                                    "display": "Repeat dispensing"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "44AF36F0-12A9-4119-9DCA-399532CA28BE"
+                    }
+                ],
+                "basedOn": [
+                    {
+                        "reference": "MedicationRequest/B4CEEDC3-579D-4CE0-994C-30EB32686272"
+                    }
+                ],
+                "groupIdentifier": {
+                    "value": "b4ceedc3-579d-4ce0-994c-30eb32686272"
+                },
+                "status": "stopped",
+                "intent": "order",
+                "medicationReference": {
+                    "reference": "Medication/6B926BE3-6F9E-4BB5-9D61-32FB51C907C2"
+                },
+                "subject": {
+                    "reference": "Patient/2FE2854D-CF58-4AEE-8F71-257ADF74FE21"
+                },
+                "authoredOn": "2010-08-12T10:40:05.427+01:00",
+                "recorder": {
+                    "reference": "Practitioner/6AB948A5-2067-4A67-AD00-60EAF13E9CAA"
+                },
+                "note": [
+                    {
+                        "text": "Cancellation Reason: Prescribing Error, Cancellation Date: 2010-12-07"
+                    }
+                ],
+                "dosageInstruction": [
+                    {
+                        "text": "One To Be Taken Twice A Day"
+                    }
+                ],
+                "dispenseRequest": {
+                    "validityPeriod": {
+                        "start": "2010-12-07",
+                        "end": "2010-12-07"
+                    },
+                    "quantity": {
+                        "value": 56,
+                        "unit": "tablet"
+                    },
+                    "expectedSupplyDuration": {
+                        "value": 28,
+                        "unit": "day",
+                        "system": "http://unitsofmeasure.org",
+                        "code": "d"
+                    }
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Practitioner",
+                "id": "1",
+                "meta": {
+                    "versionId": "1469444400000",
+                    "lastUpdated": "2016-07-25T12:00:00.000+01:00",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Practitioner-1"
+                    ]
+                },
+                "identifier": [
+                    {
+                        "system": "https://fhir.nhs.uk/Id/sds-user-id",
+                        "value": "G13579135"
+                    }
+                ],
+                "name": [
+                    {
+                        "use": "usual",
+                        "family": "Practitioner",
+                        "given": [
+                            "Test"
+                        ],
+                        "prefix": [
+                            "Mr"
+                        ]
+                    }
+                ],
+                "gender": "female"
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "AllergyIntolerance",
+                "id": "230D3D37-99E3-450A-AE88-B5AB802B7137",
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-AllergyIntoleranceEnd-1",
+                        "extension": [
+                            {
+                                "url": "reasonEnded",
+                                "valueString": "Patient reports no subsequent recurrence on same medication"
+                            }
+                        ]
+                    }
+                ],
+                "clinicalStatus": "resolved",
+                "type": "allergy",
+                "category": [
+                    "medication"
+                ],
+                "criticality": "low",
+                "onsetDateTime": "1978-12-31",
+                "assertedDate": "2010-01-14T09:57:57.33+00:00",
+                "note": [
+                    {
+                        "text": "Example note text"
+                    }
+                ],
+                "lastOccurrence": "1978-12-31",
+                "code": {
+                    "text": "test"
+                }
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Immunization",
+                "id": "C93659E1-1107-441C-BE25-C5EF4B7831D1",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Immunization-1"
+                    ]
+                },
+                "status": "completed",
+                "notGiven": false,
+                "vaccineCode": {
+                    "coding": [
+                        {
+                            "system": "http://hl7.org/fhir/v3/NullFlavor",
+                            "code": "UNK",
+                            "display": "unknown"
+                        }
+                    ]
+                },
+                "date": "2010-06-30T05:59:00+01:00",
+                "primarySource": true,
+                "location": {
+                    "reference": "Location/EB3994A6-5A87-4B53-A414-TestLocation"
+                },
+                "manufacturer": {
+                    "reference": "Organization/TestOrganization"
+                },
+                "lotNumber": "123456",
+                "expirationDate": "2011-06-21"
+            }
+        },
+
+        {
+            "resource": {
+                "resourceType": "Observation",
+                "id": "CDF96FF9-267A-41F7-93A1-BEBDCDEC2B98",
+                "code": {
+                    "coding": [
+                        {
+                            "system": "http://read.info/readv2",
+                            "code": "13lj.00",
+                            "display": "Test Observation",
+                            "userSelected": true
+                        }
+                    ]
+                },
+                "effectiveDateTime": "2010-01-14T09:42:00+00:00",
+                "issued": "2010-01-14T09:42:02.743+00:00"
+            }
         }
     ]
 }

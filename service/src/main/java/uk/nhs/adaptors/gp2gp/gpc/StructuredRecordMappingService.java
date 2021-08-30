@@ -2,19 +2,22 @@ package uk.nhs.adaptors.gp2gp.gpc;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.DocumentReference;
-import org.hl7.fhir.dstu3.model.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.nhs.adaptors.gp2gp.common.configuration.Gp2gpConfiguration;
+import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.EhrExtractMapper;
-import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.OutputMessageWrapperMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DocumentReferenceUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,7 +26,8 @@ import java.util.stream.Collectors;
 public class StructuredRecordMappingService {
     private final OutputMessageWrapperMapper outputMessageWrapperMapper;
     private final EhrExtractMapper ehrExtractMapper;
-    private final MessageContext messageContext;
+    private final Gp2gpConfiguration gp2gpConfiguration;
+    private final RandomIdGeneratorService randomIdGeneratorService;
 
     public List<OutboundMessage.ExternalAttachment> getExternalAttachments(Bundle bundle) {
         return ResourceExtractor.extractResourcesByType(bundle, DocumentReference.class)
@@ -33,19 +37,45 @@ public class StructuredRecordMappingService {
 
     private OutboundMessage.ExternalAttachment buildExternalAttachment(DocumentReference documentReference) {
         var attachment = DocumentReferenceUtils.extractAttachment(documentReference);
-        var referenceId = messageContext.getIdMapper().get(ResourceType.DocumentReference, documentReference.getIdElement());
-        var manifestReferenceId = messageContext.getIdMapper().getOrNew(ResourceType.DocumentManifest, documentReference.getIdElement());
+        var documentId = extractUrl(documentReference).map(GetGpcDocumentTaskDefinition::extractIdFromUrl).orElse(null);
+        var messageId = randomIdGeneratorService.createNewId();
 
         return OutboundMessage.ExternalAttachment.builder()
-            .referenceId(referenceId)
-            .hrefId(manifestReferenceId)
-            .contentType(DocumentReferenceUtils.extractContentType(attachment))
-            .filename(DocumentReferenceUtils.buildAttachmentFileName(referenceId, attachment))
-            .length(attachment.getSize())
-            .compressed(false) // always false for GPC documents
-            .largeAttachment(false) //TODO: true only if we split >5MB files into chunks https://gpitbjss.atlassian.net/browse/NIAD-1059
-            .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+            .documentId(documentId)
+            .messageId(messageId)
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment))
+                .contentType(DocumentReferenceUtils.extractContentType(attachment))
+                .compressed(false) // always false for GPC documents
+                .largeAttachment(isLargeAttachment(attachment))
+                .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+                .length(attachment.getSize())
+                .build()
+                .toString()
+            )
+            .url(extractUrl(documentReference).orElse(null))
             .build();
+    }
+
+    private static Optional<String> extractUrl(DocumentReference documentReference) {
+        return documentReference.getContent().stream()
+            .map(DocumentReference.DocumentReferenceContentComponent::getAttachment)
+            .map(Attachment::getUrl)
+            .peek(url -> {
+                if (StringUtils.isBlank(url)) {
+                    LOGGER.warn("Empty URL on DocumentReference {}", documentReference.getIdElement().getIdPart());
+                }
+            })
+            .filter(StringUtils::isNotBlank)
+            .reduce((a, b) -> {
+                throw new IllegalStateException(String.format(
+                    "There is more than 1 Attachment on DocumentReference %s",
+                    documentReference.getIdElement().getIdPart()));
+            });
+    }
+
+    private boolean isLargeAttachment(Attachment attachment) {
+        return attachment.getSize() > gp2gpConfiguration.getLargeAttachmentThreshold();
     }
 
     public String getHL7(GetGpcStructuredTaskDefinition structuredTaskDefinition, Bundle bundle) {
@@ -57,5 +87,9 @@ public class StructuredRecordMappingService {
         return outputMessageWrapperMapper.map(
             structuredTaskDefinition,
             ehrExtractContent);
+    }
+
+    public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
+        return ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
     }
 }

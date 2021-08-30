@@ -25,6 +25,7 @@ public final class StatementTimeMappingUtils {
     private static final String DEFAULT_AVAILABILITY_TIME_VALUE = "<availabilityTime nullFlavor=\"UNK\"/>";
     private static final String EFFECTIVE_TIME_LOW_TEMPLATE = "<low value=\"%s\"/>";
     private static final String EFFECTIVE_TIME_HIGH_TEMPLATE = "<high value=\"%s\"/>";
+    private static final String EFFECTIVE_TIME_NO_START_TEMPLATE = "<low nullFlavour=\"UNK\"/><high value=\"%s\"/>";
 
     private StatementTimeMappingUtils() {
     }
@@ -83,6 +84,17 @@ public final class StatementTimeMappingUtils {
             return String.format(EFFECTIVE_TIME_CENTER_TEMPLATE,
                 toHl7Format(observation.getEffectiveDateTimeType()));
         } else if (observation.hasEffectivePeriod()) {
+            if (!observation.getEffectivePeriod().hasStart() && !observation.getEffectivePeriod().hasEnd()) {
+                return DEFAULT_TIME_VALUE;
+            }
+
+            if (!observation.getEffectivePeriod().hasStart()) {
+                return String.format(
+                        EFFECTIVE_TIME_NO_START_TEMPLATE,
+                        toHl7Format(observation.getEffectivePeriod().getEndElement())
+                );
+            }
+
             return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, toHl7Format(
                 observation.getEffectivePeriod().getStartElement()),
                 toHl7Format(observation.getEffectivePeriod().getEndElement()));

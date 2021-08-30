@@ -1,13 +1,15 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils.isMedicationRequestType;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
-import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.Extension;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.MedicationRequest;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
@@ -21,8 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ConditionLinkSetMapperParameters;
+import uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
 @Component
@@ -32,9 +36,12 @@ public class ConditionLinkSetMapper {
 
     private static final Mustache OBSERVATION_STATEMENT_TEMPLATE = TemplateUtils
         .loadTemplate("ehr_link_set_template.mustache");
-    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
-    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1";
-    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1";
+    private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-ActualProblem-1";
+    private static final String PROBLEM_SIGNIFICANCE_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-ProblemSignificance-1";
+    private static final String RELATED_CLINICAL_CONTENT_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect"
+        + "-RelatedClinicalContent-1";
     private static final String ACTIVE = "Active";
     private static final String ACTIVE_CODE = "394774009";
     private static final String INACTIVE = "Inactive";
@@ -76,7 +83,9 @@ public class ConditionLinkSetMapper {
                 String newId = randomIdGeneratorService.createNewId();
                 builder.generateObservationStatement(true);
                 builder.conditionNamed(newId);
-                buildPertinentInfo(condition).ifPresent(builder::pertinentInfo);
+                buildObservationStatementAvailabilityTime(condition).ifPresent(builder::observationStatementAvailabilityTime);
+                new ConditionWrapper(condition, messageContext, codeableConceptCdMapper)
+                    .buildProblemInfo().ifPresent(builder::pertinentInfo);
             });
 
         builder.code(buildCode(condition));
@@ -123,8 +132,12 @@ public class ConditionLinkSetMapper {
         return ExtensionMappingUtils.filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
             .map(Extension::getValue)
             .map(value -> (Reference) value)
-            .filter(this::checkIfReferenceIsObservation)
-            .map(reference -> messageContext.getIdMapper().getOrNew(reference));
+            .filter(reference ->
+                checkIfReferenceIsObservation(reference)
+                    || checkIfReferenceIsAllergyIntolerance(reference)
+                    || checkIfReferenceIsImmunization(reference)
+            )
+            .map(this::mapLinkedId);
     }
 
     private Optional<String> buildQualifier(Condition condition) {
@@ -167,26 +180,16 @@ public class ConditionLinkSetMapper {
 
     private List<String> buildRelatedClinicalContent(Condition condition) {
         return ExtensionMappingUtils.filterAllExtensionsByUrl(condition, RELATED_CLINICAL_CONTENT_URL)
-           .stream()
-           .map(Extension::getValue)
-           .map(value -> (Reference) value)
-           .filter(this::filterOutNonExistentResource)
-           .filter(this::filterOutSuppressedLinkageResources)
-           .map(reference -> messageContext.getIdMapper().getOrNew(reference))
-           .collect(Collectors.toList());
+            .stream()
+            .map(Extension::getValue)
+            .map(value -> (Reference) value)
+            .filter(this::nonExistentResourceFilter)
+            .filter(this::suppressedLinkageResourcesFilter)
+            .map(reference -> messageContext.getIdMapper().getOrNew(reference))
+            .collect(Collectors.toList());
     }
 
-    private Optional<String> buildPertinentInfo(Condition condition) {
-        if (condition.hasNote()) {
-            return Optional.of(condition.getNote()
-                .stream()
-                .map(Annotation::getText)
-                .collect(Collectors.joining(StringUtils.SPACE)));
-        }
-        return Optional.empty();
-    }
-
-    private boolean filterOutNonExistentResource(Reference reference) {
+    private boolean nonExistentResourceFilter(Reference reference) {
 
         var referencePresent = messageContext.getInputBundleHolder()
             .getResource(reference.getReferenceElement())
@@ -200,12 +203,24 @@ public class ConditionLinkSetMapper {
         return false;
     }
 
-    private boolean filterOutSuppressedLinkageResources(Reference reference) {
-        return !SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
+    private boolean suppressedLinkageResourcesFilter(Reference reference) {
+        return !(isSuppressedResource(reference) || isSuppressedMedicationRequest(reference));
+    }
+
+    private boolean isSuppressedResource(Reference reference) {
+        return SUPPRESSED_LINKAGE_RESOURCES.contains(reference.getReferenceElement().getResourceType());
     }
 
     private boolean checkIfReferenceIsObservation(Reference reference) {
         return reference.getReferenceElement().getResourceType().equals(ResourceType.Observation.name());
+    }
+
+    private boolean checkIfReferenceIsAllergyIntolerance(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.AllergyIntolerance.name());
+    }
+
+    private boolean checkIfReferenceIsImmunization(Reference reference) {
+        return reference.getReferenceElement().getResourceType().equals(ResourceType.Immunization.name());
     }
 
     private String buildCode(Condition condition) {
@@ -213,5 +228,34 @@ public class ConditionLinkSetMapper {
             return codeableConceptCdMapper.mapCodeableConceptToCd(condition.getCode());
         }
         throw new EhrMapperException("Condition code not present");
+    }
+
+    private boolean isSuppressedMedicationRequest(Reference reference) {
+        if (isMedicationRequestType(reference)) {
+            return messageContext.getInputBundleHolder()
+                .getResource(reference.getReferenceElement())
+                .map(MedicationRequest.class::cast)
+                .map(MedicationRequestUtils::isMedicationRequestSuppressed)
+                .orElse(false);
+        }
+
+        // for all other types do not suppress with this function
+        return false;
+    }
+
+    private Optional<String> buildObservationStatementAvailabilityTime(Condition condition) {
+        return Optional.of(condition)
+            .filter(Condition::hasOnsetDateTimeType)
+            .map(Condition::getOnsetDateTimeType)
+            .map(DateFormatUtil::toHl7Format);
+    }
+
+    private String mapLinkedId(Reference reference) {
+        if (checkIfReferenceIsAllergyIntolerance(reference) && reference.getResource() != null) {
+            var idType = IdType.of(reference.getResource());
+            return messageContext.getIdMapper().getOrNew(ResourceType.Observation, idType);
+        }
+
+        return messageContext.getIdMapper().getOrNew(reference);
     }
 }

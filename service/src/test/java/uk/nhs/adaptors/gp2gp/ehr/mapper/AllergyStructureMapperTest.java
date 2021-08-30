@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildIdType;
@@ -91,38 +92,6 @@ public class AllergyStructureMapperTest {
     private AllergyStructureMapper allergyStructureMapper;
     private MessageContext messageContext;
 
-    @BeforeEach
-    public void setUp() throws IOException {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
-        when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
-        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
-        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
-        messageContext = new MessageContext(randomIdGeneratorService);
-        messageContext.initialize(bundle);
-        List.of(ResourceType.Patient, ResourceType.Device)
-            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
-        List.of(ResourceType.Practitioner, ResourceType.Organization)
-            .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
-        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
-    }
-
-    @AfterEach
-    public void tearDown() {
-        messageContext.resetMessageContext();
-    }
-
-    @ParameterizedTest
-    @MethodSource("resourceFileParams")
-    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml) throws IOException {
-        CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
-        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
-        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
-
-        String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
-        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
-    }
-
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_OPTIONAL_TEXT_FIELDS, OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS),
@@ -144,6 +113,51 @@ public class AllergyStructureMapperTest {
         );
     }
 
+    private static Stream<Arguments> resourceInvalidFileParams() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_NO_CATEGORY),
+            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY),
+            Arguments.of(INPUT_JSON_WITH_NO_ASSERTED_DATE)
+        );
+    }
+
+    @AfterEach
+    public void tearDown() {
+        messageContext.resetMessageContext();
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFileParams")
+    public void When_MappingAllergyIntoleranceJson_Expect_AllergyStructureXmlOutput(String inputJson, String outputXml)
+        throws IOException {
+        CharSequence expectedOutputMessage = ResourceTestFileUtils.getFileContent(outputXml);
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        AllergyIntolerance parsedAllergyIntolerance = new FhirParseService().parseResource(jsonInput, AllergyIntolerance.class);
+
+        String outputMessage = allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance);
+        assertThat(outputMessage).isEqualTo(expectedOutputMessage);
+    }
+
+    @BeforeEach
+    public void setUp() throws IOException {
+        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+
+        lenient().when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        lenient().when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+
+        var bundleInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_BUNDLE);
+        Bundle bundle = new FhirParseService().parseResource(bundleInput, Bundle.class);
+        messageContext = new MessageContext(randomIdGeneratorService);
+        messageContext.initialize(bundle);
+        List.of(ResourceType.Patient, ResourceType.Device)
+            .forEach(resourceType -> messageContext.getIdMapper().getOrNew(resourceType, buildIdType(resourceType, COMMON_ID)));
+        List.of(ResourceType.Practitioner, ResourceType.Organization)
+            .forEach(resourceType -> messageContext.getAgentDirectory().getAgentId(buildReference(resourceType, COMMON_ID)));
+        allergyStructureMapper = new AllergyStructureMapper(messageContext, codeableConceptCdMapper, new ParticipantMapper());
+    }
+
     @ParameterizedTest
     @MethodSource("resourceInvalidFileParams")
     public void When_MappingInvalidAllergyIntoleranceJson_Expect_Exception(String inputJson) throws IOException {
@@ -152,13 +166,5 @@ public class AllergyStructureMapperTest {
 
         assertThrows(EhrMapperException.class, ()
             -> allergyStructureMapper.mapAllergyIntoleranceToAllergyStructure(parsedAllergyIntolerance));
-    }
-
-    private static Stream<Arguments> resourceInvalidFileParams() {
-        return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_NO_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_NO_ASSERTED_DATE)
-            );
     }
 }

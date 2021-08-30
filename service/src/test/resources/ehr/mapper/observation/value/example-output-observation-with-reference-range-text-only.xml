@@ -1,0 +1,5 @@
+<referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <text>10 &lt;= x &lt;= 20</text>
+    </referenceInterpretationRange>
+</referenceRange>

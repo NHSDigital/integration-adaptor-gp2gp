@@ -268,7 +268,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
-                <code code="1010061000006108" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reactions">
+                <code nullFlavor="UNK">
     <originalText>Adverse reactions</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -397,7 +397,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
-                <code code="292534001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Atropine adverse reaction">
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -489,7 +489,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
-                <code code="292419005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Beta-adrenoceptor blocking drug adverse reaction">
+                <code nullFlavor="UNK">
     <originalText>[X]Beta-adrenorecep antag caus advers eff in ther use, NEC</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -655,26 +655,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
-        <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
-    <originalText>Adverse reaction to amoxycillin</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="19781231"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100114095333" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Health Admin Problem</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -737,20 +718,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
-        <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-    <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20090112"/>
-            <high value="20120517000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114095356" />
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -808,19 +776,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
-        <code code="704280005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Combined calcium and vitamin D3 preparation allergy">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            <high value="20120517000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114100555" />
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -883,20 +839,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
-        <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
-    <originalText>[V]Personal history of bisphosphonate allergy</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            <high value="20100114000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114095757" />
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -954,25 +897,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
-        <code code="300909004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic reaction to wasp sting">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            <high value="20170130000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114095728" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a Wasp Sting allergy note</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1030,26 +955,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
-        <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
-    <originalText>Drug hypersensitivity NOS</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100114095412" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>asprin allergy</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1107,19 +1013,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
-        <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to eggs">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20100114095342" />
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1177,25 +1071,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
-        <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20100114"/>
-            <high value="20100524000000"/>
-        </effectiveTime>
-        <availabilityTime value="20100114094956" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>This is a note for anitbiotic allergy NOS</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1427,25 +1303,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
-        <code code="293433001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction caused by simvastatin">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20190128"/>
-            <high value="20190225000000"/>
-        </effectiveTime>
-        <availabilityTime value="20190128134522" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Allergy added as SNOMED code and as a problem</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1503,20 +1361,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
-        <code code="292954005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Penicillin adverse reaction">
-    <originalText>Adverse reaction to penicillins</originalText>
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20190321"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20190321162524" />
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -1559,7 +1404,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
-                <code code="292971006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Pivampicillin adverse reaction">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to pivampicillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1623,8 +1468,8 @@
         <availabilityTime value="20100114095333" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
-                <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
+                <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1689,7 +1534,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
-                <code code="292967008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Amoxycillin adverse reaction">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to amoxycillin</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1753,8 +1598,8 @@
         <availabilityTime value="20100114095356" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="98E65972-3B3A-48B0-BEF2-F662F905A09F"/>
-                <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+                <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
+                <code nullFlavor="UNK">
     <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1818,8 +1663,8 @@
         <availabilityTime value="20100114100555" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
-                <code code="704280005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Combined calcium and vitamin D3 preparation allergy">
+                <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1882,8 +1727,8 @@
         <availabilityTime value="20100114095757" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="F5392292-A88D-4FC2-8840-A6EBFF39FA46"/>
-                <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
+                <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
+                <code nullFlavor="UNK">
     <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -1948,7 +1793,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
-                <code code="294833000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Biphosphonates allergy">
+                <code nullFlavor="UNK">
     <originalText>[V]Personal history of bisphosphonate allergy</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2012,7 +1857,7 @@
         <availabilityTime value="20100114095728" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
+                <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
                 <code code="300909004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergic reaction to wasp sting">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2076,8 +1921,8 @@
         <availabilityTime value="20100114095412" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="6FB2B95C-55D8-4BF6-A786-1A8465BD4DA9"/>
-                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+                <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
+                <code nullFlavor="UNK">
     <originalText>Drug hypersensitivity NOS</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2142,7 +1987,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
-                <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+                <code nullFlavor="UNK">
     <originalText>[X]Personal history of allergy to other antibiotic agents</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2206,7 +2051,7 @@
         <availabilityTime value="20100114095342" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
+                <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
                 <code code="91930004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to eggs">
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2270,8 +2115,8 @@
         <availabilityTime value="20100114094956" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
-                <code code="109991000119100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to antibiotic">
+                <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2335,7 +2180,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
-                <code code="1076241000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Ethyol">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Ethyol</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2400,7 +2245,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
-                <code code="1105181000006100" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Erythromid">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Erythromid</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2465,7 +2310,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
-                <code code="91931000" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Allergy to erythromycin">
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2529,7 +2374,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-                <code code="1010131000006103" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to EMIS Drug Groups/Constituents and Approved Names">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to EMIS Drug Groups/Constituents and Approved Names</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2594,7 +2439,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
-                <code code="292939004" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Trimethoprim adverse reaction">
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2657,8 +2502,8 @@
         <availabilityTime value="20190128134522" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="5DE8CDDA-866F-4CD9-9BB3-527A86DD49A9"/>
-                <code code="293433001" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction caused by simvastatin">
+                <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -2722,7 +2567,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
-                <code code="292854006" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Chloroquine adverse reaction">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to chloroquine</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2786,8 +2631,8 @@
         <availabilityTime value="20190321162524" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
-                <id root="689EE4E9-4A30-4007-ADF0-07AAA958C49C"/>
-                <code code="292954005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Penicillin adverse reaction">
+                <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to penicillins</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -2852,7 +2697,7 @@
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
-                <code code="1011841000006107" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to Beta-Adrenoceptor Blocking Drugs">
+                <code nullFlavor="UNK">
     <originalText>Adverse reaction to Beta-Adrenoceptor Blocking Drugs</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3196,7 +3041,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhhh</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - hhhh Problem Info: Problem Notes: hhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3253,7 +3098,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - What does this really mean?</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - What does this really mean? Problem Info: Problem Notes: What does this really mean?,Health Admin Problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3310,7 +3155,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhh €</text>
+                <text>Interpretation: Significance : Major - Episodicity : First - hhh € Problem Info: Problem Notes: hhh €</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

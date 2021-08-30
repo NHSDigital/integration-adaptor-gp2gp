@@ -10,9 +10,11 @@ import static uk.nhs.adaptors.gp2gp.utils.IdUtil.buildReference;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import org.hl7.fhir.dstu3.model.Attachment;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.SampledData;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,11 +45,16 @@ public class ObservationToNarrativeStatementMapperTest {
     private static final String INPUT_JSON_WITH_PERFORMER = TEST_FILE_DIRECTORY + "example-observation-resource-25.json";
     private static final String INPUT_JSON_WITH_PERFORMER_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
         + "example-observation-with-performer-invalid-ref-resource-type.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START = TEST_FILE_DIRECTORY + "example-observation-resource-38.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END = TEST_FILE_DIRECTORY + "example-observation-resource-39.json";
+    private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK = TEST_FILE_DIRECTORY + "example-observation-resource-40.json";
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-1.xml";
     private static final String OUTPUT_XML_USES_ISSUED = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-2.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD_START = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-3.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-4.xml";
     private static final String OUTPUT_XML_USES_AGENT = TEST_FILE_DIRECTORY + "expected-output-narrative-statement-5.xml";
+    private static final String INPUT_JSON_WITH_SAMPLED_DATA_VALUE = TEST_FILE_DIRECTORY + "example-observation-with-sampleddata.json";
+    private static final String INPUT_JSON_WITH_ATTACHMENT_VALUE = TEST_FILE_DIRECTORY + "example-observation-with-attachment.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -90,7 +97,10 @@ public class ObservationToNarrativeStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_ISSUED),
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
             Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_ISSUED),
-            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT)
+            Arguments.of(INPUT_JSON_WITH_PERFORMER, OUTPUT_XML_USES_AGENT),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_USES_ISSUED),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_USES_EFFECTIVE_PERIOD_START),
+            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_USES_ISSUED)
         );
     }
 
@@ -122,5 +132,26 @@ public class ObservationToNarrativeStatementMapperTest {
         assertThatThrownBy(() -> observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true))
             .isExactlyInstanceOf(EhrMapperException.class)
             .hasMessage("Not supported agent reference: Patient/something");
+    }
+
+    @ParameterizedTest
+    @MethodSource("resourceFileParamsThrowError")
+    public void When_MappingObservationWithAttachmentAndSampleData_Expect_MapperException(String inputJson, Class expectedClass)
+        throws IOException {
+        var jsonInput = ResourceTestFileUtils.getFileContent(inputJson);
+        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
+
+        var exception = assertThrows(EhrMapperException.class, () ->
+            observationToNarrativeStatementMapper.mapObservationToNarrativeStatement(parsedObservation, true));
+
+        assertThat(exception.getMessage()).isEqualTo(String.format(
+            "Observation value type %s not supported.", expectedClass));
+    }
+
+    private static Stream<Arguments> resourceFileParamsThrowError() {
+        return Stream.of(
+            Arguments.of(INPUT_JSON_WITH_SAMPLED_DATA_VALUE, SampledData.class),
+            Arguments.of(INPUT_JSON_WITH_ATTACHMENT_VALUE, Attachment.class)
+        );
     }
 }

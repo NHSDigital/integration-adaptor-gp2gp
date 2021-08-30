@@ -103,6 +103,11 @@ public class EhrExtractMapperComponentTest {
         when(timestampService.now()).thenReturn(Instant.parse(TEST_DATE_TIME));
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.getDisplayFromCodeableConcept(any(CodeableConcept.class)))
+            .thenCallRealMethod();
+
         messageContext = new MessageContext(randomIdGeneratorService);
 
         ParticipantMapper participantMapper = new ParticipantMapper();
@@ -113,6 +118,8 @@ public class EhrExtractMapperComponentTest {
             messageContext, structuredObservationValueMapper, codeableConceptCdMapper,
             participantMapper, multiStatementObservationHolderFactory);
         SpecimenMapper specimenMapper = new SpecimenMapper(messageContext, specimenObservationMapper, randomIdGeneratorService);
+        DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
 
         EncounterComponentsMapper encounterComponentsMapper = new EncounterComponentsMapper(
             messageContext,
@@ -123,7 +130,7 @@ public class EhrExtractMapperComponentTest {
             new ConditionLinkSetMapper(
                 messageContext, randomIdGeneratorService, codeableConceptCdMapper, participantMapper),
             new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
-            new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes()),
+            documentReferenceToNarrativeStatementMapper,
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper),
             new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService),
             new ObservationToNarrativeStatementMapper(messageContext, participantMapper),
@@ -147,7 +154,8 @@ public class EhrExtractMapperComponentTest {
 
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
-            encounterComponentsMapper);
+            encounterComponentsMapper,
+            documentReferenceToNarrativeStatementMapper);
 
         ehrExtractMapper = new EhrExtractMapper(randomIdGeneratorService,
         timestampService,
@@ -175,7 +183,8 @@ public class EhrExtractMapperComponentTest {
             bundle
         );
         String output = ehrExtractMapper.mapEhrExtractToXml(ehrExtractTemplateParameters);
-        assertThat(output).isEqualTo(expectedJsonToXmlContent);
+
+        assertThat(output).isEqualToIgnoringWhitespace(expectedJsonToXmlContent);
     }
 
     private static Stream<Arguments> testData() {

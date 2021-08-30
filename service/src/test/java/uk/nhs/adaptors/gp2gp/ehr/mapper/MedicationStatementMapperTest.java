@@ -34,7 +34,7 @@ import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 public class MedicationStatementMapperTest {
     private static final String TEST_ID = "394559384658936";
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/medication_request/";
-    private static final String INPUT_JSON_BUNDLE =  TEST_FILE_DIRECTORY + "fhir-bundle.json";
+    private static final String INPUT_JSON_BUNDLE = TEST_FILE_DIRECTORY + "fhir-bundle.json";
     private static final String INPUT_JSON_WITH_INVALID_INTENT = TEST_FILE_DIRECTORY + "medication-request-with-invalid-intent.json";
     private static final String INPUT_JSON_WITH_NO_VALIDITY_PERIOD = TEST_FILE_DIRECTORY
         + "medication-request-with-no-validity-period.json";
@@ -121,6 +121,34 @@ public class MedicationStatementMapperTest {
         + "medication-request-with-plan-no-info-prescription-text.json";
     private static final String INPUT_JSON_WITH_NO_RECORDER_REFERENCE = TEST_FILE_DIRECTORY
         + "medication-request-with-no-recorder-reference.json";
+    private static final String INPUT_JSON_WITH_ORDER_NO_REQUESTER = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-no-requester.json";
+    private static final String INPUT_JSON_WITH_ORDER_ON_BEHALF_OF_NOTHING = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-on-behalf-of-nothing.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_NO_ORG_INFO = TEST_FILE_DIRECTORY
+        + "medication-statement-with-authorise-no-org-info.xml";
+    private static final String INPUT_JSON_WITH_ORDER_ON_BEHALF_OF_ORG = TEST_FILE_DIRECTORY
+        + "medication-request-with-order-on-behalf-of-org.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_ORG_INFO = TEST_FILE_DIRECTORY
+        + "medication-statement-with-authorise-org-info.xml";
+    private static final String INPUT_JSON_WITH_PLAN_NO_REQUESTER = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-no-requester.json";
+    private static final String INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_NOTHING = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-on-behalf-of-nothing.json";
+    private static final String OUTPUT_XML_WITH_PRESCRIBE_NO_ORG_INFO = TEST_FILE_DIRECTORY
+        + "medication-statement-with-prescribe-no-org-info.xml";
+    private static final String INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_ORG = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-on-behalf-of-org.json";
+    private static final String OUTPUT_XML_WITH_PRESCRIBE_ORG_INFO = TEST_FILE_DIRECTORY
+        + "medication-statement-with-prescribe-org-info.xml";
+    private static final String INPUT_JSON_ON_BEHALF_OF_ORG_WITH_MULTIPLE_TYPES = TEST_FILE_DIRECTORY
+        + "medication-request-on-behalf-of-org-with-multiple-types.json";
+    private static final String OUTPUT_XML_WITH_AUTHORISE_ORG_INFO_MULTIPLE_TYPES = TEST_FILE_DIRECTORY
+        + "medication-statement-with-org-info-multiple-types.xml";
+    private static final String INPUT_JSON_WITH_EXTENSION_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
+        + "medication-request-with-extension-status-reason-with-text.json";
+    private static final String OUTPUT_XML_WITH_STATUS_REASON_TEXT = TEST_FILE_DIRECTORY
+        + "medication-statement-with-status-reason-text.xml";
 
     @Mock
     private RandomIdGeneratorService mockRandomIdGeneratorService;
@@ -171,7 +199,15 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PLAN_START_PERIOD_ONLY, OUTPUT_XML_WITH_AUTHORISE_START_PERIOD_ONLY),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_NO_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_PLAN_NO_STATUS_REASON_CODE, OUTPUT_XML_WITH_AUTHORISE_DEFAULT_STATUS_REASON_CODE),
-            Arguments.of(INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION)
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_INFO_PRESCRIPTION_TEXT, OUTPUT_XML_WITH_AUTHORISE_REPEAT_PRESCRIPTION),
+            Arguments.of(INPUT_JSON_WITH_ORDER_NO_REQUESTER, OUTPUT_XML_WITH_AUTHORISE_NO_ORG_INFO),
+            Arguments.of(INPUT_JSON_WITH_ORDER_ON_BEHALF_OF_NOTHING, OUTPUT_XML_WITH_AUTHORISE_NO_ORG_INFO),
+            Arguments.of(INPUT_JSON_WITH_ORDER_ON_BEHALF_OF_ORG, OUTPUT_XML_WITH_AUTHORISE_ORG_INFO),
+            Arguments.of(INPUT_JSON_WITH_PLAN_NO_REQUESTER, OUTPUT_XML_WITH_PRESCRIBE_NO_ORG_INFO),
+            Arguments.of(INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_NOTHING, OUTPUT_XML_WITH_PRESCRIBE_NO_ORG_INFO),
+            Arguments.of(INPUT_JSON_WITH_PLAN_ON_BEHALF_OF_ORG, OUTPUT_XML_WITH_PRESCRIBE_ORG_INFO),
+            Arguments.of(INPUT_JSON_ON_BEHALF_OF_ORG_WITH_MULTIPLE_TYPES, OUTPUT_XML_WITH_AUTHORISE_ORG_INFO_MULTIPLE_TYPES),
+            Arguments.of(INPUT_JSON_WITH_EXTENSION_STATUS_REASON_TEXT, OUTPUT_XML_WITH_STATUS_REASON_TEXT)
         );
     }
 

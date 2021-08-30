@@ -5,6 +5,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extract
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractReasonCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractRecipient;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractServiceRequested;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.RequestStatementExtractor.extractSupportingInfo;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 
 import java.util.ArrayList;
@@ -49,10 +50,10 @@ public class RequestStatementMapper {
     private static final String REQUESTER_ORG = "Requester Org: ";
     private static final String REQUESTER_RELATION = "Requester: Relation ";
     private static final String UBRN = "UBRN: ";
-    private static final String PRIORITY = "Priority: ";
     private static final String SERVICES_REQUESTED = "Service(s) Requested: ";
     private static final String SPECIALTY = "Specialty: ";
     private static final String REASON_CODES = "Reason Codes: ";
+    private static final String SUPPORTING_INFO = "Supporting Information: ";
     private static final Set<String> SUPPORTED_AGENT_TYPES = Stream.of(ResourceType.Practitioner, ResourceType.RelatedPerson,
         ResourceType.Device, ResourceType.Patient, ResourceType.Organization)
         .map(ResourceType::name)
@@ -61,6 +62,21 @@ public class RequestStatementMapper {
         + ".113883.2.1.3.2.4.15\"/>";
     private static final String NOTE = "Annotation: %s @ %s %s";
     private static final String COMMA = ", ";
+
+    private static final String PRIORITY_CODE_IMMEDIATE =
+        "<priorityCode code=\"88694003\" displayName=\"Immediate\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Asap</originalText>"
+            + "</priorityCode>";
+
+    private static final String PRIORITY_CODE_NORMAL =
+        "<priorityCode code=\"394848005\" displayName=\"Normal\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Routine</originalText>"
+            + "</priorityCode>";
+
+    private static final String PRIORITY_CODE_HIGH =
+        "<priorityCode code=\"394849002\" displayName=\"High\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\">"
+            + "<originalText>Urgent</originalText>"
+            + "</priorityCode>";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
@@ -93,6 +109,7 @@ public class RequestStatementMapper {
                 .isNested(isNested)
                 .availabilityTime(StatementTimeMappingUtils.prepareAvailabilityTime(referralRequest.getAuthoredOnElement()))
                 .text(buildTextDescription())
+                .priorityCode(buildPriorityCode())
                 .code(buildCode());
 
             if (referralRequest.hasRecipient()) {
@@ -106,6 +123,25 @@ public class RequestStatementMapper {
             return TemplateUtils.fillTemplate(REQUEST_STATEMENT_TEMPLATE, templateParameters.build());
         }
 
+        private String buildPriorityCode() {
+            if (!referralRequest.hasPriority()) {
+                return null;
+            }
+
+            switch (referralRequest.getPriority()) {
+                case ASAP:
+                    return PRIORITY_CODE_IMMEDIATE;
+                case ROUTINE:
+                    return PRIORITY_CODE_NORMAL;
+                case URGENT:
+                    return PRIORITY_CODE_HIGH;
+                default:
+                    throw new EhrMapperException(
+                        String.format("Unsupported priority in ReferralRequest: %s", referralRequest.getPriority().toCode())
+                    );
+            }
+        }
+
         private boolean hasReferencingAgent() {
             return referralRequest.hasRequester()
                 && referralRequest.getRequester().hasAgent()
@@ -116,13 +152,13 @@ public class RequestStatementMapper {
             AgentDirectory agentDirectory = messageContext.getAgentDirectory();
 
             if (isReferenceToPractitioner(agent)
-                    && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
+                && onBehalfOf != null && isReferenceToType(onBehalfOf, ResourceType.Organization)) {
                 final String participantRef = agentDirectory.getAgentRef(agent, onBehalfOf);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
 
             } else if (isReferenceToPractitioner(agent)) {
-                final String participantRef =  agentDirectory.getAgentId(agent);
+                final String participantRef = agentDirectory.getAgentId(agent);
                 final String participant = participantMapper.mapToParticipant(participantRef, ParticipantType.AUTHOR);
                 templateParameters.participant(participant);
             }
@@ -140,13 +176,6 @@ public class RequestStatementMapper {
                 .map(UBRN::concat)
                 .filter(StringUtils::isNotBlank)
                 .orElse(StringUtils.EMPTY);
-        }
-
-        private String buildPriorityDescription() {
-            if (referralRequest.hasPriority()) {
-                return PRIORITY + referralRequest.getPriority().getDisplay();
-            }
-            return StringUtils.EMPTY;
         }
 
         private String buildServiceRequestedDescription() {
@@ -262,8 +291,8 @@ public class RequestStatementMapper {
                 buildRecipientDescription(),
                 buildSpecialtyDescription(),
                 buildServiceRequestedDescription(),
-                buildPriorityDescription(),
-                buildIdentifierDescription()
+                buildIdentifierDescription(),
+                buildSupportingInfoDescription()
             );
 
             if (hasReferencingAgent()) {
@@ -289,6 +318,18 @@ public class RequestStatementMapper {
                 return codeableConceptCdMapper.mapCodeableConceptToCd(referralRequest.getReasonCodeFirstRep());
             }
             return DEFAULT_REASON_CODE_XML;
+        }
+
+        private String buildSupportingInfoDescription() {
+            if (referralRequest.hasSupportingInfo()) {
+                String supportingInfo = SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
+                    .map(value -> extractSupportingInfo(messageContext, value))
+                    .filter(value -> !value.equals(StringUtils.EMPTY))
+                    .collect(Collectors.joining(COMMA));
+
+                return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
+            }
+            return StringUtils.EMPTY;
         }
     }
 

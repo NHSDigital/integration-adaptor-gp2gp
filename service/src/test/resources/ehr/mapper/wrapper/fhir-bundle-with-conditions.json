@@ -1,0 +1,337 @@
+{
+    "resourceType": "Bundle",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/GPConnect-StructuredRecord-Bundle-1"
+        ]
+    },
+    "type": "collection",
+    "entry": [
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "id": "D50E2934-E2C2-4C5C-8E79-294C7F79BD4A-PROB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+                        "valueReference": {
+                            "reference": "Observation/D50E2934-E2C2-4C5C-8E79-294C7F79BD4A"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+                        "valueCode": "minor"
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "parent"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/FBDBFCEA-B088-4EE0-AC53-B36647E878A1-PROB"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "sibling"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/5EA6E5BC-96BF-403D-B4B2-3771F3791B7B-PROB"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "D50E2934-E2C2-4C5C-8E79-294C7F79BD4A-PROB"
+                    }
+                ],
+                "clinicalStatus": "inactive",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                                "code": "problem-list-item",
+                                "display": "Problem List Item"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "82824016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "49727002",
+                            "display": "Cough",
+                            "userSelected": true
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/144A1A2E-B3B3-4A66-B33B-148A5B75959D"
+                },
+                "onsetDateTime": "2020-11-02",
+                "abatementDateTime": "2020-11-17T00:00:00+00:00",
+                "assertedDate": "2020-11-17T15:47:52.867+00:00",
+                "asserter": {
+                    "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+                },
+                "note": [
+                    {
+                        "text": "First Note"
+                    },
+                    {
+                        "text": "Second Note"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "id": "FBDBFCEA-B088-4EE0-AC53-B36647E878A1-PROB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+                        "valueReference": {
+                            "reference": "Observation/FBDBFCEA-B088-4EE0-AC53-B36647E878A1"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+                        "valueCode": "major"
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "child"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/5EA6E5BC-96BF-403D-B4B2-3771F3791B7B-PROB"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "child"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/D50E2934-E2C2-4C5C-8E79-294C7F79BD4A-PROB"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "FBDBFCEA-B088-4EE0-AC53-B36647E878A1-PROB"
+                    }
+                ],
+                "clinicalStatus": "active",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                                "code": "problem-list-item",
+                                "display": "Problem List Item"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "350049016"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "233604007",
+                            "display": "Pneumonia",
+                            "userSelected": true
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/144A1A2E-B3B3-4A66-B33B-148A5B75959D"
+                },
+                "onsetDateTime": "2020-11-16",
+                "assertedDate": "2020-11-17T15:48:47.447+00:00",
+                "asserter": {
+                    "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+                },
+                "note": [
+                    {
+                        "text": "First Note - Parent"
+                    },
+                    {
+                        "text": "Second Note - Parent"
+                    }
+                ]
+            }
+        },
+        {
+            "resource": {
+                "resourceType": "Condition",
+                "id": "5EA6E5BC-96BF-403D-B4B2-3771F3791B7B-PROB",
+                "meta": {
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+                    ]
+                },
+                "extension": [
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1",
+                        "valueReference": {
+                            "reference": "Observation/5EA6E5BC-96BF-403D-B4B2-3771F3791B7B"
+                        }
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+                        "valueCode": "minor"
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "parent"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/FBDBFCEA-B088-4EE0-AC53-B36647E878A1-PROB"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedProblemHeader-1",
+                        "extension": [
+                            {
+                                "url": "type",
+                                "valueCode": "sibling"
+                            },
+                            {
+                                "url": "target",
+                                "valueReference": {
+                                    "reference": "Condition/D50E2934-E2C2-4C5C-8E79-294C7F79BD4A-PROB"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "identifier": [
+                    {
+                        "system": "https://EMISWeb/A82038",
+                        "value": "5EA6E5BC-96BF-403D-B4B2-3771F3791B7B-PROB"
+                    }
+                ],
+                "clinicalStatus": "inactive",
+                "category": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                                "code": "problem-list-item",
+                                "display": "Problem List Item"
+                            }
+                        ]
+                    }
+                ],
+                "code": {
+                    "coding": [
+                        {
+                            "extension": [
+                                {
+                                    "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                                    "extension": [
+                                        {
+                                            "url": "descriptionId",
+                                            "valueId": "83992015"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "system": "http://snomed.info/sct",
+                            "code": "50417007",
+                            "display": "Lower respiratory tract infection",
+                            "userSelected": true
+                        }
+                    ]
+                },
+                "subject": {
+                    "reference": "Patient/144A1A2E-B3B3-4A66-B33B-148A5B75959D"
+                },
+                "onsetDateTime": "2020-11-09",
+                "abatementDateTime": "2020-11-17T00:00:00+00:00",
+                "assertedDate": "2020-11-17T15:48:25.117+00:00",
+                "asserter": {
+                    "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+                },
+                "note": [
+                    {
+                        "text": "First Note - Sibling"
+                    },
+                    {
+                        "text": "Second Note - Sibling"
+                    }
+                ]
+            }
+        }
+    ]
+}

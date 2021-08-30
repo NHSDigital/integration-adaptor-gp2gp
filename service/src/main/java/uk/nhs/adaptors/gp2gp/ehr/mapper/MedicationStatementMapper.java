@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extr
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.prescriptionTypeTextIsNoInfoAvailable;
 
@@ -20,8 +21,10 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationRequest;
+import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.dstu3.model.codesystems.MedicationRequestIntent;
@@ -88,6 +91,7 @@ public class MedicationStatementMapper {
         var ehrSupplyDiscontinueCode = buildStatusReasonStoppedCode(medicationRequest);
         var ehrSupplyDiscontinueId = randomIdGeneratorService.createNewId();
         var ehrSupplyDiscontinueAvailabilityTime = buildStatusReasonStoppedAvailabilityTime(medicationRequest);
+        var ehrSupplyDiscontinueReasonText = buildStatusReasonStoppedText(medicationRequest);
         var priorPrescriptionId = buildPriorPrescription(medicationRequest);
         var basedOn = buildBasedOn(medicationRequest);
         var participant = buildParticipant(medicationRequest);
@@ -108,6 +112,7 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueCode(ehrSupplyDiscontinueCode)
             .ehrSupplyDiscontinueId(ehrSupplyDiscontinueId)
             .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
+            .ehrSupplyDiscontinueReasonText(ehrSupplyDiscontinueReasonText)
             .priorPrescriptionId(priorPrescriptionId)
             .basedOn(basedOn)
             .participant(participant)
@@ -158,7 +163,8 @@ public class MedicationStatementMapper {
         return List.of(
             buildPatientInstructionPertinentInformation(medicationRequest),
             buildExpectedSupplyDurationPertinentInformation(medicationRequest),
-            buildNotePertinentInformation(medicationRequest)
+            buildNotePertinentInformation(medicationRequest),
+            buildRequestedByOrgPertinentInformation(medicationRequest)
         );
     }
 
@@ -199,6 +205,30 @@ public class MedicationStatementMapper {
         return StringUtils.EMPTY;
     }
 
+    private String buildRequestedByOrgPertinentInformation(MedicationRequest medicationRequest) {
+        if (medicationRequest.hasRequester() && medicationRequest.getRequester().hasOnBehalfOf()) {
+            var onBehalfOfReference = medicationRequest.getRequester().getOnBehalfOf().getReferenceElement();
+            var onBehalfOfResource = messageContext.getInputBundleHolder().getResource(onBehalfOfReference);
+
+            return onBehalfOfResource
+                .filter(resource -> ResourceType.Organization.equals(resource.getResourceType()))
+                .map(resource -> (Organization) resource)
+                .filter(organisation -> organisation.hasType())
+                .map(organisation -> String.format("Requested by org: %s", getOrganisationTypeText(organisation)))
+                .orElseGet(() -> StringUtils.EMPTY);
+        }
+
+        return StringUtils.EMPTY;
+    }
+
+    private String getOrganisationTypeText(Organization organisation) {
+        return organisation.getType()
+            .stream()
+            .filter(CodeableConcept::hasText)
+            .map(CodeableConcept::getText)
+            .collect(Collectors.joining(", "));
+    }
+
     private String buildPatientInstructionPertinentInformation(MedicationRequest medicationRequest) {
         if (medicationRequest.hasDosageInstruction() && medicationRequest.getDosageInstructionFirstRep().hasPatientInstruction()) {
             return String.format(PATIENT_INSTRUCTION, medicationRequest.getDosageInstructionFirstRep().getPatientInstruction());
@@ -209,6 +239,13 @@ public class MedicationStatementMapper {
     private String buildStatusReasonStoppedCode(MedicationRequest medicationRequest) {
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return extractStatusReasonStoppedCode(medicationRequest, codeableConceptCdMapper);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String buildStatusReasonStoppedText(MedicationRequest medicationRequest) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+            return extractStatusReasonStoppedText(medicationRequest);
         }
         return StringUtils.EMPTY;
     }

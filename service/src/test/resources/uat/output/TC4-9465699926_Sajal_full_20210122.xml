@@ -389,6 +389,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.300"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -407,6 +413,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.000"/><high value="0.600"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -425,6 +437,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="10.500"/><high value="15.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -442,6 +460,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>Unknown UoM</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.370"/><high value="0.470"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -459,6 +483,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.000"/><high value="4.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -477,6 +507,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="26.000"/><high value="32.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -495,6 +531,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="30.000"/><high value="37.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -513,6 +555,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="76.000"/><high value="100.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -531,6 +579,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="0.200"/><high value="1.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -558,6 +612,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="2.000"/><high value="7.500"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -610,6 +670,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="150.000"/><high value="600.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -651,6 +717,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="3.800"/><high value="5.400"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -680,6 +752,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="4.000"/><high value="11.000"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -730,6 +808,12 @@ red blood cell seen, Note low platelets</text>
         </effectiveTime>
         <availabilityTime value="20020330000000"/>
             <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>mPas</originalText></translation></value>
+            <referenceRange typeCode="REFV">
+    <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
+        <value><low value="1.450"/><high value="1.720"/></value>
+    </referenceInterpretationRange>
+</referenceRange>
+
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -1052,7 +1136,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Short duration minor problem</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Short duration minor problem Problem Info: Problem Notes: Short duration minor problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1078,7 +1162,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Execerbation of the dizziness problem Ended on 11/05/2011 Problem Info: Problem Notes: Execerbation of the dizziness problem Ended on 11/05/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1166,7 +1250,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/06/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/06/2011 Problem Info: Problem Notes: Ended on 16/06/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1192,7 +1276,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Chronic Problem with no end date</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Chronic Problem with no end date Problem Info: Problem Notes: Chronic Problem with no end date</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1511,7 +1595,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - exacerbated from &quot;Partner pregnant&quot; problem Problem Info: Problem Notes: exacerbated from &quot;Partner pregnant&quot; problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1537,7 +1621,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a past problem Ended on 13/01/2010 Problem Info: Problem Notes: This is a past problem Ended on 13/01/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1563,7 +1647,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/12/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 16/12/2010 Problem Info: Problem Notes: Ended on 16/12/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1589,7 +1673,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is a problem based on a medication - no end</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a problem based on a medication - no end Problem Info: Problem Notes: This is a problem based on a medication - no end</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1725,7 +1809,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This problem was created within a consultation</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This problem was created within a consultation Problem Info: Problem Notes: This problem was created within a consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1824,7 +1908,7 @@ red blood cell seen, Note low platelets</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
-                <code code="62014003" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Adverse reaction to drug">
+                <code nullFlavor="UNK">
 </code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
@@ -1894,7 +1978,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD.</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is a re-occurence of a past problem N.EndD. Problem Info: Problem Notes: This is a re-occurence of a past problem N.EndD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1920,7 +2004,7 @@ red blood cell seen, Note low platelets</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 27/05/2010</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 27/05/2010 Problem Info: Problem Notes: Ended on 27/05/2010</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2688,7 +2772,7 @@ red blood cell seen, Note low platelets</text>
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
-                <code code="196461000000101" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Transfer-degraded drug allergy">
+                <code nullFlavor="UNK">
     <originalText>H/O: drug allergy Palonosetron 250micrograms/5ml solution for injection vials</originalText>
 </code>
                 <statusCode code="COMPLETE"/>
@@ -3358,7 +3442,6 @@ red blood cell seen, Note low platelets</text>
         <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
         <text>&lt; 21.000 {units}/wk</text>
-        <value></value>
     </referenceInterpretationRange>
 </referenceRange>
 
@@ -3406,7 +3489,7 @@ red blood cell seen, Note low platelets</text>
         <id root="FEB76FD7-EA3E-47AE-9D92-DDB7EB866A99" />
         <code code="183444007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Referral for further care">
 </code>
-        <text>Priority: Routine Recipient Org: Fictional Hospital Annotation:  @  Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
+        <text>Recipient Org: Fictional Hospital Annotation:  @  Referral for manual lymphatic drainage Referrer: David McAvenue at Testvale Surgery (New Forest PCT)
 Referral Type: Hospital
 Reason: Probation
 Service: Acute Hospital
@@ -3419,6 +3502,7 @@ Sent: 07 Mar 2011 16:58, Annotation:  @  Mode:Written, Annotation:  @  Purpose:U
             <center nullFlavor="NI"/>
         </effectiveTime>
         <availabilityTime value="20110307165500"/>
+        <priorityCode code="394848005" displayName="Normal" codeSystem="2.16.840.1.113883.2.1.3.2.4.15"><originalText>Routine</originalText></priorityCode>
         <responsibleParty typeCode="RESP">
             <agentRef classCode="AGNT">
                 <id root="DBC49D87-08A5-4E9B-A0DB-88F53EEAD89F"/>
@@ -3848,7 +3932,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level two</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level two Problem Info: Problem Notes: This is exacerbation level two</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3874,7 +3958,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 08/03/2011</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - Ended on 08/03/2011 Problem Info: Problem Notes: Ended on 08/03/2011</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3951,7 +4035,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level one</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation level one Problem Info: Problem Notes: This is exacerbation level one</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4316,7 +4400,7 @@ Dosage: 0.5 ml</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation</text>
+                <text>Interpretation: Significance : Minor - Episodicity : First - This is exacerbation Problem Info: Problem Notes: This is exacerbation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

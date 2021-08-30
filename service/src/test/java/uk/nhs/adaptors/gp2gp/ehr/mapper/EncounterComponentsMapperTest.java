@@ -17,8 +17,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
 import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.MultiStatementObservationHolderFactory;
@@ -57,6 +59,8 @@ public class EncounterComponentsMapperTest {
     private RandomIdGeneratorService randomIdGeneratorService;
     @Mock
     private CodeableConceptCdMapper codeableConceptCdMapper;
+    @Mock
+    private TimestampService timestampService;
 
     private EncounterComponentsMapper encounterComponentsMapper;
     private MessageContext messageContext;
@@ -65,6 +69,8 @@ public class EncounterComponentsMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
+            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+        when(codeableConceptCdMapper.mapToNullFlavorCodeableConcept(any(CodeableConcept.class)))
             .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
 
@@ -78,7 +84,7 @@ public class EncounterComponentsMapperTest {
             randomIdGeneratorService,
             structuredObservationValueMapper,
             codeableConceptCdMapper,
-            new ParticipantMapper()
+            participantMapper
         );
         ConditionLinkSetMapper conditionLinkSetMapper = new ConditionLinkSetMapper(messageContext,
             randomIdGeneratorService,
@@ -88,7 +94,7 @@ public class EncounterComponentsMapperTest {
         DiaryPlanStatementMapper diaryPlanStatementMapper
             = new DiaryPlanStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         DocumentReferenceToNarrativeStatementMapper documentReferenceToNarrativeStatementMapper
-            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes());
+            = new DocumentReferenceToNarrativeStatementMapper(messageContext, new SupportedContentTypes(), timestampService);
         MedicationStatementMapper medicationStatementMapper
             = new MedicationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper, randomIdGeneratorService);
         ObservationToNarrativeStatementMapper observationToNarrativeStatementMapper =
@@ -104,7 +110,8 @@ public class EncounterComponentsMapperTest {
             messageContext,
             structuredObservationValueMapper,
             new PertinentInformationObservationValueMapper(), codeableConceptCdMapper,
-            participantMapper);
+            participantMapper
+        );
         ImmunizationObservationStatementMapper immunizationObservationStatementMapper =
             new ImmunizationObservationStatementMapper(messageContext, codeableConceptCdMapper, participantMapper);
         RequestStatementMapper requestStatementMapper

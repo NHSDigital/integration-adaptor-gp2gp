@@ -2,6 +2,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Extension;
@@ -55,10 +56,6 @@ public class CodeableConceptCdMapper {
             .findFirst();
     }
 
-    private Optional<String> extractCode(Coding coding) {
-        return Optional.of(coding.getCode());
-    }
-
     private Optional<String> findOriginalText(CodeableConcept codeableConcept, Optional<Coding> coding) {
         if (coding.isPresent()) {
             if (codeableConcept.hasText()) {
@@ -77,8 +74,16 @@ public class CodeableConceptCdMapper {
         }
     }
 
+    private Optional<String> extractCode(Coding coding) {
+        return Optional.of(coding.getCode());
+    }
+
     private Optional<String> findDisplayText(Coding coding) {
         return Optional.of(coding.getDisplay());
+    }
+
+    private boolean isSnomed(Coding coding) {
+        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
     }
 
     private Optional<Extension> retrieveDisplayExtension(Coding coding) {
@@ -89,7 +94,19 @@ public class CodeableConceptCdMapper {
             .findFirst();
     }
 
-    private boolean isSnomed(Coding coding) {
-        return coding.hasSystem() && coding.getSystem().equals(SNOMED_SYSTEM);
+    public String getDisplayFromCodeableConcept(CodeableConcept codeableConcept) {
+        return findMainCode(codeableConcept)
+            .map(cc -> findDisplayText(cc).orElse(StringUtils.EMPTY))
+            .orElse(StringUtils.EMPTY);
+    }
+
+    public String mapToNullFlavorCodeableConcept(CodeableConcept codeableConcept) {
+
+        var builder = CodeableConceptCdTemplateParameters.builder().nullFlavor(true);
+        var mainCode = findMainCode(codeableConcept);
+
+        var originalText = findOriginalText(codeableConcept, mainCode);
+        originalText.ifPresent(builder::mainOriginalText);
+        return TemplateUtils.fillTemplate(CODEABLE_CONCEPT_CD_TEMPLATE, builder.build());
     }
 }
