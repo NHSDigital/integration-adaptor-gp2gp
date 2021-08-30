@@ -1,9 +1,11 @@
 package uk.nhs.adaptors.gp2gp.gpc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,13 +98,16 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             String compressedHl7 = hl7TranslatedResponse;
             if (!isLargeEhrExtract(compressedHl7)) {
                 hl7TranslatedResponse = compressedHl7;
-
             } else {
-                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition);
+                var documentId = randomIdGeneratorService.createNewId();
+                var documentName = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), documentId
+                );
+                var externalAttachment = buildExternalAttachment(compressedHl7, structuredTaskDefinition, documentId, documentName);
                 externalAttachments.add(externalAttachment);
 
                 var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-                uploadToStorage(compressedHl7, externalAttachment.getFilename(), taskDefinition);
+                uploadToStorage(compressedHl7, documentName, taskDefinition);
                 ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
                 hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
@@ -166,24 +171,25 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         return getBytesLengthOfString(ehrExtract) > gp2gpConfiguration.getLargeEhrExtractThreshold();
     }
 
-    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition) {
+    private OutboundMessage.ExternalAttachment buildExternalAttachment(String ehrExtract, TaskDefinition taskDefinition,
+        String documentId, String documentName) {
         var messageId = randomIdGeneratorService.createNewId();
-        var documentId = randomIdGeneratorService.createNewId();
-        var documentName = GpcFilenameUtils.generateDocumentFilename(
-            taskDefinition.getConversationId(), documentId
-        );
 
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .contentType("application/xml") // confirm this is correct
             .filename(documentName)
-            .length(getBytesLengthOfString(ehrExtract))
-            .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
-            .largeAttachment(true)
-            .originalBase64(false)
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(documentName)
+                .contentType("application/xml") // confirm this is correct
+                .length(getBytesLengthOfString(ehrExtract))
+                .compressed(false) // TODO: 17/08/2021 NIAD-1059 / change this to true once NIAD-1059 is implemented and hl7 is compressed
+                .largeAttachment(true)
+                .originalBase64(false)
+                .domainData(SKELETON_ATTACHMENT)
+                .build()
+                .toString())
             .url(StringUtils.EMPTY)
-            .domainData(SKELETON_ATTACHMENT)
             .build();
     }
 
