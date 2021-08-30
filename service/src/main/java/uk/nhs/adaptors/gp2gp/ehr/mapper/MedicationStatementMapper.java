@@ -6,6 +6,7 @@ import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extr
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractPrescriptionTypeCode;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedAvailabilityTime;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedCode;
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractStatusReasonStoppedText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.hasStatusReasonStopped;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.prescriptionTypeTextIsNoInfoAvailable;
 
@@ -90,6 +91,7 @@ public class MedicationStatementMapper {
         var ehrSupplyDiscontinueCode = buildStatusReasonStoppedCode(medicationRequest);
         var ehrSupplyDiscontinueId = randomIdGeneratorService.createNewId();
         var ehrSupplyDiscontinueAvailabilityTime = buildStatusReasonStoppedAvailabilityTime(medicationRequest);
+        var ehrSupplyDiscontinueReasonText = buildStatusReasonStoppedText(medicationRequest);
         var priorPrescriptionId = buildPriorPrescription(medicationRequest);
         var basedOn = buildBasedOn(medicationRequest);
         var participant = buildParticipant(medicationRequest);
@@ -110,6 +112,7 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueCode(ehrSupplyDiscontinueCode)
             .ehrSupplyDiscontinueId(ehrSupplyDiscontinueId)
             .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
+            .ehrSupplyDiscontinueReasonText(ehrSupplyDiscontinueReasonText)
             .priorPrescriptionId(priorPrescriptionId)
             .basedOn(basedOn)
             .participant(participant)
@@ -236,6 +239,13 @@ public class MedicationStatementMapper {
     private String buildStatusReasonStoppedCode(MedicationRequest medicationRequest) {
         if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
             return extractStatusReasonStoppedCode(medicationRequest, codeableConceptCdMapper);
+        }
+        return StringUtils.EMPTY;
+    }
+
+    private String buildStatusReasonStoppedText(MedicationRequest medicationRequest) {
+        if (MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
+            return extractStatusReasonStoppedText(medicationRequest);
         }
         return StringUtils.EMPTY;
     }

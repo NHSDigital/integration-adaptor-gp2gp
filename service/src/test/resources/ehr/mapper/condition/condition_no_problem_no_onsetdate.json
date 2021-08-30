@@ -1,0 +1,85 @@
+{
+    "resourceType": "Condition",
+    "id": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB",
+    "meta": {
+        "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-ProblemHeader-Condition-1"
+        ]
+    },
+    "extension": [
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "ReferralRequest/D2EA00FC-7B85-46C5-A0B7-E49C53C054D0"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "ReferralRequest/82A9E6C8-20CE-48DA-B6B3-15C39E5ABB5E"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-RelatedClinicalContent-1",
+            "valueReference": {
+                "reference": "DocumentReference/8747DFC5-11B7-4A77-B2F3-7720CC58C2FC"
+            }
+        },
+        {
+            "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ProblemSignificance-1",
+            "valueCode": "minor"
+        }
+    ],
+    "identifier": [
+        {
+            "system": "https://EMISWeb/A82038",
+            "value": "7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB"
+        }
+    ],
+    "clinicalStatus": "inactive",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "https://fhir.hl7.org.uk/STU3/CodeSystem/CareConnect-ConditionCategory-1",
+                    "code": "problem-list-item",
+                    "display": "Problem List Item"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "extension": [
+                    {
+                        "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                        "extension": [
+                            {
+                                "url": "descriptionId",
+                                "valueId": "60126016"
+                            }
+                        ]
+                    }
+                ],
+                "system": "http://snomed.info/sct",
+                "code": "36031001",
+                "display": "Burning feet",
+                "userSelected": true
+            }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/4DBBED7B-7A91-47DC-B99B-35CDFA970590"
+    },
+    "abatementDateTime": "2020-10-04T00:00:00+01:00",
+    "assertedDate": "2020-09-07T10:12:02.093+01:00",
+    "asserter": {
+        "reference": "Practitioner/C8FD0E2C-3124-4C72-AC8D-ABEA65537D1B"
+    },
+    "note": [
+        {
+            "text": "Burning feet description"
+        }
+    ]
+}

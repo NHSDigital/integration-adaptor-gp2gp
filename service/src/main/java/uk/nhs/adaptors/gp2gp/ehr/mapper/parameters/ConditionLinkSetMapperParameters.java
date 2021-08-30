@@ -26,4 +26,5 @@ public class ConditionLinkSetMapperParameters {
     private String pertinentInfo;
     private String code;
     private String performer;
+    private String observationStatementAvailabilityTime;
 }

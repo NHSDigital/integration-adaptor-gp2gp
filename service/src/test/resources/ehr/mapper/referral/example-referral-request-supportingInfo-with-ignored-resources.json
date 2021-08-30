@@ -1,0 +1,21 @@
+{
+  "resourceType": "ReferralRequest",
+  "id": "C7F71C3B-83F9-4E63-AC9C-7629563FF85F",
+  "supportingInfo": [
+    {
+      "reference": "ProcedureRequest/73EE7955-2C6E-49EE-92FA-325F1A6BE705"
+    },
+    {
+      "reference": "Condition/10B2DE4E-E2A4-4CC5-84D2-FCACA50B77CB-PROB"
+    },
+    {
+      "reference": "AllergyIntolerance/081CE989-17CD-46C6-8C22-C90F8F2487C2"
+    },
+    {
+      "reference": "Immunization/986D0994-1243-4216-A7A4-553843BF39E1"
+    },
+    {
+      "reference": "Encounter/319DA5C2-B9DC-4FD7-A4F4-FFF04BC403D2"
+    }
+  ]
+}

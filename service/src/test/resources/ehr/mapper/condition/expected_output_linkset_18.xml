@@ -1,4 +1,4 @@
-<component typeCode="COMP">
+<component typeCode="COMP" contextConductionInd="true">
     <LinkSet classCode="OBS" moodCode="EVN">
         <id root="7E277DF1-6F1C-47CD-84F7-E9B7BF4105DB-PROB" />
         <code code="394775005" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Inactive Problem">
@@ -9,7 +9,7 @@
         </code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            <low value="20200906"/>
+            <low nullFlavor="UNK"/>
             <high value="20201004000000"/>
         </effectiveTime>
         <availabilityTime value="20200907101202" />
@@ -40,16 +40,16 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
+<component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="50233a2f-128f-4b96-bdae-6207ed11a8ea"/>
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            <low value="20200906"/>
+            <low nullFlavor="UNK"/>
             <high value="20201004000000"/>
         </effectiveTime>
-        <availabilityTime value="20200906" />
+        <availabilityTime nullFlavor="UNK" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
