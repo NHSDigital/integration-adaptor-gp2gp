@@ -27,28 +27,28 @@ public class InputBundle {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private static final  List<ResourceType> MAPPABLE_RESOURCES = List.of(
         ResourceType.AllergyIntolerance,
+        ResourceType.Appointment,
         ResourceType.Condition,
+        ResourceType.Device,
+        ResourceType.DiagnosticReport,
         ResourceType.DocumentReference,
+        ResourceType.Encounter,
+        ResourceType.HealthcareService,
         ResourceType.Immunization,
         ResourceType.List,
+        ResourceType.Location,
+        ResourceType.Medication,
         ResourceType.MedicationRequest,
         ResourceType.Observation,
+        ResourceType.Organization,
+        ResourceType.Patient,
+        ResourceType.Practitioner,
+        ResourceType.PractitionerRole,
         ResourceType.ProcedureRequest,
         ResourceType.ReferralRequest,
-        ResourceType.DiagnosticReport,
-        ResourceType.Specimen,
-        ResourceType.Location,
-        ResourceType.Practitioner,
-        ResourceType.Medication,
-        ResourceType.Organization,
-        ResourceType.PractitionerRole,
-        ResourceType.Encounter,
-        ResourceType.Device,
-        ResourceType.Patient,
         ResourceType.RelatedPerson,
-        ResourceType.Appointment,
-        ResourceType.HealthcareService
-    );
+        ResourceType.Specimen
+        );
 
     private final Bundle bundle;
 
