@@ -34,9 +34,6 @@ import java.util.stream.Collectors;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static uk.nhs.adaptors.gp2gp.common.utils.Gzip.compress;
-
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Service
