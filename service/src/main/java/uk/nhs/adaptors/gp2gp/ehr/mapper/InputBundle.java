@@ -64,7 +64,11 @@ public class InputBundle {
         var resourceType = ResourceType.fromCode(reference.getResourceType());
 
         if (MAPPABLE_RESOURCES.contains(resourceType)) {
-            return extractResourceByReference(this.bundle, reference);
+            Optional<Resource> resource = extractResourceByReference(this.bundle, reference);
+            if (resource.isPresent()) {
+                return resource;
+            }
+            throw new EhrMapperException("Resource not found: " + reference);
         } else {
             throw new EhrMapperException("Reference not supported resource type: " + reference);
         }
