@@ -87,8 +87,8 @@ public class EhrExtractTest {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
-        var documentList = waitFor(() -> ((Document) Mongo.findEhrExtractStatus(conversationId)
-            .get(GPC_ACCESS_DOCUMENT)).get("documents", Collections.emptyList()));
+        var gpcAccessDocument = waitFor(() -> ((Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT)));
+        var documentList = waitFor(() -> (gpcAccessDocument.get("documents", Collections.emptyList())));
 
         assertThat(documentList.size()).isEqualTo(1);
 
