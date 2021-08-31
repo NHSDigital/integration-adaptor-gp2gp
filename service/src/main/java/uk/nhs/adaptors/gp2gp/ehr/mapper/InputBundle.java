@@ -8,7 +8,9 @@ import org.hl7.fhir.dstu3.model.ListResource;
 import org.hl7.fhir.dstu3.model.PractitionerRole;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
+
 import uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor;
 
 import java.util.List;
@@ -23,6 +25,31 @@ import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
 public class InputBundle {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
+    private static final  List<ResourceType> MAPPABLE_RESOURCES = List.of(
+        ResourceType.AllergyIntolerance,
+        ResourceType.Appointment,
+        ResourceType.Condition,
+        ResourceType.Device,
+        ResourceType.DiagnosticReport,
+        ResourceType.DocumentReference,
+        ResourceType.Encounter,
+        ResourceType.HealthcareService,
+        ResourceType.Immunization,
+        ResourceType.List,
+        ResourceType.Location,
+        ResourceType.Medication,
+        ResourceType.MedicationRequest,
+        ResourceType.Observation,
+        ResourceType.Organization,
+        ResourceType.Patient,
+        ResourceType.Practitioner,
+        ResourceType.PractitionerRole,
+        ResourceType.ProcedureRequest,
+        ResourceType.ReferralRequest,
+        ResourceType.RelatedPerson,
+        ResourceType.Specimen
+        );
+
     private final Bundle bundle;
 
     public InputBundle(Bundle bundle) {
@@ -30,7 +57,17 @@ public class InputBundle {
     }
 
     public Optional<Resource> getResource(IIdType reference) {
-        return extractResourceByReference(this.bundle, reference);
+        if (reference.getResourceType() == null) {
+            return Optional.empty();
+        }
+
+        var resourceType = ResourceType.fromCode(reference.getResourceType());
+
+        if (MAPPABLE_RESOURCES.contains(resourceType)) {
+            return extractResourceByReference(this.bundle, reference);
+        } else {
+            throw new EhrMapperException("Reference not supported resource type: " + reference);
+        }
     }
 
     public Resource getRequiredResource(IIdType reference) {
