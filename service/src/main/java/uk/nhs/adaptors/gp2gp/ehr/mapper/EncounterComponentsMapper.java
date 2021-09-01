@@ -33,6 +33,8 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 
+import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResources.isIgnoredResourceType;
+
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
@@ -113,6 +115,9 @@ public class EncounterComponentsMapper {
         LOGGER.debug("Translating list entry resource {}", resource.getId());
         if (encounterComponents.containsKey(resource.getResourceType())) {
             return encounterComponents.get(resource.getResourceType()).apply(resource);
+        } else if (isIgnoredResourceType(resource.getResourceType())) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            return Optional.empty();
         } else {
             throw new EhrMapperException("Unsupported resource in consultation list: " + resource.getId());
         }

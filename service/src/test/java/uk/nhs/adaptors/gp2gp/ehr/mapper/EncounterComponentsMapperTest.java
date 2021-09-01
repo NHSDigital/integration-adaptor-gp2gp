@@ -54,6 +54,7 @@ public class EncounterComponentsMapperTest {
     private static final String INPUT_BUNDLE_WITH_RESOURCES_NOT_IN_BUNDLE = TEST_DIRECTORY + "input-bundle-7.json";
     private static final String INPUT_BUNDLE_WITH_LIST_NOT_IN_TOPIC_OR_CATEGORY = TEST_DIRECTORY + "input-bundle-8.json";
     private static final String INPUT_BUNDLE_WITH_UNSUPPORTED_RESOURCES = TEST_DIRECTORY + "input-bundle-9-unsupported-resource.json";
+    private static final String INPUT_BUNDLE_WITH_IGNORED_RESOURCE = TEST_DIRECTORY + "input-bundle-10-ignored-resource.json";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -146,6 +147,17 @@ public class EncounterComponentsMapperTest {
         String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
 
         var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_ALL_MAPPERS_USED);
+        var encounter = extractEncounter(bundle);
+
+        String mappedXml = encounterComponentsMapper.mapComponents(encounter);
+        assertThat(mappedXml).isEqualTo(expectedXml);
+    }
+
+    @Test
+    public void When_MappingEncounterComponents_Expect_IgnoredResourceNotMapped() throws IOException {
+        String expectedXml = ResourceTestFileUtils.getFileContent(EXPECTED_COMPONENTS_MAPPED_WITH_ALL_MAPPERS_USED);
+
+        var bundle = initializeMessageContext(INPUT_BUNDLE_WITH_IGNORED_RESOURCE);
         var encounter = extractEncounter(bundle);
 
         String mappedXml = encounterComponentsMapper.mapComponents(encounter);
