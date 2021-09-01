@@ -24,7 +24,7 @@ public class StorageConnectorService {
     public void uploadFile(StorageDataWrapper response, String filename) {
         String jsonStringResponse = objectMapper.writeValueAsString(response);
         var responseBytes = jsonStringResponse.getBytes(UTF_8);
-        
+
         try (var responseInputStream = new ByteArrayInputStream(responseBytes)) {
             storageConnector.uploadToStorage(responseInputStream, responseBytes.length, filename);
         }

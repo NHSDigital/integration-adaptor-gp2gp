@@ -182,7 +182,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
         String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
         inputStream.close();
-        
+
         return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
     }
 
