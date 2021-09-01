@@ -20,9 +20,13 @@ import java.util.stream.Collectors;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractListByEncounterReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractResourceByReference;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResources.isIgnoredResourceType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class InputBundle {
     private static final String ACTUAL_PROBLEM_URL = "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ActualProblem-1";
     private static final  List<ResourceType> MAPPABLE_RESOURCES = List.of(
@@ -69,6 +73,9 @@ public class InputBundle {
                 return resource;
             }
             throw new EhrMapperException("Resource not found: " + reference);
+        } else if (isIgnoredResourceType(resourceType)) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resourceType.name()));
+            return Optional.empty();
         } else {
             throw new EhrMapperException("Reference not supported resource type: " + reference);
         }
