@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.ACCEPTED;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.micrometer.core.instrument.util.IOUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 
@@ -30,8 +32,6 @@ import uk.nhs.adaptors.mockmhsservice.service.MockMhsService;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MhsMockController {
     private final MockMhsService mockMhsService;
-    private final InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html");
-    private final String internalServerErrorResponse = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
     @PostMapping(value = "/mock-mhs-endpoint",
@@ -51,7 +51,14 @@ public class MhsMockController {
         } catch (Exception e) {
             LOGGER.error("Error could not process mock request", e);
             responseHeaders.setContentType(MediaType.TEXT_HTML);
-            return new ResponseEntity<>(internalServerErrorResponse, responseHeaders, INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(getInternalServerErrorResponse(), responseHeaders, INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @SneakyThrows(IOException.class)
+    private String getInternalServerErrorResponse(){
+        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html")) {
+            return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
     }
 }
