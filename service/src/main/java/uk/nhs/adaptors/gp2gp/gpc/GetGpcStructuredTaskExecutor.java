@@ -106,20 +106,28 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             }
             hl7TranslatedResponse = new String(compressedBytes, UTF_8);
 
-            var documentId = randomIdGeneratorService.createNewId();
-            var documentName = GpcFilenameUtils.generateDocumentFilename(
-                structuredTaskDefinition.getConversationId(), documentId
-            );
-            var externalAttachment = buildExternalAttachment(hl7TranslatedResponse, structuredTaskDefinition, documentId, documentName);
-            externalAttachments.add(externalAttachment);
+            if (!isLargeEhrExtract(hl7TranslatedResponse)) {
+                var filename = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
+                );
+                var attachment = buildAttachment(hl7TranslatedResponse, filename);
+                attachments.add(attachment);
+                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition, filename);
+            } else {
+                var documentId = randomIdGeneratorService.createNewId();
+                var documentName = GpcFilenameUtils.generateDocumentFilename(
+                    structuredTaskDefinition.getConversationId(), documentId
+                );
+                var externalAttachment = buildExternalAttachment(hl7TranslatedResponse, structuredTaskDefinition, documentId, documentName);
+                externalAttachments.add(externalAttachment);
 
-            var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
-            uploadToStorage(hl7TranslatedResponse, documentName, taskDefinition);
-            ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
+                var taskDefinition = buildGetDocumentTask(structuredTaskDefinition, externalAttachment);
+                uploadToStorage(hl7TranslatedResponse, documentName, taskDefinition);
+                ehrExtractStatusService.updateEhrExtractStatusWithEhrExtractChunks(structuredTaskDefinition, externalAttachment);
 
-            hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
-                externalAttachment.getFilename());
-
+                hl7TranslatedResponse = structuredRecordMappingService.getHL7ForLargeEhrExtract(structuredTaskDefinition,
+                    externalAttachment.getFilename());
+            }
         }
 
         var outboundMessage = OutboundMessage.builder()
