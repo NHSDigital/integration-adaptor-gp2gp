@@ -1523,6 +1523,29 @@
                     }
                 ]
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "Organization/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
+                "meta": {
+                    "versionId": "1112974926854455048",
+                    "profile": [
+                        "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Organization-1"
+                    ]
+                },
+                "type": [
+                    {
+                        "coding": [
+                            {
+                                "system": "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1",
+                                "code": "gp-practice"
+                            }
+                        ],
+                        "text": "GP Practice"
+                    }
+                ]
+            }
         }
     ]
 }

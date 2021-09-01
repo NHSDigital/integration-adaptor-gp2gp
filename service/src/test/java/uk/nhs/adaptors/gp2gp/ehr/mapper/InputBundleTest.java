@@ -1,7 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -52,13 +52,17 @@ public class InputBundleTest {
     }
 
     @Test
-    public void When_GettingResourceFromEmptyBundle_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(new Bundle()).getResource(new IdType(EXISTING_REFERENCE))).isNotPresent();
+    public void When_GettingResourceFromEmptyBundle_Expect_EhrMapperExceptionThrown() {
+        assertThatThrownBy(() -> new InputBundle(new Bundle()).getResource(new IdType(EXISTING_REFERENCE)))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Resource not found: " + EXISTING_REFERENCE);
     }
 
     @Test
-    public void When_GettingNotInBundleResource_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(bundle).getResource(new IdType(NO_EXISTING_REFERENCE))).isNotPresent();
+    public void When_GettingNotInBundleResource_Expect_EhrMapperExceptionThrown() {
+        assertThatThrownBy(() -> new InputBundle(new Bundle()).getResource(new IdType(NO_EXISTING_REFERENCE)))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Resource not found: " + NO_EXISTING_REFERENCE);
     }
 
     @Test

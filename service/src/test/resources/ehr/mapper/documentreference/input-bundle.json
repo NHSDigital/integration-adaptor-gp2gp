@@ -13,6 +13,12 @@
                 "id": "6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73",
                 "name": "Organisation name"
             }
+        },
+        {
+            "resource": {
+                "resourceType": "Organization",
+                "id": "993C75F8-067C-11EC-9A03-0242AC130003"
+            }
         }
     ]
 }
