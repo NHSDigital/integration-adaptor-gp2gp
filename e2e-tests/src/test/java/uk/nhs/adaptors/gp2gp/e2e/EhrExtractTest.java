@@ -87,14 +87,8 @@ public class EhrExtractTest {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
-        var documentList = waitFor(() -> {
-            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
-                .get(GPC_ACCESS_DOCUMENT));
-            if (extractStatus == null) {
-                return null;
-            }
-            return extractStatus.get("documents", Collections.emptyList());
-        });
+        var gpcAccessDocument = waitFor(() -> ((Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT)));
+        var documentList = waitFor(() -> theDocumentListToNotBeEmpty(gpcAccessDocument));
 
         assertThat(documentList.size()).isEqualTo(0);
 
@@ -138,6 +132,14 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 3);
+    }
+
+    private List<Object> theDocumentListToNotBeEmpty(Document gpcAccessDocument) {
+        var docs = waitFor(() -> gpcAccessDocument.get("documents", Collections.emptyList()));
+        if (docs.size() == 0) {
+            return null;
+        }
+        return docs;
     }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {

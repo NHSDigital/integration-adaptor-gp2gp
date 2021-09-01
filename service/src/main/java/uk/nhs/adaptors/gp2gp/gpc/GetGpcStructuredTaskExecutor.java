@@ -104,6 +104,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
                 throw new RuntimeException();
             }
             hl7TranslatedResponse = new String(compressedBytes, UTF_8);
+
             if (!isLargeEhrExtract(hl7TranslatedResponse)) {
                 var filename = GpcFilenameUtils.generateDocumentFilename(
                     structuredTaskDefinition.getConversationId(), randomIdGeneratorService.createNewId()
