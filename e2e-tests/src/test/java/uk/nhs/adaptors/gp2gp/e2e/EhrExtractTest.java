@@ -87,10 +87,16 @@ public class EhrExtractTest {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
-        var documentList = waitFor(() -> ((Document) Mongo.findEhrExtractStatus(conversationId)
-            .get(GPC_ACCESS_DOCUMENT)).get("documents", Collections.emptyList()));
+        var documentList = waitFor(() -> {
+            var extractStatus = ((Document) Mongo.findEhrExtractStatus(conversationId)
+                .get(GPC_ACCESS_DOCUMENT));
+            if (extractStatus == null) {
+                return null;
+            }
+            return extractStatus.get("documents", Collections.emptyList());
+        });
 
-        assertThat(documentList.size()).isEqualTo(1);
+        assertThat(documentList.size()).isEqualTo(0);
 
         var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);

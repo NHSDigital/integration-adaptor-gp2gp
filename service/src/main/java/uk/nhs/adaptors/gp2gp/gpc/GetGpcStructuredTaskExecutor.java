@@ -25,7 +25,6 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.MessageContext;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.mhs.model.OutboundMessage;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,7 +40,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
 
     public static final String SKELETON_ATTACHMENT = "X-GP2GP-Skeleton: Yes";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    public static final String XML_APPLICATION_CONTENT_TYPE = "application/xml";
+    public static final String XML_CONTENT_TYPE = "application/xml";
 
     private final GpcClient gpcClient;
     private final StorageConnectorService storageConnectorService;
@@ -189,11 +188,11 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     private OutboundMessage.Attachment buildAttachment(String content, String filename) {
         return OutboundMessage.Attachment.builder()
             .payload(content)
-            .contentType(XML_APPLICATION_CONTENT_TYPE)
+            .contentType(XML_CONTENT_TYPE)
             .isBase64(Boolean.FALSE.toString())
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(filename)
-                .contentType(XML_APPLICATION_CONTENT_TYPE)
+                .contentType(XML_CONTENT_TYPE)
                 .compressed(true) // always compressed at this stage
                 .largeAttachment(true)
                 .originalBase64(false)
@@ -213,18 +212,17 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             .documentId(documentId)
             .messageId(messageId)
             .filename(documentName)
-            .url(StringUtils.EMPTY)
             .description(OutboundMessage.AttachmentDescription.builder()
                 .fileName(documentName)
-                .contentType(XML_APPLICATION_CONTENT_TYPE) // confirm this is correct
+                .contentType(XML_CONTENT_TYPE) // confirm this is correct
+                .length(getBytesLengthOfString(ehrExtract))
                 .compressed(true) // always compressed at this stage
                 .largeAttachment(true)
                 .originalBase64(false)
-                .length(getBytesLengthOfString(ehrExtract))
                 .domainData(SKELETON_ATTACHMENT)
                 .build()
-                .toString()
-            )
+                .toString())
+            .url(StringUtils.EMPTY)
             .build();
     }
 
@@ -235,7 +233,7 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
         // Building outbound message for upload to storage as that is how DocumentSender downloads and parses from storage
         var attachments = Collections.singletonList(
             OutboundMessage.Attachment.builder()
-                .contentType(XML_APPLICATION_CONTENT_TYPE)
+                .contentType(XML_CONTENT_TYPE)
                 .isBase64(Boolean.FALSE.toString())
                 .description(taskDefinition.getDocumentId())
                 .payload(ehrExtract)
@@ -254,6 +252,6 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
     }
 
     private int getBytesLengthOfString(String input) {
-        return input.getBytes(StandardCharsets.UTF_8).length;
+        return input.getBytes(UTF_8).length;
     }
 }
