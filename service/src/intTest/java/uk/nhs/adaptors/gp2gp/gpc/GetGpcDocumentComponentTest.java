@@ -95,6 +95,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             any(),
             eq(EXPECTED_DOCUMENT_JSON_FILENAME)
         );
+        
+        inputStream.close();
     }
 
     @Test
@@ -123,6 +125,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             any(),
             eq(EXPECTED_DOCUMENT_JSON_FILENAME)
         );
+
+        inputStream.close();
     }
 
     @Test
