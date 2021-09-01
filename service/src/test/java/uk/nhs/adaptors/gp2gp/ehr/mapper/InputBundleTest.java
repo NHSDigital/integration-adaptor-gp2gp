@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import uk.nhs.adaptors.gp2gp.common.service.FhirParseService;
+import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.utils.ResourceTestFileUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,6 +27,7 @@ public class InputBundleTest {
     private static final String INPUT_BUNDLE_PATH = "/ehr/mapper/input-bundle.json";
     private static final String EXISTING_REFERENCE = "Appointment/1234";
     private static final String NO_EXISTING_REFERENCE = "Encounter/3543676";
+    private static final String UNSUPPORTED_RESOURCE_REFERENCE = "Binary/3543676";
     private static final String ENCOUNTER_LIST_EXISTING_REFERENCE = "Encounter/43536547";
     private static final String ENCOUNTER_LIST_NOT_EXISTING_REFERENCE = "Encounter/123456";
     private static final String EXISTING_LIST_REFERENCE = "List/0123456";
@@ -49,13 +52,24 @@ public class InputBundleTest {
     }
 
     @Test
-    public void When_GettingResourceFromEmptyBundle_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(new Bundle()).getResource(new IdType(EXISTING_REFERENCE))).isNotPresent();
+    public void When_GettingResourceFromEmptyBundle_Expect_EhrMapperExceptionThrown() {
+        assertThatThrownBy(() -> new InputBundle(new Bundle()).getResource(new IdType(EXISTING_REFERENCE)))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Resource not found: " + EXISTING_REFERENCE);
     }
 
     @Test
-    public void When_GettingNotInBundleResource_Expect_NoResourceReturned() {
-        assertThat(new InputBundle(bundle).getResource(new IdType(NO_EXISTING_REFERENCE))).isNotPresent();
+    public void When_GettingNotInBundleResource_Expect_EhrMapperExceptionThrown() {
+        assertThatThrownBy(() -> new InputBundle(new Bundle()).getResource(new IdType(NO_EXISTING_REFERENCE)))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Resource not found: " + NO_EXISTING_REFERENCE);
+    }
+
+    @Test
+    public void When_RetrievingUnmappableResource_Expect_ErrorThrown() {
+        assertThatThrownBy(() -> new InputBundle(bundle).getResource(new IdType(UNSUPPORTED_RESOURCE_REFERENCE)))
+            .isExactlyInstanceOf(EhrMapperException.class)
+            .hasMessage("Reference not supported resource type: " + UNSUPPORTED_RESOURCE_REFERENCE);
     }
 
     @Test

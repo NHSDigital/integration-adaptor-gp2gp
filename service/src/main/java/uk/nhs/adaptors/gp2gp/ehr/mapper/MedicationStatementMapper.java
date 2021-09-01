@@ -141,7 +141,7 @@ public class MedicationStatementMapper {
             .map(Medication.class::cast)
             .map(Medication::getCode)
             .map(codeableConceptCdMapper::mapCodeableConceptToCd)
-            .orElseThrow(() -> new EhrMapperException("Could not resolve Medication reference"));
+            .get();
     }
 
     private String buildDosageInstructionPertinentInformation(MedicationRequest medicationRequest) {

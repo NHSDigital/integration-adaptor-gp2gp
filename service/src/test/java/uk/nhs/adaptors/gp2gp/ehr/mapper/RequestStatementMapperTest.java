@@ -259,9 +259,9 @@ public class RequestStatementMapperTest {
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_REQUESTER, "Requester Reference not of expected Resource Type"),
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_RECIPIENT, "Recipient Reference not of expected Resource Type"),
             arguments(INPUT_JSON_WITH_INCORRECT_RESOURCE_TYPE_AUTHOR, "Author Reference not of expected Resource Type"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Could not resolve Device Reference"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Could not resolve Organization Reference"),
-            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Could not resolve RelatedPerson Reference"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_REQUESTER, "Resource not found: Device/un-resolved"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_RECIPIENT, "Resource not found: Organization/un-resolved"),
+            arguments(INPUT_JSON_WITH_NO_RESOLVED_REFERENCE_NOTE_AUTHOR, "Resource not found: RelatedPerson/un-resolved"),
             arguments(INPUT_JSON_WITH_UNSUPPORTED_PRIORITY, "Unsupported priority in ReferralRequest: stat")
         );
     }
