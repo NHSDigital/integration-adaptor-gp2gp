@@ -63,6 +63,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-practitioner-but-no-actor.json";
     private static final String INPUT_JSON_WITH_PRACTITIONER_INVALID_REFERENCE_RESOURCE_TYPE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-with-practitioner-invalid-reference-resource-type.json";
+    private static final String INPUT_JSON_WITH_REPORT_ORIGIN = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-with-report-origin.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -85,6 +87,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-immunization-with-two-additional-notes-from-related-condition.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-immunization-with-no-relation-to-condition.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_WITH_REPORT_ORIGIN = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-with-report-origin.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -144,7 +148,8 @@ public class ImmunizationObservationStatementMapperTest {
                 OUTPUT_XML_WITH_IMMUNIZATION_WITH_NO_RELATION_TO_CONDITION, false),
             Arguments.of(INPUT_JSON_WITH_VACCINE_CODE, OUTPUT_XML_WITH_VACCINE_CODE, false),
             Arguments.of(INPUT_JSON_WITHOUT_PRACTITIONER, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
-            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false)
+            Arguments.of(INPUT_JSON_WITH_PRACTITIONER_BUT_NO_ACTOR, OUTPUT_XML_WITHOUT_PARTICIPANT, false),
+            Arguments.of(INPUT_JSON_WITH_REPORT_ORIGIN, OUTPUT_XML_WITH_IMMUNIZATION_WITH_REPORT_ORIGIN, false)
         );
     }
 
