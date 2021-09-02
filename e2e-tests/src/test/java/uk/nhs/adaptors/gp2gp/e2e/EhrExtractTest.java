@@ -77,6 +77,27 @@ public class EhrExtractTest {
     }
 
     @Test
+    public void When_EhrExtractRequestReceivedForLargeEhrExtract_Expect_EhrExtractToBeTreatedAsAnAttachment() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = IOUtils.toString(getClass()
+            .getResourceAsStream(EHR_EXTRACT_REQUEST_NO_DOCUMENTS_TEST_FILE), StandardCharsets.UTF_8)
+            .replace(CONVERSATION_ID_PLACEHOLDER, conversationId);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
+        assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
+
+        var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
+        assertThat(gpcAccessDocument).isEmpty();
+
+        var gpcAccessStructured = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED));
+        assertThatAccessStructuredWasFetched(conversationId, gpcAccessStructured);
+
+        assertThatEhrExtractWasAttachedAsDocument(gpcAccessStructured);
+
+    }
+
+    @Test
     public void When_ExtractRequestReceivedForPatientWithNoDocs_Expect_DatabaseToBeUpdatedAccordingly() throws Exception {
         String conversationId = UUID.randomUUID().toString();
         String ehrExtractRequest = IOUtils.toString(getClass()
@@ -130,6 +151,10 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 3);
+    }
+
+    private void assertThatEhrExtractWasAttachedAsDocument(Document gpcAccessStructured) {
+        assertThat(gpcAccessStructured.get("attachment")).isNotNull();
     }
 
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {

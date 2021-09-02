@@ -126,17 +126,19 @@ public class EhrExtractRequestHandler {
             ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId)
                 .ifPresent(ehrExtractStatus -> {
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
-                    var ehrExtractDocument = ehrExtractStatus.getGpcAccessStructured().getAttachment();
-                    if (ehrExtractDocument != null) {
-                        LOGGER.info("Sending ehrExtract for: ConversationId: " + conversationId);
-                        createSendDocumentTasks(
-                            ehrExtractStatus,
-                            ehrExtractDocument.getObjectName(),
-                            0,
-                            ehrExtractDocument.getMessageId(),
-                            ehrExtractDocument.getDocumentId(),
-                            true
-                        );
+                    if (ehrExtractStatus.getGpcAccessStructured() != null) {
+                        var ehrExtractDocument = ehrExtractStatus.getGpcAccessStructured().getAttachment();
+                        if (ehrExtractDocument != null) {
+                            LOGGER.info("Sending ehrExtract for: ConversationId: " + conversationId);
+                            createSendDocumentTasks(
+                                ehrExtractStatus,
+                                ehrExtractDocument.getObjectName(),
+                                0,
+                                ehrExtractDocument.getMessageId(),
+                                ehrExtractDocument.getDocumentId(),
+                                true
+                            );
+                        }
                     }
 
                     LOGGER.info("Sending documents for: ConversationId: " + conversationId);
