@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hl7.fhir.dstu3.model.ResourceType;
 
-public class IgnoredResources {
+public class IgnoredResourcesUtils {
     private static final List<ResourceType> IGNORED_RESOURCES = List.of(
         ResourceType.QuestionnaireResponse
     );

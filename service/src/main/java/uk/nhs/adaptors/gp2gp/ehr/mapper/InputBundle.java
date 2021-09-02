@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractListByEncounterReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractResourceByReference;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResources.isIgnoredResourceType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
 
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 

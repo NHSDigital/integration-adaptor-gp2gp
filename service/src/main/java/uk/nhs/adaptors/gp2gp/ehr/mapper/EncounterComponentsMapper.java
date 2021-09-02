@@ -33,7 +33,7 @@ import uk.nhs.adaptors.gp2gp.ehr.mapper.diagnosticreport.DiagnosticReportMapper;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.MedicationRequestUtils;
 
-import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResources.isIgnoredResourceType;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

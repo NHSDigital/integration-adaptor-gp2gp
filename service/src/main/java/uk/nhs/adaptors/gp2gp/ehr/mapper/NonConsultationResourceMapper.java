@@ -24,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
 
@@ -110,6 +111,12 @@ public class NonConsultationResourceMapper {
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
+
+        if (IgnoredResourcesUtils.isIgnoredResourceType(resource.getResourceType())) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            return Optional.empty();
+        }
+
         Optional<String> componentHolder = encounterComponentsMapper.mapResourceToComponent(resource);
 
         if (componentHolder.isEmpty()) {
