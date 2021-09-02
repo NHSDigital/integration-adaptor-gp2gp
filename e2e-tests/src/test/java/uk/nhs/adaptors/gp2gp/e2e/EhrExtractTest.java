@@ -142,10 +142,6 @@ public class EhrExtractTest {
         assertMultipleDocsSent(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, DOCUMENT_ID_LARGE_2, 3);
     }
 
-    private void assertThatEhrExtractWasAttachedAsDocument(Document gpcAccessStructured) {
-        assertThat(gpcAccessStructured.get("attachment")).isNotNull();
-    }
-
     private void assertMultipleDocsSent(String conversationId, String nhsNumber, String documentId, int arraySize) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, FROM_ODS_CODE_1);
@@ -176,8 +172,7 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-//        var sentToMhs = (Document) waitFor(() -> getSentToMhs(conversationId));
-//        assertThat(sentToMhs).isNotNull();
+        waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
 
         var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -258,19 +253,18 @@ public class EhrExtractTest {
         softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
 
-    private Document getSentToMhs(String conversationId) {
+    private boolean assertThatExtractCommonMessageWasSent(String conversationId) {
         var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
         if (document != null) {
             var ehrCommon = (Document) document.get("sentToMhs");
-            if (ehrCommon != null
-                && ehrCommon.get("messageId") != null
-                && ehrCommon.get("sentAt") != null
-                && ehrCommon.get("taskId") != null) {
-                return ehrCommon;
+            if (ehrCommon != null) {
+                return ehrCommon.get("messageId") != null
+                    && ehrCommon.get("sentAt") != null
+                    && ehrCommon.get("taskId") != null;
             }
         }
-        return null;
+        return false;
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {
