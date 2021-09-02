@@ -70,9 +70,9 @@ public class EhrExtractMapper {
         return ehrExtractTemplateParameters;
     }
 
-    public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, String bindingDocumentId) {
+    public String buildSkeletonEhrExtract(GetGpcStructuredTaskDefinition getGpcStructuredTaskDefinition, String fragmentIndexDocumentId) {
         var ehrCompositionWithNarrativeStatement
-            = nonConsultationResourceMapper.buildEhrCompositionForSkeletonEhrExtract(bindingDocumentId);
+            = nonConsultationResourceMapper.buildEhrCompositionForSkeletonEhrExtract(fragmentIndexDocumentId);
         EhrExtractTemplateParameters ehrExtractTemplateParameters = setSharedExtractParams(getGpcStructuredTaskDefinition);
 
         ehrExtractTemplateParameters.setComponents(ehrCompositionWithNarrativeStatement);
