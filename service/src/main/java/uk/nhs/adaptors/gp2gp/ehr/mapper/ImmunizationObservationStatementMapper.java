@@ -55,6 +55,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %s Sequence: %S,%S ";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String VACCINATION_CODE = "Substance: %s";
+    private static final String REPORT_ORIGIN_CODE = "Origin: %s";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
@@ -105,6 +106,7 @@ public class ImmunizationObservationStatementMapper {
 
     private List<String> retrievePertinentInformation(Immunization immunization) {
         return List.of(
+            buildReportOriginPertinentInformation(immunization),
             buildParentPresentPertinentInformation(immunization),
             buildLocationPertinentInformation(immunization),
             buildManufacturerPertinentInformation(immunization),
@@ -118,6 +120,17 @@ public class ImmunizationObservationStatementMapper {
             buildVaccineCode(immunization),
             buildNotePertinentInformation(immunization)
             );
+    }
+
+    private String buildReportOriginPertinentInformation(Immunization immunization) {
+        if (immunization.hasReportOrigin() && immunization.getReportOrigin().hasCoding()) {
+            var code = CodeableConceptMappingUtils.extractTextOrCoding(immunization.getReportOrigin());
+            if (code.isPresent()) {
+                return String.format(REPORT_ORIGIN_CODE, code.get());
+            }
+        }
+
+        return StringUtils.EMPTY;
     }
 
     private String buildParentPresentPertinentInformation(Immunization immunization) {
