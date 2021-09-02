@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "io.freefair.lombok" version "5.3.0"
 }
 
 apply plugin: 'java'
@@ -16,6 +17,7 @@ dependencies {
     implementation "org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.0"
     implementation 'org.mongodb:mongo-java-driver:3.12.7'
 
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
     testImplementation 'commons-io:commons-io:2.6'
     testImplementation 'org.awaitility:awaitility:4.0.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
