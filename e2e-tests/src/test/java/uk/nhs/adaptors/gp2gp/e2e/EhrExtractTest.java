@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
 
+import org.junit.jupiter.api.BeforeEach;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -60,6 +61,14 @@ public class EhrExtractTest {
     private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
     private static final String ACK_TO_REQUESTER = "ackToRequester";
     private static final String ACK_TO_PENDING = "ackPending";
+
+    private final String mhsMockBaseUrl = System.getenv("MHS_MOCK_BASE_URL");
+    private final MhsMockRequestsJournal mhsMockRequestsJournal = new MhsMockRequestsJournal(mhsMockBaseUrl == null ?  "http://localhost:8081" : mhsMockBaseUrl);
+
+    @BeforeEach
+    void setUp() {
+        mhsMockRequestsJournal.deleteRequestsJournal();
+    }
 
     @Test
     public void When_ExtractRequestReceived_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
