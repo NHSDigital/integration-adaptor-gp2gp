@@ -7,14 +7,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -34,6 +40,8 @@ public class MhsMockController {
     private final MockMhsService mockMhsService;
     private final HttpHeaders responseHeaders = new HttpHeaders();
 
+    private static final List<String> REQUEST_JOURNAL = new ArrayList<>();
+
     @PostMapping(value = "/mock-mhs-endpoint",
         consumes = APPLICATION_JSON_VALUE
     )
@@ -41,6 +49,8 @@ public class MhsMockController {
     public ResponseEntity<String> postMockMhs(
             @RequestHeader Map<String, String> headers,
             @RequestBody(required=false) String mockMhsMessage) {
+
+        REQUEST_JOURNAL.add(mockMhsMessage);
 
         try {
             String interactionId = Optional.ofNullable(headers.get("interaction-id")).orElse(StringUtils.EMPTY);
@@ -60,5 +70,16 @@ public class MhsMockController {
         try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("InternalServerError.html")) {
             return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
+    }
+
+    @DeleteMapping(value = "/__admin/requests")
+    public ResponseEntity<String> deleteRequestJournal() {
+        REQUEST_JOURNAL.clear();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/__admin/requests")
+    public ResponseEntity<List> getRequestJournal() {
+        return new ResponseEntity<>(REQUEST_JOURNAL, HttpStatus.OK);
     }
 }
