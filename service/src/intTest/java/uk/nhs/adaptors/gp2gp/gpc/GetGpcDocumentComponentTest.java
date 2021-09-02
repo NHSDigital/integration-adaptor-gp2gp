@@ -75,7 +75,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
-        
+
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
             var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
 
@@ -105,7 +105,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
         var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
-        
+
         try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
             var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
 
@@ -116,7 +116,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
             assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
 
             var updatedFileInputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
-            var updatedStorageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
+            var updatedStorageDataWrapper =
+                OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
 
             assertThat(storageDataWrapper.getTaskId()).isNotEqualTo(updatedStorageDataWrapper.getTaskId());
 
