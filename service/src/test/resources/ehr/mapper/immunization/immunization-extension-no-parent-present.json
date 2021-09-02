@@ -12,10 +12,6 @@
       "valueDateTime": "2010-06-30T05:48:06.91+01:00"
     },
     {
-      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ParentPresent-1",
-      "valueBoolean": "true"
-    },
-    {
       "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
       "valueCodeableConcept": {
         "coding": [
@@ -130,6 +126,9 @@
             "display": "Administering Provider"
           }
         ]
+      },
+      "actor": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
       }
     }
   ],
