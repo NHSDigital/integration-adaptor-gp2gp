@@ -12,7 +12,7 @@
       "valueDateTime": "2010-06-30T05:48:06.91+01:00"
     },
     {
-      "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-CareConnect-GPC-ParentPresent-1",
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ParentPresent-1",
       "valueBoolean": "true"
     },
     {
