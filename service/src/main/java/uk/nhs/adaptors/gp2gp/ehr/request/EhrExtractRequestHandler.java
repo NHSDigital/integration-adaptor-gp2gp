@@ -126,6 +126,20 @@ public class EhrExtractRequestHandler {
             ehrExtractStatusService.updateEhrExtractStatusContinue(conversationId)
                 .ifPresent(ehrExtractStatus -> {
                     var documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+                    var ehrExtractDocument = ehrExtractStatus.getGpcAccessStructured().getAttachment();
+                    if (ehrExtractDocument != null) {
+                        LOGGER.info("Sending ehrExtract for: ConversationId: " + conversationId);
+                        createSendDocumentTasks(
+                            ehrExtractStatus,
+                            ehrExtractDocument.getObjectName(),
+                            0,
+                            ehrExtractDocument.getMessageId(),
+                            ehrExtractDocument.getDocumentId(),
+                            true
+                        );
+                    }
+
+                    LOGGER.info("Sending documents for: ConversationId: " + conversationId);
                     for (int documentPosition = 0; documentPosition < documents.size(); documentPosition++) {
                         var document = documents.get(documentPosition);
                         createSendDocumentTasks(
@@ -133,7 +147,8 @@ public class EhrExtractRequestHandler {
                             document.getObjectName(),
                             documentPosition,
                             document.getMessageId(),
-                            document.getDocumentId());
+                            document.getDocumentId(),
+                            false);
                     }
                 });
         } else {
@@ -143,7 +158,8 @@ public class EhrExtractRequestHandler {
     }
 
     private void createSendDocumentTasks(
-            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId) {
+            EhrExtractStatus ehrExtractStatus, String documentName, int documentLocation, String messageId, String documentId,
+        boolean externalEhrExtract) {
 
         var sendDocumentTaskDefinition = SendDocumentTaskDefinition.builder()
             .documentName(documentName)
@@ -157,6 +173,7 @@ public class EhrExtractRequestHandler {
             .fromOdsCode(ehrExtractStatus.getEhrRequest().getFromOdsCode())
             .messageId(messageId)
             .documentId(documentId)
+            .externalEhrExtract(externalEhrExtract)
             .build();
         taskDispatcher.createTask(sendDocumentTaskDefinition);
         LOGGER.info("Ehr Continue task created for document: " + documentName + ", taskId: " + sendDocumentTaskDefinition.getTaskId());

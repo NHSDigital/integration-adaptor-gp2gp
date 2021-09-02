@@ -88,7 +88,7 @@ public class EhrExtractTest {
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, NHS_NUMBER_NO_DOCUMENTS, FROM_ODS_CODE_1);
 
         var gpcAccessDocument = waitFor(() -> emptyDocumentTaskIsCreated(conversationId));
-        assertThatNotDocumentsWereAdded(gpcAccessDocument);
+        assertThat(gpcAccessDocument).isEmpty();
 
         var ackToPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackToPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -162,7 +162,8 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
+        var sentToMhs = (Document) waitFor(() -> getSentToMhs(conversationId));
+        assertThat(sentToMhs).isNotNull();
 
         var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
@@ -181,16 +182,13 @@ public class EhrExtractTest {
         return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
     }
 
-    private Document emptyDocumentTaskIsCreated(String conversationId) {
+    private List<Object> emptyDocumentTaskIsCreated(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         if (gpcAccessDocument == null) {
             return null;
         }
         var documentList = waitFor(() -> gpcAccessDocument.get("documents", Collections.emptyList()));
-        if (!documentList.isEmpty()) {
-            return gpcAccessDocument;
-        }
-        return null;
+        return documentList;
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
@@ -246,18 +244,19 @@ public class EhrExtractTest {
         softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
 
-    private boolean assertThatExtractCommonMessageWasSent(String conversationId) {
+    private Document getSentToMhs(String conversationId) {
         var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
         if (document != null) {
             var ehrCommon = (Document) document.get("sentToMhs");
-            if (ehrCommon != null) {
-                return ehrCommon.get("messageId") != null
-                    && ehrCommon.get("sentAt") != null
-                    && ehrCommon.get("taskId") != null;
+            if (ehrCommon != null
+                && ehrCommon.get("messageId") != null
+                && ehrCommon.get("sentAt") != null
+                && ehrCommon.get("taskId") != null) {
+                return ehrCommon;
             }
         }
-        return false;
+        return null;
     }
 
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {
@@ -293,10 +292,5 @@ public class EhrExtractTest {
     private void assertThatExtractCoreMessageWasSent(Document extractCore) {
         softly.assertThat(extractCore.get("sentAt")).isNotNull();
         softly.assertThat(extractCore.get("taskId")).isNotNull();
-    }
-
-    private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
-        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        assertThat(documentList).isNotEmpty();
     }
 }

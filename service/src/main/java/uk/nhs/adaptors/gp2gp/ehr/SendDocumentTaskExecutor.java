@@ -12,6 +12,7 @@ import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.common.storage.StorageConnectorService;
 import uk.nhs.adaptors.gp2gp.common.task.TaskExecutor;
 import uk.nhs.adaptors.gp2gp.ehr.model.EhrDocumentTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.model.EhrExtractStatus;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.mhs.MhsClient;
 import uk.nhs.adaptors.gp2gp.mhs.MhsRequestBuilder;
@@ -101,8 +102,15 @@ public class SendDocumentTaskExecutor implements TaskExecutor<SendDocumentTaskDe
                     kv.getKey()))
             .forEach(mhsClient::sendMessageToMHS);
 
-        var ehrExtractStatus = ehrExtractStatusService
-            .updateEhrExtractStatusCommon(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
+        EhrExtractStatus ehrExtractStatus = null;
+
+        if (taskDefinition.isExternalEhrExtract()) {
+            ehrExtractStatus = ehrExtractStatusService
+                .updateEhrExtractStatusCommonForExternalEhrExtract(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
+        } else {
+            ehrExtractStatus = ehrExtractStatusService
+                .updateEhrExtractStatusCommonForDocuments(taskDefinition, new ArrayList<>(requestDataToSend.keySet()));
+        }
 
         detectDocumentsSentService.beginSendingPositiveAcknowledgement(ehrExtractStatus);
     }
