@@ -1,0 +1,218 @@
+{
+  "resourceType": "Immunization",
+  "id": "C93659E1-1107-441C-BE25-C5EF4B7831D1",
+  "meta": {
+    "profile": [
+      "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-GPC-Immunization-1"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-DateRecorded-1",
+      "valueDateTime": "2010-06-30T05:48:06.91+01:00"
+    },
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-ParentPresent-1",
+      "valueBoolean": "false"
+    },
+    {
+      "url": "https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://read.info/readv2",
+            "code": "65M1.00",
+            "display": "Measles/mumps/rubella vaccn.",
+            "userSelected": true
+          },
+          {
+            "extension": [
+              {
+                "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+                "extension": [
+                  {
+                    "url": "descriptionId",
+                    "valueId": "65004017"
+                  },
+                  {
+                    "url": "descriptionDisplay",
+                    "valueString": "Measles-mumps-rubella vaccination"
+                  }
+                ]
+              }
+            ],
+            "system": "http://snomed.info/sct",
+            "code": "38598009",
+            "display": "Measles-mumps-rubella vaccination"
+          }
+        ]
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://EMISWeb/A82038",
+      "value": "C93659E1-1107-441C-BE25-C5EF4B7831D1"
+    }
+  ],
+  "status": "completed",
+  "notGiven": false,
+  "vaccineCode": {
+    "coding": [
+      {
+        "system": "http://hl7.org/fhir/v3/NullFlavor",
+        "code": "UNK",
+        "display": "unknown"
+      }
+    ]
+  },
+  "patient": {
+    "reference": "Patient/58B02021-E70A-4B30-A149-A02E3A5296C7"
+  },
+  "encounter": {
+    "reference": "Encounter/6CE8318F-2230-47CE-86CC-5210130A00F5"
+  },
+  "date": "2010-06-30T05:59:00+01:00",
+  "primarySource": true,
+  "location": {
+    "reference": "Location/EB3994A6-5A87-4B53-A414-TestLocation"
+  },
+  "manufacturer": {
+    "reference": "Organization/TestOrganization"
+  },
+  "lotNumber": "123456",
+  "expirationDate": "2011-06-21",
+  "site": {
+    "coding": [
+      {
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/STU3/StructureDefinition/Extension-coding-sctdescid",
+            "extension": [
+              {
+                "url": "descriptionId",
+                "valueId": "1697821000006118"
+              },
+              {
+                "url": "descriptionDisplay",
+                "valueString": "Left arm"
+              }
+            ]
+          }
+        ],
+        "system": "http://snomed.info/sct",
+        "code": "1697821000006102",
+        "display": "Left arm"
+      }
+    ]
+  },
+  "route": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-RouteOfAdministration",
+        "code": "IM",
+        "display": "Injection, intramuscular"
+      }
+    ]
+  },
+  "doseQuantity": {
+    "value": 5,
+    "system": "http://unitsofmeasure.org",
+    "unit": "mg"
+  },
+  "practitioner": [
+    {
+      "role": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/v2/0443",
+            "code": "AP",
+            "display": "Administering Provider"
+          }
+        ]
+      },
+      "actor": {
+        "reference": "Practitioner/6D340A1B-BC15-4D4E-93CF-BBCB5B74DF73"
+      }
+    }
+  ],
+  "note": [
+    {
+      "text": "Pete, GMS : GMS - This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is a long paragraph. This is the END of the long paragraph."
+    }
+  ],
+  "explanation": {
+    "reason": [
+      {
+        "coding": [
+          {
+            "system": "http://snomed.info/sct",
+            "code": "171279008",
+            "display": "Immunisation due"
+          }
+        ]
+      }
+    ]
+  },
+  "vaccinationProtocol": [
+    {
+      "doseSequence": 1,
+      "seriesDoses": 3,
+      "description": "A vaccination for Hepatitis",
+      "targetDisease": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "40468003",
+              "display": "Viral hepatitis, type A"
+            }
+          ]
+        },
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "40468003",
+              "display": "Viral hepatitis, type B"
+            }
+          ]
+        }
+      ],
+      "doseStatus": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/stu3/valueset-vaccination-protocol-dose-status.html",
+            "code": "count",
+            "display": "Counts"
+          }
+        ]
+      }
+    },
+    {
+      "doseSequence": 2,
+      "seriesDoses": 1,
+      "description": "A vaccination for Measles",
+      "targetDisease": [
+        {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "40468003",
+              "display": "Measles"
+            }
+          ]
+        }
+      ],
+      "doseStatus": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/stu3/valueset-vaccination-protocol-dose-status.html",
+            "code": "count",
+            "display": "Counts"
+          }
+        ]
+      }
+    }
+  ]
+}
