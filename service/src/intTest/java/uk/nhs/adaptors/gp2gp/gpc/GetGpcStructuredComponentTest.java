@@ -177,13 +177,11 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
             .concat("/")
             .concat(ehrExtractStatus.getConversationId())
             .concat("_gpc_structured.json");
-        var inputStream = storageConnector.downloadFromStorage(filename);
-
-        String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-
-        inputStream.close();
-
-        return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
+        
+        try (var inputStream = storageConnector.downloadFromStorage(filename)) {
+            String storageDataWrapperString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+            return OBJECT_MAPPER.readValue(storageDataWrapperString, StorageDataWrapper.class);
+        }
     }
 
     @SneakyThrows

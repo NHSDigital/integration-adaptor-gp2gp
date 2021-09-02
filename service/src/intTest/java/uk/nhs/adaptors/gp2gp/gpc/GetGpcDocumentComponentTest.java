@@ -75,28 +75,27 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
         var updatedEhrExtractStatus = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
         assertThatAccessRecordWasUpdated(updatedEhrExtractStatus, ehrExtractStatus, taskDefinition);
+        
+        try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
+            var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
 
-        var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
-        var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
+            assertThat(storageDataWrapper.getConversationId()).isEqualTo(taskDefinition.getConversationId());
+            assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
+            assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
+            assertThat(storageDataWrapper.getData()).contains(DOCUMENT_ID);
 
-        assertThat(storageDataWrapper.getConversationId()).isEqualTo(taskDefinition.getConversationId());
-        assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
-        assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
-        assertThat(storageDataWrapper.getData()).contains(DOCUMENT_ID);
+            String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
+                .getDocuments()
+                .get(0)
+                .getMessageId();
+            assertThat(storageDataWrapper.getData()).contains(messageId);
 
-        String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
-            .getDocuments()
-            .get(0)
-            .getMessageId();
-        assertThat(storageDataWrapper.getData()).contains(messageId);
-
-        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
-        verify(storageConnectorService).uploadFile(
-            any(),
-            eq(EXPECTED_DOCUMENT_JSON_FILENAME)
-        );
-
-        inputStream.close();
+            verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus);
+            verify(storageConnectorService).uploadFile(
+                any(),
+                eq(EXPECTED_DOCUMENT_JSON_FILENAME)
+            );
+        }
     }
 
     @Test
@@ -106,27 +105,27 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         getGpcDocumentTaskExecutor.execute(taskDefinition);
 
         var updatedEhrExtractStatus1 = ehrExtractStatusRepository.findByConversationId(taskDefinition.getConversationId()).get();
-        var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
-        var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
+        
+        try (var inputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME)) {
+            var storageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(inputStream), StorageDataWrapper.class);
 
-        var newTaskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
-        getGpcDocumentTaskExecutor.execute(newTaskDefinition);
+            var newTaskDefinition = buildValidAccessTask(ehrExtractStatus, DOCUMENT_ID);
+            getGpcDocumentTaskExecutor.execute(newTaskDefinition);
 
-        var updatedEhrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(newTaskDefinition.getConversationId()).get();
-        assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
+            var updatedEhrExtractStatus2 = ehrExtractStatusRepository.findByConversationId(newTaskDefinition.getConversationId()).get();
+            assertThatAccessRecordWasUpdated(updatedEhrExtractStatus2, updatedEhrExtractStatus1, newTaskDefinition);
 
-        var updatedFileInputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
-        var updatedStorageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
+            var updatedFileInputStream = storageConnector.downloadFromStorage(EXPECTED_DOCUMENT_JSON_FILENAME);
+            var updatedStorageDataWrapper = OBJECT_MAPPER.readValue(new InputStreamReader(updatedFileInputStream), StorageDataWrapper.class);
 
-        assertThat(storageDataWrapper.getTaskId()).isNotEqualTo(updatedStorageDataWrapper.getTaskId());
+            assertThat(storageDataWrapper.getTaskId()).isNotEqualTo(updatedStorageDataWrapper.getTaskId());
 
-        verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus2);
-        verify(storageConnectorService, times(2)).uploadFile(
-            any(),
-            eq(EXPECTED_DOCUMENT_JSON_FILENAME)
-        );
-
-        inputStream.close();
+            verify(detectTranslationCompleteService).beginSendingCompleteExtract(updatedEhrExtractStatus2);
+            verify(storageConnectorService, times(2)).uploadFile(
+                any(),
+                eq(EXPECTED_DOCUMENT_JSON_FILENAME)
+            );
+        }
     }
 
     @Test
