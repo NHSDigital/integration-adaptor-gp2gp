@@ -176,8 +176,8 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        var sentToMhs = (Document) waitFor(() -> getSentToMhs(conversationId));
-        assertThat(sentToMhs).isNotNull();
+//        var sentToMhs = (Document) waitFor(() -> getSentToMhs(conversationId));
+//        assertThat(sentToMhs).isNotNull();
 
         var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
