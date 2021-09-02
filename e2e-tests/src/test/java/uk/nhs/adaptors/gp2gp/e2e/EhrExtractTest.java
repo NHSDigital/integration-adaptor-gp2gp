@@ -10,11 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.platform.commons.util.StringUtils;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -24,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SoftAssertionsExtension.class)
+@Slf4j
 public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
@@ -62,8 +65,8 @@ public class EhrExtractTest {
     private static final String ACK_TO_REQUESTER = "ackToRequester";
     private static final String ACK_TO_PENDING = "ackPending";
 
-    private final String mhsMockBaseUrl = System.getenv("MHS_MOCK_BASE_URL");
-    private final MhsMockRequestsJournal mhsMockRequestsJournal = new MhsMockRequestsJournal(mhsMockBaseUrl == null ?  "http://localhost:8081" : mhsMockBaseUrl);
+    private final MhsMockRequestsJournal mhsMockRequestsJournal =
+        new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
 
     @BeforeEach
     void setUp() {
@@ -307,5 +310,14 @@ public class EhrExtractTest {
     private void assertThatNotDocumentsWereAdded(Document gpcAccessDocument) {
         var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
         assertThat(documentList).isNotEmpty();
+    }
+
+    private static String getEnvVar(String name, String defaultValue) {
+        var value = System.getenv(name);
+        if (StringUtils.isBlank(value)) {
+            LOGGER.warn("Missing '{}' env var. Using default value '{}'", name, defaultValue);
+            return defaultValue;
+        }
+        return value;
     }
 }
