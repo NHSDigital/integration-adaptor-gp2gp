@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.bson.Document;
@@ -26,7 +25,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(SoftAssertionsExtension.class)
-@Slf4j
 public class EhrExtractTest {
     @InjectSoftAssertions
     private SoftAssertions softly;
@@ -315,7 +313,6 @@ public class EhrExtractTest {
     private static String getEnvVar(String name, String defaultValue) {
         var value = System.getenv(name);
         if (StringUtils.isBlank(value)) {
-            LOGGER.warn("Missing '{}' env var. Using default value '{}'", name, defaultValue);
             return defaultValue;
         }
         return value;
