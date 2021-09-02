@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +35,7 @@ public class NonConsultationResourceMapperTest {
     private static final String FILES_DIRECTORY = "/ehr/mapper/non_consultation_bundles/";
     private static final String UNCATAGORISED_OBSERVATION_XML = FILES_DIRECTORY + "uncatagorised-observation-stub.xml";
     private static final String UNCATAGORISED_OBSERVATION_BUNDLE = FILES_DIRECTORY + "uncatagorised-observation-bundle.json";
+    private static final String UNCATAGORISED_IGNORED_RESOURCE_BUNDLE = FILES_DIRECTORY + "uncatagorised-ignored-resource-bundle.json";
     private static final String EXPECTED_UNCATAGORISED_OBSERVATION_OUTPUT = FILES_DIRECTORY
         + "expected-uncatagorised-observation-output.xml";
     private static final String COMMENT_OBSERVATION_XML = FILES_DIRECTORY + "comment-observation-stub.xml";
@@ -86,7 +88,7 @@ public class NonConsultationResourceMapperTest {
 
     @BeforeEach
     public void setUp() {
-        when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
+        lenient().when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         fhirParseService = new FhirParseService();
     }
@@ -107,6 +109,16 @@ public class NonConsultationResourceMapperTest {
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
         assertThat(translatedOutput).isEqualTo(expectedOutput);
+    }
+
+    @Test
+    public void When_TransformingResourceToEhrComp_Expect_IgnoredResourceToBeIgnored() throws IOException {
+        setupMock(ResourceTestFileUtils.getFileContent("")); // empty filePath provided as this isn't expected to return anything
+        String bundle = ResourceTestFileUtils.getFileContent(UNCATAGORISED_IGNORED_RESOURCE_BUNDLE);
+        Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
+
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+        assertThat(translatedOutput.isEmpty());
     }
 
     @Test
@@ -148,7 +160,7 @@ public class NonConsultationResourceMapperTest {
     }
 
     private void setupMock(String stubEhrComponentMapperXml) {
-        when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class)))
+        lenient().when(encounterComponentsMapper.mapResourceToComponent(any(Resource.class)))
             .thenReturn(Optional.of(stubEhrComponentMapperXml));
         nonConsultationResourceMapper = new NonConsultationResourceMapper(messageContext,
             randomIdGeneratorService,
