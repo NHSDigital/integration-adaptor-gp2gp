@@ -252,22 +252,22 @@ public class EhrExtractTest {
 
     private Document fetchSentToMhsForDocuments(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        if (documentList == null || documentList.isEmpty())
-            return null;
-
-        var firstDocSentToMhs = (Document) documentList.get(0);
-
-        return (Document) firstDocSentToMhs.get("sentToMhs");
+        if (gpcAccessDocument != null && gpcAccessDocument.get("documents", Collections.emptyList()) != null ) {
+            var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+            if (!documentList.isEmpty()) {
+                return (Document) ((Document) documentList.get(0)).get("sentToMhs");
+            }
+        }
+        return null;
     }
 
     private Document accessStructuredWithAttachmentThatHasBeenSent(String conversationId) {
         var gpcAccessStructured = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED);
-        if (gpcAccessStructured == null)
-            return null;
-        var attachment = (Document) gpcAccessStructured.get("attachment");
-        if (attachment != null && attachment.get("sentToMhs") != null) {
-            return attachment;
+        if (gpcAccessStructured != null) {
+            var attachment = (Document) gpcAccessStructured.get("attachment");
+            if (attachment != null && attachment.get("sentToMhs") != null) {
+                return attachment;
+            }
         }
         return null;
     }
@@ -283,15 +283,6 @@ public class EhrExtractTest {
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
-    }
-
-    private List<Object> emptyDocumentTaskIsCreated(String conversationId) {
-        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        if (gpcAccessDocument == null) {
-            return null;
-        }
-        var documentList = waitFor(() -> gpcAccessDocument.get("documents", Collections.emptyList()));
-        return documentList;
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
