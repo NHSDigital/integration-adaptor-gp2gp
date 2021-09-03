@@ -221,9 +221,12 @@ public class ImmunizationObservationStatementMapper {
             explanation = CodeableConceptMappingUtils.extractTextOrCoding(reason);
             return explanation.map(value -> REASON + value).orElse(StringUtils.EMPTY);
         } else if (immunization.hasExplanation() && immunization.getExplanation().hasReasonNotGiven()) {
-            CodeableConcept reasonNotGiven = immunization.getExplanation().getReasonNotGivenFirstRep();
-            explanation = CodeableConceptMappingUtils.extractTextOrCoding(reasonNotGiven);
-            return explanation.map(value -> REASON_NOT_GIVEN + value).orElse(StringUtils.EMPTY);
+            String reasonNotGiven = REASON_NOT_GIVEN + immunization.getExplanation().getReasonNotGiven().stream()
+                .map(CodeableConceptMappingUtils::extractTextOrCoding)
+                .map(Optional::get)
+                .filter(value -> !value.equals(StringUtils.EMPTY))
+                .collect(Collectors.joining(StringUtils.SPACE));
+            return reasonNotGiven.equals(REASON_NOT_GIVEN) ? StringUtils.EMPTY : reasonNotGiven;
         }
         return StringUtils.EMPTY;
     }
