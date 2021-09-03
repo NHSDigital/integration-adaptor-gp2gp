@@ -142,7 +142,7 @@ pipeline {
                             steps {
                                 sh '''
                                     source docker/vars.local.e2e.sh
-                                    docker network create commonforgp2gp
+                                    docker network create commonforgp2gp || true
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
                                 '''
