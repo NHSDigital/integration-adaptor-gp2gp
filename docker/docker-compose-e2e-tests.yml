@@ -29,6 +29,7 @@ services:
       - GPC_CONSUMER_GPC_GET_PATIENT_PATH
       - GPC_CONSUMER_GPC_GET_DOCUMENT_PATH
       - GP2GP_LARGE_ATTACHMENT_THRESHOLD
+      - GP2GP_MHS_MOCK_BASE_URL
     networks: 
       - commonforgp2gp
 networks:

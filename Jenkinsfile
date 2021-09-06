@@ -1,7 +1,7 @@
 String tfProject      = "nia"
 String tfEnvironment  = "build1"
 String tfComponent    = "gp2gp"
-String redirectEnv    = "ptl"          // Name of environment where TF deployment needs to be re-directed
+String redirectEnv    = "build1"          // Name of environment where TF deployment needs to be re-directed
 String redirectBranch = "main"      // When deploying branch name matches, TF deployment gets redirected to environment defined in variable "redirectEnv"
 Boolean publishWiremockImage = true // true: To publish gp2gp wiremock image to AWS ECR gp2gp-wiremock
 Boolean publishMhsMockImage  = true // true: to publsh mhs mock image to AWS ECR gp2gp-mock-mhs
@@ -37,7 +37,7 @@ pipeline {
                     steps {
                         script {
                             sh '''
-                                source docker/vars.local.sh
+                                source docker/vars.local.tests.sh
                                 docker network create commonforgp2gp || true
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml build
                                 docker-compose -f docker/docker-compose.yml -f docker/docker-compose-tests.yml up --exit-code-from gp2gp
@@ -141,8 +141,8 @@ pipeline {
                         stage('E2E Tests') {
                             steps {
                                 sh '''
-                                    source docker/vars.local.sh
-                                    docker network create commonforgp2gp
+                                    source docker/vars.local.e2e.sh
+                                    docker network create commonforgp2gp || true
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml build
                                     docker-compose -f docker/docker-compose.yml -f docker/docker-compose-e2e-tests.yml up --exit-code-from gp2gp-e2e-tests mongodb activemq gp2gp wiremock gpcc gp2gp-e2e-tests
                                 '''

@@ -1,0 +1,22 @@
+{
+    "resourceType": "ProcedureRequest",
+    "id": "1B1C6F50-D8BE-4480-83D6-EF25AC5F1836",
+    "supportingInfo": [
+        {
+            "reference": "Observation/1141a0b6-fe92-11eb-9a03-0242ac130003"
+        },
+        {
+            "reference": "Observation/1141a0b6-fe92-11eb-9a03-0242ac130003"
+        }
+    ],
+    "status": "active",
+    "intent": "plan",
+    "authoredOn": "2010-01-13T15:29:50.1+00:00",
+    "occurrencePeriod": {
+        "start": "2010-01-13",
+        "end": "2010-01-15"
+    },
+    "code": {
+        "text": "test"
+    }
+}

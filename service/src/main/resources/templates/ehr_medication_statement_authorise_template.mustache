@@ -58,6 +58,11 @@
                         <id root="{{ehrSupplyId}}"/>
                     </priorMedicationRef>
                 </reversalOf>
+                <pertinentInformation typeCode="PERT">
+                    <pertinentSupplyAnnotation classCode="OBS" moodCode="EVN">
+                        {{#ehrSupplyDiscontinueReasonText}}<text>{{{ehrSupplyDiscontinueReasonText}}}</text>{{/ehrSupplyDiscontinueReasonText}}{{^ehrSupplyDiscontinueReasonText}}<code nullFlavor="UNK"><text>Stopped</text></code>{{/ehrSupplyDiscontinueReasonText}}
+                    </pertinentSupplyAnnotation>
+                </pertinentInformation>
             </ehrSupplyDiscontinue>
         </component>
         {{/hasEhrSupplyDiscontinue}}

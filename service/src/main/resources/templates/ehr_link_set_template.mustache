@@ -41,7 +41,7 @@
             {{#effectiveTimeLow}}<low value="{{effectiveTimeLow}}"/>{{/effectiveTimeLow}}{{^effectiveTimeLow}}<low nullFlavor="UNK"/>{{/effectiveTimeLow}}
             {{#effectiveTimeHigh}}<high value="{{effectiveTimeHigh}}"/>{{/effectiveTimeHigh}}
         </effectiveTime>
-        <availabilityTime value="{{availabilityTime}}" />
+        <availabilityTime {{#observationStatementAvailabilityTime}}value="{{observationStatementAvailabilityTime}}"{{/observationStatementAvailabilityTime}}{{^observationStatementAvailabilityTime}}nullFlavor="UNK"{{/observationStatementAvailabilityTime}} />
         {{#pertinentInfo}}
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />

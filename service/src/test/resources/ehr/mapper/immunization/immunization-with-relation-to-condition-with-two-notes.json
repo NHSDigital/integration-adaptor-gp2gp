@@ -70,9 +70,6 @@
   },
   "date": "2010-06-30T05:59:00+01:00",
   "primarySource": true,
-  "location": {
-    "reference": "Location/EB3994A6-5A87-4B53-A414-913137072F57"
-  },
   "lotNumber": "123456",
   "expirationDate": "2011-06-21",
   "site": {

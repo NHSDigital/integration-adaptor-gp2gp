@@ -43,12 +43,16 @@ public class StructuredRecordMappingService {
         return OutboundMessage.ExternalAttachment.builder()
             .documentId(documentId)
             .messageId(messageId)
-            .contentType(DocumentReferenceUtils.extractContentType(attachment))
-            .filename(DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment))
-            .length(attachment.getSize())
-            .compressed(false) // always false for GPC documents
-            .largeAttachment(isLargeAttachment(attachment))
-            .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+            .description(OutboundMessage.AttachmentDescription.builder()
+                .fileName(DocumentReferenceUtils.buildAttachmentFileName(documentId, attachment))
+                .contentType(DocumentReferenceUtils.extractContentType(attachment))
+                .compressed(false) // always false for GPC documents
+                .largeAttachment(isLargeAttachment(attachment))
+                .originalBase64(true) // always true since GPC gives us a Binary resource which is mandated to have base64 encoded data
+                .length(attachment.getSize())
+                .build()
+                .toString()
+            )
             .url(extractUrl(documentReference).orElse(null))
             .build();
     }
@@ -83,5 +87,9 @@ public class StructuredRecordMappingService {
         return outputMessageWrapperMapper.map(
             structuredTaskDefinition,
             ehrExtractContent);
+    }
+
+    public String getHL7ForLargeEhrExtract(GetGpcStructuredTaskDefinition structuredTaskDefinition, String bindingDocumentId) {
+        return ehrExtractMapper.buildSkeletonEhrExtract(structuredTaskDefinition, bindingDocumentId);
     }
 }

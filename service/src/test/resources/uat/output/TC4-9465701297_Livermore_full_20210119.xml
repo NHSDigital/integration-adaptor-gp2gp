@@ -3410,25 +3410,7 @@
 </Participant>
     </LinkSet>
 </component>
-<component typeCode="COMP">
-    <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="0BA3D29E-065C-4962-9110-036BF07E17C5"/>
-        <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
-</code>
-        <statusCode code="COMPLETE"/>
-        <effectiveTime>
-            <low value="20201102"/>
-            
-        </effectiveTime>
-        <availabilityTime value="20201102111241" />
-        <pertinentInformation typeCode="PERT">
-            <sequenceNumber value="+1" />
-            <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Problem Info: Problem Notes: (Combined with Cough)</text>
-            </pertinentAnnotation>
-        </pertinentInformation>
-  </ObservationStatement>
-</component>
+
     </ehrComposition>
 </component>
                 <component typeCode="COMP">
@@ -3839,7 +3821,7 @@
         </Participant2>
         <component typeCode="COMP" >
     <ObservationStatement classCode="OBS" moodCode="EVN">
-        <id root="AB036B53-E42B-4397-B888-320370EAB440" />
+        <id root="0BA3D29E-065C-4962-9110-036BF07E17C5" />
         <code code="170433008" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Measles mumps and rubella vaccination - second dose">
 </code>
         <statusCode code="COMPLETE" />

@@ -54,21 +54,21 @@ public class RequestStatementExtractor {
                     .map(Practitioner::getNameFirstRep)
                     .map(RequestStatementExtractor::extractHumanName)
                     .map(RECIPIENT_PRACTITIONER::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
+                    .get();
         } else if (resourceType.equals(ResourceType.HealthcareService.name())) {
             return messageContext.getInputBundleHolder()
                     .getResource(referenceId)
                     .map(HealthcareService.class::cast)
                     .map(HealthcareService::getName)
                     .map(RECIPIENT_HEALTH_CARE_SERVICE::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve HealthcareService Reference"));
+                    .get();
         } else if (resourceType.equals(ResourceType.Organization.name())) {
             return messageContext.getInputBundleHolder()
                     .getResource(referenceId)
                     .map(Organization.class::cast)
                     .map(Organization::getName)
                     .map(RECIPIENT_ORG::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
+                    .get();
         }
         throw new EhrMapperException("Recipient Reference not of expected Resource Type");
     }
@@ -94,7 +94,7 @@ public class RequestStatementExtractor {
                         .map(RelatedPerson::getNameFirstRep)
                         .map(RequestStatementExtractor::extractHumanName)
                         .map(NOTE_AUTHOR_RELATION::concat)
-                        .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
+                        .get();
             } else if (reference.getResourceType().equals(ResourceType.Practitioner.name())) {
                 return messageContext.getInputBundleHolder()
                         .getResource(reference)
@@ -102,7 +102,7 @@ public class RequestStatementExtractor {
                         .map(Practitioner::getNameFirstRep)
                         .map(RequestStatementExtractor::extractHumanName)
                         .map(NOTE_AUTHOR_PRACTITIONER::concat)
-                        .orElseThrow(() -> new EhrMapperException("Could not resolve Practitioner Reference"));
+                        .get();
             } else if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return NOTE_AUTHOR_PATIENT;
             }

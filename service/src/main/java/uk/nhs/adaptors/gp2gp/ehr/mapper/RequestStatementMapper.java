@@ -241,7 +241,7 @@ public class RequestStatementMapper {
                     .map(Device::getType)
                     .flatMap(CodeableConceptMappingUtils::extractTextOrCoding)
                     .map(REQUESTER_DEVICE::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Device Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }
@@ -253,7 +253,7 @@ public class RequestStatementMapper {
                     .filter(Organization::hasName)
                     .map(Organization::getName)
                     .map(REQUESTER_ORG::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve Organization Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }
@@ -275,7 +275,7 @@ public class RequestStatementMapper {
                     .map(RelatedPerson::getNameFirstRep)
                     .map(RequestStatementExtractor::extractHumanName)
                     .map(REQUESTER_RELATION::concat)
-                    .orElseThrow(() -> new EhrMapperException("Could not resolve RelatedPerson Reference"));
+                    .get();
             }
             return StringUtils.EMPTY;
         }
@@ -322,9 +322,12 @@ public class RequestStatementMapper {
 
         private String buildSupportingInfoDescription() {
             if (referralRequest.hasSupportingInfo()) {
-                return SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
-                        .map(value -> extractSupportingInfo(messageContext, value))
-                        .collect(Collectors.joining(COMMA));
+                String supportingInfo = SUPPORTING_INFO + referralRequest.getSupportingInfo().stream()
+                    .map(value -> extractSupportingInfo(messageContext, value))
+                    .filter(value -> !value.equals(StringUtils.EMPTY))
+                    .collect(Collectors.joining(COMMA));
+
+                return supportingInfo.equals(SUPPORTING_INFO) ? StringUtils.EMPTY : supportingInfo;
             }
             return StringUtils.EMPTY;
         }

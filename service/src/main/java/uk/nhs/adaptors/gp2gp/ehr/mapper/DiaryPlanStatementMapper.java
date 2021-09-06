@@ -1,6 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.SupportingInfoResourceExtractor.extractObservation;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,22 +36,23 @@ import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class DiaryPlanStatementMapper {
 
-    private static final Mustache PLAN_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_plan_statement_template.mustache");
-    private static final String EMPTY_DATE = "nullFlavor=\"UNK\"";
-    private static final String FULL_DATE = "value=\"%s\"";
-    private static final String REASON_CODE_SEPARATOR = ", ";
     public static final String REASON_CODE_TEXT_FORMAT = "Reason Codes: %s";
     public static final String EARLIEST_RECALL_DATE_FORMAT = "Earliest Recall Date: %s";
     public static final String RECALL_DEVICE = "Recall Device: %s %s";
     public static final String RECALL_ORGANISATION = "Recall Organisation: %s";
+    private static final Mustache PLAN_STATEMENT_TEMPLATE = TemplateUtils.loadTemplate("ehr_plan_statement_template.mustache");
+    private static final String EMPTY_DATE = "nullFlavor=\"UNK\"";
+    private static final String FULL_DATE = "value=\"%s\"";
+    private static final String REASON_CODE_SEPARATOR = ", ";
+    private static final String COMMA = ", ";
 
     private final MessageContext messageContext;
     private final CodeableConceptCdMapper codeableConceptCdMapper;
     private final ParticipantMapper participantMapper;
 
-    public Optional<String> mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
+    public String mapDiaryProcedureRequestToPlanStatement(ProcedureRequest procedureRequest, Boolean isNested) {
         if (procedureRequest.getIntent() != ProcedureRequest.ProcedureRequestIntent.PLAN) {
-            return Optional.empty();
+            return null;
         }
 
         var idMapper = messageContext.getIdMapper();
@@ -65,7 +67,49 @@ public class DiaryPlanStatementMapper {
         builder.code(buildCode(procedureRequest));
         buildParticipant(procedureRequest, idMapper).ifPresent(builder::participant);
 
-        return Optional.of(TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build()));
+        return TemplateUtils.fillTemplate(PLAN_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasAuthoredOn()) {
+            return DateFormatUtil.toHl7Format(procedureRequest.getAuthoredOnElement());
+        }
+
+        throw new EhrMapperException(
+            String.format("ProcedureRequest: %s does not have required authoredOn", procedureRequest.getId())
+        );
+    }
+
+    private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
+        DateTimeType date = null;
+        if (procedureRequest.hasOccurrenceDateTimeType()) {
+            date = procedureRequest.getOccurrenceDateTimeType();
+        } else if (procedureRequest.hasOccurrencePeriod()) {
+            Period occurrencePeriod = procedureRequest.getOccurrencePeriod();
+            date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEndElement() : occurrencePeriod.getStartElement();
+        }
+
+        return Optional.of(formatEffectiveDate(date));
+    }
+
+    private Optional<String> buildText(ProcedureRequest procedureRequest) {
+        return Optional.of(Stream.of(
+            getSupportingInformation(procedureRequest),
+            getEarliestRecallDate(procedureRequest),
+            getRequester(procedureRequest),
+            getReasonCode(procedureRequest),
+            getNotes(procedureRequest)
+        )
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.joining(StringUtils.SPACE)));
+    }
+
+    private String buildCode(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasCode()) {
+            return codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode());
+        }
+        throw new EhrMapperException("Procedure request code not present");
     }
 
     private Optional<String> buildParticipant(ProcedureRequest procedureRequest, IdMapper idMapper) {
@@ -83,42 +127,18 @@ public class DiaryPlanStatementMapper {
         return Optional.empty();
     }
 
-    private Optional<String> buildEffectiveTime(ProcedureRequest procedureRequest) {
-        DateTimeType date = null;
-        if (procedureRequest.hasOccurrenceDateTimeType()) {
-            date = procedureRequest.getOccurrenceDateTimeType();
-        } else if (procedureRequest.hasOccurrencePeriod()) {
-            Period occurrencePeriod = procedureRequest.getOccurrencePeriod();
-            date = occurrencePeriod.hasEnd() ? occurrencePeriod.getEndElement() : occurrencePeriod.getStartElement();
-        }
-
-        return Optional.of(formatEffectiveDate(date));
-    }
-
     private String formatEffectiveDate(DateTimeType date) {
         return date != null ? String.format(FULL_DATE, DateFormatUtil.toHl7Format(date)) : EMPTY_DATE;
     }
 
-    private String buildAvailabilityTime(ProcedureRequest procedureRequest) {
-        if (procedureRequest.hasAuthoredOn()) {
-            return DateFormatUtil.toHl7Format(procedureRequest.getAuthoredOnElement());
+    private Optional<String> getSupportingInformation(ProcedureRequest procedureRequest) {
+        if (procedureRequest.hasSupportingInfo()) {
+            return Optional.of("Supporting Information: " + procedureRequest.getSupportingInfo().stream()
+                .filter(this::checkIfReferenceIsObservation)
+                .map((observationReference) -> extractObservation(messageContext, observationReference))
+                .collect(Collectors.joining(COMMA)));
         }
-
-        throw new EhrMapperException(
-            String.format("ProcedureRequest: %s does not have required authoredOn", procedureRequest.getId())
-        );
-    }
-
-    private Optional<String> buildText(ProcedureRequest procedureRequest) {
-        return Optional.of(Stream.of(
-            getEarliestRecallDate(procedureRequest),
-            getRequester(procedureRequest),
-            getReasonCode(procedureRequest),
-            getNotes(procedureRequest)
-        )
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.joining(StringUtils.SPACE)));
+        return Optional.empty();
     }
 
     private Optional<String> getEarliestRecallDate(ProcedureRequest procedureRequest) {
@@ -128,35 +148,6 @@ public class DiaryPlanStatementMapper {
         }
 
         return Optional.empty();
-    }
-
-    private String formatStartDate(ProcedureRequest procedureRequest) {
-        return String.format(EARLIEST_RECALL_DATE_FORMAT,
-            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStartElement()));
-    }
-
-    private Optional<String> getNotes(ProcedureRequest procedureRequest) {
-        var notes = procedureRequest.getNote()
-            .stream()
-            .map(Annotation::getText)
-            .collect(Collectors.joining(StringUtils.SPACE));
-
-        return notes.isEmpty() ? Optional.empty() : Optional.of(notes);
-    }
-
-    private Optional<String> getReasonCode(ProcedureRequest procedureRequest) {
-        var reasons = procedureRequest.getReasonCode()
-            .stream()
-            .map(CodeableConceptMappingUtils::extractTextOrCoding)
-            .filter(Optional::isPresent)
-            .map(Optional::get)
-            .collect(Collectors.joining(REASON_CODE_SEPARATOR));
-
-        return reasons.isBlank() ? Optional.empty() : Optional.of(formatReason(reasons));
-    }
-
-    private String formatReason(String value) {
-        return String.format(REASON_CODE_TEXT_FORMAT, value);
     }
 
     private Optional<String> getRequester(ProcedureRequest procedureRequest) {
@@ -180,19 +171,45 @@ public class DiaryPlanStatementMapper {
         return Optional.empty();
     }
 
-    private String buildCode(ProcedureRequest procedureRequest) {
-        if (procedureRequest.hasCode()) {
-            return codeableConceptCdMapper.mapCodeableConceptToCd(procedureRequest.getCode());
-        }
-        throw new EhrMapperException("Procedure request code not present");
+    private Optional<String> getReasonCode(ProcedureRequest procedureRequest) {
+        var reasons = procedureRequest.getReasonCode()
+            .stream()
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
+            .collect(Collectors.joining(REASON_CODE_SEPARATOR));
+
+        return reasons.isBlank() ? Optional.empty() : Optional.of(formatReason(reasons));
+    }
+
+    private Optional<String> getNotes(ProcedureRequest procedureRequest) {
+        var notes = procedureRequest.getNote()
+            .stream()
+            .map(Annotation::getText)
+            .collect(Collectors.joining(StringUtils.SPACE));
+
+        return notes.isEmpty() ? Optional.empty() : Optional.of(notes);
+    }
+
+    private boolean checkIfReferenceIsObservation(Reference reference) {
+        return ResourceType.Observation.name().equals(reference.getReferenceElement().getResourceType());
+    }
+
+    private String formatStartDate(ProcedureRequest procedureRequest) {
+        return String.format(EARLIEST_RECALL_DATE_FORMAT,
+            DateFormatUtil.toTextFormat(procedureRequest.getOccurrencePeriod().getStartElement()));
+    }
+
+    private String formatOrganization(Organization organization) {
+        return String.format(RECALL_ORGANISATION, organization.getName());
     }
 
     private String formatDevice(Device device) {
         return String.format(RECALL_DEVICE, extractTextOrCoding(device.getType()).orElse(StringUtils.EMPTY), device.getManufacturer());
     }
 
-    private String formatOrganization(Organization organization) {
-        return String.format(RECALL_ORGANISATION, organization.getName());
+    private String formatReason(String value) {
+        return String.format(REASON_CODE_TEXT_FORMAT, value);
     }
 
     @Getter

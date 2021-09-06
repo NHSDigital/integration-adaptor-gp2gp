@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.BaseExtension;
@@ -20,6 +21,7 @@ import com.github.mustachejava.Mustache;
 import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.InFulfilmentOfTemplateParameters;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -101,6 +103,20 @@ public class MedicationStatementExtractor {
             .orElse(StringUtils.EMPTY);
     }
 
+    public static String extractStatusReasonStoppedText(MedicationRequest medicationRequest) {
+        return filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL)
+            .map(Extension::getExtension)
+            .stream()
+            .flatMap(List::stream)
+            .filter(value -> STATUS_REASON_URL.equals(value.getUrl()))
+            .findFirst()
+            .map(Extension::getValue)
+            .map(CodeableConcept.class::cast)
+            .map(CodeableConceptMappingUtils::extractTextOrCoding)
+            .map(Optional::get)
+            .orElse(StringUtils.EMPTY);
+    }
+
     public static String extractStatusReasonStoppedAvailabilityTime(MedicationRequest medicationRequest) {
         var statusReason = filterExtensionByUrl(medicationRequest, MEDICATION_STATUS_REASON_STOPPED_URL);
 
@@ -124,9 +140,6 @@ public class MedicationStatementExtractor {
         LOGGER.debug("Ensuring the bundle contains Plan MedicationRequest {}", reference.getReference());
 
         var resource = messageContext.getInputBundleHolder().getResource(reference.getReferenceElement());
-        if (resource.isEmpty()) {
-            throw new EhrMapperException("Could not resolve Medication Request reference " + reference.getReference());
-        }
 
         var medicationRequest = (MedicationRequest) resource.get();
         if (!MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {

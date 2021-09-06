@@ -14,6 +14,7 @@ import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import uk.nhs.adaptors.gp2gp.common.service.TimestampService;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.NarrativeStatementTemplateParameters.NarrativeStatementTemplateParametersBuilder;
@@ -33,6 +34,7 @@ public class DocumentReferenceToNarrativeStatementMapper {
 
     private final MessageContext messageContext;
     private final SupportedContentTypes supportedContentTypes;
+    private final TimestampService timestampService;
 
     public String mapDocumentReferenceToNarrativeStatement(final DocumentReference documentReference) {
         if (documentReference.getContent().isEmpty()) {
@@ -60,6 +62,16 @@ public class DocumentReferenceToNarrativeStatementMapper {
                 .referenceContentType(attachmentContentType);
         }
 
+        return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
+    }
+
+    public String buildFragmentIndexNarrativeStatement(String bindingDocumentId) {
+        final NarrativeStatementTemplateParametersBuilder builder = NarrativeStatementTemplateParameters.builder()
+            .narrativeStatementId(bindingDocumentId)
+            .availabilityTime(DateFormatUtil.toHl7Format(timestampService.now()))
+            .hasReference(true)
+            .referenceTitle(bindingDocumentId)
+            .referenceContentType("application/xml");
         return TemplateUtils.fillTemplate(NARRATIVE_STATEMENT_TEMPLATE, builder.build());
     }
 
