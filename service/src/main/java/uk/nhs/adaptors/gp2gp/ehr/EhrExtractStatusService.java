@@ -68,9 +68,11 @@ public class EhrExtractStatusService {
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
     private static final String TASK_TYPE = "taskType";
+    private static final String ATTACHMENT = "attachment";
     private static final String STRUCTURE_ACCESSED_AT_PATH = GPC_ACCESS_STRUCTURED + DOT + ACCESSED_AT;
     private static final String STRUCTURE_TASK_ID_PATH = GPC_ACCESS_STRUCTURED + DOT + TASK_ID;
     private static final String STRUCTURE_OBJECT_NAME_PATH = GPC_ACCESS_STRUCTURED + DOT + OBJECT_NAME;
+    private static final String STRUCTURE_OBJECT_AS_ATTACHMENT = GPC_ACCESS_STRUCTURED + DOT + ATTACHMENT;
     private static final String CONTINUE_RECEIVED_PATH = EHR_CONTINUE + DOT + RECEIVED;
     private static final String DOCUMENT_ID_PATH = GPC_DOCUMENTS + DOT + DOCUMENT_ID;
     private static final String DOCUMENT_ACCESS_AT_PATH = GPC_DOCUMENTS + ARRAY_REFERENCE + ACCESSED_AT;
@@ -255,7 +257,7 @@ public class EhrExtractStatusService {
         }
     }
 
-    public EhrExtractStatus updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
+    public void updateEhrExtractStatusWithEhrExtractChunks(GetGpcStructuredTaskDefinition taskDefinition,
         OutboundMessage.ExternalAttachment externalAttachment) {
 
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
@@ -263,8 +265,8 @@ public class EhrExtractStatusService {
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
 
-        update.addToSet(GPC_DOCUMENTS,
-            EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+        update.set(STRUCTURE_OBJECT_AS_ATTACHMENT,
+            EhrExtractStatus.GpcDocument.builder()
                 .documentId(externalAttachment.getDocumentId())
                 .objectName(externalAttachment.getFilename())
                 .accessedAt(now)
@@ -280,8 +282,6 @@ public class EhrExtractStatusService {
         if (ehrExtractStatus == null) {
             throw new EhrExtractException("EHR Extract Status was not updated with ehrExtractChunks");
         }
-
-        return ehrExtractStatus;
     }
 
     public EhrExtractStatus updateEhrExtractStatusAccessDocumentDocumentReferences(
@@ -292,7 +292,7 @@ public class EhrExtractStatusService {
         Update update = createUpdateWithUpdatedAt();
         Instant now = Instant.now();
         documentIdUrlMap.forEach((documentId, url) -> update.addToSet(GPC_DOCUMENTS,
-            EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+            EhrExtractStatus.GpcDocument.builder()
             .documentId(documentId)
             .accessDocumentUrl(url)
             .objectName(null)
@@ -387,12 +387,22 @@ public class EhrExtractStatusService {
         LOGGER.info("Database updated for sending application acknowledgement");
     }
 
-    public EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
+    public EhrExtractStatus updateEhrExtractStatusCommonForDocuments(SendDocumentTaskDefinition taskDefinition, List<String> messageIds) {
+        return updateEhrExtractStatusCommon(taskDefinition, messageIds, GPC_DOCUMENTS);
+    }
+
+    public EhrExtractStatus updateEhrExtractStatusCommonForExternalEhrExtract(SendDocumentTaskDefinition taskDefinition,
+        List<String> messageIds) {
+        return updateEhrExtractStatusCommon(taskDefinition, messageIds, STRUCTURE_OBJECT_AS_ATTACHMENT);
+    }
+
+    private EhrExtractStatus updateEhrExtractStatusCommon(SendDocumentTaskDefinition taskDefinition, List<String> messageIds,
+        String rootObject) {
         Query query = createQueryForConversationId(taskDefinition.getConversationId());
 
-        var commonSentAt = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
-        var commonTaskId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
-        var commonMessageId = GPC_DOCUMENTS + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
+        var commonSentAt = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + SENT_AT;
+        var commonTaskId = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + TASK_ID;
+        var commonMessageId = rootObject + DOT + taskDefinition.getDocumentPosition() + DOT + SENT_TO_MHS + DOT + MESSAGE_ID;
 
         Update update = createUpdateWithUpdatedAt();
         update.set(commonSentAt, Instant.now());
