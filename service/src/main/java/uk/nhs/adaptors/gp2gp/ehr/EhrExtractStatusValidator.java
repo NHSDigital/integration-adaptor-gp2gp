@@ -28,7 +28,7 @@ public class EhrExtractStatusValidator {
 
     private static boolean areAllDocumentsAssociatedWithPatientFetched(EhrExtractStatus ehrExtractStatus) {
         if (ehrExtractStatus.getGpcAccessDocument() != null && ehrExtractStatus.getGpcAccessDocument().getDocuments() != null) {
-            List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
+            List<EhrExtractStatus.GpcDocument> documents = ehrExtractStatus.getGpcAccessDocument().getDocuments();
 
             return documents.isEmpty() || documents.stream().allMatch(gpcDocument -> StringUtils.isNoneBlank(gpcDocument.getObjectName()));
         }
