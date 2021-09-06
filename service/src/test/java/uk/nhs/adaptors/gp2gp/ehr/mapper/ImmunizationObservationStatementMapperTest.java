@@ -71,6 +71,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-extension-no-parent-present.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_REASON_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-multiple-reason-given.json";
+    private static final String INPUT_JSON_WITH_MULTIPLE_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-multiple-reason-not-given.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -101,6 +103,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-all-information-no-parent-present.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-multiple-reason-given.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-multiple-reason-not-given.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -164,7 +168,8 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_REPORT_ORIGIN, OUTPUT_XML_WITH_IMMUNIZATION_WITH_REPORT_ORIGIN, false),
             Arguments.of(INPUT_JSON_WITH_PARENT_PRESENT_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PARENT_PRESENT_FALSE, false),
             Arguments.of(INPUT_JSON_WITH_NO_PARENT_PRESENT, OUTPUT_XML_WITH_IMMUNIZATION_NO_PARENT_PRESENT, false),
-            Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_GIVEN, false)
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_GIVEN, false),
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_NOT_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_NOT_GIVEN, false)
         );
     }
 
