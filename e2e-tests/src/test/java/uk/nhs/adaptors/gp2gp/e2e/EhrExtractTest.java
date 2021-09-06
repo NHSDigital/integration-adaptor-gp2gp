@@ -1,10 +1,21 @@
 package uk.nhs.adaptors.gp2gp.e2e;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.InjectSoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
 import org.bson.Document;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,16 +24,8 @@ import org.xmlunit.assertj.XmlAssert;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static uk.nhs.adaptors.gp2gp.e2e.AwaitHelper.waitFor;
 
 @ExtendWith(SoftAssertionsExtension.class)
 public class EhrExtractTest {
@@ -86,6 +89,17 @@ public class EhrExtractTest {
         MessageQueue.sendToMhsInboundQueue(ehrExtractRequest2);
 
         assertHappyPathWithDocs(conversationId2, FROM_ODS_CODE_2, NHS_NUMBER, DOCUMENT_ID_NORMAL);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertEhrExtractSentAsAttachment(conversationId);
+
+        assertHappyPathWithDocs(conversationId, FROM_ODS_CODE_1, NHS_NUMBER, DOCUMENT_ID_NORMAL);
     }
 
     @Test
@@ -217,10 +231,45 @@ public class EhrExtractTest {
         var ehrContinue = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(EHR_CONTINUE));
         assertThatExtractContinueMessageWasSent(ehrContinue);
 
-        waitFor(() -> assertThat(assertThatExtractCommonMessageWasSent(conversationId)).isTrue());
-
         var ackPending = (Document) waitFor(() -> Mongo.findEhrExtractStatus(conversationId).get(ACK_TO_PENDING));
         assertThatAcknowledgementPending(ackPending, ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE);
+
+        var sentToMhs = (Document) waitFor(() -> fetchSentToMhsForDocuments(conversationId));
+        assertThat(sentToMhs.get("messageId")).isNotNull();
+        assertThat(sentToMhs.get("sentAt")).isNotNull();
+        assertThat(sentToMhs.get("taskId")).isNotNull();
+    }
+
+    private void assertEhrExtractSentAsAttachment(String conversationId) {
+        var gpcAccessStructured = waitFor(() -> accessStructuredWithAttachmentThatHasBeenSent(conversationId));
+        assertThat(gpcAccessStructured.get("documentId")).isNotNull();
+        assertThat(gpcAccessStructured.get("objectName")).isNotNull();
+        assertThat(gpcAccessStructured.get("accessedAt")).isNotNull();
+        assertThat(gpcAccessStructured.get("taskId")).isNotNull();
+        assertThat(gpcAccessStructured.get("messageId")).isNotNull();
+        assertThat(gpcAccessStructured.get("sentToMhs")).isNotNull();
+    }
+
+    private Document fetchSentToMhsForDocuments(String conversationId) {
+        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
+        if (gpcAccessDocument != null && gpcAccessDocument.get("documents", Collections.emptyList()) != null ) {
+            var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
+            if (!documentList.isEmpty()) {
+                return (Document) ((Document) documentList.get(0)).get("sentToMhs");
+            }
+        }
+        return null;
+    }
+
+    private Document accessStructuredWithAttachmentThatHasBeenSent(String conversationId) {
+        var gpcAccessStructured = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_STRUCTURED);
+        if (gpcAccessStructured != null) {
+            var attachment = (Document) gpcAccessStructured.get("attachment");
+            if (attachment != null && attachment.get("sentToMhs") != null) {
+                return attachment;
+            }
+        }
+        return null;
     }
 
     private String buildEhrExtractRequest(String conversationId, String notExistingPatientNhsNumber, String fromODSCode) throws IOException {
@@ -234,18 +283,6 @@ public class EhrExtractTest {
     private Document theDocumentTaskUpdatesTheRecord(String conversationId) {
         var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
         return getFirstDocumentIfItHasObjectNameOrElseNull(gpcAccessDocument);
-    }
-
-    private Document emptyDocumentTaskIsCreated(String conversationId) {
-        var gpcAccessDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        if (gpcAccessDocument == null) {
-            return null;
-        }
-        var documentList = waitFor(() -> gpcAccessDocument.get("documents", Collections.emptyList()));
-        if (!documentList.isEmpty()) {
-            return gpcAccessDocument;
-        }
-        return null;
     }
 
     private Document getFirstDocumentIfItHasObjectNameOrElseNull(Document gpcAccessDocument) {
@@ -301,20 +338,6 @@ public class EhrExtractTest {
         softly.assertThat(ehrContinue.get("received")).isNotNull();
     }
 
-    private boolean assertThatExtractCommonMessageWasSent(String conversationId) {
-        var ehrDocument = (Document) Mongo.findEhrExtractStatus(conversationId).get(GPC_ACCESS_DOCUMENT);
-        var document = getFirstDocumentIfItHasObjectNameOrElseNull(ehrDocument);
-        if (document != null) {
-            var ehrCommon = (Document) document.get("sentToMhs");
-            if (ehrCommon != null) {
-                return ehrCommon.get("messageId") != null
-                    && ehrCommon.get("sentAt") != null
-                    && ehrCommon.get("taskId") != null;
-            }
-        }
-        return false;
-    }
-
     private void assertThatInitialRecordWasCreated(String conversationId, Document ehrExtractStatus, String nhsNumber, String fromODSCode) {
         var ehrRequest = (Document) ehrExtractStatus.get(EHR_REQUEST);
         softly.assertThat(ehrExtractStatus).isNotNull();
@@ -348,11 +371,6 @@ public class EhrExtractTest {
     private void assertThatExtractCoreMessageWasSent(Document extractCore) {
         softly.assertThat(extractCore.get("sentAt")).isNotNull();
         softly.assertThat(extractCore.get("taskId")).isNotNull();
-    }
-
-    private void assertThatNotDocumentsWereAddedAndEhrExtractWasAttached(Document gpcAccessDocument) {
-        var documentList = gpcAccessDocument.get("documents", Collections.emptyList());
-        assertThat(documentList).isNotEmpty();
     }
 
     private static String getEnvVar(String name, String defaultValue) {

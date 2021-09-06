@@ -189,8 +189,8 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
         assertThat(gpcDocument.getTaskId()).isEqualTo(taskDefinition.getTaskId());
     }
 
-    private List<EhrExtractStatus.GpcAccessDocument.GpcDocument> prepareDocuments() {
-        return List.of(EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+    private List<EhrExtractStatus.GpcDocument> prepareDocuments() {
+        return List.of(EhrExtractStatus.GpcDocument.builder()
             .documentId(DOCUMENT_ID)
             .accessDocumentUrl(EhrStatusConstants.GPC_ACCESS_DOCUMENT_URL)
             .build());
