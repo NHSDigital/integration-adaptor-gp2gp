@@ -71,10 +71,25 @@ public class EhrExtractStatus implements TimeToLive {
     @AllArgsConstructor
     @Document
     @Builder
+    public static class GpcDocument {
+        private String documentId;
+        private String accessDocumentUrl;
+        private String objectName;
+        private Instant accessedAt;
+        private String taskId;
+        private String messageId;
+        private GpcAccessDocument.SentToMhs sentToMhs;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Document
+    @Builder
     public static class GpcAccessStructured {
         private String objectName;
         private Instant accessedAt;
         private String taskId;
+        private GpcDocument attachment;
     }
 
     @Data
@@ -84,20 +99,6 @@ public class EhrExtractStatus implements TimeToLive {
     public static class GpcAccessDocument {
         private List<GpcDocument> documents;
         private String patientId;
-
-        @Data
-        @AllArgsConstructor
-        @Document
-        @Builder
-        public static class GpcDocument {
-            private String documentId;
-            private String accessDocumentUrl;
-            private String objectName;
-            private Instant accessedAt;
-            private String taskId;
-            private String messageId;
-            private SentToMhs sentToMhs;
-        }
 
         @Data
         @AllArgsConstructor
