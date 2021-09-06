@@ -215,7 +215,7 @@ public class EhrExtractTest {
         softly.assertThat(messageIds.size()).isEqualTo(arraySize);
     }
 
-    private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
+private void assertHappyPathWithDocs(String conversationId, String fromODSCode, String nhsNumber, String documentId) {
         var ehrExtractStatus = waitFor(() -> Mongo.findEhrExtractStatus(conversationId));
         assertThatInitialRecordWasCreated(conversationId, ehrExtractStatus, nhsNumber, fromODSCode);
 
