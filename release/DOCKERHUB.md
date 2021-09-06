@@ -31,7 +31,7 @@ you are testing to ensure compatibility with configurations and scripts.
 
 ```bash
 git pull
-git checkout 1.2.0
+git checkout 1.3.0
 ```
 
 ## Find the docker directory
@@ -43,13 +43,13 @@ cd integration-adaptor-gp2gp/docker
 ## Configure the application
 
 The repository includes several configuration examples:
-* `vars.local.sh` template to run the adaptor against mock service containers
+* `vars.local.e2e.sh` or `vars.local.tests.sh` template to run the adaptor against mock service containers
 * `vars.opentest.sh` template to run the adaptor against the OpenTest environment
 
 Configure the application by copying a `vars.*.sh` file to `vars.sh`
 
 ```bash
-cp vars.local.sh vars.sh
+cp vars.local.e2e.sh vars.sh
 ```
 
 Make any required changes to the `vars.sh` file. If using `vars.local.sh` you do not need to modify anything. Refer
