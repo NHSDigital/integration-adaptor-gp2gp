@@ -30,7 +30,7 @@ public class EhrExtractStatusValidatorTest {
         assertThat(EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)).isTrue();
     }
 
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocument() {
+    private EhrExtractStatus.GpcDocument getFinishedGpcDocument() {
         return getGpcDocument(OBJECT_NAME);
     }
 
@@ -38,8 +38,8 @@ public class EhrExtractStatusValidatorTest {
         return getGpcAccessStructured(OBJECT_NAME);
     }
 
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getGpcDocument(String objectName) {
-        return EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+    private EhrExtractStatus.GpcDocument getGpcDocument(String objectName) {
+        return EhrExtractStatus.GpcDocument.builder()
             .objectName(objectName)
             .build();
     }
@@ -76,7 +76,7 @@ public class EhrExtractStatusValidatorTest {
         assertThat(EhrExtractStatusValidator.isPreparingDataFinished(ehrExtractStatus)).isFalse();
     }
 
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getUnfinishedGpcDocument() {
+    private EhrExtractStatus.GpcDocument getUnfinishedGpcDocument() {
         return getGpcDocument(null);
     }
 
@@ -153,13 +153,13 @@ public class EhrExtractStatusValidatorTest {
     @Test
     public void When_AllDocumentsInEhrExtractStatusAreSent_Expect_True() {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
-        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        List<EhrExtractStatus.GpcDocument> documentList = new ArrayList<>();
         documentList.add(getFinishedGpcDocumentSent());
         ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
         assertThat(EhrExtractStatusValidator.areAllDocumentsSent(ehrExtractStatus)).isTrue();
     }
 
-    private EhrExtractStatus.GpcAccessDocument.GpcDocument getFinishedGpcDocumentSent() {
+    private EhrExtractStatus.GpcDocument getFinishedGpcDocumentSent() {
         var doc = getFinishedGpcDocument();
         doc.setSentToMhs(new EhrExtractStatus.GpcAccessDocument.SentToMhs(List.of("123"), "123", "123"));
         return doc;
@@ -168,7 +168,7 @@ public class EhrExtractStatusValidatorTest {
     @Test
     public void When_OneDocumentIsSentAndOneDocumentNotSent_Expect_False() {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
-        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        List<EhrExtractStatus.GpcDocument> documentList = new ArrayList<>();
         documentList.add(getFinishedGpcDocumentSent());
         documentList.add(getFinishedGpcDocument());
         ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
@@ -178,7 +178,7 @@ public class EhrExtractStatusValidatorTest {
     @Test
     public void When_NoDocumentsInEhrExtractStatus_Expect_False() {
         EhrExtractStatus ehrExtractStatus = new EhrExtractStatus();
-        List<EhrExtractStatus.GpcAccessDocument.GpcDocument> documentList = new ArrayList<>();
+        List<EhrExtractStatus.GpcDocument> documentList = new ArrayList<>();
         documentList.add(getFinishedGpcDocument());
         ehrExtractStatus.setGpcAccessDocument(new EhrExtractStatus.GpcAccessDocument(documentList, "123"));
         assertThat(EhrExtractStatusValidator.areAllDocumentsSent(ehrExtractStatus)).isFalse();
