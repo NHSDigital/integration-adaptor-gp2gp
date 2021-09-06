@@ -42,7 +42,7 @@ public class EhrExtractStatusTestUtils {
     private static EhrExtractStatus.GpcAccessDocument prepareGpcAccessDocument() {
         return EhrExtractStatus.GpcAccessDocument.builder()
             .documents(List.of(
-                EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+                EhrExtractStatus.GpcDocument.builder()
                     .documentId(DOCUMENT_ID)
                     .accessDocumentUrl(GPC_ACCESS_DOCUMENT_URL)
                     .build()

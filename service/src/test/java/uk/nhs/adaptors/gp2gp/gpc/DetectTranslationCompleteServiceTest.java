@@ -50,7 +50,7 @@ public class DetectTranslationCompleteServiceTest {
             .objectName(objectName)
             .build();
 
-        EhrExtractStatus.GpcAccessDocument.GpcDocument document = EhrExtractStatus.GpcAccessDocument.GpcDocument.builder()
+        EhrExtractStatus.GpcDocument document = EhrExtractStatus.GpcDocument.builder()
             .objectName(objectName)
             .build();
 
