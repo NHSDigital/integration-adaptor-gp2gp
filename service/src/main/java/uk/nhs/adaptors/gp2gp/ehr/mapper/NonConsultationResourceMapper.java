@@ -74,7 +74,7 @@ public class NonConsultationResourceMapper {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(this::isMappableNonConsultationResource)
             .sorted(this::compareProcessingOrder)
-            .filter(resource -> !hasIdBeenMapped(resource))
+            .filter(resource -> !hasIdBeenMapped(resource) && !isIgnoredResource(resource))
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
@@ -111,11 +111,6 @@ public class NonConsultationResourceMapper {
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
-
-        if (IgnoredResourcesUtils.isIgnoredResourceType(resource.getResourceType())) {
-            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
-            return Optional.empty();
-        }
 
         Optional<String> componentHolder = encounterComponentsMapper.mapResourceToComponent(resource);
 
@@ -249,5 +244,14 @@ public class NonConsultationResourceMapper {
 
     private boolean hasIdBeenMapped(Resource resource) {
         return messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getIdElement());
+    }
+
+    private boolean isIgnoredResource(Resource resource) {
+        if (IgnoredResourcesUtils.isIgnoredResourceType(resource.getResourceType())) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            return true;
+        }
+
+        return false;
     }
 }
