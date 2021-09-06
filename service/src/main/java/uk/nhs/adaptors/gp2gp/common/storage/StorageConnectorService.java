@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -19,13 +20,14 @@ public class StorageConnectorService {
     private final StorageConnector storageConnector;
     private final ObjectMapper objectMapper;
 
-    @SneakyThrows(JsonProcessingException.class)
+    @SneakyThrows({JsonProcessingException.class, IOException.class})
     public void uploadFile(StorageDataWrapper response, String filename) {
         String jsonStringResponse = objectMapper.writeValueAsString(response);
         var responseBytes = jsonStringResponse.getBytes(UTF_8);
-        var responseInputStream = new ByteArrayInputStream(responseBytes);
 
-        storageConnector.uploadToStorage(responseInputStream, responseBytes.length, filename);
+        try (var responseInputStream = new ByteArrayInputStream(responseBytes)) {
+            storageConnector.uploadToStorage(responseInputStream, responseBytes.length, filename);
+        }
     }
 
     @SneakyThrows
