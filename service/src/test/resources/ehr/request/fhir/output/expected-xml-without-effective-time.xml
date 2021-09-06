@@ -68,7 +68,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757"/>
+        <availabilityTime nullFlavor="UNK"/>
         <author typeCode="AUT" contextControlCode="OP">
             <time value="20100114095757" />
             <agentRef classCode="AGNT">
@@ -96,7 +96,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757" />
+        <availabilityTime nullFlavor="UNK" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="test-id-3"/>
@@ -105,7 +105,7 @@
                 <effectiveTime>
                     <center nullFlavor="UNK"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095757" />
+                <availabilityTime nullFlavor="UNK" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
