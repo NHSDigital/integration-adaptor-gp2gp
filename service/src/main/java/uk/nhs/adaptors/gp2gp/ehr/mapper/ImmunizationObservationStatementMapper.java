@@ -219,8 +219,8 @@ public class ImmunizationObservationStatementMapper {
         if (immunization.hasExplanation() && immunization.getExplanation().hasReason()) {
             String reasonGiven = immunization.getExplanation().getReason().stream()
                 .map(CodeableConceptMappingUtils::extractTextOrCoding)
-                .map(Optional::get)
-                .filter(value -> !value.equals(StringUtils.EMPTY))
+                .flatMap(Optional::stream)
+                .filter(StringUtils::isNotBlank)
                 .collect(Collectors.joining(StringUtils.SPACE));
             return StringUtils.EMPTY.equals(reasonGiven) ? StringUtils.EMPTY : (REASON + reasonGiven);
         } else if (immunization.hasExplanation() && immunization.getExplanation().hasReasonNotGiven()) {
