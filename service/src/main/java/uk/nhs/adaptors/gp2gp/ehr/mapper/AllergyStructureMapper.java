@@ -16,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.DocumentReference;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
@@ -196,15 +195,14 @@ public class AllergyStructureMapper {
             IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
             if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return PATIENT_ASSERTER;
-            } 
-            else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
+            } else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
                 RelatedPerson relatedPerson = messageContext
                     .getInputBundleHolder()
                     .getResource(reference)
                     .map(RelatedPerson.class::cast)
                     .get();
-                
-                if(relatedPerson.hasName()){
+
+                if (relatedPerson.hasName()) {
                     return String.format(RELATED_PERSON_ASSERTER, relatedPerson.getName().get(0).getNameAsSingleString());
                 }
             }
