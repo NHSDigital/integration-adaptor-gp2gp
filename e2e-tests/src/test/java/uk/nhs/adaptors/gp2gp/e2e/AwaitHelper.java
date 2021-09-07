@@ -8,6 +8,8 @@ import static org.awaitility.Awaitility.await;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
+import lombok.SneakyThrows;
+
 public class AwaitHelper {
 
     protected static final int WAIT_FOR_IN_SECONDS = 60;
@@ -30,5 +32,10 @@ public class AwaitHelper {
                 });
 
         return dataToReturn.get();
+    }
+
+    @SneakyThrows
+    public static void waitFo10Seconds() {
+        Thread.sleep(10000);
     }
 }
