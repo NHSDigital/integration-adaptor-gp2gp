@@ -24,6 +24,7 @@ import uk.nhs.adaptors.gp2gp.common.service.RandomIdGeneratorService;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.EncounterTemplateParameters.EncounterTemplateParametersBuilder;
 import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
+import uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.XpathExtractor;
 
@@ -73,7 +74,7 @@ public class NonConsultationResourceMapper {
             .map(Bundle.BundleEntryComponent::getResource)
             .filter(this::isMappableNonConsultationResource)
             .sorted(this::compareProcessingOrder)
-            .filter(resource -> !hasIdBeenMapped(resource))
+            .filter(resource -> !hasIdBeenMapped(resource) && !isIgnoredResource(resource))
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
@@ -110,6 +111,7 @@ public class NonConsultationResourceMapper {
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
+
         Optional<String> componentHolder = encounterComponentsMapper.mapResourceToComponent(resource);
 
         if (componentHolder.isEmpty()) {
@@ -242,5 +244,14 @@ public class NonConsultationResourceMapper {
 
     private boolean hasIdBeenMapped(Resource resource) {
         return messageContext.getIdMapper().hasIdBeenMapped(resource.getResourceType(), resource.getIdElement());
+    }
+
+    private boolean isIgnoredResource(Resource resource) {
+        if (IgnoredResourcesUtils.isIgnoredResourceType(resource.getResourceType())) {
+            LOGGER.info(String.format("Resource of type: %s has been ignored", resource.getResourceType()));
+            return true;
+        }
+
+        return false;
     }
 }
