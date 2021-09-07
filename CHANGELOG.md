@@ -6,6 +6,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2021-09-06
+
+- Large messaging implementation
+
+### Known Issues and Limitations
+
+- Same as release 1.2.0
+
+### Added
+
+- NIAD-1504: Separation of large ehrExtract and normal attachments (#316)
+- NIAD-1716: compress ehr extract (#302)
+- NIAD-1735: MHS Mock request journal (#314)
+- NIAD-1107: Consistently handle unresolvable references in Mappings (#308)
+- NIAD-1108: Consistently handle reference to unexpected resource (#307)
+- NIAD-1714: To generate attachment description on GP2GP side (#300)
+- NIAD-1175: (Testing Fixes) Mapping Change - Handle ReferralRequest.supportingInfo (#305)
+- NIAD-1171: handle procedure request.supporting info as notes text (#304)
+- NIAD-1171: handle procedure request.supporting info as notes text (#303)
+- NIAD-1504: Split large EhrExtract into multiple fragments (#296)
+- NIAD-1171: Handle ProcedureRequest.supportingInfo as Notes/text (#299)
+- NIAD-1175: Mapping Change - Handle ReferralRequest.supportingInfo (#293)
+- NIAD-1173: niad 1577 related problem and notes added to observation stmt text (#285)
+
+### Fixed
+
+- NIAD-1481: generate ReferenceRange even when source text is missing (#283)
+- NIAD-1520: Ensure drug allergy degrade (#289)
+- NIAD-1583: Unrecognised encounter codes should display the original term text (#295)
+- NIAD-1527: medication request suppress issues with status stopped (#290)
+- NIAD-1430: EhrComposition effectiveTimes cannot have only upper bounds (#294)
+- NIAD-1578: Condition: Change to reduce duplication of problem condition - where Condition.extension(actualProblem) is transformed to ObservationStatement do not generate additional ObservationStatement (#301)
+- NIAD-1530: MedicationRequest: Place discontinuation reason term text in ehrSupplyDiscontinue/pertinentInformation (#297)
+- NIAD-1578: (Testing fixes) Condition: Change to reduce duplication of problem condition (#306)
+- NIAD-1576: availabilityTime of condition should use onSetDateTime or else output a nullFlavor of UNK (#298)
+- NIAD-1589: Immunization.extension(parentPresent) value not being processed into notes text (#315)
+- NIAD-1591: Immunization.reportOrigin not processed into notes text (#317)
+
 ## [1.2.0] - 2021-08-06
 
 - Work on GPC 1.6 uplift
