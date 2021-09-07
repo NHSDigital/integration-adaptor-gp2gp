@@ -65,6 +65,8 @@ public class AllergyStructureMapperTest {
         + "example-allergy-intolerance-resource-18.json";
     private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER = TEST_FILE_DIRECTORY
         + "example-allergy-intolerance-resource-19.json";
+    private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT = TEST_FILE_DIRECTORY
+        + "example-allergy-intolerance-resource-20.json";
 
     private static final String OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-1.xml";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-2.xml";
@@ -115,7 +117,8 @@ public class AllergyStructureMapperTest {
             Arguments.of(INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES, OUTPUT_XML_USES_RELATION_TO_CONDITION_WITH_TWO_NOTES),
             Arguments.of(INPUT_JSON_WITH_NO_RELATION_TO_CONDITION, OUTPUT_XML_USES_NO_RELATION_TO_CONDITION),
             Arguments.of(INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER, OUTPUT_XML_USES_DEVICE_RECORDER_AND_ASSERTER),
-            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER)
+            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER),
+            Arguments.of(INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT, OUTPUT_XML_USES_RELATED_PERSON_ASSERTER)
         );
     }
 

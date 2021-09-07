@@ -16,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.AllergyIntolerance;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.Condition;
+import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.RelatedPerson;
@@ -196,15 +197,20 @@ public class AllergyStructureMapper {
             if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return PATIENT_ASSERTER;
             } else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
-                RelatedPerson relatedPerson = messageContext
+                return messageContext
                     .getInputBundleHolder()
                     .getResource(reference)
                     .map(RelatedPerson.class::cast)
-                    .get();
-
-                if (relatedPerson.hasName()) {
-                    return String.format(RELATED_PERSON_ASSERTER, relatedPerson.getName().get(0).getNameAsSingleString());
-                }
+                    .filter(RelatedPerson::hasName)
+                    .map(RelatedPerson::getName)
+                    .filter(names -> names.size() > 0)
+                    .map(names -> names.get(0))
+                    .map(name -> Optional.ofNullable(name.getText())
+                        .filter(StringUtils::isNotBlank)
+                        .orElseGet(() -> name.getNameAsSingleString()))
+                    .filter(StringUtils::isNotBlank)
+                    .map(name -> String.format(RELATED_PERSON_ASSERTER, name))
+                    .orElse(StringUtils.EMPTY);
             }
         }
         return StringUtils.EMPTY;
