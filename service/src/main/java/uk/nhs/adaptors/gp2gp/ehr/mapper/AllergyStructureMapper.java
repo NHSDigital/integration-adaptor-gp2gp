@@ -44,7 +44,7 @@ public class AllergyStructureMapper {
     private static final String TYPE = "Type: ";
     private static final String CRITICALITY = "Criticality: ";
     private static final String PATIENT_ASSERTER = "Asserted By Patient";
-    private static final String RELATED_PERSON_ASSERTER = "Asserted By: Related Person %s";
+    private static final String RELATED_PERSON_ASSERTER = "Asserted By: Related Person";
     private static final String LAST_OCCURRENCE = "Last Occurred: ";
     private static final String PATIENT_RECORDER = "Recorded By Patient";
     private static final String ENVIRONMENT_CATEGORY = "environment";
@@ -208,8 +208,8 @@ public class AllergyStructureMapper {
                         .filter(StringUtils::isNotBlank)
                         .orElseGet(() -> name.getNameAsSingleString()))
                     .filter(StringUtils::isNotBlank)
-                    .map(name -> String.format(RELATED_PERSON_ASSERTER, name))
-                    .orElse(StringUtils.EMPTY);
+                    .map(name -> RELATED_PERSON_ASSERTER + StringUtils.SPACE + name)
+                    .orElse(RELATED_PERSON_ASSERTER);
             }
         }
         return StringUtils.EMPTY;

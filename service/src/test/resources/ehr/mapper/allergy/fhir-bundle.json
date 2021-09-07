@@ -220,6 +220,23 @@
           }
         ]
       }
+    },
+    {
+      "resource": {
+        "resourceType": "RelatedPerson",
+        "id": "B0A6CAB4-9D39-429E-8A2E-3BC42C0DF123",
+        "meta": {
+          "profile": [
+            "https://fhir.nhs.uk/STU3/StructureDefinition/CareConnect-RelatedPerson-1"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://EMISWeb/A82038",
+            "value": "B0A6CAB4-9D39-429E-8A2E-3BC42C0DF432"
+          }
+        ]
+      }
     }
   ]
 }
