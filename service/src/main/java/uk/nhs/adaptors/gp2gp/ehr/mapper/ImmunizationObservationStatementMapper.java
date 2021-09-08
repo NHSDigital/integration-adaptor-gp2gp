@@ -53,7 +53,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
-    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %s Sequence: %S,%S ";
+    private static final String VACCINATION_PROTOCOL_TEMPLATE = "Vaccination Protocol %s: %s Sequence: %s, Doses: %s ";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String VACCINATION_CODE = "Substance: %s";
     private static final String REPORT_ORIGIN_CODE = "Origin: %s";
@@ -258,7 +258,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String extractVaccinationProtocolString(Immunization.ImmunizationVaccinationProtocolComponent vaccinationProtocolComponent,
         AtomicInteger protocolCount) {
-        String vaccinationProtocol = String.format(VACCINATION_PROTOCOL_STRING,
+        String vaccinationProtocol = String.format(VACCINATION_PROTOCOL_TEMPLATE,
             protocolCount.getAndIncrement(),
             vaccinationProtocolComponent.getDescription(),
             vaccinationProtocolComponent.getDoseSequence(),
