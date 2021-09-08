@@ -73,6 +73,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-multiple-reason-given.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-multiple-reason-not-given.json";
+    private static final String INPUT_JSON_WITH_SITE_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-site-with-user-selected.json";
+    private static final String INPUT_JSON_WITH_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-site-with-no-user-selected.json";
     private static final String INPUT_JSON_BUNDLE = IMMUNIZATION_FILE_LOCATIONS + "fhir-bundle.json";
 
     private static final String OUTPUT_XML_WITH_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
@@ -105,6 +109,10 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-multiple-reason-given.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_NOT_GIVEN = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-multiple-reason-not-given.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-site-user-selected.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-site-no-user-selected.xml";
 
     @Mock
     private RandomIdGeneratorService randomIdGeneratorService;
@@ -169,7 +177,9 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PARENT_PRESENT_FALSE, OUTPUT_XML_WITH_IMMUNIZATION_PARENT_PRESENT_FALSE, false),
             Arguments.of(INPUT_JSON_WITH_NO_PARENT_PRESENT, OUTPUT_XML_WITH_IMMUNIZATION_NO_PARENT_PRESENT, false),
             Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_GIVEN, false),
-            Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_NOT_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_NOT_GIVEN, false)
+            Arguments.of(INPUT_JSON_WITH_MULTIPLE_REASON_NOT_GIVEN, OUTPUT_XML_WITH_IMMUNIZATION_MULTIPLE_REASON_NOT_GIVEN, false),
+            Arguments.of(INPUT_JSON_WITH_SITE_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED, false),
+            Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false)
         );
     }
 
