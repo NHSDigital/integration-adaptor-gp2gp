@@ -187,7 +187,7 @@ public class ImmunizationObservationStatementMapper {
             .map(value -> SITE + value)
             .orElse(StringUtils.EMPTY);
 
-        if(StringUtils.isBlank(siteUserSelected)){
+        if (StringUtils.isBlank(siteUserSelected)) {
             Optional<String> site = Optional.empty();
             if (immunization.hasSite()) {
                 CodeableConcept siteObject = immunization.getSite();
