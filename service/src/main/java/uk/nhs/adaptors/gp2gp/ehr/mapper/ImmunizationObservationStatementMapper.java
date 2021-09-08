@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DateType;
@@ -177,12 +178,25 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
-        Optional<String> site = Optional.empty();
-        if (immunization.hasSite()) {
-            CodeableConcept siteObject = immunization.getSite();
-            site = CodeableConceptMappingUtils.extractTextOrCoding(siteObject);
+        String siteUserSelected = immunization.getSite().getCoding().stream()
+            .filter(Coding::hasUserSelected)
+            .findFirst()
+            .map(Coding.class::cast)
+            .map(Coding::getDisplay)
+            .filter(StringUtils::isNotBlank)
+            .map(value -> SITE + value)
+            .orElse(StringUtils.EMPTY);
+
+        if(StringUtils.isBlank(siteUserSelected)){
+            Optional<String> site = Optional.empty();
+            if (immunization.hasSite()) {
+                CodeableConcept siteObject = immunization.getSite();
+                site = CodeableConceptMappingUtils.extractTextOrCoding(siteObject);
+            }
+            return site.map(value -> SITE + value).orElse(StringUtils.EMPTY);
         }
-        return site.map(value -> SITE + value).orElse(StringUtils.EMPTY);
+
+        return siteUserSelected;
     }
 
     private String buildRoutePertinentInformation(Immunization immunization) {
