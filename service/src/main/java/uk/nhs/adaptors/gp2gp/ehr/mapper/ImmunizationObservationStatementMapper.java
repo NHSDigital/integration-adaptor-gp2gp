@@ -195,7 +195,7 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildDoseQuantityPertinentInformation(Immunization immunization) {
-        if(immunization.getDoseQuantity().hasValue()){
+        if (immunization.getDoseQuantity().hasValue()) {
             SimpleQuantity doseQuantity = immunization.getDoseQuantity();
 
             if (immunization.getDoseQuantity().hasUnit()) {
@@ -205,10 +205,10 @@ public class ImmunizationObservationStatementMapper {
             if (immunization.getDoseQuantity().hasCode()) {
                 return QUANTITY + doseQuantity.getValue() + StringUtils.SPACE + doseQuantity.getCode();
             }
-            
+
             return QUANTITY + doseQuantity.getValue();
         }
-        
+
         return StringUtils.EMPTY;
     }
 
