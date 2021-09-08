@@ -12,7 +12,8 @@ public enum EhrExtractStatusPaths {
     ACK_PENDING("ackPending"),
     ACK_TO_REQUESTER("ackToRequester"),
     EHR_RECEIVED_ACK("ehrReceivedAcknowledgement"),
-    DOCUMENTS("documents");
+    DOCUMENTS("documents"),
+    MESSAGE_ID("messageId");
 
     private final String pathString;
 

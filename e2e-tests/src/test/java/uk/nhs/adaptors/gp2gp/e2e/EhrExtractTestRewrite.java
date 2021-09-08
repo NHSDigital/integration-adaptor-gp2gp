@@ -7,10 +7,17 @@ import org.bson.Document;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.commons.util.StringUtils;
+import org.xmlunit.assertj.XmlAssert;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import lombok.Builder;
+import lombok.Getter;
 import uk.nhs.adaptors.gp2gp.MessageQueue;
 import uk.nhs.adaptors.gp2gp.Mongo;
 
@@ -37,13 +44,22 @@ public class EhrExtractTestRewrite {
     private static final String TO_ASID = "918999198738";
     private static final String TO_ODS_CODE = "B86041";
     private static final String ACCEPTED_ACKNOWLEDGEMENT_TYPE_CODE = "AA";
+    private static final String NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE = "AE";
+    private static final String GET_GPC_STRUCTURED_TASK_NAME = "GET_GPC_STRUCTURED";
 
     private static final String NHS_NUMBER = "9690937286";
     private static final String NHS_NUMBER_NO_DOCUMENTS = "9690937294";
+    private static final String NHS_NUMBER_NOT_FOUND = "9876543210";
+    private static final String NHS_NUMBER_LARGE_DOCUMENTS_1 = "9690937819";
+    private static final String NHS_NUMBER_LARGE_DOCUMENTS_2 = "9690937841";
 
     private static final String FROM_ODS_CODE_1 = "GPC001";
     private static final String FROM_ODS_CODE_2 = "B2617";
     private static final String DOCUMENT_ID_NORMAL = "07a6483f-732b-461e-86b6-edb665c45510";
+    private static final String DOCUMENT_ID_LARGE = "11737b22-8cff-47e2-b741-e7f27c8c61a8";
+    private static final String DOCUMENT_ID_LARGE_2 = "29c434d6-ad47-415f-b5f5-fd1dc2941d8d";
+
+    private static final String DOCUMENT_REFERENCE_XPATH_TEMPLATE = "/EhrExtract/component/ehrFolder/component/ehrComposition/component/NarrativeStatement/reference/referredToExternalDocument/text/reference[@value='file://localhost/%s']";
 
     private final MhsMockRequestsJournal mhsMockRequestsJournal =
         new MhsMockRequestsJournal(getEnvVar("GP2GP_MHS_MOCK_BASE_URL", "http://localhost:8081"));
@@ -64,7 +80,13 @@ public class EhrExtractTestRewrite {
         assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_NORMAL);
         assertDocumentsSentToMHS(conversationId);
         assertThatNoErrorInfoIsStored(conversationId);
-        assertMessagesWereSentToMhs(6, 0, 2);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+                .numberOfMessages(6)
+                .numberOAttachments(0)
+                .numberOfExternalAttachments(2)
+                .build()
+        );
 
         String conversationId2 = UUID.randomUUID().toString();
         String ehrExtractRequest2 = buildEhrExtractRequest(conversationId2, NHS_NUMBER, FROM_ODS_CODE_2);
@@ -87,15 +109,68 @@ public class EhrExtractTestRewrite {
         assertThatNoDocumentsWereAdded(conversationId);
         assertThatNoErrorInfoIsStored(conversationId);
 
-        assertMessagesWereSentToMhs(2, 1, 0);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+            .numberOfMessages(2)
+            .numberOAttachments(1)
+            .numberOfExternalAttachments(0)
+            .compressedEhr(true)
+            .build()
+        );
     }
 
-    // test ehrExtract error thrown
+    @Test
+    public void When_ExtractRequestReceivedForNotExistingPatient_Expect_EhrStatusToBeUpdatedWithFailure() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_NOT_FOUND, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertInitialRecordCreated(conversationId, NHS_NUMBER_NOT_FOUND, FROM_ODS_CODE_1);
+        assertThatAcknowledgementSentToRequester(conversationId, NEGATIVE_ACKNOWLEDGEMENT_TYPE_CODE);
+        assertThatErrorInfoIsStored(conversationId);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+            .numberOfMessages(1)
+            .build()
+        );
+    }
 
     // chunking flows
     // test ehrExtract large docs
+    @Test
+    public void When_ExtractRequestReceivedWithDocumentSizeEqualThreshold_Expect_LargeDocumentIsSentAsOne() throws Exception {
+        // file size: 31216
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
 
-    // test large ehrExtract docs / no docs
+        assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
+        assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_LARGE);
+        assertThatDocumentsWasSentInParts(conversationId, 1);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedWithDocumentSizeLargerThanThreshold_Expect_LargeDocumentIsSplit() throws Exception {
+        // file size: 62428
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
+        assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_LARGE_2);
+        assertThatDocumentsWasSentInParts(conversationId, 3);
+    }
+
+    @Test
+    public void When_ExtractRequestReceivedForLargeEhrExtract_Expect_ExtractStatusAndDocumentDataAddedToDatabase() throws Exception {
+        String conversationId = UUID.randomUUID().toString();
+        String ehrExtractRequest = buildEhrExtractRequest(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
+        MessageQueue.sendToMhsInboundQueue(ehrExtractRequest);
+
+        assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
+        assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_NORMAL);
+//        assertEhrExtractSentAsAttachment(conversationId);
+    }
 
     private void assertHappyPathWithoutDocuments(String conversationId, String nhsNumber, String fromOdsCode) {
         assertInitialRecordCreated(conversationId, nhsNumber, fromOdsCode);
@@ -209,16 +284,77 @@ public class EhrExtractTestRewrite {
         assertThat(error).isNull();
     }
 
-    private void assertMessagesWereSentToMhs(
-        int expectedNumberOfMessages,
-        int expectedAttachments,
-        int expectedExternalAttachments
-    ) throws InterruptedException, IOException {
+    private void assertThatErrorInfoIsStored(String conversationId) {
+        var error = (Document) Mongo.findEhrExtractStatus(conversationId).get("error");
+
+        softly.assertThat(error.get("occurredAt")).isNotNull();
+        softly.assertThat(error.get("code")).isEqualTo("18");
+        softly.assertThat(error.get("message")).isEqualTo("An error occurred when executing a task");
+        softly.assertThat(error.get("taskType")).isEqualTo(GET_GPC_STRUCTURED_TASK_NAME);
+    }
+
+    private void assertThatDocumentsWasSentInParts(String conversationId, int arraySize) {
+        var document = waitFor(() -> fetchFirstObjectFromList(conversationId, GPC_ACCESS_DOCUMENT, DOCUMENTS));
+        var sentToMhs = (Document)document.get("sentToMhs");
+
+        softly.assertThat(sentToMhs).isNotNull();
+        var documentIds = sentToMhs.get(MESSAGE_ID.toString(), Collections.emptyList());
+        softly.assertThat(documentIds).isNotNull();
+        softly.assertThat(documentIds.size()).isEqualTo(arraySize);
+
+    }
+
+    // TODO: 08/09/2021 add mhsAssertions to other tests
+    private void assertMessagesWereSentToMhs(MhsMessageAssertions messageAssertions)
+        throws InterruptedException, IOException {
         var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
-        assertThat(mhsMockRequests).hasSize(expectedNumberOfMessages);
+        assertThat(mhsMockRequests).hasSize(messageAssertions.numberOfMessages);
 
         var ehrExtractMhsRequest = mhsMockRequests.get(0);
-        assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(expectedAttachments);
-        assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(expectedExternalAttachments);
+        if (messageAssertions.numberOAttachments > 0)
+            assertThat(ehrExtractMhsRequest.getAttachments()).hasSize(messageAssertions.numberOAttachments);
+        if (messageAssertions.numberOfExternalAttachments > 0)
+            assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(messageAssertions.numberOfExternalAttachments);
+
+        // TODO: 08/09/2021 make non compressed ehrExtractVersion
+        if (messageAssertions.compressedEhr) {
+            var payload = ehrExtractMhsRequest.getPayload();
+            var attachment = ehrExtractMhsRequest.getAttachments().get(0);
+
+            assertThat(attachment.getPayload()).isNotBlank();
+            assertThat(attachment.getContentType()).isEqualTo("application/xml");
+            assertThat(attachment.getIsBase64()).isEqualTo("false");
+
+            var description = attachment.getDescription();
+            var descriptionElements = Arrays.stream(description.split("\n"))
+                .filter(StringUtils::isNotBlank)
+                .map(value -> value.split("="))
+                .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
+
+            assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
+            assertThat(descriptionElements).containsEntry("Compressed", "Yes");
+            assertThat(descriptionElements).containsEntry("LargeAttachment", "Yes");
+            assertThat(descriptionElements).containsEntry("OriginalBase64", "No");
+            assertThat(descriptionElements).hasEntrySatisfying("Length", lengthAsString -> {
+                var lengthAsInt = Integer.parseInt(lengthAsString);
+                assertThat(lengthAsInt).isGreaterThan(0);
+            });
+            assertThat(descriptionElements).containsEntry("DomainData", "X-GP2GP-Skeleton: Yes");
+            assertThat(descriptionElements).containsKey("Filename");
+            var fileName = descriptionElements.get("Filename");
+
+            var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, fileName);
+            XmlAssert.assertThat(payload).hasXPath(documentReferenceXPath);
+        }
+    }
+
+    @Builder
+    @Getter
+    private static class MhsMessageAssertions {
+        private final int numberOfMessages;
+        private final int numberOAttachments;
+        private final int numberOfExternalAttachments;
+        @Builder.Default
+        private final boolean compressedEhr = false;
     }
 }
