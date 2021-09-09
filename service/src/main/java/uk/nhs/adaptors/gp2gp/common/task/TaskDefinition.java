@@ -32,11 +32,14 @@ public abstract class TaskDefinition {
      */
     private final String fromAsid;
     /**
-     * Value from {@code /RCMR_IN010000UK05/ControlActEvent/subject/EhrRequest/author/AgentOrgSDS/agentOrganizationSDS/id/@extension} of SOAP message payload
+     * Value from {@code /RCMR_IN010000UK05/ControlActEvent/subject/EhrRequest/author/AgentOrgSDS/
+       agentOrganizationSDS/id/@extension} of SOAP message payload
      */
+    @SuppressWarnings("")
     private final String fromOdsCode;
     /**
-     * Value from {@code /RCMR_IN010000UK05/ControlActEvent/subject/EhrRequest/destination/AgentOrgSDS/agentOrganizationSDS/id/@extension} of SOAP message payload
+     * Value from {@code /RCMR_IN010000UK05/ControlActEvent/subject/EhrRequest/destination/AgentOrgSDS/
+       agentOrganizationSDS/id/@extension} of SOAP message payload
      */
     private final String toOdsCode;
 

@@ -1,7 +1,6 @@
 package uk.nhs.adaptors.gp2gp.common.task;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.SendAcknowledgementTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
