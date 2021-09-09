@@ -16,6 +16,20 @@ public class CodeableConceptMappingUtils {
         }
     }
 
+    public static Optional<String> extractUserSelectedTextOrCoding(CodeableConcept codeableConcept) {
+        var userSelected = codeableConcept.getCoding().stream()
+            .filter(Coding::hasUserSelected)
+            .findFirst()
+            .map(Coding.class::cast)
+            .map(Coding::getDisplay);
+
+        if (userSelected.isPresent()) {
+            return userSelected;
+        } else {
+            return CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept);
+        }
+    }
+
     public static boolean hasCode(CodeableConcept code, List<String> codeLists) {
         return code != null && code.getCoding()
             .stream()
