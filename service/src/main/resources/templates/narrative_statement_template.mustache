@@ -2,11 +2,11 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="{{narrativeStatementId}}"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:{{commentType}}
-            {{#commentDate}}
-            CommentDate:{{{.}}}
-            {{/commentDate}}
+{{#commentDate}}
+CommentDate:{{{.}}}
+{{/commentDate}}
 
-            {{comment}}</text>
+{{comment}}</text>
         <statusCode code="COMPLETE"/>
         {{{availabilityTimeElement}}}
         {{#participant}}
