@@ -52,7 +52,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String QUANTITY = "Quantity: ";
     private static final String REASON = "Reason: ";
     private static final String REASON_NOT_GIVEN = "Reason not given: ";
-    private static final String VACCINATION_PROTOCOL_STRING = "Vaccination Protocol %S: %s Sequence: %S,%S ";
+    private static final String VACCINATION_PROTOCOL_TEMPLATE = "Vaccination Protocol %s: %s Sequence: %s, Doses: %s ";
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String VACCINATION_CODE = "Substance: %s";
     private static final String REPORT_ORIGIN_CODE = "Origin: %s";
@@ -210,13 +210,19 @@ public class ImmunizationObservationStatementMapper {
     private String buildExplanationPertinentInformation(Immunization immunization) {
         Optional<String> explanation;
         if (immunization.hasExplanation() && immunization.getExplanation().hasReason()) {
-            CodeableConcept reason = immunization.getExplanation().getReasonFirstRep();
-            explanation = CodeableConceptMappingUtils.extractTextOrCoding(reason);
-            return explanation.map(value -> REASON + value).orElse(StringUtils.EMPTY);
+            String reasonGiven = immunization.getExplanation().getReason().stream()
+                .map(CodeableConceptMappingUtils::extractTextOrCoding)
+                .flatMap(Optional::stream)
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining(StringUtils.SPACE));
+            return StringUtils.isBlank(reasonGiven) ? StringUtils.EMPTY : (REASON + reasonGiven);
         } else if (immunization.hasExplanation() && immunization.getExplanation().hasReasonNotGiven()) {
-            CodeableConcept reasonNotGiven = immunization.getExplanation().getReasonNotGivenFirstRep();
-            explanation = CodeableConceptMappingUtils.extractTextOrCoding(reasonNotGiven);
-            return explanation.map(value -> REASON_NOT_GIVEN + value).orElse(StringUtils.EMPTY);
+            String reasonNotGiven = immunization.getExplanation().getReasonNotGiven().stream()
+                .map(CodeableConceptMappingUtils::extractTextOrCoding)
+                .flatMap(Optional::stream)
+                .filter(StringUtils::isNotBlank)
+                .collect(Collectors.joining(StringUtils.SPACE));
+            return StringUtils.isBlank(reasonNotGiven) ? StringUtils.EMPTY : (REASON_NOT_GIVEN + reasonNotGiven);
         }
         return StringUtils.EMPTY;
     }
@@ -231,7 +237,7 @@ public class ImmunizationObservationStatementMapper {
 
     private String extractVaccinationProtocolString(Immunization.ImmunizationVaccinationProtocolComponent vaccinationProtocolComponent,
         AtomicInteger protocolCount) {
-        String vaccinationProtocol = String.format(VACCINATION_PROTOCOL_STRING,
+        String vaccinationProtocol = String.format(VACCINATION_PROTOCOL_TEMPLATE,
             protocolCount.getAndIncrement(),
             vaccinationProtocolComponent.getDescription(),
             vaccinationProtocolComponent.getDoseSequence(),

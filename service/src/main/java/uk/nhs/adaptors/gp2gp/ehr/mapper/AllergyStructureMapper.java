@@ -19,6 +19,7 @@ import org.hl7.fhir.dstu3.model.Condition;
 import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.PrimitiveType;
 import org.hl7.fhir.dstu3.model.Reference;
+import org.hl7.fhir.dstu3.model.RelatedPerson;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class AllergyStructureMapper {
     private static final String TYPE = "Type: ";
     private static final String CRITICALITY = "Criticality: ";
     private static final String PATIENT_ASSERTER = "Asserted By Patient";
+    private static final String RELATED_PERSON_ASSERTER = "Asserted By: Related Person";
     private static final String LAST_OCCURRENCE = "Last Occurred: ";
     private static final String PATIENT_RECORDER = "Recorded By Patient";
     private static final String ENVIRONMENT_CATEGORY = "environment";
@@ -203,6 +205,21 @@ public class AllergyStructureMapper {
             IIdType reference = allergyIntolerance.getAsserter().getReferenceElement();
             if (reference.getResourceType().equals(ResourceType.Patient.name())) {
                 return PATIENT_ASSERTER;
+            } else if (reference.getResourceType().equals(ResourceType.RelatedPerson.name())) {
+                return messageContext
+                    .getInputBundleHolder()
+                    .getResource(reference)
+                    .map(RelatedPerson.class::cast)
+                    .filter(RelatedPerson::hasName)
+                    .map(RelatedPerson::getName)
+                    .filter(names -> names.size() > 0)
+                    .map(names -> names.get(0))
+                    .map(name -> Optional.ofNullable(name.getText())
+                        .filter(StringUtils::isNotBlank)
+                        .orElseGet(() -> name.getNameAsSingleString()))
+                    .filter(StringUtils::isNotBlank)
+                    .map(name -> RELATED_PERSON_ASSERTER + StringUtils.SPACE + name)
+                    .orElse(RELATED_PERSON_ASSERTER);
             }
         }
         return StringUtils.EMPTY;
