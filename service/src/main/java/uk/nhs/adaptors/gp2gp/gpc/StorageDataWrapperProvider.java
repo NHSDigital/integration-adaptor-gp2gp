@@ -9,7 +9,7 @@ public final class StorageDataWrapperProvider {
 
     public static StorageDataWrapper buildStorageDataWrapper(TaskDefinition taskDefinition, String data, String taskId) {
         return StorageDataWrapper.builder()
-            .type(taskDefinition.getTaskType().getTaskTypeHeaderValue())
+            .type(taskDefinition.getTaskType().getTaskName())
             .conversationId(taskDefinition.getConversationId())
             .taskId(taskId)
             .data(data)

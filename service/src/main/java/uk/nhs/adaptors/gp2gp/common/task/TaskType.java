@@ -8,8 +8,6 @@ import uk.nhs.adaptors.gp2gp.ehr.SendEhrExtractCoreTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcDocumentTaskDefinition;
 import uk.nhs.adaptors.gp2gp.gpc.GetGpcStructuredTaskDefinition;
 
-@Getter
-@RequiredArgsConstructor
 public enum TaskType {
     GET_GPC_DOCUMENT(GetGpcDocumentTaskDefinition.class),
     GET_GPC_STRUCTURED(GetGpcStructuredTaskDefinition.class),
@@ -17,9 +15,13 @@ public enum TaskType {
     SEND_EHR_CONTINUE(SendDocumentTaskDefinition.class),
     SEND_ACKNOWLEDGEMENT(SendAcknowledgementTaskDefinition.class);
 
+    @Getter
     private final Class<? extends TaskDefinition> classOfTaskDefinition;
+    @Getter
+    private final String taskName;
 
-    public String getTaskTypeHeaderValue() {
-        return classOfTaskDefinition.getName();
+    TaskType(Class<? extends TaskDefinition> classOfTaskDefinition) {
+        this.classOfTaskDefinition = classOfTaskDefinition;
+        this.taskName = classOfTaskDefinition.getName();
     }
 }
