@@ -8,11 +8,11 @@ TODO: Sequence diagram "user journey" of Spine messages, tasks, and GPCC request
 
 Adaptor document tasks are defined and documented in Java source code:
 
-* [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/5249f8ae013b58e8a05cc9bc1395781d33e59c80/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
-* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/23435fc5ea5b0abd930eb2143945df563f630c9b/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java)
-* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/5249f8ae013b58e8a05cc9bc1395781d33e59c80/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java)
-* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/5249f8ae013b58e8a05cc9bc1395781d33e59c80/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java)
-* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/blob/e5deb9d80071ddd530652c8f9bef765ac16bffa9/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java)
+* [TaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/common/task/TaskDefinition.java)
+* [DocumentTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/DocumentTaskDefinition.java)
+* [SendEhrExtractCoreTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendEhrExtractCoreTaskDefinition.java)
+* [GetGpcStructuredTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/gpc/GetGpcStructuredTaskDefinition.java)
+* [SendAcknowledgementTaskDefinition.java](https://github.com/nhsconnect/integration-adaptor-gp2gp/tree/main/service/src/main/java/uk/nhs/adaptors/gp2gp/ehr/SendAcknowledgementTaskDefinition.java)
 
 ## Logging and Tracing
 
