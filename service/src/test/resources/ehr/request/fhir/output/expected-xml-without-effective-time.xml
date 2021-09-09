@@ -70,7 +70,7 @@
         </effectiveTime>
         <availabilityTime nullFlavor="UNK"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095757" />
+            <time nullFlavor="UNK" />
             <agentRef classCode="AGNT">
                 <id nullFlavor="UNK" />
             </agentRef>
