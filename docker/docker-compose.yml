@@ -152,6 +152,18 @@ services:
       - gpconnect-api
     depends_on:
       - gpconnect-api
+
+  ssp-nginx:
+    networks:
+      - commonforgp2gp
+    links:
+      - wiremock:wiremock
+    depends_on:
+      - wiremock
+    build:
+      context: ./nginx
+    ports:
+      - "5555:80"
 networks:
   commonforgp2gp:
     external: true
