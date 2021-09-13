@@ -22,9 +22,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20190601113000
+CommentDate:20190601113000
 
-            Interpretation: Test comment</text>
+Interpretation: Test comment</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>
@@ -32,9 +32,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:COMPLEX REFERENCE RANGE(E330)
-            CommentDate:20190601113000
+CommentDate:20190601113000
 
-            Range Units: test-unit</text>
+Range Units: test-unit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>
