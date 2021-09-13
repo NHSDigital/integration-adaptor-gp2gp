@@ -29,9 +29,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Data Absent: Data Absent Reason display 1</text>
+Data Absent: Data Absent Reason display 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -44,9 +44,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Interpretation display 1 NEGATIVE
+Interpretation: Interpretation display 1 NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -61,9 +61,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Site: Body site text 1</text>
+Site: Body site text 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -76,9 +76,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="random-unmapped-id"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Method: Method text 1</text>
+Method: Method text 1</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -92,9 +92,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="Mapped-From-Observation/B7F05EA7-A1A4-48C0-9C4C-CDB5768796B2-COMM"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151704
+CommentDate:20201215151704
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">
