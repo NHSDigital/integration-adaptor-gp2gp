@@ -79,6 +79,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-dose-quantity-as-code.json";
     private static final String INPUT_JSON_WITH_DOSE_QUANTITY_NO_UNIT_NO_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-dose-quantity-no-unit-no-code.json";
+    private static final String INPUT_JSON_WITH_DOSE_QUANTITY_AS_UNIT_NO_VALUE = IMMUNIZATION_FILE_LOCATIONS
+        + "immunization-dose-quantity-as-unit-no-value.json";
     private static final String INPUT_JSON_WITH_SITE_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-site-with-user-selected.json";
     private static final String INPUT_JSON_WITH_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
@@ -117,6 +119,8 @@ public class ImmunizationObservationStatementMapperTest {
         + "expected-output-observation-statement-multiple-reason-not-given.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_DOSE_QUANTITY_NO_UNIT_NO_CODE = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-dose-quantity-no-unit-no-code.xml";
+    private static final String OUTPUT_XML_WITH_IMMUNIZATION_DOSE_QUANTITY_AS_UNIT_NO_VALUE = IMMUNIZATION_FILE_LOCATIONS
+        + "expected-output-observation-statement-dose-quantity-no-value-but-unit.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
         + "expected-output-observation-statement-site-user-selected.xml";
     private static final String OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED = IMMUNIZATION_FILE_LOCATIONS
@@ -189,6 +193,7 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_DOSE_QUANTITY_AS_UNIT, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITH_DOSE_QUANTITY_AS_CODE, OUTPUT_XML_WITH_PERTINENT_INFORMATION, false),
             Arguments.of(INPUT_JSON_WITH_DOSE_QUANTITY_NO_UNIT_NO_CODE, OUTPUT_XML_WITH_IMMUNIZATION_DOSE_QUANTITY_NO_UNIT_NO_CODE, false),
+            Arguments.of(INPUT_JSON_WITH_DOSE_QUANTITY_AS_UNIT_NO_VALUE, OUTPUT_XML_WITH_IMMUNIZATION_DOSE_QUANTITY_AS_UNIT_NO_VALUE, false),
             Arguments.of(INPUT_JSON_WITH_SITE_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED, false),
             Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false)
         );
