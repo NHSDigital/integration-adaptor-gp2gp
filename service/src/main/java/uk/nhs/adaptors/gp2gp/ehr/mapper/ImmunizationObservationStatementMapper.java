@@ -177,12 +177,13 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildSitePertinentInformation(Immunization immunization) {
-        StringBuilder siteInformation = new StringBuilder(StringUtils.EMPTY);
-        CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(immunization.getSite()).ifPresent(siteValue -> {
-            siteInformation.append(SITE + siteValue);
-        });
-
-        return siteInformation.toString();
+        return Optional.of(immunization)
+            .filter(Immunization::hasSite)
+            .map(Immunization::getSite)
+            .map(CodeableConceptMappingUtils::extractUserSelectedTextOrCoding)
+            .filter(Optional::isPresent)
+            .map(siteValue -> SITE + siteValue.get())
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildRoutePertinentInformation(Immunization immunization) {
