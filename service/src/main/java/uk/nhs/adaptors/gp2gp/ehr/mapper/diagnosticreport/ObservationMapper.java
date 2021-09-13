@@ -207,7 +207,7 @@ public class ObservationMapper {
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getDataAbsentReason())
             .map(DATA_ABSENT_PREFIX::concat)
             .map(comment ->
-                mapObservationToNarrativeStatement(holder, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                mapObservationToNarrativeStatement(holder, comment, CommentType.AGGREGATE_COMMENT_SET.getCode())
             )
             .ifPresent(narrativeStatementsBlock::append);
 
@@ -229,14 +229,14 @@ public class ObservationMapper {
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
             .map(BODY_SITE_PREFIX::concat)
             .map(comment ->
-                mapObservationToNarrativeStatement(holder, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                mapObservationToNarrativeStatement(holder, comment, CommentType.AGGREGATE_COMMENT_SET.getCode())
             )
             .ifPresent(narrativeStatementsBlock::append);
 
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getMethod())
             .map(METHOD_PREFIX::concat)
             .map(comment ->
-                mapObservationToNarrativeStatement(holder, comment, CommentType.LABORATORY_RESULT_DETAIL.getCode())
+                mapObservationToNarrativeStatement(holder, comment, CommentType.AGGREGATE_COMMENT_SET.getCode())
             )
             .ifPresent(narrativeStatementsBlock::append);
 

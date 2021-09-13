@@ -16,6 +16,15 @@ public class CodeableConceptMappingUtils {
         }
     }
 
+    public static Optional<String> extractUserSelectedTextOrCoding(CodeableConcept codeableConcept) {
+        return codeableConcept.getCoding().stream()
+            .filter(Coding::hasUserSelected)
+            .findFirst()
+            .map(Coding.class::cast)
+            .map(Coding::getDisplay)
+            .or(() -> CodeableConceptMappingUtils.extractTextOrCoding(codeableConcept));
+    }
+
     public static boolean hasCode(CodeableConcept code, List<String> codeLists) {
         return code != null && code.getCoding()
             .stream()
