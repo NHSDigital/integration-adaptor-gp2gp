@@ -307,7 +307,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
@@ -346,7 +346,7 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="A4678E5E-4C76-4C27-91B8-AD7B5B0480AE"/>
@@ -387,7 +387,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -411,7 +411,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -435,7 +435,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -458,7 +458,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>Unknown UoM</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -481,7 +481,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -505,7 +505,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -529,7 +529,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -553,7 +553,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -577,7 +577,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -610,7 +610,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -668,7 +668,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -715,7 +715,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -750,7 +750,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -806,7 +806,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20020330092100"/>
         </effectiveTime>
-        <availabilityTime value="20020330000000"/>
+        <availabilityTime value="20020330092100"/>
             <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>mPas</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -908,7 +908,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20081125"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20081125"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -967,7 +967,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20090204"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20090204"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1026,7 +1026,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100104"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20100104"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1130,7 +1130,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1156,7 +1156,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209000000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1182,7 +1182,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1219,7 +1219,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1244,7 +1244,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1270,7 +1270,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20081125000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20081125000000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1308,7 +1308,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1333,7 +1333,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1358,7 +1358,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1384,7 +1384,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1410,7 +1410,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1435,7 +1435,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1461,7 +1461,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1486,7 +1486,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101209114800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101209114800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1589,7 +1589,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1615,7 +1615,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20090204000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20090204000000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1641,7 +1641,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1667,7 +1667,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1693,7 +1693,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216080600"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1719,7 +1719,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216080600"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1744,7 +1744,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216080600"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216080600"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1803,7 +1803,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1829,7 +1829,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216081700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1854,7 +1854,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216081700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1880,7 +1880,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216081700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1904,7 +1904,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216081700"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028" />
+        <availabilityTime value="20101216081700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
@@ -1914,7 +1914,7 @@ red blood cell seen, Note low platelets</text>
                 <effectiveTime>
                     <center value="20101216081700"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028" />
+                <availabilityTime value="20101216081700" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1972,7 +1972,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20101216"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20101216"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1998,7 +1998,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100104000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20100104000000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2057,7 +2057,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307150200"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307150200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2116,7 +2116,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307151300"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307151300"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2334,7 +2334,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307154400"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307154400"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2360,7 +2360,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307154400"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307154400"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2587,7 +2587,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307160100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307160100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2613,7 +2613,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307160100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307160100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2768,7 +2768,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028" />
+        <availabilityTime value="20110307000000" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="8830A1E8-9D50-4A9B-A585-331B7CEBD61F"/>
@@ -2779,7 +2779,7 @@ red blood cell seen, Note low platelets</text>
                 <effectiveTime>
                     <center value="20110307000000"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028" />
+                <availabilityTime value="20110307000000" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2802,7 +2802,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028" />
+        <availabilityTime value="20110307162000" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="73A92291-FDB9-4C9A-AF4B-C3080C0230A4"/>
@@ -2812,7 +2812,7 @@ red blood cell seen, Note low platelets</text>
                 <effectiveTime>
                     <center value="20110307162000"/>
                 </effectiveTime>
-                <availabilityTime value="20110922110028" />
+                <availabilityTime value="20110307162000" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2870,7 +2870,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2896,7 +2896,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2922,7 +2922,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         <value xsi:type="PQ" value="34.000" unit="1"><translation value="34.000"><originalText>Beats</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -2947,7 +2947,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2973,7 +2973,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3049,7 +3049,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3108,7 +3108,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307162900"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307162900"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3242,7 +3242,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3268,7 +3268,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3293,7 +3293,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3319,7 +3319,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3345,7 +3345,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3371,7 +3371,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3430,7 +3430,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20110307165400"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307165400"/>
         <value xsi:type="PQ" value="13.000" unit="1"><translation value="13.000"><originalText>{units}/wk</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3573,7 +3573,7 @@ Sent: 07 Mar 2011 16:58</text>
         <effectiveTime>
             <center value="20110307170000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3636,7 +3636,7 @@ Administrative notes: blah notes</text>
         <effectiveTime>
             <center value="20110307000000"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307000000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3695,7 +3695,7 @@ Administrative notes: blah notes</text>
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3721,7 +3721,7 @@ Administrative notes: blah notes</text>
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3747,7 +3747,7 @@ Administrative notes: blah notes</text>
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3775,7 +3775,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3806,7 +3806,7 @@ Notes: hhhhh</text>
         <effectiveTime>
             <center value="20110307170500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110307170500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3867,7 +3867,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121500"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3926,7 +3926,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3952,7 +3952,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3978,7 +3978,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4004,7 +4004,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4029,7 +4029,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4055,7 +4055,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4081,7 +4081,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4107,7 +4107,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4133,7 +4133,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4158,7 +4158,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308121800"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308121800"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4217,7 +4217,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308122600"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308122600"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4276,7 +4276,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110308123100"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110308123100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4335,7 +4335,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110609091400"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110609091400"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4394,7 +4394,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110902"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110902"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4420,7 +4420,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110902160300"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110902160300"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4446,7 +4446,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110902160300"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110902160300"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4505,7 +4505,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20110902160900"/>
         </effectiveTime>
-        <availabilityTime value="20110922110028"/>
+        <availabilityTime value="20110902160900"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6197,9 +6197,9 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20201106"/>
         </effectiveTime>
-        <availabilityTime value="20201106095918"/>
+        <availabilityTime value="20201106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201106095918" />
+            <time value="20201106" />
             <agentRef classCode="AGNT">
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D" />
             </agentRef>
@@ -6227,7 +6227,7 @@ Dosage: 0.5 ml</text>
         <effectiveTime>
             <center value="20201106"/>
         </effectiveTime>
-        <availabilityTime value="20201106095918"/>
+        <availabilityTime value="20201106"/>
         
         
         <pertinentInformation typeCode="PERT">

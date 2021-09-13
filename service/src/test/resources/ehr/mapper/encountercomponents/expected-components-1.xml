@@ -87,7 +87,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100113152950"/>
+        <availabilityTime nullFlavor="UNK"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -296,7 +296,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -305,7 +305,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>
@@ -384,7 +384,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -393,7 +393,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -461,7 +461,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="394559384658936"/>
@@ -470,7 +470,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="394559384658936"/>

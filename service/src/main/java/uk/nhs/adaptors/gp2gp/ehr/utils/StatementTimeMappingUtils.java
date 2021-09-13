@@ -69,7 +69,7 @@ public final class StatementTimeMappingUtils {
                 AVAILABILITY_TIME_VALUE_TEMPLATE,
                 toHl7Format(observation.getEffectiveDateTimeType())
             );
-        } else if (observation.hasEffectivePeriod()) {
+        } else if (observation.hasEffectivePeriod() && observation.getEffectivePeriod().hasStart()) {
             return String.format(
                 AVAILABILITY_TIME_VALUE_TEMPLATE,
                 toHl7Format(observation.getEffectivePeriod().getStartElement())
