@@ -255,9 +255,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: DVT Prophylaxis - INR 2.0-2.5
+Interpretation: DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
@@ -277,9 +277,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: ON WARFARIN</text>
+Interpretation: ON WARFARIN</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -287,9 +287,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BC8CB16F-71DF-4B02-80A2-F4DAC0A04FBC"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -374,9 +374,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Abnormal</text>
+Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -447,9 +447,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9326C01E-488B-4EDF-B9C9-529E69EE0361"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -526,9 +526,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA8DF9CD-0555-4AC3-8852-AFEFC5615854"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -582,9 +582,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6423EA0F-1F1C-4255-AEBA-D142BE836D50"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -638,9 +638,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6BE78B29-6DF2-46F2-BDA2-1E7D45EFE594"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -831,9 +831,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: ON AZATHIOPRINE</text>
+Interpretation: ON AZATHIOPRINE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -841,9 +841,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8C058D76-FFF1-4EAE-8E82-4351A110A454"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -926,9 +926,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Results repeated
+Interpretation: Results repeated
 Low plasma Folate</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -999,9 +999,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F80F3DA3-0728-4880-BE71-C71251A49D08"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: COELIAC</text>
+Interpretation: COELIAC</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1009,9 +1009,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1101,9 +1101,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="236B2A90-D7B4-4232-8E3E-6F08F0278D08"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -1119,9 +1119,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="432103E4-651E-417C-97ED-37E4E8649C89"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: PAINS HANDS AND FEET.</text>
+Interpretation: PAINS HANDS AND FEET.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1129,9 +1129,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6A894B1B-F266-415C-83E6-375A4296C1C4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1232,9 +1232,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6ACD49D4-7514-436A-93C3-6BCE26D8E3EA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: TIRED ALL THE TIME, LOW Hb</text>
+Interpretation: TIRED ALL THE TIME, LOW Hb</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1242,9 +1242,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BC8F0E5D-53ED-45CC-A45C-DE4933E064EF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1335,9 +1335,9 @@ Low plasma Folate</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BDA5C09F-6C0D-4E7D-9732-9533F4FAE45E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: URINARY STONE weight 13 mg.
+Interpretation: URINARY STONE weight 13 mg.
 Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -1354,9 +1354,9 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="409C8344-FFB9-40C9-A802-D71602F56263"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1448,9 +1448,9 @@ Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="00727D84-1710-4A66-A5E9-C419A17ED9C2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: DVT Prophylaxis - INR 2.0-2.5
+Interpretation: DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
@@ -1470,9 +1470,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F599E6DD-92AA-4CC7-BAF0-20530EE1108B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: ON WARFARIN</text>
+Interpretation: ON WARFARIN</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1480,9 +1480,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9A4CF638-ABA1-4CF9-8055-C5846EE42542"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -1958,9 +1958,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="745FF34E-354F-46DB-A1CA-4D8F48C7DAC7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -2045,9 +2045,9 @@ Mechanical Prosthetic Heart Valves )</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Interpretation      Desirable  Borderline  Increased Risk
+Interpretation: Interpretation      Desirable  Borderline  Increased Risk
 Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l
 Triglyceride reference range
  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
@@ -2093,9 +2093,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2D265D1D-A7B8-4D9F-9ABE-42F3FFD6305D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: TURBID</text>
+Interpretation: TURBID</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -2269,9 +2269,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="59C822D8-91DE-47B1-9D4E-08CBCDECD752"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: ON MEDICATION</text>
+Interpretation: ON MEDICATION</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -2279,9 +2279,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="162EF189-0270-449D-8FE0-BB82E6FF051F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -2757,9 +2757,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51468E27-23A2-4E47-A341-61A29F1EA4AE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: ANTE NATAL</text>
+Interpretation: ANTE NATAL</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -2767,9 +2767,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0E9A2D7A-29D0-48D5-9315-48F2B8F2BB25"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -2853,9 +2853,9 @@ Triglyceride reference range
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Abnormal Anisocytosis +, Polychromasia - slight, Occasional target
+Interpretation: Abnormal Anisocytosis +, Polychromasia - slight, Occasional target
 cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
         <statusCode code="COMPLETE"/>
@@ -3112,9 +3112,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C91E4DCE-520B-4073-82EF-A7A9991FB5DE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3168,9 +3168,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8169ED1C-68A3-410D-B538-BC5AC42C77DA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3247,9 +3247,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F4E72E8A-13BD-4C83-A448-32718731EC94"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3269,9 +3269,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="44598FC3-DB57-4303-8B26-7D058F2B3510"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151830
+CommentDate:20201215151830
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151830"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3325,9 +3325,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2B13FB1D-0FE8-44E2-876B-6AF70F61883C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3341,9 +3341,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="46218E0A-240A-47A3-9793-2CA43C848EDB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151830
+CommentDate:20201215151830
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151830"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3366,9 +3366,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54D4358A-453C-4047-AFB7-0D465ACD05C5"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: GASTRIC ULCER DECLINE</text>
+Interpretation: GASTRIC ULCER DECLINE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -3376,9 +3376,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4B331DB8-AC77-4438-A646-56E500E73885"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -3463,9 +3463,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
+Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3710,9 +3710,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="7BBAEAC9-0079-4A8C-9CF7-53335BF684E9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -3833,9 +3833,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CBA50EF5-9180-40A3-B8FA-161B6E15892A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -3910,9 +3910,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="619D08A7-F6DA-449B-8609-FF129D688943"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
-            CommentDate:20100223154100
+CommentDate:20100223154100
 
-            Quantity: 1750.000 mL
+Quantity: 1750.000 mL
 </text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -3950,9 +3950,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E4E199D1-E516-408C-9D3A-32BD4B9329FA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151809
+CommentDate:20201215151809
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151809"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3975,9 +3975,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4F617D37-6109-4A36-B6DA-D6A29436EC15"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -4071,9 +4071,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EE2B87AF-188B-4ECF-97BF-DC5CC69027D9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Therapeutic range applies ONLY if the sample was collected at
+Interpretation: Therapeutic range applies ONLY if the sample was collected at
 least 8 hours after last dose.
 Time since last dose : 9.5 hours</text>
         <statusCode code="COMPLETE"/>
@@ -4091,9 +4091,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="963D7357-2FDE-40EA-9C36-D2E6E61E61F6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -4190,9 +4190,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="56B35114-6813-469B-AD36-F9E4944E7866"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -4277,9 +4277,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
+Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4638,9 +4638,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5911B7CE-B5E2-4E8A-8703-E3407548DB24"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4656,9 +4656,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="9EEAB807-FDB5-494E-B83A-77AD10EF7EEE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: FLU LIKE ILLNESS</text>
+Interpretation: FLU LIKE ILLNESS</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -4666,9 +4666,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E5C085B1-363D-49BB-86E7-8283D4D0DD56"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -4743,9 +4743,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3ECDEBAA-FABE-433E-8CA4-B4E16EC88E55"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
-            CommentDate:20100223000000
+CommentDate:20100223000000
 
-            *** specimen received separated
+*** specimen received separated
 </text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -4789,9 +4789,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="AE72CCBA-F60B-46D1-B875-57746102E3A7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151742
+CommentDate:20201215151742
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4845,9 +4845,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="543443CB-EFAA-4D57-8D06-9FDC5A34FD6A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151742
+CommentDate:20201215151742
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4877,9 +4877,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="FB01369F-2A94-4D0B-AC2F-843879B69915"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Abnormal</text>
+Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4950,9 +4950,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3AC188FA-B46E-465B-9614-37F234BEB494"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5018,9 +5018,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4264DD9C-01B2-4F68-A222-E3B48540496D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151742
+CommentDate:20201215151742
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5050,9 +5050,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1E177544-82E7-4D6A-8473-69BC8FC74AB1"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Abnormal</text>
+Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5100,9 +5100,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="37227623-F695-4DEE-BE05-0C651428BEAA"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5156,9 +5156,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54E82598-8074-4432-AA97-83698B0F3396"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5214,9 +5214,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CB0B5DEA-25E6-4F23-8EAD-19EE8705CED4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5270,9 +5270,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F8A06A4B-92E4-4242-A989-D30C4C2081F6"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5292,9 +5292,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2BCEAA81-6CD9-4DD6-ABD2-0FADBD472DA4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151743
+CommentDate:20201215151743
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151743"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5317,9 +5317,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="57AC6A03-EBEE-4C3C-8901-DED3E0BFFF31"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: JAUNDICE  ?OBSTRUCTIVE</text>
+Interpretation: JAUNDICE  ?OBSTRUCTIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -5327,9 +5327,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F1EAA625-0C39-466C-9B01-FF902C5BD8C4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -5467,9 +5467,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8E54B9BE-2FB3-4975-B9E7-6C9CC991FDDB"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation:                                          Prophylaxsis    2.0 - 2.5
+Interpretation:                                          Prophylaxsis    2.0 - 2.5
                                            DVT and PE    2.0 - 3.0
                                  Recurrent DVT and PE    3.0 - 4.5
                      MI,arterial disease,heart valves    3.0 - 4.5</text>
@@ -5502,9 +5502,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DE490ABD-6F61-489B-9D9D-19ADA4B558E8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -5607,9 +5607,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F3D9CD05-FBDA-473A-8FEA-37B31D0DACA9"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151733
+CommentDate:20201215151733
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151733"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5656,9 +5656,9 @@ Time since last dose : 9.5 hours</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B6EBD5AE-DA6C-4DD7-A22E-28879AE2D886"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
+Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
 IgE House Dust Mite Weak Pos (RAST grade 1)</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -5673,9 +5673,9 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="100FAB31-CFAD-4AC4-945D-44930E2A5946"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151733
+CommentDate:20201215151733
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151733"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5698,9 +5698,9 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6F64F0E7-34FD-429D-9C04-7E1C2E02B307"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -5808,9 +5808,9 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D346E406-6D78-4055-BFC9-CD0B94388F03"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
+Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
 IgE House Dust Mite Weak Pos (RAST grade 1)
 PLEASE NOTE THIS IS A FOLLOW UP REPORT WITH NEW INFORMATION
 IgE abs to horse, negative</text>
@@ -5829,9 +5829,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="420089C5-B410-4600-B769-1605C1BD2F18"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -5933,9 +5933,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F7600EB7-9A46-4AC3-A726-96DEB40E096A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: NEGATIVE
+Interpretation: NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -5951,9 +5951,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51CBEE3D-0661-4B94-84D6-28B3030FC258"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151704
+CommentDate:20201215151704
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6030,9 +6030,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="01D94EF7-2048-4A7E-8C7E-FD49EB470E93"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151713
+CommentDate:20201215151713
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6102,9 +6102,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="FE49A882-4A7A-444D-B903-8536413D835E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Test not available</text>
+Interpretation: Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6118,9 +6118,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B00024B5-0E08-4336-A94C-4726C6DE21A7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151713
+CommentDate:20201215151713
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6143,9 +6143,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54DF49CD-11BF-4E74-B0B6-C254CB00A53A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -6529,9 +6529,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="616257C9-D034-4DB7-9E71-41CE4CCF7399"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151650
+CommentDate:20201215151650
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151650"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6554,9 +6554,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E02AE1B2-DAF9-4A69-830A-01E7C5DD9AE2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -6917,9 +6917,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="BE4FCB6F-91D6-4F7B-94F1-9D8DAF5E2044"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7028,9 +7028,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="13B6561A-F0BC-4781-BDAF-3DB003A69157"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151633
+CommentDate:20201215151633
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151633"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7053,9 +7053,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="523D0C41-89F2-41DB-BE1A-56F6165D8DF1"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: High Blood Sugar.</text>
+Interpretation: High Blood Sugar.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7063,9 +7063,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D5896EED-7073-4458-9334-35AFF8C42138"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7140,9 +7140,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="398D3F4E-8CA2-41AB-80A2-0D27EF4C8873"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LAB SPECIMEN COMMENT(E271)
-            CommentDate:20100223154100
+CommentDate:20100223154100
 
-            Fasting Status: F
+Fasting Status: F
 </text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -7178,9 +7178,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A4FF5CDB-FD31-4C11-AB90-2205935377EF"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: HIGH BLOOD SUGAR</text>
+Interpretation: HIGH BLOOD SUGAR</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7188,9 +7188,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CA7D9248-479A-4D87-9F41-D73B9E3BA7E2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7294,9 +7294,9 @@ IgE abs to horse, negative</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6BB0147E-E8F0-460F-BFE4-3AC1D9DA741B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Microscopy
+Interpretation: Microscopy
 Moderate pus cells
 Gram negative bacilli +
 Culture
@@ -7322,9 +7322,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="52A74F19-B80D-449E-BD93-728B012F1E90"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20201215151612
+CommentDate:20201215151612
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151612"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7347,9 +7347,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="27048C44-2E4F-4D39-95A7-5BE2170CC41C"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Otitis media</text>
+Interpretation: Otitis media</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7357,9 +7357,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="315D1A05-2BC4-4A9F-A007-852105C7D9E2"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7450,9 +7450,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="26F80FC0-039E-4E2F-B26A-207E83723D47"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation:   --------------------------------------------------------
+Interpretation:   --------------------------------------------------------
   SPEC NO.     TIME    GLUCOSE   URINE      URINE   SAMPLE
                                 GLUCOSE     KETONES   TYPE
                         mmol/L     %
@@ -7476,9 +7476,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5DFFF6AB-68EB-4229-8444-1C85C35E44C4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: DIABETIC</text>
+Interpretation: DIABETIC</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7486,9 +7486,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="29E5C7B0-4AF0-4670-9197-44BCE7365A03"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7580,9 +7580,9 @@ Other bacteria of doubtful significance</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="160C35BC-35D8-4B84-8DD5-4A01F9A7D433"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Interpretation: Age at term                          37.1 years
+Interpretation: Age at term                          37.1 years
 Gestation Scan                       16+4
 Alpha Foeto Protein                    35 ku/L
 AFP MOMS                             1.04
@@ -7606,9 +7606,9 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="12BE1BF6-E3A1-4191-9D37-B1DBA579FF41"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20100225154100
+CommentDate:20100225154100
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
     </NarrativeStatement>
@@ -7693,9 +7693,9 @@ AFP not elevated i.e. probably excludes N.T.D.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="64EE9F15-9718-4738-8187-455BE2A44C29"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Interpretation: Abnormal NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
+Interpretation: Abnormal NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
@@ -7739,9 +7739,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="88A7D6CB-A511-4668-AE09-E321B5660F90"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous glucose given as
+Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
@@ -7793,9 +7793,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D23ABB4B-29A8-419F-83D1-E6B716BBFAB7"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Interpretation: PA - Potentially abnormal  Fasting       4.3            negative        negative
+Interpretation: PA - Potentially abnormal  Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
@@ -7847,9 +7847,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F7EEC0CC-79F0-40F6-96A9-993DBFBBC651"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Interpretation: PA - Potentially abnormal      GLYCAEMIA
+Interpretation: PA - Potentially abnormal      GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
@@ -7901,9 +7901,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="78E90EFA-8191-4CB9-8757-F4139FC247FE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Interpretation: PA - Potentially abnormal                                       2 hr 11.1 or above
+Interpretation: PA - Potentially abnormal                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
@@ -7925,9 +7925,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8A11A952-650A-4C2B-9F66-E9A0BD7B72A8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152510
+CommentDate:20210108152510
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152510"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7950,9 +7950,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A239F1DF-FA6D-44C4-BC0B-F28094896BB4"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20030221115000
+CommentDate:20030221115000
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
     </NarrativeStatement>
@@ -8037,9 +8037,9 @@ Dr. N.O&apos;Connell</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: These LTG comments only apply to the Anti-nuclear factor and the
+Interpretation: These LTG comments only apply to the Anti-nuclear factor and the
 rheumatoid factor tests.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
@@ -8081,9 +8081,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C6717B5F-6A72-4962-92BE-0312123E2D94"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8130,9 +8130,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A676708C-B208-40C9-B759-CB0641A6A7ED"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8152,9 +8152,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3AB98D31-BC1C-40C9-B476-3E4012FBD72E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152501
+CommentDate:20210108152501
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152501"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8203,9 +8203,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="79F950C5-8E76-4A69-B789-A070F055E021"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation:   Oligoclonals detected in both sera and CSF</text>
+Interpretation:   Oligoclonals detected in both sera and CSF</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8219,9 +8219,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="037C249B-6739-441B-A054-7E0C0D77E864"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152502
+CommentDate:20210108152502
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8270,9 +8270,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DAD446F8-0884-4835-8287-7AF94E297076"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8286,9 +8286,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4C654B41-5A11-48A9-A916-67B0342B9C86"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152502
+CommentDate:20210108152502
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8335,9 +8335,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D349E94A-6A48-4F5C-87F7-86D6B2AA2B57"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8351,9 +8351,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DBD0E0F1-7A49-4222-84F6-FFD204488AB1"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152502
+CommentDate:20210108152502
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8402,9 +8402,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="400851A1-97BB-427A-86E1-629DBFDAEE38"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8418,9 +8418,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5321E409-CB3A-42A1-B420-912A28D8D4A0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8467,9 +8467,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0EEA6491-152E-4103-A780-FA3EAA75616E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8483,9 +8483,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="E8292FF4-0C6C-4880-AF51-092D14DF2ABD"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8534,9 +8534,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="84361836-A537-4936-8DAE-2E13863E8A6A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8550,9 +8550,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="88FD4D53-503C-44F3-B6AF-B04DC69DFD1D"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8601,9 +8601,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="D4843767-1D7E-4057-8567-12F766914B8F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8617,9 +8617,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2B44737A-1BFA-4F1C-ACDC-B05F4A7BDF6B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8666,9 +8666,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5A9FE28E-8273-4C90-96E7-6BF4F74E14DE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8682,9 +8682,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="13E22FCC-DCA1-4A43-992A-26D70BC95B92"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8733,9 +8733,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="900C73DE-AFDE-49ED-B14A-21E0B0091137"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: NEGATIVE</text>
+Interpretation: NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8749,9 +8749,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="AA6FA4B6-D845-481E-975C-5FD99EF1B616"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152503
+CommentDate:20210108152503
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8800,9 +8800,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A9069F2F-B34A-40EF-B2DA-74C2A10D0806"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Interpretation: Equivocal Result</text>
+Interpretation: Equivocal Result</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8816,9 +8816,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="256360F1-27CD-4F3C-81FF-3EF8C4DDF09F"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152504
+CommentDate:20210108152504
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152504"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8841,9 +8841,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="59A8B7F6-0C71-4CC3-8E5E-0F072A0B1227"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20110220155300
+CommentDate:20110220155300
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
     </NarrativeStatement>
@@ -8929,9 +8929,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DA4FE11D-8CAB-4E14-A8BF-BFA776FBD615"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: Abnormal</text>
+Interpretation: Abnormal</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9065,9 +9065,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="02F6B35F-E127-42A5-9876-6D57687B9768"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
+Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9110,9 +9110,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0DA57B33-6639-441B-96B7-F1488A8A1637"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152445
+CommentDate:20210108152445
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152445"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9216,9 +9216,9 @@ rheumatoid factor tests.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A7CFAA26-80CA-4EA0-9F7C-1328593C3633"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: U=Unsuitable for analysis
+Interpretation: U=Unsuitable for analysis
 U=Unsuitable,due to delay in delivery.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
@@ -9262,9 +9262,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="C9E244C2-5966-49B1-8968-B786EB42A551"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152449
+CommentDate:20210108152449
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152449"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9318,9 +9318,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="A0E15FF1-C9F0-42DF-8967-D90EE6BA043B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: OR - Outside reference range</text>
+Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9334,9 +9334,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="03416D2D-8A6E-4419-92C5-5ECCF2F7C13A"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152450
+CommentDate:20210108152450
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9390,9 +9390,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="74121E72-389F-4B12-91BE-D3F49A597F8B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: OR - Outside reference range</text>
+Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9406,9 +9406,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="8ED56254-7EA1-40E4-BFFE-8FBDB0437BEE"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152450
+CommentDate:20210108152450
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9462,9 +9462,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="EE9398FB-13BB-4447-97A0-1E363459FE23"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: OR - Outside reference range</text>
+Interpretation: OR - Outside reference range</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9478,9 +9478,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CF33B5B6-0D1A-45A5-A07A-57B75DA2B34E"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108152450
+CommentDate:20210108152450
 
-            Interpretation: (q) - Abnormal - Contact Patient</text>
+Interpretation: (q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9503,9 +9503,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F4E6F6C1-1E46-4913-94FA-B55A60681950"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Interpretation: Clinical Details:, NOTE: Specimen date</text>
+Interpretation: Clinical Details:, NOTE: Specimen date</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
     </NarrativeStatement>
@@ -9513,9 +9513,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5385DE2A-D791-4C1D-B874-F349685150AD"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20030618080000
+CommentDate:20030618080000
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
     </NarrativeStatement>
@@ -9619,9 +9619,9 @@ U=Unsuitable,due to delay in delivery.</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="6CD6ED21-22AD-4EDE-BD16-7A6AB07AB073"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20120726134600
+CommentDate:20120726134600
 
-            Interpretation: Clinical History : Intermittent, recurring pain L hip 5
+Interpretation: Clinical History : Intermittent, recurring pain L hip 5
 years. Footling breach at birth. Main site of discomfort L
 anterior superior iliac spine.
 .
@@ -9646,9 +9646,9 @@ No other bony abnormality seen. The IUCD is noted in situ.
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="23137F83-2549-496B-8AE9-120FDFE6E932"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108155909
+CommentDate:20210108155909
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108155909"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9668,9 +9668,9 @@ No other bony abnormality seen. The IUCD is noted in situ.
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="23137F83-2549-496B-8AE9-120FDFE6E932"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20210108155909
+CommentDate:20210108155909
 
-            Interpretation: (q) - Normal - No Action</text>
+Interpretation: (q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108155909"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9686,9 +9686,9 @@ No other bony abnormality seen. The IUCD is noted in situ.
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="5FB6FBC6-3677-4672-A356-346CBA4107F0"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20120726134600
+CommentDate:20120726134600
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20120726134600"/>
     </NarrativeStatement>

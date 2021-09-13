@@ -312,9 +312,9 @@
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: Abnormal Abnormality indicator: Abnormal, but expected
+Interpretation: Abnormal Abnormality indicator: Abnormal, but expected
 Clinical Information: GASTRIC ULCER DECLINE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
@@ -358,9 +358,9 @@ Clinical Information: GASTRIC ULCER DECLINE</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="F9EA7B08-5C2D-4F7E-852D-C753F9E8059B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: Anisocytosis +, Polychromasia - slight, Occasional target
+Interpretation: Anisocytosis +, Polychromasia - slight, Occasional target
 cell present, Burr cells - occasional, Occasional nucleated
 red blood cell seen, Note low platelets</text>
         <statusCode code="COMPLETE"/>
@@ -629,9 +629,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="25DBE266-2210-41D4-ADB0-C033F3EBED99"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -687,9 +687,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="15C6EBEA-F344-443E-BBE9-26B7B8A8F038"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: LO - Below low reference limit</text>
+Interpretation: LO - Below low reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -769,9 +769,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="B857C1E3-3A27-4A58-B341-FC5DFCD8C58B"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -825,9 +825,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="55B1BB28-8973-4CF4-B9A6-9FF49547F465"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Interpretation: HI - Above high reference limit</text>
+Interpretation: HI - Above high reference limit</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -857,9 +857,9 @@ red blood cell seen, Note low platelets</text>
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DB7C94B1-01A6-491F-AC41-A36D88023069"/>
         <text mediaType="text/x-h7uk-pmip">CommentType:LABORATORY RESULT COMMENT(E141)
-            CommentDate:20020330000000
+CommentDate:20020330000000
 
-            Status: unknown</text>
+Status: unknown</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20020330000000"/>
     </NarrativeStatement>
