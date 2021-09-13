@@ -451,7 +451,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
-        <availabilityTime value="20100123140354"/>
+        <availabilityTime value="20100123134800"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8107,9 +8107,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="19880101"/>
         </effectiveTime>
-        <availabilityTime value="20100113154141"/>
+        <availabilityTime value="19880101"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113154141" />
+            <time value="19880101" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8135,7 +8135,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="19880101"/>
         </effectiveTime>
-        <availabilityTime value="20100113154141"/>
+        <availabilityTime value="19880101"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8162,9 +8162,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20091102" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8190,7 +8190,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8217,9 +8217,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20091102" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8245,7 +8245,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
         <value xsi:type="PQ" value="120" unit="1"><translation value="120"><originalText>mmHg</originalText></translation></value>
 
         <pertinentInformation typeCode="PERT">
@@ -8272,9 +8272,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113151332" />
+            <time value="20091102" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8300,7 +8300,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20091102"/>
         </effectiveTime>
-        <availabilityTime value="20100113151332"/>
+        <availabilityTime value="20091102"/>
         <value xsi:type="PQ" value="90" unit="1"><translation value="90"><originalText>mmHg</originalText></translation></value>
 
         <pertinentInformation typeCode="PERT">
@@ -8327,9 +8327,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
-        <availabilityTime value="20100113145739"/>
+        <availabilityTime value="20100113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145739" />
+            <time value="20100113" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8382,9 +8382,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
-        <availabilityTime value="20100113145725"/>
+        <availabilityTime value="20100113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113145725" />
+            <time value="20100113" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8437,9 +8437,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
-        <availabilityTime value="20100113114111"/>
+        <availabilityTime value="20100113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100113114111" />
+            <time value="20100113" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8465,7 +8465,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100113"/>
         </effectiveTime>
-        <availabilityTime value="20100113114111"/>
+        <availabilityTime value="20100113"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8492,9 +8492,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
-        <availabilityTime value="20100123140354"/>
+        <availabilityTime value="20100123134800"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100123140354" />
+            <time value="20100123134800" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8520,7 +8520,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100123134800"/>
         </effectiveTime>
-        <availabilityTime value="20100123140354"/>
+        <availabilityTime value="20100123134800"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8547,9 +8547,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100609160800"/>
         </effectiveTime>
-        <availabilityTime value="20100609160409"/>
+        <availabilityTime value="20100609160800"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100609160409" />
+            <time value="20100609160800" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8575,7 +8575,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100609160800"/>
         </effectiveTime>
-        <availabilityTime value="20100609160409"/>
+        <availabilityTime value="20100609160800"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8630,7 +8630,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714163251"/>
+        <availabilityTime value="20100714"/>
 
 
         <pertinentInformation typeCode="PERT">
@@ -8657,9 +8657,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714163124"/>
+        <availabilityTime value="20100714"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714163124" />
+            <time value="20100714" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8790,9 +8790,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20201026"/>
         </effectiveTime>
-        <availabilityTime value="20201026115854"/>
+        <availabilityTime value="20201026"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201026115854" />
+            <time value="20201026" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -8818,7 +8818,7 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20201026"/>
         </effectiveTime>
-        <availabilityTime value="20201026115854"/>
+        <availabilityTime value="20201026"/>
 
 
         <pertinentInformation typeCode="PERT">

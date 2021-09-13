@@ -214,9 +214,9 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime nullFlavor="UNK"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20030618080000" />
+            <time nullFlavor="UNK" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>
@@ -242,7 +242,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime nullFlavor="UNK"/>
         
         
         <pertinentInformation typeCode="PERT">
