@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2021-09-10
+
+- Bug fixes
+
+### Known Issues and Limitations
+
+- Same as release 1.3.0
+
+### Added
+
+- NIAD-1235: Ensure all Java streams are closed to prevent file descriptor leaks (#313)
+
+### Fixed
+
+NIAD-1743: Added confidential scope to jwt template (#327)
+NIAD-1594: Processing Immunization.doseQuantity into Notes/Text (#319)
+NIAD-1598: Immunization: Improve rendering of vaccination protocols - title for seriesDoses (#325)
+NIAD-1603: AllergyIntolerance: Handle asserter as relatedPerson (#322)
+NIAD-1596: Immunization: only 1st reason given processed into notes text (#318)
+NIAD-1608: Ignore QuestionnaireResponse resource (#312)
+NIAD-1597: Immunization: only 1st reason not given processed into notes text (#320)
+
 ## [1.3.0] - 2021-09-06
 
 - Large messaging implementation
