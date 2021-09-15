@@ -31,7 +31,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE
+NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -49,7 +49,7 @@ Interpretation: NEGATIVE
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151704
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">

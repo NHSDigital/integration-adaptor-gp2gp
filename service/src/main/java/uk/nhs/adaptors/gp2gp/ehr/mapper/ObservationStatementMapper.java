@@ -151,41 +151,13 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasInterpretation()) {
-            CodeableConcept interpretation = observation.getInterpretation();
-
-            boolean isInterpretationCode = interpretation.getCoding().stream()
-                .anyMatch(this::isInterpretationCode);
-
-            if (!isInterpretationCode) {
-                Optional<Coding> codeWithUserSelected = interpretation.getCoding().stream()
-                    .filter(code -> !isInterpretationCode(code))
-                    .filter(Coding::hasUserSelected)
-                    .filter(Coding::getUserSelected)
-                    .findFirst();
-
-                Coding coding = codeWithUserSelected.orElseGet(() ->
-                    interpretation.hasCoding() ? interpretation.getCodingFirstRep() : null);
-
-                Optional.ofNullable(coding).ifPresent(code -> {
-                    if (code.hasCode() || code.hasDisplay()) {
-                        commentBuilder.append(INTERPRETATION_CODE_PREFIX);
-                    }
-                    if (code.hasCode()) {
-                        commentBuilder.append(coding.getCode()).append(StringUtils.SPACE);
-                    }
-                    if (code.hasDisplay()) {
-                        commentBuilder.append(code.getDisplay()).append(StringUtils.SPACE);
-                    }
-                });
-            }
-            
-            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(interpretation).ifPresent(interpretationText -> {
-                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText);
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.SPACE);
             });
         }
         
         if (observation.hasComment()) {
-            commentBuilder.append(StringUtils.SPACE).append(observation.getComment());
+            commentBuilder.append(observation.getComment());
         }
 
         buildActualProblemTextIfExists(observation)

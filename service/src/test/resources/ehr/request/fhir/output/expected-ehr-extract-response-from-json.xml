@@ -235,7 +235,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: @ÑÑ§Ñ¬ This has extended unicode characters</text>
+                <text>@ÑÑ§Ñ¬ This has extended unicode characters</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -373,7 +373,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: These are some notes !&quot;£$%^&amp;*()</text>
+                <text>These are some notes !&quot;£$%^&amp;*()</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -433,7 +433,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Mother</text>
+                <text>Family member : Mother</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -457,7 +457,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Father - note - this is obviously wrong?</text>
+                <text>Family member : Father - note - this is obviously wrong?</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8141,7 +8141,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Engraver (entry added 13/1/2010, but marked as 01/1/1988 as date of entry)</text>
+                <text>Engraver (entry added 13/1/2010, but marked as 01/1/1988 as date of entry)</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8196,7 +8196,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Uncle</text>
+                <text>Family member : Uncle</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8361,7 +8361,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected Problem Info: Problem Notes: Synonym &quot;Heart Attack&quot; selected</text>
+                <text>Significance : Major - Episodicity : First - Synonym &quot;Heart Attack&quot; selected Problem Info: Problem Notes: Synonym &quot;Heart Attack&quot; selected</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8416,7 +8416,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - Happy Puppet Problem Info: Problem Notes: Happy Puppet</text>
+                <text>Significance : Major - Episodicity : First - Happy Puppet Problem Info: Problem Notes: Happy Puppet</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8471,7 +8471,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8526,7 +8526,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8636,7 +8636,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes: This is a standalone note with extended chars Ñ§¬</text>
+                <text>Significance : Major - Episodicity : First - This is a standalone note with extended chars Ñ§¬ Problem Info: Problem Notes: This is a standalone note with extended chars Ñ§¬</text>
             </pertinentAnnotation>
         </pertinentInformation>
 
@@ -8691,7 +8691,7 @@ The line below contains special characters...
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is descriptive text `¬¦!&quot;£$%^&amp;*()-_+={}[]~#@&apos;:;&lt;,|\&gt;./?</text>
+                <text>This is descriptive text `¬¦!&quot;£$%^&amp;*()-_+={}[]~#@&apos;:;&lt;,|\&gt;./?</text>
             </pertinentAnnotation>
         </pertinentInformation>
 

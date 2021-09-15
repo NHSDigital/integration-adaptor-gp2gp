@@ -293,7 +293,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: This is the ended event. Ended on 21/10/2005</text>
+                <text>Episode: Other. NOTES: This is the ended event. Ended on 21/10/2005</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -318,7 +318,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Eating habits:Moderate,Type of diet:Vegetarian. NOTES: Dietarr notes.</text>
+                <text>Eating habits:Moderate,Type of diet:Vegetarian. NOTES: Dietarr notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -343,7 +343,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of exercise: Inactive. NOTES: Exercise notes.</text>
+                <text>Type of exercise: Inactive. NOTES: Exercise notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -528,7 +528,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: BMI: 22.7. NOTES: WEight notes.</text>
+                <text>BMI: 22.7. NOTES: WEight notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -554,7 +554,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: WEight notes</text>
+                <text>WEight notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -579,7 +579,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Height notes</text>
+                <text>Height notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -605,7 +605,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Result:Normal,Laterality:Right. NOTES: Fundo notes.</text>
+                <text>Result:Normal,Laterality:Right. NOTES: Fundo notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -656,7 +656,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Smoking.</text>
+                <text>for Smoking.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -682,7 +682,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Alcohol.</text>
+                <text>for Alcohol.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -708,7 +708,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Blood pressure.</text>
+                <text>for Blood pressure.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -734,7 +734,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for CHD.</text>
+                <text>for CHD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -760,7 +760,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Stroke or TIA.</text>
+                <text>for Stroke or TIA.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -786,7 +786,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for FH of CVA or IHD.</text>
+                <text>for FH of CVA or IHD.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -811,7 +811,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of advice given: Advice, Advice: Family History.</text>
+                <text>Type of advice given: Advice, Advice: Family History.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -837,7 +837,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of agency:Health Visitor. NOTES: Thes are some HV notes.</text>
+                <text>Type of agency:Health Visitor. NOTES: Thes are some HV notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -863,7 +863,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: for Overweight. NOTES: Some Health ed notes.</text>
+                <text>for Overweight. NOTES: Some Health ed notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -888,7 +888,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Cardio notes</text>
+                <text>Cardio notes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1066,7 +1066,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This should be abnormal according to the range</text>
+                <text>This should be abnormal according to the range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1606,7 +1606,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Notes associated with the Urethral swab</text>
+                <text>Notes associated with the Urethral swab</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1632,7 +1632,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Notes associated with this Barium Meal</text>
+                <text>Notes associated with this Barium Meal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1683,7 +1683,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Dated Unknown test resuly</text>
+                <text>Dated Unknown test resuly</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1713,7 +1713,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Some notes
+                <text>Some notes
 Spanning multiple Lines
 And more stuff</text>
             </pertinentAnnotation>
@@ -1895,7 +1895,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: </text>
+                <text>Range:</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2083,7 +2083,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: Notes on bereavement.</text>
+                <text>Episode: Other. NOTES: Notes on bereavement.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2108,7 +2108,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: and some notes.</text>
+                <text>Episode: Other. NOTES: and some notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2220,7 +2220,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: This is the availabilityTime UNK.</text>
+                <text>Episode: First ever. NOTES: This is the availabilityTime UNK.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2403,7 +2403,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Eating habits:Poor,Type of diet:Vegetarian. NOTES: Poor vegetarian - all those nut loaves.</text>
+                <text>Eating habits:Poor,Type of diet:Vegetarian. NOTES: Poor vegetarian - all those nut loaves.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2428,7 +2428,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Type of exercise: Inactive. NOTES: Exercise notes.</text>
+                <text>Type of exercise: Inactive. NOTES: Exercise notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2453,7 +2453,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: This has the In Practice flag unticked.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: This has the In Practice flag unticked.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2478,7 +2478,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: New eveent episodicity.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: New eveent episodicity.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2503,7 +2503,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: Other episodicity.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: Other episodicity.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2528,7 +2528,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Language Read:Farsi,Preferred Language:No. NOTES: Reads Farsi Again private and In Practice.</text>
+                <text>Language Read:Farsi,Preferred Language:No. NOTES: Reads Farsi Again private and In Practice.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2553,7 +2553,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Smoking status on date of event: Never smoked. NOTES: Never smoked.</text>
+                <text>Smoking status on date of event: Never smoked. NOTES: Never smoked.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2883,7 +2883,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2942,7 +2942,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: These are notes containing
+                <text>Episode: First ever. NOTES: These are notes containing
 %^%!&quot;£$%^&amp;*()-_+=&apos;;:#~/&gt;&lt;.?/¬
 and some 
 line
@@ -3021,7 +3021,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3079,7 +3079,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: This is the &quot;blocked ear&quot; notes.</text>
+                <text>Episode: First ever. NOTES: This is the &quot;blocked ear&quot; notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3104,7 +3104,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever.</text>
+                <text>Episode: First ever.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3162,7 +3162,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No value range only</text>
+                <text>No value range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3187,7 +3187,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No range</text>
+                <text>No range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3212,7 +3212,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No units</text>
+                <text>No units</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3267,7 +3267,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: No nothing</text>
+                <text>No nothing</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3293,7 +3293,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Upper range only</text>
+                <text>Upper range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3324,7 +3324,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Lower range only</text>
+                <text>Lower range only</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3387,7 +3387,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is the consultation to test edits</text>
+                <text>This is the consultation to test edits</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3417,7 +3417,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: First ever. NOTES: Patient anxious.</text>
+                <text>Episode: First ever. NOTES: Patient anxious.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3488,7 +3488,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Drinking status on eventdate: Life teetotaler. NOTES: This is the teetotaller.</text>
+                <text>Drinking status on eventdate: Life teetotaler. NOTES: This is the teetotaller.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3638,7 +3638,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Off for: 0 month(s)  14 day(s), Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: These are some MED3 notes.</text>
+                <text>Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Off for: 0 month(s)  14 day(s), Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: These are some MED3 notes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3696,7 +3696,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This is the empty one.</text>
+                <text>Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This is the empty one.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3754,7 +3754,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Clinical diagnosis: Happy puppet syndrome [PKyz500], Med3 form diagnosis: Happy puppet syndrome, Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This has a diagnosis. Ended on 08/05/2009</text>
+                <text>Clinical diagnosis: Happy puppet syndrome [PKyz500], Med3 form diagnosis: Happy puppet syndrome, Request by: GP, Refrain from work: Yes, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This has a diagnosis. Ended on 08/05/2009</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3779,7 +3779,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Clinical diagnosis: Tiredness symptom [168..00], Med3 form diagnosis: Tiredness symptom, Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This one isn&apos;t issues.</text>
+                <text>Clinical diagnosis: Tiredness symptom [168..00], Med3 form diagnosis: Tiredness symptom, Request by: GP, Refrain from work: No, Phase return: No, Altered hours: No, Amended duties: No, Adaptations: No, Assessment at six months: No, Refrain from work for six months: No, Follow up assessment: No, Start date for MED3: 05/05/2009. NOTES: This one isn&apos;t issues.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3838,7 +3838,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: GP to sign death certificate: No, Review date: 07/05/2009.</text>
+                <text>GP to sign death certificate: No, Review date: 07/05/2009.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3864,7 +3864,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Date of agreement: 04/05/2009, GP to sign death certificate: Yes, Review date: 08/05/2009.</text>
+                <text>Date of agreement: 04/05/2009, GP to sign death certificate: Yes, Review date: 08/05/2009.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3889,7 +3889,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Additional drugs available at home: No, Catheter products at home: No, Moving/handling equipment at home: No.</text>
+                <text>Additional drugs available at home: No, Catheter products at home: No, Moving/handling equipment at home: No.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3914,7 +3914,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Additional drugs available at home: Yes, Catheter products at home: Yes, Moving/handling equipment at home: Yes.</text>
+                <text>Additional drugs available at home: Yes, Catheter products at home: Yes, Moving/handling equipment at home: Yes.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3940,7 +3940,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Should GP be contacted out of hours: No.</text>
+                <text>Should GP be contacted out of hours: No.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3966,7 +3966,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Date discussed with patient: 03/05/2009, Date discussed with carer: 04/05/2009, Should GP be contacted out of hours: Yes, GP contact number: 01413572402.</text>
+                <text>Date discussed with patient: 03/05/2009, Date discussed with carer: 04/05/2009, Should GP be contacted out of hours: Yes, GP contact number: 01413572402.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4112,7 +4112,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Episode: Other. NOTES: Blah de Blah.</text>
+                <text>Episode: Other. NOTES: Blah de Blah.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

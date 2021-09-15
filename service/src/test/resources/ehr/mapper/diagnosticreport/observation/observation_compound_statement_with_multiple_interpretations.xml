@@ -20,7 +20,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20190601113000
 
-Interpretation: Example without userSelected Test comment</text>
+Interpretation: Example with userSelected Test comment</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20190601113000"/>
     </NarrativeStatement>

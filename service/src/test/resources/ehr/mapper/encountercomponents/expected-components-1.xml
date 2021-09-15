@@ -93,7 +93,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: observation uncategorised</text>
+                <text>observation uncategorised</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -319,7 +319,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE
+NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -337,7 +337,7 @@ Interpretation: NEGATIVE
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151704
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -414,7 +414,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -484,7 +484,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Test not available</text>
+Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -500,7 +500,7 @@ Interpretation: Test not available</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">

@@ -94,7 +94,7 @@ Method: Method text 1</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151704
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">

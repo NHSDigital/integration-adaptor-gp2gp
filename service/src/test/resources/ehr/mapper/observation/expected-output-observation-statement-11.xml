@@ -15,7 +15,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: Text: Test reference range text High: 20 Interpretation: Test comment</text>
+                <text>Range: Text: Test reference range text High: 20 Interpretation: Very High Value Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

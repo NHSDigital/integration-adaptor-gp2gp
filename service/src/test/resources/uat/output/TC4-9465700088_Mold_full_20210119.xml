@@ -257,7 +257,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: DVT Prophylaxis - INR 2.0-2.5
+DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
@@ -928,7 +928,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Results repeated
+Results repeated
 Low plasma Folate</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -1103,7 +1103,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -1337,7 +1337,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: URINARY STONE weight 13 mg.
+URINARY STONE weight 13 mg.
 Consisted of 36% Calcium oxalate and 64% Calcium phosphate.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -1450,7 +1450,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: DVT Prophylaxis - INR 2.0-2.5
+DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
@@ -2047,7 +2047,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Interpretation      Desirable  Borderline  Increased Risk
+Interpretation      Desirable  Borderline  Increased Risk
 Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l
 Triglyceride reference range
  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
@@ -2095,7 +2095,7 @@ Triglyceride reference range
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: TURBID</text>
+TURBID</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3271,7 +3271,7 @@ Interpretation: HI - Above high reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151830
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151830"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3343,7 +3343,7 @@ Interpretation: HI - Above high reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151830
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151830"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3465,7 +3465,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
+Neutropaenia, Occasional atypical lymphocyte seen</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3952,7 +3952,7 @@ Quantity: 1750.000 mL
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151809
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151809"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4073,7 +4073,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Therapeutic range applies ONLY if the sample was collected at
+Therapeutic range applies ONLY if the sample was collected at
 least 8 hours after last dose.
 Time since last dose : 9.5 hours</text>
         <statusCode code="COMPLETE"/>
@@ -4279,7 +4279,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
+Neutropaenia, Occasional atypical lymphocyte seen</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4640,7 +4640,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4791,7 +4791,7 @@ CommentDate:20100223000000
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151742
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4847,7 +4847,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151742
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5020,7 +5020,7 @@ Interpretation: LO - Below low reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151742
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151742"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5294,7 +5294,7 @@ Interpretation: LO - Below low reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151743
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151743"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5469,7 +5469,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation:                                          Prophylaxsis    2.0 - 2.5
+Prophylaxsis    2.0 - 2.5
                                            DVT and PE    2.0 - 3.0
                                  Recurrent DVT and PE    3.0 - 4.5
                      MI,arterial disease,heart valves    3.0 - 4.5</text>
@@ -5609,7 +5609,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151733
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151733"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5658,7 +5658,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
+IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
 IgE House Dust Mite Weak Pos (RAST grade 1)</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
@@ -5675,7 +5675,7 @@ IgE House Dust Mite Weak Pos (RAST grade 1)</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151733
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151733"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5810,7 +5810,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
+IgE abs Cat Dander, Grass Pollen and Dog Dander all Negative
 IgE House Dust Mite Weak Pos (RAST grade 1)
 PLEASE NOTE THIS IS A FOLLOW UP REPORT WITH NEW INFORMATION
 IgE abs to horse, negative</text>
@@ -5935,7 +5935,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: NEGATIVE
+NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
@@ -5953,7 +5953,7 @@ Interpretation: NEGATIVE
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151704
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151704"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6032,7 +6032,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6104,7 +6104,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Test not available</text>
+Test not available</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100225154100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6120,7 +6120,7 @@ Interpretation: Test not available</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151713
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151713"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -6531,7 +6531,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151650
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151650"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7030,7 +7030,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151633
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151633"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7296,7 +7296,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Microscopy
+Microscopy
 Moderate pus cells
 Gram negative bacilli +
 Culture
@@ -7324,7 +7324,7 @@ Other bacteria of doubtful significance</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20201215151612
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20201215151612"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -7452,7 +7452,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation:   --------------------------------------------------------
+--------------------------------------------------------
   SPEC NO.     TIME    GLUCOSE   URINE      URINE   SAMPLE
                                 GLUCOSE     KETONES   TYPE
                         mmol/L     %
@@ -7582,7 +7582,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Age at term                          37.1 years
+Age at term                          37.1 years
 Gestation Scan                       16+4
 Alpha Foeto Protein                    35 ku/L
 AFP MOMS                             1.04
@@ -7927,7 +7927,7 @@ Interpretation: PA - Potentially abnormal                                       
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152510
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152510"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8039,7 +8039,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: These LTG comments only apply to the Anti-nuclear factor and the
+These LTG comments only apply to the Anti-nuclear factor and the
 rheumatoid factor tests.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
@@ -8083,7 +8083,7 @@ rheumatoid factor tests.</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8132,7 +8132,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8154,7 +8154,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152501
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152501"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8205,7 +8205,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation:   Oligoclonals detected in both sera and CSF</text>
+Oligoclonals detected in both sera and CSF</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8221,7 +8221,7 @@ Interpretation:   Oligoclonals detected in both sera and CSF</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152502
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8272,7 +8272,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8288,7 +8288,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152502
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8337,7 +8337,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8353,7 +8353,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152502
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152502"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8404,7 +8404,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8420,7 +8420,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8469,7 +8469,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8485,7 +8485,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8536,7 +8536,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8552,7 +8552,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8603,7 +8603,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8619,7 +8619,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8668,7 +8668,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8684,7 +8684,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8735,7 +8735,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8751,7 +8751,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152503
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152503"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8802,7 +8802,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20110220155300
 
-Interpretation: Equivocal Result</text>
+Equivocal Result</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20110220155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -8818,7 +8818,7 @@ Interpretation: Equivocal Result</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152504
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152504"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9112,7 +9112,7 @@ Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152445
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152445"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9218,7 +9218,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030618080000
 
-Interpretation: U=Unsuitable for analysis
+U=Unsuitable for analysis
 U=Unsuitable,due to delay in delivery.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
@@ -9264,7 +9264,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152449
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152449"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9336,7 +9336,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152450
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9408,7 +9408,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152450
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9480,7 +9480,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108152450
 
-Interpretation: (q) - Abnormal - Contact Patient</text>
+(q) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108152450"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9621,7 +9621,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20120726134600
 
-Interpretation: Clinical History : Intermittent, recurring pain L hip 5
+Clinical History : Intermittent, recurring pain L hip 5
 years. Footling breach at birth. Main site of discomfort L
 anterior superior iliac spine.
 .
@@ -9648,7 +9648,7 @@ No other bony abnormality seen. The IUCD is noted in situ.
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108155909
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108155909"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -9670,7 +9670,7 @@ Interpretation: (q) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20210108155909
 
-Interpretation: (q) - Normal - No Action</text>
+(q) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20210108155909"/>
             <Participant typeCode="PRF" contextControlCode="OP">
