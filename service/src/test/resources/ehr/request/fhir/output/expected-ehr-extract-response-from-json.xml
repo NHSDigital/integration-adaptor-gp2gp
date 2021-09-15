@@ -8602,9 +8602,9 @@ The line below contains special characters...
         <effectiveTime>
             <center value="20100714"/>
         </effectiveTime>
-        <availabilityTime value="20100714163251"/>
+        <availabilityTime value="20100714"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100714163251" />
+            <time value="20100714" />
             <agentRef classCode="AGNT">
                 <id root="test-id-3" />
             </agentRef>

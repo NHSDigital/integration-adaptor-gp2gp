@@ -39,8 +39,6 @@ public class ImmunizationObservationStatementMapperTest {
         + "immunization-all-pertinent-information.json";
     private static final String INPUT_JSON_WITHOUT_REQUIRED_PERTINENT_INFORMATION = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-no-pertinent-information.json";
-    private static final String INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION = IMMUNIZATION_FILE_LOCATIONS
-        + "immunization-no-date-recorded.json";
     private static final String INPUT_JSON_WITHOUT_CODEABLE_CONCEPT_TEXT = IMMUNIZATION_FILE_LOCATIONS
         + "immunization-codeable-concepts-text.json";
     private static final String INPUT_JSON_WITHOUT_DATE = IMMUNIZATION_FILE_LOCATIONS
@@ -198,16 +196,6 @@ public class ImmunizationObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_SITE_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_USER_SELECTED, false),
             Arguments.of(INPUT_JSON_WITH_SITE_NO_USER_SELECTED, OUTPUT_XML_WITH_IMMUNIZATION_SITE_NO_USER_SELECTED, false)
         );
-    }
-
-    @Test
-    public void When_MappingParsedImmunizationJsonWithoutDateRecordedExtension_Expect_Error() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITHOUT_DATE_RECORDED_EXTENSION);
-        Immunization parsedImmunization = fhirParseService.parseResource(jsonInput, Immunization.class);
-
-        assertThatThrownBy(() -> observationStatementMapper.mapImmunizationToObservationStatement(parsedImmunization, false))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("Could not map recorded date");
     }
 
     @Test
