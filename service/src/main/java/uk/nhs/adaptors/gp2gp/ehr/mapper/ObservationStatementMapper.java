@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
@@ -177,22 +178,21 @@ public class ObservationStatementMapper {
                     }
                 });
             }
+            
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(interpretation).ifPresent(interpretationText -> {
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText);
+            });
         }
-
-        String interpretationTextAndComment = Stream.concat(
-            Optional.ofNullable(observation.getInterpretation().getText()).stream(),
-            Optional.ofNullable(observation.getComment()).stream()
-        ).collect(Collectors.joining(StringUtils.SPACE));
-
-        if (!interpretationTextAndComment.isBlank()) {
-            commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationTextAndComment);
+        
+        if (observation.hasComment()) {
+            commentBuilder.append(StringUtils.SPACE).append(observation.getComment());
         }
 
         buildActualProblemTextIfExists(observation)
             .map(t -> StringUtils.SPACE + t)
             .ifPresent(commentBuilder::append);
 
-        return commentBuilder.toString();
+        return commentBuilder.toString().trim();
     }
 
     private Optional<String> buildActualProblemTextIfExists(Observation observation) {
