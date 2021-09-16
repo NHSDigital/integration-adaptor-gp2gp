@@ -46,7 +46,9 @@ Data Absent: Data Absent Reason display 1</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100225154100
 
-Interpretation: Interpretation display 1 NEGATIVE
+Interpretation: Interpretation display 1
+
+NEGATIVE
      In normal pregnancies the test will usually be positive from the
      second day after the expected menstruation.</text>
         <statusCode code="COMPLETE"/>
