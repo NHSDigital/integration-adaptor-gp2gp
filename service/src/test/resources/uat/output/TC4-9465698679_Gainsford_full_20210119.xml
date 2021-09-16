@@ -240,7 +240,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734"/>
+        <availabilityTime value="20100123132700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -264,7 +264,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734" />
+        <availabilityTime value="20100123132700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B65D8AFD-6632-4AEB-9D9F-116149EDD69C"/>
@@ -275,7 +275,7 @@
                 <effectiveTime>
                     <center value="20100123132700"/>
                 </effectiveTime>
-                <availabilityTime value="20100123132734" />
+                <availabilityTime value="20100123132700" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -317,7 +317,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734"/>
+        <availabilityTime value="20100123132700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -343,7 +343,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734"/>
+        <availabilityTime value="20100123132700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -369,7 +369,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734"/>
+        <availabilityTime value="20100123132700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -393,7 +393,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734" />
+        <availabilityTime value="20100123132700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="10B9023B-A997-4449-AF63-EF3015E4C7B5"/>
@@ -403,7 +403,7 @@
                 <effectiveTime>
                     <center value="20100123132700"/>
                 </effectiveTime>
-                <availabilityTime value="20100123132734" />
+                <availabilityTime value="20100123132700" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -428,7 +428,7 @@
         <effectiveTime>
             <center value="20100123132700"/>
         </effectiveTime>
-        <availabilityTime value="20100123132734"/>
+        <availabilityTime value="20100123132700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -485,7 +485,7 @@
         <effectiveTime>
             <center value="20190128133700"/>
         </effectiveTime>
-        <availabilityTime value="20190128134114" />
+        <availabilityTime value="20190128133700" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E4FAE359-1369-41C1-B39E-F54BB55E307A"/>
@@ -496,7 +496,7 @@
                 <effectiveTime>
                     <center value="20190128133700"/>
                 </effectiveTime>
-                <availabilityTime value="20190128134114" />
+                <availabilityTime value="20190128133700" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1372,9 +1372,9 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20190128134336"/>
+        <availabilityTime nullFlavor="UNK"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190128134336" />
+            <time nullFlavor="UNK" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -1400,7 +1400,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20190128134336" />
+        <availabilityTime nullFlavor="UNK" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="97CE760A-7759-4FEA-B5A9-8667E06F86A4"/>
@@ -1411,7 +1411,7 @@
                 <effectiveTime>
                     <center nullFlavor="UNK"/>
                 </effectiveTime>
-                <availabilityTime value="20190128134336" />
+                <availabilityTime nullFlavor="UNK" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1437,9 +1437,9 @@
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
-        <availabilityTime value="20100114095333"/>
+        <availabilityTime value="19781231"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095333" />
+            <time value="19781231" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1465,7 +1465,7 @@
         <effectiveTime>
             <center value="19781231"/>
         </effectiveTime>
-        <availabilityTime value="20100114095333" />
+        <availabilityTime value="19781231" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5F1EDFB9-3B69-4A7A-9D22-26CFE3CD7F1B"/>
@@ -1476,7 +1476,7 @@
                 <effectiveTime>
                     <center value="19781231"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095333" />
+                <availabilityTime value="19781231" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1502,9 +1502,9 @@
         <effectiveTime>
             <center value="19800321"/>
         </effectiveTime>
-        <availabilityTime value="20100114095333"/>
+        <availabilityTime value="19800321"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095333" />
+            <time value="19800321" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1530,7 +1530,7 @@
         <effectiveTime>
             <center value="19800321"/>
         </effectiveTime>
-        <availabilityTime value="20100114095333" />
+        <availabilityTime value="19800321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="DF996C91-D888-4D2D-9D3A-5523480337B1"/>
@@ -1541,7 +1541,7 @@
                 <effectiveTime>
                     <center value="19800321"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095333" />
+                <availabilityTime value="19800321" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1567,9 +1567,9 @@
         <effectiveTime>
             <center value="20090112"/>
         </effectiveTime>
-        <availabilityTime value="20100114095356"/>
+        <availabilityTime value="20090112"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095356" />
+            <time value="20090112" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1595,7 +1595,7 @@
         <effectiveTime>
             <center value="20090112"/>
         </effectiveTime>
-        <availabilityTime value="20100114095356" />
+        <availabilityTime value="20090112" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F8E59BF6-55AB-4B7E-9C5F-B0C25F61DFD5"/>
@@ -1606,7 +1606,7 @@
                 <effectiveTime>
                     <center value="20090112"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095356" />
+                <availabilityTime value="20090112" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1632,9 +1632,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114100555"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114100555" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1660,7 +1660,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114100555" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="1E5D6932-C778-4997-B624-8709D2FBB189"/>
@@ -1670,7 +1670,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114100555" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1696,9 +1696,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095757" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1724,7 +1724,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="72DB5398-C825-4498-88CA-899A3653EC04"/>
@@ -1735,7 +1735,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095757" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1761,9 +1761,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095757" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1789,7 +1789,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095757" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="16A8F240-9B4C-4EFF-9B97-723E341D9AAD"/>
@@ -1800,7 +1800,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095757" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1826,9 +1826,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095728"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095728" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1854,7 +1854,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095728" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3D5E3D14-66FD-4E2F-B52F-D30BD253F355"/>
@@ -1864,7 +1864,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095728" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1890,9 +1890,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095412"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095412" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1918,7 +1918,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095412" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E984FD8F-391C-4E6E-9309-1BDE587E23EF"/>
@@ -1929,7 +1929,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095412" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1955,9 +1955,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095356"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095356" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -1983,7 +1983,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095356" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5654E733-A9E5-4086-AD63-3A3C72A8E1B3"/>
@@ -1994,7 +1994,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095356" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2020,9 +2020,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095342"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114095342" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2048,7 +2048,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114095342" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="137CDA70-9A78-43E2-930D-2758C7E11D8D"/>
@@ -2058,7 +2058,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114095342" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2084,9 +2084,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094956"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094956" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2112,7 +2112,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094956" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="D0152980-C786-4D93-B06D-7EE55CAFDDA9"/>
@@ -2122,7 +2122,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114094956" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2148,9 +2148,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094944"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094944" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2176,7 +2176,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094944" />
+        <availabilityTime value="20100114" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3BCD7C65-EC1F-42A1-842F-CA324DB55450"/>
@@ -2187,7 +2187,7 @@
                 <effectiveTime>
                     <center value="20100114"/>
                 </effectiveTime>
-                <availabilityTime value="20100114094944" />
+                <availabilityTime value="20100114" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2213,9 +2213,9 @@
         <effectiveTime>
             <center value="20100809"/>
         </effectiveTime>
-        <availabilityTime value="20100809130428"/>
+        <availabilityTime value="20100809"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100809130428" />
+            <time value="20100809" />
             <agentRef classCode="AGNT">
                 <id root="17779BE2-3C37-4DD6-BAA1-3FFEE70B558C" />
             </agentRef>
@@ -2241,7 +2241,7 @@
         <effectiveTime>
             <center value="20100809"/>
         </effectiveTime>
-        <availabilityTime value="20100809130428" />
+        <availabilityTime value="20100809" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="B38C0EDA-1B3C-4456-88F2-EACDE009EB33"/>
@@ -2252,7 +2252,7 @@
                 <effectiveTime>
                     <center value="20100809"/>
                 </effectiveTime>
-                <availabilityTime value="20100809130428" />
+                <availabilityTime value="20100809" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2278,9 +2278,9 @@
         <effectiveTime>
             <center value="20101012141200"/>
         </effectiveTime>
-        <availabilityTime value="20101012145058"/>
+        <availabilityTime value="20101012141200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20101012145058" />
+            <time value="20101012141200" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2306,7 +2306,7 @@
         <effectiveTime>
             <center value="20101012141200"/>
         </effectiveTime>
-        <availabilityTime value="20101012145058" />
+        <availabilityTime value="20101012141200" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5DC093EA-05AB-426B-93C9-0D1BAAFAF511"/>
@@ -2316,7 +2316,7 @@
                 <effectiveTime>
                     <center value="20101012141200"/>
                 </effectiveTime>
-                <availabilityTime value="20101012145058" />
+                <availabilityTime value="20101012141200" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2342,9 +2342,9 @@
         <effectiveTime>
             <center value="201812"/>
         </effectiveTime>
-        <availabilityTime value="20190128133747"/>
+        <availabilityTime value="201812"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190128133747" />
+            <time value="201812" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2370,7 +2370,7 @@
         <effectiveTime>
             <center value="201812"/>
         </effectiveTime>
-        <availabilityTime value="20190128133747" />
+        <availabilityTime value="201812" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="C3375CCA-1E80-4F29-AAC1-5D8D27ED605F"/>
@@ -2381,7 +2381,7 @@
                 <effectiveTime>
                     <center value="201812"/>
                 </effectiveTime>
-                <availabilityTime value="20190128133747" />
+                <availabilityTime value="201812" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2407,9 +2407,9 @@
         <effectiveTime>
             <center value="2018"/>
         </effectiveTime>
-        <availabilityTime value="20190128134406"/>
+        <availabilityTime value="2018"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190128134406" />
+            <time value="2018" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2435,7 +2435,7 @@
         <effectiveTime>
             <center value="2018"/>
         </effectiveTime>
-        <availabilityTime value="20190128134406" />
+        <availabilityTime value="2018" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="AEB66D16-E1FA-462A-BC70-FBD16000E308"/>
@@ -2445,7 +2445,7 @@
                 <effectiveTime>
                     <center value="2018"/>
                 </effectiveTime>
-                <availabilityTime value="20190128134406" />
+                <availabilityTime value="2018" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2471,9 +2471,9 @@
         <effectiveTime>
             <center value="20190128"/>
         </effectiveTime>
-        <availabilityTime value="20190128134522"/>
+        <availabilityTime value="20190128"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190128134522" />
+            <time value="20190128" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2499,7 +2499,7 @@
         <effectiveTime>
             <center value="20190128"/>
         </effectiveTime>
-        <availabilityTime value="20190128134522" />
+        <availabilityTime value="20190128" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="F0A2FE75-1856-47AD-9A20-570C9E4CF904"/>
@@ -2509,7 +2509,7 @@
                 <effectiveTime>
                     <center value="20190128"/>
                 </effectiveTime>
-                <availabilityTime value="20190128134522" />
+                <availabilityTime value="20190128" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2535,9 +2535,9 @@
         <effectiveTime>
             <center value="20190128"/>
         </effectiveTime>
-        <availabilityTime value="20190128133423"/>
+        <availabilityTime value="20190128"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190128133423" />
+            <time value="20190128" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2563,7 +2563,7 @@
         <effectiveTime>
             <center value="20190128"/>
         </effectiveTime>
-        <availabilityTime value="20190128133423" />
+        <availabilityTime value="20190128" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="088FA6F5-206B-4A4A-AD9A-D95F80C33CCF"/>
@@ -2574,7 +2574,7 @@
                 <effectiveTime>
                     <center value="20190128"/>
                 </effectiveTime>
-                <availabilityTime value="20190128133423" />
+                <availabilityTime value="20190128" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2600,9 +2600,9 @@
         <effectiveTime>
             <center value="20190321"/>
         </effectiveTime>
-        <availabilityTime value="20190321162524"/>
+        <availabilityTime value="20190321"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190321162524" />
+            <time value="20190321" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2628,7 +2628,7 @@
         <effectiveTime>
             <center value="20190321"/>
         </effectiveTime>
-        <availabilityTime value="20190321162524" />
+        <availabilityTime value="20190321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
@@ -2639,7 +2639,7 @@
                 <effectiveTime>
                     <center value="20190321"/>
                 </effectiveTime>
-                <availabilityTime value="20190321162524" />
+                <availabilityTime value="20190321" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2665,9 +2665,9 @@
         <effectiveTime>
             <center value="20190321"/>
         </effectiveTime>
-        <availabilityTime value="20190321162355"/>
+        <availabilityTime value="20190321"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190321162355" />
+            <time value="20190321" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -2693,7 +2693,7 @@
         <effectiveTime>
             <center value="20190321"/>
         </effectiveTime>
-        <availabilityTime value="20190321162355" />
+        <availabilityTime value="20190321" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="975F5D57-8C97-4E3B-878A-51A6D9F4A03F"/>
@@ -2704,7 +2704,7 @@
                 <effectiveTime>
                     <center value="20190321"/>
                 </effectiveTime>
-                <availabilityTime value="20190321162355" />
+                <availabilityTime value="20190321" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2781,9 +2781,9 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094202" />
+            <time value="20100114094200" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2810,7 +2810,7 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2837,9 +2837,9 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094202" />
+            <time value="20100114094200" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2867,7 +2867,7 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2894,9 +2894,9 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094202" />
+            <time value="20100114094200" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2923,7 +2923,7 @@
         <effectiveTime>
             <center value="20100114094200"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114094200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2950,9 +2950,9 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100114094202" />
+            <time value="20100114" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -2979,7 +2979,7 @@
         <effectiveTime>
             <center value="20100114"/>
         </effectiveTime>
-        <availabilityTime value="20100114094202"/>
+        <availabilityTime value="20100114"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3006,9 +3006,9 @@
         <effectiveTime>
             <center value="20100222"/>
         </effectiveTime>
-        <availabilityTime value="20100222134120"/>
+        <availabilityTime value="20100222"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20100222134120" />
+            <time value="20100222" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -3035,7 +3035,7 @@
         <effectiveTime>
             <center value="20100222"/>
         </effectiveTime>
-        <availabilityTime value="20100222134120"/>
+        <availabilityTime value="20100222"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3062,9 +3062,9 @@
         <effectiveTime>
             <center value="20101001"/>
         </effectiveTime>
-        <availabilityTime value="20101001110006"/>
+        <availabilityTime value="20101001"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20101001110006" />
+            <time value="20101001" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -3092,7 +3092,7 @@
         <effectiveTime>
             <center value="20101001"/>
         </effectiveTime>
-        <availabilityTime value="20101001110006"/>
+        <availabilityTime value="20101001"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3119,9 +3119,9 @@
         <effectiveTime>
             <center value="20101012"/>
         </effectiveTime>
-        <availabilityTime value="20101012145055"/>
+        <availabilityTime value="20101012"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20101012145055" />
+            <time value="20101012" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -3149,7 +3149,7 @@
         <effectiveTime>
             <center value="20101012"/>
         </effectiveTime>
-        <availabilityTime value="20101012145055"/>
+        <availabilityTime value="20101012"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3176,9 +3176,9 @@
         <effectiveTime>
             <center value="20190313"/>
         </effectiveTime>
-        <availabilityTime value="20190313090328"/>
+        <availabilityTime value="20190313"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20190313090328" />
+            <time value="20190313" />
             <agentRef classCode="AGNT">
                 <id root="8930C6D9-56ED-477A-8407-00DCE8A05DB4" />
             </agentRef>
@@ -3206,7 +3206,7 @@
         <effectiveTime>
             <center value="20190313"/>
         </effectiveTime>
-        <availabilityTime value="20190313090328"/>
+        <availabilityTime value="20190313"/>
         
         
         <pertinentInformation typeCode="PERT">
