@@ -1,5 +1,7 @@
 package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
+
+import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityTextFromQuantity;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractIdFromPlanMedicationRequestReference;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractDispenseRequestQuantityText;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.MedicationStatementExtractor.extractRepeatValue;
@@ -179,8 +181,10 @@ public class MedicationStatementMapper {
     private String buildQuantityText(MedicationRequest medicationRequest) {
         if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasUnit()) {
             return medicationRequest.getDispenseRequest().getQuantity().getUnit();
-        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
+        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension() ){
             return extractDispenseRequestQuantityText(medicationRequest);
+        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
+            return extractDispenseRequestQuantityTextFromQuantity(medicationRequest);
         }
         return DEFAULT_QUANTITY_TEXT;
     }

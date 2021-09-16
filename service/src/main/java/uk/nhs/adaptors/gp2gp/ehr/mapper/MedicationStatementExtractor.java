@@ -44,6 +44,16 @@ public class MedicationStatementExtractor {
 
     public static String extractDispenseRequestQuantityText(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
+            .getExtension()
+            .stream()
+            .filter(value -> MEDICATION_QUANTITY_TEXT_URL.equals(value.getUrl()))
+            .findFirst()
+            .map(value -> value.getValue().toString())
+            .orElse(DEFAULT_QUANTITY_TEXT);
+    }
+
+    public static String extractDispenseRequestQuantityTextFromQuantity(MedicationRequest medicationRequest){
+        return medicationRequest.getDispenseRequest()
             .getQuantity()
             .getExtension()
             .stream()
