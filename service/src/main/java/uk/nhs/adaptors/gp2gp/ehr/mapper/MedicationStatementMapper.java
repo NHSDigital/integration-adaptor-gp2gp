@@ -179,7 +179,7 @@ public class MedicationStatementMapper {
     private String buildQuantityText(MedicationRequest medicationRequest) {
         if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasUnit()) {
             return medicationRequest.getDispenseRequest().getQuantity().getUnit();
-        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension()) {
+        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
             return extractDispenseRequestQuantityText(medicationRequest);
         }
         return DEFAULT_QUANTITY_TEXT;
