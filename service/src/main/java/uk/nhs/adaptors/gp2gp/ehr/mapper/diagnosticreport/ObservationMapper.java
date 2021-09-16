@@ -214,12 +214,12 @@ public class ObservationMapper {
 
         if (observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText);
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF).append(StringUtils.LF);
             });
         }
 
         if (observation.hasComment()) {
-            interpretationTextAndComment.append(StringUtils.SPACE).append(observation.getComment());
+            interpretationTextAndComment.append(observation.getComment());
         }
 
         if (!interpretationTextAndComment.toString().isBlank()) {

@@ -150,7 +150,7 @@ public class ObservationStatementMapper {
 
         if (observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.SPACE);
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF).append(StringUtils.LF);
             });
         }
 
