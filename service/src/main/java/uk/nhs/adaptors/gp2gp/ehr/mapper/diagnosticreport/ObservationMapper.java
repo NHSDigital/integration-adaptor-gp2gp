@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
@@ -212,13 +211,13 @@ public class ObservationMapper {
             .ifPresent(narrativeStatementsBlock::append);
 
         StringBuilder interpretationTextAndComment = new StringBuilder();
-        
+
         if (observation.hasInterpretation()) {
             CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
                 interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText);
             });
         }
-        
+
         if (observation.hasComment()) {
             interpretationTextAndComment.append(StringUtils.SPACE).append(observation.getComment());
         }
