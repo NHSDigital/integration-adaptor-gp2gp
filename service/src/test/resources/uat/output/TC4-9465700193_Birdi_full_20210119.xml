@@ -1797,9 +1797,9 @@
         <effectiveTime>
             <center value="20210104"/>
         </effectiveTime>
-        <availabilityTime value="20210113143742"/>
+        <availabilityTime value="20210104"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113143742" />
+            <time value="20210104" />
             <agentRef classCode="AGNT">
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
             </agentRef>
@@ -1825,7 +1825,7 @@
         <effectiveTime>
             <center value="20210104"/>
         </effectiveTime>
-        <availabilityTime value="20210113143742" />
+        <availabilityTime value="20210104" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="D9AFFFA2-CD54-4998-8FE9-25E0324B0A8C"/>
@@ -1835,7 +1835,7 @@
                 <effectiveTime>
                     <center value="20210104"/>
                 </effectiveTime>
-                <availabilityTime value="20210113143742" />
+                <availabilityTime value="20210104" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1908,9 +1908,9 @@
         <effectiveTime>
             <center value="20201222"/>
         </effectiveTime>
-        <availabilityTime value="20201222131519"/>
+        <availabilityTime value="20201222"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201222131519" />
+            <time value="20201222" />
             <agentRef classCode="AGNT">
                 <id root="1610A282-3AF8-4763-BB7A-6F1BB96087DA" />
             </agentRef>
@@ -1938,7 +1938,7 @@
         <effectiveTime>
             <center value="20201222"/>
         </effectiveTime>
-        <availabilityTime value="20201222131519"/>
+        <availabilityTime value="20201222"/>
         
         
         <pertinentInformation typeCode="PERT">

@@ -6,7 +6,7 @@
         <effectiveTime>
             <center value="20100630055900"/>
         </effectiveTime>
-        <availabilityTime value="20100630054806" />
+        <availabilityTime value="20100630055900" />
         <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id"/>

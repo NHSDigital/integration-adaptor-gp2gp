@@ -243,7 +243,7 @@
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="ST">Ap 2.400</value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -369,7 +369,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="51463066-3087-424C-9265-EAAC461AFADE"/>
@@ -395,7 +395,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="7.600" unit="1"><translation value="7.600"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -428,7 +428,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="2.840" unit="1"><translation value="2.840"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -474,7 +474,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -507,7 +507,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.315" unit="1"><translation value="0.315"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -563,7 +563,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="111.100" unit="1"><translation value="111.100"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -619,7 +619,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="38.700" unit="1"><translation value="38.700"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -665,7 +665,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="34.800" unit="1"><translation value="34.800"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -688,7 +688,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="220.000" unit="1"><translation value="220.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -711,7 +711,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="7.400" unit="1"><translation value="7.400"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -734,7 +734,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -757,7 +757,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -780,7 +780,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -803,7 +803,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -921,7 +921,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="4209A033-4F0C-490E-8753-607E2799C3D8"/>
@@ -948,7 +948,7 @@ Low plasma Folate</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="1001.000" unit="1"><translation value="1001.000"><originalText>ng/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -971,7 +971,7 @@ Low plasma Folate</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>ng/mL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1090,7 +1090,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100224"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100224"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1211,7 +1211,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="11.000" unit="1"><translation value="11.000"><originalText>ng/mL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1324,7 +1324,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -1436,7 +1436,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="2.500" unit="1"><translation value="2.500"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1559,7 +1559,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
@@ -1569,7 +1569,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1592,7 +1592,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1615,7 +1615,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1638,7 +1638,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1661,7 +1661,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1684,7 +1684,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1707,7 +1707,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1730,7 +1730,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1753,7 +1753,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="8.700" unit="1"><translation value="8.700"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1776,7 +1776,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="77.700" unit="1"><translation value="77.700"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1793,7 +1793,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="1.600" unit="1"><translation value="1.600"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1816,7 +1816,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="14.300" unit="1"><translation value="14.300"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1833,7 +1833,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1856,7 +1856,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="7.100" unit="1"><translation value="7.100"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1873,7 +1873,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1896,7 +1896,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -1913,7 +1913,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -1936,7 +1936,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2040,7 +2040,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="54BF1314-A4AF-4A19-9BB9-32290AA6718B"/>
@@ -2081,7 +2081,7 @@ Triglyceride reference range
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -2120,7 +2120,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="6.100" unit="1"><translation value="6.100"><originalText>mmol/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2137,7 +2137,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>mmol/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2161,7 +2161,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="3A6624B4-CC4F-46DF-8051-B739D6ACD920"/>
@@ -2171,7 +2171,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2194,7 +2194,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>iu/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2218,7 +2218,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>iu/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2241,7 +2241,7 @@ Interpretation: TURBID</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="41.000" unit="1"><translation value="41.000"><originalText>g/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2358,7 +2358,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C0DCF0FF-BB2B-473F-BC5B-2A8C91532824"/>
@@ -2368,7 +2368,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2391,7 +2391,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2414,7 +2414,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2437,7 +2437,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2460,7 +2460,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2483,7 +2483,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2506,7 +2506,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2529,7 +2529,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2552,7 +2552,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="8.700" unit="1"><translation value="8.700"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2575,7 +2575,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="77.700" unit="1"><translation value="77.700"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2592,7 +2592,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="1.600" unit="1"><translation value="1.600"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2615,7 +2615,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="14.300" unit="1"><translation value="14.300"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2632,7 +2632,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2655,7 +2655,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="7.100" unit="1"><translation value="7.100"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2672,7 +2672,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2695,7 +2695,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2712,7 +2712,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2735,7 +2735,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -2848,7 +2848,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="3287DABC-6A46-4DD6-B99F-DB53886E7898"/>
@@ -2876,7 +2876,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2899,7 +2899,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.100" unit="1"><translation value="0.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2922,7 +2922,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="14.800" unit="1"><translation value="14.800"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2945,7 +2945,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.448" unit="1"><translation value="0.448"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2968,7 +2968,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -2991,7 +2991,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3014,7 +3014,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="33.100" unit="1"><translation value="33.100"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3037,7 +3037,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="88.500" unit="1"><translation value="88.500"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3060,7 +3060,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3093,7 +3093,7 @@ red blood cell seen, Note low platelets</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3149,7 +3149,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="119.000" unit="1"><translation value="119.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3195,7 +3195,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="5.050" unit="1"><translation value="5.050"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3228,7 +3228,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="12.600" unit="1"><translation value="12.600"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3296,7 +3296,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="379A459F-11B6-43DB-9083-2C4F0E4F1651"/>
@@ -3306,7 +3306,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="1.830" unit="1"><translation value="1.830"><originalText>cP</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3458,7 +3458,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="2F07A8F4-8A59-4A31-A906-4E1CE5033124"/>
@@ -3484,7 +3484,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.700" unit="1"><translation value="4.700"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3501,7 +3501,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.710" unit="1"><translation value="4.710"><originalText>10*12/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3518,7 +3518,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="14.600" unit="1"><translation value="14.600"><originalText>g/dL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3535,7 +3535,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.422" unit="1"><translation value="0.422"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3552,7 +3552,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>fL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3569,7 +3569,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="31.900" unit="1"><translation value="31.900"><originalText>pg</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3586,7 +3586,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/dL</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3603,7 +3603,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="232.000" unit="1"><translation value="232.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3620,7 +3620,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="1.900" unit="1"><translation value="1.900"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3637,7 +3637,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3654,7 +3654,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.500" unit="1"><translation value="0.500"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3671,7 +3671,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.300" unit="1"><translation value="0.300"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3688,7 +3688,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -3789,7 +3789,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="IVL_PQ"><low value="1000.000" unit="1" inclusive="true"><translation value="1000.000"><originalText>ng/L</originalText></translation></low></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3812,7 +3812,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="421.000" unit="1"><translation value="421.000"><originalText>ug/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -3927,7 +3927,7 @@ Quantity: 1750.000 mL
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E795F494-93E3-42AD-9FC2-91D3C51D5B3C"/>
@@ -3937,7 +3937,7 @@ Quantity: 1750.000 mL
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="IVL_PQ"><high value="0.500" unit="1" inclusive="true"><translation value="0.500"><originalText>g/L</originalText></translation></high></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -4053,7 +4053,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.900" unit="1"><translation value="0.900"><originalText>ug/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4169,7 +4169,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="IVL_PQ"><low value="200.000" unit="1" inclusive="false"><translation value="200.000"><originalText>mg/L</originalText></translation></low></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4272,7 +4272,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="CFED96FD-7E48-4E34-A3CC-4DD0814C84C4"/>
@@ -4298,7 +4298,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.700" unit="1"><translation value="4.700"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4321,7 +4321,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.710" unit="1"><translation value="4.710"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4344,7 +4344,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="14.600" unit="1"><translation value="14.600"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4367,7 +4367,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.422" unit="1"><translation value="0.422"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4390,7 +4390,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="91.000" unit="1"><translation value="91.000"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4413,7 +4413,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="31.900" unit="1"><translation value="31.900"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4436,7 +4436,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4459,7 +4459,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="232.000" unit="1"><translation value="232.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4482,7 +4482,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="1.900" unit="1"><translation value="1.900"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4505,7 +4505,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4528,7 +4528,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.500" unit="1"><translation value="0.500"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4551,7 +4551,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.300" unit="1"><translation value="0.300"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4574,7 +4574,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4604,7 +4604,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="1.530" unit="1"><translation value="1.530"><originalText>cP</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4627,7 +4627,7 @@ Interpretation: Neutropaenia, Occasional atypical lymphocyte seen</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -4760,7 +4760,7 @@ CommentDate:20100223000000
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D714A840-2256-4BDD-8B3A-8DD783A5E709"/>
@@ -4770,7 +4770,7 @@ CommentDate:20100223000000
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.100" unit="1"><translation value="4.100"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4816,7 +4816,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="53847A06-6B81-4A50-BF84-C5588990485A"/>
@@ -4826,7 +4826,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="89.000" unit="1"><translation value="89.000"><originalText>u/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4872,7 +4872,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="FB01369F-2A94-4D0B-AC2F-843879B69915"/>
@@ -4898,7 +4898,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="138.000" unit="1"><translation value="138.000"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4931,7 +4931,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="3.100" unit="1"><translation value="3.100"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -4977,7 +4977,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="102.000" unit="1"><translation value="102.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5000,7 +5000,7 @@ Interpretation: LO - Below low reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="6.100" unit="1"><translation value="6.100"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5045,7 +5045,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="1E177544-82E7-4D6A-8473-69BC8FC74AB1"/>
@@ -5081,7 +5081,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="135.000" unit="1"><translation value="135.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5137,7 +5137,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="262.000" unit="1"><translation value="262.000"><originalText>iu/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5195,7 +5195,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="87.000" unit="1"><translation value="87.000"><originalText>iu/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5251,7 +5251,7 @@ Interpretation: HI - Above high reference limit</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="33.000" unit="1"><translation value="33.000"><originalText>g/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5409,7 +5409,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="AFAF69CF-48F7-44C2-AAE1-F97BFD3A7889"/>
@@ -5419,7 +5419,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100224"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100224"/>
             <value xsi:type="PQ" value="20.700" unit="1"><translation value="20.700"><originalText>s</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -5454,7 +5454,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100224"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100224"/>
             <value xsi:type="PQ" value="1.700" unit="1"><translation value="1.700"></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5584,7 +5584,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="EDB6C384-5849-4918-BC2D-35C774EC1964"/>
@@ -5594,7 +5594,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="310.000" unit="1"><translation value="310.000"><originalText>ku/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5634,7 +5634,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FFC39E77-6B59-4747-A07C-3A610AFABD22"/>
@@ -5644,7 +5644,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5780,7 +5780,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="310.000" unit="1"><translation value="310.000"><originalText>ku/L</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -5797,7 +5797,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -5911,7 +5911,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="61DA7AC7-3174-4474-95C5-8D2C070AB61A"/>
@@ -5921,7 +5921,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6001,7 +6001,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="B1F21EA9-37F8-4D34-950E-9FD3C9B33337"/>
@@ -6011,7 +6011,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.800" unit="1"><translation value="8.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6080,7 +6080,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="4F8A90D2-C07C-407F-AC1F-118F6B2657A3"/>
@@ -6090,7 +6090,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -6225,7 +6225,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="876133BE-1895-49FC-8D1C-7B4018463B8D"/>
@@ -6235,7 +6235,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="8.500" unit="1"><translation value="8.500"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6258,7 +6258,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.730" unit="1"><translation value="4.730"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6281,7 +6281,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="12.500" unit="1"><translation value="12.500"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6304,7 +6304,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.395" unit="1"><translation value="0.395"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6327,7 +6327,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="88.900" unit="1"><translation value="88.900"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6350,7 +6350,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="29.300" unit="1"><translation value="29.300"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6373,7 +6373,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="34.600" unit="1"><translation value="34.600"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6396,7 +6396,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="304.000" unit="1"><translation value="304.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6419,7 +6419,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6442,7 +6442,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="1.100" unit="1"><translation value="1.100"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6465,7 +6465,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.400" unit="1"><translation value="0.400"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6488,7 +6488,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="IVL_PQ"><high value="0.100" unit="1" inclusive="false"><translation value="0.100"><originalText>10*9/L</originalText></translation></high></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6511,7 +6511,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6633,7 +6633,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="DBB2BEBF-D286-48DA-9793-AE7BC666EC8D"/>
@@ -6643,7 +6643,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.200" unit="1"><translation value="11.200"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6666,7 +6666,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="3.970" unit="1"><translation value="3.970"><originalText>10*12/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6689,7 +6689,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="11.700" unit="1"><translation value="11.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6712,7 +6712,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.389" unit="1"><translation value="0.389"><originalText>%</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6735,7 +6735,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="97.500" unit="1"><translation value="97.500"><originalText>fL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6758,7 +6758,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="31.800" unit="1"><translation value="31.800"><originalText>pg</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6781,7 +6781,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="35.700" unit="1"><translation value="35.700"><originalText>g/dL</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6804,7 +6804,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="281.000" unit="1"><translation value="281.000"><originalText>10*9/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -6827,7 +6827,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="76.500" unit="1"><translation value="76.500"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6844,7 +6844,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="15.300" unit="1"><translation value="15.300"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6861,7 +6861,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="7.400" unit="1"><translation value="7.400"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6878,7 +6878,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.800" unit="1"><translation value="0.800"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6895,7 +6895,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100225"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100225"/>
             <value xsi:type="PQ" value="0.000" unit="1"><translation value="0.000"><originalText>%</originalText></translation></value>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
@@ -6999,7 +6999,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="0E71DDF8-036B-46D1-8D80-3C644BEE7792"/>
@@ -7009,7 +7009,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -7157,7 +7157,7 @@ Fasting Status: F
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <value xsi:type="PQ" value="4.800" unit="1"><translation value="4.800"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -7271,7 +7271,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="F8732698-CF32-4373-B32E-B53FC2B975BF"/>
@@ -7282,7 +7282,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7439,7 +7439,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7569,7 +7569,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20100223"/>
         </effectiveTime>
-        <availabilityTime value="20100225154100"/>
+        <availabilityTime value="20100223"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7688,7 +7688,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="64EE9F15-9718-4738-8187-455BE2A44C29"/>
@@ -7727,7 +7727,7 @@ Dr. N.O&apos;Connell</text>
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7781,7 +7781,7 @@ Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous gl
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7835,7 +7835,7 @@ Interpretation: PA - Potentially abnormal  Fasting       4.3            negative
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -7889,7 +7889,7 @@ Interpretation: PA - Potentially abnormal      GLYCAEMIA
         <effectiveTime>
             <center value="20030109"/>
         </effectiveTime>
-        <availabilityTime value="20030221115000"/>
+        <availabilityTime value="20030109"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8032,7 +8032,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="0009DEB3-D325-46CC-B488-CB9C0AF5A563"/>
@@ -8069,7 +8069,7 @@ rheumatoid factor tests.</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8118,7 +8118,7 @@ Interpretation: NEGATIVE</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8180,7 +8180,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="FF8676A8-0CEF-4D8C-8ED1-7F652ADDD58C"/>
@@ -8191,7 +8191,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8247,7 +8247,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D3B97C2F-5B0A-483C-8E8C-D16590B249D0"/>
@@ -8258,7 +8258,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8313,7 +8313,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="D623A941-D069-4164-B911-3D36F4E10583"/>
@@ -8323,7 +8323,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8379,7 +8379,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C381F016-415D-4C05-B5A3-5C257BDF209D"/>
@@ -8390,7 +8390,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8445,7 +8445,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="BD99E14B-4B48-4BE7-9BB2-1CD3BCB9281A"/>
@@ -8455,7 +8455,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8511,7 +8511,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="6B98D8A9-E1F3-4059-A2E6-62814CEC72A6"/>
@@ -8522,7 +8522,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8578,7 +8578,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="A9ACF4E9-006D-45D2-90E4-2CD1BCE6ABEF"/>
@@ -8589,7 +8589,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8644,7 +8644,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="17814417-92EC-4543-9E1B-F71C2A2ABAE8"/>
@@ -8654,7 +8654,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8710,7 +8710,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="2599B42F-4D97-4012-8C2D-65415306E703"/>
@@ -8721,7 +8721,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8777,7 +8777,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="7C3F9C32-3622-4593-9A20-61909E688A24"/>
@@ -8788,7 +8788,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20110219"/>
         </effectiveTime>
-        <availabilityTime value="20110220155300"/>
+        <availabilityTime value="20110219"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -8924,7 +8924,7 @@ Status: unknown</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <NarrativeStatement classCode="OBS" moodCode="EVN">
         <id root="DA4FE11D-8CAB-4E14-A8BF-BFA776FBD615"/>
@@ -8950,7 +8950,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="79.000" unit="1"><translation value="79.000"><originalText>g/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -8973,7 +8973,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="35.000" unit="1"><translation value="35.000"><originalText>g/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -8996,7 +8996,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="2.230" unit="1"><translation value="2.230"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9020,7 +9020,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="2.380" unit="1"><translation value="2.380"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9053,7 +9053,7 @@ Interpretation: Abnormal</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -9092,7 +9092,7 @@ Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="130.000" unit="1"><translation value="130.000"><originalText>iu/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9137,7 +9137,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="549F49F2-A088-4339-8D3F-70C5029E9F16"/>
@@ -9148,7 +9148,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="3.200" unit="1"><translation value="3.200"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9171,7 +9171,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="141.000" unit="1"><translation value="141.000"><originalText>mmol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9204,7 +9204,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -9244,7 +9244,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="85.000" unit="1"><translation value="85.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9289,7 +9289,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="E207BF0E-7F80-4E1C-9BC7-15736EDA421C"/>
@@ -9299,7 +9299,7 @@ Interpretation: (q) - Normal - No Action</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>mg/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9361,7 +9361,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="83EE39A2-A583-4E6C-8D7E-85BBB0677F69"/>
@@ -9371,7 +9371,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9433,7 +9433,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="C78FD3AB-71EF-4F2D-BE8C-930469DC2729"/>
@@ -9443,7 +9443,7 @@ Interpretation: (q) - Abnormal - Contact Patient</text>
         <effectiveTime>
             <center value="20030616"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime value="20030616"/>
             <value xsi:type="PQ" value="45.000" unit="1"><translation value="45.000"><originalText>umol/L</originalText></translation></value>
             <referenceRange typeCode="REFV">
     <referenceInterpretationRange classCode="OBS" moodCode="EVN.CRT">
@@ -9596,7 +9596,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20120726"/>
         </effectiveTime>
-        <availabilityTime value="20120726134600"/>
+        <availabilityTime value="20120726"/>
             <component typeCode="COMP" contextConductionInd="true">
     <ObservationStatement classCode="OBS" moodCode="EVN">
         <id root="8E5B1C8C-F1DD-4D61-A75D-DE6D9DC182A1"/>
@@ -9607,7 +9607,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20120726"/>
         </effectiveTime>
-        <availabilityTime value="20120726134600"/>
+        <availabilityTime value="20120726"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D"/>
@@ -9752,9 +9752,9 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20201215"/>
         </effectiveTime>
-        <availabilityTime value="20201215145926"/>
+        <availabilityTime value="20201215"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201215145926" />
+            <time value="20201215" />
             <agentRef classCode="AGNT">
                 <id root="3BFD78DE-03BF-44FD-96BC-CDF3DB2CC039" />
             </agentRef>
@@ -9782,7 +9782,7 @@ Status: unknown</text>
         <effectiveTime>
             <center value="20201215"/>
         </effectiveTime>
-        <availabilityTime value="20201215145926"/>
+        <availabilityTime value="20201215"/>
         
         
         <pertinentInformation typeCode="PERT">

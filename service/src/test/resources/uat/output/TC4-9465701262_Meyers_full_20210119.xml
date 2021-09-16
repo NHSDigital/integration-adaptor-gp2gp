@@ -295,7 +295,7 @@
         <effectiveTime>
             <center value="20190708143500"/>
         </effectiveTime>
-        <availabilityTime value="20201125143734"/>
+        <availabilityTime value="20190708143500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -451,7 +451,7 @@
         <effectiveTime>
             <center value="20201109132500"/>
         </effectiveTime>
-        <availabilityTime value="20201117132807"/>
+        <availabilityTime value="20201109132500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -495,7 +495,7 @@
         <effectiveTime>
             <center value="20201109132500"/>
         </effectiveTime>
-        <availabilityTime value="20201117152638"/>
+        <availabilityTime value="20201109132500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -630,7 +630,7 @@
         <effectiveTime>
             <center value="20201117"/>
         </effectiveTime>
-        <availabilityTime value="20201117111152"/>
+        <availabilityTime value="20201117"/>
         <value xsi:type="PQ" value="27.000" unit="1"><translation value="27.000"><originalText>kg/m2</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -835,7 +835,7 @@
         <effectiveTime>
             <center value="20201117"/>
         </effectiveTime>
-        <availabilityTime value="20201117133617"/>
+        <availabilityTime value="20201117"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -910,7 +910,7 @@
         <effectiveTime>
             <center value="20201118135600"/>
         </effectiveTime>
-        <availabilityTime value="20201118135905" />
+        <availabilityTime value="20201118135600" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -5551,9 +5551,9 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20201118142753"/>
+        <availabilityTime nullFlavor="UNK"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118142753" />
+            <time nullFlavor="UNK" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -5580,7 +5580,7 @@
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20201118142753" />
+        <availabilityTime nullFlavor="UNK" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -5605,9 +5605,9 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201118135652"/>
+        <availabilityTime value="20201102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118135652" />
+            <time value="20201102" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -5634,7 +5634,7 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201118135652" />
+        <availabilityTime value="20201102" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -6053,9 +6053,9 @@
         <effectiveTime>
             <center value="20190613"/>
         </effectiveTime>
-        <availabilityTime value="20201125140917"/>
+        <availabilityTime value="20190613"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201125140917" />
+            <time value="20190613" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6083,7 +6083,7 @@
         <effectiveTime>
             <center value="20190613"/>
         </effectiveTime>
-        <availabilityTime value="20201125140917"/>
+        <availabilityTime value="20190613"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6110,9 +6110,9 @@
         <effectiveTime>
             <center value="20201015"/>
         </effectiveTime>
-        <availabilityTime value="20201125135903"/>
+        <availabilityTime value="20201015"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201125135903" />
+            <time value="20201015" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6139,7 +6139,7 @@
         <effectiveTime>
             <center value="20201015"/>
         </effectiveTime>
-        <availabilityTime value="20201125135903"/>
+        <availabilityTime value="20201015"/>
         <value xsi:type="PQ" value="14.000" unit="1"><translation value="14.000"><originalText>10*12 cells/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -6166,9 +6166,9 @@
         <effectiveTime>
             <center value="20201015"/>
         </effectiveTime>
-        <availabilityTime value="20201015110538"/>
+        <availabilityTime value="20201015"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201015110538" />
+            <time value="20201015" />
             <agentRef classCode="AGNT">
                 <id root="6B7B5C05-E36B-45EA-BE2B-C99A9A04FD1E" />
             </agentRef>
@@ -6196,7 +6196,7 @@
         <effectiveTime>
             <center value="20201015"/>
         </effectiveTime>
-        <availabilityTime value="20201015110538"/>
+        <availabilityTime value="20201015"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6223,9 +6223,9 @@
         <effectiveTime>
             <center value="20201101"/>
         </effectiveTime>
-        <availabilityTime value="20201118141948"/>
+        <availabilityTime value="20201101"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118141948" />
+            <time value="20201101" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6252,7 +6252,7 @@
         <effectiveTime>
             <center value="20201101"/>
         </effectiveTime>
-        <availabilityTime value="20201118141948"/>
+        <availabilityTime value="20201101"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6279,9 +6279,9 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201117154752"/>
+        <availabilityTime value="20201102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117154752" />
+            <time value="20201102" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6308,7 +6308,7 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201117154752"/>
+        <availabilityTime value="20201102"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6335,9 +6335,9 @@
         <effectiveTime>
             <center value="20201104"/>
         </effectiveTime>
-        <availabilityTime value="20201118141757"/>
+        <availabilityTime value="20201104"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118141757" />
+            <time value="20201104" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6364,7 +6364,7 @@
         <effectiveTime>
             <center value="20201104"/>
         </effectiveTime>
-        <availabilityTime value="20201118141757"/>
+        <availabilityTime value="20201104"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6391,9 +6391,9 @@
         <effectiveTime>
             <center value="20201109"/>
         </effectiveTime>
-        <availabilityTime value="20201118141731"/>
+        <availabilityTime value="20201109"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118141731" />
+            <time value="20201109" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6421,7 +6421,7 @@
         <effectiveTime>
             <center value="20201109"/>
         </effectiveTime>
-        <availabilityTime value="20201118141731"/>
+        <availabilityTime value="20201109"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6448,9 +6448,9 @@
         <effectiveTime>
             <center value="20201109"/>
         </effectiveTime>
-        <availabilityTime value="20201117154825"/>
+        <availabilityTime value="20201109"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117154825" />
+            <time value="20201109" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6477,7 +6477,7 @@
         <effectiveTime>
             <center value="20201109"/>
         </effectiveTime>
-        <availabilityTime value="20201117154825"/>
+        <availabilityTime value="20201109"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6504,9 +6504,9 @@
         <effectiveTime>
             <center value="20201110"/>
         </effectiveTime>
-        <availabilityTime value="20201118142015"/>
+        <availabilityTime value="20201110"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201118142015" />
+            <time value="20201110" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6533,7 +6533,7 @@
         <effectiveTime>
             <center value="20201110"/>
         </effectiveTime>
-        <availabilityTime value="20201118142015"/>
+        <availabilityTime value="20201110"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6560,9 +6560,9 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201117154847"/>
+        <availabilityTime value="20201116"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117154847" />
+            <time value="20201116" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6589,7 +6589,7 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201117154847"/>
+        <availabilityTime value="20201116"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6616,9 +6616,9 @@
         <effectiveTime>
             <center value="20201117"/>
         </effectiveTime>
-        <availabilityTime value="20201117132509"/>
+        <availabilityTime value="20201117"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201117132509" />
+            <time value="20201117" />
             <agentRef classCode="AGNT">
                 <id root="8D1610C2-5E48-4ED5-882B-5A4A172AFA35" />
             </agentRef>
@@ -6645,7 +6645,7 @@
         <effectiveTime>
             <center value="20201117"/>
         </effectiveTime>
-        <availabilityTime value="20201117132509"/>
+        <availabilityTime value="20201117"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -6672,9 +6672,9 @@
         <effectiveTime>
             <center value="20201216"/>
         </effectiveTime>
-        <availabilityTime value="20201216105122"/>
+        <availabilityTime value="20201216"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201216105122" />
+            <time value="20201216" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -6701,7 +6701,7 @@
         <effectiveTime>
             <center value="20201216"/>
         </effectiveTime>
-        <availabilityTime value="20201216105122"/>
+        <availabilityTime value="20201216"/>
         
         
         <pertinentInformation typeCode="PERT">

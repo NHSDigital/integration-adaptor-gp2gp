@@ -54,21 +54,20 @@ public class AllergyStructureMapperTest {
     private static final String INPUT_JSON_WITH_REACTION = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-11.json";
     private static final String INPUT_JSON_WITH_NO_CATEGORY = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-12.json";
     private static final String INPUT_JSON_WITH_UNSUPPORTED_CATEGORY = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-13.json";
-    private static final String INPUT_JSON_WITH_NO_ASSERTED_DATE = TEST_FILE_DIRECTORY + "example-allergy-intolerance-resource-14.json";
     private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_ONE_NOTE = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-15.json";
+        + "example-allergy-intolerance-resource-14.json";
     private static final String INPUT_JSON_WITH_RELATION_TO_CONDITION_WITH_TWO_NOTES = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-16.json";
+        + "example-allergy-intolerance-resource-15.json";
     private static final String INPUT_JSON_WITH_NO_RELATION_TO_CONDITION = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-17.json";
+        + "example-allergy-intolerance-resource-16.json";
     private static final String INPUT_JSON_WITH_DEVICE_RECORDER_AND_ASSERTER = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-18.json";
+        + "example-allergy-intolerance-resource-17.json";
     private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-19.json";
+        + "example-allergy-intolerance-resource-18.json";
     private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NAME_TEXT = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-20.json";
+        + "example-allergy-intolerance-resource-19.json";
     private static final String INPUT_JSON_WITH_RELATED_PERSON_ASSERTER_NO_NAME = TEST_FILE_DIRECTORY
-        + "example-allergy-intolerance-resource-21.json";
+        + "example-allergy-intolerance-resource-20.json";
 
     private static final String OUTPUT_XML_USES_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-1.xml";
     private static final String OUTPUT_XML_USES_NO_OPTIONAL_TEXT_FIELDS = TEST_FILE_DIRECTORY + "expected-output-allergy-structure-2.xml";
@@ -130,8 +129,7 @@ public class AllergyStructureMapperTest {
     private static Stream<Arguments> resourceInvalidFileParams() {
         return Stream.of(
             Arguments.of(INPUT_JSON_WITH_NO_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY),
-            Arguments.of(INPUT_JSON_WITH_NO_ASSERTED_DATE)
+            Arguments.of(INPUT_JSON_WITH_UNSUPPORTED_CATEGORY)
         );
     }
 
