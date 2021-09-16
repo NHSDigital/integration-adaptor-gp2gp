@@ -23,7 +23,7 @@ import java.util.Optional;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils.extractTextOrCoding;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTime;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForBloodPressureNote;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils.prepareEffectiveTimeForObservation;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils.loadTemplate;
 
@@ -86,7 +86,7 @@ public class BloodPressureMapper {
         extractNarrativeText(observation).ifPresent(narrativeText -> {
             builder.narrativeId(randomIdGeneratorService.createNewId());
             builder.narrativeText(narrativeText);
-            builder.narrativeAvailabilityTime(prepareAvailabilityTimeForBloodPressureNote(observation));
+            builder.narrativeAvailabilityTime(prepareAvailabilityTimeForObservationStatement(observation));
         });
 
         if (observation.hasPerformer()) {
