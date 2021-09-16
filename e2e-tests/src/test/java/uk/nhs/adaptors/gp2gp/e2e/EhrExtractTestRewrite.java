@@ -13,6 +13,7 @@ import org.xmlunit.assertj.XmlAssert;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -147,6 +148,14 @@ public class EhrExtractTestRewrite {
         assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_1, FROM_ODS_CODE_1);
         assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_LARGE);
         assertThatDocumentsWasSentInParts(conversationId, 1);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+                .compressedEhr(true)
+                .numberOfMessages(3)
+                .numberOfExternalAttachments(1)
+                .numberOAttachments(0)
+                .build()
+        );
     }
 
     @Test
@@ -159,6 +168,14 @@ public class EhrExtractTestRewrite {
         assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER_LARGE_DOCUMENTS_2, FROM_ODS_CODE_1);
         assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_LARGE_2);
         assertThatDocumentsWasSentInParts(conversationId, 3);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+                .compressedEhr(true)
+                .numberOfMessages(5)
+                .numberOfExternalAttachments(1)
+                .numberOAttachments(0)
+                .build()
+        );
     }
 
     @Test
@@ -169,7 +186,14 @@ public class EhrExtractTestRewrite {
 
         assertHappyPathWithoutDocuments(conversationId, NHS_NUMBER, FROM_ODS_CODE_1);
         assertThatFirstDocumentWasFetched(conversationId, DOCUMENT_ID_NORMAL);
-//        assertEhrExtractSentAsAttachment(conversationId);
+        assertMessagesWereSentToMhs(
+            MhsMessageAssertions.builder()
+                .compressedEhr(true)
+                .numberOfMessages(6)
+                .numberOfExternalAttachments(2)
+                .numberOAttachments(0)
+                .build()
+        );
     }
 
     private void assertHappyPathWithoutDocuments(String conversationId, String nhsNumber, String fromOdsCode) {
@@ -305,8 +329,7 @@ public class EhrExtractTestRewrite {
     }
 
     // TODO: 08/09/2021 add mhsAssertions to other tests
-    private void assertMessagesWereSentToMhs(MhsMessageAssertions messageAssertions)
-        throws InterruptedException, IOException {
+    private void assertMessagesWereSentToMhs(MhsMessageAssertions messageAssertions) throws InterruptedException, IOException {
         var mhsMockRequests = mhsMockRequestsJournal.getRequestsJournal();
         assertThat(mhsMockRequests).hasSize(messageAssertions.numberOfMessages);
 
@@ -317,7 +340,7 @@ public class EhrExtractTestRewrite {
             assertThat(ehrExtractMhsRequest.getExternalAttachments()).hasSize(messageAssertions.numberOfExternalAttachments);
 
         // TODO: 08/09/2021 make non compressed ehrExtractVersion
-        if (messageAssertions.compressedEhr) {
+        if (messageAssertions.compressedEhr && messageAssertions.getNumberOAttachments() > 0) {
             var payload = ehrExtractMhsRequest.getPayload();
             var attachment = ehrExtractMhsRequest.getAttachments().get(0);
 
@@ -326,10 +349,7 @@ public class EhrExtractTestRewrite {
             assertThat(attachment.getIsBase64()).isEqualTo("false");
 
             var description = attachment.getDescription();
-            var descriptionElements = Arrays.stream(description.split("\n"))
-                .filter(StringUtils::isNotBlank)
-                .map(value -> value.split("="))
-                .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
+            var descriptionElements = splitDescriptionElement(description);
 
             assertThat(descriptionElements).containsEntry("ContentType", "application/xml");
             assertThat(descriptionElements).containsEntry("Compressed", "Yes");
@@ -341,11 +361,18 @@ public class EhrExtractTestRewrite {
             });
             assertThat(descriptionElements).containsEntry("DomainData", "X-GP2GP-Skeleton: Yes");
             assertThat(descriptionElements).containsKey("Filename");
-            var fileName = descriptionElements.get("Filename");
 
+            var fileName = descriptionElements.get("Filename");
             var documentReferenceXPath = String.format(DOCUMENT_REFERENCE_XPATH_TEMPLATE, fileName);
             XmlAssert.assertThat(payload).hasXPath(documentReferenceXPath);
         }
+    }
+
+    private Map<String, String> splitDescriptionElement(String description) {
+        return Arrays.stream(description.split("\n"))
+            .filter(StringUtils::isNotBlank)
+            .map(value -> value.split("="))
+            .collect(Collectors.toMap(x -> x[0].trim(), x -> x[1]));
     }
 
     @Builder
@@ -356,5 +383,7 @@ public class EhrExtractTestRewrite {
         private final int numberOfExternalAttachments;
         @Builder.Default
         private final boolean compressedEhr = false;
+        @Builder.Default
+        private final boolean splitCompressedEhr = false;
     }
 }

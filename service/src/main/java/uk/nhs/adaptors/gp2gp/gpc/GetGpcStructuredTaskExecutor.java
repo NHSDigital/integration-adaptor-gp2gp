@@ -236,7 +236,16 @@ public class GetGpcStructuredTaskExecutor implements TaskExecutor<GetGpcStructur
             OutboundMessage.Attachment.builder()
                 .contentType(XML_CONTENT_TYPE)
                 .isBase64(Boolean.FALSE.toString())
-                .description(taskDefinition.getDocumentId())
+                .description(OutboundMessage.AttachmentDescription.builder()
+                    .fileName(documentName)
+                    .contentType(XML_CONTENT_TYPE) // confirm this is correct
+                    .length(getBytesLengthOfString(ehrExtract))
+                    .compressed(true) // always compressed at this stage
+                    .largeAttachment(true)
+                    .originalBase64(false)
+                    .domainData(SKELETON_ATTACHMENT)
+                    .build()
+                    .toString())
                 .payload(ehrExtract)
                 .build());
         var outboundMessage = OutboundMessage.builder()
