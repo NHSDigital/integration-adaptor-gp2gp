@@ -2,7 +2,6 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractOnsetDate;
 import static uk.nhs.adaptors.gp2gp.ehr.mapper.AllergyStructureExtractor.extractReaction;
-import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toHl7Format;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil.toTextFormat;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
@@ -30,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.AllergyStructureTemplateParameters.AllergyStructureTemplateParametersBuilder;
+import uk.nhs.adaptors.gp2gp.ehr.utils.DateFormatUtil;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -68,7 +68,7 @@ public class AllergyStructureMapper {
             .pertinentInformation(buildPertinentInformation(allergyIntolerance))
             .code(buildCode(allergyIntolerance))
             .effectiveTime(buildEffectiveTime(allergyIntolerance))
-            .availabilityTime(toHl7Format(allergyIntolerance.getAssertedDateElement()));
+            .availabilityTime(buildAvailabilityTime(allergyIntolerance));
 
         buildCategory(allergyIntolerance, allergyStructureTemplateParameters);
 
@@ -112,6 +112,14 @@ public class AllergyStructureMapper {
             }
         }
         throw new EhrMapperException("Allergy code not present");
+    }
+
+    private String buildAvailabilityTime(AllergyIntolerance allergyIntolerance) {
+        return Optional.of(allergyIntolerance)
+            .filter(AllergyIntolerance:: hasOnsetDateTimeType)
+            .map(AllergyIntolerance:: getOnsetDateTimeType)
+            .map(DateFormatUtil:: toHl7Format)
+            .orElse(StringUtils.EMPTY);
     }
 
     private String buildEffectiveTime(AllergyIntolerance allergyIntolerance) {

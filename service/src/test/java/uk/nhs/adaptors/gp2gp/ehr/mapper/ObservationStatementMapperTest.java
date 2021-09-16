@@ -47,8 +47,6 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-3.json";
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY
         + "example-observation-resource-4.json";
-    private static final String INPUT_JSON_WITH_NO_DATES = TEST_FILE_DIRECTORY
-        + "example-observation-resource-5.json";
     private static final String INPUT_JSON_WITH_STRING_VALUE = TEST_FILE_DIRECTORY
         + "example-observation-resource-6.json";
     private static final String INPUT_JSON_WITH_QUANTITY_VALUE = TEST_FILE_DIRECTORY
@@ -232,15 +230,6 @@ public class ObservationStatementMapperTest {
         String outputMessage = observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true);
 
         assertThat(outputMessage).isEqualTo(expectedOutputMessage);
-    }
-
-    @Test
-    public void When_MappingParsedObservationJsonWithNoDates_Expect_Exception() throws IOException {
-        var jsonInput = ResourceTestFileUtils.getFileContent(INPUT_JSON_WITH_NO_DATES);
-        Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
-
-        assertThrows(EhrMapperException.class, ()
-            -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true));
     }
 
     @Test

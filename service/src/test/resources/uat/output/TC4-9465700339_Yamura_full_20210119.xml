@@ -287,7 +287,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -312,7 +312,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -337,7 +337,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -361,7 +361,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050201" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="5A074D71-AEBD-473C-815F-CD64255B87EB"/>
@@ -372,7 +372,7 @@
                 <effectiveTime>
                     <center value="20050201"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050201" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -396,7 +396,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -421,7 +421,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -497,7 +497,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -522,7 +522,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="76.204" unit="1"><translation value="76.204"><originalText>kg</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -548,7 +548,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="22.700" unit="1"><translation value="22.700"><originalText>kg/m2</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -573,7 +573,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="1.829" unit="1"><translation value="1.829"><originalText>m</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -599,7 +599,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -625,7 +625,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -650,7 +650,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -676,7 +676,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -702,7 +702,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -728,7 +728,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -754,7 +754,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -780,7 +780,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -805,7 +805,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -831,7 +831,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -857,7 +857,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -882,7 +882,7 @@
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -940,7 +940,7 @@
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -972,7 +972,7 @@ Low</text>
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="16.000" unit="1"><translation value="16.000"><originalText>[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1004,7 +1004,7 @@ Weeks: 4. Very Low</text>
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>g/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1036,7 +1036,7 @@ Abnormal Abnormal</text>
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="IVL_PQ"><low value="6.000" unit="1" inclusive="true"><translation value="6.000"><originalText>[iU]/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1068,7 +1068,7 @@ High</text>
         <effectiveTime>
             <center value="20050208"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050208"/>
         <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1149,7 +1149,7 @@ High</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="6.000" unit="1"><translation value="6.000"><originalText>umol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1181,7 +1181,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1209,7 +1209,7 @@ Normal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1236,7 +1236,7 @@ Normal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1261,7 +1261,7 @@ Normal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1286,7 +1286,7 @@ Normal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Negative</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1311,7 +1311,7 @@ Normal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1338,7 +1338,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Negative</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1363,7 +1363,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1389,7 +1389,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1416,7 +1416,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1441,7 +1441,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1466,7 +1466,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1492,7 +1492,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1519,7 +1519,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1544,7 +1544,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1570,7 +1570,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Potential Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1595,7 +1595,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1620,7 +1620,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1646,7 +1646,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Abnormal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1671,7 +1671,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="200502"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200502"/>
         <value xsi:type="ST">Normal</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1697,7 +1697,7 @@ Abnormal</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime nullFlavor="UNK"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1727,7 +1727,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="8.000" unit="1"><translation value="8.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1759,7 +1759,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="7.000" unit="1"><translation value="7.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1789,7 +1789,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><high value="8.000" unit="1" inclusive="false"><translation value="8.000"><originalText>nmol/L</originalText></translation></high></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1819,7 +1819,7 @@ And more stuff</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         <value xsi:type="IVL_PQ"><high value="8.000" unit="1" inclusive="true"><translation value="8.000"><originalText>mmol/L</originalText></translation></high></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1851,7 +1851,7 @@ Year only test result Low</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><low value="7.000" unit="1" inclusive="false"><translation value="7.000"><originalText>mmol/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1881,7 +1881,7 @@ Year only test result Low</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="IVL_PQ"><low value="8.000" unit="1" inclusive="true"><translation value="8.000"><originalText>nmol/L</originalText></translation></low></value>
         
         <pertinentInformation typeCode="PERT">
@@ -1913,7 +1913,7 @@ Very High</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="ST">Ap 6.000 %</value>
         
         <pertinentInformation typeCode="PERT">
@@ -1938,7 +1938,7 @@ Very High</text>
         <effectiveTime>
             <center value="20050209"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050209"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>nmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -2002,7 +2002,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20050723"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050723" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="87AEE307-5DEE-4673-BA2E-622376A2DED4"/>
@@ -2013,7 +2013,7 @@ This should be normal according to the range High</text>
                 <effectiveTime>
                     <center value="20050723"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050723" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2036,7 +2036,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20050722"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20050722" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="E4EC396C-F254-426C-92DA-7DF2AEB8AAC6"/>
@@ -2046,7 +2046,7 @@ This should be normal according to the range High</text>
                 <effectiveTime>
                     <center value="20050722"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20050722" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -2103,7 +2103,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="200411"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200411"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2128,7 +2128,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="2004"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2004"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2240,7 +2240,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime nullFlavor="UNK"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2423,7 +2423,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2448,7 +2448,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2473,7 +2473,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060420"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060420"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2498,7 +2498,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060422"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060422"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2523,7 +2523,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2548,7 +2548,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060421"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060421"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2573,7 +2573,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2598,7 +2598,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2623,7 +2623,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2648,7 +2648,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2706,7 +2706,7 @@ This should be normal according to the range High</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="1200.000" unit="1"><translation value="1200.000"><originalText>m[iU]/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -2771,7 +2771,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060425122200"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425122200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2846,7 +2846,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060425163000"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425163000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2905,7 +2905,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060519"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060519"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2964,7 +2964,7 @@ Abnormal</text>
         <effectiveTime>
             <center value="20060605"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060605"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3043,7 +3043,7 @@ with special characters
         <effectiveTime>
             <center value="20060614"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060614"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3101,7 +3101,7 @@ with special characters
         <effectiveTime>
             <center value="20060811"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060811"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3126,7 +3126,7 @@ with special characters
         <effectiveTime>
             <center value="20060811"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060811"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3184,7 +3184,7 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3209,7 +3209,7 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>mmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3234,7 +3234,7 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="3.000" unit="1"><translation value="3.000"></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3264,7 +3264,7 @@ with special characters
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3291,7 +3291,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3317,7 +3317,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="1.000" unit="1"><translation value="1.000"><originalText>mm/h</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3348,7 +3348,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20060818"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060818"/>
         <value xsi:type="PQ" value="2.000" unit="1"><translation value="2.000"><originalText>nmol/L</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3411,7 +3411,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20060906"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060906"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>[iU]/mL</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -3441,7 +3441,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20060906"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060906"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3512,7 +3512,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3537,7 +3537,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3594,7 +3594,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20080307"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149" />
+        <availabilityTime value="20080307" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="3D83E26F-FCA2-49F8-BC3D-6F0B8BB33C05"/>
@@ -3605,7 +3605,7 @@ abnormality only Very Low</text>
                 <effectiveTime>
                     <center value="20080307"/>
                 </effectiveTime>
-                <availabilityTime value="20131118094149" />
+                <availabilityTime value="20080307" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -3662,7 +3662,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3720,7 +3720,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3778,7 +3778,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3803,7 +3803,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3862,7 +3862,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3888,7 +3888,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3913,7 +3913,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3938,7 +3938,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3964,7 +3964,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3990,7 +3990,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4048,7 +4048,7 @@ abnormality only Very Low</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>%</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4080,7 +4080,7 @@ This is an empty one Abnormal</text>
         <effectiveTime>
             <center value="20090505"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20090505"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4140,7 +4140,7 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20120112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20120112"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4295,9 +4295,9 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20010325"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010325"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20010325" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4324,7 +4324,7 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20010325"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010325"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4351,9 +4351,9 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20010425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20010425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4380,7 +4380,7 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20010425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20010425"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4407,9 +4407,9 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="200112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200112"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="200112" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4436,7 +4436,7 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="200112"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="200112"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4463,9 +4463,9 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20041027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20041027"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20041027" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -4492,7 +4492,7 @@ This is the HepB antutbody notes Absent</text>
         <effectiveTime>
             <center value="20041027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20041027"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4822,9 +4822,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4851,7 +4851,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="20.000" unit="1"><translation value="20.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4878,9 +4878,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4907,7 +4907,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="160.000" unit="1"><translation value="160.000"><originalText>mm[Hg]</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4934,9 +4934,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -4963,7 +4963,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="60.000" unit="1"><translation value="60.000"><originalText>mm[Hg]</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -4990,9 +4990,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20050201" />
             <agentRef classCode="AGNT">
                 <id root="2D70F602-6BB1-47E0-B2EC-39912A59787D" />
             </agentRef>
@@ -5020,7 +5020,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="20050201"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20050201"/>
         <value xsi:type="PQ" value="10.000" unit="1"><translation value="10.000"><originalText>/wk</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5047,9 +5047,9 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="2005" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5076,7 +5076,7 @@ Line breaks in the notes</text>
         <effectiveTime>
             <center value="2005"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="2005"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5320,9 +5320,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5349,7 +5349,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="5.000" unit="1"><translation value="5.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5376,9 +5376,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5405,7 +5405,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5432,9 +5432,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5461,7 +5461,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="6.000" unit="1"><translation value="6.000"><originalText>[oz_av]/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5488,9 +5488,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5517,7 +5517,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="4.000" unit="1"><translation value="4.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -5544,9 +5544,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20060425" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -5573,7 +5573,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20060425"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20060425"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/d</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -6006,9 +6006,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20131118094149" />
+            <time value="20061027" />
             <agentRef classCode="AGNT">
                 <id root="A9BEB770-CF96-44BD-ABFC-609E8643FB34" />
             </agentRef>
@@ -6036,7 +6036,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20061027"/>
         </effectiveTime>
-        <availabilityTime value="20131118094149"/>
+        <availabilityTime value="20061027"/>
         <value xsi:type="PQ" value="12.000" unit="1"><translation value="12.000"><originalText>/wk</originalText></translation></value>
         
         <pertinentInformation typeCode="PERT">
@@ -6063,9 +6063,9 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20201125"/>
         </effectiveTime>
-        <availabilityTime value="20201125165553"/>
+        <availabilityTime value="20201125"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201125165553" />
+            <time value="20201125" />
             <agentRef classCode="AGNT">
                 <id root="176ECCF6-93C9-426E-9C10-640DC3C1E86A" />
             </agentRef>
@@ -6093,7 +6093,7 @@ and extending onto other lines as well.</text>
         <effectiveTime>
             <center value="20201125"/>
         </effectiveTime>
-        <availabilityTime value="20201125165553"/>
+        <availabilityTime value="20201125"/>
         
         
         <pertinentInformation typeCode="PERT">

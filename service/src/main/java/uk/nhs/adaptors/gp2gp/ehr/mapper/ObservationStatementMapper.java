@@ -55,7 +55,7 @@ public class ObservationStatementMapper {
             .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .code(prepareCode(observation))
             .comment(prepareComment(observation))
-            .issued(DateFormatUtil.toHl7Format(observation.getIssuedElement()))
+            .issued(StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(observation))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
 
