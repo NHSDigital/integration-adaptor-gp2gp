@@ -181,7 +181,7 @@ public class MedicationStatementMapper {
     private String buildQuantityText(MedicationRequest medicationRequest) {
         if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasUnit()) {
             return medicationRequest.getDispenseRequest().getQuantity().getUnit();
-        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension() ){
+        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension()) {
             return extractDispenseRequestQuantityText(medicationRequest);
         } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
             return extractDispenseRequestQuantityTextFromQuantity(medicationRequest);

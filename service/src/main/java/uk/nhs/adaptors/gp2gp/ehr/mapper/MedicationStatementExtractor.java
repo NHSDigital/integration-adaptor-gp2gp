@@ -52,7 +52,7 @@ public class MedicationStatementExtractor {
             .orElse(DEFAULT_QUANTITY_TEXT);
     }
 
-    public static String extractDispenseRequestQuantityTextFromQuantity(MedicationRequest medicationRequest){
+    public static String extractDispenseRequestQuantityTextFromQuantity(MedicationRequest medicationRequest) {
         return medicationRequest.getDispenseRequest()
             .getQuantity()
             .getExtension()
