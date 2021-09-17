@@ -11,12 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.DiagnosticReport;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.*;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,6 +62,7 @@ public class NonConsultationResourceMapper {
             ResourceType.DocumentReference, this::buildForDocumentReference,
             ResourceType.QuestionnaireResponse, this::buildForQuestionnaireResponse
         );
+    private static final String ENDED_ALLERGIES = "1103671000000101";
 
     public List<String> mapRemainingResourcesToEhrCompositions(Bundle bundle) {
         var mappedResources = bundle.getEntry()
@@ -111,6 +107,19 @@ public class NonConsultationResourceMapper {
     }
 
     private Optional<String> mapResourceToEhrComposition(Resource resource) {
+
+        if (resource.getResourceType().equals(ResourceType.List)) {
+            var list = (ListResource) resource;
+            if (list.hasCode()
+                    && list.getCode().hasCoding()
+                    && list.getCode().getCodingFirstRep().hasCode()
+                    && list.getCode().getCodingFirstRep().getCode().equals(ENDED_ALLERGIES)) {
+                if (list.hasContained()) {
+                    resource = list.getContained().get(0);
+                }
+            }
+            return Optional.empty();
+        }
 
         Optional<String> componentHolder = encounterComponentsMapper.mapResourceToComponent(resource);
 
@@ -222,6 +231,10 @@ public class NonConsultationResourceMapper {
         return null;
     }
 
+    private EncounterTemplateParametersBuilder buildForList(String component, Resource resource) {
+        return null;
+    }
+
     private EncounterTemplateParametersBuilder buildForObservation(String component, Resource resource) {
         Observation observation = (Observation) resource;
         if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(EncounterComponentsMapper.NARRATIVE_STATEMENT_CODE))) {
@@ -239,7 +252,7 @@ public class NonConsultationResourceMapper {
     }
 
     private boolean isMappableNonConsultationResource(Resource resource) {
-        return resourceBuilder.containsKey(resource.getResourceType());
+        return resourceBuilder.containsKey(resource.getResourceType()) || resource.getResourceType().equals(ResourceType.List);
     }
 
     private boolean hasIdBeenMapped(Resource resource) {
