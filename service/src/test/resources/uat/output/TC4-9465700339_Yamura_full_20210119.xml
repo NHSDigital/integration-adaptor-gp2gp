@@ -1895,7 +1895,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: </text>
+                <text>Range: Low: 4.000 % High: 9.000 % </text>
             </pertinentAnnotation>
         </pertinentInformation>
         
