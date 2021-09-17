@@ -13,7 +13,6 @@
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Range: Text: Test reference range text High: 20 Interpretation: Example without code
-
 Test comment</text>
             </pertinentAnnotation>
         </pertinentInformation>

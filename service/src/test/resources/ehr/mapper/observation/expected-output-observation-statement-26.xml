@@ -13,7 +13,6 @@
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: An example of text in interpretation
-
 Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>

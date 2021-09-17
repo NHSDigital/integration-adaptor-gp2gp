@@ -1249,7 +1249,6 @@ Status: unknown</text>
 CommentDate:20030221115000
 
 Interpretation: Abnormal
-
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
@@ -1297,7 +1296,6 @@ Dr. N.O&apos;Connell</text>
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
            Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
@@ -1353,7 +1351,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
  Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
@@ -1409,7 +1406,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
      GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
@@ -1465,7 +1461,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
@@ -1603,7 +1598,6 @@ Status: unknown</text>
 CommentDate:20030221115000
 
 Interpretation: Abnormal
-
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
@@ -1651,7 +1645,6 @@ Dr. N.O&apos;Connell</text>
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
            Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
@@ -1707,7 +1700,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
  Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
@@ -1763,7 +1755,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
      GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
@@ -1819,7 +1810,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
@@ -1942,7 +1932,6 @@ Status: unknown</text>
 CommentDate:20030221115000
 
 Interpretation: Abnormal
-
 NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
@@ -1990,7 +1979,6 @@ Dr. N.O&apos;Connell</text>
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
            Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
@@ -2046,7 +2034,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
  Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
@@ -2102,7 +2089,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
      GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
@@ -2158,7 +2144,6 @@ Interpretation: PA - Potentially abnormal
 CommentDate:20030221115000
 
 Interpretation: PA - Potentially abnormal
-
                                       2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
@@ -2533,7 +2518,6 @@ Interpretation: HI - Above high reference limit</text>
 CommentDate:20030602175200
 
 Interpretation: HI - Above high reference limit
-
                              Cholesterol 6.5 - 7.8 Moderate Risk of CHD
                              Cholesterol     &gt; 7.8 Marked Risk of CHD</text>
         <statusCode code="COMPLETE"/>
@@ -3219,7 +3203,6 @@ Interpretation: Abnormal</text>
 CommentDate:20030618080000
 
 Interpretation: OR - Outside reference range
-
 U=Unsuitable for analysis</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
@@ -4379,7 +4362,6 @@ Status: unknown</text>
 CommentDate:20030704111300
 
 Interpretation: PA - Potentially abnormal
-
 Negative
 I.M.Screen</text>
         <statusCode code="COMPLETE"/>
@@ -7967,7 +7949,6 @@ Status: unknown</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Abnormal
-
 (EMISTest) - No Action</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -8085,7 +8066,6 @@ Status: unknown</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Abnormal
-
 Less than or equal to 5 and abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -8336,7 +8316,6 @@ Less than or equal to 5 and abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Abnormal
-
 This is marked as abnormal but in range</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -8524,7 +8503,6 @@ This is marked as abnormal but in range</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: Abnormal
-
 This is hand entered abnormal with no range</text>
             </pertinentAnnotation>
         </pertinentInformation>

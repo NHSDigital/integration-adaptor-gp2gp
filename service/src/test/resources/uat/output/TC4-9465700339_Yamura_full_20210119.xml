@@ -947,7 +947,6 @@
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: LO - Below low reference limit
-
 Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -979,7 +978,6 @@ Low</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: LO - Below low reference limit
-
 Weeks: 4. Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1011,7 +1009,6 @@ Weeks: 4. Very Low</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1043,7 +1040,6 @@ Abnormal Abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: HI - Above high reference limit
-
 High</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1156,7 +1152,6 @@ High</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1188,7 +1183,6 @@ Abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1216,7 +1210,6 @@ Normal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1318,7 +1311,6 @@ Normal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1396,7 +1388,6 @@ Abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1499,7 +1490,6 @@ Abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1826,7 +1816,6 @@ And more stuff</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: LO - Below low reference limit
-
 Year only test result Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1888,7 +1877,6 @@ Year only test result Low</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: HI - Above high reference limit
-
 Very High</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -1945,7 +1933,6 @@ Very High</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: HI - Above high reference limit
-
 This should be normal according to the range High</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -2713,7 +2700,6 @@ This should be normal according to the range High</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -3271,7 +3257,6 @@ with special characters
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: LO - Below low reference limit
-
 abnormality only Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -4055,7 +4040,6 @@ abnormality only Very Low</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 This is an empty one Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
@@ -4087,7 +4071,6 @@ This is an empty one Abnormal</text>
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
                 <text>Interpretation: PA - Potentially abnormal
-
 This is the HepB antutbody notes Absent</text>
             </pertinentAnnotation>
         </pertinentInformation>
