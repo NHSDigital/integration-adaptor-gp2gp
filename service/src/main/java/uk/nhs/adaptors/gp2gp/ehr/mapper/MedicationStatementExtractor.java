@@ -3,6 +3,7 @@ package uk.nhs.adaptors.gp2gp.ehr.mapper;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,7 +60,8 @@ public class MedicationStatementExtractor {
             .stream()
             .filter(value -> MEDICATION_QUANTITY_TEXT_URL.equals(value.getUrl()))
             .findFirst()
-            .map(value -> value.getValue().toString())
+            .map(Extension::getValue)
+            .map(Objects::toString)
             .orElse(DEFAULT_QUANTITY_TEXT);
     }
 

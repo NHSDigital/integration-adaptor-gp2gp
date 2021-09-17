@@ -183,7 +183,8 @@ public class MedicationStatementMapper {
             return medicationRequest.getDispenseRequest().getQuantity().getUnit();
         } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasExtension()) {
             return extractDispenseRequestQuantityText(medicationRequest);
-        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
+        } else if (medicationRequest.hasDispenseRequest() && medicationRequest.getDispenseRequest().hasQuantity()
+            && medicationRequest.getDispenseRequest().getQuantity().hasExtension()) {
             return extractDispenseRequestQuantityTextFromQuantity(medicationRequest);
         }
         return DEFAULT_QUANTITY_TEXT;
