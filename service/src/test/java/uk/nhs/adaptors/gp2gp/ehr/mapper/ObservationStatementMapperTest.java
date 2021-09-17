@@ -111,6 +111,10 @@ public class ObservationStatementMapperTest {
         + "example-observation-resource-37.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
         + "example-observation-resource-41.json";
+    private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "example-observation-resource-42.json";
+    private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "example-observation-resource-43.json";
 
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-1.xml";
@@ -168,6 +172,10 @@ public class ObservationStatementMapperTest {
         + "expected-output-observation-statement-28.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
         + "expected-output-observation-statement-29.xml";
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-30.xml";
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+        + "expected-output-observation-statement-31.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -289,7 +297,9 @@ public class ObservationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW),
             Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK),
-            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY)
+            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY),
+            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY),
+            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY)
         );
     }
 }
