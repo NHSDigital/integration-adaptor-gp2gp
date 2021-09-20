@@ -1,0 +1,21 @@
+{
+    "resourceType": "Observation",
+    "id": "3377543D-5B1B-4C4F-BFF6-9F7BC3A1C3B8",
+    "code": {
+        "text": "test"
+    },
+    "effectiveDateTime": "2010-07-14T16:32:51.42+01:00",
+    "issued": "2010-01-13T15:29:50.3+00:00",
+    "referenceRange": [
+        {
+            "low": {
+                "value": 10.000,
+                "unit": "ml"
+            },
+            "high": {
+                "value": 100.000,
+                "unit": "ml"
+            }
+        }
+    ]
+}
