@@ -239,10 +239,6 @@ public class NonConsultationResourceMapper {
         return null;
     }
 
-    private EncounterTemplateParametersBuilder buildForList(String component, Resource resource) {
-        return null;
-    }
-
     private EncounterTemplateParametersBuilder buildForObservation(String component, Resource resource) {
         Observation observation = (Observation) resource;
         if (CodeableConceptMappingUtils.hasCode(observation.getCode(), List.of(EncounterComponentsMapper.NARRATIVE_STATEMENT_CODE))) {
