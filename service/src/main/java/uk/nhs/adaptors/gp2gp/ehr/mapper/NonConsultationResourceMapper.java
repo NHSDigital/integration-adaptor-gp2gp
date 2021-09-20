@@ -84,15 +84,20 @@ public class NonConsultationResourceMapper {
             .map(ListResource::getContained)
             .flatMap(List::stream)
             .filter(resource -> !hasIdBeenMapped(resource))
+            .map(this::replaceId)
             .map(this::mapResourceToEhrComposition)
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
         mappedResources.addAll(endedAllergies);
 
-        int i = 0;
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
+    }
+
+    private Resource replaceId(Resource resource) {
+        resource.setIdElement(new IdType(ResourceType.AllergyIntolerance.name(), randomIdGeneratorService.createNewId()));
+        return resource;
     }
 
     public List<String> buildEhrCompositionForSkeletonEhrExtract(String bindingDocumentId) {
