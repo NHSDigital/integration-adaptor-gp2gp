@@ -914,7 +914,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Location: EMIS Test Practice Location Manufacturer: imakedrugs4u Batch: batch002 Expiration: 2023</text>
+                <text>Primary Source: true Location: EMIS Test Practice Location Manufacturer: imakedrugs4u Batch: batch002 Expiration: 2023</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5584,7 +5584,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: imakedrugs Date of Entry unpopulated</text>
+                <text>Primary Source: true Manufacturer: imakedrugs Date of Entry unpopulated</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5638,7 +5638,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: imakedrugs Batch: batch001 Expiration: 2025-12-01 Site: Left arm GMS : GMS, Scheduled/Unscheduled : Unscheduled - historical date</text>
+                <text>Primary Source: true Manufacturer: imakedrugs Batch: batch001 Expiration: 2025-12-01 Site: Left arm GMS : GMS, Scheduled/Unscheduled : Unscheduled - historical date</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
