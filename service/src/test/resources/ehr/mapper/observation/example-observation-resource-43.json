@@ -11,10 +11,6 @@
             "low": {
                 "value": 10.000,
                 "unit": "ml"
-            },
-            "high": {
-                "value": 100.000,
-                "unit": "ml"
             }
         }
     ]

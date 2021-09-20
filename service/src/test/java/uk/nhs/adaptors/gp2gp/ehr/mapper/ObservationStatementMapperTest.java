@@ -40,134 +40,146 @@ public class ObservationStatementMapperTest {
     private static final String TEST_FILE_DIRECTORY = "/ehr/mapper/observation/";
 
     private static final String INPUT_JSON_WITH_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
-        + "example-observation-resource-1.json";
+            + "example-observation-resource-1.json";
     private static final String INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
-        + "example-observation-resource-2.json";
+            + "example-observation-resource-2.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY
-        + "example-observation-resource-3.json";
+            + "example-observation-resource-3.json";
     private static final String INPUT_JSON_WITH_ISSUED_ONLY = TEST_FILE_DIRECTORY
-        + "example-observation-resource-4.json";
+            + "example-observation-resource-4.json";
     private static final String INPUT_JSON_WITH_STRING_VALUE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-6.json";
+            + "example-observation-resource-6.json";
     private static final String INPUT_JSON_WITH_QUANTITY_VALUE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-7.json";
+            + "example-observation-resource-7.json";
     private static final String INPUT_JSON_WITH_CODEABLE_CONCEPT_VALUE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-8.json";
+            + "example-observation-resource-8.json";
     private static final String INPUT_JSON_WITH_SAMPLED_DATA_VALUE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-9.json";
+            + "example-observation-resource-9.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE_AND_QUANTITY = TEST_FILE_DIRECTORY
-        + "example-observation-resource-10.json";
+            + "example-observation-resource-10.json";
     private static final String INPUT_JSON_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-11.json";
+            + "example-observation-resource-11.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_HIGH_1 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-12.json";
+            + "example-observation-resource-12.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-13.json";
+            + "example-observation-resource-13.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM = TEST_FILE_DIRECTORY
-        + "example-observation-resource-14.json";
+            + "example-observation-resource-14.json";
     private static final String INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
-        + "example-observation-resource-15.json";
+            + "example-observation-resource-15.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_INTERPRETATIONS = TEST_FILE_DIRECTORY
-        + "example-observation-resource-16.json";
+            + "example-observation-resource-16.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_HIGH_2 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-17.json";
+            + "example-observation-resource-17.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_HIGH_3 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-18.json";
+            + "example-observation-resource-18.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_LOW_1 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-19.json";
+            + "example-observation-resource-19.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_LOW_2 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-20.json";
+            + "example-observation-resource-20.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_LOW_3 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-21.json";
+            + "example-observation-resource-21.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-22.json";
+            + "example-observation-resource-22.json";
     private static final String INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2 = TEST_FILE_DIRECTORY
-        + "example-observation-resource-23.json";
+            + "example-observation-resource-23.json";
     private static final String INPUT_JSON_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
-        + "example-observation-resource-24.json";
+            + "example-observation-resource-24.json";
     private static final String INPUT_JSON_WITH_COMPONENT_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "example-observation-resource-26.json";
+            + "example-observation-resource-26.json";
     private static final String INPUT_JSON_WITH_COMPONENT_VALUE_QUANTITY = TEST_FILE_DIRECTORY
-        + "example-observation-resource-27.json";
+            + "example-observation-resource-27.json";
     private static final String INPUT_JSON_WITH_COMPONENT_VALUE_STRING = TEST_FILE_DIRECTORY
-        + "example-observation-resource-28.json";
+            + "example-observation-resource-28.json";
     private static final String INPUT_JSON_WITH_COMPONENT_VALUE_OTHER_TYPES = TEST_FILE_DIRECTORY
-        + "example-observation-resource-29.json";
+            + "example-observation-resource-29.json";
     private static final String INPUT_JSON_WITH_COMPONENT_USER_SELECTED_INTERPRETATION = TEST_FILE_DIRECTORY
-        + "example-observation-resource-30.json";
+            + "example-observation-resource-30.json";
     private static final String INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION = TEST_FILE_DIRECTORY
-        + "example-observation-resource-31.json";
+            + "example-observation-resource-31.json";
     private static final String INPUT_JSON_WITH_MULTIPLE_COMPONENTS = TEST_FILE_DIRECTORY
-        + "example-observation-resource-32.json";
+            + "example-observation-resource-32.json";
     private static final String INPUT_JSON_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
-        + "example-observation-resource-33.json";
+            + "example-observation-resource-33.json";
     private static final String INPUT_JSON_WITH_PARTICIPANT_INVALID_REFERENCE_RESOURCE_TYPE = TEST_FILE_DIRECTORY
-        + "example-observation-resource-34.json";
+            + "example-observation-resource-34.json";
     private static final String INPUT_JSON_WITH_ATTACHMENT_VALUE = TEST_FILE_DIRECTORY
             + "example-observation-resource-35.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START = TEST_FILE_DIRECTORY
             + "example-observation-resource-36.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK = TEST_FILE_DIRECTORY
             + "example-observation-resource-37.json";
+    private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "example-observation-resource-41.json";
+    private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "example-observation-resource-42.json";
+    private static final String INPUT_JSON_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "example-observation-resource-43.json";
     private static final String INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END = TEST_FILE_DIRECTORY
-        + "example-observation-resource-41.json";
+            + "example-observation-resource-44.json";
 
     private static final String OUTPUT_XML_USES_EFFECTIVE_DATE_TIME = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-1.xml";
+            + "expected-output-observation-statement-1.xml";
     private static final String OUTPUT_XML_USES_UNK_DATE_TIME = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-2.xml";
+            + "expected-output-observation-statement-2.xml";
     private static final String OUTPUT_XML_USES_NESTED_COMPONENT = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-3.xml";
+            + "expected-output-observation-statement-3.xml";
     private static final String OUTPUT_XML_USES_EFFECTIVE_PERIOD = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-4.xml";
+            + "expected-output-observation-statement-4.xml";
     private static final String OUTPUT_XML_WITH_STRING_VALUE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-5.xml";
+            + "expected-output-observation-statement-5.xml";
     private static final String OUTPUT_XML_WITH_QUANTITY_VALUE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-6.xml";
+            + "expected-output-observation-statement-6.xml";
     private static final String OUTPUT_XML_WITH_CODEABLE_CONCEPT_VALUE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-7.xml";
+            + "expected-output-observation-statement-7.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_AND_QUANTITY = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-9.xml";
+            + "expected-output-observation-statement-9.xml";
     private static final String OUTPUT_XML_WITH_REFERENCE_RANGE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-10.xml";
+            + "expected-output-observation-statement-10.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-11.xml";
+            + "expected-output-observation-statement-11.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-12.xml";
+            + "expected-output-observation-statement-12.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-13.xml";
+            + "expected-output-observation-statement-13.xml";
     private static final String OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-14.xml";
+            + "expected-output-observation-statement-14.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-15.xml";
+            + "expected-output-observation-statement-15.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-16.xml";
+            + "expected-output-observation-statement-16.xml";
     private static final String OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-17.xml";
+            + "expected-output-observation-statement-17.xml";
     private static final String OUTPUT_XML_WITH_PARTICIPANT = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-18.xml";
+            + "expected-output-observation-statement-18.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_OPTIONAL_FIELDS = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-19.xml";
+            + "expected-output-observation-statement-19.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_QUANTITY = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-20.xml";
+            + "expected-output-observation-statement-20.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_STRING = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-21.xml";
+            + "expected-output-observation-statement-21.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_VALUE_OTHER_TYPES = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-22.xml";
+            + "expected-output-observation-statement-22.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_USER_SELECTED_INTERPRETATION = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-23.xml";
+            + "expected-output-observation-statement-23.xml";
     private static final String OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-24.xml";
+            + "expected-output-observation-statement-24.xml";
     private static final String OUTPUT_XML_WITH_MULTIPLE_COMPONENTS = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-25.xml";
+            + "expected-output-observation-statement-25.xml";
     private static final String OUTPUT_XML_WITH_NO_COMPONENT = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-26.xml";
+            + "expected-output-observation-statement-26.xml";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW = TEST_FILE_DIRECTORY
             + "expected-output-observation-statement-27.xml";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK = TEST_FILE_DIRECTORY
             + "expected-output-observation-statement-28.xml";
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "expected-output-observation-statement-29.xml";
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "expected-output-observation-statement-30.xml";
+    private static final String OUTPUT_XML_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY = TEST_FILE_DIRECTORY
+            + "expected-output-observation-statement-31.xml";
     private static final String OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END = TEST_FILE_DIRECTORY
-        + "expected-output-observation-statement-29.xml";
+            + "expected-output-observation-statement-32.xml";
 
     private CharSequence expectedOutputMessage;
     private ObservationStatementMapper observationStatementMapper;
@@ -182,14 +194,14 @@ public class ObservationStatementMapperTest {
     public void setUp() {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         when(codeableConceptCdMapper.mapCodeableConceptToCd(any(CodeableConcept.class)))
-            .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
+                .thenReturn(CodeableConceptMapperMockUtil.NULL_FLAVOR_CODE);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(new Bundle());
         observationStatementMapper = new ObservationStatementMapper(messageContext,
-            new StructuredObservationValueMapper(),
-            new PertinentInformationObservationValueMapper(),
-            codeableConceptCdMapper,
-            new ParticipantMapper());
+                new StructuredObservationValueMapper(),
+                new PertinentInformationObservationValueMapper(),
+                codeableConceptCdMapper,
+                new ParticipantMapper());
     }
 
     @AfterEach
@@ -219,10 +231,10 @@ public class ObservationStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         var exception = assertThrows(EhrMapperException.class, () ->
-            observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false));
+                observationStatementMapper.mapObservationToObservationStatement(parsedObservation, false));
 
         assertThat(exception.getMessage()).isEqualTo(String.format(
-            "Observation value type %s not supported.", expectedClass));
+                "Observation value type %s not supported.", expectedClass));
     }
 
     @Test
@@ -242,54 +254,59 @@ public class ObservationStatementMapperTest {
         Observation parsedObservation = new FhirParseService().parseResource(jsonInput, Observation.class);
 
         assertThatThrownBy(() -> observationStatementMapper.mapObservationToObservationStatement(parsedObservation, true))
-            .isExactlyInstanceOf(EhrMapperException.class)
-            .hasMessage("Invalid performer reference in observation resource with id: "
-                + "Consultation3-Topic2-Category-Examination-Observation-1");
+                .isExactlyInstanceOf(EhrMapperException.class)
+                .hasMessage("Invalid performer reference in observation resource with id: "
+                        + "Consultation3-Topic2-Category-Examination-Observation-1");
     }
 
     private static Stream<Arguments> resourceFileParamsThrowError() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_SAMPLED_DATA_VALUE, SampledData.class),
-            Arguments.of(INPUT_JSON_WITH_ATTACHMENT_VALUE, Attachment.class)
+                Arguments.of(INPUT_JSON_WITH_SAMPLED_DATA_VALUE, SampledData.class),
+                Arguments.of(INPUT_JSON_WITH_ATTACHMENT_VALUE, Attachment.class)
         );
     }
 
     private static Stream<Arguments> resourceFileParams() {
         return Stream.of(
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_UNK_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD),
-            Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_UNK_DATE_TIME),
-            Arguments.of(INPUT_JSON_WITH_STRING_VALUE, OUTPUT_XML_WITH_STRING_VALUE),
-            Arguments.of(INPUT_JSON_WITH_QUANTITY_VALUE, OUTPUT_XML_WITH_QUANTITY_VALUE),
-            Arguments.of(INPUT_JSON_WITH_CODEABLE_CONCEPT_VALUE, OUTPUT_XML_WITH_CODEABLE_CONCEPT_VALUE),
-            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_AND_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_AND_QUANTITY),
-            Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_1, OUTPUT_XML_WITH_INTERPRETATION_CODE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM),
-            Arguments.of(INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED, OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED),
-            Arguments.of(INPUT_JSON_WITH_MULTIPLE_INTERPRETATIONS, OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_2, OUTPUT_XML_WITH_INTERPRETATION_CODE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_3, OUTPUT_XML_WITH_INTERPRETATION_CODE),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_3, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
-            Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_OPTIONAL_FIELDS, OUTPUT_XML_WITH_COMPONENT_OPTIONAL_FIELDS),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_QUANTITY, OUTPUT_XML_WITH_COMPONENT_VALUE_QUANTITY),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_STRING, OUTPUT_XML_WITH_COMPONENT_VALUE_STRING),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_OTHER_TYPES, OUTPUT_XML_WITH_COMPONENT_VALUE_OTHER_TYPES),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_USER_SELECTED_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_USER_SELECTED_INTERPRETATION),
-            Arguments.of(INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION),
-            Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
-            Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
-            Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END),
-            Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK)
+                Arguments.of(INPUT_JSON_WITH_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_EFFECTIVE_DATE_TIME),
+                Arguments.of(INPUT_JSON_WITH_NULL_EFFECTIVE_DATE_TIME, OUTPUT_XML_USES_UNK_DATE_TIME),
+                Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD, OUTPUT_XML_USES_EFFECTIVE_PERIOD),
+                Arguments.of(INPUT_JSON_WITH_ISSUED_ONLY, OUTPUT_XML_USES_UNK_DATE_TIME),
+                Arguments.of(INPUT_JSON_WITH_STRING_VALUE, OUTPUT_XML_WITH_STRING_VALUE),
+                Arguments.of(INPUT_JSON_WITH_QUANTITY_VALUE, OUTPUT_XML_WITH_QUANTITY_VALUE),
+                Arguments.of(INPUT_JSON_WITH_CODEABLE_CONCEPT_VALUE, OUTPUT_XML_WITH_CODEABLE_CONCEPT_VALUE),
+                Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_AND_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_AND_QUANTITY),
+                Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE, OUTPUT_XML_WITH_REFERENCE_RANGE),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_1, OUTPUT_XML_WITH_INTERPRETATION_CODE),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_CODE, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_CODE),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_INVALID_SYSTEM, OUTPUT_XML_WITH_INTERPRETATION_CODE_INVALID_SYSTEM),
+                Arguments.of(INPUT_JSON_WITH_TWO_INTERPRETATION_USER_SELECTED, OUTPUT_XML_WITH_TWO_INTERPRETATION_USER_SELECTED),
+                Arguments.of(INPUT_JSON_WITH_MULTIPLE_INTERPRETATIONS, OUTPUT_XML_WITH_MULTIPLE_INTERPRETATIONS),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_2, OUTPUT_XML_WITH_INTERPRETATION_CODE),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_HIGH_3, OUTPUT_XML_WITH_INTERPRETATION_CODE),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_LOW_3, OUTPUT_XML_WITH_INTERPRETATION_CODE_LOW),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_1, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
+                Arguments.of(INPUT_JSON_WITH_INTERPRETATION_ABNORMAL_2, OUTPUT_XML_WITH_INTERPRETATION_CODE_ABNORMAL),
+                Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_OPTIONAL_FIELDS, OUTPUT_XML_WITH_COMPONENT_OPTIONAL_FIELDS),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_QUANTITY, OUTPUT_XML_WITH_COMPONENT_VALUE_QUANTITY),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_STRING, OUTPUT_XML_WITH_COMPONENT_VALUE_STRING),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_VALUE_OTHER_TYPES, OUTPUT_XML_WITH_COMPONENT_VALUE_OTHER_TYPES),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_USER_SELECTED_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_USER_SELECTED_INTERPRETATION),
+                Arguments.of(INPUT_JSON_WITH_COMPONENT_FIRST_INTERPRETATION, OUTPUT_XML_WITH_COMPONENT_FIRST_INTERPRETATION),
+                Arguments.of(INPUT_JSON_WITH_MULTIPLE_COMPONENTS, OUTPUT_XML_WITH_MULTIPLE_COMPONENTS),
+                Arguments.of(INPUT_JSON_WITH_NO_COMPONENT, OUTPUT_XML_WITH_NO_COMPONENT),
+                Arguments.of(INPUT_JSON_WITH_PARTICIPANT, OUTPUT_XML_WITH_PARTICIPANT),
+                Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_START, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK_LOW),
+                Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_BLANK, OUTPUT_XML_WITH_EFFECTIVE_TIME_UNK),
+                Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY, OUTPUT_XML_WITH_REFERENCE_RANGE_NO_VALUE_QUANTITY),
+                Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY,
+                        OUTPUT_XML_WITH_REFERENCE_RANGE_NO_LOW_NO_VALUE_QUANTITY),
+                Arguments.of(INPUT_JSON_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY,
+                        OUTPUT_XML_WITH_REFERENCE_RANGE_NO_HIGH_NO_VALUE_QUANTITY),
+                Arguments.of(INPUT_JSON_WITH_EFFECTIVE_PERIOD_NO_END, OUTPUT_XML_WITH_EFFECTIVE_TIME_NO_END)
         );
     }
 }

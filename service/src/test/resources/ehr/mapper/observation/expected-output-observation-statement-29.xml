@@ -4,15 +4,15 @@
         <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
         <statusCode code="COMPLETE" />
         <effectiveTime>
-            <low value="20190701113000"/>
+            <center value="20100714163251"/>
         </effectiveTime>
-        <availabilityTime value="20190701113000"/>
+        <availabilityTime value="20100714163251"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Test comment</text>
+                <text>Range: Low: 10.000 ml High: 100.000 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
