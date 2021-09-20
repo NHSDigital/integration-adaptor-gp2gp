@@ -12,7 +12,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Range: Low: 10.000 ml </text>
+                <text>Range: Low: 10.000 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
