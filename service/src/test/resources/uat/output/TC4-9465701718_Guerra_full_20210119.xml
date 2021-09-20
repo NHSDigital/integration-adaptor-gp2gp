@@ -313,7 +313,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is another coded entry within a pathology consultation</text>
+                <text>This is another coded entry within a pathology consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -708,7 +708,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20020330162100
 
-Interpretation: DVT Prophylaxis - INR 2.0-2.5
+DVT Prophylaxis - INR 2.0-2.5
 Treatment of DVT,PE,AF,TIA - INR 2.0-3.0
 Recurrent DVT or PE                )
 Arterial Disease                   )INR 3.0-4.5
@@ -1248,7 +1248,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: Abnormal NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
+Interpretation: Abnormal
+NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
@@ -1294,7 +1295,8 @@ Dr. N.O&apos;Connell</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous glucose given as
+Interpretation: PA - Potentially abnormal
+           Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
@@ -1348,7 +1350,8 @@ Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous gl
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal  Fasting       4.3            negative        negative
+Interpretation: PA - Potentially abnormal
+ Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
@@ -1402,7 +1405,8 @@ Interpretation: PA - Potentially abnormal  Fasting       4.3            negative
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal      GLYCAEMIA
+Interpretation: PA - Potentially abnormal
+     GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
@@ -1456,7 +1460,8 @@ Interpretation: PA - Potentially abnormal      GLYCAEMIA
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal                                       2 hr 11.1 or above
+Interpretation: PA - Potentially abnormal
+                                      2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
@@ -1480,7 +1485,7 @@ Interpretation: PA - Potentially abnormal                                       
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326140443
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326140443"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -1592,7 +1597,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: Abnormal NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
+Interpretation: Abnormal
+NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
@@ -1638,7 +1644,8 @@ Dr. N.O&apos;Connell</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous glucose given as
+Interpretation: PA - Potentially abnormal
+           Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
@@ -1692,7 +1699,8 @@ Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous gl
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal  Fasting       4.3            negative        negative
+Interpretation: PA - Potentially abnormal
+ Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
@@ -1746,7 +1754,8 @@ Interpretation: PA - Potentially abnormal  Fasting       4.3            negative
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal      GLYCAEMIA
+Interpretation: PA - Potentially abnormal
+     GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
@@ -1800,7 +1809,8 @@ Interpretation: PA - Potentially abnormal      GLYCAEMIA
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal                                       2 hr 11.1 or above
+Interpretation: PA - Potentially abnormal
+                                      2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
@@ -1921,7 +1931,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: Abnormal NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
+Interpretation: Abnormal
+NB NEW WHO/DIABETES UK CLASSIFICATION CRITERIA FROM 01.06.00
 Dr. N.O&apos;Connell</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030221115000"/>
@@ -1967,7 +1978,8 @@ Dr. N.O&apos;Connell</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous glucose given as
+Interpretation: PA - Potentially abnormal
+           Oral dose: 75g anhydrous glucose given as
                      113ml Polycal liquid
           Plasma Glucose           Urine Results
  Time        (mmol/l)         Ketones         Glucose</text>
@@ -2021,7 +2033,8 @@ Interpretation: PA - Potentially abnormal            Oral dose: 75g anhydrous gl
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal  Fasting       4.3            negative        negative
+Interpretation: PA - Potentially abnormal
+ Fasting       4.3            negative        negative
  2 hours       7.6            negative        negative
  NORMAL              : Fasting up to 6.0 &amp; 2 hr up to 7.7
  IMPAIRED FASTING    : Fasting 6.1-6.9 &amp; 2 hr up to 7.7</text>
@@ -2075,7 +2088,8 @@ Interpretation: PA - Potentially abnormal  Fasting       4.3            negative
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal      GLYCAEMIA
+Interpretation: PA - Potentially abnormal
+     GLYCAEMIA
  IMPAIRED GLUCOSE    : Fasting up to 6.9 &amp; 2 hr 7.8-11.0
      TOLERANCE
  *DIABETES MELLITUS  : Fasting 7.0 or above &amp;/or</text>
@@ -2129,7 +2143,8 @@ Interpretation: PA - Potentially abnormal      GLYCAEMIA
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030221115000
 
-Interpretation: PA - Potentially abnormal                                       2 hr 11.1 or above
+Interpretation: PA - Potentially abnormal
+                                      2 hr 11.1 or above
  *(must also have symptoms - polyuria, polydipsia,
    unexplained weight loss)</text>
         <statusCode code="COMPLETE"/>
@@ -2502,7 +2517,8 @@ Interpretation: HI - Above high reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030602175200
 
-Interpretation: HI - Above high reference limit                              Cholesterol 6.5 - 7.8 Moderate Risk of CHD
+Interpretation: HI - Above high reference limit
+                             Cholesterol 6.5 - 7.8 Moderate Risk of CHD
                              Cholesterol     &gt; 7.8 Marked Risk of CHD</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030602175200"/>
@@ -3186,7 +3202,8 @@ Interpretation: Abnormal</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030618080000
 
-Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
+Interpretation: OR - Outside reference range
+U=Unsuitable for analysis</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3231,7 +3248,7 @@ Interpretation: OR - Outside reference range U=Unsuitable for analysis</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326134544
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326134544"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3336,7 +3353,7 @@ Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030618080000
 
-Interpretation: U=Unsuitable for analysis
+U=Unsuitable for analysis
 U=Unsuitable,due to delay in delivery.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030618080000"/>
@@ -3382,7 +3399,7 @@ U=Unsuitable,due to delay in delivery.</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326134545
 
-Interpretation: (EMISTest) - Normal - No Action</text>
+(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326134545"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3454,7 +3471,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326134545
 
-Interpretation: (EMISTest) - Abnormal - No Action</text>
+(EMISTest) - Abnormal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326134545"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3526,7 +3543,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326134545
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326134545"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3598,7 +3615,7 @@ Interpretation: OR - Outside reference range</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100326134545
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100326134545"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3884,7 +3901,7 @@ Interpretation: HI - Above high reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100209122106
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100209122106"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -3956,7 +3973,7 @@ Interpretation: HI - Above high reference limit</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100209122106
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100209122106"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4012,7 +4029,7 @@ Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100209122106
 
-Interpretation: (EMISTest) - No Action</text>
+(EMISTest) - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100209122106"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4063,7 +4080,7 @@ Interpretation: (EMISTest) - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030628112300
 
-Interpretation: Non fasting specimen.</text>
+Non fasting specimen.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030628112300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4079,7 +4096,7 @@ Interpretation: Non fasting specimen.</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100209122106
 
-Interpretation: (EMISTest) - Normal - No Action</text>
+(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100209122106"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4344,7 +4361,8 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030704111300
 
-Interpretation: PA - Potentially abnormal Negative
+Interpretation: PA - Potentially abnormal
+Negative
 I.M.Screen</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030704111300"/>
@@ -4361,7 +4379,7 @@ I.M.Screen</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100201093313
 
-Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+(EMISTest) - Abnormal - Contact Patient</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100201093313"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4410,7 +4428,7 @@ Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20030704111300
 
-Interpretation: WBC MORPHOLOGY NORMAL
+WBC MORPHOLOGY NORMAL
 RBC MORPHOLOGY NORMAL</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20030704111300"/>
@@ -4427,7 +4445,7 @@ RBC MORPHOLOGY NORMAL</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100201093313
 
-Interpretation: (EMISTest) - Normal - No Action</text>
+(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100201093313"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4802,7 +4820,7 @@ Interpretation: (EMISTest) - Normal - No Action</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100201093313
 
-Interpretation: (EMISTest) - Normal - No Action</text>
+(EMISTest) - Normal - No Action</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100201093313"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -4924,7 +4942,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: These LTG comments only apply to the Anti-nuclear factor and the
+These LTG comments only apply to the Anti-nuclear factor and the
 rheumatoid factor tests.</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
@@ -4968,7 +4986,7 @@ rheumatoid factor tests.</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5017,7 +5035,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5062,7 +5080,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation:   Oligoclonals detected in both sera and CSF</text>
+Oligoclonals detected in both sera and CSF</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5094,7 +5112,7 @@ Interpretation:   Oligoclonals detected in both sera and CSF</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5125,7 +5143,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5157,7 +5175,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5188,7 +5206,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5220,7 +5238,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5252,7 +5270,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5283,7 +5301,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5315,7 +5333,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: NEGATIVE</text>
+NEGATIVE</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5347,7 +5365,7 @@ Interpretation: NEGATIVE</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050225155300
 
-Interpretation: Equivocal Result</text>
+Equivocal Result</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050225155300"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5562,7 +5580,7 @@ Status: unknown</text>
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050316060100
 
-Interpretation: See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
+See FATS/Healthy Hearts guidelines for interpretation of lipids</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050316060100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5665,7 +5683,7 @@ Interpretation: See FATS/Healthy Hearts guidelines for interpretation of lipids<
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20050316060100
 
-Interpretation: Euthyroid picture (including satisfactory thyroxine replacement)</text>
+Euthyroid picture (including satisfactory thyroxine replacement)</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20050316060100"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -5747,7 +5765,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Hand entered results</text>
+                <text>Hand entered results</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5873,7 +5891,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Unsuitable for analysis</text>
+                <text>Unsuitable for analysis</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5948,7 +5966,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Hand entered results</text>
+                <text>Hand entered results</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6023,7 +6041,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Unsuitable, due to delay in delivery</text>
+                <text>Unsuitable, due to delay in delivery</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6618,7 +6636,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: (EMISTest) - Abnormal - Contact Patient</text>
+                <text>(EMISTest) - Abnormal - Contact Patient</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6787,7 +6805,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: TURBID</text>
+                <text>TURBID</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6843,7 +6861,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: (EMISTest) - No Action, Interpretation      Desirable  Borderline  Increased Risk, Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l, Triglyceride reference range,  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
+                <text>(EMISTest) - No Action, Interpretation      Desirable  Borderline  Increased Risk, Total cholesterol     &lt;5.2       5.2-6.5     &gt;6.5   mmol/l, Triglyceride reference range,  Fasting 0.5-1.8 mmol/l, Non-fasting usually &lt;4.0 mmol/l</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -7022,7 +7040,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Results repeated, Low plasma Folate</text>
+                <text>Results repeated, Low plasma Folate</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -7078,7 +7096,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Microscopy, Moderate pus cells, Gram negative bacilli +, Culture, 1.Haemophilus  influenzae +++, 2.Staphylococcus aureus +, Sensitivities,                     1 2 3 4 5, Amoxycillin         S R, Trimethoprim        S R, Flucloxacillin      R S, Erythromicin        R S, Other bacteria of doubtful significance</text>
+                <text>Microscopy, Moderate pus cells, Gram negative bacilli +, Culture, 1.Haemophilus  influenzae +++, 2.Staphylococcus aureus +, Sensitivities,                     1 2 3 4 5, Amoxycillin         S R, Trimethoprim        S R, Flucloxacillin      R S, Erythromicin        R S, Other bacteria of doubtful significance</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -7930,7 +7948,8 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: (EMISTest) - No Action</text>
+                <text>Interpretation: Abnormal
+(EMISTest) - No Action</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -7987,7 +8006,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Age at term                          37.1 years, Gestation Scan                       16+4, Alpha Foeto Protein                    35 ku/L, AFP MOMS                             1.04, Free Beta-HCG                           8 iu/L, Beta-HCG MOMS                        0.60, Down&apos;s Risk :-                     1 in &gt;10000, Low risk of Down&apos;s Syndrome. ( Cut off 1 in 250 ), AFP not elevated i.e. probably excludes N.T.D.</text>
+                <text>Age at term                          37.1 years, Gestation Scan                       16+4, Alpha Foeto Protein                    35 ku/L, AFP MOMS                             1.04, Free Beta-HCG                           8 iu/L, Beta-HCG MOMS                        0.60, Down&apos;s Risk :-                     1 in &gt;10000, Low risk of Down&apos;s Syndrome. ( Cut off 1 in 250 ), AFP not elevated i.e. probably excludes N.T.D.</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -8046,7 +8065,8 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Less than or equal to 5 and abnormal</text>
+                <text>Interpretation: Abnormal
+Less than or equal to 5 and abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8107,7 +8127,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: less than 22</text>
+                <text>less than 22</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8168,7 +8188,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: greater than or equal to five</text>
+                <text>greater than or equal to five</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8230,7 +8250,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Normal value is greater than 2</text>
+                <text>Normal value is greater than 2</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8295,7 +8315,8 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is marked as abnormal but in range</text>
+                <text>Interpretation: Abnormal
+This is marked as abnormal but in range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8356,7 +8377,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is outside the range but not abnormal</text>
+                <text>This is outside the range but not abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8417,7 +8438,7 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This has a hand entered range</text>
+                <text>This has a hand entered range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -8481,7 +8502,8 @@ Status: unknown</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: This is hand entered abnormal with no range</text>
+                <text>Interpretation: Abnormal
+This is hand entered abnormal with no range</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
