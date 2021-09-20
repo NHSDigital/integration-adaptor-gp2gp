@@ -12,7 +12,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Component(s): [Interpretation Code: First interpretation code] Interpretation: Example comment</text>
+                <text>Component(s): [Interpretation Code: First interpretation code] Example comment</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

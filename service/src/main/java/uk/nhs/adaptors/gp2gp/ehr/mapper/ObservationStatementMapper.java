@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.dstu3.model.Attachment;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Quantity;
@@ -27,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.nhs.adaptors.gp2gp.ehr.exception.EhrMapperException;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.parameters.ObservationStatementTemplateParameters;
 import uk.nhs.adaptors.gp2gp.ehr.mapper.wrapper.ConditionWrapper;
+import uk.nhs.adaptors.gp2gp.ehr.utils.CodeableConceptMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.StatementTimeMappingUtils;
 import uk.nhs.adaptors.gp2gp.ehr.utils.TemplateUtils;
 
@@ -149,49 +148,20 @@ public class ObservationStatementMapper {
         }
 
         if (observation.hasInterpretation()) {
-            CodeableConcept interpretation = observation.getInterpretation();
-
-            boolean isInterpretationCode = interpretation.getCoding().stream()
-                .anyMatch(this::isInterpretationCode);
-
-            if (!isInterpretationCode) {
-                Optional<Coding> codeWithUserSelected = interpretation.getCoding().stream()
-                    .filter(code -> !isInterpretationCode(code))
-                    .filter(Coding::hasUserSelected)
-                    .filter(Coding::getUserSelected)
-                    .findFirst();
-
-                Coding coding = codeWithUserSelected.orElseGet(() ->
-                    interpretation.hasCoding() ? interpretation.getCodingFirstRep() : null);
-
-                Optional.ofNullable(coding).ifPresent(code -> {
-                    if (code.hasCode() || code.hasDisplay()) {
-                        commentBuilder.append(INTERPRETATION_CODE_PREFIX);
-                    }
-                    if (code.hasCode()) {
-                        commentBuilder.append(coding.getCode()).append(StringUtils.SPACE);
-                    }
-                    if (code.hasDisplay()) {
-                        commentBuilder.append(code.getDisplay()).append(StringUtils.SPACE);
-                    }
-                });
-            }
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
+            });
         }
 
-        String interpretationTextAndComment = Stream.concat(
-            Optional.ofNullable(observation.getInterpretation().getText()).stream(),
-            Optional.ofNullable(observation.getComment()).stream()
-        ).collect(Collectors.joining(StringUtils.SPACE));
-
-        if (!interpretationTextAndComment.isBlank()) {
-            commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationTextAndComment);
+        if (observation.hasComment()) {
+            commentBuilder.append(observation.getComment());
         }
 
         buildActualProblemTextIfExists(observation)
             .map(t -> StringUtils.SPACE + t)
             .ifPresent(commentBuilder::append);
 
-        return commentBuilder.toString();
+        return commentBuilder.toString().trim();
     }
 
     private Optional<String> buildActualProblemTextIfExists(Observation observation) {
