@@ -323,7 +323,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Note - Local Code</text>
+                <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -375,7 +375,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Note - Local Code</text>
+                <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -434,7 +434,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Note - Local Code</text>
+                <text>Note - Local Code</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3041,7 +3041,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhhh Problem Info: Problem Notes: hhhh</text>
+                <text>Significance : Major - Episodicity : First - hhhh Problem Info: Problem Notes: hhhh</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3098,7 +3098,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - What does this really mean? Problem Info: Problem Notes: What does this really mean?,Health Admin Problem</text>
+                <text>Significance : Minor - Episodicity : First - What does this really mean? Problem Info: Problem Notes: What does this really mean?,Health Admin Problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -3155,7 +3155,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - hhh € Problem Info: Problem Notes: hhh €</text>
+                <text>Significance : Major - Episodicity : First - hhh € Problem Info: Problem Notes: hhh €</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

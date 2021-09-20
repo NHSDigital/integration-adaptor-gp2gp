@@ -865,7 +865,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Father</text>
+                <text>Family member : Father</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -890,7 +890,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Add some text about diabetes</text>
+                <text>Add some text about diabetes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1108,7 +1108,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : Review</text>
+                <text>Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1422,7 +1422,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : Review</text>
+                <text>Laterality : Bilateral - Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2070,7 +2070,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: - personal plan in online tool</text>
+                <text>- personal plan in online tool</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2245,7 +2245,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient first choice</text>
+                <text>Patient choice : Patient first choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2345,7 +2345,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient first choice</text>
+                <text>Patient choice : Patient first choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2370,7 +2370,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient second choice</text>
+                <text>Patient choice : Patient second choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2481,7 +2481,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: - uses both walking stick and frame</text>
+                <text>- uses both walking stick and frame</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2631,7 +2631,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: daughter visits 3 or 4 times a week and is local is needed in emergencies</text>
+                <text>daughter visits 3 or 4 times a week and is local is needed in emergencies</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4103,7 +4103,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Burning feet description Problem Info: Problem Notes: Burning feet description</text>
+                <text>Significance : Minor - Episodicity : First - Burning feet description Problem Info: Problem Notes: Burning feet description</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4215,7 +4215,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient does not wish for data to be shared</text>
+                <text>Patient does not wish for data to be shared</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4383,7 +4383,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: ccccccc</text>
+                <text>ccccccc</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4439,7 +4439,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: xxx</text>
+                <text>xxx</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4496,7 +4496,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4608,7 +4608,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
+                <text>Laterality : Bilateral - Significance : Major - Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4664,7 +4664,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess) Problem Info: Related Problem: Child of Peritonsillar abscess Related Problem: Parent of Pain in throat Problem Notes: (Combined with Peritonsillar abscess)</text>
+                <text>Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess) Problem Info: Related Problem: Child of Peritonsillar abscess Related Problem: Parent of Pain in throat Problem Notes: (Combined with Peritonsillar abscess)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4720,7 +4720,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Tonsillitis) Problem Info: Related Problem: Child of Tonsillitis Problem Notes: (Grouped with Tonsillitis)</text>
+                <text>Significance : Minor - Episodicity : First - (Grouped with Tonsillitis) Problem Info: Related Problem: Child of Tonsillitis Problem Notes: (Grouped with Tonsillitis)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5222,7 +5222,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5278,7 +5278,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: discussed likely progression</text>
+                <text>discussed likely progression</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5334,7 +5334,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
