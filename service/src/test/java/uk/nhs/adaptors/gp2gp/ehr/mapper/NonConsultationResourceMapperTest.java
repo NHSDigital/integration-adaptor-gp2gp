@@ -47,6 +47,8 @@ public class NonConsultationResourceMapperTest {
     private static final String ALLERGY_INTOLERANCE_BUNDLE = FILES_DIRECTORY + "allergy-intolerance-bundle.json";
     private static final String ENDED_ALLERGY_INTOLERANCE_BUNDLE = FILES_DIRECTORY + "ended-allergy-intolerance-bundle.json";
     private static final String EXPECTED_ALLERGY_INTOLERANCE_OUTPUT = FILES_DIRECTORY + "expected-allergy-intolerance-output.xml";
+    private static final String MULTIPLE_ENDED_ALLERGY_INTOLERANCES_BUNDLE = FILES_DIRECTORY
+        + "multiple-ended-allergy-intolerances-bundle.json";
     private static final String BLOOD_PRESSURE_XML = FILES_DIRECTORY + "blood-pressure-stub.xml";
     private static final String BLOOD_PRESSURE_BUNDLE = FILES_DIRECTORY + "blood-pressure-bundle.json";
     private static final String EXPECTED_BLOOD_PRESSURE_OUTPUT = FILES_DIRECTORY + "expected-blood-pressure-output.xml";
@@ -111,11 +113,13 @@ public class NonConsultationResourceMapperTest {
         assertThat(translatedOutput).isEqualTo(expectedOutput);
     }
 
-    @Test
-    public void When_TransformingEndedAllergyListToEhrComp_Expect_CorrectValuesToBeExtracted() throws IOException {
+    @ParameterizedTest
+    @MethodSource("endedAllergiesArgs")
+    public void When_TransformingEndedAllergyListToEhrComp_Expect_CorrectValuesToBeExtracted(String inputBundle, String output)
+        throws IOException {
         setupMock(ResourceTestFileUtils.getFileContent(ALLERGY_INTOLERANCE_XML));
-        String bundle = ResourceTestFileUtils.getFileContent(ENDED_ALLERGY_INTOLERANCE_BUNDLE);
-        String expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_ALLERGY_INTOLERANCE_OUTPUT);
+        String bundle = ResourceTestFileUtils.getFileContent(inputBundle);
+        String expectedOutput = ResourceTestFileUtils.getFileContent(output);
         Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
@@ -169,6 +173,13 @@ public class NonConsultationResourceMapperTest {
             Arguments.of(DIAGNOSTIC_REPORT_XML, DIAGNOSTIC_REPORT_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_OUTPUT),
             Arguments.of(
                 DIAGNOSTIC_REPORT_AGENT_PERSON_XML, DIAGNOSTIC_REPORT_AGENT_PERSON_BUNDLE, EXPECTED_DIAGNOSTIC_REPORT_AGENT_PERSON_OUTPUT)
+        );
+    }
+
+    private static Stream<Arguments> endedAllergiesArgs() {
+        return Stream.of(
+            Arguments.of(ENDED_ALLERGY_INTOLERANCE_BUNDLE, EXPECTED_ALLERGY_INTOLERANCE_OUTPUT),
+            Arguments.of(MULTIPLE_ENDED_ALLERGY_INTOLERANCES_BUNDLE, EXPECTED_ALLERGY_INTOLERANCE_OUTPUT)
         );
     }
 

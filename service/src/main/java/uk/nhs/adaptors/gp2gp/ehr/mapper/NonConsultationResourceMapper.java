@@ -70,7 +70,6 @@ public class NonConsultationResourceMapper {
             ResourceType.DocumentReference, this::buildForDocumentReference,
             ResourceType.QuestionnaireResponse, this::buildForQuestionnaireResponse
         );
-    private static final String ENDED_ALLERGIES = "1103671000000101";
 
     public List<String> mapRemainingResourcesToEhrCompositions(Bundle bundle) {
         var mappedResources = bundle.getEntry()
@@ -285,7 +284,7 @@ public class NonConsultationResourceMapper {
             if (list.hasCode()
                 && list.getCode().hasCoding()
                 && list.getCode().getCodingFirstRep().hasCode()
-                && list.getCode().getCodingFirstRep().getCode().equals(ENDED_ALLERGIES)) {
+                && list.getCode().getCodingFirstRep().getCode().equals(ENDED_ALLERGIES_CODE)) {
                 return list.hasContained();
             }
         }
