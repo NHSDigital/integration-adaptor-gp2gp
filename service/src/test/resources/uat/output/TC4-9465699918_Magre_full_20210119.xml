@@ -6342,7 +6342,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Batch: hep12345 Parent present</text>
+                <text>Primary Source: true Batch: hep12345 Parent present</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6396,7 +6396,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: Acme Pharmaceuticals Batch: FLU-87654</text>
+                <text>Primary Source: true Manufacturer: Acme Pharmaceuticals Batch: FLU-87654</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
