@@ -89,17 +89,17 @@ public class PertinentInformationObservationValueMapper {
             pertinentInformationBuilder.append(TEXT_PREFIX)
                 .append(observationReferenceRangeComponent.getText())
                 .append(StringUtils.SPACE);
+        }
 
-            if (observationReferenceRangeComponent.hasLow()) {
-                addRangePertinentInformation(pertinentInformationBuilder,
-                    observationReferenceRangeComponent.getLow(),
-                    LOW_PREFIX);
-            }
-            if (observationReferenceRangeComponent.hasHigh()) {
-                addRangePertinentInformation(pertinentInformationBuilder,
-                    observationReferenceRangeComponent.getHigh(),
-                    HIGH_PREFIX);
-            }
+        if (observationReferenceRangeComponent.hasLow()) {
+            addRangePertinentInformation(pertinentInformationBuilder,
+                observationReferenceRangeComponent.getLow(),
+                LOW_PREFIX);
+        }
+        if (observationReferenceRangeComponent.hasHigh()) {
+            addRangePertinentInformation(pertinentInformationBuilder,
+                observationReferenceRangeComponent.getHigh(),
+                HIGH_PREFIX);
         }
 
         return pertinentInformationBuilder.toString();

@@ -12,7 +12,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Component(s): [Interpretation Code: Second interpretation code with userSelected true Interpretation Text: Example interpretation text] Example comment</text>
+                <text>Range: High: 100.000 ml</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
