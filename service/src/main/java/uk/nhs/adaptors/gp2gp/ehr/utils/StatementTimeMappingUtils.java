@@ -95,6 +95,13 @@ public final class StatementTimeMappingUtils {
                 );
             }
 
+            if (observation.getEffectivePeriod().hasStart() && !observation.getEffectivePeriod().hasEnd()) {
+                return String.format(
+                        EFFECTIVE_TIME_LOW_TEMPLATE,
+                        toHl7Format(observation.getEffectivePeriod().getStartElement())
+                );
+            }
+
             return String.format(EFFECTIVE_TIME_FULL_TEMPLATE, toHl7Format(
                 observation.getEffectivePeriod().getStartElement()),
                 toHl7Format(observation.getEffectivePeriod().getEndElement()));
