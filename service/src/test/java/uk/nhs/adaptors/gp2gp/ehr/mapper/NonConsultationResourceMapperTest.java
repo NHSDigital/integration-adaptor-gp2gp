@@ -45,6 +45,7 @@ public class NonConsultationResourceMapperTest {
     private static final String EXPECTED_IMMUNIZATION_OUTPUT = FILES_DIRECTORY + "expected-immunization-output.xml";
     private static final String ALLERGY_INTOLERANCE_XML = FILES_DIRECTORY + "allergy-intolerance-stub.xml";
     private static final String ALLERGY_INTOLERANCE_BUNDLE = FILES_DIRECTORY + "allergy-intolerance-bundle.json";
+    private static final String ENDED_ALLERGY_INTOLERANCE_BUNDLE = FILES_DIRECTORY + "ended-allergy-intolerance-bundle.json";
     private static final String EXPECTED_ALLERGY_INTOLERANCE_OUTPUT = FILES_DIRECTORY + "expected-allergy-intolerance-output.xml";
     private static final String BLOOD_PRESSURE_XML = FILES_DIRECTORY + "blood-pressure-stub.xml";
     private static final String BLOOD_PRESSURE_BUNDLE = FILES_DIRECTORY + "blood-pressure-bundle.json";
@@ -108,6 +109,19 @@ public class NonConsultationResourceMapperTest {
 
         var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle).get(0);
         assertThat(translatedOutput).isEqualTo(expectedOutput);
+    }
+
+    @Test
+    public void When_TransformingEndedAllergyListToEhrComp_Expect_CorrectValuesToBeExtracted() throws IOException {
+        setupMock(ResourceTestFileUtils.getFileContent(ALLERGY_INTOLERANCE_XML));
+        String bundle = ResourceTestFileUtils.getFileContent(ENDED_ALLERGY_INTOLERANCE_BUNDLE);
+        String expectedOutput = ResourceTestFileUtils.getFileContent(EXPECTED_ALLERGY_INTOLERANCE_OUTPUT);
+        Bundle parsedBundle = fhirParseService.parseResource(bundle, Bundle.class);
+
+        var translatedOutput = nonConsultationResourceMapper.mapRemainingResourcesToEhrCompositions(parsedBundle);
+        assertThat(translatedOutput.size()).isEqualTo(2);
+        assertThat(translatedOutput.get(0)).isEqualTo(expectedOutput);
+        assertThat(translatedOutput.get(1)).isEqualTo(expectedOutput);
     }
 
     @Test
