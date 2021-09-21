@@ -55,6 +55,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String VACCINATION_CODE = "Substance: %s";
     private static final String REPORT_ORIGIN_CODE = "Origin: %s";
+    private static final String PRIMARY_SOURCE = "Primary Source: %s";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
@@ -100,6 +101,7 @@ public class ImmunizationObservationStatementMapper {
         return List.of(
             buildReportOriginPertinentInformation(immunization),
             buildParentPresentPertinentInformation(immunization),
+            buildPrimarySourcePertinentInformation(immunization),
             buildLocationPertinentInformation(immunization),
             buildManufacturerPertinentInformation(immunization),
             buildLotNumberPertinentInformation(immunization),
@@ -296,5 +298,13 @@ public class ImmunizationObservationStatementMapper {
             .map(Immunization:: getDateElement)
             .map(DateFormatUtil:: toHl7Format)
             .orElse(StringUtils.EMPTY);
+    }
+
+    private String buildPrimarySourcePertinentInformation(Immunization immunization) {
+        if (immunization.hasPrimarySource()) {
+            return String.format(PRIMARY_SOURCE, immunization.getPrimarySource());
+        }
+
+        return StringUtils.EMPTY;
     }
 }
