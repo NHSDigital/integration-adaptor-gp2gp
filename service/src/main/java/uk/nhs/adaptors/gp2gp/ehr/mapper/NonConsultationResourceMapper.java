@@ -11,14 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.DiagnosticReport;
-import org.hl7.fhir.dstu3.model.Observation;
-import org.hl7.fhir.dstu3.model.Reference;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.ResourceType;
-import org.hl7.fhir.dstu3.model.ListResource;
-import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.*;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -281,10 +274,11 @@ public class NonConsultationResourceMapper {
     private boolean isEndedAllergyList(Resource resource) {
         if (resource.getResourceType().equals(ResourceType.List)) {
             var list = (ListResource) resource;
-            if (list.hasCode()
-                && list.getCode().hasCoding()
-                && list.getCode().getCodingFirstRep().hasCode()
-                && list.getCode().getCodingFirstRep().getCode().equals(ENDED_ALLERGIES_CODE)) {
+            var endedAllergies = Optional.ofNullable(list.getCode())
+                    .map(CodeableConcept::getCodingFirstRep)
+                    .filter(coding -> coding.getCode().equals(ENDED_ALLERGIES_CODE))
+                    .orElse(null);
+            if (endedAllergies != null) {
                 return list.hasContained();
             }
         }
