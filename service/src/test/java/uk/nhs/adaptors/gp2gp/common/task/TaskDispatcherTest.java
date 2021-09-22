@@ -61,7 +61,7 @@ public class TaskDispatcherTest {
         when(session.createTextMessage("payload")).thenReturn(textMessage);
 
         messageCreatorArgumentCaptor.getValue().createMessage(session);
-        verify(textMessage).setStringProperty(TASK_TYPE_HEADER_NAME, TaskType.GET_GPC_DOCUMENT.getTaskTypeHeaderValue());
+        verify(textMessage).setStringProperty(TASK_TYPE_HEADER_NAME, TaskType.GET_GPC_DOCUMENT.getTaskName());
     }
 
     @Test
