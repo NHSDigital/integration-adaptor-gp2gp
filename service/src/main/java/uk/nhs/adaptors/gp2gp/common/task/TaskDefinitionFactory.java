@@ -17,7 +17,7 @@ public class TaskDefinitionFactory {
 
     public TaskDefinition getTaskDefinition(String taskType, String body)  {
         return Arrays.stream(TaskType.values())
-            .filter(type -> type.getTaskTypeHeaderValue().equals(taskType))
+            .filter(type -> type.getTaskName().equals(taskType))
             .map(type -> unmarshallTask(type, body))
             .findFirst()
             .orElseThrow(() -> new TaskHandlerException("No task definition class for task type '" + taskType + "'"));
