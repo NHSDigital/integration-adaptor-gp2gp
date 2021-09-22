@@ -284,7 +284,7 @@ public class NonConsultationResourceMapper {
             var list = (ListResource) resource;
             var endedAllergies = Optional.ofNullable(list.getCode())
                     .map(CodeableConcept::getCodingFirstRep)
-                    .filter(coding -> coding.getCode().equals(ENDED_ALLERGIES_CODE))
+                    .filter(coding -> ENDED_ALLERGIES_CODE.equals(coding.getCode()))
                     .orElse(null);
             if (endedAllergies != null) {
                 return list.hasContained();
