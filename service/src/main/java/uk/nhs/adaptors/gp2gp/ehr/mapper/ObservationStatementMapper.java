@@ -147,12 +147,6 @@ public class ObservationStatementMapper {
             }
         }
 
-        if (observation.hasInterpretation()) {
-            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
-            });
-        }
-
         if (observation.hasComment()) {
             commentBuilder.append(observation.getComment());
         }

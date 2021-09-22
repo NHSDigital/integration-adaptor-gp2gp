@@ -946,8 +946,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit
-Low</text>
+                <text>Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -977,8 +976,7 @@ Low</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit
-Weeks: 4. Very Low</text>
+                <text>Weeks: 4. Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1008,8 +1006,7 @@ Weeks: 4. Very Low</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal Abnormal</text>
+                <text>Abnormal Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1039,8 +1036,7 @@ Abnormal Abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit
-High</text>
+                <text>High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1151,8 +1147,7 @@ High</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal</text>
+                <text>Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1182,8 +1177,7 @@ Abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Normal</text>
+                <text>Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1209,8 +1203,7 @@ Normal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Normal</text>
+                <text>Normal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1310,8 +1303,7 @@ Normal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal</text>
+                <text>Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1387,8 +1379,7 @@ Abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal</text>
+                <text>Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1489,8 +1480,7 @@ Abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal</text>
+                <text>Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1815,8 +1805,7 @@ And more stuff</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit
-Year only test result Low</text>
+                <text>Year only test result Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1876,8 +1865,7 @@ Year only test result Low</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit
-Very High</text>
+                <text>Very High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -1932,8 +1920,7 @@ Very High</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: HI - Above high reference limit
-This should be normal according to the range High</text>
+                <text>This should be normal according to the range High</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -2699,8 +2686,7 @@ This should be normal according to the range High</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-Abnormal</text>
+                <text>Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -3256,8 +3242,7 @@ with special characters
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: LO - Below low reference limit
-abnormality only Very Low</text>
+                <text>abnormality only Very Low</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4039,8 +4024,7 @@ abnormality only Very Low</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-This is an empty one Abnormal</text>
+                <text>This is an empty one Abnormal</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <referenceRange typeCode="REFV">
@@ -4070,8 +4054,7 @@ This is an empty one Abnormal</text>
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: PA - Potentially abnormal
-This is the HepB antutbody notes Absent</text>
+                <text>This is the HepB antutbody notes Absent</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

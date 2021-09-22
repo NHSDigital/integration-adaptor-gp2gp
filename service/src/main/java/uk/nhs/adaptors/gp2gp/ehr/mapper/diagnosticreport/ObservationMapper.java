@@ -210,26 +210,15 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        StringBuilder interpretationTextAndComment = new StringBuilder();
-
-        if (observation.hasInterpretation()) {
-            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
-                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
-            });
-        }
-
         if (observation.hasComment()) {
-            interpretationTextAndComment.append(observation.getComment());
+            if (!observation.getComment().isBlank()) {
+                narrativeStatementsBlock.append(
+                    mapObservationToNarrativeStatement(
+                        holder, observation.getComment(), CommentType.AGGREGATE_COMMENT_SET.getCode()
+                    )
+                );
+            }
         }
-
-        if (!interpretationTextAndComment.toString().isBlank()) {
-            narrativeStatementsBlock.append(
-                mapObservationToNarrativeStatement(
-                    holder, interpretationTextAndComment.toString().trim(), CommentType.AGGREGATE_COMMENT_SET.getCode()
-                )
-            );
-        }
-
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
             .map(BODY_SITE_PREFIX::concat)
             .map(comment ->
