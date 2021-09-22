@@ -38,9 +38,10 @@ public class ObservationStatementMapper {
         TemplateUtils.loadTemplate("unstructured_observation_statement_template.mustache");
     private static final String REFERENCE_RANGE_UNIT_PREFIX = "Range Units: ";
     private static final String INTERPRETATION_PREFIX = "Interpretation: ";
-    private static final String INTERPRETATION_CODE_PREFIX = "Interpretation Code: ";
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
+    
+    private boolean interpretationCodeMapped = false;
 
     private final MessageContext messageContext;
     private final StructuredObservationValueMapper structuredObservationValueMapper;
@@ -53,7 +54,6 @@ public class ObservationStatementMapper {
         var observationStatementTemplateParametersBuilder = ObservationStatementTemplateParameters.builder()
             .observationStatementId(idMapper.getOrNew(ResourceType.Observation, observation.getIdElement()))
             .code(prepareCode(observation))
-            .comment(prepareComment(observation))
             .issued(StatementTimeMappingUtils.prepareAvailabilityTimeForObservationStatement(observation))
             .isNested(isNested)
             .effectiveTime(StatementTimeMappingUtils.prepareEffectiveTimeForObservation(observation));
@@ -79,14 +79,21 @@ public class ObservationStatementMapper {
             observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .ifPresent(coding -> observationStatementTemplateParametersBuilder.interpretation(
-                    structuredObservationValueMapper.mapInterpretation(coding)
-                ));
+                .ifPresent(coding -> {
+                    String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
+                    if (StringUtils.isNotBlank(mappedValue)) {
+                        interpretationCodeMapped = true;
+                    }
+                    observationStatementTemplateParametersBuilder.interpretation(mappedValue);
+                    }
+                );
         }
 
         if (observation.hasPerformer()) {
             observationStatementTemplateParametersBuilder.participant(buildParticipant(observation));
         }
+        
+        observationStatementTemplateParametersBuilder.comment(prepareComment(observation));
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
             observationStatementTemplateParametersBuilder.build());
@@ -147,6 +154,12 @@ public class ObservationStatementMapper {
             }
         }
 
+        if (!interpretationCodeMapped && observation.hasInterpretation()) {
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
+                commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
+            });
+        }
+        
         if (observation.hasComment()) {
             commentBuilder.append(observation.getComment());
         }

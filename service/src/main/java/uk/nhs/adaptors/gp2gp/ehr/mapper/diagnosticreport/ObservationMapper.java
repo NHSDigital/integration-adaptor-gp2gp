@@ -59,6 +59,8 @@ public class ObservationMapper {
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
+    
+    private boolean interpretationCodeMapped = false;
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
 
@@ -210,15 +212,26 @@ public class ObservationMapper {
             )
             .ifPresent(narrativeStatementsBlock::append);
 
-        if (observation.hasComment()) {
-            if (!observation.getComment().isBlank()) {
-                narrativeStatementsBlock.append(
-                    mapObservationToNarrativeStatement(
-                        holder, observation.getComment(), CommentType.AGGREGATE_COMMENT_SET.getCode()
-                    )
-                );
-            }
+        StringBuilder interpretationTextAndComment = new StringBuilder();
+
+        if (!interpretationCodeMapped && observation.hasInterpretation()) {
+            CodeableConceptMappingUtils.extractUserSelectedTextOrCoding(observation.getInterpretation()).ifPresent(interpretationText -> {
+                interpretationTextAndComment.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
+            });
         }
+
+        if (observation.hasComment()) {
+            interpretationTextAndComment.append(observation.getComment());
+        }
+
+        if (!interpretationTextAndComment.toString().isBlank()) {
+            narrativeStatementsBlock.append(
+                mapObservationToNarrativeStatement(
+                    holder, interpretationTextAndComment.toString().trim(), CommentType.AGGREGATE_COMMENT_SET.getCode()
+                )
+            );
+        }
+        
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
             .map(BODY_SITE_PREFIX::concat)
             .map(comment ->
@@ -334,7 +347,13 @@ public class ObservationMapper {
             return observation.getInterpretation().getCoding().stream()
                 .filter(this::isInterpretationCode)
                 .findFirst()
-                .map(structuredObservationValueMapper::mapInterpretation);
+                .map(coding -> {
+                    String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
+                    if(StringUtils.isNotBlank(mappedValue)){
+                        interpretationCodeMapped = true;
+                    }
+                    return mappedValue;
+                });
         }
 
         return Optional.empty();
