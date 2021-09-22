@@ -29,9 +29,9 @@ public class TaskDispatcher {
     public void createTask(TaskDefinition taskDefinition) {
         try {
             String messagePayload = objectMapper.writeValueAsString(taskDefinition);
-            sendMessage(messagePayload, taskDefinition.getTaskType().getTaskTypeHeaderValue());
+            sendMessage(messagePayload, taskDefinition.getTaskType().getTaskName());
             LOGGER.info("Created new {} task with id {}",
-                taskDefinition.getTaskType().getTaskTypeHeaderValue(),
+                taskDefinition.getTaskType().getTaskName(),
                 taskDefinition.getTaskId());
         } catch (JsonProcessingException e) {
             throw new TaskHandlerException("Unable to serialise task definition to JSON", e);
