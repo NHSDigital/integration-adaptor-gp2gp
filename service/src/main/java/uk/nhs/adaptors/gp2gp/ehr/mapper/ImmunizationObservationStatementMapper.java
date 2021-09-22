@@ -13,7 +13,6 @@ import org.hl7.fhir.dstu3.model.Annotation;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Condition;
-import org.hl7.fhir.dstu3.model.DateTimeType;
 import org.hl7.fhir.dstu3.model.DateType;
 import org.hl7.fhir.dstu3.model.Immunization;
 import org.hl7.fhir.dstu3.model.Location;
@@ -56,6 +55,7 @@ public class ImmunizationObservationStatementMapper {
     private static final String VACCINATION_TARGET_DISEASE = "Target Disease: ";
     private static final String VACCINATION_CODE = "Substance: %s";
     private static final String REPORT_ORIGIN_CODE = "Origin: %s";
+    private static final String PRIMARY_SOURCE = "Primary Source: %s";
     private static final String COMMA = ",";
 
     private final MessageContext messageContext;
@@ -83,18 +83,11 @@ public class ImmunizationObservationStatementMapper {
     }
 
     private String buildAvailabilityTime(Immunization immunization) {
-        var dateRecordedExtension = ExtensionMappingUtils.filterExtensionByUrl(immunization, DATE_RECORDED_URL);
-        return dateRecordedExtension
-            .map(value -> DateFormatUtil.toHl7Format((DateTimeType) value.getValue()))
-            .orElseThrow(() -> new EhrMapperException("Could not map recorded date"));
+        return retrieveImmunizationDate(immunization);
     }
 
     private String buildEffectiveTime(Immunization immunization) {
-        Optional<String> effectiveTime = Optional.empty();
-        if (immunization.hasDateElement()) {
-            effectiveTime = Optional.of(DateFormatUtil.toHl7Format(immunization.getDateElement()));
-        }
-        return effectiveTime.orElse(StringUtils.EMPTY);
+        return retrieveImmunizationDate(immunization);
     }
 
     private String buildPertinentInformation(Immunization immunization) {
@@ -108,6 +101,7 @@ public class ImmunizationObservationStatementMapper {
         return List.of(
             buildReportOriginPertinentInformation(immunization),
             buildParentPresentPertinentInformation(immunization),
+            buildPrimarySourcePertinentInformation(immunization),
             buildLocationPertinentInformation(immunization),
             buildManufacturerPertinentInformation(immunization),
             buildLotNumberPertinentInformation(immunization),
@@ -296,5 +290,21 @@ public class ImmunizationObservationStatementMapper {
 
     private boolean vaccineCodeUNK(CodeableConcept codeableConcept) {
         return  (codeableConcept.getCodingFirstRep().hasCode() && codeableConcept.getCodingFirstRep().getCode().equals("UNK"));
+    }
+
+    private String retrieveImmunizationDate(Immunization immunization) {
+        return Optional.of(immunization)
+            .filter(Immunization:: hasDateElement)
+            .map(Immunization:: getDateElement)
+            .map(DateFormatUtil:: toHl7Format)
+            .orElse(StringUtils.EMPTY);
+    }
+
+    private String buildPrimarySourcePertinentInformation(Immunization immunization) {
+        if (immunization.hasPrimarySource()) {
+            return String.format(PRIMARY_SOURCE, immunization.getPrimarySource());
+        }
+
+        return StringUtils.EMPTY;
     }
 }

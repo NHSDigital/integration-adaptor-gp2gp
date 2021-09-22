@@ -602,7 +602,7 @@
         <effectiveTime>
             <center value="20200907174500"/>
         </effectiveTime>
-        <availabilityTime value="20201105134936"/>
+        <availabilityTime value="20200907174500"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -859,13 +859,13 @@
         <effectiveTime>
             <center value="20201105134300"/>
         </effectiveTime>
-        <availabilityTime value="20201105134554"/>
+        <availabilityTime value="20201105134300"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Father</text>
+                <text>Family member : Father</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -884,13 +884,13 @@
         <effectiveTime>
             <center value="20201105134300"/>
         </effectiveTime>
-        <availabilityTime value="20201105134555"/>
+        <availabilityTime value="20201105134300"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Add some text about diabetes</text>
+                <text>Add some text about diabetes</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1102,13 +1102,13 @@
         <effectiveTime>
             <center value="20201110115000"/>
         </effectiveTime>
-        <availabilityTime value="20201110115342"/>
+        <availabilityTime value="20201110115000"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : Review</text>
+                <text>Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1201,7 +1201,7 @@
         <effectiveTime>
             <center value="20201110115600"/>
         </effectiveTime>
-        <availabilityTime value="20201110115806" />
+        <availabilityTime value="20201110115600" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="09A882DA-C219-4146-97EF-3FD9A57135B0"/>
@@ -1211,7 +1211,7 @@
                 <effectiveTime>
                     <center value="20201110115600"/>
                 </effectiveTime>
-                <availabilityTime value="20201110115806" />
+                <availabilityTime value="20201110115600" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
@@ -1391,7 +1391,7 @@
         <effectiveTime>
             <center value="20201216111000"/>
         </effectiveTime>
-        <availabilityTime value="20201216111515"/>
+        <availabilityTime value="20201216111000"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -1416,13 +1416,13 @@
         <effectiveTime>
             <center value="20201216111000"/>
         </effectiveTime>
-        <availabilityTime value="20201216112654"/>
+        <availabilityTime value="20201216111000"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : Review</text>
+                <text>Laterality : Bilateral - Significance : Major - Episodicity : Review</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -1758,7 +1758,7 @@
         <effectiveTime>
             <center value="20201217124900"/>
         </effectiveTime>
-        <availabilityTime value="20201217125757"/>
+        <availabilityTime value="20201217124900"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2064,13 +2064,13 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133422"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: - personal plan in online tool</text>
+                <text>- personal plan in online tool</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2089,7 +2089,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133422"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2114,7 +2114,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133422"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2139,7 +2139,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133423"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2164,7 +2164,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133423"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2189,7 +2189,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133424"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2214,7 +2214,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133424"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2239,13 +2239,13 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133424"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient first choice</text>
+                <text>Patient choice : Patient first choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2264,7 +2264,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133424"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2289,7 +2289,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133425"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2314,7 +2314,7 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133425"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2339,13 +2339,13 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133425"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient first choice</text>
+                <text>Patient choice : Patient first choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2364,13 +2364,13 @@
         <effectiveTime>
             <center value="20210111131700"/>
         </effectiveTime>
-        <availabilityTime value="20210113133426"/>
+        <availabilityTime value="20210111131700"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient choice : Patient second choice</text>
+                <text>Patient choice : Patient second choice</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2450,7 +2450,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120407"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2475,13 +2475,13 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: - uses both walking stick and frame</text>
+                <text>- uses both walking stick and frame</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2500,7 +2500,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2525,7 +2525,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2550,7 +2550,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2575,7 +2575,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2600,7 +2600,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2625,13 +2625,13 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: daughter visits 3 or 4 times a week and is local is needed in emergencies</text>
+                <text>daughter visits 3 or 4 times a week and is local is needed in emergencies</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -2650,7 +2650,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2675,7 +2675,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2700,7 +2700,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120408"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -2725,7 +2725,7 @@
         <effectiveTime>
             <center value="20210113113200"/>
         </effectiveTime>
-        <availabilityTime value="20210113120409"/>
+        <availabilityTime value="20210113113200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -3799,9 +3799,9 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201102111241"/>
+        <availabilityTime value="20201102"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201102111241" />
+            <time value="20201102" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -3828,11 +3828,11 @@
         <effectiveTime>
             <center value="20201102"/>
         </effectiveTime>
-        <availabilityTime value="20201102111241" />
+        <availabilityTime value="20201102" />
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: wefew Batch: 123213 Expiration: 2020-11-14 Site: Left arm (Combined with Cough) GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
+                <text>Primary Source: true Manufacturer: wefew Batch: 123213 Expiration: 2020-11-14 Site: Left arm (Combined with Cough) GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -4011,9 +4011,9 @@
         <effectiveTime>
             <center value="20200615"/>
         </effectiveTime>
-        <availabilityTime value="20200615121053"/>
+        <availabilityTime value="20200615"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200615121053" />
+            <time value="20200615" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -4041,7 +4041,7 @@
         <effectiveTime>
             <center value="20200615"/>
         </effectiveTime>
-        <availabilityTime value="20200615121053"/>
+        <availabilityTime value="20200615"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4068,9 +4068,9 @@
         <effectiveTime>
             <center value="20200906"/>
         </effectiveTime>
-        <availabilityTime value="20200907101202"/>
+        <availabilityTime value="20200906"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200907101202" />
+            <time value="20200906" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4097,13 +4097,13 @@
         <effectiveTime>
             <center value="20200906"/>
         </effectiveTime>
-        <availabilityTime value="20200907101202"/>
+        <availabilityTime value="20200906"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - Burning feet description Problem Info: Problem Notes: Burning feet description</text>
+                <text>Significance : Minor - Episodicity : First - Burning feet description Problem Info: Problem Notes: Burning feet description</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4124,9 +4124,9 @@
         <effectiveTime>
             <center value="20200907100200"/>
         </effectiveTime>
-        <availabilityTime value="20200907100240"/>
+        <availabilityTime value="20200907100200"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200907100240" />
+            <time value="20200907100200" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4153,7 +4153,7 @@
         <effectiveTime>
             <center value="20200907100200"/>
         </effectiveTime>
-        <availabilityTime value="20200907100240"/>
+        <availabilityTime value="20200907100200"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4180,9 +4180,9 @@
         <effectiveTime>
             <center value="20200907"/>
         </effectiveTime>
-        <availabilityTime value="20200907101018"/>
+        <availabilityTime value="20200907"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200907101018" />
+            <time value="20200907" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4209,13 +4209,13 @@
         <effectiveTime>
             <center value="20200907"/>
         </effectiveTime>
-        <availabilityTime value="20200907101018"/>
+        <availabilityTime value="20200907"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Patient does not wish for data to be shared</text>
+                <text>Patient does not wish for data to be shared</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4236,9 +4236,9 @@
         <effectiveTime>
             <center value="20200908135100"/>
         </effectiveTime>
-        <availabilityTime value="20200908135207"/>
+        <availabilityTime value="20200908135100"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200908135207" />
+            <time value="20200908135100" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -4265,7 +4265,7 @@
         <effectiveTime>
             <center value="20200908135100"/>
         </effectiveTime>
-        <availabilityTime value="20200908135207"/>
+        <availabilityTime value="20200908135100"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4292,9 +4292,9 @@
         <effectiveTime>
             <center value="20200909091300"/>
         </effectiveTime>
-        <availabilityTime value="20200909091405"/>
+        <availabilityTime value="20200909091300"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200909091405" />
+            <time value="20200909091300" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4321,7 +4321,7 @@
         <effectiveTime>
             <center value="20200909091300"/>
         </effectiveTime>
-        <availabilityTime value="20200909091405"/>
+        <availabilityTime value="20200909091300"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4348,9 +4348,9 @@
         <effectiveTime>
             <center value="20200909"/>
         </effectiveTime>
-        <availabilityTime value="20200909091428"/>
+        <availabilityTime value="20200909"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200909091428" />
+            <time value="20200909" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4377,13 +4377,13 @@
         <effectiveTime>
             <center value="20200909"/>
         </effectiveTime>
-        <availabilityTime value="20200909091428"/>
+        <availabilityTime value="20200909"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: ccccccc</text>
+                <text>ccccccc</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4404,9 +4404,9 @@
         <effectiveTime>
             <center value="20200909"/>
         </effectiveTime>
-        <availabilityTime value="20200909091349"/>
+        <availabilityTime value="20200909"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20200909091349" />
+            <time value="20200909" />
             <agentRef classCode="AGNT">
                 <id root="CA4AD477-C33B-4FE7-8417-A242BB3D23AF" />
             </agentRef>
@@ -4433,13 +4433,13 @@
         <effectiveTime>
             <center value="20200909"/>
         </effectiveTime>
-        <availabilityTime value="20200909091349"/>
+        <availabilityTime value="20200909"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: xxx</text>
+                <text>xxx</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4460,9 +4460,9 @@
         <effectiveTime>
             <center value="20201105"/>
         </effectiveTime>
-        <availabilityTime value="20201105131810"/>
+        <availabilityTime value="20201105"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201105131810" />
+            <time value="20201105" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4490,13 +4490,13 @@
         <effectiveTime>
             <center value="20201105"/>
         </effectiveTime>
-        <availabilityTime value="20201105131810"/>
+        <availabilityTime value="20201105"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4517,9 +4517,9 @@
         <effectiveTime>
             <center value="20201109132900"/>
         </effectiveTime>
-        <availabilityTime value="20201109133113"/>
+        <availabilityTime value="20201109132900"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201109133113" />
+            <time value="20201109132900" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -4546,7 +4546,7 @@
         <effectiveTime>
             <center value="20201109132900"/>
         </effectiveTime>
-        <availabilityTime value="20201109133113"/>
+        <availabilityTime value="20201109132900"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -4573,9 +4573,9 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116142203"/>
+        <availabilityTime value="20201116"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201116142203" />
+            <time value="20201116" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4602,13 +4602,13 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116142203"/>
+        <availabilityTime value="20201116"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
+                <text>Laterality : Bilateral - Significance : Major - Episodicity : First Problem Info: Related Problem: Parent of Tonsillitis</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4629,9 +4629,9 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116141913"/>
+        <availabilityTime value="20201116"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201116141913" />
+            <time value="20201116" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4658,13 +4658,13 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116141913"/>
+        <availabilityTime value="20201116"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess) Problem Info: Related Problem: Child of Peritonsillar abscess Related Problem: Parent of Pain in throat Problem Notes: (Combined with Peritonsillar abscess)</text>
+                <text>Significance : Major - Episodicity : First - (Combined with Peritonsillar abscess) Problem Info: Related Problem: Child of Peritonsillar abscess Related Problem: Parent of Pain in throat Problem Notes: (Combined with Peritonsillar abscess)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4685,9 +4685,9 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116141542"/>
+        <availabilityTime value="20201116"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201116141542" />
+            <time value="20201116" />
             <agentRef classCode="AGNT">
                 <id root="1AB77AC2-0026-4C4B-A168-DAA15D108BA8" />
             </agentRef>
@@ -4714,13 +4714,13 @@
         <effectiveTime>
             <center value="20201116"/>
         </effectiveTime>
-        <availabilityTime value="20201116141542"/>
+        <availabilityTime value="20201116"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Tonsillitis) Problem Info: Related Problem: Child of Tonsillitis Problem Notes: (Grouped with Tonsillitis)</text>
+                <text>Significance : Minor - Episodicity : First - (Grouped with Tonsillitis) Problem Info: Related Problem: Child of Tonsillitis Problem Notes: (Grouped with Tonsillitis)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -4741,9 +4741,9 @@
         <effectiveTime>
             <center value="20201119"/>
         </effectiveTime>
-        <availabilityTime value="20201119114500"/>
+        <availabilityTime value="20201119"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20201119114500" />
+            <time value="20201119" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -4770,7 +4770,7 @@
         <effectiveTime>
             <center value="20201119"/>
         </effectiveTime>
-        <availabilityTime value="20201119114500"/>
+        <availabilityTime value="20201119"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5018,9 +5018,9 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113132019"/>
+        <availabilityTime value="20210106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113132019" />
+            <time value="20210106" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5047,7 +5047,7 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113132019"/>
+        <availabilityTime value="20210106"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5074,9 +5074,9 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131924"/>
+        <availabilityTime value="20210106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131924" />
+            <time value="20210106" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5104,7 +5104,7 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131924"/>
+        <availabilityTime value="20210106"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5131,9 +5131,9 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131804"/>
+        <availabilityTime value="20210106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131804" />
+            <time value="20210106" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5160,7 +5160,7 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131804"/>
+        <availabilityTime value="20210106"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5187,9 +5187,9 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131655"/>
+        <availabilityTime value="20210106"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131655" />
+            <time value="20210106" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5216,13 +5216,13 @@
         <effectiveTime>
             <center value="20210106"/>
         </effectiveTime>
-        <availabilityTime value="20210113131655"/>
+        <availabilityTime value="20210106"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5243,9 +5243,9 @@
         <effectiveTime>
             <center value="20210107"/>
         </effectiveTime>
-        <availabilityTime value="20210113131622"/>
+        <availabilityTime value="20210107"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131622" />
+            <time value="20210107" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5272,13 +5272,13 @@
         <effectiveTime>
             <center value="20210107"/>
         </effectiveTime>
-        <availabilityTime value="20210113131622"/>
+        <availabilityTime value="20210107"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: discussed likely progression</text>
+                <text>discussed likely progression</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5299,9 +5299,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154153"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113154153" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5328,13 +5328,13 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154153"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -5355,9 +5355,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154124"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113154124" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5384,7 +5384,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154124"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5411,9 +5411,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154035"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113154035" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5440,7 +5440,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113154035"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5467,9 +5467,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131458"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131458" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5496,7 +5496,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131458"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5523,9 +5523,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131355"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131355" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5552,7 +5552,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131355"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5579,9 +5579,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131305"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131305" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5608,7 +5608,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131305"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5635,9 +5635,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131305"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131305" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5664,7 +5664,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131305"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5691,9 +5691,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131304"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131304" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5720,7 +5720,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131304"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">
@@ -5747,9 +5747,9 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131304"/>
+        <availabilityTime value="20210113"/>
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="20210113131304" />
+            <time value="20210113" />
             <agentRef classCode="AGNT">
                 <id root="B90A10B6-D8D3-4FDC-A253-5C2CA3350613" />
             </agentRef>
@@ -5776,7 +5776,7 @@
         <effectiveTime>
             <center value="20210113"/>
         </effectiveTime>
-        <availabilityTime value="20210113131304"/>
+        <availabilityTime value="20210113"/>
         
         
         <pertinentInformation typeCode="PERT">

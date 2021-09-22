@@ -15,7 +15,7 @@
         </effectiveTime>
         {{{availabilityTime}}}
         <author typeCode="AUT" contextControlCode="OP">
-            <time value="{{authorTime}}" />
+            <time {{#authorTime}}value="{{authorTime}}"{{/authorTime}}{{^authorTime}}nullFlavor="UNK"{{/authorTime}} />
             <agentRef classCode="AGNT">
                 {{#author}}<id root="{{author}}" />{{/author}}{{^author}}<id nullFlavor="UNK" />{{/author}}
             </agentRef>

@@ -141,7 +141,7 @@
         <text mediaType="text/x-h7uk-pmip">CommentType:AGGREGATE COMMENT SET
 CommentDate:20100123140354
 
-Interpretation: This is some random free text</text>
+This is some random free text</text>
         <statusCode code="COMPLETE"/>
         <availabilityTime value="20100123140354"/>
             <Participant typeCode="PRF" contextControlCode="OP">
@@ -158,7 +158,7 @@ Interpretation: This is some random free text</text>
         <effectiveTime>
             <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="20030618080000"/>
+        <availabilityTime nullFlavor="UNK"/>
             <Participant typeCode="PRF" contextControlCode="OP">
     <agentRef classCode="AGNT">
         <id root="test-id-3"/>

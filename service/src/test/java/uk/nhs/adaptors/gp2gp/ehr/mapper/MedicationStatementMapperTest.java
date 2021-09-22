@@ -77,8 +77,12 @@ public class MedicationStatementMapperTest {
         + "medication-statement-with-authorise-optional-fields.xml";
     private static final String INPUT_JSON_WITH_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-dispense-quantity-text.json";
+    private static final String INPUT_JSON_WITH_QUANTITY_QUANTITY_TEXT = TEST_FILE_DIRECTORY
+        + "medication-request-with-plan-quantity-quantity-text.json";
     private static final String OUTPUT_XML_WITH_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
         + "medication-statement-with-dispense-quantity-text.xml";
+    private static final String OUTPUT_XML_WITH_QUANTITY_QUANTITY_TEXT = TEST_FILE_DIRECTORY
+        + "medication-statement-with-quantity-quantity-text.xml";
     private static final String INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
         + "medication-request-with-plan-no-dispense-quantity-text.json";
     private static final String OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_TEXT = TEST_FILE_DIRECTORY
@@ -191,6 +195,7 @@ public class MedicationStatementMapperTest {
             Arguments.of(INPUT_JSON_WITH_ACTIVE_STATUS, OUTPUT_XML_WITH_ACTIVE_STATUS),
             Arguments.of(INPUT_JSON_WITH_PLAN_OPTIONAL_FIELDS, OUTPUT_XML_WITH_AUTHORISE_OPTIONAL_FIELDS),
             Arguments.of(INPUT_JSON_WITH_DISPENSE_QUANTITY_TEXT, OUTPUT_XML_WITH_DISPENSE_QUANTITY_TEXT),
+            Arguments.of(INPUT_JSON_WITH_QUANTITY_QUANTITY_TEXT, OUTPUT_XML_WITH_QUANTITY_QUANTITY_TEXT),
             Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_TEXT, OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_TEXT),
             Arguments.of(INPUT_JSON_WITH_NO_DISPENSE_QUANTITY_VALUE, OUTPUT_XML_WITH_NO_DISPENSE_QUANTITY_VALUE),
             Arguments.of(INPUT_JSON_WITH_PLAN_ACUTE_PRESCRIPTION, OUTPUT_XML_WITH_AUTHORISE_ACUTE_PRESCRIPTION),

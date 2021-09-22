@@ -1,0 +1,12 @@
+{
+    "resourceType":"Observation",
+    "id":"Test-Observation",
+    "effectivePeriod": {
+        "start": "2019-07-01T10:30:00+00:00"
+    },
+    "issued":"2019-06-01T10:30:00+00:00",
+    "comment": "Test comment",
+    "code": {
+        "text": "test"
+    }
+}
