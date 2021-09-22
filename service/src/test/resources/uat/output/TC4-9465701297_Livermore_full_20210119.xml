@@ -3832,7 +3832,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: wefew Batch: 123213 Expiration: 2020-11-14 Site: Left arm (Combined with Cough) GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
+                <text>Primary Source: true Manufacturer: wefew Batch: 123213 Expiration: 2020-11-14 Site: Left arm (Combined with Cough) GMS : GMS - Significance : Minor - Episodicity : First - (Combined with Cough)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
