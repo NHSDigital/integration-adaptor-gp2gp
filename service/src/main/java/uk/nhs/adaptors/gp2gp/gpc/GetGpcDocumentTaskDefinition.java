@@ -10,13 +10,21 @@ import uk.nhs.adaptors.gp2gp.ehr.DocumentTaskDefinition;
 
 import static uk.nhs.adaptors.gp2gp.common.task.TaskType.GET_GPC_DOCUMENT;
 
+/**
+ * Task definition for downloading binaries from GCP
+ */
 @Jacksonized
 @SuperBuilder
 @Getter
 @EqualsAndHashCode(callSuper = true)
 public class GetGpcDocumentTaskDefinition extends DocumentTaskDefinition {
-    private final String accessDocumentUrl;
+
     private static final String PATH_DELIMITER = "/";
+
+    /**
+     * URl pointing to the FHIR Binary resource hosted by GPC
+     */
+    private final String accessDocumentUrl;
 
     @Override
     public TaskType getTaskType() {

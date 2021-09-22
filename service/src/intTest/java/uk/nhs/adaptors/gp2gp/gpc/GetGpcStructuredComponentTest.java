@@ -190,7 +190,7 @@ public class GetGpcStructuredComponentTest extends BaseTaskTest {
     ) {
         assertThat(storageDataWrapper.getConversationId()).isEqualTo(ehrExtractStatus.getConversationId());
         assertThat(storageDataWrapper.getTaskId()).isEqualTo(ehrExtractStatus.getGpcAccessStructured().getTaskId());
-        assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskTypeHeaderValue());
+        assertThat(storageDataWrapper.getType()).isEqualTo(structuredTaskDefinition.getTaskType().getTaskName());
 
         String mhsMessageJson = storageDataWrapper.getData();
         OutboundMessage outboundMessage = objectMapper.readValue(mhsMessageJson, OutboundMessage.class);
