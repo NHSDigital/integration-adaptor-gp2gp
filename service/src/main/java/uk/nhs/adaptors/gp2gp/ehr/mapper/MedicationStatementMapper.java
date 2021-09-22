@@ -94,7 +94,6 @@ public class MedicationStatementMapper {
         var ehrSupplyDiscontinueId = randomIdGeneratorService.createNewId();
         var ehrSupplyDiscontinueAvailabilityTime = buildStatusReasonStoppedAvailabilityTime(medicationRequest);
         var ehrSupplyDiscontinueReasonText = buildStatusReasonStoppedText(medicationRequest);
-        var priorPrescriptionId = buildPriorPrescription(medicationRequest);
         var basedOn = buildBasedOn(medicationRequest);
         var participant = buildParticipant(medicationRequest);
 
@@ -115,7 +114,6 @@ public class MedicationStatementMapper {
             .ehrSupplyDiscontinueId(ehrSupplyDiscontinueId)
             .ehrSupplyDiscontinueAvailabilityTime(ehrSupplyDiscontinueAvailabilityTime)
             .ehrSupplyDiscontinueReasonText(ehrSupplyDiscontinueReasonText)
-            .priorPrescriptionId(priorPrescriptionId)
             .basedOn(basedOn)
             .participant(participant)
             .build();
@@ -288,14 +286,6 @@ public class MedicationStatementMapper {
                     .collect(Collectors.joining());
             }
             throw new EhrMapperException("Could not resolve Based On for Order Medication Request");
-        }
-        return StringUtils.EMPTY;
-    }
-
-    private String buildPriorPrescription(MedicationRequest medicationRequest) {
-        if (medicationRequest.hasPriorPrescription()
-            && MedicationRequestIntent.PLAN.getDisplay().equals(medicationRequest.getIntent().getDisplay())) {
-            return extractIdFromPlanMedicationRequestReference(medicationRequest.getPriorPrescription(), messageContext);
         }
         return StringUtils.EMPTY;
     }
