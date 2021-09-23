@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
@@ -50,9 +51,7 @@ public class EncounterMapperTest {
             .setCode(new CodeableConcept()
                 .setCoding(List.of(new Coding()
                     .setCode(CONSULTATION_LIST_CODE))))
-            .setDate(CONSULTATION_DATE))
-        .setResource(new Location().setName(TEST_LOCATION_NAME)
-            .setId(TEST_LOCATION_ID));
+            .setDate(CONSULTATION_DATE));
 
     private static final String INPUT_JSON_WITH_EFFECTIVE_TIME = TEST_FILES_DIRECTORY
         + "example-encounter-resource-1.json";
@@ -128,7 +127,14 @@ public class EncounterMapperTest {
         when(randomIdGeneratorService.createNewId()).thenReturn(TEST_ID);
         messageContext = new MessageContext(randomIdGeneratorService);
         messageContext.initialize(bundle);
-        lenient().when(bundle.getEntry()).thenReturn(List.of(BUNDLE_WITH_CONSULTATION));
+      //  lenient().when(bundle.getEntry()).thenReturn(List.of(BUNDLE_WITH_CONSULTATION));
+
+        lenient().when(bundle.getEntry()).thenReturn(List.of(
+            BUNDLE_WITH_CONSULTATION,
+            new Bundle.BundleEntryComponent()
+                .setResource(new Location().setName(TEST_LOCATION_NAME).setId(TEST_ID))
+        ));
+
         encounterMapper = new EncounterMapper(messageContext, encounterComponentsMapper);
     }
 

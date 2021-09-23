@@ -8,6 +8,8 @@ import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
 import org.hl7.fhir.instance.model.api.IIdType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -36,6 +38,10 @@ public class ResourceExtractor {
 
     private static boolean isReferencedResource(IIdType reference, Resource resource) {
         return hasResourceType(resource, reference.getResourceType()) && hasId(reference, resource);
+    }
+
+    public static List<Bundle.BundleEntryComponent> extractAllEntries(Bundle allBundle){
+        return ObjectUtils.allNotNull(allBundle) ? allBundle.getEntry() : List.of();
     }
 
     public static Optional<ListResource> extractListByEncounterReference(Bundle allBundle, IIdType reference, String code) {

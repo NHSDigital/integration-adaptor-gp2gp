@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ExtensionMappingUtils.filterExtensionByUrl;
+import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.*;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractListByEncounterReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.ResourceExtractor.extractResourceByReference;
 import static uk.nhs.adaptors.gp2gp.ehr.utils.IgnoredResourcesUtils.isIgnoredResourceType;
@@ -81,6 +82,10 @@ public class InputBundle {
         }
     }
 
+    public List<Bundle.BundleEntryComponent> getEntries(){
+        return extractAllEntries(this.bundle);
+    }
+
     public Resource getRequiredResource(IIdType reference) {
         return extractResourceByReference(this.bundle, reference)
             .orElseThrow(() -> new EhrMapperException("Resource not found: " + reference));
@@ -91,7 +96,7 @@ public class InputBundle {
     }
 
     public List<Condition> getRelatedConditions(String referenceId) {
-        return ResourceExtractor.extractResourcesByType(bundle, Condition.class)
+        return extractResourcesByType(bundle, Condition.class)
             .filter(condition -> filterExtensionByUrl(condition, ACTUAL_PROBLEM_URL)
                     .map(Extension::getValue)
                     .map(Reference.class::cast)
@@ -103,7 +108,7 @@ public class InputBundle {
     }
 
     public Optional<PractitionerRole> getPractitionerRoleFor(String practitionerReference, String organizationReference) {
-        return ResourceExtractor.extractResourcesByType(bundle, PractitionerRole.class)
+        return extractResourcesByType(bundle, PractitionerRole.class)
             .filter(PractitionerRole::hasPractitioner)
             .filter(PractitionerRole::hasOrganization)
             .filter(practitionerRole -> isPractitionerRoleOf(practitionerReference, organizationReference, practitionerRole))

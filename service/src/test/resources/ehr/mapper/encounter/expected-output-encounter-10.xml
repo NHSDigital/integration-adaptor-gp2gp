@@ -19,7 +19,7 @@
             <locatedEntity classCode="LOCE">
                 <code code="394730007" codeSystem="2.16.840.1.113883.2.1.3.2.4.15" displayName="Healthcare related organisation" />
                 <locatedPlace classCode="PLC" determinerCode="INSTANCE">
-                    <name>Branch Surgery Rhing</name>
+                    <name>Test Location</name>
                 </locatedPlace>
             </locatedEntity>
         </location>
