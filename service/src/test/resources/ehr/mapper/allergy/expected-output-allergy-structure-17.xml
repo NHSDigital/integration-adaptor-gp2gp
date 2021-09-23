@@ -4,22 +4,22 @@
         <code code="14L..00" codeSystem="2.16.840.1.113883.2.1.6.2" displayName="H/O: drug allergy"/>
         <statusCode code="COMPLETE"/>
         <effectiveTime>
-            <center value="19781231"/>
+            <center nullFlavor="UNK"/>
         </effectiveTime>
-        <availabilityTime value="19781231" />
+        <availabilityTime nullFlavor="UNK" />
         <component typeCode="COMP" contextConductionInd="true">
             <ObservationStatement classCode="OBS" moodCode="ENV">
                 <id root="394559384658936"/>
                 <code nullFlavor="UNK"><originalText>Mocked code</originalText></code>
                 <statusCode code="COMPLETE"/>
                 <effectiveTime>
-                    <center value="19781231"/>
+                    <center nullFlavor="UNK"/>
                 </effectiveTime>
-                <availabilityTime value="19781231" />
+                <availabilityTime nullFlavor="UNK" />
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Reason Ended: Patient reports no subsequent recurrence on same medication End Date: 2018-03-01</text>
+                        <text>End Date: 2018-03-01</text>
                     </pertinentAnnotation>
                 </pertinentInformation>
             </ObservationStatement>

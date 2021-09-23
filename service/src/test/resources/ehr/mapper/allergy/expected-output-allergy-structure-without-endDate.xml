@@ -19,7 +19,7 @@
                 <pertinentInformation typeCode="PERT">
                     <sequenceNumber value="+1"/>
                     <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                        <text>Reason Ended: Patient reports no subsequent recurrence on same medication End Date: 2018-03-01</text>
+                        <text></text>
                     </pertinentAnnotation>
                 </pertinentInformation>
             </ObservationStatement>
