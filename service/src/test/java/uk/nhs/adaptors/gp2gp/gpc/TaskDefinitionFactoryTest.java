@@ -69,7 +69,7 @@ public class TaskDefinitionFactoryTest {
 
         GetGpcDocumentTaskDefinition taskDefinition =
             (GetGpcDocumentTaskDefinition) taskDefinitionFactory
-                .getTaskDefinition(GET_GPC_DOCUMENT.getTaskTypeHeaderValue(), DOCUMENT_BODY);
+                .getTaskDefinition(GET_GPC_DOCUMENT.getTaskName(), DOCUMENT_BODY);
 
         assertThat(taskDefinition.getClass()).isEqualTo(GetGpcDocumentTaskDefinition.class);
     }
@@ -88,7 +88,7 @@ public class TaskDefinitionFactoryTest {
 
         GetGpcStructuredTaskDefinition taskDefinition =
             (GetGpcStructuredTaskDefinition) taskDefinitionFactory
-                .getTaskDefinition(GET_GPC_STRUCTURED.getTaskTypeHeaderValue(), STRUCTURE_BODY);
+                .getTaskDefinition(GET_GPC_STRUCTURED.getTaskName(), STRUCTURE_BODY);
 
         assertThat(taskDefinition.getClass()).isEqualTo(GetGpcStructuredTaskDefinition.class);
     }
