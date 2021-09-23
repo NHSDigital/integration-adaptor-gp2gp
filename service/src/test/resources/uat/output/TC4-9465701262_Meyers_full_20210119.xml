@@ -301,7 +301,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: code then freetext</text>
+                <text>code then freetext</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -457,7 +457,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First</text>
+                <text>Significance : Major - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -501,7 +501,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Family member : Maternal grandmother - manually added text within consultation</text>
+                <text>Family member : Maternal grandmother - manually added text within consultation</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -636,7 +636,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Some descriptive text for Bmi</text>
+                <text>Some descriptive text for Bmi</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -914,7 +914,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Location: EMIS Test Practice Location Manufacturer: imakedrugs4u Batch: batch002 Expiration: 2023</text>
+                <text>Primary Source: true Location: EMIS Test Practice Location Manufacturer: imakedrugs4u Batch: batch002 Expiration: 2023</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5584,7 +5584,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: imakedrugs Date of Entry unpopulated</text>
+                <text>Primary Source: true Manufacturer: imakedrugs Date of Entry unpopulated</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -5638,7 +5638,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1"/>
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Manufacturer: imakedrugs Batch: batch001 Expiration: 2025-12-01 Site: Left arm GMS : GMS, Scheduled/Unscheduled : Unscheduled - historical date</text>
+                <text>Primary Source: true Manufacturer: imakedrugs Batch: batch001 Expiration: 2025-12-01 Site: Left arm GMS : GMS, Scheduled/Unscheduled : Unscheduled - historical date</text>
             </pertinentAnnotation>
         </pertinentInformation>
         <Participant typeCode="PRF" contextControlCode="OP">
@@ -6089,7 +6089,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Past dated entry</text>
+                <text>Past dated entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6258,7 +6258,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - First entry Problem Info: Problem Notes: First entry</text>
+                <text>Significance : Major - Episodicity : First - First entry Problem Info: Problem Notes: First entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6314,7 +6314,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Lower respiratory tract infection Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Severity : Mild, Frequencies : Occasional - Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Lower respiratory tract infection Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6370,7 +6370,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Myocardial infarction Problem Notes: (Grouped with Ischaemic heart disease)</text>
+                <text>Significance : Minor - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Myocardial infarction Problem Notes: (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6427,7 +6427,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Chest pain Problem Notes: (Grouped with Ischaemic heart disease)</text>
+                <text>Significance : Major - Episodicity : First - (Grouped with Ischaemic heart disease) Problem Info: Related Problem: Child of Ischaemic heart disease Related Problem: Sibling of Chest pain Problem Notes: (Grouped with Ischaemic heart disease)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6483,7 +6483,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Cough Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
+                <text>Significance : Minor - Episodicity : First - To be evolved, (Evolved into Pneumonia 16-Nov-2020) Problem Info: Related Problem: Child of Pneumonia Related Problem: Sibling of Cough Problem Notes: To be evolved, (Evolved into Pneumonia 16-Nov-2020)</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6539,7 +6539,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : Review - second entry</text>
+                <text>Significance : Major - Episodicity : Review - second entry</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6595,7 +6595,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved Problem Info: Related Problem: Parent of Lower respiratory tract infection Related Problem: Parent of Cough Problem Notes: To be evolved; Second text of the problem</text>
+                <text>Laterality : Bilateral - Significance : Major - Episodicity : First - To be evolved Problem Info: Related Problem: Parent of Lower respiratory tract infection Related Problem: Parent of Cough Problem Notes: To be evolved; Second text of the problem</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6651,7 +6651,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Major - Episodicity : New Problem Info: Related Problem: Parent of Myocardial infarction Related Problem: Parent of Chest pain</text>
+                <text>Significance : Major - Episodicity : New Problem Info: Related Problem: Parent of Myocardial infarction Related Problem: Parent of Chest pain</text>
             </pertinentAnnotation>
         </pertinentInformation>
         
@@ -6707,7 +6707,7 @@
         <pertinentInformation typeCode="PERT">
             <sequenceNumber value="+1" />
             <pertinentAnnotation classCode="OBS" moodCode="EVN">
-                <text>Interpretation: Significance : Minor - Episodicity : First</text>
+                <text>Significance : Minor - Episodicity : First</text>
             </pertinentAnnotation>
         </pertinentInformation>
         

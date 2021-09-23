@@ -81,7 +81,7 @@ public class GetGpcDocumentComponentTest extends BaseTaskTest {
 
             assertThat(storageDataWrapper.getConversationId()).isEqualTo(taskDefinition.getConversationId());
             assertThat(storageDataWrapper.getTaskId()).isEqualTo(taskDefinition.getTaskId());
-            assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskTypeHeaderValue());
+            assertThat(storageDataWrapper.getType()).isEqualTo(taskDefinition.getTaskType().getTaskName());
             assertThat(storageDataWrapper.getData()).contains(DOCUMENT_ID);
 
             String messageId = updatedEhrExtractStatus.getGpcAccessDocument()
