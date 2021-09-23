@@ -32,13 +32,6 @@
                         <originalText>{{quantityText}}</originalText>
                     </translation>
                 </quantity>
-                {{#priorPrescriptionId}}
-                    <predecessor typeCode="SUCC">
-                        <priorMedicationRef classCode="SBADM" moodCode="INT">
-                            <id root="{{priorPrescriptionId}}"/>
-                        </priorMedicationRef>
-                    </predecessor>
-                {{/priorPrescriptionId}}
                 <pertinentInformation typeCode="PERT">
                     <pertinentSupplyAnnotation>
                         <text>{{ehrSupplyPertinentInformation}}</text>
