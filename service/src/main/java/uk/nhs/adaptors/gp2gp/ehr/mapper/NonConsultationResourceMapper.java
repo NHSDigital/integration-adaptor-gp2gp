@@ -17,6 +17,9 @@ import org.hl7.fhir.dstu3.model.Observation;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.ResourceType;
+import org.hl7.fhir.dstu3.model.ListResource;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.instance.model.api.IIdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +52,7 @@ public class NonConsultationResourceMapper {
         + "data\" codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
     private static final String CONDITION_CODE = "<code code=\"109341000000100\" displayName=\"GP to GP communication transaction\" "
         + "codeSystem=\"2.16.840.1.113883.2.1.3.2.4.15\"/>";
+    private static final String ENDED_ALLERGIES_CODE = "1103671000000101";
 
     private final MessageContext messageContext;
     private final RandomIdGeneratorService randomIdGeneratorService;
@@ -79,8 +83,28 @@ public class NonConsultationResourceMapper {
             .flatMap(Optional::stream)
             .collect(Collectors.toList());
 
+        var endedAllergies = bundle.getEntry()
+            .stream()
+            .map(Bundle.BundleEntryComponent::getResource)
+            .filter(this::isEndedAllergyList)
+            .map(ListResource.class::cast)
+            .map(ListResource::getContained)
+            .flatMap(List::stream)
+            .filter(resource -> !hasIdBeenMapped(resource))
+            .map(this::replaceId)
+            .map(this::mapResourceToEhrComposition)
+            .flatMap(Optional::stream)
+            .collect(Collectors.toList());
+
+        mappedResources.addAll(endedAllergies);
+
         LOGGER.debug("Non-consultation resources mapped: {}", mappedResources.size());
         return mappedResources;
+    }
+
+    private Resource replaceId(Resource resource) {
+        resource.setIdElement(new IdType(ResourceType.AllergyIntolerance.name(), randomIdGeneratorService.createNewId()));
+        return resource;
     }
 
     public List<String> buildEhrCompositionForSkeletonEhrExtract(String bindingDocumentId) {
@@ -252,6 +276,20 @@ public class NonConsultationResourceMapper {
             return true;
         }
 
+        return false;
+    }
+
+    private boolean isEndedAllergyList(Resource resource) {
+        if (resource.getResourceType().equals(ResourceType.List)) {
+            var list = (ListResource) resource;
+            var endedAllergies = Optional.ofNullable(list.getCode())
+                    .map(CodeableConcept::getCodingFirstRep)
+                    .filter(coding -> ENDED_ALLERGIES_CODE.equals(coding.getCode()))
+                    .orElse(null);
+            if (endedAllergies != null) {
+                return list.hasContained();
+            }
+        }
         return false;
     }
 }
