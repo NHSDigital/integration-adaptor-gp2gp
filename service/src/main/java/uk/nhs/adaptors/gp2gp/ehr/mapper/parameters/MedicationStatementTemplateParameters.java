@@ -24,7 +24,6 @@ public class MedicationStatementTemplateParameters {
     private String ehrSupplyDiscontinueCode;
     private String ehrSupplyDiscontinueAvailabilityTime;
     private String ehrSupplyDiscontinueReasonText;
-    private String priorPrescriptionId;
     private String basedOn;
     private String participant;
 }
