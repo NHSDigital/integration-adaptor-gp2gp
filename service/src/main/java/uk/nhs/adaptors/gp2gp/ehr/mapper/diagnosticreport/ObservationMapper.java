@@ -59,7 +59,7 @@ public class ObservationMapper {
     private static final String RANGE_UNITS_PREFIX = "Range Units: ";
 
     private static final String COMMENT_NOTE_CODE = "37331000000100";
-    
+
     private boolean interpretationCodeMapped = false;
 
     private static final List<Class<? extends Type>> UNHANDLED_TYPES = List.of(SampledData.class, Attachment.class);
@@ -231,7 +231,7 @@ public class ObservationMapper {
                 )
             );
         }
-        
+
         CodeableConceptMappingUtils.extractTextOrCoding(observation.getBodySite())
             .map(BODY_SITE_PREFIX::concat)
             .map(comment ->
@@ -349,7 +349,7 @@ public class ObservationMapper {
                 .findFirst()
                 .map(coding -> {
                     String mappedValue = structuredObservationValueMapper.mapInterpretation(coding);
-                    if(StringUtils.isNotBlank(mappedValue)){
+                    if (StringUtils.isNotBlank(mappedValue)) {
                         interpretationCodeMapped = true;
                     }
                     return mappedValue;

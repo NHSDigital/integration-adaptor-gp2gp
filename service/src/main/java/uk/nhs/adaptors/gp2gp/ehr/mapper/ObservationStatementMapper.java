@@ -40,7 +40,7 @@ public class ObservationStatementMapper {
     private static final String INTERPRETATION_PREFIX = "Interpretation: ";
     private static final String INTERPRETATION_CODE_SYSTEM = "http://hl7.org/fhir/v2/0078";
     private static final Set<String> INTERPRETATION_CODES = Set.of("H", "HH", "HU", "L", "LL", "LU", "A", "AA");
-    
+
     private boolean interpretationCodeMapped = false;
 
     private final MessageContext messageContext;
@@ -85,14 +85,14 @@ public class ObservationStatementMapper {
                         interpretationCodeMapped = true;
                     }
                     observationStatementTemplateParametersBuilder.interpretation(mappedValue);
-                    }
-                );
+                }
+            );
         }
 
         if (observation.hasPerformer()) {
             observationStatementTemplateParametersBuilder.participant(buildParticipant(observation));
         }
-        
+
         observationStatementTemplateParametersBuilder.comment(prepareComment(observation));
 
         return TemplateUtils.fillTemplate(OBSERVATION_STATEMENT_EFFECTIVE_TIME_TEMPLATE,
@@ -159,7 +159,7 @@ public class ObservationStatementMapper {
                 commentBuilder.append(INTERPRETATION_PREFIX).append(interpretationText).append(StringUtils.LF);
             });
         }
-        
+
         if (observation.hasComment()) {
             commentBuilder.append(observation.getComment());
         }
