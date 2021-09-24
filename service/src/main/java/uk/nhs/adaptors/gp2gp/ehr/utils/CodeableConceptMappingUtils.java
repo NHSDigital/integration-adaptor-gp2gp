@@ -19,6 +19,7 @@ public class CodeableConceptMappingUtils {
         } else {
             return Optional.ofNullable(codeableConcept.getCoding())
                 .stream()
+                .flatMap(List::stream)
                 .findFirst()
                 .map(Coding.class::cast)
                 .map(coding -> Optional.ofNullable(getExtensionTermText(coding.getExtension()))
